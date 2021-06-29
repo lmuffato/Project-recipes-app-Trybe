@@ -22,6 +22,11 @@ function LoginPage() {
     }
   }, [userEmail, userPassw]);
 
+  setLocalStorage = () => {
+    localStorage.setItem('mealsToken', '1');
+    localStorage.setItem('cocktailsToken', '1');
+  };
+
   return (
     <div>
       <label htmlFor="email-input">
@@ -53,7 +58,7 @@ function LoginPage() {
         <button
           type="button"
           disabled={ btnLogin }
-          // onClick=
+          onClick={ setLocalStorage() }
         >
           Entrar
         </button>
