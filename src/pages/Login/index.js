@@ -5,7 +5,8 @@ function Login() {
   const [password, setPassword] = useState('');
   const minPassLength = 7;
   function handleClick() {
-    localStorage.setItem('email', email);
+    localStorage.setItem('mealsToken', 1);
+    localStorage.setItem('cocktailsToken', 1);
   }
   const patternEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return (
