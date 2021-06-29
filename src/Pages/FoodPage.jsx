@@ -4,7 +4,7 @@ import Header from '../Components/Header';
 function FoodPage() {
   return (
     <>
-      <Header />
+      <Header page="themealdb" />
       <h1 data-testid="page-title">Comidas</h1>
     </>);
 }
