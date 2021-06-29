@@ -29,6 +29,10 @@
 }
 */
 
+header {
+  display: flex;
+}
+
 .meals > .logo {
   animation: shake 1.5s infinite ease;
   color: aliceblue;

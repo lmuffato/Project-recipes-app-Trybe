@@ -1,19 +1,35 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useHistory } from 'react-router-dom';
 import profileIconImg from '../../images/profileIcon.svg';
 import searchIconImg from '../../images/searchIcon.svg';
-// 1 botão de perfil -- que redireciona pra tela de perfil
+import Button from '../Generics/Button';
 
 function Header({ children }) {
+  const history = useHistory();
+
+  const handleRedirectToProfile = (ev) => {
+    ev.preventDefault();
+    history.push('/perfil');
+  };
+
   return (
     <header>
-      <button type="button" data-testid="profile-top-btn">
-        <img src={ profileIconImg } alt="Logo da página de perfil" />
-      </button>
+      <Button onClick={ handleRedirectToProfile }>
+        <img
+          src={ profileIconImg }
+          data-testid="profile-top-btn"
+          alt="Logo da página de perfil"
+        />
+      </Button>
       { children }
-      <button type="button" data-testid="search-top-btn">
-        <img src={ searchIconImg } alt="Logo da página de perfil" />
-      </button>
+      <Button>
+        <img
+          src={ searchIconImg }
+          data-testid="search-top-btn"
+          alt="Logo da página de perfil"
+        />
+      </Button>
     </header>
   );
 }
