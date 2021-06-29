@@ -1,9 +1,12 @@
 import React from 'react';
 import './App.css';
 import rockGlass from './images/rockGlass.svg';
+import MealsProvider from './context/MealsProvider';
+import CocktailsProvider from './context/CocktailsProvider';
+import UserProvider from './context/UserProvider';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-async function App() {
+function App() {
   return (
     <div className="meals">
       <span className="logo">TRYBE</span>
@@ -14,6 +17,13 @@ async function App() {
       >
         Glass
       </object>
+      <UserProvider>
+        <CocktailsProvider>
+          <MealsProvider>
+            {/* <Login /> */}
+          </MealsProvider>
+        </CocktailsProvider>
+      </UserProvider>
     </div>
   );
 }

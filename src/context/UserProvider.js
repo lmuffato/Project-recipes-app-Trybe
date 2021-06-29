@@ -19,3 +19,5 @@ function UserProvider(props) {
 UserProvider.propTypes = {
   children: PropTypes.node,
 }.isRequired;
+
+export default UserProvider;

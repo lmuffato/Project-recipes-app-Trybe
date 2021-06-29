@@ -19,3 +19,5 @@ function CocktailsProvider(props) {
 CocktailsProvider.propTypes = {
   children: PropTypes.node,
 }.isRequired;
+
+export default CocktailsProvider;

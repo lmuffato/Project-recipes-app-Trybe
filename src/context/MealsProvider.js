@@ -19,3 +19,5 @@ function MealsProvider(props) {
 MealsProvider.propTypes = {
   children: PropTypes.node,
 }.isRequired;
+
+export default MealsProvider;
