@@ -34,7 +34,7 @@ header {
   border-bottom: 1px solid #e2e2e2;
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-evenly;
   padding: 24px;
 }
 
