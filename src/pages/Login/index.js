@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router';
 
+import './style.css';
+
 const Login = () => {
   const history = useHistory();
   const [email, setEmail] = useState('');
@@ -28,18 +30,36 @@ const Login = () => {
   };
 
   return (
-    <form>
-      <input type="email" data-testid="email-input" onChange={ emailIsValid } />
-      <input type="password" data-testid="password-input" onChange={ passwordIsValid } />
-      <button
-        type="submit"
-        data-testid="login-submit-btn"
-        disabled={ !(validEmail && validPassword) }
-        onClick={ handleSubmit }
-      >
-        Entrar
-      </button>
-    </form>
+    <div className="container">
+      <div className="line">
+        <h2>Login</h2>
+        <form className="form">
+          <input
+            type="email"
+            className="input"
+            placeholder="Email"
+            data-testid="email-input"
+            onChange={ emailIsValid }
+          />
+          <input
+            type="password"
+            className="input"
+            placeholder="Senha"
+            data-testid="password-input"
+            onChange={ passwordIsValid }
+          />
+          <button
+            type="submit"
+            className="login-submit-btn"
+            data-testid="login-submit-btn"
+            disabled={ !(validEmail && validPassword) }
+            onClick={ handleSubmit }
+          >
+            Entrar
+          </button>
+        </form>
+      </div>
+    </div>
   );
 };
 
