@@ -22,13 +22,13 @@ function LoginPage() {
     }
   }, [userEmail, userPassw]);
 
-  setLocalStorage = () => {
+  function setLocalStorage() {
     localStorage.setItem('mealsToken', '1');
     localStorage.setItem('cocktailsToken', '1');
     const setUser = { email: userEmail };
     const emailStringFly = JSON.stringify(setUser);
     localStorage.setItem('user', emailStringFly);
-  };
+  }
 
   return (
     <div>
@@ -59,9 +59,10 @@ function LoginPage() {
       </label>
       <Link to="/comidas">
         <button
-          type="button"
+          data-testid="login-submit-btn"
+          type="submit"
           disabled={ btnLogin }
-          onClick={ setLocalStorage() }
+          onClick={ setLocalStorage }
         >
           Entrar
         </button>
