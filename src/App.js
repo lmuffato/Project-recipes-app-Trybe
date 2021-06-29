@@ -7,14 +7,6 @@ import Login from './Pages/Login';
 function App() {
   return (
     <div className="meals">
-      {/* <span className="logo">TRYBE</span>
-      <object
-        className="rocksGlass"
-        type="image/svg+xml"
-        data={ rockGlass }
-      >
-        Glass
-      </object> */}
       <Login />
     </div>
   );
