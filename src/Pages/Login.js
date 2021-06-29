@@ -43,8 +43,4 @@ function Login() {
   );
 }
 
-// const mapDispatchToProps = (dispatch) => ({
-//   login: (value) => dispatch(actionLogin(value)),
-// });
-
 export default Login;
