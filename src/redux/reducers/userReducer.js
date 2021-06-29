@@ -7,7 +7,7 @@ const INITIAL_STATE = {
 
 export const LOGIN = 'LOGIN';
 
-export default function movieReducer(state = INITIAL_STATE, action) {
+export default function userReducer(state = INITIAL_STATE, action) {
   switch (action.type) {
   case LOGIN:
     return {
