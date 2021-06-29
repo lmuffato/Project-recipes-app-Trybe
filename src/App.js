@@ -1,20 +1,17 @@
 import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
 import './App.css';
-import rockGlass from './images/rockGlass.svg';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import RecipesProvider from './provider/RecipesProvider';
 
 function App() {
   return (
-    <div className="meals">
-      <span className="logo">TRYBE</span>
-      <object
-        className="rocksGlass"
-        type="image/svg+xml"
-        data={ rockGlass }
-      >
-        Glass
-      </object>
-    </div>
+    <BrowserRouter>
+      <RecipesProvider>
+        <div>
+          <h1>App</h1>
+        </div>
+      </RecipesProvider>
+    </BrowserRouter>
   );
 }
 
