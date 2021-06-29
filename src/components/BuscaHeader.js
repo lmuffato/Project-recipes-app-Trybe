@@ -7,10 +7,6 @@ function BuscaHeader() {
   const [endpoint, setEndpoint] = useState();
   const { fetchApi } = useContext(ReceitasContext);
 
-  function foo() {
-    alert('Sua busca deve conter somente 1 (um) caracter');
-  }
-
   function handleClick(event) {
     let endpointIn;
     switch (type) {
@@ -19,7 +15,8 @@ function BuscaHeader() {
       break;
     case 'firstLetter':
       if (text.length > 1) {
-        foo();
+        // eslint-disable-next-line no-alert
+        alert('Sua busca deve conter somente 1 (um) caracter');
       }
       endpointIn = `https://www.themealdb.com/api/json/v1/1/search.php?f=${text}`;
       break;
