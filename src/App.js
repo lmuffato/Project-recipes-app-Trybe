@@ -1,15 +1,18 @@
 import React from 'react';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import './App.css';
 import RecipesProvider from './provider/RecipesProvider';
+import routes from './helpers/routes';
 
 function App() {
   return (
     <BrowserRouter>
       <RecipesProvider>
-        <div>
-          <h1>App</h1>
-        </div>
+        <Switch>
+          {routes.map(({ path, component }) => (
+            <Route key={ path } path={ path } component={ component } />
+          ))}
+        </Switch>
       </RecipesProvider>
     </BrowserRouter>
   );
