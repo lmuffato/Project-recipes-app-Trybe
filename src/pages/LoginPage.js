@@ -25,6 +25,9 @@ function LoginPage() {
   setLocalStorage = () => {
     localStorage.setItem('mealsToken', '1');
     localStorage.setItem('cocktailsToken', '1');
+    const setUser = { email: userEmail };
+    const emailStringFly = JSON.stringify(setUser);
+    localStorage.setItem('user', emailStringFly);
   };
 
   return (
