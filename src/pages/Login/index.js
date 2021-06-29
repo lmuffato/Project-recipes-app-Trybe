@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router';
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const minPassLength = 7;
   const loginData = ({ email });
+  const history = useHistory();
   function handleClick() {
     localStorage.setItem('mealsToken', 1);
     localStorage.setItem('cocktailsToken', 1);
     localStorage.setItem('user', JSON.stringify(loginData));
+    history.push('/comidas');
   }
   const patternEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return (

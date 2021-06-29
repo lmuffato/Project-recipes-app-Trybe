@@ -1,4 +1,5 @@
 import React from 'react';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -10,7 +11,11 @@ function App() {
   return (
     <RecipeProvider>
       <UserProvider>
-        <Login />
+        <BrowserRouter>
+          <Switch>
+            <Route path="/" component={ Login } />
+          </Switch>
+        </BrowserRouter>
       </UserProvider>
     </RecipeProvider>
   );
