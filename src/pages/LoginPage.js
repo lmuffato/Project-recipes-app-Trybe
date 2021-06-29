@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import UserContext from '../contexts/UserContext';
+import { Link } from 'react-router-dom';
 
 function LoginPage() {
   const contextUser = useContext(UserContext);
@@ -48,14 +49,15 @@ function LoginPage() {
           onChange={ (e) => setUserPassw(e.target.value) }
         />
       </label>
-
-      <button
-        type="button"
-        disabled={ btnLogin }
-        // onClick=
-      >
-        Entrar
-      </button>
+      <Link to="/comidas">
+        <button
+          type="button"
+          disabled={ btnLogin }
+          // onClick=
+        >
+          Entrar
+        </button>
+      </Link>
     </div>
   );
 }
