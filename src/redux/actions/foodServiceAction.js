@@ -1,4 +1,4 @@
-import fetchAPI from '../fetchAPI';
+import fetchAPI from '../../services';
 
 export const LOADING = 'LOADING';
 export const LOADING_SUCESS = 'LOADING_SUCESS';
