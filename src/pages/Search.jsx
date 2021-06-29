@@ -1,13 +1,13 @@
 import React from 'react';
 import Header from '../components/Header';
 
-function Profile() {
+function Search() {
   return (
     <div>
-      Pagina Profile
-      <Header title="Perfil" />
+      Pagina Search
+      <Header title="Explorar" />
     </div>
   );
 }
 
-export default Profile;
+export default Search;

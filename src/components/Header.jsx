@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 
-function Header({ title, searchImg }) {
+function Header({ title, searchImg = false }) {
   return (
     <div>
       <Link to="/perfil">
@@ -14,9 +14,8 @@ function Header({ title, searchImg }) {
       {searchImg ? (
         <button
           type="button"
-          data-testid="search-top-btn"
         >
-          <img src={ searchIcon } alt="botão buscar" />
+          <img data-testid="search-top-btn" src={ searchIcon } alt="botão buscar" />
         </button>
       ) : null}
     </div>
