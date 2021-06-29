@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import profileIconImg from '../../images/profileIcon.svg';
-import searchIconImg from '../../images/searchIcon.svg';
 import Button from '../Generics/Button';
 
 function Header({ children }) {
@@ -23,13 +22,6 @@ function Header({ children }) {
         />
       </Button>
       { children }
-      <Button>
-        <img
-          src={ searchIconImg }
-          data-testid="search-top-btn"
-          alt="Logo da página de perfil"
-        />
-      </Button>
     </header>
   );
 }

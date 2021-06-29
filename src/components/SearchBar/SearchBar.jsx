@@ -2,32 +2,35 @@ import React from 'react';
 
 // mudar depois de acordo com requisito
 function SearchBar() {
+  // const [isActive, setIsActive] = useState(false);
+
   return (
     <div>
+      <input type="text" placeholder="Buscar receita" />
       <label htmlFor="ingredient">
-        Ingredient
         <input
           type="radio"
           name=""
           id="ingredient"
           data-testid="ingredient-search-radio"
         />
+        Ingredient
       </label>
       <label htmlFor="name">
-        Name
         <input
           type="radio"
           name=""
           id="name"
         />
+        Name
       </label>
       <label htmlFor="first-letter">
-        First letter
         <input
           type="radio"
           name=""
           id="first-letter"
         />
+        First letter
       </label>
     </div>
   );

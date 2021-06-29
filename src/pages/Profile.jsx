@@ -7,7 +7,6 @@ function Profile() {
       <Header>
         <h2 data-testid="page-title">Perfil</h2>
       </Header>
-      Tela de perfil
     </div>
   );
 }
