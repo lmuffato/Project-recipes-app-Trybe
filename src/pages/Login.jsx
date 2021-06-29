@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
+import { useHistory } from 'react-router';
 import UserContext from '../context/UserContext';
 import { setToLocalStorage } from '../services/localStorage';
 
@@ -6,6 +7,7 @@ function Login() {
   const [disabled, setDisabled] = useState(true);
   const { email, setEmail } = useContext(UserContext);
   const [password, setPassword] = useState('');
+  const history = useHistory();
 
   useEffect(() => {
     const isDisabled = () => {
@@ -24,6 +26,7 @@ function Login() {
     setToLocalStorage('user', { email });
     setToLocalStorage('mealsToken', 1);
     setToLocalStorage('cocktailsToken', 1);
+    history.push('/comidas');
   };
 
   return (
