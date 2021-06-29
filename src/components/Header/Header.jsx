@@ -1,4 +1,5 @@
 import React from 'react';
+import '../../App.css';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import profileIconImg from '../../images/profileIcon.svg';
@@ -13,14 +14,16 @@ function Header({ children }) {
   };
 
   return (
-    <header>
-      <Button onClick={ handleRedirectToProfile }>
-        <img
-          src={ profileIconImg }
-          data-testid="profile-top-btn"
-          alt="Logo da página de perfil"
-        />
-      </Button>
+    <header className="page-header">
+      <div className="container">
+        <Button onClick={ handleRedirectToProfile }>
+          <img
+            src={ profileIconImg }
+            data-testid="profile-top-btn"
+            alt="Logo da página de perfil"
+          />
+        </Button>
+      </div>
       { children }
     </header>
   );
