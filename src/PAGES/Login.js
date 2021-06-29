@@ -1,6 +1,13 @@
 import React from 'react';
+import UserContext from '../CONTEXT/UserContext';
 
 function LoginPage() {
+  const contextUser = useContext(UserContext);
+  const { userEmail,
+    setUserEmail,
+    userPassw,
+    setUserPassw } = contextUser;
+
   return (
     <div>
       <label htmlFor="email-input">
@@ -9,6 +16,8 @@ function LoginPage() {
           data-testid="email-input"
           id="email-input"
           type="email"
+          value={ userEmail }
+          onChange={ (e) => setUserEmail(e.target.value) }
         />
       </label>
 
@@ -18,6 +27,8 @@ function LoginPage() {
           data-testid="password-input"
           id="password-input"
           type="password"
+          value={ userPassw }
+          onChange={ (e) => setUserPassw(e.target.value) }
         />
       </label>
 
