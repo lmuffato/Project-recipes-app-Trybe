@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
 import UserContext from '../context/UserContext';
+import { setToLocalStorage } from '../services/localStorage';
 
 function Login() {
   const [disabled, setDisabled] = useState(true);
@@ -19,6 +20,12 @@ function Login() {
     isDisabled();
   }, [email, password]);
 
+  const submitInfo = () => {
+    setToLocalStorage('user', { email });
+    setToLocalStorage('mealsToken', 1);
+    setToLocalStorage('cocktailsToken', 1);
+  };
+
   return (
     <div>
       <input
@@ -37,6 +44,7 @@ function Login() {
         type="button"
         data-testid="login-submit-btn"
         disabled={ disabled }
+        onClick={ submitInfo }
       >
         Entrar
       </button>
