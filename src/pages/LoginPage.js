@@ -1,5 +1,5 @@
-import React from 'react';
-import UserContext from '../CONTEXT/UserContext';
+import React, { useContext } from 'react';
+import UserContext from '../contexts/UserContext';
 
 function LoginPage() {
   const contextUser = useContext(UserContext);
