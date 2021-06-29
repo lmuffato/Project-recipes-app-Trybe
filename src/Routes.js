@@ -1,13 +1,22 @@
 import React from 'react';
-import { Route, Switch } from 'react-dom';
+import { Route, Switch } from 'react-router';
+import Login from './login/Login';
+import Drinks from './recipes-main/Drinks';
+import Foods from './recipes-main/Foods';
 
 function Routes() {
   return (
-    <Route>
-      <Switch>
+    <Switch>
+      <Route exact path="/">
         <Login />
-      </Switch>
-    </Route>
+      </Route>
+      <Route path="/comidas">
+        <Foods />
+      </Route>
+      <Route path="/bebidas">
+        <Drinks />
+      </Route>
+    </Switch>
   );
 }
 
