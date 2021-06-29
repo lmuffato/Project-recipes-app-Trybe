@@ -2,13 +2,14 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import ProviderBebidas from './provider/ProviderBebida';
 import ProviderComidas from './provider/ProviderComidas';
+import { Login } from './pages';
 
 function App() {
   return (
     <ProviderBebidas>
       <ProviderComidas>
         <Switch>
-          <Route path="/comidas" component={ Comidas } />
+          {/* <Route path="/comidas" component={ Comidas } />
           <Route path="/bebidas" component={ Bebidas } />
           <Route path="/comidas/{id-da-receita}" component={ DetalhesComida } />
           <Route path="/bebidas/{id-da-bebida}" component={ DetalhesBebida } />
@@ -22,7 +23,7 @@ function App() {
           <Route path="/explorar/comidas/area" component={ ExplorarComidasArea } />
           <Route path="/perfil" component={ Perfil } />
           <Route path="/receitas-feitas" component={ ReceitasFeitas } />
-          <Route path="/receitas-favoritas" component={ ReceitasFavoritas } />
+          <Route path="/receitas-favoritas" component={ ReceitasFavoritas } /> */}
           <Route exact path="/" component={ Login } />
         </Switch>
       </ProviderComidas>
