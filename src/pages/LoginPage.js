@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import UserContext from '../contexts/UserContext';
 
@@ -9,18 +9,37 @@ function LoginPage() {
   const [validPassw, setValidPassw] = useState(false);
   const [btnLogin, setBtnLogin] = useState(true);
 
-  useEffect(() => {
+  // habilita/desabilita o botão
+  function handleButton() {
+    if (validEmail && validPassw) {
+      setBtnLogin(false);
+    } else setBtnLogin(true);
+  }
+
+  function validit() {
     const minPassw = 6;
     const emailRegex = /^\w+@\w+.com$/;
+    // checa se a senha é valida
     if (userPassw.length > minPassw) {
+      console.log('userPassw.length');
+      console.log(userPassw.length);
       setValidPassw(true);
+    // checa se o email é valido
     } else if (emailRegex.test(userEmail)) {
       setValidEmail(true);
     }
-    if (validEmail && validPassw === true) {
-      setBtnLogin(false);
+    handleButton();
+  }
+
+  function handleChange(event) {
+    const { name, value } = event.target;
+    if (name === 'email') {
+      setUserEmail(value);
+    } else if (name === 'password') {
+      setUserPassw(value);
     }
-  }, [userEmail, userPassw]);
+    validit();
+  }
 
   function setLocalStorage() {
     localStorage.setItem('mealsToken', '1');
@@ -40,9 +59,7 @@ function LoginPage() {
           type="email"
           name="email"
           value={ userEmail }
-          onChange={ (e) => setUserEmail(e.target.value) }
-          pattern="(\w\.?)+@[\w\.-]+\.\w{2}"
-          required
+          onChange={ (event) => handleChange(event) }
         />
       </label>
 
@@ -54,7 +71,7 @@ function LoginPage() {
           type="password"
           name="password"
           value={ userPassw }
-          onChange={ (e) => setUserPassw(e.target.value) }
+          onChange={ (event) => handleChange(event) }
         />
       </label>
       <Link to="/comidas">
