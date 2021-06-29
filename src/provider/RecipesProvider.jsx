@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import RecipesContext from '../context/RecipesContext';
 
 export default function RecipesProvider({ children }) {
-  context = {};
+  const context = {};
   return (
     <RecipesContext.Provider value={ context }>
       { children }
