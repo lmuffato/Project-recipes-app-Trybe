@@ -1,12 +1,10 @@
 import React from 'react';
+import Button from '../Generics/Button';
 
-// mudar depois de acordo com requisito
 function SearchBar() {
-  // const [isActive, setIsActive] = useState(false);
-
   return (
-    <div>
-      <input type="text" placeholder="Buscar receita" />
+    <form>
+      <input type="text" placeholder="Buscar receita" data-testid="search-input" />
       <label htmlFor="ingredient">
         <input
           type="radio"
@@ -21,6 +19,7 @@ function SearchBar() {
           type="radio"
           name=""
           id="name"
+          data-testid="name-search-radio"
         />
         Name
       </label>
@@ -29,10 +28,14 @@ function SearchBar() {
           type="radio"
           name=""
           id="first-letter"
+          data-testid="first-letter-search-radio"
         />
         First letter
       </label>
-    </div>
+      <Button data-testid="exec-search-btn">
+        Buscar
+      </Button>
+    </form>
   );
 }
 
