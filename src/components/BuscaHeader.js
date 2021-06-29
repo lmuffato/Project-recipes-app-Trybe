@@ -1,28 +1,43 @@
-import React, { useState } from 'react';
-// import ReceitasContext from '../contexts/ReceitasContext';
+import React, { useState, useContext, useEffect } from 'react';
+import ReceitasContext from '../contexts/ReceitasContext';
 
 function BuscaHeader() {
   const [text, setText] = useState();
   const [type, setType] = useState('name');
   const [endpoint, setEndpoint] = useState();
+  const { fetchApi } = useContext(ReceitasContext);
+
+  function foo() {
+    alert('Sua busca deve conter somente 1 (um) caracter');
+  }
 
   function handleClick(event) {
+    let endpointIn;
     switch (type) {
     case 'ingredient':
-      setEndpoint(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${text}`);
+      endpointIn = `https://www.themealdb.com/api/json/v1/1/filter.php?i=${text}`;
       break;
     case 'firstLetter':
-      setEndpoint(`https://www.themealdb.com/api/json/v1/1/filter.php?f=${text}`);
+      if (text.length > 1) {
+        foo();
+      }
+      endpointIn = `https://www.themealdb.com/api/json/v1/1/search.php?f=${text}`;
       break;
     case 'name':
-      setEndpoint(`https://www.themealdb.com/api/json/v1/1/filter.php?s=${text}`);
+      endpointIn = `https://www.themealdb.com/api/json/v1/1/search.php?s=${text}`;
       break;
     default:
       break;
     }
-    console.log({ text, type, endpoint });
+    setEndpoint(endpointIn);
+    fetchApi(endpointIn);
     event.preventDefault();
   }
+
+  useEffect(() => {
+    console.log({ text, type, endpoint });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [endpoint]);
 
   return (
     <form>
