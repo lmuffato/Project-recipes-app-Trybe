@@ -1,0 +1,9 @@
+footer {
+  background-color: rgb(196, 196, 196);
+  bottom: 0;
+  display: flex;
+  justify-content: space-evenly;
+  padding: 1%;
+  position: fixed;
+  width: 100%;
+}
