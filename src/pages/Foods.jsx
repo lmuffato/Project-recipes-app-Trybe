@@ -1,9 +1,10 @@
 import React from 'react';
+import Header from '../components/Header';
 
 function Foods() {
   return (
     <div>
-      Pagina Comidas
+      <Header title="Comidas" searchImg="true" />
     </div>
   );
 }

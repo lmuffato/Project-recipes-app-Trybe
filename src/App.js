@@ -4,6 +4,7 @@ import { Route, Switch } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Login from './pages/Login';
 import Foods from './pages/Foods';
+import Profile from './pages/Profile';
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <Switch>
         <Route exact path="/" component={ Login } />
         <Route path="/comidas" component={ Foods } />
+        <Route path="/perfil" component={ Profile } />
       </Switch>
     </div>
   );
