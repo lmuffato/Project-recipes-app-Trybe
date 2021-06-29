@@ -5,7 +5,7 @@ import exploreIcon from '../images/exploreIcon.svg';
 import mealIcon from '../images/mealIcon.svg';
 import '../styles/Footer.css';
 
-function Footers() {
+function Footer() {
   return (
     <footer data-testid="footer">
       <Link to="/bebidas">
@@ -21,4 +21,4 @@ function Footers() {
   );
 }
 
-export default Footers;
+export default Footer;

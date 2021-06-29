@@ -1,12 +1,12 @@
 import React from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Footers from './compenents/Footer';
+import Footer from './compenents/Footer';
 
 function App() {
   return (
     <div className="meals">
-      <Footers />
+      <Footer />
     </div>
   );
 }
