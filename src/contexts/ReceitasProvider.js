@@ -3,10 +3,16 @@ import PropTypes from 'prop-types';
 import ReceitasContext from './ReceitasContext';
 
 function ReceitasProvider({ children }) {
-  const [email, setEmail] = useState('mchusemann@gmail.com');
-  const [senha, setSenha] = useState();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   return (
-    <ReceitasContext.Provider value={ { email, setEmail, senha, setSenha } }>
+    <ReceitasContext.Provider
+      value={ { email,
+        setEmail,
+        password,
+        setPassword,
+      } }
+    >
       {children}
     </ReceitasContext.Provider>
   );
