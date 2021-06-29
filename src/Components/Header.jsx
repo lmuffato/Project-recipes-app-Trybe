@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { FoodContext } from '../Context/FoodProvider';
 import profileIcon from '../images/profileIcon.svg';
@@ -6,7 +7,10 @@ import searchIcon from '../images/searchIcon.svg';
 
 function Header({ page }) {
   const [showSearch, setShowSearch] = React.useState(false);
-  const { setRadioSelected, setSearchText, setCurrentPage } = React.useContext(FoodContext);
+  const {
+    setRadioSelected,
+    setSearchText,
+    setCurrentPage } = React.useContext(FoodContext);
 
   const handleClick = () => {
     const radios = document.querySelectorAll('[name="search"]');
@@ -87,5 +91,9 @@ function Header({ page }) {
     </section>
   );
 }
+
+Header.propTypes = {
+  pages: PropTypes.string,
+}.isRequired;
 
 export default Header;
