@@ -34,5 +34,4 @@ describe('Testing the Bottom Menu', () => {
     const { location: { pathname } } = history;
     expect(pathname).toBe('/comidas');
   });
-
 });
