@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
-import RecipesContext from '../context/RecipesContext';
+import RecipesContext from '../../context/RecipesContext';
 
 export default function SearchBar({ place }) {
   const { handleApi } = useContext(RecipesContext);

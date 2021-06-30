@@ -9,9 +9,15 @@ import './style.css';
 export default function FooterMenu() {
   return (
     <div data-testid="footer" className="footer">
-      <Link data-testid="drinks-bottom-btn" to="/bebidas">{ drinkIcon }</Link>
-      <Link data-testid="explore-bottom-btn" to="/explorar">{ searchIcon }</Link>
-      <Link data-testid="food-bottom-btn" to="/comidas">{ foodIcon }</Link>
+      <Link data-testid="drinks-bottom-btn" to="/bebidas">
+        <img src={ drinkIcon } alt="glass icon" />
+      </Link>
+      <Link data-testid="explore-bottom-btn" to="/explorar">
+        <img src={ searchIcon } alt="compass icon" />
+      </Link>
+      <Link data-testid="food-bottom-btn" to="/comidas">
+        <img src={ foodIcon } alt="meal icon" />
+      </Link>
     </div>
   );
 }
