@@ -1,7 +1,8 @@
 import React, { useContext } from 'react';
+import PropTypes from 'prop-types';
 import Context from '../../context/Context';
 
-function Login() {
+function Login(props) {
   const {
     email,
     setEmail,
@@ -16,6 +17,15 @@ function Login() {
       return false;
     }
     return true;
+  };
+
+  const handleClick = () => {
+    const { history } = props;
+    const userToLocalStorage = { email };
+    localStorage.setItem('mealsToken', '1');
+    localStorage.setItem('cocktailsToken', '1');
+    localStorage.setItem('user', JSON.stringify(userToLocalStorage));
+    history.push('/comidas');
   };
 
   return (
@@ -37,6 +47,7 @@ function Login() {
           type="button"
           data-testid="login-submit-btn"
           disabled={ validate() }
+          onClick={ () => handleClick() }
         >
           Entrar
         </button>
@@ -44,5 +55,9 @@ function Login() {
     </form>
   );
 }
+
+Login.propTypes = {
+  history: PropTypes.object,
+}.isRequired;
 
 export default Login;
