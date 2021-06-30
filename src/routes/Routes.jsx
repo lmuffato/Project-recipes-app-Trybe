@@ -26,15 +26,15 @@ function Routes() {
       <Route exact path="/explorar/comidas" component={ FoodExplore } />
       <Route
         exact
+        path="/explorar/bebidas/ingredientes"
+        component={ DrinkIngredientExplore }
+      />
+      <Route
+        exact
         path="/explorar/bebidas"
         component={ DrinkExplore }
       />
       <Route exact path="/explorar" component={ Explore } />
-      <Route
-        exact
-        path="/explorar/bebidas/ingredientes"
-        component={ DrinkIngredientExplore }
-      />
 
       <Route exact path="/perfil" component={ Profile } />
 
