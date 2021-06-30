@@ -2,7 +2,15 @@ import React from 'react';
 
 import { fireEvent } from '@testing-library/react';
 
+import Drinks from '../pages/Drinks';
+import DrinkExplore from '../pages/DrinkExplore';
+import DrinkIngredientExplore from '../pages/DrinkIngredientExplore';
+import Explore from '../pages/Explore';
+import FoodArea from '../pages/FoodArea';
 import Foods from '../pages/Foods';
+import FoodExplore from '../pages/FoodExplore';
+import FoodIngredientExplore from '../pages/FoodIngredientExplore';
+import Login from '../pages/Login';
 
 import renderWithRouter from '../helper/renderWithRouter';
 
@@ -29,6 +37,75 @@ describe('Requirement 9', () => {
     const { getByTestId } = renderWithRouter(<Foods />);
     const searchTop = getByTestId(testids.searchTopButton);
     expect(searchTop).toBeInTheDocument();
+  });
+});
+
+describe('Requirement 10', () => {
+  const itDoesntRenderHeader = (query) => {
+    expect(query(testids.profileTopButton)).toBeNull();
+    expect(query(testids.pageTitle)).toBeNull();
+    expect(query(testids.searchTopButton)).toBeNull();
+  };
+
+  const itRenderAllIcons = (get) => {
+    expect(get(testids.profileTopButton)).toBeInTheDocument();
+    expect(get(testids.pageTitle)).toBeInTheDocument();
+    expect(get(testids.searchTopButton)).toBeInTheDocument();
+  };
+
+  const itDoesntRenderSearchIcon = (query, get) => {
+    expect(get(testids.profileTopButton)).toBeInTheDocument();
+    expect(get(testids.pageTitle)).toBeInTheDocument();
+    expect(query(testids.searchTopButton)).toBeNull();
+  };
+
+  it('doesnt render the Header on the Login screen', () => {
+    const { queryByTestId } = renderWithRouter(<Login />);
+    itDoesntRenderHeader(queryByTestId);
+  });
+
+  it('renders the correct icons on the Foods screen', () => {
+    const { getByTestId } = renderWithRouter(<Foods />);
+    itRenderAllIcons(getByTestId);
+  });
+
+  it('renders the correct icons on the Drinks screen', () => {
+    const { getByTestId } = renderWithRouter(<Drinks />);
+    itRenderAllIcons(getByTestId);
+  });
+
+  it('renders the correct icons on the Explore screen', () => {
+    const { getByTestId, queryByTestId } = renderWithRouter(<Explore />);
+    itDoesntRenderSearchIcon(queryByTestId, getByTestId);
+  });
+
+  it('renders the correct icons on the FoodExplore screen', () => {
+    const { getByTestId, queryByTestId } = renderWithRouter(<FoodExplore />);
+    itDoesntRenderSearchIcon(queryByTestId, getByTestId);
+  });
+
+  it('renders the correct icons on the DrinkExplore screen', () => {
+    const { getByTestId, queryByTestId } = renderWithRouter(<DrinkExplore />);
+    itDoesntRenderSearchIcon(queryByTestId, getByTestId);
+  });
+
+  it('renders the correct icons on the FoodIngredientExplore screen', () => {
+    const { getByTestId, queryByTestId } = renderWithRouter(
+      <FoodIngredientExplore />
+    );
+    itDoesntRenderSearchIcon(queryByTestId, getByTestId);
+  });
+
+  it('renders the correct icons on the DrinkIngredientExplore screen', () => {
+    const { getByTestId, queryByTestId } = renderWithRouter(
+      <DrinkIngredientExplore />
+    );
+    itDoesntRenderSearchIcon(queryByTestId, getByTestId);
+  });
+
+  it('renders the correct icons on the FoodArea screen', () => {
+    const { getByTestId } = renderWithRouter(<FoodArea />);
+    itRenderAllIcons(getByTestId);
   });
 });
 
