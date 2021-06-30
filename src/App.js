@@ -5,6 +5,8 @@ import Login from './pages/Login';
 import Meals from './pages/Meals';
 import Drinks from './pages/Drinks';
 
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 function App() {
   return (
     <div className="meals">
@@ -16,5 +18,4 @@ function App() {
     </div>
   );
 }
-
 export default App;
