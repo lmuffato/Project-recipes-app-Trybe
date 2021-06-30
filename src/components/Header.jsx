@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import SearchBar from './SearchBar';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 
 function Header({ title, searchImg = false }) {
+  const [searchInput, setSearchInput] = useState(false);
+
   return (
     <div>
       <Link to="/perfil">
@@ -14,10 +17,13 @@ function Header({ title, searchImg = false }) {
       {searchImg ? (
         <button
           type="button"
+          onClick={ () => setSearchInput(!searchInput) }
         >
           <img data-testid="search-top-btn" src={ searchIcon } alt="botão buscar" />
         </button>
       ) : null}
+      {searchInput ? (<SearchBar />) : null}
+
     </div>
   );
 }

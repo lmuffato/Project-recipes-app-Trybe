@@ -4,12 +4,18 @@ import UserContext from './UserContext';
 
 function UserProvider({ children }) {
   const [email, setEmail] = useState('');
+  const [inputText, setInputText] = useState('');
+  const [inputRadios, setInputRadios] = useState('');
 
   return (
     <UserContext.Provider
       value={ {
         email,
         setEmail,
+        inputText,
+        setInputText,
+        inputRadios,
+        setInputRadios,
       } }
     >
       {children}
