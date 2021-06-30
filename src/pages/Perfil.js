@@ -3,6 +3,7 @@ import React from 'react';
 import Footer from '../components/Footer';
 import Buttons from '../components/Buttons';
 import { btnGroup, containerBtn, title, containerTitle } from '../styles/perfil';
+import Header from '../components/Header';
 
 function Perfil(props) {
   const getEmail = () => {
@@ -51,6 +52,7 @@ function Perfil(props) {
 
   return (
     <>
+      <Header title="Perfil" />
       <div className={ containerBtn }>
         <div className={ containerTitle }>
           <h3 className={ title } data-testid="profile-email">{ getEmail() }</h3>
