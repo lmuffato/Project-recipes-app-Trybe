@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Header from '../components/Header/Header';
 import SearchBarButton from '../components/SearchBar/SearchBarButton';
 import SearchBar from '../components/SearchBar/SearchBar';
+import Footer from '../components/Footer/Footer';
 
 function Home() {
   const [isActive, setIsActive] = useState(false);
@@ -23,6 +24,7 @@ function Home() {
       <div>
         Lista de receitas
       </div>
+      <Footer />
     </>
   );
 }
