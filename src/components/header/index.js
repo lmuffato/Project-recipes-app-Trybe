@@ -17,5 +17,5 @@ export default function Header({ title = 'Headers', isSearch = true }) {
 
 Header.propTypes = {
   title: PropTypes.string,
-  isSearch: PropTypes.bolean,
+  isSearch: PropTypes.bool,
 }.isRequired;
