@@ -1,15 +1,19 @@
 import React from 'react';
-import { BrowserRouter } from 'react-router-dom';
-import Router from './Router';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import UserProvider from './context/UserProvider';
+import Login from './pages/Login';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-class App extends React.Component {
-  render() {
-    return (
+function App() {
+  return (
+    <UserProvider>
       <BrowserRouter>
-        <Router />
+        <Switch>
+          <Route path="/" component={ Login } />
+        </Switch>
       </BrowserRouter>
-    );
-  }
+    </UserProvider>
+  );
 }
 
 export default App;
