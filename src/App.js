@@ -1,21 +1,30 @@
 import React from 'react';
-import { Switch, Route } from 'react-router';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import Drink from './pages/Drink/index';
+import Food from './pages/Food/index';
+import Header from './components/header';
+import AppProvider from './context/AppContext';
 
 function App() {
   return (
     <div>
-      <Switch>
-        <Route exact path="/" component={ Login } />
-        <Route path="/comidas" component={ Food } />
-        <Route path="/bebidas" component={ Drink } />
-        <Route path="/comidas/{id-da-receita}" component={ FoodDetails } />
-        <Route path="/bebidas/{id-da-receita}" component={ DrinkDetails } />
-        <Route path="/comidas/{id-da-receita}/in-progress" component={ FoodInProgress } />
-        <Route path="/bebidas/{id-da-receita}/in-progress" component={ DrinInProgress } />
-        <Route path="/explorar" component={ Explore } />
-        <Route path="/explorar/comidas" component={ ExploreFoods } />
-        <Route path="/explorar/bebidas" component={ ExploreDrinks } />
-      </Switch>
+      <AppProvider>
+        <BrowserRouter>
+          <Switch>
+            {/* <Route exact path="/" component={ Login } /> */}
+            <Header />
+            <Route path="/comidas" component={ Food } />
+            <Route path="/bebidas" component={ Drink } />
+            {/* <Route path="/comidas/{id-da-receita}" component={ FoodDetails } />
+            <Route path="/bebidas/{id-da-receita}" component={ DrinkDetails } />
+            <Route path="/comidas/{id-da-receita}/in-progress" component={ FoodInProgress } />
+            <Route path="/bebidas/{id-da-receita}/in-progress" component={ DrinInProgress } />
+            <Route path="/explorar" component={ Explore } />
+            <Route path="/explorar/comidas" component={ ExploreFoods } />
+            <Route path="/explorar/bebidas" component={ ExploreDrinks } /> */}
+          </Switch>
+        </BrowserRouter>
+      </AppProvider>
     </div>
   );
 }
