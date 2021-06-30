@@ -1,7 +1,7 @@
 import { Route } from 'react-router-dom';
 import React from 'react';
-import Food from './components/Food';
 import Drink from './components/Drink';
+import Food from './components/Food';
 
 function MainRecipes() {
   return (
