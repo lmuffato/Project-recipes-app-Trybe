@@ -10,7 +10,9 @@ export default function ProfileButton() {
         data-testid="profile-top-btn"
         src={ ProfileImg }
         alt="Profile"
-      />
+      >
+        <img src={ ProfileImg } alt="search" />
+      </button>
     </Link>
   );
 }

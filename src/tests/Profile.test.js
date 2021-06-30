@@ -14,7 +14,7 @@ const renderWithRouter = (ui, { route = '/' } = {}) => {
 describe('tests `profile` page ', () => {
   it('1-contains a page title', () => {
     renderWithRouter(<Profile />);
-    const profileBttn = screen.getByTestId(PROFILE_TITLE);
-    expect(profileBttn).toBeInTheDocument();
+    const profileTitle = screen.getByTestId(PROFILE_TITLE);
+    expect(profileTitle).toBeInTheDocument();
   });
 });

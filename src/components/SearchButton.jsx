@@ -1,25 +1,27 @@
-import React from 'react';
-// import React, { useState } from 'react';
+import React, { useState } from 'react';
 import SearchImg from '../images/searchIcon.svg';
-// import Searchbar from './Searchbar';
+import Searchbar from './Searchbar';
 
 export default function SearchButton() {
-  // const [searchBar, setsearchBar] = useState(false);
-  // function getSearchBar() {
-  //   return searchBar ? setsearchBar(false) : setsearchBar(true);
-  // }
+  const [searchBar, setsearchBar] = useState(false);
+  function getSearchBar() {
+    return searchBar ? setsearchBar(false) : setsearchBar(true);
+  }
 
   return (
-    <button
-      type="button"
-      data-testid="search-top-btn"
-      src={ SearchImg }
-      alt="Search"
-      // onClick={ getSearchBar }
-    >
+    <>
+      <button
+        type="button"
+        data-testid="search-top-btn"
+        src={ SearchImg }
+        alt="Search"
+        onClick={ getSearchBar }
+      >
+        <img src={ SearchImg } alt="search" />
+      </button>
       <div>
-        {/* { searchbar && <Searchbar /> } */}
+        { searchBar && <Searchbar /> }
       </div>
-    </button>
+    </>
   );
 }
