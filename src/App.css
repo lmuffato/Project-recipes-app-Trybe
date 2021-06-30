@@ -1,3 +1,11 @@
+html, body {
+  height: 100vh;
+}
+
+.center {
+  height: 100vh;
+}
+
 .meals {
   align-items: center;
   background: #0fa36b;
