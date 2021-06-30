@@ -14,6 +14,11 @@ function Login() {
     return !(inputPassword.length >= digits && inputEmail.match(pattern));
   };
 
+  const successfulLogin = () => {
+    localStorage.setItem('mealsToken', '1');
+    localStorage.setItem('cocktailsToken', '1');
+  };
+
   return (
     <div className={ styles.loginPage }>
       <header className={ styles.loginHeader }>
@@ -50,6 +55,7 @@ function Login() {
             className="primary-btn"
             data-testid="login-submit-btn"
             disabled={ enabledButton() }
+            onClick={ successfulLogin }
           >
             Entrar
           </button>
