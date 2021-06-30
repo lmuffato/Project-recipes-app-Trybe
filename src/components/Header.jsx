@@ -10,7 +10,6 @@ function Header() {
     <button
       type="button"
       onClick={ () => setDisplaySearchBar(!displaySearchBar) }
-      name="buttonSearch"
     >
       <img
         data-testid="search-top-btn"
@@ -28,6 +27,7 @@ function Header() {
             data-testid="profile-top-btn"
             alt="profileIcon"
             src={ ProfileImage }
+            name="profileIcon"
           />
         </Link>
         <h1 data-testid="page-title">title</h1>
