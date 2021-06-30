@@ -1,11 +1,11 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import './App.css';
 import RecipesProvider from './provider/RecipesProvider';
 import routes from './helpers/routes';
-
 function App() {
   return (
+   <BrowserRouter>
     <RecipesProvider>
       <Switch>
         {routes.map(({ path, component, exact }) => (
@@ -13,7 +13,9 @@ function App() {
         ))}
       </Switch>
     </RecipesProvider>
+  </BrowserRouter>
   );
 }
+
 
 export default App;
