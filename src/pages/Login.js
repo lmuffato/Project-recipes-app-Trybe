@@ -32,7 +32,7 @@ class Login extends React.Component {
         <button
           type="button"
           data-testid="login-submit-btn"
-         // disable={ disableOn }
+          // disable={ disableOn }
         >
           Entrar
         </button>
