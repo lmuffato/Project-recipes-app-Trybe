@@ -3,7 +3,7 @@ import Header from '../components/Header';
 
 function MainFood() {
   return (
-    <Header props={ { search: true } } />
+    <Header props={ { search: true, title: 'Comidas' } } />
   );
 }
 
