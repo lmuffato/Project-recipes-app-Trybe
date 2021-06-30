@@ -1,10 +1,10 @@
 #footer-links {
+  background-color: rgb(0, 5, 0);
+  bottom: 0;
   display: flex;
-  position: fixed;
   justify-content: space-around;
   left: 0;
-  bottom: 0;
-  width: 100%;
-  background-color: grey;
   padding: 10px;
+  position: fixed;
+  width: 100%;
 }
