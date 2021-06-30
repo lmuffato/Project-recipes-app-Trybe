@@ -1,11 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import SearchBar from '../SearchBar';
 
 import profileIcon from '../../images/profileIcon.svg';
 import searchIcon from '../../images/searchIcon.svg';
 
 function Header(props) {
   const { children } = props;
+  const [serching, setSerching] = useState(false);
+
   const toHideSearchIcon = [
     'Explorar',
     'Explorar Comidas',
@@ -15,13 +19,15 @@ function Header(props) {
 
   return (
     <div>
-      <button
-        type="button"
-        data-testid="profile-top-btn"
-      >
-        { profileIcon }
-      </button>
-      <h1 data-testid="page-title">{ children }</h1>
+      <Link to="/perfil">
+        <button
+          type="button"
+          data-testid="profile-top-btn"
+        >
+          {profileIcon}
+        </button>
+      </Link>
+      <h1 data-testid="page-title">{children}</h1>
       {
         toHideSearchIcon.includes(children)
           ? ''
@@ -29,10 +35,14 @@ function Header(props) {
             <button
               type="button"
               data-testid="search-top-btn"
+              onClick={ () => setSerching((oldState) => !oldState) }
             >
-              { searchIcon }
+              {searchIcon}
             </button>
           )
+      }
+      {
+        serching ? <SearchBar /> : ''
       }
     </div>
   );
