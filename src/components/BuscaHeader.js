@@ -1,4 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import ReceitasContext from '../contexts/ReceitasContext';
 
 function BuscaHeader() {
@@ -6,22 +7,35 @@ function BuscaHeader() {
   const [type, setType] = useState('name');
   const [endpoint, setEndpoint] = useState();
   const { fetchApi } = useContext(ReceitasContext);
+  const pathName = useHistory().location.pathname;
 
   function handleClick(event) {
     let endpointIn;
     switch (type) {
     case 'ingredient':
-      endpointIn = `https://www.themealdb.com/api/json/v1/1/filter.php?i=${text}`;
+      if (pathName === '/comidas') {
+        endpointIn = `https://www.themealdb.com/api/json/v1/1/filter.php?i=${text}`;
+      } else {
+        endpointIn = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${text}`;
+      }
       break;
     case 'firstLetter':
       if (text.length > 1) {
         // eslint-disable-next-line no-alert
         alert('Sua busca deve conter somente 1 (um) caracter');
       }
-      endpointIn = `https://www.themealdb.com/api/json/v1/1/search.php?f=${text}`;
+      if (pathName === '/comidas') {
+        endpointIn = `https://www.themealdb.com/api/json/v1/1/search.php?f=${text}`;
+      } else {
+        endpointIn = `https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${text}`;
+      }
       break;
     case 'name':
-      endpointIn = `https://www.themealdb.com/api/json/v1/1/search.php?s=${text}`;
+      if (pathName === '/comidas') {
+        endpointIn = `https://www.themealdb.com/api/json/v1/1/search.php?s=${text}`;
+      } else {
+        endpointIn = `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${text}`;
+      }
       break;
     default:
       break;
