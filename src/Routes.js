@@ -10,7 +10,7 @@ import explorePage from './pages/explore/explorePage';
 import exploreFoodPage from './pages/explore/exploreFoodPage';
 import exploreDrinkPage from './pages/explore/exploreDrinkPage';
 import expFoodIngPage from './pages/explore/exploreFoodIngredientsPage';
-import explDrinkIngPage from './pages/explore/exploreDrinkIngredientsPage';
+import expDrinkIngPage from './pages/explore/exploreDrinkIngredientsPage';
 
 export default function Routes() {
   return (
