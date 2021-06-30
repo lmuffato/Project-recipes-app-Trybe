@@ -7,7 +7,7 @@ const Wrapper = styled.section`align-items: center;
   margin-top: 40px;
 
   strong {
-    margin: 20px auto;
+    margin: 30px auto;
   }
 
   a {
