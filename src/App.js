@@ -2,7 +2,7 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import ProviderBebidas from './provider/ProviderBebida';
 import ProviderComidas from './provider/ProviderComidas';
-import Login from './pages';
+import { Login, Perfil } from './pages';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
@@ -22,9 +22,9 @@ function App() {
           <Route path="/explorar/bebidas/ingredientes" component={ ExplorarBebidasING } />
           <Route path="/explorar/comidas/ingredientes" component={ ExplorarComidasING } />
           <Route path="/explorar/comidas/area" component={ ExplorarComidasArea } />
-          <Route path="/perfil" component={ Perfil } />
           <Route path="/receitas-feitas" component={ ReceitasFeitas } />
-          <Route path="/receitas-favoritas" component={ ReceitasFavoritas } /> */}
+        <Route path="/receitas-favoritas" component={ ReceitasFavoritas } /> */}
+          <Route path="/perfil" component={ Perfil } />
           <Route exact path="/" component={ Login } />
         </Switch>
       </ProviderComidas>
