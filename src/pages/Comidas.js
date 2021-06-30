@@ -21,8 +21,10 @@ function Comidas() {
     }
     alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
     return (
-      <Header title="Comidas" />
-      <Footer />
+      <div>
+        <Header title="Comidas" />
+        <Footer />
+      </div>
     );
   }
   return (

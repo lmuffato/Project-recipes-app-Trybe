@@ -21,8 +21,10 @@ function Bebidas() {
     }
     alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
     return (
-      <Header title="Bebidas" />
-      <Footer />
+      <div>
+        <Header title="Bebidas" />
+        <Footer />
+      </div>
     );
   }
   return (
