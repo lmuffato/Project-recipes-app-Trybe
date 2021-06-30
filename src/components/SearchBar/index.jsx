@@ -1,11 +1,12 @@
 import React, { useState, useContext } from 'react';
+import PropTypes from 'prop-types';
 import { Form, Button } from 'react-bootstrap';
+import RecipesContext from '../../context/RecipesContext';
 
-export default function SearchBar() {
+export default function SearchBar({ page }) {
   const [searchTerm, setSearchTerm] = useState('');
   const [radioOption, setRadioOption] = useState('');
-  // Esta linha deve ser adequada ao formato do estado geral, bom como iportar o contexto
-  const { setKeyWord, setRadio } = useContext(recipes);
+  const { setRecipes, recipes } = useContext(RecipesContext);
 
   const toRadios = [
     { label: 'Ingrediente', testeId: 'ingredient-search-radio' },
@@ -16,13 +17,26 @@ export default function SearchBar() {
   const handleClick = () => {
     if (radioOption === 'Primeira letra') {
       if (searchTerm.length === 1) {
-        setKeyWord(searchTerm);
-        setRadio(radioOption);
-      } else { alert('Sua busca deve conter somente 1 (um) caracter.'); }
+        setRecipes({
+          ...recipes,
+          [page]: {
+            ...recipes[page],
+            params: { query: searchTerm, type: radioOption },
+          },
+        });
+      } else { return alert('Sua busca deve conter somente 1 (um) caracter.'); }
     } else {
-      setKeyWord(searchTerm);
-      setRadio(radioOption);
+      setRecipes({
+        ...recipes,
+        [page]: {
+          ...recipes[page], params: { query: searchTerm, type: radioOption },
+        },
+      });
     }
+  };
+
+  const handleChange = ({ target: { value } }) => {
+    setSearchTerm(value);
   };
 
   return (
@@ -31,7 +45,7 @@ export default function SearchBar() {
         type="text"
         placeHolder="Buscar Receita"
         data-testid="search-input"
-        onChange={ setSearchTerm({ target: { value } }) }
+        onChange={ handleChange }
       />
       {toRadios.map(({ label, testeId }) => (
         <Form.Check
@@ -54,3 +68,7 @@ export default function SearchBar() {
     </div>
   );
 }
+
+SearchBar.propTypes = {
+  page: PropTypes.string.isRequired,
+};

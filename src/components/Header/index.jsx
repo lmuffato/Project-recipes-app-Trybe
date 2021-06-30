@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import SearchBar from '../SearchBar';
+import './styles.css';
 
 import profileIcon from '../../images/profileIcon.svg';
 import searchIcon from '../../images/searchIcon.svg';
@@ -18,31 +19,31 @@ function Header(props) {
   ];
 
   return (
-    <div>
+    <div className="header-parent">
       <Link to="/perfil">
-        <button
-          type="button"
+        <img
+          src={ profileIcon }
           data-testid="profile-top-btn"
-        >
-          {profileIcon}
-        </button>
+          alt="user"
+        />
       </Link>
-      <h1 data-testid="page-title">{children}</h1>
+      <h2 data-testid="page-title">{children}</h2>
       {
         toHideSearchIcon.includes(children)
           ? ''
           : (
-            <button
-              type="button"
+            <img
+              src={ searchIcon }
+              aria-hidden="true"
               data-testid="search-top-btn"
               onClick={ () => setSerching((oldState) => !oldState) }
-            >
-              {searchIcon}
-            </button>
+              alt="do search"
+            />
           )
       }
       {
-        serching ? <SearchBar /> : ''
+        serching ? (
+          <SearchBar page={ children.includes('Comida') ? 'meals' : 'drinks' } />) : ''
       }
     </div>
   );

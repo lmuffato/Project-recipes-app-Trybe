@@ -1,12 +1,12 @@
 export default fetchMealsAndDrinks = (query, type, page) => {
   // endpoints
-  const byName = (page === 'Meals')
+  const byName = (page === 'meals')
     ? `https://www.themealdb.com/api/json/v1/1/search.php?s=${query}`
     : `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${query}`;
-  const byFirstLetter = (page === 'Meals')
+  const byFirstLetter = (page === 'meals')
     ? `https://www.themealdb.com/api/json/v1/1/search.php?f=${query}`
     : `https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${query}`;
-  const byIngredient = (page === 'Meals')
+  const byIngredient = (page === 'meals')
     ? `https://www.themealdb.com/api/json/v1/1/filter.php?i=${query}`
     : `https://www.themealdb.com/api/json/v1/1/filter.php?i=${query}`;
 
