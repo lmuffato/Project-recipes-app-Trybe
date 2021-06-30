@@ -3,12 +3,15 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter } from 'react-router-dom';
 import Routes from './Routes';
+import RecipesProvider from './recipes-main/RecipesProvider';
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes />
-    </BrowserRouter>
+    <RecipesProvider>
+      <BrowserRouter>
+        <Routes />
+      </BrowserRouter>
+    </RecipesProvider>
   );
 }
 
