@@ -1,5 +1,11 @@
 import React from 'react';
+import Header from '../components/Header';
 
 export default function DrinkDetails() {
-  return <div>Detalhes da bebida</div>;
+  return (
+    <>
+      <Header title="Detalhes da bebida" />
+      <h1>DrinkDetails</h1>
+    </>
+  );
 }

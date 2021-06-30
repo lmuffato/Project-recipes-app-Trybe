@@ -1,4 +1,5 @@
 import React from 'react';
+import { string, number } from 'prop-types';
 
 export default function RecipeCard({ index, thumb, title }) {
   return (
@@ -8,3 +9,9 @@ export default function RecipeCard({ index, thumb, title }) {
     </section>
   );
 }
+
+RecipeCard.propTypes = {
+  index: number,
+  thumb: string,
+  title: string,
+}.isRequired;
