@@ -44,7 +44,7 @@ export default function Login() {
         <Link to="/comidas">
           <Button
             disabled={ loginValidation(userEmail, password) }
-            variant="primary"
+            variant="dark"
             type="button"
             data-testid="login-submit-btn"
             onClick={ setTokenLocalStorage }
