@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { setLocalStorage } from '../helper';
 import { /* useClassState, */ useStateEasyRedux } from '../redux/reducer/EasyRedux';
 
