@@ -1,12 +1,9 @@
 import React from 'react';
 import Footer from '../Components/Footer/Footer';
 
-function Bebidas() {
+function ExploreByType() {
   return (
-    <div>
-      <Footer />
-    </div>
+    <Footer />
   );
 }
-
-export default Bebidas;
+export default ExploreByType;

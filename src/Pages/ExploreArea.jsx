@@ -1,12 +1,9 @@
 import React from 'react';
 import Footer from '../Components/Footer/Footer';
 
-function Comidas() {
+function ExploreArea() {
   return (
-    <div>
-      <Footer />
-    </div>
+    <Footer />
   );
 }
-
-export default Comidas;
+export default ExploreArea;

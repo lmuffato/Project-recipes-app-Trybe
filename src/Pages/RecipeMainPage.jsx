@@ -1,12 +1,9 @@
 import React from 'react';
 import Footer from '../Components/Footer/Footer';
 
-function Perfil() {
+function RecipeMainPage() {
   return (
-    <div>
-      <Footer />
-    </div>
+    <Footer />
   );
 }
-
-export default Perfil;
+export default RecipeMainPage;

@@ -1,12 +1,9 @@
 import React from 'react';
 import Footer from '../Components/Footer/Footer';
 
-function Explorar() {
+function ExploreIngredients() {
   return (
-    <div>
-      <Footer />
-    </div>
+    <Footer />
   );
 }
-
-export default Explorar;
+export default ExploreIngredients;

@@ -1,12 +1,9 @@
 import React from 'react';
 import Footer from '../Components/Footer/Footer';
 
-function NaoEncontrado() {
+function Profile() {
   return (
-    <div>
-      <Footer />
-    </div>
+    <Footer />
   );
 }
-
-export default NaoEncontrado;
+export default Profile;

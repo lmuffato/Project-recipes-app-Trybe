@@ -1,8 +1,8 @@
 import React from 'react';
 
-function Login() {
+function ListofRecipes() {
   return (
     <h1>Hello World</h1>
   );
 }
-export default Login;
+export default ListofRecipes;
