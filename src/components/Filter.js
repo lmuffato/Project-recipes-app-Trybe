@@ -4,6 +4,7 @@ import ReceitasContext from '../contexts/ReceitasContext';
 
 function Filter({ page }) {
   const [APIresponse, setAPIResponse] = useState();
+  const [selected, setSelected] = useState();
   const { fetchApi, setFilter } = useContext(ReceitasContext);
   let classes = [];
 
@@ -42,28 +43,45 @@ function Filter({ page }) {
     classes = arr;
   }
 
-  function handleClick(clas) {
+  function handleChange(event) {
     if (page === 'comidas') {
-      fetchApi(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${clas}`);
+      fetchApi(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${event.target.value}`);
       setFilter(true);
+      setSelected(event.target.value);
     } else {
-      fetchApi(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${clas}`);
+      fetchApi(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${event.target.value}`);
       setFilter(true);
+      setSelected(event.target.value);
     }
   }
 
+  function handleClick(event) {
+    if (selected === event.target.value) {
+      event.target.checked = false;
+      if (page === 'comidas') {
+        fetchApi('https://www.themealdb.com/api/json/v1/1/search.php?s=');
+      } else {
+        fetchApi('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
+      }
+    }
+  }
   return (classes.length > 1
     && (
       <div>
         {classes.map((clas, index) => (
-          <button
-            key={ index }
-            type="button"
-            data-testid={ `${clas.strCategory}-category-filter` }
-            onClick={ () => handleClick(clas.strCategory) }
-          >
+          <label key={ index } htmlFor={ clas.strCategory }>
+            <input
+              type="radio"
+              data-testid={ `${clas.strCategory}-category-filter` }
+              onChange={ handleChange }
+              id={ clas.strCategory }
+              name="class"
+              value={ clas.strCategory }
+              onClick={ handleClick }
+            />
             {clas.strCategory}
-          </button>))}
+          </label>
+        ))}
       </div>
     ));
 }
