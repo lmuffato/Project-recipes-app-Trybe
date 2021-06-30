@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 import Header from '../components/Header';
-import { useStateEasyRedux } from '../redux/reducer/EasyRedux';
+import { useStateEasyRedux } from 'easy-redux-trybe';
 
 export default function Bebidas(props) {
   const { match: { params, path } } = props;

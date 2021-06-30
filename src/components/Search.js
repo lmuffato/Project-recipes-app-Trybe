@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useClassState, useStateEasyRedux } from '../redux/reducer/EasyRedux';
+import { useClassState, useStateEasyRedux } from 'easy-redux-trybe';
 
 const initialState = {
   search: '',
