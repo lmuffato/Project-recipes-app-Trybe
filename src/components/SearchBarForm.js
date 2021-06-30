@@ -1,13 +1,25 @@
 import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
+import { getIngrediente, getNome, getPrimeiraLetra,
+} from '../services/fetchApiSearchBar';
 
 const SearchBarForm = () => {
   const [busca, setBusca] = useState('');
   const [markBusca, setMarkBusca] = useState('');
 
-  const handleChange = ({ target: { name, value } }) => {
-    setBusca({ ...busca, [name]: value });
-    setMarkBusca({ ...markBusca, [name]: value });
+  const handleSearchBarApi = async () => {
+    if (markBusca === 'ingrediente') {
+      getIngrediente(busca).then((res) => res);
+    }
+    if (markBusca === 'nome') {
+      getNome(busca).then((res) => res);
+    }
+    if (markBusca === 'primeira-letra') {
+      getPrimeiraLetra(busca).then((res) => res);
+    }
+    if (markBusca === 'primeira-letra' && busca.length > 1) {
+      alert('Sua busca deve conter somente 1 (um) caracter');
+    }
   };
 
   const handleSearchBarValue = () => (
@@ -17,7 +29,7 @@ const SearchBarForm = () => {
         type="text"
         id="id-busca"
         name="id-busca"
-        onChange={ handleChange }
+        onChange={ (e) => setBusca(e.target.value) }
         data-testid="search-input"
       />
     </Form.Group>
@@ -31,7 +43,7 @@ const SearchBarForm = () => {
             type="radio"
             name="busca"
             value="ingrediente"
-            onChange={ handleChange }
+            onChange={ (e) => setMarkBusca(e.target.value) }
             data-testid="ingredient-search-radio"
           />
           Ingrediente
@@ -43,7 +55,7 @@ const SearchBarForm = () => {
             type="radio"
             name="busca"
             value="nome"
-            onChange={ handleChange }
+            onChange={ (e) => setMarkBusca(e.target.value) }
             data-testid="name-search-radio"
           />
           Nome
@@ -54,8 +66,8 @@ const SearchBarForm = () => {
           <Form.Control
             type="radio"
             name="busca"
-            value="primeira-Letra"
-            onChange={ handleChange }
+            value="primeira-letra"
+            onChange={ (e) => setMarkBusca(e.target.value) }
             data-testid="first-letter-search-radio"
           />
           Primeira Letra
@@ -71,6 +83,7 @@ const SearchBarForm = () => {
         { handleSearchBarMark() }
         <Button
           data-testid="exec-search-btn"
+          onClick={ handleSearchBarApi }
         >
           Busca
         </Button>
