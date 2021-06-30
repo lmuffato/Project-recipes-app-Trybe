@@ -18,10 +18,16 @@ function UserContextProvider({ children }) {
     }
   }, [emailData, passwordData]);
 
+  const handleClick = () => {
+    localStorage.setItem('mealsToken', 1);
+    localStorage.setItem('cocktailsToken', 1);
+  };
+
   const contextValue = {
     disabledData,
     setEmail,
     setPassword,
+    handleClick,
   };
 
   return (

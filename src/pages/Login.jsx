@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { UserContext } from '../context/UserContext';
 
 function Login() {
-  const { setEmail, setPassword, disabledData } = useContext(UserContext);
+  const { setEmail, setPassword, disabledData, handleClick } = useContext(UserContext);
   return (
     <div>
       <label htmlFor="email">
@@ -27,7 +27,7 @@ function Login() {
         type="button"
         data-testid="login-submit-btn"
         disabled={ disabledData }
-        // onClick={ }
+        onClick={ () => handleClick() }
       >
         Entrar
       </button>
