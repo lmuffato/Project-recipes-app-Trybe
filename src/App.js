@@ -2,7 +2,8 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import ProviderBebidas from './provider/ProviderBebida';
 import ProviderComidas from './provider/ProviderComidas';
-import { Login } from './pages';
+import Login from './pages';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (

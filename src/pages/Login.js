@@ -1,4 +1,6 @@
+import { object } from 'prop-types';
 import React, { useEffect, useState } from 'react';
+import { Button, Form } from 'react-bootstrap';
 
 function Login(props) {
   const INITIAL_LOGIN = {
@@ -8,50 +10,68 @@ function Login(props) {
   const [isDisabled, setIsDisabled] = useState(true);
   const [login, setLogin] = useState(INITIAL_LOGIN);
 
-  const handleChange = ({ target }) => {
-    console.log(target);
+  const handleChange = ({ target: { name, value } }) => {
+    setLogin({
+      ...login,
+      [name]: value,
+    });
   };
 
-  const handleClick = ({ target }) => {
+  const handleClick = () => {
+    localStorage.setItem('mealsToken', 1);
+    localStorage.setItem('cocktailsToken', 1);
+    localStorage.setItem('user', JSON.stringify(login.email));
     const { history } = props;
-    console.log(history);
+    history.push('/comidas');
   };
 
   const inputsLogin = () => (
-    <form className="bd-highlight container">
-      <input
-        type="text"
-        name="email"
-        value={ login.email }
-        onChange={ handleChange }
-        placeholder="Email"
-        data-testid="email-input"
-        className="form-control col mb-4"
-      />
-      <input
-        type="password"
-        name="password"
-        value={ login.password }
-        onChange={ handleChange }
-        placeholder="Senha"
-        data-testid="password-input"
-        className="form-control col mb-4"
-      />
-      <button
+    <Form className="col-md-4 offset-md-4">
+      <Form.Group controlId="formBasicEmail">
+        <Form.Label>Email:</Form.Label>
+        <Form.Control
+          size="lg"
+          type="email"
+          placeholder="Enter email"
+          name="email"
+          value={ login.email }
+          onChange={ handleChange }
+          data-testid="email-input"
+        />
+        <Form.Text className="text-muted">
+          Nunca compartilharemos seu e-mail com mais ninguém.
+        </Form.Text>
+      </Form.Group>
+
+      <Form.Group controlId="formBasicPassword">
+        <Form.Label>Senha:</Form.Label>
+        <Form.Control
+          size="lg"
+          type="password"
+          name="password"
+          value={ login.password }
+          onChange={ handleChange }
+          placeholder="Senha"
+          data-testid="password-input"
+        />
+      </Form.Group>
+      <Button
+        variant="success"
         type="button"
         disabled={ isDisabled }
         onClick={ handleClick }
         data-testid="login-submit-btn"
-        className="btn btn-secondary col"
+        className="col-md-4 offset-md-4"
       >
         Entrar
-      </button>
-    </form>
+      </Button>
+    </Form>
   );
 
   // regex de email retirado de: https://ui.dev/validate-email-address-javascript/
   const inputsVerifier = () => {
     const { email, password } = login;
+    // modelo que o regex de email verifica _@_._
     const emailRegex = new RegExp(/^[^\s@]+@[^\s@]+\.[^\s@]+$/);
     const passwordRegex = new RegExp(/[\w\D]{7}/g);
     if (emailRegex.test(email) && passwordRegex.test(password)) {
@@ -73,5 +93,9 @@ function Login(props) {
     </div>
   );
 }
+
+Login.propTypes = {
+  history: object,
+}.isRequired;
 
 export default Login;
