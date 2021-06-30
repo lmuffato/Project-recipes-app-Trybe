@@ -3,7 +3,7 @@ import Header from '../components/Header';
 
 function Explore() {
   return (
-    <Header search="false" />
+    <Header props={ { search: false, title: 'Explorar' } } />
   );
 }
 
