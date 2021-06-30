@@ -3,7 +3,9 @@ import Header from '../components/Header';
 
 function Bebidas() {
   return (
-    <Header title="Bebidas" />
+    <div>
+      <Header title="Bebidas" />
+    </div>
   );
 }
 
