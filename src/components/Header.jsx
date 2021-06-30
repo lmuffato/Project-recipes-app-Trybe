@@ -6,7 +6,7 @@ import searchIcon from '../images/searchIcon.svg';
 
 export default () => (
   <header className="header-container" data-testid="header">
-    <Link to="/profile" data-testid="profile-top-btn">
+    <Link to="/perfil" data-testid="profile-top-btn">
       <img src={ profileIcon } alt="" />
     </Link>
     <h1 data-testid="page-title">Comidas</h1>

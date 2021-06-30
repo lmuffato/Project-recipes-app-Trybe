@@ -1,4 +1,5 @@
 import React from 'react';
+import userEvent from '@testing-library/user-event';
 import Comidas from '../pages/Comidas';
 import App from '../App';
 import renderWithRouter from './renderWithRouter';
@@ -90,5 +91,15 @@ describe(`10 - Implemente um ícone para a tela de perfil, um título e
   });
   it('O header tem os ícones corretos na tela de receitas favoritas', () => {
     testHeaderComponents('/receitas-favoritas');
+  });
+});
+
+describe(`11 - Redirecione a pessoa usuária para a tela de perfil ao clicar
+  no botão de perfil`, () => {
+  it('A mudança de tela ocorre corretamente', () => {
+    const { getByTestId, history } = renderWithRouter(<Comidas />);
+    const linkToPerfil = getByTestId('profile-top-btn');
+    userEvent.click(linkToPerfil);
+    expect(history.location.pathname).toEqual('/perfil');
   });
 });
