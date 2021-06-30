@@ -25,7 +25,7 @@ function App() {
         <UserProvider>
           <Switch>
             <Route exact path="/" component={ Login } />
-            <Route path="/explorar" exact component={ Explore } />
+            <Route path="/explorar" component={ Explore } />
             <Route path="/comidas" component={ MainRecipes } />
             <Route path="/bebidas" component={ MainCocktails } />
             <Route path="/profile" component={ Profile } />

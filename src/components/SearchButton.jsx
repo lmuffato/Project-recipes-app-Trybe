@@ -16,7 +16,6 @@ export default function SearchButton() {
       alt="Search"
       // onClick={ getSearchBar }
     >
-      <img src={ SearchImg } alt="Search" />
       <div>
         {/* { searchbar && <Searchbar /> } */}
       </div>
