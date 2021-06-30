@@ -3,7 +3,24 @@ import PropTypes from 'prop-types';
 import RecipesContext from './RecipesContext';
 
 function RecipesProvider({ children }) {
-  const context = {};
+  const INITIAL_RECIPES = {
+    meals: {
+      params: { query: '', type: '' },
+      results: [],
+    },
+    drinks: {
+      params: { query: '', type: '' },
+      results: [],
+    },
+    isLoading: false,
+  };
+
+  const [recipes, setRecipes] = useState(INITIAL_RECIPES);
+  const context = {
+    recipes,
+    setRecipes,
+  };
+
   return (
     <RecipesContext.Provider value={ context }>
       {children}
