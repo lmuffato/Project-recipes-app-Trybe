@@ -10,7 +10,5 @@
 // <Route path="/receitas-feitas" component={ RecipesDone } />
 // <Route path="/receitas-favoritas" component={ FavoriteRecipes } />
 
-// <Route path="/comidas/{id-da-receita}" component={ FoodDetails } />
-// <Route path="/bebidas/{id-da-receita}" component={ DrinkDetails } />
-// <Route path="/comidas/{id-da-receita}/in-progress" component={ FoodProgress } />
-// <Route path="/bebidas/{id-da-receita}/in-progress" component={ DrinkProgress } />
+// <Route path="/comidas/:id/in-progress" component={ FoodProgress } />
+// <Route path="/bebidas/:id/in-progress" component={ DrinkProgress } />

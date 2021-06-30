@@ -9,15 +9,17 @@ import useRecipe from '../hooks/useRecipe';
 import { fetchIngredient, fetchName, fetchFirstLetter } from '../services/data';
 
 export default function Header({ title, searchIcon = false }) {
-  const { setRecipe } = useRecipe();
+  const { setRecipe, recipe } = useRecipe();
 
   const [searchResult, setSearchResult] = useState('');
   const [selectedSearch, setSelectedSearch] = useState('');
   const [showSearch, setShowSearch] = useState(false);
+
   const history = useHistory();
+  const { pathname } = history.location;
+  const recipeKeyName = pathname === '/comidas' ? 'meals' : 'drinks';
 
   const getRecipe = () => {
-    const { pathname } = history.location;
     const site = pathname === '/comidas' ? 'meal' : 'cocktail';
 
     switch (selectedSearch) {
@@ -30,16 +32,27 @@ export default function Header({ title, searchIcon = false }) {
         return fetchFirstLetter(site, searchResult);
       }
       alert('Sua busca deve conter somente 1 (um) caracter');
-      break;
+      return { meals: [], drinks: [] };
     default:
-      return searchResult;
+      return { meals: [], drinks: [] };
     }
   };
 
   const getSearch = async () => {
-    const recipe = await getRecipe();
-    setRecipe(recipe);
+    const recipeResponse = await getRecipe();
+    setRecipe(recipeResponse);
   };
+
+  const redirectToMealOrDrink = () => {
+    const foods = recipe[recipeKeyName];
+    const idFood = pathname === '/comidas' ? 'idMeal' : 'idDrink';
+
+    if (foods.length === 1 && foods) {
+      history.push(`${pathname}/${foods[0][idFood]}`);
+    }
+  };
+
+  redirectToMealOrDrink();
 
   return (
     <header>

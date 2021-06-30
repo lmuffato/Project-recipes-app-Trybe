@@ -4,7 +4,7 @@ import { shape } from 'prop-types';
 export const RecipeContext = createContext();
 
 export function RecipeContextProvider({ children }) {
-  const [recipe, setRecipe] = useState();
+  const [recipe, setRecipe] = useState({ meals: [], drinks: [] });
 
   return (
     <RecipeContext.Provider value={ { recipe, setRecipe } }>
