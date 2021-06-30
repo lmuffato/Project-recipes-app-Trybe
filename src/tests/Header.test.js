@@ -35,4 +35,18 @@ describe('Requirement 11', () => {
     const { pathname } = history.location;
     expect(pathname).toBe('/perfil');
   });
+
+  describe('Requirement 12', () => {
+    it('shows and hides the seach input', () => {
+      const { queryByRole, getByRole } = renderWithRouter(<Foods />);
+
+      const searchButton = getByRole('img', {
+        name: /search/i,
+      });
+
+      expect(queryByRole('textbox')).toBeNull();
+      fireEvent.click(searchButton);
+      expect(queryByRole('textbox')).toBeInTheDocument();
+    });
+  });
 });
