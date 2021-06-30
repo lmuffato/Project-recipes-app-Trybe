@@ -19,11 +19,8 @@ function useFetchRecipes(type) {
 
         const limitedData = {
           ...data,
-          recipes: data[type].slice(0, MAX_RECIPES),
+          [type]: data[type].slice(0, MAX_RECIPES),
         };
-
-        console.log(data);
-        console.log(data);
 
         setRecipesContext(limitedData);
         setRecipesData(limitedData);

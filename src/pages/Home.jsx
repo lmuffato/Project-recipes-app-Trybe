@@ -8,11 +8,10 @@ function Home(props) {
   const { type } = props;
   const fetchData = useFetchRecipes(type);
   const [recipes, setRecipes] = useState([]);
-  console.log('recipes:', recipes);
 
   useEffect(() => {
-    if (fetchData.recipes) setRecipes(fetchData.recipes);
-  }, [fetchData]);
+    if (fetchData[type]) setRecipes(fetchData[type]);
+  }, [fetchData, type]);
 
   return (
     <div>
