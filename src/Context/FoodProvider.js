@@ -9,6 +9,7 @@ function FoodProvider({ children }) {
   const [searchText, setSearchText] = useState('');
   const [currentPage, setCurrentPage] = useState('');
   const [identifier, setIdentifier] = useState('');
+  const [category, setCategory] = useState(false);
   const contextValue = {
     foods,
     setFoods,
@@ -19,6 +20,9 @@ function FoodProvider({ children }) {
     currentPage,
     setCurrentPage,
     identifier,
+    setIdentifier,
+    category,
+    setCategory,
   };
 
   useEffect(() => {
@@ -50,7 +54,6 @@ function FoodProvider({ children }) {
       }
     };
     getFoods();
-    console.log(foods);
   }, [radioSelected, currentPage, searchText, currentPage]);
 
   return (
