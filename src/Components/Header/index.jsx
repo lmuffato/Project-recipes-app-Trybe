@@ -14,7 +14,8 @@ function Header(props) {
   const toHideSearchIcon = [
     'Explorar',
     'Explorar Comidas',
-    'Explorar Ingradientes',
+    'Explorar Bebidas',
+    'Explorar Ingredientes',
     'Receitas Feitas', 'Receitas Favoritas', 'Perfil',
   ];
 

@@ -1,9 +1,18 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import Header from '../../Components/Header';
 
-function ListOfRecipes() {
+function ListOfRecipes({ header }) {
   return (
-    <h1>ListOfRecipes</h1>
+    <div>
+      <Header>{ header }</Header>
+      <h1>ListOfRecipes</h1>
+    </div>
   );
 }
+
+ListOfRecipes.propTypes = {
+  header: PropTypes.string,
+}.isRequired;
 
 export default ListOfRecipes;

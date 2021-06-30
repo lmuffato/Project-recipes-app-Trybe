@@ -16,8 +16,16 @@ export default function Router() {
     <BrowserRouter>
       <Switch>
         <Route exact path="/" component={ Login } />
-        <Route exact path="/comidas" component={ RecipeMainPage } />
-        <Route exact path="/bebidas" component={ RecipeMainPage } />
+        <Route
+          exact
+          path="/comidas"
+          render={ (props) => <RecipeMainPage { ...props } header="Comidas" /> }
+        />
+        <Route
+          exact
+          path="/bebidas"
+          render={ (props) => <RecipeMainPage { ...props } header="Bebidas" /> }
+        />
         <Route exact path="/comidas/:id" component={ Details } />
         <Route exact path="/bebidas/:id" component={ Details } />
         <Route
@@ -28,9 +36,21 @@ export default function Router() {
           path="/bebidas/:id/in-progress"
           component={ InProcess }
         />
-        <Route exact path="/explorar" component={ Explore } />
-        <Route exact path="/explorar/comidas" component={ ExploreByType } />
-        <Route exact path="/explorar/bebidas" component={ ExploreByType } />
+        <Route
+          exact
+          path="/explorar"
+          component={ Explore }
+        />
+        <Route
+          exact
+          path="/explorar/comidas"
+          render={ (props) => <ExploreByType { ...props } header="Explorar Comidas" /> }
+        />
+        <Route
+          exact
+          path="/explorar/bebidas"
+          render={ (props) => <ExploreByType { ...props } header="Explorar Bebidas" /> }
+        />
         <Route
           path="/explorar/comidas/ingredientes"
           component={ ExploreIngredients }
@@ -39,10 +59,22 @@ export default function Router() {
           path="/explorar/bebidas/ingredientes"
           component={ ExploreIngredients }
         />
-        <Route path="/explorar/comidas/area" component={ ExploreArea } />
-        <Route path="/perfil" component={ Profile } />
-        <Route path="/receitas-feitas" component={ ListofRecipes } />
-        <Route path="/receitas-favoritas" component={ ListofRecipes } />
+        <Route
+          path="/explorar/comidas/area"
+          component={ ExploreArea }
+        />
+        <Route
+          path="/perfil"
+          component={ Profile }
+        />
+        <Route
+          path="/receitas-feitas"
+          render={ (props) => <ListofRecipes { ...props } header="Receitas Feitas" /> }
+        />
+        <Route
+          path="/receitas-favoritas"
+          render={ (props) => <ListofRecipes { ...props } header="Receitas Favoritas" /> }
+        />
       </Switch>
     </BrowserRouter>
   );
