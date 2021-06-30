@@ -26,7 +26,7 @@ function Login(props) {
   };
 
   const inputsLogin = () => (
-    <Form className="col-md-4 offset-md-4">
+    <Form className="">
       <Form.Group controlId="formBasicEmail">
         <Form.Label>Email:</Form.Label>
         <Form.Control
@@ -87,7 +87,7 @@ function Login(props) {
   }, [login]);
 
   return (
-    <div>
+    <div className="shadow p-3 mb-5 bg-white rounded col-md-4 offset-md-4">
       <h1 className="text-center mb-4">Login</h1>
       {inputsLogin()}
     </div>
