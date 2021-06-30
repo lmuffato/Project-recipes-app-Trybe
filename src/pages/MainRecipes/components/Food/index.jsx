@@ -1,24 +1,24 @@
 import React, { useEffect, useState } from 'react';
-import getMeals from '../../../../services/MealApi';
+import getFoodRecipes from '../../../../services/mealApi';
 import RecipeCard from '../RecipeCard';
 
 function Food() {
-  const [meals, setMeals] = useState([]);
+  const [recipes, setRecipes] = useState([]);
 
-  async function getAllMeals() {
+  async function getRecipes() {
     const mealsArrayLimit = 12;
-    const res = await getMeals();
-    setMeals(res.meals.slice(0, mealsArrayLimit));
+    const result = await getFoodRecipes();
+    setRecipes(result.meals.slice(0, mealsArrayLimit));
   }
 
   useEffect(() => {
-    getAllMeals();
+    getRecipes();
   }, []);
 
   return (
     <>
       <h1>Comidas</h1>
-      <RecipeCard meals={ meals } />
+      <RecipeCard meals={ recipes } />
     </>
   );
 }

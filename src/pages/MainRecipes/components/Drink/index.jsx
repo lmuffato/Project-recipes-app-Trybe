@@ -1,7 +1,28 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import getDrinkRecipes from '../../../../services/cockTailApi';
+import RecipeCard from '../RecipeCard';
 
 function Drink() {
-  return <h1>bebidas</h1>;
+  const [recipes, setRecipes] = useState([]);
+
+  async function getRecipes() {
+    const resultArrayLimit = 12;
+    const result = await getDrinkRecipes();
+    setRecipes(result.drinks.slice(0, resultArrayLimit));
+  }
+
+  useEffect(() => {
+    getRecipes();
+  }, []);
+
+  console.log(recipes);
+
+  return (
+    <>
+      <h1>Comidas</h1>
+      <RecipeCard meals={ recipes } />
+    </>
+  );
 }
 
 export default Drink;
