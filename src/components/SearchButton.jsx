@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
+// import React, { useState } from 'react';
 import SearchImg from '../images/searchIcon.svg';
 // import Searchbar from './Searchbar';
 

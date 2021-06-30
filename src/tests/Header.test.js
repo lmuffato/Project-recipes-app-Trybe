@@ -4,7 +4,7 @@ import { render, screen } from '@testing-library/react';
 import Header from '../components/Header';
 
 const PROFILE_TOP_BUTTON = 'profile-top-btn';
-const PAGE_TITLE = 'page-title';
+// const PAGE_TITLE = 'page-title';
 const SEARCH_TOP_BUTTON = 'search-top-btn';
 
 const renderWithRouter = (ui, { route = '/' } = {}) => {
