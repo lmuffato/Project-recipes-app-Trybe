@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import brandFace from '../../images/brand/face.svg';
 
 import styles from './styles.module.scss';
@@ -52,15 +53,17 @@ function Login() {
             value={ password }
             onChange={ (event) => setPassword(event.target.value) }
           />
-          <button
-            type="submit"
-            className="primary-btn"
-            data-testid="login-submit-btn"
-            disabled={ enabledButton() }
-            onClick={ successfulLogin }
-          >
-            Entrar
-          </button>
+          <Link to="/comidas">
+            <button
+              type="submit"
+              className="primary-btn"
+              data-testid="login-submit-btn"
+              disabled={ enabledButton() }
+              onClick={ successfulLogin }
+            >
+              Entrar
+            </button>
+          </Link>
         </form>
       </main>
       <footer className={ styles.loginFooter }>
