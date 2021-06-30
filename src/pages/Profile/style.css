@@ -1,6 +1,6 @@
 .span-email {
-  padding-bottom: 30px;
   font-size: 20px;
+  padding-bottom: 30px;
 }
 
 .buttons {
@@ -9,15 +9,15 @@
 }
 
 .button {
-  border: none;
-  margin-top: 10px;
-  margin-bottom: 10px;
   background-color: #ffc529;
+  border: none;
   border-radius: 4px;
   font-size: 18px;
   height: 34px;
-  width: 205px;
+  margin-bottom: 10px;
+  margin-top: 10px;
   transition: 0.4s;
+  width: 205px;
 }
 
 a {
