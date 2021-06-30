@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { setToLocalStorage } from '../services/localStorage';
+import rockGlass from '../images/rockGlass.svg';
 
 function Login() {
   const history = useHistory();
@@ -37,7 +38,14 @@ function Login() {
   const passwordLength = 7;
   return (
     <div className="login">
-      <h1 className="title">My Wallet</h1>
+     <span className="logo">TRYBE</span>
+      <object
+        className="rocksGlass"
+        type="image/svg+xml"
+        data={ rockGlass }
+      >
+        Glass
+      </object>
       <h1 className="login-word">Login</h1>
       <p className="loginEmail">Email:</p>
       <input

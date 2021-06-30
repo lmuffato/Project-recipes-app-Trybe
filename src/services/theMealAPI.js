@@ -12,6 +12,34 @@ export const ApiByCategory = async () => {
   }
 };
 
+export const ApiByName = async (name) => {
+  try {
+    const fetchApi = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${name}`);
+    const getResponse = await fetchApi.json();
+    return getResponse;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const ApiByFirstLetter = async (letter) => {
+  const fetchApi = await fetch(
+    `https://www.themealdb.com/api/json/v1/1/search.php?f=${letter}`,
+  );
+  const getResponse = await fetchApi.json();
+  console.log(getResponse);
+  return getResponse;
+};
+
+export const ApiByIngredient = async (ingredient) => {
+  const fetchApi = await fetch(
+    `https://www.themealdb.com/api/json/v1/1/filter.php?i=${ingredient}`,
+  );
+  const getResponse = await fetchApi.json();
+  console.log(getResponse);
+  return getResponse;
+};
+
 export const ApiByAreas = async () => {
   try {
     const fetchApi = await fetch('https://www.themealdb.com/api/json/v1/1/list.php?a=list');
