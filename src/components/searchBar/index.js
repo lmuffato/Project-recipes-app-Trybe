@@ -17,11 +17,23 @@ export default function SearchBar() {
   }
 
   return (
-    <div>
-      <input type="text" />
-      {generateRadioButtons('name', 'label', 'onChange', 'dataTest')}
-      {generateRadioButtons('name', 'label', 'onChange', 'dataTest')}
-      {generateRadioButtons('name', 'label', 'onChange', 'dataTest')}
-    </div>
+    <>
+      <input
+        data-testid="search-input"
+        type="text"
+      />
+
+      {generateRadioButtons('name', 'Ingredient', 'onChange', 'ingredient-search-radio')}
+      {generateRadioButtons('name', 'Name', 'onChange', 'name-search-radio')}
+      {generateRadioButtons('name', 'First letter',
+        'onChange', 'first-letter-search-radio')}
+      <button
+        data-testid="exec-search-btn"
+        type="button"
+      >
+        Search
+
+      </button>
+    </>
   );
 }

@@ -10,7 +10,7 @@ export default function Header({ title = 'Headers', isSearch = true }) {
       <span data-testid="page-title">
         { title }
       </span>
-      { isSearch ? <SearchBtn data-testid="search-top-btn" /> : null}
+      { isSearch ? <SearchBtn /> : null}
     </div>
   );
 }
