@@ -13,6 +13,14 @@ class Login extends React.Component {
 
     this.userValidate = this.userValidate.bind(this);
     this.saveEmail = this.saveEmail.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange(e) {
+    const { value, id } = e.target;
+    this.setState({
+      [id]: value,
+    }, () => this.userValidate());
   }
 
   userValidate() {
@@ -20,14 +28,11 @@ class Login extends React.Component {
     const regex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
     const validEmail = regex.test(String(email).toLowerCase());
     const minPassLength = 6;
-    if (password.length >= minPassLength) {
-      this.setState({ validPassword: true });
-    }
-    if (validEmail) {
-      this.setState({ validEmail: true });
-    }
+    const isBlocked = (password.length >= minPassLength && validEmail);
+    this.setState({
+      validData: isBlocked,
+    });
   }
-
   saveEmail() {
     const { email } = this.state;
     localStorage.setItem('user', email);
@@ -42,7 +47,7 @@ class Login extends React.Component {
             type="email"
             data-testid="email-input"
             value={ email }
-            // onChange={}
+            onChange={ (e) => this.handleChange(e) }
           />
         </label>
         <label htmlFor="password-input">
@@ -50,7 +55,7 @@ class Login extends React.Component {
             type="password"
             data-testid="password-input"
             value={ password }
-          // onChange={}
+            onChange={ (e) => this.handleChange(e) }
           />
         </label>
         <button
