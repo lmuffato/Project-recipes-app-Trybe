@@ -1,0 +1,21 @@
+import React, { useState, createContext } from 'react';
+import PropTypes from 'prop-types';
+
+export const RecipesContext = createContext({});
+
+function RecipesContextProvider({ children }) {
+  const [recipesContext, setRecipesContext] = useState({});
+  const contextValue = { recipesContext, setRecipesContext };
+
+  return (
+    <RecipesContext.Provider value={ contextValue }>
+      { children }
+    </RecipesContext.Provider>
+  );
+}
+
+RecipesContextProvider.propTypes = {
+  children: PropTypes.node.isRequired,
+};
+
+export default RecipesContextProvider;
