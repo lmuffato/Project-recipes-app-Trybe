@@ -4,10 +4,12 @@ import MealsContext from './MealsContext';
 
 function MealsProvider(props) {
   const [meals, setMeals] = useState([]);
+
   const context = {
     meals,
     setMeals,
   };
+
   const { children } = props;
   return (
     <MealsContext.Provider value={ context }>

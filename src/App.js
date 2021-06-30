@@ -5,6 +5,7 @@ import MealsProvider from './context/MealsProvider';
 import CocktailsProvider from './context/CocktailsProvider';
 import UserProvider from './context/UserProvider';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Foods from './pages/Foods';
 
 function App() {
   return (
@@ -20,7 +21,7 @@ function App() {
       <UserProvider>
         <CocktailsProvider>
           <MealsProvider>
-            {/* <Login /> */}
+            <Foods path="/comidas" />
           </MealsProvider>
         </CocktailsProvider>
       </UserProvider>
