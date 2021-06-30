@@ -38,7 +38,7 @@ function Login() {
   const passwordLength = 7;
   return (
     <div className="login">
-     <span className="logo">TRYBE</span>
+      <span className="logo">TRYBE</span>
       <object
         className="rocksGlass"
         type="image/svg+xml"
