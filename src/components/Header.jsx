@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 import './Header.css';
@@ -76,7 +77,9 @@ function Header({ props: { search, title } }) {
   return (
     <div>
       <header>
-        <img src={ profileIcon } data-testid="profile-top-btn" alt="profile icon" />
+        <Link to="/perfil">
+          <img src={ profileIcon } data-testid="profile-top-btn" alt="profile icon" />
+        </Link>
         <h1
           data-testid="page-title"
         >
