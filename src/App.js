@@ -1,11 +1,11 @@
 import React from 'react';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './App.css';
 import rockGlass from './images/rockGlass.svg';
-import MealsProvider from './context/MealsProvider';
-import CocktailsProvider from './context/CocktailsProvider';
 import UserProvider from './context/UserProvider';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Foods from './pages/Foods';
+import Login from './pages/Login';
+import Main from './pages/Main';
 
 function App() {
   return (
@@ -18,13 +18,14 @@ function App() {
       >
         Glass
       </object>
-      <UserProvider>
-        <CocktailsProvider>
-          <MealsProvider>
-            <Foods path="/comidas" />
-          </MealsProvider>
-        </CocktailsProvider>
-      </UserProvider>
+      <BrowserRouter>
+        <UserProvider>
+          <Switch>
+            <Route exact path="/" component={ Login } />
+            <Route path="/comidas" component={ Main } />
+          </Switch>
+        </UserProvider>
+      </BrowserRouter>
     </div>
   );
 }
