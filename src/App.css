@@ -29,23 +29,6 @@
 }
 */
 
-header {
-  align-items: center;
-  border-bottom: 1px solid #e2e2e2;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  padding: 24px;
-}
-
-header > button, .container > button {
-  align-self: center;
-  background: inherit;
-  border: 0;
-  max-height: 40px;
-  max-width: 40px;
-}
-
 .meals > .logo {
   animation: shake 1.5s infinite ease;
   color: aliceblue;

@@ -1,5 +1,4 @@
 import React from 'react';
-import '../../App.css';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import profileIconImg from '../../images/profileIcon.svg';
