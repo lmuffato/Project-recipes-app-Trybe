@@ -43,7 +43,7 @@ export default function SearchBar({ page }) {
     <div>
       <Form.Control
         type="text"
-        placeHolder="Buscar Receita"
+        placeholder="Buscar Receita"
         data-testid="search-input"
         onChange={ handleChange }
       />
