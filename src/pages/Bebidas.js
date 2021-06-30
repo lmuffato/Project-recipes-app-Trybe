@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import { useStateEasyRedux } from 'easy-redux-trybe';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 import Header from '../components/Header';
-import { useStateEasyRedux } from 'easy-redux-trybe';
 
 export default function Bebidas(props) {
   const { match: { params, path } } = props;
