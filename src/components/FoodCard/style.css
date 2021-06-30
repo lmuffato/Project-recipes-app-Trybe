@@ -1,4 +1,4 @@
-.food-card  {
+.food-card {
   display: flex;
   flex-direction: column;
   max-height: 60%;
@@ -7,8 +7,8 @@
 
 .food-card img {
   max-height: 50%;
-  max-width: 35%;  
-} 
+  max-width: 35%;
+}
 
 .food-card h1 {
   font-size: 55%;
