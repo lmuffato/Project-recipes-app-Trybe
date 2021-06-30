@@ -1,16 +1,19 @@
 import React from 'react';
 
-import { fireEvent } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 import Drinks from '../pages/Drinks';
 import DrinkExplore from '../pages/DrinkExplore';
 import DrinkIngredientExplore from '../pages/DrinkIngredientExplore';
 import Explore from '../pages/Explore';
+import FavoriteRecipes from '../pages/FavoriteRecipes';
 import FoodArea from '../pages/FoodArea';
 import Foods from '../pages/Foods';
 import FoodExplore from '../pages/FoodExplore';
 import FoodIngredientExplore from '../pages/FoodIngredientExplore';
 import Login from '../pages/Login';
+import Profile from '../pages/Profile';
+import RecipesDone from '../pages/RecipesDone';
 
 import renderWithRouter from '../helper/renderWithRouter';
 
@@ -91,14 +94,14 @@ describe('Requirement 10', () => {
 
   it('renders the correct icons on the FoodIngredientExplore screen', () => {
     const { getByTestId, queryByTestId } = renderWithRouter(
-      <FoodIngredientExplore />
+      <FoodIngredientExplore />,
     );
     itDoesntRenderSearchIcon(queryByTestId, getByTestId);
   });
 
   it('renders the correct icons on the DrinkIngredientExplore screen', () => {
     const { getByTestId, queryByTestId } = renderWithRouter(
-      <DrinkIngredientExplore />
+      <DrinkIngredientExplore />,
     );
     itDoesntRenderSearchIcon(queryByTestId, getByTestId);
   });
@@ -106,6 +109,23 @@ describe('Requirement 10', () => {
   it('renders the correct icons on the FoodArea screen', () => {
     const { getByTestId } = renderWithRouter(<FoodArea />);
     itRenderAllIcons(getByTestId);
+  });
+
+  it('renders the correct icons on the Profile screen', () => {
+    const { getByTestId, queryByTestId } = renderWithRouter(<Profile />);
+    itDoesntRenderSearchIcon(queryByTestId, getByTestId);
+  });
+
+  it('renders the correct icons on the FavoriteRecipes screen', () => {
+    const { getByTestId, queryByTestId } = renderWithRouter(
+      <FavoriteRecipes />,
+    );
+    itDoesntRenderSearchIcon(queryByTestId, getByTestId);
+  });
+
+  it('renders the correct icons on the RecipesDone screen', () => {
+    const { getByTestId, queryByTestId } = renderWithRouter(<RecipesDone />);
+    itDoesntRenderSearchIcon(queryByTestId, getByTestId);
   });
 });
 
@@ -116,7 +136,7 @@ describe('Requirement 11', () => {
     const profilePageButton = getByRole('button', {
       name: /profile avatar/i,
     });
-    fireEvent.click(profilePageButton);
+    userEvent.click(profilePageButton);
 
     const { pathname } = history.location;
     expect(pathname).toBe('/perfil');
@@ -132,7 +152,7 @@ describe('Requirement 12', () => {
     });
 
     expect(queryByRole('textbox')).toBeNull();
-    fireEvent.click(searchButton);
+    userEvent.click(searchButton);
     expect(queryByRole('textbox')).toBeInTheDocument();
   });
 });
