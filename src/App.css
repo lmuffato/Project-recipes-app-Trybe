@@ -1,3 +1,21 @@
+.card-painel {
+  align-items: center;
+  display: flex;
+  flex: 1 0 50px;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card-meal-drink {
+  background-color: #ffd6a5;
+  border: black 1px solid;
+  border-radius: 5px;
+}
+
+.card-name {
+  text-align: center;
+}
+
 .meals {
   align-items: center;
   background: #0fa36b;
