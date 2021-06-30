@@ -4,6 +4,8 @@ import foodIcon from '../../images/mealIcon.svg';
 import drinkIcon from '../../images/drinkIcon.svg';
 import searchIcon from '../../images/searchIcon.svg';
 
+import './style.css';
+
 export default function FooterMenu() {
   return (
     <div data-testid="footer" className="footer">
