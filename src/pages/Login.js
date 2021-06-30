@@ -1,6 +1,8 @@
 import { object } from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
+import '../App.css';
+import { divMain, divContentForm, textLogin, textUpInput, btn } from '../styles/login';
 
 function Login(props) {
   const INITIAL_LOGIN = {
@@ -18,54 +20,58 @@ function Login(props) {
   };
 
   const handleClick = () => {
+    const user = { email: login.email };
     localStorage.setItem('mealsToken', 1);
     localStorage.setItem('cocktailsToken', 1);
-    localStorage.setItem('user', JSON.stringify(login.email));
+    localStorage.setItem('user', JSON.stringify(user));
     const { history } = props;
     history.push('/comidas');
   };
 
   const inputsLogin = () => (
-    <Form className="">
-      <Form.Group controlId="formBasicEmail">
-        <Form.Label>Email:</Form.Label>
-        <Form.Control
-          size="lg"
-          type="email"
-          placeholder="Enter email"
-          name="email"
-          value={ login.email }
-          onChange={ handleChange }
-          data-testid="email-input"
-        />
-        <Form.Text className="text-muted">
-          Nunca compartilharemos seu e-mail com mais ninguém.
-        </Form.Text>
-      </Form.Group>
+    <div className={ divContentForm }>
+      <h1 className={ textLogin }>Login</h1>
+      <Form>
+        <Form.Group controlId="formBasicEmail">
+          <Form.Label>Email:</Form.Label>
+          <Form.Control
+            size="lg"
+            type="email"
+            placeholder="Enter email"
+            name="email"
+            value={ login.email }
+            onChange={ handleChange }
+            data-testid="email-input"
+          />
+          <Form.Text className={ textUpInput }>
+            Nunca compartilharemos seu e-mail com mais ninguém.
+          </Form.Text>
+        </Form.Group>
 
-      <Form.Group controlId="formBasicPassword">
-        <Form.Label>Senha:</Form.Label>
-        <Form.Control
-          size="lg"
-          type="password"
-          name="password"
-          value={ login.password }
-          onChange={ handleChange }
-          placeholder="Senha"
-          data-testid="password-input"
-        />
-      </Form.Group>
-      <Button
-        variant="success"
-        type="button"
-        disabled={ isDisabled }
-        onClick={ handleClick }
-        data-testid="login-submit-btn"
-        className="col-md-4 offset-md-4"
-      >
-        Entrar
-      </Button>
-    </Form>
+        <Form.Group controlId="formBasicPassword">
+          <Form.Label>Senha:</Form.Label>
+          <Form.Control
+            size="lg"
+            type="password"
+            name="password"
+            value={ login.password }
+            onChange={ handleChange }
+            placeholder="Senha"
+            data-testid="password-input"
+          />
+        </Form.Group>
+        <Button
+          variant="success"
+          type="button"
+          disabled={ isDisabled }
+          onClick={ handleClick }
+          data-testid="login-submit-btn"
+          className={ btn }
+        >
+          Entrar
+        </Button>
+      </Form>
+    </div>
   );
 
   // regex de email retirado de: https://ui.dev/validate-email-address-javascript/
@@ -87,8 +93,7 @@ function Login(props) {
   }, [login]);
 
   return (
-    <div className="shadow p-3 mb-5 bg-white rounded col-md-4 offset-md-4">
-      <h1 className="text-center mb-4">Login</h1>
+    <div className={ divMain }>
       {inputsLogin()}
     </div>
   );
