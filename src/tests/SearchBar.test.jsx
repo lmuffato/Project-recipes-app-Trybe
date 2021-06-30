@@ -1,7 +1,7 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
 import renderWithRouter from './renderWithRouter';
-import SearchBar from '../components/SearchBar/SearchBar';
+import SearchBar from '../components/SearchBar';
 import RecipesProvider from '../provider/RecipesProvider';
 
 test('test the rendering', () => {
