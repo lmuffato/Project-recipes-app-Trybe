@@ -1,41 +1,37 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import SearchIcon from '../images/searchIcon.svg';
 import ProfileImage from '../images/profileIcon.svg';
 
-function Header() {
-  const [displaySearchBar, setDisplaySearchBar] = useState(false);
-
-  const searchButton = () => (
-    <button
-      type="button"
-      onClick={ () => setDisplaySearchBar(!displaySearchBar) }
-    >
-      <img
-        data-testid="search-top-btn"
-        src={ SearchIcon }
-        alt="profileIcon"
-      />
-    </button>
-  );
-
+function Header({ title, search = false }) {
   return (
     <header>
-      <div>
-        <Link to="/perfil">
+      <button type="button">
+        <img
+          data-testid="profile-top-btn"
+          src={ ProfileImage }
+          alt="profileBtn"
+        />
+      </button>
+
+      <h1 data-testid="page-title">{title}</h1>
+
+      {search && (
+        <button type="button">
           <img
-            data-testid="profile-top-btn"
-            alt="profileIcon"
-            src={ ProfileImage }
+            src={ SearchIcon }
+            alt="SearchBtn"
+            data-testid="search-top-btn"
           />
-        </Link>
-        <h1 data-testid="page-title">title</h1>
-        <div>
-          { searchButton }
-        </div>
-      </div>
+        </button>
+      )}
     </header>
   );
 }
+
+Header.propTypes = {
+  title: PropTypes.string.isRequired,
+  search: PropTypes.bool.isRequired,
+};
 
 export default Header;
