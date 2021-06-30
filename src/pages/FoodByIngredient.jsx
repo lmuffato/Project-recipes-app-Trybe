@@ -5,7 +5,7 @@ export default function FoodByIngredient() {
   return (
     <div>
       <Header>
-        <h1 data-testid="page-title">Comidas por ingrediente</h1>
+        <h1 data-testid="page-title">Explorar Ingredientes</h1>
       </Header>
     </div>
   );

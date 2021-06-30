@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from '../components/Header';
 
-function Profile() {
+export default function Profile() {
   return (
     <div>
       <Header>
@@ -10,5 +10,3 @@ function Profile() {
     </div>
   );
 }
-
-export default Profile;
