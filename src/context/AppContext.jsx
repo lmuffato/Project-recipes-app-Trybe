@@ -6,11 +6,10 @@ export const AppContext = createContext();
 export default function AppProvider({ children }) {
   // header States
   const [displaySearchBar, setDisplaySearchBar] = useState(false);
-  const displaySearchBarToggle = () => setDisplaySearchBar(!displaySearchBar);
 
   const context = {
     displaySearchBar,
-    displaySearchBarToggle,
+    setDisplaySearchBar,
   };
 
   return (

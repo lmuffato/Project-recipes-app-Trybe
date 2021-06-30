@@ -5,15 +5,15 @@ import SearchBar from '../searchBar/index';
 
 export default function SearchBtn() {
   const {
-    displaySearchBarToggle,
     displaySearchBar,
+    setDisplaySearchBar,
   } = useContext(AppContext);
 
   return (
     <div data-testid="search-top-btn">
       <button
         type="button"
-        onClick={ displaySearchBarToggle }
+        onClick={ () => setDisplaySearchBar(!displaySearchBar) }
       >
         <img src={ SearchIcon } alt="Search icon" />
       </button>

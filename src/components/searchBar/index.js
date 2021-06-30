@@ -1,13 +1,7 @@
 import React from 'react';
 
-class SearchBar extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.GenerateRadioButtons = this.GenerateRadioButtons.bind(this);
-  }
-
-  GenerateRadioButtons(name, label, onChange, dataTest) {
+export default function SearchBar() {
+  function generateRadioButtons(name, label, onChange, dataTest) {
     return (
       <label htmlFor={ name }>
         {label}
@@ -22,16 +16,12 @@ class SearchBar extends React.Component {
     );
   }
 
-  render() {
-    return (
-      <div>
-        <input type="text" />
-        {this.GenerateRadioButtons('name', 'label', 'onChange', 'dataTest')}
-        {this.GenerateRadioButtons('name', 'label', 'onChange', 'dataTest')}
-        {this.GenerateRadioButtons('name', 'label', 'onChange', 'dataTest')}
-      </div>
-    );
-  }
+  return (
+    <div>
+      <input type="text" />
+      {generateRadioButtons('name', 'label', 'onChange', 'dataTest')}
+      {generateRadioButtons('name', 'label', 'onChange', 'dataTest')}
+      {generateRadioButtons('name', 'label', 'onChange', 'dataTest')}
+    </div>
+  );
 }
-
-export default SearchBar;

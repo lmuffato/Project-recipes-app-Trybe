@@ -8,9 +8,9 @@ export default function Header({ title = 'Headers', isSearch = true }) {
     <div>
       <ProfileBtn />
       <span data-testid="page-title">
-        {title}
+        { title }
       </span>
-      { isSearch ? <SearchBtn /> : null}
+      { isSearch ? <SearchBtn data-testid="search-top-btn" /> : null}
     </div>
   );
 }
