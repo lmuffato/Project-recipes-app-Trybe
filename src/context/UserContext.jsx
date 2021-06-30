@@ -19,8 +19,11 @@ function UserContextProvider({ children }) {
   }, [emailData, passwordData]);
 
   const handleClick = () => {
+    console.log(emailData);
+    const user = { email: emailData };
     localStorage.setItem('mealsToken', 1);
     localStorage.setItem('cocktailsToken', 1);
+    localStorage.setItem('user', JSON.stringify(user));
   };
 
   const contextValue = {
