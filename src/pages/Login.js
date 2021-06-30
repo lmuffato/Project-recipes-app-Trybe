@@ -77,7 +77,7 @@ function Login(props) {
   // regex de email retirado de: https://ui.dev/validate-email-address-javascript/
   const inputsVerifier = () => {
     const { email, password } = login;
-    // modelo que o regex de email verifica _@_._
+    // modelo que o regex de email verifica exemplo@exemplo.exemplo
     const emailRegex = new RegExp(/^[^\s@]+@[^\s@]+\.[^\s@]+$/);
     const passwordRegex = new RegExp(/[\w\D]{7}/g);
     if (emailRegex.test(email) && passwordRegex.test(password)) {
