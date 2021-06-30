@@ -12,7 +12,6 @@ function ReceitasProvider({ children }) {
       .then((response) => response.json())
       .then((response) => {
         setAPIResponse(response);
-        console.log(response);
       });
   }
 

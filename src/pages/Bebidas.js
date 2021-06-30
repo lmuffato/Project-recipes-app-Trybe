@@ -3,6 +3,7 @@ import CardList from '../components/CardList';
 import Header from '../components/Header';
 import ReceitasContext from '../contexts/ReceitasContext';
 import Footer from '../components/Footer';
+import Filter from '../components/Filter';
 
 function Bebidas() {
   const { APIresponse, fetchApi } = useContext(ReceitasContext);
@@ -17,6 +18,7 @@ function Bebidas() {
       return (
         <div>
           <Header title="Bebidas" />
+          <Filter page="bebidas" />
           <CardList
             list={ APIresponse.drinks }
           />
@@ -35,6 +37,7 @@ function Bebidas() {
   return (
     <div>
       <Header title="Bebidas" />
+      <Filter page="bebidas" />
       <Footer />
     </div>
   );
