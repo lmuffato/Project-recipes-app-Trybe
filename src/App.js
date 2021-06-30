@@ -4,6 +4,8 @@ import Explore from './pages/Explore';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Profile from './pages/Profile';
+import ExploreFoods from './pages/ExploreFoods';
+import ExploreDrinks from './pages/ExploreDrinks';
 
 function App() {
   return (
@@ -21,6 +23,8 @@ function App() {
       />
       <Route path="/perfil" component={ Profile } />
       <Route path="/explorar" exact component={ Explore } />
+      <Route path="/explorar/comidas" component={ ExploreFoods } />
+      <Route path="/explorar/bebidas" component={ ExploreDrinks } />
     </Switch>
   );
 }
