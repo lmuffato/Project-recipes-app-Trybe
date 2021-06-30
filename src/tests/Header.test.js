@@ -31,16 +31,26 @@ describe('Requirement 9', () => {
 });
 
 describe('Requirement 10', () => {
-  it('doesnt render Header component on the Login screen', () => {
-    const { queryByTestId } = renderWithRouter(<Login />);
+  const itDoesntRenderHeader = (query) => {
+    expect(query(testids.profileTopButton)).toBeNull();
+    expect(query(testids.pageTitle)).toBeNull();
+    expect(query(testids.searchTopButton)).toBeNull();
+  };
 
-    expect(queryByTestId(testids.profileTopButton)).toBeNull();
-    expect(queryByTestId(testids.pageTitle)).toBeNull();
-    expect(queryByTestId(testids.searchTopButton)).toBeNull();
+  const itRenderAllIcons = (get) => {
+    expect(get(testids.profileTopButton)).toBeInTheDocument();
+    expect(get(testids.pageTitle)).toBeInTheDocument();
+    expect(get(testids.searchTopButton)).toBeInTheDocument();
+  };
+
+  it('doesnt render the Header on the Login screen', () => {
+    const { queryByTestId } = renderWithRouter(<Login />);
+    itDoesntRenderHeader(queryByTestId);
   });
 
-  it('renders the correct icons on the FoodArea screen', () => {
-
+  it('renders the correct icons on the Foods screen', () => {
+    const { getByTestId } = renderWithRouter(<Foods />);
+    itRenderAllIcons(getByTestId);
   });
 });
 
