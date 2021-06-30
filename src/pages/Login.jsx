@@ -1,9 +1,36 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { UserContext } from '../context/UserContext';
 
 function Login() {
+  const { setEmail, setPassword, disabledData, handleClick } = useContext(UserContext);
   return (
     <div>
-      Tela de login
+      <label htmlFor="email">
+        Email
+        <input
+          type="text"
+          data-testid="email-input"
+          id="email"
+          onChange={ (event) => setEmail(event.target.value) }
+        />
+      </label>
+      <label htmlFor="password">
+        Senha
+        <input
+          type="password"
+          data-testid="password-input"
+          id="password"
+          onChange={ (event) => setPassword(event.target.value) }
+        />
+      </label>
+      <button
+        type="button"
+        data-testid="login-submit-btn"
+        disabled={ disabledData }
+        onClick={ () => handleClick() }
+      >
+        Entrar
+      </button>
     </div>
   );
 }
