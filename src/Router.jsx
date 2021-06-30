@@ -20,12 +20,10 @@ export default function Router() {
       <Route exact path="/comidas/:id" component={ Details } />
       <Route exact path="/bebidas/:id" component={ Details } />
       <Route
-        exact
         path="/comidas/:id/in-progress"
         component={ InProcess }
       />
       <Route
-        exact
         path="/bebidas/:id/in-progress"
         component={ InProcess }
       />
@@ -33,19 +31,17 @@ export default function Router() {
       <Route exact path="/explorar/comidas" component={ ExploreByType } />
       <Route exact path="/explorar/bebidas" component={ ExploreByType } />
       <Route
-        exact
         path="/explorar/comidas/ingredientes"
         component={ ExploreIngredients }
       />
       <Route
-        exact
         path="/explorar/bebidas/ingredientes"
         component={ ExploreIngredients }
       />
-      <Route exact path="/explorar/comidas/area" component={ ExploreArea } />
-      <Route exact path="/perfil" component={ Profile } />
-      <Route exact path="/receitas-feitas" component={ ListofRecipes } />
-      <Route exact path="/receitas-favoritas" component={ ListofRecipes } />
+      <Route path="/explorar/comidas/area" component={ ExploreArea } />
+      <Route path="/perfil" component={ Profile } />
+      <Route path="/receitas-feitas" component={ ListofRecipes } />
+      <Route path="/receitas-favoritas" component={ ListofRecipes } />
     </Switch>
   );
 }

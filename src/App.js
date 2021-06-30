@@ -1,7 +1,7 @@
 import React from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { BrowserRouter, Switch } from 'react-router-dom';
 import UserProvider from './context/UserProvider';
-import Login from './pages/Login';
+import Router from './Router';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
@@ -9,7 +9,7 @@ function App() {
     <UserProvider>
       <BrowserRouter>
         <Switch>
-          <Route path="/" component={ Login } />
+          <Router />
         </Switch>
       </BrowserRouter>
     </UserProvider>
