@@ -37,6 +37,10 @@
   font-weight: 900;
 }
 
+li {
+  list-style: none;
+}
+
 @keyframes shake {
 
   0% {

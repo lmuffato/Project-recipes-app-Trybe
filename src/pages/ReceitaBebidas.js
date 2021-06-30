@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 
@@ -6,17 +7,23 @@ function Receita() {
   const id = window.location.pathname.match(/(\d+)/)[0];
   const [loading, setLoading] = useState(true);
   const [info, setInfo] = useState('');
+  const [recomend, setRecomend] = useState();
 
   useEffect(() => {
     async function FoodAPI() {
       const requesition = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`);
       const result = await requesition.json();
+      async function recomendCard() {
+        const data = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=');
+        const recomendOptions = await data.json();
+        setRecomend(recomendOptions.meals);
+      }
+      await recomendCard();
       setLoading(false);
       setInfo(result.drinks[0]);
     }
     FoodAPI();
   }, [id]);
-  console.log(info);
   const { strDrinkThumb, strDrink, strCategory, strInstructions, strAlcoholic } = info;
 
   const listCreator = () => {
@@ -36,6 +43,26 @@ function Receita() {
       )));
   };
 
+  const recomendList = () => {
+    const qtd = 6;
+    if (loading === false) {
+      return (
+        recomend.filter((e, i) => i < qtd).map((e, i) => (
+          <li key={ i } data-testid={ `${i}-recomendation-card` }>
+            <Link to={ `/comidas/${e.idMeal}` }>
+              <div data-testid={ `${i}-recipe-card` }>
+                <img
+                  src={ e.strMealThumb }
+                  data-testid={ `${i}-card-img` }
+                  alt="foto da receita"
+                />
+                <h4 data-testid={ `${i}-recomendation-title` }>{ e.strMeal }</h4>
+              </div>
+            </Link>
+          </li>)));
+    }
+  };
+
   const componentGen = () => {
     if (loading === false) {
       return (
@@ -52,7 +79,7 @@ function Receita() {
           <p data-testid="recipe-category">{`${strCategory} ${strAlcoholic}`}</p>
           {listCreator()}
           <ul data-testid="instructions">{strInstructions}</ul>
-          <p testid={ `${0}-recomendation-card` }>Cards</p>
+          {recomendList()}
           <button type="button" data-testid="start-recipe-btn">Iniciar Receita</button>
         </div>
       );

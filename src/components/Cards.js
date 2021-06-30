@@ -1,12 +1,10 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import ReceitasContext from '../contexts/ReceitasContext';
 
 function Card({ index, strName, strThumb, id, type }) {
-  const { setCurrent } = useContext(ReceitasContext);
   return (
-    <Link to={ `/${type}/${id}` } onClick={ () => setCurrent(index) }>
+    <Link to={ `/${type}/${id}` }>
       <div data-testid={ `${index}-recipe-card` }>
         <img
           src={ strThumb }
