@@ -1,29 +1,50 @@
+import PropTypes from 'prop-types';
 import React, { useContext, useState } from 'react';
+import CocktailsContext from '../context/CocktailsContext';
 import MealsContext from '../context/MealsContext';
+import {
+  ApiByCocktailIngredient,
+  ApiByCocktailName,
+  ApiByCocktailFirstLetter } from '../services/theCockTailAPI';
 import { ApiByFirstLetter, ApiByIngredient, ApiByName } from '../services/theMealAPI';
 
-export default function SearchBar() {
+export default function SearchBar({ props }) {
   const [searchValue, setSearchValue] = useState({
     search: '',
     check: '',
   });
 
   const { setMeals } = useContext(MealsContext);
+  const { setCocktails } = useContext(CocktailsContext);
+  const { match } = props;
+  const firstLetter = 'first-letter';
 
   const handleClick = async () => {
     const { search, check } = searchValue;
-    console.log(search, check);
-    if (check === 'ingredient') {
+    const uRl = match.path;
+    if (check === 'ingredient' && uRl === '/comidas') {
       const results = await ApiByIngredient(search);
       setMeals(results);
     }
-    if (check === 'name') {
+    if (check === 'ingredient' && uRl === '/bebidas') {
+      const results = await ApiByCocktailIngredient(search);
+      setCocktails(results);
+    }
+    if (check === 'name' && uRl === '/comidas') {
       const results = await ApiByName(search);
       setMeals(results);
     }
-    if (check === 'first-letter') {
+    if (check === 'name' && uRl === '/bebidas') {
+      const results = await ApiByCocktailName(search);
+      setCocktails(results);
+    }
+    if (check === firstLetter && uRl === '/comidas') {
       const results = await ApiByFirstLetter(search);
       setMeals(results);
+    }
+    if (check === firstLetter && uRl === '/bebidas') {
+      const results = await ApiByCocktailFirstLetter(search);
+      setCocktails(results);
     }
   };
 
@@ -73,7 +94,7 @@ export default function SearchBar() {
           id="firstLetter-radio"
           type="radio"
           name="check"
-          value="first-letter"
+          value={ firstLetter }
           data-testid="first-letter-search-radio"
           onChange={ handleChange }
         />
@@ -89,3 +110,7 @@ export default function SearchBar() {
     </form>
   );
 }
+
+SearchBar.propTypes = {
+  props: PropTypes.object,
+}.isRequired;
