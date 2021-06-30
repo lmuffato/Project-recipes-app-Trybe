@@ -3,7 +3,7 @@ import Header from '../components/Header';
 
 function MainDrink() {
   return (
-    <Header />
+    <Header props={ { search: true, title: 'Bebidas' } } />
   );
 }
 
