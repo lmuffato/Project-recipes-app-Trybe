@@ -14,7 +14,5 @@ describe('testing if the header is rendered', () => {
     // userEvent.click(search);
 
     expect(title).toHaveTextContent(/título/i);
-    // expect(profile).toBeInTheDocument();
-    // expect(search).toBeInTheDocument();
   });
 });
