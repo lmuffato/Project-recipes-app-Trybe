@@ -50,7 +50,7 @@ export default function SearchBar({ props }) {
 
   const handleChange = ({ target }) => {
     const { check, search } = searchValue;
-    if (search.length > 1 && check === 'first-letter') {
+    if (search.length > 1 && check === firstLetter) {
       alert('Sua busca deve conter somente 1 (um) caracter');
     }
     if (target.name === 'check') {

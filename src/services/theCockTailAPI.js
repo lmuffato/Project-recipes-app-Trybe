@@ -20,7 +20,7 @@ export const ApiByCocktailFirstLetter = async (ingredient) => {
 
 export const ApiByCocktailIngredient = async (ingredient) => {
   try {
-    const fetchApi = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?i=${ingredient}`);
+    const fetchApi = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${ingredient}`);
     const getResponse = await fetchApi.json();
     return getResponse;
   } catch (error) {
