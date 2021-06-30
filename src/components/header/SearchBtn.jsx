@@ -10,10 +10,11 @@ export default function SearchBtn() {
   } = useContext(AppContext);
 
   return (
-    <div data-testid="search-top-btn">
+    <div>
       <button
         type="button"
         onClick={ () => setDisplaySearchBar(!displaySearchBar) }
+        data-testid="search-top-btn"
       >
         <img src={ SearchIcon } alt="Search icon" />
       </button>
