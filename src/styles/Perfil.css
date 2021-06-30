@@ -1,0 +1,10 @@
+.profile-btns {
+  margin-top: 200px;
+}
+
+button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px;
+}
