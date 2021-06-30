@@ -37,6 +37,39 @@
   font-weight: 900;
 }
 
+header {
+  align-items: center;
+  background: rgb(184, 184, 184);
+  display: flex;
+  justify-content: space-around;
+}
+
+.card-container {
+  align-items: center;
+  background: rgb(88, 88, 88);
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 230px;
+  text-align: center;
+  width: 150px;
+}
+
+.img-card {
+  width: 120px;
+}
+
+.foodlist {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 15px;
+  width: 100%;
+}
+
 @keyframes shake {
 
   0% {
