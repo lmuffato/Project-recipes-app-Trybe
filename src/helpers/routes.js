@@ -1,6 +1,10 @@
 import React from 'react';
+import Login from '../pages/Login';
+import MainFoods from '../pages/MainFoods';
+import MainDrinks from '../pages/MainDrinks';
+import Profile from '../pages/Profile';
+import Explore from '../pages/Explore';
 import Header from '../components/Header';
-import Comidas from '../pages/Comidas';
 
 const componentWithHeader = () => (
   <section>
@@ -17,17 +21,17 @@ const componentWithoutHeader = () => (
 export default [
   {
     path: '/',
-    component: componentWithoutHeader,
+    component: Login,
     exact: true,
   },
   {
     path: '/comidas',
-    component: Comidas,
+    component: MainFoods,
     exact: true,
   },
   {
     path: '/bebidas',
-    component: componentWithHeader,
+    component: MainDrinks,
     exact: true,
   },
   {
@@ -37,7 +41,7 @@ export default [
   },
   {
     path: '/explorar',
-    component: componentWithHeader,
+    component: Explore,
     exact: true,
   },
   {
@@ -67,7 +71,7 @@ export default [
   },
   {
     path: '/perfil',
-    component: componentWithHeader,
+    component: Profile,
     exact: false,
   },
   {

@@ -1,6 +1,6 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
-import Comidas from '../pages/Comidas';
+import MainFoods from '../pages/MainFoods';
 import App from '../App';
 import renderWithRouter from './renderWithRouter';
 import profileIcon from '../images/profileIcon.svg';
@@ -15,7 +15,7 @@ describe(`9 - Implemente os elementos do header na tela principal de receitas,
   respeitando os atributos descritos no protótipo`, () => {
   it(`Tem os data-testids 'profile-top-btn', 'page-title' e
   'search-top-btn'`, () => {
-    const { getByTestId, getByText } = renderWithRouter(<Comidas />);
+    const { getByTestId, getByText } = renderWithRouter(<MainFoods />);
 
     expect(getByTestId(PROFILE_TOP_BTN)).toBeInTheDocument();
     expect(getByTestId(SEARCH_TOP_BTN)).toBeInTheDocument();
@@ -99,7 +99,7 @@ describe(`10 - Implemente um ícone para a tela de perfil, um título e
 describe(`11 - Redirecione a pessoa usuária para a tela de perfil ao clicar
   no botão de perfil`, () => {
   it('A mudança de tela ocorre corretamente', () => {
-    const { getByTestId, history } = renderWithRouter(<Comidas />);
+    const { getByTestId, history } = renderWithRouter(<MainFoods />);
     const linkToPerfil = getByTestId(PROFILE_TOP_BTN);
     userEvent.click(linkToPerfil);
     expect(history.location.pathname).toEqual('/perfil');
@@ -109,7 +109,7 @@ describe(`11 - Redirecione a pessoa usuária para a tela de perfil ao clicar
 describe(`12 - Desenvolva o botão de busca que, ao ser clicado, a barra
   de busca deve aparecer. O mesmo serve para escondê-la`, () => {
   it('Ao clicar no botão de busca pela primeira vez a barra de busca aparece', () => {
-    const { getByTestId } = renderWithRouter(<Comidas />);
+    const { getByTestId } = renderWithRouter(<MainFoods />);
     const buttonSearch = getByTestId(SEARCH_TOP_BTN);
     userEvent.click(buttonSearch);
     const searchBar = getByTestId('search-bar');
@@ -117,7 +117,7 @@ describe(`12 - Desenvolva o botão de busca que, ao ser clicado, a barra
     expect(style.visibility).toBe('visible');
   });
   it('Ao clicar no botão de busca pela segunda vez a barra de busca desaparece', () => {
-    const { getByTestId } = renderWithRouter(<Comidas />);
+    const { getByTestId } = renderWithRouter(<MainFoods />);
     const buttonSearch = getByTestId(SEARCH_TOP_BTN);
     userEvent.dblClick(buttonSearch);
     const searchBar = getByTestId('search-bar');

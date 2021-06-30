@@ -1,20 +1,20 @@
 import React, { useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import profileIcon from '../images/profileIcon.svg';
-import searchIcon from '../images/searchIcon.svg';
-import SearchBar from './SearchBar';
-import '../pages/Comidas/style.css';
+import profileIcon from '../../images/profileIcon.svg';
+import searchIcon from '../../images/searchIcon.svg';
+import SearchBar from '../SearchBar';
+import './style.css';
 
-export default () => {
+export default function Header() {
   const [searchActive, setSearchActive] = useState(false);
+  let path;
   const handleCLick = () => {
+    const { pathname } = window.location;
+    if (pathname === '/comidas') path = 'meal';
+    if (pathname === '/bebidas') path = 'cocktail';
     setSearchActive(!searchActive);
   };
-
-  const style = { visibility: `${searchActive ? 'visible' : 'hidden'}` };
-
-  console.log(searchActive);
 
   return (
     <header className="header-container" data-testid="header">
@@ -25,7 +25,7 @@ export default () => {
       <Button data-testid="search-top-btn" onClick={ handleCLick }>
         <img src={ searchIcon } alt="" />
       </Button>
-      <SearchBar style={ style } searchActive={ searchActive } />
+      <SearchBar searchActive={ searchActive } path={ path } />
     </header>
   );
-};
+}
