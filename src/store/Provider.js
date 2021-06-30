@@ -12,9 +12,8 @@ function Provider({ children }) {
   const [dataFetchFoodsAndArea, setDataFetchFoodsAndArea] = useState([]);
   const [dataFetchFoodsAndIngredients, setDataFetchFoodsAndIngredients] = useState([]);
   const [infoUser, setDatainfoUser] = useState({
-    disable: true,
     email: '',
-    name: '',
+    password: '',
     shouldRedirect: false,
   });
 
