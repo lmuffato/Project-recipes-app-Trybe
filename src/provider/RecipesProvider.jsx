@@ -22,6 +22,7 @@ export default function RecipesProvider({ children }) {
   const context = {
     handleApi,
   };
+  
   return (
     <RecipesContext.Provider value={ context }>
       { children }
