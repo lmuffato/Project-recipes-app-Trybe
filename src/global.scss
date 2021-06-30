@@ -1,0 +1,22 @@
+:root {
+
+  --yellow: #fb8b24;
+
+  --purple: #721d64;
+
+  --dark-purple: #4b0740;
+
+  --light-purple: #ee9ee1;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  border-bottom: 5px solid var(--purple);
+  color: var(--yellow);
+  font-family: Yanone Kaffeesatz , sans-serif;
+}
