@@ -1,7 +1,5 @@
 import React from 'react';
-// import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
-// import ReceitasContext from '../contexts/ReceitasContext';
 
 function Card({ index, strName, strThumb }) {
   return (
@@ -17,7 +15,7 @@ function Card({ index, strName, strThumb }) {
 }
 
 Card.propTypes = {
-  index: PropTypes.string.isRequired,
+  index: PropTypes.number.isRequired,
   strName: PropTypes.string.isRequired,
   strThumb: PropTypes.string.isRequired,
 };

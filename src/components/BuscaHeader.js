@@ -1,11 +1,11 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import ReceitasContext from '../contexts/ReceitasContext';
 
 function BuscaHeader() {
   const [text, setText] = useState();
   const [type, setType] = useState('name');
-  const [endpoint, setEndpoint] = useState();
+  // const [endpoint, setEndpoint] = useState();
   const { fetchApi } = useContext(ReceitasContext);
   const pathName = useHistory().location.pathname;
 
@@ -40,15 +40,9 @@ function BuscaHeader() {
     default:
       break;
     }
-    setEndpoint(endpointIn);
     fetchApi(endpointIn);
     event.preventDefault();
   }
-
-  useEffect(() => {
-    console.log({ text, type, endpoint });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [endpoint]);
 
   return (
     <form>

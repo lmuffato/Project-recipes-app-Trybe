@@ -5,13 +5,26 @@ import ReceitasContext from '../contexts/ReceitasContext';
 
 function Comidas() {
   const { APIresponse } = useContext(ReceitasContext);
+
+  if (APIresponse !== undefined) {
+    if (APIresponse.meals !== null) {
+      return (
+        <div>
+          <Header title="Comidas" />
+          <CardList
+            list={ APIresponse.meals }
+          />
+        </div>
+      );
+    }
+    alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+    return (
+      <Header title="Comidas" />
+    );
+  }
   return (
     <div>
       <Header title="Comidas" />
-      { APIresponse !== undefined
-          && <CardList
-            list={ APIresponse.meals }
-          />}
     </div>
   );
 }

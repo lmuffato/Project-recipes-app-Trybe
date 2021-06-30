@@ -12,7 +12,6 @@ function CardList({ list }) {
       const element = list[index];
       arr.push(element);
     }
-    console.log(arr);
     return (
       arr.map((recipie, index) => {
         if (recipie.strMeal !== undefined) {
