@@ -14,23 +14,25 @@ function CardList({ list }) {
     }
     return (
       arr.map((recipie, index) => {
-        if (recipie.strMeal !== undefined) {
-          return (
+        if (recipie !== undefined) {
+          if (recipie.strMeal !== undefined) {
+            return (
+              <Card
+                index={ index }
+                key={ index }
+                strName={ recipie.strMeal }
+                strThumb={ recipie.strMealThumb }
+              />
+            );
+          } return (
             <Card
               index={ index }
               key={ index }
-              strName={ recipie.strMeal }
-              strThumb={ recipie.strMealThumb }
+              strName={ recipie.strDrink }
+              strThumb={ recipie.strDrinkThumb }
             />
           );
-        } return (
-          <Card
-            index={ index }
-            key={ index }
-            strName={ recipie.strDrink }
-            strThumb={ recipie.strDrinkThumb }
-          />
-        );
+        } return (<div key={ index }>Loading...</div>);
       }));
   }
   return (

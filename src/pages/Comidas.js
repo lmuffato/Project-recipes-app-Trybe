@@ -7,7 +7,7 @@ function Comidas() {
   const { APIresponse } = useContext(ReceitasContext);
 
   if (APIresponse !== undefined) {
-    if (APIresponse.meals !== null) {
+    if (APIresponse.meals !== null && APIresponse.meals.length >= 1) {
       return (
         <div>
           <Header title="Comidas" />
