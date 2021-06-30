@@ -1,0 +1,86 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100 ;0,300 ;1,500&display=swap') ;
+
+form {
+  background-color: rgb(94, 248, 157);
+  border: 0.3em solid rgb(67, 163, 58);
+  display: flex;
+  font-family: Roboto , sans-serif;
+  height: 100vh;
+  justify-content: center;
+  margin: auto;
+}
+
+.form-group {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  max-width: 500px;
+  padding: 2em;
+  width: 90%;
+}
+
+.icons {
+  display: flex;
+  font-size: 3em;
+  justify-content: space-between;
+  margin-bottom: 2em;
+  width: 100%;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 1em;
+  width: 100%;
+}
+
+p {
+  display: none;
+}
+
+input {
+  border: none;
+  border-radius: 0.3em;
+  box-sizing: border-box;
+  font-size: 1.2em;
+  height: 5vh;
+  padding: 0.3em;
+}
+
+input:focus {
+  border: 0.1em solid rgb(67, 163, 58);
+  font-size: 1.2em;
+  outline: none;
+  transition: 1s;
+}
+
+button {
+  align-items: center;
+  background-color: rgb(67, 163, 58);
+  border: none;
+  border-radius: 0.3em;
+  box-sizing: border-box;
+  color: white;
+  display: flex;
+  font-size: 1.3em;
+  height: 5vh;
+  justify-content: center;
+  width: 100%;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+button:disabled {
+  background-color: grey;
+  color: white;
+  cursor: not-allowed;
+}
+
+button:enabled {
+  background-color: #5ce250;
+  color: black;
+  transition: 2s;
+}
