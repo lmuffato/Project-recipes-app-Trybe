@@ -13,6 +13,10 @@ import DrinkExplore from '../pages/DrinkExplore';
 import DrinkIngredientExplore from '../pages/DrinkIngredientExplore';
 import FoodArea from '../pages/FoodArea';
 import FavoriteRecipes from '../pages/FavoriteRecipes';
+// import FoodDetails from '../pages/FoodDetails';
+// import DrinkDetails from '../pages/DrinkDetails';
+// import FoodProgress from '../pages/FoodProgress';
+// import DrinkProgress from '../pages/DrinkProgress';
 
 function Routes() {
   return (
@@ -35,17 +39,24 @@ function Routes() {
         component={ DrinkExplore }
       />
       <Route exact path="/explorar" component={ Explore } />
-
       <Route exact path="/perfil" component={ Profile } />
-
       <Route exact path="/receitas-feitas" component={ RecipesDone } />
       <Route exact path="/receitas-favoritas" component={ FavoriteRecipes } />
-
       <Route exact path="/comidas" component={ Foods } />
-
       <Route exact path="/bebidas" component={ Drinks } />
-
       <Route exact path="/" component={ Login } />
+      {/* <Route exact path="/comidas/{id-da-receita}" component={ FoodDetails } />
+      <Route exact path="/bebidas/{id-da-receita}" component={ DrinkDetails } />
+      <Route
+        exact
+        path="/comidas/{id-da-receita}/in-progress"
+        component={ FoodProgress }
+      />
+      <Route
+        exact
+        path="/bebidas/{id-da-receita}/in-progress"
+        component={ DrinkProgress }
+      /> */}
     </Switch>
   );
 }

@@ -14,6 +14,10 @@ import FoodIngredientExplore from '../pages/FoodIngredientExplore';
 import Login from '../pages/Login';
 import Profile from '../pages/Profile';
 import RecipesDone from '../pages/RecipesDone';
+// import FoodDetails from '../pages/FoodDetails';
+// import DrinkDetails from '../pages/DrinkDetails';
+// import FoodProgress from '../pages/FoodProgress';
+// import DrinkProgress from '../pages/DrinkProgress';
 
 import renderWithRouter from '../helper/renderWithRouter';
 
@@ -76,6 +80,26 @@ describe('Requirement 10', () => {
     const { getByTestId } = renderWithRouter(<Drinks />);
     itRenderAllIcons(getByTestId);
   });
+
+  // it('doesnt render the Header on the FoodDetails screen', () => {
+  //   const { queryByTestId } = renderWithRouter(<FoodDetails />);
+  //   itDoesntRenderHeader(queryByTestId);
+  // });
+
+  // it('doesnt render the Header on the DrinkDetails screen', () => {
+  //   const { queryByTestId } = renderWithRouter(<DrinkDetails />);
+  //   itDoesntRenderHeader(queryByTestId);
+  // });
+
+  // it('doesnt render the Header on the FoodProgress screen', () => {
+  //   const { queryByTestId } = renderWithRouter(<FoodProgress />);
+  //   itDoesntRenderHeader(queryByTestId);
+  // });
+
+  // it('doesnt render the Header on the DrinkProgress screen', () => {
+  //   const { queryByTestId } = renderWithRouter(<DrinkProgress />);
+  //   itDoesntRenderHeader(queryByTestId);
+  // });
 
   it('renders the correct icons on the Explore screen', () => {
     const { getByTestId, queryByTestId } = renderWithRouter(<Explore />);
