@@ -3,7 +3,6 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import UserProvider from './context/UserProvider';
 import Login from './pages/Login';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Header from './components/Header';
 
 function App() {
   return (
