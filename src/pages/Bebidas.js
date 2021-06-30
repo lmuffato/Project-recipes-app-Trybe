@@ -1,9 +1,18 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import CardList from '../components/CardList';
 import Header from '../components/Header';
+import ReceitasContext from '../contexts/ReceitasContext';
 
 function Bebidas() {
+  const { APIresponse } = useContext(ReceitasContext);
   return (
-    <Header title="Bebidas" />
+    <div>
+      <Header title="Bebidas" />
+      { APIresponse !== undefined
+        && <CardList
+          list={ APIresponse.drinks }
+        />}
+    </div>
   );
 }
 

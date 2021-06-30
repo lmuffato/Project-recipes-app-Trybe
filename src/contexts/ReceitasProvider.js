@@ -24,11 +24,9 @@ function ReceitasProvider({ children }) {
       value={ {
         email,
         senha,
-        // endpoint,
         APIresponse,
         setEmail,
         setSenha,
-        // setEndpoint,
         fetchApi,
       } }
     >
