@@ -1,10 +1,10 @@
 import React from 'react';
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import App from '../App';
 import { getItemFromLocalStorage } from '../services/localStorage';
 import renderWithRouterAndContext from './helpers/renderWithRouterAndContext';
 import { mockApiByCategory } from './mock/mockMealAPI';
+import Login from '../pages/Login';
 
 const EMAIL_INPUT_TEST_ID = 'email-input';
 const PASSWORD_INPUT_TEST_ID = 'password-input';
@@ -14,13 +14,13 @@ const VALID_PASSWORD = '1234567';
 
 describe('Testa todo o Componente "Login"', () => {
   it('1-Verifica se contem o texto trybe na página login', () => {
-    renderWithRouterAndContext(<App />);
+    renderWithRouterAndContext(<Login />);
     const linkElement = screen.getByText(/TRYBE/i);
     expect(linkElement).toBeInTheDocument();
   });
 
   test('2-Verifica se a página possui os campos de inputs e o botão', () => {
-    renderWithRouterAndContext(<App />);
+    renderWithRouterAndContext(<Login />);
 
     const button = screen.getByTestId(BUTTON_INPUT_TEST_ID);
     const email = screen.getByTestId(EMAIL_INPUT_TEST_ID);
@@ -31,7 +31,7 @@ describe('Testa todo o Componente "Login"', () => {
     expect(senha).toBeInTheDocument();
   });
   test('3-Verifica se é possivel digitar no campo de input "email"', () => {
-    renderWithRouterAndContext(<App />);
+    renderWithRouterAndContext(<Login />);
 
     const emailInput = screen.getByTestId(EMAIL_INPUT_TEST_ID);
 
@@ -40,7 +40,7 @@ describe('Testa todo o Componente "Login"', () => {
     expect(emailInput).toHaveValue(VALID_EMAIL);
   });
   test('4-Verifica se é possivel digitar no campo de input "senha"', () => {
-    renderWithRouterAndContext(<App />);
+    renderWithRouterAndContext(<Login />);
 
     const passwordInput = screen.getByTestId(PASSWORD_INPUT_TEST_ID);
 
@@ -50,7 +50,7 @@ describe('Testa todo o Componente "Login"', () => {
   });
   test('5-Verifica que o formulário só seja válido após um'
    + ' email válido e uma senha de mais de 6 caracteres serem preenchidos', () => {
-    renderWithRouterAndContext(<App />);
+    renderWithRouterAndContext(<Login />);
 
     const button = screen.getByTestId(BUTTON_INPUT_TEST_ID);
     const email = screen.getByTestId(EMAIL_INPUT_TEST_ID);
@@ -70,7 +70,7 @@ describe('Testa todo o Componente "Login"', () => {
   });
   test('6-Verifica que após a submissão mealsToken e cocktailsToken'
   + ' devem estar salvos em localStorage e ambas possuem o valor 1', () => {
-    renderWithRouterAndContext(<App />);
+    renderWithRouterAndContext(<Login />);
 
     const button = screen.getByTestId(BUTTON_INPUT_TEST_ID);
     const email = screen.getByTestId(EMAIL_INPUT_TEST_ID);
@@ -85,7 +85,7 @@ describe('Testa todo o Componente "Login"', () => {
   });
   test('7-Verifica que após a submissão a chave user deve estar'
   + ' salva em localStorage', () => {
-    renderWithRouterAndContext(<App />);
+    renderWithRouterAndContext(<Login />);
 
     const button = screen.getByTestId(BUTTON_INPUT_TEST_ID);
     const email = screen.getByTestId(EMAIL_INPUT_TEST_ID);
@@ -99,7 +99,7 @@ describe('Testa todo o Componente "Login"', () => {
   });
   test('8-Verifica que após a submissão a rota muda para a tela '
   + ' principal de receitas de comidas', async () => {
-    renderWithRouterAndContext(<App />);
+    renderWithRouterAndContext(<Login />);
     const categories = await mockApiByCategory();
 
     const button = screen.getByTestId(BUTTON_INPUT_TEST_ID);
