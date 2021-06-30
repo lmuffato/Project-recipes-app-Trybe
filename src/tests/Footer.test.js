@@ -60,7 +60,8 @@ describe('Requirement 20', () => {
   it('expect Footer position to be fixed', () => {
     const { getByTestId } = renderWithRouter(<Foods />);
     const footer = getByTestId(testids.footer);
-    expect(footer).toHaveStyle('bottom: 0px');
+    expect(footer.style.bottom).toBe('0px');
+    expect(footer.style.position).toBe('fixed');
   });
   it('expect Footer icons src to match', () => {
     const { getByTestId } = renderWithRouter(<Foods />);
