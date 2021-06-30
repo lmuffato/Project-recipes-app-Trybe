@@ -1,7 +1,13 @@
 import React from 'react';
+import Header from '../components/Header';
 
 function ReceitasFavoritas() {
-  return <div>Página de Receitas Favoritas</div>;
+  return (
+    <section>
+      <Header />
+      <div>Página de Bebidas</div>
+    </section>
+  );
 }
 
 export default ReceitasFavoritas;

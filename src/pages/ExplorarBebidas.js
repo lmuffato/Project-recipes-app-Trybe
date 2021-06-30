@@ -1,7 +1,13 @@
 import React from 'react';
+import Header from '../components/Header';
 
 function ExporarBebidas() {
-  return <div>Página de Explorar Bebidas</div>;
+  return (
+    <section>
+      <Header />
+      <div>Página de Bebidas</div>
+    </section>
+  );
 }
 
 export default ExporarBebidas;

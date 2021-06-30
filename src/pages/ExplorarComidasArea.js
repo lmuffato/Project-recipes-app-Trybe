@@ -1,7 +1,13 @@
 import React from 'react';
+import Header from '../components/Header';
 
 function ExplorarComidasArea() {
-  return <div>Página de Explorar Comidas por Area</div>;
+  return (
+    <section>
+      <Header />
+      <div>Página de Bebidas</div>
+    </section>
+  );
 }
 
 export default ExplorarComidasArea;
