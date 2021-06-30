@@ -3,7 +3,6 @@
 // <Route path="/explorar/comidas" component={ FoodExplore } />
 // <Route path="/explorar/bebidas" component={ DrinkExplore } />
 // <Route path="/explorar/comidas/ingredientes" component={ FoodIngredientExplore } />
-
 // <Route path="/explorar/bebidas/ingredientes" component={ DrinkIngredientExplore } />
 // <Route path="/explorar/comidas/area" component={ FoodArea } />
 // <Route path="/perfil" component={ Profile } />

@@ -2,6 +2,7 @@ import React from 'react';
 
 import Header from '../components/Header';
 import RecipeCard from '../components/RecipeCard';
+import Footer from '../components/Footer';
 
 import useRecipe from '../hooks/useRecipe';
 
@@ -31,6 +32,7 @@ export default function Drinks() {
     <main>
       <Header title="Bebidas" searchIcon />
       {renderCards()}
+      <Footer />
     </main>
   );
 }
