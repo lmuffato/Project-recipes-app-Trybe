@@ -39,8 +39,11 @@ export const fetchSearch = (type, text, currentPage) => async (dispatch) => {
     }
   }
 
-  const res = await fetch(url);
-  const data = await res.json();
-
-  dispatch(actionSearch(data));
+  try {
+    const res = await fetch(url);
+    const data = await res.json();
+    dispatch(actionSearch(data));
+  } catch (error) {
+    dispatch(actionSearch('error'));
+  }
 };
