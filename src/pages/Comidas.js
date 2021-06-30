@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import CardList from '../components/CardList';
 import Header from '../components/Header';
 import ReceitasContext from '../contexts/ReceitasContext';
+import Footer from '../components/Footer';
 
 function Comidas() {
   const { APIresponse } = useContext(ReceitasContext);
@@ -14,17 +15,20 @@ function Comidas() {
           <CardList
             list={ APIresponse.meals }
           />
+          <Footer />
         </div>
       );
     }
     alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
     return (
       <Header title="Comidas" />
+      <Footer />
     );
   }
   return (
     <div>
       <Header title="Comidas" />
+      <Footer />
     </div>
   );
 }

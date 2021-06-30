@@ -2,13 +2,13 @@ import React from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
-function Perfil() {
+function ExplorarComidas() {
   return (
     <>
-      <Header title="Perfil" />
+      <Header title="Explorar comidas" />
       <Footer />
     </>
   );
 }
 
-export default Perfil;
+export default ExplorarComidas;

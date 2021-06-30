@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import ReceitasContext from './ReceitasContext';
 
 function ReceitasProvider({ children }) {
-  const [email, setEmail] = useState('mchusemann@gmail.com');
-  const [senha, setSenha] = useState();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [APIresponse, setAPIResponse] = useState();
 
   async function fetchApi(endpoint) {
@@ -20,11 +20,11 @@ function ReceitasProvider({ children }) {
     <ReceitasContext.Provider
       value={ {
         email,
-        senha,
         APIresponse,
         setEmail,
-        setSenha,
         fetchApi,
+        password,
+        setPassword,
       } }
     >
       {children}
