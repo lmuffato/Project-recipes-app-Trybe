@@ -1,12 +1,17 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 import './Header.css';
+import { fetchSearch } from '../redux/actions';
 
 function Header({ props: { search, title } }) {
   const [searchBar, setSearchBar] = useState(false);
+  const [searchText, setSearchText] = useState('');
+  const [radioValue, setRadioValue] = useState('');
+  const dispatch = useDispatch();
 
   const showSearchBar = () => {
     if (searchBar) setSearchBar(false);
@@ -27,6 +32,14 @@ function Header({ props: { search, title } }) {
     }
   };
 
+  const clickSearch = () => {
+    if (searchText.length > 1 && radioValue === 'first') {
+      alert('Sua busca deve conter somente 1 (um) caracter');
+    } else {
+      dispatch(fetchSearch(radioValue, searchText, window.location.href.split('/')[3]));
+    }
+  };
+
   const renderSearchBar = () => {
     if (searchBar) {
       return (
@@ -35,6 +48,7 @@ function Header({ props: { search, title } }) {
             type="text"
             placeholder="Buscar Receita"
             data-testid="search-input"
+            onChange={ ({ target }) => setSearchText(target.value) }
           />
           <label htmlFor="ingredient">
             <input
@@ -42,6 +56,7 @@ function Header({ props: { search, title } }) {
               id="ingredient"
               name="searchRadio"
               data-testid="ingredient-search-radio"
+              onChange={ () => setRadioValue('ingredient') }
             />
             Ingrediente
           </label>
@@ -51,6 +66,7 @@ function Header({ props: { search, title } }) {
               id="name"
               name="searchRadio"
               data-testid="name-search-radio"
+              onChange={ () => setRadioValue('name') }
             />
             Nome
           </label>
@@ -60,12 +76,14 @@ function Header({ props: { search, title } }) {
               id="firstLetter"
               name="searchRadio"
               data-testid="first-letter-search-radio"
+              onChange={ () => setRadioValue('first') }
             />
             Primeira Letra
           </label>
           <button
             type="button"
             data-testid="exec-search-btn"
+            onClick={ clickSearch }
           >
             Buscar
           </button>
