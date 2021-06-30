@@ -1,14 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import { Container, Content } from './styles';
+
 import drinkImg from '../../images/drinkIcon.svg';
 import foodImg from '../../images/mealIcon.svg';
 import exploreImg from '../../images/exploreIcon.svg';
 
 export default function Footer() {
   return (
-    <footer data-testid="footer">
-      <ul>
+    <Container data-testid="footer">
+      <Content>
         <li>
           <Link to="/bebidas" data-testid="drinks-bottom-btn">
             <img src={ drinkImg } alt="Ícone de bebida" />
@@ -24,7 +26,7 @@ export default function Footer() {
             <img src={ foodImg } alt="Ícone de comida" />
           </Link>
         </li>
-      </ul>
-    </footer>
+      </Content>
+    </Container>
   );
 }
