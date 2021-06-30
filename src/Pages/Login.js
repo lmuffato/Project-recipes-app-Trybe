@@ -1,58 +1,75 @@
-// import React from 'react';
+import React, { useContext } from 'react';
+import { Redirect } from 'react-router-dom';
+import context from '../store/Context';
 
-// function Login() {
+function Login() {
+  const { infoUser, setDatainfoUser } = useContext(context);
+  const { email, password, shouldRedirect } = infoUser;
+  const validateFields = () => {
+    const passwordLength = 7;
+    const validate = /\S+@\S+\.\S+/;
+    const emailValidate = validate.test(email);
+    const passwordValidate = password && password.length >= passwordLength;
+    return !(emailValidate && passwordValidate);
+  };
 
-//   validateFields() {
-//     const { email, name } = this.state;
-//     const nameLength = 6;
-//     const validate = /\S+@\S+\.\S+/;
-//     const emailValidate = validate.test(email);
-//     const nameValidate = name.length >= nameLength;
-//     this.setState({ disable: !(emailValidate && nameValidate) }); // Logica dessa liha desenvolvida com a ajuda de: João Nascimento
-//   }
+  const createLocalStorage = () => {
+    const state = { email };
+    const token = 1;
+    localStorage.setItem('user', JSON.stringify(state));
+    localStorage.setItem('mealsToken', JSON.stringify(token));
+    localStorage.setItem('cocktailsToken', JSON.stringify(token));
+  };
 
-//   handleChange({ target: { name, value } }) {
-//     this.setState({
-//       [name]: value,
-//     });
-//   }
+  const handleChange = ({ target }) => {
+    setDatainfoUser((oldState) => ({
+      ...oldState,
+      [target.name]: target.value,
+    }));
+  };
 
-//   return (
-//     <form>
-//       <label htmlFor="email-input">
-//         <input
-//           type="email"
-//           placeholder="Email"
-//           name="email"
-//           id="email-input"
-//           data-testid="input-gravatar-email"
-//           onChange={ this.handleChange }
-//         />
-//       </label>
-//       <br />
-//       <label htmlFor="name-input">
-//         <input
-//           type="text"
-//           placeholder="Nome"
-//           name="name"
-//           id="name-input"
-//           data-testid="input-player-name"
-//           onChange={ this.handleChange }
-//         />
-//       </label>
-//       <button
-//         data-testid="btn-play"
-//         type="button"
-//         disabled={ disable }
-//         onClick={ this.handleClick }
-//       >
-//         Jogar
-//       </button>
-//       <button data-testid="btn-settings" type="button">
-//         <Link to="/settings">Configurações</Link>
-//       </button>
-//     </form>
-//   );
-// }
+  const handleClick = () => {
+    createLocalStorage();
+    setDatainfoUser((oldState) => ({
+      ...oldState,
+      shouldRedirect: true,
+    }));
+  };
 
-// export default Login;
+  if (shouldRedirect) return <Redirect to="/comidas" />;
+  return (
+    <form>
+      <label htmlFor="email-input">
+        <input
+          type="email"
+          placeholder="Email"
+          name="email"
+          id="email-input"
+          data-testid="email-input"
+          onChange={ handleChange }
+        />
+      </label>
+      <br />
+      <label htmlFor="password-input">
+        <input
+          type="password"
+          placeholder="Senha"
+          name="password"
+          id="password-input"
+          data-testid="password-input"
+          onChange={ handleChange }
+        />
+      </label>
+      <button
+        type="button"
+        disabled={ validateFields() }
+        onClick={ handleClick }
+        data-testid="login-submit-btn"
+      >
+        Entrar
+      </button>
+    </form>
+  );
+}
+
+export default Login;
