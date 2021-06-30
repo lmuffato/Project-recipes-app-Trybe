@@ -3,6 +3,7 @@ import { screen } from '@testing-library/dom'
 import App from './App';
 import renderWhithRouter from './components/RenderWithRouter';
 import userEvent from '@testing-library/user-event';
+import { getByRole, getByTestId } from '@testing-library/react';
 
 describe('1 - Testes tela de login', () => {
   test('Verifica se existe tela de login',
@@ -72,5 +73,23 @@ describe('1 - Testes tela de login', () => {
     const { pathname } = location;
 
     expect(pathname).toBe('/comidas');
+  });
+});
+
+describe.only('4 - Testes do Menu inferior(Footer)', () => {
+  test('Verifica se existe o componente Footer',
+  () => {
+    const { history } = renderWhithRouter(<App />);
+    const { location } = history;
+    const { pathname } = location;
+
+    history.push('/comidas');
+
+    const linkComidas = getByTestId('drinks-bottom-btn');
+
+    expect(linkComidas).toBeInTheDocument();
+
+    
+    expect(pathname).toBe('/');
   });
 });

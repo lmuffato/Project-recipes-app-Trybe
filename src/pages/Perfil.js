@@ -6,8 +6,11 @@ import { btnGroup, containerBtn, title, containerTitle } from '../styles/perfil'
 
 function Perfil(props) {
   const getEmail = () => {
-    const { email } = JSON.parse(localStorage.getItem('user'));
-    return email;
+    if (JSON.parse(localStorage.getItem('user') !== null)) {
+      const { email } = JSON.parse(localStorage.getItem('user'));
+      return email;
+    }
+    return 'não logado';
   };
 
   const handleClick = ({ target }) => {
