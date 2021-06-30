@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 class Login extends React.Component {
   constructor() {
@@ -54,15 +53,14 @@ class Login extends React.Component {
           // onChange={}
           />
         </label>
-        <Link
-          to="/comidas"
-          type="button"
+        <button
+          type="submit"
           data-testid="login-submit-btn"
           disabled={ !validEmail || !validPassword }
-          onSubmit={ saveEmail() }
+          // onSubmit={ saveEmail() }
         >
           Entrar
-        </Link>
+        </button>
       </form>
     );
   }
