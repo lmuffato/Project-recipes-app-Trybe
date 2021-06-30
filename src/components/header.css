@@ -23,9 +23,3 @@
   background: transparent;
   border: none;
 }
-
-/* Quebra a acessibilidade do botão */
-
-/* .header__button:focus, .header__button:active {
-  outline: none;
-} */
