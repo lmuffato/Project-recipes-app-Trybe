@@ -6,6 +6,10 @@ const Wrapper = styled.section`align-items: center;
   justify-content: center;
   margin-top: 40px;
 
+  strong {
+    margin: 20px auto;
+  }
+
   a {
     text-decoration: none;
 
