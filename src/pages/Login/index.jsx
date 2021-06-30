@@ -4,17 +4,19 @@ import brandFace from '../../images/brand/face.svg';
 import styles from './styles.module.scss';
 
 function Login() {
-  const [inputEmail, setInputEmail] = useState('');
-  const [inputPassword, setInputPassword] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   // Padrão para o RegEx: https://regexr.com/2ri2c
   const enabledButton = () => {
     const pattern = /\b[\w.-]+@[\w.-]+\.\w{2,4}\b/gi;
     const digits = 7;
-    return !(inputPassword.length >= digits && inputEmail.match(pattern));
+    return !(password.length >= digits && email.match(pattern));
   };
 
   const successfulLogin = () => {
+    const userEmail = { email };
+    localStorage.setItem('user', JSON.stringify(userEmail));
     localStorage.setItem('mealsToken', '1');
     localStorage.setItem('cocktailsToken', '1');
   };
@@ -40,15 +42,15 @@ function Login() {
             type="email"
             data-testid="email-input"
             placeholder="E-mail"
-            value={ inputEmail }
-            onChange={ (event) => setInputEmail(event.target.value) }
+            value={ email }
+            onChange={ (event) => setEmail(event.target.value) }
           />
           <input
             type="password"
             data-testid="password-input"
             placeholder="Senha"
-            value={ inputPassword }
-            onChange={ (event) => setInputPassword(event.target.value) }
+            value={ password }
+            onChange={ (event) => setPassword(event.target.value) }
           />
           <button
             type="submit"
