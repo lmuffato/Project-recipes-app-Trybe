@@ -2,7 +2,7 @@ import React from 'react';
 import CategoriesBtn from './components/MealsPage/CategoriesBtn';
 import MealCards from './components/MealsPage/MealCards';
 
-function Recipes() {
+function Meals() {
   return (
     <div>
       <CategoriesBtn />
@@ -11,4 +11,4 @@ function Recipes() {
   );
 }
 
-export default Recipes;
+export default Meals;

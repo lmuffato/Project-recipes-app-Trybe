@@ -29,7 +29,7 @@ function MealCards(props) {
 }
 
 MealCards.propTypes = {
-  meal: arrayOf(object),
+  meals: arrayOf(object),
   fetchMeals: func,
 }.isRequired;
 

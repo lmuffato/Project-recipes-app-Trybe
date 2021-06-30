@@ -1,25 +1,25 @@
 import { arrayOf, func, object } from 'prop-types';
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { getMeals } from '../../../actions/meals';
+import { getDrinks } from '../../../actions/drinks';
 
 function DrinkCards(props) {
-  const { fetchMeals, meals } = props;
+  const { fetchDrinks, drinks } = props;
   const size = 12;
-  console.log(meals);
+  console.log(drinks);
 
   useState(() => {
-    fetchMeals();
+    fetchDrinks();
   }, []);
 
   return (
     <div>
-      { meals.slice(0, size).map(({ strMeal, strMealThumb }, index) => (
-        <div key={ strMeal } data-testid={ `${index}-recipe-card` }>
-          <h2 data-testid={ `${index}-card-name` }>{strMeal}</h2>
+      { drinks.slice(0, size).map(({ strDrink, strDrinkThumb }, index) => (
+        <div key={ strDrink } data-testid={ `${index}-recipe-card` }>
+          <h2 data-testid={ `${index}-card-name` }>{strDrink}</h2>
           <img
-            src={ strMealThumb }
-            alt={ strMeal }
+            src={ strDrinkThumb }
+            alt={ strDrink }
             data-testid={ `${index}-card-img` }
           />
         </div>
@@ -29,16 +29,16 @@ function DrinkCards(props) {
 }
 
 DrinkCards.propTypes = {
-  meal: arrayOf(object),
+  drinks: arrayOf(object),
   fetchMeals: func,
 }.isRequired;
 
 const mapStateToProps = (state) => ({
-  meals: state.meals.meals,
+  drinks: state.drinks.drinks,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchMeals: () => dispatch(getMeals()),
+  fetchDrinks: () => dispatch(getDrinks()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(DrinkCards);
