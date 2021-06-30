@@ -1,10 +1,12 @@
 import React, { useContext } from 'react';
 import { Card } from 'react-bootstrap';
-import Context from '../../context/Context';
-import './index.css';
+import Context from '../../../context/Context';
+import '../index.css';
+import CardsFilterRecipes from './CardsFilterRecipes';
+import FilterFoods from './FilterFoods';
 
 function Foods() {
-  const { foods } = useContext(Context);
+  const { foods, showFilter } = useContext(Context);
   const lengthFoods = 12;
   const CardsRecipes = () => {
     if (foods !== []) {
@@ -12,6 +14,7 @@ function Foods() {
       return (
         <div className="cards-foods">
           {recipes.map((recipe, index) => (
+            // Código fonte da biblioteca Bootstrap
             <Card
               key={ index }
               style={ { width: '10rem' } }
@@ -39,7 +42,8 @@ function Foods() {
   return (
     <>
       <div>Header</div>
-      {CardsRecipes()}
+      <FilterFoods />
+      {showFilter ? <CardsFilterRecipes /> : CardsRecipes()}
       <div>Rodapé</div>
     </>
   );

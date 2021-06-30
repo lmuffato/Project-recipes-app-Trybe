@@ -1,8 +1,8 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import Login from './pages/login/Login';
-import Foods from './pages/recipes-main/Foods';
-import Drinks from './pages/recipes-main/Drinks';
+import Foods from './pages/recipes-main/Foods/Foods';
+import Drinks from './pages/recipes-main/Drinks/Drinks';
 import ProfileScreen from './pages/ProfileScreen/ProfileScreen';
 import RecipesDone from './pages/RecipesDone/RecipesDone';
 import RecipesFav from './pages/RecipesFav/RecipesFav';

@@ -9,3 +9,22 @@
   border-radius: 15px;
   margin: 5px;
 }
+
+.buttonsCategoryDrinks {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content:space-around;
+  padding: 3px;
+}
+
+.buttonsCategoryFood {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding: 3px;
+}
+
+.buttonsCategoryDrinks button {
+  flex-grow: 1;
+  margin: 5px;
+}
