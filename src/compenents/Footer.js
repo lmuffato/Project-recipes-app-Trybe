@@ -7,14 +7,11 @@ import mealIcon from '../images/mealIcon.svg';
 import '../styles/Footer.css';
 
 function Footer() {
-  const { mealOrDrink, setMealOrDrink } = useContext(SearchbarContext);
-
-  // console.log(mealOrDrink);
+  const { setMealOrDrink } = useContext(SearchbarContext);
 
   const handleClick = (search) => {
     setMealOrDrink(search);
   };
-
 
   return (
     <footer data-testid="footer">
