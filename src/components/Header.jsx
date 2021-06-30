@@ -4,22 +4,35 @@ import SearchIcon from '../images/searchIcon.svg';
 import ProfileImage from '../images/profileIcon.svg';
 
 function Header() {
+  const [displaySearchBar, setDisplaySearchBar] = useState(false);
+
+  const searchButton = () => (
+    <button
+      type="button"
+      onClick={ () => setDisplaySearchBar(!displaySearchBar) }
+    >
+      <img
+        data-testid="search-top-btn"
+        src={ SearchIcon }
+        alt="profileIcon"
+      />
+    </button>
+  );
+
   return (
     <header>
       <div>
         <Link to="/perfil">
           <img
-            src={ ProfileImage }
-            alt="profileIcon"
             data-testid="profile-top-btn"
+            alt="profileIcon"
+            src={ ProfileImage }
           />
         </Link>
-        <button
-          type="submit"
-          data-testid="search-top-btn"
-        >
-          { SearchIcon }
-        </button>
+        <h1 data-testid="page-title">title</h1>
+        <div>
+          { searchButton }
+        </div>
       </div>
     </header>
   );
