@@ -23,7 +23,7 @@ export default function Header({ title, searchIcon = false }) {
     case 'name':
       return fetchName(searchResult);
     case 'firstLetter':
-      if (selectedSearch.length === 1) {
+      if (searchResult.length === 1) {
         return fetchFirstLetter(searchResult);
       }
       alert('Sua busca deve conter somente 1 (um) caracter');

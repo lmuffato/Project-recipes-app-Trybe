@@ -4,20 +4,20 @@ const genericFetch = async (URL) => {
   return json;
 };
 
-export const fetchIngredient = async (site, ingredient) => {
-  const URL = `https://www.${site}db.com/api/json/v1/1/filter.php?i=${ingredient}`;
+export const fetchIngredient = async (ingredient) => {
+  const URL = `https://www.themealdb.com/api/json/v1/1/filter.php?i=${ingredient}`;
   const result = await genericFetch(URL);
   return result;
 };
 
-export const fetchName = async (site, name) => {
-  const URL = `https://www.${site}db.com/api/json/v1/1/search.php?s=${name}`;
+export const fetchName = async (name) => {
+  const URL = `https://www.themealdb.com/api/json/v1/1/search.php?s=${name}`;
   const result = await genericFetch(URL);
   return result;
 };
 
-export const fetchFirstLetter = async (site, firstLetter) => {
-  const URL = `https://www.${site}db.com/api/json/v1/1/search.php?s=${firstLetter}`;
+export const fetchFirstLetter = async (firstLetter) => {
+  const URL = `https://www.themealdb.com/api/json/v1/1/search.php?f=${firstLetter}`;
   const result = await genericFetch(URL);
   return result;
 };
