@@ -16,7 +16,9 @@ function Profile() {
 
   const handleGetEmailFromLocalStorage = () => {
     const getEmail = JSON.parse(localStorage.getItem('user'));
-    setEmail(getEmail.email);
+    if (getEmail) {
+      setEmail(getEmail.email);
+    }
   };
 
   useEffect(() => {
@@ -29,7 +31,7 @@ function Profile() {
         <h2 data-testid="page-title">Perfil</h2>
       </Header>
       <Wrapper>
-        <strong data-testid="profile-email">{ email }</strong>
+        <strong data-testid="profile-email">{ email || 'email@teste.com' }</strong>
         <Link to="/receitas-feitas">
           <button type="button" data-testid="profile-done-btn">
             Receitas Feitas
