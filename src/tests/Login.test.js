@@ -1,9 +1,10 @@
 import React from 'react';
-import { BrowserRouter } from 'react-router-dom';
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import App from '../App';
 import { getItemFromLocalStorage } from '../services/localStorage';
+import renderWithRouterAndContext from './helpers/renderWithRouterAndContext';
+import { mockApiByCategory } from './mock/mockMealAPI';
 
 const EMAIL_INPUT_TEST_ID = 'email-input';
 const PASSWORD_INPUT_TEST_ID = 'password-input';
@@ -11,22 +12,15 @@ const BUTTON_INPUT_TEST_ID = 'login-submit-btn';
 const VALID_EMAIL = 'email@email.com';
 const VALID_PASSWORD = '1234567';
 
-// scr: https://testing-library.com/docs/example-react-router/#reducing-boilerplate
-const renderWithRouter = (ui, { route = '/' } = {}) => {
-  window.history.pushState({}, 'Login Page', route);
-
-  return render(ui, { wrapper: BrowserRouter });
-};
-
 describe('Testa todo o Componente "Login"', () => {
   it('1-Verifica se contem o texto trybe na página login', () => {
-    renderWithRouter(<App />);
+    renderWithRouterAndContext(<App />);
     const linkElement = screen.getByText(/TRYBE/i);
     expect(linkElement).toBeInTheDocument();
   });
 
   test('2-Verifica se a página possui os campos de inputs e o botão', () => {
-    renderWithRouter(<App />);
+    renderWithRouterAndContext(<App />);
 
     const button = screen.getByTestId(BUTTON_INPUT_TEST_ID);
     const email = screen.getByTestId(EMAIL_INPUT_TEST_ID);
@@ -37,7 +31,7 @@ describe('Testa todo o Componente "Login"', () => {
     expect(senha).toBeInTheDocument();
   });
   test('3-Verifica se é possivel digitar no campo de input "email"', () => {
-    renderWithRouter(<App />);
+    renderWithRouterAndContext(<App />);
 
     const emailInput = screen.getByTestId(EMAIL_INPUT_TEST_ID);
 
@@ -46,7 +40,7 @@ describe('Testa todo o Componente "Login"', () => {
     expect(emailInput).toHaveValue(VALID_EMAIL);
   });
   test('4-Verifica se é possivel digitar no campo de input "senha"', () => {
-    renderWithRouter(<App />);
+    renderWithRouterAndContext(<App />);
 
     const passwordInput = screen.getByTestId(PASSWORD_INPUT_TEST_ID);
 
@@ -56,7 +50,7 @@ describe('Testa todo o Componente "Login"', () => {
   });
   test('5-Verifica que o formulário só seja válido após um'
    + ' email válido e uma senha de mais de 6 caracteres serem preenchidos', () => {
-    renderWithRouter(<App />);
+    renderWithRouterAndContext(<App />);
 
     const button = screen.getByTestId(BUTTON_INPUT_TEST_ID);
     const email = screen.getByTestId(EMAIL_INPUT_TEST_ID);
@@ -76,7 +70,7 @@ describe('Testa todo o Componente "Login"', () => {
   });
   test('6-Verifica que após a submissão mealsToken e cocktailsToken'
   + ' devem estar salvos em localStorage e ambas possuem o valor 1', () => {
-    renderWithRouter(<App />);
+    renderWithRouterAndContext(<App />);
 
     const button = screen.getByTestId(BUTTON_INPUT_TEST_ID);
     const email = screen.getByTestId(EMAIL_INPUT_TEST_ID);
@@ -91,7 +85,7 @@ describe('Testa todo o Componente "Login"', () => {
   });
   test('7-Verifica que após a submissão a chave user deve estar'
   + ' salva em localStorage', () => {
-    renderWithRouter(<App />);
+    renderWithRouterAndContext(<App />);
 
     const button = screen.getByTestId(BUTTON_INPUT_TEST_ID);
     const email = screen.getByTestId(EMAIL_INPUT_TEST_ID);
@@ -104,8 +98,9 @@ describe('Testa todo o Componente "Login"', () => {
     expect(getItemFromLocalStorage('user')).toEqual({ email: VALID_EMAIL });
   });
   test('8-Verifica que após a submissão a rota muda para a tela '
-  + ' principal de receitas de comidas', () => {
-    renderWithRouter(<App />);
+  + ' principal de receitas de comidas', async () => {
+    renderWithRouterAndContext(<App />);
+    const categories = await mockApiByCategory();
 
     const button = screen.getByTestId(BUTTON_INPUT_TEST_ID);
     const email = screen.getByTestId(EMAIL_INPUT_TEST_ID);
@@ -115,6 +110,21 @@ describe('Testa todo o Componente "Login"', () => {
     userEvent.type(senha, VALID_PASSWORD);
     userEvent.click(button);
 
+    const meals = { meals: [{ strCategory: 'Beef' },
+      { strCategory: 'Breakfast' },
+      { strCategory: 'Chicken' },
+      { strCategory: 'Dessert' },
+      { strCategory: 'Goat' },
+      { strCategory: 'Lamb' },
+      { strCategory: 'Miscellaneous' },
+      { strCategory: 'Pasta' },
+      { strCategory: 'Pork' },
+      { strCategory: 'Seafood' },
+      { strCategory: 'Side' },
+      { strCategory: 'Starter' },
+      { strCategory: 'Vegan' },
+      { strCategory: 'Vegetarian' }] };
     expect(window.location.pathname).toBe('/comidas');
+    expect(categories).toMatchObject(meals);
   });
 });
