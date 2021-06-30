@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import UserContext from '../contexts/UserContext';
 
@@ -9,36 +9,19 @@ function LoginPage() {
   const [validPassw, setValidPassw] = useState(false);
   const [btnLogin, setBtnLogin] = useState(true);
 
-  // habilita/desabilita o botão
-  function handleButton() {
+  useEffect(() => {
     if (validEmail && validPassw) {
       setBtnLogin(false);
-    } else setBtnLogin(true);
-  }
+    } else { setBtnLogin(true); }
+  }, [validEmail, validPassw]);
 
-  function validit() {
-    const minPassw = 6;
-    const emailRegex = /^\w+@\w+.com$/;
-    // checa se a senha é valida
-    if (userPassw.length > minPassw) {
-      console.log('userPassw.length');
-      console.log(userPassw.length);
-      setValidPassw(true);
-    // checa se o email é valido
-    } else if (emailRegex.test(userEmail)) {
-      setValidEmail(true);
+  function handleChanges(event, setState, setValid) {
+    const { value } = event.target;
+    setState(value);
+    const validated = event.target.checkValidity();
+    if (validated === true) {
+      setValid(true);
     }
-    handleButton();
-  }
-
-  function handleChange(event) {
-    const { name, value } = event.target;
-    if (name === 'email') {
-      setUserEmail(value);
-    } else if (name === 'password') {
-      setUserPassw(value);
-    }
-    validit();
   }
 
   function setLocalStorage() {
@@ -59,7 +42,9 @@ function LoginPage() {
           type="email"
           name="email"
           value={ userEmail }
-          onChange={ (event) => handleChange(event) }
+          onChange={ (event) => handleChanges(event, setUserEmail, setValidEmail) }
+          pattern="(\w\.?)+@[\w\.-]+\.\w{2}"
+          required
         />
       </label>
 
@@ -71,7 +56,8 @@ function LoginPage() {
           type="password"
           name="password"
           value={ userPassw }
-          onChange={ (event) => handleChange(event) }
+          onChange={ (event) => handleChanges(event, setUserPassw, setValidPassw) }
+          pattern=".{7,}"
         />
       </label>
       <Link to="/comidas">
