@@ -1,0 +1,21 @@
+.footer {
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    display: flex;
+    background-color: rgb(67, 163, 58);
+}
+
+.footer ul {
+    display: flex;
+    width: 100%;
+    list-style-type: none;
+    justify-content: space-around;
+    margin: auto;
+    padding: 0.5em;
+}
+
+.footer ul li button {
+    background-color: transparent;
+    border: none;
+}

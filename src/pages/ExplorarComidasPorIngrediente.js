@@ -2,13 +2,13 @@ import React from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
-function Perfil() {
+function ExplorarComidasPorIngrediente() {
   return (
     <>
-      <Header title="Perfil" />
+      <Header title="Explorar comidas por ingrediente" />
       <Footer />
     </>
   );
 }
 
-export default Perfil;
+export default ExplorarComidasPorIngrediente;
