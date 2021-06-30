@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
-import RecipesContext from './RecipesContext';
+import { node } from 'prop-types';
+import Context from './Context';
 import { fetchApiDrinks, fetchApiFoods } from '../services/fetchApi';
 
-function RecipeProvider({ children }) {
+function Provider({ children }) {
+  // useStates...
+  const [logout, setLogout] = useState(false);
   const [foods, setFoods] = useState([]);
   const [drinks, setDrinks] = useState([]);
-  const [loading, setLoagind] = useState(false);
-
   function getFoods() {
     const fetchApis = async () => {
       const dataFoods = await fetchApiFoods();
@@ -19,20 +19,23 @@ function RecipeProvider({ children }) {
   }
   // ComponentDidMount
   useEffect(getFoods, []);
-  const context = {
-    loading,
-    setLoagind,
+
+  const dataValue = {
+    logout,
+    setLogout,
     foods,
     drinks,
   };
+
   return (
-    <RecipesContext.Provider value={ context }>
-      {children}
-    </RecipesContext.Provider>
+    <Context.Provider value={ dataValue }>
+      { children}
+    </Context.Provider>
   );
 }
 
-RecipeProvider.propTypes = {
-  children: PropTypes.element,
+Provider.propTypes = {
+  children: node,
 }.isRequired;
-export default RecipeProvider;
+
+export default Provider;

@@ -1,21 +1,21 @@
 import React from 'react';
-import { Route, Switch } from 'react-router';
-import Login from './login/Login';
-import Drinks from './recipes-main/Drinks';
-import Foods from './recipes-main/Foods';
+import { Switch, Route } from 'react-router-dom';
+import Login from './pages/login/Login';
+import Foods from './pages/recipes-main/Foods';
+import Drinks from './pages/recipes-main/Drinks';
+import ProfileScreen from './pages/ProfileScreen/ProfileScreen';
+import RecipesDone from './pages/RecipesDone/RecipesDone';
+import RecipesFav from './pages/RecipesFav/RecipesFav';
 
 function Routes() {
   return (
     <Switch>
-      <Route exact path="/">
-        <Login />
-      </Route>
-      <Route path="/comidas">
-        <Foods />
-      </Route>
-      <Route path="/bebidas">
-        <Drinks />
-      </Route>
+      <Route exact path="/" component={ Login } />
+      <Route path="/comidas" component={ Foods } />
+      <Route path="/bebidas" component={ Drinks } />
+      <Route path="/perfil" component={ ProfileScreen } />
+      <Route path="/receitas-feitas" component={ RecipesDone } />
+      <Route path="/receitas-favoritas" component={ RecipesFav } />
     </Switch>
   );
 }

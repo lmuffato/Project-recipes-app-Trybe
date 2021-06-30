@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
 import { Card } from 'react-bootstrap';
+import Context from '../../context/Context';
 import './index.css';
-import RecipesContext from './RecipesContext';
 
 function Foods() {
-  const { foods } = useContext(RecipesContext);
+  const { foods } = useContext(Context);
   const lengthFoods = 12;
   const CardsRecipes = () => {
     if (foods !== []) {

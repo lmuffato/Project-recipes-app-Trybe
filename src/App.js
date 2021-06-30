@@ -1,17 +1,15 @@
 import React from 'react';
 import './App.css';
+// import rockGlass from './images/rockGlass.svg';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { BrowserRouter } from 'react-router-dom';
 import Routes from './Routes';
-import RecipesProvider from './recipes-main/RecipesProvider';
+import Provider from './context/Provider';
 
 function App() {
   return (
-    <RecipesProvider>
-      <BrowserRouter>
-        <Routes />
-      </BrowserRouter>
-    </RecipesProvider>
+    <Provider>
+      <Routes />
+    </Provider>
   );
 }
 
