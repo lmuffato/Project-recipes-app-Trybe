@@ -1,0 +1,15 @@
+.food-card  {
+    display: flex;
+    flex-direction: column;
+    max-width: 40%;
+    max-height: 60%;
+}
+
+.food-card img {
+    max-width: 35%;
+    max-height: 50%;
+} 
+
+.food-card h1 {
+    font-size: 55%;
+}
