@@ -1,7 +1,8 @@
-import { API_FETCH, STORE_CATEGORIES } from '../actions/recipes';
+import { API_FETCH, STORE_CATEGORIES, STORE_MEALS } from '../actions/meals';
 
 const INITIAL_STATE = {
   categories: [],
+  meals: [],
   loading: false,
 };
 
@@ -11,6 +12,8 @@ const recipes = (state = INITIAL_STATE, action) => {
     return { ...state, loading: true };
   case STORE_CATEGORIES:
     return { ...state, categories: action.payload, loading: false };
+  case STORE_MEALS:
+    return { ...state, meals: action.payload, loading: false };
   default:
     return state;
   }
