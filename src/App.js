@@ -6,15 +6,13 @@ import routes from './helpers/routes';
 
 function App() {
   return (
-   <BrowserRouter>
     <RecipesProvider>
       <Switch>
         {routes.map(({ path, component, exact }) => (
-          <Route key={ path } path={ path } exact={ exact } component={ component } />
+          <Route key={path} path={path} exact={exact} component={component} />
         ))}
       </Switch>
     </RecipesProvider>
-  </BrowserRouter>
   );
 }
 
