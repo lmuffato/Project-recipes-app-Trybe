@@ -23,15 +23,15 @@ export default function SearchBar() {
         type="text"
       />
 
-      {generateRadioButtons('name', 'Ingredient', 'onChange', 'ingredient-search-radio')}
-      {generateRadioButtons('name', 'Name', 'onChange', 'name-search-radio')}
-      {generateRadioButtons('name', 'First letter',
+      {generateRadioButtons('name', 'Ingrediente', 'onChange', 'ingredient-search-radio')}
+      {generateRadioButtons('name', 'Nome', 'onChange', 'name-search-radio')}
+      {generateRadioButtons('name', 'Primeira letra',
         'onChange', 'first-letter-search-radio')}
       <button
         data-testid="exec-search-btn"
         type="button"
       >
-        Search
+        Buscar
 
       </button>
     </>
