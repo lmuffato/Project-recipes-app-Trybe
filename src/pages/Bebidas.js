@@ -1,11 +1,16 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import CardList from '../components/CardList';
 import Header from '../components/Header';
 import ReceitasContext from '../contexts/ReceitasContext';
 import Footer from '../components/Footer';
 
 function Bebidas() {
-  const { APIresponse } = useContext(ReceitasContext);
+  const { APIresponse, fetchApi } = useContext(ReceitasContext);
+
+  useEffect(() => {
+    fetchApi('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   if (APIresponse !== undefined) {
     if (APIresponse.drinks !== null) {
