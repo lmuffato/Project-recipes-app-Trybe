@@ -2,12 +2,13 @@ import React from 'react';
 import Footer from '../components/Footer';
 
 function Explorar() {
-  return <div>
+  return (
+    <div>
       Página de Explorar
       <footer>
         <Footer />
       </footer>
-    </div>;
+    </div>);
 }
 
 export default Explorar;

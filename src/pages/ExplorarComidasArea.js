@@ -2,12 +2,13 @@ import React from 'react';
 import Footer from '../components/Footer';
 
 function ExplorarComidasArea() {
-  return <div>
+  return (
+    <div>
       Página de Explorar Comidas por Area
       <footer>
         <Footer />
       </footer>
-    </div>;
+    </div>);
 }
 
 export default ExplorarComidasArea;

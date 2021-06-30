@@ -2,12 +2,13 @@ import React from 'react';
 import Footer from '../components/Footer';
 
 function Bebidas() {
-  return <div>
+  return (
+    <div>
       Página de Bebidas
       <footer>
         <Footer />
       </footer>
-    </div>;
+    </div>);
 }
 
 export default Bebidas;

@@ -2,12 +2,13 @@ import React from 'react';
 import Footer from '../components/Footer';
 
 function Perfil() {
-  return <div>
+  return (
+    <div>
       Página de Perfil
       <footer>
         <Footer />
       </footer>
-    </div>;
+    </div>);
 }
 
 export default Perfil;
