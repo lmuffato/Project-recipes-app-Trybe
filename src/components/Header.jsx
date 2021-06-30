@@ -10,6 +10,7 @@ function Header() {
     <button
       type="button"
       onClick={ () => setDisplaySearchBar(!displaySearchBar) }
+      name="buttonSearch"
     >
       <img
         data-testid="search-top-btn"
