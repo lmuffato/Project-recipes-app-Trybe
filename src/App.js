@@ -1,13 +1,15 @@
 import React from 'react';
-import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { Switch, Route } from 'react-router-dom';
 import Login from './Pages/Login';
+import MainFood from './Pages/MainFood';
 
 function App() {
   return (
-    <div className="meals">
-      <Login />
-    </div>
+    <Switch>
+      <Route exact path="/" component={ Login } />
+      <Route path="/comidas" component={ MainFood } />
+    </Switch>
   );
 }
 
