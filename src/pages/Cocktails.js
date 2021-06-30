@@ -2,7 +2,7 @@ import React from 'react';
 import Header from '../components/Header';
 import SearchBar from '../components/SearchBar';
 
-function Main(props) {
+function Cocktails(props) {
   return (
     <div>
       <Header />
@@ -12,4 +12,4 @@ function Main(props) {
   );
 }
 
-export default Main;
+export default Cocktails;

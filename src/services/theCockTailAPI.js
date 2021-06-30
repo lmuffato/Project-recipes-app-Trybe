@@ -1,4 +1,4 @@
-export const ApiByName = async (name) => {
+export const ApiByCocktailName = async (name) => {
   try {
     const fetchApi = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${name}`);
     const getResponse = await fetchApi.json();
@@ -8,9 +8,19 @@ export const ApiByName = async (name) => {
   }
 };
 
-export const ApiByIngredient = async (ingredient) => {
+export const ApiByCocktailFirstLetter = async (ingredient) => {
   try {
-    const fetchApi = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?i=${ingredient}`);
+    const fetchApi = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${ingredient}`);
+    const getResponse = await fetchApi.json();
+    return getResponse;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const ApiByCocktailIngredient = async (ingredient) => {
+  try {
+    const fetchApi = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${ingredient}`);
     const getResponse = await fetchApi.json();
     return getResponse;
   } catch (error) {
