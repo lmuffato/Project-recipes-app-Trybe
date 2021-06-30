@@ -17,14 +17,17 @@ export default function Header({ title, searchIcon = false }) {
   const history = useHistory();
 
   const getRecipe = () => {
+    const { pathname } = history.location;
+    const site = pathname === '/comidas' ? 'meal' : 'cocktail';
+
     switch (selectedSearch) {
     case 'ingredient':
-      return fetchIngredient(searchResult);
+      return fetchIngredient(site, searchResult);
     case 'name':
-      return fetchName(searchResult);
+      return fetchName(site, searchResult);
     case 'firstLetter':
       if (searchResult.length === 1) {
-        return fetchFirstLetter(searchResult);
+        return fetchFirstLetter(site, searchResult);
       }
       alert('Sua busca deve conter somente 1 (um) caracter');
       break;
