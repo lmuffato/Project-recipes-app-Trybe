@@ -5,7 +5,7 @@ import Header from '../../components/Header';
 function FoodExplore() {
   return (
     <>
-      <Header title="Explorar Comidas" searchBtn={false} />
+      <Header title="Explorar Comidas" searchBtn={ false } />
       <Footer />
     </>
   );
