@@ -12,18 +12,30 @@ export default function Footer() {
     <Container data-testid="footer">
       <Content>
         <li>
-          <Link to="/bebidas" data-testid="drinks-bottom-btn">
-            <img src={ drinkImg } alt="Ícone de bebida" />
+          <Link to="/bebidas">
+            <img
+              src={ drinkImg }
+              alt="Ícone de bebida"
+              data-testid="drinks-bottom-btn"
+            />
           </Link>
         </li>
         <li>
-          <Link to="/explorar" data-testid="explore-bottom-btn">
-            <img src={ exploreImg } alt="Ícone de bússola" />
+          <Link to="/explorar">
+            <img
+              src={ exploreImg }
+              alt="Ícone de bússola"
+              data-testid="explore-bottom-btn"
+            />
           </Link>
         </li>
         <li>
-          <Link to="/comidas" data-testid="food-bottom-btn">
-            <img src={ foodImg } alt="Ícone de comida" />
+          <Link to="/comidas">
+            <img
+              src={ foodImg }
+              alt="Ícone de comida"
+              data-testid="food-bottom-btn"
+            />
           </Link>
         </li>
       </Content>
