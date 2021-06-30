@@ -40,7 +40,6 @@ class Login extends React.Component {
     localStorage.setItem('user', { email });
     const { history } = this.props;
     history.push('/carteira');
-
   }
 
   render() {
