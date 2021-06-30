@@ -4,7 +4,7 @@ export default function EmailInput() {
   return (
     <input
       data-testid="email-input"
-      type="text"
+      type="email"
       placeholder="email"
     />
   );
