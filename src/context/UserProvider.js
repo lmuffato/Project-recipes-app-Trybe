@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import UserContext from './UserContext';
+import MealsProvider from './MealsProvider';
+import CocktailsProvider from './CocktailsProvider';
 
 function UserProvider(props) {
   const [user, setUser] = useState({});
@@ -10,9 +12,13 @@ function UserProvider(props) {
   };
   const { children } = props;
   return (
-    <UserContext.Provider value={ context }>
-      {children}
-    </UserContext.Provider>
+    <CocktailsProvider>
+      <MealsProvider>
+        <UserContext.Provider value={ context }>
+          {children}
+        </UserContext.Provider>
+      </MealsProvider>
+    </CocktailsProvider>
   );
 }
 
