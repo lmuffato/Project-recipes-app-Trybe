@@ -1,7 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import UserContext from '../contexts/UserContext';
-import '../styles/LoginPage.css';
 
 function LoginPage() {
   const contextUser = useContext(UserContext);
