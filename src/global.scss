@@ -16,10 +16,15 @@
   padding: 0;
 }
 
+body {
+  background: var(--dark-purple);
+}
+
 h1 {
   border-bottom: 5px solid var(--purple);
   color: var(--yellow);
   font-family: Yanone Kaffeesatz , sans-serif;
+  padding-bottom: 7px;
 }
 
 input {
@@ -33,4 +38,19 @@ input {
   &::placeholder {
     color: var(--light-purple);
   }
+}
+
+button {
+  cursor: pointer;
+}
+
+.primary-btn {
+  background: var(--yellow);
+  border: none;
+  border-radius: 8px;
+  color: var(--dark-purple);
+  font-family: Yanone Kaffeesatz , sans-serif;
+  font-size: 22px;
+  line-height: 1;
+  padding: 10px 25px;
 }

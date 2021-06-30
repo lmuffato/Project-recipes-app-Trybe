@@ -1,10 +1,12 @@
 import React from 'react';
 import brandFace from '../../images/brand/face.svg';
 
+import styles from './styles.module.scss';
+
 function Login() {
   return (
-    <>
-      <header>
+    <div className={ styles.loginPage }>
+      <header className={ styles.loginHeader }>
         <p>
           Você está a poucos
           <br />
@@ -16,15 +18,25 @@ function Login() {
         </p>
         <img src={ brandFace } alt="illustration of face savoring food" />
       </header>
-      <main>
+      <main className={ styles.loginMain }>
+        <h1>Login</h1>
         <form>
-          <input type="email" data-testid="email-input" />
-          <input type="password" data-testid="password-input" />
-          <button type="submit" data-testid="login-submit-btn">Entrar</button>
+          <input type="email" data-testid="email-input" placeholder="E-mail" />
+          <input type="password" data-testid="password-input" placeholder="Senha" />
+          <button
+            type="submit"
+            className="primary-btn"
+            data-testid="login-submit-btn"
+          >
+            Entrar
+          </button>
         </form>
       </main>
-      <footer />
-    </>
+      <footer className={ styles.loginFooter }>
+        <img src="/logo_darkbg.svg" alt="Squarefood" />
+        <div>Desenvolvido por Grupo 21</div>
+      </footer>
+    </div>
   );
 }
 
