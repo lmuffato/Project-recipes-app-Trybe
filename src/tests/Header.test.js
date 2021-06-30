@@ -1,8 +1,15 @@
 import React from 'react';
+
 import { fireEvent } from '@testing-library/react';
-import renderWithRouter from '../helper/renderWithRouter';
+
+import Drinks from '../pages/Drinks';
+import DrinkExplore from '../pages/DrinkExplore';
+import Explore from '../pages/Explore';
 import Foods from '../pages/Foods';
+import FoodExplore from '../pages/FoodExplore';
 import Login from '../pages/Login';
+
+import renderWithRouter from '../helper/renderWithRouter';
 
 const testids = {
   profileTopButton: 'profile-top-btn',
@@ -43,6 +50,12 @@ describe('Requirement 10', () => {
     expect(get(testids.searchTopButton)).toBeInTheDocument();
   };
 
+  const itDoesntRenderSearchIcon = (query, get) => {
+    expect(get(testids.profileTopButton)).toBeInTheDocument();
+    expect(get(testids.pageTitle)).toBeInTheDocument();
+    expect(query(testids.searchTopButton)).toBeNull();
+  };
+
   it('doesnt render the Header on the Login screen', () => {
     const { queryByTestId } = renderWithRouter(<Login />);
     itDoesntRenderHeader(queryByTestId);
@@ -51,6 +64,26 @@ describe('Requirement 10', () => {
   it('renders the correct icons on the Foods screen', () => {
     const { getByTestId } = renderWithRouter(<Foods />);
     itRenderAllIcons(getByTestId);
+  });
+
+  it('renders the correct icons on the Drinks screen', () => {
+    const { getByTestId } = renderWithRouter(<Drinks />);
+    itRenderAllIcons(getByTestId);
+  });
+
+  it('renders the correct icons on the Explore screen', () => {
+    const { getByTestId, queryByTestId } = renderWithRouter(<Explore />);
+    itDoesntRenderSearchIcon(queryByTestId, getByTestId);
+  });
+
+  it('renders the correct icons on the FoodExplore screen', () => {
+    const { getByTestId, queryByTestId } = renderWithRouter(<FoodExplore />);
+    itDoesntRenderSearchIcon(queryByTestId, getByTestId);
+  });
+
+  it('renders the correct icons on the DrinkExplore screen', () => {
+    const { getByTestId, queryByTestId } = renderWithRouter(<DrinkExplore />);
+    itDoesntRenderSearchIcon(queryByTestId, getByTestId);
   });
 });
 
