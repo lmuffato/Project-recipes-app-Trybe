@@ -5,7 +5,10 @@ import rockGlass from './images/rockGlass.svg';
 import UserProvider from './context/UserProvider';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Login from './pages/Login';
-import Main from './pages/Main';
+import MainRecipes from './pages/MainRecipes';
+import MainCocktails from './pages/MainCocktails';
+import Explore from './pages/Explore';
+import Profile from './pages/Profile';
 
 function App() {
   return (
@@ -22,7 +25,10 @@ function App() {
         <UserProvider>
           <Switch>
             <Route exact path="/" component={ Login } />
-            <Route path="/comidas" component={ Main } />
+            <Route path="/explorar" exact component={ Explore } />
+            <Route path="/comidas" component={ MainRecipes } />
+            <Route path="/bebidas" component={ MainCocktails } />
+            <Route path="/profile" component={ Profile } />
           </Switch>
         </UserProvider>
       </BrowserRouter>
