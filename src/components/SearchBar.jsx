@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
-import UserContext from '../context/UserContext';
+import SearchContext from '../context/SearchContext';
 
 function SearchBar() {
   const { inputText, setInputText,
-    inputRadios, setInputRadios } = useContext(UserContext);
+    inputRadios, setInputRadios } = useContext(SearchContext);
 
   const handleRadios = ({ target }) => {
     if (target.checked) setInputRadios(target.id);
