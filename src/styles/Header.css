@@ -1,14 +1,14 @@
-/* body {
-    margin: 0;
-    padding: 0;
-    background-color: black;
-  }  
-
 .header {
-  width: 100%;
+  top: 0;
   display: flex;
+  justify-content: space-evenly;
   flex-direction: row;
-  float: left;
-  padding: 3% 4%;
-  background-color: aqua;
-} */
+  padding: 1%;
+  position: fixed;
+  width: 100%;
+} 
+
+.searchBtn {
+  background-color: #0fa36b;
+  border: none;
+}

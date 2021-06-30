@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import '../styles/Header.css';
 import { Link } from 'react-router-dom';
 import profileIcon from '../images/profileIcon.svg';
@@ -15,7 +15,11 @@ function Header() {
     return (
       <div>
         <label htmlFor="searchBar">
-          <input id="searchBar" type="text" />
+          <input
+            id="searchBar"
+            type="text"
+            data-testid="search-input"
+          />
         </label>
       </div>
     );
@@ -31,6 +35,7 @@ function Header() {
         type="button"
         data-testid="search-top-btn"
         onClick={ getSearchBar }
+        className="searchBtn"
       >
         <img src={ searchIcon } alt="magnifier" />
       </button>
