@@ -9,8 +9,8 @@ import mainDrink from './pages/recipes/mainDrinkRecipes';
 import explorePage from './pages/explore/explorePage';
 import exploreFoodPage from './pages/explore/exploreFoodPage';
 import exploreDrinkPage from './pages/explore/exploreDrinkPage';
-import exploreFoodIngredientsPage from './pages/explore/exploreFoodIngredientsPage';
-import exploreDrinkIngredientsPage from './pages/explore/exploreDrinkIngredientsPage';
+import expFoodIngPage from './pages/explore/exploreFoodIngredientsPage';
+import explDrinkIngPage from './pages/explore/exploreDrinkIngredientsPage';
 
 export default function Routes() {
   return (
@@ -23,8 +23,8 @@ export default function Routes() {
           <Route path="/explorar" component={ explorePage } />
           <Route path="/explorar/comidas" component={ exploreFoodPage } />
           <Route path="/explorar/bebidas" component={ exploreDrinkPage } />
-          <Route path="/explorar/comidas/ingredientes" component={ exploreFoodIngredientsPage } />
-          <Route path="/explorar/bebidas/ingredientes" component={ exploreDrinkIngredientsPage } />
+          <Route path="/explorar/comidas/ingredientes" component={ expFoodIngPage } />
+          <Route path="/explorar/bebidas/ingredientes" component={ expDrinkIngPage } />
           <Route path="/perfil" component={ perfil } />
           <Route path="/receitas-feitas" component={ doneRecipes } />
           <Route path="/receitas-favoritas" component={ favoriteRecipes } />
