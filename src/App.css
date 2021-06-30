@@ -38,22 +38,22 @@
 }
 
 header {
+  align-items: center;
   background: rgb(184, 184, 184);
   display: flex;
   justify-content: space-around;
-  align-items: center;
 }
 
 .card-container {
+  align-items: center;
   background: rgb(88, 88, 88);
   display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  flex-direction: column;
-  width: 150px;
-  min-height: 230px;
   flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 230px;
+  text-align: center;
+  width: 150px;
 }
 
 .img-card {
@@ -61,13 +61,13 @@ header {
 }
 
 .foodlist {
-  margin-top: 15px;
-  width: 100%;
+  align-items: center;
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
   gap: 10px;
+  justify-content: center;
+  margin-top: 15px;
+  width: 100%;
 }
 
 @keyframes shake {
