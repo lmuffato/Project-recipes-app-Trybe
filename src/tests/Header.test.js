@@ -1,4 +1,5 @@
 import React from 'react';
+import { fireEvent } from '@testing-library/react';
 import Foods from '../pages/Foods';
 import renderWithRouter from '../helper/renderWithRouter';
 
@@ -19,5 +20,19 @@ describe('Requirement 9', () => {
     const { getByTestId } = renderWithRouter(<Foods />);
     const searchTop = getByTestId('search-top-btn');
     expect(searchTop).toBeInTheDocument();
+  });
+});
+
+describe('Requirement 11', () => {
+  it('changes to the Profile Page', () => {
+    const { getByRole, history } = renderWithRouter(<Foods />);
+
+    const profilePageButton = getByRole('button', {
+      name: /profile avatar/i,
+    });
+    fireEvent.click(profilePageButton);
+
+    const { pathname } = history.location;
+    expect(pathname).toBe('/perfil');
   });
 });
