@@ -7,7 +7,16 @@ function App() {
   return (
     <Switch>
       <Route path="/" exact component={ Login } />
-      <Route path="/comidas" exact component={ Home } />
+      <Route
+        path="/comidas"
+        exact
+        render={ (props) => <Home { ...props } type="meals" /> }
+      />
+      <Route
+        path="/bebidas"
+        exact
+        render={ (props) => <Home { ...props } type="drinks" /> }
+      />
     </Switch>
   );
 }
