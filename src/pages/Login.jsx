@@ -35,7 +35,8 @@ class Login extends React.Component {
     });
   }
 
-  saveEmail() {
+  saveEmail(e) {
+    e.preventDefault();
     const { email } = this.state;
     localStorage.setItem('user', { email });
     const { history } = this.props;
