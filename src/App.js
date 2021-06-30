@@ -3,18 +3,20 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import './App.css';
 import RecipesProvider from './provider/RecipesProvider';
 
-import Login from './pages/Login';
+import { Login, MainFoods, MainDrinks, Profile, Explore } from './pages';
 
-function App() {
-  return (
-    <BrowserRouter>
-      <RecipesProvider>
-        <Switch>
-          <Route exact path="/" component={ Login } />
-        </Switch>
-      </RecipesProvider>
-    </BrowserRouter>
-  );
-}
+const App = () => (
+  <BrowserRouter>
+    <RecipesProvider>
+      <Switch>
+        <Route exact path="/" component={ Login } />
+        <Route path="/comidas" component={ MainFoods } />
+        <Route path="/bebidas" component={ MainDrinks } />
+        <Route path="/perfil" component={ Profile } />
+        <Route path="/explorar" component={ Explore } />
+      </Switch>
+    </RecipesProvider>
+  </BrowserRouter>
+);
 
 export default App;

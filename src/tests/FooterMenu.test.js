@@ -1,6 +1,6 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
-import FooterMenu from '../components/FooterMenu';
+import FooterMenu from '../components/Footer';
 import renderWithRouter from './renderWithRouter';
 
 test('test the component rendering', () => {
