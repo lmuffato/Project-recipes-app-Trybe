@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useHistory } from 'react-router';
 
+import UserContext from '../../context/UserContext';
+
 function Login() {
-  const [email, setEmail] = useState('');
+  const { email, setEmail } = useContext(UserContext);
   const [password, setPassword] = useState('');
   const minPassLength = 7;
   const loginData = ({ email });
