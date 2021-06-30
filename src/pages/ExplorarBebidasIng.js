@@ -1,9 +1,11 @@
 import React from 'react';
+import Header from '../components/Header';
 
 export default function ExplorarBebidasIng() {
   return (
     <div>
-      Explorar Bebidas ingredientes
+      <h1>Explorar Bebidas ingredientes</h1>
+      <Header />
     </div>
   );
 }
