@@ -30,19 +30,24 @@ function Login() {
 
   return (
     <div>
+      <h1>Login</h1>
       <div>
         <input
           name="email"
           type="text"
           data-testid="email-input"
           value={ email }
+          placeholder="E-mail"
           onChange={ handleChangeEmail }
         />
+      </div>
+      <div>
         <input
           name="password"
           type="password"
           data-testid="password-input"
           value={ password }
+          placeholder="Senha"
           onChange={ handleChangePassword }
         />
       </div>
