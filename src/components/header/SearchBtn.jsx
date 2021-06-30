@@ -4,10 +4,11 @@ import { AppContext } from '../../context/AppContext';
 import SearchBar from '../searchBar/index';
 
 export default function SearchBtn() {
+  const { context } = useContext(AppContext);
   const {
     displaySearchBar,
     setDisplaySearchBar,
-  } = useContext(AppContext);
+  } = context;
 
   return (
     <div>

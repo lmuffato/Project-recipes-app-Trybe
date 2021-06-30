@@ -1,39 +1,18 @@
-import React, { useState } from 'react';
-import {
-  fetchByIngredientApi,
-  fetchByNameApi,
-  fetchByFirstLetterApi,
-} from '../../services/fetchApiRadio';
+import React, { useContext } from 'react';
+import { AppContext } from '../../context/AppContext';
+import apiSearch from '../../services/useApiSearch';
 
 export default function SearchBar() {
-  const [searchValue, setSearchValue] = useState('');
-  const [inputValue, setInputValue] = useState('');
+  const { context } = useContext(AppContext);
+  const {
+    setSearchValue,
+    inputValue,
+    setInputValue,
+    pageOrigin,
+    searchValue,
 
-  let searchResults = '';
-  const length = 1;
-  async function getApiSearch() {
-    switch (searchValue) {
-    case 'ingredient-search':
-      searchResults = await fetchByIngredientApi(inputValue);
-      console.log(searchResults);
-      break;
-    case 'name-search':
-      searchResults = await fetchByNameApi(inputValue);
-      console.log(searchResults);
-      break;
-    case 'first-letter-search':
-      if (inputValue.length > length) {
-        alert('Sua busca deve conter somente 1 (um) caracter');
-        return;
-      }
-      searchResults = await fetchByFirstLetterApi(inputValue);
-      console.log(searchResults);
-      break;
+  } = context;
 
-    default:
-      return alert('nao encontrado');
-    }
-  }
   function generateRadioButtons(value, label, dataTest) {
     return (
       <label htmlFor="search-radio">
@@ -67,7 +46,7 @@ export default function SearchBar() {
       <button
         data-testid="exec-search-btn"
         type="button"
-        onClick={ getApiSearch }
+        onClick={ () => apiSearch(searchValue, inputValue, pageOrigin) }
       >
         Buscar
 
