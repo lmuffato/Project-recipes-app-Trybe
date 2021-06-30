@@ -1,11 +1,28 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 
-function Home() {
+import useFetchRecipes from '../effects/useFetchRecipes';
+import Card from '../components/Card/Card';
+
+function Home(props) {
+  const { type } = props;
+  const fetchData = useFetchRecipes(type);
+  const [recipes, setRecipes] = useState([]);
+
+  useEffect(() => {
+    if (fetchData[type]) setRecipes(fetchData[type]);
+  }, [fetchData, type]);
+
   return (
     <div>
-      Tela principal
+      { recipes.length === 0 ? 'Loading...'
+        : recipes.map((recipe, i) => <Card recipe={ recipe } key={ i } index={ i } />) }
     </div>
   );
 }
+
+Home.propTypes = {
+  recipe: PropTypes.string,
+}.isRequired;
 
 export default Home;
