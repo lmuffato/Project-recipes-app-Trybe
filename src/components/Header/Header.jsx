@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import profileIconImg from '../../images/profileIcon.svg';
 import Button from '../Generics/Button';
+import HeaderContainer from './styles';
 
 function Header({ children }) {
   const history = useHistory();
@@ -14,7 +15,7 @@ function Header({ children }) {
   };
 
   return (
-    <header className="page-header">
+    <HeaderContainer>
       <div className="container">
         <Button onClick={ handleRedirectToProfile }>
           <img
@@ -25,7 +26,7 @@ function Header({ children }) {
         </Button>
       </div>
       { children }
-    </header>
+    </HeaderContainer>
   );
 }
 
