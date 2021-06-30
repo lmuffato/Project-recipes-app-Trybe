@@ -1,4 +1,11 @@
-div {
-  border: 1px solid black;
+.cards-foods {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding: 5px;
+}
+
+.cards-foods div {
+  border-radius: 15px;
   margin: 5px;
 }

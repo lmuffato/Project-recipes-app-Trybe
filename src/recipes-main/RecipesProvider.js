@@ -6,6 +6,7 @@ import { fetchApiDrinks, fetchApiFoods } from '../services/fetchApi';
 function RecipeProvider({ children }) {
   const [foods, setFoods] = useState([]);
   const [drinks, setDrinks] = useState([]);
+  const [loading, setLoagind] = useState(false);
 
   function getFoods() {
     const fetchApis = async () => {
@@ -19,6 +20,8 @@ function RecipeProvider({ children }) {
   // ComponentDidMount
   useEffect(getFoods, []);
   const context = {
+    loading,
+    setLoagind,
     foods,
     drinks,
   };
