@@ -1,11 +1,12 @@
 import React from 'react';
+import FoodList from '../Components/FoodList';
 import Header from '../Components/Header';
 
 function BeveragePage() {
   return (
     <>
-      <Header page="thecocktaildb" />
-      <h1 data-testid="page-title">Bebidas</h1>
+      <Header page="thecocktaildb" title="Bebidas" />
+      <FoodList />
     </>);
 }
 

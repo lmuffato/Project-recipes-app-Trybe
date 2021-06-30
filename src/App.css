@@ -39,6 +39,35 @@
 
 header {
   background: rgb(184, 184, 184);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.card-container {
+  background: rgb(88, 88, 88);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  flex-direction: column;
+  width: 150px;
+  min-height: 230px;
+  flex: 1;
+}
+
+.img-card {
+  width: 120px;
+}
+
+.foodlist {
+  margin-top: 15px;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
 }
 
 @keyframes shake {

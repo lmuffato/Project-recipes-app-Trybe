@@ -5,7 +5,7 @@ import { FoodContext } from '../Context/FoodProvider';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 
-function Header({ page }) {
+function Header({ page, title }) {
   const [showSearch, setShowSearch] = React.useState(false);
   const {
     setRadioSelected,
@@ -30,6 +30,7 @@ function Header({ page }) {
   const searchInputs = () => (
     <>
       <input data-testid="search-input" id="searchInput" />
+      <br />
       <label htmlFor="ingredient">
         <input
           id="ingredient"
@@ -79,6 +80,7 @@ function Header({ page }) {
             <img src={ profileIcon } alt="profile user" />
           </button>
         </Link>
+        <h1 data-testid="page-title">{ title }</h1>
         <button
           type="button"
           data-testid="search-top-btn"
@@ -93,7 +95,8 @@ function Header({ page }) {
 }
 
 Header.propTypes = {
-  pages: PropTypes.string,
-}.isRequired;
+  page: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+};
 
 export default Header;

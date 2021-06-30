@@ -8,6 +8,7 @@ function FoodProvider({ children }) {
   const [radioSelected, setRadioSelected] = useState('');
   const [searchText, setSearchText] = useState('');
   const [currentPage, setCurrentPage] = useState('');
+  const [identifier, setIdentifier] = useState('');
   const contextValue = {
     foods,
     setFoods,
@@ -17,6 +18,7 @@ function FoodProvider({ children }) {
     setRadioSelected,
     currentPage,
     setCurrentPage,
+    identifier,
   };
 
   useEffect(() => {
@@ -31,7 +33,21 @@ function FoodProvider({ children }) {
       }
       const response = await fetch(endpoint);
       const responseJson = await response.json();
-      setFoods(responseJson);
+      if (currentPage === 'themealdb') {
+        if (responseJson.meals === null) {
+          alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+        } else {
+          setIdentifier('Meal');
+          setFoods(responseJson.meals);
+        }
+      } else if (currentPage === 'thecocktaildb') {
+        if (responseJson.drinks === null) {
+          alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+        } else {
+          setIdentifier('Drink');
+          setFoods(responseJson.drinks);
+        }
+      }
     };
     getFoods();
     console.log(foods);
