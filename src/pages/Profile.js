@@ -1,16 +1,14 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import UserContext from '../contexts/UserContext';
 import '../styles/Profile.css';
 
 function Profile() {
-  const contextUser = useContext(UserContext);
-  const { userEmail } = contextUser;
+  const userEmailStorage = JSON.parse(localStorage.getItem('user'));
+  const userEmail = userEmailStorage.email;
 
   const clearStorage = () => localStorage.clear();
 
   return (
-
     <div className="profile-btns">
       <p data-testid="profile-email">{userEmail}</p>
       <Link to="/receitas-feitas">
