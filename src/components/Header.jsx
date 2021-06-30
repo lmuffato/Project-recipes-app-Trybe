@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-// import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
@@ -7,11 +6,7 @@ import './Header.css';
 
 function Header({ props: { search, title } }) {
   const [searchBar, setSearchBar] = useState(false);
-  // const history = useHistory();
-  // const { pathname } = history.location;
-  // const allName = pathname.split('/');
-  // const firstName = `${allName[1].charAt(0).toLocaleUpperCase()}${allName[1].slice(1)}`;
-  // const lastName = `${allName[2].charAt(0).toLocaleUpperCase()}${allName[2].slice(1)}`;
+
   const showSearchBar = () => {
     if (searchBar) setSearchBar(false);
     else setSearchBar(true);
