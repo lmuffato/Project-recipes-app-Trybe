@@ -16,11 +16,14 @@ function useFetchRecipes(type) {
       try {
         const res = await fetch(fetchUrl);
         const data = await res.json();
-        console.log(data);
+
         const limitedData = {
           ...data,
-          meals: data[type].slice(0, MAX_RECIPES),
+          recipes: data[type].slice(0, MAX_RECIPES),
         };
+
+        console.log(data);
+        console.log(data);
 
         setRecipesContext(limitedData);
         setRecipesData(limitedData);

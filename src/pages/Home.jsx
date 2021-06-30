@@ -11,7 +11,7 @@ function Home(props) {
   console.log('recipes:', recipes);
 
   useEffect(() => {
-    if (fetchData.meals) setRecipes(fetchData.meals);
+    if (fetchData.recipes) setRecipes(fetchData.recipes);
   }, [fetchData]);
 
   return (
