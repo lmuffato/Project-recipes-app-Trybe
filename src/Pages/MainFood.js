@@ -1,8 +1,9 @@
 import React from 'react';
+import Header from '../components/Header';
 
 function MainFood() {
   return (
-    <h1>Página principal de receita de comidas</h1>
+    <Header />
   );
 }
 
