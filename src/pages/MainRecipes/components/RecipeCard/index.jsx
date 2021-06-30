@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function MealCard({ meals }) {
+function RecipeCard({ meals }) {
   return (
     <>
       {meals.map((meal, index) => (
@@ -18,8 +18,8 @@ function MealCard({ meals }) {
   );
 }
 
-MealCard.propTypes = {
+RecipeCard.propTypes = {
   meals: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
-export default MealCard;
+export default RecipeCard;

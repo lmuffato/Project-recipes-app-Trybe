@@ -1,13 +1,13 @@
 import React from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Switch, Route } from 'react-router-dom';
-import MainFood from './pages/MainFood';
+import { Switch } from 'react-router-dom';
+import MainRecipes from './pages/MainRecipes';
 
 function App() {
   return (
     <Switch>
-      <Route path="/comidas" component={ MainFood } />
+      <MainRecipes />
     </Switch>
   );
 }

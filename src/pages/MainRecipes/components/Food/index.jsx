@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import getMeals from '../../services/MealApi';
-import MealCard from './components/MealCard';
+import getMeals from '../../../../services/MealApi';
+import RecipeCard from '../RecipeCard';
 
-function MainFood() {
+function Food() {
   const [meals, setMeals] = useState([]);
 
   async function getAllMeals() {
@@ -18,9 +18,9 @@ function MainFood() {
   return (
     <>
       <h1>Comidas</h1>
-      <MealCard meals={ meals } />
+      <RecipeCard meals={ meals } />
     </>
   );
 }
 
-export default MainFood;
+export default Food;
