@@ -1,5 +1,5 @@
 import React from 'react';
 
-export default function FoodArea() {
-  return <div>Bebida!!</div>;
+export default function DrinkDetails() {
+  return <div>Detalhes da bebida</div>;
 }
