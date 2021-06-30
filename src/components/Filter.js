@@ -1,11 +1,9 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import ReceitasContext from '../contexts/ReceitasContext';
+import Button from './Button';
 
 function Filter({ page }) {
   const [APIresponse, setAPIResponse] = useState();
-  const [selected, setSelected] = useState();
-  const { fetchApi, setFilter } = useContext(ReceitasContext);
   let classes = [];
 
   async function fetchClass(endpoint) {
@@ -27,7 +25,7 @@ function Filter({ page }) {
 
   if (APIresponse !== undefined && page === 'comidas') {
     const firstFive = 5;
-    const arr = [];
+    const arr = [{ strCategory: 'All' }];
     for (let index = 0; index < firstFive; index += 1) {
       const element = APIresponse.meals[index];
       arr.push(element);
@@ -35,7 +33,7 @@ function Filter({ page }) {
     classes = arr;
   } else if (APIresponse !== undefined && page === 'bebidas') {
     const firstFive = 5;
-    const arr = [];
+    const arr = [{ strCategory: 'All' }];
     for (let index = 0; index < firstFive; index += 1) {
       const element = APIresponse.drinks[index];
       arr.push(element);
@@ -43,44 +41,11 @@ function Filter({ page }) {
     classes = arr;
   }
 
-  function handleChange(event) {
-    if (page === 'comidas') {
-      fetchApi(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${event.target.value}`);
-      setFilter(true);
-      setSelected(event.target.value);
-    } else {
-      fetchApi(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${event.target.value}`);
-      setFilter(true);
-      setSelected(event.target.value);
-    }
-  }
-
-  function handleClick(event) {
-    if (selected === event.target.value) {
-      event.target.checked = false;
-      if (page === 'comidas') {
-        fetchApi('https://www.themealdb.com/api/json/v1/1/search.php?s=');
-      } else {
-        fetchApi('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
-      }
-    }
-  }
   return (classes.length > 1
     && (
       <div>
         {classes.map((clas, index) => (
-          <label key={ index } htmlFor={ clas.strCategory }>
-            <input
-              type="radio"
-              data-testid={ `${clas.strCategory}-category-filter` }
-              onChange={ handleChange }
-              id={ clas.strCategory }
-              name="class"
-              value={ clas.strCategory }
-              onClick={ handleClick }
-            />
-            {clas.strCategory}
-          </label>
+          <Button key={ index } clas={ clas } index={ index } page={ page } />
         ))}
       </div>
     ));

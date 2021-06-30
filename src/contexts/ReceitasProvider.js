@@ -6,6 +6,7 @@ function ReceitasProvider({ children }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [APIresponse, setAPIResponse] = useState();
+  const [selected, setSelected] = useState();
   const [filter, setFilter] = useState(false);
 
   async function fetchApi(endpoint) {
@@ -27,6 +28,8 @@ function ReceitasProvider({ children }) {
         setPassword,
         filter,
         setFilter,
+        selected,
+        setSelected,
       } }
     >
       {children}
