@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 import UserContext from './UserContext';
 
 function UserProvider({ children }) {
-  const [email, token] = useState({ email: '', token: 1 });
+  const [email, setEmail] = useState('');
   return (
-    <UserContext.Provider value={ { email, token } }>
+    <UserContext.Provider value={ { email, setEmail } }>
       { children }
     </UserContext.Provider>
   );
