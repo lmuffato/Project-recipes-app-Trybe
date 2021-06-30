@@ -1,11 +1,11 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeCategory } from '../redux/actions/mealsAction';
+import { changeCategory } from '../redux/actions/drinksAction';
 
-function MealsCategoryButtons() {
-  const mealCategories = useSelector((state) => state.meals.categories);
-  const selectedCategory = useSelector((state) => state.meals.selectedCategory);
-  const categories = [{ strCategory: 'All' }, ...mealCategories];
+function DrinksCategoryButtons() {
+  const drinkCategories = useSelector((state) => state.drinks.categories);
+  const selectedCategory = useSelector((state) => state.drinks.selectedCategory);
+  const categories = [{ strCategory: 'All' }, ...drinkCategories];
 
   const dispatch = useDispatch();
   function setCategory(category) {
@@ -31,4 +31,4 @@ function MealsCategoryButtons() {
   );
 }
 
-export default MealsCategoryButtons;
+export default DrinksCategoryButtons;

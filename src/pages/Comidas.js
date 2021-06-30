@@ -6,7 +6,7 @@ import {
 import Loading from '../components/Loading';
 import MealsCategoryButtons from '../components/MealsCategoryButtons';
 import MealsCards from '../components/MealsCards';
-import { ALL_MEALS_ENDPOINT, MEALS_BY_CATEGORY_ENDPOINT } from '../services';
+import { ALL_MEALS_ENDPOINT, MEALS_BY_CATEGORY_ENDPOINT } from '../services/meals';
 
 const pickEndpoint = (category) => {
   switch (category) {

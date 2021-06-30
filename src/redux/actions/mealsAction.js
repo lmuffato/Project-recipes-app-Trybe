@@ -1,29 +1,30 @@
-import { ALL_CATEGORIES_ENDPOINT, fetchAPI } from '../../services';
+import { MEALS_ALL_CATEGORIES_ENDPOINT } from '../../services/meals';
+import fetchAPI from '../../services';
 
-export const LOADING_RECIPES = 'LOADING_RECIPES';
-export const FINISHED_LOADING_RECIPES = 'FINISHED_LOADING_RECIPES';
-export const LOADING_RECIPES_FAILED = 'LOADING_RECIPES_FAILED';
+export const LOADING_MEAL_RECIPES = 'LOADING_MEAL_RECIPES';
+export const FINISHED_LOADING_MEAL_RECIPES = 'FINISHED_LOADING_MEAL_RECIPES';
+export const LOADING_MEAL_RECIPES_FAILED = 'LOADING_MEAL_RECIPES_FAILED';
 export const SET_MEALS = 'SET_MEALS';
-export const LOADING_CATEGORIES = 'LOADING_CATEGORIES';
-export const FINISHED_LOADING_CATEGORIES = 'FINISHED_LOADING_CATEGORIES';
-export const LOADING_CATEGORIES_FAILED = 'LOADING_CATEGORIES_FAILED';
-export const SET_CATEGORIES = 'SET_CATEGORIES';
-export const CHANGE_CATEGORY = 'CHANGE_CATEGORY';
+export const LOADING_MEAL_CATEGORIES = 'LOADING_MEAL_CATEGORIES';
+export const FINISHED_LOADING_MEAL_CATEGORIES = 'FINISHED_LOADING_MEAL_CATEGORIES';
+export const LOADING_MEAL_CATEGORIES_FAILED = 'LOADING_MEAL_CATEGORIES_FAILED';
+export const SET_MEAL_CATEGORIES = 'SET_MEAL_CATEGORIES';
+export const CHANGE_MEAL_CATEGORY = 'CHANGE_MEAL_CATEGORY';
 
 function loadingRecipes() {
   return {
-    type: LOADING_RECIPES,
+    type: LOADING_MEAL_RECIPES,
   };
 }
 function finishedLoadingRecipes(payload) {
   return {
-    type: FINISHED_LOADING_RECIPES,
+    type: FINISHED_LOADING_MEAL_RECIPES,
     payload,
   };
 }
 function loadingRecipesFailed(payload) {
   return {
-    type: LOADING_RECIPES_FAILED,
+    type: LOADING_MEAL_RECIPES_FAILED,
     payload,
   };
 }
@@ -34,8 +35,8 @@ function setMeals(payload) {
   };
 }
 export function getFoodRecipesAPIThunk(URL) {
-  const LAST_FOOD_INDEX = 12;
-  const onlyTheFirst12 = (_recipe, index) => index < LAST_FOOD_INDEX;
+  const LAST_MEAL_INDEX = 12;
+  const onlyTheFirst12 = (_recipe, index) => index < LAST_MEAL_INDEX;
   return async (dispatch) => {
     dispatch(loadingRecipes());
     try {
@@ -51,24 +52,24 @@ export function getFoodRecipesAPIThunk(URL) {
 
 function loadingCategories() {
   return {
-    type: LOADING_CATEGORIES,
+    type: LOADING_MEAL_CATEGORIES,
   };
 }
 function finishedLoadingCategories(payload) {
   return {
-    type: FINISHED_LOADING_CATEGORIES,
+    type: FINISHED_LOADING_MEAL_CATEGORIES,
     payload,
   };
 }
 function loadingCategoriesFailed(payload) {
   return {
-    type: LOADING_CATEGORIES_FAILED,
+    type: LOADING_MEAL_CATEGORIES_FAILED,
     payload,
   };
 }
 function setCategories(payload) {
   return {
-    type: SET_CATEGORIES,
+    type: SET_MEAL_CATEGORIES,
     payload,
   };
 }
@@ -78,7 +79,7 @@ export function getFoodCategoriesAPIThunk() {
   return async (dispatch) => {
     dispatch(loadingCategories());
     try {
-      const response = await fetchAPI(ALL_CATEGORIES_ENDPOINT);
+      const response = await fetchAPI(MEALS_ALL_CATEGORIES_ENDPOINT);
       dispatch(setCategories(response.meals.filter(onlyTheFirst5)));
     } catch (e) {
       console.error(e);
@@ -90,7 +91,7 @@ export function getFoodCategoriesAPIThunk() {
 
 export function changeCategory(payload) {
   return {
-    type: CHANGE_CATEGORY,
+    type: CHANGE_MEAL_CATEGORY,
     payload,
   };
 }
