@@ -1,4 +1,5 @@
 import React, { useState, useContext } from 'react';
+import { useHistory } from 'react-router';
 import SearchbarContext from '../contexts/SearchbarContext';
 
 function SearchBar() {
@@ -6,6 +7,7 @@ function SearchBar() {
   const [name, setName] = useState('');
   const [request, setRequest] = useState('');
   const [letter, setLetter] = useState('');
+  const history = useHistory();
 
   const { mealOrDrink } = useContext(SearchbarContext);
 
@@ -14,16 +16,33 @@ function SearchBar() {
     setLetter(word);
   };
 
+  const checkResult = (results) => {
+    const data = results;
+    let drinkId;
+    let mealId;
+
+    if (mealOrDrink === 'cocktail' && data.drinks.length === 1) {
+      drinkId = data.drinks[0].idDrink;
+      history.push(`/bebidas/${drinkId}`);
+    } else if (mealOrDrink === 'meal' && data.meals.length === 1) {
+      mealId = data.meals[0].idMeal;
+      history.push(`/comidas/${mealId}`);
+    } else {
+      return recipes;
+    }
+  };
+
   const getData = async () => {
     if (letter === 'f' && name.length > 1) {
       alert('Sua busca deve conter somente 1 (um) caracter');
     }
     const endpoint = `https://www.the${mealOrDrink}db.com/api/json/v1/1/${request}.php?${letter}=${name}`;
     await fetch(endpoint).then((data) => data.json())
-      .then((results) => setRecipes(results));
+      .then((results) => {
+        setRecipes(results);
+        checkResult(results);
+      });
   };
-
-  console.log(recipes);
 
   return (
     <div>
