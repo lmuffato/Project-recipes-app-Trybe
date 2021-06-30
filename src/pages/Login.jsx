@@ -1,14 +1,14 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 class Login extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       email: '',
       password: '',
-      validPassword: false,
-      validEmail: false,
+      validData: false,
     };
 
     this.userValidate = this.userValidate.bind(this);
@@ -33,18 +33,22 @@ class Login extends React.Component {
       validData: isBlocked,
     });
   }
+
   saveEmail() {
     const { email } = this.state;
-    localStorage.setItem('user', email);
+    localStorage.setItem('user', { email });
+    const { history } = this.props;
+    history.push('/carteira');
   }
 
   render() {
-    const { email, password, validEmail, validPassword } = this.state;
+    const { email, password, validData } = this.state;
     return (
       <form>
         <label htmlFor="email-input">
           <input
             type="email"
+            id="email"
             data-testid="email-input"
             value={ email }
             onChange={ (e) => this.handleChange(e) }
@@ -53,16 +57,18 @@ class Login extends React.Component {
         <label htmlFor="password-input">
           <input
             type="password"
+            id="password"
             data-testid="password-input"
             value={ password }
             onChange={ (e) => this.handleChange(e) }
           />
         </label>
+
         <button
-          type="submit"
+          type="button"
           data-testid="login-submit-btn"
-          disabled={ !validEmail || !validPassword }
-          // onSubmit={ saveEmail() }
+          disabled={ !validData }
+          onSubmit={ this.saveEmail }
         >
           Entrar
         </button>
@@ -70,5 +76,9 @@ class Login extends React.Component {
     );
   }
 }
+
+Login.propTypes = {
+  history: PropTypes.string.isRequired,
+};
 
 export default Login;

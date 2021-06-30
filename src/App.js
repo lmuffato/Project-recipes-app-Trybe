@@ -1,13 +1,12 @@
 import React from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import Login from './pages/Login';
+import { Route, Switch, BrowserRouter } from 'react-router-dom';
 import Profile from './pages/Perfil';
+import Login from './pages/Login';
 import Explorar from './pages/Explorar';
 import Comidas from './pages/Comidas';
 import Bebidas from './pages/Bebidas';
 import ReceitasFeitas from './pages/ReceitasFeitas';
 import ReceitasFavoritas from './pages/ReceitasFavoritas';
-
 import './App.css';
 
 class App extends React.Component {
