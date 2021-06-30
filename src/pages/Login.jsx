@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 class Login extends React.Component {
   constructor() {
@@ -12,15 +13,9 @@ class Login extends React.Component {
     };
 
     this.userValidate = this.userValidate.bind(this);
-    this.setToken = this.setToken.bind(this);
+    this.saveEmail = this.saveEmail.bind(this);
   }
 
-  /*
-  setToken() {
-  const token = '1';
-  return setToken = localStorage.getItem('token');
-  };
-*/
   userValidate() {
     const { email, password } = this.state;
     const regex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
@@ -34,14 +29,13 @@ class Login extends React.Component {
     }
   }
 
-  render() {
-    const {
-      email,
-      password,
-      validEmail,
-      validPassword } = this.state;
+  saveEmail() {
+    const { email } = this.state;
+    localStorage.setItem('user', email);
+  }
 
-    const { setToken } = this.props;
+  render() {
+    const { email, password, validEmail, validPassword } = this.state;
     return (
       <form>
         <label htmlFor="email-input">
@@ -65,7 +59,7 @@ class Login extends React.Component {
           type="button"
           data-testid="login-submit-btn"
           disabled={ !validEmail || !validPassword }
-          onClick={ this.setToken() }
+          onSubmit={ saveEmail() }
         >
           Entrar
         </Link>
