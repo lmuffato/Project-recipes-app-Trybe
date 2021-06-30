@@ -3,14 +3,14 @@ import './App.css';
 import { Switch, Route } from 'react-router-dom';
 import Login from './pages/Login';
 
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 function App() {
   return (
-    <div className="meals">
-      <Switch>
-        <Route exact path="/" component={ Login } />
-      </Switch>
-    </div>
+    <Switch>
+      <Route exact path="/" component={ Login } />
+      <Route path="/comidas" />
+    </Switch>
   );
 }
-
 export default App;
