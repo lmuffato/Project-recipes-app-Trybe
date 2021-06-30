@@ -4,9 +4,11 @@ import { fireEvent } from '@testing-library/react';
 
 import Drinks from '../pages/Drinks';
 import DrinkExplore from '../pages/DrinkExplore';
+import DrinkIngredientExplore from '../pages/DrinkIngredientExplore';
 import Explore from '../pages/Explore';
 import Foods from '../pages/Foods';
 import FoodExplore from '../pages/FoodExplore';
+import FoodIngredientExplore from '../pages/FoodIngredientExplore';
 import Login from '../pages/Login';
 
 import renderWithRouter from '../helper/renderWithRouter';
@@ -83,6 +85,16 @@ describe('Requirement 10', () => {
 
   it('renders the correct icons on the DrinkExplore screen', () => {
     const { getByTestId, queryByTestId } = renderWithRouter(<DrinkExplore />);
+    itDoesntRenderSearchIcon(queryByTestId, getByTestId);
+  });
+
+  it('renders the correct icons on the FoodIngredientExplore screen', () => {
+    const { getByTestId, queryByTestId } = renderWithRouter(<FoodIngredientExplore />);
+    itDoesntRenderSearchIcon(queryByTestId, getByTestId);
+  });
+
+  it('renders the correct icons on the DrinkIngredientExplore screen', () => {
+    const { getByTestId, queryByTestId } = renderWithRouter(<DrinkIngredientExplore />);
     itDoesntRenderSearchIcon(queryByTestId, getByTestId);
   });
 });
