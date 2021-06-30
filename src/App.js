@@ -6,6 +6,7 @@ import routes from './helpers/routes';
 
 function App() {
   return (
+   <BrowserRouter>
     <RecipesProvider>
       <Switch>
         {routes.map(({ path, component, exact }) => (
@@ -13,6 +14,7 @@ function App() {
         ))}
       </Switch>
     </RecipesProvider>
+  </BrowserRouter>
   );
 }
 
