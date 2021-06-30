@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { Form, Button } from 'react-bootstrap';
 import RecipesContext from '../../context/RecipesContext';
+import fetchMealsAndDrinks from '../../services';
 
 export default function SearchBar({ page }) {
   const [searchTerm, setSearchTerm] = useState('');
@@ -14,23 +15,20 @@ export default function SearchBar({ page }) {
     { label: 'Primeira letra', testeId: 'first-letter-search-radio' },
   ];
 
-  const handleClick = () => {
+  const handleClick = async () => {
     if (radioOption === 'Primeira letra') {
       if (searchTerm.length === 1) {
         setRecipes({
           ...recipes,
-          [page]: {
-            ...recipes[page],
-            params: { query: searchTerm, type: radioOption },
-          },
+          [page]: { results: await fetchMealsAndDrinks(searchTerm, radioOption, page) },
+          isLoading: true,
         });
+        setRecipes({ ...recipes, isLoading: false });
       } else { return alert('Sua busca deve conter somente 1 (um) caracter.'); }
     } else {
       setRecipes({
         ...recipes,
-        [page]: {
-          ...recipes[page], params: { query: searchTerm, type: radioOption },
-        },
+        [page]: { results: await fetchMealsAndDrinks(searchTerm, radioOption, page) },
       });
     }
   };

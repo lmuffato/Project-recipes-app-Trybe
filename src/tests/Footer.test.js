@@ -1,6 +1,6 @@
 import { fireEvent, screen } from '@testing-library/dom';
 import React from 'react';
-import Footer from '../Components/Footer/Footer';
+import Footer from '../Components/Footer';
 import renderWithRouter from './renderWithRoute';
 
 describe('Footer component test', () => {

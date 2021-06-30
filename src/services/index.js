@@ -1,4 +1,4 @@
-export default fetchMealsAndDrinks = (query, type, page) => {
+const fetchMealsAndDrinks = async (query, type, page) => {
   // endpoints
   const byName = (page === 'meals')
     ? `https://www.themealdb.com/api/json/v1/1/search.php?s=${query}`
@@ -15,9 +15,11 @@ export default fetchMealsAndDrinks = (query, type, page) => {
   if (type === 'Nome') endpoint = byName;
   if (type === 'Primeira letra') endpoint = byFirstLetter;
 
-  const { meals } = fetch(endpoint)
+  const { meals } = await fetch(endpoint)
     .then((results) => results.json()
       .then((data) => data));
 
   return meals;
 };
+
+export default fetchMealsAndDrinks;

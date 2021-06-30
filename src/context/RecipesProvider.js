@@ -4,14 +4,8 @@ import RecipesContext from './RecipesContext';
 
 function RecipesProvider({ children }) {
   const INITIAL_RECIPES = {
-    meals: {
-      params: { query: '', type: '' },
-      results: [],
-    },
-    drinks: {
-      params: { query: '', type: '' },
-      results: [],
-    },
+    meals: { results: [] },
+    drinks: { results: [] },
     isLoading: false,
   };
 
