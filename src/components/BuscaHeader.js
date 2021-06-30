@@ -5,7 +5,6 @@ import ReceitasContext from '../contexts/ReceitasContext';
 function BuscaHeader() {
   const [text, setText] = useState();
   const [type, setType] = useState('name');
-  // const [endpoint, setEndpoint] = useState();
   const { fetchApi } = useContext(ReceitasContext);
   const pathName = useHistory().location.pathname;
 
