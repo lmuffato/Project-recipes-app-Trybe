@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 import './Header.css';
@@ -12,6 +12,7 @@ function Header({ props: { search, title } }) {
   const [searchText, setSearchText] = useState('');
   const [radioValue, setRadioValue] = useState('');
   const dispatch = useDispatch();
+  const data = useSelector((state) => state.searchReducer.data);
 
   const showSearchBar = () => {
     if (searchBar) setSearchBar(false);
@@ -91,6 +92,15 @@ function Header({ props: { search, title } }) {
       );
     }
   };
+
+  useEffect(() => {
+    if ((data && data.meals === null) || data === 'error') {
+      return alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+    }
+    if ((data && data.drinks === null) || data === 'error') {
+      return alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+    }
+  }, [data]);
 
   return (
     <div>
