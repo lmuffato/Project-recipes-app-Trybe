@@ -1,0 +1,34 @@
+.span-email {
+  padding-bottom: 30px;
+  font-size: 20px;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+}
+
+.button {
+  border: none;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  background-color: #ffc529;
+  border-radius: 4px;
+  font-size: 18px;
+  height: 34px;
+  width: 205px;
+  transition: 0.4s;
+}
+
+a {
+  color: #272d2f;
+  text-decoration: none;
+}
+
+.button:hover {
+  background-color: #272d2f;
+}
+
+.button:hover a {
+  color: #d7d7d7;
+}
