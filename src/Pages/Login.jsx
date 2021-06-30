@@ -1,8 +1,10 @@
 import React from 'react';
+import FormLogin from '../Components/FormLogin';
 
 function Login() {
   return (
-    <h1>Hello World</h1>
+    <FormLogin />
   );
 }
+
 export default Login;
