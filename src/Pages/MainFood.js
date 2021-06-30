@@ -1,9 +1,13 @@
 import React from 'react';
 import Header from '../components/Header';
+import Footer from '../components/Footer';
 
 function MainFood() {
   return (
-    <Header props={ { search: true, title: 'Comidas' } } />
+    <>
+      <Header props={ { search: true, title: 'Comidas' } } />
+      <Footer />
+    </>
   );
 }
 
