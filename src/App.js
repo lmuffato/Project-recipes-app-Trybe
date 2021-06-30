@@ -13,11 +13,9 @@ function App() {
     <BrowserRouter>
       <RecipeProvider>
         <UserProvider>
-
           <Rotas />
         </UserProvider>
       </RecipeProvider>
-
     </BrowserRouter>
   );
 }
