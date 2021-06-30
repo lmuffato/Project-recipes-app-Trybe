@@ -23,6 +23,11 @@ function Login() {
   const loginBtn = () => {
     dispatch(actionLogin(email, password));
     history.push('/comidas');
+    const lintEmail = email;
+    const lsemail = JSON.stringify({ email: lintEmail });
+    window.localStorage.setItem('user', lsemail);
+    localStorage.setItem('mealsToken', 1);
+    localStorage.setItem('cocktailsToken', 1);
   };
 
   return (
