@@ -26,6 +26,7 @@ function Bebidas() {
         </div>
       );
     }
+    // eslint-disable-next-line no-alert
     alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
     return (
       <div>

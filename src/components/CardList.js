@@ -24,6 +24,8 @@ function CardList({ list }) {
                 key={ index }
                 strName={ recipie.strMeal }
                 strThumb={ recipie.strMealThumb }
+                strId={ recipie.idMeal }
+                page="comidas"
               />
             );
           } return (
@@ -32,6 +34,8 @@ function CardList({ list }) {
               key={ index }
               strName={ recipie.strDrink }
               strThumb={ recipie.strDrinkThumb }
+              strId={ recipie.idDrink }
+              page="bebidas"
             />
           );
         } return (<span key={ index } />);
