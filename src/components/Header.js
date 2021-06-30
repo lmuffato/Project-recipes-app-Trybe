@@ -3,14 +3,11 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import profileIMG from '../images/profileIcon.svg';
 import searchIMG from '../images/searchIcon.svg';
+import BuscaHeader from './BuscaHeader';
 
 function Header(props) {
   const { title } = props;
   const [input, setInput] = useState(false);
-
-  function HandleClick() {
-    setInput(!input);
-  }
 
   return (
     <div>
@@ -24,18 +21,17 @@ function Header(props) {
       <p data-testid="page-title">
         {title}
       </p>
-      <button type="button" onClick={ HandleClick }>
+      <button
+        type="button"
+        onClick={ () => setInput(!input) }
+      >
         <img
           src={ searchIMG }
           data-testid="search-top-btn"
           alt="searchIMG"
         />
       </button>
-      {
-        input === true
-          ? 'true'
-          : 'false'
-      }
+      { input === true && <BuscaHeader /> }
     </div>
   );
 }
