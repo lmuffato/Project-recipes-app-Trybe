@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import SearchBtn from './SearchBtn';
 import ProfileBtn from './ProfileBtn';
 
-export default function Header({ title = 'Headers', isSearch = true }) {
+export default function Header({ title, isSearch = true }) {
   return (
     <div>
       <ProfileBtn />
