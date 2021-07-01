@@ -24,7 +24,7 @@ export default function SearchBar({ page }) {
           isLoading: true,
         });
         setRecipes({ ...recipes, isLoading: false });
-      } else { return alert('Sua busca deve conter somente 1 (um) caracter.'); }
+      } else { return alert('Sua busca deve conter somente 1 (um) caracter'); }
     } else {
       setRecipes({
         ...recipes,

@@ -8,7 +8,7 @@ const fetchMealsAndDrinks = async (query, type, page) => {
     : `https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${query}`;
   const byIngredient = (page === 'meals')
     ? `https://www.themealdb.com/api/json/v1/1/filter.php?i=${query}`
-    : `https://www.themealdb.com/api/json/v1/1/filter.php?i=${query}`;
+    : `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${query}`;
 
   let endpoint = '';
   if (type === 'Ingrediente') endpoint = byIngredient;
