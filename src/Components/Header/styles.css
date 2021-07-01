@@ -1,0 +1,6 @@
+.header-parent {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  padding: 1rem;
+}

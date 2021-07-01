@@ -1,17 +1,15 @@
 import React from 'react';
-import { BrowserRouter, Switch } from 'react-router-dom';
 import UserProvider from './context/UserProvider';
-import Router from './Router';
+import RecipesProvider from './context/RecipesProvider';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Router from './Router';
 
 function App() {
   return (
     <UserProvider>
-      <BrowserRouter>
-        <Switch>
-          <Router />
-        </Switch>
-      </BrowserRouter>
+      <RecipesProvider>
+        <Router />
+      </RecipesProvider>
     </UserProvider>
   );
 }
