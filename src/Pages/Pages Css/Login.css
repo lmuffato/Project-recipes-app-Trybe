@@ -3,11 +3,17 @@ html {
   --black: #0D114F;
 }
 
-header, footer {
+.login-container {
+  height: 100vh;
+  width: 100vw;
+}
+
+.login-form {
   align-items: center;
   background-color: var(--background);
   color: var(--black);
   display: flex;
-  justify-content: space-evenly;
-  padding: 0.5vh;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
 }

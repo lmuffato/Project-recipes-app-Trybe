@@ -106,7 +106,11 @@ function Header({ props: { search, title } }) {
     <div>
       <header>
         <Link to="/perfil">
-          <img src={ profileIcon } data-testid="profile-top-btn" alt="profile icon" />
+          <img
+            src={ profileIcon }
+            data-testid="profile-top-btn"
+            alt="profile icon"
+          />
         </Link>
         <h1
           data-testid="page-title"

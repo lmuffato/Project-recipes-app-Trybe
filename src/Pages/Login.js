@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import { Form, Button } from 'react-bootstrap';
 import { actionLogin } from '../redux/actions';
+import './Pages Css/Login.css';
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -31,26 +33,32 @@ function Login() {
   };
 
   return (
-    <form>
-      <input
-        type="email"
-        data-testid="email-input"
-        onChange={ (e) => setEmail(e.target.value) }
-      />
-      <input
-        type="password"
-        data-testid="password-input"
-        onChange={ (e) => setPassword(e.target.value) }
-      />
-      <button
-        type="button"
-        disabled={ !loginButton }
-        onClick={ loginBtn }
-        data-testid="login-submit-btn"
-      >
-        Entrar
-      </button>
-    </form>
+    <main className="login-container">
+      <Form className="login-form">
+        <Form.Label>
+          <Form.Control
+            type="email"
+            data-testid="email-input"
+            onChange={ (e) => setEmail(e.target.value) }
+          />
+        </Form.Label>
+        <Form.Label>
+          <Form.Control
+            type="password"
+            data-testid="password-input"
+            onChange={ (e) => setPassword(e.target.value) }
+          />
+        </Form.Label>
+        <Button
+          variant="primary"
+          disabled={ !loginButton }
+          onClick={ loginBtn }
+          data-testid="login-submit-btn"
+        >
+          Entrar
+        </Button>
+      </Form>
+    </main>
   );
 }
 
