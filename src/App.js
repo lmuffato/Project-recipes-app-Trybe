@@ -2,7 +2,10 @@ import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Drink from './pages/Drink/index';
 import Food from './pages/Food/index';
+import Login from './pages/login/index';
+
 import AppProvider from './context/AppContext';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (
@@ -10,8 +13,7 @@ function App() {
       <AppProvider>
         <BrowserRouter>
           <Switch>
-            {/* <Route exact path="/" component={ Login } /> */}
-
+            <Route exact path="/" component={ Login } />
             <Route path="/comidas" component={ Food } />
             <Route path="/bebidas" component={ Drink } />
             {/* <Route path="/comidas/{id-da-receita}" component={ FoodDetails } />
