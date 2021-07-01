@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import profileIMG from '../images/profileIcon.svg';
-import BuscaHeader from './BuscaHeader';
-import SearchButton from './SearchButton';
+import BuscaHeader from './HeaderComponents/BuscaHeader';
+import SearchButton from './HeaderComponents/SearchButton';
 
 function Header(props) {
   const { title, displayButton } = props;

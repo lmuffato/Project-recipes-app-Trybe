@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import searchIMG from '../images/searchIcon.svg';
+import searchIMG from '../../images/searchIcon.svg';
 
 function SearchButton(props) {
   const { input, setInput } = props;

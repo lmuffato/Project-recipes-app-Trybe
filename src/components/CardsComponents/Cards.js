@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
 import { useHistory } from 'react-router-dom';
-import './Card.css';
+import '../../styles/Card.css';
 
 function Card({ index, strName, strThumb, strId, page }) {
   const history = useHistory();

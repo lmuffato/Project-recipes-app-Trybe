@@ -1,9 +1,9 @@
 import React, { useContext, useEffect } from 'react';
-import CardList from '../components/CardList';
-import Header from '../components/Header';
-import ReceitasContext from '../contexts/ReceitasContext';
-import Footer from '../components/Footer';
-import Filter from '../components/Filter';
+import CardList from '../../components/CardList';
+import Header from '../../components/Header';
+import ReceitasContext from '../../contexts/ReceitasContext';
+import Footer from '../../components/Footer';
+import Filter from '../../components/Filter';
 
 function Comidas() {
   const { APIFood, fetchApi } = useContext(ReceitasContext);

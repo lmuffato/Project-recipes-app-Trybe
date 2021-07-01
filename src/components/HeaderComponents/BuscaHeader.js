@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
-import ReceitasContext from '../contexts/ReceitasContext';
+import ReceitasContext from '../../contexts/ReceitasContext';
 
 function BuscaHeader() {
   const [text, setText] = useState();
