@@ -16,12 +16,14 @@ function SearchBar() {
   // submit do botão de busca, coloca os filtros num array que servirá de trigger para o fetch no contexto
   const handleSubmit = useCallback((ev) => {
     ev.preventDefault();
+    console.log(inputSearch, radioValue);
     setSearchBarFilters(
       searchBarFilters.concat({
         radioValue,
         inputSearch,
       }),
     );
+    console.log(searchBarFilters);
   }, [inputSearch, radioValue, searchBarFilters, setSearchBarFilters]);
 
   return (
@@ -68,7 +70,10 @@ function SearchBar() {
           First letter
         </label>
       </div>
-      <Button data-testid="exec-search-btn" onClick={ (ev) => handleSubmit(ev) }>
+      <Button
+        data-testid="exec-search-btn"
+        onClick={ (ev) => handleSubmit(ev) }
+      >
         Buscar
       </Button>
     </SearchBarContainer>

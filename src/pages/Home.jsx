@@ -5,7 +5,8 @@ import SearchBarButton from '../components/SearchBar/SearchBarButton';
 import SearchBar from '../components/SearchBar/SearchBar';
 import Footer from '../components/Footer/Footer';
 import useFetchRecipes from '../effects/useFetchRecipes';
-import Card from '../components/Card/Card';
+// import Card from '../components/Card/Card';
+import CardList from '../components/CardList/CardList';
 
 function Home(props) {
   const { type } = props;
@@ -32,11 +33,12 @@ function Home(props) {
         { isActive ? (<SearchBar />) : ''}
       </div>
       <div>
-        <div>
+        {/* <div>
           { recipes.length === 0 ? 'Loading...'
             : recipes.map((recipe, i) => (
               <Card recipe={ recipe } key={ i } index={ i } />)) }
-        </div>
+        </div> */}
+        <CardList recipes={ recipes } type={ type } />
       </div>
       <Footer />
     </>
