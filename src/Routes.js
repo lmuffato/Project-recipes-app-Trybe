@@ -6,8 +6,8 @@ import ProfileScreen from './pages/ProfileScreen/ProfileScreen';
 import Login from './pages/LoginPage/Login';
 import RecipesDone from './pages/RecipesDone/RecipesDone';
 import RecipesFav from './pages/RecipesFav/RecipesFav';
-import Food from './pages/FoodPage/Food';
-import Beverage from './pages/BeveragePage/Beverage';
+// import Food from './pages/FoodPage/Food';
+// import Beverage from './pages/BeveragePage/Beverage';
 import ExploreFoodArea from './pages/ExplorePage/ExploreFoodArea';
 import Explore from './pages/ExplorePage/Explore';
 import ExploreFood from './pages/ExplorePage/ExploreFood';
@@ -20,10 +20,10 @@ function Routes() {
   return (
     <Switch>
       <Route exact path="/" component={ Login } />
-      <Route exact path="/comidas" component={ Food } />
+      {/* <Route exact path="/comidas" component={ Food } />
       <Route exact path="/bebidas" component={ Beverage } />
       <Route exact path="/comidas/52771" component={ InitPage } />
-      <Route exact path="/bebidas/178319" component={ InitPage } />
+      <Route exact path="/bebidas/178319" component={ InitPage } /> */}
       <Route exact path="/comidas/52771/in-progress" component={ InitPage } />
       <Route exact path="/bebidas/178319/in-progress" component={ InitPage } />
       <Route exact path="/explorar/comidas" component={ ExploreFood } />
