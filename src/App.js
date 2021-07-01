@@ -6,15 +6,18 @@ import ReceitasProvider from './contexts/ReceitasProvider';
 import Login from './pages/Login';
 import Perfil from './pages/Perfil';
 import Explorar from './pages/Explorar';
-import Comidas from './pages/Comidas';
-import Bebidas from './pages/Bebidas';
-import ExplorarComidas from './pages/ExplorarComidas';
-import ExplorarBebidas from './pages/ExplorarBebidas';
-import ExplorarBebidasPorIngrediente from './pages/ExplorarBebidasPorIngrediente';
-import ExplorarComidasPorIngrediente from './pages/ExplorarComidasPorIngrediente';
-import ExplorarComidasPorArea from './pages/ExplorarComidasPorArea';
-import ReceitaComida from './pages/ReceitaComida';
-import ReceitaBebidas from './pages/ReceitaBebidas';
+import Comidas from './pages/Comidas/Comidas';
+import Bebidas from './pages/Bebidas/Bebidas';
+import ExplorarComidas from './pages/Comidas/ExplorarComidas/ExplorarComidas';
+import ExplorarBebidas from './pages/Bebidas/ExplorarBebidas/ExplorarBebidas';
+import ExplorarBebidasPorIngrediente from
+  './pages/Bebidas/ExplorarBebidas/ExplorarBebidasPorIngrediente';
+import ExplorarComidasPorIngrediente from
+  './pages/Comidas/ExplorarComidas/ExplorarComidasPorIngrediente';
+import ExplorarComidasPorArea from
+  './pages/Comidas/ExplorarComidas/ExplorarComidasPorArea';
+import ReceitaComida from './pages/Comidas/Receitas/ReceitaComida';
+import ReceitaBebidas from './pages/Bebidas/Receitas/ReceitaBebidas';
 
 function App() {
   return (

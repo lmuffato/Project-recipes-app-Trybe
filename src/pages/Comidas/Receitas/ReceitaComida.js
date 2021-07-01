@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Carousel from 'react-bootstrap/Carousel';
 import { Link } from 'react-router-dom';
 import Header from '../../../components/Header';
-import '../styles/RecipeDetails.css';
+import '../../../styles/RecipeDetails.css';
 import ComponentGen from '../../../components/RecipeDetailsComponents';
 
 function Receita() {
