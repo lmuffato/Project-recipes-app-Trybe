@@ -1,0 +1,16 @@
+.m-Header {
+  align-items: center;
+  background-color: #c4c4c4;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.m-Header button {
+  background: none;
+  border: none;
+  color: inherit;
+  font: inherit;
+  outline: inherit;
+  padding: 0;
+}
