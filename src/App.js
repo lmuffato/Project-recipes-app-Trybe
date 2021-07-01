@@ -7,6 +7,12 @@ import Comidas from './pages/Comidas';
 import Bebidas from './pages/Bebidas';
 import ReceitasFeitas from './pages/ReceitasFeitas';
 import ReceitasFavoritas from './pages/ReceitasFavoritas';
+import ExpBebidas from './pages/ExpBebidas';
+import ExpComidas from './pages/ExpComidas';
+import ExpBebidasIng from './pages/ExpBebidasIng';
+import ExpComidasIng from './pages/ExpComidasIng';
+import ExpComidasOri from './pages/ExpComidasOri';
+
 import './App.css';
 
 class App extends React.Component {
@@ -20,6 +26,19 @@ class App extends React.Component {
             <Route exact path="/bebidas" component={ Bebidas } />
             <Route exact path="/perfil" component={ Profile } />
             <Route exact path="/explorar" component={ Explorar } />
+            <Route exact path="/explorar/bebidas" component={ ExpBebidas } />
+            <Route
+              exact
+              path="/explorar/bebidas/ingredientes"
+              component={ ExpBebidasIng }
+            />
+            <Route exact path="/explorar/comidas" component={ ExpComidas } />
+            <Route
+              exact
+              path="/explorar/comidas/ingredientes"
+              component={ ExpComidasIng }
+            />
+            <Route exact path="/explorar/comidas/area" component={ ExpComidasOri } />
             <Route exact path="/receitas-feitas" component={ ReceitasFeitas } />
             <Route exact path="/receitas-favoritas" component={ ReceitasFavoritas } />
           </Switch>
