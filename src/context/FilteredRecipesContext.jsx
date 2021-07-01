@@ -23,7 +23,7 @@ function FilteredRecipesContextProvider({ children }) {
         setFilteredRecipes(formattingData[type]);
       }
       // console.log(formattingData[type] !== null ? 'sim' : 'no');
-      // setIsLoading(false);
+      console.log(formattingData[type]);
     } catch (err) {
       console.log(err);
       // eslint-disable-next-line no-alert

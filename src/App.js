@@ -11,25 +11,25 @@ function App() {
     <Switch>
       <Route path="/" exact component={ Login } />
       <Route
-        path="/comidas"
         exact
+        path="/comidas"
         render={ (props) => <Home { ...props } type="meals" /> }
       />
       <Route
-        path="/bebidas"
         exact
+        path="/bebidas"
         render={ (props) => <Home { ...props } type="drinks" /> }
       />
       <Route path="/perfil" component={ Profile } />
       <Route path="/explorar" exact component={ Explore } />
       <Route
-        path="/comidas/:id"
         exact
+        path="/comidas/:id"
         render={ (props) => <RecipeDetails { ...props } type="meals" /> }
       />
       <Route
-        path="/bebidas/:id"
         exact
+        path="/bebidas/:id"
         render={ (props) => <RecipeDetails { ...props } type="drinks" /> }
       />
     </Switch>

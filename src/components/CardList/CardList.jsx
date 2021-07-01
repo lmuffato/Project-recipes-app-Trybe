@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { Redirect } from 'react-router';
 import PropTypes from 'prop-types';
 import Card from '../Card/Card';
 import useFilteredRecipes from '../../hooks/useFilteredRecipes';
@@ -13,41 +14,60 @@ function CardList({ recipes, type }) {
     getFilteredRecipes(type);
   }, [type, searchBarFilters, getFilteredRecipes]);
 
-  // if (isLoading) {
-  //   return 'Loading...';
-  // }
+  if (recipes.length === 0) {
+    return 'Loading...';
+  }
+
+  if (filteredRecipes.length === 1) {
+    const recipe = filteredRecipes.find((el) => el === filteredRecipes[0]);
+    return type === 'meals' ? (
+      <Redirect
+        to={ {
+          pathname: `/comidas/${recipe.idMeal}`,
+          state: { recipe, type },
+        } }
+      />
+    ) : (
+      <Redirect
+        to={ {
+          pathname: `/bebidas/${recipe.idDrink}`,
+          state: { recipe, type },
+        } }
+      />
+    );
+  }
 
   return (
     <CardListContainer>
-      { filteredRecipes.length > 0 ? (
+      { filteredRecipes.length > 1 ? (
         filteredRecipes.map((recipe, index) => (
           type === 'meals' ? (
             <Link
-              to={ { pathname: `/comidas/${index}`, state: { recipe, type } } }
+              to={ { pathname: `/comidas/${recipe.idMeal}`, state: { recipe, type } } }
               key={ index }
             >
               <Card recipe={ recipe } index={ index } type={ type } />
             </Link>
           ) : (
             <Link
-              to={ { pathname: `/bebidas/${index}`, state: { recipe, type } } }
+              to={ { pathname: `/bebidas/${recipe.idDrink}`, state: { recipe, type } } }
               key={ index }
             >
               <Card recipe={ recipe } index={ index } type={ type } />
             </Link>
           )
         ))
-      ) : (recipes.length > 0 && recipes.map((recipe, i) => (
+      ) : (recipes.length > 1 && recipes.map((recipe, i) => (
         type === 'meals' ? (
           <Link
-            to={ { pathname: `/comidas/${i}`, state: { recipe, type } } }
+            to={ { pathname: `/comidas/${recipe.idMeal}`, state: { recipe, type } } }
             key={ i }
           >
             <Card recipe={ recipe } key={ i } index={ i } />
           </Link>
         ) : (
           <Link
-            to={ { pathname: `/bebidas/${i}`, state: { recipe, type } } }
+            to={ { pathname: `/bebidas/${recipe.idDrink}`, state: { recipe, type } } }
             key={ i }
           >
             <Card recipe={ recipe } key={ i } index={ i } />
