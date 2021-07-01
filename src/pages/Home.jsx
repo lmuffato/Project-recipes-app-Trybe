@@ -5,7 +5,7 @@ import SearchBarButton from '../components/SearchBar/SearchBarButton';
 import SearchBar from '../components/SearchBar/SearchBar';
 import Footer from '../components/Footer/Footer';
 import useFetchRecipes from '../effects/useFetchRecipes';
-// import Card from '../components/Card/Card';
+import RecipesContainer from '../styles/home';
 import CardList from '../components/CardList/CardList';
 
 function Home(props) {
@@ -34,9 +34,9 @@ function Home(props) {
       <div>
         { isActive ? (<SearchBar type={ type } />) : ''}
       </div>
-      <div>
+      <RecipesContainer>
         <CardList recipes={ recipes } type={ type } />
-      </div>
+      </RecipesContainer>
       <Footer />
     </>
   );
