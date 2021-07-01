@@ -31,6 +31,10 @@ function FilteredRecipesContextProvider({ children }) {
     }
   };
 
+  const alertMessage = () => {
+    window.alert('Sua busca deve conter somente 1 (um) caracter');
+  };
+
   const handleMealFilterType = (filterType, query, type) => {
     const endpointMealIngr = `https://www.themealdb.com/api/json/v1/1/filter.php?i=${query}`;
     const endpointMealName = `https://www.themealdb.com/api/json/v1/1/search.php?s=${query}`;
@@ -41,7 +45,7 @@ function FilteredRecipesContextProvider({ children }) {
       break;
     case 'first-letter':
       if (query.length > 1 || query.trim() === '') {
-        // incluir alert
+        alertMessage();
       } else {
         fetchFilteredMealRecipes(endpointMealFirstLetter, type);
       }
@@ -65,7 +69,7 @@ function FilteredRecipesContextProvider({ children }) {
       break;
     case 'first-letter':
       if (query.length > 1 || query.trim() === '') {
-        // chamar a função do alert
+        alertMessage();
       } else {
         fetchFilteredMealRecipes(cocktailEndpointFirstLetter, type);
       }
