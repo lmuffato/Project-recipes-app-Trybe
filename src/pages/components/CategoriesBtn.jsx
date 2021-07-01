@@ -5,15 +5,17 @@ import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import { getCategories } from '../../../actions/meals';
+import { getMealsCategories } from '../../actions/meals';
+import { getDrinksCategories } from '../../actions/drinks';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function CategoriesBtn(props) {
-  const { categories, fetchCategories } = props;
+  const { categories, fetchMealsCategories, fetchDrinksCategories, type } = props;
 
   useEffect(() => {
-    fetchCategories();
-  }, [fetchCategories]);
+    if (type === 'meals') fetchMealsCategories();
+    if (type === 'drinks') fetchDrinksCategories();
+  }, [fetchMealsCategories, fetchDrinksCategories, type]);
 
   return (
     <Container className="categories-container">
@@ -52,7 +54,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchCategories: () => dispatch(getCategories()),
+  fetchMealsCategories: () => dispatch(getMealsCategories()),
+  fetchDrinksCategories: () => dispatch(getDrinksCategories()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CategoriesBtn);

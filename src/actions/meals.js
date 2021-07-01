@@ -1,4 +1,4 @@
-import fetchCategories from '../services/fetchCategories';
+import { fetchMealsCategories } from '../services/fetchCategories';
 import fetchMeals from '../services/fetchMeals';
 
 export const API_FETCH = 'API_FETCH';
@@ -11,10 +11,10 @@ export const storeCategories = (payload) => ({ type: STORE_CATEGORIES, payload }
 
 export const storeMeals = (payload) => ({ type: STORE_MEALS, payload });
 
-export function getCategories() {
+export function getMealsCategories() {
   return async (dispatch) => {
     dispatch(apiFetch());
-    const categories = await fetchCategories();
+    const categories = await fetchMealsCategories();
     dispatch(storeCategories(categories));
   };
 }

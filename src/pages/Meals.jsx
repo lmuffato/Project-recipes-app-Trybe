@@ -1,11 +1,11 @@
 import React from 'react';
-import CategoriesBtn from './components/MealsPage/CategoriesBtn';
+import CategoriesBtn from './components/CategoriesBtn';
 import MealCards from './components/MealsPage/MealCards';
 
 function Meals() {
   return (
     <div>
-      <CategoriesBtn />
+      <CategoriesBtn type="meals" />
       <MealCards />
     </div>
   );
