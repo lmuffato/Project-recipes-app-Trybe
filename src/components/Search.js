@@ -1,0 +1,122 @@
+import React from 'react';
+import PropTypes from 'prop-types';
+import { useClassState, useStateEasyRedux } from '../redux/reducer/EasyRedux';
+
+const initialState = {
+  search: '',
+  searchRadio: 'Ingrediente',
+};
+
+export default function Search(props) {
+  const [state, setState] = useClassState(initialState);
+  const [, setStateRedux] = useStateEasyRedux(Search, {});
+  const { search, searchRadio } = state;
+  const { searchApi } = props;
+
+  const handleChange = ({ target: { name, value } }) => {
+    setState({
+      [name]: value,
+    });
+  };
+
+  const fetchSearch = async (ev) => {
+    if (ev) ev.preventDefault();
+    let url;
+
+    switch (searchRadio) {
+    case 'Ingrediente':
+      url = `https://www.${searchApi}.com/api/json/v1/1/filter.php?i=`;
+      break;
+    case 'Nome':
+      url = `https://www.${searchApi}.com/api/json/v1/1/search.php?s=`;
+      break;
+    case 'Primeira letra':
+      if (search.length !== 1) {
+        alert('Sua busca deve conter somente 1 (um) caracter');
+        return;
+      }
+      url = `https://www.${searchApi}.com/api/json/v1/1/search.php?f=`;
+      break;
+    default:
+      break;
+    }
+
+    console.log(`${url}${search}`);
+    try {
+      const response = await fetch(`${url}${search}`);
+      const data = await response.json();
+      const results = data.meals || data.drinks;
+
+      const INDEX_END = 12;
+      const resultsTwelveItems = results.slice(0, INDEX_END);
+
+      console.log(resultsTwelveItems); // APAGAR DEPOIS
+      setStateRedux({ actionType: 'FETCH_COMPLETED', resultsTwelveItems });
+      return resultsTwelveItems;
+    } catch (error) {
+      console.error(error);
+      alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+    }
+  };
+
+  return (
+    <div>
+      <label htmlFor="search-input">
+        Search:
+        <input
+          id="search-input"
+          type="text"
+          name="search"
+          value={ search }
+          onChange={ handleChange }
+          data-testid="search-input"
+        />
+      </label>
+      <label htmlFor="ingredient-search-radio">
+        Ingrediente:
+        <input
+          id="ingredient-search-radio"
+          type="radio"
+          name="searchRadio"
+          value="Ingrediente"
+          onChange={ handleChange }
+          data-testid="ingredient-search-radio"
+          defaultChecked
+        />
+      </label>
+      <label htmlFor="name-search-radio">
+        Nome:
+        <input
+          id="name-search-radio"
+          type="radio"
+          name="searchRadio"
+          value="Nome"
+          onChange={ handleChange }
+          data-testid="name-search-radio"
+        />
+      </label>
+      <label htmlFor="first-letter-search-radio">
+        Primeira letra:
+        <input
+          id="first-letter-search-radio"
+          type="radio"
+          name="searchRadio"
+          value="Primeira letra"
+          onChange={ handleChange }
+          data-testid="first-letter-search-radio"
+        />
+      </label>
+      <button
+        type="button"
+        onClick={ fetchSearch }
+        data-testid="exec-search-btn"
+      >
+        Buscar
+      </button>
+    </div>
+  );
+}
+
+Search.propTypes = {
+  searchApi: PropTypes.string.isRequired,
+};
