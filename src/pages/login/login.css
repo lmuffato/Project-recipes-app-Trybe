@@ -1,0 +1,10 @@
+.login {
+ display: flex; 
+ flex-direction: column;
+ align-items: center;
+ padding: 50vw;
+} 
+
+.loginText {
+padding: 10px;
+}
