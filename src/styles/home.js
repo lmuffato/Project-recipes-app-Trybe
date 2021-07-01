@@ -12,7 +12,6 @@ const RecipesContainer = styled.div`align-items: center;
   z-index: 0;
 
   @media only screen and ( max-width : 479px ) {
-    align-items: center;
     margin-top: 25px;
     max-width: 100%;
   }

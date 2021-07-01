@@ -3,7 +3,7 @@ import { Switch, Route } from 'react-router-dom';
 import Explore from './pages/Explore';
 import Home from './pages/Home';
 import Login from './pages/Login';
-import MealDetails from './pages/MealDetails';
+import RecipeDetails from './pages/RecipeDetails';
 import Profile from './pages/Profile';
 
 function App() {
@@ -22,7 +22,16 @@ function App() {
       />
       <Route path="/perfil" component={ Profile } />
       <Route path="/explorar" exact component={ Explore } />
-      <Route path="/comidas/:id" exact component={ MealDetails } />
+      <Route
+        path="/comidas/:id"
+        exact
+        render={ (props) => <RecipeDetails { ...props } type="meals" /> }
+      />
+      <Route
+        path="/bebidas/:id"
+        exact
+        render={ (props) => <RecipeDetails { ...props } type="drinks" /> }
+      />
     </Switch>
   );
 }

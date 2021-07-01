@@ -1,6 +1,6 @@
 import React from 'react';
 
-function MealDetails() {
+function RecipeDetails() {
   return (
     <div>
       Tela de detalhes - Meals
@@ -8,4 +8,4 @@ function MealDetails() {
   );
 }
 
-export default MealDetails;
+export default RecipeDetails;
