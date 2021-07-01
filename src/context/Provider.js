@@ -20,6 +20,7 @@ function Provider({ children }) {
   const [showFilter, setShowFilter] = useState(false);
   const [filterDrinks, setFilterDrinks] = useState([]);
   const [category, setCategory] = useState('');
+
   function getFoods() {
     const fetchApis = async () => {
       const dataFoods = await fetchApiFoods();
@@ -68,6 +69,13 @@ function Provider({ children }) {
     }
   };
 
+  const clickRecipeFood = (id) => {
+    console.log(id);
+  };
+
+  const clickRecipeDrinks = (id) => {
+    console.log(id);
+  };
   // ComponentDidMount
   useEffect(getFoods, []);
 
@@ -82,6 +90,8 @@ function Provider({ children }) {
     filterDrinks,
     clickFilterFood,
     clickFilterDrinks,
+    clickRecipeFood,
+    clickRecipeDrinks,
     showFilter,
   };
 
