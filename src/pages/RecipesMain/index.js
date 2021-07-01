@@ -1,5 +1,5 @@
-import React, { useContext } from 'react';
-/* import PropTypes from 'prop-types'; */
+import React, { useContext, useEffect } from 'react';
+import PropTypes, { shape } from 'prop-types';
 import './recipesMain.css';
 import Header from '../../components/header';
 import MenuFoot from '../../components/menuFoot';
@@ -8,10 +8,18 @@ import RecipeCard from './RecipeCard';
 import Categories from './Categories';
 import { AppContext } from '../../context/AppContext';
 
-export default function RecipesMain() {
+export default function RecipesMain({ match }) {
+  const { path } = match;
   const { context } = useContext(AppContext);
-  const { recipesList } = context;
+  const { recipesList, setPageOrigin } = context;
 
+  useEffect(() => {
+    if (path === '/comidas') {
+      setPageOrigin('themealdb');
+    } if (path === '/bebidas') {
+      setPageOrigin('thecocktaildb');
+    }
+  }, []);
   return (
     <div>
       <Header />
@@ -31,3 +39,10 @@ export default function RecipesMain() {
     </div>
   );
 }
+
+RecipesMain.propTypes = {
+
+  match: PropTypes.arrayOf(shape({
+    path: PropTypes.string.isRequired,
+  })).isRequired,
+};
