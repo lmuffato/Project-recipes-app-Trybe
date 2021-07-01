@@ -7,9 +7,10 @@ export const actionLogin = (email, password) => ({
   password,
 });
 
-export const actionSearch = (value) => ({
+export const actionSearch = (value, item) => ({
   type: ACTION_SEARCH,
   data: value,
+  item,
 });
 
 export const fetchSearch = (type, text, currentPage) => async (dispatch) => {
@@ -42,7 +43,11 @@ export const fetchSearch = (type, text, currentPage) => async (dispatch) => {
   try {
     const res = await fetch(url);
     const data = await res.json();
-    dispatch(actionSearch(data));
+    if (currentPage === 'comidas') {
+      dispatch(actionSearch(data.meals, 'meals'));
+    } else {
+      dispatch(actionSearch(data.drinks, 'drinks'));
+    }
   } catch (error) {
     dispatch(actionSearch('error'));
   }
