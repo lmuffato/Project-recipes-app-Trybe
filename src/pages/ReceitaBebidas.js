@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import Carousel from 'react-bootstrap/Carousel';
 import { Link } from 'react-router-dom';
-import Footer from '../components/Footer';
 import Header from '../components/Header';
+import ComponentGen from '../components/RecipeDetailsComponents';
+import '../styles/RecipeDetails.css';
 
 function Receita() {
   const id = window.location.pathname.match(/(\d+)/)[0];
@@ -24,7 +26,6 @@ function Receita() {
     }
     FoodAPI();
   }, [id]);
-  const { strDrinkThumb, strDrink, strCategory, strInstructions, strAlcoholic } = info;
 
   const listCreator = () => {
     const ingredients = [];
@@ -48,49 +49,32 @@ function Receita() {
     if (loading === false) {
       return (
         recomend.filter((e, i) => i < qtd).map((e, i) => (
-          <li key={ i } data-testid={ `${i}-recomendation-card` }>
+          <Carousel.Item key={ i } data-testid={ `${i}-recomendation-title` }>
             <Link to={ `/comidas/${e.idMeal}` }>
-              <div data-testid={ `${i}-recipe-card` }>
+              <div data-testid={ `${i}-recomendation-card` }>
                 <img
                   src={ e.strMealThumb }
                   data-testid={ `${i}-card-img` }
                   alt="foto da receita"
+                  style={ { height: '200px' } }
                 />
-                <h4 data-testid={ `${i}-recomendation-title` }>{ e.strMeal }</h4>
+                <h4>{ e.strMeal }</h4>
               </div>
             </Link>
-          </li>)));
-    }
-  };
-
-  const componentGen = () => {
-    if (loading === false) {
-      return (
-        <div>
-          <img
-            data-testid="recipe-photo"
-            src={ strDrinkThumb }
-            alt="recipe"
-            style={ { height: '200px' } }
-          />
-          <p data-testid="recipe-title">{`${strDrink}`}</p>
-          <button type="button" data-testid="share-btn">Share</button>
-          <button type="button" data-testid="favorite-btn">Favorite</button>
-          <p data-testid="recipe-category">{`${strCategory} ${strAlcoholic}`}</p>
-          {listCreator()}
-          <ul data-testid="instructions">{strInstructions}</ul>
-          {recomendList()}
-          <button type="button" data-testid="start-recipe-btn">Iniciar Receita</button>
-        </div>
-      );
+          </Carousel.Item>
+        )));
     }
   };
 
   return (
     <>
       <Header title="Receita" />
-      {componentGen()}
-      <Footer />
+      { loading === false
+      && <ComponentGen
+        info={ info }
+        listCreator={ listCreator() }
+        recomendList={ recomendList() }
+      />}
     </>
   );
 }

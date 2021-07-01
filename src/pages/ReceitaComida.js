@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import Carousel from 'react-bootstrap/Carousel';
 import { Link } from 'react-router-dom';
-import Footer from '../components/Footer';
 import Header from '../components/Header';
+import '../styles/RecipeDetails.css';
+import ComponentGen from '../components/RecipeDetailsComponents';
 
 function Receita() {
   const id = window.location.pathname.match(/(\d+)/)[0];
@@ -24,7 +26,6 @@ function Receita() {
     }
     FoodAPI();
   }, [id]);
-  const { strMealThumb, strMeal, strCategory, strInstructions, strYoutube } = info;
 
   const listCreator = () => {
     const ingredients = [];
@@ -45,53 +46,33 @@ function Receita() {
 
   const recomendList = () => {
     const qtd = 6;
-    if (loading === false) {
-      return (
-        recomend.filter((e, i) => i < qtd).map((e, i) => (
-          <li key={ i } data-testid={ `${i}-recomendation-card` }>
-            <Link to={ `/bebidas/${e.idDrink}` }>
-              <div data-testid={ `${i}-recipe-card` }>
-                <img
-                  src={ e.strDrinkThumb }
-                  data-testid={ `${i}-card-img` }
-                  alt="foto da receita"
-                />
-                <h4 data-testid={ `${i}-recomendation-title` }>{ e.strDrink }</h4>
-              </div>
-            </Link>
-          </li>)));
-    }
-  };
-
-  const componentGen = () => {
-    if (loading === false) {
-      return (
-        <div>
-          <img
-            data-testid="recipe-photo"
-            src={ strMealThumb }
-            alt="recipe"
-            style={ { height: '200px' } }
-          />
-          <p data-testid="recipe-title">{strMeal}</p>
-          <button type="button" data-testid="share-btn">Share</button>
-          <button type="button" data-testid="favorite-btn">Favorite</button>
-          <p data-testid="recipe-category">{strCategory}</p>
-          {listCreator()}
-          <ul data-testid="instructions">{strInstructions}</ul>
-          <video src={ strYoutube } data-testid="video"><track kind="captions" /></video>
-          {recomendList()}
-          <button type="button" data-testid="start-recipe-btn">Iniciar Receita</button>
-        </div>
-      );
-    }
+    return (
+      recomend.filter((e, i) => i < qtd).map((e, i) => (
+        <Carousel.Item key={ i } data-testid={ `${i}-recomendation-title` }>
+          <Link to={ `/bebidas/${e.idDrink}` }>
+            <div data-testid={ `${i}-recomendation-card` }>
+              <img
+                src={ e.strDrinkThumb }
+                data-testid={ `${i}-card-img` }
+                alt="foto da receita"
+                style={ { height: '200px' } }
+              />
+              <h4>{ e.strDrink }</h4>
+            </div>
+          </Link>
+        </Carousel.Item>
+      )));
   };
 
   return (
     <>
       <Header title="Receita" />
-      {componentGen()}
-      <Footer />
+      { loading === false
+      && <ComponentGen
+        info={ info }
+        listCreator={ listCreator() }
+        recomendList={ recomendList() }
+      />}
     </>
   );
 }
