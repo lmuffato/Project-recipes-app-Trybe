@@ -1,4 +1,4 @@
-import { EMAIL_LOGIN, PASSWORD_LOGIN } from '../common/def';
+import { EMAIL_LOGIN, PASSWORD_LOGIN, INSERT_STORAGE, REDIRECT } from '../common/def';
 
 export default function loginReducer(state, action) {
   switch (action.type) {
@@ -11,6 +11,17 @@ export default function loginReducer(state, action) {
     return {
       ...state,
       password: action.payload,
+    };
+  case INSERT_STORAGE:
+    return {
+      ...state,
+      mealsToken: action.payload.mealsToken,
+      cocktailsToken: action.payload.cocktailsToken,
+    };
+  case REDIRECT:
+    return {
+      ...state,
+      redirect: action.payload,
     };
   default:
     return state;
