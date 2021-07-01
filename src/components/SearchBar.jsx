@@ -24,7 +24,13 @@ export default function SearchBar({ props }) {
 
   const pushMealDetails = (results) => {
     const { meals } = results;
-    if (meals.length === 1) {
+    console.log(results);
+    console.log(meals);
+
+    if (meals === null) {
+      alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+    }
+    if (meals && meals.length === 1) {
       const mealId = meals[0].idMeal;
       console.log(mealId);
       history.push(`/comidas/${mealId}`);
@@ -33,7 +39,10 @@ export default function SearchBar({ props }) {
 
   const pushCocktailDetails = (results) => {
     const { drinks } = results;
-    if (drinks.length === 1) {
+    if (drinks === null) {
+      alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+    }
+    if (drinks && drinks.length === 1) {
       const drinkId = drinks[0].idDrink;
       history.push(`/bebidas/${drinkId}`);
     }
