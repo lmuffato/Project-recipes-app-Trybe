@@ -4,7 +4,10 @@ import Header from '../components/Header';
 export default function ReceitasFeitas() {
   return (
     <div>
-      <Header title="Receitas Feitas" />
+      <Header
+        title="Receitas Feitas"
+        enableSearchIcon={ false }
+      />
     </div>
   );
 }

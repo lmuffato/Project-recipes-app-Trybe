@@ -4,7 +4,10 @@ import Header from '../components/Header';
 export default function ReceitasFavoritas() {
   return (
     <div>
-      <Header title="Receitas Favoritas" />
+      <Header
+        title="Receitas Favoritas"
+        enableSearchIcon={ false }
+      />
     </div>
   );
 }

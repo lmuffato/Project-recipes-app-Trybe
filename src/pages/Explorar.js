@@ -4,7 +4,10 @@ import Header from '../components/Header';
 export default function Explorar() {
   return (
     <div>
-      <Header title="Explorar" />
+      <Header
+        title="Explorar"
+        enableSearchIcon={ false }
+      />
     </div>
   );
 }

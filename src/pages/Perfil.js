@@ -4,8 +4,10 @@ import Header from '../components/Header';
 export default function Perfil() {
   return (
     <div>
-      <h1>perfil</h1>
-      <Header title="Perfil" />
+      <Header
+        title="Perfil"
+        enableSearchIcon={ false }
+      />
     </div>
   );
 }
