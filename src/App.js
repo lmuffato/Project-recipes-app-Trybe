@@ -1,9 +1,8 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import Drink from './pages/Drink/index';
-import Food from './pages/Food/index';
 import Login from './pages/login/index';
 
+import RecipesMain from './pages/RecipesMain/index';
 import AppProvider from './context/AppContext';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -14,8 +13,9 @@ function App() {
         <BrowserRouter>
           <Switch>
             <Route exact path="/" component={ Login } />
-            <Route path="/comidas" component={ Food } />
-            <Route path="/bebidas" component={ Drink } />
+            {/* <Route exact path="/" component={ Login } /> */}
+            <Route path="/comidas" component={ RecipesMain } />
+            <Route path="/bebidas" component={ RecipesMain } />
             {/* <Route path="/comidas/{id-da-receita}" component={ FoodDetails } />
             <Route path="/bebidas/{id-da-receita}" component={ DrinkDetails } />
             <Route path="/comidas/{id-da-receita}/in-progress" component={ FoodInProgress } />

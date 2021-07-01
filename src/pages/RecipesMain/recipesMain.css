@@ -1,0 +1,9 @@
+.list-main-recipes {
+  display: flex;
+  flex-flow: row wrap;
+  margin: auto;
+}
+
+.recipe-card {
+  margin: 10px 20px;
+}
