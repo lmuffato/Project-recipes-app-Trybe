@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Card from './Cards';
+import ReceitasContext from '../contexts/ReceitasContext';
 
 function CardList({ list }) {
   const maxLength = 12;
+  const { filter } = useContext(ReceitasContext);
 
-  if (list.length > 1) {
+  if (list.length > 1 || filter === true) {
     const arr = [];
     for (let index = 0; index < maxLength; index += 1) {
       const element = list[index];
@@ -22,6 +24,8 @@ function CardList({ list }) {
                 key={ index }
                 strName={ recipie.strMeal }
                 strThumb={ recipie.strMealThumb }
+                strId={ recipie.idMeal }
+                page="comidas"
               />
             );
           } return (
@@ -30,9 +34,11 @@ function CardList({ list }) {
               key={ index }
               strName={ recipie.strDrink }
               strThumb={ recipie.strDrinkThumb }
+              strId={ recipie.idDrink }
+              page="bebidas"
             />
           );
-        } return (<div key={ index }>Loading...</div>);
+        } return (<span key={ index } />);
       }));
   }
   return (
