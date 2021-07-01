@@ -11,7 +11,6 @@ function Home(props) {
   const { type } = props;
   const fetchData = useFetchRecipes(type);
   const [recipes, setRecipes] = useState([]);
-  // const [filteredRecipes, setFilteredRecipes] = useState([]);
   const [isActive, setIsActive] = useState(false);
 
   const handleToggleSearchBar = (ev) => {

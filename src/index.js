@@ -1,17 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+// import { transitions, positions, types, Provider as AlertProvider } from 'react-alert';
+// import AlertTemplate from 'react-alert-template-basic';
 import './index.css';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import UserContextProvider from './context/UserContext';
 import RecipesContextProvider from './context/RecipesContext';
+import FiltredRecipesContextProvider from './context/FilteredRecipesContext';
 
 ReactDOM.render(
   <BrowserRouter>
     <UserContextProvider>
       <RecipesContextProvider>
-        <App />
+        <FiltredRecipesContextProvider>
+          <App />
+        </FiltredRecipesContextProvider>
       </RecipesContextProvider>
     </UserContextProvider>
   </BrowserRouter>, document.getElementById('root'),
