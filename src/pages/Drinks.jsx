@@ -10,7 +10,7 @@ function Drinks() {
     <div>
       Pagina Drinks
       <Header title="Bebidas" searchImg="true" />
-      {filteredDrinks.map((recipes, index) => (
+      {filteredDrinks ? filteredDrinks.map((recipes, index) => (
         index <= CARDS_NUMBER ? (
           <DrinkCard
             key={ recipes.idDrink }
@@ -21,7 +21,7 @@ function Drinks() {
             testCardId={ `${index}-recipe-card` }
           />
         ) : null
-      ))}
+      )) : alert('Sinto muito, não encontramos nenhuma receita para esses filtros.')}
     </div>
   );
 }

@@ -16,7 +16,9 @@ function SearchProvider({ children }) {
     setIsloading(true);
     const apiRecipes = await fetchRecipes(text, radio);
     setFilteredRecipes(apiRecipes.meals);
-    if (apiRecipes.meals.length === 1) {
+    if (!apiRecipes.meals) {
+      setFilteredRecipes([]);
+    } else if (apiRecipes.meals && apiRecipes.meals.length === 1) {
       history.push(`/comidas/${apiRecipes.meals[0].idMeal}`);
     }
     setIsloading(false);
@@ -26,7 +28,9 @@ function SearchProvider({ children }) {
     setIsloading(true);
     const apiRecipes = await fetchDrinksRecipes(text, radio);
     setFilteredDrinks(apiRecipes.drinks);
-    if (apiRecipes.drinks.length === 1) {
+    if (!apiRecipes.drinks) {
+      setFilteredDrinks([]);
+    } else if (apiRecipes.drinks && apiRecipes.drinks.length === 1) {
       history.push(`/bebidas/${apiRecipes.drinks[0].idDrink}`);
     }
     setIsloading(false);

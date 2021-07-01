@@ -9,7 +9,7 @@ function Foods() {
   return (
     <div>
       <Header title="Comidas" searchImg="true" />
-      {filteredRecipes.map((recipes, index) => (
+      {filteredRecipes ? filteredRecipes.map((recipes, index) => (
         index <= CARDS_NUMBER ? (
           <MealCard
             key={ recipes.idMeal }
@@ -20,7 +20,7 @@ function Foods() {
             testCardId={ `${index}-recipe-card` }
           />
         ) : null
-      ))}
+      )) : alert('Sinto muito, não encontramos nenhuma receita para esses filtros.')}
     </div>
   );
 }
