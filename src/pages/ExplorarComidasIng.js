@@ -1,9 +1,13 @@
 import React from 'react';
+import Header from '../components/Header';
 
 export default function ExplorarComidasIng() {
   return (
     <div>
-      Detalhes Comidas ingrdientes
+      <Header
+        title="Explorar Ingredientes"
+        enableSearchIcon={ false }
+      />
     </div>
   );
 }
