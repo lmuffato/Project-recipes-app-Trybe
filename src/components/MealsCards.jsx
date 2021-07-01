@@ -10,7 +10,7 @@ export default function MealsCards() {
 
   return (
     <div>
-      {recipesArray.length > 1
+      {recipesArray.length > 0
       && recipesArray.map((recipe, index) => (
         <Card
           style={ { width: '18rem' } }

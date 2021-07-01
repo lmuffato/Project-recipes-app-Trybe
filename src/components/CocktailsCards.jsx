@@ -10,7 +10,7 @@ export default function CocktailsCards() {
 
   return (
     <div className="cards-container">
-      {drinksArray.length > 1
+      {drinksArray.length > 0
       && drinksArray.map((recipe, index) => (
         <Card
           style={ { width: '18rem' } }

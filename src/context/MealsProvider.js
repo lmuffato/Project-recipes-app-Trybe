@@ -1,15 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import MealsContext from './MealsContext';
-import { ApiByCategory, ApiFirstsResults } from '../services/theMealAPI';
+import { ApiByCategory,
+  ApiFilterByCategory, ApiFirstsResults } from '../services/theMealAPI';
 
 function MealsProvider(props) {
   const [mealsObject, setMeals] = useState({});
   const [mealsCategories, setMealsCategories] = useState([]);
+  const [currCategory, setCurrCategory] = useState('');
 
-  // const setMealsByCategories = (category) => {
-
-  // };
+  useEffect(() => {
+    const setMealsByCategories = async () => {
+      const results = await ApiFilterByCategory(currCategory);
+      setMeals(results);
+    };
+    setMealsByCategories();
+  }, [currCategory]);
 
   useEffect(() => {
     const load = async () => {
@@ -27,6 +33,7 @@ function MealsProvider(props) {
     mealsObject,
     setMeals,
     mealsCategories,
+    setCurrCategory,
   };
 
   const { children } = props;
