@@ -7,6 +7,7 @@ import './style.css';
 
 const Explore = () => (
   <div className="container">
+    <Header />
     <div className="buttons line">
       <Link to="/explorar/comidas">
         <button
@@ -28,6 +29,7 @@ const Explore = () => (
         </button>
       </Link>
     </div>
+    <Footer />
   </div>
 );
 
