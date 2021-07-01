@@ -5,7 +5,7 @@ import renderWithRouterAndRedux from './renderWithRouterAndRedux';
 import { storeCategories, storeMeals } from '../actions/meals';
 
 describe('Test Meals page', () => {
-  const store = {
+  const mockStore = {
     meals: {
       categories: ['sushi'],
       meals: [],
@@ -25,15 +25,15 @@ describe('Test Meals page', () => {
   ];
 
   it('Test if pathname is \'/comidas\'', () => {
-    const { history } = renderWithRouterAndRedux(<Meals />, store);
+    const { history } = renderWithRouterAndRedux(<Meals />, mockStore);
     history.push('/comidas');
     const { pathname } = history.location;
     expect(pathname).toBe('/comidas');
   });
 
-  it('Test if cards are rendered', () => {
-    const { store: test } = renderWithRouterAndRedux(<Meals />, store);
-    test.dispatch(storeMeals(data));
+  it('Test if meal cards are rendered', () => {
+    const { store } = renderWithRouterAndRedux(<Meals />, mockStore);
+    store.dispatch(storeMeals(data));
     const images = screen.getAllByRole('img');
     expect(images.length).toBe(2);
   });
@@ -41,9 +41,9 @@ describe('Test Meals page', () => {
   it('Test if category buttons are rendered', () => {
     const numberOfButtons = 6;
     const mockCategories = ['Beef', 'Chicken', 'Dessert', 'Lamb', 'Miscellaneous'];
-    const { store: test,
-      getByRole, getAllByRole } = renderWithRouterAndRedux(<Meals />, store);
-    test.dispatch(storeCategories(mockCategories));
+    const { store,
+      getByRole, getAllByRole } = renderWithRouterAndRedux(<Meals />, mockStore);
+    store.dispatch(storeCategories(mockCategories));
     expect(getAllByRole('button').length).toBe(numberOfButtons);
     expect(getByRole('button', { name: /beef/i })).toBeInTheDocument();
     expect(getByRole('button', { name: /chicken/i })).toBeInTheDocument();
