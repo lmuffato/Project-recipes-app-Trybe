@@ -11,12 +11,20 @@ export default function FormLogin() {
   const [stateLogin, dispatch] = useReducer(loginReducer, {
     email: '',
     password: '',
+    mealsToken: '1',
+    cocktailsToken: '1',
   });
+
+  const { mealsToken, cocktailsToken } = stateLogin;
 
   return (
     <LoginContext.Provider value={ { stateLogin, dispatch } }>
       <form
-        onSubmit={ (evt) => evt.preventDefault() }
+        onSubmit={ (evt) => {
+          evt.preventDefault();
+          localStorage.setItem('mealsToken', mealsToken);
+          localStorage.setItem('cocktailsToken', cocktailsToken);
+        } }
       >
         <EmailInput />
         <PasswordInput />
