@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import Card from './Cards';
+import Card from './CardsComponents/Cards';
 import ReceitasContext from '../contexts/ReceitasContext';
 
 function CardList({ list }) {
