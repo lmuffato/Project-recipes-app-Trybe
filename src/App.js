@@ -16,6 +16,7 @@ import ExploreFoodByArea from './Pages/ExploreFoodByArea';
 import UserProfile from './Pages/UserProfile';
 import DoneRecepies from './Pages/DoneRecepies';
 import FavoriteRecepies from './Pages/FavoriteRecepies';
+import NotFound from './Pages/NotFound';
 
 function App() {
   return (
@@ -34,6 +35,10 @@ function App() {
       <Route
         path="/explorar/comidas/area"
         component={ ExploreFoodByArea }
+      />
+      <Route
+        path="/explorar/bebidas/area"
+        component={ NotFound }
       />
       <Route path="/comidas/:idMeal" component={ MealDetails } />
       <Route path="/bebidas/:idDrink" component={ DrinkDetails } />
