@@ -10,7 +10,7 @@ const ProfileScreen = () => {
   const { setLogout } = useContext(Context);
 
   const handleClick = ({ target }) => {
-    console.log(target);
+    // console.log(target);
     if (target.id === 'recipes-made') {
       console.log('Receitas feitas clicked!');
     }
