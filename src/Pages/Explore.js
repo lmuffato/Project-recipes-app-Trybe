@@ -3,7 +3,7 @@ import { Button } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import './Pages Css/Explore.css';
+import './PagesCss/Explore.css';
 
 function Explore() {
   const history = useHistory();
