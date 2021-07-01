@@ -31,3 +31,8 @@ html {
   margin: 5vh;
   padding: 5vh;
 }
+
+h3 {
+  margin: auto;
+  padding-top: 3vh;  
+}
