@@ -45,8 +45,11 @@ function Login() {
           <GiKnifeFork className="knifeForkIcon" />
         </div>
         <label htmlFor="email">
-          <p>Email</p>
+          <p className="lbl-txt-login">
+            Email
+          </p>
           <input
+            className="input-login"
             value={ email }
             data-testid="email-input"
             type="email"
@@ -55,8 +58,9 @@ function Login() {
           />
         </label>
         <label htmlFor="password">
-          <p>Senha</p>
+          <p className="lbl-txt-login">Senha</p>
           <input
+            className="input-login"
             value={ password }
             data-testid="password-input"
             type="password"
@@ -66,6 +70,7 @@ function Login() {
           />
         </label>
         <button
+          className="btn-login"
           type="submit"
           data-testid="login-submit-btn"
           disabled={ disableButton }
