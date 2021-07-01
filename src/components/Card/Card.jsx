@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import CardContainer from './styles';
 
 function Card(props) {
@@ -8,6 +9,7 @@ function Card(props) {
   const recipeThumb = recipe.strMealThumb || recipe.strDrinkThumb;
 
   return (
+
     <CardContainer>
       <div data-testid={ `${index}-recipe-card` }>
         <div className="img-wrapper">
@@ -23,6 +25,7 @@ function Card(props) {
         </div>
       </div>
     </CardContainer>
+
   );
 }
 
