@@ -4,13 +4,8 @@ import PropTypes from 'prop-types';
 export const FilteredRecipesContext = createContext({});
 
 const MAX_RECIPES = 12;
-// const INITIAL_STATE = {
-//   radioValue: '',
-//   inputSearch: '',
-// };
 
 function FilteredRecipesContextProvider({ children }) {
-  // const [filteredRecipesData, setFilteredRecipesData] = useState([]);
   const [filteredRecipes, setFilteredRecipes] = useState([]);
   const [searchBarFilters, setSearchBarFilters] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -19,7 +14,6 @@ function FilteredRecipesContextProvider({ children }) {
     try {
       const response = await fetch(endpoint);
       const data = await response.json();
-      // console.log(Object.entries(data));
       const formattingData = {
         ...data,
         [type]: data[type].slice(0, MAX_RECIPES),
@@ -27,7 +21,7 @@ function FilteredRecipesContextProvider({ children }) {
       if (formattingData[type] !== null) {
         setFilteredRecipes(formattingData[type]);
       }
-      console.log(formattingData[type] !== null ? 'sim' : 'no');
+      // console.log(formattingData[type] !== null ? 'sim' : 'no');
       // setIsLoading(false);
     } catch (err) {
       console.log(err);
@@ -99,8 +93,6 @@ function FilteredRecipesContextProvider({ children }) {
         if (type === 'drinks') {
           handleDrinksFilterType(radioValue, inputSearch, type); // faz o switch case de cada concatenação de busca
         }
-        // passar os dois como parametros da função
-        // fazer o if
       });
       setSearchBarFilters([]);
     }
