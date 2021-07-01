@@ -1,10 +1,12 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
+import { useHistory } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import './Pages Css/Explore.css';
 
 function Explore() {
+  const history = useHistory();
   return (
     <>
       <Header props={ { search: false, title: 'Explorar' } } />
@@ -15,6 +17,7 @@ function Explore() {
             size="lg"
             className="buttons"
             data-testid="explore-food"
+            onClick={ () => history.push('/explorar/comidas') }
           >
             Explorar Comidas
           </Button>
@@ -23,6 +26,7 @@ function Explore() {
             size="lg"
             className="buttons"
             data-testid="explore-drinks"
+            onClick={ () => history.push('/explorar/bebidas') }
           >
             Explorar Bebidas
           </Button>
