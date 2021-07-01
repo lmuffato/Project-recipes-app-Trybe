@@ -20,7 +20,7 @@ export default function Login() {
     localStorage.setItem('user', JSON.stringify(Obj));
   }
   return (
-    <div>
+    <div className="meals">
       <Form>
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>

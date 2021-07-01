@@ -6,7 +6,7 @@ import Routes from './Routes';
 
 function App() {
   return (
-    <div className="meals">
+    <div>
       <Provider>
         <Routes />
       </Provider>
