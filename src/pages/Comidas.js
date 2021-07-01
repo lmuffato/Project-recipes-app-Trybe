@@ -29,7 +29,7 @@ function Comidas() {
   }
   return (
     <div>
-      <Header title="Comidas" />
+      <Header title="Comidas" displayButton />
       <Footer />
     </div>
   );

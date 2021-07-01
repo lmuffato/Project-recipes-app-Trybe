@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import profileIMG from '../images/profileIcon.svg';
-import searchIMG from '../images/searchIcon.svg';
 import BuscaHeader from './BuscaHeader';
+import SearchButton from './SearchButton';
 
 function Header(props) {
-  const { title } = props;
+  const { title, displayButton } = props;
   const [input, setInput] = useState(false);
 
   return (
@@ -21,16 +21,7 @@ function Header(props) {
       <p data-testid="page-title">
         {title}
       </p>
-      <button
-        type="button"
-        onClick={ () => setInput(!input) }
-      >
-        <img
-          src={ searchIMG }
-          data-testid="search-top-btn"
-          alt="searchIMG"
-        />
-      </button>
+      {displayButton && <SearchButton input={ input } setInput={ setInput } />}
       { input === true && <BuscaHeader /> }
     </div>
   );

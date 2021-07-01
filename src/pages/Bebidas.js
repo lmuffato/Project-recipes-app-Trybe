@@ -29,7 +29,7 @@ function Bebidas() {
   }
   return (
     <div>
-      <Header title="Bebidas" />
+      <Header title="Bebidas" displayButton />
       <Footer />
     </div>
   );
