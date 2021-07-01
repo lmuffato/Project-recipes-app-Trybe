@@ -2,10 +2,11 @@ import React, { useContext } from 'react';
 import { Card } from 'react-bootstrap';
 import Context from '../../../context/Context';
 import '../index.css';
+import CardsFilterRecipes from './CardsFilterRecipes';
 import FilterDrinks from './FilterDrinks';
 
 function Drinks() {
-  const { drinks } = useContext(Context);
+  const { drinks, showFilter } = useContext(Context);
   const lengthDrinks = 12;
   const CardsRecipes = () => {
     if (drinks !== []) {
@@ -41,7 +42,7 @@ function Drinks() {
     <>
       <div>Header</div>
       <FilterDrinks />
-      {CardsRecipes()}
+      {showFilter ? <CardsFilterRecipes /> : CardsRecipes()}
       <div>Rodapé</div>
     </>
   );

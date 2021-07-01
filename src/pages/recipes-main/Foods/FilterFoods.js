@@ -3,7 +3,7 @@ import { Button } from 'react-bootstrap';
 import Context from '../../../context/Context';
 
 function FilterFoods() {
-  const { categoryFoods, handleClick } = useContext(Context);
+  const { categoryFoods, clickFilterFood: handleClick } = useContext(Context);
   const lengthMax = 5;
 
   const setButoons = () => {

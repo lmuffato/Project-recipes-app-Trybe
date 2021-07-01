@@ -35,3 +35,9 @@ export async function fetchFilterFoods(category) {
   const dataCategoryFoods = await response.json();
   return dataCategoryFoods.meals;
 }
+
+export async function fetchFilterDrinks(category) {
+  const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${category}`);
+  const dataCategoryDrinks = await response.json();
+  return dataCategoryDrinks.drinks;
+}

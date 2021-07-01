@@ -6,7 +6,8 @@ import {
   fetchApiFoods,
   fetchCategoryFoods,
   fetchCategoryDrinks,
-  fetchFilterFoods } from '../services/fetchApi';
+  fetchFilterFoods,
+  fetchFilterDrinks } from '../services/fetchApi';
 
 function Provider({ children }) {
   // useStates...
@@ -17,6 +18,7 @@ function Provider({ children }) {
   const [categoryDrinks, setCategoryDrinks] = useState([]);
   const [filterFoods, setFilterFoods] = useState([]);
   const [showFilter, setShowFilter] = useState(false);
+  const [filterDrinks, setFilterDrinks] = useState([]);
   function getFoods() {
     const fetchApis = async () => {
       const dataFoods = await fetchApiFoods();
@@ -31,7 +33,7 @@ function Provider({ children }) {
     fetchApis();
   }
 
-  const handleClick = (e) => {
+  const clickFilterFood = (e) => {
     if (e.target.innerText !== 'All') {
       setShowFilter(true);
       setFilterFoods([]);
@@ -43,7 +45,20 @@ function Provider({ children }) {
     } else {
       setShowFilter(false);
     }
-    // console.log(filterFoods);
+  };
+
+  const handleClick = (e) => {
+    if (e.target.innerText !== 'All') {
+      setShowFilter(true);
+      setFilterDrinks([]);
+      const getCategoryDrinks = async () => {
+        const data = await fetchFilterDrinks(e.target.innerText);
+        setFilterDrinks(data);
+      };
+      getCategoryDrinks();
+    } else {
+      setShowFilter(false);
+    }
   };
 
   // ComponentDidMount
@@ -57,6 +72,8 @@ function Provider({ children }) {
     categoryFoods,
     categoryDrinks,
     filterFoods,
+    filterDrinks,
+    clickFilterFood,
     handleClick,
     showFilter,
   };

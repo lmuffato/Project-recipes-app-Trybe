@@ -1,13 +1,13 @@
-// Foods
+// Drinks
 import React, { useContext } from 'react';
 import { Card } from 'react-bootstrap';
 import Context from '../../../context/Context';
 
 function CardsFilterRecipes() {
-  const { filterFoods } = useContext(Context);
+  const { filterDrinks } = useContext(Context);
   const showFilter = () => {
-    const lengthFoods = 12;
-    const recipes = filterFoods.slice(0, lengthFoods);
+    const lengthDrinks = 12;
+    const recipes = filterDrinks.slice(0, lengthDrinks);
     return (
       <div>
         {recipes.map((recipe, index) => (
@@ -19,14 +19,14 @@ function CardsFilterRecipes() {
           >
             <Card.Img
               variant="top"
-              src={ recipe.strMealThumb }
+              src={ recipe.strDrinkThumb }
               data-testid={ `${index}-card-img` }
             />
             <Card.Body>
               <Card.Title
                 data-testid={ `${index}-card-name` }
               >
-                {recipe.strMeal}
+                {recipe.strDrink}
               </Card.Title>
             </Card.Body>
           </Card>
