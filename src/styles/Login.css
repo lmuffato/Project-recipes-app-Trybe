@@ -35,11 +35,11 @@ label {
   width: 100%;
 }
 
-p {
+.lbl-txt-login {
   display: none;
 }
 
-input {
+.input-login {
   border: none;
   border-radius: 0.3em;
   box-sizing: border-box;
@@ -48,14 +48,14 @@ input {
   padding: 0.3em;
 }
 
-input:focus {
-  border: 0.1em solid rgb(67, 163, 58);
+.input-login:focus {
+  border: 0.2em solid rgb(67, 163, 58);
   font-size: 1.2em;
   outline: none;
-  transition: 1s;
+  transition: 0.2s;
 }
 
-button {
+.btn-login {
   align-items: center;
   background-color: rgb(67, 163, 58);
   border: none;
@@ -69,17 +69,17 @@ button {
   width: 100%;
 }
 
-button:hover {
+.btn-login:hover {
   cursor: pointer;
 }
 
-button:disabled {
+.btn-login:disabled {
   background-color: grey;
   color: white;
   cursor: not-allowed;
 }
 
-button:enabled {
+.btn-login:enabled {
   background-color: #5ce250;
   color: black;
   transition: 2s;
