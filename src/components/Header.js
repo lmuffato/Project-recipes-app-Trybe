@@ -15,7 +15,6 @@ export default function Header({ title, show = true }) {
 
   function handleSearch() {
     if (show) {
-      console.log(show);
       return (
         <button
           className="iconsHeader"
@@ -55,7 +54,7 @@ export default function Header({ title, show = true }) {
         { handleSearch() }
       </div>
       <div>
-        { (click) ? <p className="teste" data-testid="search-input">teste</p> : null}
+        { (click) ? <p data-testid="search-input">teste</p> : null}
       </div>
     </section>
   );
