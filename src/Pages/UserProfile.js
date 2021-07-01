@@ -8,6 +8,12 @@ function UserProfile() {
   const history = useHistory();
   const userEmailObject = JSON.parse(localStorage.getItem('user'));
   const userEmail = Object.values(userEmailObject);
+
+  const userLogout = () => {
+    localStorage.clear();
+    history.push('/');
+  };
+
   return (
     <>
       <Header props={ { search: false, title: 'Perfil' } } />
@@ -37,7 +43,7 @@ function UserProfile() {
             size="lg"
             className="buttons"
             data-testid="profile-logout-btn"
-            onClick={ () => history.push('/') }
+            onClick={ userLogout }
           >
             Sair
           </Button>
