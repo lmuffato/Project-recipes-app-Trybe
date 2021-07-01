@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import MealsContext from './MealsContext';
 
 function MealsProvider(props) {
-  const [meals, setMeals] = useState([]);
+  const [mealsArray, setMeals] = useState([]);
 
   const context = {
-    meals,
+    mealsArray,
     setMeals,
   };
 

@@ -7,6 +7,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Login from './pages/Login';
 import Main from './pages/Main';
 import Cocktails from './pages/Cocktails';
+import MealDetails from './pages/MealDetails';
+import CocktailDetails from './pages/CocktailDetails';
 
 function App() {
   return (
@@ -25,6 +27,8 @@ function App() {
             <Route exact path="/" component={ Login } />
             <Route path="/comidas" component={ Main } />
             <Route path="/bebidas" component={ Cocktails } />
+            <Route path="/comidas/:id" component={ MealDetails } />
+            <Route path="/bebidas/:id" component={ CocktailDetails } />
           </Switch>
         </UserProvider>
       </BrowserRouter>
