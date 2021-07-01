@@ -19,6 +19,7 @@ function Provider({ children }) {
   const [filterFoods, setFilterFoods] = useState([]);
   const [showFilter, setShowFilter] = useState(false);
   const [filterDrinks, setFilterDrinks] = useState([]);
+  const [category, setCategory] = useState('');
   function getFoods() {
     const fetchApis = async () => {
       const dataFoods = await fetchApiFoods();
@@ -34,6 +35,7 @@ function Provider({ children }) {
   }
 
   const clickFilterFood = (e) => {
+    setCategory(e.target.innerText);
     if (e.target.innerText !== 'All') {
       setShowFilter(true);
       setFilterFoods([]);
@@ -42,12 +44,13 @@ function Provider({ children }) {
         setFilterFoods(data);
       };
       getCategoryFoods();
-    } else {
+    } if (category === e.target.innerText) {
       setShowFilter(false);
     }
   };
 
-  const handleClick = (e) => {
+  const clickFilterDrinks = (e) => {
+    setCategory(e.target.innerText);
     if (e.target.innerText !== 'All') {
       setShowFilter(true);
       setFilterDrinks([]);
@@ -56,7 +59,7 @@ function Provider({ children }) {
         setFilterDrinks(data);
       };
       getCategoryDrinks();
-    } else {
+    } if (category === e.target.innerText) {
       setShowFilter(false);
     }
   };
@@ -74,7 +77,7 @@ function Provider({ children }) {
     filterFoods,
     filterDrinks,
     clickFilterFood,
-    handleClick,
+    clickFilterDrinks,
     showFilter,
   };
 

@@ -3,7 +3,7 @@ import { Button } from 'react-bootstrap';
 import Context from '../../../context/Context';
 
 function FilterDrinks() {
-  const { categoryDrinks, handleClick } = useContext(Context);
+  const { categoryDrinks, clickFilterDrinks: handleClick } = useContext(Context);
   const lengthMax = 5;
   const setButoons = () => {
     if (categoryDrinks !== []) {
