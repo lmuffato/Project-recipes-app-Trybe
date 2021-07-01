@@ -1,0 +1,12 @@
+.search-bar-container {
+  background-color: #aebeca;
+  height: 50px;
+  max-height: 0;
+  overflow: hidden;
+  transition: all 0.1s linear;
+}
+
+.search-bar-container.active {
+  max-height: 50px;
+  transition: all 0.1s linear;
+}

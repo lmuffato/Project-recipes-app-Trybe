@@ -1,13 +1,12 @@
 import React from 'react';
 import Footer from '../../components/Footer';
-import SearchBar from '../../components/SearchBar';
+import Header from '../../components/Header';
 
 const MainDrinks = () => (
-  <div>
-    <h1>MainDrinks</h1>
-    <SearchBar place="cocktail" />
+  <section>
+    <Header />
     <Footer />
-  </div>
+  </section>
 );
 
 export default MainDrinks;

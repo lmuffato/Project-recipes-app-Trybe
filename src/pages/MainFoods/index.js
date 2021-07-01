@@ -1,13 +1,12 @@
 import React from 'react';
 import Footer from '../../components/Footer';
-import SearchBar from '../../components/SearchBar';
+import Header from '../../components/Header';
 
 const MainFoods = () => (
-  <div>
-    <h1>MainFoods</h1>
-    <SearchBar place="meal" />
+  <section>
+    <Header />
     <Footer />
-  </div>
+  </section>
 
 );
 
