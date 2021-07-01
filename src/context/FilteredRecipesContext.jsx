@@ -5,10 +5,13 @@ export const FilteredRecipesContext = createContext({});
 
 function FilteredRecipesContextProvider({ children }) {
   const [filteredRecipes, setFilteredRecipes] = useState([]);
+  const [searchBarFilters, setSearchBarFilters] = useState([]);
 
   const contextValue = {
     filteredRecipes,
-    setFilteredRecipes };
+    setFilteredRecipes,
+    searchBarFilters,
+    setSearchBarFilters };
 
   return (
     <FilteredRecipesContext.Provider value={ contextValue }>

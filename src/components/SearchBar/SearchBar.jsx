@@ -1,14 +1,28 @@
 import React, { useCallback, useState } from 'react';
+import useFilteredRecipes from '../../hooks/useFilteredRecipes';
 import Button from '../Generics/Button';
 import SearchBarContainer from './styles';
 
 function SearchBar() {
   const [inputSearch, setInputSearch] = useState('');
   const [radioValue, setRadioValue] = useState('');
+  const { searchBarFilters, setSearchBarFilters } = useFilteredRecipes();
 
+  // configura o onChange dos radio inputs
   const handleChange = useCallback((event) => {
-    setRadioValue(event.target.value)
-  }, [])
+    setRadioValue(event.target.value);
+  }, []);
+
+  // submit do botão de busca, coloca os filtros num array que servirá de trigger para o fetch no contexto
+  const handleSubmit = useCallback((ev) => {
+    ev.preventDefault();
+    setSearchBarFilters(
+      searchBarFilters.concat({
+        radioValue,
+        inputSearch,
+      }),
+    );
+  }, [inputSearch, radioValue, searchBarFilters, setSearchBarFilters]);
 
   return (
     <SearchBarContainer>
@@ -54,7 +68,7 @@ function SearchBar() {
           First letter
         </label>
       </div>
-      <Button data-testid="exec-search-btn">
+      <Button data-testid="exec-search-btn" onClick={ (ev) => handleSubmit(ev) }>
         Buscar
       </Button>
     </SearchBarContainer>
