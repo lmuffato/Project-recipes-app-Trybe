@@ -1,10 +1,10 @@
 import React from 'react';
 import Header from '../../components/Header';
 
-export default function explorePage() {
+export default function CompletedRecipes() {
   return (
     <div>
-      <Header title="Explorar" show={ false } />
+      <Header title="Receitas Feitas" show={ false } />
     </div>
   );
 }

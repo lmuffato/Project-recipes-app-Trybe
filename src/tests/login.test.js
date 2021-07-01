@@ -29,6 +29,6 @@ describe('Testing Login Screen', () => {
 
     userEvent.click(getByRole('button'));
 
-    expect(getByText('Hello World')).toBeInTheDocument();
+    expect(getByText('Comidas')).toBeInTheDocument();
   });
 });
