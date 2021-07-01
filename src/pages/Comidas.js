@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Card } from 'react-bootstrap';
 import { mealsAPI } from '../services/apisMealsAndCocktails';
+import Header from '../components/Header';
 
 function Comidas() {
   const [data, setData] = useState([]);
@@ -36,7 +37,7 @@ function Comidas() {
   if (data.length < 1) return <h1>Loading...</h1>;
   return (
     <div>
-      <h1>Comidas</h1>
+      <Header title="Comidas" />
       <div>
         { foods() }
       </div>

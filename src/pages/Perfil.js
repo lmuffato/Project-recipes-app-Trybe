@@ -2,11 +2,15 @@ import { object } from 'prop-types';
 import React from 'react';
 import Buttons from '../components/Buttons';
 import { btnGroup, containerBtn, title, containerTitle } from '../styles/perfil';
+import Header from '../components/Header';
 
 function Perfil(props) {
   const getEmail = () => {
-    const { email } = JSON.parse(localStorage.getItem('user'));
-    return email;
+    if (JSON.parse(localStorage.getItem('user') !== null)) {
+      const { email } = JSON.parse(localStorage.getItem('user'));
+      return email;
+    }
+    return 'não logado';
   };
 
   const handleClick = ({ target }) => {
@@ -47,6 +51,7 @@ function Perfil(props) {
 
   return (
     <div className={ containerBtn }>
+      <Header title="Perfil" />
       <div className={ containerTitle }>
         <h3 className={ title } data-testid="profile-email">{ getEmail() }</h3>
       </div>
