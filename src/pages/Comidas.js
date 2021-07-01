@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import {
   getFoodCategoriesAPIThunk, getFoodRecipesAPIThunk } from '../redux/actions/mealsAction';
+import Footer from '../components/Footer';
 import Loading from '../components/Loading';
 import MealsCategoryButtons from '../components/MealsCategoryButtons';
 import MealsCards from '../components/MealsCards';
@@ -32,6 +33,9 @@ function Comidas() {
     <>
       {loadingCategories ? <Loading /> : <MealsCategoryButtons />}
       {loadingRecipes ? <Loading /> : <MealsCards />}
+      <footer>
+        <Footer />
+      </footer>
     </>
   );
 }
