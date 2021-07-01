@@ -2,25 +2,22 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
-import SearchButton from '../components/SearchButton';
 
-class Comidas extends React.Component {
+class ExpBebidas extends React.Component {
   render() {
     const { history } = this.props;
     return (
       <>
-        <Header title="Comidas">
-          <SearchButton />
-        </Header>
-        <div>Página principal Receitas COMIDA</div>
+        <Header title="Explorar Bebidas" />
+        <div>Página explorar Bebidas</div>
         <Footer history={ history } />
       </>
     );
   }
 }
 
-Comidas.propTypes = {
+ExpBebidas.propTypes = {
   history: PropTypes.shape().isRequired,
 };
 
-export default Comidas;
+export default ExpBebidas;
