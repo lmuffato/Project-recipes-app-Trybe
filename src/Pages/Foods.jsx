@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import context from '../store/Context';
+import Footer from '../components/Footer';
 
 function Foods() {
   const { foods, catFoods } = useContext(context);
@@ -37,6 +38,7 @@ function Foods() {
             </Link>
           ))
       }
+      <Footer />
     </>
   );
 }
