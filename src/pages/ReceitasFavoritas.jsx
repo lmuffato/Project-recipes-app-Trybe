@@ -1,9 +1,13 @@
 import React from 'react';
+import Header from '../components/Header';
 
 class ReceitasFavoritas extends React.Component {
   render() {
     return (
-      <div> PÁGINA RECEITAS FAVORITAS</div>
+      <>
+        <Header title="Receitas Favoritas" />
+        <div> PÁGINA RECEITAS FAVORITAS</div>
+      </>
     );
   }
 }

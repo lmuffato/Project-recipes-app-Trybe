@@ -2,17 +2,18 @@ import React from 'react';
 import Header from '../components/Header';
 import SearchButton from '../components/SearchButton';
 
-class Bebidas extends React.Component {
+class ExpComidasOri extends React.Component {
   render() {
     return (
       <>
-        <Header title="Bebidas">
+        <Header title="Explorar Origem">
           <SearchButton />
         </Header>
-        <div>Página principal receitas BEBIDAS</div>
+        <div>Página de explorar Comidas por origem</div>
       </>
+
     );
   }
 }
 
-export default Bebidas;
+export default ExpComidasOri;
