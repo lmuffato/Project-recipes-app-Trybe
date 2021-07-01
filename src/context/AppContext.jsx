@@ -9,7 +9,7 @@ export default function AppProvider({ children }) {
   const [displaySearchBar, setDisplaySearchBar] = useState(false);
   const [searchValue, setSearchValue] = useState('');
   const [inputValue, setInputValue] = useState('');
-  const [pageOrigin, setPageOrigin] = useState('themealdb');
+  const [pageOrigin, setPageOrigin] = useState('');
   const [recipesList, setRecipesList] = useState([]);
   const [categoriesList, setCategoriesList] = useState([]);
   const NUM_RECIPES_SHOWN = 12;
@@ -35,7 +35,7 @@ export default function AppProvider({ children }) {
         categories.splice(NUM_CATEG_SHOWN, categories.length - 1);
         setCategoriesList(categories);
       });
-  }, []);
+  }, [pageOrigin]);
 
   useEffect(() => {
     fetchRecipesApi(pageOrigin)
@@ -43,7 +43,7 @@ export default function AppProvider({ children }) {
         recipes.splice(NUM_RECIPES_SHOWN, recipes.length - 1);
         setRecipesList(recipes);
       });
-  }, []);
+  }, [pageOrigin]);
 
   return (
     <AppContext.Provider value={ { context } }>
