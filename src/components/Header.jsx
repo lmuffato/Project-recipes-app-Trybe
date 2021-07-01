@@ -16,21 +16,21 @@ class Header extends React.Component {
     this.renderSearchButton = this.renderSearchButton.bind(this);
   }
 
-  renderSearchButton() {
-    const { location: { pathname } } = this.props;
-    if (pathname === '/comidas' || '/bebidas') {
-      return (
-        <button
-          type="submit"
-          data-testid="search-top-btn"
-          onClick={ () => (
-            this.setState((prev) => ({ hideInput: !prev.hideInput }))) }
-        >
-          <img src={ search } alt="explore" />
-        </button>
-      );
-    }
-  }
+  // renderSearchButton() {
+  //   const { location: { pathname } } = this.props;
+  //   if (pathname === '/comidas' || '/bebidas') {
+  //     return (
+  //       <button
+  //         type="submit"
+  //         data-testid="search-top-btn"
+  //         onClick={ () => (
+  //           this.setState((prev) => ({ hideInput: !prev.hideInput }))) }
+  //       >
+  //         <img src={ search } alt="explore" />
+  //       </button>
+  //     );
+  //   }
+  // }
 
   renderInputSearch() {
     return (
