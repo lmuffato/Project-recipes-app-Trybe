@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import context from '../store/Context';
@@ -10,32 +10,24 @@ function Foods() {
     catFoods,
     setCategoryF,
     categoryF,
-    foodsAndCategory,
   } = useContext(context);
-  const [myMeals, setMyMeals] = useState([]);
   const stopCard = 11;
   const stopCat = 4;
   const handleClick = (categoryName) => {
     setCategoryF(categoryName);
     if (categoryName === categoryF) {
-      setCategoryF('');
-      return setMyMeals(foods);
+      setCategoryF('All');
+    } else {
+      setCategoryF(categoryName);
     }
   };
-
-  useEffect(() => {
-    if (foodsAndCategory === null) {
-      return setMyMeals(foods);
-    }
-    setMyMeals(foodsAndCategory);
-  }, [foodsAndCategory, foods, setMyMeals]);
 
   return (
     <>
       <Header title="Comidas" />
       <button
         type="button"
-        onClick={ () => setMyMeals(foods) }
+        onClick={ () => setCategoryF('All') }
         data-testid="All-category-filter"
       >
         All
@@ -54,7 +46,7 @@ function Foods() {
           ))
       }
       {
-        myMeals.filter((_, index) => index <= stopCard)
+        foods.filter((_, index) => index <= stopCard)
           .map((food, index) => (
             <Link to={ `/comidas/${food.idMeal}` } key={ food.idMeal }>
               <div key={ food.idMeal } data-testid={ `${index}-recipe-card` }>

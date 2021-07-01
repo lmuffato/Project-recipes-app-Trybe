@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import context from '../store/Context';
@@ -10,33 +10,24 @@ function Drinks() {
     catDrinks,
     setCategoryD,
     categoryD,
-    drinksAndCategory,
   } = useContext(context);
-  const [myMeals, setMyMeals] = useState(drinks);
   const stopCart = 11;
   const stopCat = 4;
   const handleClick = (categoryName) => {
     setCategoryD(categoryName);
     if (categoryName === categoryD) {
-      setCategoryD('');
-      return setMyMeals(drinks);
+      setCategoryD('All');
+    } else {
+      setCategoryD(categoryName);
     }
   };
-
-  useEffect(() => {
-    console.log(drinksAndCategory);
-    if (drinksAndCategory.length === 0) {
-      return setMyMeals(drinks);
-    }
-    setMyMeals(drinksAndCategory);
-  }, [drinksAndCategory, drinks, setMyMeals]);
 
   return (
     <>
       <Header title="Bebidas" />
       <button
         type="button"
-        onClick={ () => setMyMeals(drinks) }
+        onClick={ () => setCategoryD('All') }
         data-testid="All-category-filter"
       >
         All
@@ -55,7 +46,7 @@ function Drinks() {
           ))
       }
       {
-        myMeals.filter((_, index) => index <= stopCart)
+        drinks.filter((_, index) => index <= stopCart)
           .map((drink, index) => (
             <Link to={ `/bebidas/${drink.idDrink}` } key={ drink.idDrink }>
               <div
