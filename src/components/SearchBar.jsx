@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { useContext, useState } from 'react';
+import { useHistory } from 'react-router';
 import CocktailsContext from '../context/CocktailsContext';
 import MealsContext from '../context/MealsContext';
 import {
@@ -14,36 +15,67 @@ export default function SearchBar({ props }) {
     check: '',
   });
 
+  const history = useHistory();
+
   const { setMeals } = useContext(MealsContext);
   const { setCocktails } = useContext(CocktailsContext);
   const { match } = props;
   const firstLetter = 'first-letter';
+
+  const pushMealDetails = (results) => {
+    const { meals } = results;
+
+    if (meals === null) {
+      alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+    }
+    if (meals && meals.length === 1) {
+      const mealId = meals[0].idMeal;
+      history.push(`/comidas/${mealId}`);
+    }
+  };
+
+  const pushCocktailDetails = (results) => {
+    const { drinks } = results;
+    if (drinks === null) {
+      alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+    }
+    if (drinks && drinks.length === 1) {
+      const drinkId = drinks[0].idDrink;
+      history.push(`/bebidas/${drinkId}`);
+    }
+  };
 
   const handleClick = async () => {
     const { search, check } = searchValue;
     const uRl = match.path;
     if (check === 'ingredient' && uRl === '/comidas') {
       const results = await ApiByIngredient(search);
+      pushMealDetails(results);
       setMeals(results);
     }
     if (check === 'ingredient' && uRl === '/bebidas') {
       const results = await ApiByCocktailIngredient(search);
+      pushCocktailDetails(results);
       setCocktails(results);
     }
     if (check === 'name' && uRl === '/comidas') {
       const results = await ApiByName(search);
+      pushMealDetails(results);
       setMeals(results);
     }
     if (check === 'name' && uRl === '/bebidas') {
       const results = await ApiByCocktailName(search);
+      pushCocktailDetails(results);
       setCocktails(results);
     }
     if (check === firstLetter && uRl === '/comidas') {
       const results = await ApiByFirstLetter(search);
+      pushMealDetails(results);
       setMeals(results);
     }
     if (check === firstLetter && uRl === '/bebidas') {
       const results = await ApiByCocktailFirstLetter(search);
+      pushCocktailDetails(results);
       setCocktails(results);
     }
   };
@@ -61,7 +93,7 @@ export default function SearchBar({ props }) {
   };
 
   return (
-    <form data-testid="search-top-btn">
+    <form>
       <input
         type="text"
         data-testid="search-input"

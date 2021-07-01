@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import CocktailsContext from './CocktailsContext';
 
 function CocktailsProvider(props) {
-  const [cocktails, setCocktails] = useState([]);
+  const [cocktails, setCocktails] = useState({});
   const context = {
     cocktails,
     setCocktails,

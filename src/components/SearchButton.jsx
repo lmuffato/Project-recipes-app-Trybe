@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import SearchImg from '../images/searchIcon.svg';
-import Searchbar from './Searchbar';
+import SearchBar from './SearchBar';
 
-export default function SearchButton() {
+export default function SearchButton({ props }) {
   const [searchBar, setsearchBar] = useState(false);
   function getSearchBar() {
     return searchBar ? setsearchBar(false) : setsearchBar(true);
@@ -20,8 +21,12 @@ export default function SearchButton() {
         <img src={ SearchImg } alt="search" />
       </button>
       <div>
-        { searchBar && <Searchbar /> }
+        { searchBar && <SearchBar props={ props } /> }
       </div>
     </>
   );
 }
+
+SearchButton.propTypes = {
+  props: PropTypes.object,
+}.isRequired;
