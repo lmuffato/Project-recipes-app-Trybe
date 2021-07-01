@@ -8,6 +8,8 @@ import Footer from '../../components/Footer';
 
 const ProfileScreen = () => {
   const { setLogout } = useContext(Context);
+  const { email } = JSON.parse(localStorage.getItem('user'));
+  console.log(email);
 
   const handleClick = ({ target }) => {
     // console.log(target);
@@ -28,8 +30,8 @@ const ProfileScreen = () => {
     <>
       <Header />
       <div className="card" style={ styleCard }>
-        <h5 className="card-title">Perfil</h5>
-        <span data-testid="profile-email">email@mail.com</span>
+        {/* <h5 className="card-title">Perfil</h5> */}
+        <span data-testid="profile-email">{ email }</span>
         <div className="btn-group-vertical">
           <Link
             to="/receitas-feitas"
