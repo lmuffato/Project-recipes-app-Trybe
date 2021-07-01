@@ -1,12 +1,23 @@
-import { ACTION_SEARCH } from '../actions';
+import { ACTION_SEARCH, ACTION_MAIN_FOOD_LIST } from '../actions';
 
-const searchReducer = (state = '', action) => {
+const INITIAL_STATE = {
+  data: '',
+  item: '',
+  recipeCategoryList: [],
+};
+
+const searchReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
   case ACTION_SEARCH:
     return {
       ...state,
       data: action.data,
       item: action.item,
+    };
+  case ACTION_MAIN_FOOD_LIST:
+    return {
+      ...state,
+      recipeCategoryList: action.recipeList,
     };
   default:
     return state;

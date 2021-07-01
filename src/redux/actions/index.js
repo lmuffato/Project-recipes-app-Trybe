@@ -1,5 +1,6 @@
 export const ACTION_LOGIN = 'ACTION_LOGIN';
 export const ACTION_SEARCH = 'ACTION_SEARCH';
+export const ACTION_MAIN_FOOD_LIST = 'ACTION_MAIN_FOOD_LIST';
 
 export const actionLogin = (email, password) => ({
   type: ACTION_LOGIN,
@@ -11,6 +12,11 @@ export const actionSearch = (value, item) => ({
   type: ACTION_SEARCH,
   data: value,
   item,
+});
+
+export const requestCategoriesList = (recipeList) => ({
+  type: ACTION_MAIN_FOOD_LIST,
+  recipeList,
 });
 
 export const fetchSearch = (type, text, currentPage) => async (dispatch) => {
