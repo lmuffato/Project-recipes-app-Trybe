@@ -1,6 +1,6 @@
 .login {
-  display: flex;
   align-items: center;
+  display: flex;
   flex-direction: column;
   padding: 50vw;
 }
