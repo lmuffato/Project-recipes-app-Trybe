@@ -1,16 +1,17 @@
 import React from 'react';
 import CocktailsCards from '../components/CocktailsCards';
+import FilterCocktailsByCategories from '../components/FilterCocktailsByCategories';
 import Header from '../components/Header';
-// import SearchBar from '../components/SearchBar';
 import SearchButton from '../components/SearchButton';
 
 export default function MainCocktails(props) {
   return (
     <div>
       <Header>
-        <h1 data-testid="page-title">Bebidas</h1>
         <SearchButton props={ props } />
       </Header>
+      <h1 data-testid="page-title">Bebidas</h1>
+      <FilterCocktailsByCategories />
       <CocktailsCards />
     </div>
   );
