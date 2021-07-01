@@ -68,6 +68,11 @@
 }
 
 footer {
-  position: fixed;
+  align-items: center;
   bottom: 0;
+  display: flex;
+  justify-content: space-between;
+  left: 0;
+  position: fixed;
+  width: 100%;
 }
