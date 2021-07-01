@@ -26,18 +26,15 @@ function Home(props) {
   return (
     <>
       <Header>
-        <h2 data-testid="page-title">Comidas</h2>
+        { type === 'meals'
+          ? (<h2 data-testid="page-title">Comidas</h2>) : (
+            <h2 data-testid="page-title">Bebidas</h2>)}
         <SearchBarButton onClick={ handleToggleSearchBar } />
       </Header>
       <div>
         { isActive ? (<SearchBar type={ type } />) : ''}
       </div>
       <div>
-        {/* <div>
-          { recipes.length === 0 ? 'Loading...'
-            : recipes.map((recipe, i) => (
-              <Card recipe={ recipe } key={ i } index={ i } />)) }
-        </div> */}
         <CardList recipes={ recipes } type={ type } />
       </div>
       <Footer />

@@ -84,13 +84,15 @@ function SearchBar({ type }) {
           First letter
         </label>
       </div>
-      <Button
-        data-testid="exec-search-btn"
-        onClick={ (ev) => handleSubmit(ev) }
-      >
-        Buscar
-      </Button>
-      <ResetSearchBarFiltersButton onClick={ (ev) => handleResetFilters(ev) } />
+      <div className="btn-container">
+        <Button
+          data-testid="exec-search-btn"
+          onClick={ (ev) => handleSubmit(ev) }
+        >
+          Buscar
+        </Button>
+        <ResetSearchBarFiltersButton onClick={ (ev) => handleResetFilters(ev) } />
+      </div>
     </SearchBarContainer>
   );
 }

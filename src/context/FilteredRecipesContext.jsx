@@ -39,9 +39,11 @@ function FilteredRecipesContextProvider({ children }) {
 
   // faz o switch case dos endpoints pra buscar receitas na api de comidas
   const handleMealFilterType = (filterType, query, type) => {
-    const endpointMealIngr = `https://www.themealdb.com/api/json/v1/1/filter.php?i=${query}`;
-    const endpointMealName = `https://www.themealdb.com/api/json/v1/1/search.php?s=${query}`;
-    const endpointMealFirstLetter = `https://www.themealdb.com/api/json/v1/1/search.php?f=${query}`;
+    const trimSpacesQuery = query.replace(/\s/g, '').trim();
+    console.log(trimSpacesQuery);
+    const endpointMealIngr = `https://www.themealdb.com/api/json/v1/1/filter.php?i=${trimSpacesQuery}`;
+    const endpointMealName = `https://www.themealdb.com/api/json/v1/1/search.php?s=${trimSpacesQuery}`;
+    const endpointMealFirstLetter = `https://www.themealdb.com/api/json/v1/1/search.php?f=${trimSpacesQuery}`;
     switch (filterType) {
     case 'ingredient':
       fetchFilteredMealRecipes(endpointMealIngr, type);
@@ -63,9 +65,10 @@ function FilteredRecipesContextProvider({ children }) {
 
   // faz o switch case dos endpoints pra buscar receitas na api de drinks
   const handleDrinksFilterType = (filterType, query, type) => {
-    const cocktailEndpointIngr = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${query}`;
-    const cocktailEndpointName = `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${query}`;
-    const cocktailEndpointFirstLetter = `https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${query}`;
+    const trimSpacesQuery = query.trim();
+    const cocktailEndpointIngr = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${trimSpacesQuery}`;
+    const cocktailEndpointName = `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${trimSpacesQuery}`;
+    const cocktailEndpointFirstLetter = `https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${trimSpacesQuery}`;
 
     switch (filterType) {
     case 'ingredient':
