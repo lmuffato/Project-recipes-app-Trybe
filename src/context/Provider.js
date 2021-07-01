@@ -46,6 +46,8 @@ function Provider({ children }) {
       getCategoryFoods();
     } if (category === e.target.innerText) {
       setShowFilter(false);
+    } if (e.target.innerText === 'All') {
+      setShowFilter(false);
     }
   };
 
@@ -60,6 +62,8 @@ function Provider({ children }) {
       };
       getCategoryDrinks();
     } if (category === e.target.innerText) {
+      setShowFilter(false);
+    } if (e.target.innerText === 'All') {
       setShowFilter(false);
     }
   };
