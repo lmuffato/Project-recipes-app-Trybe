@@ -6,6 +6,7 @@ function ReceitasProvider({ children }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [APIresponse, setAPIResponse] = useState();
+  const [favorite, setFavorite] = useState(false);
 
   async function fetchApi(endpoint) {
     await fetch(endpoint)
@@ -24,6 +25,8 @@ function ReceitasProvider({ children }) {
         fetchApi,
         password,
         setPassword,
+        favorite,
+        setFavorite,
       } }
     >
       {children}

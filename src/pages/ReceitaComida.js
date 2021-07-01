@@ -69,6 +69,7 @@ function Receita() {
       <Header title="Receita" />
       { loading === false
       && <ComponentGen
+        loading={ loading }
         info={ info }
         listCreator={ listCreator() }
         recomendList={ recomendList() }

@@ -8,16 +8,18 @@ import FavBtn from './RecipeComponents/FavoriteButton';
 import RecipeCatg from './RecipeComponents/RecipeCategory';
 import BottomBtn from './RecipeComponents/BottomButton';
 import RecipeInst from './RecipeComponents/RecipeInstructions';
+import VideoCtn from './RecipeComponents/VideoContainer';
 
 function ComponentGen(props) {
-  const { info, listCreator, recomendList } = props;
+  const { info, listCreator, recomendList, favorite, setFavorite } = props;
   const { strMealThumb, strMeal, strCategory, strInstructions, strYoutube } = info;
   const { strDrinkThumb, strDrink, strAlcoholic } = info;
+
   return (
     <div className="recipe_details">
       <RecipeImage origin={ strMealThumb || strDrinkThumb } />
       <RecipeTitle title={ strMeal || strDrink } />
-      <ShareBtn />
+      <ShareBtn favorite={ favorite } setFavorite={ setFavorite } />
       <FavBtn />
       { strAlcoholic !== undefined
         ? <RecipeCatg category={ `${strCategory} ${strAlcoholic}` } />
@@ -26,8 +28,7 @@ function ComponentGen(props) {
       {listCreator}
       <h3>Instruções</h3>
       <RecipeInst instructions={ strInstructions } />
-      <h3>Vídeo</h3>
-      <video src={ strYoutube } data-testid="video"><track kind="captions" /></video>
+      { strMeal !== undefined && <VideoCtn src={ strYoutube } /> }
       <h3>Recomendadas</h3>
       <Carousel>
         {recomendList}
@@ -39,8 +40,10 @@ function ComponentGen(props) {
 
 ComponentGen.propTypes = {
   info: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string)).isRequired,
-  listCreator: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string)).isRequired,
-  recomendList: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string)).isRequired,
+  listCreator: PropTypes.func.isRequired,
+  recomendList: PropTypes.func.isRequired,
+  favorite: PropTypes.bool.isRequired,
+  setFavorite: PropTypes.func.isRequired,
 };
 
 export default ComponentGen;

@@ -1,6 +1,27 @@
-import React from 'react';
-import Button from 'react-bootstrap/Button';
+import React, { useContext } from 'react';
+import isFavorite from '../../images/blackHeartIcon.svg';
+import isNotFavorite from '../../images/whiteHeartIcon.svg';
+import ReceitasContext from '../../contexts/ReceitasContext';
 
 export default function FavBtn() {
-  return (<Button type="button" data-testid="favorite-btn">Favorite</Button>);
+  const { favorite, setFavorite } = useContext(ReceitasContext);
+  const handleClick = () => {
+    setFavorite(!favorite);
+  };
+  const imageProvider = () => (
+    favorite === true
+      ? isFavorite
+      : isNotFavorite
+  );
+  return (
+    <input
+      type="image"
+      data-testid="favorite-btn"
+      variant="light"
+      style={ { height: '28px' } }
+      onClick={ handleClick }
+      src={ imageProvider() }
+      alt="isFavorite"
+    />
+  );
 }
