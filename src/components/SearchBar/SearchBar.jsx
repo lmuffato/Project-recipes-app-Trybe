@@ -1,12 +1,17 @@
 import React, { useCallback, useState } from 'react';
+import PropTypes from 'prop-types';
+import useFetchRecipes from '../../effects/useFetchRecipes';
 import useFilteredRecipes from '../../hooks/useFilteredRecipes';
 import Button from '../Generics/Button';
+import ResetSearchBarFiltersButton from './ResetSearchBarFiltersButton';
 import SearchBarContainer from './styles';
 
-function SearchBar() {
+function SearchBar({ type }) {
   const [inputSearch, setInputSearch] = useState('');
   const [radioValue, setRadioValue] = useState('');
-  const { searchBarFilters, setSearchBarFilters } = useFilteredRecipes();
+  const { searchBarFilters,
+    setSearchBarFilters, setFilteredRecipes, filteredRecipes } = useFilteredRecipes();
+  const fetchData = useFetchRecipes(type);
 
   // configura o onChange dos radio inputs
   const handleChange = useCallback((event) => {
@@ -23,10 +28,17 @@ function SearchBar() {
         inputSearch,
       }),
     );
-    console.log(searchBarFilters);
-    // if (filteredRecipes.length === 0) {
-    // }
+    // console.log(searchBarFilters);
   }, [inputSearch, radioValue, searchBarFilters, setSearchBarFilters]);
+
+  const handleResetFilters = useCallback((ev) => {
+    ev.preventDefault();
+    setInputSearch('');
+    setRadioValue('');
+    setSearchBarFilters([]);
+    if (fetchData[type]) setFilteredRecipes(fetchData[type]);
+    console.log(filteredRecipes);
+  }, [fetchData, filteredRecipes, setFilteredRecipes, setSearchBarFilters, type]);
 
   return (
     <SearchBarContainer>
@@ -78,8 +90,13 @@ function SearchBar() {
       >
         Buscar
       </Button>
+      <ResetSearchBarFiltersButton onClick={ (ev) => handleResetFilters(ev) } />
     </SearchBarContainer>
   );
 }
+
+SearchBar.propTypes = {
+  type: PropTypes.string.isRequired,
+};
 
 export default SearchBar;

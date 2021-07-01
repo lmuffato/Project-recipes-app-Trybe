@@ -30,7 +30,7 @@ function Home(props) {
         <SearchBarButton onClick={ handleToggleSearchBar } />
       </Header>
       <div>
-        { isActive ? (<SearchBar />) : ''}
+        { isActive ? (<SearchBar type={ type } />) : ''}
       </div>
       <div>
         {/* <div>

@@ -6,10 +6,11 @@ export const FilteredRecipesContext = createContext({});
 const MAX_RECIPES = 12;
 
 function FilteredRecipesContextProvider({ children }) {
-  const [filteredRecipes, setFilteredRecipes] = useState([]);
-  const [searchBarFilters, setSearchBarFilters] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [filteredRecipes, setFilteredRecipes] = useState([]); // estado que armazena as buscas feitas na searchBar
+  const [searchBarFilters, setSearchBarFilters] = useState([]); // estado que armazena os filtros (input de busca e input radio) da searchBar
+  const [isLoading, setIsLoading] = useState(true); // será utilizado depois pra renderizar um componente de loading
 
+  // faz o fetch na api, conforme endpoint e tipo para as telas de comidas e bebidas
   const fetchFilteredMealRecipes = async (endpoint, type) => {
     try {
       const response = await fetch(endpoint);
@@ -30,11 +31,13 @@ function FilteredRecipesContextProvider({ children }) {
     }
   };
 
+  // cria alert p/ as buscas por primeira letra
   const alertMessage = () => {
     // eslint-disable-next-line no-alert
     window.alert('Sua busca deve conter somente 1 (um) caracter');
   };
 
+  // faz o switch case dos endpoints pra buscar receitas na api de comidas
   const handleMealFilterType = (filterType, query, type) => {
     const endpointMealIngr = `https://www.themealdb.com/api/json/v1/1/filter.php?i=${query}`;
     const endpointMealName = `https://www.themealdb.com/api/json/v1/1/search.php?s=${query}`;
@@ -58,6 +61,7 @@ function FilteredRecipesContextProvider({ children }) {
     }
   };
 
+  // faz o switch case dos endpoints pra buscar receitas na api de drinks
   const handleDrinksFilterType = (filterType, query, type) => {
     const cocktailEndpointIngr = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${query}`;
     const cocktailEndpointName = `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${query}`;
@@ -82,7 +86,7 @@ function FilteredRecipesContextProvider({ children }) {
     }
   };
 
-  // vai ser chamada no useEffect --> array de filtros como dependência
+  // vai ser chamada no useEffect do componente CardList --> array de filtros como dependência
   const getFilteredRecipes = (type) => {
     if (searchBarFilters.length > 0) {
       searchBarFilters.forEach((item) => {
