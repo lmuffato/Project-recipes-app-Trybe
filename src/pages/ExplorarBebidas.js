@@ -5,7 +5,7 @@ import Footer from '../components/Footer';
 function ExplorarBebidas() {
   return (
     <>
-      <Header title="Explorar Bebidas" />
+      <Header title="Explorar Bebidas" displayButton={ false } />
       <Footer />
     </>
   );

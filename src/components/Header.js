@@ -10,7 +10,7 @@ function Header(props) {
   const [input, setInput] = useState(false);
 
   return (
-    <div>
+    <header>
       <Link to="/perfil">
         <img
           src={ profileIMG }
@@ -21,9 +21,10 @@ function Header(props) {
       <p data-testid="page-title">
         {title}
       </p>
-      {displayButton && <SearchButton input={ input } setInput={ setInput } />}
-      { input === true && <BuscaHeader /> }
-    </div>
+      {(displayButton !== false)
+        ? <SearchButton input={ input } setInput={ setInput } /> : ''}
+      { input && <BuscaHeader /> }
+    </header>
   );
 }
 Header.propTypes = {

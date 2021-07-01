@@ -37,7 +37,7 @@ function Bebidas() {
   }
   return (
     <div>
-      <Header title="Bebidas" displayButton />
+      <Header title="Bebidas" />
       <Filter page="bebidas" />
       <Footer />
     </div>

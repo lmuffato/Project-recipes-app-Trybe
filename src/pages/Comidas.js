@@ -37,7 +37,7 @@ function Comidas() {
   }
   return (
     <div>
-      <Header title="Comidas" displayButton />
+      <Header title="Comidas" />
       <Filter page="comidas" />
       <Footer />
     </div>

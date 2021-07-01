@@ -7,7 +7,7 @@ function Perfil() {
   const emails = JSON.parse(localStorage.getItem('user')).email;
   return (
     <>
-      <Header title="Perfil" />
+      <Header title="Perfil" displayButton={ false } />
       <p data-testid="profile-email">{ emails }</p>
       <Link to="/receitas-feitas">
         <button type="button" data-testid="profile-done-btn">Receitas Feitas</button>

@@ -5,7 +5,7 @@ import Footer from '../components/Footer';
 function ExplorarBebidasPorArea() {
   return (
     <>
-      <Header title="Explorar bebidas por local de origem" displayButton />
+      <Header title="Explorar bebidas por local de origem" />
       <Footer />
     </>
   );
