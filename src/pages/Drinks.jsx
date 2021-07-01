@@ -1,14 +1,38 @@
 import React from 'react';
+
 import Header from '../components/Header';
+import RecipeCard from '../components/RecipeCard';
 import Footer from '../components/Footer';
 
+import useRecipe from '../hooks/useRecipe';
+
 export default function Drinks() {
+  const { recipe } = useRecipe();
+
+  const renderCards = () => {
+    const maxLengthRecipes = 12;
+
+    if (recipe.drinks) {
+      const filteredRecipe = recipe.drinks.filter(
+        (drink, index) => index < maxLengthRecipes,
+      );
+
+      return filteredRecipe.map((recp, index) => (
+        <RecipeCard
+          key={ index }
+          index={ index }
+          thumb={ recp.strDrinkThumb }
+          title={ recp.strDrink }
+        />
+      ));
+    }
+  };
+
   return (
-    <div>
-      <Header title="Bebidas" searchIcon>
-        <h1>Drinks!</h1>
-      </Header>
+    <main>
+      <Header title="Bebidas" searchIcon />
+      {renderCards()}
       <Footer />
-    </div>
+    </main>
   );
 }

@@ -1,12 +1,26 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { string, bool } from 'prop-types';
-import { useHistory } from 'react-router-dom';
 import profileSvg from '../images/profileIcon.svg';
 import searchSvg from '../images/searchIcon.svg';
+import useSearch from '../hooks/useSearch';
 
 export default function Header({ title, searchIcon = false }) {
-  const [showSearch, setShowSearch] = useState(false);
-  const history = useHistory();
+  const {
+    setSearchResult,
+    setSelectedSearch,
+    showSearch,
+    setShowSearch,
+    foods,
+    getSearch,
+    history,
+    redirectToMealOrDrink,
+  } = useSearch();
+
+  if (!foods) {
+    alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+  }
+
+  if (foods) redirectToMealOrDrink();
 
   return (
     <header>
@@ -28,7 +42,57 @@ export default function Header({ title, searchIcon = false }) {
 
       <div>
         {showSearch && (
-          <input data-testid="search-input" placeholder="Buscar Receita" />
+          <div>
+            <input
+              data-testid="search-input"
+              placeholder="Buscar Receita"
+              onChange={ ({ target }) => setSearchResult(target.value) }
+            />
+
+            <label htmlFor="ingredient-search-radio">
+              Ingrediente
+              <input
+                data-testid="ingredient-search-radio"
+                type="radio"
+                name="search-radio"
+                id="ingredient-search-radio"
+                value="ingredient"
+                onChange={ ({ target }) => setSelectedSearch(target.value) }
+              />
+            </label>
+
+            <label htmlFor="name-search-radio">
+              Nome
+              <input
+                data-testid="name-search-radio"
+                type="radio"
+                name="search-radio"
+                id="name-search-radio"
+                value="name"
+                onChange={ ({ target }) => setSelectedSearch(target.value) }
+              />
+            </label>
+
+            <label htmlFor="first-letter-search-radio">
+              Primeira letra
+              <input
+                data-testid="first-letter-search-radio"
+                type="radio"
+                name="search-radio"
+                id="first-letter-search-radio"
+                value="firstLetter"
+                onChange={ ({ target }) => setSelectedSearch(target.value) }
+              />
+            </label>
+
+            <button
+              data-testid="exec-search-btn"
+              type="button"
+              onClick={ getSearch }
+            >
+              Buscar
+            </button>
+          </div>
         )}
       </div>
     </header>
