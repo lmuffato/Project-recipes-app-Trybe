@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import { arrayOf, string } from 'prop-types';
 import { connect } from 'react-redux';
 import Button from 'react-bootstrap/Button';
@@ -11,13 +11,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 function CategoriesBtn(props) {
   const { categories, fetchCategories } = props;
 
-  useState(() => {
+  useEffect(() => {
     fetchCategories();
-  }, []);
+  }, [fetchCategories]);
 
   return (
     <Container className="categories-container">
-      <Row xs="2" md="4" lg="6">
+      <Row xs="3" md="4" lg="6">
         <Col>
           <Button
             variant="outline-dark"

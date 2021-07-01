@@ -1,16 +1,15 @@
 import { arrayOf, func, object } from 'prop-types';
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { getDrinks } from '../../../actions/drinks';
 
 function DrinkCards(props) {
   const { fetchDrinks, drinks } = props;
   const size = 12;
-  console.log(drinks);
 
-  useState(() => {
+  useEffect(() => {
     fetchDrinks();
-  }, []);
+  }, [fetchDrinks]);
 
   return (
     <div>
