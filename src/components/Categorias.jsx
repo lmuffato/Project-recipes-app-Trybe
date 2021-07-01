@@ -30,17 +30,17 @@ function Categorias({ param }) {
     }
   }, [string]);
 
-  // eslint-disable-next-line array-callback-return
   const btns = () => param.map((item, index) => {
     const magicNumber = 4;
+    let obj = '';
     if (index <= magicNumber) {
       const text = item.strCategory;
       const dataTestid = `${item.strCategory}-category-filter`;
       const funcHandleClick = handleClick;
-      const obj = { text, dataTestid, funcHandleClick };
-
+      obj = { text, dataTestid, funcHandleClick };
       return <Buttons params={ obj } key={ item.strCategory } />;
     }
+    return null;
   });
 
   if (param.length < 1) return <h1>Loading...</h1>;
