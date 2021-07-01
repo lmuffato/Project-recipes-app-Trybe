@@ -4,7 +4,7 @@ import Header from '../components/Header';
 function ExporarComidasIngredientes() {
   return (
     <section>
-      <Header title="Explorar Ingredientes" show={ false } />
+      <Header title="Explorar Igitngredientes" show={ false } />
     </section>
   );
 }
