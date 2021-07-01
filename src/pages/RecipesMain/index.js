@@ -1,25 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 /* import PropTypes from 'prop-types'; */
 import './recipesMain.css';
 import Header from '../../components/header';
 import MenuFoot from '../../components/menuFoot';
-import { fetchRecipesApi } from '../../services/fetchApiMain';
+
 import RecipeCard from './RecipeCard';
 import Categories from './Categories';
+import { AppContext } from '../../context/AppContext';
 
 export default function RecipesMain() {
-  const [recipesList, setRecipesList] = useState([]);
-  const drinkOrFood = 'drink'; // informação mockada - virá do context!
-  const NUM_RECIPES_SHOWN = 12;
-
-  useEffect(() => {
-    fetchRecipesApi(drinkOrFood)
-      .then((recipes) => {
-        console.log(recipes);
-        recipes.splice(NUM_RECIPES_SHOWN, recipes.length - 1);
-        setRecipesList(recipes);
-      });
-  }, []);
+  const { context } = useContext(AppContext);
+  const { recipesList } = context;
 
   return (
     <div>

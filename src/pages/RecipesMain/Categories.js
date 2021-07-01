@@ -1,20 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import CategoryBtn from './CategoryBtn';
-import { fetchCategoriesApi } from '../../services/fetchApiMain';
+import { AppContext } from '../../context/AppContext';
 
 export default function Categories() {
-  const [categoriesList, setCategoriesList] = useState([]);
-  const drinkOrFood = 'drink'; // informação mockada - virá do context!
-  const NUM_CATEG_SHOWN = 5;
-
-  useEffect(() => {
-    fetchCategoriesApi(drinkOrFood)
-      .then((categories) => {
-        console.log(categories);
-        categories.splice(NUM_CATEG_SHOWN, categories.length - 1);
-        setCategoriesList(categories);
-      });
-  }, []);
+  const { context } = useContext(AppContext);
+  const { categoriesList } = context;
 
   return (
     <div>
