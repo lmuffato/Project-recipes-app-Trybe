@@ -4,6 +4,7 @@ import Context from '../../context/Context';
 import styleCard, { styleBtn } from './index.style';
 import clearLS from '../../services/localStorage/clearLS';
 import Header from '../../components/Header';
+import Footer from '../../components/Footer';
 
 const ProfileScreen = () => {
   const { setLogout } = useContext(Context);
@@ -74,6 +75,7 @@ const ProfileScreen = () => {
           </Link>
         </div>
       </div>
+      <Footer />
     </>
   );
 };
