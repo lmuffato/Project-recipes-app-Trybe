@@ -10,10 +10,10 @@ export default function Header() {
   return (
     <div className="header-searchbar-container">
       <div className="header-container">
-        <Link to="/perfil">
-          <img data-testid="profile-top-btn" src={ profileIcon } alt="Icone de perfil" />
+        <Link to="/perfil" data-testid="profile-top-btn" src="profileIcon">
+          <img src={ profileIcon } alt="Icone de perfil" />
         </Link>
-        <span data-test-id="page-title">titulo</span>
+        <span data-testid="page-title">titulo</span>
         <button type="button" onClick={ () => setDisplaySearchBar(!displaySearchBar) }>
           <img data-testid="search-top-btn" src={ searchIcon } alt="Icone de perfil" />
         </button>
