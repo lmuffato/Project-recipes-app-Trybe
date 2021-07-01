@@ -40,7 +40,7 @@ function FilteredRecipesContextProvider({ children }) {
   // faz o switch case dos endpoints pra buscar receitas na api de comidas
   const handleMealFilterType = (filterType, query, type) => {
     const trimSpacesQuery = query.replace(/\s/g, '').trim();
-    console.log(trimSpacesQuery);
+    // console.log(trimSpacesQuery);
     const endpointMealIngr = `https://www.themealdb.com/api/json/v1/1/filter.php?i=${trimSpacesQuery}`;
     const endpointMealName = `https://www.themealdb.com/api/json/v1/1/search.php?s=${trimSpacesQuery}`;
     const endpointMealFirstLetter = `https://www.themealdb.com/api/json/v1/1/search.php?f=${trimSpacesQuery}`;
@@ -65,7 +65,7 @@ function FilteredRecipesContextProvider({ children }) {
 
   // faz o switch case dos endpoints pra buscar receitas na api de drinks
   const handleDrinksFilterType = (filterType, query, type) => {
-    const trimSpacesQuery = query.trim();
+    const trimSpacesQuery = query.replace(/\s/g, '').trim();
     const cocktailEndpointIngr = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${trimSpacesQuery}`;
     const cocktailEndpointName = `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${trimSpacesQuery}`;
     const cocktailEndpointFirstLetter = `https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${trimSpacesQuery}`;
@@ -126,3 +126,9 @@ FilteredRecipesContextProvider.propTypes = {
 };
 
 export default FilteredRecipesContextProvider;
+
+// Referências:
+// Remoção de todos os espaços de uma string utilizando JavaScript:
+// --> https://pt.stackoverflow.com/questions/382479/removendo-todos-os-espa%C3%A7os-de-uma-string-usando-javascript
+// Remoção dos espaços ao final e no início de uma string:
+// --> https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/String/trim
