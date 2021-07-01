@@ -28,7 +28,7 @@ class Login extends React.Component {
     const regex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
     const validEmail = regex.test(String(email).toLowerCase());
     const minPassLength = 6;
-    const isBlocked = (password.length >= minPassLength && validEmail);
+    const isBlocked = (password.length > minPassLength && validEmail);
     this.setState({
       validData: isBlocked,
     });
@@ -37,9 +37,12 @@ class Login extends React.Component {
   saveEmail(e) {
     e.preventDefault();
     const { email } = this.state;
-    localStorage.setItem('user', { email });
+    const user = {
+      email,
+    };
+    localStorage.setItem('user', JSON.stringify(user));
     const { history } = this.props;
-    history.push('/carteira');
+    history.push('/comidas');
   }
 
   render() {
@@ -69,7 +72,7 @@ class Login extends React.Component {
           type="button"
           data-testid="login-submit-btn"
           disabled={ !validData }
-          onSubmit={ this.saveEmail }
+          onClick={ this.saveEmail }
         >
           Entrar
         </button>
