@@ -24,6 +24,8 @@ function SearchBar() {
       }),
     );
     console.log(searchBarFilters);
+    // if (filteredRecipes.length === 0) {
+    // }
   }, [inputSearch, radioValue, searchBarFilters, setSearchBarFilters]);
 
   return (

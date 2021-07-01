@@ -10,24 +10,28 @@ const MAX_RECIPES = 12;
 // };
 
 function FilteredRecipesContextProvider({ children }) {
-  // const typeURL = type === 'meals' ? '' : '';
+  // const [filteredRecipesData, setFilteredRecipesData] = useState([]);
   const [filteredRecipes, setFilteredRecipes] = useState([]);
   const [searchBarFilters, setSearchBarFilters] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const fetchFilteredMealRecipes = async (endpoint, type) => {
     try {
       const response = await fetch(endpoint);
       const data = await response.json();
-
-      const limitedData = {
+      // console.log(Object.entries(data));
+      const formattingData = {
         ...data,
         [type]: data[type].slice(0, MAX_RECIPES),
       };
-      console.log(Object.keys(limitedData));
-      if (limitedData[type]) setFilteredRecipes(limitedData[type]);
-    // setar no estado de filtro
+      if (formattingData[type] !== null) {
+        setFilteredRecipes(formattingData[type]);
+      }
+      console.log(formattingData[type] !== null ? 'sim' : 'no');
+      // setIsLoading(false);
     } catch (err) {
-      throw new Error(err);
+      console.log(err);
+      alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
     }
   };
 
@@ -105,7 +109,9 @@ function FilteredRecipesContextProvider({ children }) {
     setFilteredRecipes,
     searchBarFilters,
     setSearchBarFilters,
-    getFilteredRecipes }; // arr[arr.length - 1]
+    getFilteredRecipes,
+    isLoading,
+    setIsLoading };
 
   return (
     <FilteredRecipesContext.Provider value={ contextValue }>

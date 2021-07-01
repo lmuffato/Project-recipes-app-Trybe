@@ -4,11 +4,16 @@ import Card from '../Card/Card';
 import useFilteredRecipes from '../../hooks/useFilteredRecipes';
 
 function CardList({ recipes, type }) {
-  const { getFilteredRecipes, searchBarFilters, filteredRecipes } = useFilteredRecipes();
+  const { getFilteredRecipes,
+    searchBarFilters, filteredRecipes } = useFilteredRecipes();
 
   useEffect(() => {
     getFilteredRecipes(type);
-  }, [type, searchBarFilters]);
+  }, [type, searchBarFilters, getFilteredRecipes]);
+
+  // if (isLoading) {
+  //   return 'Loading...';
+  // }
 
   return (
     <div>
