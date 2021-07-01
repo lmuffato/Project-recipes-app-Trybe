@@ -1,8 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Drink from './pages/Drink/index';
-import Food from './pages/Food/index';
-import Header from './components/header';
+import RecipesMain from './pages/RecipesMain/index';
 import AppProvider from './context/AppContext';
 
 function App() {
@@ -12,9 +11,8 @@ function App() {
         <BrowserRouter>
           <Switch>
             {/* <Route exact path="/" component={ Login } /> */}
-            <Header />
-            <Route path="/comidas" component={ Food } />
-            <Route path="/bebidas" component={ Drink } />
+            <Route path="/comidas" component={ RecipesMain } />
+            <Route path="/bebidas" component={ RecipesMain } />
             {/* <Route path="/comidas/{id-da-receita}" component={ FoodDetails } />
             <Route path="/bebidas/{id-da-receita}" component={ DrinkDetails } />
             <Route path="/comidas/{id-da-receita}/in-progress" component={ FoodInProgress } />
