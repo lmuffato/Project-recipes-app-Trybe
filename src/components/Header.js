@@ -8,7 +8,6 @@ import BuscaHeader from './BuscaHeader';
 function Header(props) {
   const { title } = props;
   const [input, setInput] = useState(false);
-
   return (
     <div>
       <Link to="/perfil">
