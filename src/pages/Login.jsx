@@ -28,7 +28,7 @@ class Login extends React.Component {
     const regex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
     const validEmail = regex.test(String(email).toLowerCase());
     const minPassLength = 6;
-    const isBlocked = (password.length >= minPassLength && validEmail);
+    const isBlocked = (password.length > minPassLength && validEmail);
     this.setState({
       validData: isBlocked,
     });
@@ -37,16 +37,21 @@ class Login extends React.Component {
   saveEmail(e) {
     e.preventDefault();
     const { email } = this.state;
-    localStorage.setItem('user', { email });
+    const user = {
+      email,
+    };
+    localStorage.setItem('user', JSON.stringify(user));
+    localStorage.setItem('mealsToken', 1);
+    localStorage.setItem('cocktailsToken', 1);
     const { history } = this.props;
-    history.push('/carteira');
+    history.push('/comidas');
   }
 
   render() {
     const { email, password, validData } = this.state;
     return (
       <form>
-        <label htmlFor="email-input">
+        <label htmlFor="email">
           <input
             type="email"
             id="email"
@@ -55,7 +60,7 @@ class Login extends React.Component {
             onChange={ (e) => this.handleChange(e) }
           />
         </label>
-        <label htmlFor="password-input">
+        <label htmlFor="password">
           <input
             type="password"
             id="password"
@@ -69,7 +74,7 @@ class Login extends React.Component {
           type="button"
           data-testid="login-submit-btn"
           disabled={ !validData }
-          onSubmit={ this.saveEmail }
+          onClick={ this.saveEmail }
         >
           Entrar
         </button>
@@ -79,7 +84,7 @@ class Login extends React.Component {
 }
 
 Login.propTypes = {
-  history: PropTypes.string.isRequired,
+  history: PropTypes.oneOfType([PropTypes.object]).isRequired,
 };
 
 export default Login;

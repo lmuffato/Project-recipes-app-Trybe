@@ -1,23 +1,23 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
-import { screen, render } from '@testing-library/react';
+import { screen, render, fireEvent } from '@testing-library/react';
 import Login from '../pages/Login';
 
 const EMAIL_INPUT_TEST_ID = 'email-input';
 const PASSWORD_INPUT_TEST_ID = 'password-input';
 const SUBMIT_BUTTON_TEST_ID = 'login-submit-btn';
 const VALID_EMAIL = 'alguem@email.com';
-const VALID_PASSWORD = '123456';
+const VALID_PASSWORD = '1234567';
 
 describe('1 - Crie todos os elementos que devem respeitar os atributos', () => {
-  test('O input de email deve possuir o atributo data-testid="email-input', () => {
+  test('O input de email deve possuir o atributo data-testid="email-input"', () => {
     render(<Login />);
     const email = screen.getByTestId(EMAIL_INPUT_TEST_ID);
 
     expect(email).toBeInTheDocument();
   });
 
-  test('O input de senha deve possuir o atributo data-testid="password-input', () => {
+  test('O input de senha deve possuir o atributo data-testid="password-input"', () => {
     render(<Login />);
     const senha = screen.getByTestId(PASSWORD_INPUT_TEST_ID);
 
@@ -32,28 +32,61 @@ describe('1 - Crie todos os elementos que devem respeitar os atributos', () => {
   });
 });
 
-describe('5 - Autenticar informações de acordo com os seguintes testes', () => {
+describe('2 - O usuário deve conseguir escrever digitar no input de email', () => {
+  test('É possível escrever o email', () => {
+    render(<Login />);
+    const email = screen.getByTestId(EMAIL_INPUT_TEST_ID);
+
+    userEvent.type(email, VALID_EMAIL);
+    expect(email).toHaveValue(VALID_EMAIL);
+  });
+});
+
+describe('3 - O usuário deve conseguir escrever digitar no input de senha', () => {
+  test('É possível escrever a senha', () => {
+    render(<Login />);
+    const senha = screen.getByTestId(PASSWORD_INPUT_TEST_ID);
+
+    userEvent.type(senha, VALID_PASSWORD);
+    expect(senha).toHaveValue(VALID_PASSWORD);
+  });
+});
+
+describe('4 - Autenticar informações de acordo com os seguintes testes', () => {
   test('O botão deve estar desativado se o email for inválido', () => {
     render(<Login />);
     const email = screen.getByTestId(EMAIL_INPUT_TEST_ID);
-    const senha = screen.getByTestId(PASSWORD_INPUT_TEST_ID);
     const button = screen.getByText('Entrar');
 
     userEvent.type(email, VALID_EMAIL);
-    userEvent.type(senha, '23456');
     expect(button).toBeDisabled();
     userEvent.type(email, 'email');
-    userEvent.type(senha, VALID_PASSWORD);
     expect(button).toBeDisabled();
     userEvent.type(email, 'email@com@');
-    userEvent.type(senha, VALID_PASSWORD);
     expect(button).toBeDisabled();
 
     userEvent.type(email, 'emailcom@');
-    userEvent.type(senha, VALID_PASSWORD);
     expect(button).toBeDisabled();
 
     userEvent.type(email, 'alguem@email.');
+    expect(button).toBeDisabled();
+  });
+
+  test('O botão deve estar desativado se a senha tiver 6 caracteres ou menos', () => {
+    render(<Login />);
+    const senha = screen.getByTestId(PASSWORD_INPUT_TEST_ID);
+    const button = screen.getByText('Entrar');
+
+    userEvent.type(senha, '23456');
+    expect(button).toBeDisabled();
+    userEvent.type(senha, VALID_PASSWORD);
+    expect(button).toBeDisabled();
+    userEvent.type(senha, VALID_PASSWORD);
+    expect(button).toBeDisabled();
+
+    userEvent.type(senha, VALID_PASSWORD);
+    expect(button).toBeDisabled();
+
     userEvent.type(senha, VALID_PASSWORD);
     expect(button).toBeDisabled();
   });
@@ -71,45 +104,21 @@ describe('5 - Autenticar informações de acordo com os seguintes testes', () =>
   });
 });
 
-/*
-import userEvent from '@testing-library/user-event';
-import { fireEvent, screen } from '@testing-library/react';
-import App from '../App';
-
-import { renderWithRouterAndStore } from './testConfig';
-
-afterEach(() => jest.clearAllMocks());
-
-  test('A rota para esta página deve ser \'/\'', () => {
-    const { history } = renderWithRouterAndStore(<App />, '/');
-    expect(history.location.pathname).toBe('/');
-  });
-
-describe('3 - Utilize o Redux para salvar no estado global as informações da pessoa logada', () => {
-  test('Salve o email no estado da aplicação, com a chave email, assim que o usuário logar.', () => {
-    const { store } = renderWithRouterAndStore(<App />, '/');
+describe('5 - Salva 2 tokens no localStorage após a submissão', () => {
+  test('Cria as chaves no LocalStorage', () => {
+    render(<Login />);
     const email = screen.getByTestId(EMAIL_INPUT_TEST_ID);
     const senha = screen.getByTestId(PASSWORD_INPUT_TEST_ID);
-    const button = screen.getByText(/Entrar/i);
-
-    userEvent.type(email, VALID_EMAIL);
-    userEvent.type(senha, VALID_PASSWORD);
+    const button = screen.getByText('Entrar');
+    userEvent.type(email, 'email@email.com');
+    userEvent.type(senha, '1234567');
     fireEvent.click(button);
 
-    expect(store.getState().user.email).toBe(VALID_EMAIL);
-  });
-
-  test('A rota deve ser mudada para \'/carteira\' após o clique no botão.', () => {
-    const { history } = renderWithRouterAndStore(<App />, '/');
-    const email = screen.getByTestId(EMAIL_INPUT_TEST_ID);
-    const senha = screen.getByTestId(PASSWORD_INPUT_TEST_ID);
-    const button = screen.getByText(/Entrar/i);
-
-    userEvent.type(email, VALID_EMAIL);
-    userEvent.type(senha, VALID_PASSWORD);
-    fireEvent.click(button);
-
-    expect(history.location.pathname).toBe('/carteira');
+    const mealsToken = localStorage.getItem('mealsToken');
+    const cocktailsToken = localStorage.getItem('cocktailsToken');
+    const user = JSON.parse(localStorage.getItem('user'));
+    expect(mealsToken).toBe('1');
+    expect(cocktailsToken).toBe('1');
+    expect(user.email).toBe(email.value);
   });
 });
-*/
