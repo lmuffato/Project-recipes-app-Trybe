@@ -1,7 +1,13 @@
 import React from 'react';
-import Button from 'react-bootstrap/Button';
 import Carousel from 'react-bootstrap/Carousel';
 import PropTypes from 'prop-types';
+import RecipeImage from './RecipeComponents/RecipeImage';
+import RecipeTitle from './RecipeComponents/RecipeTitle';
+import ShareBtn from './RecipeComponents/ShareButton';
+import FavBtn from './RecipeComponents/FavoriteButton';
+import RecipeCatg from './RecipeComponents/RecipeCategory';
+import BottomBtn from './RecipeComponents/BottomButton';
+import RecipeInst from './RecipeComponents/RecipeInstructions';
 
 function ComponentGen(props) {
   const { info, listCreator, recomendList } = props;
@@ -9,34 +15,24 @@ function ComponentGen(props) {
   const { strDrinkThumb, strDrink, strAlcoholic } = info;
   return (
     <div className="recipe_details">
-      <img
-        data-testid="recipe-photo"
-        src={ strMealThumb || strDrinkThumb }
-        alt="recipe"
-        style={ { height: '200px' } }
-      />
-      <p data-testid="recipe-title">{strMeal || strDrink }</p>
-      <button type="button" data-testid="share-btn">Share</button>
-      <button type="button" data-testid="favorite-btn">Favorite</button>
+      <RecipeImage origin={ strMealThumb || strDrinkThumb } />
+      <RecipeTitle title={ strMeal || strDrink } />
+      <ShareBtn />
+      <FavBtn />
       { strAlcoholic !== undefined
-        ? <p data-testid="recipe-category">{`${strCategory} ${strAlcoholic}`}</p>
-        : <p data-testid="recipe-category">{strCategory}</p>}
+        ? <RecipeCatg category={ `${strCategory} ${strAlcoholic}` } />
+        : <RecipeCatg category={ strCategory } />}
+      <h3>Ingredientes</h3>
       {listCreator}
-      <ul data-testid="instructions">{strInstructions}</ul>
+      <h3>Instruções</h3>
+      <RecipeInst instructions={ strInstructions } />
+      <h3>Vídeo</h3>
       <video src={ strYoutube } data-testid="video"><track kind="captions" /></video>
+      <h3>Recomendadas</h3>
       <Carousel>
         {recomendList}
       </Carousel>
-      <div className="btnDiv">
-        <Button
-          type="button"
-          data-testid="start-recipe-btn"
-          variant="secondary"
-          className="startBtn"
-        >
-          Iniciar Receita
-        </Button>
-      </div>
+      <BottomBtn />
     </div>
   );
 }
