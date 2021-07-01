@@ -10,7 +10,7 @@ function Footer() {
 
   return (
     <footer data-testid="footer">
-      <Link to="/drinks">
+      <Link to="/bebidas">
         <img data-testid="drinks-bottom-btn" src={ drinkIcon } alt="imagem drink" />
       </Link>
       <Link to="/explorar">
