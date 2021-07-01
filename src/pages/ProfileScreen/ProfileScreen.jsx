@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import Context from '../../context/Context';
 import styleCard, { styleBtn } from './index.style';
 import clearLS from '../../services/localStorage/clearLS';
+import Header from '../../components/Header';
+import Footer from '../../components/Footer';
 
 const ProfileScreen = () => {
   const { setLogout } = useContext(Context);
@@ -23,54 +25,58 @@ const ProfileScreen = () => {
   };
 
   return (
-    <div className="card" style={ styleCard }>
-      <h5 className="card-title">Perfil</h5>
-      <span data-testid="profile-email">email@mail.com</span>
-      <div className="btn-group-vertical">
-        <Link
-          to="/receitas-feitas"
-          style={ styleBtn }
-        >
-          <button
-            id="recipes-made"
-            type="button"
-            data-testid="profile-done-btn"
-            onClick={ handleClick }
-            className="btn btn-primary"
+    <>
+      <Header />
+      <div className="card" style={ styleCard }>
+        <h5 className="card-title">Perfil</h5>
+        <span data-testid="profile-email">email@mail.com</span>
+        <div className="btn-group-vertical">
+          <Link
+            to="/receitas-feitas"
+            style={ styleBtn }
           >
-            Receitas Feitas
-          </button>
-        </Link>
-        <Link
-          to="receitas-favoritas"
-          style={ styleBtn }
-        >
-          <button
-            id="recipes-fav"
-            type="button"
-            data-testid="profile-favorite-btn"
-            className="btn btn-primary"
-            onClick={ handleClick }
+            <button
+              id="recipes-made"
+              type="button"
+              data-testid="profile-done-btn"
+              onClick={ handleClick }
+              className="btn btn-primary"
+            >
+              Receitas Feitas
+            </button>
+          </Link>
+          <Link
+            to="receitas-favoritas"
+            style={ styleBtn }
           >
-            Receitas Favoritas
-          </button>
-        </Link>
-        <Link
-          to="/"
-          style={ styleBtn }
-        >
-          <button
-            id="logout"
-            type="button"
-            data-testid="profile-logout-btn"
-            className="btn btn-danger"
-            onClick={ handleClick }
+            <button
+              id="recipes-fav"
+              type="button"
+              data-testid="profile-favorite-btn"
+              className="btn btn-primary"
+              onClick={ handleClick }
+            >
+              Receitas Favoritas
+            </button>
+          </Link>
+          <Link
+            to="/"
+            style={ styleBtn }
           >
-            Sair
-          </button>
-        </Link>
+            <button
+              id="logout"
+              type="button"
+              data-testid="profile-logout-btn"
+              className="btn btn-danger"
+              onClick={ handleClick }
+            >
+              Sair
+            </button>
+          </Link>
+        </div>
       </div>
-    </div>
+      <Footer />
+    </>
   );
 };
 

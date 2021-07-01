@@ -7,6 +7,7 @@ function Provider({ children }) {
   const [logout, setLogout] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [search, setSearch] = useState(false);
   const dataValue = {
     logout,
     setLogout,
@@ -14,6 +15,8 @@ function Provider({ children }) {
     setEmail,
     password,
     setPassword,
+    search,
+    setSearch,
   };
 
   return (
