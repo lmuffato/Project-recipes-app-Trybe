@@ -1,16 +1,28 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Header from '../components/Header';
 import MealCard from '../components/MealCard';
 import SearchContext from '../context/SearchContext';
 import Footer from '../components/Footer';
 
 function Foods() {
-  const { filteredRecipes } = useContext(SearchContext);
+  const { filteredRecipes, getFullRecipes, fullRecipes } = useContext(SearchContext);
   const CARDS_NUMBER = 11;
+
+  const [showRecipe, setShowRecipe] = useState([]);
+  useEffect(() => {
+    getFullRecipes();
+  }, []);
+
+  useEffect(() => {
+    if (!filteredRecipes || filteredRecipes.length > 0) {
+      setShowRecipe(filteredRecipes);
+    } else { setShowRecipe(fullRecipes); }
+  }, [fullRecipes, filteredRecipes]);
+
   return (
     <div>
       <Header title="Comidas" searchImg="true" />
-      {filteredRecipes ? filteredRecipes.map((recipes, index) => (
+      {showRecipe ? showRecipe.map((recipes, index) => (
         index <= CARDS_NUMBER ? (
           <MealCard
             key={ recipes.idMeal }

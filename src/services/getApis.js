@@ -37,3 +37,17 @@ export async function fetchDrinksRecipes(searchText, radio) {
   const resultJson = await result.json();
   return resultJson;
 }
+
+export async function fetchFullRecipes() {
+  const edpoint = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
+  const result = await fetch(edpoint);
+  const resultJson = await result.json();
+  return resultJson;
+}
+
+export async function fetchFullDrinksRecipes() {
+  const edpoint = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s';
+  const result = await fetch(edpoint);
+  const resultJson = await result.json();
+  return resultJson;
+}
