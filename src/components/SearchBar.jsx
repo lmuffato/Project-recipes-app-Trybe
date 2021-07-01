@@ -24,15 +24,12 @@ export default function SearchBar({ props }) {
 
   const pushMealDetails = (results) => {
     const { meals } = results;
-    console.log(results);
-    console.log(meals);
 
     if (meals === null) {
       alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
     }
     if (meals && meals.length === 1) {
       const mealId = meals[0].idMeal;
-      console.log(mealId);
       history.push(`/comidas/${mealId}`);
     }
   };
@@ -96,7 +93,7 @@ export default function SearchBar({ props }) {
   };
 
   return (
-    <form data-testid="search-top-btn">
+    <form>
       <input
         type="text"
         data-testid="search-input"
