@@ -12,7 +12,7 @@ function Drinks() {
     if (drinks !== []) {
       const recipes = drinks.slice(0, lengthDrinks);
       return (
-        <div className="cards-foods">
+        <div className="cards-drinks">
           {recipes.map((recipe, index) => (
           // Código fonte da biblioteca Bootstrap
             <Card

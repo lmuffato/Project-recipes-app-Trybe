@@ -9,7 +9,7 @@ function CardsFilterRecipes() {
     const lengthDrinks = 12;
     const recipes = filterDrinks.slice(0, lengthDrinks);
     return (
-      <div>
+      <div className="cards-drinks">
         {recipes.map((recipe, index) => (
           // Código fonte da biblioteca Bootstrap
           <Card

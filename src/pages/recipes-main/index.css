@@ -10,6 +10,18 @@
   margin: 5px;
 }
 
+.cards-drinks {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding: 5px;
+}
+
+.cards-drinks div {
+  border-radius: 15px;
+  margin: 5px;
+}
+
 .buttonsCategoryDrinks {
   display: flex;
   flex-wrap: wrap;
