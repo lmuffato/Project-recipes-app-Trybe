@@ -1,6 +1,6 @@
 import React from 'react';
 
-class ReceitasFeitas extends React.component {
+class ReceitasFeitas extends React.Component {
   render() {
     return (
       <div> RECEITAS FEITAS</div>
