@@ -31,11 +31,13 @@ function FilteredRecipesContextProvider({ children }) {
       // setIsLoading(false);
     } catch (err) {
       console.log(err);
-      alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+      // eslint-disable-next-line no-alert
+      window.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
     }
   };
 
   const alertMessage = () => {
+    // eslint-disable-next-line no-alert
     window.alert('Sua busca deve conter somente 1 (um) caracter');
   };
 
