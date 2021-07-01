@@ -1,14 +1,16 @@
 import React from 'react';
+
+import Header from '../components/Header';
 import Footer from '../components/Footer';
 
 function ExplorarComidas() {
   return (
-    <div>
-      Página de Explorar Comidas
+    <section>
+      <Header title="Explorar Comidas" show={ false } />
       <footer>
         <Footer />
       </footer>
-    </div>);
+    </section>);
 }
 
 export default ExplorarComidas;

@@ -1,14 +1,16 @@
 import React from 'react';
+
+import Header from '../components/Header';
 import Footer from '../components/Footer';
 
 function ExplorarComidasArea() {
   return (
-    <div>
-      Página de Explorar Comidas por Area
+    <section>
+      <Header title="Explorar Origem" />
       <footer>
         <Footer />
       </footer>
-    </div>);
+    </section>);
 }
 
 export default ExplorarComidasArea;
