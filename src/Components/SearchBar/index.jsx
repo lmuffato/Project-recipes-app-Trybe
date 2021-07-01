@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { Form, Button } from 'react-bootstrap';
+import { useLocation, useHistory } from 'react-router-dom';
 import RecipesContext from '../../context/RecipesContext';
 import fetchMealsAndDrinks from '../../services';
 
@@ -15,21 +16,39 @@ export default function SearchBar({ page }) {
     { label: 'Primeira letra', testeId: 'first-letter-search-radio' },
   ];
 
+  const { pathname } = useLocation();
+  const history = useHistory();
+
+  const handleLength = async (array) => {
+    const objIdKey = (page === 'meals') ? 'idMeal' : 'idDrink';
+    console.log(array);
+    if (array === null) {
+      // eslint-disable-next-line no-alert
+      return alert(
+        'Sinto muito, não encontramos nenhuma receita para esses filtros.',
+      );
+    }
+    if (array.length === 1) return history.push(`${pathname}/${array[0][objIdKey]}`);
+  };
+
   const handleClick = async () => {
     if (radioOption === 'Primeira letra') {
       if (searchTerm.length === 1) {
+        const array = await fetchMealsAndDrinks(searchTerm, radioOption, page);
         setRecipes({
           ...recipes,
-          [page]: { results: await fetchMealsAndDrinks(searchTerm, radioOption, page) },
-          isLoading: true,
+          [page]: { results: array },
         });
-        setRecipes({ ...recipes, isLoading: false });
+        handleLength(array);
+      // eslint-disable-next-line no-alert
       } else { return alert('Sua busca deve conter somente 1 (um) caracter'); }
     } else {
+      const array = await fetchMealsAndDrinks(searchTerm, radioOption, page);
       setRecipes({
         ...recipes,
-        [page]: { results: await fetchMealsAndDrinks(searchTerm, radioOption, page) },
+        [page]: { results: array },
       });
+      handleLength(array);
     }
   };
 

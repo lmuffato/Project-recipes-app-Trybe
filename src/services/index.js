@@ -1,4 +1,5 @@
 const fetchMealsAndDrinks = async (query, type, page) => {
+  const objNameKey = (page === 'meals') ? 'meals' : 'drinks';
   // endpoints
   const byName = (page === 'meals')
     ? `https://www.themealdb.com/api/json/v1/1/search.php?s=${query}`
@@ -15,11 +16,11 @@ const fetchMealsAndDrinks = async (query, type, page) => {
   if (type === 'Nome') endpoint = byName;
   if (type === 'Primeira letra') endpoint = byFirstLetter;
 
-  const { meals } = await fetch(endpoint)
+  const apiResults = await fetch(endpoint)
     .then((results) => results.json()
       .then((data) => data));
 
-  return meals;
+  return apiResults[objNameKey];
 };
 
 export default fetchMealsAndDrinks;
