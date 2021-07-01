@@ -44,3 +44,8 @@ code {
   flex: 1 1 auto;
   padding: 20px;
 }
+
+.recipe-img {
+  width: 20%;
+  /* height: 20%; */
+}
