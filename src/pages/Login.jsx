@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 class Login extends React.Component {
   constructor() {
@@ -14,6 +15,13 @@ class Login extends React.Component {
 
     this.userValidate = this.userValidate.bind(this);
     this.saveEmail = this.saveEmail.bind(this);
+    this.setToken = this.setToken.bind(this);
+  }
+
+  setToken() {
+    const token = '1';
+    localStorage.setItem('mealsToken', token);
+    localStorage.setItem('cocktailsToken', token);
   }
 
   userValidate() {
@@ -36,30 +44,33 @@ class Login extends React.Component {
 
   render() {
     const { email, password, validEmail, validPassword } = this.state;
+    const { setToken, saveEmail } = this.props;
     return (
       <form>
         <label htmlFor="email-input">
           <input
+            id="email-input"
             type="email"
             data-testid="email-input"
             value={ email }
-            // onChange={}
           />
         </label>
         <label htmlFor="password-input">
           <input
+            id="password-input"
             type="password"
             data-testid="password-input"
             value={ password }
-          // onChange={}
           />
         </label>
+        <input />
         <Link
           to="/comidas"
           type="button"
           data-testid="login-submit-btn"
-          disabled={ !validEmail || !validPassword }
-          onSubmit={ saveEmail() }
+          disabled={ validEmail && validPassword }
+          onSubmit={ () => { saveEmail(); } }
+          onClick={ () => { setToken(); } }
         >
           Entrar
         </Link>
@@ -67,5 +78,9 @@ class Login extends React.Component {
     );
   }
 }
+
+Login.propTypes = {
+  setToken: PropTypes.func,
+}.isRequired;
 
 export default Login;
