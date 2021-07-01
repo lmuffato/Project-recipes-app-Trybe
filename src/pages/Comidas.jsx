@@ -5,7 +5,7 @@ class Comidas extends React.Component {
   render() {
     return (
       <>
-        <Header pageTitle="Comidas" />
+        <Header title="Comidas" />
         <div>Página principal Receitas COMIDA</div>
       </>
 

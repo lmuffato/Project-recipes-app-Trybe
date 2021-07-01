@@ -5,7 +5,7 @@ class Bebidas extends React.Component {
   render() {
     return (
       <>
-        <Header pageTitle="Bebidas" />
+        <Header title="Bebidas" />
         <div>Página principal receitas BEBIDAS</div>
       </>
     );
