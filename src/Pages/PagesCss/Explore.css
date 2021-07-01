@@ -1,7 +1,11 @@
 html {
-  --black: #0D114F;
+
+  --black: #0d114f;
+
   --lightBlack: #2e2d2d;
+
   --main-background: #f1e1c3d2;
+
 }
 
 .main-container {
