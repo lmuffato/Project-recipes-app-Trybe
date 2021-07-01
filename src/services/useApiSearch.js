@@ -19,10 +19,10 @@ export default async function apiSearch(searchValue, inputValue, page) {
   case 'first-letter-search':
     if (inputValue.length > length) {
       alert('Sua busca deve conter somente 1 (um) caracter');
-      return;
+    } else {
+      searchResults = await fetchByFirstLetterApi(inputValue, page);
+      console.log(searchResults);
     }
-    searchResults = await fetchByFirstLetterApi(inputValue, page);
-    console.log(searchResults);
     break;
 
   default:
