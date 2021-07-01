@@ -4,8 +4,7 @@ import Header from '../components/Header';
 function ReceitasFeitas() {
   return (
     <section>
-      <Header />
-      <div>Página de Bebidas</div>
+      <Header title="Receitas Feitas" show={ false } />
     </section>
   );
 }

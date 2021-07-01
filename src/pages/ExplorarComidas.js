@@ -4,8 +4,7 @@ import Header from '../components/Header';
 function ExplorarComidas() {
   return (
     <section>
-      <Header />
-      <div>Página de Bebidas</div>
+      <Header title="Explorar Comidas" show={ false } />
     </section>
   );
 }

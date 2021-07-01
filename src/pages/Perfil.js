@@ -4,8 +4,7 @@ import Header from '../components/Header';
 function Perfil() {
   return (
     <section>
-      <Header />
-      <div>Página de Bebidas</div>
+      <Header title="Perfil" show={ false } />
     </section>
   );
 }

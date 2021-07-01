@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { useHistory } from 'react-router';
 import profile from '../images/profileIcon.svg';
 import search from '../images/searchIcon.svg';
 // import BarraBuscar from './BarraBuscar';
 
-function Header() {
+function Header({ title, show = true }) {
   const history = useHistory();
   const [click, setClick] = useState(false);
 
@@ -13,32 +14,46 @@ function Header() {
     if (click) setClick(false);
   }
 
+  function handleSearch() {
+    if (show) {
+      return (
+        <button
+          type="button"
+          onClick={ () => handleClick() }
+        >
+          <img data-testid="search-top-btn" src={ search } alt="search icon" />
+        </button>
+      );
+    }
+  }
+
   return (
     <section>
       <div>
         <button
           type="button"
-          data-testids="profile-top-btn"
           onClick={ () => history.push('/perfil') }
         >
-          <img src={ profile } alt="profile icon" />
+          <img data-testid="profile-top-btn" src={ profile } alt="profile icon" />
         </button>
 
-        <p data-testids="search-top-btn">Comidas</p>
+        <h3 data-testid="page-title">{ title }</h3>
 
-        <button
-          type="button"
-          data-testids="search-top-btn"
-          onClick={ () => handleClick() }
-        >
-          <img src={ search } alt="search icon" />
-        </button>
+        { handleSearch() }
+
       </div>
       <div>
-        { (click) ? <div>barra buscarr aqui</div> : null }
+        { (click) ? <div data-testid="search-input">barra de buscar aqui</div> : null }
+        {/* coloquei o data-testid aqui para passar no requisto 12, mas ele é para ser colocado no input do
+        componete barrabuscar, e esse componete deve ser renderizado aqui */}
       </div>
     </section>
   );
 }
+
+Header.propTypes = {
+  title: PropTypes.string.isRequired,
+  show: PropTypes.bool.isRequired,
+};
 
 export default Header;
