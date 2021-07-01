@@ -7,15 +7,15 @@ import { fetchRecipes, fetchDrinksRecipes } from '../services/getApis';
 function SearchProvider({ children }) {
   const [inputText, setInputText] = useState('');
   const [inputRadios, setInputRadios] = useState('ingredient');
-  const [recipes, setRecipes] = useState('');
-  const [drinksRecipes, setDrinksRecipes] = useState('');
+  const [filteredRecipes, setFilteredRecipes] = useState([]);
+  const [filteredDrinks, setFilteredDrinks] = useState([]);
   const [isLoading, setIsloading] = useState(false);
   const history = useHistory();
 
   const getRecipes = async (text, radio) => {
     setIsloading(true);
     const apiRecipes = await fetchRecipes(text, radio);
-    setRecipes(apiRecipes.meals);
+    setFilteredRecipes(apiRecipes.meals);
     if (apiRecipes.meals.length === 1) {
       history.push(`/comidas/${apiRecipes.meals[0].idMeal}`);
     }
@@ -25,7 +25,7 @@ function SearchProvider({ children }) {
   const getDrinksRecipes = async (text, radio) => {
     setIsloading(true);
     const apiRecipes = await fetchDrinksRecipes(text, radio);
-    setDrinksRecipes(apiRecipes.drinks);
+    setFilteredDrinks(apiRecipes.drinks);
     if (apiRecipes.drinks.length === 1) {
       history.push(`/bebidas/${apiRecipes.drinks[0].idDrink}`);
     }
@@ -39,10 +39,10 @@ function SearchProvider({ children }) {
         setInputText,
         inputRadios,
         setInputRadios,
-        recipes,
+        filteredRecipes,
         isLoading,
         getRecipes,
-        drinksRecipes,
+        filteredDrinks,
         getDrinksRecipes,
       } }
     >

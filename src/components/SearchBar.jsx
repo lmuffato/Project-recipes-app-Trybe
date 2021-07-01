@@ -5,7 +5,7 @@ import SearchContext from '../context/SearchContext';
 function SearchBar() {
   const { inputText, setInputText,
     inputRadios, setInputRadios,
-    getRecipes, getDrinksRecipes, drinksRecipes } = useContext(SearchContext);
+    getRecipes, getDrinksRecipes, filteredDrinks } = useContext(SearchContext);
   const location = useLocation();
 
   const handleRadios = ({ target }) => {
@@ -13,8 +13,8 @@ function SearchBar() {
   };
 
   useEffect(() => {
-    console.log(drinksRecipes);
-  }, [drinksRecipes]);
+    console.log(filteredDrinks);
+  }, [filteredDrinks]);
 
   const onClick = () => {
     if (inputRadios === 'first-letter' && inputText.length > 1) {
