@@ -7,7 +7,7 @@ const EMAIL_INPUT_TEST_ID = 'email-input';
 const PASSWORD_INPUT_TEST_ID = 'password-input';
 const SUBMIT_BUTTON_TEST_ID = 'login-submit-btn';
 const VALID_EMAIL = 'alguem@email.com';
-const VALID_PASSWORD = '123456';
+const VALID_PASSWORD = '1234567';
 
 describe('1 - Crie todos os elementos que devem respeitar os atributos', () => {
   test('O input de email deve possuir o atributo data-testid="email-input', () => {
