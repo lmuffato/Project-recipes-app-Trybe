@@ -1,7 +1,7 @@
 import React from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import Login from './pages/Login';
+import { Route, Switch, BrowserRouter } from 'react-router-dom';
 import Profile from './pages/Perfil';
+import Login from './pages/Login';
 import Explorar from './pages/Explorar';
 import Comidas from './pages/Comidas';
 import Bebidas from './pages/Bebidas';
@@ -26,7 +26,6 @@ class App extends React.Component {
             <Route exact path="/bebidas" component={ Bebidas } />
             <Route exact path="/perfil" component={ Profile } />
             <Route exact path="/explorar" component={ Explorar } />
-
             <Route exact path="/explorar/bebidas" component={ ExpBebidas } />
             <Route
               exact
@@ -40,7 +39,6 @@ class App extends React.Component {
               component={ ExpComidasIng }
             />
             <Route exact path="/explorar/comidas/area" component={ ExpComidasOri } />
-
             <Route exact path="/receitas-feitas" component={ ReceitasFeitas } />
             <Route exact path="/receitas-favoritas" component={ ReceitasFavoritas } />
           </Switch>
