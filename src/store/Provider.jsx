@@ -2,19 +2,17 @@ import React, { useState, useEffect } from 'react';
 import { node } from 'prop-types';
 import context from './Context';
 import {
-  fetchFoodsAndArea,
-  fetchFoodsAndIngredients,
-  fetch12FirstFoods,
-  fetch12FirstDrinks,
+  fetchAllFoods,
+  fetchAllDrinks,
   fetchAllCategoriesFoods,
   fetchAllCategoriesDrinks,
+  fetchMealsAndCategory,
+  fetchDrinksAndCategory,
 } from '../services/Data';
 
 function Provider({ children }) {
-  const [dataFetchFoodsAndArea, setDataFetchFoodsAndArea] = useState([]);
-  const [dataFetchFoodsAndIngredients, setDataFetchFoodsAndIngredients] = useState([]);
-  const [dataFetch12FirstFoods, setDataFetch12FirstFoods] = useState([]);
-  const [dataFetch12FirstDrinks, setDataFetch12FirstDrinks] = useState([]);
+  const [dataFetchAllFoods, setDataFetchAllFoods] = useState([]);
+  const [dataFetchAllDrinks, setDataFetchAllDrinks] = useState([]);
   const [dataFetchAllCategoriesFoods, setDataFetchAllCategoriesFoods] = useState([]);
   const [dataFetchAllCategoriesDrinks, setDataFetchAllCategoriesDrinks] = useState([]);
   const [infoUser, setDatainfoUser] = useState({
@@ -22,31 +20,46 @@ function Provider({ children }) {
     password: '',
     shouldRedirect: false,
   });
+  const [categoryF, setCategoryF] = useState('');
+  const [categoryD, setCategoryD] = useState('');
+  const [dataMealsAndCategory, setDataMealsAndCategory] = useState([]);
+  const [dataDrinksAndCategory, setDrinksAndCategory] = useState([]);
 
   useEffect(() => {
-    fetchFoodsAndArea()
-      .then(({ meals }) => setDataFetchFoodsAndArea(meals));
-    fetchFoodsAndIngredients()
-      .then(({ meals }) => setDataFetchFoodsAndIngredients(meals));
-    fetch12FirstFoods()
-      .then(({ meals }) => setDataFetch12FirstFoods(meals));
-    fetch12FirstDrinks()
-      .then(({ drinks }) => setDataFetch12FirstDrinks(drinks));
+    fetchAllFoods()
+      .then(({ meals }) => setDataFetchAllFoods(meals));
+    fetchAllDrinks()
+      .then(({ drinks }) => setDataFetchAllDrinks(drinks));
     fetchAllCategoriesFoods()
       .then(({ meals }) => setDataFetchAllCategoriesFoods(meals));
     fetchAllCategoriesDrinks()
       .then(({ drinks }) => setDataFetchAllCategoriesDrinks(drinks));
   }, []);
 
+  useEffect(() => {
+    fetchMealsAndCategory(categoryF)
+      .then(({ meals }) => setDataMealsAndCategory(meals));
+  }, [categoryF]);
+
+  useEffect(() => {
+    console.log(categoryD);
+    fetchDrinksAndCategory(categoryD)
+      .then(({ drinks }) => setDrinksAndCategory(drinks));
+  }, [categoryD]);
+
   const contextValue = {
-    dataFetchFoodsAndArea,
-    dataFetchFoodsAndIngredients,
-    foods: dataFetch12FirstFoods,
-    drinks: dataFetch12FirstDrinks,
+    foods: dataFetchAllFoods,
+    drinks: dataFetchAllDrinks,
     catFoods: dataFetchAllCategoriesFoods,
     catDrinks: dataFetchAllCategoriesDrinks,
     infoUser,
     setDatainfoUser,
+    categoryF,
+    setCategoryF,
+    categoryD,
+    setCategoryD,
+    foodsAndCategory: dataMealsAndCategory,
+    drinksAndCategory: dataDrinksAndCategory,
   };
 
   return (
