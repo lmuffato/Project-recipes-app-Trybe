@@ -2,12 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Header from '../../Components/Header';
 import Footer from '../../Components/Footer';
+import RecipeCard from '../../Components/RecipeCard';
 
 function RecipeMainPage({ header }) {
   return (
     <div>
       <Header>{ header }</Header>
-      <h1>RecipeMainPage</h1>
+      <RecipeCard />
       <Footer />
     </div>
   );

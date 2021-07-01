@@ -1,0 +1,20 @@
+.recipe-cards-parent {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-content: center;
+  max-width: 100vw;
+  max-height: fit-content;
+}
+
+.recipe-cards-parent > div {
+  max-width: 30%;
+  margin: 0.25rem;
+  text-align: center;
+  font-weight: 550;
+}
+
+
+.recipe-cards-parent > div > img {
+  width: 100%;
+}
