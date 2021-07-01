@@ -1,12 +1,16 @@
 import React from 'react';
-import Header from '../components/Header';
 
-function ExporarComidasIngredientes() {
+import Header from '../components/Header';
+import Footer from '../components/Footer';
+
+function ExplorarComidasIngredientes() {
   return (
     <section>
       <Header title="Explorar Ingredientes" show={ false } />
-    </section>
-  );
+      <footer>
+        <Footer />
+      </footer>
+    </section>);
 }
 
-export default ExporarComidasIngredientes;
+export default ExplorarComidasIngredientes;

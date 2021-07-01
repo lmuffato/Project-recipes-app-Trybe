@@ -1,19 +1,17 @@
-// import { SELECT_MOVIE } from '../actions/index';
-// import categories from '../data';
+import { SET_EMAIL } from '../actions/userAction';
+
 const INITIAL_STATE = {
   email: '',
-  password: '',
+  passaword: '',
 };
 
-export const LOGIN = 'LOGIN';
-
-export default function userReducer(state = INITIAL_STATE, action) {
+const user = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-  case LOGIN:
-    return {
-      ...state,
-    };
+  case SET_EMAIL:
+    return { ...state, email: action.payloadEmailValue };
   default:
     return state;
   }
-}
+};
+
+export default user;
