@@ -6,19 +6,19 @@ import App from '../App';
 
 describe('Testing login page', () => {
   test('if inputs (email, password) and button are in the page', () => {
-    renderWithRouter(<App />);
-    const getInputEmail = screen.getByTestId('email-input');
-    const getInputPassw = screen.getByTestId('password-input');
-    const getBtnLogin = screen.getByTestId('login-submit-btn');
+    const { getByTestId } = renderWithRouter(<App />);
+    const getInputEmail = getByTestId('email-input');
+    const getInputPassw = getByTestId('password-input');
+    const getBtnLogin = getByTestId('login-submit-btn');
     expect(getInputEmail).toBeInTheDocument();
     expect(getInputPassw).toBeInTheDocument();
     expect(getBtnLogin).toBeInTheDocument();
   });
   test('the type function in inputs, enable/disable and redirect in button', () => {
-    const { history } = renderWithRouter(<App />);
-    const getInputEmail = screen.getByTestId('email-input');
-    const getInputPassw = screen.getByTestId('password-input');
-    const getBtnLogin = screen.getByTestId('login-submit-btn');
+    const { history, getByTestId } = renderWithRouter(<App />);
+    const getInputEmail = getByTestId('email-input');
+    const getInputPassw = getByTestId('password-input');
+    const getBtnLogin = getByTestId('login-submit-btn');
     expect(getBtnLogin).toBeDisabled();
     userEvent.type(getInputEmail, 'teste@email.com');
     expect(getInputEmail).toHaveValue('teste@email.com');
