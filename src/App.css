@@ -68,9 +68,9 @@
 }
 
 footer {
-  width: 300px;
   background-color: #b3b2b2;
+  width: 300px;
+  bottom: 0%;
   align-items: center;
   position: fixed;
-  bottom: 0%;
 }
