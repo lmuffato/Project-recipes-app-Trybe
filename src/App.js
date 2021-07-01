@@ -1,22 +1,19 @@
 import React from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import './App.css';
 import RecipesProvider from './provider/RecipesProvider';
+import routes from './helpers/routes';
 
-import { Login, MainFoods, MainDrinks, Profile, Explore } from './pages';
-
-const App = () => (
-  <BrowserRouter>
+function App() {
+  return (
     <RecipesProvider>
       <Switch>
-        <Route exact path="/" component={ Login } />
-        <Route path="/comidas" component={ MainFoods } />
-        <Route path="/bebidas" component={ MainDrinks } />
-        <Route path="/perfil" component={ Profile } />
-        <Route path="/explorar" component={ Explore } />
+        {routes.map(({ path, component, exact }) => (
+          <Route key={ path } path={ path } exact={ exact } component={ component } />
+        ))}
       </Switch>
     </RecipesProvider>
-  </BrowserRouter>
-);
+  );
+}
 
 export default App;

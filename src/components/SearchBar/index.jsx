@@ -2,12 +2,13 @@ import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import RecipesContext from '../../context/RecipesContext';
 
-export default function SearchBar({ place }) {
+export default function SearchBar({ searchActive, path }) {
   const { handleApi } = useContext(RecipesContext);
+
   const [searchState, setState] = useState({
     textInput: '',
     radioInput: '',
-    place,
+    path,
   });
 
   const handleState = ({ target: { value, name } }) => {
@@ -17,12 +18,22 @@ export default function SearchBar({ place }) {
     }));
   };
 
-  const handleButton = () => {
-    handleApi(searchState);
+  const handleButton = async () => {
+    const { pathname } = window.location;
+
+    if (pathname === '/comidas' || pathname === '/bebidas') {
+      handleApi(searchState, 'meal');
+    }
   };
 
+  const style = { visibility: `${searchActive ? 'visible' : 'hidden'}` };
+
   return (
-    <div>
+    <div
+      className={ `search-bar-container${searchActive ? ' active' : ''}` }
+      data-testid="search-bar"
+      style={ style }
+    >
       <input
         onChange={ handleState }
         type="text"
@@ -76,6 +87,11 @@ export default function SearchBar({ place }) {
   );
 }
 
+SearchBar.defaultProps = {
+  path: '',
+};
+
 SearchBar.propTypes = {
-  place: PropTypes.string.isRequired,
+  path: PropTypes.string,
+  searchActive: PropTypes.bool.isRequired,
 };

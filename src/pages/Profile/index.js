@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Footer from '../../components/Footer';
+import Header from '../../components/Header';
 
 import './style.css';
 
@@ -12,7 +13,8 @@ const Profile = () => {
   };
 
   return (
-    <div>
+    <section>
+      <Header />
       <div className="container">
         <span
           className="span-email"
@@ -44,7 +46,7 @@ const Profile = () => {
         </div>
       </div>
       <Footer />
-    </div>
+    </section>
   );
 };
 
