@@ -17,7 +17,7 @@ export default function RecipesMain() {
       <Header />
       <Categories />
       <div className="list-main-recipes">
-        { recipesList.map(
+        { recipesList && recipesList.map(
           (recipe, index) => (
             <RecipeCard
               recipe={ recipe }

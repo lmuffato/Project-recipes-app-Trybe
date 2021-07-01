@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export default function CategoryBtn({ category: { strCategory } }) {
   return (
@@ -12,3 +13,7 @@ export default function CategoryBtn({ category: { strCategory } }) {
     </div>
   );
 }
+CategoryBtn.propTypes = {
+
+  category: PropTypes.string.isRequired,
+};

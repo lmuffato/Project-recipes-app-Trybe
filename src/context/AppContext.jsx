@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { fetchRecipesApi, fetchCategoriesApi } from '../services/fetchApiMain';
 
 export const AppContext = createContext();
-
 export default function AppProvider({ children }) {
   // header States
   const [displaySearchBar, setDisplaySearchBar] = useState(false);
@@ -36,7 +35,7 @@ export default function AppProvider({ children }) {
         categories.splice(NUM_CATEG_SHOWN, categories.length - 1);
         setCategoriesList(categories);
       });
-  }, []);
+  }, [pageOrigin]);
 
   useEffect(() => {
     fetchRecipesApi(pageOrigin)
@@ -44,7 +43,7 @@ export default function AppProvider({ children }) {
         recipes.splice(NUM_RECIPES_SHOWN, recipes.length - 1);
         setRecipesList(recipes);
       });
-  }, []);
+  }, [pageOrigin]);
 
   return (
     <AppContext.Provider value={ { context } }>

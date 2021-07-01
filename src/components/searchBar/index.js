@@ -1,6 +1,10 @@
 import React, { useContext } from 'react';
 import { AppContext } from '../../context/AppContext';
-import apiSearch from '../../services/useApiSearch';
+import {
+  fetchByIngredientApi,
+  fetchByNameApi,
+  fetchByFirstLetterApi,
+} from '../../services/fetchApiRadio';
 
 export default function SearchBar() {
   const { context } = useContext(AppContext);
@@ -10,8 +14,39 @@ export default function SearchBar() {
     setInputValue,
     pageOrigin,
     searchValue,
+    setRecipesList,
 
   } = context;
+  let searchResults = '';
+  const length = 1;
+  const NUM_RECIPES_SHOWN = 12;
+
+  async function apiSearch(value, input, page) {
+    switch (value) {
+    case 'ingredient-search':
+      searchResults = await fetchByIngredientApi(input, page);
+      searchResults.splice(NUM_RECIPES_SHOWN, searchResults.length - 1);
+      setRecipesList(searchResults);
+      break;
+    case 'name-search':
+      searchResults = await fetchByNameApi(input, page);
+      searchResults.splice(NUM_RECIPES_SHOWN, searchResults.length - 1);
+      setRecipesList(searchResults);
+      break;
+    case 'first-letter-search':
+      if (input.length > length) {
+        alert('Sua busca deve conter somente 1 (um) caracter');
+      } else {
+        searchResults = await fetchByFirstLetterApi(input, page);
+        searchResults.splice(NUM_RECIPES_SHOWN, searchResults.length - 1);
+        setRecipesList(searchResults);
+      }
+      break;
+
+    default:
+      return searchResults;
+    }
+  }
 
   function generateRadioButtons(value, label, dataTest) {
     return (
