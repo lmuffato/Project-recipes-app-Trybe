@@ -1,11 +1,25 @@
 import React from 'react';
+
 import userEvent from '@testing-library/user-event';
 import Login from '../pages/Login';
-import renderWithRouter from '../helper/renderWithRouter';
+import renderWithRouterAndContext from '../helper/tests/renderWithRouterAndContext';
+import getTest from '../helper/tests/getTestInfo';
+
+const { headerRenderTests, footerRenderTests } = getTest('/');
+const { itDoesntRenderHeader } = headerRenderTests();
+const { itDoesntRenderFooter } = footerRenderTests();
 
 describe('Login screen', () => {
+  describe('Check Header and Footer components', () => {
+    it('doesnt render the Header and Footer on the Login screen', () => {
+      const { queryByTestId } = renderWithRouterAndContext(<Login />);
+      itDoesntRenderHeader(queryByTestId);
+      itDoesntRenderFooter(queryByTestId);
+    });
+  });
+
   it('does and checks the user login process', () => {
-    const { getByTestId, history } = renderWithRouter(<Login />);
+    const { getByTestId, history } = renderWithRouterAndContext(<Login />);
 
     const passwordInput = getByTestId('password-input');
     const emailInput = getByTestId('email-input');
