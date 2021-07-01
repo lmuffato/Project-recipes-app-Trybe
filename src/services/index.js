@@ -5,10 +5,8 @@
  * @param {string} URL O endpoint onde será feito o GET request.
  * @return {object} Resposta da API.
  */
-async function fetchAPI(URL) {
+export default async function fetchAPI(URL) {
   const response = await fetch(URL);
   const data = await response.json();
   return data;
 }
-
-export default fetchAPI;
