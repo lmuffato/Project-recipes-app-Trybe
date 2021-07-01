@@ -19,36 +19,42 @@ export default function SearchBar({ page }) {
   const { pathname } = useLocation();
   const history = useHistory();
 
-  const handleLength = async (array) => {
+  const handleLength = async () => {
+    let array = await fetchMealsAndDrinks(searchTerm, radioOption, page);
+    const MAX_ARRAY_SIZE = 12;
     const objIdKey = (page === 'meals') ? 'idMeal' : 'idDrink';
-    console.log(array);
     if (array === null) {
+      array = [];
       // eslint-disable-next-line no-alert
-      return alert(
+      alert(
         'Sinto muito, não encontramos nenhuma receita para esses filtros.',
       );
     }
     if (array.length === 1) return history.push(`${pathname}/${array[0][objIdKey]}`);
+    if (array.length > MAX_ARRAY_SIZE) {
+      array = array.reduce((acc, curr, index) => (
+        index < MAX_ARRAY_SIZE ? [...acc, curr] : acc
+      ), []);
+    }
+    return array;
   };
 
   const handleClick = async () => {
     if (radioOption === 'Primeira letra') {
       if (searchTerm.length === 1) {
-        const array = await fetchMealsAndDrinks(searchTerm, radioOption, page);
+        const response = await handleLength();
         setRecipes({
           ...recipes,
-          [page]: { results: array },
+          [page]: { results: response },
         });
-        handleLength(array);
       // eslint-disable-next-line no-alert
       } else { return alert('Sua busca deve conter somente 1 (um) caracter'); }
     } else {
-      const array = await fetchMealsAndDrinks(searchTerm, radioOption, page);
+      const response = await handleLength();
       setRecipes({
         ...recipes,
-        [page]: { results: array },
+        [page]: { results: response },
       });
-      handleLength(array);
     }
   };
 
