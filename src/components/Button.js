@@ -7,11 +7,11 @@ function Button({ clas, index, page }) {
 
   function handleChange(event) {
     if (page === 'comidas' && event.target.value !== 'All') {
-      fetchApi(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${event.target.value}`);
+      fetchApi(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${event.target.value}`, 'comidas');
       setFilter(true);
       setSelected(event.target.value);
     } else if (page === 'bebidas' && event.target.value !== 'All') {
-      fetchApi(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${event.target.value}`);
+      fetchApi(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${event.target.value}`, 'bebidas');
       setFilter(true);
       setSelected(event.target.value);
     }
@@ -21,9 +21,9 @@ function Button({ clas, index, page }) {
     if (selected === event.target.value || event.target.value === 'All') {
       event.target.checked = false;
       if (page === 'comidas') {
-        fetchApi('https://www.themealdb.com/api/json/v1/1/search.php?s=');
+        fetchApi('https://www.themealdb.com/api/json/v1/1/search.php?s=', 'comidas');
       } else {
-        fetchApi('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
+        fetchApi('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=', 'bebidas');
       }
     }
   }

@@ -14,8 +14,10 @@ function BuscaHeader() {
     case 'ingredient':
       if (pathName === '/comidas') {
         endpointIn = `https://www.themealdb.com/api/json/v1/1/filter.php?i=${text}`;
+        fetchApi(endpointIn, 'bebidas');
       } else {
         endpointIn = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${text}`;
+        fetchApi(endpointIn, 'bebidas');
       }
       break;
     case 'firstLetter':
@@ -25,21 +27,24 @@ function BuscaHeader() {
       }
       if (pathName === '/comidas') {
         endpointIn = `https://www.themealdb.com/api/json/v1/1/search.php?f=${text}`;
+        fetchApi(endpointIn, 'comidas');
       } else {
         endpointIn = `https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${text}`;
+        fetchApi(endpointIn, 'bebidas');
       }
       break;
     case 'name':
       if (pathName === '/comidas') {
         endpointIn = `https://www.themealdb.com/api/json/v1/1/search.php?s=${text}`;
+        fetchApi(endpointIn, 'comidas');
       } else {
         endpointIn = `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${text}`;
+        fetchApi(endpointIn, 'bebidas');
       }
       break;
     default:
       break;
     }
-    fetchApi(endpointIn);
     event.preventDefault();
   }
 

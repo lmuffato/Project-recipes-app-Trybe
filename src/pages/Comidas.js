@@ -6,21 +6,21 @@ import Footer from '../components/Footer';
 import Filter from '../components/Filter';
 
 function Comidas() {
-  const { APIresponse, fetchApi } = useContext(ReceitasContext);
+  const { APIFood, fetchApi } = useContext(ReceitasContext);
 
   useEffect(() => {
-    fetchApi('https://www.themealdb.com/api/json/v1/1/search.php?s=');
+    fetchApi('https://www.themealdb.com/api/json/v1/1/search.php?s=', 'comidas');
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  if (APIresponse !== undefined) {
-    if (APIresponse.meals !== null && APIresponse.meals.length >= 1) {
+  if (APIFood !== undefined) {
+    if (APIFood.meals !== null && APIFood.meals.length >= 1) {
       return (
         <div>
           <Header title="Comidas" />
           <Filter page="comidas" />
           <CardList
-            list={ APIresponse.meals }
+            list={ APIFood.meals }
           />
           <Footer />
         </div>

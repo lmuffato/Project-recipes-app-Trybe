@@ -6,21 +6,21 @@ import Footer from '../components/Footer';
 import Filter from '../components/Filter';
 
 function Bebidas() {
-  const { APIresponse, fetchApi } = useContext(ReceitasContext);
+  const { APIDrink, fetchApi } = useContext(ReceitasContext);
 
   useEffect(() => {
-    fetchApi('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    fetchApi('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=', 'bebidas');
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  if (APIresponse !== undefined) {
-    if (APIresponse.drinks !== null) {
+  if (APIDrink !== undefined) {
+    if (APIDrink.drinks !== null && APIDrink.drinks.length >= 1) {
       return (
         <div>
           <Header title="Bebidas" />
           <Filter page="bebidas" />
           <CardList
-            list={ APIresponse.drinks }
+            list={ APIDrink.drinks }
           />
           <Footer />
         </div>
