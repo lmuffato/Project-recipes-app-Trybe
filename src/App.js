@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Switch, BrowserRouter } from 'react-router-dom';
-import Login from './pages/Login';
 import Profile from './pages/Perfil';
+import Login from './pages/Login';
 import Explorar from './pages/Explorar';
 import Comidas from './pages/Comidas';
 import Bebidas from './pages/Bebidas';

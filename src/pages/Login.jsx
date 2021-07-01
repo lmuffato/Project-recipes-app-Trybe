@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 class Login extends React.Component {
@@ -65,18 +64,15 @@ class Login extends React.Component {
             onChange={ (e) => this.handleChange(e) }
           />
         </label>
-        <Link
-          to="/comidas"
+
+        <button
+          type="button"
+          data-testid="login-submit-btn"
+          disabled={ !validData }
+          onSubmit={ this.saveEmail }
         >
-          <button
-            type="button"
-            data-testid="login-submit-btn"
-            disabled={ !validData }
-            onSubmit={ this.saveEmail }
-          >
-            Entrar
-          </button>
-        </Link>
+          Entrar
+        </button>
       </form>
     );
   }
