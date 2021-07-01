@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
-import './Header.css';
 import { fetchSearch } from '../redux/actions';
+import './Header.css';
 
 function Header({ props: { search, title } }) {
   const [searchBar, setSearchBar] = useState(false);
@@ -106,7 +106,11 @@ function Header({ props: { search, title } }) {
     <div>
       <header>
         <Link to="/perfil">
-          <img src={ profileIcon } data-testid="profile-top-btn" alt="profile icon" />
+          <img
+            src={ profileIcon }
+            data-testid="profile-top-btn"
+            alt="profile icon"
+          />
         </Link>
         <h1
           data-testid="page-title"
