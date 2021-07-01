@@ -3,14 +3,13 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 class Login extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       email: '',
       password: '',
-      validPassword: false,
-      validEmail: false,
+      validData: false,
     };
 
     this.userValidate = this.userValidate.bind(this);
@@ -18,10 +17,18 @@ class Login extends React.Component {
     this.setToken = this.setToken.bind(this);
   }
 
+  handleChange(e) {
+    const { value, id } = e.target;
+    this.setState({
+      [id]: value,
+    }, () => this.userValidate());
+  }
+
   setToken() {
     const token = '1';
     localStorage.setItem('mealsToken', token);
     localStorage.setItem('cocktailsToken', token);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   userValidate() {
@@ -29,22 +36,24 @@ class Login extends React.Component {
     const regex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
     const validEmail = regex.test(String(email).toLowerCase());
     const minPassLength = 6;
-    if (password.length >= minPassLength) {
-      this.setState({ validPassword: true });
-    }
-    if (validEmail) {
-      this.setState({ validEmail: true });
-    }
+    const isBlocked = (password.length >= minPassLength && validEmail);
+    this.setState({
+      validData: isBlocked,
+    });
   }
 
-  saveEmail() {
+  saveEmail(e) {
+    e.preventDefault();
     const { email } = this.state;
-    localStorage.setItem('user', email);
+    localStorage.setItem('user', { email });
+    const { history } = this.props;
+    history.push('/carteira');
   }
 
   render() {
-    const { email, password, validEmail, validPassword } = this.state;
-    const { setToken, saveEmail } = this.props;
+    const { email, password, validData } = this.state;
+    const { setToken } = this.props;
+
     return (
       <form>
         <label htmlFor="email-input">
@@ -53,6 +62,7 @@ class Login extends React.Component {
             type="email"
             data-testid="email-input"
             value={ email }
+            onChange={ (e) => this.handleChange(e) }
           />
         </label>
         <label htmlFor="password-input">
@@ -61,18 +71,21 @@ class Login extends React.Component {
             type="password"
             data-testid="password-input"
             value={ password }
+            onChange={ (e) => this.handleChange(e) }
           />
         </label>
-        <input />
         <Link
-          to="/comidas"
-          type="button"
-          data-testid="login-submit-btn"
-          disabled={ validEmail && validPassword }
-          onSubmit={ () => { saveEmail(); } }
-          onClick={ () => { setToken(); } }
+          to="/Comidas"
         >
-          Entrar
+          <button
+            type="button"
+            data-testid="login-submit-btn"
+            disabled={ !validData }
+            onSubmit={ this.saveEmail }
+            onClick={ () => setToken() }
+          >
+            Entrar
+          </button>
         </Link>
       </form>
     );
@@ -81,6 +94,7 @@ class Login extends React.Component {
 
 Login.propTypes = {
   setToken: PropTypes.func,
+  history: PropTypes.string.isRequired,
 }.isRequired;
 
 export default Login;
