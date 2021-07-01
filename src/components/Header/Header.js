@@ -14,13 +14,15 @@ export default function Header({ title }) {
           <img src={ profileIcon } alt="Icone de perfil" />
         </Link>
         <span data-testid="page-title">{title}</span>
-        <input
-          type="image"
+        <button
+          type="button"
           src={ searchIcon }
           alt="Search Icon"
           data-testid="search-top-btn"
           onClick={ () => setDisplaySearchBar(!displaySearchBar) }
-        />
+        >
+          <img src={ searchIcon } alt="Search Icon" />
+        </button>
       </div>
       {displaySearchBar ? <SearchBar /> : null}
     </div>
