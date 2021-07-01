@@ -1,19 +1,26 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import CardList from '../components/CardList';
 import Header from '../components/Header';
 import ReceitasContext from '../contexts/ReceitasContext';
 import Footer from '../components/Footer';
+import Filter from '../components/Filter';
 
 function Comidas() {
-  const { APIresponse } = useContext(ReceitasContext);
+  const { APIFood, fetchApi } = useContext(ReceitasContext);
 
-  if (APIresponse !== undefined) {
-    if (APIresponse.meals !== null && APIresponse.meals.length >= 1) {
+  useEffect(() => {
+    fetchApi('https://www.themealdb.com/api/json/v1/1/search.php?s=', 'comidas');
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  if (APIFood !== undefined) {
+    if (APIFood.meals !== null && APIFood.meals.length >= 1) {
       return (
         <div>
           <Header title="Comidas" />
+          <Filter page="comidas" />
           <CardList
-            list={ APIresponse.meals }
+            list={ APIFood.meals }
           />
           <Footer />
         </div>
@@ -31,6 +38,7 @@ function Comidas() {
   return (
     <div>
       <Header title="Comidas" />
+      <Filter page="comidas" />
       <Footer />
     </div>
   );

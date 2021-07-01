@@ -7,6 +7,7 @@ import BuscaHeader from './BuscaHeader';
 
 function Header(props) {
   const { title } = props;
+  console.log(toAppear);
   const [input, setInput] = useState(false);
   return (
     <div>

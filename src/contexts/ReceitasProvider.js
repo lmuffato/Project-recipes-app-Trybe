@@ -7,11 +7,21 @@ function ReceitasProvider({ children }) {
   const [password, setPassword] = useState('');
   const [APIresponse, setAPIResponse] = useState();
   const [favorite, setFavorite] = useState(false);
+  const [APIFood, setAPIFood] = useState();
+  const [APIDrink, setAPIDrink] = useState();
+  const [selected, setSelected] = useState();
+  const [filter, setFilter] = useState(false);
+  const [canRender, setCanRender] = useState(false);
 
-  async function fetchApi(endpoint) {
+  async function fetchApi(endpoint, page) {
     await fetch(endpoint)
       .then((response) => response.json())
       .then((response) => {
+        if (page === 'comidas') {
+          setAPIFood(response);
+        } else if (page === 'bebidas') {
+          setAPIDrink(response);
+        }
         setAPIResponse(response);
       });
   }
@@ -21,12 +31,23 @@ function ReceitasProvider({ children }) {
       value={ {
         email,
         APIresponse,
+        setAPIResponse,
         setEmail,
         fetchApi,
         password,
         setPassword,
         favorite,
         setFavorite,
+        filter,
+        setFilter,
+        selected,
+        setSelected,
+        canRender,
+        setCanRender,
+        APIFood,
+        setAPIFood,
+        APIDrink,
+        setAPIDrink,
       } }
     >
       {children}

@@ -1,6 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { BiDrink } from 'react-icons/bi';
+import { GiKnifeFork } from 'react-icons/gi';
+
 import ReceitasContext from '../contexts/ReceitasContext';
+import '../styles/Login.css';
 
 function Login() {
   const {
@@ -34,35 +38,47 @@ function Login() {
         saveToLocalStorage();
       } }
     >
-      <h1>Login</h1>
-      <label htmlFor="email">
-        Email
-        <input
-          value={ email }
-          data-testid="email-input"
-          type="email"
-          placeholder="Email"
-          onChange={ ({ target }) => setEmail(target.value) }
-        />
-      </label>
-      <label htmlFor="password">
-        Senha
-        <input
-          value={ password }
-          data-testid="password-input"
-          type="password"
-          placeholder="Senha"
-          onChange={ ({ target }) => setPassword(target.value) }
-          minLength="7"
-        />
-      </label>
-      <button
-        type="submit"
-        data-testid="login-submit-btn"
-        disabled={ disableButton }
-      >
-        Entrar
-      </button>
+      <div className="form-group">
+        <div className="icons">
+          <BiDrink className="drinkIcon" />
+          <h1>Login</h1>
+          <GiKnifeFork className="knifeForkIcon" />
+        </div>
+        <label htmlFor="email">
+          <p className="lbl-txt-login">
+            Email
+          </p>
+          <input
+            className="input-login"
+            value={ email }
+            data-testid="email-input"
+            type="email"
+            placeholder="Email"
+            onChange={ ({ target }) => setEmail(target.value) }
+          />
+        </label>
+        <label htmlFor="password">
+          <p className="lbl-txt-login">Senha</p>
+          <input
+            className="input-login"
+            value={ password }
+            data-testid="password-input"
+            type="password"
+            placeholder="Senha"
+            onChange={ ({ target }) => setPassword(target.value) }
+            minLength="7"
+          />
+        </label>
+        <button
+          className="btn-login"
+          type="submit"
+          data-testid="login-submit-btn"
+          disabled={ disableButton }
+        >
+          Entrar
+        </button>
+      </div>
+
     </form>
   );
 }
