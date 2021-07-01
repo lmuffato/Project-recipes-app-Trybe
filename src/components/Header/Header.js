@@ -4,7 +4,7 @@ import profileIcon from '../../images/profileIcon.svg';
 import searchIcon from '../../images/searchIcon.svg';
 import SearchBar from './SearchBar';
 
-export default function Header() {
+export default function Header({ title }) {
   const [displaySearchBar, setDisplaySearchBar] = useState(false);
 
   return (
@@ -13,10 +13,14 @@ export default function Header() {
         <Link to="/perfil" data-testid="profile-top-btn" src="profileIcon">
           <img src={ profileIcon } alt="Icone de perfil" />
         </Link>
-        <span data-testid="page-title">titulo</span>
-        <button type="button" onClick={ () => setDisplaySearchBar(!displaySearchBar) }>
-          <img data-testid="search-top-btn" src={ searchIcon } alt="Icone de perfil" />
-        </button>
+        <span data-testid="page-title">{title}</span>
+        <input
+          type="image"
+          src={ searchIcon }
+          alt="Search Icon"
+          data-testid="search-top-btn"
+          onClick={ () => setDisplaySearchBar(!displaySearchBar) }
+        />
       </div>
       {displaySearchBar ? <SearchBar /> : null}
     </div>
