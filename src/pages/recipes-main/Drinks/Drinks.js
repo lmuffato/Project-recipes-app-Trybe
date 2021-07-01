@@ -1,6 +1,8 @@
 import React, { useContext } from 'react';
 import { Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import Footer from '../../../components/Footer';
+import HeaderWithSearch from '../../../components/HeaderWithSearch';
 import Context from '../../../context/Context';
 import '../index.css';
 import CardsFilterRecipes from './CardsFilterRecipes';
@@ -43,10 +45,10 @@ function Drinks() {
   };
   return (
     <>
-      <div>Header</div>
+      <HeaderWithSearch />
       <FilterDrinks />
       {showFilter ? <CardsFilterRecipes /> : CardsRecipes()}
-      <div>Rodapé</div>
+      <Footer />
     </>
   );
 }

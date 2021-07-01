@@ -20,6 +20,9 @@ function Provider({ children }) {
   const [showFilter, setShowFilter] = useState(false);
   const [filterDrinks, setFilterDrinks] = useState([]);
   const [category, setCategory] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [search, setSearch] = useState(false);
 
   function getFoods() {
     const fetchApis = async () => {
@@ -93,6 +96,12 @@ function Provider({ children }) {
     clickRecipeFood,
     clickRecipeDrinks,
     showFilter,
+    email,
+    setEmail,
+    password,
+    setPassword,
+    search,
+    setSearch,
   };
 
   return (
