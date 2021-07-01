@@ -11,8 +11,8 @@ const mealsAPI = async () => {
 const cocktailsAPI = async () => {
   const endPoint = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
   try {
-    const { cocktails } = await (await fetch(endPoint)).json();
-    return cocktails;
+    const { drinks } = await (await fetch(endPoint)).json();
+    return drinks;
   } catch (error) {
     console.error(error);
   }
