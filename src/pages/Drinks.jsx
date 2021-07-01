@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import Header from '../components/Header';
 import DrinkCard from '../components/DrinkCard';
 import SearchContext from '../context/SearchContext';
+import Footer from '../components/Footer';
 
 function Drinks() {
   const { filteredDrinks } = useContext(SearchContext);
@@ -22,6 +23,7 @@ function Drinks() {
           />
         ) : null
       )) : alert('Sinto muito, não encontramos nenhuma receita para esses filtros.')}
+      <Footer />
     </div>
   );
 }

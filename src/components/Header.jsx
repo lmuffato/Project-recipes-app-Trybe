@@ -9,7 +9,7 @@ function Header({ title, searchImg = false }) {
   const [searchInput, setSearchInput] = useState(false);
 
   return (
-    <div>
+    <header>
       <Link to="/perfil">
         <img data-testid="profile-top-btn" src={ profileIcon } alt="imagem perfil" />
       </Link>
@@ -24,7 +24,7 @@ function Header({ title, searchImg = false }) {
       ) : null}
       {searchInput ? (<SearchBar />) : null}
 
-    </div>
+    </header>
   );
 }
 
