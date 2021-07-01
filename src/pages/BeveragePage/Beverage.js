@@ -1,12 +1,13 @@
 import React from 'react';
 import HeaderWithSearch from '../../components/HeaderWithSearch';
 
-function Food() {
+function Beverage() {
   return (
     <div>
       <HeaderWithSearch />
+      Beverage
     </div>
   );
 }
 
-export default Food;
+export default Beverage;

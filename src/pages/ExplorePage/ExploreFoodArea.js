@@ -1,12 +1,13 @@
 import React from 'react';
 import HeaderWithSearch from '../../components/HeaderWithSearch';
 
-function Food() {
+function ExploreFoodArea() {
   return (
     <div>
       <HeaderWithSearch />
+      Explorar Origem
     </div>
   );
 }
 
-export default Food;
+export default ExploreFoodArea;
