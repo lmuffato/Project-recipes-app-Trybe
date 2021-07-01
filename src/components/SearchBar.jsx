@@ -1,17 +1,24 @@
 import React, { useState } from 'react';
 import { Button, Input } from 'semantic-ui-react';
+import { fetchSearch } from '../services/Data';
 
 function SearchBar() {
   const [radio, setRadio] = useState('');
   const [activeSearch, setActiveSearch] = useState(true);
   const [inputSearch, setInputSearch] = useState('');
-  const [searchValues, setSearchValues] = useState([]);
   const handleClick = (e, { value }) => {
     setRadio(value);
     setActiveSearch(false);
   };
-  const handleSubmit = () => {
-    setSearchValues([radio, inputSearch]);
+  const handleSubmit = async () => {
+    const data = await fetchSearch(radio, inputSearch);
+    if (data === 'alert') {
+      alert('Sua busca deve conter somente 1 (um) caracter');
+    }
+    setInputSearch('');
+    setRadio('');
+    setActiveSearch(true);
+    console.log(data);
   };
   return (
     <form>

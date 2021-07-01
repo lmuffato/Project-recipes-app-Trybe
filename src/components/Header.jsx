@@ -20,7 +20,7 @@ function Header({ title, searchBtn = true }) {
           <img src={ ProfileImage } alt="perfil" />
         </button>
 
-        <h1 data-testid="page-title">{title}</h1>
+        <span data-testid="page-title">{title}</span>
         {searchBtn
           && (
             <button

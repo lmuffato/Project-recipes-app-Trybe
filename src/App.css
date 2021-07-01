@@ -17,8 +17,28 @@
 
 footer {
   bottom: 0;
+  display: flex !important;
   position: fixed;
+  justify-content: space-around;
   width: 100%;
+}
+
+header {
+  align-items: center;
+  background-color: #999;
+  display: flex !important;
+  justify-content: center;
+}
+
+header > span {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+header > button {
+  background-color: #ffffff00;
+  border: none;
+  padding: 10px 15px;
 }
 
 /*
