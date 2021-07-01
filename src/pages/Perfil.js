@@ -4,11 +4,19 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 
 function Perfil() {
-  const emails = JSON.parse(localStorage.getItem('user')).email;
+  const emailFinder = () => {
+    let info = {};
+    const localSize = localStorage.length;
+    if (localSize !== 0) {
+      info = JSON.parse(localStorage.getItem('user')).email;
+      return (<p data-testid="profile-email">{ info }</p>);
+    }
+  };
+
   return (
     <>
       <Header title="Perfil" displayButton={ false } />
-      <p data-testid="profile-email">{ emails }</p>
+      { emailFinder() }
       <Link to="/receitas-feitas">
         <button type="button" data-testid="profile-done-btn">Receitas Feitas</button>
       </Link>
@@ -33,4 +41,5 @@ function Perfil() {
     </>
   );
 }
+
 export default Perfil;
