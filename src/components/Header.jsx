@@ -94,10 +94,10 @@ function Header({ props: { search, title } }) {
   };
 
   useEffect(() => {
-    if ((data && data.meals === null) || data === 'error') {
+    if ((data === null) || data === 'error') {
       return alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
     }
-    if ((data && data.drinks === null) || data === 'error') {
+    if ((data === null) || data === 'error') {
       return alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
     }
   }, [data]);

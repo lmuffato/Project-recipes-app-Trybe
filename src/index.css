@@ -11,3 +11,36 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.card {
+  background-color: white;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 3px;
+  display: flex;
+  flex-direction: column;
+  height: 370px;
+  margin: 5px;
+  overflow: hidden;
+  width: 300px;
+}
+
+.recipe-card-image {
+  width: 100%;
+}
+
+.list {
+  display: flex;
+  flex-flow: row wrap;
+  padding: 48px 30px;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 500;
+  margin: 0 0 12px;
+}
+
+.title-div {
+  flex: 1 1 auto;
+  padding: 20px;
+}
