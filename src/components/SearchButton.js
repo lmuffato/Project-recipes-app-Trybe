@@ -17,4 +17,9 @@ function SearchButton(props) {
   );
 }
 
+SearchButton.propTypes = {
+  input: PropTypes.bool.isRequired,
+  setInput: PropTypes.func.isRequired,
+};
+
 export default SearchButton;

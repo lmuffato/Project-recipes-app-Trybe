@@ -28,6 +28,7 @@ function Header(props) {
 }
 Header.propTypes = {
   title: PropTypes.string.isRequired,
+  displayButton: PropTypes.bool.isRequired,
 };
 
 export default Header;
