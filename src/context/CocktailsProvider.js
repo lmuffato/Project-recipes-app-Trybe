@@ -6,16 +6,15 @@ import { ApiCocktailFirstItems, CocktailApiCategory,
 
 function CocktailsProvider(props) {
   const [cocktails, setCocktails] = useState({});
+  const [cocktailsCopy, setCocktailsCopy] = useState({});
   const [cocktailsCategories, setCocktailsCategories] = useState([]);
   const [currCategory, setCurrCategory] = useState('');
 
-  useEffect(() => {
-    const setMealsByCategories = async () => {
-      const results = await CocktailApiFilterByCategory(currCategory);
-      setCocktails(results);
-    };
-    setMealsByCategories();
-  }, [currCategory]);
+  const setMealsByCategories = async (string) => {
+    if (currCategory === string) return setCocktails(cocktailsCopy);
+    const results = await CocktailApiFilterByCategory(string);
+    setCocktails(results);
+  };
 
   useEffect(() => {
     const load = async () => {
@@ -23,6 +22,7 @@ function CocktailsProvider(props) {
       const cocktailCategories = await CocktailApiCategory();
       const { drinks } = cocktailCategories;
       setCocktails(result);
+      setCocktailsCopy(result);
       setCocktailsCategories(drinks);
     };
     load();
@@ -33,6 +33,7 @@ function CocktailsProvider(props) {
     setCocktails,
     cocktailsCategories,
     setCurrCategory,
+    setMealsByCategories,
   };
   const { children } = props;
   return (

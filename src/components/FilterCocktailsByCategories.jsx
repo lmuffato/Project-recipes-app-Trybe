@@ -2,7 +2,8 @@ import React, { useContext } from 'react';
 import CocktailsContext from '../context/CocktailsContext';
 
 export default function FilterCocktailsByCategories() {
-  const { cocktailsCategories, setCurrCategory } = useContext(CocktailsContext);
+  const { cocktailsCategories, setCurrCategory,
+    setMealsByCategories } = useContext(CocktailsContext);
   const end = 5;
   const recipesArray = cocktailsCategories ? cocktailsCategories.slice(0, end) : [];
 
@@ -14,7 +15,10 @@ export default function FilterCocktailsByCategories() {
           type="button"
           key={ category.strCategory }
           value={ category.strCategory }
-          onClick={ (e) => setCurrCategory(e.target.value) }
+          onClick={ (e) => {
+            setMealsByCategories(e.target.value);
+            setCurrCategory(e.target.value);
+          } }
           data-testid={ `${category.strCategory}-category-filter` }
         >
           {category.strCategory}

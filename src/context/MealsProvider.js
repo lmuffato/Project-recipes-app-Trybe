@@ -6,16 +6,15 @@ import { ApiByCategory,
 
 function MealsProvider(props) {
   const [mealsObject, setMeals] = useState({});
+  const [mealsCopyObject, setMealsCopy] = useState({});
   const [mealsCategories, setMealsCategories] = useState([]);
   const [currCategory, setCurrCategory] = useState('');
 
-  useEffect(() => {
-    const setMealsByCategories = async () => {
-      const results = await ApiFilterByCategory(currCategory);
-      setMeals(results);
-    };
-    setMealsByCategories();
-  }, [currCategory]);
+  const setMealsByCategories = async (string) => {
+    if (currCategory === string) return setMeals(mealsCopyObject);
+    const results = await ApiFilterByCategory(string);
+    setMeals(results);
+  };
 
   useEffect(() => {
     const load = async () => {
@@ -23,6 +22,7 @@ function MealsProvider(props) {
       const categoriesMealsResults = await ApiByCategory();
       const { meals } = categoriesMealsResults;
       setMeals(result);
+      setMealsCopy(result);
       setMealsCategories(meals);
     };
 
@@ -34,6 +34,7 @@ function MealsProvider(props) {
     setMeals,
     mealsCategories,
     setCurrCategory,
+    setMealsByCategories,
   };
 
   const { children } = props;
