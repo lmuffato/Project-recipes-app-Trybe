@@ -5,24 +5,64 @@ import search from '../images/searchIcon.svg';
 import profile from '../images/profileIcon.svg';
 
 class Header extends React.Component {
-  render() {
-    const { title } = this.props;
+  constructor(props) {
+    super(props);
 
-    return (
-      <header>
-        <Link to="/perfil">
-          <button type="submit" data-testid="profile-top-btn">
-            <img src={ profile } alt="explore" />
-          </button>
-        </Link>
-        <h1 data-testid="page-title">{title}</h1>
+    this.state = {
+      hideInput: true,
+    };
+
+    this.renderInputSearch = this.renderInputSearch.bind(this);
+    this.renderSearchButton = this.renderSearchButton.bind(this);
+  }
+
+  renderSearchButton() {
+    const { location: { pathname } } = this.props;
+    if (pathname === '/comidas' || '/bebidas') {
+      return (
         <button
           type="submit"
           data-testid="search-top-btn"
+          onClick={ () => (
+            this.setState((prev) => ({ hideInput: !prev.hideInput }))) }
         >
           <img src={ search } alt="explore" />
         </button>
-      </header>
+      );
+    }
+  }
+
+  renderInputSearch() {
+    return (
+
+      <input type="text" />
+    );
+  }
+
+  render() {
+    const { title } = this.props;
+    const { hideInput } = this.state;
+
+    return (
+      <>
+        <header>
+          <Link to="/perfil">
+            <button type="submit" data-testid="profile-top-btn">
+              <img src={ profile } alt="explore" />
+            </button>
+          </Link>
+          <h1 data-testid="page-title">{title}</h1>
+          <button
+            type="submit"
+            data-testid="search-top-btn"
+            onClick={ () => (
+              this.setState((prev) => ({ hideInput: !prev.hideInput }))) }
+          >
+            <img src={ search } alt="explore" />
+          </button>
+        </header>
+        {!hideInput && this.renderInputSearch()}
+      </>
     );
   }
 }
