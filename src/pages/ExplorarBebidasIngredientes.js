@@ -11,7 +11,6 @@ function ExplorarBebidasIngredientes() {
         <Footer />
       </footer>
     </section>);
-
 }
 
 export default ExplorarBebidasIngredientes;
