@@ -5,7 +5,7 @@ import Footer from '../components/Footer';
 function Explorar() {
   return (
     <>
-      <Header title="Explorar" toAppear={ false } />
+      <Header title="Explorar" displayButton={ false } />
       <Footer />
     </>
   );

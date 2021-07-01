@@ -5,7 +5,7 @@ import Footer from '../components/Footer';
 function ExplorarComidasPorIngrediente() {
   return (
     <>
-      <Header title="Explorar comidas por ingrediente" />
+      <Header title="Explorar comidas por ingrediente" displayButton={ false } />
       <Footer />
     </>
   );
