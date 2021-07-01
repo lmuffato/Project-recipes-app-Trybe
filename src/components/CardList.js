@@ -16,10 +16,13 @@ function CardList({ list }) {
     }
     return (
       arr.map((recipie, index) => {
+        const { idMeal, idDrink } = recipie;
         if (recipie !== undefined) {
           if (recipie.strMeal !== undefined) {
             return (
               <Card
+                type="comidas"
+                id={ idMeal }
                 index={ index }
                 key={ index }
                 strName={ recipie.strMeal }
@@ -30,6 +33,8 @@ function CardList({ list }) {
             );
           } return (
             <Card
+              type="bebidas"
+              id={ idDrink }
               index={ index }
               key={ index }
               strName={ recipie.strDrink }

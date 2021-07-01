@@ -8,7 +8,6 @@ import SearchButton from './SearchButton';
 function Header(props) {
   const { title, displayButton } = props;
   const [input, setInput] = useState(false);
-
   return (
     <header>
       <Link to="/perfil">
