@@ -1,9 +1,19 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import MealsContext from './MealsContext';
+import { ApiFirstsResults } from '../services/theMealAPI';
 
 function MealsProvider(props) {
   const [mealsObject, setMeals] = useState({});
+
+  useEffect(() => {
+    const load = async () => {
+      const result = await ApiFirstsResults();
+      setMeals(result);
+    };
+
+    load();
+  }, []);
 
   const context = {
     mealsObject,

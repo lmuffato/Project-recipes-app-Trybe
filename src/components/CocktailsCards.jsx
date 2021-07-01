@@ -7,8 +7,6 @@ export default function CocktailsCards() {
   const { drinks } = cocktails;
   const end = 12;
   const drinksArray = drinks ? drinks.slice(0, end) : [];
-  console.log(cocktails);
-  console.log(drinks);
 
   return (
     <div className="cards-container">

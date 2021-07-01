@@ -12,6 +12,16 @@ export const ApiByCategory = async () => {
   }
 };
 
+export const ApiFirstsResults = async () => {
+  try {
+    const fetchApi = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=');
+    const getResponse = await fetchApi.json();
+    return getResponse;
+  } catch (error) {
+    return error;
+  }
+};
+
 export const ApiByName = async (name) => {
   try {
     const fetchApi = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${name}`);
