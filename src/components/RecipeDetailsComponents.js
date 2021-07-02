@@ -14,16 +14,34 @@ function ComponentGen(props) {
   const { info, listCreator, recomendList, favorite, setFavorite } = props;
   const { strMealThumb, strMeal, strCategory, strInstructions, strYoutube } = info;
   const { strDrinkThumb, strDrink, strAlcoholic, idDrink, idMeal, strArea } = info;
+  let currentInfo = [];
 
-  const currentInfo = [{
-    id: idDrink || idMeal,
-    type: idDrink ? 'bebida' : 'comida',
-    area: strArea || '',
-    category: strCategory || '',
-    alcoholicOrNot: strAlcoholic || '',
-    name: strMeal || strDrink,
-    image: strMealThumb || strDrinkThumb,
-  }];
+  if (idDrink !== undefined) {
+    currentInfo = [{
+      id: idDrink,
+      type: 'bebida',
+      area: '',
+      category: strCategory || '',
+      alcoholicOrNot: strAlcoholic,
+      name: strDrink,
+      image: strDrinkThumb,
+    }];
+  } else {
+    currentInfo = [{
+      id: idMeal,
+      type: 'comida',
+      area: strArea,
+      category: strCategory || '',
+      alcoholicOrNot: '',
+      name: strMeal,
+      image: strMealThumb,
+    }];
+  }
+
+  const infoReceiver = {
+    meals: {},
+    cocktails: {},
+  };
 
   return (
     <div className="recipe_details">
@@ -43,7 +61,7 @@ function ComponentGen(props) {
       <Carousel>
         {recomendList}
       </Carousel>
-      <BottomBtn info={ info } />
+      <BottomBtn info={ info } inProgress={ infoReceiver } />
     </div>
   );
 }

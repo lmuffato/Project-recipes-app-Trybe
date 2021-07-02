@@ -7,7 +7,6 @@ export default function FavBtn(props) {
   const { info } = props;
   const [favorite, setFavorite] = useState(false);
   const id = window.location.pathname.match(/(\d+)/)[0];
-  console.log(info);
 
   useEffect(() => {
     const isFavorito = () => {

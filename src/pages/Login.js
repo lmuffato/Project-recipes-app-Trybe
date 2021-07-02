@@ -29,7 +29,6 @@ function Login() {
     localStorage.setItem('cocktailsToken', 1);
     const object = JSON.stringify({ email });
     localStorage.setItem('user', object);
-    localStorage.setItem('favoriteRecipes', []);
     history.push('/comidas');
   };
   return (
