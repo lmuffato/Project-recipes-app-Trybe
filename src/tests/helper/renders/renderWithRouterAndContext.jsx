@@ -2,8 +2,9 @@ import React, { createContext } from 'react';
 import { Router } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
 import { render } from '@testing-library/react';
+import { RecipeContextProvider } from '../../../store/RecipeContext';
 
-const renderWithRouterAndRedux = (
+const renderWithRouterAndContext = (
   Component,
   Context = createContext(),
   {
@@ -13,13 +14,14 @@ const renderWithRouterAndRedux = (
   } = {},
 ) => ({
   ...render(
-    <Router history={ history }>
-      <Context.Provider value={ value }>{Component}</Context.Provider>
-      ,
-    </Router>,
+    <RecipeContextProvider value={ value }>
+      <Router history={ history }>
+        {Component}
+      </Router>
+    </RecipeContextProvider>,
   ),
   value,
   history,
 });
 
-export default renderWithRouterAndRedux;
+export default renderWithRouterAndContext;

@@ -2,7 +2,7 @@ import React from 'react';
 
 import DrinkProgress from '../pages/DrinkProgress';
 import renderWithRouterAndContext from './helper/renders/renderWithRouterAndContext';
-import getTest from './helper/getTestInfo';
+import getTest from './helper/mocks/getTestInfo';
 
 const { headerRenderTests, footerRenderTests } = getTest(
   '/bebidas/:id/in-progress',

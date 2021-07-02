@@ -2,9 +2,9 @@ import React from 'react';
 import userEvent from '@testing-library/user-event';
 import Foods from '../pages/Foods';
 import renderWithRouterAndContext from './helper/renders/renderWithRouterAndContext';
-import getTestInfo from './helper/getTestInfo';
+import getTest from './helper/mocks/getTestInfo';
 
-const { RecipeContext, renderEmptyValue, testsIds } = getTestInfo('/comidas');
+const { RecipeContext, renderEmptyValue, testsIds } = getTest('/comidas');
 const { footerTestIds } = testsIds;
 
 describe('Requirement 19', () => {

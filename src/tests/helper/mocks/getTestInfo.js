@@ -1,4 +1,4 @@
-import { RecipeContext } from '../../store/RecipeContext';
+import { RecipeContext } from '../../../store/RecipeContext';
 
 const testsIds = {
   headerTestIds: {

@@ -2,7 +2,7 @@ import React from 'react';
 
 import FoodDetails from '../pages/FoodDetails';
 import renderWithRouterAndContext from './helper/renders/renderWithRouterAndContext';
-import getTest from './helper/getTestInfo';
+import getTest from './helper/mocks/getTestInfo';
 
 const { headerRenderTests, footerRenderTests } = getTest('/comidas/:id');
 const { itDoesntRenderHeader } = headerRenderTests();

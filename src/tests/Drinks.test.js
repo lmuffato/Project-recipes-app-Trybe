@@ -2,7 +2,7 @@ import React from 'react';
 
 import Drinks from '../pages/Drinks';
 import renderWithRouterAndContext from './helper/renders/renderWithRouterAndContext';
-import getTest from './helper/getTestInfo';
+import getTest from './helper/mocks/getTestInfo';
 
 const {
   RecipeContext,

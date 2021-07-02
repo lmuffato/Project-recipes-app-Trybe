@@ -1,8 +1,7 @@
 import React from 'react';
-
 import Profile from '../pages/Profile';
 import renderWithRouterAndContext from './helper/renders/renderWithRouterAndContext';
-import getTest from './helper/getTestInfo';
+import getTest from './helper/mocks/getTestInfo';
 
 const {
   RecipeContext,

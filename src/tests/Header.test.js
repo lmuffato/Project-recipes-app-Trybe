@@ -1,11 +1,7 @@
 import React from 'react';
-
 import userEvent from '@testing-library/user-event';
-
 import Foods from '../pages/Foods';
-
 import { RecipeContext } from '../store/RecipeContext';
-
 import renderWithRouterAndContext from './helper/renders/renderWithRouterAndContext';
 
 describe('Requirement 11', () => {
