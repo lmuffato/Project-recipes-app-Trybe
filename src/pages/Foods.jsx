@@ -4,7 +4,7 @@ import Header from '../components/Header';
 import useMainRecipe from '../hooks/useMainRecipe';
 
 export default function Foods() {
-  const { renderCards } = useMainRecipe('meals', 'meal');
+  const { renderCards } = useMainRecipe('meal');
 
   return (
     <main>

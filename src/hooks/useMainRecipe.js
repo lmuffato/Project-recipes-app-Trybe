@@ -1,13 +1,12 @@
 import React, { useEffect } from 'react';
 import RecipeCard from '../components/RecipeCard';
-import firstLetterUpperCase from '../helper/stringMethods';
+import getMealsOrDrinks from '../helper/mealsOrDrinksMethods';
 import { fetchName } from '../services/data';
 import useRecipe from './useRecipe';
 
-export default function useMainRecipe(foods, food) {
+export default function useMainRecipe(type) {
   const { recipe, setRecipe } = useRecipe();
-
-  const siteToFetch = food === 'drink' ? 'cocktail' : 'meal';
+  const { foods, site, foodUpperCase } = getMealsOrDrinks(type);
 
   const renderCards = () => {
     const maxLengthRecipes = 12;
@@ -15,8 +14,6 @@ export default function useMainRecipe(foods, food) {
       const filteredRecipe = recipe[foods].filter(
         (drink, index) => index < maxLengthRecipes,
       );
-
-      const foodUpperCase = firstLetterUpperCase(food);
 
       return filteredRecipe.map((recp, index) => (
         <RecipeCard
@@ -31,7 +28,7 @@ export default function useMainRecipe(foods, food) {
 
   useEffect(() => {
     const fetchMountRecipe = async () => {
-      const responseRecipe = await fetchName(siteToFetch);
+      const responseRecipe = await fetchName(site);
       setRecipe({ ...recipe, [foods]: responseRecipe[foods] });
     };
 

@@ -2,23 +2,24 @@ import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import useRecipe from './useRecipe';
 import { fetchIngredient, fetchName, fetchFirstLetter } from '../services/data';
+import getMealsOrDrinks from '../helper/mealsOrDrinksMethods';
 
 export default function useSearch() {
   const { setRecipe, recipe } = useRecipe();
+
+  const history = useHistory();
+  const { pathname } = history.location;
+
+  const food = pathname === '/comidas' ? 'meal' : 'drink';
+  const { foods, site, idFood } = getMealsOrDrinks(food);
 
   const [searchResult, setSearchResult] = useState('');
   const [selectedSearch, setSelectedSearch] = useState('');
   const [showSearch, setShowSearch] = useState(false);
 
-  const history = useHistory();
-  const { pathname } = history.location;
-
-  const recipeKeyName = pathname === '/comidas' ? 'meals' : 'drinks';
-  const foods = recipe[recipeKeyName];
+  const foodsRecipe = recipe[foods];
 
   const getRecipe = () => {
-    const site = pathname === '/comidas' ? 'meal' : 'cocktail';
-
     switch (selectedSearch) {
     case 'ingredient':
       return fetchIngredient(site, searchResult);
@@ -39,14 +40,14 @@ export default function useSearch() {
   };
 
   const getSearch = async () => {
-    const recipeResponse = await getRecipe();
-    setRecipe(recipeResponse);
+    const responseRecipe = await getRecipe();
+    setRecipe({ ...recipe, [foods]: responseRecipe[foods] });
   };
 
   const redirectToMealOrDrink = () => {
-    const idFood = pathname === '/comidas' ? 'idMeal' : 'idDrink';
-
-    if (foods.length === 1) history.push(`${pathname}/${foods[0][idFood]}`);
+    if (foodsRecipe.length === 1) {
+      history.push(`${pathname}/${foodsRecipe[0][idFood]}`);
+    }
   };
 
   return {
@@ -54,7 +55,7 @@ export default function useSearch() {
     setSelectedSearch,
     showSearch,
     setShowSearch,
-    foods,
+    foodsRecipe,
     getSearch,
     history,
     redirectToMealOrDrink,
