@@ -28,12 +28,12 @@ function App() {
         <UserProvider>
           <Switch>
             <Route exact path="/" component={ Login } />
-            <Route exact path="/comidas" component={ MainRecipes } />
             <Route exact path="/bebidas" component={ MainCocktails } />
-            <Route exact path="/comida/:id" component={ FoodDetails } />
-            <Route exact path="/comidas/:id/in-progress" component={ FoodInProgress } />
+            <Route exact path="/comidas" component={ MainRecipes } />
             <Route exact path="/bebidas/:id" component={ DrinkDetails } />
-            <Route exact path="/bebidas/:id" component={ DrinkInProgress } />
+            <Route exact path="/comidas/:id" component={ FoodDetails } />
+            <Route exact path="/comidas/:id/in-progress" component={ FoodInProgress } />
+            <Route exact path="/bebidas/:id/in-progress" component={ DrinkInProgress } />
             <Route exact path="/explorar" component={ Explore } />
             <Route exact path="/explorar/comidas" component={ ExploreFood } />
             <Route

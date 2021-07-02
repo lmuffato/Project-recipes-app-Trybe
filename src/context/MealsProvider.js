@@ -1,17 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import { useHistory } from 'react-router-dom';
 import MealsContext from './MealsContext';
 import { ApiByCategory,
-  ApiFilterByCategory, ApiFirstsResults } from '../services/theMealAPI';
+  ApiFilterByCategory, ApiFirstsResults, ApiRecipeDetail } from '../services/theMealAPI';
 
 function MealsProvider(props) {
   const [mealsObject, setMeals] = useState({});
   const [mealsCopyObject, setMealsCopy] = useState({});
   const [mealsCategories, setMealsCategories] = useState([]);
   const [currCategory, setCurrCategory] = useState('');
+  const [currMeal, setCurrMeal] = useState({});
+  const history = useHistory();
+
+  const getCurrMeal = async (id) => {
+    const recipe = await ApiRecipeDetail(id);
+    const { meals } = recipe;
+    const [meal] = meals;
+    setCurrMeal(meal);
+    history.push(`/comidas/${id}`);
+  };
 
   const setMealsByCategories = async (string) => {
-    if (currCategory === string) return setMeals(mealsCopyObject);
+    if (currCategory === string || string === 'All') return setMeals(mealsCopyObject);
     const results = await ApiFilterByCategory(string);
     setMeals(results);
   };
@@ -35,6 +46,8 @@ function MealsProvider(props) {
     mealsCategories,
     setCurrCategory,
     setMealsByCategories,
+    currMeal,
+    getCurrMeal,
   };
 
   const { children } = props;

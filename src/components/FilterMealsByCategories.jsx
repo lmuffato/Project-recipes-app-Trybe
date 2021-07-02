@@ -10,6 +10,17 @@ export default function FilterMealsByCategories() {
 
   return (
     <div>
+      <button
+        value="All"
+        type="button"
+        data-testid="All-category-filter"
+        onClick={ (e) => {
+          setMealsByCategories(e.target.value);
+          setCurrCategory(e.target.value);
+        } }
+      >
+        All
+      </button>
       {recipesArray.length > 1
       && recipesArray.map((category) => (
         <button

@@ -3,12 +3,23 @@ import CocktailsContext from '../context/CocktailsContext';
 
 export default function FilterCocktailsByCategories() {
   const { cocktailsCategories, setCurrCategory,
-    setMealsByCategories } = useContext(CocktailsContext);
+    setCocktailsByCategories } = useContext(CocktailsContext);
   const end = 5;
   const recipesArray = cocktailsCategories ? cocktailsCategories.slice(0, end) : [];
 
   return (
     <div>
+      <button
+        value="All"
+        type="button"
+        data-testid="All-category-filter"
+        onClick={ (e) => {
+          setCocktailsByCategories(e.target.value);
+          setCurrCategory(e.target.value);
+        } }
+      >
+        All
+      </button>
       {recipesArray.length > 1
       && recipesArray.map((category) => (
         <button

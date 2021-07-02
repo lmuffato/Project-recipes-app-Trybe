@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import { useHistory } from 'react-router-dom';
 import CocktailsContext from './CocktailsContext';
-import { ApiCocktailFirstItems, CocktailApiCategory,
+import { ApiCocktailFirstItems, ApiDetailsById, CocktailApiCategory,
   CocktailApiFilterByCategory } from '../services/theCockTailAPI';
 
 function CocktailsProvider(props) {
@@ -9,9 +10,19 @@ function CocktailsProvider(props) {
   const [cocktailsCopy, setCocktailsCopy] = useState({});
   const [cocktailsCategories, setCocktailsCategories] = useState([]);
   const [currCategory, setCurrCategory] = useState('');
+  const [currCocktail, setCurrCocktail] = useState({});
+  const history = useHistory();
 
-  const setMealsByCategories = async (string) => {
-    if (currCategory === string) return setCocktails(cocktailsCopy);
+  const getCurrCocktail = async (id) => {
+    const recipe = await ApiDetailsById(id);
+    const { drinks } = recipe;
+    const [currDrink] = drinks;
+    setCurrCocktail(currDrink);
+    history.push(`/bebidas/${id}`);
+  };
+
+  const setCocktailsByCategories = async (string) => {
+    if (currCategory === string || string === 'All') return setCocktails(cocktailsCopy);
     const results = await CocktailApiFilterByCategory(string);
     setCocktails(results);
   };
@@ -33,7 +44,9 @@ function CocktailsProvider(props) {
     setCocktails,
     cocktailsCategories,
     setCurrCategory,
-    setMealsByCategories,
+    setCocktailsByCategories,
+    currCocktail,
+    getCurrCocktail,
   };
   const { children } = props;
   return (
