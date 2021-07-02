@@ -6,15 +6,38 @@ import Header from '../components/Header';
 class Perfil extends React.Component {
   render() {
     const { history } = this.props;
+    const user = JSON.parse(localStorage.getItem('user'));
+
     return (
-      <div>
-        <Header title="Perfil" />
-        <span> email usuário from store</span>
-        <button type="submit">FEITAS</button>
-        <button type="submit">FAVORITAS</button>
-        <button type="submit">SAIR</button>
-        <Footer history={ history } />
-      </div>
+      <>
+        <header>
+          <Header title="Perfil" />
+        </header>
+        <div>
+          <span data-testid="profile-email">
+            {user.email}
+          </span>
+          <button
+            type="button"
+            data-testid="profile-done-btn"
+          >
+            Receitas Feitas
+          </button>
+          <button
+            type="button"
+            data-testid="profile-favorite-btn"
+          >
+            Receitas Favoritas
+          </button>
+          <button
+            type="button"
+            data-testid="profile-logout-btn"
+          >
+            Sair
+          </button>
+          <Footer history={ history } />
+        </div>
+      </>
     );
   }
 }
