@@ -1,16 +1,17 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import fetchFoodCategories from '../helpers/fetchInicialMeals';
+import fetchInitialMeals from '../helpers/fetchInicialMeals';
 import { requestInitialMeals } from '../redux/actions';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import RecipeCards from '../components/RecipeCards';
+import FilterButtons from '../components/CategoryButtons';
 
 function MainFood() {
   const dispatch = useDispatch();
   useEffect(() => {
     const getMeals = async () => {
-      const { meals } = await fetchFoodCategories();
+      const { meals } = await fetchInitialMeals();
       dispatch(requestInitialMeals(meals));
     };
     getMeals();
@@ -19,6 +20,7 @@ function MainFood() {
   return (
     <>
       <Header props={ { search: true, title: 'Comidas' } } />
+      <FilterButtons props="Food" />
       <RecipeCards />
       <Footer />
     </>

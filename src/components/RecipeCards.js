@@ -46,14 +46,12 @@ export default function RecipeCards() {
           const showLimit = 12;
           if (index < showLimit) {
             return (
-              <Link to={ `${ptType}/${id}` }>
+              <Link to={ `${ptType}/${id}` } key={ index }>
                 <div
-                  key={ index }
                   className="card"
                   data-testid={ `${index}-recipe-card` }
                 >
                   <img
-                    key={ `recipe-${index}` }
                     alt="recipe"
                     data-testid={ `${index}-card-img` }
                     className="recipe-card-image"
