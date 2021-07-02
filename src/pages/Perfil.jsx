@@ -4,6 +4,18 @@ import Footer from '../components/Footer';
 import Header from '../components/Header';
 
 class Perfil extends React.Component {
+  constructor() {
+    super();
+
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick() {
+    const { history } = this.props;
+    localStorage.clear();
+    history.push('/');
+  }
+
   render() {
     const { history } = this.props;
     const user = JSON.parse(localStorage.getItem('user'));
@@ -34,6 +46,7 @@ class Perfil extends React.Component {
           <button
             type="button"
             data-testid="profile-logout-btn"
+            onClick={ this.handleClick }
           >
             Sair
           </button>
