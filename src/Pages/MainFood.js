@@ -4,7 +4,6 @@ import fetchFoodCategories from '../helpers/fetchInicialMeals';
 import { requestInitialMeals } from '../redux/actions';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-// import RecipeCards from '../components/RecipeCards';
 import RecipeCategories from '../components/MainFoodMeals';
 
 function MainFood() {
@@ -21,7 +20,6 @@ function MainFood() {
     <>
       <Header props={ { search: true, title: 'Comidas' } } />
       <RecipeCategories />
-      {/* <RecipeCards /> */}
       <Footer />
     </>
   );

@@ -7,7 +7,8 @@ import Footer from '../components/Footer';
 function UserProfile() {
   const history = useHistory();
   const userEmailObject = JSON.parse(localStorage.getItem('user'));
-  const userEmail = Object.values(userEmailObject);
+  let userEmail = '';
+  if (userEmailObject) userEmail = Object.values(userEmailObject);
 
   const userLogout = () => {
     localStorage.clear();
