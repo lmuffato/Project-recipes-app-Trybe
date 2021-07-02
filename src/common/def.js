@@ -1,0 +1,4 @@
+export const EMAIL_LOGIN = 'EMAIL_LOGIN';
+export const PASSWORD_LOGIN = 'PASSWORD_LOGIN';
+export const INSERT_STORAGE = 'INSERT_STORAGE';
+export const REDIRECT = 'REDIRECT';

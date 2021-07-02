@@ -1,9 +1,13 @@
 import React from 'react';
+import Header from '../components/Header';
 
 export default function ReceitasFavoritas() {
   return (
     <div>
-      receitas favoritas
+      <Header
+        title="Receitas Favoritas"
+        enableSearchIcon={ false }
+      />
     </div>
   );
 }

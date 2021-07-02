@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Header from '../components/Header';
 
 export default function Comidas() {
   const [foods, setComidas] = useState([]);
@@ -39,10 +40,9 @@ export default function Comidas() {
     fetchCategories();
     fetchDrinks();
   }, []);
-
   return (
     <>
-      <h1>Comidas</h1>
+      <Header title="Comidas" />
       {categories.map((categoryName, index) => (
         index < NUMBER_OF_CATEGORIES ? (
           <button
