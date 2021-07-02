@@ -66,3 +66,13 @@
     transform: rotate(-10deg);
   }
 }
+
+footer {
+  align-items: center;
+  bottom: 0;
+  display: flex;
+  justify-content: space-between;
+  left: 0;
+  position: fixed;
+  width: 100%;
+}
