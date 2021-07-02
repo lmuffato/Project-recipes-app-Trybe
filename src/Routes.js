@@ -8,6 +8,7 @@ import ProfileScreen from './pages/ProfileScreen/ProfileScreen';
 import Login from './pages/LoginPage/Login';
 import RecipesDone from './pages/RecipesDone/RecipesDone';
 import RecipesFav from './pages/RecipesFav/RecipesFav';
+import NotFound from './pages/explore/NotFound';
 import Explore from './pages/explore/Explore';
 import ExploreFood from './pages/explore/ExploreFood';
 import ExploreDrinks from './pages/explore/ExploreDrinks';
@@ -31,9 +32,10 @@ function Routes() {
       />
       <Route
         exact
-        path="/explorar/comidas/origem"
+        path="/explorar/comidas/area"
         component={ ExploreFoodByOrigin }
       />
+      <Route path="/explorar/bebidas/area" component={ NotFound } />
       <Route
         path="/explorar/bebidas/ingredientes"
         component={ ExploreDrinksByIngredients }

@@ -5,7 +5,7 @@ import { useHistory } from 'react-router-dom';
 function ButtonsByType({ type }) {
   const history = useHistory();
   function handleExploreDirection(direction) {
-    history.push(`explorar/${type}/${direction}`);
+    history.push(`${type}/${direction}`);
   }
 
   return (
@@ -22,7 +22,7 @@ function ButtonsByType({ type }) {
           <button
             data-testid="explore-by-area"
             type="button"
-            onClick={ () => handleExploreDirection('Origem') }
+            onClick={ () => handleExploreDirection('area') }
           >
             Por Local de Origem
           </button>
@@ -31,7 +31,7 @@ function ButtonsByType({ type }) {
       <button
         data-testid="explore-surprise"
         type="button"
-        // onClick={ () => handleExploreDirection(type) }
+        // continuar por aqui onClick={ () => handleExploreDirection(type) }
       >
         Me Surpreenda!
       </button>
