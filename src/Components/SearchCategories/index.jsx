@@ -1,13 +1,15 @@
 import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Button } from 'react-bootstrap';
-import { getByCategoryName, getCaterories } from '../../services/fetchRecipes';
+import { getByCategoryName, getCaterories, getDrinks,
+  getMeals } from '../../services/fetchRecipes';
 import './styles.css';
 import recipesContext from '../../context/RecipesContext';
 
 export default function SearchCategories({ page }) {
   const NUMBER_CATEGORIES = 5;
   const [categories, setCategory] = useState([]);
+  const [targetBtn, setTargetBtn] = useState('');
   const { recipes, setRecipes } = useContext(recipesContext);
   useEffect(() => {
     getCaterories(page).then((result) => {
@@ -16,15 +18,30 @@ export default function SearchCategories({ page }) {
   }, [page]);
 
   const handleCategory = (evt) => {
-    evt.preventDefault();
     const { target: { value } } = evt;
-    getByCategoryName(page, value).then((result) => (
-      setRecipes({
-        ...recipes,
-        [page]: { results: result[page] },
-      })
-    ));
+    const { target: { innerHTML } } = evt;
+    if (innerHTML !== targetBtn) {
+      getByCategoryName(page, value).then((result) => (
+        setRecipes({
+          ...recipes,
+          [page]: { results: result[page] },
+        })
+      ));
+      setTargetBtn(innerHTML);
+    } else {
+      getMeals().then((response) => {
+        getDrinks().then((result) => {
+          setRecipes({
+            meals: { results: response },
+            drinks: { results: result },
+            isLoading: false,
+          });
+        });
+      });
+      setTargetBtn('');
+    }
   };
+
   return (
     <div className="categories-container">
       {categories.reduce((acc, curr, index) => (
