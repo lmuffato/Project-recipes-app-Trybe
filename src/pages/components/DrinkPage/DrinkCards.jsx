@@ -1,5 +1,6 @@
-import { arrayOf, func, object } from 'prop-types';
 import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { arrayOf, func, object } from 'prop-types';
 import { connect } from 'react-redux';
 import { getDrinks } from '../../../actions/drinks';
 
@@ -13,15 +14,17 @@ function DrinkCards(props) {
 
   return (
     <div>
-      { drinks.slice(0, size).map(({ strDrink, strDrinkThumb }, index) => (
-        <div key={ strDrink } data-testid={ `${index}-recipe-card` }>
-          <h2 data-testid={ `${index}-card-name` }>{strDrink}</h2>
-          <img
-            src={ strDrinkThumb }
-            alt={ strDrink }
-            data-testid={ `${index}-card-img` }
-          />
-        </div>
+      { drinks.slice(0, size).map(({ idDrink, strDrink, strDrinkThumb }, index) => (
+        <Link key={ strDrink } to={ `/bebidas/${idDrink}` }>
+          <div data-testid={ `${index}-recipe-card` }>
+            <h2 data-testid={ `${index}-card-name` }>{strDrink}</h2>
+            <img
+              src={ strDrinkThumb }
+              alt={ strDrink }
+              data-testid={ `${index}-card-img` }
+            />
+          </div>
+        </Link>
       )) }
     </div>
   );
