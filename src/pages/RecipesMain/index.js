@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react';
-/* import PropTypes from 'prop-types'; */
+import PropTypes from 'prop-types';
 import './recipesMain.css';
-import { fetchRecipesApi, fetchCategoriesApi } from '../../services/fetchApiMain';
+import { Link } from 'react-router-dom';
 import Header from '../../components/header';
 import MenuFoot from '../../components/menuFoot';
 
@@ -11,7 +11,7 @@ import { AppContext } from '../../context/AppContext';
 
 export default function RecipesMain({ match: { path } }) {
   const { context } = useContext(AppContext);
-  const { recipesList, setPageOrigin } = context;
+  const { recipesList, pageOrigin, setPageOrigin } = context;
 
   useEffect(() => {
     setPageOrigin(path === '/comidas' ? 'themealdb' : 'thecocktaildb');
@@ -24,11 +24,17 @@ export default function RecipesMain({ match: { path } }) {
       <div className="list-main-recipes">
         { recipesList && recipesList.map(
           (recipe, index) => (
-            <RecipeCard
-              recipe={ recipe }
+            <Link
+              to={ pageOrigin === 'themealdb'
+                ? `comidas/${recipe.idMeal}`
+                : `bebidas/${recipe.idDrink}` }
               key={ recipe.idMeal || recipe.idDrink }
-              index={ index }
-            />
+            >
+              <RecipeCard
+                recipe={ recipe }
+                index={ index }
+              />
+            </Link>
           ),
         )}
       </div>
@@ -36,3 +42,7 @@ export default function RecipesMain({ match: { path } }) {
     </div>
   );
 }
+
+RecipesMain.propTypes = {
+  match: PropTypes.object,
+}.isRequired;

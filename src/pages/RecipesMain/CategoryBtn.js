@@ -6,8 +6,8 @@ import { fetchByCategoryApi } from '../../services/fetchApiMain';
 export default function CategoryBtn({ category: { strCategory }, handleClickAll }) {
   const { context } = useContext(AppContext);
   const { setRecipesList, pageOrigin } = context;
-  const NUM_RECIPES_SHOWN = 12;
   const [toggle, setToggle] = useState(false);
+  const NUM_RECIPES_SHOWN = 12;
 
   function handleClick() {
     if (!toggle) {
@@ -37,4 +37,5 @@ export default function CategoryBtn({ category: { strCategory }, handleClickAll 
 
 CategoryBtn.propTypes = {
   strCategory: PropTypes.string,
+  handleClickAll: PropTypes.func,
 }.isRequired;
