@@ -5,6 +5,7 @@ import MainDrinks from '../pages/MainDrinks';
 import Profile from '../pages/Profile';
 import Explore from '../pages/Explore';
 import Header from '../components/Header';
+import NotFound from '../pages/NotFound';
 
 const componentWithHeader = () => (
   <section>
@@ -47,27 +48,32 @@ export default [
   {
     path: '/explorar/comidas',
     component: componentWithHeader,
-    exact: false,
+    exact: true,
   },
   {
     path: '/explorar/bebidas',
     component: componentWithHeader,
-    exact: false,
+    exact: true,
   },
   {
     path: '/explorar/comidas/ingredientes',
     component: componentWithHeader,
-    exact: false,
+    exact: true,
   },
   {
     path: '/explorar/bebidas/ingredientes',
     component: componentWithHeader,
-    exact: false,
+    exact: true,
   },
   {
     path: '/explorar/comidas/area',
     component: componentWithHeader,
-    exact: false,
+    exact: true,
+  },
+  {
+    path: '/explorar/bebidas/area',
+    component: NotFound,
+    exact: true,
   },
   {
     path: '/perfil',
