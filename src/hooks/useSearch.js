@@ -5,8 +5,9 @@ import { fetchIngredient, fetchName, fetchFirstLetter } from '../services/data';
 import getMealsOrDrinks from '../helper/mealsOrDrinksMethods';
 
 export default function useSearch() {
-  const { setRecipe, recipe, setSearchedByCategory, searchedByCategory } =
-    useRecipe();
+  const {
+    setRecipe, recipe, setSearchedByCategory, searchedByCategory,
+  } = useRecipe();
 
   const history = useHistory();
   const { pathname } = history.location;

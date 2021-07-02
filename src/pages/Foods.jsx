@@ -4,7 +4,7 @@ import Header from '../components/Header';
 import useMainRecipe from '../hooks/useMainRecipe';
 
 export default function Foods() {
-  const { renderCards, setCategory, recipe } = useMainRecipe('meal');
+  const { renderCards, handleClickCategory, recipe } = useMainRecipe('meal');
   const { meals } = recipe.list;
 
   return (
@@ -12,18 +12,22 @@ export default function Foods() {
       <Header title="Comidas" searchIcon />
 
       <div>
+        <button
+          data-testid="All-category-filter"
+          type="button"
+          onClick={ handleClickCategory }
+        >
+          All
+        </button>
         {meals.map((category) => (
-          <label htmlFor={ category } key={ category }>
+          <button
+            key={ category }
+            data-testid={ `${category}-category-filter` }
+            type="button"
+            onClick={ handleClickCategory }
+          >
             {category.replace(category[0], category[0].toUpperCase())}
-            <input
-              data-testid={ `${category}-category-filter` }
-              type="radio"
-              name="category-radio"
-              value={ category }
-              id={ category }
-              onChange={ ({ target }) => setCategory(target.value) }
-            />
-          </label>
+          </button>
         ))}
       </div>
 

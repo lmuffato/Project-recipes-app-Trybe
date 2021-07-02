@@ -10,6 +10,25 @@ export default function useMainRecipe(type) {
   const { recipe, setRecipe, setSearchedByCategory } = useRecipe();
   const { foods, site, foodUpperCase } = getMealsOrDrinks(type);
   const [category, setCategory] = useState('');
+  const [toggleCategory, setToggleCategory] = useState(false);
+
+  const fetchAllCategories = async () => {
+    const responseRecipe = await fetchName(site);
+    const responseList = await fetchList(site);
+
+    const filteredList = responseList[foods].reduce((acc, cur, index) => {
+      if (index > maxList) return acc;
+      const curCategory = cur.strCategory;
+      const newAcc = acc.concat(curCategory);
+      return newAcc;
+    }, []);
+
+    setRecipe({
+      ...recipe,
+      [foods]: responseRecipe[foods],
+      list: { ...recipe.list, [foods]: filteredList },
+    });
+  };
 
   const renderCards = () => {
     const maxLengthRecipes = 12;
@@ -29,39 +48,44 @@ export default function useMainRecipe(type) {
     }
   };
 
+  const handleClickCategory = ({ target }) => {
+    const { innerText } = target;
+
+    if (innerText === category) {
+      setToggleCategory(true);
+      setCategory('');
+    }
+
+    setCategory(innerText);
+  };
+
   useEffect(() => {
-    const fetchUpdateRecipe = async () => {
-      setSearchedByCategory(true);
-      const updateRecipeByCategory = await fetchByCategory(site, category);
-      setRecipe({ ...recipe, [foods]: updateRecipeByCategory[foods] });
-    };
+    if (toggleCategory) {
+      setToggleCategory(false);
+      fetchAllCategories();
+    }
+  }, [toggleCategory]);
+
+  useEffect(() => {
+    if (category === 'All') {
+      fetchAllCategories();
+      return;
+    }
 
     if (category) {
+      const fetchUpdateRecipe = async () => {
+        setSearchedByCategory(true);
+        const updateRecipeByCategory = await fetchByCategory(site, category);
+        setRecipe({ ...recipe, [foods]: updateRecipeByCategory[foods] });
+      };
+
       fetchUpdateRecipe();
     }
   }, [category]);
 
   useEffect(() => {
-    const fetchMountRecipe = async () => {
-      const responseRecipe = await fetchName(site);
-      const responseList = await fetchList(site);
-
-      const filteredList = responseList[foods].reduce((acc, cur, index) => {
-        if (index > maxList) return acc;
-        const curCategory = cur.strCategory;
-        const newAcc = acc.concat(curCategory);
-        return newAcc;
-      }, []);
-
-      setRecipe({
-        ...recipe,
-        [foods]: responseRecipe[foods],
-        list: { ...recipe.list, [foods]: filteredList },
-      });
-    };
-
-    fetchMountRecipe();
+    fetchAllCategories();
   }, []);
 
-  return { recipe, setRecipe, renderCards, setCategory };
+  return { recipe, setRecipe, renderCards, handleClickCategory };
 }
