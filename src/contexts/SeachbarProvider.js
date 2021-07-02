@@ -2,12 +2,15 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import SearchbarContext from './SearchbarContext';
 
-function Provider({ children }) {
-  const [mealOrDrink, setMealOrDrink] = useState('meal');
+function SearchbarProvider({ children }) {
+  const [mealOrDrink, setMealOrDrink] = useState(null);
+  const [recipes, setRecipes] = useState({});
 
   const contextValue = {
     mealOrDrink,
     setMealOrDrink,
+    recipes,
+    setRecipes,
   };
 
   return (
@@ -17,8 +20,8 @@ function Provider({ children }) {
   );
 }
 
-Provider.propTypes = {
+SearchbarProvider.propTypes = {
   children: PropTypes.node,
 }.isRequired;
 
-export default Provider;
+export default SearchbarProvider;

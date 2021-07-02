@@ -3,21 +3,21 @@ import { useHistory } from 'react-router';
 import SearchbarContext from '../contexts/SearchbarContext';
 
 function SearchBar() {
-  const [recipes, setRecipes] = useState({});
   const [name, setName] = useState('');
   const [request, setRequest] = useState('');
   const [letter, setLetter] = useState('');
   const history = useHistory();
 
-  const { mealOrDrink } = useContext(SearchbarContext);
+  const { mealOrDrink, setRecipes } = useContext(SearchbarContext);
 
   const handleChange = (type, word) => {
     setRequest(type);
     setLetter(word);
   };
 
-  const checkResult = (results) => {
+  const recipeDescription = (results) => {
     const data = results;
+    console.log(data);
     let drinkId;
     let mealId;
 
@@ -28,7 +28,7 @@ function SearchBar() {
       mealId = data.meals[0].idMeal;
       history.push(`/comidas/${mealId}`);
     } else {
-      return recipes;
+      return data;
     }
   };
 
@@ -40,7 +40,7 @@ function SearchBar() {
     await fetch(endpoint).then((data) => data.json())
       .then((results) => {
         setRecipes(results);
-        checkResult(results);
+        recipeDescription(results);
       });
   };
 
@@ -90,8 +90,6 @@ function SearchBar() {
       >
         Buscar
       </button>
-
-      {/* { [recipes].map((recipe, index) => <div key={ index }>{ console.log(recipe.meals) }</div>) } */}
     </div>
   );
 }

@@ -4,20 +4,26 @@ import LoginPage from './pages/LoginPage';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Footer from './compenents/Footer';
+// import MainRecepies from './compenents/MainRecepies';
+import SearchbarProvider from './contexts/SeachbarProvider';
 import UserProvider from './contexts/UserProvider';
 // import SearchBar from './compenents/SearchBar';
+import DrinkDescription from './compenents/DrinkDescription';
 
 function App() {
   return (
     <div className="meals">
       <UserProvider>
-        <Switch>
-          {/* <Route path="/comidas/:detalhes" component={} /> */}
-          <Route exact path="/" component={ LoginPage } />
-        </Switch>
-        {/* <SearchBar /> */}
+        <SearchbarProvider>
+          <Switch>
+            <Route path="/bebidas/:detalhes" component={ DrinkDescription } />
+            <Route exact path="/" component={ LoginPage } />
+          </Switch>
+          {/* <SearchBar /> */}
+          <DrinkDescription />
+          <Footer />
+        </SearchbarProvider>
       </UserProvider>
-      <Footer />
     </div>
   );
 }
