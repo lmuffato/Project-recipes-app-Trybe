@@ -4,6 +4,7 @@ import { Link, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import searchIcon from '../images/searchIcon.svg';
 import profileIcon from '../images/profileIcon.svg';
+import header from '../styles/header';
 import SearchBarForm from './search bar/SearchBarForm';
 
 function Header({ title }) {
@@ -18,7 +19,7 @@ function Header({ title }) {
   && location.pathname !== 'explorar'
   && location.pathname !== '/explorar/comidas/area') {
     return (
-      <div className="header-container">
+      <div className={ header }>
         <Link to="/perfil">
           <img
             data-testid="profile-top-btn"
@@ -33,7 +34,7 @@ function Header({ title }) {
   if (searchBar === true) {
     return (
       <>
-        <div className="header-container">
+        <div className={ header }>
           <Link to="/perfil">
             <img
               data-testid="profile-top-btn"
@@ -57,7 +58,7 @@ function Header({ title }) {
     );
   } if (searchBar === false) {
     return (
-      <div className="header-container">
+      <div className={ header }>
         <Link to="/perfil">
           <img
             data-testid="profile-top-btn"

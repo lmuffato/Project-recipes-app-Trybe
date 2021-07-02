@@ -1,11 +1,34 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Card } from 'react-bootstrap';
 import Header from '../components/Header';
 import Categorias from '../components/Categorias';
 import ContextComidas from '../provider/ContextComida';
+import Footer from '../components/Footer';
+import { filterCategoriaComidas } from '../services/apisCategories';
+import { mealsAPI } from '../services/apisMealsAndCocktails';
 
 function Comidas() {
-  const { data, categoria } = useContext(ContextComidas);
+  const { data, categoria, setData, texto } = useContext(ContextComidas);
+
+  const getApis = async () => {
+    const apiFoods = await filterCategoriaComidas(texto);
+    if (apiFoods !== null && apiFoods !== undefined) {
+      return setData(apiFoods);
+    }
+  };
+
+  const fetchapi = async () => {
+    const comidas = await mealsAPI();
+    setData(comidas);
+  };
+
+  useEffect(() => {
+    if (texto === 'All') {
+      fetchapi();
+    } else if (texto !== '') {
+      getApis();
+    }
+  }, [texto]);
 
   const foods = () => data.map((item, index) => {
     const magicNumber = 12;
@@ -15,6 +38,7 @@ function Comidas() {
           key={ item.idMeal }
           style={ { width: '10rem' } }
           data-testid={ `${index}-recipe-card` }
+          className="shadow m-1 rounded"
         >
           <Card.Img
             variant="top"
@@ -39,9 +63,10 @@ function Comidas() {
     <div>
       <Header title="Comidas" />
       <Categorias param={ categoria } />
-      <div>
+      <div className="d-flex w-100 flex-wrap justify-content-center">
         { foods() }
       </div>
+      <Footer />
     </div>
   );
 }

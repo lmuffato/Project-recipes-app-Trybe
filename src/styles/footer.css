@@ -1,0 +1,10 @@
+.footer-links {
+  background-color: rgb(122, 122, 122);
+  bottom: 0;
+  display: flex;
+  justify-content: space-around;
+  left: 0;
+  padding: 10px;
+  position: fixed;
+  width: 100%;
+}

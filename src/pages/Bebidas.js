@@ -1,11 +1,34 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Card } from 'react-bootstrap';
+import Footer from '../components/Footer';
 import Header from '../components/Header';
 import Categorias from '../components/Categorias';
 import ContextBebidas from '../provider/ContextBebida';
+import { filterCategoriaBebidas } from '../services/apisCategories';
+import { cocktailsAPI } from '../services/apisMealsAndCocktails';
 
 function Bebidas() {
-  const { data, categoria } = useContext(ContextBebidas);
+  const { data, categoria, setData, texto } = useContext(ContextBebidas);
+
+  const getApis = async () => {
+    const apiDrinks = await filterCategoriaBebidas(texto);
+    if (apiDrinks !== null && apiDrinks !== undefined) {
+      return setData(apiDrinks);
+    }
+  };
+
+  const fetchapi = async () => {
+    const bebidas = await cocktailsAPI();
+    setData(bebidas);
+  };
+
+  useEffect(() => {
+    if (texto === 'All') {
+      fetchapi();
+    } else if (texto !== '') {
+      getApis();
+    }
+  }, [texto]);
 
   const drinks = () => data.map((item, index) => {
     const magicNumber = 12;
@@ -15,6 +38,7 @@ function Bebidas() {
           key={ item.idDrink }
           style={ { width: '10rem' } }
           data-testid={ `${index}-recipe-card` }
+          className="shadow m-2 rounded"
         >
           <Card.Img
             variant="top"
@@ -39,9 +63,10 @@ function Bebidas() {
     <div>
       <Header title="Bebidas" />
       <Categorias param={ categoria } />
-      <div>
+      <div className="d-flex w-75 flex-wrap mx-auto">
         { drinks() }
       </div>
+      <Footer />
     </div>
   );
 }

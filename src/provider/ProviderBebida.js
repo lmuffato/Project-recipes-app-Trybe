@@ -7,21 +7,25 @@ import { categoriaBebida } from '../services/apisCategories';
 function ProviderBebidas({ children }) {
   const [data, setData] = useState([]);
   const [categoria, setCategoria] = useState([]);
+  const [texto, setTexto] = useState('');
+
+  const fetchapi = async () => {
+    const bebidas = await cocktailsAPI();
+    const categoriaBebidas = await categoriaBebida();
+
+    setData(bebidas);
+    setCategoria(categoriaBebidas);
+  };
 
   useEffect(() => {
-    const fetchapi = async () => {
-      const bebidas = await cocktailsAPI();
-      const categoriaBebidas = await categoriaBebida();
-
-      setData(bebidas);
-      setCategoria(categoriaBebidas);
-    };
     fetchapi();
   }, []);
 
   const context = {
     data,
     categoria,
+    texto,
+    setTexto,
     setData,
     setCategoria,
   };

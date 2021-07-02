@@ -24,9 +24,10 @@ const SearchBarForm = () => {
   );
 
   const handleSearchBarMark = () => (
-    <div>
+    <div className="d-flex">
       <Form.Group>
         <Form.Label>
+          Ingrediente
           <Form.Control
             type="radio"
             name="busca"
@@ -34,11 +35,11 @@ const SearchBarForm = () => {
             onChange={ handleChange }
             data-testid="ingredient-search-radio"
           />
-          Ingrediente
         </Form.Label>
       </Form.Group>
       <Form.Group>
         <Form.Label>
+          Nome
           <Form.Control
             type="radio"
             name="busca"
@@ -46,11 +47,11 @@ const SearchBarForm = () => {
             onChange={ handleChange }
             data-testid="name-search-radio"
           />
-          Nome
         </Form.Label>
       </Form.Group>
       <Form.Group>
         <Form.Label>
+          Primeira Letra
           <Form.Control
             type="radio"
             name="busca"
@@ -58,7 +59,6 @@ const SearchBarForm = () => {
             onChange={ handleChange }
             data-testid="first-letter-search-radio"
           />
-          Primeira Letra
         </Form.Label>
       </Form.Group>
     </div>
@@ -66,14 +66,16 @@ const SearchBarForm = () => {
 
   return (
     <div>
-      <Form>
+      <Form className="d-flex flex-column align-items-center bg-secondary">
         { handleSearchBarValue() }
-        { handleSearchBarMark() }
-        <Button
-          data-testid="exec-search-btn"
-        >
-          Busca
-        </Button>
+        <div className="d-flex justify-content-center align-items-center">
+          { handleSearchBarMark() }
+          <Button
+            data-testid="exec-search-btn"
+          >
+            Busca
+          </Button>
+        </div>
       </Form>
     </div>
   );

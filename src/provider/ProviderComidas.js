@@ -7,21 +7,25 @@ import { mealsAPI } from '../services/apisMealsAndCocktails';
 function ProviderComidas({ children }) {
   const [data, setData] = useState([]);
   const [categoria, setCategoria] = useState([]);
+  const [texto, setTexto] = useState('');
+
+  const fetchapi = async () => {
+    const comidas = await mealsAPI();
+    const categorias = await categoriaComida();
+
+    setData(comidas);
+    setCategoria(categorias);
+  };
 
   useEffect(() => {
-    const fetchapi = async () => {
-      const comidas = await mealsAPI();
-      const categorias = await categoriaComida();
-
-      setData(comidas);
-      setCategoria(categorias);
-    };
     fetchapi();
   }, []);
 
   const context = {
     data,
     setData,
+    texto,
+    setTexto,
     categoria,
     setCategoria,
   };
