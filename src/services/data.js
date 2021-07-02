@@ -10,7 +10,7 @@ export const fetchIngredient = async (site, ingredient) => {
   return result;
 };
 
-export const fetchName = async (site, name) => {
+export const fetchName = async (site, name = '') => {
   const URL = `https://www.the${site}db.com/api/json/v1/1/search.php?s=${name}`;
   const result = await genericFetch(URL);
   return result;
