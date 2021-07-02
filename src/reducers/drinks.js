@@ -1,6 +1,7 @@
 import { API_FETCH, SET_DRINKS_FILTER, STORE_DRINKS } from '../actions/drinks';
 
 const INITIAL_STATE = {
+  categories: [],
   drinks: [],
   loading: false,
   filter: '',

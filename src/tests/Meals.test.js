@@ -1,30 +1,45 @@
 import React from 'react';
 import { screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import Meals from '../pages/Meals';
 import renderWithRouterAndRedux from './renderWithRouterAndRedux';
 import { storeCategories, storeMeals } from '../actions/meals';
 
-describe('Test Meals page', () => {
-  afterAll(() => done());
+const mockStore = {
+  meals: {
+    categories: [],
+    meals: [],
+    loading: false,
+    filter: '',
+  },
+};
 
-  const mockStore = {
-    meals: {
-      categories: ['sushi'],
-      meals: [],
-      loading: false,
-    },
-  };
+const data = [
+  {
+    strMeal: 'Corba',
+    strMealThumb: 'https://www.themealdb.com/images/media/meals/58oia61564916529.jpg',
+  },
+  {
+    strMeal: 'Kumpir',
+    strMealThumb: 'https://www.themealdb.com/images/media/meals/mlchx21564916997.jpg',
+  },
+];
 
-  const data = [
+const beefData = {
+  meals: [
     {
-      strMeal: 'Corba',
-      strMealThumb: 'https://www.themealdb.com/images/media/meals/58oia61564916529.jpg',
+      strMeal: 'Beef and Mustard Pie',
+      strMealThumb: 'https://www.themealdb.com/images/media/meals/wrssvt1511556563.jpg',
     },
     {
-      strMeal: 'Kumpir',
+      strMeal: 'Beef and Oyster pie',
       strMealThumb: 'https://www.themealdb.com/images/media/meals/mlchx21564916997.jpg',
     },
-  ];
+  ],
+};
+
+describe('Test Meals page', () => {
+  afterAll(() => done());
 
   it('Test if pathname is \'/comidas\'', () => {
     const { history } = renderWithRouterAndRedux(<Meals />, mockStore);
@@ -53,5 +68,27 @@ describe('Test Meals page', () => {
     expect(getByRole('button', { name: /lamb/i })).toBeInTheDocument();
     expect(getByRole('button', { name: /miscellaneous/i })).toBeInTheDocument();
     expect(getByRole('button', { name: /all/i })).toBeInTheDocument();
+  });
+});
+
+describe('Test filter buttons', () => {
+  afterAll(() => done());
+  it('Test if filter button \'Beef\' fetchs new data', async () => {
+    const { findByText, findByRole } = renderWithRouterAndRedux(
+      <Meals />, mockStore,
+    );
+
+    global.fetch = jest.fn(() => (
+      Promise.resolve({
+        json: () => Promise.resolve(beefData),
+      })
+    ));
+
+    expect(await findByText(/Corba/i)).toBeInTheDocument();
+
+    const beefButton = await findByRole('button', { name: /beef/i });
+    userEvent.click(beefButton);
+
+    expect(await findByText(/Beef and Mustard Pie/i));
   });
 });
