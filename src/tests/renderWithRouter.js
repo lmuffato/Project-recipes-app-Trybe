@@ -1,15 +1,22 @@
 import { render } from '@testing-library/react';
 import { createMemoryHistory } from 'history';
 import React from 'react';
-import { Router } from 'react-router-dom';
+import { MemoryRouter } from 'react-router-dom';
+
+import RecipeProvider from '../context/RecipeProvider';
+import UserProvider from '../context/UserProvider';
 
 function renderWithRouter(componentToRender) {
   const historyMock = createMemoryHistory();
 
   const renderObject = render(
-    <Router history={ historyMock }>
-      {componentToRender}
-    </Router>,
+    <RecipeProvider>
+      <UserProvider>
+        <MemoryRouter history={ historyMock }>
+          {componentToRender}
+        </MemoryRouter>
+      </UserProvider>
+    </RecipeProvider>,
   );
 
   return {

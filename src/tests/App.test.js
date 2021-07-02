@@ -52,11 +52,11 @@ describe('Página de Login', () => {
       expect(submitBtn).toBeEnabled();
     });
     test('Ao clicar no botão, habiltiado, vai para "/comidas"', () => {
-      const { getByTestId, history } = renderAppWithRouter();
+      const { getByTestId } = renderAppWithRouter();
       userEvent.type(getByTestId(EMAIL_LOGIN_INPUT), 'ada-lovelance@trybe.com');
       userEvent.type(getByTestId(PASSWORD_LOGIN_INPUT), 'alanTuring1912');
       userEvent.click(getByTestId(BUTTON_LOGIN));
-      expect(history.location.pathname).toBe('/comidas');
+      expect(document.URL.includes('/comidas')).toBe(true);
     });
   });
 });
