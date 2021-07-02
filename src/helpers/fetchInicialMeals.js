@@ -1,4 +1,4 @@
-const url = 'https://www.themealdb.com/api/json/v1/1/search.php?s=a';
+const url = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
 
 const fetchFoodCategories = async () => {
   const response = await fetch(url);

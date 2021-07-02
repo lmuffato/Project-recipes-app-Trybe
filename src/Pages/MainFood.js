@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import fetchFoodCategories from '../helpers/fetchInicialMeals';
-import fetchDrinks from '../helpers/fetchInitialDrinks';
-import { requestInitialMeals, requestInitialDrinks } from '../redux/actions';
+import { requestInitialMeals } from '../redux/actions';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 // import RecipeCards from '../components/RecipeCards';
@@ -15,12 +14,7 @@ function MainFood() {
       const { meals } = await fetchFoodCategories();
       dispatch(requestInitialMeals(meals));
     };
-    const getDrinks = async () => {
-      const { drinks } = await fetchDrinks();
-      dispatch(requestInitialDrinks(drinks));
-    };
     getMeals();
-    getDrinks();
   });
 
   return (

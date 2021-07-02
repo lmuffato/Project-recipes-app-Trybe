@@ -4,8 +4,9 @@ import { useSelector } from 'react-redux';
 
 function RandomDrinks() {
   const data = useSelector((state) => state.searchReducer.initialDrinks);
+  const TWELVE = 12;
   const renderDrinks = () => (
-    data.map((e, index) => index < 12 && (
+    data.map((e, index) => index < TWELVE && (
       <div key={ index } data-testid={ `${index}-recipe-card` }>
         <img
           src={ e.strDrinkThumb }

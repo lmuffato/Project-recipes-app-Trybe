@@ -1,4 +1,4 @@
-const url = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=a';
+const url = 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=Ordinary Drink';
 
 const fetchDrinks = async () => {
   const response = await fetch(url);
