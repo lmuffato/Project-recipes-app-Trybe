@@ -5,13 +5,10 @@ import renderWithRouterAndContext from './helper/renders/renderWithRouterAndCont
 
 describe('Requirement 11', () => {
   it('changes to the Profile Page', () => {
-    const { getByRole, history } = renderWithRouterAndContext(
-      <Foods />,
-      {
-        value: { recipe: { meals: [], drinks: [] } },
-        initialEntries: ['/comidas'],
-      },
-    );
+    const { getByRole, history } = renderWithRouterAndContext(<Foods />, {
+      value: { meals: [], drinks: [], list: { meals: [], drinks: [] } },
+      initialEntries: ['/comidas'],
+    });
 
     const profilePageButton = getByRole('button', {
       name: /profile avatar/i,
@@ -25,13 +22,10 @@ describe('Requirement 11', () => {
 
 describe('Requirement 12', () => {
   it('shows and hides the search input', () => {
-    const { queryByRole, getByRole } = renderWithRouterAndContext(
-      <Foods />,
-      {
-        value: { recipe: { meals: [], drinks: [] } },
-        initialEntries: ['/comidas'],
-      },
-    );
+    const { queryByRole, getByRole } = renderWithRouterAndContext(<Foods />, {
+      value: { meals: [], drinks: [], list: { meals: [], drinks: [] } },
+      initialEntries: ['/comidas'],
+    });
 
     const searchButton = getByRole('img', {
       name: /search/i,

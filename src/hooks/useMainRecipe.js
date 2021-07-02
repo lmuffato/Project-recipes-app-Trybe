@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react';
 import RecipeCard from '../components/RecipeCard';
 import getMealsOrDrinks from '../helper/mealsOrDrinksMethods';
-import { fetchName } from '../services/data';
+import { fetchList, fetchName } from '../services/data';
 import useRecipe from './useRecipe';
+
+const maxList = 4;
 
 export default function useMainRecipe(type) {
   const { recipe, setRecipe } = useRecipe();
@@ -29,7 +31,20 @@ export default function useMainRecipe(type) {
   useEffect(() => {
     const fetchMountRecipe = async () => {
       const responseRecipe = await fetchName(site);
-      setRecipe({ ...recipe, [foods]: responseRecipe[foods] });
+      const responseList = await fetchList(site);
+
+      const filteredList = responseList[foods].reduce((acc, cur, index) => {
+        if (index > maxList) return acc;
+        const category = cur.strCategory;
+        const newAcc = acc.concat(category);
+        return newAcc;
+      }, []);
+
+      setRecipe({
+        ...recipe,
+        [foods]: responseRecipe[foods],
+        list: { ...recipe.list, [foods]: filteredList },
+      });
     };
 
     fetchMountRecipe();

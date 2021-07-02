@@ -4,11 +4,25 @@ import Header from '../components/Header';
 import useMainRecipe from '../hooks/useMainRecipe';
 
 export default function Drinks() {
-  const { renderCards } = useMainRecipe('drink');
+  const { renderCards, recipe } = useMainRecipe('drink');
+  const { drinks } = recipe.list;
 
   return (
     <main>
       <Header title="Bebidas" searchIcon />
+      <div>
+        {drinks.map((category) => (
+          <label htmlFor={ category } key={ category }>
+            {category.replace(category[0], category[0].toUpperCase())}
+            <input
+              data-testid={ `${category}-category-filter` }
+              type="radio"
+              name="category-radio"
+              id={ category }
+            />
+          </label>
+        ))}
+      </div>
       <div>{renderCards()}</div>
       <Footer />
     </main>

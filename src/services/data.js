@@ -21,3 +21,9 @@ export const fetchFirstLetter = async (site, firstLetter) => {
   const result = await genericFetch(URL);
   return result;
 };
+
+export const fetchList = async (site) => {
+  const URL = `https://www.the${site}db.com/api/json/v1/1/list.php?c=list`;
+  const result = await genericFetch(URL);
+  return result;
+};

@@ -58,9 +58,9 @@ const footerRenderTests = () => {
 };
 
 export default function getTestInfo(path = '/') {
-  const recipe = { meals: [], drinks: [] };
+  const recipe = { meals: [], drinks: [], list: { meals: [], drinks: [] } };
   const renderEmptyValue = {
-    value: { recipe },
+    value: { ...recipe },
     initialEntries: [path],
   };
 

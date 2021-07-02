@@ -1,7 +1,11 @@
 import React, { createContext, useState } from 'react';
 import { shape, object } from 'prop-types';
 
-const INITIAL_VALUE = { meals: [], drinks: [] };
+const INITIAL_VALUE = {
+  meals: [],
+  drinks: [],
+  list: { meals: [], drinks: [] },
+};
 
 export const RecipeContext = createContext();
 
