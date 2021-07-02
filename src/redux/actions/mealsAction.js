@@ -5,6 +5,7 @@ export const LOADING_MEAL_RECIPES = 'LOADING_MEAL_RECIPES';
 export const FINISHED_LOADING_MEAL_RECIPES = 'FINISHED_LOADING_MEAL_RECIPES';
 export const LOADING_MEAL_RECIPES_FAILED = 'LOADING_MEAL_RECIPES_FAILED';
 export const SET_MEALS = 'SET_MEALS';
+export const SET_SEARCH_BAR_MEALS = 'SET_SEARCH_BAR_MEALS';
 export const LOADING_MEAL_CATEGORIES = 'LOADING_MEAL_CATEGORIES';
 export const FINISHED_LOADING_MEAL_CATEGORIES = 'FINISHED_LOADING_MEAL_CATEGORIES';
 export const LOADING_MEAL_CATEGORIES_FAILED = 'LOADING_MEAL_CATEGORIES_FAILED';
@@ -28,20 +29,12 @@ function loadingRecipesFailed(payload) {
     payload,
   };
 }
-function setMeals(payload) {
-  return {
-    type: SET_MEALS,
-    payload,
-  };
-}
-export function getFoodRecipesAPIThunk(URL) {
-  const LAST_MEAL_INDEX = 12;
-  const onlyTheFirst12 = (_recipe, index) => index < LAST_MEAL_INDEX;
-  return async (dispatch) => {
+function APIThunk(setter) {
+  return (URL) => async (dispatch) => {
     dispatch(loadingRecipes());
     try {
       const response = await fetchAPI(URL);
-      dispatch(setMeals(response.meals.filter(onlyTheFirst12)));
+      dispatch(setter(response.meals));
     } catch (e) {
       console.error(e);
       dispatch(loadingRecipesFailed(e));
@@ -49,6 +42,20 @@ export function getFoodRecipesAPIThunk(URL) {
     dispatch(finishedLoadingRecipes());
   };
 }
+function setMeals(payload) {
+  return {
+    type: SET_MEALS,
+    payload,
+  };
+}
+function setSearchBarMeals(payload) {
+  return {
+    type: SET_SEARCH_BAR_MEALS,
+    payload,
+  };
+}
+export const getFoodRecipesAPIThunk = APIThunk(setMeals);
+export const getFoodSearchBarAPIThunk = APIThunk(setSearchBarMeals);
 
 function loadingCategories() {
   return {

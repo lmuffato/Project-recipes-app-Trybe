@@ -29,12 +29,16 @@ function Comidas() {
   }, [dispatch, selectedCategory]);
   const loadingRecipes = useSelector((state) => state.meals.loadingRecipes);
   const loadingCategories = useSelector((state) => state.meals.loadingCategories);
+  const meals = useSelector((state) => state.meals.recipes);
 
+  const LAST_MEAL_INDEX = 12;
+  const onlyTheFirst12 = (_recipe, index) => index < LAST_MEAL_INDEX;
   return (
     <section>
       <Header title="Comidas" />
       {loadingCategories ? <Loading /> : <MealsCategoryButtons />}
-      {loadingRecipes ? <Loading /> : <MealsCards />}
+      {loadingRecipes ? <Loading />
+        : <MealsCards meals={ meals.filter(onlyTheFirst12) } />}
       <footer>
         <Footer />
       </footer>

@@ -1,10 +1,8 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { arrayOf, shape, string } from 'prop-types';
 
-function MealsCards() {
-  const meals = useSelector((state) => state.meals.recipes);
-
+function MealsCards({ meals }) {
   return (
     <div className="meals-container">
       {meals.map((meal, index) => (
@@ -26,5 +24,15 @@ function MealsCards() {
     </div>
   );
 }
+
+MealsCards.propTypes = {
+  meals: arrayOf(
+    shape(
+      { idMeal: string,
+        strMeal: string,
+        strMealThumb: string },
+    ),
+  ).isRequired,
+};
 
 export default MealsCards;
