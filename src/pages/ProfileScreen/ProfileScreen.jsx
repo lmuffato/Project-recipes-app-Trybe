@@ -9,7 +9,6 @@ import Footer from '../../components/Footer';
 const ProfileScreen = () => {
   const { setLogout } = useContext(Context);
   const { email } = JSON.parse(localStorage.getItem('user'));
-  console.log(email);
 
   const handleClick = ({ target }) => {
     // console.log(target);

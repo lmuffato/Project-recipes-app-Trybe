@@ -36,9 +36,6 @@ function Routes() {
       <Route exact path="/explorar/bebidas/ingredientes" component={ ExplBeverageIng } />
       <Route exact path="/explorar/comidas/area" component={ ExploreFoodArea } />
       <Route exact path="/explorar" component={ Explore } />
-      <Route exact path="/perfil" component={ ProfileScreen } />
-      <Route exact path="/receitas-feitas" component={ RecipesDone } />
-      <Route exact path="/receitas-favoritas" component={ RecipesFav } />
     </Switch>
   );
 }
