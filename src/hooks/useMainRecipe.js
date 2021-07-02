@@ -32,7 +32,7 @@ export default function useMainRecipe(foods, food) {
   useEffect(() => {
     const fetchMountRecipe = async () => {
       const responseRecipe = await fetchName(siteToFetch);
-      setRecipe(responseRecipe);
+      setRecipe({ ...recipe, [foods]: responseRecipe[foods] });
     };
 
     fetchMountRecipe();
