@@ -1,11 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Button from 'react-bootstrap/Button';
 import { useHistory } from 'react-router';
+// import { ApiByRandom } from '../services/theMealAPI';
 import Header from '../components/Header';
+import MealsContext from '../context/MealsContext';
 
 export default function ExploreFood() {
   const history = useHistory();
-  const handleClick = ({ target }) => {
+  const { handleRandomMealDetails } = useContext(MealsContext);
+
+  const handleClick = async ({ target }) => {
     const { name } = target;
     if (name === 'ingredient') {
       history.push('/explorar/comidas/ingredientes');
@@ -13,7 +17,11 @@ export default function ExploreFood() {
     if (name === 'area') {
       history.push('/explorar/comidas/area');
     }
+    if (name === 'surprise') {
+      await handleRandomMealDetails();
+    }
   };
+
   return (
     <div>
       <Header>
