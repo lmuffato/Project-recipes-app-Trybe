@@ -23,7 +23,7 @@ export default function MealsCards() {
             data-testid={ `${index}-card-img` }
             alt={ recipe.strImageAttribution }
           />
-          <Card.Title data-testid={ `${index}-card-name` }>{recipe.strMeal}</Card.Title>
+          <h3 data-testid={ `${index}-card-name` }>{recipe.strMeal}</h3>
         </Card>
       ))}
     </div>
