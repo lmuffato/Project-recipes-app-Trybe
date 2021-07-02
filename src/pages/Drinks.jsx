@@ -8,18 +8,21 @@ import FilterButtons from '../components/FilterButtons';
 
 function Drinks() {
   const { filteredDrinks, fullDrinks } = useContext(SearchContext);
-  const { drinksCategories } = useContext(FilterContext);
+  const { drinksCategories, drinkFilterButton,
+    drinksByCategory } = useContext(FilterContext);
   const CARDS_NUMBER = 11;
   const CATEGORIES_NUMBER = 5;
   const [showRecipe, setShowRecipe] = useState([]);
 
   useEffect(() => {
-    if (!filteredDrinks || filteredDrinks.length > 0) {
+    if (drinkFilterButton !== '') {
+      setShowRecipe(drinksByCategory);
+    } else if (!filteredDrinks || filteredDrinks.length > 0) {
       setShowRecipe(filteredDrinks);
     } else {
       setShowRecipe(fullDrinks);
     }
-  }, [fullDrinks, filteredDrinks]);
+  }, [fullDrinks, filteredDrinks, drinksByCategory]);
 
   return (
     <div>

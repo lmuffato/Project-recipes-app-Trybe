@@ -8,16 +8,18 @@ import FilterContext from '../context/FilterContext';
 
 function Foods() {
   const { filteredRecipes, fullRecipes } = useContext(SearchContext);
-  const { mealsCategories } = useContext(FilterContext);
+  const { mealsCategories, filterButton, mealsByCategory } = useContext(FilterContext);
   const CARDS_NUMBER = 11;
   const CATEGORIES_NUMBER = 5;
   const [showRecipe, setShowRecipe] = useState([]);
 
   useEffect(() => {
-    if (!filteredRecipes || filteredRecipes.length > 0) {
+    if (filterButton !== '') {
+      setShowRecipe(mealsByCategory);
+    } else if (!filteredRecipes || filteredRecipes.length > 0) {
       setShowRecipe(filteredRecipes);
     } else { setShowRecipe(fullRecipes); }
-  }, [fullRecipes, filteredRecipes]);
+  }, [fullRecipes, filteredRecipes, mealsByCategory]);
 
   return (
     <div>
