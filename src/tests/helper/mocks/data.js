@@ -48,4 +48,42 @@ export const foodDataApi = {
   },
 };
 
-export const drinkDataApi = {};
+export const drinkDataApi = {
+  darkCaipirinha: {
+    drinks: [
+      {
+        idDrink: '17177',
+        strDrink: 'Dark Caipirinha',
+        strDrinkAlternate: null,
+        strTags: null,
+        strVideo: null,
+        strCategory: 'Cocktail',
+        strIBA: null,
+        strAlcoholic: 'Alcoholic',
+        strGlass: 'Highball glass',
+        strInstructions:
+          'Muddle the sugar into the lime wedges in an old-fashioned glass.\r\nFill the glass with ice cubes.\r\nPour the cachaca into the glass.\r\nStir well.',
+        strInstructionsES: null,
+        strInstructionsDE:
+          'Den Zucker in einem old-fashioned Glas in die Limettenspalten mischen.',
+        strInstructionsFR: null,
+        strInstructionsIT:
+          'Pestare lo zucchero con gli spicchi di lime in un bicchiere vecchio stile, riempire il bicchiere con cubetti di ghiaccio, versare la cachaca nel bicchiere e mescolare bene.',
+        'strInstructionsZH-HANS': null,
+        'strInstructionsZH-HANT': null,
+        strDrinkThumb:
+          'https://www.thecocktaildb.com/images/media/drink/uwstrx1472406058.jpg',
+        strIngredient1: 'demerara Sugar',
+        strIngredient2: 'Lime',
+        strIngredient3: 'Cachaca',
+        strMeasure1: '2 tsp ',
+        strMeasure2: '1',
+        strMeasure3: '2 1/2 oz',
+        strImageSource: null,
+        strImageAttribution: null,
+        strCreativeCommonsConfirmed: 'Yes',
+        dateModified: '2016-08-28 18:40:58',
+      },
+    ],
+  },
+};
