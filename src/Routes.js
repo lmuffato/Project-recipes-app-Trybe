@@ -21,7 +21,6 @@ import DrinksInProgress from './pages/recipes-main/Drinks/DrinksInProgress';
 function Routes() {
   return (
     <Switch>
-      <Route exact path="/" component={ InitPage } />
       <Route path="/perfil" component={ ProfileScreen } />
       <Route path="/receitas-feitas" component={ RecipesDone } />
       <Route path="/receitas-favoritas" component={ RecipesFav } />
@@ -42,7 +41,6 @@ function Routes() {
       <Route exact path="/explorar/bebidas" component={ ExploreDrinks } />
       <Route exact path="/explorar/comidas" component={ ExploreFood } />
       <Route path="/explorar" component={ Explore } />
-      =======
       <Route exact path="/" component={ Login } />
       <Route exact path="/comidas/:id" component={ DetailsOfFoods } />
       <Route exact path="/comidas" component={ Foods } />
