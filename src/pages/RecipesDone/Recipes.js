@@ -4,6 +4,7 @@ import './index.css';
 import Share from '../../images/shareIcon.svg';
 
 function Recipes() {
+  // const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'))
   const doneRecipes = [
     {
       id: '52771',
@@ -38,46 +39,86 @@ function Recipes() {
         { tagName}
       </Card.Text>));
   };
+  const handleFood = (recipe, index) => (
+    <Card style={ { width: '22rem' } } bsPrefix="card-img" key={ index }>
+      <Card.Img
+        variant="bottom"
+        src={ recipe.image }
+        data-testid={ `${index}-horizontal-image` }
+      />
+      <Card.Body>
+        <Button
+          variant="primary"
+          data-testid={ `${index}-horizontal-share-btn` }
+          src={ Share }
+        >
+          <Card.Img
+            variant="top"
+            src={ Share }
+          />
+        </Button>
+        <Card.Text data-testid={ `${index}-horizontal-top-text` }>
+          {` ${recipe.area} - ${recipe.category} `}
+        </Card.Text>
+        <Card.Title
+          data-testid={ `${index}-horizontal-name` }
+        >
+          {recipe.name}
+        </Card.Title>
+        <Card.Text data-testid={ `${index}-horizontal-done-date` }>
+          {`Feita em : ${recipe.doneDate}`}
+        </Card.Text>
+        <span>
+          {changeTags(recipe.tags, index)}
+        </span>
+      </Card.Body>
+    </Card>
+  );
+  const handleDrink = (recipe, index) => (
+    <Card style={ { width: '22rem' } } bsPrefix="card-img" key={ index }>
+      <Card.Img
+        variant="bottom"
+        src={ recipe.image }
+        data-testid={ `${index}-horizontal-image` }
+      />
+      <Card.Body>
+        <Button
+          variant="primary"
+          data-testid={ `${index}-horizontal-share-btn` }
+          src={ Share }
+        >
+          <Card.Img
+            variant="top"
+            src={ Share }
+          />
+        </Button>
+        {/* <Card.Text>
+          {`${recipe.alcoholicOrNot}`}
+        </Card.Text>
+        <Card.Text data-testid={ `${index}-horizontal-top-text` }>
+          {`${recipe.area} - ${recipe.category} `}
+        </Card.Text> */}
+        <Card.Text data-testid={ `${index}-horizontal-top-text` }>
+          {`${recipe.alcoholicOrNot}`}
+        </Card.Text>
+        <Card.Title
+          data-testid={ `${index}-horizontal-name` }
+        >
+          {recipe.name}
+        </Card.Title>
+        <Card.Text data-testid={ `${index}-horizontal-done-date` }>
+          {`Feita em: ${recipe.doneDate}`}
+        </Card.Text>
+        <span>
+          {changeTags(recipe.tags, index)}
+        </span>
+      </Card.Body>
+    </Card>
+  );
   return (
     <>
       {doneRecipes.map((recipe, index) => (
-        <Card style={ { width: '22rem' } } bsPrefix="card-img" key={ index }>
-          <Card.Img
-            variant="bottom"
-            src={ recipe.image }
-            data-testid={ `${index}-horizontal-image` }
-          />
-          <Card.Body>
-            <Button
-              variant="primary"
-              data-testid={ `${index}-horizontal-share-btn` }
-              src={ Share }
-            >
-              <Card.Img
-                variant="top"
-                src={ Share }
-              />
-            </Button>
-            <Card.Title
-              data-testid={ `${index}-horizontal-name` }
-            >
-              {recipe.name}
-            </Card.Title>
-            <Card.Text data-testid={ `${index}-horizontal-top-text` }>
-              {`Região/Categoria: ${recipe.area} - ${recipe.category} `}
-            </Card.Text>
-            <Card.Text data-testid={ `${index}-horizontal-done-date` }>
-              {`Realizado em: ${recipe.doneDate}`}
-            </Card.Text>
-            {/* <Card.Text>
-              {`Área: ${recipe.area}`}
-            </Card.Text> */}
-            <span>
-              Tags:
-              {changeTags(recipe.tags, index)}
-            </span>
-          </Card.Body>
-        </Card>
+        recipe.type === 'comida' ? handleFood(recipe, index) : handleDrink(recipe, index)
       ))}
     </>
   );
