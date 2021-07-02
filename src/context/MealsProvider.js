@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import MealsContext from './MealsContext';
 
-function MealsProvider(props) {
+function MealsProvider({ children }) {
   const [mealsObject, setMeals] = useState({});
 
   const context = {
@@ -10,7 +10,6 @@ function MealsProvider(props) {
     setMeals,
   };
 
-  const { children } = props;
   return (
     <MealsContext.Provider value={ context }>
       {children}

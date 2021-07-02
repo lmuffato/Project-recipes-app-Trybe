@@ -4,13 +4,13 @@ import UserContext from './UserContext';
 import MealsProvider from './MealsProvider';
 import CocktailsProvider from './CocktailsProvider';
 
-function UserProvider(props) {
+function UserProvider({ children }) {
   const [user, setUser] = useState({});
   const context = {
     user,
     setUser,
   };
-  const { children } = props;
+
   return (
     <CocktailsProvider>
       <MealsProvider>

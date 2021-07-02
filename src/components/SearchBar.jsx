@@ -9,7 +9,7 @@ import {
   ApiByCocktailFirstLetter } from '../services/theCockTailAPI';
 import { ApiByFirstLetter, ApiByIngredient, ApiByName } from '../services/theMealAPI';
 
-export default function SearchBar({ props }) {
+export default function SearchBar({ page }) {
   const [searchValue, setSearchValue] = useState({
     search: '',
     check: '',
@@ -19,7 +19,6 @@ export default function SearchBar({ props }) {
 
   const { setMeals } = useContext(MealsContext);
   const { setCocktails } = useContext(CocktailsContext);
-  const { match } = props;
   const firstLetter = 'first-letter';
 
   const pushMealDetails = (results) => {
@@ -47,33 +46,32 @@ export default function SearchBar({ props }) {
 
   const handleClick = async () => {
     const { search, check } = searchValue;
-    const uRl = match.path;
-    if (check === 'ingredient' && uRl === '/comidas') {
+    if (check === 'ingredient' && page === '/comidas') {
       const results = await ApiByIngredient(search);
       pushMealDetails(results);
       setMeals(results);
     }
-    if (check === 'ingredient' && uRl === '/bebidas') {
+    if (check === 'ingredient' && page === '/bebidas') {
       const results = await ApiByCocktailIngredient(search);
       pushCocktailDetails(results);
       setCocktails(results);
     }
-    if (check === 'name' && uRl === '/comidas') {
+    if (check === 'name' && page === '/comidas') {
       const results = await ApiByName(search);
       pushMealDetails(results);
       setMeals(results);
     }
-    if (check === 'name' && uRl === '/bebidas') {
+    if (check === 'name' && page === '/bebidas') {
       const results = await ApiByCocktailName(search);
       pushCocktailDetails(results);
       setCocktails(results);
     }
-    if (check === firstLetter && uRl === '/comidas') {
+    if (check === firstLetter && page === '/comidas') {
       const results = await ApiByFirstLetter(search);
       pushMealDetails(results);
       setMeals(results);
     }
-    if (check === firstLetter && uRl === '/bebidas') {
+    if (check === firstLetter && page === '/bebidas') {
       const results = await ApiByCocktailFirstLetter(search);
       pushCocktailDetails(results);
       setCocktails(results);
@@ -144,5 +142,5 @@ export default function SearchBar({ props }) {
 }
 
 SearchBar.propTypes = {
-  props: PropTypes.object,
+  page: PropTypes.object,
 }.isRequired;
