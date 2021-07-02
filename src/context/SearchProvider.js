@@ -40,10 +40,8 @@ function SearchProvider({ children }) {
   };
 
   const getFullRecipes = async () => {
-    setIsloading(true);
     const apiRecipes = await fetchFullRecipes();
     setFullRecipes(apiRecipes.meals);
-    setIsloading(false);
   };
 
   const getFullDrinksRecipes = async () => {
@@ -54,6 +52,7 @@ function SearchProvider({ children }) {
   useEffect(() => {
     setIsloading(true);
     getFullDrinksRecipes();
+    getFullRecipes();
     setIsloading(false);
   }, []);
 
@@ -69,7 +68,6 @@ function SearchProvider({ children }) {
         getRecipes,
         filteredDrinks,
         getDrinksRecipes,
-        getFullRecipes,
         fullRecipes,
         fullDrinks,
       } }

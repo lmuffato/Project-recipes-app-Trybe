@@ -3,35 +3,39 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import SearchContext from '../context/SearchContext';
 import DrinkCard from '../components/DrinkCard';
+import FilterContext from '../context/FilterContext';
+import FilterButtons from '../components/FilterButtons';
 
 function Drinks() {
   const { filteredDrinks, fullDrinks } = useContext(SearchContext);
+  const { drinksCategories, drinkFilterButton,
+    drinksByCategory } = useContext(FilterContext);
   const CARDS_NUMBER = 11;
-
+  const CATEGORIES_NUMBER = 5;
   const [showRecipe, setShowRecipe] = useState([]);
 
   useEffect(() => {
-    if (!filteredDrinks || filteredDrinks.length > 0) {
+    if (drinkFilterButton !== '') {
+      setShowRecipe(drinksByCategory);
+    } else if (!filteredDrinks || filteredDrinks.length > 0) {
       setShowRecipe(filteredDrinks);
-      console.log(filteredDrinks, '!filteredDrinks');
     } else {
       setShowRecipe(fullDrinks);
-      console.log(filteredDrinks, 'filteredDrinks');
     }
-  }, [fullDrinks, filteredDrinks]);
+  }, [fullDrinks, filteredDrinks, drinksByCategory, drinkFilterButton]);
 
-  // if (isLoading) {
-  //   return (
-  //     <div>
-  //       <Header title="Bebidas" searchImg="true" />
-  //       Loading...
-  //       <Footer />
-  //     </div>
-  //   );
-  // }
   return (
     <div>
       <Header title="Bebidas" searchImg="true" />
+      {drinksCategories.map((category, index) => (
+        index < CATEGORIES_NUMBER ? (
+          <FilterButtons
+            key={ index }
+            categoryName={ category.strCategory }
+            testId={ `${category.strCategory}-category-filter` }
+          />
+        ) : (null)
+      ))}
       {showRecipe ? showRecipe.map((recipes, index) => (
         index <= CARDS_NUMBER ? (
           <DrinkCard
