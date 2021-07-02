@@ -4,12 +4,12 @@ import { connect } from 'react-redux';
 import { getDrinks } from '../../../actions/drinks';
 
 function DrinkCards(props) {
-  const { fetchDrinks, drinks } = props;
+  const { fetchDrinks, drinks, filter } = props;
   const size = 12;
 
   useEffect(() => {
-    fetchDrinks();
-  }, [fetchDrinks]);
+    fetchDrinks(filter);
+  }, [fetchDrinks, filter]);
 
   return (
     <div>
@@ -34,10 +34,11 @@ DrinkCards.propTypes = {
 
 const mapStateToProps = (state) => ({
   drinks: state.drinks.drinks,
+  filter: state.drinks.filter,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchDrinks: () => dispatch(getDrinks()),
+  fetchDrinks: (filter) => dispatch(getDrinks(filter)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(DrinkCards);

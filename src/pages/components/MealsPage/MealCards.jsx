@@ -4,12 +4,12 @@ import { connect } from 'react-redux';
 import { getMeals } from '../../../actions/meals';
 
 function MealCards(props) {
-  const { fetchMeals, meals } = props;
+  const { fetchMeals, meals, filter } = props;
   const size = 12;
 
   useEffect(() => {
-    fetchMeals();
-  }, [fetchMeals]);
+    fetchMeals(filter);
+  }, [fetchMeals, filter]);
 
   return (
     <div>
@@ -34,10 +34,11 @@ MealCards.propTypes = {
 
 const mapStateToProps = (state) => ({
   meals: state.meals.meals,
+  filter: state.meals.filter,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchMeals: () => dispatch(getMeals()),
+  fetchMeals: (filter) => dispatch(getMeals(filter)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(MealCards);

@@ -22,10 +22,10 @@ export function getMealsCategories() {
   };
 }
 
-export function getMeals() {
+export function getMeals(filter) {
   return async (dispatch) => {
     dispatch(apiFetch());
-    const meals = await fetchMeals();
+    const meals = await fetchMeals(filter);
     dispatch(storeMeals(meals));
   };
 }

@@ -32,7 +32,7 @@ function CategoriesBtn(props) {
       <Row xs="3" md="4" lg="6">
         <Col>
           <Button
-            onClick={ () => setFilter('All') }
+            onClick={ () => setFilter('') }
             variant="outline-dark"
             data-testid="all-category-filter"
             type="button"

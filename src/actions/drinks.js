@@ -22,10 +22,10 @@ export function getDrinksCategories() {
   };
 }
 
-export function getDrinks() {
+export function getDrinks(filter) {
   return async (dispatch) => {
     dispatch(apiFetch());
-    const drinks = await fetchDrinks();
+    const drinks = await fetchDrinks(filter);
     dispatch(storeDrinks(drinks));
   };
 }
