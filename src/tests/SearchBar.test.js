@@ -7,6 +7,7 @@ import CocktailsProvider from '../context/CocktailsProvider';
 import MealsProvider from '../context/MealsProvider';
 import UserContext from '../context/UserContext';
 import MainRecipes from '../pages/MainRecipes';
+import { mockApiByName } from './mock/mockMealAPI';
 // import { mockApiByMainIngredient, mockApiByName } from './mock/mockMealAPI';
 
 // const renderWithRouter = (component) => {
@@ -16,8 +17,8 @@ import MainRecipes from '../pages/MainRecipes';
 //   });
 // };
 
-const renderWithRouterAndContext = (ui, { providerProps, route = '/' } = {}) => {
-  window.history.pushState({}, 'Login Page', route);
+const renderWithRouterAndContext = (ui, { providerProps, route = '/comidas' } = {}) => {
+  window.history.pushState({}, 'Main Recipes', route);
   const history = createMemoryHistory();
   return ({
     ...render(
@@ -82,90 +83,90 @@ describe('test if SearchBar component', () => {
   });
 });
 
-// describe('test if SearchBar component when renders the Api', () => {
-//   const mealsByIngredient = { meals: [{
-//     strMeal: 'Brown Stew Chicken',
-//     strMealThumb: 'https://www.themealdb.com/images/media/meals/sypxpx1515365095.jpg',
-//     idMeal: '52940' },
-//   { strMeal: 'Chicken & mushroom Hotpot',
-//     strMealThumb: 'https://www.themealdb.com/images/media/meals/uuuspp1511297945.jpg',
-//     idMeal: '52846' },
-//   { strMeal: 'Chicken Alfredo Primavera',
-//     strMealThumb: 'https://www.themealdb.com/images/media/meals/syqypv1486981727.jpg',
-//     idMeal: '52796' },
-//   { strMeal: 'Chicken Basquaise',
-//     strMealThumb: 'https://www.themealdb.com/images/media/meals/wruvqv1511880994.jpg',
-//     idMeal: '52934' },
-//   { strMeal: 'Chicken Congee',
-//     strMealThumb: 'https://www.themealdb.com/images/media/meals/1529446352.jpg',
-//     idMeal: '52956' },
-//   { strMeal: 'Chicken Handi',
-//     strMealThumb: 'https://www.themealdb.com/images/media/meals/wyxwsp1486979827.jpg',
-//     idMeal: '52795' },
-//   { strMeal: 'Kentucky Fried Chicken',
-//     strMealThumb: 'https://www.themealdb.com/images/media/meals/xqusqy1487348868.jpg',
-//     idMeal: '52813' },
-//   { strMeal: 'Kung Pao Chicken',
-//     strMealThumb: 'https://www.themealdb.com/images/media/meals/1525872624.jpg',
-//     idMeal: '52945' },
-//   { strMeal: 'Pad See Ew',
-//     strMealThumb: 'https://www.themealdb.com/images/media/meals/uuuspp1468263334.jpg',
-//     idMeal: '52774' },
-//   { strMeal: 'Piri-piri chicken and slaw',
-//     strMealThumb: 'https://www.themealdb.com/images/media/meals/hglsbl1614346998.jpg',
-//     idMeal: '53039' },
-//   { strMeal: 'Thai Green Curry',
-//     strMealThumb: 'https://www.themealdb.com/images/media/meals/sstssx1487349585.jpg',
-//     idMeal: '52814' }] };
+describe('test if SearchBar component when renders the Api', () => {
+  // const mealsByIngredient = { meals: [{
+  //   strMeal: 'Brown Stew Chicken',
+  //   strMealThumb: 'https://www.themealdb.com/images/media/meals/sypxpx1515365095.jpg',
+  //   idMeal: '52940' },
+  // { strMeal: 'Chicken & mushroom Hotpot',
+  //   strMealThumb: 'https://www.themealdb.com/images/media/meals/uuuspp1511297945.jpg',
+  //   idMeal: '52846' },
+  // { strMeal: 'Chicken Alfredo Primavera',
+  //   strMealThumb: 'https://www.themealdb.com/images/media/meals/syqypv1486981727.jpg',
+  //   idMeal: '52796' },
+  // { strMeal: 'Chicken Basquaise',
+  //   strMealThumb: 'https://www.themealdb.com/images/media/meals/wruvqv1511880994.jpg',
+  //   idMeal: '52934' },
+  // { strMeal: 'Chicken Congee',
+  //   strMealThumb: 'https://www.themealdb.com/images/media/meals/1529446352.jpg',
+  //   idMeal: '52956' },
+  // { strMeal: 'Chicken Handi',
+  //   strMealThumb: 'https://www.themealdb.com/images/media/meals/wyxwsp1486979827.jpg',
+  //   idMeal: '52795' },
+  // { strMeal: 'Kentucky Fried Chicken',
+  //   strMealThumb: 'https://www.themealdb.com/images/media/meals/xqusqy1487348868.jpg',
+  //   idMeal: '52813' },
+  // { strMeal: 'Kung Pao Chicken',
+  //   strMealThumb: 'https://www.themealdb.com/images/media/meals/1525872624.jpg',
+  //   idMeal: '52945' },
+  // { strMeal: 'Pad See Ew',
+  //   strMealThumb: 'https://www.themealdb.com/images/media/meals/uuuspp1468263334.jpg',
+  //   idMeal: '52774' },
+  // { strMeal: 'Piri-piri chicken and slaw',
+  //   strMealThumb: 'https://www.themealdb.com/images/media/meals/hglsbl1614346998.jpg',
+  //   idMeal: '53039' },
+  // { strMeal: 'Thai Green Curry',
+  //   strMealThumb: 'https://www.themealdb.com/images/media/meals/sstssx1487349585.jpg',
+  //   idMeal: '52814' }] };
 
-//   it('redirects when returns just one recipe', async () => {
-//     const { history } = renderWithRouterAndContext(<MainRecipes />);
-//     const meals = await mockApiByName();
-//     const searchButton = screen.getByTestId(SEARCH_TOP_BUTTON);
-//     userEvent.click(searchButton);
+  it('redirects when returns just one recipe', async () => {
+    renderWithRouterAndContext(<MainRecipes />);
+    const meals = await mockApiByName();
+    const searchButton = screen.getByTestId(SEARCH_TOP_BUTTON);
+    userEvent.click(searchButton);
 
-//     const input = screen.getByTestId(SEARCH_INPUT);
-//     userEvent.type(input, VALID_NAME);
+    const input = screen.getByTestId(SEARCH_INPUT);
+    userEvent.type(input, VALID_NAME);
 
-//     const nameRadio = screen.getByTestId(NAME_SEARCH_RADIO);
-//     fireEvent.click(nameRadio);
+    const nameRadio = screen.getByTestId(NAME_SEARCH_RADIO);
+    fireEvent.click(nameRadio);
 
-//     const requestApiButton = screen.getByTestId(EXEC_SEARCH_BTN);
-//     userEvent.click(requestApiButton);
+    const requestApiButton = screen.getByTestId(EXEC_SEARCH_BTN);
+    userEvent.click(requestApiButton);
 
-//     const newMeals = { meals: [
-//       {
-//         idMeal: '52771',
-//         strMeal: 'Spicy Arrabiata Penne',
-//         strMealThumb: 'https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg',
-//       },
-//     ],
-//     };
-//     expect(history.location.pathname).toBe('/comidas/52771');
-//     expect(meals).toMatchObject(newMeals);
-//   });
+    const newMeals = { meals: [
+      {
+        idMeal: '52771',
+        strMeal: 'Spicy Arrabiata Penne',
+        strMealThumb: 'https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg',
+      },
+    ],
+    };
+    expect(window.location.pathname).toBe('/comidas/52771');
+    expect(meals).toMatchObject(newMeals);
+  });
 
-//   it('test the rendering of api elements', async () => {
-//     renderWithRouterAndContext(<MainRecipes />);
-//     const requestApi = await mockApiByMainIngredient();
-//     const searchButton = screen.getByTestId(SEARCH_TOP_BUTTON);
-//     userEvent.click(searchButton);
+  // it('test the rendering of api elements', async () => {
+  //   renderWithRouterAndContext(<MainRecipes />, { route: '/comidas' });
+  //   const requestApi = await mockApiByMainIngredient();
+  //   const searchButton = screen.getByTestId(SEARCH_TOP_BUTTON);
+  //   userEvent.click(searchButton);
 
-//     const input = screen.getByTestId(SEARCH_INPUT);
-//     userEvent.type(input, 'chicken');
+  //   const input = screen.getByTestId(SEARCH_INPUT);
+  //   userEvent.type(input, 'chicken');
 
-//     const nameRadio = screen.getByTestId(NAME_SEARCH_RADIO);
-//     fireEvent.click(nameRadio);
+  //   const nameRadio = screen.getByTestId(NAME_SEARCH_RADIO);
+  //   fireEvent.click(nameRadio);
 
-//     const requestApiButton = screen.getByTestId(EXEC_SEARCH_BTN);
-//     userEvent.click(requestApiButton);
+  //   const requestApiButton = screen.getByTestId(EXEC_SEARCH_BTN);
+  //   userEvent.click(requestApiButton);
 
-//     const length = 11;
-//     const cardsTitles = screen.getAllByRole('heading', { level: 3 });
-//     console.log(cardsTitles);
-//     expect(cardsTitles.length).toBe(length);
-//     // const cardsImages = screen.getAllByRole('img');
-//     // expect(cardsImages.length).toBe(length);
-//     expect(requestApi).toMatchObject(mealsByIngredient);
-//   });
-// });
+  //   const length = 11;
+  //   const cardsTitles = screen.getAllByRole('heading', { level: 3 });
+  //   console.log(cardsTitles);
+  //   expect(cardsTitles.length).toBe(length);
+  //   // const cardsImages = screen.getAllByRole('img');
+  //   // expect(cardsImages.length).toBe(length);
+  //   expect(requestApi).toMatchObject(mealsByIngredient);
+  // });
+});
