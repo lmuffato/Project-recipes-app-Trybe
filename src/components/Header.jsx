@@ -16,7 +16,7 @@ class Header extends React.Component {
           </button>
         </Link>
         <h1 data-testid="page-title">{title}</h1>
-        {children}
+        {children !== undefined ? children : <div /> }
       </header>
     );
   }
@@ -24,7 +24,11 @@ class Header extends React.Component {
 
 Header.propTypes = {
   title: PropTypes.string.isRequired,
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node,
+};
+
+Header.defaultProps = {
+  children: false,
 };
 
 export default Header;
