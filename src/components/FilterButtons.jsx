@@ -4,12 +4,18 @@ import React, { useContext } from 'react';
 import FilterContext from '../context/FilterContext';
 
 function FilterButtons({ categoryName, testId }) {
-  const { setFilterButton, setDrinkFilterButton } = useContext(FilterContext);
+  const { setFilterButton, setDrinkFilterButton,
+    filterButton, drinkFilterButton } = useContext(FilterContext);
   const location = useLocation();
 
   const onClick = () => {
     if (location.pathname === '/comidas') {
-      setFilterButton(categoryName);
+      if (filterButton === categoryName) {
+        setFilterButton('');
+      } else { setFilterButton(categoryName); }
+    }
+    if (drinkFilterButton === categoryName) {
+      setDrinkFilterButton('');
     } else { setDrinkFilterButton(categoryName); }
   };
 

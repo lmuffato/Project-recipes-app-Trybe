@@ -22,7 +22,7 @@ function Drinks() {
     } else {
       setShowRecipe(fullDrinks);
     }
-  }, [fullDrinks, filteredDrinks, drinksByCategory]);
+  }, [fullDrinks, filteredDrinks, drinksByCategory, drinkFilterButton]);
 
   return (
     <div>
