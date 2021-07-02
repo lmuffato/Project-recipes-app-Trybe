@@ -23,7 +23,7 @@ export default function CocktailsCards() {
             variant="top"
             src={ recipe.strDrinkThumb }
             data-testid={ `${index}-card-img` }
-            alt={ recipe.strImageAttribution }
+            alt="recipe"
           />
           <h3 data-testid={ `${index}-card-name` }>{recipe.strDrink}</h3>
         </Card>

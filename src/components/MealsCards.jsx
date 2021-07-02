@@ -21,7 +21,7 @@ export default function MealsCards() {
             variant="top"
             src={ recipe.strMealThumb }
             data-testid={ `${index}-card-img` }
-            alt={ recipe.strImageAttribution }
+            alt="recipe"
           />
           <h3 data-testid={ `${index}-card-name` }>{recipe.strMeal}</h3>
         </Card>
