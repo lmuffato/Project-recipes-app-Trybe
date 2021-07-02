@@ -1,6 +1,8 @@
 export const ACTION_LOGIN = 'ACTION_LOGIN';
 export const ACTION_SEARCH = 'ACTION_SEARCH';
+export const ACTION_MAIN_FOOD_LIST = 'ACTION_MAIN_FOOD_LIST';
 export const ACTION_DETAILS = 'ACTION_DETAILS';
+export const ACTION_MAIN_DRINK = 'ACTION_MAIN_DRINK';
 
 export const actionLogin = (email, password) => ({
   type: ACTION_LOGIN,
@@ -12,6 +14,16 @@ export const actionSearch = (value, item) => ({
   type: ACTION_SEARCH,
   data: value,
   item,
+});
+
+export const requestInitialMeals = (mealsList) => ({
+  type: ACTION_MAIN_FOOD_LIST,
+  mealsList,
+});
+
+export const requestInitialDrinks = (drinksList) => ({
+  type: ACTION_MAIN_DRINK,
+  drinksList,
 });
 
 export const actionDetails = (value) => ({

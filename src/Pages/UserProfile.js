@@ -7,7 +7,8 @@ import Footer from '../components/Footer';
 function UserProfile() {
   const history = useHistory();
   const userEmailObject = JSON.parse(localStorage.getItem('user'));
-  const userEmail = Object.values(userEmailObject);
+  let userEmail = '';
+  if (userEmailObject) userEmail = Object.values(userEmailObject);
 
   const userLogout = () => {
     localStorage.clear();
@@ -19,7 +20,7 @@ function UserProfile() {
       <Header props={ { search: false, title: 'Perfil' } } />
       <main className="main-container">
         <section className="main-explore">
-          <h3 data-testid="profile-email">{userEmail}</h3>
+          { userEmail && <h3 data-testid="profile-email">{userEmail}</h3>}
           <Button
             variant="light"
             size="lg"
