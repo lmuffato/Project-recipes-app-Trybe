@@ -20,6 +20,7 @@ class Perfil extends React.Component {
           <button
             type="button"
             data-testid="profile-done-btn"
+            onClick={ () => history.push('/receitas-feitas') }
           >
             Receitas Feitas
           </button>
