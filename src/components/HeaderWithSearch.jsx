@@ -31,6 +31,11 @@ function HeaderWithSearch() {
     }
   };
 
+  const style = {
+    border: 'none',
+    background: 'none',
+  };
+
   return (
     <>
       <Link to="/perfil">
@@ -44,6 +49,7 @@ function HeaderWithSearch() {
       <button
         type="button"
         onClick={ () => handleSearch() }
+        style={ style }
       >
         <img
           src={ searchIcon }
