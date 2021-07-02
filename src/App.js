@@ -4,8 +4,6 @@ import ProviderBebidas from './provider/ProviderBebida';
 import ProviderComidas from './provider/ProviderComidas';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import DetalheReceitaComida from './components/DetalheReceitaComida';
-import DetalheReceitaBebida from './components/DetalheReceitaBebida';
 import {
   Login,
   Perfil,
@@ -21,8 +19,8 @@ import {
   Explorar,
   BebidasAtiva,
   ComidasAtiva,
-  // DetalhesComida,
-  // DetalhesBebida,
+  DetalhesComida,
+  DetalhesBebida,
 } from './pages';
 import mockMeals from './components/mock/mockMeals';
 import mockDrinks from './components/mock/mockDrinks';
@@ -31,14 +29,14 @@ function App() {
   const renderDetalheReceitaComida = (match) => {
     console.log('Match', match);
     return (
-      <DetalheReceitaComida props={ mockMeals } match={ match } />
+      <DetalhesComida props={ mockMeals } match={ match } />
     );
   };
 
   const renderDetalheReceitaBebida = (match) => {
     console.log('Match', match);
     return (
-      <DetalheReceitaBebida props={ mockDrinks } match={ match } />
+      <DetalhesBebida props={ mockDrinks } match={ match } />
     );
   };
 
