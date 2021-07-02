@@ -10,13 +10,15 @@ const INITIAL_STATE = {
   loadingCategories: false,
   loadingRecipesError: null,
   loadingCategoriesError: null,
+  recipesURL: null,
 };
 
 export default function loadingReducer(state = INITIAL_STATE, action) {
   switch (action.type) {
   case LOADING_RECIPES:
     return { ...state,
-      loadingRecipes: true };
+      loadingRecipes: true,
+      recipesURL: action.payload };
   case FINISHED_LOADING_RECIPES:
     return { ...state,
       loadingRecipes: false };

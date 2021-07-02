@@ -6,9 +6,10 @@ export const FINISHED_LOADING_CATEGORIES = 'FINISHED_LOADING_CATEGORIES';
 export const LOADING_CATEGORIES_FAILED = 'LOADING_CATEGORIES_FAILED';
 export const CHANGE_CATEGORY = 'CHANGE_CATEGORY';
 
-export function loadingRecipes() {
+export function loadingRecipes(payload) {
   return {
     type: LOADING_RECIPES,
+    payload,
   };
 }
 export function finishedLoadingRecipes(payload) {

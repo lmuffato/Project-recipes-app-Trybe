@@ -4,7 +4,6 @@ import { useHistory } from 'react-router';
 import profile from '../images/profileIcon.svg';
 import search from '../images/searchIcon.svg';
 import SearchBar from './SearchBar';
-// import BarraBuscar from './BarraBuscar';
 
 function Header({ title, show }) {
   const history = useHistory();
@@ -44,7 +43,7 @@ function Header({ title, show }) {
 
       </div>
       <div>
-        { click && <SearchBar />}
+        { click && <SearchBar type={ title } />}
       </div>
     </section>
   );

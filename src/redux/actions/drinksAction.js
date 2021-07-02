@@ -15,7 +15,7 @@ export const CHANGE_DRINK_CATEGORY = 'CHANGE_DRINK_CATEGORY';
 
 function APIThunk(setter) {
   return (URL) => async (dispatch) => {
-    dispatch(loadingRecipes());
+    dispatch(loadingRecipes(URL));
     try {
       const response = await fetchAPI(URL);
       dispatch(setter(response.drinks));

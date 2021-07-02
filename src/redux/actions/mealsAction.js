@@ -15,7 +15,7 @@ export const CHANGE_MEAL_CATEGORY = 'CHANGE_MEAL_CATEGORY';
 
 function APIThunk(setter) {
   return (URL) => async (dispatch) => {
-    dispatch(loadingRecipes());
+    dispatch(loadingRecipes(URL));
     try {
       const response = await fetchAPI(URL);
       dispatch(setter(response.meals));

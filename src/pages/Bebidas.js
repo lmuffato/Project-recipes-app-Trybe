@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { ALL_DRINKS_ENDPOINT, DRINKS_BY_CATEGORY_ENDPOINT } from '../services/drinks';
+import { ALL_DRINKS_ENDPOINT,
+  DRINKS_BY_CATEGORY_ENDPOINT } from '../services/drinks';
 import { getDrinkCategoriesAPIThunk,
   getDrinkRecipesAPIThunk } from '../redux/actions/drinksAction';
 import Header from '../components/Header';
@@ -32,15 +33,11 @@ function Bebidas() {
   const loadingCategories = useSelector((state) => state.loading.loadingCategories);
   const drinks = useSelector((state) => state.drinks.recipes);
 
-  const LAST_DRINK_INDEX = 12;
-  const onlyTheFirst12 = (_recipe, index) => index < LAST_DRINK_INDEX;
-
   return (
     <section>
       <Header title="Bebidas" />
       {loadingCategories ? <Loading /> : <DrinksCategoryButtons />}
-      {loadingRecipes ? <Loading />
-        : <DrinksCards drinks={ drinks.filter(onlyTheFirst12) } />}
+      {loadingRecipes ? <Loading /> : <DrinksCards drinks={ drinks } />}
       <footer>
         <Footer />
       </footer>
