@@ -26,10 +26,10 @@ function DrinkDetails() {
       const array = Object.entries(data[0]);
 
       array.forEach((item) => {
-        if (item[0].includes('strIngredient') && item[1] !== null) {
+        if (item[0].includes('strIngredient') && item[1] !== null && item[1] !== '') {
           ingredients.push(item[1]);
         }
-        if (item[0].includes('strMeasure')) {
+        if (item[0].includes('strMeasure') && item[1] !== null) {
           measure.push(item[1]);
         }
       });
@@ -51,29 +51,14 @@ function DrinkDetails() {
           <h3 data-testid="recipe-category">{strAlcoholic}</h3>
           <h2>Ingredients</h2>
           <ul>
-            { ingredients.map((item, index) => {
-              if (item !== '') {
-                if (measure[index].length > 1) {
-                  return (
-                    <li
-                      key={ index }
-                      data-testid={ `${index}-ingredient-name-and-measure` }
-                    >
-                      {`${item} - ${measure[index]}`}
-                    </li>
-                  );
-                }
-                return (
-                  <li
-                    key={ index }
-                    data-testid={ `${index}-ingredient-name-and-measure` }
-                  >
-                    {`${item} - ${measure[index]} un`}
-                  </li>
-                );
-              }
-              return '';
-            })}
+            { ingredients.map((item, index) => (
+              <li
+                key={ index }
+                data-testid={ `${index}-ingredient-name-and-measure` }
+              >
+                {`${item} ${(measure[index] ? `- ${measure}` : '')}`}
+              </li>
+            ))}
           </ul>
           <h2>Instructions</h2>
           <p data-testid="instructions">{strInstructions}</p>

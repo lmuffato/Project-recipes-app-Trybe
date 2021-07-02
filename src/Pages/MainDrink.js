@@ -4,7 +4,8 @@ import fetchDrinks from '../helpers/fetchInitialDrinks';
 import { requestInitialDrinks } from '../redux/actions';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import MainDrinksCards from '../components/MainDrinksCards';
+// import MainDrinksCards from '../components/MainDrinksCards';
+import RecipeCards from '../components/RecipeCards';
 
 function MainDrink() {
   const dispatch = useDispatch();
@@ -18,7 +19,7 @@ function MainDrink() {
   return (
     <>
       <Header props={ { search: true, title: 'Bebidas' } } />
-      <MainDrinksCards />
+      <RecipeCards />
       <Footer />
     </>
   );
