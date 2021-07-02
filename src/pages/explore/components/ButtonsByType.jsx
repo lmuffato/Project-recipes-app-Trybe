@@ -31,7 +31,7 @@ function ButtonsByType({ type }) {
       <button
         data-testid="explore-surprise"
         type="button"
-        // onClick={ () => handleExploreDirection(type) }
+        // continuar por aqui onClick={ () => handleExploreDirection(type) }
       >
         Me Surpreenda!
       </button>
