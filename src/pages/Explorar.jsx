@@ -10,9 +10,20 @@ class Explorar extends React.Component {
       <>
         <Header title="Explorar" />
         <div>
-          <h1>EXPLORAR</h1>
-          <button type="submit"> explorar comidas</button>
-          <button type="submit"> explorar bebidas </button>
+          <button
+            data-testid="explore-food"
+            type="submit"
+            onClick={ () => history.push('/explorar/comidas') }
+          >
+            Explorar Comidas
+          </button>
+          <button
+            data-testid="explore-drinks"
+            type="submit"
+            onClick={ () => history.push('/explorar/bebidas') }
+          >
+            Explorar Bebidas
+          </button>
           <Footer history={ history } />
         </div>
       </>

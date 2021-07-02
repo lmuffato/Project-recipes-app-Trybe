@@ -16,7 +16,7 @@ class Header extends React.Component {
           </button>
         </Link>
         <h1 data-testid="page-title">{title}</h1>
-        {children}
+        {children !== undefined ? children : <div /> }
       </header>
     );
   }
