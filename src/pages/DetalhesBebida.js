@@ -44,13 +44,46 @@ function DetalhesBebida({ match: { params: { id } } }) {
         strIngredient1,
         strIngredient2,
         strIngredient3,
+        strIngredient4,
+        strIngredient5,
+        strIngredient6,
+        strIngredient7,
+        strIngredient8,
+        strIngredient9,
+        strIngredient10,
+        strIngredient11,
+        strIngredient12,
+        strIngredient13,
+        strMeasure1,
+        strMeasure2,
+        strMeasure3,
+        strMeasure4,
+        strMeasure5,
+        strMeasure6,
+        strMeasure7,
+        strMeasure8,
+        strMeasure9,
+        strMeasure10,
+        strMeasure11,
+        strMeasure12,
+        strMeasure13,
         strDrinkThumb,
       } = acctualyDrink.drinks[0];
 
       const ingredients = [
-        strIngredient1,
-        strIngredient2,
-        strIngredient3,
+        `${strIngredient1} ${strMeasure1}`,
+        `${strIngredient2} ${strMeasure2}`,
+        `${strIngredient3} ${strMeasure3}`,
+        `${strIngredient4} ${strMeasure4}`,
+        `${strIngredient5} ${strMeasure5}`,
+        `${strIngredient6} ${strMeasure6}`,
+        `${strIngredient7} ${strMeasure7}`,
+        `${strIngredient8} ${strMeasure8}`,
+        `${strIngredient9} ${strMeasure9}`,
+        `${strIngredient10} ${strMeasure10}`,
+        `${strIngredient11} ${strMeasure11}`,
+        `${strIngredient12} ${strMeasure12}`,
+        `${strIngredient13} ${strMeasure13}`,
       ];
 
       return (
@@ -58,7 +91,6 @@ function DetalhesBebida({ match: { params: { id } } }) {
           <img alt="Produto" data-testid="recipe-photo" src={ strDrinkThumb } />
 
           <h2 data-testid="recipe-title">{ strDrink }</h2>
-          <h3>{ strAlcoholic }</h3>
 
           <div>
             <button type="button" data-testid="share-btn">
@@ -69,7 +101,7 @@ function DetalhesBebida({ match: { params: { id } } }) {
             </button>
           </div>
 
-          <p data-testid="recipe-category">{ strCategory }</p>
+          <p data-testid="recipe-category">{ `${strCategory} - ${strAlcoholic}` }</p>
 
           <ul>
             { ingredients.map((igredient, index) => (
