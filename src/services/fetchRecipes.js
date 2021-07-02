@@ -20,3 +20,21 @@ export async function getDrinks() {
   ), []);
   return reduceDrinks;
 }
+
+export async function getCaterories(page) {
+  const endpoint = (page === 'meals')
+    ? 'https://www.themealdb.com/api/json/v1/1/list.php?c=list'
+    : 'https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list';
+  const response = await fetch(endpoint);
+  const result = response.json();
+  return result;
+}
+
+export async function getByCategoryName(page, recipe) {
+  const endpoint = (page === 'meals')
+    ? `https://www.themealdb.com/api/json/v1/1/filter.php?c=${recipe}`
+    : `https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${recipe}`;
+  const response = await fetch(endpoint);
+  const result = response.json();
+  return result;
+}

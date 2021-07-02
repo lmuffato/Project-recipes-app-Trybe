@@ -6,6 +6,7 @@ import './styles.css';
 
 import profileIcon from '../../images/profileIcon.svg';
 import searchIcon from '../../images/searchIcon.svg';
+import SearchCategories from '../SearchCategories';
 
 function Header(props) {
   const { children } = props;
@@ -44,7 +45,8 @@ function Header(props) {
       }
       {
         serching ? (
-          <SearchBar page={ children.includes('Comida') ? 'meals' : 'drinks' } />) : ''
+          <SearchBar page={ children.includes('Comida') ? 'meals' : 'drinks' } />)
+          : <SearchCategories page={ children.includes('Comida') ? 'meals' : 'drinks' } />
       }
     </div>
   );

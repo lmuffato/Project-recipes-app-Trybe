@@ -11,11 +11,6 @@ function RecipesProvider({ children }) {
   };
 
   const [recipes, setRecipes] = useState(INITIAL_RECIPES);
-  const context = {
-    recipes,
-    setRecipes,
-  };
-
   useEffect(() => {
     getMeals().then((response) => {
       getDrinks().then((result) => {
@@ -27,6 +22,11 @@ function RecipesProvider({ children }) {
       });
     });
   }, []);
+
+  const context = {
+    recipes,
+    setRecipes,
+  };
 
   return (
     <RecipesContext.Provider value={ context }>

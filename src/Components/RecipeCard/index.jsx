@@ -5,13 +5,16 @@ import { Card } from 'react-bootstrap';
 import './styles.css';
 
 function RecipeCard({ recipesArray }) {
+  const NUMBER_OF_CARDS = 12;
   const { pathname } = useLocation();
 
   const toggleApiReturn = (pathname.includes('comidas')) ? 'strMeal' : 'strDrink';
 
   return (
     <div className="recipe-cards-parent">
-      { recipesArray.map((recipe, index) => (
+      { recipesArray.reduce((acc, curr, index) => (
+        index < NUMBER_OF_CARDS ? [...acc, curr] : acc
+      ), []).map((recipe, index) => (
         <Card
           className="card"
           data-testid={ `${index}-recipe-card` }
