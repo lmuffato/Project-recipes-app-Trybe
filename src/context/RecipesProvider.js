@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import RecipesContext from './RecipesContext';
+import { getDrinks, getMeals } from '../services/fetchRecipes';
 
 function RecipesProvider({ children }) {
   const INITIAL_RECIPES = {
@@ -14,6 +15,18 @@ function RecipesProvider({ children }) {
     recipes,
     setRecipes,
   };
+
+  useEffect(() => {
+    getMeals().then((response) => {
+      getDrinks().then((result) => {
+        setRecipes({
+          meals: { results: response },
+          drinks: { results: result },
+          isLoading: false,
+        });
+      });
+    });
+  }, []);
 
   return (
     <RecipesContext.Provider value={ context }>
