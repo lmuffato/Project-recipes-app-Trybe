@@ -33,7 +33,7 @@ describe('Header', () => {
     userEvent.click(profileButton);
     expect(history.location.pathname).toBe('/perfil');
   });
-  test('Verifica se exibe título "Comidas"', () => {
+  test('Verifica se exibe título "Bebidas"', () => {
     const { getByTestId } = renderFoodWithRouter();
     const headerTitle = getByTestId('page-title');
     expect(headerTitle).toBeInTheDocument();
