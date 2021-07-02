@@ -18,7 +18,11 @@ class Perfil extends React.Component {
 
   render() {
     const { history } = this.props;
-    const user = JSON.parse(localStorage.getItem('user'));
+    let email = '';
+    if (localStorage.user) {
+      const user = JSON.parse(localStorage.getItem('user'));
+      email = user.email;
+    }
 
     return (
       <>
@@ -27,7 +31,7 @@ class Perfil extends React.Component {
         </header>
         <div className="profile">
           <span data-testid="profile-email">
-            {user.email}
+            {email}
           </span>
           <button
             type="button"
