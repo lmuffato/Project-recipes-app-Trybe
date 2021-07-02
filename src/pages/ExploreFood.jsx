@@ -10,6 +10,9 @@ export default function ExploreFood() {
     if (name === 'ingredient') {
       history.push('/explorar/comidas/ingredientes');
     }
+    if (name === 'area') {
+      history.push('/explorar/comidas/area');
+    }
   };
   return (
     <div>
