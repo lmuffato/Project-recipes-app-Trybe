@@ -4,7 +4,7 @@ import Footer from '../components/Footer';
 import Header from '../components/Header';
 
 function Bebidas() {
-  const id = '15997';
+  const id = '15328';
   return (
     <div>
       <h1>Bebidas</h1>

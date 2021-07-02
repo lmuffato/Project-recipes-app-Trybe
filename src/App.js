@@ -22,21 +22,19 @@ import {
   DetalhesComida,
   DetalhesBebida,
 } from './pages';
-import mockMeals from './components/mock/mockMeals';
-import mockDrinks from './components/mock/mockDrinks';
 
 function App() {
   const renderDetalheReceitaComida = (match) => {
     console.log('Match', match);
     return (
-      <DetalhesComida props={ mockMeals } match={ match } />
+      <DetalhesComida match={ match } />
     );
   };
 
   const renderDetalheReceitaBebida = (match) => {
     console.log('Match', match);
     return (
-      <DetalhesBebida props={ mockDrinks } match={ match } />
+      <DetalhesBebida match={ match } />
     );
   };
 
