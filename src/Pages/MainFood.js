@@ -4,14 +4,15 @@ import fetchFoodCategories from '../helpers/fetchInicialCategories';
 import { requestCategoriesList } from '../redux/actions';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import RecipeCards from '../components/RecipeCards';
+// import RecipeCards from '../components/RecipeCards';
+import RecipeCategories from '../components/RecipeCategories';
 
 function MainFood() {
   const dispatch = useDispatch();
   useEffect(() => {
     const getCategories = async () => {
-      const { categories } = await fetchFoodCategories();
-      dispatch(requestCategoriesList(categories));
+      const { meals } = await fetchFoodCategories();
+      dispatch(requestCategoriesList(meals));
     };
     getCategories();
   });
@@ -19,7 +20,8 @@ function MainFood() {
   return (
     <>
       <Header props={ { search: true, title: 'Comidas' } } />
-      <RecipeCards />
+      <RecipeCategories />
+      {/* <RecipeCards /> */}
       <Footer />
     </>
   );
