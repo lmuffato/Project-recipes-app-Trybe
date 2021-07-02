@@ -51,7 +51,7 @@ class Login extends React.Component {
     const { email, password, validData } = this.state;
     return (
       <form>
-        <label htmlFor="email-input">
+        <label htmlFor="email">
           <input
             type="email"
             id="email"
@@ -60,7 +60,7 @@ class Login extends React.Component {
             onChange={ (e) => this.handleChange(e) }
           />
         </label>
-        <label htmlFor="password-input">
+        <label htmlFor="password">
           <input
             type="password"
             id="password"
@@ -84,7 +84,7 @@ class Login extends React.Component {
 }
 
 Login.propTypes = {
-  history: PropTypes.string.isRequired,
+  history: PropTypes.oneOfType([PropTypes.object]).isRequired,
 };
 
 export default Login;
