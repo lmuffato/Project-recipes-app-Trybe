@@ -6,7 +6,6 @@ function ReceitasProvider({ children }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [APIresponse, setAPIResponse] = useState();
-  const [favorite, setFavorite] = useState(false);
   const [APIFood, setAPIFood] = useState();
   const [APIDrink, setAPIDrink] = useState();
   const [selected, setSelected] = useState();
@@ -36,8 +35,6 @@ function ReceitasProvider({ children }) {
         fetchApi,
         password,
         setPassword,
-        favorite,
-        setFavorite,
         filter,
         setFilter,
         selected,

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Carousel from 'react-bootstrap/Carousel';
 import { Link } from 'react-router-dom';
-import Header from '../../../components/Header';
 import '../../../styles/RecipeDetails.css';
 import ComponentGen from '../../../components/RecipeDetailsComponents';
 
@@ -31,7 +30,7 @@ function Receita() {
     const ingredients = [];
     const quantity = [];
     Object.entries(info)
-      .filter((e) => e[0].indexOf('strIngredient') === 0 && e[1] !== '')
+      .filter((e) => e[0].indexOf('strIngredient') === 0 && e[1] !== '' && e[1] !== null)
       .map((e) => ingredients.push(e[1]));
     Object.entries(info)
       .filter((e) => e[0].indexOf('strMeasure') === 0 && e[1] !== '')
@@ -65,16 +64,14 @@ function Receita() {
   };
 
   return (
-    <>
-      <Header title="Receita" />
-      { loading === false
+
+    loading === false
       && <ComponentGen
         loading={ loading }
         info={ info }
         listCreator={ listCreator() }
         recomendList={ recomendList() }
-      />}
-    </>
+      />
   );
 }
 

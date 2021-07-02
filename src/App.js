@@ -18,6 +18,9 @@ import ExplorarComidasPorArea from
   './pages/Comidas/ExplorarComidas/ExplorarComidasPorArea';
 import ReceitaComida from './pages/Comidas/Receitas/ReceitaComida';
 import ReceitaBebidas from './pages/Bebidas/Receitas/ReceitaBebidas';
+import receitasFeitas from './pages/ReceitasFeitas';
+import receitasFavoritas from './pages/ReceitasFavoritas';
+import recipesInProgress from './pages/ReceitasEmAndamento';
 
 function App() {
   return (
@@ -27,26 +30,25 @@ function App() {
           <Route exact path="/" component={ Login } />
           <Route exact path="/comidas" component={ Comidas } />
           <Route exact path="/bebidas" component={ Bebidas } />
-          {/* <Route path={ `/comidas/${id - da - receita}/in-progress` } />
-          <Route path={ `/bebidas/${id - da - receita}/in-progress` } /> */}
+          <Route path="/comidas/:id/in-progress" component={ recipesInProgress } />
+          <Route path="/bebidas/:id/in-progress" component={ recipesInProgress } />
           <Route path="/comidas/:id" component={ ReceitaComida } />
           <Route path="/bebidas/:id" component={ ReceitaBebidas } />
           <Route exact path="/explorar" component={ Explorar } />
-          <Route path="/explorar/comidas/area" component={ ExplorarComidasPorArea } />
-          <Route path="/explorar/comidas" component={ ExplorarComidas } />
-          <Route path="/explorar/bebidas" component={ ExplorarBebidas } />
-
           <Route
             path="/explorar/comidas/ingredientes"
             component={ ExplorarComidasPorIngrediente }
           />
+          <Route path="/explorar/comidas/area" component={ ExplorarComidasPorArea } />
           <Route
             path="/explorar/bebidas/ingredientes"
             component={ ExplorarBebidasPorIngrediente }
           />
+          <Route path="/explorar/comidas" component={ ExplorarComidas } />
+          <Route path="/explorar/bebidas" component={ ExplorarBebidas } />
           <Route path="/perfil" component={ Perfil } />
-          {/* <Route path="/receitas-feitas" />
-          <Route path="/receitas-favoritas" /> */}
+          <Route path="/receitas-feitas" component={ receitasFeitas } />
+          <Route path="/receitas-favoritas" component={ receitasFavoritas } />
         </Switch>
       </ReceitasProvider>
     </div>

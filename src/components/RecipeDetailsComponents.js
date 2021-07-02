@@ -13,14 +13,42 @@ import VideoCtn from './RecipeComponents/VideoContainer';
 function ComponentGen(props) {
   const { info, listCreator, recomendList, favorite, setFavorite } = props;
   const { strMealThumb, strMeal, strCategory, strInstructions, strYoutube } = info;
-  const { strDrinkThumb, strDrink, strAlcoholic } = info;
+  const { strDrinkThumb, strDrink, strAlcoholic, idDrink, idMeal, strArea } = info;
+  let currentInfo = [];
+
+  if (idDrink !== undefined) {
+    currentInfo = [{
+      id: idDrink,
+      type: 'bebida',
+      area: '',
+      category: strCategory || '',
+      alcoholicOrNot: strAlcoholic,
+      name: strDrink,
+      image: strDrinkThumb,
+    }];
+  } else {
+    currentInfo = [{
+      id: idMeal,
+      type: 'comida',
+      area: strArea,
+      category: strCategory || '',
+      alcoholicOrNot: '',
+      name: strMeal,
+      image: strMealThumb,
+    }];
+  }
+
+  const infoReceiver = {
+    meals: {},
+    cocktails: {},
+  };
 
   return (
     <div className="recipe_details">
       <RecipeImage origin={ strMealThumb || strDrinkThumb } />
       <RecipeTitle title={ strMeal || strDrink } />
       <ShareBtn favorite={ favorite } setFavorite={ setFavorite } />
-      <FavBtn />
+      <FavBtn info={ currentInfo } />
       { strAlcoholic !== undefined
         ? <RecipeCatg category={ `${strCategory} ${strAlcoholic}` } />
         : <RecipeCatg category={ strCategory } />}
@@ -33,7 +61,7 @@ function ComponentGen(props) {
       <Carousel>
         {recomendList}
       </Carousel>
-      <BottomBtn />
+      <BottomBtn info={ info } inProgress={ infoReceiver } />
     </div>
   );
 }

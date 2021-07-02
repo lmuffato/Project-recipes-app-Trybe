@@ -1,13 +1,54 @@
-import React, { useContext } from 'react';
+import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import isFavorite from '../../images/blackHeartIcon.svg';
 import isNotFavorite from '../../images/whiteHeartIcon.svg';
-import ReceitasContext from '../../contexts/ReceitasContext';
 
-export default function FavBtn() {
-  const { favorite, setFavorite } = useContext(ReceitasContext);
+export default function FavBtn(props) {
+  const { info } = props;
+  const [favorite, setFavorite] = useState(false);
+  const id = window.location.pathname.match(/(\d+)/)[0];
+
+  useEffect(() => {
+    const isFavorito = () => {
+      const local = localStorage.getItem('favoriteRecipes');
+      if (local === '' || local === null) {
+        setFavorite(false);
+      } else {
+        const favorites = JSON.parse(local).find((e) => (e.id === id));
+        return (favorites !== undefined ? setFavorite(true) : setFavorite(false));
+      }
+    };
+    isFavorito();
+  }, [id]);
+
+  const localStoragePush = () => {
+    const local = localStorage.getItem('favoriteRecipes');
+    if (local === '' || local === null) {
+      localStorage.setItem('favoriteRecipes', JSON.stringify(info));
+    } else {
+      const favorites = JSON.parse(local);
+      const addFavorites = favorites.concat(info);
+      localStorage.setItem('favoriteRecipes', JSON.stringify(addFavorites));
+    }
+  };
+
+  const localStorageRetriever = () => {
+    const local = localStorage.getItem('favoriteRecipes');
+    if (local === '' || local === null) {
+      setFavorite(false);
+    } else {
+      const favorites = JSON.parse(local);
+      const toRemove = favorites.find((e) => (e.id === id));
+      const removed = favorites.filter((e) => e !== toRemove);
+      localStorage.setItem('favoriteRecipes', JSON.stringify(removed));
+    }
+  };
+
   const handleClick = () => {
     setFavorite(!favorite);
+    return (favorite === false ? localStoragePush() : localStorageRetriever());
   };
+
   const imageProvider = () => (
     favorite === true
       ? isFavorite
@@ -25,3 +66,7 @@ export default function FavBtn() {
     />
   );
 }
+
+FavBtn.propTypes = {
+  info: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string)).isRequired,
+};
