@@ -5,7 +5,6 @@ import renderWithRouterAndContext from './helper/renders/renderWithRouterAndCont
 import getTest from './helper/mocks/getTestInfo';
 
 const {
-  RecipeContext,
   renderEmptyValue,
   headerRenderTests,
   footerRenderTests,
@@ -16,7 +15,6 @@ describe('FoodArea Screen', () => {
     it('does Header and Footer tests', () => {
       const { getByTestId } = renderWithRouterAndContext(
         <FoodArea />,
-        RecipeContext,
         renderEmptyValue,
       );
 

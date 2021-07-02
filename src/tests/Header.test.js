@@ -1,14 +1,12 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
 import Foods from '../pages/Foods';
-import { RecipeContext } from '../store/RecipeContext';
 import renderWithRouterAndContext from './helper/renders/renderWithRouterAndContext';
 
 describe('Requirement 11', () => {
   it('changes to the Profile Page', () => {
     const { getByRole, history } = renderWithRouterAndContext(
       <Foods />,
-      RecipeContext,
       {
         value: { recipe: { meals: [], drinks: [] } },
         initialEntries: ['/comidas'],
@@ -29,7 +27,6 @@ describe('Requirement 12', () => {
   it('shows and hides the search input', () => {
     const { queryByRole, getByRole } = renderWithRouterAndContext(
       <Foods />,
-      RecipeContext,
       {
         value: { recipe: { meals: [], drinks: [] } },
         initialEntries: ['/comidas'],

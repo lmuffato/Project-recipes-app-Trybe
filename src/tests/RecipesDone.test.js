@@ -4,7 +4,6 @@ import renderWithRouterAndContext from './helper/renders/renderWithRouterAndCont
 import getTest from './helper/mocks/getTestInfo';
 
 const {
-  RecipeContext,
   renderEmptyValue,
   headerRenderTests,
   footerRenderTests,
@@ -17,7 +16,6 @@ describe('RecipesDone screen', () => {
     it('doesnt render the Header and Footer on the RecipesDone screen', () => {
       const { queryByTestId, getByTestId } = renderWithRouterAndContext(
         <RecipesDone />,
-        RecipeContext,
         renderEmptyValue,
       );
       itDoesntRenderSearchIcon(queryByTestId, getByTestId);

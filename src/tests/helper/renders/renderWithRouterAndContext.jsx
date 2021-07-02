@@ -1,4 +1,4 @@
-import React, { createContext } from 'react';
+import React from 'react';
 import { Router } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
 import { render } from '@testing-library/react';
@@ -6,7 +6,6 @@ import { RecipeContextProvider } from '../../../store/RecipeContext';
 
 const renderWithRouterAndContext = (
   Component,
-  Context = createContext(),
   {
     value = {},
     initialEntries = ['/'],

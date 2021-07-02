@@ -1,5 +1,3 @@
-import { RecipeContext } from '../../../store/RecipeContext';
-
 const testsIds = {
   headerTestIds: {
     profileTopButton: 'profile-top-btn',
@@ -67,7 +65,6 @@ export default function getTestInfo(path = '/') {
   };
 
   return {
-    RecipeContext,
     renderEmptyValue,
     headerRenderTests,
     footerRenderTests,

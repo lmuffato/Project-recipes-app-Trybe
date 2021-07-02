@@ -6,7 +6,6 @@ import getTest from './helper/mocks/getTestInfo';
 import { foodDataApi } from './helper/mocks/data';
 
 const {
-  RecipeContext,
   renderEmptyValue,
   headerRenderTests,
   footerRenderTests,
@@ -17,7 +16,6 @@ describe('Foods Screen', () => {
     it('does Header and Footer tests', () => {
       const { getByTestId } = renderWithRouterAndContext(
         <Foods />,
-        RecipeContext,
         renderEmptyValue,
       );
 
@@ -30,7 +28,6 @@ describe('Foods Screen', () => {
     it('checks API', async () => {
       const { getByRole } = renderWithRouterAndContext(
         <Foods />,
-        RecipeContext,
         renderEmptyValue,
       );
 

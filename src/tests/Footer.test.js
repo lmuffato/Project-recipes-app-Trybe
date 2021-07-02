@@ -4,14 +4,13 @@ import Foods from '../pages/Foods';
 import renderWithRouterAndContext from './helper/renders/renderWithRouterAndContext';
 import getTest from './helper/mocks/getTestInfo';
 
-const { RecipeContext, renderEmptyValue, testsIds } = getTest('/comidas');
+const { renderEmptyValue, testsIds } = getTest('/comidas');
 const { footerTestIds } = testsIds;
 
 describe('Requirement 19', () => {
   it('renders footer', () => {
     const { getByTestId } = renderWithRouterAndContext(
       <Foods />,
-      RecipeContext,
       renderEmptyValue,
     );
     const footer = getByTestId(footerTestIds.footer);
@@ -21,7 +20,6 @@ describe('Requirement 19', () => {
   it('renders Drinks Botton Button', () => {
     const { getByTestId } = renderWithRouterAndContext(
       <Foods />,
-      RecipeContext,
       renderEmptyValue,
     );
     const drinkBottonButton = getByTestId(footerTestIds.drinksBottonBtn);
@@ -31,7 +29,6 @@ describe('Requirement 19', () => {
   it('renders Explore Button', () => {
     const { getByTestId } = renderWithRouterAndContext(
       <Foods />,
-      RecipeContext,
       renderEmptyValue,
     );
     const exploreButton = getByTestId(footerTestIds.exploreBottonBtn);
@@ -41,7 +38,6 @@ describe('Requirement 19', () => {
   it('renders Drinks Botton Button', () => {
     const { getByTestId } = renderWithRouterAndContext(
       <Foods />,
-      RecipeContext,
       renderEmptyValue,
     );
     const foodBottonButton = getByTestId(footerTestIds.foodBottonBtn);
@@ -53,7 +49,6 @@ describe('Requirement 20', () => {
   it('expect Footer position to be fixed', () => {
     const { getByTestId } = renderWithRouterAndContext(
       <Foods />,
-      RecipeContext,
       renderEmptyValue,
     );
     const footer = getByTestId(footerTestIds.footer);
@@ -63,7 +58,6 @@ describe('Requirement 20', () => {
   it('expect Footer icons src to match', () => {
     const { getByTestId } = renderWithRouterAndContext(
       <Foods />,
-      RecipeContext,
       renderEmptyValue,
     );
     const drinkIcon = getByTestId(footerTestIds.drinkIcon);
@@ -79,7 +73,6 @@ describe('Requirement 22', () => {
   it('changes to Cocktails page', () => {
     const { getByRole, history } = renderWithRouterAndContext(
       <Foods />,
-      RecipeContext,
       renderEmptyValue,
     );
     const cocktailBtn = getByRole('button', {
@@ -95,7 +88,6 @@ describe('Requirement 23', () => {
   it('changes to Explore page', () => {
     const { getByRole, history } = renderWithRouterAndContext(
       <Foods />,
-      RecipeContext,
       renderEmptyValue,
     );
     const exploreBtn = getByRole('button', {
@@ -111,7 +103,6 @@ describe('Requirement 24', () => {
   it('change to Foods page', () => {
     const { getByRole, history } = renderWithRouterAndContext(
       <Foods />,
-      RecipeContext,
       renderEmptyValue,
     );
     const foodBtn = getByRole('button', {
