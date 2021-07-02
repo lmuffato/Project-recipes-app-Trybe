@@ -1,8 +1,10 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import Foods from './pages/recipes-main/Foods/Foods';
-import DetailsOfFoods from './pages/recipes-main/Foods/DetailsOfFood';
-import DetailsOfDrinks from './pages/recipes-main/Drinks/DetailsOfDrinks';
+// import DetailsOfFoods from './pages/recipes-main/Foods/DetailsOfFood';
+import DetailsFoodRecipe from './pages/DetailsPages/DetailsFoodRecipe';
+// import DetailsOfDrinks from './pages/recipes-main/Drinks/DetailsOfDrinks';
+import DetailsDrinkRecipe from './pages/DetailsPages/DetailsDrinkRecipe';
 import Drinks from './pages/recipes-main/Drinks/Drinks';
 import ProfileScreen from './pages/ProfileScreen/ProfileScreen';
 import Login from './pages/LoginPage/Login';
@@ -21,9 +23,9 @@ function Routes() {
   return (
     <Switch>
       <Route exact path="/" component={ Login } />
-      <Route exact path="/comidas/:id" component={ DetailsOfFoods } />
+      <Route exact path="/comidas/:id" component={ DetailsFoodRecipe } />
       <Route exact path="/comidas" component={ Foods } />
-      <Route exact path="/bebidas/:id" component={ DetailsOfDrinks } />
+      <Route exact path="/bebidas/:id" component={ DetailsDrinkRecipe } />
       <Route exact path="/bebidas" component={ Drinks } />
       <Route exact path="/perfil" component={ ProfileScreen } />
       <Route exact path="/receitas-feitas" component={ RecipesDone } />

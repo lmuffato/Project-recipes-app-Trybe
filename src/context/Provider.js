@@ -7,7 +7,8 @@ import {
   fetchCategoryFoods,
   fetchCategoryDrinks,
   fetchFilterFoods,
-  fetchFilterDrinks } from '../services/fetchApi';
+  fetchFilterDrinks,
+  fetchRecipeFood } from '../services/fetchApi';
 
 function Provider({ children }) {
   // useStates...
@@ -23,6 +24,7 @@ function Provider({ children }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [search, setSearch] = useState(false);
+  const [recipeFood, setRecipeFood] = useState({ });
 
   function getFoods() {
     const fetchApis = async () => {
@@ -74,6 +76,11 @@ function Provider({ children }) {
 
   const clickRecipeFood = (id) => {
     console.log(id);
+    const getRecipeFood = async (idFood) => {
+      const data = await fetchRecipeFood(idFood);
+      setRecipeFood(data);
+    };
+    getRecipeFood(id);
   };
 
   const clickRecipeDrinks = (id) => {
@@ -102,6 +109,8 @@ function Provider({ children }) {
     setPassword,
     search,
     setSearch,
+    recipeFood,
+    setRecipeFood,
   };
 
   return (
