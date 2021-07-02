@@ -27,6 +27,7 @@ class Perfil extends React.Component {
           <button
             type="button"
             data-testid="profile-favorite-btn"
+            onClick={ () => history.push('/receitas-favoritas') }
           >
             Receitas Favoritas
           </button>
