@@ -1,15 +1,16 @@
 import React from 'react';
+import ButtonsByType from './components/ButtonsByType';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 
-function ExplBeverageIng() {
+function ExploreFood() {
   return (
     <div>
       <Header />
-      Explorar Ingredientes
+      <ButtonsByType type="comidas" />
       <Footer />
     </div>
   );
 }
 
-export default ExplBeverageIng;
+export default ExploreFood;
