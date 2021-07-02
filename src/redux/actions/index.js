@@ -10,10 +10,9 @@ export const actionLogin = (email, password) => ({
   password,
 });
 
-export const actionSearch = (value, item) => ({
+export const actionSearch = (value) => ({
   type: ACTION_SEARCH,
   data: value,
-  item,
 });
 
 export const requestInitialMeals = (mealsList) => ({
@@ -62,32 +61,32 @@ export const fetchSearch = (type, text, currentPage) => async (dispatch) => {
     const res = await fetch(url);
     const data = await res.json();
     if (currentPage === 'comidas') {
-      dispatch(actionSearch(data.meals, 'meals'));
+      dispatch(actionSearch(data.meals));
     } else {
-      dispatch(actionSearch(data.drinks, 'drinks'));
+      dispatch(actionSearch(data.drinks));
     }
   } catch (error) {
     dispatch(actionSearch('error'));
   }
 };
 
-export const fetchById = (currentPage, id) => async (dispatch) => {
-  let url = '';
-  if (currentPage === 'comidas') {
-    url = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
-  } else {
-    url = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
-  }
+// export const fetchById = (currentPage, id) => async (dispatch) => {
+//   let url = '';
+//   if (currentPage === 'comidas') {
+//     url = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
+//   } else {
+//     url = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
+//   }
 
-  try {
-    const res = await fetch(url);
-    const data = await res.json();
-    if (currentPage === 'comidas') {
-      dispatch(actionDetails(data.meals));
-    } else {
-      dispatch(actionDetails(data.drinks));
-    }
-  } catch (error) {
-    dispatch(actionDetails('error'));
-  }
-};
+//   try {
+//     const res = await fetch(url);
+//     const data = await res.json();
+//     if (currentPage === 'comidas') {
+//       dispatch(actionDetails(data.meals));
+//     } else {
+//       dispatch(actionDetails(data.drinks));
+//     }
+//   } catch (error) {
+//     dispatch(actionDetails('error'));
+//   }
+// };
