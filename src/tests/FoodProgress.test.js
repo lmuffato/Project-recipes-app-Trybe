@@ -1,8 +1,8 @@
 import React from 'react';
 
 import FoodProgress from '../pages/FoodProgress';
-import renderWithRouterAndContext from '../helper/tests/renderWithRouterAndContext';
-import getTest from '../helper/tests/getTestInfo';
+import renderWithRouterAndContext from './helper/renders/renderWithRouterAndContext';
+import getTest from './helper/getTestInfo';
 
 const { headerRenderTests, footerRenderTests } = getTest(
   '/comidas/:id/in-progress',

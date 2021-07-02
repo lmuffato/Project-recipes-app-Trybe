@@ -2,8 +2,8 @@ import React from 'react';
 
 import userEvent from '@testing-library/user-event';
 import Login from '../pages/Login';
-import renderWithRouterAndContext from '../helper/tests/renderWithRouterAndContext';
-import getTest from '../helper/tests/getTestInfo';
+import renderWithRouterAndContext from './helper/renders/renderWithRouterAndContext';
+import getTest from './helper/getTestInfo';
 
 const { headerRenderTests, footerRenderTests } = getTest('/');
 const { itDoesntRenderHeader } = headerRenderTests();

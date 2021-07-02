@@ -1,8 +1,8 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
 import Foods from '../pages/Foods';
-import renderWithRouterAndContext from '../helper/tests/renderWithRouterAndContext';
-import getTestInfo from '../helper/tests/getTestInfo';
+import renderWithRouterAndContext from './helper/renders/renderWithRouterAndContext';
+import getTestInfo from './helper/getTestInfo';
 
 const { RecipeContext, renderEmptyValue, testsIds } = getTestInfo('/comidas');
 const { footerTestIds } = testsIds;

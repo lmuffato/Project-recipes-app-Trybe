@@ -1,8 +1,8 @@
 import React from 'react';
 
 import Foods from '../pages/Foods';
-import renderWithRouterAndContext from '../helper/tests/renderWithRouterAndContext';
-import getTest from '../helper/tests/getTestInfo';
+import renderWithRouterAndContext from './helper/renders/renderWithRouterAndContext';
+import getTest from './helper/getTestInfo';
 
 const {
   RecipeContext,

@@ -6,7 +6,7 @@ import Foods from '../pages/Foods';
 
 import { RecipeContext } from '../store/RecipeContext';
 
-import renderWithRouterAndContext from '../helper/tests/renderWithRouterAndContext';
+import renderWithRouterAndContext from './helper/renders/renderWithRouterAndContext';
 
 describe('Requirement 11', () => {
   it('changes to the Profile Page', () => {
