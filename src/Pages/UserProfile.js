@@ -19,7 +19,7 @@ function UserProfile() {
       <Header props={ { search: false, title: 'Perfil' } } />
       <main className="main-container">
         <section className="main-explore">
-          <h3 data-testid="profile-email">{userEmail}</h3>
+          { userEmail && <h3 data-testid="profile-email">{userEmail}</h3>}
           <Button
             variant="light"
             size="lg"
