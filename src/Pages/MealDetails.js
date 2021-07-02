@@ -1,17 +1,23 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchById } from '../redux/actions';
+import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { actionDetails } from '../redux/actions';
 import shareIcon from '../images/shareIcon.svg';
 import favoriteIcon from '../images/blackHeartIcon.svg';
 
 function MealDetails() {
   const id = window.location.href.split('/')[4];
   const dispatch = useDispatch();
-  const data = useSelector((state) => state.detailsReducer.data);
+  const [data, setData] = useState();
 
   useEffect(() => {
-    dispatch(fetchById('comidas', id));
-  }, [id]);
+    const mealDrinks = async () => {
+      const url = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
+      const { meals } = await fetch(url).then((r) => r.json());
+      setData(meals);
+      dispatch(actionDetails(meals));
+    };
+    mealDrinks();
+  }, []);
 
   const renderMealRecipe = () => {
     const ingredients = [];

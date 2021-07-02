@@ -1,6 +1,6 @@
 export const ACTION_LOGIN = 'ACTION_LOGIN';
 export const ACTION_SEARCH = 'ACTION_SEARCH';
-export const ACTION_DETAILS = 'ACTION_DETAILS';
+export const ACTION_DETAILS = 'ACTION_DRINK_DETAILS';
 
 export const actionLogin = (email, password) => ({
   type: ACTION_LOGIN,
@@ -79,3 +79,25 @@ export const fetchById = (currentPage, id) => async (dispatch) => {
     dispatch(actionDetails('error'));
   }
 };
+
+// export const fetchMealById = (id) => async (dispatch) => {
+//   const url = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
+//   try {
+//     const res = await fetch(url);
+//     const data = await res.json();
+//     dispatch(actionMealDetails(data.meals));
+//   } catch (error) {
+//     dispatch(actionMealDetails('error'));
+//   }
+// };
+
+// export const fetchDrinkById = (id) => async (dispatch) => {
+//   const url = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
+//   try {
+//     const res = await fetch(url);
+//     const data = await res.json();
+//     dispatch(actionDrinkDetails(data.drinks));
+//   } catch (error) {
+//     dispatch(actionDrinkDetails('error'));
+//   }
+// };

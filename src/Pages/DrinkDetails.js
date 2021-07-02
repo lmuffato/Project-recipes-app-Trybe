@@ -1,17 +1,23 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchById } from '../redux/actions';
+import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { actionDetails } from '../redux/actions';
 import shareIcon from '../images/shareIcon.svg';
 import favoriteIcon from '../images/blackHeartIcon.svg';
 
 function DrinkDetails() {
   const id = window.location.href.split('/')[4];
   const dispatch = useDispatch();
-  const data = useSelector((state) => state.detailsReducer.data);
+  const [data, setData] = useState();
 
   useEffect(() => {
-    dispatch(fetchById('bebidas', id));
-  }, [id]);
+    const fetchDrinks = async () => {
+      const url = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
+      const { drinks } = await fetch(url).then((r) => r.json());
+      setData(drinks);
+      dispatch(actionDetails(drinks));
+    };
+    fetchDrinks();
+  }, []);
 
   const renderDrinkRecipe = () => {
     const ingredients = [];
@@ -28,7 +34,7 @@ function DrinkDetails() {
         }
       });
 
-      const { strDrink, strCategory, strDrinkThumb, strInstructions } = data[0];
+      const { strDrink, strAlcoholic, strDrinkThumb, strInstructions } = data[0];
       return (
         <div>
           <img
@@ -42,7 +48,7 @@ function DrinkDetails() {
             <img alt="share" data-testid="share-btn" src={ shareIcon } />
             <img alt="favorite" data-testid="favorite-btn" src={ favoriteIcon } />
           </div>
-          <h3 data-testid="recipe-category">{strCategory}</h3>
+          <h3 data-testid="recipe-category">{strAlcoholic}</h3>
           <h2>Ingredients</h2>
           <ul>
             { ingredients.map((item, index) => {
