@@ -1,7 +1,7 @@
 export const ACTION_LOGIN = 'ACTION_LOGIN';
 export const ACTION_SEARCH = 'ACTION_SEARCH';
+export const ACTION_DETAILS = 'ACTION_DRINK_DETAILS';
 export const ACTION_MAIN_FOOD_LIST = 'ACTION_MAIN_FOOD_LIST';
-export const ACTION_DETAILS = 'ACTION_DETAILS';
 export const ACTION_MAIN_DRINK = 'ACTION_MAIN_DRINK';
 
 export const actionLogin = (email, password) => ({
