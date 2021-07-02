@@ -5,10 +5,12 @@ import SearchContext from '../context/SearchContext';
 import Footer from '../components/Footer';
 
 function Foods() {
-  const { filteredRecipes, getFullRecipes, fullRecipes } = useContext(SearchContext);
+  const { filteredRecipes, getFullRecipes,
+    fullRecipes } = useContext(SearchContext);
   const CARDS_NUMBER = 11;
 
   const [showRecipe, setShowRecipe] = useState([]);
+
   useEffect(() => {
     getFullRecipes();
   }, []);
@@ -18,6 +20,16 @@ function Foods() {
       setShowRecipe(filteredRecipes);
     } else { setShowRecipe(fullRecipes); }
   }, [fullRecipes, filteredRecipes]);
+
+  // if (isLoading) {
+  //   return (
+  //     <div>
+  //       <Header title="Comidas" searchImg="true" />
+  //       Loading...
+  //       <Footer />
+  //     </div>
+  //   );
+  // }
 
   return (
     <div>

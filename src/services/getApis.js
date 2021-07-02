@@ -33,8 +33,11 @@ export async function fetchDrinksRecipes(searchText, radio) {
   default:
   }
   const endpoint = `https://www.thecocktaildb.com/api/json/v1/1/${radioLetter}=${searchText}`;
+  console.log('buscou endpoint');
   const result = await fetch(endpoint);
+  console.log(result, 'pegou o result');
   const resultJson = await result.json();
+  console.log(resultJson, 'pegou o result JSON');
   return resultJson;
 }
 
@@ -46,7 +49,7 @@ export async function fetchFullRecipes() {
 }
 
 export async function fetchFullDrinksRecipes() {
-  const edpoint = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s';
+  const edpoint = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
   const result = await fetch(edpoint);
   const resultJson = await result.json();
   return resultJson;

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router';
 import SearchContext from './SearchContext';
@@ -47,11 +47,15 @@ function SearchProvider({ children }) {
   };
 
   const getFullDrinksRecipes = async () => {
-    setIsloading(true);
     const apiRecipes = await fetchFullDrinksRecipes();
-    setFullDrinks(apiRecipes.drinks);
-    setIsloading(false);
+    if (apiRecipes) setFullDrinks(apiRecipes.drinks);
   };
+
+  useEffect(() => {
+    setIsloading(true);
+    getFullDrinksRecipes();
+    setIsloading(false);
+  }, []);
 
   return (
     <SearchContext.Provider
@@ -67,7 +71,6 @@ function SearchProvider({ children }) {
         getDrinksRecipes,
         getFullRecipes,
         fullRecipes,
-        getFullDrinksRecipes,
         fullDrinks,
       } }
     >
