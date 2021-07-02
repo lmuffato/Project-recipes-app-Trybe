@@ -14,8 +14,37 @@ class SearchButton extends React.Component {
 
   renderInputSearch() {
     return (
+      <>
+        <input type="text" data-testid="search-input" />
+        <label htmlFor="optionsIngrediente">
+          <input
+            type="radio"
+            value="Ingrediente"
+            name="options"
+            id="optionsIngrediente"
+          />
+          Ingrediente
+        </label>
+        <label htmlFor="optionsNome">
+          <input
+            type="radio"
+            value="Nome"
+            name="options"
+            id="optionsNome"
+          />
+          Nome
+        </label>
+        <label htmlFor="optionsPrimeiraLetra">
+          <input
+            type="radio"
+            value="PrimeiraLetra"
+            name="options"
+            id="optionsPrimeiraLetra"
+          />
+          Primeira letra
+        </label>
+      </>
 
-      <input type="text" data-testid="search-input" />
     );
   }
 
