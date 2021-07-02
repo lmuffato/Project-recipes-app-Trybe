@@ -1,20 +1,16 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { useLocation } from 'react-router';
 import SearchContext from '../context/SearchContext';
 
 function SearchBar() {
   const { inputText, setInputText,
     inputRadios, setInputRadios,
-    getRecipes, getDrinksRecipes, filteredDrinks } = useContext(SearchContext);
+    getRecipes, getDrinksRecipes } = useContext(SearchContext);
   const location = useLocation();
 
   const handleRadios = ({ target }) => {
     if (target.checked) setInputRadios(target.id);
   };
-
-  useEffect(() => {
-    console.log(filteredDrinks);
-  }, [filteredDrinks]);
 
   const onClick = () => {
     if (inputRadios === 'first-letter' && inputText.length > 1) {

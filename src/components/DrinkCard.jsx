@@ -5,7 +5,7 @@ function DrinkCard({ mealName, mealImg, testImgId, testNameId, testCardId }) {
   return (
     <div data-testid={ testCardId }>
       <img src={ mealImg } alt={ mealName } data-testid={ testImgId } />
-      <h3 data-testId={ testNameId }>{mealName}</h3>
+      <h3 data-testid={ testNameId }>{mealName}</h3>
     </div>
   );
 }
