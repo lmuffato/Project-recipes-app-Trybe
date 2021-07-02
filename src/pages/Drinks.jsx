@@ -4,7 +4,7 @@ import Header from '../components/Header';
 import useMainRecipe from '../hooks/useMainRecipe';
 
 export default function Drinks() {
-  const { renderCards, recipe } = useMainRecipe('drink');
+  const { renderCards, setCategory, recipe } = useMainRecipe('drink');
   const { drinks } = recipe.list;
 
   return (
@@ -18,7 +18,9 @@ export default function Drinks() {
               data-testid={ `${category}-category-filter` }
               type="radio"
               name="category-radio"
+              value={ category }
               id={ category }
+              onChange={ ({ target }) => setCategory(target.value) }
             />
           </label>
         ))}

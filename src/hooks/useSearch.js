@@ -5,7 +5,8 @@ import { fetchIngredient, fetchName, fetchFirstLetter } from '../services/data';
 import getMealsOrDrinks from '../helper/mealsOrDrinksMethods';
 
 export default function useSearch() {
-  const { setRecipe, recipe } = useRecipe();
+  const { setRecipe, recipe, setSearchedByCategory, searchedByCategory } =
+    useRecipe();
 
   const history = useHistory();
   const { pathname } = history.location;
@@ -40,12 +41,13 @@ export default function useSearch() {
   };
 
   const getSearch = async () => {
+    setSearchedByCategory(false);
     const responseRecipe = await getRecipe();
     setRecipe({ ...recipe, [foods]: responseRecipe[foods] });
   };
 
   const redirectToMealOrDrink = () => {
-    if (foodsRecipe.length === 1) {
+    if (foodsRecipe.length === 1 && !searchedByCategory) {
       history.push(`${pathname}/${foodsRecipe[0][idFood]}`);
     }
   };

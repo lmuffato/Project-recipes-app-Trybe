@@ -11,9 +11,12 @@ export const RecipeContext = createContext();
 
 export function RecipeContextProvider({ value = INITIAL_VALUE, children }) {
   const [recipe, setRecipe] = useState(value);
+  const [searchedByCategory, setSearchedByCategory] = useState(false);
 
   return (
-    <RecipeContext.Provider value={ { recipe, setRecipe } }>
+    <RecipeContext.Provider
+      value={ { recipe, setRecipe, searchedByCategory, setSearchedByCategory } }
+    >
       {children}
     </RecipeContext.Provider>
   );

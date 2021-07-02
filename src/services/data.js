@@ -27,3 +27,10 @@ export const fetchList = async (site) => {
   const result = await genericFetch(URL);
   return result;
 };
+
+export const fetchByCategory = async (site, category) => {
+  const URL = `https://www.the${site}db.com/api/json/v1/1/filter.php?c=${category}`;
+  const result = await genericFetch(URL);
+  console.log(result);
+  return result;
+};

@@ -6,7 +6,12 @@ import renderWithRouterAndContext from './helper/renders/renderWithRouterAndCont
 describe('Requirement 11', () => {
   it('changes to the Profile Page', () => {
     const { getByRole, history } = renderWithRouterAndContext(<Foods />, {
-      value: { meals: [], drinks: [], list: { meals: [], drinks: [] } },
+      value: {
+        meals: [],
+        drinks: [],
+        list: { meals: [], drinks: [] },
+        searchedByCategory: false,
+      },
       initialEntries: ['/comidas'],
     });
 
