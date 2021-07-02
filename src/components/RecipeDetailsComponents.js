@@ -13,14 +13,24 @@ import VideoCtn from './RecipeComponents/VideoContainer';
 function ComponentGen(props) {
   const { info, listCreator, recomendList, favorite, setFavorite } = props;
   const { strMealThumb, strMeal, strCategory, strInstructions, strYoutube } = info;
-  const { strDrinkThumb, strDrink, strAlcoholic } = info;
+  const { strDrinkThumb, strDrink, strAlcoholic, idDrink, idMeal, strArea } = info;
+
+  const currentInfo = [{
+    id: idDrink || idMeal,
+    type: idDrink ? 'bebida' : 'comida',
+    area: strArea || '',
+    category: strCategory || '',
+    alcoholicOrNot: strAlcoholic || '',
+    name: strMeal || strDrink,
+    image: strMealThumb || strDrinkThumb,
+  }];
 
   return (
     <div className="recipe_details">
       <RecipeImage origin={ strMealThumb || strDrinkThumb } />
       <RecipeTitle title={ strMeal || strDrink } />
       <ShareBtn favorite={ favorite } setFavorite={ setFavorite } />
-      <FavBtn />
+      <FavBtn info={ currentInfo } />
       { strAlcoholic !== undefined
         ? <RecipeCatg category={ `${strCategory} ${strAlcoholic}` } />
         : <RecipeCatg category={ strCategory } />}
@@ -33,7 +43,7 @@ function ComponentGen(props) {
       <Carousel>
         {recomendList}
       </Carousel>
-      <BottomBtn />
+      <BottomBtn info={ info } />
     </div>
   );
 }

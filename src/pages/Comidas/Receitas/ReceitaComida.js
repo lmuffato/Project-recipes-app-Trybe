@@ -30,7 +30,7 @@ function Receita() {
     const ingredients = [];
     const quantity = [];
     Object.entries(info)
-      .filter((e) => e[0].indexOf('strIngredient') === 0 && e[1] !== '')
+      .filter((e) => e[0].indexOf('strIngredient') === 0 && e[1] !== '' && e[1] !== null)
       .map((e) => ingredients.push(e[1]));
     Object.entries(info)
       .filter((e) => e[0].indexOf('strMeasure') === 0 && e[1] !== '')
