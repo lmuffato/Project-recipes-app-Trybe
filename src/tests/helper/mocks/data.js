@@ -8,7 +8,14 @@ export const foodDataApi = {
         strCategory: 'Side',
         strArea: 'Turkish',
         strInstructions:
-          'Pick through your lentils for any foreign debris, rinse them 2 or 3 times, drain, and set aside.  Fair warning, this will probably turn your lentils into a solid block that you’ll have to break up later\r\nIn a large pot over medium-high heat, sauté the olive oil and the onion with a pinch of salt for about 3 minutes, then add the carrots and cook for another 3 minutes.\r\nAdd the tomato paste and stir it around for around 1 minute. Now add the cumin, paprika, mint, thyme, black pepper, and red pepp...',
+          `Pick through your lentils for any foreign debris, rinse them 2 or 3 
+          times, drain, and set aside.  Fair warning, this will probably turn 
+          your lentils into a solid block that you’ll have to break up later\r\n
+          In a large pot over medium-high heat, sauté the olive oil and the onion 
+          with a pinch of salt for about 3 minutes, then add the carrots and cook 
+          for another 3 minutes.\r\nAdd the tomato paste and stir it around for 
+          around 1 minute. Now add the cumin, paprika, mint, thyme, black pepper, 
+          and red pepp...`,
         strMealThumb:
           'https://www.themealdb.com/images/media/meals/58oia61564916529.jpg',
         strTags: 'Soup',
@@ -62,13 +69,17 @@ export const drinkDataApi = {
         strAlcoholic: 'Alcoholic',
         strGlass: 'Highball glass',
         strInstructions:
-          'Muddle the sugar into the lime wedges in an old-fashioned glass.\r\nFill the glass with ice cubes.\r\nPour the cachaca into the glass.\r\nStir well.',
+          `Muddle the sugar into the lime wedges in an old-fashioned glass.
+          \r\nFill the glass with ice cubes.\r\nPour the cachaca into the glass.
+          \r\nStir well.`,
         strInstructionsES: null,
         strInstructionsDE:
           'Den Zucker in einem old-fashioned Glas in die Limettenspalten mischen.',
         strInstructionsFR: null,
         strInstructionsIT:
-          'Pestare lo zucchero con gli spicchi di lime in un bicchiere vecchio stile, riempire il bicchiere con cubetti di ghiaccio, versare la cachaca nel bicchiere e mescolare bene.',
+          `Pestare lo zucchero con gli spicchi di lime in un bicchiere vecchio 
+          stile, riempire il bicchiere con cubetti di ghiaccio, versare la 
+          cachaca nel bicchiere e mescolare bene.`,
         'strInstructionsZH-HANS': null,
         'strInstructionsZH-HANT': null,
         strDrinkThumb:
