@@ -1,14 +1,24 @@
-import React, { useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import SearchbarContext from '../contexts/SearchbarContext';
 
 function DrinkDescription() {
-  const { recipes } = useContext(SearchbarContext);
+  const { idDrink } = useContext(SearchbarContext);
 
-  console.log(recipes);
+  const [drink, setDrink] = useState(null);
+
+  useEffect(() => {
+    const getDrink = async () => {
+      const endpoint = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${idDrink}`;
+      await fetch(endpoint).then((data) => data.json())
+        .then((result) => setDrink(result));
+    };
+    getDrink();
+  }, [idDrink]);
 
   return (
     <div>
-      <p>Descrição comida! Deu certo</p>
+      {console.log(drink)}
+      <p>Descrição bebida! Deu certo</p>
     </div>
   );
 }

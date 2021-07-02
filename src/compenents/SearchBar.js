@@ -8,7 +8,7 @@ function SearchBar() {
   const [letter, setLetter] = useState('');
   const history = useHistory();
 
-  const { mealOrDrink, setRecipes } = useContext(SearchbarContext);
+  const { mealOrDrink, setRecipes, setIdMeal, setIdDrink } = useContext(SearchbarContext);
 
   const handleChange = (type, word) => {
     setRequest(type);
@@ -23,9 +23,11 @@ function SearchBar() {
 
     if (mealOrDrink === 'cocktail' && data.drinks.length === 1) {
       drinkId = data.drinks[0].idDrink;
+      setIdDrink(drinkId);
       history.push(`/bebidas/${drinkId}`);
     } else if (mealOrDrink === 'meal' && data.meals.length === 1) {
       mealId = data.meals[0].idMeal;
+      setIdMeal(mealId);
       history.push(`/comidas/${mealId}`);
     } else {
       return data;
