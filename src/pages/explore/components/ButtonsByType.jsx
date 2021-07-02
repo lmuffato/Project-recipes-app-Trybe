@@ -5,7 +5,7 @@ import { useHistory } from 'react-router-dom';
 function ButtonsByType({ type }) {
   const history = useHistory();
   function handleExploreDirection(direction) {
-    history.push(`explorar/${type}/${direction}`);
+    history.push(`${type}/${direction}`);
   }
 
   return (
