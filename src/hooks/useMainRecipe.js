@@ -8,7 +8,7 @@ const maxList = 4;
 
 export default function useMainRecipe(type) {
   const { recipe, setRecipe, setSearchedByCategory } = useRecipe();
-  const { foods, site, foodUpperCase } = getMealsOrDrinks(type);
+  const { foods, site, foodUpperCase, idFood } = getMealsOrDrinks(type);
   const [category, setCategory] = useState('');
   const [toggleCategory, setToggleCategory] = useState(false);
 
@@ -43,6 +43,7 @@ export default function useMainRecipe(type) {
           index={ index }
           thumb={ recp[`str${foodUpperCase}Thumb`] }
           title={ recp[`str${foodUpperCase}`] }
+          id={ recp[idFood] }
         />
       ));
     }
