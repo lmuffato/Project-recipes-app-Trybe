@@ -1,5 +1,5 @@
 import React, { useState, createContext, useEffect } from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import { fetchRecipesApi, fetchCategoriesApi } from '../services/fetchApiMain';
 
 export const AppContext = createContext();
@@ -7,6 +7,7 @@ export const AppContext = createContext();
 export default function AppProvider({ children }) {
   // header States
   const [displaySearchBar, setDisplaySearchBar] = useState(false);
+
   const [searchValue, setSearchValue] = useState('');
   const [inputValue, setInputValue] = useState('');
   const [pageOrigin, setPageOrigin] = useState('');
@@ -51,7 +52,3 @@ export default function AppProvider({ children }) {
     </AppContext.Provider>
   );
 }
-
-AppProvider.propTypes = {
-  children: PropTypes.node.isRequired,
-};

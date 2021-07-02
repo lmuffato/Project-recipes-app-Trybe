@@ -1,19 +1,25 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
 import { AppContext } from '../../context/AppContext';
 import { fetchByCategoryApi } from '../../services/fetchApiMain';
 
-export default function CategoryBtn({ category: { strCategory } }) {
+export default function CategoryBtn({ category: { strCategory }, handleClickAll }) {
   const { context } = useContext(AppContext);
   const { setRecipesList, pageOrigin } = context;
   const NUM_RECIPES_SHOWN = 12;
+  const [toggle, setToggle] = useState(false);
 
   function handleClick() {
-    fetchByCategoryApi(pageOrigin, strCategory)
-      .then((recipes) => {
-        recipes.splice(NUM_RECIPES_SHOWN, recipes.length - 1);
-        setRecipesList(recipes);
-      });
+    if (!toggle) {
+      fetchByCategoryApi(pageOrigin, strCategory)
+        .then((recipes) => {
+          recipes.splice(NUM_RECIPES_SHOWN, recipes.length - 1);
+          setRecipesList(recipes);
+        });
+      setToggle(!toggle);
+    } else {
+      handleClickAll();
+    }
   }
 
   return (

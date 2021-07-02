@@ -1,16 +1,27 @@
 import React, { useContext } from 'react';
 import CategoryBtn from './CategoryBtn';
 import { AppContext } from '../../context/AppContext';
+import { fetchRecipesApi } from '../../services/fetchApiMain';
 
 export default function Categories() {
   const { context } = useContext(AppContext);
-  const { categoriesList } = context;
+  const { categoriesList, pageOrigin, setRecipesList } = context;
+  const NUM_RECIPES_SHOWN = 12;
+
+  function handleClickAll() {
+    fetchRecipesApi(pageOrigin)
+      .then((recipes) => {
+        recipes.splice(NUM_RECIPES_SHOWN, recipes.length - 1);
+        setRecipesList(recipes);
+      });
+  }
 
   return (
     <div>
       <button
         type="button"
-        data-testid="all-category-filter"
+        data-testid="All-category-filter"
+        onClick={ () => handleClickAll() }
       >
         All
       </button>
@@ -19,6 +30,7 @@ export default function Categories() {
           <CategoryBtn
             category={ category }
             key={ index }
+            handleClickAll={ handleClickAll }
           />
         ),
       )}
