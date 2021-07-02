@@ -25,7 +25,7 @@ const SearchTest = async (ratioButton, value) => {
     .every((recipe) => recipe.strMeal.includes(value))).toBe(true), time);
 };
 
-describe('Header', () => {
+describe('Header DrinkPage', () => {
   test('Verifica se tem botão para o perfil', () => {
     const { getByTestId, history } = renderFoodWithRouter();
     const profileButton = getByTestId('profile-top-btn');
@@ -72,5 +72,61 @@ describe('Header', () => {
         setInterval(() => expect(recipes
           .every((recipe) => recipe.strMeal[0])).toBe('w'), time);
       });
+  });
+});
+
+describe('Conteúdo DrinkPage', () => {
+  test('Exiba todas os botões de categoria descritos nas instruções e no protótipo',
+    async () => {
+      const { getByTestId } = renderFoodWithRouter();
+      const categories = await (await fetch('https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list')).json();
+      await categories.meals.forEach((category) => {
+        const { strCategory: categoryName } = category;
+        expect(getByTestId(`${categoryName}-category-filter`)).toBeInTheDocument();
+      });
+    });
+  test('Exiba 12 cards de receitas', () => {
+    const { getAllByTestId } = renderFoodWithRouter();
+    expect(getAllByTestId('recipe-card')).toHaveLength(lengthRequired);
+  });
+  test('Todos os cards estejam preenchidos corretamente', async () => {
+    const { getAllByTestId } = renderFoodWithRouter();
+    const drinkCardImg = getAllByTestId('recipe-card-img');
+    const drinkCardTitle = getAllByTestId('recipe-card-title');
+    const initialRecipes = await (await fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=')).json();
+    for (let recipe = 0; recipe <= lengthRequired; recipe += 1) {
+      expect(drinkCardImg[recipe].src).toBe(initialRecipes.meals[recipe].strMealThumb);
+      expect(drinkCardTitle[recipe].src).toBe(initialRecipes.meals[recipe].strMeal);
+    }
+  });
+  test('Ao clicar no card, é encaminhado para a pagina de detlahes', async () => {
+    const { getAllByTestId, history } = renderFoodWithRouter();
+    const initialRecipes = await (await fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=')).json();
+    userEvent.click(getAllByTestId('recipe-card')[0]);
+    const { location: { pathname } } = history;
+    const { meals } = initialRecipes;
+    expect(pathname).toBe(`/${meals[0].idMeal}`);
+  });
+});
+
+describe('Footer DrinkPage', () => {
+  test('Exibir footer com todos os elementos descritos no protótipo', () => {
+    const { getByTestId } = renderFoodWithRouter();
+    expect(getByTestId('footer')).toBeInTheDocument();
+    expect(getByTestId('drinks-bottom-btn')).toBeInTheDocument();
+    expect(getByTestId('explore-bottom-btn')).toBeInTheDocument();
+    expect(getByTestId('food-bottom-btn')).toBeInTheDocument();
+  });
+  test('Ao clicar no botão de COMIDAS é redirecinado para a pagina', () => {
+    const { getByTestId, history } = renderFoodWithRouter();
+    userEvent.click(getByTestId('drinks-bottom-btn'));
+    const { location: { pathname } } = history;
+    expect(pathname).toBe('/comidas');
+  });
+  test('Ao clicar no botão de EXPLORAR é redirecionado para a pagina', () => {
+    const { getByTestId, history } = renderFoodWithRouter();
+    userEvent.click(getByTestId('explore-bottom-btn'));
+    const { location: { pathname } } = history;
+    expect(pathname).toBe('/explorar');
   });
 });
