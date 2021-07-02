@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
+import ExploreButton from '../components/ExploreButton';
 
 class ExpBebidas extends React.Component {
   render() {
@@ -9,7 +10,16 @@ class ExpBebidas extends React.Component {
     return (
       <>
         <Header title="Explorar Bebidas" />
-        <div>Página explorar Bebidas</div>
+        <ExploreButton
+          textButton="Por Ingredientes"
+          onClick={ () => history.push('/explorar/bebidas/ingredientes') }
+          datatestId="explore-by-ingredient"
+        />
+        <ExploreButton
+          textButton="Me Surpreenda!"
+          onClick={ () => history.push('/explorar/comidas/area') }
+          datatestId="explore-surprise"
+        />
         <Footer history={ history } />
       </>
     );

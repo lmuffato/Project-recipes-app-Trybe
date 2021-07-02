@@ -9,7 +9,6 @@ class ExpComidasIng extends React.Component {
     return (
       <>
         <Header title="Explorar Ingredientes" />
-        <div>Página de explorar comidas por origem</div>
         <Footer history={ history } />
       </>
     );
