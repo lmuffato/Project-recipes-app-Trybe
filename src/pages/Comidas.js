@@ -1,61 +1,47 @@
 import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import Header from '../components/Header';
 
+import { fetchFoods, fetchFoodCategories } from '../services/mealAPI';
+import { fetchCocktails, fetchCocktailCategories } from '../services/cocktailAPI';
+
+import CategoryButtons from '../components/Main/CategoryButtons';
+
 export default function Comidas() {
-  const [foods, setComidas] = useState([]);
-  const [drinks, setDrinks] = useState([]);
+  const { pathname } = useLocation();
+
+  const [recipes, setRecipes] = useState([]);
   const [categories, setCategories] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
   const NUMBER_OF_RECIPES = 12;
-  const NUMBER_OF_CATEGORIES = 5;
-  const FOOD_API_URL = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
-  const CATEGORIES_API_URL = 'https://www.themealdb.com/api/json/v1/1/list.php?c=list';
-  const DRINKS_API_URL = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list';
-
-  async function fetchFoods() {
-    const fetchURL = await fetch(FOOD_API_URL);
-    const response = await fetchURL.json();
-    const { meals } = await response;
-    setIsLoaded(true);
-    setComidas(meals);
-  }
-
-  async function fetchCategories() {
-    const fetchURL = await fetch(CATEGORIES_API_URL);
-    const response = await fetchURL.json();
-    const { meals } = await response;
-
-    setCategories(meals);
-  }
-
-  async function fetchDrinks() {
-    const fetchURL = await fetch(DRINKS_API_URL);
-    const response = await fetchURL.json();
-    const { drinks: drinksFromApi } = await response;
-    setDrinks(drinksFromApi);
-  }
 
   useEffect(() => {
-    fetchFoods();
-    fetchCategories();
-    fetchDrinks();
-  }, []);
+    if (pathname === '/comidas') {
+      fetchFoods().then((data) => {
+        setRecipes(data.meals);
+      });
+      fetchFoodCategories().then((data) => {
+        setCategories(data.meals);
+      });
+    }
+    if (pathname === '/bebidas') {
+      fetchCocktails().then((data) => {
+        setRecipes(data.meals);
+      });
+      fetchCocktailCategories().then((data) => {
+        setCategories(data.meals);
+      });
+    }
+    setIsLoaded(true);
+  }, [pathname]);
+
   return (
     <>
       <Header title="Comidas" />
-      {categories.map((categoryName, index) => (
-        index < NUMBER_OF_CATEGORIES ? (
-          <button
-            type="submit"
-            key={ index }
-            data-testid={ `${categoryName.strCategory}-category-filter` }
-          >
-            {categoryName.strCategory}
-          </button>) : ''
-      ))}
+      <CategoryButtons categories={ categories } />
 
       <ul>
-        {isLoaded && foods.map((food, index) => (
+        {isLoaded && recipes.map((food, index) => (
           index < NUMBER_OF_RECIPES ? (
             <div data-testid={ `${index}-recipe-card` }>
               <li key={ index }>
@@ -71,17 +57,6 @@ export default function Comidas() {
               </li>
             </div>) : ''))}
       </ul>
-      <h1>Bebidas</h1>
-      {drinks.map((drinkName, index) => (
-        index < NUMBER_OF_CATEGORIES ? (
-          <button
-            type="submit"
-            key={ index }
-            data-testid={ `${drinkName.strCategory}-category-filter` }
-          >
-            {drinkName.strCategory}
-          </button>) : ''
-      ))}
     </>
   );
 }
