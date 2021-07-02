@@ -25,7 +25,7 @@ class Perfil extends React.Component {
         <header>
           <Header title="Perfil" />
         </header>
-        <div>
+        <div className="profile">
           <span data-testid="profile-email">
             {user.email}
           </span>
