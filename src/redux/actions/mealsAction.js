@@ -1,34 +1,18 @@
 import { MEALS_ALL_CATEGORIES_ENDPOINT } from '../../services/meals';
 import fetchAPI from '../../services';
+import {
+  finishedLoadingCategories,
+  finishedLoadingRecipes,
+  loadingCategories,
+  loadingCategoriesFailed,
+  loadingRecipes,
+  loadingRecipesFailed } from './loadingAction';
 
-export const LOADING_MEAL_RECIPES = 'LOADING_MEAL_RECIPES';
-export const FINISHED_LOADING_MEAL_RECIPES = 'FINISHED_LOADING_MEAL_RECIPES';
-export const LOADING_MEAL_RECIPES_FAILED = 'LOADING_MEAL_RECIPES_FAILED';
 export const SET_MEALS = 'SET_MEALS';
 export const SET_SEARCH_BAR_MEALS = 'SET_SEARCH_BAR_MEALS';
-export const LOADING_MEAL_CATEGORIES = 'LOADING_MEAL_CATEGORIES';
-export const FINISHED_LOADING_MEAL_CATEGORIES = 'FINISHED_LOADING_MEAL_CATEGORIES';
-export const LOADING_MEAL_CATEGORIES_FAILED = 'LOADING_MEAL_CATEGORIES_FAILED';
 export const SET_MEAL_CATEGORIES = 'SET_MEAL_CATEGORIES';
 export const CHANGE_MEAL_CATEGORY = 'CHANGE_MEAL_CATEGORY';
 
-function loadingRecipes() {
-  return {
-    type: LOADING_MEAL_RECIPES,
-  };
-}
-function finishedLoadingRecipes(payload) {
-  return {
-    type: FINISHED_LOADING_MEAL_RECIPES,
-    payload,
-  };
-}
-function loadingRecipesFailed(payload) {
-  return {
-    type: LOADING_MEAL_RECIPES_FAILED,
-    payload,
-  };
-}
 function APIThunk(setter) {
   return (URL) => async (dispatch) => {
     dispatch(loadingRecipes());
@@ -57,23 +41,6 @@ function setSearchBarMeals(payload) {
 export const getFoodRecipesAPIThunk = APIThunk(setMeals);
 export const getFoodSearchBarAPIThunk = APIThunk(setSearchBarMeals);
 
-function loadingCategories() {
-  return {
-    type: LOADING_MEAL_CATEGORIES,
-  };
-}
-function finishedLoadingCategories(payload) {
-  return {
-    type: FINISHED_LOADING_MEAL_CATEGORIES,
-    payload,
-  };
-}
-function loadingCategoriesFailed(payload) {
-  return {
-    type: LOADING_MEAL_CATEGORIES_FAILED,
-    payload,
-  };
-}
 function setCategories(payload) {
   return {
     type: SET_MEAL_CATEGORIES,

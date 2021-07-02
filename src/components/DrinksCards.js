@@ -1,10 +1,8 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { arrayOf, shape, string } from 'prop-types';
 
-function DrinksCards() {
-  const drinks = useSelector((state) => state.drinks.recipes);
-
+function DrinksCards({ drinks }) {
   return (
     <div className="drinks-container">
       {drinks.map((drink, index) => (
@@ -26,5 +24,15 @@ function DrinksCards() {
     </div>
   );
 }
+
+DrinksCards.propTypes = {
+  drinks: arrayOf(
+    shape(
+      { idDrink: string,
+        strDrink: string,
+        strDrinkThumb: string },
+    ),
+  ).isRequired,
+};
 
 export default DrinksCards;

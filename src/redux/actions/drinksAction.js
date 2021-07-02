@@ -1,47 +1,24 @@
 import { DRINKS_ALL_CATEGORIES_ENDPOINT } from '../../services/drinks';
 import fetchAPI from '../../services';
+import {
+  finishedLoadingCategories,
+  finishedLoadingRecipes,
+  loadingCategories,
+  loadingCategoriesFailed,
+  loadingRecipes,
+  loadingRecipesFailed } from './loadingAction';
 
-export const LOADING_DRINK_RECIPES = 'LOADING_DRINK_RECIPES';
-export const FINISHED_LOADING_DRINK_RECIPES = 'FINISHED_LOADING_DRINK_RECIPES';
-export const LOADING_DRINK_RECIPES_FAILED = 'LOADING_DRINK_RECIPES_FAILED';
 export const SET_DRINKS = 'SET_DRINKS';
-export const LOADING_DRINK_CATEGORIES = 'LOADING_DRINK_CATEGORIES';
-export const FINISHED_LOADING_DRINK_CATEGORIES = 'FINISHED_LOADING_DRINK_CATEGORIES';
-export const LOADING_DRINK_CATEGORIES_FAILED = 'LOADING_DRINK_CATEGORIES_FAILED';
+export const SET_SEARCH_BAR_DRINKS = 'SET_SEARCH_BAR_DRINKS';
 export const SET_DRINK_CATEGORIES = 'SET_DRINK_CATEGORIES';
 export const CHANGE_DRINK_CATEGORY = 'CHANGE_DRINK_CATEGORY';
 
-function loadingRecipes() {
-  return {
-    type: LOADING_DRINK_RECIPES,
-  };
-}
-function finishedLoadingRecipes(payload) {
-  return {
-    type: FINISHED_LOADING_DRINK_RECIPES,
-    payload,
-  };
-}
-function loadingRecipesFailed(payload) {
-  return {
-    type: LOADING_DRINK_RECIPES_FAILED,
-    payload,
-  };
-}
-function setMeals(payload) {
-  return {
-    type: SET_DRINKS,
-    payload,
-  };
-}
-export function getDrinkRecipesAPIThunk(URL) {
-  const LAST_DRINK_INDEX = 12;
-  const onlyTheFirst12 = (_recipe, index) => index < LAST_DRINK_INDEX;
-  return async (dispatch) => {
+function APIThunk(setter) {
+  return (URL) => async (dispatch) => {
     dispatch(loadingRecipes());
     try {
       const response = await fetchAPI(URL);
-      dispatch(setMeals(response.drinks.filter(onlyTheFirst12)));
+      dispatch(setter(response.drinks));
     } catch (e) {
       console.error(e);
       dispatch(loadingRecipesFailed(e));
@@ -49,24 +26,21 @@ export function getDrinkRecipesAPIThunk(URL) {
     dispatch(finishedLoadingRecipes());
   };
 }
+function setDrinks(payload) {
+  return {
+    type: SET_DRINKS,
+    payload,
+  };
+}
+function setSearchBarDrinks(payload) {
+  return {
+    type: SET_SEARCH_BAR_DRINKS,
+    payload,
+  };
+}
+export const getDrinkRecipesAPIThunk = APIThunk(setDrinks);
+export const getDrinkSearchBarAPIThunk = APIThunk(setSearchBarDrinks);
 
-function loadingCategories() {
-  return {
-    type: LOADING_DRINK_CATEGORIES,
-  };
-}
-function finishedLoadingCategories(payload) {
-  return {
-    type: FINISHED_LOADING_DRINK_CATEGORIES,
-    payload,
-  };
-}
-function loadingCategoriesFailed(payload) {
-  return {
-    type: LOADING_DRINK_CATEGORIES_FAILED,
-    payload,
-  };
-}
 function setCategories(payload) {
   return {
     type: SET_DRINK_CATEGORIES,

@@ -27,8 +27,8 @@ function Comidas() {
   useEffect(() => {
     dispatch(getFoodRecipesAPIThunk(pickEndpoint(selectedCategory)));
   }, [dispatch, selectedCategory]);
-  const loadingRecipes = useSelector((state) => state.meals.loadingRecipes);
-  const loadingCategories = useSelector((state) => state.meals.loadingCategories);
+  const loadingRecipes = useSelector((state) => state.loading.loadingRecipes);
+  const loadingCategories = useSelector((state) => state.loading.loadingCategories);
   const meals = useSelector((state) => state.meals.recipes);
 
   const LAST_MEAL_INDEX = 12;

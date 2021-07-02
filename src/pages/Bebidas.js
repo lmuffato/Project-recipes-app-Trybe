@@ -28,14 +28,19 @@ function Bebidas() {
   useEffect(() => {
     dispatch(getDrinkRecipesAPIThunk(pickEndpoint(selectedCategory)));
   }, [dispatch, selectedCategory]);
-  const loadingRecipes = useSelector((state) => state.drinks.loadingRecipes);
-  const loadingCategories = useSelector((state) => state.drinks.loadingCategories);
+  const loadingRecipes = useSelector((state) => state.loading.loadingRecipes);
+  const loadingCategories = useSelector((state) => state.loading.loadingCategories);
+  const drinks = useSelector((state) => state.drinks.recipes);
+
+  const LAST_DRINK_INDEX = 12;
+  const onlyTheFirst12 = (_recipe, index) => index < LAST_DRINK_INDEX;
 
   return (
     <section>
       <Header title="Bebidas" />
       {loadingCategories ? <Loading /> : <DrinksCategoryButtons />}
-      {loadingRecipes ? <Loading /> : <DrinksCards />}
+      {loadingRecipes ? <Loading />
+        : <DrinksCards drinks={ drinks.filter(onlyTheFirst12) } />}
       <footer>
         <Footer />
       </footer>
