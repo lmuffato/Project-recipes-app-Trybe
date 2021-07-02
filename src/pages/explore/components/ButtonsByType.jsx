@@ -22,7 +22,7 @@ function ButtonsByType({ type }) {
           <button
             data-testid="explore-by-area"
             type="button"
-            onClick={ () => handleExploreDirection('Origem') }
+            onClick={ () => handleExploreDirection('area') }
           >
             Por Local de Origem
           </button>

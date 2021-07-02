@@ -31,7 +31,7 @@ function Routes() {
       />
       <Route
         exact
-        path="/explorar/comidas/origem"
+        path="/explorar/comidas/area"
         component={ ExploreFoodByOrigin }
       />
       <Route
