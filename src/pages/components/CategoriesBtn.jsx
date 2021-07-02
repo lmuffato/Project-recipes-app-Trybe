@@ -34,7 +34,7 @@ function CategoriesBtn(props) {
           <Button
             onClick={ () => setFilter('') }
             variant="outline-dark"
-            data-testid="all-category-filter"
+            data-testid="All-category-filter"
             type="button"
           >
             All
