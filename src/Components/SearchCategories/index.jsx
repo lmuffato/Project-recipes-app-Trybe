@@ -20,7 +20,7 @@ export default function SearchCategories({ page }) {
   const handleCategory = (evt) => {
     const { target: { value } } = evt;
     const { target: { innerHTML } } = evt;
-    if (innerHTML !== targetBtn) {
+    if (innerHTML !== 'All' && innerHTML !== targetBtn) {
       getByCategoryName(page, value).then((result) => (
         setRecipes({
           ...recipes,
@@ -28,7 +28,7 @@ export default function SearchCategories({ page }) {
         })
       ));
       setTargetBtn(innerHTML);
-    } else {
+    } if (innerHTML === 'All' || innerHTML === targetBtn) {
       getMeals().then((response) => {
         getDrinks().then((result) => {
           setRecipes({
@@ -59,6 +59,15 @@ export default function SearchCategories({ page }) {
           {category.strCategory}
         </Button>
       ))}
+      <Button
+        className="btn-category"
+        data-testid="All-category-filter"
+        type="button"
+        size="sm"
+        onClick={ handleCategory }
+      >
+        All
+      </Button>
     </div>
   );
 }

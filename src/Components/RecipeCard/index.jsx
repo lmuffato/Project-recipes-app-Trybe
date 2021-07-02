@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Card } from 'react-bootstrap';
 import './styles.css';
 
@@ -9,6 +9,7 @@ function RecipeCard({ recipesArray }) {
   const { pathname } = useLocation();
 
   const toggleApiReturn = (pathname.includes('comidas')) ? 'strMeal' : 'strDrink';
+  const toggleLink = (pathname.includes('comidas')) ? 'comidas' : 'bebidas';
 
   return (
     <div className="recipe-cards-parent">
@@ -20,19 +21,26 @@ function RecipeCard({ recipesArray }) {
           data-testid={ `${index}-recipe-card` }
           key={ `recipe-card-${index}` }
         >
-          <Card.Img
-            variant="top"
-            src={ recipe[`${toggleApiReturn}Thumb`] }
-            data-testid={ `${index}-card-img` }
-          />
-          <Card.Body>
-            <Card.Title
-              className="card-title"
-              data-testid={ `${index}-card-name` }
-            >
-              { recipe[toggleApiReturn]}
-            </Card.Title>
-          </Card.Body>
+          <Link
+            key={ index }
+            to={ (pathname.includes('comidas'))
+              ? `/${toggleLink}/${recipe.idMeal}`
+              : `/${toggleLink}/${recipe.idDrink}` }
+          >
+            <Card.Img
+              variant="top"
+              src={ recipe[`${toggleApiReturn}Thumb`] }
+              data-testid={ `${index}-card-img` }
+            />
+            <Card.Body>
+              <Card.Title
+                className="card-title"
+                data-testid={ `${index}-card-name` }
+              >
+                { recipe[toggleApiReturn]}
+              </Card.Title>
+            </Card.Body>
+          </Link>
         </Card>
       ))}
     </div>
