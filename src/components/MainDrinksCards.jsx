@@ -2,26 +2,26 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 // import { Link } from 'react-router-dom';
 
-function RecipeCategories() {
-  const data = useSelector((state) => state.searchReducer.recipeCategoryList);
-  const renderCategories = () => (
+function RandomDrinks() {
+  const data = useSelector((state) => state.searchReducer.initialDrinks);
+  const renderDrinks = () => (
     data.map((e, index) => index < 12 && (
       <div key={ index } data-testid={ `${index}-recipe-card` }>
         <img
-          src={ e.strMealThumb }
+          src={ e.strDrinkThumb }
           alt="category thumb"
           data-testid={ `${index}-card-img` }
         />
-        <span data-testid={ `${index}-card-name` }>{e.strMeal}</span>
+        <span data-testid={ `${index}-card-name` }>{e.strDrink}</span>
       </div>
     ))
   );
 
   return (
     <div>
-      { renderCategories() }
+      { renderDrinks() }
     </div>
   );
 }
 
-export default RecipeCategories;
+export default RandomDrinks;

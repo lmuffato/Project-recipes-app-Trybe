@@ -1,9 +1,10 @@
-import { ACTION_SEARCH, ACTION_MAIN_FOOD_LIST } from '../actions';
+import { ACTION_SEARCH, ACTION_MAIN_FOOD_LIST, ACTION_MAIN_DRINK } from '../actions';
 
 const INITIAL_STATE = {
   data: '',
   item: '',
-  recipeCategoryList: [],
+  initialMeals: [],
+  initialDrinks: [],
 };
 
 const searchReducer = (state = INITIAL_STATE, action) => {
@@ -17,7 +18,12 @@ const searchReducer = (state = INITIAL_STATE, action) => {
   case ACTION_MAIN_FOOD_LIST:
     return {
       ...state,
-      recipeCategoryList: action.recipeList,
+      initialMeals: action.mealsList,
+    };
+  case ACTION_MAIN_DRINK:
+    return {
+      ...state,
+      initialDrinks: action.drinksList,
     };
   default:
     return state;
