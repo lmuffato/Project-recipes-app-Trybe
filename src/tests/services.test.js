@@ -27,6 +27,8 @@ const drinksData = {
 };
 
 describe('Test API fetchs', () => {
+  afterAll(() => done());
+
   it('Test fetchMeals function', async () => {
     const endpoint = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
 

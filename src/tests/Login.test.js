@@ -8,6 +8,8 @@ const passwordDataId = 'password-input';
 const loginBtnDataId = 'login-submit-btn';
 
 describe('1 -test if all login elements are in the login screen', () => {
+  afterAll(() => done());
+
   it('test if app screen is "/"', () => {
     const { history } = renderWithRouterAndRedux(<App />);
     let { pathname } = history.location;

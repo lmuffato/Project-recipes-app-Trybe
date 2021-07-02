@@ -5,6 +5,8 @@ import renderWithRouterAndRedux from './renderWithRouterAndRedux';
 import { storeDrinks } from '../actions/drinks';
 
 describe('Test Drinks Page', () => {
+  afterAll(() => done());
+
   const data = [
     {
       strDrink: 'GG',

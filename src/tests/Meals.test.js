@@ -5,6 +5,8 @@ import renderWithRouterAndRedux from './renderWithRouterAndRedux';
 import { storeCategories, storeMeals } from '../actions/meals';
 
 describe('Test Meals page', () => {
+  afterAll(() => done());
+
   const mockStore = {
     meals: {
       categories: ['sushi'],

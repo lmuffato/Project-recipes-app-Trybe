@@ -4,6 +4,7 @@ const INITIAL_STATE = {
   categories: [],
   meals: [],
   loading: false,
+  filter: '',
 };
 
 const recipes = (state = INITIAL_STATE, action) => {
