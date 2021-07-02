@@ -1,0 +1,42 @@
+.cards-foods {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding: 5px;
+}
+
+.cards-foods div {
+  border-radius: 15px;
+  margin: 5px;
+}
+
+.cards-drinks {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding: 5px;
+}
+
+.cards-drinks div {
+  border-radius: 15px;
+  margin: 5px;
+}
+
+.buttonsCategoryDrinks {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding: 3px;
+}
+
+.buttonsCategoryFood {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding: 3px;
+}
+
+.buttonsCategoryDrinks button {
+  flex-grow: 1;
+  margin: 5px;
+}
