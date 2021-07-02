@@ -3,17 +3,15 @@ import Header from '../components/Header';
 import MealCard from '../components/MealCard';
 import SearchContext from '../context/SearchContext';
 import Footer from '../components/Footer';
+import FilterButtons from '../components/FilterButtons';
+import FilterContext from '../context/FilterContext';
 
 function Foods() {
-  const { filteredRecipes, getFullRecipes,
-    fullRecipes } = useContext(SearchContext);
+  const { filteredRecipes, fullRecipes } = useContext(SearchContext);
+  const { mealsCategories } = useContext(FilterContext);
   const CARDS_NUMBER = 11;
-
+  const CATEGORIES_NUMBER = 5;
   const [showRecipe, setShowRecipe] = useState([]);
-
-  useEffect(() => {
-    getFullRecipes();
-  }, []);
 
   useEffect(() => {
     if (!filteredRecipes || filteredRecipes.length > 0) {
@@ -21,19 +19,18 @@ function Foods() {
     } else { setShowRecipe(fullRecipes); }
   }, [fullRecipes, filteredRecipes]);
 
-  // if (isLoading) {
-  //   return (
-  //     <div>
-  //       <Header title="Comidas" searchImg="true" />
-  //       Loading...
-  //       <Footer />
-  //     </div>
-  //   );
-  // }
-
   return (
     <div>
       <Header title="Comidas" searchImg="true" />
+      {mealsCategories.map((category, index) => (
+        index < CATEGORIES_NUMBER ? (
+          <FilterButtons
+            key={ index }
+            categoryName={ category.strCategory }
+            testId={ `${category.strCategory}-category-filter` }
+          />
+        ) : (null)
+      ))}
       {showRecipe ? showRecipe.map((recipes, index) => (
         index <= CARDS_NUMBER ? (
           <MealCard

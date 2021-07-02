@@ -54,3 +54,17 @@ export async function fetchFullDrinksRecipes() {
   const resultJson = await result.json();
   return resultJson;
 }
+
+export async function fetchMealsCategories() {
+  const endpoint = 'https://www.themealdb.com/api/json/v1/1/list.php?c=list';
+  const result = await fetch(endpoint);
+  const resultJson = await result.json();
+  return resultJson;
+}
+
+export async function fetchDrinksCategories() {
+  const endpoint = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list';
+  const result = await fetch(endpoint);
+  const resultJson = await result.json();
+  return resultJson;
+}
