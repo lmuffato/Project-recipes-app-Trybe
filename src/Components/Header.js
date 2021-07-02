@@ -10,7 +10,6 @@ function Header({ title }) {
         <img src={ imgProfile } alt="Profile" data-testid="profile-top-btn" />
       </Link>
       <h2 data-testid="page-title" className="page-title">{ title }</h2>
-
     </div>
   );
 }

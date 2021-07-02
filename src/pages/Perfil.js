@@ -15,7 +15,7 @@ function Perfil() {
 
   return (
     <main>
-      <Header />
+      <Header title="Perfil" />
       <div
         data-testid="profile-email"
         className="email"
