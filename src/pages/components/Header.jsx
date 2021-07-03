@@ -51,7 +51,7 @@ function Header(props) {
       </Row>
       <Row>
         <Col>
-          { searchBar ? <SearchBar /> : null }
+          { searchBar ? <SearchBar type={ type } /> : null }
         </Col>
       </Row>
     </Container>

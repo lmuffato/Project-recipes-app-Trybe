@@ -1,4 +1,4 @@
-import fetchDrinks from '../services/fetchDrinks';
+import fetchDrinks, { fetchMealSearched } from '../services/fetchDrinks';
 import { fetchDrinksCategories } from '../services/fetchCategories';
 
 export const API_FETCH = 'API_FETCH';
@@ -27,5 +27,13 @@ export function getDrinks(filter) {
     dispatch(apiFetch());
     const drinks = await fetchDrinks(filter);
     dispatch(storeDrinks(drinks));
+  };
+}
+
+export function searchDrink(text, option) {
+  return async (dispatch) => {
+    dispatch(apiFetch());
+    const meals = await fetchMealSearched(text, option);
+    dispatch(storeDrinks(meals));
   };
 }

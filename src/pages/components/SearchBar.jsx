@@ -1,20 +1,24 @@
 import React, { useState } from 'react';
+import { string } from 'prop-types';
 import { useDispatch } from 'react-redux';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { searchMeal } from '../../actions/meals';
+import { searchDrink } from '../../actions/drinks';
 
-function SearchBar() {
+function SearchBar(props) {
+  const { type } = props;
   const [searchText, setSearchText] = useState('');
   const [radioOption, setRadioOption] = useState('ingredient');
   const dispatch = useDispatch();
 
   const searchRecipe = () => {
     if (radioOption === 'first-letter' && searchText.length !== 1) {
-      alert('Sua busca deve conter somente 1 (um) caracter');
+      alert('Sua busca deve conter somente 1 (um) caracter'); // eslint-disable-line
     } else {
-      dispatch(searchMeal(searchText, radioOption));
+      if (type === 'meals') dispatch(searchMeal(searchText, radioOption));
+      if (type === 'drinks') dispatch(searchDrink(searchText, radioOption));
       setSearchText('');
     }
   };
@@ -86,5 +90,9 @@ function SearchBar() {
     </Container>
   );
 }
+
+SearchBar.propTypes = {
+  type: string,
+}.isRequired;
 
 export default SearchBar;
