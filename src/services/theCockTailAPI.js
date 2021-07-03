@@ -1,3 +1,33 @@
+export const CocktailApiFilterByCategory = async (category) => {
+  try {
+    const fetchApi = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${category}`);
+    const getResponse = await fetchApi.json();
+    return getResponse;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const CocktailApiCategory = async () => {
+  try {
+    const fetchApi = await fetch('https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list');
+    const getResponse = await fetchApi.json();
+    return getResponse;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const ApiCocktailFirstItems = async () => {
+  try {
+    const fetchApi = await fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
+    const getResponse = await fetchApi.json();
+    return getResponse;
+  } catch (error) {
+    return error;
+  }
+};
+
 export const ApiByCocktailName = async (name) => {
   try {
     const fetchApi = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${name}`);
