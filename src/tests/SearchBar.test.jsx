@@ -2,11 +2,7 @@ import React from 'react';
 import userEvent from '@testing-library/user-event';
 import renderWithRouter from './renderWithRouter';
 import SearchBar from '../components/SearchBar';
-<<<<<<< HEAD
-import RecipesProvider from '../provider/RecipesProvider';
 import RecipesContext from '../context/RecipesContext';
-=======
->>>>>>> main-group-2
 
 test('test the rendering', () => {
   const { getByTestId } = renderWithRouter(
