@@ -14,7 +14,7 @@ const Profile = () => {
 
   return (
     <section>
-      <Header />
+      <Header title="Perfil" />
       <div className="container">
         <span
           className="span-email"

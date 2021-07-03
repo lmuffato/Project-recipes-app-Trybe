@@ -4,7 +4,7 @@ import Header from '../../components/Header';
 
 const Explore = () => (
   <section>
-    <Header />
+    <Header title="Explorar" />
     <h1>Explore</h1>
     <Footer />
   </section>
