@@ -1,10 +1,23 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import { searchMeal } from '../../actions/meals';
 
 function SearchBar() {
-  const [searchText, setSearchText] = useState();
+  const [searchText, setSearchText] = useState('');
+  const [radioOption, setRadioOption] = useState('ingredient');
+  const dispatch = useDispatch();
+
+  const searchRecipe = () => {
+    if (radioOption === 'first-letter' && searchText.length !== 1) {
+      alert('Sua busca deve conter somente 1 (um) caracter');
+    } else {
+      dispatch(searchMeal(searchText, radioOption));
+      setSearchText('');
+    }
+  };
 
   return (
     <Container>
@@ -26,6 +39,8 @@ function SearchBar() {
               type="radio"
               value="ingredient"
               name="search-options"
+              onChange={ () => setRadioOption('ingredient') }
+              defaultChecked
             />
             Ingredientes
           </label>
@@ -38,18 +53,20 @@ function SearchBar() {
               type="radio"
               value="name"
               name="search-options"
+              onChange={ () => setRadioOption('name') }
             />
             Nome
           </label>
         </Col>
         <Col>
-          <label htmlFor="firstletter">
+          <label htmlFor="first-letter">
             <input
               data-testid="first-letter-search-radio"
-              id="firstletter"
+              id="first-letter"
               type="radio"
-              value="firstletter"
+              value="first-letter"
               name="search-options"
+              onChange={ () => setRadioOption('first-letter') }
             />
             Primeira letra
           </label>
@@ -60,6 +77,7 @@ function SearchBar() {
           <button
             data-testid="exec-search-btn"
             type="button"
+            onClick={ () => searchRecipe() }
           >
             Buscar
           </button>

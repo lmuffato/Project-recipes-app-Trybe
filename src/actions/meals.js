@@ -1,5 +1,5 @@
 import { fetchMealsCategories } from '../services/fetchCategories';
-import fetchMeals from '../services/fetchMeals';
+import fetchMeals, { fetchMealSearched } from '../services/fetchMeals';
 
 export const API_FETCH = 'API_FETCH';
 export const STORE_CATEGORIES = 'STORE_CATEGORIES';
@@ -26,6 +26,14 @@ export function getMeals(filter) {
   return async (dispatch) => {
     dispatch(apiFetch());
     const meals = await fetchMeals(filter);
+    dispatch(storeMeals(meals));
+  };
+}
+
+export function searchMeal(text, option) {
+  return async (dispatch) => {
+    dispatch(apiFetch());
+    const meals = await fetchMealSearched(text, option);
     dispatch(storeMeals(meals));
   };
 }
