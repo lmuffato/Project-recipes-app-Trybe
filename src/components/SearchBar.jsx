@@ -1,22 +1,31 @@
-import React, { useEffect, useState } from 'react';
+/* eslint-disable no-alert */
+import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Button, Input } from 'semantic-ui-react';
+import context from '../store/Context';
 import { fetchSearch } from '../services/Data';
 
 // Testa se há apenas um resultado da pesquisa, retornando shouldRedirect e direcionando para a página específica da receita
 
 const testData = (data) => {
   let shouldRedirect = false;
-  if (data[Object.keys(data)].length === 1) shouldRedirect = true;
-  return shouldRedirect;
+  let message = '';
+  try {
+    if (data[Object.keys(data)].length === 1) shouldRedirect = true;
+  } catch (error) {
+    message = 'Sinto muito, não encontramos nenhuma receita para esses filtros.';
+  }
+  return { shouldRedirect, message };
 };
 
 function SearchBar() {
+  const { setDrinks, setFoods } = useContext(context);
   const history = useHistory();
   const [radio, setRadio] = useState('');
   const [activeSearch, setActiveSearch] = useState(true);
   const [inputSearch, setInputSearch] = useState('');
   const [path, setPath] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     setPath(window.location.pathname);
@@ -27,6 +36,7 @@ function SearchBar() {
     setActiveSearch(false);
   };
   const handleSubmit = async () => {
+    setIsLoading(true);
     const data = await fetchSearch(radio, inputSearch, path);
     if (data === 'alert') {
       // eslint-disable-next-line no-alert
@@ -36,6 +46,16 @@ function SearchBar() {
     setRadio('');
     setActiveSearch(true);
     const { drinks, meals } = data;
+    try {
+      if (drinks.length > 1) setDrinks(drinks);
+    } catch (error) {
+      console.log();
+    }
+    try {
+      if (meals.length > 1) setFoods(meals);
+    } catch (error) {
+      console.log();
+    }
 
     // Tenta pegar o id de drink. Se não conseguir, pega de foods
 
@@ -52,8 +72,12 @@ function SearchBar() {
     } catch (e) {
       console.log();
     }
-    if (testData(data)) history.push(`${path}/${id}`);
-    // Se a função retornar que deve redirecionar, leva até a página do resultado
+    if (testData(data).shouldRedirect) history.push(`${path}/${id}`); // Se a função retornar que deve redirecionar, leva até a página do resultado
+    if (!testData(data).shouldRedirect
+    && testData(data).message !== ''
+    && data !== 'alert') alert(testData(data).message);
+    setIsLoading(false);
+    console.log(data);
   };
   return (
     <>
@@ -103,6 +127,7 @@ function SearchBar() {
           onChange={ (event) => setInputSearch(event.target.value) }
         />
         <Button
+          loading={ isLoading }
           icon="search"
           type="button"
           data-testid="exec-search-btn"
