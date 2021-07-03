@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { Button, Card } from 'react-bootstrap';
 import './index.css';
+import { Link } from 'react-router-dom';
 import Share from '../../images/shareIcon.svg';
 import Context from '../../context/Context';
 
@@ -24,11 +25,13 @@ function Recipes() {
   };
   const handleFood = (recipe, index) => (
     <Card style={ { width: '22rem' } } bsPrefix="card-img" key={ index }>
-      <Card.Img
-        variant="bottom"
-        src={ recipe.image }
-        data-testid={ `${index}-horizontal-image` }
-      />
+      <Link key={ index } to={ `comidas/${recipe.id}` }>
+        <Card.Img
+          variant="bottom"
+          src={ recipe.image }
+          data-testid={ `${index}-horizontal-image` }
+        />
+      </Link>
       <Card.Body>
         <Button
           variant="primary"
@@ -43,11 +46,13 @@ function Recipes() {
         <Card.Text data-testid={ `${index}-horizontal-top-text` }>
           {` ${recipe.area} - ${recipe.category} `}
         </Card.Text>
-        <Card.Title
-          data-testid={ `${index}-horizontal-name` }
-        >
-          {recipe.name}
-        </Card.Title>
+        <Link key={ index } to={ `comidas/${recipe.id}` }>
+          <Card.Title
+            data-testid={ `${index}-horizontal-name` }
+          >
+            {recipe.name}
+          </Card.Title>
+        </Link>
         <Card.Text data-testid={ `${index}-horizontal-done-date` }>
           {`Feita em : ${recipe.doneDate}`}
         </Card.Text>
@@ -59,11 +64,13 @@ function Recipes() {
   );
   const handleDrink = (recipe, index) => (
     <Card style={ { width: '22rem' } } bsPrefix="card-img" key={ index }>
-      <Card.Img
-        variant="bottom"
-        src={ recipe.image }
-        data-testid={ `${index}-horizontal-image` }
-      />
+      <Link key={ index } to={ `bebidas/${recipe.id}` }>
+        <Card.Img
+          variant="bottom"
+          src={ recipe.image }
+          data-testid={ `${index}-horizontal-image` }
+        />
+      </Link>
       <Card.Body>
         <Button
           variant="primary"
@@ -78,11 +85,13 @@ function Recipes() {
         <Card.Text data-testid={ `${index}-horizontal-top-text` }>
           {`${recipe.alcoholicOrNot}`}
         </Card.Text>
-        <Card.Title
-          data-testid={ `${index}-horizontal-name` }
-        >
-          {recipe.name}
-        </Card.Title>
+        <Link key={ index } to={ `bebidas/${recipe.id}` }>
+          <Card.Title
+            data-testid={ `${index}-horizontal-name` }
+          >
+            {recipe.name}
+          </Card.Title>
+        </Link>
         <Card.Text data-testid={ `${index}-horizontal-done-date` }>
           {`Feita em: ${recipe.doneDate}`}
         </Card.Text>

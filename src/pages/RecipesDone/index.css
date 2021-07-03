@@ -48,3 +48,8 @@
   border: none;
   background-color: white;
 }
+
+a {
+  direction: none;
+  color: black;
+}
