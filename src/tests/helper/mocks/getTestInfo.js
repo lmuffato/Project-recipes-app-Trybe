@@ -57,6 +57,16 @@ const footerRenderTests = () => {
   return { itDoesntRenderFooter, itRenderAllIcons };
 };
 
+const recipeCardsTest = async ({ id, name, image }, findByTestId) => {
+  const sectionCard = await findByTestId(`${id}-recipe-card`);
+  const titleCard = await findByTestId(`${id}-card-name`);
+  const imgCard = await findByTestId(`${id}-card-img`);
+
+  expect(sectionCard).toBeInTheDocument();
+  expect(titleCard).toHaveTextContent(name);
+  expect(imgCard).toHaveAttribute('src', image);
+};
+
 export default function getTestInfo(path = '/') {
   const recipe = { meals: [], drinks: [], list: { meals: [], drinks: [] } };
   const renderEmptyValue = {
@@ -68,6 +78,7 @@ export default function getTestInfo(path = '/') {
     renderEmptyValue,
     headerRenderTests,
     footerRenderTests,
+    recipeCardsTest,
     testsIds,
   };
 }

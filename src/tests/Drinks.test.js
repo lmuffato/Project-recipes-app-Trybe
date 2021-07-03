@@ -9,6 +9,7 @@ const {
   renderEmptyValue,
   headerRenderTests,
   footerRenderTests,
+  recipeCardsTest,
 } = getTest('/bebidas');
 
 describe('Drinks Screen', () => {
@@ -53,6 +54,19 @@ describe('Drinks Screen', () => {
         userEvent.click(buttonSearch);
 
         expect(mockRecipeApi).toBeCalled();
+      });
+    });
+  });
+
+  describe('User search tests', () => {
+    it('cheks initial foods', async () => {
+      const { findByTestId } = renderWithRouterAndContext(
+        <Drinks />,
+        renderEmptyValue,
+      );
+
+      drinkDataApi.firstTwelve.forEach((recipe) => {
+        recipeCardsTest(recipe, findByTestId);
       });
     });
   });

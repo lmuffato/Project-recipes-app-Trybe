@@ -9,6 +9,7 @@ const {
   renderEmptyValue,
   headerRenderTests,
   footerRenderTests,
+  recipeCardsTest,
 } = getTest('/comidas');
 
 describe('Foods Screen', () => {
@@ -52,6 +53,19 @@ describe('Foods Screen', () => {
       userEvent.click(buttonSearch);
 
       expect(mockRecipeApi).toBeCalled();
+    });
+  });
+
+  describe('User search tests', () => {
+    it('cheks initial foods', async () => {
+      const { findByTestId } = renderWithRouterAndContext(
+        <Foods />,
+        renderEmptyValue,
+      );
+
+      foodDataApi.firstTwelve.forEach((recipe) => {
+        recipeCardsTest(recipe, findByTestId);
+      });
     });
   });
 });
