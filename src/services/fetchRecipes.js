@@ -1,6 +1,7 @@
 const MEALS_RECIPES = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
 const DRINKS_RECIPES = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
 const NUMBER_INDEX = 12;
+
 export async function getMeals() {
   const response = await fetch(MEALS_RECIPES);
   const result = await response.json();
@@ -34,6 +35,15 @@ export async function getByCategoryName(page, recipe) {
   const endpoint = (page === 'meals')
     ? `https://www.themealdb.com/api/json/v1/1/filter.php?c=${recipe}`
     : `https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${recipe}`;
+  const response = await fetch(endpoint);
+  const result = response.json();
+  return result;
+}
+
+export async function getRecipeByID(pathname, id) {
+  const endpoint = (pathname.includes('comidas'))
+    ? `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`
+    : `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
   const response = await fetch(endpoint);
   const result = response.json();
   return result;
