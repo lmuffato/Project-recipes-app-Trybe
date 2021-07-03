@@ -8,6 +8,7 @@ function MealDetails() {
   const id = window.location.href.split('/')[4];
   const dispatch = useDispatch();
   const [data, setData] = useState();
+  const [recomendations, setRecomendations] = useState();
 
   useEffect(() => {
     const mealDrinks = async () => {
@@ -16,8 +17,36 @@ function MealDetails() {
       setData(meals);
       dispatch(actionDetails(meals));
     };
+    const fetchRecomendations = async () => {
+      const url = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
+      const { drinks } = await fetch(url).then((r) => r.json());
+      setRecomendations(drinks);
+    };
     mealDrinks();
+    fetchRecomendations();
   }, []);
+
+  const renderRecomendations = (param) => {
+    if (param) {
+      return (
+        param.map((recipe, index) => {
+          const { strDrink, strAlcoholic, strDrinkThumb } = recipe;
+          const limitNumber = 6;
+          if (index <= limitNumber) {
+            return (
+              <div data-testid={ `${index}-recomendation-card` } key={ index }>
+                <img alt={ strDrink } src={ strDrinkThumb } />
+                <h3>{strAlcoholic}</h3>
+                <h2>{strDrink}</h2>
+              </div>
+            );
+          }
+          return '';
+        })
+      );
+    }
+    return '';
+  };
 
   const renderMealRecipe = () => {
     const ingredients = [];
@@ -88,7 +117,7 @@ function MealDetails() {
             data-testid="video"
           />
           <h2>Recomendadas</h2>
-          <div data-testid={ `${0}-recomendation-card` }>cards de receitas aqui</div>
+          {renderRecomendations(recomendations)}
           <button type="button" data-testid="start-recipe-btn">Iniciar Receita</button>
         </div>
       );
