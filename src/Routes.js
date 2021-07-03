@@ -1,16 +1,17 @@
 import React from 'react';
 import { Route, Switch, BrowserRouter } from 'react-router-dom';
 import Login from './pages/otherPages/Login';
-import perfil from './pages/otherPages/perfil';
-import doneRecipes from './pages/otherPages/doneRecipes';
-import favoriteRecipes from './pages/otherPages/favoriteRecipes';
-import mainFood from './pages/recipes/mainFoodRecipes';
-import mainDrink from './pages/recipes/mainDrinkRecipes';
+import recipesPage from './pages/recipes/recipesPage';
+import Profile from './pages/Profile/Profile';
+import Drinks from './pages/recipes/Drinks';
 import explorePage from './pages/explore/explorePage';
-import exploreFoodPage from './pages/explore/exploreFoodPage';
-import exploreDrinkPage from './pages/explore/exploreDrinkPage';
-import expFoodIngPage from './pages/explore/exploreFoodIngredientsPage';
-import expDrinkIngPage from './pages/explore/exploreDrinkIngredientsPage';
+import DrinksExplore from './pages/explore/DrinkExplore';
+import FoodIngredients from './pages/explore/ingredients/FoodIngredients';
+import FoodsExplore from './pages/explore/FoodsExplore';
+import DrinksIngredients from './pages/explore/ingredients/DrinksIngredients';
+import CompletedRecipes from './pages/recipes/CompletedRecipes';
+import FavoriteRecipes from './pages/recipes/FavoriteRecipes';
+import ExploreFoodByArea from './pages/explore/ExploreFoodByArea';
 
 export default function Routes() {
   return (
@@ -18,16 +19,37 @@ export default function Routes() {
       <BrowserRouter>
         <Switch>
           <Route exact path="/" component={ Login } />
-          <Route path="/comidas" component={ mainFood } />
-          <Route path="/bebidas" component={ mainDrink } />
-          <Route path="/explorar" component={ explorePage } />
-          <Route path="/explorar/comidas" component={ exploreFoodPage } />
-          <Route path="/explorar/bebidas" component={ exploreDrinkPage } />
-          <Route path="/explorar/comidas/ingredientes" component={ expFoodIngPage } />
-          <Route path="/explorar/bebidas/ingredientes" component={ expDrinkIngPage } />
-          <Route path="/perfil" component={ perfil } />
-          <Route path="/receitas-feitas" component={ doneRecipes } />
-          <Route path="/receitas-favoritas" component={ favoriteRecipes } />
+          <Route exact path="/comidas" component={ recipesPage } />
+          <Route exact path="/perfil" component={ Profile } />
+          <Route exact path="/bebidas" component={ Drinks } />
+          <Route exact path="/explorar" component={ explorePage } />
+          <Route exact path="/explorar/bebidas" component={ DrinksExplore } />
+          <Route exact path="/explorar/comidas" component={ FoodsExplore } />
+          <Route
+            exact
+            path="/explorar/comidas/ingredientes"
+            component={ FoodIngredients }
+          />
+          <Route
+            exact
+            path="/explorar/bebidas/ingredientes"
+            component={ DrinksIngredients }
+          />
+          <Route
+            exact
+            path="/receitas-feitas"
+            component={ CompletedRecipes }
+          />
+          <Route
+            exact
+            path="/receitas-favoritas"
+            component={ FavoriteRecipes }
+          />
+          <Route
+            exact
+            path="/explorar/comidas/area"
+            component={ ExploreFoodByArea }
+          />
         </Switch>
       </BrowserRouter>
     </div>

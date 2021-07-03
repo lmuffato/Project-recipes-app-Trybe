@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import '../../componentsStyles/Bottom Menu/bottomMenu.css';
-import exploreIcon from '../../images/exploreIcon.svg';
-import drinkIcon from '../../images/drinkIcon.svg';
-import mealIcon from '../../images/mealIcon.svg';
+import '../componentsStyles/Bottom Menu/bottomMenu.css';
+import exploreIcon from '../images/exploreIcon.svg';
+import drinkIcon from '../images/drinkIcon.svg';
+import mealIcon from '../images/mealIcon.svg';
 
 function bottomMenu() {
   return (
