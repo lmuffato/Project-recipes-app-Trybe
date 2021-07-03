@@ -1,5 +1,5 @@
 import React from 'react';
-import BottomMenu from '../../components/Bottom Menu/bottomMenu';
+import BottomMenu from '../../components/bottomMenu';
 
 export default function mainDrinkRecipes() {
   return (

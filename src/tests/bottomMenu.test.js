@@ -1,7 +1,7 @@
 import React from 'react';
 import { fireEvent } from '@testing-library/react';
 import renderWithRouter from '../services/renderWithRouter';
-import BottomMenu from '../components/Bottom Menu/bottomMenu';
+import BottomMenu from '../components/bottomMenu';
 
 describe('Testing the Bottom Menu', () => {
   it('3 Links', () => {
