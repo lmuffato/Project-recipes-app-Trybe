@@ -22,6 +22,16 @@ export const ApiByName = async (name) => {
   }
 };
 
+export const ApiByRandom = async () => {
+  try {
+    const fetchApi = await fetch('https://www.themealdb.com/api/json/v1/1/random.php');
+    const getResponse = await fetchApi.json();
+    return getResponse;
+  } catch (error) {
+    return error;
+  }
+};
+
 export const ApiByFirstLetter = async (letter) => {
   const fetchApi = await fetch(
     `https://www.themealdb.com/api/json/v1/1/search.php?f=${letter}`,
