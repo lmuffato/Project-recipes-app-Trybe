@@ -8,8 +8,13 @@ function App() {
   return (
     <RecipesProvider>
       <Switch>
-        {routes.map(({ path, component, exact }) => (
-          <Route key={ path } path={ path } exact={ exact } component={ component } />
+        {routes.map(({ path, Component, exact, title }) => (
+          <Route
+            key={ path }
+            path={ path }
+            exact={ exact }
+            render={ () => <Component title={ title } /> }
+          />
         ))}
       </Switch>
     </RecipesProvider>
