@@ -135,9 +135,15 @@ class SearchButton extends React.Component {
   }
 
   renderInputSearch() {
+    const { valueInput } = this.state;
     return (
-
-      <input type="text" data-testid="search-input" />
+      <input
+        type="text"
+        data-testid="search-input"
+        nome="valueInput"
+        value={ valueInput }
+        onChange={ this.handleChange }
+      />
     );
   }
 
@@ -146,11 +152,68 @@ class SearchButton extends React.Component {
     return (
       <>
         <button
-          type="submit"
-          onClick={ () => (
-            this.setState((prev) => ({ hideInput: !prev.hideInput }))) }
+          data-testid="search-top-btn"
+          type="button"
+          onClick={ () => {
+            if (!btn) {
+              this.setState({
+                btn: true,
+              });
+            } else {
+              this.setState({
+                btn: false,
+              });
+            }
+          } }
         >
-          <img src={ searchIcon } alt="procurar" data-testid="search-top-btn" />
+          <img src={ searchIcon } alt="search" />
+        </button>
+        {btn ? this.renderInputSearch() : null}
+        <label htmlFor="optionsIngrediente">
+          <input
+            type="radio"
+            value="Ingrediente"
+            name="options"
+            id="optionsIngrediente"
+            data-testid="ingredient-search-radio"
+            onClick={ () => this.setState({
+              clickRButton: 'ingrendient',
+            }) }
+          />
+          Ingrediente
+        </label>
+        <label htmlFor="optionsNome">
+          <input
+            type="radio"
+            value="Nome"
+            name="options"
+            id="optionsNome"
+            data-testid="name-search-radio"
+            onClick={ () => this.setState({
+              clickRButton: 'name',
+            }) }
+          />
+          Nome
+        </label>
+        <label htmlFor="optionsPrimeiraLetra">
+          <input
+            type="radio"
+            value="PrimeiraLetra"
+            name="options"
+            id="optionsPrimeiraLetra"
+            data-testid="first-letter-search-radio"
+            onClick={ () => this.setState({
+              clickRButton: 'firstLetter',
+            }) }
+          />
+          Primeira letra
+        </label>
+        <button
+          type="submit"
+          data-testid="exec-search-btn"
+          onClick={ this.handleClick }
+        >
+          Pesquisar
         </button>
         {this.verifyRenderApi()}
       </>
