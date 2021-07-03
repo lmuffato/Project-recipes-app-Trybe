@@ -6,7 +6,7 @@ import RecipesHeader from './components/RecipesHeader';
 function Meals() {
   return (
     <div>
-      <RecipesHeader />
+      <RecipesHeader type="meals" />
       <CategoriesBtn type="meals" />
       <MealCards />
     </div>
