@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { Redirect } from 'react-router-dom';
+import { /* useClassState, */ useStateEasyRedux } from 'easy-redux-trybe';
 import { setLocalStorage } from '../helper';
-import { /* useClassState, */ useStateEasyRedux } from '../redux/reducer/EasyRedux';
 
 const initialState = {
   toggleBtn: true,

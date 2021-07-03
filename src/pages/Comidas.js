@@ -2,8 +2,8 @@ import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
+import { useStateEasyRedux } from 'easy-redux-trybe';
 import Header from '../components/Header';
-import { useStateEasyRedux } from '../redux/reducer/EasyRedux';
 
 function Comidas(props) {
   const { match: { params, path } } = props;
