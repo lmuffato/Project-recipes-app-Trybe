@@ -4,11 +4,11 @@ import Header from '../components/Header';
 import MealsCards from '../components/MealsCards';
 import SearchButton from '../components/SearchButton';
 
-export default function MainRecipes(props) {
+export default function MainRecipes() {
   return (
     <div>
       <Header>
-        <SearchButton props={ props } />
+        <SearchButton page="/comidas" />
       </Header>
       <h1 data-testid="page-title">Comidas</h1>
       <FilterMealsByCategories />

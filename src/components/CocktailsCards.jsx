@@ -22,9 +22,9 @@ export default function CocktailsCards() {
             variant="top"
             src={ recipe.strDrinkThumb }
             data-testid={ `${index}-card-img` }
-            alt={ recipe.strImageAttribution }
+            alt="recipe"
           />
-          <Card.Title data-testid={ `${index}-card-name` }>{recipe.strDrink}</Card.Title>
+          <h3 data-testid={ `${index}-card-name` }>{recipe.strDrink}</h3>
         </Card>
       ))}
     </div>

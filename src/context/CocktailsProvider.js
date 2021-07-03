@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import CocktailsContext from './CocktailsContext';
-import { ApiCocktailFirstItems, ApiDetailsById, CocktailApiCategory,
+import { ApiCocktailFirstItems, ApiDetailsById,
+  ApiRandom, CocktailApiCategory,
   CocktailApiFilterByCategory } from '../services/theCockTailAPI';
 
 function CocktailsProvider(props) {
@@ -13,6 +14,14 @@ function CocktailsProvider(props) {
   const [currCategoryId, setCurrCategoryId] = useState('');
   const [currCocktail, setCurrCocktail] = useState({});
   const history = useHistory();
+
+  const handleRandomDrinkDetails = async () => {
+    const result = await ApiRandom();
+    const { drinks } = result;
+    const [drink] = drinks;
+    const { idDrink } = drink;
+    history.push(`/bebidas/${idDrink}`);
+  };
 
   useEffect(() => {
     if (!currCategoryId) return;
@@ -52,7 +61,9 @@ function CocktailsProvider(props) {
     setCocktailsByCategories,
     currCocktail,
     setCurrCategoryId,
+    handleRandomDrinkDetails,
   };
+
   const { children } = props;
   return (
     <CocktailsContext.Provider value={ context }>

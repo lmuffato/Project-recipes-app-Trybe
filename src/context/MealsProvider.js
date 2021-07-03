@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import MealsContext from './MealsContext';
-import { ApiByCategory,
+import { ApiByCategory, ApiByRandom,
   ApiFilterByCategory, ApiFirstsResults, ApiRecipeDetail } from '../services/theMealAPI';
 
-function MealsProvider(props) {
+function MealsProvider({ children }) {
   const [mealsObject, setMeals] = useState({});
   const [mealsCopyObject, setMealsCopy] = useState({});
   const [mealsCategories, setMealsCategories] = useState([]);
@@ -45,6 +45,14 @@ function MealsProvider(props) {
     load();
   }, []);
 
+  const handleRandomMealDetails = async () => {
+    const result = await ApiByRandom();
+    const { meals } = result;
+    const [meal] = meals;
+    const { idMeal } = meal;
+    history.push(`/comidas/${idMeal}`);
+  };
+
   const context = {
     mealsObject,
     setMeals,
@@ -53,9 +61,9 @@ function MealsProvider(props) {
     setMealsByCategories,
     currMeal,
     setCurrCategoryId,
+    handleRandomMealDetails,
   };
 
-  const { children } = props;
   return (
     <MealsContext.Provider value={ context }>
       {children}

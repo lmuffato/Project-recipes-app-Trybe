@@ -4,11 +4,11 @@ import FilterCocktailsByCategories from '../components/FilterCocktailsByCategori
 import Header from '../components/Header';
 import SearchButton from '../components/SearchButton';
 
-export default function MainCocktails(props) {
+export default function MainCocktails() {
   return (
     <div>
       <Header>
-        <SearchButton props={ props } />
+        <SearchButton page="/bebidas" />
       </Header>
       <h1 data-testid="page-title">Bebidas</h1>
       <FilterCocktailsByCategories />
