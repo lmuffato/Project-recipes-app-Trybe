@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from '../../components/Header';
-import ButtonExplore from '../../components/ButtonExplore';
 import Footer from '../../components/Footer';
+import ButtonExplore from '../../components/ButtonExplore';
 
 function ExploreDrinks() {
   return (

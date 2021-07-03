@@ -74,4 +74,4 @@ ButtonExplore.propTypes = {
 export default ButtonExplore;
 
 // Referências:
-// Componente feito com o auxílio do Guilherme Dornelles
+// Componente feito com o auxílio do Guilherme Dornelles.
