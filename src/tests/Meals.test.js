@@ -16,10 +16,12 @@ const mockStore = {
 
 const data = [
   {
+    idMeal: '52977',
     strMeal: 'Corba',
     strMealThumb: 'https://www.themealdb.com/images/media/meals/58oia61564916529.jpg',
   },
   {
+    idMeal: '52978',
     strMeal: 'Kumpir',
     strMealThumb: 'https://www.themealdb.com/images/media/meals/mlchx21564916997.jpg',
   },
@@ -28,17 +30,19 @@ const data = [
 const beefData = {
   meals: [
     {
+      idMeal: '52874',
       strMeal: 'Beef and Mustard Pie',
       strMealThumb: 'https://www.themealdb.com/images/media/meals/wrssvt1511556563.jpg',
     },
     {
+      idMeal: '52878',
       strMeal: 'Beef and Oyster pie',
       strMealThumb: 'https://www.themealdb.com/images/media/meals/mlchx21564916997.jpg',
     },
   ],
 };
 
-describe('Test Meals page', () => {
+describe('1 - Test Meals page', () => {
   afterAll(() => done());
 
   it('Test if pathname is \'/comidas\'', () => {
@@ -71,8 +75,9 @@ describe('Test Meals page', () => {
   });
 });
 
-describe('Test filter buttons', () => {
+describe('2 - Test filter buttons', () => {
   afterAll(() => done());
+
   it('Test if filter button \'Beef\' fetchs new data', async () => {
     const { findByText, findByRole } = renderWithRouterAndRedux(
       <Meals />, mockStore,

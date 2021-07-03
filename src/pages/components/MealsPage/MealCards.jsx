@@ -15,16 +15,16 @@ function MealCards(props) {
   return (
     <div>
       { meals.slice(0, size).map(({ idMeal, strMeal, strMealThumb }, index) => (
-        <Link key={ strMeal } to={ `/comidas/${idMeal}` }>
-          <div data-testid={ `${index}-recipe-card` }>
+        <div key={ strMeal } data-testid={ `${index}-recipe-card` }>
+          <Link to={ `/comidas/${idMeal}` }>
             <h2 data-testid={ `${index}-card-name` }>{strMeal}</h2>
             <img
               src={ strMealThumb }
               alt={ strMeal }
               data-testid={ `${index}-card-img` }
             />
-          </div>
-        </Link>
+          </Link>
+        </div>
       )) }
     </div>
   );

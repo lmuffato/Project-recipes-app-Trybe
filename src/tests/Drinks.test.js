@@ -4,6 +4,7 @@ import userEvent from '@testing-library/user-event';
 import Drinks from '../pages/Drinks';
 import renderWithRouterAndRedux from './renderWithRouterAndRedux';
 import { storeDrinks } from '../actions/drinks';
+import '@testing-library/jest-dom';
 
 const mockStore = {
   drinks: {
@@ -14,15 +15,21 @@ const mockStore = {
   },
 };
 
-const data = [
-  {
-    strDrink: 'GG',
-    strDrinkThumb: 'https://www.themealdb.com/images/media/meals/58oia61564916529.jpg',
-  },
-  {
-    strDrink: 'A1',
-    strDrinkThumb: 'https://www.thecocktaildb.com/images/media/drink/2x8thr1504816928.jpg',
-  }];
+// const mockCategories = ['Odinary Drink', 'Cocktail',
+//   'Milk / Float / Shake', 'Other/Unknown', 'Cocoa'];
+
+const data = {
+  drinks: [
+    {
+      idDrink: '15997',
+      strDrink: 'GG',
+      strDrinkThumb: 'https://www.themealdb.com/images/media/meals/58oia61564916529.jpg',
+    },
+    {
+      strDrink: 'A1',
+      strDrinkThumb: 'https://www.thecocktaildb.com/images/media/drink/2x8thr1504816928.jpg',
+    }],
+};
 
 const ordinaryDrinkData = {
   drinks: [
@@ -37,7 +44,7 @@ const ordinaryDrinkData = {
   ],
 };
 
-describe('Test Drinks Page', () => {
+describe('1 - Test Drinks Page', () => {
   afterAll(() => done());
 
   it('Test if pathname is \'/bebidas\'', () => {
@@ -49,7 +56,7 @@ describe('Test Drinks Page', () => {
 
   it('Test if meal cards are rendered', () => {
     const { store, getByText } = renderWithRouterAndRedux(<Drinks />, mockStore);
-    store.dispatch(storeDrinks(data));
+    store.dispatch(storeDrinks(data.drinks));
     const images = screen.getAllByRole('img');
 
     expect(images.length).toBe(2);
@@ -58,7 +65,7 @@ describe('Test Drinks Page', () => {
   });
 });
 
-describe('Test filter buttons', () => {
+describe('2 - Test filter buttons', () => {
   afterAll(() => done());
 
   it('Test if filter button \'Ordinary Drink\' fetchs new data', async () => {
@@ -66,9 +73,13 @@ describe('Test filter buttons', () => {
       <Drinks />, mockStore,
     );
 
-    global.fetch = jest.fn(() => (
+    global.fetch = jest.fn().mockImplementationOnce(() => (
       Promise.resolve({
         json: () => Promise.resolve(ordinaryDrinkData),
+      })
+    )).mockImplementation(() => (
+      Promise.resolve({
+        json: () => Promise.resolve(data),
       })
     ));
 
@@ -78,5 +89,28 @@ describe('Test filter buttons', () => {
     userEvent.click(ordinaryDrinkButton);
 
     expect(await findByText(/3-Mile Long Island Iced Tea/i)).toBeInTheDocument();
+
+    const allButton = await findByRole('button', { name: /all/i });
+    userEvent.click(allButton);
+
+    expect(await findByText(/GG/i)).toBeInTheDocument();
+  });
+});
+
+describe('3 - Test if click on card redirects to recipe\'s page', () => {
+  afterAll(() => done());
+
+  it('Test if click on GG\'s card redirect to it\' recipe page', async () => {
+    const { history, findByRole } = renderWithRouterAndRedux(<Drinks />, mockStore);
+
+    const image = await findByRole('img', { name: /gg/i });
+
+    expect(image).toBeInTheDocument();
+
+    userEvent.click(image);
+
+    const { location: { pathname } } = history;
+
+    expect(pathname).toBe('/bebidas/15997');
   });
 });
