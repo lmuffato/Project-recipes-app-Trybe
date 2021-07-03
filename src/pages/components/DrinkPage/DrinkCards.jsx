@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { arrayOf, func, object } from 'prop-types';
 import { connect } from 'react-redux';
@@ -6,11 +6,20 @@ import { getDrinks } from '../../../actions/drinks';
 
 function DrinkCards(props) {
   const { fetchDrinks, drinks, filter } = props;
+  const [mountComponent, finishMounting] = useState(true);
   const size = 12;
 
   useEffect(() => {
-    fetchDrinks(filter);
+    const firstFetch = async () => {
+      await fetchDrinks(filter);
+      finishMounting(false);
+    };
+    firstFetch();
   }, [fetchDrinks, filter]);
+
+  useEffect(() => {
+    if (drinks.length === 0 && !mountComponent) alert('Sinto muito, não encontramos nenhuma receita para esses filtros.') // eslint-disable-line
+  }, [drinks, mountComponent]);
 
   return (
     <div>
