@@ -4,7 +4,7 @@ import Header from '../../components/Header';
 
 const MainDrinks = () => (
   <section>
-    <Header />
+    <Header title="Bebidas" />
     <Footer />
   </section>
 );
