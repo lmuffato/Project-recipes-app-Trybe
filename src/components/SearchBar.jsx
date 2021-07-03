@@ -32,7 +32,6 @@ function SearchBar() {
       />
       <label htmlFor="ingredient">
         <input
-          checked
           type="radio"
           id="ingredient"
           value={ inputRadios }

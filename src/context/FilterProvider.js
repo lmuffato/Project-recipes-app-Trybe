@@ -29,8 +29,10 @@ function FilterProvider({ children }) {
   };
 
   const getDrinkByCategory = async (category) => {
-    const apiResult = await fetchDrinksByCategory(category);
-    setDrinksByCategory(apiResult.drinks);
+    if (category) {
+      const apiResult = await fetchDrinksByCategory(category);
+      setDrinksByCategory(apiResult.drinks);
+    }
   };
 
   useEffect(() => {
