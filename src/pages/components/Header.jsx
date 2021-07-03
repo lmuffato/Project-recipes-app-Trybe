@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { string } from 'prop-types';
 import { Link } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
@@ -6,9 +6,11 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import profileIcon from '../../images/profileIcon.svg';
 import searchIcon from '../../images/searchIcon.svg';
+import SearchBar from './SearchBar';
 
-function RecipesHeader(props) {
+function Header(props) {
   const { type } = props;
+  const [searchBar, toggleSearchBar] = useState(false);
 
   const pageTitle = () => {
     if (type === 'meals') return 'Comidas';
@@ -36,18 +38,28 @@ function RecipesHeader(props) {
         </Col>
         <Col>
           { showSearchIcon() ? (
-            <Link to="/explorar">
-              <img data-testid="search-top-btn" src={ searchIcon } alt="Search icon" />
-            </Link>)
+            <button type="button" onClick={ () => toggleSearchBar(!searchBar) }>
+              <img
+                data-testid="search-top-btn"
+                src={ searchIcon }
+                alt="Search icon"
+              />
+            </button>
+          )
             : null }
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+          { searchBar ? <SearchBar /> : null }
         </Col>
       </Row>
     </Container>
   );
 }
 
-RecipesHeader.propTypes = {
+Header.propTypes = {
   type: string,
 }.isRequired;
 
-export default RecipesHeader;
+export default Header;
