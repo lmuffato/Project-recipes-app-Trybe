@@ -1,0 +1,13 @@
+.categories-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.btn-category {
+  background-color: rgb(252, 252, 113);
+  border-color: rgb(252, 252, 113);
+  color: black;
+  margin: 5px 8px;
+  width: 140px;
+}
