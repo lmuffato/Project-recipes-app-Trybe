@@ -23,9 +23,11 @@ function RecipeCard({ recipesArray }) {
         >
           <Link
             key={ index }
-            to={ (pathname.includes('comidas'))
+            to={ { pathname: (pathname.includes('comidas'))
               ? `/${toggleLink}/${recipe.idMeal}`
-              : `/${toggleLink}/${recipe.idDrink}` }
+              : `/${toggleLink}/${recipe.idDrink}`,
+            state: recipe,
+            } }
           >
             <Card.Img
               variant="top"
