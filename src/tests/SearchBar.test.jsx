@@ -2,14 +2,15 @@ import React from 'react';
 import userEvent from '@testing-library/user-event';
 import renderWithRouter from './renderWithRouter';
 import SearchBar from '../components/SearchBar';
+<<<<<<< HEAD
 import RecipesProvider from '../provider/RecipesProvider';
 import RecipesContext from '../context/RecipesContext';
+=======
+>>>>>>> main-group-2
 
 test('test the rendering', () => {
   const { getByTestId } = renderWithRouter(
-    <RecipesProvider>
-      <SearchBar />
-    </RecipesProvider>,
+    <SearchBar searchActive />,
   );
   const searchInput = getByTestId('search-input');
   expect(searchInput).toBeInTheDocument();
@@ -24,9 +25,7 @@ test('test the rendering', () => {
 describe('tests the input events', () => {
   it('test the text input', () => {
     const { getByTestId } = renderWithRouter(
-      <RecipesProvider>
-        <SearchBar />
-      </RecipesProvider>,
+      <SearchBar searchActive />,
     );
     const searchInput = getByTestId('search-input');
     userEvent.type(searchInput, 'é somente um teste');
@@ -34,9 +33,7 @@ describe('tests the input events', () => {
   });
   it('tests the radios', () => {
     const { getAllByRole } = renderWithRouter(
-      <RecipesProvider>
-        <SearchBar />
-      </RecipesProvider>,
+      <SearchBar searchActive />,
     );
     const radios = getAllByRole('radio');
     radios.forEach((radio) => {

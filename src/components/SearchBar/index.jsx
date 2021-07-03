@@ -18,7 +18,7 @@ export default function SearchBar({ place }) {
   const [searchState, setState] = useState({
     textInput: '',
     radioInput: '',
-    place,
+    path,
   });
 
   const handleState = ({ target: { value, name } }) => {
@@ -28,8 +28,12 @@ export default function SearchBar({ place }) {
     }));
   };
 
-  const handleButton = () => {
-    handleApi(searchState);
+  const handleButton = async () => {
+    const { pathname } = window.location;
+
+    if (pathname === '/comidas' || pathname === '/bebidas') {
+      handleApi(searchState, 'meal');
+    }
   };
 
   const conditional = () => {
