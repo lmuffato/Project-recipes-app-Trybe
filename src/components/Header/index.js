@@ -8,12 +8,12 @@ import SearchBar from '../SearchBar';
 import './style.css';
 
 export default function Header({ title }) {
-  let path = '';
+  const [path, setPath] = useState('');
   const [searchActive, setSearchActive] = useState(false);
   const { pathname } = window.location;
   const handleCLick = () => {
-    if (pathname === '/comidas') path = 'meal';
-    if (pathname === '/bebidas') path = 'cocktail';
+    if (pathname === '/comidas') setPath('meal');
+    if (pathname === '/bebidas') setPath('cocktail');
     setSearchActive(!searchActive);
   };
 
@@ -43,7 +43,7 @@ export default function Header({ title }) {
 
   const renderSearchBar = () => {
     if (searchActive) {
-      return <SearchBar searchActive={ searchActive } path={ path } />;
+      return <SearchBar searchActive={ searchActive } place={ path } />;
     }
   };
 

@@ -6,6 +6,7 @@ export default function RecipesProvider({ children }) {
   const [results, setResults] = useState([]);
 
   const handleApi = async ({ textInput, radioInput, place }) => {
+    console.log(place);
     if (radioInput === 'ingredient') {
       const fetched = await fetch(`https://www.the${place}db.com/api/json/v1/1/filter.php?i=${textInput}`);
       const json = await fetched.json();

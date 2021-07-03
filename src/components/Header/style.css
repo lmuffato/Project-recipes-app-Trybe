@@ -1,4 +1,4 @@
-.search-bar-container {
+/* .search-bar-container {
   background-color: #aebeca;
   height: 50px;
   max-height: 0;
@@ -6,7 +6,7 @@
   transition: all 0.1s linear;
 }
 
-.search-bar-container.active {
+.search-bar-container {
   max-height: 50px;
   transition: all 0.1s linear;
-}
+} */

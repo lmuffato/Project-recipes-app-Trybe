@@ -5,7 +5,7 @@ import RecipesContext from '../../context/RecipesContext';
 import FoodCard from '../FoodCard';
 import './style.css';
 
-export default function SearchBar({ place }) {
+export default function SearchBar({ place, searchActive }) {
   const objectTranslation = {
     meal: 'comidas',
     cocktail: 'bebidas',
@@ -18,7 +18,6 @@ export default function SearchBar({ place }) {
   const [searchState, setState] = useState({
     textInput: '',
     radioInput: '',
-    path,
   });
 
   const handleState = ({ target: { value, name } }) => {
@@ -28,16 +27,19 @@ export default function SearchBar({ place }) {
     }));
   };
 
-  const handleButton = async () => {
-    const { pathname } = window.location;
-
-    if (pathname === '/comidas' || pathname === '/bebidas') {
-      handleApi(searchState, 'meal');
-    }
+  const handleButton = () => {
+    handleApi({
+      ...searchState,
+      place,
+    });
   };
 
   const conditional = () => {
-    if (results.length === 1) {
+    if (results === null) {
+      const alertStr = 'Sinto muito, não encontramos nenhuma receita para esses filtros.';
+      alert(alertStr);
+      return null;
+    } if (results.length === 1) {
       return (
         <Redirect to={ `/${objectTranslation[place]}/${results[0][objectId[place]]}` } />
       );
@@ -50,7 +52,10 @@ export default function SearchBar({ place }) {
   };
 
   return (
-    <div>
+    <div
+      data-testid="search-bar"
+      className={ searchActive ? 'search-bar-container' : 'none' }
+    >
       <div>
         <input
           onChange={ handleState }
@@ -111,4 +116,5 @@ export default function SearchBar({ place }) {
 
 SearchBar.propTypes = {
   place: PropTypes.string.isRequired,
+  searchActive: PropTypes.bool.isRequired,
 };
