@@ -2,6 +2,9 @@ import React, { useRef } from 'react';
 import { Redirect } from 'react-router-dom';
 import { /* useClassState, */ useStateEasyRedux } from 'easy-redux-trybe';
 import { setLocalStorage } from '../helper';
+import logo from '../assets/logo-recipies.svg';
+
+import styles from '../styles/Login.module.scss';
 
 const initialState = {
   toggleBtn: true,
@@ -49,34 +52,31 @@ function Login() {
 
   if (shouldRedirect) return <Redirect to="/comidas" />;
   return (
-    <div>
+    <div className={ styles.container }>
       {/* <header>
         <Link to="/settings" data-testid="btn-settings">Config</Link>
       </header> */}
-      <main>
+      <main className={ styles.mainLogin }>
+        <img src={ logo } alt="logo app" />
         <form onSubmit={ handleSubmit }>
-          <label htmlFor="email-input">
-            Email:
-            <input
-              id="email-input"
-              type="text"
-              name="email"
-              value={ email }
-              onChange={ handleChange }
-              data-testid="email-input"
-            />
-          </label>
-          <label htmlFor="password-input">
-            Password:
-            <input
-              ref={ password }
-              id="password-input"
-              type="text"
-              minLength="7"
-              onChange={ handleChange }
-              data-testid="password-input"
-            />
-          </label>
+          <input
+            id="email-input"
+            type="text"
+            name="email"
+            value={ email }
+            onChange={ handleChange }
+            data-testid="email-input"
+            placeholder="E-mail"
+          />
+          <input
+            ref={ password }
+            id="password-input"
+            type="password"
+            minLength="7"
+            onChange={ handleChange }
+            data-testid="password-input"
+            placeholder="Password"
+          />
           <button
             type="submit"
             data-testid="login-submit-btn"
