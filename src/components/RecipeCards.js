@@ -2,10 +2,8 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
 
-const typePt = window.location.href.split('/')[3];
-const type = (typePt === 'bebidas' ? 'drinks' : 'meals');
-
 function GoToDetails(data) {
+  const typePt = window.location.href.split('/')[3];
   const history = useHistory();
   let url = '';
   if (data && data.length === 1) {
@@ -18,7 +16,14 @@ function GoToDetails(data) {
   }
 }
 
+const obj = {
+  bebidas: 'drinks',
+  comidas: 'meals',
+};
+
 export default function RecipeCards() {
+  const typePt = window.location.href.split('/')[3];
+  const type = obj[typePt];
   const data1 = useSelector((state) => state.searchReducer.data);
   const data2 = useSelector((state) => (typePt === 'bebidas'
     ? state.searchReducer.initialDrinks : state.searchReducer.initialMeals));
@@ -46,9 +51,8 @@ export default function RecipeCards() {
           const showLimit = 12;
           if (index < showLimit) {
             return (
-              <Link to={ `${ptType}/${id}` }>
+              <Link to={ `${ptType}/${id}` } key={ name }>
                 <div
-                  key={ index }
                   className="card"
                   data-testid={ `${index}-recipe-card` }
                 >

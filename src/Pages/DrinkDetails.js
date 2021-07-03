@@ -8,6 +8,7 @@ function DrinkDetails() {
   const id = window.location.href.split('/')[4];
   const dispatch = useDispatch();
   const [data, setData] = useState();
+  const [recomendations, setRecomendations] = useState();
 
   useEffect(() => {
     const fetchDrinks = async () => {
@@ -16,8 +17,36 @@ function DrinkDetails() {
       setData(drinks);
       dispatch(actionDetails(drinks));
     };
+    const fetchRecomendations = async () => {
+      const url = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
+      const { meals } = await fetch(url).then((r) => r.json());
+      setRecomendations(meals);
+    };
     fetchDrinks();
+    fetchRecomendations();
   }, []);
+
+  const renderRecomendations = (param) => {
+    if (param) {
+      return (
+        param.map((recipe, index) => {
+          const { strMeal, strCategory, strMealThumb } = recipe;
+          const limitNumber = 6;
+          if (index <= limitNumber) {
+            return (
+              <div data-testid={ `${index}-recomendation-card` } key={ index }>
+                <img alt={ strMeal } src={ strMealThumb } />
+                <h3>{strCategory}</h3>
+                <h2>{strMeal}</h2>
+              </div>
+            );
+          }
+          return '';
+        })
+      );
+    }
+    return '';
+  };
 
   const renderDrinkRecipe = () => {
     const ingredients = [];
@@ -56,14 +85,14 @@ function DrinkDetails() {
                 key={ index }
                 data-testid={ `${index}-ingredient-name-and-measure` }
               >
-                {`${item} ${(measure[index] ? `- ${measure}` : '')}`}
+                {`${item} ${(measure[index] ? `- ${measure[index]}` : '')}`}
               </li>
             ))}
           </ul>
           <h2>Instructions</h2>
           <p data-testid="instructions">{strInstructions}</p>
           <h2>Recomendadas</h2>
-          <div data-testid={ `${0}-recomendation-card` }>cards de receitas aqui</div>
+          {renderRecomendations(recomendations)}
           <button type="button" data-testid="start-recipe-btn">Iniciar Receita</button>
         </div>
       );
