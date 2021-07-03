@@ -27,7 +27,7 @@ export default function FilterCocktailsByCategories() {
           key={ category.strCategory }
           value={ category.strCategory }
           onClick={ (e) => {
-            setMealsByCategories(e.target.value);
+            setCocktailsByCategories(e.target.value);
             setCurrCategory(e.target.value);
           } }
           data-testid={ `${category.strCategory}-category-filter` }

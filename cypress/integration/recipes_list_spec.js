@@ -34,7 +34,7 @@ const checkFirstTwelveRecipes = (recipes, meal = true) => {
   cy.get('[data-testid="12-card-name"]').should('not.exist');
 };
 
-/* describe('25 - Implemente os elementos da tela principal de receitas respeitando os atributos descritos no protótipo', () => {
+describe('25 - Implemente os elementos da tela principal de receitas respeitando os atributos descritos no protótipo', () => {
   it('A tela tem os data-testids de todos os 12 cards da tela de comidas', () => {
     cy.visit('http://localhost:3000/comidas', {
       onBeforeLoad(win) {
@@ -337,7 +337,7 @@ describe('31 - Desenvolva o filtro de categorias com a opção de filtrar por to
     cy.get('[data-testid="All-category-filter"]').click();
     checkFirstTwelveRecipes(drinksMock.drinks, false);
   });
-}); */
+});
 
 describe('32 - Redirecione a pessoa usuária, ao clicar no card, para a tela de detalhes, que deve mudar a rota e conter o id da receita na URL', () => {
   it('Caso as receitas sejam de comida a rota deve mudar para a tela de detalhes da receita', () => {

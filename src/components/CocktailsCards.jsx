@@ -3,7 +3,7 @@ import { Card } from 'react-bootstrap';
 import CocktailsContext from '../context/CocktailsContext';
 
 export default function CocktailsCards() {
-  const { cocktails, getCurrCocktail } = useContext(CocktailsContext);
+  const { cocktails, setCurrCategoryId } = useContext(CocktailsContext);
   const { drinks } = cocktails;
   const end = 12;
   const drinksArray = drinks ? drinks.slice(0, end) : [];
@@ -13,7 +13,7 @@ export default function CocktailsCards() {
       {drinksArray.length > 0
       && drinksArray.map((recipe, index) => (
         <Card
-          onClick={ () => getCurrCocktail(recipe.idDrink) }
+          onClick={ async () => setCurrCategoryId(recipe.idDrink) }
           style={ { width: '18rem' } }
           key={ index }
           data-testid={ `${index}-recipe-card` }

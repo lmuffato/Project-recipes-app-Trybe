@@ -10,16 +10,21 @@ function MealsProvider(props) {
   const [mealsCopyObject, setMealsCopy] = useState({});
   const [mealsCategories, setMealsCategories] = useState([]);
   const [currCategory, setCurrCategory] = useState('');
+  const [currCategoryId, setCurrCategoryId] = useState('');
   const [currMeal, setCurrMeal] = useState({});
   const history = useHistory();
 
-  const getCurrMeal = async (id) => {
-    const recipe = await ApiRecipeDetail(id);
-    const { meals } = recipe;
-    const [meal] = meals;
-    setCurrMeal(meal);
-    history.push(`/comidas/${id}`);
-  };
+  useEffect(() => {
+    if (!currCategoryId) return;
+    const getCurrMeal = async () => {
+      const recipe = await ApiRecipeDetail(currCategoryId);
+      const { meals } = recipe;
+      const [meal] = meals;
+      setCurrMeal(meal);
+    };
+    getCurrMeal();
+    history.push(`comidas/${currCategoryId}`);
+  }, [currCategoryId]);
 
   const setMealsByCategories = async (string) => {
     if (currCategory === string || string === 'All') return setMeals(mealsCopyObject);
@@ -47,7 +52,7 @@ function MealsProvider(props) {
     setCurrCategory,
     setMealsByCategories,
     currMeal,
-    getCurrMeal,
+    setCurrCategoryId,
   };
 
   const { children } = props;

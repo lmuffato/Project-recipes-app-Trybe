@@ -10,16 +10,21 @@ function CocktailsProvider(props) {
   const [cocktailsCopy, setCocktailsCopy] = useState({});
   const [cocktailsCategories, setCocktailsCategories] = useState([]);
   const [currCategory, setCurrCategory] = useState('');
+  const [currCategoryId, setCurrCategoryId] = useState('');
   const [currCocktail, setCurrCocktail] = useState({});
   const history = useHistory();
 
-  const getCurrCocktail = async (id) => {
-    const recipe = await ApiDetailsById(id);
-    const { drinks } = recipe;
-    const [currDrink] = drinks;
-    setCurrCocktail(currDrink);
-    history.push(`/bebidas/${id}`);
-  };
+  useEffect(() => {
+    if (!currCategoryId) return;
+    const getCurrCocktail = async () => {
+      const recipe = await ApiDetailsById(currCategoryId);
+      const { drinks } = recipe;
+      const [currDrink] = drinks;
+      setCurrCocktail(currDrink);
+    };
+    getCurrCocktail();
+    history.push(`bebidas/${currCategoryId}`);
+  }, [currCategory, currCategoryId]);
 
   const setCocktailsByCategories = async (string) => {
     if (currCategory === string || string === 'All') return setCocktails(cocktailsCopy);
@@ -46,7 +51,7 @@ function CocktailsProvider(props) {
     setCurrCategory,
     setCocktailsByCategories,
     currCocktail,
-    getCurrCocktail,
+    setCurrCategoryId,
   };
   const { children } = props;
   return (
