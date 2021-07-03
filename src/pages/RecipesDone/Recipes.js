@@ -1,34 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Button, Card } from 'react-bootstrap';
 import './index.css';
 import Share from '../../images/shareIcon.svg';
+import Context from '../../context/Context';
 
 function Recipes() {
-  // const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'))
-  const doneRecipes = [
-    {
-      id: '52771',
-      type: 'comida',
-      area: 'Italian',
-      category: 'Vegetarian',
-      alcoholicOrNot: '',
-      name: 'Spicy Arrabiata Penne',
-      image: 'https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg',
-      doneDate: '23/06/2020',
-      tags: ['Pasta', 'Curry'],
-    },
-    {
-      id: '178319',
-      type: 'bebida',
-      area: '',
-      category: 'Cocktail',
-      alcoholicOrNot: 'Alcoholic',
-      name: 'Aquamarine',
-      image: 'https://www.thecocktaildb.com/images/media/drink/zvsre31572902738.jpg',
-      doneDate: '23/06/2020',
-      tags: [],
-    },
-  ];
+  const { doneRecipes: noFilter, doneFilterRecipes, showFilter } = useContext(Context);
+  let doneRecipes = noFilter;
+  if (!showFilter) {
+    doneRecipes = noFilter;
+  } else {
+    doneRecipes = doneFilterRecipes;
+  }
   const changeTags = (t, index) => {
     const tags = t.slice(0, 2);
     return tags.map((tagName) => (
@@ -92,12 +75,6 @@ function Recipes() {
             src={ Share }
           />
         </Button>
-        {/* <Card.Text>
-          {`${recipe.alcoholicOrNot}`}
-        </Card.Text>
-        <Card.Text data-testid={ `${index}-horizontal-top-text` }>
-          {`${recipe.area} - ${recipe.category} `}
-        </Card.Text> */}
         <Card.Text data-testid={ `${index}-horizontal-top-text` }>
           {`${recipe.alcoholicOrNot}`}
         </Card.Text>

@@ -8,6 +8,7 @@ import {
   fetchCategoryDrinks,
   fetchFilterFoods,
   fetchFilterDrinks } from '../services/fetchApi';
+import Mock from '../services/mokcInformation';
 
 function Provider({ children }) {
   // useStates...
@@ -23,8 +24,11 @@ function Provider({ children }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [search, setSearch] = useState(false);
+  const [doneRecipes, setDoneRecipes] = useState([]);
+  const [doneFilterRecipes, setDoneFilter] = useState([]);
 
-  function getFoods() {
+  function getInFormations() {
+    // const informationLocalStorage = JSON.parse(localStorage.getItem('doneRecipes'))
     const fetchApis = async () => {
       const dataFoods = await fetchApiFoods();
       const dataDrinks = await fetchApiDrinks();
@@ -36,12 +40,13 @@ function Provider({ children }) {
       setDrinks(dataDrinks);
     };
     fetchApis();
+    setDoneRecipes(Mock);
   }
 
   const clickFilterFood = (e) => {
     setCategory(e.target.innerText);
     if (e.target.innerText !== 'All') {
-      setShowFilter(true);
+      setShowFilter(false);
       setFilterFoods([]);
       const getCategoryFoods = async () => {
         const data = await fetchFilterFoods(e.target.innerText);
@@ -49,9 +54,9 @@ function Provider({ children }) {
       };
       getCategoryFoods();
     } if (category === e.target.innerText) {
-      setShowFilter(false);
+      setShowFilter(true);
     } if (e.target.innerText === 'All') {
-      setShowFilter(false);
+      setShowFilter(true);
     }
   };
 
@@ -79,8 +84,30 @@ function Provider({ children }) {
   const clickRecipeDrinks = (id) => {
     console.log(id);
   };
+
+  const doneFilter = (e) => {
+    const { innerText } = e.target;
+    setDoneFilter([]);
+    if (innerText === 'All') {
+      setShowFilter(false);
+      setDoneRecipes(Mock);
+      setDoneFilter([]);
+    }
+    if (innerText === 'Food') {
+      setShowFilter(true);
+      const newRecipes = doneRecipes
+        .filter((recipe) => (recipe.type === 'comida') && recipe);
+      setDoneFilter(newRecipes);
+    }
+    if (innerText === 'Drinks') {
+      setShowFilter(true);
+      const newRecipes = doneRecipes
+        .filter((recipe) => (recipe.type === 'bebida') && recipe);
+      setDoneFilter(newRecipes);
+    }
+  };
   // ComponentDidMount
-  useEffect(getFoods, []);
+  useEffect(getInFormations, []);
 
   const dataValue = {
     logout,
@@ -102,6 +129,9 @@ function Provider({ children }) {
     setPassword,
     search,
     setSearch,
+    doneRecipes,
+    doneFilter,
+    doneFilterRecipes,
   };
 
   return (

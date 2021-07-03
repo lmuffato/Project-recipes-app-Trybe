@@ -5,6 +5,7 @@ import styleCard, { styleBtn } from './index.style';
 import clearLS from '../../services/localStorage/clearLS';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
+// import doneRecipes from '../../services/mokcInformation';
 
 const ProfileScreen = () => {
   const { setLogout } = useContext(Context);
@@ -13,6 +14,7 @@ const ProfileScreen = () => {
   const handleClick = ({ target }) => {
     // console.log(target);
     if (target.id === 'recipes-made') {
+      // const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'))
       console.log('Receitas feitas clicked!');
     }
     if (target.id === 'recipes-fav') {
