@@ -68,5 +68,8 @@ export default function FavBtn(props) {
 }
 
 FavBtn.propTypes = {
-  info: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string)).isRequired,
+  info: PropTypes.oneOfType(
+    [PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string)),
+      PropTypes.objectOf(PropTypes.any)],
+  ).isRequired,
 };
