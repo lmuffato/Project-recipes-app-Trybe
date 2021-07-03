@@ -55,6 +55,8 @@ function Provider({ children }) {
     drinks: dataDrinksAndCategory,
     catFoods: dataCategoriesFoods,
     catDrinks: dataCategoriesDrinks,
+    setDrinks: setDrinksAndCategory,
+    setFoods: setDataMealsAndCategory,
     infoUser,
     setDatainfoUser,
     categoryF,
