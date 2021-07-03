@@ -15,16 +15,16 @@ function DrinkCards(props) {
   return (
     <div>
       { drinks.slice(0, size).map(({ idDrink, strDrink, strDrinkThumb }, index) => (
-        <Link key={ strDrink } to={ `/bebidas/${idDrink}` }>
-          <div data-testid={ `${index}-recipe-card` }>
+        <div key={ strDrink } data-testid={ `${index}-recipe-card` }>
+          <Link to={ `/bebidas/${idDrink}` }>
             <h2 data-testid={ `${index}-card-name` }>{strDrink}</h2>
             <img
               src={ strDrinkThumb }
               alt={ strDrink }
               data-testid={ `${index}-card-img` }
             />
-          </div>
-        </Link>
+          </Link>
+        </div>
       )) }
     </div>
   );

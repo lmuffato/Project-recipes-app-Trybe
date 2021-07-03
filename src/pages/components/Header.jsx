@@ -9,6 +9,20 @@ import searchIcon from '../../images/searchIcon.svg';
 
 function RecipesHeader(props) {
   const { type } = props;
+
+  const pageTitle = () => {
+    if (type === 'meals') return 'Comidas';
+    if (type === 'drinks') return 'Bebidas';
+    if (type === 'search') return 'Explorar';
+    if (type === 'search-ingredients') return 'Explorar Ingredientes';
+    if (type === 'search-origin') return 'Explorar Origem';
+  };
+
+  const showSearchIcon = () => {
+    if (['meals', 'drinks', 'search-origin'].includes(type)) return true;
+    return false;
+  };
+
   return (
     <Container as="header">
       <Row sm="3" xs="3">
@@ -18,10 +32,14 @@ function RecipesHeader(props) {
           </Link>
         </Col>
         <Col>
-          <h3 data-testid="page-title">{ type === 'meals' ? 'Comidas' : 'Bebidas' }</h3>
+          <h3 data-testid="page-title">{ pageTitle() }</h3>
         </Col>
         <Col>
-          <img data-testid="search-top-btn" src={ searchIcon } alt="Search icon" />
+          { showSearchIcon() ? (
+            <Link to="/explorar">
+              <img data-testid="search-top-btn" src={ searchIcon } alt="Search icon" />
+            </Link>)
+            : null }
         </Col>
       </Row>
     </Container>
