@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export default function TagMaker(props) {
   const { index } = props;
@@ -18,3 +19,7 @@ export default function TagMaker(props) {
     </div>
   );
 }
+
+TagMaker.propTypes = {
+  index: PropTypes.number.isRequired,
+};
