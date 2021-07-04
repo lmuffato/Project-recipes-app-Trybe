@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 import { useStateEasyRedux } from 'easy-redux-trybe';
 import Header from '../components/Header';
+import Cards from '../components/Cards';
 
 function Comidas(props) {
   const { match: { params, path } } = props;
@@ -36,25 +37,12 @@ function Comidas(props) {
       {/* {`COMIDAAAAAAAAAAAAA ${!!id}`} */}
       <main className="card-painel">
         {resultsTwelveItems && resultsTwelveItems.map(
-          (el, index) => (
-            <div
-              className="card-meal-drink"
-              key={ el.idMeal }
-              data-testid={ `${index}-recipe-card` }
-            >
-              <img
-                src={ el.strMealThumb }
-                alt="Drink"
-                width="100%"
-                data-testid={ `${index}-card-img` }
-              />
-              <p
-                className="card-name"
-                data-testid={ `${index}-card-name` }
-              >
-                { el.strMeal }
-              </p>
-            </div>
+          (el, index) => (<Cards
+            key={ el.idMeal }
+            el={ el }
+            { ...{ path } }
+            index={ index }
+          />
           ),
         )}
       </main>

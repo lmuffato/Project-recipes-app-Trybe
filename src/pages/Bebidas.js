@@ -4,6 +4,7 @@ import { useStateEasyRedux } from 'easy-redux-trybe';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 import Header from '../components/Header';
+import Cards from '../components/Cards';
 
 export default function Bebidas(props) {
   const { match: { params, path } } = props;
@@ -34,25 +35,12 @@ export default function Bebidas(props) {
       <Header title="Bebidas" showButton showHeader={ !!id } { ...{ path } } />
       <main className="card-painel">
         {resultsTwelveItems && resultsTwelveItems.map(
-          (el, index) => (
-            <div
-              className="card-meal-drink"
-              key={ el.idDrink }
-              data-testid={ `${index}-recipe-card` }
-            >
-              <img
-                src={ el.strDrinkThumb }
-                alt="Drink"
-                width="50px"
-                data-testid={ `${index}-card-img` }
-              />
-              <p
-                className="card-name"
-                data-testid={ `${index}-card-name` }
-              >
-                { el.strDrink }
-              </p>
-            </div>
+          (el, index) => (<Cards
+            key={ el.idDrink }
+            el={ el }
+            { ...{ path } }
+            index={ index }
+          />
           ),
         )}
       </main>
