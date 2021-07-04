@@ -41,3 +41,5 @@ export async function fetchFilterDrinks(category) {
   const dataCategoryDrinks = await response.json();
   return dataCategoryDrinks.drinks;
 }
+
+// Req 74 Requisição a Api de random Drinks e MealsMock
