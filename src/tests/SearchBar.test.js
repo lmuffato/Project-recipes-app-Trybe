@@ -157,7 +157,7 @@ describe('test if SearchBar component when renders the Api', () => {
     const requestApi = await mockApiByMainIngredient();
 
     const length = 12;
-    const cardsImages = screen.getAllByAltText('recipe');
+    const cardsImages = await screen.getAllByAltText('recipe');
 
     expect(cardsImages.length).toBe(length);
     expect(requestApi).toMatchObject(mealsByIngredient);

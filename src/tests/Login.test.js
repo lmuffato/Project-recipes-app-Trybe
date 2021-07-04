@@ -99,7 +99,7 @@ describe('Testa todo o Componente "Login"', () => {
   });
   test('8-Verifica que após a submissão a rota muda para a tela '
   + ' principal de receitas de comidas', async () => {
-    renderWithRouterAndContext(<Login />);
+    const { historyTest } = renderWithRouterAndContext(<Login />);
     const categories = await mockApiByCategory();
 
     const button = screen.getByTestId(BUTTON_INPUT_TEST_ID);
@@ -124,7 +124,7 @@ describe('Testa todo o Componente "Login"', () => {
       { strCategory: 'Starter' },
       { strCategory: 'Vegan' },
       { strCategory: 'Vegetarian' }] };
-    expect(window.location.pathname).toBe('/comidas');
+    expect(historyTest.entries[2].pathname).toBe('/comidas');
     expect(categories).toMatchObject(meals);
   });
 });

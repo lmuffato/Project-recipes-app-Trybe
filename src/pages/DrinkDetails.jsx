@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Card } from 'react-bootstrap';
+import { Card, Carousel } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 import RecipeDetail from '../effects/RecipeDetails';
 import shareIcon from '../images/shareIcon.svg';
@@ -20,12 +20,13 @@ export default function DrinkDetails() {
   if (!currDrink.recipe) return;
   const { arrRecipeIngredients, arrRecipeMeasureUnit,
     recipe, recomends } = currDrink;
+  console.log(recomends);
   return (
     <Card style={ { width: '18rem' } }>
-      <h2 data-testid="recipe-title">{recipe.strMeal}</h2>
+      <h2 data-testid="recipe-title">{recipe.strDrink}</h2>
       <img
-        src={ recipe.strMealThumb }
-        alt={ recipe.strMeal }
+        src={ recipe.strDrinkThumb }
+        alt={ recipe.strDrink }
         data-testid="recipe-photo"
       />
       <img
@@ -40,7 +41,7 @@ export default function DrinkDetails() {
         src={ favoriteIcon }
         alt="favoritar"
       />
-      <h3 data-testid="recipe-category">{recipe.strCategory}</h3>
+      <h3 data-testid="recipe-category">{recipe.strAlcoholic}</h3>
       <h3>Ingredientes:</h3>
       {arrRecipeIngredients.map((ingredient, index) => {
         if (!ingredient[1]) return;
@@ -63,14 +64,21 @@ export default function DrinkDetails() {
         src={ recipe.strYoutube }
       /> : null}
       <h4>Pratos Recomendados:</h4>
-      {recomends.map((item, index) => (
-        <img
-          key={ item.strMeal }
-          src={ item.strMealThumb }
-          alt={ item.strMeal }
-          data-testid={ `${index}-recomendation-card` }
-        />
-      ))}
+      <Carousel>
+        {recomends.map((item, index) => (
+          <Carousel.Item key={ `${index}-${item.strMeal}` }>
+            <img
+              className="d-block w-100"
+              src={ item.strMealThumb }
+              alt={ item.strMeal }
+              data-testid={ `${index}-recomendation-card` }
+            />
+            <Carousel.Caption>
+              <h3 data-testid={ `${index}-recomendation-title` }>{item.strMeal}</h3>
+            </Carousel.Caption>
+          </Carousel.Item>
+        ))}
+      </Carousel>
       <button type="button" data-testid="start-recipe-btn">Começar Receita</button>
     </Card>
   );
