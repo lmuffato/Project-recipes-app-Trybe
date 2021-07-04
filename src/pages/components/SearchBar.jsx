@@ -13,7 +13,6 @@ function SearchBar(props) {
   const [radioOption, setRadioOption] = useState('ingredient');
   const dispatch = useDispatch();
   const cards = useSelector((state) => state[type][type]);
-  console.log(cards);
 
   useEffect(() => {
     if (cards.length === 0) {
