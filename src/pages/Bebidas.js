@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 import Header from '../components/Header';
 import Cards from '../components/Cards';
+import FilterButtons from '../components/FilterButtons';
 
 export default function Bebidas(props) {
   const { match: { params, path } } = props;
@@ -34,12 +35,11 @@ export default function Bebidas(props) {
     <div>
       <Header title="Bebidas" showButton showHeader={ !!id } { ...{ path } } />
       <main className="card-painel">
+        <FilterButtons { ...{ path, resultsTwelveItems } } />
         {resultsTwelveItems && resultsTwelveItems.map(
           (el, index) => (<Cards
             key={ el.idDrink }
-            el={ el }
-            { ...{ path } }
-            index={ index }
+            { ...{ path, el, index } }
           />
           ),
         )}

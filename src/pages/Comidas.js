@@ -5,6 +5,7 @@ import { Redirect } from 'react-router-dom';
 import { useStateEasyRedux } from 'easy-redux-trybe';
 import Header from '../components/Header';
 import Cards from '../components/Cards';
+import FilterButtons from '../components/FilterButtons';
 
 function Comidas(props) {
   const { match: { params, path } } = props;
@@ -36,12 +37,11 @@ function Comidas(props) {
       <Header title="Comidas" showButton showHeader={ !!id } { ...{ path } } />
       {/* {`COMIDAAAAAAAAAAAAA ${!!id}`} */}
       <main className="card-painel">
+        <FilterButtons { ...{ path, resultsTwelveItems } } />
         {resultsTwelveItems && resultsTwelveItems.map(
           (el, index) => (<Cards
             key={ el.idMeal }
-            el={ el }
-            { ...{ path } }
-            index={ index }
+            { ...{ path, el, index } }
           />
           ),
         )}
