@@ -6,6 +6,7 @@ import { Redirect } from 'react-router-dom';
 import Header from '../components/Header';
 import Cards from '../components/Cards';
 import FilterButtons from '../components/FilterButtons';
+import Footer from '../components/Footer';
 
 export default function Bebidas(props) {
   const { match: { params, path } } = props;
@@ -32,7 +33,7 @@ export default function Bebidas(props) {
     return <Redirect to={ `bebidas/${idDrink}` } />;
   }
   return (
-    <div>
+    <div className="test-container">
       <Header title="Bebidas" showButton showHeader={ !!id } { ...{ path } } />
       <main className="card-painel">
         <FilterButtons { ...{ path, resultsTwelveItems } } />
@@ -44,6 +45,7 @@ export default function Bebidas(props) {
           ),
         )}
       </main>
+      <Footer />
     </div>
   );
 }
