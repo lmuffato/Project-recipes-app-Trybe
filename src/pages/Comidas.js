@@ -34,7 +34,7 @@ function Comidas(props) {
     return <Redirect to={ `comidas/${idMeal}` } />;
   }
   return (
-    <div>
+    <div className="test-container">
       <Header title="Comidas" showButton showHeader={ !!id } { ...{ path } } />
       {/* {`COMIDAAAAAAAAAAAAA ${!!id}`} */}
       <main className="card-painel">
