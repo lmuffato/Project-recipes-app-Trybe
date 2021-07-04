@@ -7,17 +7,21 @@ function Explore() {
   return (
     <>
       <Header title="Explorar" searchBtn={ false } />
-      <Link
-        to="/explorar/comidas"
-        data-testid="explore-food"
-      >
-        Explorar Comidas
+      <Link to="/explorar/comidas">
+        <button
+          data-testid="explore-food"
+          type="button"
+        >
+          Explorar Comidas
+        </button>
       </Link>
-      <Link
-        to="/explorar/bebidas"
-        data-testid="explore-drinks"
-      >
-        Explorar Bebidas
+      <Link to="/explorar/bebidas">
+        <button
+          data-testid="explore-drinks"
+          type="button"
+        >
+          Explorar Bebidas
+        </button>
       </Link>
       <Footer />
     </>

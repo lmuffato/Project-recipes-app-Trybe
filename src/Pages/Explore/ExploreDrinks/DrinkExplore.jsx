@@ -1,14 +1,16 @@
 import React from 'react';
-import Footer from '../../../components/Footer';
 import Header from '../../../components/Header';
+import Footer from '../../../components/Footer';
+import ButtonExplore from '../../../components/ButtonExplore';
 
-function DrinkExplore() {
+function ExploreDrinks() {
   return (
     <>
       <Header title="Explorar Bebidas" searchBtn={ false } />
+      <ButtonExplore type="bebidas" />
       <Footer />
     </>
   );
 }
 
-export default DrinkExplore;
+export default ExploreDrinks;
