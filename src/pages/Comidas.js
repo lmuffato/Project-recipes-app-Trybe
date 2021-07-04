@@ -6,6 +6,7 @@ import { useStateEasyRedux } from 'easy-redux-trybe';
 import Header from '../components/Header';
 import Cards from '../components/Cards';
 import FilterButtons from '../components/FilterButtons';
+import Footer from '../components/Footer';
 
 function Comidas(props) {
   const { match: { params, path } } = props;
@@ -46,6 +47,7 @@ function Comidas(props) {
           ),
         )}
       </main>
+      <Footer />
     </div>
   );
 }
