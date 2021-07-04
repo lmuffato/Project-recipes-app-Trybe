@@ -10,8 +10,12 @@ function Profile() {
   const [redirectLogin, setRedirectLogin] = useState(false);
 
   useEffect(() => {
-    const getEmail = localStorage.getItem('user');
-    setUserEmail(JSON.parse(getEmail).email);
+    const getEmail = JSON.parse(localStorage.getItem('user'));
+    try {
+      setUserEmail(getEmail.email);
+    } catch (error) {
+      setUserEmail('email');
+    }
   }, []);
 
   const clearLocalStorage = () => {
