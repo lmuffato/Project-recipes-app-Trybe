@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { arrayOf, func, object } from 'prop-types';
 import { connect } from 'react-redux';
@@ -6,20 +6,11 @@ import { getMeals } from '../../../actions/meals';
 
 function MealCards(props) {
   const { fetchMeals, meals, filter } = props;
-  const [mountComponent, finishMounting] = useState(true);
   const size = 12;
 
   useEffect(() => {
-    const firstFetch = async () => {
-      await fetchMeals(filter);
-      finishMounting(false);
-    };
-    firstFetch();
+    fetchMeals(filter);
   }, [fetchMeals, filter]);
-
-  useEffect(() => {
-    if (meals.length === 0 && !mountComponent) alert('Sinto muito, não encontramos nenhuma receita para esses filtros.') // eslint-disable-line
-  }, [meals, mountComponent]);
 
   return (
     <div>

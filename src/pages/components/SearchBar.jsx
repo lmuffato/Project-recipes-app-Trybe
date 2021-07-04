@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { string } from 'prop-types';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -12,6 +12,14 @@ function SearchBar(props) {
   const [searchText, setSearchText] = useState('');
   const [radioOption, setRadioOption] = useState('ingredient');
   const dispatch = useDispatch();
+  const cards = useSelector((state) => state[type][type]);
+  console.log(cards);
+
+  useEffect(() => {
+    if (cards.length === 0) {
+      alert('Sinto muito, não encontramos nenhuma receita para esses filtros.'); // eslint-disable-line
+    }
+  }, [cards]);
 
   const searchRecipe = () => {
     if (radioOption === 'first-letter' && searchText.length !== 1) {
