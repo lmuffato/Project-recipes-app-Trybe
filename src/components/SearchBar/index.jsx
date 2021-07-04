@@ -1,7 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import swal from 'sweetalert';
 import RecipesContext from '../../context/RecipesContext';
 import FoodCard from '../FoodCard';
 import './style.css';
@@ -29,23 +28,32 @@ export default function SearchBar({ place, searchActive }) {
   };
 
   const handleButton = () => {
-    handleApi({
-      ...searchState,
-      place,
-    });
+    const { alert } = window;
+    if (searchState.radioInput === 'letter' && searchState.textInput.length > 1) {
+      alert('Sua busca deve conter somente 1 (um) caracter');
+    } else {
+      handleApi({
+        ...searchState,
+        place,
+      });
+    }
   };
 
   const conditional = () => {
+    const maxNumber = 12;
     if (results === null) {
       const alertStr = 'Sinto muito, não encontramos nenhuma receita para esses filtros.';
       handleNull();
-      swal(alertStr);
+      const { alert } = window;
+      alert(alertStr);
       return null;
     } if (results.length === 1) {
       return (
         <Redirect to={ `/${objectTranslation[place]}/${results[0][objectId[place]]}` } />
       );
-    } return results.map((food, index) => (<FoodCard
+    }
+    const firstTwelve = results.slice(1, maxNumber);
+    return firstTwelve.map((food, index) => (<FoodCard
       key={ index }
       food={ food }
       index={ index }
