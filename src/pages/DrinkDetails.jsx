@@ -20,7 +20,6 @@ export default function DrinkDetails() {
   if (!currDrink.recipe) return;
   const { arrRecipeIngredients, arrRecipeMeasureUnit,
     recipe, recomends } = currDrink;
-  console.log(recomends);
   return (
     <Card style={ { width: '18rem' } }>
       <h2 data-testid="recipe-title">{recipe.strDrink}</h2>

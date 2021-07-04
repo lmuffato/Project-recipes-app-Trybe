@@ -1,43 +1,36 @@
 import React, { useEffect, useState } from 'react';
 import { Card, Carousel } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
+import RecipeDetail from '../effects/RecipeDetails';
 import shareIcon from '../images/shareIcon.svg';
 import favoriteIcon from '../images/whiteHeartIcon.svg';
 import { ApiCocktailFirstItems } from '../services/theCockTailAPI';
 import { ApiRecipeDetail } from '../services/theMealAPI';
 
 export default function FoodDetails() {
-  const [currMeal, setCurrMeal] = useState({});
-  const [firstCocktails, setFirstCocktails] = useState([]);
   const history = useHistory();
   const { pathname } = history.location;
-  const regExp = /[0-9]/gi;
-  const getId = pathname.match(regExp).reduce((acc, item) => acc + item, '');
+  const [currMeal, setCurrMeal] = useState({
+    recipe: {},
+    recomends: [],
+    arrRecipeIngredients: [],
+    arrRecipeMeasureUnit: [],
+  });
+  RecipeDetail(pathname, ApiRecipeDetail, ApiCocktailFirstItems, setCurrMeal);
 
-  useEffect(() => {
-    const getCurrMeal = async () => {
-      const recipe = await ApiRecipeDetail(getId);
-      const cockTails = await ApiCocktailFirstItems();
-      const { drinks } = cockTails;
-      const ARR_LENGTH = 6;
-      const arrDrinks = drinks.slice(0, ARR_LENGTH);
-      const { meals: [meal] } = recipe;
-      console.log(meal);
-      setCurrMeal(meal);
-      setFirstCocktails(arrDrinks);
-    };
-    getCurrMeal();
-  }, []);
-  const arrCurrMeal = Object.entries(currMeal);
-  // src: https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/String/match
-  const arrCurrMealIngredients = arrCurrMeal.filter((i) => i[0].match(/strIngredient/gi));
-  const arrCurrMealMeasure = arrCurrMeal.filter((i) => i[0].match(/strMeasure/gi));
+  // function recipeInit(event) {
+  //   const { target } = event;
+  //   target.innerHTML = 'Continuar Receita';
+  // }
+  if (!currMeal.recipe) return;
+  const { arrRecipeIngredients, arrRecipeMeasureUnit,
+    recipe, recomends } = currMeal;
   return (
     <Card style={ { width: '18rem' } }>
-      <h2 data-testid="recipe-title">{currMeal.strMeal}</h2>
+      <h2 data-testid="recipe-title">{recipe.strMeal}</h2>
       <img
-        src={ currMeal.strMealThumb }
-        alt={ currMeal.strMeal }
+        src={ recipe.strMealThumb }
+        alt={ recipe.strMeal }
         data-testid="recipe-photo"
       />
       <img
@@ -52,9 +45,9 @@ export default function FoodDetails() {
         src={ favoriteIcon }
         alt="favoritar"
       />
-      <h3 data-testid="recipe-category">{currMeal.strCategory}</h3>
+      <h3 data-testid="recipe-category">{recipe.strCategory}</h3>
       <h3>Ingredientes:</h3>
-      {arrCurrMealIngredients.map((ingredient, index) => {
+      {arrRecipeIngredients.map((ingredient, index) => {
         if (!ingredient[1]) return;
         return (
           <p
@@ -62,22 +55,21 @@ export default function FoodDetails() {
             data-testid={ `${index}-ingredient-name-and-measure` }
           >
             {`${ingredient[1]}: `}
-            <span>{arrCurrMealMeasure[index][1]}</span>
+            <span>{arrRecipeMeasureUnit[index][1]}</span>
           </p>
         );
       })}
-      <p data-testid="instructions">{ currMeal.strInstructions }</p>
+      <p data-testid="instructions">{ recipe.strInstructions }</p>
       <iframe
-        title={ currMeal.strMeal }
+        title={ recipe.strMeal }
         width="240"
         height="120"
         data-testid="video"
-        src={ currMeal.strYoutube }
+        src={ recipe.strYoutube }
       />
       <h4>Bebidas Recomendadas:</h4>
-
       <Carousel>
-        {firstCocktails.map((item, index) => (
+        {recomends.map((item, index) => (
           <Carousel.Item key={ `${index}-${item.strDrink}` }>
             <img
               className="d-block w-100"
@@ -95,8 +87,9 @@ export default function FoodDetails() {
         className="fixed-bottom"
         type="button"
         data-testid="start-recipe-btn"
+        // onClick={ recipeInit }
       >
-        Começar Receita
+        Iniciar Receita
       </button>
     </Card>
   );
