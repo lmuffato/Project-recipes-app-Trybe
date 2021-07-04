@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import { getItemFromLocalStorage } from '../services/localStorage';
 
 const getResults = (arrRecipe, currRecipe) => {
@@ -11,10 +12,7 @@ const getResults = (arrRecipe, currRecipe) => {
       if (!i[1]) return;
       return i[0].match(/strIngredient/gi);
     });
-  const arrRecipeMeasureUnit = arrCurrRecipe.filter((i) => {
-    if (!i[1]) return;
-    return i[0].match(/strMeasure/gi);
-  });
+  const arrRecipeMeasureUnit = arrCurrRecipe.filter((i) => i[0].match(/strMeasure/gi));
   return { arrLenght, arrRecipeIngredients, arrRecipeMeasureUnit };
 };
 
@@ -27,23 +25,24 @@ function checkDoneRecipes(id) {
 }
 
 function checkInprogressRecipes(id, pathname) {
-  const currRecipe = getItemFromLocalStorage('inProgressRecipes');
-  if (!currRecipe) return false;
-  if (pathname.includes('comida')) {
-    if (Number(Object.keys(currRecipe.meals)[0]) === Number(id)) {
+  const storage = getItemFromLocalStorage('inProgressRecipes');
+  if (!storage || !storage.cocktails) return false;
+  if (pathname.includes('comidas')) {
+    if (Number(Object.keys(storage.meals)[0]) === Number(id)) {
       return true;
     }
     return false;
   }
-  if (Number(Object.keys(currRecipe.cocktails)[0]) === Number(id)) return true;
+  if (Number(Object.keys(storage.cocktails)[0]) === Number(id)) return true;
   return false;
 }
-
-function RecipeDetail(history, apiCallbackByID, apiCallBack, stateCallback) {
+export default function RecipeDetail(state, apiCallbackByID, apiCallBack, stateCallback) {
+  const history = useHistory();
   const regExp = /[0-9]/gi;
-  const getId = history.match(regExp).reduce((acc, item) => acc + item, '');
+  const getId = history.location
+    .pathname.match(regExp).reduce((acc, item) => acc + item, '');
   const doneRecipe = checkDoneRecipes(getId);
-  const inProgressRecipe = checkInprogressRecipes(getId, history);
+  const inProgressRecipe = checkInprogressRecipes(getId, history.location.pathname);
   useEffect(() => {
     const getCurrMeal = async () => {
       const recipe = await apiCallbackByID(getId);
@@ -73,11 +72,10 @@ function RecipeDetail(history, apiCallbackByID, apiCallBack, stateCallback) {
           arrRecipeIngredients,
           arrRecipeMeasureUnit,
           doneRecipe,
+          inProgress: inProgressRecipe,
         });
       }
     };
     getCurrMeal();
   }, []);
 }
-
-export default RecipeDetail;

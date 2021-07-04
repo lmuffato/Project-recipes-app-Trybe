@@ -1,16 +1,13 @@
 import React, { useState } from 'react';
 import { Card, Carousel } from 'react-bootstrap';
-import { useHistory } from 'react-router-dom';
 import RecipeDetail from '../effects/RecipeDetails';
+import RecipeInit from '../effects/RecipeInit';
 import shareIcon from '../images/shareIcon.svg';
 import favoriteIcon from '../images/whiteHeartIcon.svg';
-import { setToLocalStorage } from '../services/localStorage';
 import { ApiCocktailFirstItems } from '../services/theCockTailAPI';
 import { ApiRecipeDetail } from '../services/theMealAPI';
 
 export default function FoodDetails() {
-  const history = useHistory();
-  const { pathname } = history.location;
   const [currMeal, setCurrMeal] = useState({
     recipe: {},
     recomends: [],
@@ -18,19 +15,16 @@ export default function FoodDetails() {
     arrRecipeMeasureUnit: [],
     doneRecipe: false,
     inProgress: false,
+    recipeInit: false,
   });
-  RecipeDetail(pathname, ApiRecipeDetail, ApiCocktailFirstItems, setCurrMeal);
+
+  RecipeDetail(currMeal, ApiRecipeDetail, ApiCocktailFirstItems, setCurrMeal);
+  RecipeInit(currMeal);
 
   if (!currMeal.recipe) return;
   const { arrRecipeIngredients, arrRecipeMeasureUnit,
     recipe, recomends, doneRecipe, inProgress } = currMeal;
 
-  const recipeInit = () => {
-    const { recipe: { idMeal } } = currMeal;
-    const currRecipe = { meals: { [idMeal]: arrRecipeIngredients } };
-    setToLocalStorage('inProgressRecipes', currRecipe);
-    history.push(`/comidas/${idMeal}/in-progress`);
-  };
   return (
     <Card style={ { width: '18rem' } }>
       <h2 data-testid="recipe-title">{recipe.strMeal}</h2>
@@ -94,7 +88,7 @@ export default function FoodDetails() {
           className="fixed-bottom"
           type="button"
           data-testid="start-recipe-btn"
-          onClick={ recipeInit }
+          onClick={ () => setCurrMeal({ ...currMeal, recipeInit: true }) }
         >
           {inProgress ? 'Continuar Receita' : 'Iniciar Receita'}
         </button>) : null}

@@ -1,25 +1,29 @@
 import React, { useState } from 'react';
 import { Card, Carousel } from 'react-bootstrap';
-import { useHistory } from 'react-router-dom';
 import RecipeDetail from '../effects/RecipeDetails';
+import RecipeInit from '../effects/RecipeInit';
 import shareIcon from '../images/shareIcon.svg';
 import favoriteIcon from '../images/whiteHeartIcon.svg';
 import { ApiDetailsById } from '../services/theCockTailAPI';
 import { ApiFirstsResults } from '../services/theMealAPI';
 
 export default function DrinkDetails() {
-  const history = useHistory();
-  const { pathname } = history.location;
   const [currDrink, setCurrDrink] = useState({
     recipe: {},
     recomends: [],
     arrRecipeIngredients: [],
     arrRecipeMeasureUnit: [],
+    doneRecipe: false,
+    inProgress: false,
+    recipeInit: false,
   });
-  RecipeDetail(pathname, ApiDetailsById, ApiFirstsResults, setCurrDrink);
+  RecipeDetail(currDrink, ApiDetailsById, ApiFirstsResults, setCurrDrink);
+  RecipeInit(currDrink);
+
   if (!currDrink.recipe) return;
   const { arrRecipeIngredients, arrRecipeMeasureUnit,
-    recipe, recomends } = currDrink;
+    recipe, recomends, doneRecipe, inProgress } = currDrink;
+
   return (
     <Card style={ { width: '18rem' } }>
       <h2 data-testid="recipe-title">{recipe.strDrink}</h2>
@@ -78,13 +82,15 @@ export default function DrinkDetails() {
           </Carousel.Item>
         ))}
       </Carousel>
-      <button
-        className="fixed-bottom"
-        type="button"
-        data-testid="start-recipe-btn"
-      >
-        Começar Receita
-      </button>
+      {!doneRecipe ? (
+        <button
+          className="fixed-bottom"
+          type="button"
+          data-testid="start-recipe-btn"
+          onClick={ () => setCurrDrink({ ...currDrink, recipeInit: true }) }
+        >
+          {inProgress ? 'Continuar Receita' : 'Iniciar Receita'}
+        </button>) : null}
     </Card>
   );
 }
