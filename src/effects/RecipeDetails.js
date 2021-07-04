@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { getItemFromLocalStorage } from '../services/localStorage';
 
 const getResults = (arrRecipe, currRecipe) => {
   const ARR_LENGTH = 6;
@@ -11,9 +12,18 @@ const getResults = (arrRecipe, currRecipe) => {
   return { arrLenght, arrRecipeIngredients, arrRecipeMeasureUnit };
 };
 
+function checkDoneRecipes(id) {
+  const doneRecipes = getItemFromLocalStorage('doneRecipes');
+  if (!doneRecipes) return false;
+  const itemFound = doneRecipes.find((item) => item.id === id);
+  if (itemFound) return true;
+  return false;
+}
+
 function RecipeDetail(history, apiCallbackByID, apiCallBack, stateCallback) {
   const regExp = /[0-9]/gi;
   const getId = history.match(regExp).reduce((acc, item) => acc + item, '');
+  const doneRecipe = checkDoneRecipes(getId);
   useEffect(() => {
     const getCurrMeal = async () => {
       const recipe = await apiCallbackByID(getId);
@@ -28,6 +38,7 @@ function RecipeDetail(history, apiCallbackByID, apiCallBack, stateCallback) {
           recomends: arrLenght,
           arrRecipeIngredients,
           arrRecipeMeasureUnit,
+          doneRecipe,
         });
       }
       if (recipe.meals && recipeArr.drinks) {
@@ -40,6 +51,7 @@ function RecipeDetail(history, apiCallbackByID, apiCallBack, stateCallback) {
           recomends: arrLenght,
           arrRecipeIngredients,
           arrRecipeMeasureUnit,
+          doneRecipe,
         });
       }
     };

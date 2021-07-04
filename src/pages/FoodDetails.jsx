@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Card, Carousel } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 import RecipeDetail from '../effects/RecipeDetails';
@@ -15,16 +15,14 @@ export default function FoodDetails() {
     recomends: [],
     arrRecipeIngredients: [],
     arrRecipeMeasureUnit: [],
+    doneRecipe: false,
   });
   RecipeDetail(pathname, ApiRecipeDetail, ApiCocktailFirstItems, setCurrMeal);
 
-  // function recipeInit(event) {
-  //   const { target } = event;
-  //   target.innerHTML = 'Continuar Receita';
-  // }
   if (!currMeal.recipe) return;
   const { arrRecipeIngredients, arrRecipeMeasureUnit,
-    recipe, recomends } = currMeal;
+    recipe, recomends, doneRecipe } = currMeal;
+    console.log(doneRecipe);
   return (
     <Card style={ { width: '18rem' } }>
       <h2 data-testid="recipe-title">{recipe.strMeal}</h2>
@@ -83,14 +81,15 @@ export default function FoodDetails() {
           </Carousel.Item>
         ))}
       </Carousel>
-      <button
-        className="fixed-bottom"
-        type="button"
-        data-testid="start-recipe-btn"
+      {!doneRecipe && (
+        <button
+          className="fixed-bottom"
+          type="button"
+          data-testid="start-recipe-btn"
         // onClick={ recipeInit }
-      >
-        Iniciar Receita
-      </button>
+        >
+          {doneRecipe ? 'Continuar Receita' : 'Iniciar Receita'}
+        </button>)}
     </Card>
   );
 }
