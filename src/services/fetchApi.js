@@ -42,4 +42,18 @@ export async function fetchFilterDrinks(category) {
   return dataCategoryDrinks.drinks;
 }
 
-// Req 74 Requisição a Api de random Drinks e MealsMock
+// Req 74 Requisição a Api de random Drinks e Meals
+
+export async function fetchApiRandomDrinks() {
+  const randomDrink = 'https://www.thecocktaildb.com/api/json/v1/1/random.php';
+  const response = await fetch(randomDrink);
+  const { drinks } = await response.json();
+  return drinks;
+}
+
+export async function fetchApiRandomMeal() {
+  const randomMeal = 'https://www.themealdb.com/api/json/v1/1/random.php';
+  const response = await fetch(randomMeal);
+  const { meals } = await response.json();
+  return meals;
+}
