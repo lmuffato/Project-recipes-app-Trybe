@@ -11,6 +11,7 @@ function ReceitasProvider({ children }) {
   const [selected, setSelected] = useState();
   const [filter, setFilter] = useState(false);
   const [canRender, setCanRender] = useState(false);
+  const [filterValue, setFilterValue] = useState('All');
 
   async function fetchApi(endpoint, page) {
     await fetch(endpoint)
@@ -45,6 +46,8 @@ function ReceitasProvider({ children }) {
         setAPIFood,
         APIDrink,
         setAPIDrink,
+        filterValue,
+        setFilterValue,
       } }
     >
       {children}
