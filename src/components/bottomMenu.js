@@ -7,7 +7,7 @@ import mealIcon from '../images/mealIcon.svg';
 
 function bottomMenu() {
   return (
-    <div className="bottom" data-testid="footer">
+    <div className="footer" data-testid="footer">
       <Link to="/bebidas">
         <img
           data-testid="drinks-bottom-btn"
