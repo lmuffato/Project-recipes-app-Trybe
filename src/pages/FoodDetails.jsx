@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import RecipeDetail from '../effects/RecipeDetails';
 import shareIcon from '../images/shareIcon.svg';
 import favoriteIcon from '../images/whiteHeartIcon.svg';
+import { setToLocalStorage } from '../services/localStorage';
 import { ApiCocktailFirstItems } from '../services/theCockTailAPI';
 import { ApiRecipeDetail } from '../services/theMealAPI';
 
@@ -16,13 +17,20 @@ export default function FoodDetails() {
     arrRecipeIngredients: [],
     arrRecipeMeasureUnit: [],
     doneRecipe: false,
+    inProgress: false,
   });
   RecipeDetail(pathname, ApiRecipeDetail, ApiCocktailFirstItems, setCurrMeal);
 
   if (!currMeal.recipe) return;
   const { arrRecipeIngredients, arrRecipeMeasureUnit,
-    recipe, recomends, doneRecipe } = currMeal;
+    recipe, recomends, doneRecipe, inProgress } = currMeal;
 
+  const recipeInit = () => {
+    const { recipe: { idMeal } } = currMeal;
+    const currRecipe = { meals: { [idMeal]: arrRecipeIngredients } };
+    setToLocalStorage('inProgressRecipes', currRecipe);
+    history.push(`/comidas/${idMeal}/in-progress`);
+  };
   return (
     <Card style={ { width: '18rem' } }>
       <h2 data-testid="recipe-title">{recipe.strMeal}</h2>
@@ -81,15 +89,15 @@ export default function FoodDetails() {
           </Carousel.Item>
         ))}
       </Carousel>
-      {!doneRecipe && (
+      {!doneRecipe ? (
         <button
           className="fixed-bottom"
           type="button"
           data-testid="start-recipe-btn"
-        // onClick={ recipeInit }
+          onClick={ recipeInit }
         >
-          {doneRecipe ? 'Continuar Receita' : 'Iniciar Receita'}
-        </button>)}
+          {inProgress ? 'Continuar Receita' : 'Iniciar Receita'}
+        </button>) : null}
     </Card>
   );
 }
