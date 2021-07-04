@@ -91,23 +91,13 @@ export default function FoodDetails() {
           </Carousel.Item>
         ))}
       </Carousel>
-
-      {/* {firstCocktails.map((drink, index) => (
-        <div key={ `${index}-${drink.strDrink}` }>
-          <h4
-            data-testid={ `${index}-recomendation-title` }
-          >
-            {drink.strDrink}
-          </h4>
-          <img
-            style={ { width: '18rem' } }
-            src={ drink.strDrinkThumb }
-            alt={ drink.strDrink }
-            data-testid={ `${index}-recomendation-card` }
-          />
-        </div>
-      ))} */}
-      <button type="button" data-testid="start-recipe-btn">Começar Receita</button>
+      <button
+        className="fixed-bottom"
+        type="button"
+        data-testid="start-recipe-btn"
+      >
+        Começar Receita
+      </button>
     </Card>
   );
 }

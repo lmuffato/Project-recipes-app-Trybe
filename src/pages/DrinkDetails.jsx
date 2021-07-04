@@ -79,7 +79,13 @@ export default function DrinkDetails() {
           </Carousel.Item>
         ))}
       </Carousel>
-      <button type="button" data-testid="start-recipe-btn">Começar Receita</button>
+      <button
+        className="fixed-bottom"
+        type="button"
+        data-testid="start-recipe-btn"
+      >
+        Começar Receita
+      </button>
     </Card>
   );
 }
