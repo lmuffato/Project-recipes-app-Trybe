@@ -8,6 +8,17 @@ import Comidas from './pages/Comidas';
 import Bebidas from './pages/Bebidas';
 import Explorar from './pages/Explorar';
 import Perfil from './pages/Perfil';
+import FoodDetails from './pages/foods/FoodDetails';
+import FoodProgress from './pages/foods/FoodProgress';
+import DrinkDetails from './pages/drinks/DrinkDetails';
+import DrinkProgress from './pages/drinks/DrinkProgress';
+import ExploreDrink from './pages/explore/ExploreDrink';
+import ExploreFood from './pages/explore/ExploreFood';
+import DrinkIngredients from './pages/explore/DrinkIngredients';
+import FoodIngredients from './pages/explore/FoodIngredients';
+import FoodArea from './pages/explore/FoodArea';
+import DoneRecipies from './pages/DoneRecipies';
+import FavoriteRecipies from './pages/FavoriteRecipies';
 
 function App() {
   return (
@@ -16,20 +27,44 @@ function App() {
         <Route exact path="/" component={ Login } />
         <Route exact path="/bebidas" component={ Bebidas } />
         <Route exact path="/comidas" component={ Comidas } />
-        <Route exact path="/bebidas/:id" component={ Bebidas } />
-        <Route exact path="/comidas/:id" component={ Comidas } />
-        <Route exact path="/bebidas/:id/in-progress" component={ Bebidas } />
-        <Route exact path="/comidas/:id/in-progress" component={ Comidas } />
+        <Route
+          exact
+          path="/bebidas/:id"
+          render={ (props) => <DrinkDetails { ...props } /> }
+        />
+        <Route
+          exact
+          path="/comidas/:id"
+          render={ (props) => <FoodDetails { ...props } /> }
+        />
+        <Route
+          exact
+          path="/bebidas/:id/in-progress"
+          render={ (props) => <DrinkProgress { ...props } /> }
+        />
+        <Route
+          exact
+          path="/comidas/:id/in-progress"
+          render={ (props) => <FoodProgress { ...props } /> }
+        />
         <Route exact path="/explorar" component={ Explorar } />
-        <Route exact path="/explorar/bebidas" component={ Login } />
-        <Route exact path="/explorar/comidas" component={ Login } />
-        <Route exact path="/explorar/bebidas/ingredientes" component={ Login } />
-        <Route exact path="/explorar/comidas/ingredientes" component={ Login } />
+        <Route exact path="/explorar/bebidas" component={ ExploreDrink } />
+        <Route exact path="/explorar/comidas" component={ ExploreFood } />
+        <Route
+          exact
+          path="/explorar/bebidas/ingredientes"
+          component={ DrinkIngredients }
+        />
+        <Route
+          exact
+          path="/explorar/comidas/ingredientes"
+          component={ FoodIngredients }
+        />
         {/* <Route exact path="/explorar/bebidas/area" component={ Login } /> */}
-        <Route exact path="/explorar/comidas/area" component={ Login } />
+        <Route exact path="/explorar/comidas/area" component={ FoodArea } />
         <Route exact path="/perfil" component={ Perfil } />
-        <Route exact path="/receitas-feitas" component={ Login } />
-        <Route exact path="/receitas-favoritas" component={ Login } />
+        <Route exact path="/receitas-feitas" component={ DoneRecipies } />
+        <Route exact path="/receitas-favoritas" component={ FavoriteRecipies } />
         {/* <Route exact path="/feedback" component={ Feedback } /> */}
         <Route path="*" component={ NotFound } />
       </Switch>
