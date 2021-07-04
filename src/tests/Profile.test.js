@@ -3,9 +3,7 @@ import React from 'react';
 // import Login from '../pages/Login';
 import Profile from '../pages/Profile';
 import renderWithRouterAndContext from './helper/renders/renderWithRouterAndContext';
-import renderWithRouter from './helper/renders/renderWithRouter';
 import getTest from './helper/mocks/getTestInfo';
-import { RecipeContextProvider } from '../store/RecipeContext';
 
 const { renderEmptyValue, headerRenderTests, footerRenderTests } = getTest('/profile');
 
@@ -14,7 +12,7 @@ const { itDoesntRenderSearchIcon } = headerRenderTests();
 describe('Profile Screen', () => {
   describe('Check Header and Footer components', () => {
     it('does Header and Footer tests', () => {
-      const { getByTestId, queryByTestId, history } = renderWithRouterAndContext(
+      const { getByTestId, queryByTestId } = renderWithRouterAndContext(
         <Profile />,
         renderEmptyValue,
       );
@@ -44,14 +42,14 @@ describe('Profile Screen', () => {
     });
 
     it('Render "Recipes Done Button"', () => {
-      const { getByTestId } = renderWithRouterAndContext(
+      const {} = renderWithRouterAndContext(
         <Profile />,
         renderEmptyValue,
       );
     });
 
     it('Render "Favorite Recipes Button"', () => {
-      const { getByTestId } = renderWithRouterAndContext(
+      const {} = renderWithRouterAndContext(
         <Profile />,
         renderEmptyValue,
       );
