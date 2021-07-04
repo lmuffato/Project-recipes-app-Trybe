@@ -1,8 +1,7 @@
 @media screen and (max-width: 414px) {
   .container {
     background: #EB8328;
-    height: 5rem;
-    border-bottom: 2px solid white;
+    height: 80px;
     
     header {
       display: flex;
@@ -18,8 +17,8 @@
       }
 
       .profile {
-        height: 2rem;
-        width: 2rem;
+        height: 32px;
+        width: 32px;
         margin-top: 14px;
         padding: 10px;
         /* background: white;

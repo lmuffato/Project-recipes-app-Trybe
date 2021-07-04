@@ -33,7 +33,7 @@ function Comidas(props) {
   return (
     <div>
       <Header title="Comidas" showButton showHeader={ !!id } { ...{ path } } />
-      {`COMIDAAAAAAAAAAAAA ${!!id}`}
+      {/* {`COMIDAAAAAAAAAAAAA ${!!id}`} */}
       <main className="card-painel">
         {resultsTwelveItems && resultsTwelveItems.map(
           (el, index) => (
