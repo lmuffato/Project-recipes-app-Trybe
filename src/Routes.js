@@ -12,6 +12,7 @@ import DrinksIngredients from './pages/explore/ingredients/DrinksIngredients';
 import CompletedRecipes from './pages/otherPages/CompletedRecipes';
 import FavoriteRecipes from './pages/otherPages/FavoriteRecipes';
 import ExploreFoodByArea from './pages/explore/ExploreFoodByArea';
+import MealDetails from './pages/recipes/MealDetails';
 
 export default function Routes() {
   return (
@@ -19,9 +20,10 @@ export default function Routes() {
       <BrowserRouter>
         <Switch>
           <Route exact path="/" component={ Login } />
-          <Route exact path="/comidas" component={ Foods } />
           <Route exact path="/perfil" component={ Profile } />
+          <Route exact path="/comidas" component={ Foods } />
           <Route exact path="/bebidas" component={ Drinks } />
+          <Route path="/comidas/:id" component={ MealDetails } />
           <Route exact path="/explorar" component={ ExplorePage } />
           <Route exact path="/explorar/bebidas" component={ DrinksExplore } />
           <Route exact path="/explorar/comidas" component={ FoodsExplore } />
@@ -36,19 +38,17 @@ export default function Routes() {
             component={ DrinksIngredients }
           />
           <Route
+            exact path="/explorar/comidas/area"
+            component={ ExploreFoodByArea }
+          />
+          <Route
             exact
             path="/receitas-feitas"
             component={ CompletedRecipes }
           />
           <Route
-            exact
-            path="/receitas-favoritas"
+            exact path="/receitas-favoritas"
             component={ FavoriteRecipes }
-          />
-          <Route
-            exact
-            path="/explorar/comidas/area"
-            component={ ExploreFoodByArea }
           />
         </Switch>
       </BrowserRouter>
