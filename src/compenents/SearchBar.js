@@ -6,9 +6,10 @@ function SearchBar() {
   const [name, setName] = useState('');
   const [request, setRequest] = useState('');
   const [letter, setLetter] = useState('');
+  const { mealOrDrink, setRecipes, setIdMeal, setIdDrink } = useContext(SearchbarContext);
+
   const history = useHistory();
 
-  const { mealOrDrink, setRecipes, setIdMeal, setIdDrink } = useContext(SearchbarContext);
 
   const handleChange = (type, word) => {
     setRequest(type);
@@ -17,11 +18,12 @@ function SearchBar() {
 
   const recipeDescription = (results) => {
     const data = results;
-    console.log(data);
     let drinkId;
     let mealId;
 
-    if (mealOrDrink === 'cocktail' && data.drinks.length === 1) {
+    if (data.meals === null || data.drinks === null) {
+      alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+    } else if (mealOrDrink === 'cocktail' && data.drinks.length === 1) {
       drinkId = data.drinks[0].idDrink;
       setIdDrink(drinkId);
       history.push(`/bebidas/${drinkId}`);
@@ -31,6 +33,7 @@ function SearchBar() {
       history.push(`/comidas/${mealId}`);
     } else {
       return data;
+      // Implementar req-17 aqui;
     }
   };
 
