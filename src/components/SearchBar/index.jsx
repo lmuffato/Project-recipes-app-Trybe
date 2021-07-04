@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import swal from 'sweetalert';
 import RecipesContext from '../../context/RecipesContext';
 import FoodCard from '../FoodCard';
 import './style.css';
@@ -14,7 +15,7 @@ export default function SearchBar({ place, searchActive }) {
     cocktail: 'idDrink',
     meal: 'idMeal',
   };
-  const { handleApi, results } = useContext(RecipesContext);
+  const { handleApi, results, handleNull } = useContext(RecipesContext);
   const [searchState, setState] = useState({
     textInput: '',
     radioInput: '',
@@ -37,7 +38,8 @@ export default function SearchBar({ place, searchActive }) {
   const conditional = () => {
     if (results === null) {
       const alertStr = 'Sinto muito, não encontramos nenhuma receita para esses filtros.';
-      alert(alertStr);
+      handleNull();
+      swal(alertStr);
       return null;
     } if (results.length === 1) {
       return (

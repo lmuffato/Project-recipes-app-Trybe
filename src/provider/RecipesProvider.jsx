@@ -22,9 +22,14 @@ export default function RecipesProvider({ children }) {
     }
   };
 
+  const handleNull = () => {
+    setResults([]);
+  };
+
   const context = {
     handleApi,
     results,
+    handleNull,
   };
 
   return (
