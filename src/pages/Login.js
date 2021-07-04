@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import { Redirect } from 'react-router-dom';
 import { /* useClassState, */ useStateEasyRedux } from 'easy-redux-trybe';
 import { setLocalStorage } from '../helper';
-import logo from '../assets/logo-recipies.svg';
+import logo from '../images/logo-recipies.svg';
 
 import styles from '../styles/Login.module.scss';
 
