@@ -22,7 +22,7 @@ export default function FoodDetails() {
   if (!currMeal.recipe) return;
   const { arrRecipeIngredients, arrRecipeMeasureUnit,
     recipe, recomends, doneRecipe } = currMeal;
-    console.log(doneRecipe);
+
   return (
     <Card style={ { width: '18rem' } }>
       <h2 data-testid="recipe-title">{recipe.strMeal}</h2>
