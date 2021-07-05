@@ -1,6 +1,7 @@
 import { CHANGE_DRINK_CATEGORY,
   SET_DRINKS,
-  SET_DRINK_CATEGORIES } from '../actions/drinksAction';
+  SET_DRINK_CATEGORIES,
+} from '../actions/drinksAction';
 
 const INITIAL_STATE = {
   recipes: [],
