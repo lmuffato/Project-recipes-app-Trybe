@@ -24,19 +24,9 @@ import {
 } from './pages';
 
 function App() {
-  const renderDetalheReceitaComida = (match) => {
-    console.log('Match', match);
-    return (
-      <DetalhesComida match={ match } />
-    );
-  };
+  const renderDetalheReceitaComida = (match) => (<DetalhesComida match={ match } />);
 
-  const renderDetalheReceitaBebida = (match) => {
-    console.log('Match', match);
-    return (
-      <DetalhesBebida match={ match } />
-    );
-  };
+  const renderDetalheReceitaBebida = (match) => (<DetalhesBebida match={ match } />);
 
   return (
     <ProviderBebidas>

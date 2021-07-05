@@ -14,8 +14,6 @@ function DetalhesBebida({ match: { params: { id } } }) {
   const [acctualyDrink, setAcctualyDrink] = useState();
   const [isLoading, setIsLoading] = useState(false);
 
-  console.log('Match do Drink', id);
-
   useEffect(() => {
     async function fetchFood() {
       setIsLoading(true);
@@ -31,8 +29,6 @@ function DetalhesBebida({ match: { params: { id } } }) {
   const handleClick = (e) => {
     e.preventDefault();
   };
-
-  console.log(acctualyDrink);
 
   const createRecipe = () => {
     if (acctualyDrink) {

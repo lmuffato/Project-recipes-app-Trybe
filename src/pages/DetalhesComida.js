@@ -14,8 +14,6 @@ function DetalhesComida({ match: { params: { id } } }) {
   const [acctualyFood, setAcctualyFood] = useState();
   const [isLoading, setIsLoading] = useState(false);
 
-  console.log('Match do Item', id);
-
   useEffect(() => {
     async function fetchFood() {
       setIsLoading(true);
@@ -67,6 +65,8 @@ function DetalhesComida({ match: { params: { id } } }) {
         // strYoutube,
         strMealThumb,
       } = acctualyFood.meals[0];
+
+      console.log('Teste do Includes', acctualyFood.meals[0]);
 
       const ingredients = [
         `${strIngredient1} ${strMeasure1}`,
@@ -138,10 +138,6 @@ function DetalhesComida({ match: { params: { id } } }) {
 
     return null;
   };
-
-  if (acctualyFood) {
-    console.log('Fetch', acctualyFood.meals);
-  }
 
   return !isLoading ? createRecipe() : <span>Loading...</span>;
 }
