@@ -46,7 +46,7 @@ function Provider({ children }) {
   const clickFilterFood = (e) => {
     setCategory(e.target.innerText);
     if (e.target.innerText !== 'All') {
-      setShowFilter(false);
+      setShowFilter(true);
       setFilterFoods([]);
       const getCategoryFoods = async () => {
         const data = await fetchFilterFoods(e.target.innerText);
@@ -54,9 +54,9 @@ function Provider({ children }) {
       };
       getCategoryFoods();
     } if (category === e.target.innerText) {
-      setShowFilter(true);
+      setShowFilter(false);
     } if (e.target.innerText === 'All') {
-      setShowFilter(true);
+      setShowFilter(false);
     }
   };
 

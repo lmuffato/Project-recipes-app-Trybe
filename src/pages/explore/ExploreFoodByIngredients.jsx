@@ -2,14 +2,14 @@ import React from 'react';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 
-function ExplFoodIng() {
+function ExploreFoodByIngredients() {
   return (
     <div>
       <Header />
-      Explorar Ingredientes
+      Comidas Por Ingredientes!
       <Footer />
     </div>
   );
 }
 
-export default ExplFoodIng;
+export default ExploreFoodByIngredients;
