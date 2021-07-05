@@ -3,7 +3,7 @@ import React from 'react';
 import Header from '../Components/Header';
 import RecipeMainPage from '../Pages/RecipeMainPage';
 import renderWithRouter from './renderWithRoute';
-// import fetchMealsAndDrinks from '../services';
+import * as fetchMealsAndDrinks from '../services';
 import apiReturnIngredient from './data';
 
 describe('Testa o Componente Header', () => {
@@ -48,20 +48,21 @@ describe('Testa o Componente Header', () => {
     expect(SEARCH_BUTTON).toBeInTheDocument();
   });
 
-  it('testa se o a barra de pesquisa tem os comportamentos esperados', () => {
+  it('testa se o a barra de pesquisa tem os comportamentos esperados', async () => {
     const {
-      getByRole, getByTestId, findByTestId,
+      getByRole, getByTestId, findByTestId, findByText, history,
     } = renderWithRouter(<RecipeMainPage header="Comidas" />);
 
-    const MAX_CARDS = 12;
-    const cardIds = [...Array(MAX_CARDS).keys()]
-      .map((e, i) => `${i}-recipe-card`);
-    // Source: https://stackoverflow.com/questions/3746725/how-to-create-an-array-containing-1-n
+    history.push('/comidas');
+    expect(history.location.pathname).toEqual('/comidas');
 
-    jest.spyOn(global, 'fetch');
-    const mockFetch = global.fetch.mockResolvedValue({
-      json: jest.fn().mockResolvedValue(apiReturnIngredient),
-    });
+    const MAX_CARDS = 12;
+    // Source: https://stackoverflow.com/questions/3746725/how-to-create-an-array-containing-1-n
+    const cardIds = [...Array(MAX_CARDS).keys()]
+      .map((e, i) => `${i}-recipe-cardaa`);
+
+    const mockFetch = jest.spyOn(fetchMealsAndDrinks, 'default')
+      .mockResolvedValue(apiReturnIngredient.meals);
 
     const SEARCH_ICON = getByTestId('search-top-btn');
     userEvent.click(SEARCH_ICON);
@@ -75,9 +76,9 @@ describe('Testa o Componente Header', () => {
     userEvent.click(SEARCH_BUTTON);
 
     expect(mockFetch).toHaveBeenCalled();
-    // Falso positivo aqui, os id são criados corretamente;
-    cardIds.forEach(async (item) => {
-      expect(await findByTestId(item)).toBeInTheDocument();
-    });
+    expect(await findByText(/Apam/i)).toBeInTheDocument();
+    const promisses = cardIds.map((id) => findByTestId(id));
+    const returnedCards = await Promise.all(promisses);
+    returnedCards.forEach((card) => expect(card).toBeInTheDocument());
   });
 });
