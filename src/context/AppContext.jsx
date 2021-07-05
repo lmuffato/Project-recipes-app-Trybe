@@ -26,7 +26,6 @@ export default function AppProvider({ children }) {
     setRecipesList,
     categoriesList,
     setCategoriesList,
-
   };
 
   useEffect(() => {
@@ -53,5 +52,5 @@ export default function AppProvider({ children }) {
 }
 
 AppProvider.propTypes = {
-  children: PropTypes.node.isRequired,
-};
+  children: PropTypes.node,
+}.isRequired;

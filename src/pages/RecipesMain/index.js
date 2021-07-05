@@ -1,6 +1,7 @@
-import React, { useContext, useEffect, useState } from 'react';
-import PropTypes, { shape } from 'prop-types';
+import React, { useContext, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import './recipesMain.css';
+import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router';
 import Header from '../../components/header';
 import MenuFoot from '../../components/menuFoot';
@@ -12,22 +13,17 @@ import { AppContext } from '../../context/AppContext';
 export default function RecipesMain({ match }) {
   const { path } = match;
   const { context } = useContext(AppContext);
-  const { recipesList, setPageOrigin } = context;
-  const [title, setTitle] = useState('COMIDAS');
+  const { recipesList, setPageOrigin, pageOrigin } = context;
+  // const [title, setTitle] = useState('COMIDAS');
   const history = useHistory();
-  useEffect(() => {
-    if (path === '/comidas') {
-      setPageOrigin('themealdb');
-      setTitle('COMIDAS');
-    } if (path === '/bebidas') {
-      setPageOrigin('thecocktaildb');
-      setTitle('BEBIDAS');
-    }
-  }, []);
-  return (
 
+  useEffect(() => {
+    setPageOrigin(path === '/comidas' ? 'themealdb' : 'thecocktaildb');
+  }, []);
+
+  return (
     <div>
-      <Header title={ title } />
+      <Header title={ pageOrigin === 'themealdb' ? 'Comidas' : 'Bebidas' } />
       <Categories />
       <div className="list-main-recipes">
         { recipesList.length === 1 ? recipesList.map((oneRecipe) => (
@@ -35,11 +31,17 @@ export default function RecipesMain({ match }) {
         ))
           : recipesList.map(
             (recipe, index) => (
-              <RecipeCard
-                recipe={ recipe }
+              <Link
+                to={ pageOrigin === 'themealdb'
+                  ? `comidas/${recipe.idMeal}`
+                  : `bebidas/${recipe.idDrink}` }
                 key={ recipe.idMeal || recipe.idDrink }
-                index={ index }
-              />
+              >
+                <RecipeCard
+                  recipe={ recipe }
+                  index={ index }
+                />
+              </Link>
             ),
           )}
       </div>
@@ -49,8 +51,7 @@ export default function RecipesMain({ match }) {
 }
 
 RecipesMain.propTypes = {
-
-  match: PropTypes.arrayOf(shape({
+  match: PropTypes.arrayOf(PropTypes.shape({
     path: PropTypes.string.isRequired,
   })).isRequired,
 };
