@@ -8,6 +8,8 @@ import {
   fetchAllCategoriesDrinks,
   fetchMealsAndCategory,
   fetchDrinksAndCategory,
+  fetchRandomDrinks,
+  fetchRandomMeal,
 } from '../services/Data';
 
 function Provider({ children }) {
@@ -22,6 +24,8 @@ function Provider({ children }) {
   const [categoryD, setCategoryD] = useState('All');
   const [dataMealsAndCategory, setDataMealsAndCategory] = useState([]);
   const [dataDrinksAndCategory, setDrinksAndCategory] = useState([]);
+  const [randomDrinkId, setRandomDrinkId] = useState([]);
+  const [randomMealId, setRandomMealId] = useState([]);
 
   useEffect(() => {
     fetchAllCategoriesFoods()
@@ -50,6 +54,14 @@ function Provider({ children }) {
     }
   }, [categoryD]);
 
+  useEffect(() => {
+    fetchRandomDrinks().then((results) => setRandomDrinkId(results.drinks[0].idDrink));
+  }, []);
+
+  useEffect(() => {
+    fetchRandomMeal().then((results) => setRandomMealId(results.meals[0].idMeal));
+  }, []);
+
   const contextValue = {
     foods: dataMealsAndCategory,
     drinks: dataDrinksAndCategory,
@@ -63,6 +75,8 @@ function Provider({ children }) {
     setCategoryF,
     categoryD,
     setCategoryD,
+    randomDrinkId,
+    randomMealId,
   };
 
   return (
