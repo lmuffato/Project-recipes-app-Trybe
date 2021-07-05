@@ -1,9 +1,9 @@
 import React from 'react';
 
-export default function index() {
+export default function FoodDetails() {
   return (
     <div>
-      DETAILS PAGE - FOODS
+      <h1>foodDetails</h1>
     </div>
   );
 }

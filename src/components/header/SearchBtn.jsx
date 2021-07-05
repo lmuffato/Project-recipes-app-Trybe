@@ -4,18 +4,19 @@ import { AppContext } from '../../context/AppContext';
 import SearchBar from '../searchBar/index';
 
 export default function SearchBtn() {
+  const { context } = useContext(AppContext);
   const {
     displaySearchBar,
     setDisplaySearchBar,
-  } = useContext(AppContext);
+  } = context;
 
   return (
-    <div data-testid="search-top-btn">
+    <div>
       <button
         type="button"
         onClick={ () => setDisplaySearchBar(!displaySearchBar) }
       >
-        <img src={ SearchIcon } alt="Search icon" />
+        <img src={ SearchIcon } alt="Search icon" data-testid="search-top-btn" />
       </button>
       <div>
         {displaySearchBar && <SearchBar />}
