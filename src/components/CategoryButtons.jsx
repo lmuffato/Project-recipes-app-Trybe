@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from 'react';
+// import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import fetchFoodCategories from '../helpers/fetchFoodCategories';
 import fetchDrinkCategories from '../helpers/fetchDrinkCategories';
+import fetchDrinkByCategory from '../helpers/fetchDrinkByCategory';
+import fetchFoodByCategory from '../helpers/fetchFoodByCategory';
 
 function FilterButtons({ props }) {
   const [categoriesList, setCategoriesList] = useState([]);
+  // const history = useHistory();
   const FIVE = 5;
 
   useEffect(() => {
@@ -24,6 +28,25 @@ function FilterButtons({ props }) {
     }
   }, [props]);
 
+  const HandleFilterByCategoryButton = (type, category) => {
+    if (type === 'Drinks') {
+      const fetchByCategory = async () => {
+        const { drinks } = await fetchDrinkByCategory(category);
+        // setCategoriesList(drinks);
+        console.log(drinks);
+      };
+      fetchByCategory();
+    }
+    if (type === 'Food') {
+      const fecthByCategory = async () => {
+        const { meals } = await fetchFoodByCategory(category);
+        // setCategoriesList(meals);
+        console.log(meals);
+      };
+      fecthByCategory();
+    }
+  };
+
   return (
     <div>
       {
@@ -32,6 +55,7 @@ function FilterButtons({ props }) {
             key={ e.idCategory }
             type="button"
             data-testid={ `${e.strCategory}-category-filter` }
+            onClick={ () => HandleFilterByCategoryButton(props, e.strCategory) }
           >
             {e.strCategory}
           </button>
@@ -40,6 +64,7 @@ function FilterButtons({ props }) {
             key={ index }
             type="button"
             data-testid={ `${e.strCategory}-category-filter` }
+            onClick={ () => HandleFilterByCategoryButton(props, e.strCategory) }
           >
             {e.strCategory}
           </button>

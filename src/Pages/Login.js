@@ -1,15 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { Form, Button } from 'react-bootstrap';
-import { actionLogin } from '../redux/actions';
 import './PagesCss/Login.css';
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loginButton, setLoginButton] = useState(false);
-  const dispatch = useDispatch();
   const history = useHistory();
 
   useEffect(() => {
@@ -23,10 +20,8 @@ function Login() {
   }, [email, password]);
 
   const loginBtn = () => {
-    dispatch(actionLogin(email, password));
     history.push('/comidas');
-    const lintEmail = email;
-    const lsemail = JSON.stringify({ email: lintEmail });
+    const lsemail = JSON.stringify(email);
     window.localStorage.setItem('user', lsemail);
     localStorage.setItem('mealsToken', 1);
     localStorage.setItem('cocktailsToken', 1);
