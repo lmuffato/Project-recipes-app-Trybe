@@ -11,6 +11,7 @@ function Buttons({ params }) {
       className="btn btn-success m-3 border border-success shadow p-3"
       data-testid={ dataTestid }
       onClick={ funcHandleClick }
+      value={ text }
     >
       {text}
     </button>
