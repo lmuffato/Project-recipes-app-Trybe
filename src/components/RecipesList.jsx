@@ -13,7 +13,6 @@ function RecipesList({ data, path }) {
         <li
           key={ index }
           data-testid={ `${index}-recipe-card` }
-          key={ index }
         >
           <Link to={ { pathname: `/${path}/${id}` } }>
             <div className="card">
