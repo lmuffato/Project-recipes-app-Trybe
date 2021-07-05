@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import searchIcon from '../images/searchIcon.svg';
 import profileIcon from '../images/profileIcon.svg';
-import header from '../styles/header';
+// import header from '../styles/header';
 import SearchBarForm from './search bar/SearchBarForm';
 import '../styles/Header.css';
 
@@ -18,7 +18,7 @@ function Header({ title }) {
   && location.pathname !== '/bebidas'
   && location.pathname !== '/explorar/comidas/area') {
     return (
-      <div className={ header }>
+      <div className="header-container">
         <Link to="/perfil">
           <img
             data-testid="profile-top-btn"
@@ -33,7 +33,7 @@ function Header({ title }) {
   if (searchBar === true) {
     return (
       <>
-        <div className={ header }>
+        <div className="header-container">
           <Link to="/perfil">
             <img
               data-testid="profile-top-btn"
@@ -57,7 +57,7 @@ function Header({ title }) {
     );
   } if (searchBar === false) {
     return (
-      <div className={ header }>
+      <div className="header-container">
         <Link to="/perfil">
           <img
             data-testid="profile-top-btn"
