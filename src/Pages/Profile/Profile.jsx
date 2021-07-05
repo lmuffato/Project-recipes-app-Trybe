@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
-import Footer from '../components/Footer';
-import Header from '../components/Header';
+import Footer from '../../components/Footer';
+import Header from '../../components/Header';
 
 function Profile() {
   const [userEmail, setUserEmail] = useState('');
@@ -10,8 +10,12 @@ function Profile() {
   const [redirectLogin, setRedirectLogin] = useState(false);
 
   useEffect(() => {
-    const getEmail = localStorage.getItem('user');
-    setUserEmail(JSON.parse(getEmail).email);
+    const getEmail = JSON.parse(localStorage.getItem('user'));
+    try {
+      setUserEmail(getEmail.email);
+    } catch (error) {
+      setUserEmail('email');
+    }
   }, []);
 
   const clearLocalStorage = () => {

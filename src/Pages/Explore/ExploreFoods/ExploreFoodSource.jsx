@@ -1,8 +1,8 @@
 import React from 'react';
-import Footer from '../../components/Footer';
-import Header from '../../components/Header';
+import Footer from '../../../components/Footer';
+import Header from '../../../components/Header';
 
-function ExploreFoodSource() {
+function ExploreArea() {
   return (
     <>
       <Header
@@ -15,4 +15,4 @@ function ExploreFoodSource() {
   );
 }
 
-export default ExploreFoodSource;
+export default ExploreArea;

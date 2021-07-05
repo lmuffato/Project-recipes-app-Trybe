@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Redirect } from 'react-router-dom';
-import context from '../store/Context';
+import context from '../../store/Context';
 
 function Login() {
   const { infoUser, setDatainfoUser } = useContext(context);
