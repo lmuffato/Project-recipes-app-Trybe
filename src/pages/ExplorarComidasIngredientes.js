@@ -1,7 +1,16 @@
 import React from 'react';
 
-function ExporarComidasIngredientes() {
-  return <div>Página de Explorar Comidas por Ingredientes</div>;
+import Header from '../components/Header';
+import Footer from '../components/Footer';
+
+function ExplorarComidasIngredientes() {
+  return (
+    <section>
+      <Header title="Explorar Ingredientes" show={ false } />
+      <footer>
+        <Footer />
+      </footer>
+    </section>);
 }
 
-export default ExporarComidasIngredientes;
+export default ExplorarComidasIngredientes;
