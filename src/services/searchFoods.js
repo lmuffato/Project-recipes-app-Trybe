@@ -28,7 +28,10 @@ const SearchFoods = async (type, name) => {
     if (name.length === 1) return searchbyLetter(name);
 
     // eslint-disable-next-line no-alert
-    if (name.length > 1) alert('Sua busca deve conter somente 1 (um) caracter');
+    if (name.length > 1) {
+      const { alert } = window;
+      alert('Sua busca deve conter somente 1 (um) caracter');
+    }
   }
 };
 

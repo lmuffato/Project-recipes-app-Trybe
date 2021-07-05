@@ -20,6 +20,7 @@ export default function HeaderSearchBar() {
     if (pathname === '/bebidas') {
       const recipes = await searchDrinks(myChoice, searchTerm);
       if (recipes === null) {
+        const { alert } = window;
         alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
         return;
       }
@@ -30,6 +31,7 @@ export default function HeaderSearchBar() {
     if (pathname === '/comidas') {
       const recipes = await searchFoods(myChoice, searchTerm);
       if (recipes === null) {
+        const { alert } = window;
         alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
         return;
       }
