@@ -11,7 +11,7 @@ function FoodsArea() {
         country.strArea
       ));
       setAreas(allAreas);
-    }
+    };
     getAreas();
   }, []);
 
@@ -20,7 +20,7 @@ function FoodsArea() {
       <select data-testid="explore-by-area-dropdown">
         <option>All</option>
         {areas.map((area, index) => (
-          <option key={ index } data-testid={ `${ area }-option` }>{area}</option>
+          <option key={ index } data-testid={ `${area}-option` }>{area}</option>
         ))}
       </select>
     </div>
