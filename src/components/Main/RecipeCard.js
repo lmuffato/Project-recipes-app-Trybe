@@ -8,12 +8,12 @@ export default function RecipeCard({ recipe, index, type }) {
       <li>
         <img
           data-testid={ `${index}-card-img` }
-          src={ type === 'Comidas' ? recipe.strMealThumb : recipe.strDrinkThumb }
+          src={ type === '/comidas' ? recipe.strMealThumb : recipe.strDrinkThumb }
           alt="thumbnail recipe"
           width="100"
         />
         <p data-testid={ `${index}-card-name` }>
-          { type === 'Comidas' ? recipe.strMeal : recipe.strDrink }
+          { type === '/comidas' ? recipe.strMeal : recipe.strDrink }
         </p>
       </li>
     </div>

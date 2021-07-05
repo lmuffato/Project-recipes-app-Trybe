@@ -1,7 +1,8 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import Login from './pages/Login';
-import Main from './pages/Main';
+import Comidas from './pages/Comidas';
+import Bebidas from './pages/Bebidas';
 import DetalhesComidas from './pages/DetalhesComidas';
 import DetalhesBebidas from './pages/DetalhesBebidas';
 import DetalhesComidasIP from './pages/DetalhesComidasIP';
@@ -20,8 +21,8 @@ function App() {
   return (
     <Switch>
       <Route exact path="/" component={ Login } />
-      <Route exact path="/comidas" component={ Main } />
-      <Route exact path="/bebidas" component={ Main } />
+      <Route exact path="/comidas" component={ Comidas } />
+      <Route exact path="/bebidas" component={ Bebidas } />
       <Route exact path="/explorar" component={ Explorar } />
       <Route exact path="/explorar/comidas" component={ ExplorarComidas } />
       <Route exact path="/explorar/bebidas" component={ ExplorarBebidas } />
