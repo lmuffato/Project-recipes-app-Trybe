@@ -3,10 +3,18 @@ import Login from '../pages/Login';
 import Profile from '../pages/Profile';
 import Explore from '../pages/Explore';
 import Header from '../components/Header';
+import FooterMenu from '../components/Footer';
 import Foods from '../pages/MainFoods';
 import Drinks from '../pages/MainDrinks';
 import FoodDetails from '../pages/FoodDetails';
 import DrinkDetails from '../pages/DrinkDetails';
+
+const componentWithHeaderAndFooter = ({ title }) => (
+  <section>
+    <Header title={ title } />
+    <FooterMenu />
+  </section>
+);
 
 const componentWithHeader = ({ title }) => (
   <section>
@@ -53,31 +61,31 @@ export default [
   },
   {
     path: '/explorar/comidas',
-    Component: componentWithHeader,
+    Component: componentWithHeaderAndFooter,
     exact: true,
     title: 'Explorar Comidas',
   },
   {
     path: '/explorar/bebidas',
-    Component: componentWithHeader,
+    Component: componentWithHeaderAndFooter,
     exact: true,
     title: 'Explorar Bebidas',
   },
   {
     path: '/explorar/comidas/ingredientes',
-    Component: componentWithHeader,
+    Component: componentWithHeaderAndFooter,
     exact: false,
     title: 'Explorar Ingredientes',
   },
   {
     path: '/explorar/bebidas/ingredientes',
-    Component: componentWithHeader,
+    Component: componentWithHeaderAndFooter,
     exact: false,
     title: 'Explorar Ingredientes',
   },
   {
     path: '/explorar/comidas/area',
-    Component: componentWithHeader,
+    Component: componentWithHeaderAndFooter,
     exact: false,
     title: 'Explorar Origem',
   },
