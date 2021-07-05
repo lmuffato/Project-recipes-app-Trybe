@@ -1,10 +1,12 @@
 import React from 'react';
+import FooterBar from '../components/FooterBar';
 
 function Explore() {
   return (
-    <div>
+    <main>
       renderiza das opções de exploração: comida e bebida
-    </div>
+      <FooterBar />
+    </main>
   );
 }
 
