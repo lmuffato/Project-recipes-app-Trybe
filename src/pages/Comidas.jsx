@@ -8,10 +8,12 @@ import MainFoodCard from '../components/MainFoodCard';
 class Comidas extends React.Component {
   render() {
     const { history } = this.props;
+    const { location } = history;
+    const { pathname } = location;
     return (
       <>
         <Header title="Comidas">
-          <SearchButton />
+          <SearchButton pathname={ pathname } />
         </Header>
         <div>Página principal Receitas COMIDA</div>
         <MainFoodCard />
@@ -22,7 +24,7 @@ class Comidas extends React.Component {
 }
 
 Comidas.propTypes = {
-  history: PropTypes.shape().isRequired,
-};
+  pathname: PropTypes.string,
+}.isRequired;
 
 export default Comidas;
