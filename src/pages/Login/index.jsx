@@ -24,13 +24,11 @@ function Login() {
 
   const successfulLogin = (event) => {
     event.preventDefault();
-    const user = {
-      email,
-      gravatar: `https://www.gravatar.com/avatar/${md5(email)}`,
-    };
-    localStorage.setItem('user', JSON.stringify(user));
+    const userEmail = { email };
+    localStorage.setItem('user', JSON.stringify(userEmail));
     localStorage.setItem('mealsToken', '1');
     localStorage.setItem('cocktailsToken', '1');
+    localStorage.setItem('gravatar', `https://www.gravatar.com/avatar/${md5(email)}`);
     history.push('/comidas');
   };
 

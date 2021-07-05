@@ -8,10 +8,12 @@ import styles from './styles.module.scss';
 
 function Header({ title }) {
   const user = useLocalStorage('user');
+  const gravatar = localStorage.getItem('gravatar');
+
   return (
     <header className={ styles.header }>
       <Link to="/perfil" className={ styles.profilePic }>
-        <img src={ user.gravatar } alt={ user.email } />
+        <img src={ gravatar } alt={ user.email } />
       </Link>
       { title }
       <BiSearch />
