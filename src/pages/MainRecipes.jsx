@@ -3,6 +3,7 @@ import FilterMealsByCategories from '../components/FilterMealsByCategories';
 import Header from '../components/Header';
 import MealsCards from '../components/MealsCards';
 import SearchButton from '../components/SearchButton';
+import InferiorMenu from '../components/InferiorMenu';
 
 export default function MainRecipes() {
   return (
@@ -13,6 +14,7 @@ export default function MainRecipes() {
       <h1 data-testid="page-title">Comidas</h1>
       <FilterMealsByCategories />
       <MealsCards />
+      <InferiorMenu />
     </div>
   );
 }

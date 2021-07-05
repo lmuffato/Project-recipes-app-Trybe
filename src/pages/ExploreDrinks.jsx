@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import Button from 'react-bootstrap/Button';
 import { useHistory } from 'react-router';
 import Header from '../components/Header';
+import InferiorMenu from '../components/InferiorMenu';
 import CocktailsContext from '../context/CocktailsContext';
 
 export default function ExploreDrinks() {
@@ -39,6 +40,7 @@ export default function ExploreDrinks() {
       >
         Me Surpreenda!
       </Button>
+      <InferiorMenu />
     </div>
   );
 }

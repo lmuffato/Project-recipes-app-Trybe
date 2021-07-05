@@ -3,6 +3,7 @@ import Button from 'react-bootstrap/Button';
 import { useHistory } from 'react-router';
 // import { ApiByRandom } from '../services/theMealAPI';
 import Header from '../components/Header';
+import InferiorMenu from '../components/InferiorMenu';
 import MealsContext from '../context/MealsContext';
 
 export default function ExploreFood() {
@@ -51,6 +52,7 @@ export default function ExploreFood() {
       >
         Me Surpreenda!
       </Button>
+      <InferiorMenu />
     </div>
   );
 }

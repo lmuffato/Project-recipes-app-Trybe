@@ -10,7 +10,7 @@ export default function SearchButton({ page }) {
   }
 
   return (
-    <>
+    <div>
       <button
         type="button"
         data-testid="search-top-btn"
@@ -23,7 +23,7 @@ export default function SearchButton({ page }) {
       <div>
         { searchBar && <SearchBar page={ page } /> }
       </div>
-    </>
+    </div>
   );
 }
 
