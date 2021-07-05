@@ -1,8 +1,21 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { useStateEasyRedux } from 'easy-redux-trybe';
 
 function DrinkDetails(props) {
   const { match: { params: { id } } } = props;
+
+  const [, setStateRedux] = useStateEasyRedux(DrinkDetails, {});
+
+  useEffect(() => {
+    const fetchRecipie = async () => {
+      const request = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`);
+      const response = await request.json();
+      setStateRedux({ actionType: 'FETCH_DRINK', response });
+    };
+    fetchRecipie();
+  }, []);
+
   return (
     <div>
       Bebida de ID :

@@ -1,8 +1,26 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { useStateEasyRedux } from 'easy-redux-trybe';
+// import { useSelector } from 'react-redux';
 
 function FoodDetails(props) {
   const { match: { params: { id } } } = props;
+
+  const [, setStateRedux] = useStateEasyRedux(FoodDetails, {});
+
+  useEffect(() => {
+    const fetchRecipie = async () => {
+      const request = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`);
+      const response = await request.json();
+      setStateRedux({ actionType: 'FETCH_FOOD', response });
+    };
+    fetchRecipie();
+  }, []);
+
+  /* const food = useSelector((state) => (
+    state.FoodDetails ? state.FoodDetails.food : undefined
+  )); */
+
   return (
     <div>
       Comida
@@ -32,10 +50,3 @@ FoodDetails.propTypes = {
 };
 
 export default FoodDetails;
-
-/* const urlRecipie = verifyPath
-      ? 'https://www.themealdb.com/api/json/v1/1/lookup.php?i='
-      : 'https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=';
-    const fecthMeal = await fetch(`${urlRecipie}${element}`);
-    const resultMeal = await fecthMeal.json();
-    setStateRedux({ actionType: 'FETCH_RECIPIE', resultMeal }); */
