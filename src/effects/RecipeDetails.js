@@ -24,6 +24,14 @@ function checkDoneRecipes(id) {
   return false;
 }
 
+// function checkFavoriteRecipes(id) {
+//   const favRecipes = getItemFromLocalStorage('favoriteRecipes');
+//   if (!favRecipes) return false;
+//   const itemFound = favRecipes.find((item) => item.id === id);
+//   if (itemFound) return true;
+//   return false;
+// }
+
 function checkInprogressRecipes(id, pathname) {
   const storage = getItemFromLocalStorage('inProgressRecipes');
   if (!storage || !storage.cocktails) return false;

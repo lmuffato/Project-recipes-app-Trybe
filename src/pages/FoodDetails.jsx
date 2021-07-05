@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { Card, Carousel } from 'react-bootstrap';
+import FavoriteButton from '../components/FavoriteButton';
 import RecipeDetail from '../effects/RecipeDetails';
 import RecipeInit from '../effects/RecipeInit';
 import shareIcon from '../images/shareIcon.svg';
-import favoriteIcon from '../images/whiteHeartIcon.svg';
+// import favoriteIcon from '../images/whiteHeartIcon.svg';
 import { ApiCocktailFirstItems } from '../services/theCockTailAPI';
 import { ApiRecipeDetail } from '../services/theMealAPI';
 
@@ -39,12 +40,7 @@ export default function FoodDetails() {
         src={ shareIcon }
         alt="compartilhar"
       />
-      <img
-        style={ { width: '2rem' } }
-        data-testid="favorite-btn"
-        src={ favoriteIcon }
-        alt="favoritar"
-      />
+      <FavoriteButton />
       <h3 data-testid="recipe-category">{recipe.strCategory}</h3>
       <h3>Ingredientes:</h3>
       {arrRecipeIngredients.map((ingredient, index) => {
