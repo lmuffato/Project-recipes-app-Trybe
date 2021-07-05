@@ -1,16 +1,16 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import shareIconImg from '../images/shareIcon.svg';
+import favoriteIconImg from '../images/whiteHeartIcon.svg';
 import RecipeInfo from '../components/RecipeInfo/RecipeInfo';
 import Button from '../components/Generics/Button';
 import RecipeIngredients from '../components/RecipeIngredients/RecipeIngredients';
 import Container from '../styles/recipeDetails';
+import MealVideo from '../components/MealVideo/MealVideo';
 
-function RecipeDetails() {
-  const location = useLocation();
+function RecipeDetails({ type }) {
   const { id } = useParams();
-  const { state } = location;
-  const { type } = state;
   const endpointMeals = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
   const endpointDrinks = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
   const [fetchRecipeURL, setFetchRecipeURL] = useState('');
@@ -47,10 +47,7 @@ function RecipeDetails() {
     return 'Loading';
   }
 
-  // console.log(recipe);
-  // incluir fetch à API de cada receita
   const recipeName = singleRecipe.strMeal || singleRecipe.strDrink;
-  // const recipeId = recipe.idMeal || recipe.idDrink;
   const recipeThumb = singleRecipe.strMealThumb || singleRecipe.strDrinkThumb;
   const recipeCategory = singleRecipe.strCategory;
   const isAlchooholic = singleRecipe.strAlcoholic || '';
@@ -64,7 +61,10 @@ function RecipeDetails() {
         { type === 'drinks' ? (<h3 data-testid="recipe-category">{isAlchooholic}</h3>) : (
           <h3 data-testid="recipe-category">{recipeCategory}</h3>)}
       </RecipeInfo>
-
+      <div className="icons">
+        <img src={ shareIconImg } alt="ícone de compartilhar" data-testid="share-btn" />
+        <img src={ favoriteIconImg } alt="" data-testid="favorite-btn" />
+      </div>
       <div className="ingredients-list">
         <RecipeIngredients recipe={ singleRecipe } type={ type } />
       </div>
@@ -75,11 +75,10 @@ function RecipeDetails() {
           { singleRecipe.strInstructions }
         </p>
       </div>
-      <div data-testid="video">Video aqui</div>
+      { type === 'meals' ? (<MealVideo />) : ''}
       <Button data-testid="start-recipe-btn">
         Iniciar receita
       </Button>
-
     </Container>
   );
 }

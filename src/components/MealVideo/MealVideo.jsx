@@ -2,7 +2,7 @@ import React from 'react';
 
 function MealVideo() {
   return (
-    <div>
+    <div data-testid="video">
       Teste
     </div>
   );
