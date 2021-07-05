@@ -1,0 +1,53 @@
+.loginPage {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
+}
+
+.loginHeader {
+  background: var(--yellow);
+  border-radius: 0 0 40px;
+  display: flex;
+  justify-content: space-between;
+  margin-right: 30px;
+  padding: 25px 30px;
+
+  p, strong {
+    color: var(--dark-purple);
+    font-family: Yanone Kaffeesatz , sans-serif;
+    font-size: 26px;
+    line-height: 1.2;
+  }
+}
+
+.loginMain {
+  margin: 0 30px;
+
+  form {
+    display: grid;
+    gap: 20px;
+    margin-top: 36px;
+
+    button {
+      margin-top: 16px;
+    }
+  }
+}
+
+.loginFooter {
+  display: grid;
+  gap: 15px;
+  justify-items: center;
+  padding: 0 30px;
+
+  div {
+    background: var(--purple);
+    border-radius: 40px 40px 0 0;
+    color: var(--light-purple);
+    font-size: 14px;
+    padding: 15px;
+    text-align: center;
+    width: 100%;
+  }
+}
