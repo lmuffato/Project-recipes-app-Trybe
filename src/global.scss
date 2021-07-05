@@ -53,4 +53,10 @@ button {
   font-size: 22px;
   line-height: 1;
   padding: 10px 25px;
+
+  &:disabled {
+    background: #c6c6c6;
+    color: #6a6a6a;
+    cursor: not-allowed;
+  }
 }
