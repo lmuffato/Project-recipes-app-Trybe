@@ -67,7 +67,7 @@ function RecipeDetails() {
       </RecipeInfo>
 
       <div>
-        <RecipeIngredients recipe={ singleRecipe } />
+        <RecipeIngredients recipe={ singleRecipe } type={ type } />
       </div>
       {/* <RecipeIngredients id={ recipeId } type={ type } /> */}
       <div className="instructions">

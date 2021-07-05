@@ -5,6 +5,8 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import RecipeDetails from './pages/RecipeDetails';
 import Profile from './pages/Profile';
+import ExploreFoods from './pages/ExploreFoods';
+import ExploreDrinks from './pages/ExploreDrinks';
 
 function App() {
   return (
@@ -22,6 +24,8 @@ function App() {
       />
       <Route path="/perfil" component={ Profile } />
       <Route path="/explorar" exact component={ Explore } />
+      <Route path="/explorar/comidas" component={ ExploreFoods } />
+      <Route path="/explorar/bebidas" component={ ExploreDrinks } />
       <Route
         exact
         path="/comidas/:id"
