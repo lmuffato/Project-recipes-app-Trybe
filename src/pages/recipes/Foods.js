@@ -7,7 +7,6 @@ import getMeals from '../../services/getMeals';
 import '../../App.css';
 
 export default function Foods() {
-
   const { mealsList, setMealsList, isLoading, setLoading } = useContext(Context);
 
   useEffect(() => {
@@ -19,7 +18,7 @@ export default function Foods() {
     };
     reciveMeals();
     console.log(mealsList);
-  }, [])
+  }, []);
 
   return (
     <div className="food-page">

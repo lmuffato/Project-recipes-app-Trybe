@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Context from './Context';
 
@@ -19,7 +19,7 @@ function Provider({ children }) {
     mealsList,
     setMealsList,
     isLoading,
-    setLoading
+    setLoading,
   };
 
   return (
