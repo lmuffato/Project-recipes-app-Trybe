@@ -8,6 +8,8 @@ const passwordDataId = 'password-input';
 const loginBtnDataId = 'login-submit-btn';
 
 describe('1 -test if all login elements are in the login screen', () => {
+  afterAll(() => done());
+
   it('test if app screen is "/"', () => {
     const { history } = renderWithRouterAndRedux(<App />);
     let { pathname } = history.location;
@@ -40,6 +42,8 @@ describe('1 -test if all login elements are in the login screen', () => {
 });
 
 describe('2 -test if button is disable/enable', () => {
+  afterAll(() => done());
+
   it('test if with wrong email and correct password button remains disable', () => {
     const { getByTestId } = renderWithRouterAndRedux(<App />);
     const emailInput = getByTestId(emailDataId);
@@ -73,6 +77,8 @@ describe('2 -test if button is disable/enable', () => {
 
 describe('3 - test if when button is clicked it will redirect'
 + 'to "/comidas" and save things to localStorage', () => {
+  afterAll(() => done());
+
   it('test if button fully works', () => {
     const { getByTestId, history } = renderWithRouterAndRedux(<App />);
     let { pathname } = history.location;

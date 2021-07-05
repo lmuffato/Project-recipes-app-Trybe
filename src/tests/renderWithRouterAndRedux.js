@@ -3,12 +3,14 @@ import React from 'react';
 import { Router } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
 import { render } from '@testing-library/react';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
 import rootReducer from '../reducers';
 
 const renderWithRouterAndRedux = (component,
-  initialState, store = createStore(rootReducer, initialState)) => {
+  initialState, store = createStore(rootReducer, initialState,
+    applyMiddleware(thunk))) => {
   const history = createMemoryHistory();
   return ({
     ...render(
