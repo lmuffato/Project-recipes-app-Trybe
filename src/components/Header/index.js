@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import profileIcon from '../../images/profileIcon.svg';
 import searchIcon from '../../images/searchIcon.svg';
 import SearchBar from '../SearchBar';
+
 import './style.css';
 
 export default function Header({ title }) {

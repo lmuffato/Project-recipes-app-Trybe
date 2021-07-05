@@ -5,6 +5,8 @@ import searchFoods from '../../services/searchFoods';
 import searchDrinks from '../../services/searchDrinks';
 import RecipesContext from '../../context/RecipesContext';
 
+import './style.css';
+
 export default function HeaderSearchBar() {
   const [searchTerm, setSearchTerm] = useState('');
   const [myChoice, setMyChoice] = useState('');
@@ -44,19 +46,17 @@ export default function HeaderSearchBar() {
 
   return (
     <div>
-      <fieldset>
-        <legend>Barra de Busca</legend>
-        <label htmlFor="search-input">
-          <input
-            type="text"
-            id="search-input"
-            data-testid="search-input"
-            placeholder="digite aqui o termo da busca"
-            onChange={ ({ target: { value: searchText } }) => (
-              setSearchTerm(searchText)) }
-          />
-        </label>
-        <br />
+      <input
+        type="text"
+        className="search-input"
+        id="search-input"
+        data-testid="search-input"
+        placeholder="Digite sua busca"
+        onChange={ ({ target: { value: searchText } }) => (
+          setSearchTerm(searchText)) }
+      />
+      <br />
+      <div className="radios">
         <label htmlFor="ingredient">
           <input
             type="radio"
@@ -90,15 +90,16 @@ export default function HeaderSearchBar() {
           />
           First Letter
         </label>
-        <br />
-        <button
-          type="button"
-          data-testid="exec-search-btn"
-          onClick={ clickSearchButton }
-        >
-          Click Me
-        </button>
-      </fieldset>
+      </div>
+      <br />
+      <button
+        className="btn-search"
+        type="button"
+        data-testid="exec-search-btn"
+        onClick={ clickSearchButton }
+      >
+        Click Me
+      </button>
     </div>
   );
 }
