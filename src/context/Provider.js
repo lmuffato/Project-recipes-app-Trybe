@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Context from './Context';
 
@@ -6,6 +6,9 @@ function Provider({ children }) {
   const [userEmail, setUserEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isDisabled, setIsDisabled] = useState(true);
+  const [mealsList, setMealsList] = useState([]);
+  const [isLoading, setLoading] = useState(false);
+
   const store = {
     userEmail,
     password,
@@ -13,6 +16,10 @@ function Provider({ children }) {
     setPassword,
     isDisabled,
     setIsDisabled,
+    mealsList,
+    setMealsList,
+    isLoading,
+    setLoading
   };
 
   return (

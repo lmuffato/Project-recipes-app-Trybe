@@ -1,13 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import '../componentsStyles/Bottom Menu/bottomMenu.css';
+import '../App.css';
 import exploreIcon from '../images/exploreIcon.svg';
 import drinkIcon from '../images/drinkIcon.svg';
 import mealIcon from '../images/mealIcon.svg';
 
 function bottomMenu() {
   return (
-    <div className="bottom" data-testid="footer">
+    <div className="footer" data-testid="footer">
       <Link to="/bebidas">
         <img
           data-testid="drinks-bottom-btn"

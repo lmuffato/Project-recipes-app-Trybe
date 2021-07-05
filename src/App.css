@@ -20,6 +20,7 @@
 }
 
 .header {
+  position: absolute;
   align-items: center;
   background-color: #550788;
   color: #d1d1d1;
@@ -29,4 +30,28 @@
   position: fixed;
   top: 0;
   width: 100%;
+}
+
+.footer {
+  position: absolute;
+  align-items: center;
+  background-color: #550788;
+  bottom: 0;
+  color: #d1d1d1;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  position: fixed;
+  width: 100%;
+}
+
+.food-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  flex-flow: column wrap;
+}
+
+ul {
+  list-style-type: none;
 }
