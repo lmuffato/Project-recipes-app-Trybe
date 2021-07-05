@@ -9,9 +9,9 @@ function useFetchRecipes(type) {
   const { setRecipesContext } = useContext(RecipesContext);
 
   useEffect(() => {
+    if (!fetchUrl) return;
     const fetchRecipes = async () => {
       try {
-        if (!fetchUrl) return;
         const res = await fetch(fetchUrl);
         const data = await res.json();
 
@@ -19,7 +19,6 @@ function useFetchRecipes(type) {
           ...data,
           [type]: data[type].slice(0, MAX_RECIPES),
         };
-        console.log('limitedData: ', limitedData);
         setRecipesContext(limitedData);
         setRecipesData(limitedData);
       } catch (err) {
