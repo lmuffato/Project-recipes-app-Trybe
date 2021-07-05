@@ -1,20 +1,16 @@
 import React from 'react';
 import Login from '../pages/Login';
-import MainFoods from '../pages/MainFoods';
-import MainDrinks from '../pages/MainDrinks';
 import Profile from '../pages/Profile';
 import Explore from '../pages/Explore';
 import Header from '../components/Header';
+import Foods from '../pages/MainFoods';
+import Drinks from '../pages/MainDrinks';
+import FoodDetails from '../pages/FoodDetails';
+import DrinkDetails from '../pages/DrinkDetails';
 
 const componentWithHeader = ({ title }) => (
   <section>
     <Header title={ title } />
-  </section>
-);
-
-const componentWithoutHeader = () => (
-  <section>
-    Component
   </section>
 );
 
@@ -27,21 +23,27 @@ export default [
   },
   {
     path: '/comidas',
-    Component: MainFoods,
+    Component: Foods,
     exact: true,
     title: 'Comidas',
   },
   {
     path: '/bebidas',
-    Component: MainDrinks,
+    Component: Drinks,
     exact: true,
     title: 'Bebidas',
   },
   {
-    path: '/comidas/0',
-    Component: componentWithoutHeader,
-    exact: false,
+    path: '/comidas/:id',
+    Component: FoodDetails,
+    exact: true,
     title: 'Comidas',
+  },
+  {
+    path: '/bebidas/:id',
+    Component: DrinkDetails,
+    exact: true,
+    title: 'Bebidas',
   },
   {
     path: '/explorar',
