@@ -10,11 +10,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (
-    <RecipeContextProvider>
-      <Router>
+    <Router>
+      <RecipeContextProvider>
         <Routes />
-      </Router>
-    </RecipeContextProvider>
+      </RecipeContextProvider>
+    </Router>
   );
 }
 

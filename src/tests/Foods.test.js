@@ -1,23 +1,20 @@
-import React from 'react';
+import { screen } from '@testing-library/dom';
 import userEvent from '@testing-library/user-event';
-import Foods from '../pages/Foods';
 import renderWithRouterAndContext from './helper/renders/renderWithRouterAndContext';
 import getTest from './helper/mocks/getTestInfo';
 import { foodDataApi } from './helper/mocks/data';
 
 const {
-  renderEmptyValue,
   headerRenderTests,
   footerRenderTests,
 } = getTest('/comidas');
 
+const { getByTestId } = screen;
+
 describe('Foods Screen', () => {
   describe('Check Header and Footer components', () => {
-    it('does Header and Footer tests', () => {
-      const { getByTestId } = renderWithRouterAndContext(
-        <Foods />,
-        renderEmptyValue,
-      );
+    it('does Header and Footer tests', async () => {
+      await renderWithRouterAndContext();
 
       headerRenderTests().itRenderAllIcons(getByTestId);
       footerRenderTests().itRenderAllIcons(getByTestId);
@@ -26,10 +23,7 @@ describe('Foods Screen', () => {
 
   describe('API tests', () => {
     it('checks API', async () => {
-      const { getByRole } = renderWithRouterAndContext(
-        <Foods />,
-        renderEmptyValue,
-      );
+      await renderWithRouterAndContext();
 
       const apiResponse = Promise.resolve({
         json: () => Promise.resolve(foodDataApi.corba),
