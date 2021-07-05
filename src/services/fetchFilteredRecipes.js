@@ -1,17 +1,31 @@
-const fetchFilteredMealRecipes = async (endpoint) => {
-  try {
-    const response = await fetch(endpoint);
-    const data = await response.json();
-
-    const limitedData = {
-      ...data,
-      [type]: data[type].slice(0, MAX_RECIPES),
-    };
-    setFilteredRecipes(limitedData);
-    // setar no estado de filtro
-  } catch (err) {
-    throw new Error(err);
-  }
+const formattingMeasuresAndIngredients = (type, keysAndValues) => {
+  const mapingValues = keysAndValues.reduce((acc, cur) => {
+    const objeto = acc;
+    const currentItem = cur;
+    switch (type) {
+    case 'meals':
+      if (currentItem[0].includes('strIngredient') && currentItem[1] !== '') {
+        objeto.ingredients.push(currentItem[1]);
+      }
+      if (currentItem[0].includes('strMeasure') && currentItem[1] !== '') {
+        objeto.measures.push(currentItem[1]);
+      }
+      break;
+    default:
+      if (currentItem[0].includes('strIngredient') && currentItem[1] !== null) {
+        objeto.ingredients.push(currentItem[1]);
+      }
+      if (currentItem[0].includes('strMeasure') && currentItem[1] !== null) {
+        objeto.measures.push(currentItem[1]);
+      }
+    }
+    console.log(objeto);
+    return objeto;
+  }, {
+    ingredients: [],
+    measures: [],
+  });
+  return mapingValues;
 };
 
-export default fetchFilteredMealRecipes;
+export default formattingMeasuresAndIngredients;
