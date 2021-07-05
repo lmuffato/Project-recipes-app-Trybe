@@ -6,7 +6,7 @@ function Explore() {
     <div>
       <Link to="/explorar/comidas">
         <button
-        type="button"
+          type="button"
           data-testid="explore-food"
         >
           Explorar Comidas
@@ -21,8 +21,8 @@ function Explore() {
           Explorar Bebidas
         </button>
       </Link>
-  </div>
-  )
+    </div>
+  );
 }
 
 export default Explore;
