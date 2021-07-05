@@ -1,6 +1,6 @@
 import React from 'react';
 
-function MealDetails() {
+function DrinksDetails() {
   return (
     <div>
       <h1>hello world</h1>
@@ -8,4 +8,4 @@ function MealDetails() {
   )
 }
 
-export default MealDetails;
+export default DrinksDetails;
