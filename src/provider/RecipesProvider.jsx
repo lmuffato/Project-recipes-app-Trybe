@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import RecipesContext from '../context/RecipesContext';
 
 export default function RecipesProvider({ children }) {
+  const [recipesFoods, setRecipesFoods] = useState([]);
+  const [recipesDrinks, setRecipesDrinks] = useState([]);
+
   const handleApi = async ({ textInput, radioInput, place }) => {
     if (radioInput === 'ingredient') {
       const fetched = await fetch(`https://www.the${place}db.com/api/json/v1/1/filter.php?i=${textInput}`);
@@ -21,6 +24,10 @@ export default function RecipesProvider({ children }) {
 
   const context = {
     handleApi,
+    recipesFoods,
+    recipesDrinks,
+    setRecipesFoods,
+    setRecipesDrinks,
   };
 
   return (
