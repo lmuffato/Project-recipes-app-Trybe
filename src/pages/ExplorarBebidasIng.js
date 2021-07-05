@@ -9,7 +9,7 @@ export default function ExplorarBebidasIng() {
         title="Explorar Ingredientes"
         enableSearchIcon={ false }
       />
-      <Footer/>
+      <Footer />
     </div>
   );
 }
