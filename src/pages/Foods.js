@@ -6,6 +6,7 @@ function Foods() {
     <div>
       <Link to="/explorar/comidas/ingredientes">
         <button
+          type="button"
           data-testid="explore-by-ingredient"
         >
           Por Ingredientes
@@ -14,6 +15,7 @@ function Foods() {
 
       <Link to="/explorar/comidas/area">
         <button
+          type="button"
           data-testid="explore-by-area"
         >
           Por Local de Origem
@@ -22,8 +24,9 @@ function Foods() {
 
       <Link to="">
         <button
+          type="button"
           data-testid="explore-surprise"
-          >
+        >
           Me Surpreenda!
         </button>
       </Link>
@@ -32,3 +35,8 @@ function Foods() {
 }
 
 export default Foods;
+
+
+/* 
+/comidas/{id-da-receita};
+/bebidas/{id-da-receita} */

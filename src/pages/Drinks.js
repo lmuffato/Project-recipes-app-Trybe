@@ -6,6 +6,7 @@ function Drinks() {
     <div>
       <Link to="/explorar/bebidas/ingredientes">
         <button
+          type="button"
           data-testid="explore-by-ingredient"
         >
           Por Ingredientes
@@ -14,8 +15,9 @@ function Drinks() {
 
       <Link to="">
         <button
+          type="button"
           data-testid="explore-surprise"
-          >
+        >
           Me Surpreenda!
         </button>
       </Link>
