@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import SearchButton from '../components/SearchButton';
+import MainDrinkCard from '../components/MainDrinkCard';
 
 class Bebidas extends React.Component {
   render() {
@@ -13,6 +14,7 @@ class Bebidas extends React.Component {
           <SearchButton />
         </Header>
         <div>Página principal receitas BEBIDAS</div>
+        <MainDrinkCard />
         <Footer history={ history } />
       </>
     );
