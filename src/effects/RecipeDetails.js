@@ -26,15 +26,13 @@ function checkDoneRecipes(id) {
 
 function checkInprogressRecipes(id, pathname) {
   const storage = getItemFromLocalStorage('inProgressRecipes');
-  if (!storage || !storage.cocktails) return false;
+  if (!storage) return false;
   if (pathname.includes('comidas')) {
-    if (Number(Object.keys(storage.meals)[0]) === Number(id)) {
-      return true;
-    }
-    return false;
+    return storage.meals[id];
   }
-  if (Number(Object.keys(storage.cocktails)[0]) === Number(id)) return true;
-  return false;
+  if (pathname.includes('bebidas')) {
+    return storage.cocktails[id];
+  }
 }
 export default function RecipeDetail(state, apiCallbackByID, apiCallBack, stateCallback) {
   const history = useHistory();
