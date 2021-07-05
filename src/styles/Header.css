@@ -1,0 +1,17 @@
+.header-container {
+  align-items: center;
+  background-color: rgb(122, 122, 122);
+  display: flex;
+  flex-flow: row;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+}
+
+.header-container > button {
+  background-color: rgb(122, 122, 122);
+  border-style: none;
+}
+
+.header-container > button:focus {
+  outline: none;
+}
