@@ -8,7 +8,7 @@ export default function AppProvider({ children }) {
   const [displaySearchBar, setDisplaySearchBar] = useState(false);
   const [searchValue, setSearchValue] = useState('');
   const [inputValue, setInputValue] = useState('');
-  const [pageOrigin, setPageOrigin] = useState('themealdb');
+  const [pageOrigin, setPageOrigin] = useState('');
   const [recipesList, setRecipesList] = useState([]);
   const [categoriesList, setCategoriesList] = useState([]);
   const NUM_RECIPES_SHOWN = 12;
