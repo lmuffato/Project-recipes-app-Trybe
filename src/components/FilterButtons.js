@@ -3,6 +3,8 @@ import { useStateEasyRedux } from 'easy-redux-trybe';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 
+import styles from '../styles/FilterButtons.module.scss';
+
 function FilterButtons({ path }) {
   const [, setStateRedux] = useStateEasyRedux(FilterButtons, {});
 
@@ -27,17 +29,19 @@ function FilterButtons({ path }) {
     state.FilterButtons ? state.FilterButtons.fiveCategories : undefined));
 
   return (
-    <div>
-      <button type="button">All</button>
-      {fiveCategories && fiveCategories.map(({ strCategory: categoryName }) => (
-        <button
-          data-testid={ `${categoryName}-category-filter` }
-          key={ categoryName }
-          type="button"
-        >
-          { categoryName }
-        </button>
-      ))}
+    <div className={ styles.container }>
+      <div className={ styles.areaButtons }>
+        <button type="button">All</button>
+        {fiveCategories && fiveCategories.map(({ strCategory: categoryName }) => (
+          <button
+            data-testid={ `${categoryName}-category-filter` }
+            key={ categoryName }
+            type="button"
+          >
+            { categoryName }
+          </button>
+        ))}
+      </div>
     </div>
   );
 }

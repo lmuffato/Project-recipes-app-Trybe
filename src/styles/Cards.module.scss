@@ -1,7 +1,8 @@
 @media screen and (max-width: 414px) {
   .cardMealDrink {
-    background-color: #ffd6a5;
+    background: #ffd6a5;
     border-radius: 5px;
+    box-shadow: 1px 1px 5px grey;
 
     p {
       font-family: 'Poppins', sans-serif;
