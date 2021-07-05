@@ -28,6 +28,7 @@ function FilterButtons({ path }) {
 
   return (
     <div>
+      <button type="button">All</button>
       {fiveCategories && fiveCategories.map(({ strCategory: categoryName }) => (
         <button
           data-testid={ `${categoryName}-category-filter` }

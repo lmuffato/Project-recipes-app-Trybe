@@ -8,6 +8,8 @@ import Cards from '../components/Cards';
 import FilterButtons from '../components/FilterButtons';
 import Footer from '../components/Footer';
 
+import styles from '../styles/MainPages.module.scss';
+
 function Comidas(props) {
   const { match: { params, path } } = props;
   const { id } = params;
@@ -34,11 +36,11 @@ function Comidas(props) {
     return <Redirect to={ `comidas/${idMeal}` } />;
   }
   return (
-    <div className="test-container">
+    <div className={ styles.container }>
       <Header title="Comidas" showButton showHeader={ !!id } { ...{ path } } />
       {/* {`COMIDAAAAAAAAAAAAA ${!!id}`} */}
-      <main className="card-painel">
-        <FilterButtons { ...{ path, resultsTwelveItems } } />
+      <FilterButtons { ...{ path, resultsTwelveItems } } />
+      <main className={ styles.cardsArea }>
         {resultsTwelveItems && resultsTwelveItems.map(
           (el, index) => (<Cards
             key={ el.idMeal }
