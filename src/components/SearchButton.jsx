@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 import React from 'react';
 import PropTypes from 'prop-types';
 import searchIcon from '../images/searchIcon.svg';
@@ -5,7 +6,6 @@ import searchIcon from '../images/searchIcon.svg';
 class SearchButton extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
       valueInput: '',
       clickRButton: '',
@@ -59,7 +59,6 @@ class SearchButton extends React.Component {
   handleClick() {
     const { clickRButton, valueInput, foodOrDrink } = this.state;
     if (valueInput.length > 1 && clickRButton === 'firstLetter') {
-      // eslint-disable-next-line no-alert
       alert('Sua busca deve conter somente 1 (um) caracter');
     } else if (foodOrDrink === '/comidas') {
       return this.requestApi(this.apiFood(valueInput)[clickRButton]);
@@ -111,24 +110,37 @@ class SearchButton extends React.Component {
   }
 
   renderFood() {
+    const { history } = this.props;
     const { api } = this.state;
+    console.log(api);
     return (
       api.map((paran) => (
         <div key={ paran.idMeal }>
           <h1>{paran.strMeal}</h1>
-          <img src={ paran.strMealThumb } alt="food" />
+          <input
+            type="image"
+            src={ paran.strMealThumb }
+            alt="food"
+            onClick={ () => history.push(`/comidas/${paran.idMeal}`) }
+          />
         </div>
       ))
     );
   }
 
   renderDrink() {
+    const { history } = this.props;
     const { api } = this.state;
     return (
       api.map((paran) => (
         <div key={ paran.idDrink }>
           <h1>{paran.strDrink}</h1>
-          <img src={ paran.strDrinkThumb } alt="drink" />
+          <input
+            type="image"
+            src={ paran.strDrinkThumb }
+            alt="drink"
+            onClick={ () => history.push(`/comidas/${paran.idMeal}`) }
+          />
         </div>
       ))
     );
@@ -231,6 +243,7 @@ class SearchButton extends React.Component {
 
 SearchButton.propTypes = {
   pathname: PropTypes.string,
+  history: PropTypes.shape(),
 }.isRequired;
 
 export default SearchButton;

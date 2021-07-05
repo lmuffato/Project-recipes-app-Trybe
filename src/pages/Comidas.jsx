@@ -12,7 +12,7 @@ class Comidas extends React.Component {
     return (
       <>
         <Header title="Comidas">
-          <SearchButton pathname={ pathname } />
+          <SearchButton pathname={ pathname } history={ history } />
         </Header>
         <div>Página principal Receitas COMIDA</div>
         <Footer history={ history } />

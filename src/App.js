@@ -12,6 +12,7 @@ import ExpComidas from './pages/ExpComidas';
 import ExpBebidasIng from './pages/ExpBebidasIng';
 import ExpComidasIng from './pages/ExpComidasIng';
 import ExpComidasOri from './pages/ExpComidasOri';
+import DetComidas from './pages/DetComidas';
 
 import './App.css';
 
@@ -33,6 +34,7 @@ class App extends React.Component {
               component={ ExpBebidasIng }
             />
             <Route exact path="/explorar/comidas" component={ ExpComidas } />
+            <Route exact path="/comidas/:id" component={ DetComidas } />
             <Route
               exact
               path="/explorar/comidas/ingredientes"
