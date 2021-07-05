@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 export default function FilterFood(props) {
-  const { address, display } = props;
+  const { address } = props;
 
   return (
     <>
@@ -34,6 +34,5 @@ export default function FilterFood(props) {
 }
 
 FilterFood.propTypes = {
-  display: PropTypes.string.isRequired,
   address: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string)).isRequired,
 };
