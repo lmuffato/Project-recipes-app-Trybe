@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 import Header from '../components/Header/Header';
 import SearchBarButton from '../components/SearchBar/SearchBarButton';
@@ -8,10 +8,12 @@ import useFetchRecipes from '../effects/useFetchRecipes';
 import RecipesContainer from '../styles/home';
 import CategoriesList from '../components/CategoriesList/CategoriesList';
 import CardList from '../components/CardList/CardList';
+import { RecipesContext } from '../context/RecipesContext';
 
 function Home(props) {
   const { type } = props;
-  const fetchData = useFetchRecipes(type);
+  const [, setFetchUrl] = useFetchRecipes(type);
+  const { recipesContext } = useContext(RecipesContext);
   const [recipes, setRecipes] = useState([]);
   const [isActive, setIsActive] = useState(false);
 
@@ -21,8 +23,13 @@ function Home(props) {
   };
 
   useEffect(() => {
-    if (fetchData[type]) setRecipes(fetchData[type]);
-  }, [fetchData, type]);
+    if (type === 'meals') return setFetchUrl('https://www.themealdb.com/api/json/v1/1/search.php?s=');
+    return setFetchUrl('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
+  }, [setFetchUrl, type]);
+
+  useEffect(() => {
+    if (recipesContext[type]) setRecipes(recipesContext[type]);
+  }, [recipesContext, type]);
 
   return (
     <>
