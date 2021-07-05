@@ -4,11 +4,13 @@ import { BiSearch } from 'react-icons/bi';
 import { Link } from 'react-router-dom';
 import useLocalStorage from '../../hooks/useLocalStorage';
 
+import styles from './styles.module.scss';
+
 function Header({ title }) {
   const user = useLocalStorage('user');
   return (
     <header>
-      <Link to="/perfil">
+      <Link to="/perfil" className={ styles.profilePic }>
         <img src={ user.gravatar } alt={ user.email } />
       </Link>
       { title }
