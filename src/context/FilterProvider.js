@@ -29,9 +29,12 @@ function FilterProvider({ children }) {
   };
 
   const getDrinkByCategory = async (category) => {
+    console.log('entrou: ', category);
     if (category) {
-      const apiResult = await fetchDrinksByCategory(category);
-      setDrinksByCategory(apiResult.drinks);
+      if (category !== 'Beef' && category !== 'Breakfast' && category !== 'Chicken' && category !== 'Dessert' && category !== 'Goat') {
+        const apiResult = await fetchDrinksByCategory(category);
+        setDrinksByCategory(apiResult.drinks);
+      }
     }
   };
 
