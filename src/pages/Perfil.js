@@ -1,5 +1,6 @@
 import { object } from 'prop-types';
 import React from 'react';
+import Footer from '../components/Footer';
 import Buttons from '../components/Buttons';
 import { btnGroup, containerBtn, title, containerTitle } from '../styles/perfil';
 import Header from '../components/Header';
@@ -50,17 +51,20 @@ function Perfil(props) {
   };
 
   return (
-    <div className={ containerBtn }>
+    <>
       <Header title="Perfil" />
-      <div className={ containerTitle }>
-        <h3 className={ title } data-testid="profile-email">{ getEmail() }</h3>
+      <div className={ containerBtn }>
+        <div className={ containerTitle }>
+          <h3 className={ title } data-testid="profile-email">{ getEmail() }</h3>
+        </div>
+        <div className={ btnGroup }>
+          {btnDone()}
+          {btnFavorite()}
+          {btnExit()}
+        </div>
       </div>
-      <div className={ btnGroup }>
-        {btnDone()}
-        {btnFavorite()}
-        {btnExit()}
-      </div>
-    </div>
+      <Footer />
+    </>
   );
 }
 

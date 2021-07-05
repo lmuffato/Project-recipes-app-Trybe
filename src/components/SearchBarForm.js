@@ -1,25 +1,49 @@
 import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
-import { getIngrediente, getNome, getPrimeiraLetra,
+import { useLocation } from 'react-router-dom';
+import { getIngCock, getIngCockTail, getNameCock,
+  getNameCockTail, getPriLetraCock, getPriLetraCockTail,
 } from '../services/fetchApiSearchBar';
 
 const SearchBarForm = () => {
   const [busca, setBusca] = useState('');
   const [markBusca, setMarkBusca] = useState('');
+  const location = useLocation();
+  const primeiraLetra = 'primeira-letra';
 
-  const handleSearchBarApi = async () => {
+  const handleSearchBarApiComidas = async () => {
     if (markBusca === 'ingrediente') {
-      getIngrediente(busca).then((res) => res);
+      getIngCock(busca).then((res) => console.log(res));
     }
     if (markBusca === 'nome') {
-      getNome(busca).then((res) => res);
+      getNameCock(busca).then((res) => res);
     }
-    if (markBusca === 'primeira-letra') {
-      getPrimeiraLetra(busca).then((res) => res);
+    if (markBusca === primeiraLetra) {
+      getPriLetraCock(busca).then((res) => res);
     }
-    if (markBusca === 'primeira-letra' && busca.length > 1) {
+    if (markBusca === primeiraLetra && busca.length > 1) {
       alert('Sua busca deve conter somente 1 (um) caracter');
     }
+  };
+
+  const handleSearchBarApiBebidas = async () => {
+    if (markBusca === 'ingrediente') {
+      getIngCockTail(busca).then((res) => res);
+    }
+    if (markBusca === 'nome') {
+      getNameCockTail(busca).then((res) => res);
+    }
+    if (markBusca === primeiraLetra) {
+      getPriLetraCockTail(busca).then((res) => console.log(res));
+    }
+    if (markBusca === primeiraLetra && busca.length > 1) {
+      alert('Sua busca deve conter somente 1 (um) caracter');
+    }
+  };
+
+  const handleFilterSearchBar = () => {
+    if (location.pathname === '/comidas') return handleSearchBarApiComidas();
+    if (location.pathname === '/bebidas') return handleSearchBarApiBebidas();
   };
 
   const handleSearchBarValue = () => (
@@ -83,7 +107,7 @@ const SearchBarForm = () => {
         { handleSearchBarMark() }
         <Button
           data-testid="exec-search-btn"
-          onClick={ handleSearchBarApi }
+          onClick={ handleFilterSearchBar }
         >
           Busca
         </Button>

@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import Button from 'react-bootstrap/Button';
 import { Link, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import searchIcon from '../images/searchIcon.svg';
 import profileIcon from '../images/profileIcon.svg';
 import SearchBarForm from './SearchBarForm';
+import '../styles/Header.css';
 
 function Header({ title }) {
   const [searchBar, setSearchBar] = useState(false);
@@ -15,7 +15,6 @@ function Header({ title }) {
 
   if (location.pathname !== '/comidas'
   && location.pathname !== '/bebidas'
-  && location.pathname !== 'explorar'
   && location.pathname !== '/explorar/comidas/area') {
     return (
       <div className="header-container">
@@ -42,13 +41,13 @@ function Header({ title }) {
             />
           </Link>
           <h1 data-testid="page-title">{title}</h1>
-          <Button onClick={ showSearchBar }>
+          <button type="button" onClick={ showSearchBar }>
             <img
               data-testid="search-top-btn"
               src={ searchIcon }
               alt="search"
             />
-          </Button>
+          </button>
         </div>
         <div>
           <SearchBarForm />
@@ -66,13 +65,13 @@ function Header({ title }) {
           />
         </Link>
         <h1 data-testid="page-title">{title}</h1>
-        <Button onClick={ showSearchBar }>
+        <button type="button" onClick={ showSearchBar }>
           <img
             data-testid="search-top-btn"
             src={ searchIcon }
             alt="search"
           />
-        </Button>
+        </button>
       </div>
     );
   }
