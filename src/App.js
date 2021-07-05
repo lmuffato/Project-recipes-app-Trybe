@@ -24,17 +24,20 @@ function App() {
       <ProviderRecipes>
         <Switch>
           <Route exact path="/" component={ Login } />
-          <Route path="/main/food" component={ MainFood } />
-          <Route path="/main/drink" component={ MainDrink } />
-          <Route path="/detail" component={ Detail } />
-          <Route path="/explore" component={ Explore } />
-          <Route path="/explore/filters" component={ ExploreFilters } />
-          <Route path="/explore/ingredients" component={ ByIngredients } />
-          <Route path="/explore/origin" component={ ByOrigin } />
-          <Route path="/made-recipes" component={ MadeRecipes } />
-          <Route path="/in-process-recipes" component={ InProcess } />
-          <Route path="/profile" component={ Profile } />
-          <Route path="/favorites" component={ Favorites } />
+          <Route path="/comidas" component={ MainFood } />
+          <Route path="/bebidas" component={ MainDrink } />
+          <Route path="/comidas/:id" component={ Detail } />
+          <Route path="/bebidas/:id" component={ Detail } />
+          <Route path="/comidas/:id/in-progress" component={ InProcess } />
+          <Route path="/bebidas/:id/in-progress" component={ InProcess } />
+          <Route path="/explorar" component={ Explore } />
+          <Route path="/explorar/comidas" component={ ExploreFilters } />
+          <Route path="/explorar/bebidas" component={ ExploreFilters } />
+          <Route path="/explorar/bebidas/ingredientes" component={ ByIngredients } />
+          <Route path="/explorar/comidas/area" component={ ByOrigin } />
+          <Route path="/receitas-feitas" component={ MadeRecipes } />
+          <Route path="/perfil" component={ Profile } />
+          <Route path="/receitas-favoritas" component={ Favorites } />
           <Route component={ NotFound } />
         </Switch>
       </ProviderRecipes>
