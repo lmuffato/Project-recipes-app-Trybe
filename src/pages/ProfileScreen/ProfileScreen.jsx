@@ -9,8 +9,8 @@ import Footer from '../../components/Footer';
 
 const ProfileScreen = () => {
   const { setLogout } = useContext(Context);
-  // const email = JSON.parse(localStorage.getItem('user')).email;
   const email = 'test@test.com';
+  // const email = JSON.parse(localStorage.getItem('user')).email;
   // console.log(email);
   const handleClick = ({ target }) => {
     // console.log(target);
