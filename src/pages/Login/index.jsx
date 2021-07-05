@@ -16,12 +16,12 @@ function Login() {
 
   const history = useHistory();
 
-  const successfulLogin = () => {
+  const successfulLogin = (event) => {
+    event.preventDefault();
     const userEmail = { email };
     localStorage.setItem('user', JSON.stringify(userEmail));
     localStorage.setItem('mealsToken', '1');
     localStorage.setItem('cocktailsToken', '1');
-    // const history = useHistory;
     history.push('/comidas');
   };
 
@@ -41,7 +41,7 @@ function Login() {
       </header>
       <main className={ styles.loginMain }>
         <h1>Login</h1>
-        <form>
+        <form onSubmit={ successfulLogin }>
           <input
             type="email"
             data-testid="email-input"
@@ -61,7 +61,6 @@ function Login() {
             className="primary-btn"
             data-testid="login-submit-btn"
             disabled={ enabledButton() }
-            onClick={ successfulLogin }
           >
             Entrar
           </button>
