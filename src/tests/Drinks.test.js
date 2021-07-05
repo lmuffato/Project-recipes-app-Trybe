@@ -44,7 +44,7 @@ const ordinaryDrinkData = {
   ],
 };
 
-describe('1 - Test Drinks Page', () => {
+describe.skip('1 - Test Drinks Page', () => {
   afterAll(() => done());
 
   it('Test if pathname is \'/bebidas\'', () => {
@@ -65,7 +65,7 @@ describe('1 - Test Drinks Page', () => {
   });
 });
 
-describe('2 - Test filter buttons', () => {
+describe.skip('2 - Test filter buttons', () => {
   afterAll(() => done());
 
   it('Test if filter button \'Ordinary Drink\' fetchs new data', async () => {
@@ -97,7 +97,7 @@ describe('2 - Test filter buttons', () => {
   });
 });
 
-describe('3 - Test if click on card redirects to recipe\'s page', () => {
+describe.skip('3 - Test if click on card redirects to recipe\'s page', () => {
   afterAll(() => done());
 
   it('Test if click on GG\'s card redirect to it\' recipe page', async () => {

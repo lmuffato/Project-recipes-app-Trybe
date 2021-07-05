@@ -42,7 +42,7 @@ const beefData = {
   ],
 };
 
-describe('1 - Test Meals page', () => {
+describe.skip('1 - Test Meals page', () => {
   afterAll(() => done());
 
   it('Test if pathname is \'/comidas\'', () => {
@@ -75,7 +75,7 @@ describe('1 - Test Meals page', () => {
   });
 });
 
-describe('2 - Test filter buttons', () => {
+describe.skip('2 - Test filter buttons', () => {
   afterAll(() => done());
 
   it('Test if filter button \'Beef\' fetchs new data', async () => {

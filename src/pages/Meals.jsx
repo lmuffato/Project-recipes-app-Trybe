@@ -5,10 +5,11 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 
 function Meals() {
+  const type = 'meals';
   return (
     <div>
-      <Header type="meals" />
-      <CategoriesBtn type="meals" />
+      <Header type={ type } />
+      <CategoriesBtn type={ type } />
       <MealCards />
       <Footer />
     </div>

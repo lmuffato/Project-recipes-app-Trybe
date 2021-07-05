@@ -11,7 +11,7 @@ import './Footer.css';
 function Footer() {
   return (
     <Container as="footer" className="footer-menu" data-testid="footer">
-      <Row>
+      <Row sm="3" xs="3">
         <Col>
           <Link to="/bebidas">
             <img
