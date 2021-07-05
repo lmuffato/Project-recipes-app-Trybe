@@ -55,7 +55,14 @@ const SearchBarContainer = styled.form`align-items: center;
         padding: 0 10px;
         text-align: left;
       }
+
     }
+
+  }
+
+  .btn-container {
+    display: flex;
+    gap: 1rem;
   }
 
   button {

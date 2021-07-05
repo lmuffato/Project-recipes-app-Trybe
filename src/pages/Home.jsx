@@ -5,7 +5,8 @@ import SearchBarButton from '../components/SearchBar/SearchBarButton';
 import SearchBar from '../components/SearchBar/SearchBar';
 import Footer from '../components/Footer/Footer';
 import useFetchRecipes from '../effects/useFetchRecipes';
-import Card from '../components/Card/Card';
+import RecipesContainer from '../styles/home';
+import CardList from '../components/CardList/CardList';
 
 function Home(props) {
   const { type } = props;
@@ -25,19 +26,17 @@ function Home(props) {
   return (
     <>
       <Header>
-        <h2 data-testid="page-title">Comidas</h2>
+        { type === 'meals'
+          ? (<h2 data-testid="page-title">Comidas</h2>) : (
+            <h2 data-testid="page-title">Bebidas</h2>)}
         <SearchBarButton onClick={ handleToggleSearchBar } />
       </Header>
       <div>
-        { isActive ? (<SearchBar />) : ''}
+        { isActive ? (<SearchBar type={ type } />) : ''}
       </div>
-      <div>
-        <div>
-          { recipes.length === 0 ? 'Loading...'
-            : recipes.map((recipe, i) => (
-              <Card recipe={ recipe } key={ i } index={ i } />)) }
-        </div>
-      </div>
+      <RecipesContainer>
+        <CardList recipes={ recipes } type={ type } />
+      </RecipesContainer>
       <Footer />
     </>
   );
