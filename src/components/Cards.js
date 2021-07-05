@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styles from '../styles/Cards.module.scss';
 
 function Cards({ el, index, path }) {
   const verifyPath = String(path).includes('comidas');
 
   return (
     <div
-      className="card-meal-drink"
+      className={ styles.cardMealDrink }
       data-testid={ `${index}-recipe-card` }
     >
       <img
@@ -15,10 +16,7 @@ function Cards({ el, index, path }) {
         width="100%"
         data-testid={ `${index}-card-img` }
       />
-      <p
-        className="card-name"
-        data-testid={ `${index}-card-name` }
-      >
+      <p data-testid={ `${index}-card-name` }>
         { verifyPath ? el.strMeal : el.strDrink }
       </p>
     </div>
