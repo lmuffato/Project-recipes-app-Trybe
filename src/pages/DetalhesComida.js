@@ -148,7 +148,7 @@ function DetalhesComida({ match: { params: { id } } }) {
             type="button"
             onClick={ handleClick }
             data-testid="start-recipe-btn"
-            className={ btn }
+            className={ `${btn} button-recipe` }
           >
             Start recipe
           </Button>

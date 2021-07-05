@@ -4,5 +4,11 @@
 
 .recomendation-container {
   display: flex;
+  margin-bottom: 25px;
   overflow-x: scroll;
+}
+
+.button-recipe {
+  bottom: 0;
+  position: fixed;
 }
