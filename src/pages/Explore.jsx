@@ -8,6 +8,22 @@ function Explore() {
       <Header>
         <h2 data-testid="page-title">Explorar</h2>
       </Header>
+      <section>
+        <section data-testid="explore-food">
+          <a
+            href="/explorar/comidas"
+          >
+            <h2>Explorar Comidas</h2>
+          </a>
+        </section>
+        <section data-testid="explore-drinks">
+          <a
+            href="/explorar/bebidas"
+          >
+            <h2>Explorar Bebidas</h2>
+          </a>
+        </section>
+      </section>
       Tela explorar
       <Footer />
     </div>
