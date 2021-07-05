@@ -17,7 +17,7 @@ function ExploreDrinks() {
             size="lg"
             className="buttons"
             data-testid="explore-by-ingredient"
-            onClick={ () => history.push('/explorar/comidas/ingredientes') }
+            onClick={ () => history.push('/explorar/bebidas/ingredientes') }
           >
             Por Ingredientes
           </Button>
