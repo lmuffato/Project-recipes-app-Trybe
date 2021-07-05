@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import brandFace from '../../images/brand/face.svg';
 import styles from './styles.module.scss';
@@ -6,13 +6,18 @@ import styles from './styles.module.scss';
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [btnisDisabled, setBtnIsDisabled] = useState(false);
 
-  // Padrão para o RegEx: https://regexr.com/2ri2c
-  const enabledButton = () => {
-    const pattern = /\b[\w.-]+@[\w.-]+\.\w{2,4}\b/gi;
-    const digits = 7;
-    return !(password.length >= digits && email.match(pattern));
-  };
+  useEffect(() => {
+    // Padrão para o RegEx: https://regexr.com/2ri2c
+    const enabledButton = () => {
+      const pattern = /\b[\w.-]+@[\w.-]+\.\w{2,4}\b/gi;
+      const digits = 7;
+      setBtnIsDisabled(!(password.length >= digits && email.match(pattern)));
+    };
+
+    enabledButton();
+  }, [email, password]);
 
   const history = useHistory();
 
@@ -60,7 +65,7 @@ function Login() {
             type="submit"
             className="primary-btn"
             data-testid="login-submit-btn"
-            disabled={ enabledButton() }
+            disabled={ btnisDisabled }
           >
             Entrar
           </button>
