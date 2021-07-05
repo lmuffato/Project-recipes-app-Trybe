@@ -26,15 +26,13 @@ function FilteredRecipesContextProvider({ children }) {
       console.log(formattingData[type]);
     } catch (err) {
       console.log(err);
-      // eslint-disable-next-line no-alert
-      window.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+      global.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
     }
   };
 
   // cria alert p/ as buscas por primeira letra
   const alertMessage = () => {
-    // eslint-disable-next-line no-alert
-    window.alert('Sua busca deve conter somente 1 (um) caracter');
+    global.alert('Sua busca deve conter somente 1 (um) caracter');
   };
 
   // faz o switch case dos endpoints pra buscar receitas na api de comidas
