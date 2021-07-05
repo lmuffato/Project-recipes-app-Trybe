@@ -1,39 +1,25 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
-function RecipeIngredients({ id, type }) {
-  const endpointMeals = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
-  const endpointDrinks = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
-  const [fetchRecipeURL, setFetchRecipeURL] = useState('');
-  // const [ingredientsArr, setIngredientsArr] = useState([]);
-  // const [instructionsArr, setInstructionsArr] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [recipe, setRecipe] = useState({});
-
-  const handleFetchIngredients = useCallback(() => {
-    if (type === 'meals') {
-      setFetchRecipeURL(endpointMeals);
-    }
-    if (type === 'drinks') {
-      setFetchRecipeURL(endpointDrinks);
-    }
-  }, [endpointDrinks, endpointMeals, type]);
-
-  const handleFetch = useCallback(async (url) => {
-    try {
-      const request = await fetch(url);
-      const data = await request.json();
-      setRecipe(data[type][0]);
-      console.log(data[type][0]);
-      setIsLoading(false);
-    } catch (err) {
-      console.log(err);
-    }
-  }, [type]);
-
+function RecipeIngredients({ recipe }) {
+  const keysAndValues = Object.entries(recipe);
+  const [ingredient, setIngredients] = useState([]);
+  const [measures, setMeasures] = useState([]);
   // const { strIngredient1,
   // strIngredient2, strIngredient3, strIngredient4, strIngredient5, strIngredient6, strIngredient7 } = recipe;
 
+  const handleIngredientsAndMeasures = () => {
+    const mapIngredients = keysAndValues.map(
+      (element) => (element[0].includes('strIngredient') && element[1] !== null ? (
+        setIngredients(mapIngredients)
+      ) : ''),
+    );
+    const mapMeasures = keysAndValues.map(
+      (el) => (el[0].includes('strMeasure') && el[1] !== null ? (
+        setMeasures(mapMeasures)
+      ) : ''),
+    );
+  };
   // const handleIngr = (value) => {
   //   if (value.trim() !== '') {
   //     setIngredientsArr([...ingredientsArr].push(value));
@@ -41,24 +27,28 @@ function RecipeIngredients({ id, type }) {
   //   }
   // };
 
+  useEffect(() => {
+    console.log(keysAndValues);
+  }, [keysAndValues, recipe]);
+
   // const handleAddIngrToArr = () => {
   //   handleIngr(strIngredient1);
   //   console.log(ingredientsArr);
   // };
 
-  useEffect(() => {
-    handleFetchIngredients();
-    handleFetch(fetchRecipeURL);
-  }, [fetchRecipeURL, handleFetch, handleFetchIngredients]);
-
-  if (isLoading) {
-    return 'Loading';
-  }
-
   return (
     <div>
-      Ingredientes
-      { recipe.strCategory }
+      <h3>Ingredientes</h3>
+      <ul>
+        { keysAndValues.map((element, index) => (
+          element[0].includes('strIngredient') && element[1] !== null ? (
+            <li key={ element } data-testid={ `${index}-ingredient-name-and-measure` }>
+              { element[1]}
+            </li>
+          ) : (
+            ' '
+          )))}
+      </ul>
     </div>
   );
 }
@@ -66,6 +56,5 @@ function RecipeIngredients({ id, type }) {
 export default RecipeIngredients;
 
 RecipeIngredients.propTypes = {
-  type: PropTypes.string.isRequired,
-  id: PropTypes.string.isRequired,
+  recipe: PropTypes.shape().isRequired,
 };

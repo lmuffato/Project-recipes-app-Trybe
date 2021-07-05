@@ -20,5 +20,5 @@ export default RecipeInfo;
 RecipeInfo.propTypes = {
   recipeName: PropTypes.string.isRequired,
   recipeThumb: PropTypes.string.isRequired,
-  children: PropTypes.string.isRequired,
+  children: PropTypes.shape().isRequired,
 };

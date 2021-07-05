@@ -1,15 +1,19 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import RecipeInfo from '../components/RecipeInfo/RecipeInfo';
-// import RecipeIngredients from '../components/RecipeIngredients/RecipeIngredients';
+import Button from '../components/Generics/Button';
+import RecipeIngredients from '../components/RecipeIngredients/RecipeIngredients';
 
 function RecipeDetails() {
   const location = useLocation();
+  const { id } = useParams();
+  // const { match } = useParams();
+  // const { id } = match;
   const { state } = location;
-  const { recipe, type } = state;
-  const endpointMeals = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${recipe.idMeal}`;
-  const endpointDrinks = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${recipe.idDrink}`;
+  const { type } = state;
+  const endpointMeals = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
+  const endpointDrinks = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
   const [fetchRecipeURL, setFetchRecipeURL] = useState('');
   const [isLoading, setIsLoading] = useState(true);
   const [singleRecipe, setRecipe] = useState({});
@@ -61,13 +65,21 @@ function RecipeDetails() {
         { type === 'drinks' ? (<h3 data-testid="recipe-category">{isAlchooholic}</h3>) : (
           <h3 data-testid="recipe-category">{recipeCategory}</h3>)}
       </RecipeInfo>
+
+      <div>
+        <RecipeIngredients recipe={ singleRecipe } />
+      </div>
       {/* <RecipeIngredients id={ recipeId } type={ type } /> */}
       <div className="instructions">
         <h5>Instructions</h5>
         <p data-testid="instructions">
           { singleRecipe.strInstructions }
         </p>
+        <div data-testid="video">Video aqui</div>
       </div>
+      <Button data-testid="start-recipe-btn">
+        Iniciar receita
+      </Button>
 
     </div>
   );
