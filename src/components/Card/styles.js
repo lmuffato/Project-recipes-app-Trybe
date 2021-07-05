@@ -33,7 +33,7 @@ const CardContainer = styled.div`margin: 8px 8px 32px;
     flex-wrap: nowrap;
     font-size: 1rem;
     justify-content: normal;
-    margin: 12px auto 6px;
+    margin: 10px auto 6px;
     z-index: 2;
   }
 

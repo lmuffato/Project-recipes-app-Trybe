@@ -3,6 +3,7 @@ import { useHistory, Link } from 'react-router-dom';
 import Wrapper from '../styles/profile';
 import Header from '../components/Header/Header';
 import Button from '../components/Generics/Button';
+import Footer from '../components/Footer/Footer';
 
 function Profile() {
   const history = useHistory();
@@ -46,6 +47,7 @@ function Profile() {
           Sair
         </Button>
       </Wrapper>
+      <Footer />
     </div>
   );
 }
