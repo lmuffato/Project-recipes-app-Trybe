@@ -10,18 +10,18 @@ function FoodsArea() {
       const allAreas = fetchArea.meals.map((country) => (
         country.strArea
       ));
-      console.log(allAreas);
       setAreas(allAreas);
     }
     getAreas();
-  }, [])
+  }, []);
+
   return (
     <div>
-      <div>FoodsArea</div>
       <select data-testid="explore-by-area-dropdown">
-    {areas.map((area, index) => (
-      <option key={index} data-testid={`${area}-option`}>{area}</option>
-    ))}
+        <option>All</option>
+        {areas.map((area, index) => (
+          <option key={ index } data-testid={ `${ area }-option` }>{area}</option>
+        ))}
       </select>
     </div>
   );
