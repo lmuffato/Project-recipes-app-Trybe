@@ -1,5 +1,6 @@
 import {
-  ACTION_SEARCH, ACTION_MAIN_FOOD_LIST, ACTION_MAIN_DRINK, ACTION_LOADING,
+  ACTION_SEARCH, ACTION_MAIN_FOOD_LIST, ACTION_MAIN_DRINK,
+  ACTION_LOADING, ACTION_DRINKS_CATEGORY, ACTION_FOOD_CATEGORY,
 } from '../actions';
 
 const INITIAL_STATE = {
@@ -8,6 +9,8 @@ const INITIAL_STATE = {
   initialMeals: [],
   initialDrinks: [],
   isLoading: false,
+  drinksCategory: [],
+  mealsCategory: [],
 };
 
 const searchReducer = (state = INITIAL_STATE, action) => {
@@ -34,6 +37,17 @@ const searchReducer = (state = INITIAL_STATE, action) => {
       ...state,
       initialDrinks: action.drinksList,
       isLoading: false,
+    };
+  case ACTION_DRINKS_CATEGORY:
+    return {
+      ...state,
+      drinksCategory: action.drinksCategories,
+    };
+  case ACTION_FOOD_CATEGORY:
+    console.log(action.foodCategories);
+    return {
+      ...state,
+      mealsCategory: action.foodCategories,
     };
   default:
     return state;

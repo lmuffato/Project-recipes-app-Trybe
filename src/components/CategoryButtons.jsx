@@ -1,33 +1,35 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
 // import { requestInitialDrinks } from '../redux/actions';
 // import { useHistory } from 'react-router-dom';
-import fetchFoodCategories from '../helpers/fetchFoodCategories';
-import fetchDrinkCategories from '../helpers/fetchDrinkCategories';
+// import fetchFoodCategories from '../helpers/fetchFoodCategories';
 import fetchDrinkByCategory from '../helpers/fetchDrinkByCategory';
 import fetchFoodByCategory from '../helpers/fetchFoodByCategory';
 
 function FilterButtons({ props }) {
-  const [categoriesList, setCategoriesList] = useState([]);
+  const { drinksCategory } = useSelector((state) => state.searchReducer);
+  const { mealsCategory } = useSelector((state) => state.searchReducer);
   // const history = useHistory();
+  const tipe = (props === 'Drinks') ? drinksCategory : mealsCategory;
   const FIVE = 5;
 
-  useEffect(() => {
-    if (props === 'Drinks') {
-      const fetchCategories = async () => {
-        const { drinks } = await fetchDrinkCategories();
-        setCategoriesList(drinks);
-      };
-      fetchCategories();
-    }
-    if (props === 'Food') {
-      const fecthCategories = async () => {
-        const { categories } = await fetchFoodCategories();
-        setCategoriesList(categories);
-      };
-      fecthCategories();
-    }
-  }, [props]);
+  // useEffect(() => {
+  //   // if (props === 'Drinks') {
+  //   // const fetchCategories = async () => {
+  //   //   const { drinks } = await fetchDrinkCategories();
+  //   //   setCategoriesList(drinks);
+  //   // };
+  //   // fetchCategories();
+  //   // }
+  //   if (props === 'Food') {
+  //     const fecthCategories = async () => {
+  //       const { categories } = await fetchFoodCategories();
+  //       setCategoriesList(categories);
+  //     };
+  //     fecthCategories();
+  //   }
+  // }, []);
 
   const HandleFilterByCategoryButton = (type, category) => {
     if (type === 'Drinks') {
@@ -38,7 +40,7 @@ function FilterButtons({ props }) {
       };
       fetchByCategory();
     }
-    if (type === 'Food') {
+    if (type === 'Meals') {
       const fecthByCategory = async () => {
         const { meals } = await fetchFoodByCategory(category);
         // dispatch(requestInitialMeals(meals));
@@ -51,17 +53,8 @@ function FilterButtons({ props }) {
   return (
     <div>
       {
-        (categoriesList && categoriesList.length > 0 && (
-          props === 'Food' ? categoriesList.map((e, index) => index < FIVE && (
-            <button
-              key={ e.idCategory }
-              type="button"
-              data-testid={ `${e.strCategory}-category-filter` }
-              onClick={ () => HandleFilterByCategoryButton(props, e.strCategory) }
-            >
-              {e.strCategory}
-            </button>
-          )) : categoriesList.map((e, index) => index < FIVE && (
+        tipe && (
+          tipe.map((e, index) => index < FIVE && (
             <button
               key={ index }
               type="button"
@@ -70,7 +63,8 @@ function FilterButtons({ props }) {
             >
               {e.strCategory}
             </button>
-          ))))
+          ))
+        )
       }
     </div>
   );

@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import fetchInitialMeals from '../helpers/fetchInicialMeals';
-import { requestRecipies, setInitialMeals } from '../redux/actions';
+import fetchFoodCategories from '../helpers/fetchFoodCategories';
+import { requestRecipies, setInitialMeals, actionFoodCategory } from '../redux/actions';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import RecipeCards from '../components/RecipeCards';
@@ -18,13 +19,20 @@ function MainFood() {
       const { meals } = await fetchInitialMeals();
       dispatch(setInitialMeals(meals));
     };
+    const fecthMealsCategory = async () => {
+      const { categories } = await fetchFoodCategories();
+      console.log(categories);
+      dispatch(actionFoodCategory(categories));
+    };
+
+    fecthMealsCategory();
     getMeals();
   }, [dispatch]);
 
   return (
     <>
       <Header props={ { search: true, title: 'Comidas' } } />
-      { isLoading ? '' : <FilterButtons props="Food" /> }
+      { isLoading ? '' : <FilterButtons props="Meals" /> }
       { isLoading ? loading : <RecipeCards /> }
       <Footer />
     </>
