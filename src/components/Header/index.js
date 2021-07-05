@@ -49,11 +49,13 @@ export default function Header({ title }) {
 
   return (
     <header className="header-container" data-testid="header">
-      <Link to="/perfil">
-        <img src={ profileIcon } alt="" data-testid="profile-top-btn" />
-      </Link>
-      <h1 data-testid="page-title">{title}</h1>
-      {renderSearchButton()}
+      <div className="header-top">
+        <Link to="/perfil">
+          <img src={ profileIcon } alt="" data-testid="profile-top-btn" />
+        </Link>
+        <h1 data-testid="page-title">{title}</h1>
+        {renderSearchButton()}
+      </div>
       {renderSearchBar()}
     </header>
   );

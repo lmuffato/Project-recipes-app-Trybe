@@ -121,16 +121,14 @@ describe(`12 - Desenvolva o botão de busca que, ao ser clicado, a barra
     const buttonSearch = getByTestId(SEARCH_TOP_BTN);
     await userEvent.click(buttonSearch);
     const searchBar = getByTestId('search-bar');
-    const style = window.getComputedStyle(searchBar);
-    expect(style.visibility).toBe('visible');
+    expect(searchBar).toBeInTheDocument();
   });
   it(`Ao clicar no botão de busca pela segunda vez a barra
     de busca desaparece`, async () => {
-    const { getByTestId } = renderWithRouter(<MainFoods />);
+    const { getByTestId, queryByTestId } = renderWithRouter(<MainFoods />);
     const buttonSearch = getByTestId(SEARCH_TOP_BTN);
     await userEvent.dblClick(buttonSearch);
-    const searchBar = getByTestId('search-bar');
-    const style = window.getComputedStyle(searchBar);
-    expect(style.visibility).toBe('hidden');
+    const searchBar = queryByTestId('search-bar');
+    expect(searchBar).toBeNull();
   });
 });
