@@ -3,7 +3,9 @@ import RecipeContext from '../../context/RecipeContext';
 import {
   initialFoods, getCategoriesFoods, foodsByCategory } from '../../services/apiRequests';
 
+import Header from '../../components/Header';
 import SearchBar from '../../components/SearchBar';
+import FooterMenu from '../../components/footerMenu';
 import RecipeCardFood from '../../components/RecipeCardFood';
 import CategoriesButtons from '../../components/CategoriesButtons';
 
@@ -37,13 +39,13 @@ function FoodPage() {
   const maxLength = 11;
   return (
     <section>
+      <Header />
       <SearchBar />
       { categories
         && <CategoriesButtons
           categories={ categories }
           toggleCategory={ toggleCategory }
         /> }
-      <ul>
         { !isLoading && recipes
           .filter((_, index) => index <= maxLength)
           .map((meal, index) => (
@@ -53,7 +55,7 @@ function FoodPage() {
               index={ index }
             />
           ))}
-      </ul>
+      <FooterMenu />
     </section>
   );
 }

@@ -5,6 +5,7 @@ import {
   initialDrinks, drinksByCategory } from '../../services/apiRequests';
 
 import SearchBar from '../../components/SearchBar';
+import FooterMenu from '../../components/footerMenu';
 import RecipeCardDrink from '../../components/RecipeCardDrink';
 import CategoriesButtons from '../../components/CategoriesButtons';
 
@@ -44,7 +45,6 @@ function DrinkPage() {
           categories={ categories }
           toggleCategory={ toggleCategory }
         /> }
-      <ul>
         { !isLoading && recipes
           .filter((_, index) => index <= maxLength)
           .map((drink, index) => (
@@ -54,7 +54,7 @@ function DrinkPage() {
               index={ index }
             />
           ))}
-      </ul>
+     <FooterMenu />
     </section>
   );
 }
