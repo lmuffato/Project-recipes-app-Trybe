@@ -6,7 +6,7 @@ import CategoryButtons from '../components/Main/CategoryButtons';
 import RecipeCard from '../components/Main/RecipeCard';
 
 export default function Comidas() {
-  const [drinks, setDrinks] = useState([]);
+  const [foods, setFoods] = useState([]);
   const [categories, setCategories] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
   const NUMBER_OF_RECIPES = 12;
@@ -14,7 +14,7 @@ export default function Comidas() {
 
   useEffect(() => {
     fetchFoods().then((data) => {
-      setDrinks(data.meals);
+      setFoods(data.meals);
     });
     fetchFoodCategories().then((data) => {
       setCategories(data.meals);
@@ -28,7 +28,7 @@ export default function Comidas() {
       <CategoryButtons categories={ categories } />
 
       <ul>
-        {isLoaded && drinks.slice(0, NUMBER_OF_RECIPES)
+        {isLoaded && foods.slice(0, NUMBER_OF_RECIPES)
           .map((recipe, index) => (
             <RecipeCard
               key={ index }
