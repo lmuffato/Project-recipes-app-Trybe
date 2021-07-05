@@ -10,7 +10,7 @@ import FilterButtons from '../components/CategoryButtons';
 function MainDrink() {
   const dispatch = useDispatch();
   const isLoading = useSelector((state) => state.searchReducer.isLoading);
-  const loading = <h1>Loading...</h1>;
+  const loading = <h2>Loading...</h2>;
 
   useEffect(() => {
     const getDrinks = async () => {

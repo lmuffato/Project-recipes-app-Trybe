@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-// import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
+// import { requestInitialDrinks } from '../redux/actions';
+// import { useHistory } from 'react-router-dom';
 import fetchFoodCategories from '../helpers/fetchFoodCategories';
 import fetchDrinkCategories from '../helpers/fetchDrinkCategories';
 import fetchDrinkByCategory from '../helpers/fetchDrinkByCategory';
@@ -32,7 +33,7 @@ function FilterButtons({ props }) {
     if (type === 'Drinks') {
       const fetchByCategory = async () => {
         const { drinks } = await fetchDrinkByCategory(category);
-        // setCategoriesList(drinks);
+        // dispatch(requestInitialDrinks(drinks));
         console.log(drinks);
       };
       fetchByCategory();
@@ -40,7 +41,7 @@ function FilterButtons({ props }) {
     if (type === 'Food') {
       const fecthByCategory = async () => {
         const { meals } = await fetchFoodByCategory(category);
-        // setCategoriesList(meals);
+        // dispatch(requestInitialMeals(meals));
         console.log(meals);
       };
       fecthByCategory();
