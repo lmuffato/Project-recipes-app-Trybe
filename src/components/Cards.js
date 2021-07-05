@@ -1,21 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
-import { useStateEasyRedux } from 'easy-redux-trybe';
 import styles from '../styles/Cards.module.scss';
 
 function Cards({ el, index, path }) {
-  const [, setStateRedux] = useStateEasyRedux({ name: 'Cards' }, {});
   const history = useHistory();
   const verifyPath = String(path).includes('comidas');
 
-  const choiceRecipie = async (element) => {
-    const urlRecipie = verifyPath
-      ? 'https://www.themealdb.com/api/json/v1/1/lookup.php?i='
-      : 'https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=';
-    const fecthMeal = await fetch(`${urlRecipie}${element}`);
-    const resultMeal = await fecthMeal.json();
-    setStateRedux({ actionType: 'FETCH_RECIPIE', resultMeal });
+  const choiceRecipie = (element) => {
     if (verifyPath) {
       history.push(`comidas/${element}`);
     } else {
