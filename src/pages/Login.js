@@ -28,9 +28,6 @@ function Login() {
     setToLocalStorage('mealsToken', 1);
     setToLocalStorage('cocktailsToken', 1);
     setToLocalStorage('user', user);
-    setToLocalStorage('doneRecipes', []);
-    setToLocalStorage('favoriteRecipes', []);
-    setToLocalStorage('inProgressRecipes', {});
     history.push('/comidas');
   }
 
