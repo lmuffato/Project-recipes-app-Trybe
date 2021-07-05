@@ -3,6 +3,7 @@ import CocktailsCards from '../components/CocktailsCards';
 import FilterCocktailsByCategories from '../components/FilterCocktailsByCategories';
 import Header from '../components/Header';
 import SearchButton from '../components/SearchButton';
+import InferiorMenu from '../components/InferiorMenu';
 
 export default function MainCocktails() {
   return (
@@ -13,6 +14,7 @@ export default function MainCocktails() {
       <h1 data-testid="page-title">Bebidas</h1>
       <FilterCocktailsByCategories />
       <CocktailsCards />
+      <InferiorMenu />
     </div>
   );
 }

@@ -2,6 +2,7 @@ import React from 'react';
 import Button from 'react-bootstrap/Button';
 import { useHistory } from 'react-router';
 import Header from '../components/Header';
+import InferiorMenu from '../components/InferiorMenu';
 
 export default function Explore() {
   const history = useHistory();
@@ -35,6 +36,7 @@ export default function Explore() {
       >
         Explorar Bebidas
       </Button>
+      <InferiorMenu />
     </div>
   );
 }
