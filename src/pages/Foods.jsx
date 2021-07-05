@@ -45,6 +45,7 @@ function Foods() {
             testImgId={ `${index}-card-img` }
             testNameId={ `${index}-card-name` }
             testCardId={ `${index}-recipe-card` }
+            mealId={ recipes.idMeal }
           />
         ) : null
       )) : alert('Sinto muito, não encontramos nenhuma receita para esses filtros.')}
