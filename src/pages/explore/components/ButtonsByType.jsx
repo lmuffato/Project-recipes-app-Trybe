@@ -1,11 +1,25 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { string } from 'prop-types';
 import { useHistory } from 'react-router-dom';
+import { fetchApiRandomDrinks, fetchApiRandomMeal } from '../../../services/fetchApi';
 
 function ButtonsByType({ type }) {
   const history = useHistory();
+  const [randomDrinkId, setRandomDrinkId] = useState();
+  const [randomMealId, setRandomMealId] = useState();
+
+  useEffect(() => {
+    fetchApiRandomMeal().then((res) => setRandomMealId(res[0].idMeal));
+    fetchApiRandomDrinks().then((res) => setRandomDrinkId(res[0].idDrink));
+  }, []);
+
   function handleExploreDirection(direction) {
-    history.push(`explorar/${type}/${direction}`);
+    history.push(`${type}/${direction}`);
+  }
+
+  function randomDrinkMeal() {
+    if (type === 'bebidas') return `/bebidas/${randomDrinkId}`;
+    return `/comidas/${randomMealId}`;
   }
 
   return (
@@ -22,16 +36,15 @@ function ButtonsByType({ type }) {
           <button
             data-testid="explore-by-area"
             type="button"
-            onClick={ () => handleExploreDirection('Origem') }
+            onClick={ () => handleExploreDirection('area') }
           >
             Por Local de Origem
           </button>
         )}
-
       <button
         data-testid="explore-surprise"
         type="button"
-        // onClick={ () => handleExploreDirection(type) }
+        onClick={ () => history.push(randomDrinkMeal()) }
       >
         Me Surpreenda!
       </button>
@@ -44,5 +57,3 @@ ButtonsByType.propTypes = {
 }.isRequired;
 
 export default ButtonsByType;
-
-// References: https://reactrouter.com/web/api/Hooks

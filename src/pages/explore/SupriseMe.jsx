@@ -1,11 +1,16 @@
 import React from 'react';
 
-function SupriseMe() {
+function SupriseMe({ type }) {
+  console.log(type);
   return (
-    <div>
+    <>
       Me Surpreenda!
-    </div>
+    </>
   );
 }
+
+SupriseMe.propTypes = {
+  type: string,
+}.isRequired;
 
 export default SupriseMe;
