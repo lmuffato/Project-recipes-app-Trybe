@@ -4,6 +4,7 @@ import Header from '../components/Header';
 import { fetchFoods, fetchFoodCategories } from '../services/mealAPI';
 import CategoryButtons from '../components/Main/CategoryButtons';
 import RecipeCard from '../components/Main/RecipeCard';
+import Footer from '../components/Footer';
 
 export default function Comidas() {
   const [foods, setFoods] = useState([]);
@@ -38,6 +39,7 @@ export default function Comidas() {
             />
           ))}
       </ul>
+      <Footer />
     </>
   );
 }

@@ -4,6 +4,7 @@ import Header from '../components/Header';
 import { fetchCocktails, fetchCocktailCategories } from '../services/cocktailAPI';
 import CategoryButtons from '../components/Main/CategoryButtons';
 import RecipeCard from '../components/Main/RecipeCard';
+import Footer from '../components/Footer';
 
 export default function Bebidas() {
   const [drinks, setDrinks] = useState([]);
@@ -38,6 +39,7 @@ export default function Bebidas() {
             />
           ))}
       </ul>
+      <Footer />
     </>
   );
 }
