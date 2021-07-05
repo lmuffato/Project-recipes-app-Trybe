@@ -34,7 +34,7 @@ export default function ExploreIngredients() {
       }
     };
     getApi();
-  }, []);
+  }, [pathname]);
   return (
     <div>
       {ingredientsList.map((ingredient, index) => (
