@@ -1,5 +1,6 @@
 import { object } from 'prop-types';
 import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import RecomendacoesCard from '../components/RecomendacoesCard';
 
@@ -15,6 +16,7 @@ function DetalhesBebida({ match: { params: { id } } }) {
   const [acctualyDrink, setAcctualyDrink] = useState();
   const [isLoading, setIsLoading] = useState(false);
   const [drinkRecomendation, setDrinkRecomendation] = useState();
+  const history = useHistory();
 
   useEffect(() => {
     async function fetchDrink() {
@@ -32,6 +34,8 @@ function DetalhesBebida({ match: { params: { id } } }) {
 
   const handleClick = (e) => {
     e.preventDefault();
+
+    history.push(`/bebidas/${id}/in-progress`);
   };
 
   const createRecipe = () => {
