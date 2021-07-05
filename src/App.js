@@ -13,7 +13,8 @@ import Favorites from './screens/Favorites';
 import InProcess from './screens/InProcess';
 import Login from './screens/Login';
 import MadeRecipes from './screens/MadeRecipes';
-import Main from './screens/Main';
+import MainFood from './screens/MainFood';
+import MainDrink from './screens/MainDrink';
 import NotFound from './screens/NotFound';
 import Profile from './screens/Profile';
 
@@ -23,7 +24,8 @@ function App() {
       <ProviderRecipes>
         <Switch>
           <Route exact path="/" component={ Login } />
-          <Route path="/main" component={ Main } />
+          <Route path="/main/food" component={ MainFood } />
+          <Route path="/main/drink" component={ MainDrink } />
           <Route path="/detail" component={ Detail } />
           <Route path="/explore" component={ Explore } />
           <Route path="/explore/filters" component={ ExploreFilters } />

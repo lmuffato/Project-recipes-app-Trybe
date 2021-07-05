@@ -1,10 +1,12 @@
 import React from 'react';
+import FooterBar from '../components/FooterBar';
 
 function ByIngredients() {
   return (
-    <div>
+    <main>
       renderiza a tela de busca de receitas por ingredientes
-    </div>
+      <FooterBar />
+    </main>
   );
 }
 

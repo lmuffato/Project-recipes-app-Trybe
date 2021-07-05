@@ -1,10 +1,12 @@
 import React from 'react';
+import FooterBar from '../components/FooterBar';
 
 function Profile() {
   return (
-    <div>
+    <main>
       perfil
-    </div>
+      <FooterBar />
+    </main>
   );
 }
 

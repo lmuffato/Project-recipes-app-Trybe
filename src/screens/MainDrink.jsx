@@ -1,13 +1,13 @@
 import React from 'react';
 import FooterBar from '../components/FooterBar';
 
-function ExploreFilters() {
+function MainDrink() {
   return (
     <main>
-      renderiza os filtros por ingrediente, local, e surpreenda-me
+      tela principal
       <FooterBar />
     </main>
   );
 }
 
-export default ExploreFilters;
+export default MainDrink;
