@@ -8,7 +8,7 @@ import Footer from './compenents/Footer';
 import SearchbarProvider from './contexts/SeachbarProvider';
 import UserProvider from './contexts/UserProvider';
 import Explore from './pages/Explore';
-import Foods from './pages/Foods'
+import Foods from './pages/Foods';
 import Drinks from './pages/Drinks';
 
 function App() {
