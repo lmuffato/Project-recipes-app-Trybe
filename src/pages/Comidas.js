@@ -18,7 +18,7 @@ export default function Comidas() {
       <CategoryButtons categories={ categories } />
 
       <ul>
-        {foods && foods.slice(0, NUMBER_OF_RECIPES)
+        { foods && foods.slice(0, NUMBER_OF_RECIPES)
           .map((recipe, index) => (
             <RecipeCard
               key={ index }

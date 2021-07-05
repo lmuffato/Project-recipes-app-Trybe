@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
+import FoodContext from '../../contexts/FoodContext';
 
 const NUMBER_OF_CATEGORIES = 5;
 
 export default function CategoryButtons({ categories }) {
+
+  const { filterFoodByCategory } = useContext(FoodContext);
+
   return (
     <div>
       {categories.map((categoryName, index) => (
@@ -12,6 +16,7 @@ export default function CategoryButtons({ categories }) {
             type="submit"
             key={ index }
             data-testid={ `${categoryName.strCategory}-category-filter` }
+            onClick={ (ev) => filterFoodByCategory(ev, categoryName.strCategory) }
           >
             {categoryName.strCategory}
           </button>) : ''
