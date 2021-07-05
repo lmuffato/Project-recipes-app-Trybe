@@ -1,19 +1,20 @@
 import React from 'react';
-import PropTypes, { object } from 'prop-types';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import './RecipeList.css';
 
-function RecipesList({ data }) {
-  
-  const renderCards = (data) => {
-    const first12 = data.slice(0, 12);
+function RecipesList({ data, path }) {
+  const renderCards = () => {
+    const magicNum = 12;
+    const first12 = data.slice(0, magicNum);
     const toReturn = first12.map((recipe, index) => {
       const { name, imgSrc, id } = recipe;
       return (
         <li
           data-testid={ `${index}-recipe-card` }
+          key={ index }
         >
-          <Link to={ { pathname:`/comidas/${id}` } }>
+          <Link to={ { pathname: `/${path}/${id}` } }>
             <div className="card">
               <img
                 src={ `${imgSrc}` }
@@ -33,19 +34,20 @@ function RecipesList({ data }) {
       );
     });
     return toReturn;
-  }
+  };
 
   return (
     <div className="component">
       <ul className="card-list">
-        { renderCards(data) }
+        { renderCards() }
       </ul>
     </div>
-  )
+  );
 }
 
 RecipesList.propTypes = {
-  data: PropTypes.arrayOf(object).isRequired,
+  data: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string)).isRequired,
+  path: PropTypes.string.isRequired,
 };
 
-export default RecipesList
+export default RecipesList;
