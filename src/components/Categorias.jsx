@@ -51,7 +51,6 @@ function Categorias({ param }) {
   //   </ToggleButton>
   // );
 
-  // eslint-disable-next-line array-callback-return
   const btns = () => param.map((item, idx) => {
     const magicNumber = 4;
     if (idx <= magicNumber) {
@@ -68,6 +67,7 @@ function Categorias({ param }) {
         </button>
       );
     }
+    return null;
   });
 
   const btnAll = () => (
