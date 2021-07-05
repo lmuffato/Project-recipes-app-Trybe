@@ -9,9 +9,9 @@ import Footer from '../../components/Footer';
 
 const ProfileScreen = () => {
   const { setLogout } = useContext(Context);
-  // const email = JSON.parse(localStorage.getItem('user')).email;
+  const user = JSON.parse(localStorage.getItem('user'));
   // console.log(email);
-  const email = 'test@test.com';
+  // const email = 'test@test.com';
   const handleClick = ({ target }) => {
     // console.log(target);
     if (target.id === 'recipes-made') {
@@ -33,7 +33,7 @@ const ProfileScreen = () => {
       <Header />
       <div className="card" style={ styleCard }>
         <h5 className="card-title">Perfil</h5>
-        <span data-testid="profile-email">{ email }</span>
+        { (user) && <span data-testid="profile-email">{ user.email }</span> }
         <div className="btn-group-vertical">
           <Link
             to="/receitas-feitas"
