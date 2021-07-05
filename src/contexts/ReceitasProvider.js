@@ -8,6 +8,8 @@ function ReceitasProvider({ children }) {
   const [APIresponse, setAPIResponse] = useState();
   const [APIFood, setAPIFood] = useState();
   const [APIDrink, setAPIDrink] = useState();
+  const [APIIngredientsFood, setAPIIngredientsFood] = useState();
+  const [APIIngredientsDrink, setAPIIngredientsDrink] = useState();
   const [selected, setSelected] = useState();
   const [filter, setFilter] = useState(false);
   const [canRender, setCanRender] = useState(false);
@@ -21,6 +23,10 @@ function ReceitasProvider({ children }) {
           setAPIFood(response);
         } else if (page === 'bebidas') {
           setAPIDrink(response);
+        } else if (page === 'ingredientes-comidas') {
+          setAPIIngredientsFood(response);
+        } else if (page === 'ingredientes-bebidas') {
+          setAPIIngredientsDrink(response);
         }
         setAPIResponse(response);
       });
@@ -48,6 +54,8 @@ function ReceitasProvider({ children }) {
         setAPIDrink,
         filterValue,
         setFilterValue,
+        APIIngredientsFood,
+        APIIngredientsDrink,
       } }
     >
       {children}
