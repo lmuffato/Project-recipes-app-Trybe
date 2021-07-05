@@ -5,6 +5,8 @@ import Search from './Search';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 
+import styles from '../styles/Header.module.scss';
+
 export default function Header(props) {
   const { title, showButton, showHeader, path } = props;
   // const { path } = params;
@@ -19,16 +21,16 @@ export default function Header(props) {
 
   if (showHeader) return '';
   return (
-    <div className="Header">
-      <header className="header">
+    <div className={ styles.container }>
+      <header>
         <Link
-          className="header-img"
+          className={ styles.profile }
           to="/perfil"
           data-testid="profile-top-btn"
           src={ profileIcon }
           alt="Profile"
         >
-          <img src={ profileIcon } alt="Search" className="header-img" />
+          <img src={ profileIcon } alt="Search" />
         </Link>
         <h1 data-testid="page-title">
           {title}
@@ -41,8 +43,9 @@ export default function Header(props) {
               data-testid="search-top-btn"
               src={ searchIcon }
               alt="Search"
+              className={ styles.search }
             >
-              <img src={ searchIcon } alt="Search" className="header-img" />
+              <img src={ searchIcon } alt="Search" />
             </button>)
         }
       </header>

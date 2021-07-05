@@ -1,0 +1,58 @@
+@media screen and (max-width: 414px) {
+  .searchContainer {
+    height: 115px;
+    position: relative;
+    background-color: #EB8328;
+    margin-top: -11px;
+    border-top: 1px solid white;
+    display: flex;
+    align-items: center;
+    
+    section {
+      width: 90%;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+
+      .searchInput {
+        height: 25px;
+        border-radius: 5px;
+        padding: 0 5px;
+        background: #FFF;
+        border: none;
+      }
+
+      .radios {
+        display: flex;
+        justify-content: space-around;
+        margin: 10px 0;
+
+        label {
+          font-size: 13px;
+          font-weight: 500;
+          color: white;
+          font-family: 'Poppins', sans-serif;
+
+          input {
+            transform: translateY(20%);
+          }
+        }
+      }
+
+      button {
+        font-family: 'Poppins', sans-serif;
+        height: 25px;
+        border-radius: 5px;
+        font-weight: 500;
+        background: #FFF;
+        color: #EB8328;
+        cursor: pointer;
+        border: 0;
+
+        &:hover {
+          opacity: 0.93;
+        }
+      }
+    }
+  }
+}

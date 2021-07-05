@@ -1,0 +1,12 @@
+@media screen and (max-width: 414px) {
+  .container {
+    position: absolute;
+
+    .cardsArea {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-gap: 8px;
+      margin: 15px 10px 70px 10px;
+    }
+  }
+}

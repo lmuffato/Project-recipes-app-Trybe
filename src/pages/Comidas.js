@@ -4,6 +4,11 @@ import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 import { useStateEasyRedux } from 'easy-redux-trybe';
 import Header from '../components/Header';
+import Cards from '../components/Cards';
+import FilterButtons from '../components/FilterButtons';
+import Footer from '../components/Footer';
+
+import styles from '../styles/MainPages.module.scss';
 
 function Comidas(props) {
   const { match: { params, path } } = props;
@@ -31,33 +36,20 @@ function Comidas(props) {
     return <Redirect to={ `comidas/${idMeal}` } />;
   }
   return (
-    <div>
+    <div className={ styles.container }>
       <Header title="Comidas" showButton showHeader={ !!id } { ...{ path } } />
-      {`COMIDAAAAAAAAAAAAA ${!!id}`}
-      <main className="card-painel">
+      {/* {`COMIDAAAAAAAAAAAAA ${!!id}`} */}
+      <FilterButtons { ...{ path, resultsTwelveItems } } />
+      <main className={ styles.cardsArea }>
         {resultsTwelveItems && resultsTwelveItems.map(
-          (el, index) => (
-            <div
-              className="card-meal-drink"
-              key={ el.idMeal }
-              data-testid={ `${index}-recipe-card` }
-            >
-              <img
-                src={ el.strMealThumb }
-                alt="Drink"
-                width="100%"
-                data-testid={ `${index}-card-img` }
-              />
-              <p
-                className="card-name"
-                data-testid={ `${index}-card-name` }
-              >
-                { el.strMeal }
-              </p>
-            </div>
+          (el, index) => (<Cards
+            key={ el.idMeal }
+            { ...{ path, el, index } }
+          />
           ),
         )}
       </main>
+      <Footer />
     </div>
   );
 }
