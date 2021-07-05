@@ -24,7 +24,7 @@ function DrinkDetails() {
     };
     fetchDrinks();
     fetchRecomendations();
-  }, []);
+  }, [dispatch, id]);
 
   const renderRecomendations = (param) => {
     if (param) {

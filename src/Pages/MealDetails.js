@@ -24,7 +24,7 @@ function MealDetails() {
     };
     mealDrinks();
     fetchRecomendations();
-  }, []);
+  }, [dispatch, id]);
 
   const renderRecomendations = (param) => {
     if (param) {

@@ -1,6 +1,5 @@
-const url = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
-
-const fetchInitialMeals = async () => {
+const fetchFoodByCategory = async (category) => {
+  const url = `https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`;
   try {
     const response = await fetch(url);
     const data = await response.json();
@@ -10,4 +9,4 @@ const fetchInitialMeals = async () => {
   }
 };
 
-export default fetchInitialMeals;
+export default fetchFoodByCategory;

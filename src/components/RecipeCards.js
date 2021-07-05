@@ -57,7 +57,6 @@ export default function RecipeCards() {
                   data-testid={ `${index}-recipe-card` }
                 >
                   <img
-                    key={ `recipe-${index}` }
                     alt="recipe"
                     data-testid={ `${index}-card-img` }
                     className="recipe-card-image"

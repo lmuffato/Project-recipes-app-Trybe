@@ -1,13 +1,19 @@
-export const ACTION_LOGIN = 'ACTION_LOGIN';
+export const ACTION_LOADING = 'ACTION_LOADING';
 export const ACTION_SEARCH = 'ACTION_SEARCH';
 export const ACTION_DETAILS = 'ACTION_DRINK_DETAILS';
 export const ACTION_MAIN_FOOD_LIST = 'ACTION_MAIN_FOOD_LIST';
 export const ACTION_MAIN_DRINK = 'ACTION_MAIN_DRINK';
+export const ACTION_DRINKS_CATEGORY = 'ACTION_DRINKS_CATEGORY';
+export const ACTION_FOOD_CATEGORY = 'ACTION_FOOD_CATEGORY';
 
-export const actionLogin = (email, password) => ({
-  type: ACTION_LOGIN,
-  email,
-  password,
+export const actionDrinksCategory = (drinksCategories) => ({
+  type: ACTION_DRINKS_CATEGORY,
+  drinksCategories,
+});
+
+export const actionFoodCategory = (foodCategories) => ({
+  type: ACTION_FOOD_CATEGORY,
+  foodCategories,
 });
 
 export const actionSearch = (value) => ({
@@ -15,7 +21,11 @@ export const actionSearch = (value) => ({
   data: value,
 });
 
-export const requestInitialMeals = (mealsList) => ({
+export const requestRecipies = () => ({
+  type: ACTION_LOADING,
+});
+
+export const setInitialMeals = (mealsList) => ({
   type: ACTION_MAIN_FOOD_LIST,
   mealsList,
 });

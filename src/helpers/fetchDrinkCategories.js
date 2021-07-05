@@ -1,6 +1,6 @@
-const url = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
+const url = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list';
 
-const fetchInitialMeals = async () => {
+const fetchDrinkCategories = async () => {
   try {
     const response = await fetch(url);
     const data = await response.json();
@@ -10,4 +10,4 @@ const fetchInitialMeals = async () => {
   }
 };
 
-export default fetchInitialMeals;
+export default fetchDrinkCategories;
