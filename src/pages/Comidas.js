@@ -9,7 +9,6 @@ import FoodContext from '../contexts/FoodContext';
 export default function Comidas() {
   const NUMBER_OF_RECIPES = 12;
   const { pathname } = useLocation();
-
   const { foods, categories } = useContext(FoodContext);
 
   return (
