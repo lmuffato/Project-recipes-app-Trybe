@@ -36,9 +36,16 @@ describe(`10 - Implemente um ícone para a tela de perfil, um título e
     const { history, getByTestId } = renderWithRouter(<App />);
     history.push(route);
     const profileTopBtn = getByTestId(PROFILE_TOP_BTN);
-    expect(profileTopBtn.firstElementChild).toHaveAttribute('src', profileIcon);
+    expect(profileTopBtn).toHaveAttribute('src', profileIcon);
     const searchTopBtn = getByTestId(SEARCH_TOP_BTN);
-    expect(searchTopBtn.firstElementChild).toHaveAttribute('src', searchIcon);
+    expect(searchTopBtn).toHaveAttribute('src', searchIcon);
+    // const iconSrc = profileTopBtn.src;
+    // const path = iconSrc.substring(iconSrc.lastIndexOf('/') + 1);
+    // expect(path).toBe(profileIcon);
+    // const searchTopBtn = getByTestId(SEARCH_TOP_BTN);
+    // const iconSrc = profileTopBtn.src;
+    // const path = iconSrc.substring(iconSrc.lastIndexOf('/') + 1);
+    // expect(searc).toHaveAttribute('src', searchIcon);
   };
   it('Não tem header na tela de login', () => {
     testExistHeader('/');
@@ -108,18 +115,20 @@ describe(`11 - Redirecione a pessoa usuária para a tela de perfil ao clicar
 
 describe(`12 - Desenvolva o botão de busca que, ao ser clicado, a barra
   de busca deve aparecer. O mesmo serve para escondê-la`, () => {
-  it('Ao clicar no botão de busca pela primeira vez a barra de busca aparece', () => {
+  it(`Ao clicar no botão de busca pela primeira vez a barra
+    de busca aparece`, async () => {
     const { getByTestId } = renderWithRouter(<MainFoods />);
     const buttonSearch = getByTestId(SEARCH_TOP_BTN);
-    userEvent.click(buttonSearch);
+    await userEvent.click(buttonSearch);
     const searchBar = getByTestId('search-bar');
     const style = window.getComputedStyle(searchBar);
     expect(style.visibility).toBe('visible');
   });
-  it('Ao clicar no botão de busca pela segunda vez a barra de busca desaparece', () => {
+  it(`Ao clicar no botão de busca pela segunda vez a barra
+    de busca desaparece`, async () => {
     const { getByTestId } = renderWithRouter(<MainFoods />);
     const buttonSearch = getByTestId(SEARCH_TOP_BTN);
-    userEvent.dblClick(buttonSearch);
+    await userEvent.dblClick(buttonSearch);
     const searchBar = getByTestId('search-bar');
     const style = window.getComputedStyle(searchBar);
     expect(style.visibility).toBe('hidden');

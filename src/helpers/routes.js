@@ -1,87 +1,102 @@
 import React from 'react';
 import Login from '../pages/Login';
-import MainFoods from '../pages/MainFoods';
-import MainDrinks from '../pages/MainDrinks';
 import Profile from '../pages/Profile';
 import Explore from '../pages/Explore';
 import Header from '../components/Header';
+import Foods from '../pages/MainFoods';
+import Drinks from '../pages/MainDrinks';
+import FoodDetails from '../pages/FoodDetails';
+import DrinkDetails from '../pages/DrinkDetails';
 
-const componentWithHeader = () => (
+const componentWithHeader = ({ title }) => (
   <section>
-    <Header />
-  </section>
-);
-
-const componentWithoutHeader = () => (
-  <section>
-    COMPONENT
+    <Header title={ title } />
   </section>
 );
 
 export default [
   {
     path: '/',
-    component: Login,
+    Component: Login,
     exact: true,
+    title: 'Login',
   },
   {
     path: '/comidas',
-    component: MainFoods,
+    Component: Foods,
     exact: true,
+    title: 'Comidas',
   },
   {
     path: '/bebidas',
-    component: MainDrinks,
+    Component: Drinks,
     exact: true,
+    title: 'Bebidas',
   },
   {
-    path: '/comidas/0',
-    component: componentWithoutHeader,
-    exact: false,
+    path: '/comidas/:id',
+    Component: FoodDetails,
+    exact: true,
+    title: 'Comidas',
+  },
+  {
+    path: '/bebidas/:id',
+    Component: DrinkDetails,
+    exact: true,
+    title: 'Bebidas',
   },
   {
     path: '/explorar',
-    component: Explore,
+    Component: Explore,
     exact: true,
+    title: 'Explorar',
   },
   {
     path: '/explorar/comidas',
-    component: componentWithHeader,
-    exact: false,
+    Component: componentWithHeader,
+    exact: true,
+    title: 'Explorar Comidas',
   },
   {
     path: '/explorar/bebidas',
-    component: componentWithHeader,
-    exact: false,
+    Component: componentWithHeader,
+    exact: true,
+    title: 'Explorar Bebidas',
   },
   {
     path: '/explorar/comidas/ingredientes',
-    component: componentWithHeader,
+    Component: componentWithHeader,
     exact: false,
+    title: 'Explorar Ingredientes',
   },
   {
     path: '/explorar/bebidas/ingredientes',
-    component: componentWithHeader,
+    Component: componentWithHeader,
     exact: false,
+    title: 'Explorar Ingredientes',
   },
   {
     path: '/explorar/comidas/area',
-    component: componentWithHeader,
+    Component: componentWithHeader,
     exact: false,
+    title: 'Explorar Origem',
   },
   {
     path: '/perfil',
-    component: Profile,
-    exact: false,
+    Component: Profile,
+    exact: true,
+    title: 'Perfil',
   },
   {
     path: '/receitas-feitas',
-    component: componentWithHeader,
-    exact: false,
+    Component: componentWithHeader,
+    exact: true,
+    title: 'Receitas Feitas',
   },
   {
     path: '/receitas-favoritas',
-    component: componentWithHeader,
-    exact: false,
+    Component: componentWithHeader,
+    exact: true,
+    title: 'Receitas Favoritas',
   },
 ];
