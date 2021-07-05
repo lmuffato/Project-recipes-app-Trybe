@@ -56,3 +56,15 @@ export const drinksByFirstLetter = async (firstLetter, callback) => {
   const ApiData = await rawApiData.json();
   callback(ApiData);
 };
+export const getCategoriesFoods = async (callback) => {
+  const rawApiData = await fetch('https://www.themealdb.com/api/json/v1/1/list.php?c=list');
+  const ApiData = await rawApiData.json();
+  const { meals } = ApiData;
+  callback(meals);
+};
+export const getCategoriesDrinks = async (callback) => {
+  const rawApiData = await fetch('https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list');
+  const ApiData = await rawApiData.json();
+  const { drinks } = ApiData;
+  callback(drinks);
+};
