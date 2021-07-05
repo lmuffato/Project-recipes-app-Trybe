@@ -6,12 +6,15 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import UserContextProvider from './context/UserContext';
 import RecipesContextProvider from './context/RecipesContext';
+import FiltredRecipesContextProvider from './context/FilteredRecipesContext';
 
 ReactDOM.render(
   <BrowserRouter>
     <UserContextProvider>
       <RecipesContextProvider>
-        <App />
+        <FiltredRecipesContextProvider>
+          <App />
+        </FiltredRecipesContextProvider>
       </RecipesContextProvider>
     </UserContextProvider>
   </BrowserRouter>, document.getElementById('root'),

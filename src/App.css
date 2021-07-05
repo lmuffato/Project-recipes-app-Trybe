@@ -1,3 +1,7 @@
+* {
+  -webkit-font-smoothing: antialiased;
+}
+
 .meals {
   align-items: center;
   background: #0fa36b;

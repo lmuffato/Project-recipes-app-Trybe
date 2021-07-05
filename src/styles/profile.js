@@ -33,6 +33,7 @@ const Wrapper = styled.section`align-items: center;
     max-width: 200px;
     min-width: 180px;
     padding: 0 32px;
+    transition: filter 0.2s;
 
     &:disabled {
       cursor: not-allowed;
