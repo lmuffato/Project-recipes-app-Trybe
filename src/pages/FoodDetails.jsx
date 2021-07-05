@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Card, Carousel } from 'react-bootstrap';
+import { Card, Carousel, Button } from 'react-bootstrap';
 import FavoriteButton from '../components/FavoriteButton';
 import RecipeDetail from '../effects/RecipeDetails';
 import RecipeInit from '../effects/RecipeInit';
@@ -80,14 +80,14 @@ export default function FoodDetails() {
         ))}
       </Carousel>
       {!doneRecipe ? (
-        <button
+        <Button
+          variant="dark"
           className="fixed-bottom"
-          type="button"
           data-testid="start-recipe-btn"
           onClick={ () => setCurrMeal({ ...currMeal, recipeInit: true }) }
         >
           {inProgress ? 'Continuar Receita' : 'Iniciar Receita'}
-        </button>) : null}
+        </Button>) : null}
     </Card>
   );
 }
