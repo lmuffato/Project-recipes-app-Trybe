@@ -1,4 +1,4 @@
-const apiReturnIngredient = {
+export const apiReturnIngredient = {
   meals: [
     {
       strMeal: 'Apam balik',
@@ -193,4 +193,10 @@ const apiReturnIngredient = {
   ],
 };
 
-export default apiReturnIngredient;
+export const apiReturnName = {
+  meals: [{
+    strMeal: 'Arrabiata',
+    strMealThumb: 'https://www.themealdb.com/images/media/meals/adxcbq1619787919.jpg',
+    idMeal: '52771',
+  }],
+};

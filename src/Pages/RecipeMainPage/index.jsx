@@ -8,7 +8,6 @@ import recipesContext from '../../context/RecipesContext';
 function RecipeMainPage({ header }) {
   const { recipes } = useContext(recipesContext);
   const toggle = (header.includes('Comidas')) ? 'meals' : 'drinks';
-  console.log(toggle);
   return (
     <div>
       <Header>{ header }</Header>

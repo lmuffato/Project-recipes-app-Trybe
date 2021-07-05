@@ -30,7 +30,7 @@ export default function SearchBar({ page }) {
         'Sinto muito, não encontramos nenhuma receita para esses filtros.',
       );
     }
-    if (array.length === 1) return history.push(`${pathname}/${array[0][objIdKey]}`);
+    if (array.length === 1) { history.push(`${pathname}/${array[0][objIdKey]}`); }
     if (array.length > MAX_ARRAY_SIZE) {
       array = array.reduce((acc, curr, index) => (
         index < MAX_ARRAY_SIZE ? [...acc, curr] : acc
