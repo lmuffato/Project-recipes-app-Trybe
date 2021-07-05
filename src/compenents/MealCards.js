@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function MealCard({ data, index }) {
-  console.log(data);
+function MealCards({ data, index }) {
+  // console.log(data);
   const { strMealThumb, strMeal } = data;
   return (
     <div className="recipe" data-testid={ `${index}-recipe-card` }>
@@ -17,8 +17,8 @@ function MealCard({ data, index }) {
   );
 }
 
-MealCard.propTypes = {
+MealCards.propTypes = {
   data: PropTypes.shape({}),
 }.isRequired;
 
-export default MealCard;
+export default MealCards;
