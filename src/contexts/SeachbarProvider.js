@@ -3,12 +3,14 @@ import PropTypes from 'prop-types';
 import SearchbarContext from './SearchbarContext';
 
 function SearchbarProvider({ children }) {
-  const [mealOrDrink, setMealOrDrink] = useState(null);
+  const [mealOrDrink, setMealOrDrink] = useState('meal');
 
   const contextValue = {
     mealOrDrink,
     setMealOrDrink,
   };
+
+  console.log(`SearchbarProvider: ${mealOrDrink}`);
 
   return (
     <SearchbarContext.Provider value={ contextValue }>

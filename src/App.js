@@ -7,6 +7,7 @@ import Footer from './compenents/Footer';
 // import MainRecepies from './compenents/MainRecepies';
 import SearchbarProvider from './contexts/SeachbarProvider';
 import UserProvider from './contexts/UserProvider';
+import MainMealsRecipes from './pages/MainMealsRecipes';
 
 function App() {
   return (
@@ -15,6 +16,8 @@ function App() {
         <SearchbarProvider>
           <Switch>
             <Route exact path="/" component={ LoginPage } />
+            <Route exact path="/comidas" component={ MainMealsRecipes } />
+            <Route exact path="/bebidas" component={ MainMealsRecipes } />
           </Switch>
           <Footer />
         </SearchbarProvider>
