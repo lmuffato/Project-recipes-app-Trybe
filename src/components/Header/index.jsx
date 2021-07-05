@@ -9,7 +9,7 @@ import styles from './styles.module.scss';
 function Header({ title }) {
   const user = useLocalStorage('user');
   return (
-    <header>
+    <header className={ styles.header }>
       <Link to="/perfil" className={ styles.profilePic }>
         <img src={ user.gravatar } alt={ user.email } />
       </Link>
