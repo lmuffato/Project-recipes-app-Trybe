@@ -11,6 +11,7 @@ function RecipesList({ data, path }) {
       const { name, imgSrc, id } = recipe;
       return (
         <li
+          key={ index }
           data-testid={ `${index}-recipe-card` }
           key={ index }
         >
