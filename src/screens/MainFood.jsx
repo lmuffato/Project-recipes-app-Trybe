@@ -1,13 +1,13 @@
 import React from 'react';
 import FooterBar from '../components/FooterBar';
 
-function Explore() {
+function MainFood() {
   return (
     <main>
-      renderiza das opções de exploração: comida e bebida
+      tela principal
       <FooterBar />
     </main>
   );
 }
 
-export default Explore;
+export default MainFood;

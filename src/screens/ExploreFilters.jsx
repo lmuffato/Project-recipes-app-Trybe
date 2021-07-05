@@ -1,10 +1,12 @@
 import React from 'react';
+import FooterBar from '../components/FooterBar';
 
 function ExploreFilters() {
   return (
-    <div>
+    <main>
       renderiza os filtros por ingrediente, local, e surpreenda-me
-    </div>
+      <FooterBar />
+    </main>
   );
 }
 
