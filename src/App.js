@@ -24,14 +24,26 @@ import {
 } from './pages';
 
 function App() {
+  const renderDetalheReceitaComida = (match) => (<DetalhesComida match={ match } />);
+
+  const renderDetalheReceitaBebida = (match) => (<DetalhesBebida match={ match } />);
+
   return (
     <ProviderBebidas>
       <ProviderComidas>
         <Switch>
-          <Route exact path="/comidas/{id-da-receita}" component={ DetalhesComida } />
-          <Route exact path="/bebidas/{id-da-bebida}" component={ DetalhesBebida } />
-          <Route path="/comidas/{id-da-receita}/in-progress" component={ ComidasAtiva } />
-          <Route path="/bebidas/{id-da-receita}/in-progress" component={ BebidasAtiva } />
+          <Route
+            exact
+            path="/comidas/:id"
+            render={ ({ match }) => renderDetalheReceitaComida(match) }
+          />
+          <Route
+            exact
+            path="/bebidas/:id"
+            render={ ({ match }) => renderDetalheReceitaBebida(match) }
+          />
+          <Route path="/comidas/:id-da-receita/in-progress" component={ ComidasAtiva } />
+          <Route path="/bebidas/:id-da-receita/in-progress" component={ BebidasAtiva } />
           <Route exact path="/explorar" component={ Explorar } />
           <Route exact path="/explorar/comidas" component={ ExplorarComidas } />
           <Route exact path="/explorar/bebidas" component={ ExplorarBebidas } />
