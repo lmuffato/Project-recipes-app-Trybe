@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import md5 from 'md5';
 import brandFace from '../../images/brand/face.svg';
 import styles from './styles.module.scss';
 
@@ -23,8 +24,11 @@ function Login() {
 
   const successfulLogin = (event) => {
     event.preventDefault();
-    const userEmail = { email };
-    localStorage.setItem('user', JSON.stringify(userEmail));
+    const user = {
+      email,
+      gravatar: `https://www.gravatar.com/avatar/${md5(email)}`,
+    };
+    localStorage.setItem('user', JSON.stringify(user));
     localStorage.setItem('mealsToken', '1');
     localStorage.setItem('cocktailsToken', '1');
     history.push('/comidas');
