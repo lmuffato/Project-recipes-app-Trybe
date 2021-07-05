@@ -26,7 +26,6 @@ const searchDrinks = async (type, name) => {
 
   if (type === 'first-letter') {
     if (name.length === 1) return searchByLetter(name);
-    // eslint-disable-next-line no-alert
     if (name.length > 1) {
       const { alert } = window;
       alert('Sua busca deve conter somente 1 (um) caracter');
