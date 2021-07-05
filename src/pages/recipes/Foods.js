@@ -18,6 +18,7 @@ export default function Foods() {
     };
     reciveMeals();
     console.log(mealsList);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
