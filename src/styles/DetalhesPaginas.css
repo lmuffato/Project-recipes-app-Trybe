@@ -1,0 +1,8 @@
+.img-details-main {
+  width: 300px;
+}
+
+.recomendation-container {
+  display: flex;
+  overflow-x: scroll;
+}
