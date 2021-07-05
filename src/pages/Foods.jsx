@@ -5,10 +5,12 @@ import SearchContext from '../context/SearchContext';
 import Footer from '../components/Footer';
 import FilterButtons from '../components/FilterButtons';
 import FilterContext from '../context/FilterContext';
+import ButtonAll from '../components/ButtonAll';
 
 function Foods() {
   const { filteredRecipes, fullRecipes } = useContext(SearchContext);
-  const { mealsCategories, filterButton, mealsByCategory } = useContext(FilterContext);
+  const { mealsCategories, filterButton, mealsByCategory,
+    setFilterButton } = useContext(FilterContext);
   const CARDS_NUMBER = 11;
   const CATEGORIES_NUMBER = 5;
   const [showRecipe, setShowRecipe] = useState([]);
@@ -33,6 +35,7 @@ function Foods() {
           />
         ) : (null)
       ))}
+      <ButtonAll setFiltered={ setFilterButton } />
       {showRecipe ? showRecipe.map((recipes, index) => (
         index <= CARDS_NUMBER ? (
           <MealCard

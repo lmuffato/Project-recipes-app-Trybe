@@ -5,11 +5,12 @@ import SearchContext from '../context/SearchContext';
 import DrinkCard from '../components/DrinkCard';
 import FilterContext from '../context/FilterContext';
 import FilterButtons from '../components/FilterButtons';
+import ButtonAll from '../components/ButtonAll';
 
 function Drinks() {
   const { filteredDrinks, fullDrinks } = useContext(SearchContext);
   const { drinksCategories, drinkFilterButton,
-    drinksByCategory } = useContext(FilterContext);
+    drinksByCategory, setDrinkFilterButton } = useContext(FilterContext);
   const CARDS_NUMBER = 11;
   const CATEGORIES_NUMBER = 5;
   const [showRecipe, setShowRecipe] = useState([]);
@@ -36,6 +37,7 @@ function Drinks() {
           />
         ) : (null)
       ))}
+      <ButtonAll setFiltered={ setDrinkFilterButton } />
       {showRecipe ? showRecipe.map((recipes, index) => (
         index <= CARDS_NUMBER ? (
           <DrinkCard
