@@ -46,15 +46,15 @@ function FoodPage() {
           categories={ categories }
           toggleCategory={ toggleCategory }
         /> }
-        { !isLoading && recipes
-          .filter((_, index) => index <= maxLength)
-          .map((meal, index) => (
-            <RecipeCardFood
-              key={ meal.idMeal }
-              meal={ meal }
-              index={ index }
-            />
-          ))}
+      { !isLoading && recipes
+        .filter((_, index) => index <= maxLength)
+        .map((meal, index) => (
+          <RecipeCardFood
+            key={ meal.idMeal }
+            meal={ meal }
+            index={ index }
+          />
+        ))}
       <FooterMenu />
     </section>
   );

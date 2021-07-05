@@ -45,16 +45,16 @@ function DrinkPage() {
           categories={ categories }
           toggleCategory={ toggleCategory }
         /> }
-        { !isLoading && recipes
-          .filter((_, index) => index <= maxLength)
-          .map((drink, index) => (
-            <RecipeCardDrink
-              key={ drink.idDrink }
-              drink={ drink }
-              index={ index }
-            />
-          ))}
-     <FooterMenu />
+      { !isLoading && recipes
+        .filter((_, index) => index <= maxLength)
+        .map((drink, index) => (
+          <RecipeCardDrink
+            key={ drink.idDrink }
+            drink={ drink }
+            index={ index }
+          />
+        ))}
+      <FooterMenu />
     </section>
   );
 }

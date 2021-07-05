@@ -13,6 +13,7 @@ import OriginLocation from '../pages/OriginLocation';
 import ProfilePage from '../pages/ProfilePage';
 import DoneRecipes from '../pages/DoneRecipes';
 import FavoriteRecipes from '../pages/FavoriteRecipes';
+
 export default function Routes() {
   return (
     <Switch>
