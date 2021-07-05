@@ -1,19 +1,20 @@
 import React from 'react';
-import PropTypes, { object } from 'prop-types';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import './RecipeList.css';
 
 function RecipesList({ data }) {
-  
-  const renderCards = (data) => {
-    const first12 = data.slice(0, 12);
+  const renderCards = (card) => {
+    const twelve = 12;
+    const first12 = card.slice(0, twelve);
     const toReturn = first12.map((recipe, index) => {
       const { name, imgSrc, id } = recipe;
       return (
         <li
+          key={ index }
           data-testid={ `${index}-recipe-card` }
         >
-          <Link to={ { pathname:`/comidas/${id}` } }>
+          <Link to={ { pathname: `/comidas/${id}` } }>
             <div className="card">
               <img
                 src={ `${imgSrc}` }
@@ -33,7 +34,7 @@ function RecipesList({ data }) {
       );
     });
     return toReturn;
-  }
+  };
 
   return (
     <div className="component">
@@ -41,11 +42,11 @@ function RecipesList({ data }) {
         { renderCards(data) }
       </ul>
     </div>
-  )
+  );
 }
 
 RecipesList.propTypes = {
-  data: PropTypes.arrayOf(object).isRequired,
+  data: PropTypes.arrayOf(Object).isRequired,
 };
 
-export default RecipesList
+export default RecipesList;

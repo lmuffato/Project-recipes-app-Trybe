@@ -38,7 +38,8 @@ export default function Routes() {
             component={ DrinksIngredients }
           />
           <Route
-            exact path="/explorar/comidas/area"
+            exact
+            path="/explorar/comidas/area"
             component={ ExploreFoodByArea }
           />
           <Route
@@ -47,7 +48,8 @@ export default function Routes() {
             component={ CompletedRecipes }
           />
           <Route
-            exact path="/receitas-favoritas"
+            exact
+            path="/receitas-favoritas"
             component={ FavoriteRecipes }
           />
         </Switch>

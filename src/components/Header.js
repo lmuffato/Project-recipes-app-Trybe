@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
@@ -12,6 +12,10 @@ export default function Header({ title, show = true }) {
     if (!click) setClick(true);
     if (click) setClick(false);
   };
+
+  const location = useLocation();
+  const url = location.pathname;
+  console.log(url);
 
   function handleSearch() {
     if (show) {
