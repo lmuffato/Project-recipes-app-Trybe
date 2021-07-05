@@ -18,7 +18,7 @@ export async function getNameCock(nome) {
   }
 }
 
-export async function getPriLetraCock(primeiraLetra) {
+export async function getFirstLetterCock(primeiraLetra) {
   try {
     const response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?f=${primeiraLetra}`);
     const res = response.json();
@@ -48,7 +48,7 @@ export async function getNameCockTail(nome) {
   }
 }
 
-export async function getPriLetraCockTail(primeiraLetra) {
+export async function getFirstLetterCockTail(primeiraLetra) {
   try {
     const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${primeiraLetra}`);
     const res = response.json();

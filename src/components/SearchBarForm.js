@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { useLocation } from 'react-router-dom';
 import { getIngCock, getIngCockTail, getNameCock,
-  getNameCockTail, getPriLetraCock, getPriLetraCockTail,
+  getNameCockTail, getFirstLetterCock, getFirstLetterCockTail,
 } from '../services/fetchApiSearchBar';
 
 const SearchBarForm = () => {
   const [busca, setBusca] = useState('');
   const [markBusca, setMarkBusca] = useState('');
   const location = useLocation();
-  const primeiraLetra = 'primeira-letra';
+  const FirstLetter = 'primeira-letra';
 
   const handleSearchBarApiComidas = async () => {
     if (markBusca === 'ingrediente') {
@@ -18,12 +18,13 @@ const SearchBarForm = () => {
     if (markBusca === 'nome') {
       getNameCock(busca).then((res) => res);
     }
-    if (markBusca === primeiraLetra) {
-      getPriLetraCock(busca).then((res) => res);
+    if (markBusca === FirstLetter) {
+      getFirstLetterCock(busca).then((res) => res);
     }
-    if (markBusca === primeiraLetra && busca.length > 1) {
+    if (markBusca === FirstLetter && busca.length > 1) {
       alert('Sua busca deve conter somente 1 (um) caracter');
     }
+    return alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
   };
 
   const handleSearchBarApiBebidas = async () => {
@@ -33,12 +34,13 @@ const SearchBarForm = () => {
     if (markBusca === 'nome') {
       getNameCockTail(busca).then((res) => res);
     }
-    if (markBusca === primeiraLetra) {
-      getPriLetraCockTail(busca).then((res) => console.log(res));
+    if (markBusca === FirstLetter) {
+      getFirstLetterCockTail(busca).then((res) => console.log(res));
     }
-    if (markBusca === primeiraLetra && busca.length > 1) {
+    if (markBusca === FirstLetter && busca.length > 1) {
       alert('Sua busca deve conter somente 1 (um) caracter');
     }
+    return alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
   };
 
   const handleFilterSearchBar = () => {
