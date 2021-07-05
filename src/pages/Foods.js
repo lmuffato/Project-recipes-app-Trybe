@@ -1,7 +1,22 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 function Foods() {
+  const [idMeal, setIdMeal] = useState()
+
+  useEffect(() => {
+    const getRandomFoodRecepie = async () => {
+      const myFetch = await fetch('https://www.themealdb.com/api/json/v1/1/random.php')
+        .then((response) => response.json()) 
+        .then((respo) => respo);
+      const saveIdMeal = myFetch.meals[0].idMeal;
+      console.log(myFetch);
+      setIdMeal(saveIdMeal);
+    }
+    getRandomFoodRecepie();
+  }, [])
+
+
   return (
     <div>
       <Link to="/explorar/comidas/ingredientes">
@@ -12,7 +27,6 @@ function Foods() {
           Por Ingredientes
         </button>
       </Link>
-
       <Link to="/explorar/comidas/area">
         <button
           type="button"
@@ -21,8 +35,7 @@ function Foods() {
           Por Local de Origem
         </button>
       </Link>
-
-      <Link to="">
+      <Link to={`/comidas/${idMeal}`}>
         <button
           type="button"
           data-testid="explore-surprise"
@@ -35,8 +48,3 @@ function Foods() {
 }
 
 export default Foods;
-
-
-/* 
-/comidas/{id-da-receita};
-/bebidas/{id-da-receita} */

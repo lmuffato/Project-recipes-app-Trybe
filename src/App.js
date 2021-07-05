@@ -24,10 +24,14 @@ function App() {
             <Route exact path="/explorar" component={ Explore } />
             <Route exact path="/explorar/comidas" component={ Foods } />
             <Route exact path="/explorar/bebidas" component={ Drinks } />
-            <Route exact path="/explorar/comidas/ingredientes"
-              component={ FoodsIngredients } />
-            <Route exact path="/explorar/bebidas/ingredientes"
-              component={ DrinksIngredients } />
+            <Route
+              exact path="/explorar/comidas/ingredientes"
+              component={ FoodsIngredients }
+            />
+            <Route
+              exact path="/explorar/bebidas/ingredientes"
+              component={ DrinksIngredients }
+            />
             <Route exact path="/explorar/comidas/area" component={ FoodsArea } />
 
           </Switch>
