@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 export default function RecipeCard({ recipe, index, type }) {
-
   return (
     <div data-testid={ `${index}-recipe-card` }>
       <li>
