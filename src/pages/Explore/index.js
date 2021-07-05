@@ -6,7 +6,6 @@ import Header from '../../components/Header';
 import './style.css';
 
 const Explore = () => (
-<<<<<<< HEAD
   <div className="container">
     <Header />
     <div className="buttons line">
@@ -30,11 +29,6 @@ const Explore = () => (
         </button>
       </Link>
     </div>
-=======
-  <section>
-    <Header title="Explorar" />
-    <h1>Explore</h1>
->>>>>>> main-group-2
     <Footer />
   </div>
 );
