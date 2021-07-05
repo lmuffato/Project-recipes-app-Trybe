@@ -10,11 +10,14 @@ import ReceitasFavoritas from './pages/ReceitasFavoritas';
 import UserProvider from './contexts/UserProvider';
 import Header from './compenents/Header';
 import SearchbarProvider from './contexts/SeachbarProvider';
+import HeaderProvider from './contexts/HeaderProvider';
 
 function App() {
   return (
     <div className="meals">
-      <Header />
+      <HeaderProvider>
+        <Header />
+      </HeaderProvider>
       <UserProvider>
         <Switch>
           <Route exact path="/" component={ LoginPage } />

@@ -9,15 +9,22 @@ function Profile() {
   const clearStorage = () => localStorage.clear();
 
   return (
-    <div className="profile-btns">
+    <div className="profile-elements">
       <p data-testid="profile-email">{userEmail}</p>
       <Link to="/receitas-feitas">
-        <button type="button" data-testid="profile-done-btn">Receitas Feitas</button>
+        <button
+          type="button"
+          data-testid="profile-done-btn"
+          className="profile-btns"
+        >
+          Receitas Feitas
+        </button>
       </Link>
       <Link to="/receitas-favoritas">
         <button
           type="button"
           data-testid="profile-favorite-btn"
+          className="profile-btns"
         >
           Receitas Favoritas
         </button>
@@ -26,6 +33,7 @@ function Profile() {
         <button
           type="button"
           data-testid="profile-logout-btn"
+          className="profile-btns"
           onClick={ clearStorage }
         >
           Sair

@@ -1,8 +1,13 @@
-.profile-btns {
-  margin-top: 150px;
+* {
+  margin: 0;
+  padding: 0;
 }
 
-button {
+.profile-elements {
+  margin-bottom: 17em;
+}
+
+.profile-btns {
   align-items: center;
   display: flex;
   justify-content: center;
