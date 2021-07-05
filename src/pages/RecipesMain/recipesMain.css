@@ -4,13 +4,13 @@
 }
 
 .recipe-card {
-  margin: 10px 10px;
   display: flex;
   flex-flow: column;
+  margin: 10px;
   width: 40%;
 }
 
 .recipe-card > p {
-  text-align: center;
   margin-top: 5px;
+  text-align: center;
 }
