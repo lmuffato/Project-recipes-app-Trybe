@@ -28,9 +28,8 @@ function CategoriesList(props) {
     const fetchRecipesByCategoryUrl = type === 'meals'
       ? 'https://www.themealdb.com/api/json/v1/1/filter.php?c='
       : 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=';
-    const queryCategory = category.replace(/ /g, '_');
 
-    setFetchUrl(`${fetchRecipesByCategoryUrl}${queryCategory}`);
+    setFetchUrl(`${fetchRecipesByCategoryUrl}${category}`);
   };
 
   if (categories.length === 0) return 'Loading categories';
