@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import { head } from 'lodash-es';
 
 import blackHeart from '../../images/blackHeartIcon.svg';
 import whiteHeart from '../../images/whiteHeartIcon.svg';
@@ -16,23 +17,36 @@ function removeFromFavorites(id) {
 }
 function addToFavorites(mealDetails) {
   const favoriteRecipes = JSON.parse(localStorage.getItem(FAVORITE_RECIPES)) || [];
+  const { idMeal: id,
+    strArea: area,
+    strCategory: category,
+    strMealThumb: image,
+    strMeal: name } = head(mealDetails);
   localStorage.setItem(
     FAVORITE_RECIPES, JSON.stringify(
-      [...favoriteRecipes, ...mealDetails],
+      [...favoriteRecipes, {
+        id,
+        area,
+        category,
+        image,
+        name,
+        alcoholicOrNot: '',
+        type: 'comida' }],
     ),
   );
 }
 
 function Favorite() {
-  const [isFavorite, setIsFavorite] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(null);
   const { id } = useParams();
   useEffect(() => {
     const favoriteRecipes = JSON.parse(localStorage.getItem(FAVORITE_RECIPES));
     setIsFavorite(favoriteRecipes && favoriteRecipes
-      .some((recipe) => Number(recipe.idMeal) === Number(id)));
+      .some((recipe) => Number(recipe.id) === Number(id)));
   }, [id]);
   const mealDetails = useSelector((state) => state.meals.mealDetails);
-  // console.log(isFavorite);
+  console.log(localStorage);
+  console.log(isFavorite);
   function toggleStatus() {
     if (isFavorite) {
       setIsFavorite(false);
