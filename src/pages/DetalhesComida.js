@@ -12,6 +12,8 @@ import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import '../styles/DetalhesPaginas.css';
 import { btn } from '../styles/login';
 
+const copy = require('clipboard-copy');
+
 function DetalhesComida({ match: { params: { id } } }) {
   const [acctualyFood, setAcctualyFood] = useState();
   const [isLoading, setIsLoading] = useState(false);
@@ -31,6 +33,15 @@ function DetalhesComida({ match: { params: { id } } }) {
 
     fetchFood();
   }, [id]);
+
+  const shareClick = (e) => {
+    e.preventDefault();
+    const { location: { pathname } } = history;
+
+    // console.log('Teste do copiar', pathname);
+    copy(`http://localhost:3000/${pathname}`);
+    return e.value === 'Link copiado!';
+  };
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -70,7 +81,7 @@ function DetalhesComida({ match: { params: { id } } }) {
         strMeasure11,
         strMeasure12,
         strMeasure13,
-        // strYoutube,
+        strYoutube,
         strMealThumb,
       } = acctualyFood.meals[0];
 
@@ -89,7 +100,9 @@ function DetalhesComida({ match: { params: { id } } }) {
         `${strIngredient12} ${strMeasure12}`,
         `${strIngredient13} ${strMeasure13}`,
       ];
-      console.log('Comidas da recomendação', foodRecomendation);
+
+      const linkLength = 32;
+      const youtubeLink = strYoutube.substr(linkLength);
 
       return (
         <div className="recipe-container">
@@ -103,7 +116,7 @@ function DetalhesComida({ match: { params: { id } } }) {
           <h2 data-testid="recipe-title">{ strMeal }</h2>
 
           <div>
-            <button type="button" data-testid="share-btn">
+            <button type="button" data-testid="share-btn" onClick={ shareClick }>
               <img alt="Share link" src={ shareIcon } />
             </button>
             <button type="button" data-testid="favorite-btn">
@@ -125,7 +138,7 @@ function DetalhesComida({ match: { params: { id } } }) {
 
           <p data-testid="instructions">{ strInstructions }</p>
 
-          <iframe data-testid="video" width="320" height="240" src="https://www.youtube.com/embed/VVnZd8A84z4" title="YouTube video player" frameBorder="0" />
+          <iframe data-testid="video" width="320" height="240" src={ `https://www.youtube.com/embed/${youtubeLink}` } title="YouTube video player" frameBorder="0" />
 
           <h3>Receitas Recomendadas:</h3>
 

@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 import '../styles/RecomendacoesCard.css';
 
 function RecomendacoesCard({ props, type, index }) {
-  console.log('Chegou aqui', props, type);
-
   const renderRecipeByType = () => {
     if (type === 'meal') {
       return (
@@ -14,6 +12,7 @@ function RecomendacoesCard({ props, type, index }) {
             alt="Recomendações"
             src={ props.strDrinkThumb }
           />
+
           <h4 data-testid={ `${index}-recomendation-title` }>{ props.strDrink }</h4>
         </div>
       );
@@ -25,6 +24,7 @@ function RecomendacoesCard({ props, type, index }) {
             alt="Recomendações"
             src={ props.strMealThumb }
           />
+
           <h4 data-testid={ `${index}-recomendation-title` }>{ props.strMeal }</h4>
         </div>
       );

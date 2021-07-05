@@ -4,7 +4,7 @@
 
 .recomendation-container {
   display: flex;
-  margin-bottom: 25px;
+  margin-bottom: 40px;
   overflow-x: scroll;
 }
 
