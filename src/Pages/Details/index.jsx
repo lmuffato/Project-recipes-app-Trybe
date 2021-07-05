@@ -11,7 +11,7 @@ function Details() {
 
   useEffect(() => {
     getRecipeByID(pathname, id).then((response) => {
-      setRecipesDetails(response[toggleApi]);
+      setRecipesDetails(response[toggleApi][0]);
     });
   }, [id, pathname, toggleApi]);
 
