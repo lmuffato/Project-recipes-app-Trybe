@@ -8,9 +8,8 @@ import { getDrinkRecomendation } from '../services/fetchApiRecomendations';
 
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import '../styles/DetalhesPaginas.css';
 import { btn } from '../styles/login';
-
-const indexMock = 0;
 
 function DetalhesComida({ match: { params: { id } } }) {
   const [acctualyFood, setAcctualyFood] = useState();
@@ -89,8 +88,13 @@ function DetalhesComida({ match: { params: { id } } }) {
       console.log('Comidas da recomendação', foodRecomendation);
 
       return (
-        <>
-          <img alt="Produto" data-testid="recipe-photo" src={ strMealThumb } />
+        <div className="recipe-container">
+          <img
+            alt="Produto"
+            className="img-details-main"
+            data-testid="recipe-photo"
+            src={ strMealThumb }
+          />
 
           <h2 data-testid="recipe-title">{ strMeal }</h2>
 
@@ -119,18 +123,20 @@ function DetalhesComida({ match: { params: { id } } }) {
 
           <iframe data-testid="video" width="320" height="240" src="https://www.youtube.com/embed/VVnZd8A84z4" title="YouTube video player" frameBorder="0" />
 
-          {/* <div data-testid={ `${index}-recomendation-card` }>
-            Card Receitas Recomendadas
-          </div> */}
+          <h3>Receitas Recomendadas:</h3>
 
-          <div data-testid={ `${indexMock}-recomendation-card` }>
-            <h3>Receitas Recomendadas</h3>
+          <div className="recomendation-container">
 
             { foodRecomendation.map((food, index) => {
               const cardLength = 5;
               if (index <= cardLength) {
                 return (
-                  <RecomendacoesCard key={ food.idMeal } props={ food } />
+                  <RecomendacoesCard
+                    key={ food.idMeal }
+                    props={ food }
+                    type="meal"
+                    index={ index }
+                  />
                 );
               }
               return null;
@@ -146,7 +152,7 @@ function DetalhesComida({ match: { params: { id } } }) {
           >
             Start recipe
           </Button>
-        </>
+        </div>
       );
     }
 

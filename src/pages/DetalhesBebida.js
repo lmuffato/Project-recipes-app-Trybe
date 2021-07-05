@@ -8,9 +8,8 @@ import { getFoodRecomendation } from '../services/fetchApiRecomendations';
 
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import '../styles/DetalhesPaginas.css';
 import { btn } from '../styles/login';
-
-const indexMock = 0;
 
 function DetalhesBebida({ match: { params: { id } } }) {
   const [acctualyDrink, setAcctualyDrink] = useState();
@@ -89,8 +88,13 @@ function DetalhesBebida({ match: { params: { id } } }) {
       console.log('Recomendação de Drinks', drinkRecomendation);
 
       return (
-        <>
-          <img alt="Produto" data-testid="recipe-photo" src={ strDrinkThumb } />
+        <div className="recipe-container">
+          <img
+            alt="Produto"
+            className="img-details-main"
+            data-testid="recipe-photo"
+            src={ strDrinkThumb }
+          />
 
           <h2 data-testid="recipe-title">{ strDrink }</h2>
 
@@ -117,18 +121,20 @@ function DetalhesBebida({ match: { params: { id } } }) {
 
           <p data-testid="instructions">{ strInstructions }</p>
 
-          {/* <div data-testid={ `${index}-recomendation-card` }>
-            Card Receitas Recomendadas
-          </div> */}
+          <h3>Receitas Recomendadas:</h3>
 
-          <div data-testid={ `${indexMock}-recomendation-card` }>
-            <h3>Receitas Recomendadas</h3>
+          <div className="recomendation-container">
 
             { drinkRecomendation.map((drink, index) => {
               const cardLength = 5;
               if (index <= cardLength) {
                 return (
-                  <RecomendacoesCard key={ drink.idDrink } props={ drink } />
+                  <RecomendacoesCard
+                    key={ drink.idDrink }
+                    props={ drink }
+                    type="drink"
+                    index={ index }
+                  />
                 );
               }
               return null;
@@ -144,7 +150,7 @@ function DetalhesBebida({ match: { params: { id } } }) {
           >
             Start recipe
           </Button>
-        </>
+        </div>
       );
     }
     return null;
