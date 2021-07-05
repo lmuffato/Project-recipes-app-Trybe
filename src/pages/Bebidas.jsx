@@ -13,10 +13,10 @@ class Bebidas extends React.Component {
     return (
       <>
         <Header title="Bebidas">
-          <SearchButton pathname={ pathname } />
+          <SearchButton pathname={ pathname } history={ history } />
         </Header>
         <div>Página principal receitas BEBIDAS</div>
-        <MainDrinkCard />
+        <MainDrinkCard history={ history } />
         <Footer history={ history } />
       </>
     );
@@ -24,6 +24,7 @@ class Bebidas extends React.Component {
 }
 
 Bebidas.propTypes = {
+  history: PropTypes.shape(),
   pathname: PropTypes.string,
 }.isRequired;
 

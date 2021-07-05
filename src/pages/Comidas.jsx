@@ -16,7 +16,7 @@ class Comidas extends React.Component {
           <SearchButton pathname={ pathname } history={ history } />
         </Header>
         <div>Página principal Receitas COMIDA</div>
-        <MainFoodCard />
+        <MainFoodCard history={ history } />
         <Footer history={ history } />
       </>
     );
@@ -24,6 +24,7 @@ class Comidas extends React.Component {
 }
 
 Comidas.propTypes = {
+  history: PropTypes.shape(),
   pathname: PropTypes.string,
 }.isRequired;
 

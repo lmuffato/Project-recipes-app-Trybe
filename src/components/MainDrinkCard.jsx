@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 class MainDrinkCard extends React.Component {
   constructor(props) {
@@ -29,16 +30,19 @@ class MainDrinkCard extends React.Component {
   }
 
   render() {
+    const { history } = this.props;
     const { drinkData, isLoading } = this.state;
     const loading = (<h1>Carregando...</h1>);
     return (
       <div>
         { isLoading ? loading : drinkData.map((recipe, index) => (
           <div key={ index } data-testid={ `${index}-recipe-card` }>
-            <img
+            <input
+              type="image"
               src={ recipe.strDrinkThumb }
               alt={ recipe.strDrink }
               data-testid={ `${index}-card-img` }
+              onClick={ () => history.push(`comidas/${recipe.idMeal}`) }
             />
             <h6 data-testid={ `${index}-card-name` }>{recipe.strDrink}</h6>
           </div>
@@ -47,5 +51,9 @@ class MainDrinkCard extends React.Component {
     );
   }
 }
+
+MainDrinkCard.propTypes = {
+  history: PropTypes.shape(),
+}.isRequired;
 
 export default MainDrinkCard;
