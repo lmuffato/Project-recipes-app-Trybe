@@ -25,6 +25,9 @@ function DrinkPage() {
     if (choosedCategory) {
       setIsLoading(true);
       drinksByCategory(setRecipes, choosedCategory);
+    } else if (choosedCategory === '') {
+      setIsLoading(true);
+      initialDrinks(setRecipes);
     }
     setIsLoading(false);
   }, [choosedCategory, setRecipes]);

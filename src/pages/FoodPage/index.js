@@ -24,6 +24,9 @@ function FoodPage() {
     if (choosedCategory) {
       setIsLoading(true);
       foodsByCategory(setRecipes, choosedCategory);
+    } else if (choosedCategory === '') {
+      setIsLoading(true);
+      initialFoods(setRecipes);
     }
     setIsLoading(false);
   }, [choosedCategory, setRecipes]);
