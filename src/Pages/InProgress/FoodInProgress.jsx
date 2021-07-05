@@ -1,6 +1,6 @@
 import React from 'react';
 
-function MealInProgress() {
+function FoodInProgress() {
   return (
     <>
 
@@ -8,4 +8,4 @@ function MealInProgress() {
   );
 }
 
-export default MealInProgress;
+export default FoodInProgress;
