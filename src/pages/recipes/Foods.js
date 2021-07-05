@@ -7,7 +7,6 @@ import getMeals from '../../services/getMeals';
 import '../../App.css';
 
 export default function Foods() {
-
   const { mealsList, setMealsList, isLoading, setLoading } = useContext(Context);
 
   useEffect(() => {
@@ -18,13 +17,13 @@ export default function Foods() {
       setLoading(false);
     };
     reciveMeals();
-    console.log(mealsList);
-  }, [])
+  }, []);
 
   return (
     <div className="food-page">
       <Header title="Comidas" show />
-      { isLoading ? <h1>Loading...</h1> : <RecipesList data={ mealsList } /> }
+      { isLoading ? <h1>Loading...</h1>
+        : <RecipesList data={ mealsList } path="comidas" /> }
       <BottomMenu />
     </div>
   );
