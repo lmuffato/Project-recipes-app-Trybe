@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import {
   getFoodCategoriesAPIThunk, getFoodRecipesAPIThunk } from '../redux/actions/mealsAction';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
 import Loading from '../components/Loading';
 import MealsCategoryButtons from '../components/MealsCategoryButtons';
 import MealsCards from '../components/MealsCards';
@@ -29,10 +31,14 @@ function Comidas() {
   const loadingCategories = useSelector((state) => state.meals.loadingCategories);
 
   return (
-    <>
+    <section>
+      <Header title="Comidas" />
       {loadingCategories ? <Loading /> : <MealsCategoryButtons />}
       {loadingRecipes ? <Loading /> : <MealsCards />}
-    </>
+      <footer>
+        <Footer />
+      </footer>
+    </section>
   );
 }
 
