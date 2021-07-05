@@ -14,23 +14,6 @@ function FilterButtons({ props }) {
   const tipe = (props === 'Drinks') ? drinksCategory : mealsCategory;
   const FIVE = 5;
 
-  // useEffect(() => {
-  //   // if (props === 'Drinks') {
-  //   // const fetchCategories = async () => {
-  //   //   const { drinks } = await fetchDrinkCategories();
-  //   //   setCategoriesList(drinks);
-  //   // };
-  //   // fetchCategories();
-  //   // }
-  //   if (props === 'Food') {
-  //     const fecthCategories = async () => {
-  //       const { categories } = await fetchFoodCategories();
-  //       setCategoriesList(categories);
-  //     };
-  //     fecthCategories();
-  //   }
-  // }, []);
-
   const HandleFilterByCategoryButton = (type, category) => {
     if (type === 'Drinks') {
       const fetchByCategory = async () => {

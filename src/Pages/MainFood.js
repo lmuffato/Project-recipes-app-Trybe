@@ -20,9 +20,9 @@ function MainFood() {
       dispatch(setInitialMeals(meals));
     };
     const fecthMealsCategory = async () => {
-      const { categories } = await fetchFoodCategories();
-      console.log(categories);
-      dispatch(actionFoodCategory(categories));
+      const { meals } = await fetchFoodCategories();
+      console.log(meals);
+      dispatch(actionFoodCategory(meals));
     };
 
     fecthMealsCategory();
