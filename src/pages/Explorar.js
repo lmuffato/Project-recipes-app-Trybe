@@ -9,24 +9,24 @@ function Explorar() {
   return (
     <div className={ styles.container }>
       <Header title="Explorar" />
-      <Link
-        to="/explorar/comidas"
-        data-testid="explore-food"
-        className={ styles.redirect }
-      >
-        <button type="button">
+      <button type="button">
+        <Link
+          to="/explorar/comidas"
+          data-testid="explore-food"
+          className={ styles.redirect }
+        >
           Explorar Comidas
-        </button>
-      </Link>
-      <Link
-        to="/explorar/bebidas"
-        data-testid="explore-drinks"
-        className={ styles.redirect }
-      >
-        <button type="button">
+        </Link>
+      </button>
+      <button type="button">
+        <Link
+          to="/explorar/bebidas"
+          data-testid="explore-drinks"
+          className={ styles.redirect }
+        >
           Explorar Bebidas
-        </button>
-      </Link>
+        </Link>
+      </button>
       <Footer />
     </div>
   );
