@@ -21,6 +21,7 @@ function Bebidas() {
           <Filter page="bebidas" />
           <CardList
             list={ APIDrink.drinks }
+            type="bebidas"
           />
           <Footer />
         </div>
