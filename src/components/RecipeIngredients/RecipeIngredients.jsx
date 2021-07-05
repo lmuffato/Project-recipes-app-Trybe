@@ -24,16 +24,19 @@ function RecipeIngredients({ recipe, type }) {
   const keyIngr = 'ingredients';
 
   return (
-    <div>
+    <>
       <h3>Ingredientes</h3>
       <ul>
         {(ingredientsAndMeasures.length > 0
         && ingredientsAndMeasures.measures.map((element, index) => (
           <li key={ element } data-testid={ `${index}-ingredient-name-and-measure` }>
-            { element[keyIngr] }
+            <span>
+              {' '}
+              { element[keyIngr][0] }
+            </span>
           </li>)))}
       </ul>
-    </div>
+    </>
   );
 }
 

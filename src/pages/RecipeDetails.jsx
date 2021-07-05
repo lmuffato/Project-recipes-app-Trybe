@@ -4,12 +4,11 @@ import PropTypes from 'prop-types';
 import RecipeInfo from '../components/RecipeInfo/RecipeInfo';
 import Button from '../components/Generics/Button';
 import RecipeIngredients from '../components/RecipeIngredients/RecipeIngredients';
+import Container from '../styles/recipeDetails';
 
 function RecipeDetails() {
   const location = useLocation();
   const { id } = useParams();
-  // const { match } = useParams();
-  // const { id } = match;
   const { state } = location;
   const { type } = state;
   const endpointMeals = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
@@ -57,7 +56,7 @@ function RecipeDetails() {
   const isAlchooholic = singleRecipe.strAlcoholic || '';
 
   return (
-    <div className="recipe-details-page">
+    <Container>
       <RecipeInfo
         recipeName={ recipeName }
         recipeThumb={ recipeThumb }
@@ -66,7 +65,7 @@ function RecipeDetails() {
           <h3 data-testid="recipe-category">{recipeCategory}</h3>)}
       </RecipeInfo>
 
-      <div>
+      <div className="ingredients-list">
         <RecipeIngredients recipe={ singleRecipe } type={ type } />
       </div>
       {/* <RecipeIngredients id={ recipeId } type={ type } /> */}
@@ -75,13 +74,13 @@ function RecipeDetails() {
         <p data-testid="instructions">
           { singleRecipe.strInstructions }
         </p>
-        <div data-testid="video">Video aqui</div>
       </div>
+      <div data-testid="video">Video aqui</div>
       <Button data-testid="start-recipe-btn">
         Iniciar receita
       </Button>
 
-    </div>
+    </Container>
   );
 }
 
