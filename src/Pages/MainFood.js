@@ -24,7 +24,7 @@ function MainFood() {
   return (
     <>
       <Header props={ { search: true, title: 'Comidas' } } />
-      <FilterButtons props="Food" />
+      { isLoading ? '' : <FilterButtons props="Food" /> }
       { isLoading ? loading : <RecipeCards /> }
       <Footer />
     </>

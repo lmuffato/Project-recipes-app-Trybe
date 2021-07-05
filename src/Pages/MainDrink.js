@@ -23,7 +23,7 @@ function MainDrink() {
   return (
     <>
       <Header props={ { search: true, title: 'Bebidas' } } />
-      <FilterButtons props="Drinks" />
+      { isLoading ? '' : <FilterButtons props="Drinks" /> }
       { isLoading ? loading : <RecipeCards /> }
       <Footer />
     </>

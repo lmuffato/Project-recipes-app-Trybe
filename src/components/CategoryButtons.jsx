@@ -51,25 +51,26 @@ function FilterButtons({ props }) {
   return (
     <div>
       {
-        props === 'Food' ? categoriesList.map((e, index) => index < FIVE && (
-          <button
-            key={ e.idCategory }
-            type="button"
-            data-testid={ `${e.strCategory}-category-filter` }
-            onClick={ () => HandleFilterByCategoryButton(props, e.strCategory) }
-          >
-            {e.strCategory}
-          </button>
-        )) : categoriesList.map((e, index) => index < FIVE && (
-          <button
-            key={ index }
-            type="button"
-            data-testid={ `${e.strCategory}-category-filter` }
-            onClick={ () => HandleFilterByCategoryButton(props, e.strCategory) }
-          >
-            {e.strCategory}
-          </button>
-        ))
+        (categoriesList && categoriesList.length > 0 && (
+          props === 'Food' ? categoriesList.map((e, index) => index < FIVE && (
+            <button
+              key={ e.idCategory }
+              type="button"
+              data-testid={ `${e.strCategory}-category-filter` }
+              onClick={ () => HandleFilterByCategoryButton(props, e.strCategory) }
+            >
+              {e.strCategory}
+            </button>
+          )) : categoriesList.map((e, index) => index < FIVE && (
+            <button
+              key={ index }
+              type="button"
+              data-testid={ `${e.strCategory}-category-filter` }
+              onClick={ () => HandleFilterByCategoryButton(props, e.strCategory) }
+            >
+              {e.strCategory}
+            </button>
+          ))))
       }
     </div>
   );
