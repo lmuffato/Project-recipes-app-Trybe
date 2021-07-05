@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import brandFace from '../../images/brand/face.svg';
-
 import styles from './styles.module.scss';
 
 function Login() {
@@ -15,11 +14,15 @@ function Login() {
     return !(password.length >= digits && email.match(pattern));
   };
 
+  const history = useHistory();
+
   const successfulLogin = () => {
     const userEmail = { email };
     localStorage.setItem('user', JSON.stringify(userEmail));
     localStorage.setItem('mealsToken', '1');
     localStorage.setItem('cocktailsToken', '1');
+    // const history = useHistory;
+    history.push('/comidas');
   };
 
   return (
@@ -53,17 +56,15 @@ function Login() {
             value={ password }
             onChange={ (event) => setPassword(event.target.value) }
           />
-          <Link to="/comidas">
-            <button
-              type="submit"
-              className="primary-btn"
-              data-testid="login-submit-btn"
-              disabled={ enabledButton() }
-              onClick={ successfulLogin }
-            >
-              Entrar
-            </button>
-          </Link>
+          <button
+            type="submit"
+            className="primary-btn"
+            data-testid="login-submit-btn"
+            disabled={ enabledButton() }
+            onClick={ successfulLogin }
+          >
+            Entrar
+          </button>
         </form>
       </main>
       <footer className={ styles.loginFooter }>
