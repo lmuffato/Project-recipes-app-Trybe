@@ -15,8 +15,8 @@ import DrinkExplore from '../pages/DrinkExplore';
 import DrinkIngredientExplore from '../pages/DrinkIngredientExplore';
 import FoodArea from '../pages/FoodArea';
 import FavoriteRecipes from '../pages/FavoriteRecipes';
-// import FoodProgress from '../pages/FoodProgress';
-// import DrinkProgress from '../pages/DrinkProgress';
+import FoodProgress from '../pages/FoodProgress';
+import DrinkProgress from '../pages/DrinkProgress';
 
 function Routes() {
   return (
@@ -39,24 +39,23 @@ function Routes() {
       <Route exact path="/receitas-feitas" component={ RecipesDone } />
       <Route exact path="/receitas-favoritas" component={ FavoriteRecipes } />
 
+      <Route
+        exact
+        path="/comidas/:id/in-progress"
+        component={ FoodProgress }
+      />
       <Route path="/comidas/:id" component={ FoodDetails } />
       <Route exact path="/comidas" component={ Foods } />
 
-      <Route path="/bebidas/:id" component={ DrinkDetails } />
-
-      <Route exact path="/bebidas" component={ Drinks } />
-      <Route exact path="/" component={ Login } />
-      {/*
       <Route
         exact
-        path="/comidas/{id-da-receita}/in-progress"
-        component={ FoodProgress }
-      />
-      <Route
-        exact
-        path="/bebidas/{id-da-receita}/in-progress"
+        path="/bebidas/:id/in-progress"
         component={ DrinkProgress }
-      /> */}
+      />
+      <Route path="/bebidas/:id" component={ DrinkDetails } />
+      <Route exact path="/bebidas" component={ Drinks } />
+
+      <Route exact path="/" component={ Login } />
     </Switch>
   );
 }

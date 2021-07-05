@@ -10,17 +10,17 @@ export default function Header({ title, searchIcon = false }) {
     setSelectedSearch,
     showSearch,
     setShowSearch,
-    foods,
+    foodsRecipe,
     getSearch,
     history,
     redirectToMealOrDrink,
   } = useSearch();
 
-  if (!foods) {
+  if (!foodsRecipe) {
     alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
   }
 
-  if (foods) redirectToMealOrDrink();
+  if (foodsRecipe) redirectToMealOrDrink();
 
   return (
     <header>

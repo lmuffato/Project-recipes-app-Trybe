@@ -1,37 +1,38 @@
 import React from 'react';
-
-import Header from '../components/Header';
-import RecipeCard from '../components/RecipeCard';
 import Footer from '../components/Footer';
-
-import useRecipe from '../hooks/useRecipe';
+import Header from '../components/Header';
+import useMainRecipe from '../hooks/useMainRecipe';
 
 export default function Drinks() {
-  const { recipe } = useRecipe();
-
-  const renderCards = () => {
-    const maxLengthRecipes = 12;
-
-    if (recipe.drinks) {
-      const filteredRecipe = recipe.drinks.filter(
-        (drink, index) => index < maxLengthRecipes,
-      );
-
-      return filteredRecipe.map((recp, index) => (
-        <RecipeCard
-          key={ index }
-          index={ index }
-          thumb={ recp.strDrinkThumb }
-          title={ recp.strDrink }
-        />
-      ));
-    }
-  };
+  const { renderCards, handleClickCategory, recipe } = useMainRecipe('drink');
+  const { drinks } = recipe.list;
 
   return (
     <main>
       <Header title="Bebidas" searchIcon />
-      {renderCards()}
+
+      <div>
+        <button
+          type="button"
+          onClick={ handleClickCategory }
+          data-testid="All-category-filter"
+        >
+          All
+        </button>
+        {drinks.map((category) => (
+          <button
+            key={ category }
+            data-testid={ `${category}-category-filter` }
+            type="button"
+            onClick={ handleClickCategory }
+          >
+            {category.replace(category[0], category[0].toUpperCase())}
+          </button>
+        ))}
+      </div>
+
+      <div>{renderCards()}</div>
+
       <Footer />
     </main>
   );
