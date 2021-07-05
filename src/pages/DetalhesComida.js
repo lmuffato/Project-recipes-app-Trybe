@@ -1,8 +1,10 @@
 import { object } from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
+import RecomendacoesCard from '../components/RecomendacoesCard';
 
 import { getFoodByID } from '../services/fetchApiDetailsRecipe';
+import { getDrinkRecomendation } from '../services/fetchApiRecomendations';
 
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
@@ -13,12 +15,15 @@ const indexMock = 0;
 function DetalhesComida({ match: { params: { id } } }) {
   const [acctualyFood, setAcctualyFood] = useState();
   const [isLoading, setIsLoading] = useState(false);
+  const [foodRecomendation, setFoodRecomendation] = useState();
 
   useEffect(() => {
     async function fetchFood() {
       setIsLoading(true);
       const food = await getFoodByID(id);
+      const recomendations = await getDrinkRecomendation();
 
+      setFoodRecomendation(recomendations.drinks);
       setAcctualyFood(food);
       setIsLoading(false);
     }
@@ -66,8 +71,6 @@ function DetalhesComida({ match: { params: { id } } }) {
         strMealThumb,
       } = acctualyFood.meals[0];
 
-      console.log('Teste do Includes', acctualyFood.meals[0]);
-
       const ingredients = [
         `${strIngredient1} ${strMeasure1}`,
         `${strIngredient2} ${strMeasure2}`,
@@ -83,6 +86,7 @@ function DetalhesComida({ match: { params: { id } } }) {
         `${strIngredient12} ${strMeasure12}`,
         `${strIngredient13} ${strMeasure13}`,
       ];
+      console.log('Comidas da recomendação', foodRecomendation);
 
       return (
         <>
@@ -120,7 +124,17 @@ function DetalhesComida({ match: { params: { id } } }) {
           </div> */}
 
           <div data-testid={ `${indexMock}-recomendation-card` }>
-            Card Receitas Recomendadas
+            <h3>Receitas Recomendadas</h3>
+
+            { foodRecomendation.map((food, index) => {
+              const cardLength = 5;
+              if (index <= cardLength) {
+                return (
+                  <RecomendacoesCard key={ food.idMeal } props={ food } />
+                );
+              }
+              return null;
+            }) }
           </div>
 
           <Button

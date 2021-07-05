@@ -1,8 +1,10 @@
 import { object } from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
+import RecomendacoesCard from '../components/RecomendacoesCard';
 
 import { getDrinkByID } from '../services/fetchApiDetailsRecipe';
+import { getFoodRecomendation } from '../services/fetchApiRecomendations';
 
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
@@ -13,17 +15,20 @@ const indexMock = 0;
 function DetalhesBebida({ match: { params: { id } } }) {
   const [acctualyDrink, setAcctualyDrink] = useState();
   const [isLoading, setIsLoading] = useState(false);
+  const [drinkRecomendation, setDrinkRecomendation] = useState();
 
   useEffect(() => {
-    async function fetchFood() {
+    async function fetchDrink() {
       setIsLoading(true);
-      const food = await getDrinkByID(id);
+      const drink = await getDrinkByID(id);
+      const recomendations = await getFoodRecomendation();
 
-      setAcctualyDrink(food);
+      setDrinkRecomendation(recomendations.meals);
+      setAcctualyDrink(drink);
       setIsLoading(false);
     }
 
-    fetchFood();
+    fetchDrink();
   }, [id]);
 
   const handleClick = (e) => {
@@ -81,6 +86,7 @@ function DetalhesBebida({ match: { params: { id } } }) {
         `${strIngredient12} ${strMeasure12}`,
         `${strIngredient13} ${strMeasure13}`,
       ];
+      console.log('Recomendação de Drinks', drinkRecomendation);
 
       return (
         <>
@@ -107,7 +113,6 @@ function DetalhesBebida({ match: { params: { id } } }) {
               >
                 { igredient }
               </li>))}
-            {/* Map aqui */}
           </ul>
 
           <p data-testid="instructions">{ strInstructions }</p>
@@ -117,7 +122,17 @@ function DetalhesBebida({ match: { params: { id } } }) {
           </div> */}
 
           <div data-testid={ `${indexMock}-recomendation-card` }>
-            Card Receitas Recomendadas
+            <h3>Receitas Recomendadas</h3>
+
+            { drinkRecomendation.map((drink, index) => {
+              const cardLength = 5;
+              if (index <= cardLength) {
+                return (
+                  <RecomendacoesCard key={ drink.idDrink } props={ drink } />
+                );
+              }
+              return null;
+            }) }
           </div>
 
           <Button
