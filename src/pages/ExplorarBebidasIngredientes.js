@@ -1,7 +1,16 @@
 import React from 'react';
 
+import Header from '../components/Header';
+import Footer from '../components/Footer';
+
 function ExplorarBebidasIngredientes() {
-  return <div>Página de Explorar Bebidas por Ingredientes</div>;
+  return (
+    <section>
+      <Header title="Explorar Ingredientes" show={ false } />
+      <footer>
+        <Footer />
+      </footer>
+    </section>);
 }
 
 export default ExplorarBebidasIngredientes;

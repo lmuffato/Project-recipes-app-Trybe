@@ -1,8 +1,10 @@
-// export const SELECT_MOVIE = 'SELECT_MOVIE';
+export const SET_EMAIL = 'SET_EMAIL';
 
-export default function selectMovie(payload) {
-  return ({
-    type: 'LOGIN',
-    payload,
-  });
+function setEmail(payloadEmailValue) {
+  return {
+    type: SET_EMAIL,
+    payloadEmailValue,
+  };
 }
+
+export default setEmail;

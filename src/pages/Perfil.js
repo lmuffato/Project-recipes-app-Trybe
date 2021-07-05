@@ -1,6 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import Header from '../components/Header';
+import Footer from '../components/Footer';
+
 function Perfil() {
   const userEmailStorage = JSON.parse(localStorage.getItem('user'));
   const userEmail = userEmailStorage.email;
@@ -8,7 +11,8 @@ function Perfil() {
   const clearStorage = () => localStorage.clear();
 
   return (
-    <>
+    <section>
+      <Header title="Perfil" show={ false } />
       <span data-testid="profile-email">{userEmail}</span>
       <Link to="/receitas-feitas">
         <button
@@ -35,7 +39,10 @@ function Perfil() {
           Sair
         </button>
       </Link>
-    </>
+      <footer>
+        <Footer />
+      </footer>
+    </section>
   );
 }
 
