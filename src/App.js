@@ -3,12 +3,12 @@ import { Route, Switch } from 'react-router-dom';
 import LoginPage from './pages/LoginPage';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Header from './compenents/Header';
 import Footer from './compenents/Footer';
 import Profile from './pages/ProfilePage';
 import ReceitasFeitas from './pages/ReceitasFeitas';
 import ReceitasFavoritas from './pages/ReceitasFavoritas';
 import UserProvider from './contexts/UserProvider';
-import Header from './compenents/Header';
 import SearchbarProvider from './contexts/SeachbarProvider';
 import HeaderProvider from './contexts/HeaderProvider';
 
