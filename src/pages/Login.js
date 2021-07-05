@@ -10,23 +10,30 @@ class Login extends React.Component {
     super();
 
     this.state = {
-      email: '',
+      userEmail: '',
       senha: '',
     };
     this.onChange = this.onChange.bind(this);
   }
 
   onChange(event) {
+    const { userEmail } = this.state;
+    localStorage.setItem('mealsToken', 1);
+    localStorage.setItem('cocktailsToken', 1);
+    const userInfo = { email: userEmail };
+    console.log(userInfo);
+    const userInfoJson = JSON.stringify(userInfo);
+    localStorage.setItem('user', userInfoJson);
     this.setState({
       [event.target.name]: event.target.value,
     });
   }
 
   validation() {
-    const { email, senha } = this.state;
+    const { userEmail, senha } = this.state;
     const emailRegex = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i;
     const minValue = 6;
-    if (emailRegex.test(email) && senha.length > minValue) {
+    if (emailRegex.test(userEmail) && senha.length > minValue) {
       return false;
     }
 
@@ -34,7 +41,7 @@ class Login extends React.Component {
   }
 
   render() {
-    const { email, senha } = this.state;
+    const { userEmail, senha } = this.state;
     const { handleClick } = this.props;
     return (
       <>
@@ -46,8 +53,8 @@ class Login extends React.Component {
             type="text"
             id="input-email"
             onChange={ this.onChange }
-            value={ email }
-            name="email"
+            value={ userEmail }
+            name="userEmail"
           />
         </label>
         <label htmlFor="input-password">
@@ -61,10 +68,10 @@ class Login extends React.Component {
             name="senha"
           />
         </label>
-        <Link to="/Comidas">
+        <Link to="/comidas">
           <button
             data-testid="login-submit-btn"
-            onClick={ () => { handleClick(email); } }
+            onClick={ () => { handleClick(userEmail); } }
             disabled={ this.validation() }
             type="button"
           >
