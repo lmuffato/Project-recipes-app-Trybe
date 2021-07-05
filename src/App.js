@@ -7,6 +7,9 @@ import Footer from './compenents/Footer';
 // import MainRecepies from './compenents/MainRecepies';
 import SearchbarProvider from './contexts/SeachbarProvider';
 import UserProvider from './contexts/UserProvider';
+import Explore from './pages/Explore';
+import Foods from './pages/Foods'
+import Drinks from './pages/Drinks';
 
 function App() {
   return (
@@ -15,6 +18,9 @@ function App() {
         <SearchbarProvider>
           <Switch>
             <Route exact path="/" component={ LoginPage } />
+            <Route exact path="/explorar" component={ Explore } />
+            <Route exact path="/explorar/comidas" component={ Foods } />
+            <Route exact path="/explorar/bebidas" component={ Drinks } />
           </Switch>
           <Footer />
         </SearchbarProvider>
