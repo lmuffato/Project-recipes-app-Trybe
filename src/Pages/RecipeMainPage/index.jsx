@@ -15,7 +15,7 @@ function RecipeMainPage({ header }) {
       <Header>{ header }</Header>
       { recipes[toggle].results !== null
         ? <RecipeCard recipesArray={ recipes[toggle].results } />
-        : 'vazio'}
+        : ''}
       <Footer />
     </div>
   );
