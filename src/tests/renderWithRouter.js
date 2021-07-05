@@ -4,8 +4,9 @@ import { createMemoryHistory } from 'history';
 import { render } from '@testing-library/react';
 import RecipesProvider from '../provider/RecipesProvider';
 
-const renderWithRouter = (component) => {
+const renderWithRouter = (component, mockHistory = '') => {
   const history = createMemoryHistory();
+  history.push(mockHistory);
   return ({
     ...render(
       <RecipesProvider>

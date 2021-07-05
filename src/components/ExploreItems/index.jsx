@@ -9,6 +9,19 @@ export default function ExploreItems() {
   const idLink = pathname.split('explorar')[1];
   const [id, setId] = useState('');
   const [redirect, setRedirect] = useState(false);
+  const conditionalButton = () => {
+    if (!pathname.includes('bebidas')) {
+      return (
+        <Link
+          className="button"
+          data-testid="explore-by-area"
+          to={ `${pathname}/area` }
+        >
+          Por Local de Origem
+        </Link>
+      );
+    }
+  };
   const handleButton = async () => {
     if (pathname.includes('comidas')) {
       const api = await searchRandomFood();
@@ -29,13 +42,7 @@ export default function ExploreItems() {
       >
         Por Ingredientes
       </Link>
-      <Link
-        className="button"
-        data-testid="explore-by-area"
-        to={ `${pathname}/area` }
-      >
-        Por Local de Origem
-      </Link>
+      { conditionalButton()}
       <button
         className="button"
         onClick={ handleButton }
