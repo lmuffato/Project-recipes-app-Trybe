@@ -1,7 +1,15 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import MealCards from '../compenents/MealCards';
+import '../styles/MealAndDrinkCards.css';
 
 function FoodsArea() {
   const [areas, setAreas] = useState([]);
+  const [mealsRecepies, setMealsRecepies] = useState([]);
+  const [selectedArea, setSelectedArea] = useState('All');
+  const [showRecepies, setShowRecepies] = useState(mealsRecepies);
+  const lastRecipe = 12;
+
   useEffect(() => {
     const getAreas = async () => {
       const fetchArea = await fetch('https://www.themealdb.com/api/json/v1/1/list.php?a=list')
@@ -13,17 +21,54 @@ function FoodsArea() {
       setAreas(allAreas);
     };
     getAreas();
+
+    const getMealsRecepies = async () => {
+      const fetchRecepies = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=')
+        .then((responses) => responses.json())  
+        .then((respos) => respos.meals)
+      console.log(fetchRecepies);
+      setMealsRecepies(fetchRecepies);
+      setShowRecepies(fetchRecepies.slice(0, lastRecipe))
+    }
+
+    getMealsRecepies();
   }, []);
 
-  return (
-    <div>
-      <select data-testid="explore-by-area-dropdown">
-        <option>All</option>
-        {areas.map((area, index) => (
-          <option key={ index } data-testid={ `${area}-option` }>{area}</option>
-        ))}
-      </select>
-    </div>
+  useEffect(() => {
+    if (selectedArea === 'All') {
+      setShowRecepies(mealsRecepies.slice(0, lastRecipe))
+    } else {
+      const filteredRecepies = mealsRecepies.filter((recepi) => (
+        recepi.strArea === selectedArea
+      ));
+      setShowRecepies(filteredRecepies.slice(0, lastRecipe));
+    }
+  }, [selectedArea]);
+  
+ return (
+      <div>
+        <select
+          data-testid="explore-by-area-dropdown"
+          onChange={ (e) => setSelectedArea(e.target.value)}
+          value={ selectedArea }
+        >
+          <option data-testid="All-option">All</option>
+          {areas.map((area, index) => (
+            <option key={ index } data-testid={ `${area}-option` }>{area}</option>
+          ))}
+        </select>
+        <section className="recipes-container">
+          {showRecepies.map((recepie, index) => (
+            <Link to={`/comidas/${recepie.idMeal}`}>
+              <MealCards
+                data={ recepie }
+                index={ index }
+                key={ recepie.idMeal }
+                />
+            </Link>
+          ))}
+        </section>
+      </div>
   );
 }
 
