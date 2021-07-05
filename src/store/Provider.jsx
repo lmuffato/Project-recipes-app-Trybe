@@ -5,12 +5,14 @@ import {
   fetchFoodsAndCategories,
   fetchFoodsAndArea,
   fetchFoodsAndIngredients,
+  fetchMealDetailsByID,
 } from '../services/Data';
 
 function Provider({ children }) {
   const [dataFetchFoodsAndCategories, setDatafetchFoodsAndCategories] = useState([]);
   const [dataFetchFoodsAndArea, setDataFetchFoodsAndArea] = useState([]);
   const [dataFetchFoodsAndIngredients, setDataFetchFoodsAndIngredients] = useState([]);
+  const [dataFetchMealDetailsByID, setDataFetchMealDetailsByID] = useState([]);
   const [infoUser, setDatainfoUser] = useState({
     email: '',
     password: '',
@@ -24,7 +26,9 @@ function Provider({ children }) {
       .then(({ meals }) => setDataFetchFoodsAndArea(meals));
     fetchFoodsAndIngredients()
       .then(({ meals }) => setDataFetchFoodsAndIngredients(meals));
-  }, []);
+    fetchMealDetailsByID()
+      .then(( ))
+    }, []);
 
   const contextValue = {
     dataFetchFoodsAndCategories,

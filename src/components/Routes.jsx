@@ -12,6 +12,8 @@ import ExploreFoodSource from '../Pages/Explore/ExploreFoodSource';
 import FoodExplore from '../Pages/Explore/FoodExplore';
 import FoodIngredientsExplore from '../Pages/Explore/FoodIngredientsExplore';
 import RecipesDone from '../Pages/RecipesDone';
+import MealInProgress from '../Pages/InProgress/MealInProgress';
+import DrinkInProgress from '../Pages/InProgress/DrinkInProgress';
 
 function Routes() {
   return (
@@ -34,6 +36,16 @@ function Routes() {
         exact
         path="/explorar/comidas/ingredientes"
         component={ FoodIngredientsExplore }
+      />
+      <Route
+        exact
+        path="/comidas/{id-da-receita}/in-progress"
+        component={ MealInProgress }
+      />
+      <Route
+        exact
+        path="/bebidas/{id-da-receita}/in-progress"
+        component={ DrinkInProgress }
       />
       <Route exact path="/" component={ Login } />
     </Switch>
