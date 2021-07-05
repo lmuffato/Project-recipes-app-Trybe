@@ -1,15 +1,29 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+// import { requestMeals } from '../services/apiRequests';
 
 import RecipeContext from './RecipeContext';
 
 function RecipeProvider({ children }) {
-  const [categories, initialRecipes] = useState({
-    categories: [],
-    initialRecipes: [],
-  });
+  // const [isLoading, setIsLoading] = useState(false);
+  const [recipes, setRecipes] = useState([]);
+
+  // async function fetchMeals() {
+  //   setIsLoading(true);
+  //   const meals = await requestMeals();
+  //   setRecipes(meals);
+  //   setIsLoading(false);
+  // }
+
+  const contextValue = {
+    recipes,
+    setRecipes,
+    // fetchMeals,
+    // isLoading,
+  };
+
   return (
-    <RecipeContext.Provider value={ { categories, initialRecipes } }>
+    <RecipeContext.Provider value={ contextValue }>
       { children }
     </RecipeContext.Provider>
   );
