@@ -4,6 +4,7 @@ import {
   getCategoriesDrinks,
   initialDrinks, drinksByCategory } from '../../services/apiRequests';
 
+import Header from '../../components/Header';
 import SearchBar from '../../components/SearchBar';
 import FooterMenu from '../../components/footerMenu';
 import RecipeCardDrink from '../../components/RecipeCardDrink';
@@ -39,6 +40,7 @@ function DrinkPage() {
   const maxLength = 11;
   return (
     <section>
+      <Header searchBar="true" />
       <SearchBar />
       { categories
         && <CategoriesButtons
