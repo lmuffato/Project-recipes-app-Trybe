@@ -1,11 +1,15 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Button, Card } from 'react-bootstrap';
 import './index.css';
 import { Link } from 'react-router-dom';
 import Share from '../../images/shareIcon.svg';
 import Context from '../../context/Context';
 
+const copy = require('clipboard-copy');
+
 function Recipes() {
+  const [showCopyFood, setShopFood] = useState(false);
+  const [showCopyDrinks, setShopDrinks] = useState(false);
   const { doneRecipes: noFilter, doneFilterRecipes, showFilter } = useContext(Context);
   let doneRecipes = noFilter;
   if (!showFilter) {
@@ -13,6 +17,21 @@ function Recipes() {
   } else {
     doneRecipes = doneFilterRecipes;
   }
+  const copyLinkFood = (id) => {
+    setShopFood(true);
+    const show = () => {
+      copy(`http://localhost:3000/comidas/${id}`);
+    };
+    show();
+  };
+  const copyLinkDrink = (id) => {
+    setShopDrinks(true);
+    const show = () => {
+      copy(`http://localhost:3000/bebidas/${id}`);
+    };
+    show();
+  };
+
   const changeTags = (t, index) => {
     const tags = t.slice(0, 2);
     return tags.map((tagName) => (
@@ -33,16 +52,19 @@ function Recipes() {
         />
       </Link>
       <Card.Body>
-        <Button
-          variant="primary"
-          data-testid={ `${index}-horizontal-share-btn` }
-          src={ Share }
-        >
-          <Card.Img
-            variant="top"
-            src={ Share }
-          />
-        </Button>
+        {showCopyFood ? <p>Link copiado!</p>
+          : (
+            <Button
+              variant="primary"
+              data-testid={ `${index}-horizontal-share-btn` }
+              src={ Share }
+              onClick={ () => copyLinkFood(recipe.id) }
+            >
+              <Card.Img
+                variant="top"
+                src={ Share }
+              />
+            </Button>)}
         <Card.Text data-testid={ `${index}-horizontal-top-text` }>
           {` ${recipe.area} - ${recipe.category} `}
         </Card.Text>
@@ -72,16 +94,19 @@ function Recipes() {
         />
       </Link>
       <Card.Body>
-        <Button
-          variant="primary"
-          data-testid={ `${index}-horizontal-share-btn` }
-          src={ Share }
-        >
-          <Card.Img
-            variant="top"
-            src={ Share }
-          />
-        </Button>
+        {showCopyDrinks ? <p>Link copiado!</p>
+          : (
+            <Button
+              variant="primary"
+              data-testid={ `${index}-horizontal-share-btn` }
+              src={ Share }
+              onClick={ () => copyLinkDrink(recipe.id) }
+            >
+              <Card.Img
+                variant="top"
+                src={ Share }
+              />
+            </Button>)}
         <Card.Text data-testid={ `${index}-horizontal-top-text` }>
           {`${recipe.alcoholicOrNot}`}
         </Card.Text>

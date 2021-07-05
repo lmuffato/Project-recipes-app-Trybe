@@ -43,13 +43,13 @@
 }
 
 .button {
+  background-color: white;
+  border: none;
   margin-left: 120px;
   width: 35px;
-  border: none;
-  background-color: white;
 }
 
 a {
-  direction: none;
   color: black;
+  direction: none;
 }
