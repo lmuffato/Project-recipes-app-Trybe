@@ -1,10 +1,13 @@
 import React from 'react';
 
-export default function CategoriesButtons({ categories }) {
+export default function CategoriesButtons({ categories, toggleCategory }) {
   const maxLength = 4;
   return (
     <form>
-      <label htmlFor="category-button">
+      <label
+        htmlFor="category-button"
+        onChange={ (ev) => toggleCategory(ev.target.value) }
+      >
         { categories
           .filter((_, index) => index <= maxLength)
           .map((category, index) => (
@@ -14,7 +17,7 @@ export default function CategoriesButtons({ categories }) {
                 type="radio"
                 name="category-button"
                 value={ category.strCategory }
-                data-testid={ `${category.strCategory}-category-filter`}
+                data-testid={ `${category.strCategory}-category-filter` }
               />
               { category.strCategory }
             </label>

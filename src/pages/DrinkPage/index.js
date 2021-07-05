@@ -1,6 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
 import RecipeContext from '../../context/RecipeContext';
-import { getCategoriesDrinks, initialDrinks } from '../../services/apiRequests';
+import {
+  getCategoriesDrinks,
+  initialDrinks, drinksByCategory } from '../../services/apiRequests';
 
 import SearchBar from '../../components/SearchBar';
 import RecipeCardDrink from '../../components/RecipeCardDrink';
@@ -11,6 +13,7 @@ function DrinkPage() {
   const { recipes, setRecipes } = useContext(RecipeContext);
   const [isLoading, setIsLoading] = useState(true);
   const [categories, setCategories] = useState([]);
+  const [choosedCategory, toggleCategory] = useState('');
 
   useEffect(() => {
     setIsLoading(true);
@@ -18,6 +21,13 @@ function DrinkPage() {
     initialDrinks(setRecipes);
     setIsLoading(false);
   }, [setRecipes]);
+  useEffect(() => {
+    if (choosedCategory) {
+      setIsLoading(true);
+      drinksByCategory(setRecipes, choosedCategory);
+    }
+    setIsLoading(false);
+  }, [choosedCategory, setRecipes]);
   if (isLoading) {
     console.log('loading...');
     return <p>Loading...</p>;
@@ -26,7 +36,11 @@ function DrinkPage() {
   return (
     <section>
       <SearchBar />
-      { categories && <CategoriesButtons categories={ categories } /> }
+      { categories
+        && <CategoriesButtons
+          categories={ categories }
+          toggleCategory={ toggleCategory }
+        /> }
       <ul>
         { !isLoading && recipes
           .filter((_, index) => index <= maxLength)

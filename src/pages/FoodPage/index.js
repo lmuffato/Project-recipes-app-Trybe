@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import RecipeContext from '../../context/RecipeContext';
-import { initialFoods, getCategoriesFoods } from '../../services/apiRequests';
+import {
+  initialFoods, getCategoriesFoods, foodsByCategory } from '../../services/apiRequests';
 
 import SearchBar from '../../components/SearchBar';
 import RecipeCardFood from '../../components/RecipeCardFood';
@@ -11,6 +12,7 @@ function FoodPage() {
   const { recipes, setRecipes } = useContext(RecipeContext);
   const [isLoading, setIsLoading] = useState(true);
   const [categories, setCategories] = useState([]);
+  const [choosedCategory, toggleCategory] = useState('');
 
   useEffect(() => {
     setIsLoading(true);
@@ -18,6 +20,13 @@ function FoodPage() {
     initialFoods(setRecipes);
     setIsLoading(false);
   }, [setRecipes]);
+  useEffect(() => {
+    if (choosedCategory) {
+      setIsLoading(true);
+      foodsByCategory(setRecipes, choosedCategory);
+    }
+    setIsLoading(false);
+  }, [choosedCategory, setRecipes]);
   if (isLoading) {
     console.log('loading...');
     return <p>Loading...</p>;
@@ -26,7 +35,11 @@ function FoodPage() {
   return (
     <section>
       <SearchBar />
-      { categories && <CategoriesButtons categories={ categories } /> }
+      { categories
+        && <CategoriesButtons
+          categories={ categories }
+          toggleCategory={ toggleCategory }
+        /> }
       <ul>
         { !isLoading && recipes
           .filter((_, index) => index <= maxLength)
