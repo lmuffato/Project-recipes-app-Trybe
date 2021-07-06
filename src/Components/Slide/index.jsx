@@ -7,6 +7,8 @@ import './styles.css';
 
 function Slide({ toggle, category }) {
   const [recomendations, setRecomendations] = useState([]);
+  const fixedToggle = toggle === 'Meal' ? 'Drink' : 'Meal';
+  const fixedCategory = category === 'strCategory' ? 'strAlcoholic' : 'strCategory';
 
   useEffect(() => {
     getDrinks().then((response) => {
@@ -16,7 +18,6 @@ function Slide({ toggle, category }) {
 
   return (
     <div>
-      { console.log(recomendations)}
       <h2>Recomendadas</h2>
       <div>
         { recomendations.map((item, index) => (
@@ -26,10 +27,10 @@ function Slide({ toggle, category }) {
               ? `/comidas/${item.idMeal}` : `/comidas/${item.idDrink}` }
           >
             <Card data-testid={ `${index}-recomendation-card` }>
-              <Card.Image variant="top" src={ item[`str${toggle}Thumb`] } />
+              <Card.Img variant="top" src={ item[`str${fixedToggle}Thumb`] } />
               <Card.Body>
-                <Card.Subtitle>{ item[category] }</Card.Subtitle>
-                <Card.Title>{ item[`str${toggle}`] }</Card.Title>
+                <Card.Subtitle>{ item[fixedCategory] }</Card.Subtitle>
+                <Card.Title>{ item[`str${fixedToggle}`] }</Card.Title>
               </Card.Body>
             </Card>
           </Link>

@@ -3,7 +3,7 @@ import { Button, Image } from 'react-bootstrap';
 import { useLocation, useParams } from 'react-router';
 import { getRecipeByID } from '../../services/fetchRecipes';
 import Ingredient from '../../Components/Ingredients';
-// import Slide from '../../Components/Slide';
+import Slide from '../../Components/Slide';
 
 import shareIcon from '../../images/shareIcon.svg';
 import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
@@ -65,7 +65,7 @@ function Details() {
                 />
               </div>)
             : ''}
-          {/* <Slide toggle={ recipeType } category={ toggleCategory } /> */}
+          <Slide toggle={ recipeType } category={ toggleCategory } />
           <Button data-testid="start-recipe-btn">Iniciar Receita</Button>
         </div>
       )}
