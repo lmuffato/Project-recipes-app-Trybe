@@ -50,6 +50,7 @@ function Comidas() {
           <Filter page="comidas" />
           <CardList
             list={ APIFood.meals }
+            type="comidas"
           />
           <Footer />
         </div>
