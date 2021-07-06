@@ -13,8 +13,8 @@ function Details() {
   const { id } = useParams();
   const [recipesDetails, setRecipesDetails] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [recipeType, setRecipeType] = useState('Meal');
 
+  const recipeType = (pathname.includes('comidas')) ? 'Meal' : 'Drink';
   const toggleApi = (pathname.includes('comidas')) ? 'meals' : 'drinks';
   const toggleCategory = recipeType === 'Meal' ? 'strCategory' : 'strAlcoholic';
 
@@ -22,7 +22,6 @@ function Details() {
     getRecipeByID(pathname, id).then((response) => {
       setRecipesDetails(response[toggleApi][0]);
       setIsLoading(false);
-      if (toggleApi === 'drinks') { setRecipeType('Drink'); }
     });
   }, [id, pathname, toggleApi]);
 
@@ -64,7 +63,7 @@ function Details() {
                   title="How to do"
                 />
               </div>)
-            : ''}
+            : null}
           <Slide toggle={ recipeType } category={ toggleCategory } />
           <Button data-testid="start-recipe-btn">Iniciar Receita</Button>
         </div>

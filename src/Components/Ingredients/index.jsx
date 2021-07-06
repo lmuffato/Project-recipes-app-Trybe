@@ -17,7 +17,7 @@ function Ingredient({ recipe, type }) {
             {ingredients.map((item, index) => (
               <li
                 key={ `ingredient-${index}` }
-                data-testid={ `${0}-ingredient-name-and-measure` }
+                data-testid={ `${index}-ingredient-name-and-measure` }
               >
                 {`${item[1]} - ${mensures[index][1]}`}
               </li>
