@@ -1,6 +1,6 @@
 import React from 'react';
-import { BrowserRouter } from 'react-router-dom';
-import { Route, Switch } from 'react-router';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+// import { Route, Switch } from 'react-router';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ProviderRecipes from './context/ProviderRecipes';
@@ -24,12 +24,18 @@ function App() {
       <ProviderRecipes>
         <Switch>
           <Route exact path="/" component={ Login } />
+          <Route
+            path="/comidas/:id/in-progress"
+            render={ (props) => <InProcess { ...props } /> }
+          />
+          <Route
+            path="/bebidas/:id/in-progress"
+            render={ (props) => <InProcess { ...props } /> }
+          />
+          <Route path="/comidas/:id" render={ (props) => <Detail { ...props } /> } />
+          <Route path="/bebidas/:id" render={ (props) => <Detail { ...props } /> } />
           <Route path="/comidas" component={ MainFood } />
           <Route path="/bebidas" component={ MainDrink } />
-          <Route path="/comidas/:id" component={ Detail } />
-          <Route path="/bebidas/:id" component={ Detail } />
-          <Route path="/comidas/:id/in-progress" component={ InProcess } />
-          <Route path="/bebidas/:id/in-progress" component={ InProcess } />
           <Route path="/explorar" component={ Explore } />
           <Route path="/explorar/comidas" component={ ExploreFilters } />
           <Route path="/explorar/bebidas" component={ ExploreFilters } />
