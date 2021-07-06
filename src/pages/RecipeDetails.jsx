@@ -6,6 +6,7 @@ import Button from '../components/Generics/Button';
 import RecipeIngredients from '../components/RecipeIngredients/RecipeIngredients';
 import Container from '../styles/recipeDetails';
 import MealVideo from '../components/MealVideo/MealVideo';
+import Carousel from '../components/Carousel/Carousel.jsx';
 
 function RecipeDetails({ type }) {
   const { id } = useParams();
@@ -76,6 +77,9 @@ function RecipeDetails({ type }) {
           youTubeVideo={ youTubeVideo.substring(magicNumber) }
           title={ recipeName }
         />) : ''}
+      <div className="carousel-container">
+        <Carousel />
+      </div>
       <Button data-testid="start-recipe-btn">
         Iniciar receita
       </Button>

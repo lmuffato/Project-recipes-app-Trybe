@@ -75,8 +75,6 @@ const Container = styled.div`align-items: center;
       display: flex;
       flex-wrap: wrap;
       margin: 1rem;
-
-      /* max-width: 820px; */
       max-width: 640px;
     }
   }
@@ -86,6 +84,16 @@ const Container = styled.div`align-items: center;
     margin: 0 auto 3.75rem;
     max-height: auto;
     max-width: 90vw;
+  }
+
+  .carousel-container {
+    display: flex;
+    margin: 0 auto 2rem;
+
+    div {
+      display: flex;
+      margin-bottom: 2rem;
+    }
   }
 
   button {
