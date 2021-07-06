@@ -29,33 +29,30 @@ function Login(props) {
   };
 
   return (
-    <>
-      <h1>Login Page</h1>
-      <form>
-        <fieldset>
-          <input
-            type="text"
-            data-testid="email-input"
-            onChange={ (e) => setEmail(e.target.value) }
-            value={ email }
-          />
-          <input
-            type="password"
-            data-testid="password-input"
-            onChange={ (e) => setPassword(e.target.value) }
-            value={ password }
-          />
-          <button
-            type="button"
-            data-testid="login-submit-btn"
-            disabled={ validate() }
-            onClick={ () => handleClick() }
-          >
-            Entrar
-          </button>
-        </fieldset>
-      </form>
-    </>
+    <form>
+      <fieldset>
+        <input
+          type="text"
+          data-testid="email-input"
+          onChange={ (e) => setEmail(e.target.value) }
+          value={ email }
+        />
+        <input
+          type="password"
+          data-testid="password-input"
+          onChange={ (e) => setPassword(e.target.value) }
+          value={ password }
+        />
+        <button
+          type="button"
+          data-testid="login-submit-btn"
+          disabled={ validate() }
+          onClick={ () => handleClick() }
+        >
+          Entrar
+        </button>
+      </fieldset>
+    </form>
   );
 }
 

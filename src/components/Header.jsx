@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import profileIcon from '../images/profileIcon.svg';
+import './Style.css';
 
 function Header() {
   const pageTitle = () => {
@@ -21,15 +22,17 @@ function Header() {
     } return title;
   };
   return (
-    <div>
-      <Link to="/perfil">
-        <img
-          src={ profileIcon }
-          alt="profile-icon"
-          data-testid="profile-top-btn"
-        />
-      </Link>
-      <h4 data-testid="page-title">{pageTitle()}</h4>
+    <div className="header">
+      <div className="header-content">
+        <Link to="/perfil">
+          <img
+            src={ profileIcon }
+            alt="profile-icon"
+            data-testid="profile-top-btn"
+          />
+        </Link>
+        <h4 data-testid="page-title">{pageTitle()}</h4>
+      </div>
     </div>
   );
 }

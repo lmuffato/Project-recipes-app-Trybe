@@ -1,16 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { node } from 'prop-types';
-import {
-  fetchApiDrinks,
-  fetchApiFoods,
-  fetchCategoryFoods,
-  fetchCategoryDrinks,
-  fetchFilterFoods,
-  fetchFilterDrinks,
-  fetchRecipeFood,
-  fetchRecipeDrink,
-  fetchFoodsRecommended,
-  fetchDrinksRecommended } from '../services/fetchApi';
+import { fetchApiDrinks, fetchApiFoods, fetchCategoryFoods, fetchCategoryDrinks,
+  fetchFilterFoods, fetchFilterDrinks, fetchRecipeFood, fetchRecipeDrink,
+  fetchFoodsRecommended, fetchDrinksRecommended, fetchFilterFoodByIngredient,
+  fetchFilterDrinkByIngredient, fetchFilterFoodByName, fetchFilterDrinkByName,
+  fetchFilterFoodByLetter, fetchFilterDrinkByLetter } from '../services/fetchApi';
 import Context from './Context';
 
 // import { fetchApiDrinks } from '../services/fetchApi';
@@ -19,7 +13,6 @@ import { checkExist }
   from '../pages/DetailsPages/components/buttons/ButtonMakeRecipeDrink';
 
 import setProgressRecipesLS from '../services/localStorage/setProgressRecipesLS';
-// fetchFilterDrinks } from '../services/fetchApi';
 import Mock from '../services/mokcInformation';
 
 function Provider({ children }) {
@@ -41,7 +34,9 @@ function Provider({ children }) {
   const [foodRecommended, setFoodRecommended] = useState([]);
   const [drinkRecommended, setDrinkRecommended] = useState([]);
   const [progressRecipes, setProgressRecipes] = useState([]);
-  // function getFoods() {
+  const [radio, setRadio] = useState('');
+  const [searchInput, setSearchInput] = useState('');
+  const [path, setPath] = useState('');
   const [doneRecipes, setDoneRecipes] = useState([]);
   const [doneFilterRecipes, setDoneFilter] = useState([]);
 
@@ -192,6 +187,58 @@ function Provider({ children }) {
     // ComponentDidMount
   // useEffect(getInFormations, []);
 
+  const handleClickFilter = () => {
+    if (path === 'comidas' && radio === 'Ingrediente') {
+      const getFoodByIngredient = async () => {
+        setShowFilter(true);
+        setFilterFoods([]);
+        const data = await fetchFilterFoodByIngredient(searchInput);
+        setFilterFoods(data);
+      };
+      getFoodByIngredient();
+    } if (path === 'bebidas' && radio === 'Ingrediente') {
+      setShowFilter(true);
+      setFilterDrinks([]);
+      const getDrinkByIngredient = async () => {
+        const data = await fetchFilterDrinkByIngredient(searchInput);
+        setFilterDrinks(data);
+      };
+      getDrinkByIngredient();
+    } if (path === 'comidas' && radio === 'Nome') {
+      const getFoodByName = async () => {
+        setShowFilter(true);
+        setFilterFoods([]);
+        const data = await fetchFilterFoodByName(searchInput);
+        setFilterFoods(data);
+      };
+      getFoodByName();
+    } if (path === 'bebidas' && radio === 'Nome') {
+      setShowFilter(true);
+      setFilterDrinks([]);
+      const getDrinkByName = async () => {
+        const data = await fetchFilterDrinkByName(searchInput);
+        setFilterDrinks(data);
+      };
+      getDrinkByName();
+    } if (path === 'comidas' && radio === 'Primeira letra') {
+      const getFoodByLetter = async () => {
+        setShowFilter(true);
+        setFilterFoods([]);
+        const data = await fetchFilterFoodByLetter(searchInput);
+        setFilterFoods(data);
+      };
+      getFoodByLetter();
+    } if (path === 'bebidas' && radio === 'Primeira letra') {
+      setShowFilter(true);
+      setFilterDrinks([]);
+      const getDrinkByLetter = async () => {
+        const data = await fetchFilterDrinkByLetter(searchInput);
+        setFilterDrinks(data);
+      };
+      getDrinkByLetter();
+    }
+  };
+
   const dataValue = {
     logout,
     setLogout,
@@ -220,6 +267,13 @@ function Provider({ children }) {
     progressRecipes,
     setProgressRecipes,
     clickSetProgress,
+    searchInput,
+    setSearchInput,
+    radio,
+    setRadio,
+    path,
+    setPath,
+    handleClickFilter,
     doneRecipes,
     doneFilter,
     doneFilterRecipes,
