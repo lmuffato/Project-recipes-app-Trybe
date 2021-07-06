@@ -9,17 +9,24 @@ export default function FoodDetails() {
     recommended,
     getIngredientsAndMeasures,
     filterRecommended,
+    redirectToProgressPage,
+    copyToClipBoard,
   } = useRecipeDetails('meal');
   const recipeMeal = recipe.meals[0];
   const { ingredients, measures } = getIngredientsAndMeasures(recipeMeal);
   const { strMealThumb, strMeal, strCategory, strInstructions, strYoutube } = recipeMeal;
+
+  const styleFooter = {
+    bottom: '0px',
+    position: 'fixed',
+  };
 
   return (
     <main>
       <section>
         <img data-testid="recipe-photo" src={ strMealThumb } alt="Recipe" />
         <h1 data-testid="recipe-title">{strMeal}</h1>
-        <button type="button" data-testid="share-btn">
+        <button type="button" data-testid="share-btn" onClick={ copyToClipBoard }>
           Share button
         </button>
         <button type="button" data-testid="favorite-btn">
@@ -66,7 +73,7 @@ export default function FoodDetails() {
         <div className="carousel">
           {filterRecommended(recommended.drinks).map((rec, index) => (
             <CarouselCard
-              key={ rec.idDrink }
+              key={ index }
               cardImg={ rec.strDrinkThumb }
               cardTitle={ rec.strDrink }
               cardCategory={ rec.strAlcoholic }
@@ -76,11 +83,14 @@ export default function FoodDetails() {
         </div>
       </section>
 
-      <button type="button" data-testid="start-recipe-btn">
-        Iniciar Receita
+      <button
+        type="button"
+        data-testid="start-recipe-btn"
+        style={ styleFooter }
+        onClick={ redirectToProgressPage }
+      >
+        Continuar Receita
       </button>
     </main>
   );
 }
-
-// carousel: https://react-bootstrap.github.io/components/carousel/

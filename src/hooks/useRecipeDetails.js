@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
+import getMealsOrDrinks from '../helper/mealsOrDrinksMethods';
 import { fetchById, fetchName } from '../services/data';
 
 const INITIAL_STATE = {
@@ -7,13 +8,15 @@ const INITIAL_STATE = {
   drinks: [{ strYoutube: '' }],
 };
 
-export default function useRecipeDetails(type) {
-  const recommendedSite = type === 'meal' ? 'cocktail' : 'meal';
+const copy = require('clipboard-copy');
 
-  const { location } = useHistory();
+export default function useRecipeDetails(type) {
+  const { recommendedSite, portugueseFood, site } = getMealsOrDrinks(type);
+
+  const { location, push } = useHistory();
+  const { id } = useParams();
   const [recipe, setRecipe] = useState(INITIAL_STATE);
   const [recommended, setRecommended] = useState(INITIAL_STATE);
-  const id = location.pathname.split('/')[2];
 
   const getIngredientsAndMeasures = (rcp) => {
     const entriesRecipe = Object.entries(rcp);
@@ -41,9 +44,18 @@ export default function useRecipeDetails(type) {
     return filteredRecommended;
   };
 
+  const redirectToProgressPage = () => {
+    push(`/${portugueseFood}/${id}/in-progress`);
+  };
+
+  const copyToClipBoard = () => {
+    copy(`http://localhost:3000${location.pathname}`);
+    alert('Link copiado!');
+  };
+
   useEffect(() => {
     const fetchDidMount = async () => {
-      const resultRecipe = await fetchById(type, id);
+      const resultRecipe = await fetchById(site, id);
       const resultRecommended = await fetchName(recommendedSite);
       setRecipe(resultRecipe);
       setRecommended(resultRecommended);
@@ -57,5 +69,7 @@ export default function useRecipeDetails(type) {
     recommended,
     getIngredientsAndMeasures,
     filterRecommended,
+    redirectToProgressPage,
+    copyToClipBoard,
   };
 }

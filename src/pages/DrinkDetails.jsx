@@ -7,8 +7,10 @@ export default function DrinkDetails() {
     getIngredientsAndMeasures,
     recommended,
     filterRecommended,
-  } = useRecipeDetails('cocktail');
-  // ALERTA GAMBIARRA
+    redirectToProgressPage,
+    copyToClipBoard,
+  } = useRecipeDetails('drink');
+  // ALERTA ENGENHARIA DE EMERGÊNCIA
   const recipeDrink = recipe.drinks
     ? recipe.drinks[0]
     : { drinks: [{}] };
@@ -20,12 +22,17 @@ export default function DrinkDetails() {
     strAlcoholic,
   } = recipeDrink;
 
+  const styleFooter = {
+    bottom: '0px',
+    position: 'fixed',
+  };
+
   return (
     <main>
       <section>
-        <img data-testid="recipe-photo" src={ strDrinkThumb } alt="#" />
+        <img data-testid="recipe-photo" src={ strDrinkThumb } alt="Recipe" />
         <h1 data-testid="recipe-title">{strDrink}</h1>
-        <button type="button" data-testid="share-btn">
+        <button type="button" data-testid="share-btn" onClick={ copyToClipBoard }>
           Share button
         </button>
         <button type="button" data-testid="favorite-btn">
@@ -55,12 +62,11 @@ export default function DrinkDetails() {
         </section>
       </section>
       <section>
-
         <h2>Recommended</h2>
         <div className="carousel">
           {filterRecommended(recommended.meals).map((rec, index) => (
             <CarouselCard
-              key={ rec.idMeal }
+              key={ index }
               cardImg={ rec.strMealThumb }
               cardTitle={ rec.strMeal }
               cardCategory={ rec.strCategory }
@@ -70,8 +76,13 @@ export default function DrinkDetails() {
         </div>
       </section>
 
-      <button type="button" data-testid="start-recipe-btn">
-        Iniciar Receita
+      <button
+        type="button"
+        data-testid="start-recipe-btn"
+        style={ styleFooter }
+        onClick={ redirectToProgressPage }
+      >
+        Continuar Receita
       </button>
     </main>
   );
