@@ -6,7 +6,7 @@ import Button from '../components/Generics/Button';
 import RecipeIngredients from '../components/RecipeIngredients/RecipeIngredients';
 import Container from '../styles/recipeDetails';
 import MealVideo from '../components/MealVideo/MealVideo';
-import Carousel from '../components/Carousel/Carousel.jsx';
+import Carousel from '../components/Carousel/Carousel';
 
 function RecipeDetails({ type }) {
   const { id } = useParams();
