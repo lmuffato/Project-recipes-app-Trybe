@@ -5,6 +5,9 @@ import Card from '../Card/Card';
 
 function Carousel({ recommendations }) {
   // const [currentImage, setCurrentImage] = useState(0);
+  // recommendations max-length = 6;
+  // espera que o fetch à API tenha sido realizado -- se pg de comidas, recomendaçoes de bebidas
+  // se pg de bebidas, recomendaçoes de comidas
 
   return (
     <CarouselContainer>

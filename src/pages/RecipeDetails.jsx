@@ -11,6 +11,7 @@ import useFetchRecipes from '../effects/useFetchRecipes';
 
 function RecipeDetails({ type }) {
   const { id } = useParams();
+  const currRecomendation = type === 'meals' ? 'drinks' : 'meals';
   const endpointMeals = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
   const endpointDrinks = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
   const [fetchRecipeURL, setFetchRecipeURL] = useState('');
@@ -39,16 +40,12 @@ function RecipeDetails({ type }) {
     }
   }, [type]);
 
+  const fetchData = useFetchRecipes(currRecomendation);
   useEffect(() => {
     handleFetchIngredients();
     handleFetch(fetchRecipeURL);
-  }, [fetchRecipeURL, handleFetch, handleFetchIngredients]);
-
-  const fetchData = useFetchRecipes(type);
-
-  useEffect(() => {
-    if (fetchData[type]) setRecomendations(fetchData[type]);
-  }, [fetchData, type]);
+    if (fetchData[currRecomendation]) setRecomendations(fetchData[currRecomendation]);
+  }, [currRecomendation, fetchData, fetchRecipeURL, handleFetch, handleFetchIngredients]);
 
   if (isLoading) {
     return 'Loading';
