@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Button, Card, Col, Container, Form, Image, Row } from 'react-bootstrap';
 import { useLocation, useParams } from 'react-router';
 import { getRecipeByID } from '../../services/fetchRecipes';
+import ShareButton from '../../Components/ShareButton';
 
 function Details() {
   const { pathname } = useLocation();
@@ -22,7 +23,7 @@ function Details() {
           {console.log(recipesDetails)}
           <Image thumbnail data-testid="recipe-photo" />
           <h1 data-testid="recipe-title">Titulo</h1>
-          <button type="button" data-testid="share-btn">Share</button>
+          <ShareButton />
           <button type="button" data-testid="favorite-btn">Favorite</button>
           <p data-testid="recipe-category">Texto</p>
           <Form.Check data-testid={ `${0}-ingredient-name-and-measure` } />
