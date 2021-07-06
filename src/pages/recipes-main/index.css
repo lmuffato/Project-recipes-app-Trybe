@@ -53,7 +53,7 @@ body {
   margin: 5px;
 }
 
-#startBtn a {
+.startBtn {
   bottom: 0;
   position: fixed;
 }
