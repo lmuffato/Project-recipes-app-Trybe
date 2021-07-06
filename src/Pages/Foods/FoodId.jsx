@@ -21,7 +21,7 @@ function FoodId() {
       });
   }, [id]);
 
-  if (!foodForId.length) return <div>Loading...</div>;
+  if (!foodForId) return <div>Loading...</div>;
 
   const {
     strMeal,
