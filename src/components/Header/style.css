@@ -4,28 +4,14 @@
 
 .header-top {
   align-items: center;
+  background-color: #ffc529;
   display: flex;
   justify-content: space-around;
+  padding: 10px 0;
   width: 100%;
 }
 
 .header-top button {
   background-color: transparent;
   border: none;
-}
-
-.search-bar-container {
-  background-color: #aebeca;
-
-  /* height: 50px; */
-
-  /* max-height: 0; */
-  overflow: hidden;
-  transition: all 0.1s linear;
-}
-
-.search-bar-container.active {
-
-  /* max-height: 50px; */
-  transition: all 0.1s linear;
 }

@@ -14,30 +14,38 @@ export default function HeaderSearchBar() {
 
   const { setRecipesDrinks, setRecipesFoods } = useContext(RecipesContext);
 
-  /* Source: https://github.com/tryber/sd-09-project-recipes-app/tree/main-group-23 */
-  const clickSearchButton = async () => {
-    const { pathname } = history.location;
-    if (pathname === '/bebidas') {
-      const recipes = await searchDrinks(myChoice, searchTerm);
-      if (recipes === null) {
-        const { alert } = window;
-        alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
-        return;
-      }
-      if (recipes.length === 1) history.push(`/bebidas/${recipes[0].idDrink}`);
-      setRecipesDrinks(recipes);
+  const getDrinks = async () => {
+    const recipes = await searchDrinks(myChoice, searchTerm);
+    if (recipes === null) {
+      const { alert } = window;
+      alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+      return;
     }
+    if (recipes.length === 1) history.push(`/bebidas/${recipes[0].idDrink}`);
+    setRecipesDrinks(recipes);
+  };
 
-    if (pathname === '/comidas') {
-      const recipes = await searchFoods(myChoice, searchTerm);
-      if (recipes === null) {
-        const { alert } = window;
-        alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
-        return;
+  const getFoods = async () => {
+    const recipes = await searchFoods(myChoice, searchTerm);
+    if (recipes === null) {
+      const { alert } = window;
+      alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+      return;
+    }
+    if (recipes.length === 1) history.push(`/comidas/${recipes[0].idMeal}`);
+    setRecipesFoods(recipes);
+  };
+
+  /* Source: https://github.com/tryber/sd-09-project-recipes-app/tree/main-group-23 */
+  const clickSearchButton = () => {
+    if (searchTerm && myChoice) {
+      const { pathname } = history.location;
+      if (pathname === '/bebidas') {
+        getDrinks();
       }
-      if (recipes.length === 1) history.push(`/comidas/${recipes[0].idMeal}`);
-      console.log(recipes);
-      setRecipesFoods(recipes);
+      if (pathname === '/comidas') {
+        getFoods();
+      }
     }
   };
 
@@ -47,7 +55,7 @@ export default function HeaderSearchBar() {
   };
 
   return (
-    <div>
+    <div data-testid="search-bar" className="search-bar-container">
       <input
         type="text"
         className="search-input"

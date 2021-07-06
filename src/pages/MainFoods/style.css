@@ -1,0 +1,47 @@
+.foods-page {
+  width: 100%;
+}
+
+.buttons-categories {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  height: 60px;
+  justify-content: space-evenly;
+  margin-top: 15px;
+  width: 100%;
+}
+
+.buttons-categories button {
+  background-color: #d7d7d7;
+  border: none;
+  border-radius: 20px;
+  padding: 4px 9px;
+  transition: background-color 0.1s ease;
+}
+
+.recipe-card {
+  box-shadow: 0 14px 44px -12px rgba (0 , 0 , 0 , 0.76);
+  display: flex;
+  flex-direction: column;
+  margin: 15px 10px;
+  position: relative;
+}
+
+.recipe-card img {
+  height: 300px;
+  width: 100%;
+}
+
+.recipe-card p {
+  align-items: center;
+  background-color: rgba(240, 240, 240, 0.3);
+  bottom: 0;
+  display: flex;
+  font-weight: 400;
+  height: 30%;
+  margin: 0;
+  padding-left: 10px;
+  position: absolute;
+  width: 100%;
+}
