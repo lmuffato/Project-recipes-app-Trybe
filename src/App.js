@@ -6,22 +6,25 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Footer from './compenents/Footer';
 // import MainRecepies from './compenents/MainRecepies';
 import SearchbarProvider from './contexts/SeachbarProvider';
-import UserProvider from './contexts/UserProvider';
-import MainMealsRecipes from './pages/MainMealsRecipes';
+// import UserProvider from './contexts/UserProvider';
+import MainMealsRecipes from './pages/MainRecipesPage';
+import RecipesProvider from './contexts/RecipesProvider';
 
 function App() {
   return (
     <div className="meals">
-      <UserProvider>
-        <SearchbarProvider>
+      {/* <UserProvider> */}
+      <SearchbarProvider>
+        <RecipesProvider>
           <Switch>
             <Route exact path="/" component={ LoginPage } />
             <Route exact path="/comidas" component={ MainMealsRecipes } />
             <Route exact path="/bebidas" component={ MainMealsRecipes } />
           </Switch>
           <Footer />
-        </SearchbarProvider>
-      </UserProvider>
+        </RecipesProvider>
+      </SearchbarProvider>
+      {/* </UserProvider> */}
     </div>
   );
 }

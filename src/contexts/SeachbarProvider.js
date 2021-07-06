@@ -4,10 +4,13 @@ import SearchbarContext from './SearchbarContext';
 
 function SearchbarProvider({ children }) {
   const [mealOrDrink, setMealOrDrink] = useState('meal');
+  const [searchCategory, setSearchCategory] = useState('list');
 
   const contextValue = {
     mealOrDrink,
     setMealOrDrink,
+    searchCategory,
+    setSearchCategory,
   };
 
   console.log(`SearchbarProvider: ${mealOrDrink}`);
