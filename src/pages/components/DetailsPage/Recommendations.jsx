@@ -4,7 +4,8 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 
 function Recommendations(props) {
-  const { recommendations } = props;
+  const { type } = props;
+  const recommendations = ['test'];
   return (
     <Container>
       { recommendations.map((recommendation, index) => (

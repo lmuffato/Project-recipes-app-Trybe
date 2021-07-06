@@ -4,13 +4,17 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 
 function Ingredients(props) {
-  const { ingredients } = props;
+  const { recipe } = props;
+  const recipeKeys = Object.keys(recipe);
+  const ingredients = recipeKeys.filter((key) => key.includes('Ingredient'));
+  const measures = recipeKeys.filter((key) => key.includes('Measure'));
+
   return (
     <Container>
       <h2>Ingredients</h2>
       { ingredients.map((ingredient, index) => (
         <Row key={ ingredient } data-testid={ `${index}-ingredient-name-and-measure` }>
-          { ingredient }
+          { `${recipe[measures[index]]} ${recipe[ingredient]}` }
         </Row>
       )) }
     </Container>

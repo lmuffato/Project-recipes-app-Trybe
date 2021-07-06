@@ -28,6 +28,5 @@ export async function fetchMealSearched(text, option) {
 export async function fetchSpecificMeal(id) {
   const endpoint = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
   const { meals } = await (await fetch(endpoint)).json();
-  console.log(meals);
   return meals;
 }

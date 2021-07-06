@@ -7,7 +7,11 @@ import shareIcon from '../../../images/shareIcon.svg';
 import whiteHeartIcon from '../../../images/whiteHeartIcon.svg';
 
 function DetailsHeader(props) {
-  const { img, title, category } = props;
+  const { recipe } = props;
+  const title = recipe.strDrink || recipe.strMeal;
+  const img = recipe.strDrinkThumb || recipe.strMealThumb;
+  const category = recipe.strAlcoholic || recipe.strCategory;
+
   return (
     <Container>
       <Row>
@@ -24,7 +28,6 @@ function DetailsHeader(props) {
       </Row>
       <Row>
         <Col data-testid="recipe-category">
-          Categoria
           { category }
         </Col>
       </Row>

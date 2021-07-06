@@ -32,6 +32,5 @@ export async function fetchMealSearched(text, option) {
 export async function fetchSpecificDrink(id) {
   const endpoint = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
   const { drinks } = await (await fetch(endpoint)).json();
-  console.log(drinks);
   return drinks;
 }
