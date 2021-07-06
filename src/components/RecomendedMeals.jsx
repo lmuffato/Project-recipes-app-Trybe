@@ -1,27 +1,20 @@
-import React, { useEffect, useState } from 'react';
-import { fetchRandonMeal } from '../services/getApis';
+import React from 'react';
+import PropTypes from 'prop-types';
 
-function RecomendedMeals() {
-  const [recomendedMeals, setRecomendedMeals] = useState([]);
-  useEffect(() => {
-    const MEALS_NUMBER = 6;
-    const getRandonDrink = async () => {
-      const result = await fetchRandonMeal();
-      setRecomendedMeals([...recomendedMeals, result.meals[0]]);
-    };
-    if (recomendedMeals.length < MEALS_NUMBER) getRandonDrink();
-  }, [recomendedMeals]);
-
+function RecomendedMeals({ recommendationId, mealImg, mealName, mealTitleId }) {
   return (
-    <div data-testid="0-recomendation-card">
-      {recomendedMeals.map((meal, index) => (
-        <div key={ index } data-testid={ `${index}-recomendation-card"` }>
-          <img src={ meal.strMealThumb } alt="Recomended meal" />
-          <h3>{ meal.strMeal }</h3>
-        </div>
-      ))}
+    <div data-testid={ recommendationId } className="carousel-card">
+      <img src={ mealImg } alt="Recomended drink" />
+      <h3 data-testid={ mealTitleId }>{ mealName }</h3>
     </div>
   );
 }
+
+RecomendedMeals.propTypes = {
+  recommendationId: PropTypes.string,
+  mealImg: PropTypes.string,
+  mealName: PropTypes.string,
+  mealTitleId: PropTypes.string,
+}.isRequired;
 
 export default RecomendedMeals;

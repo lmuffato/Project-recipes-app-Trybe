@@ -3,6 +3,10 @@ footer {
   position: fixed;
 }
 
+/* img {
+  width: 200px;
+} */
+
 header {
   display: flex;
   flex-wrap: wrap;
@@ -19,6 +23,35 @@ header {
   height: 100vh;
   justify-content: center;
   width: 100%;
+}
+
+.carousel-card {
+  display: flex;
+  flex-direction: column;
+  height: 200px;
+  margin: 5px;
+  width: 40vw;
+}
+
+.carousel-card > img {
+  border-radius: 0.6rem;
+  height: 200px;
+  object-fit: fill;
+  overflow: hidden;
+  width: 40vw;
+}
+
+.carousel-card > h3 {
+  overflow: hidden;
+  padding-bottom: 15px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.carousel-list {
+  display: flex;
+  margin: 10px 30px;
+  overflow-x: scroll;
 }
 
 /*
