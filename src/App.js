@@ -13,7 +13,6 @@ import Drinks from './pages/Drinks';
 import DrinksIngredients from './pages/DrinksIngredients';
 import FoodsIngredients from './pages/FoodsIngredients';
 import FoodsArea from './pages/FoodsArea';
-import Comida from './pages/Comida';
 
 function App() {
   return (
@@ -22,7 +21,6 @@ function App() {
         <SearchbarProvider>
           <Switch>
             <Route exact path="/" component={ LoginPage } />
-            <Route path="/comidas" component={ Comida } />
             <Route exact path="/explorar" component={ Explore } />
             <Route exact path="/explorar/comidas" component={ Foods } />
             <Route exact path="/explorar/bebidas" component={ Drinks } />

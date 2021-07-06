@@ -23,10 +23,10 @@ function DrinksIngredients() {
       twelveIngredients.map((ingredient, index) => {
         const name = ingredient.strIngredient1;
         return (
-          <Link to="/comidas" key={ index } data-testid={ `${index}-ingredient-card` }>
+          <Link to="/bebidas" key={ index } data-testid={ `${index}-ingredient-card` }>
             <img
               data-testid={ `${index}-card-img` }
-              src={ `https://www.themealdb.com/images/ingredients/${name}-Small.png` }
+              src={ `https://www.thecocktaildb.com/images/ingredients/${name}-Small.png` }
               alt={ name }
             />
             <p data-testid={ `${index}-card-name` }>{ name }</p>
