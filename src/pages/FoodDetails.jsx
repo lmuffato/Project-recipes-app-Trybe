@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Card, Carousel, Button, Image } from 'react-bootstrap';
+import FavoriteButton from '../components/FavoriteButton';
 import RecipeDetail from '../effects/RecipeDetails';
 import RecipeInit from '../effects/RecipeInit';
 import shareIcon from '../images/shareIcon.svg';
-import favoriteIcon from '../images/whiteHeartIcon.svg';
 import { ApiCocktailFirstItems } from '../services/theCockTailAPI';
 import { ApiRecipeDetail } from '../services/theMealAPI';
 import RecipeShared from '../effects/RecipeShared';
@@ -45,12 +45,7 @@ export default function FoodDetails() {
         alt="Compartilhar"
         onClick={ () => setCurrMeal({ ...currMeal, shareRecipe: true }) }
       />
-      <img
-        style={ { width: '2rem' } }
-        data-testid="favorite-btn"
-        src={ favoriteIcon }
-        alt="favoritar"
-      />
+      <FavoriteButton recipe={ recipe } />
       <h3 data-testid="recipe-category">{recipe.strCategory}</h3>
       <h3>Ingredientes:</h3>
       {arrRecipeIngredients.map((ingredient, index) => {

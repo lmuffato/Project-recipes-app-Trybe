@@ -3,10 +3,10 @@ import { Button, Card, Carousel, Image } from 'react-bootstrap';
 import RecipeDetail from '../effects/RecipeDetails';
 import RecipeInit from '../effects/RecipeInit';
 import shareIcon from '../images/shareIcon.svg';
-import favoriteIcon from '../images/whiteHeartIcon.svg';
 import { ApiDetailsById } from '../services/theCockTailAPI';
 import { ApiFirstsResults } from '../services/theMealAPI';
 import RecipeShared from '../effects/RecipeShared';
+import FavoriteButton from '../components/FavoriteButton';
 
 export default function DrinkDetails() {
   const [currDrink, setCurrDrink] = useState({
@@ -43,12 +43,7 @@ export default function DrinkDetails() {
         src={ shareIcon }
         onClick={ () => setCurrDrink({ ...currDrink, shareRecipe: true }) }
       />
-      <img
-        style={ { width: '2rem' } }
-        data-testid="favorite-btn"
-        src={ favoriteIcon }
-        alt="favoritar"
-      />
+      <FavoriteButton recipe={ recipe } />
       <h3 data-testid="recipe-category">{recipe.strAlcoholic}</h3>
       <h3>Ingredientes:</h3>
       {arrRecipeIngredients.map((ingredient, index) => {
