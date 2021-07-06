@@ -14,7 +14,8 @@ function Ingredients(props) {
       <h2>Ingredients</h2>
       { ingredients.map((ingredient, index) => (
         <Row key={ ingredient } data-testid={ `${index}-ingredient-name-and-measure` }>
-          { `${recipe[measures[index]]} ${recipe[ingredient]}` }
+          { recipe[measures[index]] }
+          { recipe[ingredient] }
         </Row>
       )) }
     </Container>

@@ -2,13 +2,13 @@ import fetchDrinks,
 { fetchMealSearched, fetchSpecificDrink } from '../services/fetchDrinks';
 import { fetchDrinksCategories } from '../services/fetchCategories';
 
-export const API_FETCH = 'API_FETCH';
+export const API_DRINK_FETCH = 'API_DRINK_FETCH';
 export const STORE_DRINKS = 'STORE_DRINKS';
 export const STORE_CATEGORIES = 'STORE_CATEGORIES';
 export const SET_DRINKS_FILTER = 'SET_DRINKS_FILTER';
 export const SPECIFIC_DRINK = 'SPECIFIC_DRINK';
 
-export const apiFetch = () => ({ type: API_FETCH });
+export const apiFetch = () => ({ type: API_DRINK_FETCH });
 
 export const storeCategories = (payload) => ({ type: STORE_CATEGORIES, payload });
 

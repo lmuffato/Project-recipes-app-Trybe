@@ -1,13 +1,13 @@
 import { fetchMealsCategories } from '../services/fetchCategories';
 import fetchMeals, { fetchMealSearched, fetchSpecificMeal } from '../services/fetchMeals';
 
-export const API_FETCH = 'API_FETCH';
+export const API_MEAL_FETCH = 'API_MEAL_FETCH';
 export const STORE_CATEGORIES = 'STORE_CATEGORIES';
 export const STORE_MEALS = 'STORE_MEALS';
 export const SET_MEALS_FILTER = 'SET_MEALS_FILTER';
 export const SPECIFIC_MEAL = 'SPECIFIC_MEAL';
 
-export const apiFetch = () => ({ type: API_FETCH });
+export const apiFetch = () => ({ type: API_MEAL_FETCH });
 
 export const storeCategories = (payload) => ({ type: STORE_CATEGORIES, payload });
 

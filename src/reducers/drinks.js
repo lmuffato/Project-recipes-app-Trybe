@@ -1,4 +1,4 @@
-import { API_FETCH, SET_DRINKS_FILTER,
+import { API_DRINK_FETCH, SET_DRINKS_FILTER,
   SPECIFIC_DRINK, STORE_DRINKS } from '../actions/drinks';
 
 const INITIAL_STATE = {
@@ -11,7 +11,7 @@ const INITIAL_STATE = {
 
 const recipes = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-  case API_FETCH:
+  case API_DRINK_FETCH:
     return { ...state, loading: true };
   case STORE_DRINKS:
     return { ...state, drinks: action.payload, loading: false };
