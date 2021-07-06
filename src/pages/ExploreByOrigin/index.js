@@ -5,7 +5,7 @@ import Footer from '../../components/Footer';
 export default function ExploreByOrigin() {
   return (
     <div>
-      <Header title="Explorar por Origem" />
+      <Header title="Explorar Origem" />
       <Footer />
     </div>
   );
