@@ -3,7 +3,9 @@ import { useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import RecipeInfo from '../components/RecipeInfo/RecipeInfo';
 import Button from '../components/Generics/Button';
-import RecipeIngredients from '../components/RecipeIngredients/RecipeIngredients';
+import
+RecipeIngredientsInProgress from
+  '../components/RecipesIngredientsInProgress/RecipesIngredientsInProgress';
 import Container from '../styles/recipeDetails';
 
 function RecipesInProgress({ type }) {
@@ -60,7 +62,7 @@ function RecipesInProgress({ type }) {
       </RecipeInfo>
       <h3>Ingredientes</h3>
       <div className="ingredients-list">
-        <RecipeIngredients recipe={ singleRecipe } />
+        <RecipeIngredientsInProgress recipe={ singleRecipe } />
       </div>
       <h3>Instructions</h3>
       <div className="instructions">
