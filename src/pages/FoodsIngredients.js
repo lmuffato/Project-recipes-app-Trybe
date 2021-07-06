@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 function FoodsIngredients() {
   const [ingredients, setIngredients] = useState([]);
+  // const [selectedIngredient, setSelectedIngredient] = useState('');
 
   useEffect(() => {
     const getIngredients = async () => {
@@ -21,7 +22,13 @@ function FoodsIngredients() {
       twelveIngredients.map((ingredient, index) => {
         const name = ingredient.strIngredient;
         return (
-          <Link to="/comidas" key={ index } data-testid={ `${index}-ingredient-card` }>
+          <Link
+            to="/comidas"
+            key={ index }
+            data-testid={ `${index}-ingredient-card` }
+            // Passar o nome do ingrediente para um estado global para filtra-lo por receita
+            // onClick={ setSelectedIngredient(name) }
+          >
             <img
               data-testid={ `${index}-card-img` }
               src={ `https://www.themealdb.com/images/ingredients/${name}-Small.png` }
@@ -33,6 +40,8 @@ function FoodsIngredients() {
       })
     );
   };
+
+  console.log(ingredients);
 
   return (
     getTwelveIngredients()
