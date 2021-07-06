@@ -1,0 +1,17 @@
+.card-left {
+  float: left;
+  padding: 1px;
+  width: 50%;
+}
+
+.card-right {
+  float: right;
+  padding: 1px;
+  width: 50%;
+
+}
+
+.carousel-indicators {
+  visibility: hidden;
+}
+

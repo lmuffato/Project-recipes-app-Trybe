@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { node } from 'prop-types';
+import { fetchApiDrinks, fetchApiFoods, fetchCategoryFoods, fetchCategoryDrinks,
+  fetchFilterFoods, fetchFilterDrinks, fetchRecipeFood, fetchRecipeDrink,
+  fetchFoodsRecommended, fetchDrinksRecommended } from '../services/fetchApi';
 import Context from './Context';
-import {
-  fetchApiDrinks,
-  fetchApiFoods,
-  fetchCategoryFoods,
-  fetchCategoryDrinks,
-  fetchFilterFoods,
-  fetchFilterDrinks,
 
-} from '../services/fetchApi';
+// import { fetchApiDrinks } from '../services/fetchApi';
+
+import { checkExist }
+  from '../pages/DetailsPages/components/buttons/ButtonMakeRecipeDrink';
+
+import setProgressRecipesLS from '../services/localStorage/setProgressRecipesLS';
 import Mock from '../services/mokcInformation';
 
 function Provider({ children }) {
@@ -26,6 +27,11 @@ function Provider({ children }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [search, setSearch] = useState(false);
+  const [recipeFood, setRecipeFood] = useState({ });
+  const [recipeDrink, setRecipeDrink] = useState({ });
+  const [foodRecommended, setFoodRecommended] = useState([]);
+  const [drinkRecommended, setDrinkRecommended] = useState([]);
+  const [progressRecipes, setProgressRecipes] = useState([]);
   const [radio, setRadio] = useState('');
   const [searchInput, setSearchInput] = useState('');
   const [path, setPath] = useState('');
@@ -75,20 +81,86 @@ function Provider({ children }) {
         setFilterDrinks(data);
       };
       getCategoryDrinks();
-    } if (category === e.target.innerText) {
+    }
+    if (category === e.target.innerText) {
       setShowFilter(false);
-    } if (e.target.innerText === 'All') {
+    }
+    if (e.target.innerText === 'All') {
       setShowFilter(false);
     }
   };
 
-  const clickRecipeFood = (id) => {
-    console.log(id);
+  const clickRecipeFood = (id) => { // JSON da receita em si, para pagina de Details.
+    const getRecipeFood = async (idFood) => {
+      const data = await fetchRecipeFood(idFood);
+      setRecipeFood(data);
+    };
+    getRecipeFood(id);
   };
 
-  const clickRecipeDrinks = (id) => {
-    console.log(id);
+  const clickRecipeDrinks = (id) => { // JSON da receita em si, para pagina Details
+    const getRecipeDrink = async (idDrink) => {
+      const data = await fetchRecipeDrink(idDrink);
+      setRecipeDrink(data);
+    };
+    getRecipeDrink(id);
   };
+
+  function foodsRecommendedF() { // funcao q busca comidas recomendadas e seta na variavel global.
+    const fetchAsync = async () => {
+      const data = await fetchFoodsRecommended();
+      setFoodRecommended(data);
+    };
+    fetchAsync();
+  }
+
+  function drinksRecommendedF() { // funcao q busca drinks recomendados e seta na var global.
+    const fetchAsync = async () => {
+      const data = await fetchDrinksRecommended();
+      setDrinkRecommended(data);
+    };
+    fetchAsync();
+  }
+
+  function clickSetProgress(progress, id, type, recipe) {
+    console.log(id);
+    // verificar se o id já está em progresso... (progressRecipes => useState)
+    if (progress === 'in') { //
+      checkExist(id, progressRecipes);
+      setProgressRecipes([...progressRecipes, { id, progress, type }]);
+      setProgressRecipesLS(recipe);
+    }
+    if (progress === 'done') {
+      setProgressRecipes({ id, progress, type });
+      // copia tudo que há no progressRecipe, mas altera o obj q tem recebe o id. (maybe)
+    }
+  }
+
+  function initProgressInLS() {
+    if (localStorage.getItem('inProgressRecipes')) return null;
+    localStorage.setItem('inProgressRecipes',
+      JSON.stringify({ cocktails: {}, meals: {} }));
+  }
+
+  function initDoneRecipesInLS() {
+    if (localStorage.getItem('doneRecipes')) return null;
+    localStorage.setItem('doneRecipes', JSON.stringify([]));
+  }
+
+  function initFavRecipesInLS() {
+    if (localStorage.getItem('favoriteRecipes')) return null;
+    localStorage.setItem('favoriteRecipes', JSON.stringify([]));
+  }
+  // ComponentDidMount
+  useEffect(() => {
+    getInFormations();
+    // getFoods();
+    foodsRecommendedF();
+    drinksRecommendedF();
+    initProgressInLS();
+    initDoneRecipesInLS();
+    initFavRecipesInLS();
+  }, []);
 
   const doneFilter = (e) => {
     const { innerText } = e.target;
@@ -111,8 +183,8 @@ function Provider({ children }) {
       setDoneFilter(newRecipes);
     }
   };
-  // ComponentDidMount
-  useEffect(getInFormations, []);
+    // ComponentDidMount
+  // useEffect(getInFormations, []);
 
   const dataValue = {
     logout,
@@ -134,6 +206,14 @@ function Provider({ children }) {
     setPassword,
     search,
     setSearch,
+    recipeFood,
+    recipeDrink,
+    setRecipeFood,
+    foodRecommended,
+    drinkRecommended,
+    progressRecipes,
+    setProgressRecipes,
+    clickSetProgress,
     searchInput,
     setSearchInput,
     radio,
