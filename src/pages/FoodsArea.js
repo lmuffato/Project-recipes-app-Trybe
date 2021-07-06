@@ -34,20 +34,20 @@ function FoodsArea() {
     getMealsRecepies();
   }, []);
 
+  async function getFiltredFetch() {
+    const filteredFetch = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?a=${selectedArea}`)
+      .then((responses) => responses.json())
+      .then((respos) => respos.meals);
+      console.log(filteredFetch);
+      const fils = filteredFetch.filter((element, index) => index <= 12);
+    setShowRecepies(fils);
+  }
+
   useEffect(() => {
     console.log(selectedArea);
     if (selectedArea === 'All') {
       setShowRecepies(mealsRecepies.slice(0, lastRecipe));
     } else { 
-      async function getFiltredFetch() {
-      const filteredFetch = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?a=${selectedArea}`)
-        .then((responses) => responses.json())
-        .then((respos) => respos.meals);
-        console.log(filteredFetch);
-        const fils = filteredFetch.filter((element, index) => index <= 12);
-      setShowRecepies(fils);
-      console.log('caiu no else')
-    }
     getFiltredFetch();
   }
   }, [selectedArea])
