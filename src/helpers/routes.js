@@ -10,6 +10,8 @@ import DrinkDetails from '../pages/DrinkDetails';
 import ExploreFood from '../pages/ExploreFood';
 import ExploreDrink from '../pages/ExploreDrink';
 import IngredientsPage from '../pages/IngredientsPage';
+import ExploreByOrigin from '../pages/ExploreByOrigin';
+import FavoriteRecipes from '../pages/FavoriteRecipes';
 
 const componentWithHeader = ({ title }) => (
   <section>
@@ -80,7 +82,7 @@ export default [
   },
   {
     path: '/explorar/comidas/area',
-    Component: componentWithHeader,
+    Component: ExploreByOrigin,
     exact: false,
     title: 'Explorar Origem',
   },
@@ -98,7 +100,7 @@ export default [
   },
   {
     path: '/receitas-favoritas',
-    Component: componentWithHeader,
+    Component: FavoriteRecipes,
     exact: true,
     title: 'Receitas Favoritas',
   },
