@@ -1,8 +1,8 @@
 .buttons {
   display: flex;
+  flex-direction: row;
   justify-content: space-around;
   width: 100%;
-  flex-direction: row;
 }
 
 .button-favorite {
@@ -24,45 +24,43 @@
 }
 
 .card {
-  -webkit-box-shadow: 0px 7px 15px 1px rgba(0,0,0,0.53); 
-  box-shadow: 0px 7px 15px 1px rgba(0,0,0,0.53);
-  margin: 4%;
+  box-shadow: 7px 15px 1px rgba(0, 0, 0, 0.53);
   display: flex;
   justify-content: space-around;
+  margin: 4%;
 }
 
 .image {
-  order: 1;
-  height: 150px;
-  display: flex;
   align-items: center;
+  display: flex;
+  height: 150px;
+  order: 1;
 }
 
 .content {
-  order: 2;
-  display: flex;
   align-items: flex-end;
+  display: flex;
+  order: 2;
   padding-bottom: 20px;
 }
 
 .content button {
+  background-color: white;
+  border: none;
   margin-left: 10px;
   margin-right: 10px;
-  border: none;
-  background-color: white;
 }
 
-.content .share{
+.content .share {
   width: 30px;
 }
 
-.content .favorite{
+.content .favorite {
   width: 30px;
 }
 
 .favorite-share {
-  padding: 0;
-  border: none;
   background: none;
-
+  border: none;
+  padding: 0;
 }
