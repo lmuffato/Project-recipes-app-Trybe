@@ -1,11 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 function MealCards({ data, index }) {
   // console.log(data);
-  const { strMealThumb, strMeal } = data;
+  const { idMeal, strMealThumb, strMeal } = data;
   return (
-    <div className="recipe" data-testid={ `${index}-recipe-card` }>
+    <Link
+      to={ `/comidas/${idMeal}` }
+      className="recipe"
+      data-testid={ `${index}-recipe-card` }
+    >
       <img
         data-testid={ `${index}-card-img` }
         src={ strMealThumb }
@@ -13,7 +18,7 @@ function MealCards({ data, index }) {
         className="recipe-image"
       />
       <p className="recipe-title" data-testid={ `${index}-card-name` }>{strMeal}</p>
-    </div>
+    </Link>
   );
 }
 
