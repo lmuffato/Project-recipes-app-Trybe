@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import FooterMenu from '../../components/footerMenu';
+import Header from '../../components/Header';
 
 export default function ProfilePage() {
   function getItem() {
@@ -8,6 +10,7 @@ export default function ProfilePage() {
 
   return (
     <>
+      <Header />
       <p data-testid="profile-email">{getItem()}</p>
       <Link
         to="/receitas-feitas"
@@ -35,6 +38,7 @@ export default function ProfilePage() {
           Sair
         </button>
       </Link>
+      <FooterMenu />
     </>
   );
 }
