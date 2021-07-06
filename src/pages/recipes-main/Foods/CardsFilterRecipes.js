@@ -36,10 +36,19 @@ function CardsFilterRecipes() {
       </div>
     );
   };
+
+  const showErrorMessage = () => {
+    const alert = 'Sinto muito, não encontramos nenhuma receita para esses filtros.';
+    global.alert(alert);
+    return (
+      <div />
+    );
+  };
+
   return (
-    <>
-      {showFilter()}
-    </>
+    <div>
+      {(filterFoods !== null) ? showFilter() : showErrorMessage()}
+    </div>
   );
 }
 
