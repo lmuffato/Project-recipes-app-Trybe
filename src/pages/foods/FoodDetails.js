@@ -1,7 +1,9 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useStateEasyRedux } from 'easy-redux-trybe';
-// import { useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
+import positions from '../../services/data';
+import createIngredients from '../../services/functions';
 
 function FoodDetails(props) {
   const { match: { params: { id } } } = props;
@@ -10,33 +12,49 @@ function FoodDetails(props) {
 
   useEffect(() => {
     const fetchRecipie = async () => {
-      const request = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`);
-      const response = await request.json();
-      setStateRedux({ actionType: 'FETCH_FOOD', response });
+      const requestFood = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`);
+      const dataFood = await requestFood.json();
+      const responseFood = dataFood.meals;
+      setStateRedux({ actionType: 'FETCH_FOOD', responseFood });
     };
     fetchRecipie();
   }, []);
 
-  /* const food = useSelector((state) => (
-    state.FoodDetails ? state.FoodDetails.food : undefined
-  )); */
+  const foods = useSelector((state) => (
+    state.FoodDetails ? state.FoodDetails.responseFood : undefined
+  ));
+
+  console.log(foods);
 
   return (
     <div>
       Comida
       { id }
-      <div className="teste-details">
-        <img src="" alt="" data-testid="recipe-photo" />
-        <h1 data-testid="recipe-title">título</h1>
-        <button type="button" data-testid="share-btn">compartilhar</button>
-        <button type="button" data-testid="favorite-btn">favoritar</button>
-        <p data-testid="recipe-category">categoria</p>
-        <li data-testid="0-ingredient-name-and-measure">um</li>
-        <p data-testid="instructions">texto</p>
-        <div data-testid="video">vídeo</div>
-        <div data-testid="0-recomendation-card">recomendação</div>
-        <button type="button" data-testid="start-recipe-btn">Iniciar</button>
-      </div>
+      {foods && foods.map(
+        (el) => (
+          <div className="teste-details" key={ el.idMeal }>
+            <img src={ el.strMealThumb } alt={ el.strMeal } data-testid="recipe-photo" />
+            <h1 data-testid="recipe-title">{ el.strMeal }</h1>
+            <button type="button" data-testid="share-btn">compartilhar</button>
+            <button type="button" data-testid="favorite-btn">favoritar</button>
+            <p data-testid="recipe-category">{ el.strCategory }</p>
+            <ul>
+              {positions
+                .map((position, index) => createIngredients({ el, position, index }))}
+            </ul>
+            <p data-testid="instructions">{ el.strInstructions }</p>
+            <embed
+              type="video/mp4"
+              src={ el.strYoutube }
+              width="400"
+              height="300"
+              data-testid="video"
+            />
+            <div data-testid="0-recomendation-card">recomendação</div>
+            <button type="button" data-testid="start-recipe-btn">Iniciar</button>
+          </div>
+        ),
+      )}
     </div>
   );
 }
