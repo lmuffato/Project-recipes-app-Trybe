@@ -8,7 +8,10 @@ import Context from '../context/Context';
 function HeaderWithSearch() {
   const {
     search,
-    handleSearch,
+    setShowFilter,
+    setSearchInput,
+    setSearch,
+    showFilter,
   } = useContext(Context);
 
   const pageTitle = () => {
@@ -26,6 +29,22 @@ function HeaderWithSearch() {
   const style = {
     border: 'none',
     background: 'none',
+  };
+
+  const undoSearch = () => {
+    setShowFilter(false);
+    setSearch(false);
+    setSearchInput('');
+  };
+
+  const handleSearch = () => {
+    if (search === false) {
+      return setSearch(true);
+    } if (search === true && showFilter) {
+      return undoSearch();
+    } if (search === true && !showFilter) {
+      return setSearch(false);
+    }
   };
 
   return (
