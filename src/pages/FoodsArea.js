@@ -37,10 +37,19 @@ function FoodsArea() {
     if (selectedArea === 'All') {
       setShowRecepies(mealsRecepies.slice(0, lastRecipe));
     } else {
-      const filteredRecepies = mealsRecepies.filter((recepi) => (
-        recepi.strArea === selectedArea
-        ));
-        setShowRecepies(filteredRecepies.slice(0, lastRecipe));
+      async function getFiltredFetch() {
+        console.log('entrou na função de fetch filtro');
+        const filteredFetch = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?a=${selectedArea}`)
+        .then((responses) => responses.json())
+        .then((respos) => respos.meals);
+        /* const filteredRecepies = mealsRecepies.filter((recepi) => (
+          recepi.strArea === selectedArea
+          )); */
+          console.log('filteredFetch')
+          console.log((filteredFetch));
+          setShowRecepies(filteredFetch.slice(0, lastRecipe));
+        }
+        getFiltredFetch();
       }
     console.log(showRecepies)
   }, [selectedArea, mealsRecepies]);
