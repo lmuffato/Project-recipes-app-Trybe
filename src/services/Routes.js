@@ -13,6 +13,8 @@ import OriginLocation from '../pages/OriginLocation';
 import ProfilePage from '../pages/ProfilePage';
 import DoneRecipes from '../pages/DoneRecipes';
 import FavoriteRecipes from '../pages/FavoriteRecipes';
+import FoodInProcess from '../pages/FoodInProcess';
+import DrinkInProcess from '../pages/DrinkInProcess';
 
 export default function Routes() {
   return (
@@ -22,6 +24,8 @@ export default function Routes() {
       <Route path="/bebidas" component={ DrinkPage } />
       <Route path="/comidas/:idMeal" component={ RecipeDetails } />
       <Route path="/bebidas/:idDrink" component={ RecipeDetails } />
+      <Route path="/comidas/:idMeal/in-progress" component={ FoodInProcess } />
+      <Route path="/comidas/:idDrink/in-progress" component={ DrinkInProcess } />
       <Route path="/explorar" component={ ExplorePage } />
       <Route path="/explorar/comidas" component={ ExploreFoods } />
       <Route path="/explorar/bebidas" component={ ExploreDrinks } />
