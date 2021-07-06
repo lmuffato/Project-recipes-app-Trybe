@@ -9,7 +9,6 @@ function MainRecipes({ categories, recipes, handleFilter }) {
   const { setSearchCategory } = useContext(SearchbarContext);
   const { type } = useContext(RecipesContext);
 
-  console.log(type);
   return (
     <>
       <section>

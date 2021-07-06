@@ -8,13 +8,12 @@ import '../styles/Footer.css';
 
 function Footer() {
   const {
-    setMealOrDrink, setSearchCategory, setSearchFilter,
+    setMealOrDrink, setSearchCategory,
   } = useContext(SearchbarContext);
 
   const handleClick = (search) => {
     setMealOrDrink(search);
     setSearchCategory('list');
-    setSearchFilter('list');
   };
 
   return (

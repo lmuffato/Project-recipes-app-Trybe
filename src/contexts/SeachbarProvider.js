@@ -13,8 +13,6 @@ function SearchbarProvider({ children }) {
     setSearchCategory,
   };
 
-  console.log(`SearchbarProvider: ${mealOrDrink}`);
-
   return (
     <SearchbarContext.Provider value={ contextValue }>
       {children}

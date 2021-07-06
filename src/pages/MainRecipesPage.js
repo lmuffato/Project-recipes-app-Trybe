@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import Footer from '../compenents/Footer';
 import MainRecipes from '../compenents/MainRecipes';
 import RecipesContext from '../contexts/RecipesContext';
 // import RecipeCard from '../compenents/RecipeCard';
@@ -37,11 +38,10 @@ function MainMealsRecipes() {
       lastCategory: 5,
       endpointCategory: `https://www.the${type}db.com/api/json/v1/1/filter.php?c=${searchCategory}`,
     };
-    console.log(endpoints.endpointCategories);
+
     apiRequester(endpoints.endpointMealOrDrink)
       .then((response) => {
         // setRecipes(response); // Salva as 25 receitas retornadas da API, faz um backup
-        console.log(response);
         setTwelveRecipes(Object.values(response)[0].slice(0, endpoints.lastRecipe));
         // setLoading(false);
       });
@@ -51,11 +51,9 @@ function MainMealsRecipes() {
         setCategories(Object.values(response)[0].slice(0, endpoints.lastCategory));
       });
 
-    console.log(`searchCategory: ${searchCategory}`);
     if (searchCategory !== 'list') {
       apiRequester(endpoints.endpointCategory)
         .then((response) => {
-          console.log(Object.values(response));
           setReturnedCategory(Object.values(response)[0]
             .splice(0, endpoints.lastRecipe));
         });
@@ -80,41 +78,7 @@ function MainMealsRecipes() {
           recipes={ recipes }
           handleFilter={ handleFilter }
         />
-        {/* <section>
-          <button
-            type="button"
-            data-testid="All-category-filter"
-            onClick={ () => setSearchCategory('list') }
-          >
-            All
-          </button>
-          {categories.map(({ strCategory }, index) => (
-            <button
-              key={ index }
-              type="button"
-              value={ strCategory }
-              data-testid={ `${strCategory}-category-filter` }
-              onClick={ (e) => handleFilter(e.target) }
-            >
-              { strCategory }
-            </button>
-          ))}
-        </section>
-        <section className="recipes-container">
-          { type === 'meal' ? recipes.map((recipe, index) => (
-            <MealCards
-              data={ recipe }
-              index={ index }
-              key={ recipe.idMeal }
-            />
-          )) : recipes.map((recipe, index) => (
-            <DrinkCards
-              data={ recipe }
-              index={ index }
-              key={ recipe.idDrink }
-            />
-          ))}
-        </section> */}
+        <Footer />
       </>
     );
   }

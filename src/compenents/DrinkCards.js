@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 function DrinkCards({ data, index }) {
-  console.log(data);
   const { idDrink, strDrinkThumb, strDrink } = data;
   return (
     <Link
