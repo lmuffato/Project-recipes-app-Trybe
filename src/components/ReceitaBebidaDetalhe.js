@@ -11,12 +11,13 @@ import { btn } from '../styles/login';
 
 const copy = require('clipboard-copy');
 
-function ReceitaComidaDetalhe({ props }) {
-  const [favoriteFood, setFavoriteFood] = useState(false);
+function ReceitaBebidaDetalhe({ props }) {
   const [clipboardStatus, setClipboardStatus] = useState();
+  const [favoriteDrink, setFavoriteDrink] = useState(false);
+
   const history = useHistory();
 
-  const { acctualyFood, foodRecomendation, id } = props;
+  const { acctualyDrink, drinkRecomendation, id } = props;
 
   const shareClick = (e) => {
     e.preventDefault();
@@ -29,45 +30,66 @@ function ReceitaComidaDetalhe({ props }) {
   const favoriteClick = (e) => {
     e.preventDefault();
 
-    return !favoriteFood ? setFavoriteFood(true) : setFavoriteFood(false);
+    return !favoriteDrink ? setFavoriteDrink(true) : setFavoriteDrink(false);
   };
 
   const handleClick = (e) => {
     e.preventDefault();
 
-    history.push(`/comidas/${id}/in-progress`);
+    history.push(`/bebidas/${id}/in-progress`);
   };
 
   const createRecipe = () => {
-    if (acctualyFood) {
+    if (acctualyDrink) {
       const {
-        strMeal,
+        strDrink,
+        strAlcoholic,
         strCategory,
         strInstructions,
-        strYoutube,
-        strMealThumb,
-      } = acctualyFood.meals[0];
-
-      const foodRendering = acctualyFood.meals[0];
+        strIngredient1,
+        strIngredient2,
+        strIngredient3,
+        strIngredient4,
+        strIngredient5,
+        strIngredient6,
+        strIngredient7,
+        strIngredient8,
+        strIngredient9,
+        strIngredient10,
+        strIngredient11,
+        strIngredient12,
+        strIngredient13,
+        strMeasure1,
+        strMeasure2,
+        strMeasure3,
+        strMeasure4,
+        strMeasure5,
+        strMeasure6,
+        strMeasure7,
+        strMeasure8,
+        strMeasure9,
+        strMeasure10,
+        strMeasure11,
+        strMeasure12,
+        strMeasure13,
+        strDrinkThumb,
+      } = acctualyDrink.drinks[0];
 
       const ingredients = [
-        `${foodRendering.strIngredient1} ${foodRendering.strMeasure1}`,
-        `${foodRendering.strIngredient2} ${foodRendering.strMeasure2}`,
-        `${foodRendering.strIngredient3} ${foodRendering.strMeasure3}`,
-        `${foodRendering.strIngredient4} ${foodRendering.strMeasure4}`,
-        `${foodRendering.strIngredient5} ${foodRendering.strMeasure5}`,
-        `${foodRendering.strIngredient6} ${foodRendering.strMeasure6}`,
-        `${foodRendering.strIngredient7} ${foodRendering.strMeasure7}`,
-        `${foodRendering.strIngredient8} ${foodRendering.strMeasure8}`,
-        `${foodRendering.strIngredient9} ${foodRendering.strMeasure9}`,
-        `${foodRendering.strIngredient10} ${foodRendering.strMeasure10}`,
-        `${foodRendering.strIngredient11} ${foodRendering.strMeasure11}`,
-        `${foodRendering.strIngredient12} ${foodRendering.strMeasure12}`,
-        `${foodRendering.strIngredient13} ${foodRendering.strMeasure13}`,
+        `${strIngredient1} ${strMeasure1}`,
+        `${strIngredient2} ${strMeasure2}`,
+        `${strIngredient3} ${strMeasure3}`,
+        `${strIngredient4} ${strMeasure4}`,
+        `${strIngredient5} ${strMeasure5}`,
+        `${strIngredient6} ${strMeasure6}`,
+        `${strIngredient7} ${strMeasure7}`,
+        `${strIngredient8} ${strMeasure8}`,
+        `${strIngredient9} ${strMeasure9}`,
+        `${strIngredient10} ${strMeasure10}`,
+        `${strIngredient11} ${strMeasure11}`,
+        `${strIngredient12} ${strMeasure12}`,
+        `${strIngredient13} ${strMeasure13}`,
       ];
-
-      const linkLength = 32;
-      const youtubeLink = strYoutube.substr(linkLength);
 
       return (
         <div className="recipe-container">
@@ -75,10 +97,10 @@ function ReceitaComidaDetalhe({ props }) {
             alt="Produto"
             className="img-details-main"
             data-testid="recipe-photo"
-            src={ strMealThumb }
+            src={ strDrinkThumb }
           />
 
-          <h2 data-testid="recipe-title">{ strMeal }</h2>
+          <h2 data-testid="recipe-title">{ strDrink }</h2>
 
           <div>
             <button type="button" data-testid="share-btn" onClick={ shareClick }>
@@ -88,18 +110,22 @@ function ReceitaComidaDetalhe({ props }) {
               <img
                 alt="Favorite button"
                 data-testid="favorite-btn"
-                src={ !favoriteFood ? whiteHeartIcon : blackHeartIcon }
+                src={ !favoriteDrink ? whiteHeartIcon : blackHeartIcon }
               />
             </button>
           </div>
 
           {!clipboardStatus ? null : (<h5>Link copiado!</h5>)}
 
-          <p data-testid="recipe-category">{ strCategory }</p>
+          <p data-testid="recipe-category">{ `${strCategory} - ${strAlcoholic}` }</p>
 
           <ul>
             { ingredients.map((ingredient, index) => {
-              if (ingredient !== null && ingredient !== ' ' && ingredient !== '  ') {
+              console.log(ingredients);
+              if (ingredient !== null
+                && ingredient !== ' '
+                && ingredient !== '  '
+                && ingredient !== 'null null') {
                 return (
                   <li
                     key={ ingredient }
@@ -108,26 +134,24 @@ function ReceitaComidaDetalhe({ props }) {
                     { ingredient }
                   </li>);
               }
-              return null;
+              return '';
             })}
           </ul>
 
           <p data-testid="instructions">{ strInstructions }</p>
 
-          <iframe data-testid="video" width="320" height="240" src={ `https://www.youtube.com/embed/${youtubeLink}` } title="YouTube video player" frameBorder="0" />
-
           <h3>Receitas Recomendadas:</h3>
 
           <div className="recomendation-container">
 
-            { foodRecomendation.map((food, index) => {
+            { drinkRecomendation.map((drink, index) => {
               const cardLength = 5;
               if (index <= cardLength) {
                 return (
                   <RecomendacoesCard
-                    key={ food.idMeal }
-                    props={ food }
-                    type="meal"
+                    key={ drink.idDrink }
+                    props={ drink }
+                    type="drink"
                     index={ index }
                   />
                 );
@@ -143,8 +167,7 @@ function ReceitaComidaDetalhe({ props }) {
             data-testid="start-recipe-btn"
             className={ `${btn} button-recipe` }
           >
-            Start Recipe
-            {/* foodRecipeStatus === 'start' ? 'Start recipe' : 'Continuar Receita'  */}
+            Start recipe
           </Button>
         </div>
       );
@@ -155,4 +178,4 @@ function ReceitaComidaDetalhe({ props }) {
   return createRecipe();
 }
 
-export default ReceitaComidaDetalhe;
+export default ReceitaBebidaDetalhe;
