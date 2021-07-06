@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { head, isEmpty, zip } from 'lodash';
+import { head, isEmpty } from 'lodash';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
@@ -9,19 +9,8 @@ import { getFoodDetailsAPIThunk } from '../redux/actions/mealsAction';
 import { getDrinkRecipesAPIThunk } from '../redux/actions/drinksAction';
 import Recipe from '../components/Recipe';
 import Loading from '../components/Loading';
+import { createIngredientsList } from '../utils';
 
-function createList(object = {}) {
-  const entries = Object.entries(object);
-  const ingredients = entries
-    .filter(([key]) => key.includes('strIngredient'))
-    .filter(([, value]) => !isEmpty(value))
-    .map(([, value]) => value);
-  const measurements = entries
-    .filter(([key]) => key.includes('strMeasure'))
-    .filter(([, value]) => value !== ' ')
-    .map(([, value]) => value);
-  return zip(ingredients, measurements);
-}
 function ComidasDetalhes() {
   const { id } = useParams();
   const dispatch = useDispatch();
@@ -35,7 +24,7 @@ function ComidasDetalhes() {
 
   const { strMeal, strCategory, strInstructions,
     strMealThumb, strYoutube } = meal || {};
-  const ingredients = createList(meal);
+  const ingredients = createIngredientsList(meal);
   return (
     loading || isEmpty(meal) || isEmpty(drinks) ? <Loading />
       : (

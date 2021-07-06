@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { head, isEmpty, isString, zip } from 'lodash';
+import { head, isEmpty } from 'lodash';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
@@ -9,19 +9,8 @@ import { getDrinkDetailsAPIThunk } from '../redux/actions/drinksAction';
 import { getFoodRecipesAPIThunk } from '../redux/actions/mealsAction';
 import Recipe from '../components/Recipe';
 import Loading from '../components/Loading';
+import { createIngredientsList } from '../utils';
 
-function createList(object = {}) {
-  const entries = Object.entries(object);
-  const ingredients = entries
-    .filter(([key]) => key.includes('strIngredient'))
-    .filter(([, value]) => isString(value) && !isEmpty(value))
-    .map(([, value]) => value);
-  const measurements = entries
-    .filter(([key]) => key.includes('strMeasure'))
-    .filter(([, value]) => isString(value) && !isEmpty(value))
-    .map(([, value]) => value);
-  return zip(ingredients, measurements);
-}
 function BebidasDetalhes() {
   const { id } = useParams();
   const dispatch = useDispatch();
@@ -35,7 +24,7 @@ function BebidasDetalhes() {
 
   const { strDrink, strAlcoholic, strInstructions,
     strDrinkThumb } = drink || {};
-  const ingredients = createList(drink);
+  const ingredients = createIngredientsList(drink);
   return (
     loading || isEmpty(drink) || isEmpty(meals) ? <Loading />
       : (
