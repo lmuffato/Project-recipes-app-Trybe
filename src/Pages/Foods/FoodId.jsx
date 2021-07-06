@@ -9,6 +9,10 @@ function FoodId() {
   const [shouldRedirect, setShouldRedirect] = useState(false);
 
   const index = 0;
+  const style = {
+    bottom: '0px',
+    position: 'fixed',
+  };
 
   const handleClick = () => {
     setShouldRedirect(true);
@@ -58,7 +62,7 @@ function FoodId() {
       <section>
         <p>Ingredients</p>
         <ul>
-          <li data-testid={ `${index}-ingredient-name-and-measure` } />
+          <li data-testid={ `${index}-ingredient-name-and-measure` }>penne rigate</li>
         </ul>
       </section>
       <section>
@@ -83,6 +87,7 @@ function FoodId() {
         type="button"
         onClick={ handleClick }
         data-testid="start-recipe-btn"
+        style={ style }
       >
         Iniciar Receita
       </button>
