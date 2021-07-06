@@ -3,7 +3,7 @@ const fetchFoodByCategory = async (category) => {
   try {
     const response = await fetch(url);
     const data = await response.json();
-    return response.ok ? Promise.resolve(data) : Promise.reject(data);
+    return data;
   } catch (error) {
     console.error(error);
   }
