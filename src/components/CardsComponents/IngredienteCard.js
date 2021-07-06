@@ -3,14 +3,19 @@ import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import '../../styles/Card.css';
 
-function Card({ index, strName, strThumb, strId, page }) {
+function IngredienteCard({ index, strName, strThumb, page }) {
   const history = useHistory();
   return (
     <button
       className="card"
       type="button"
       data-testid={ `${index}-ingredient-card` }
-      onClick={ () => history.push(`/${page}/${strId}`) }
+      onClick={ () => history.push(
+        `/${page}`,
+        {
+          ingredientName: strName },
+
+      ) }
     >
       <img
         className="card-img"
@@ -23,12 +28,11 @@ function Card({ index, strName, strThumb, strId, page }) {
   );
 }
 
-Card.propTypes = {
+IngredienteCard.propTypes = {
   index: PropTypes.number.isRequired,
   strName: PropTypes.string.isRequired,
   strThumb: PropTypes.string.isRequired,
-  strId: PropTypes.string.isRequired,
   page: PropTypes.string.isRequired,
 };
 
-export default Card;
+export default IngredienteCard;

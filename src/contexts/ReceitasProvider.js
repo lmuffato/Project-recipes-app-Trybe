@@ -14,6 +14,8 @@ function ReceitasProvider({ children }) {
   const [filter, setFilter] = useState(false);
   const [canRender, setCanRender] = useState(false);
   const [filterValue, setFilterValue] = useState('All');
+  const [drinksByIngredient, setDrinksByIngredient] = useState();
+  const [foodsByIngredient, setFoodsByIngredient] = useState();
 
   async function fetchApi(endpoint, page) {
     await fetch(endpoint)
@@ -30,6 +32,27 @@ function ReceitasProvider({ children }) {
         }
         setAPIResponse(response);
       });
+  }
+
+  async function setFilterByIngredient(ingredient, foodOrDrink) {
+    console.log(ingredient);
+
+    if (foodOrDrink === 'food' && APIFood) {
+      await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${
+        ingredient.toLowerCase()}`)
+        .then((response) => response.json())
+        .then((response) => {
+          setFoodsByIngredient(response);
+        });
+    }
+
+    if (APIDrink) {
+      await fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${ingredient}`)
+        .then((response) => response.json())
+        .then((response) => {
+          setDrinksByIngredient(response);
+        });
+    }
   }
 
   return (
@@ -56,6 +79,9 @@ function ReceitasProvider({ children }) {
         setFilterValue,
         APIIngredientsFood,
         APIIngredientsDrink,
+        drinksByIngredient,
+        foodsByIngredient,
+        setFilterByIngredient,
       } }
     >
       {children}

@@ -26,8 +26,7 @@ function ExplorarComidasPorIngrediente() {
               key={ index }
               index={ index }
               strName={ item.strIngredient }
-              strId={ item.idIngredient }
-              page="ingredientes"
+              page="comidas"
               strThumb={ `https://www.themealdb.com/images/ingredients/${item.strIngredient}-Small.png` }
             />
           ))

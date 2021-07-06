@@ -21,19 +21,15 @@ function ExplorarBebidasPorIngrediente() {
       {
         APIIngredientsDrink && APIIngredientsDrink.drinks
           .filter((item, index) => index <= INGREDIENT_LENGTH)
-          .map((item, index) => {
-            console.log(item);
-            return (
-              <IngredienteCard
-                key={ index }
-                index={ index }
-                strName={ item.strIngredient1 }
-                strId={ index }
-                page="ingredientes"
-                strThumb={ `https://www.thecocktaildb.com/images/ingredients/${item.strIngredient1}-Small.png` }
-              />
-            );
-          })
+          .map((item, index) => (
+            <IngredienteCard
+              key={ index }
+              index={ index }
+              strName={ item.strIngredient1 }
+              page="bebidas"
+              strThumb={ `https://www.thecocktaildb.com/images/ingredients/${item.strIngredient1}-Small.png` }
+            />
+          ))
       }
       <Footer />
     </>

@@ -5,6 +5,8 @@ import Card from './CardsComponents/Cards';
 import ReceitasContext from '../contexts/ReceitasContext';
 
 function CardList({ list }) {
+  console.log({ list });
+
   const maxLength = 12;
   const { filter } = useContext(ReceitasContext);
 
@@ -16,13 +18,12 @@ function CardList({ list }) {
     }
     return (
       arr.map((recipie, index) => {
-        const { idMeal, idDrink } = recipie;
         if (recipie !== undefined) {
           if (recipie.strMeal !== undefined) {
             return (
               <Card
                 type="comidas"
-                id={ idMeal }
+                id={ recipie.idMeal }
                 index={ index }
                 key={ index }
                 strName={ recipie.strMeal }
@@ -34,7 +35,7 @@ function CardList({ list }) {
           } return (
             <Card
               type="bebidas"
-              id={ idDrink }
+              id={ recipie.idDrink }
               index={ index }
               key={ index }
               strName={ recipie.strDrink }
