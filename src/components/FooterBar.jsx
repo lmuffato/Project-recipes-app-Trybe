@@ -8,7 +8,7 @@ import mealIcon from '../images/mealIcon.svg';
 
 function FooterBar() {
   return (
-    <footer data-testid="footer" id="footer-bar">
+    <footer data-testid="footer" className="footer-bar">
       <Link to="/bebidas">
         <img
           src={ drinkIcon }
