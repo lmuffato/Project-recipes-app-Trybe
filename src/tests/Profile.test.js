@@ -31,28 +31,28 @@ describe('Profile Screen', () => {
     });
   });
 
-  describe('Profile Page Tests', () => {
-    it('Render User Email', () => {
-      const { getByTestId } = renderWithRouterAndContext(
-        <Profile />,
-        renderEmptyValue,
-      );
-      const userEmail = getByTestId(profileEmail);
-      expect(userEmail).toBeInTheDocument();
-    });
+  // describe('Profile Page Tests', () => {
+  //   it('Render User Email', () => {
+  //     const { getByTestId } = renderWithRouterAndContext(
+  //       <Profile />,
+  //       renderEmptyValue,
+  //     );
+  //     const userEmail = getByTestId(profileEmail);
+  //     expect(userEmail).toBeInTheDocument();
+  //   });
 
-    it('Render "Recipes Done Button"', () => {
-      const {} = renderWithRouterAndContext(
-        <Profile />,
-        renderEmptyValue,
-      );
-    });
+  //   it('Render "Recipes Done Button"', () => {
+  //     const {} = renderWithRouterAndContext(
+  //       <Profile />,
+  //       renderEmptyValue,
+  //     );
+  //   });
 
-    it('Render "Favorite Recipes Button"', () => {
-      const {} = renderWithRouterAndContext(
-        <Profile />,
-        renderEmptyValue,
-      );
-    });
-  });
+  //   it('Render "Favorite Recipes Button"', () => {
+  //     const {} = renderWithRouterAndContext(
+  //       <Profile />,
+  //       renderEmptyValue,
+  //     );
+  //   });
+  // });
 });

@@ -1,0 +1,8 @@
+.carousel {
+  display: flex;
+  overflow-x: scroll;
+}
+
+.carousel img {
+  width: 178px;
+}

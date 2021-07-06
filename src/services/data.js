@@ -31,6 +31,11 @@ export const fetchList = async (site) => {
 export const fetchByCategory = async (site, category) => {
   const URL = `https://www.the${site}db.com/api/json/v1/1/filter.php?c=${category}`;
   const result = await genericFetch(URL);
-  console.log(result);
+  return result;
+};
+
+export const fetchById = async (site, id) => {
+  const URL = `https://www.the${site}db.com/api/json/v1/1/lookup.php?i=${id}`;
+  const result = await genericFetch(URL);
   return result;
 };

@@ -15,7 +15,7 @@ export default function Profile() {
   return (
     <div>
       <Header title="Perfil" />
-      <h1 data-testid="profile-email">{ user.email }</h1>
+      <h1 data-testid="profile-email">{ user && user.email }</h1>
       <button
         type="button"
         onClick={ () => history.push('/receitas-feitas') }
