@@ -29,7 +29,7 @@ function ReceitaComidaDetalhe({ props }) {
   const favoriteClick = (e) => {
     e.preventDefault();
 
-    const date = new Date().toString();
+    // const date = new Date().toString();
 
     const favoriteRecipe = {
       id,
@@ -37,20 +37,17 @@ function ReceitaComidaDetalhe({ props }) {
       area: acctualyFood.meals[0].strArea,
       category: acctualyFood.meals[0].strCategory,
       alcoholicOrNot: '',
-      name: acctualyFood.strDrink,
+      name: acctualyFood.meals[0].strMeal,
       image: acctualyFood.meals[0].strMealThumb,
-      doneDate: date,
-      tags: acctualyFood.meals[0].strTags,
+      // doneDate: date,
+      // tags: acctualyFood.meals[0].strTags,
     };
 
     if (JSON.parse(localStorage.getItem('favoriteRecipes') !== null)) {
       const oldRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
 
-      console.log(oldRecipes);
-
       const newRecipes = [...oldRecipes, favoriteRecipe];
 
-      console.log('New Recipe', newRecipes);
       localStorage.setItem('favoriteRecipes', JSON.stringify(newRecipes));
     } else {
       localStorage.setItem('favoriteRecipes', JSON.stringify([favoriteRecipe]));

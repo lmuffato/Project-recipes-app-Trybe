@@ -40,8 +40,8 @@ function ReceitaBebidaDetalhe({ props }) {
       alcoholicOrNot: acctualyDrink.drinks[0].strAlcoholic,
       name: acctualyDrink.drinks[0].strDrink,
       image: acctualyDrink.drinks[0].strDrinkThumb,
-      doneDate: date,
-      tags: acctualyDrink.drinks[0].strTags,
+      // doneDate: date,
+      // tags: acctualyDrink.drinks[0].strTags,
     };
 
     if (JSON.parse(localStorage.getItem('favoriteRecipes') !== null)) {
