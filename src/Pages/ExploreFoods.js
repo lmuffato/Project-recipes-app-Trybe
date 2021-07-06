@@ -4,9 +4,16 @@ import { useHistory } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import './PagesCss/Explore.css';
+import RandomRecipe from '../util/getRandomRecipe';
 
 function ExploreFoods() {
   const history = useHistory();
+  const { meals } = RandomRecipe('comidas');
+  let randomMeal = '';
+  if (meals) {
+    randomMeal = meals[0].idMeal;
+  }
+
   return (
     <>
       <Header props={ { search: false, title: 'Explorar Comidas' } } />
@@ -35,7 +42,7 @@ function ExploreFoods() {
             size="lg"
             className="buttons"
             data-testid="explore-surprise"
-            onClick={ () => history.push('/explorar/bebidas') }
+            onClick={ () => history.push(`/comidas/${randomMeal}`) }
           >
             Me Surpreenda!
           </Button>
