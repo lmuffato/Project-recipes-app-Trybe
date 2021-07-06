@@ -9,6 +9,8 @@ function Provider({ children }) {
   const [mealsList, setMealsList] = useState([]);
   const [drinksList, setDrinksList] = useState([]);
   const [isLoading, setLoading] = useState(false);
+  const [catList, setCatList] = useState([]);
+  const [category, setCategory] = useState('All');
 
   const store = {
     userEmail,
@@ -23,6 +25,10 @@ function Provider({ children }) {
     setLoading,
     drinksList,
     setDrinksList,
+    catList,
+    setCatList,
+    category,
+    setCategory,
   };
 
   return (
