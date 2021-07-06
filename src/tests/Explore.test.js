@@ -21,7 +21,7 @@ describe('testing explore page', () => {
     userEvent.click(getFooterExplore);
     const { pathname } = history.location;
     expect(pathname).toBe('/explorar');
-  })
+  });
   test('the existence os two buttons, one for food and other for drinks', () => {
     const { history } = renderWithRouter(<App />);
     login();
@@ -29,10 +29,10 @@ describe('testing explore page', () => {
     const getExploreFood = screen.getByTestId('explore-food');
     expect(getExploreFood).toBeInTheDocument();
     expect(getExploreFood).toHaveTextContent('Explorar Comidas');
-    const getExploreDrink = screen.getByTestId('explore-drinks')
+    const getExploreDrink = screen.getByTestId('explore-drinks');
     expect(getExploreDrink).toBeInTheDocument();
     expect(getExploreDrink).toHaveTextContent('Explorar Bebidas');
-  })
+  });
   test('if explore foods button redirect the page', () => {
     const { history } = renderWithRouter(<App />);
     login();
@@ -46,7 +46,7 @@ describe('testing explore page', () => {
     const { history } = renderWithRouter(<App />);
     login();
     history.push('/explorar');
-    const getExploreDrink = screen.getByTestId('explore-drinks')
+    const getExploreDrink = screen.getByTestId('explore-drinks');
     userEvent.click(getExploreDrink);
     const { pathname } = history.location;
     expect(pathname).toBe('/explorar/bebidas');
