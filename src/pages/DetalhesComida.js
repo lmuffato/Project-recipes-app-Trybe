@@ -1,5 +1,6 @@
 import { object } from 'prop-types';
 import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import RecomendacoesCard from '../components/RecomendacoesCard';
 
@@ -15,6 +16,8 @@ function DetalhesComida({ match: { params: { id } } }) {
   const [acctualyFood, setAcctualyFood] = useState();
   const [isLoading, setIsLoading] = useState(false);
   const [foodRecomendation, setFoodRecomendation] = useState();
+
+  const history = useHistory();
 
   useEffect(() => {
     async function fetchFood() {
@@ -32,6 +35,11 @@ function DetalhesComida({ match: { params: { id } } }) {
 
   const handleClick = (e) => {
     e.preventDefault();
+    const { idMeal } = acctualyFood.meals[0];
+    console.log(idMeal);
+    console.log(acctualyFood);
+    localStorage.setItem(`${idMeal}`, 'olá');
+    history.push(`/comidas/${idMeal}/in-progress`);
   };
 
   const createRecipe = () => {

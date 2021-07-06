@@ -28,6 +28,10 @@ function App() {
 
   const renderDetalheReceitaBebida = (match) => (<DetalhesBebida match={ match } />);
 
+  const renderFoodInProgress = (match) => (<ComidasAtiva match={ match } />);
+
+  const renderDrinkInProgress = (match) => (<BebidasAtiva match={ match } />);
+
   return (
     <ProviderBebidas>
       <ProviderComidas>
@@ -42,8 +46,16 @@ function App() {
             path="/bebidas/:id"
             render={ ({ match }) => renderDetalheReceitaBebida(match) }
           />
-          <Route path="/comidas/:id-da-receita/in-progress" component={ ComidasAtiva } />
-          <Route path="/bebidas/:id-da-receita/in-progress" component={ BebidasAtiva } />
+          <Route
+            exact
+            path="/comidas/:id/in-progress"
+            render={ ({ match }) => renderFoodInProgress(match) }
+          />
+          <Route
+            exact
+            path="/bebidas/:id/in-progress"
+            render={ ({ match }) => renderDrinkInProgress(match) }
+          />
           <Route exact path="/explorar" component={ Explorar } />
           <Route exact path="/explorar/comidas" component={ ExplorarComidas } />
           <Route exact path="/explorar/bebidas" component={ ExplorarBebidas } />
