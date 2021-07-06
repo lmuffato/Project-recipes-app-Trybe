@@ -2,19 +2,18 @@ import React from 'react';
 import { string, number } from 'prop-types';
 
 function IngredientCards({
-  datatestid, index, thumbnail, name, datatestidCard, datatestidCardImg }) {
+  index, thumbnail, name, key }) {
   return (
-    <div data-testid={ datatestid }>
+    <div key={ key } data-testid={ `${index}-ingredient-card` }>
       <img
-        data-testid={ datatestidCardImg }
+        data-testid={ `${index}-card-img` }
         src={ thumbnail }
         alt={ name }
         index={ index }
-        key={ index }
       />
       <h4
         key={ index }
-        data-testid={ datatestidCard }
+        data-testid={ `${index}-card-name` }
       >
         { name }
       </h4>

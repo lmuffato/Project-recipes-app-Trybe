@@ -17,13 +17,10 @@ function ExploreFoodByIngredients() {
       <Header />
       { twelveIngredients
         .map((meal, index) => (<IngredientCards
-          datatestid={ `${index}-ingredient-card` }
           key={ index }
           name={ meal.strIngredient }
           thumbnail={ `https://www.themealdb.com/images/ingredients/${meal.strIngredient}-Small.png` }
           index={ index }
-          datatestidCardImg={ `${index}-card-img` }
-          datatestidCard={ `${index}-card-name` }
         />))}
       <Footer />
     </div>

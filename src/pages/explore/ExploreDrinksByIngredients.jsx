@@ -19,13 +19,10 @@ function ExploreDrinksByIngredients() {
       <Header />
       { twelveIngredients
         .map((drink, index) => (<IngredientCards
-          datatestid={ `${index}-ingredient-card` }
           key={ index }
           name={ drink.strIngredient1 }
           thumbnail={ `https://www.thecocktaildb.com/images/ingredients/${drink.strIngredient1}-Small.png` }
           index={ index }
-          datatestidCardImg={ `${index}-card-img` }
-          datatestidCard={ `${index}-card-name` }
         />))}
       <Footer />
     </div>
