@@ -42,7 +42,7 @@ class MainFoodCard extends React.Component {
               src={ recipe.strMealThumb }
               alt={ recipe.strMeal }
               data-testid={ `${index}-card-img` }
-              width="270px"
+              width="350px"
               onClick={ () => history.push(`/comidas/${recipe.idMeal}`) }
             />
             <h6 data-testid={ `${index}-card-name` }>{recipe.strMeal}</h6>
