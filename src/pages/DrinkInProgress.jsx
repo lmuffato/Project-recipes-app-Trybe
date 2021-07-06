@@ -47,12 +47,18 @@ export default function DrinkInProgress() {
       />
       <h3 data-testid="recipe-category">{recipe.strAlcoholic}</h3>
       {arrRecipeIngredients.map((ingredient, index) => (
-        <p
+        <div
           key={ `${index}-${ingredient[1]}` }
           data-testid={ `${index}-ingredient-step` }
         >
-          {ingredient[1]}
-        </p>
+          <input
+            type="checkbox"
+            id={ ingredient[1] }
+            name={ ingredient[1] }
+            value={ ingredient[1] }
+          />
+          <label htmlFor={ ingredient[1] }>{ingredient[1]}</label>
+        </div>
       ))}
       <p data-testid="instructions">{ recipe.strInstructions }</p>
       <Button
