@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 export const RecipesContext = createContext({});
 
 function RecipesContextProvider({ children }) {
-  const [recipesContext, setRecipesContext] = useState([]);
-  const [currentType, setCurrentType] = useState('meals');
-  const contextValue = { recipesContext, setRecipesContext, currentType, setCurrentType };
+  const [recipesContext, setRecipesContext] = useState({});
+  // const [currentType, setCurrentType] = useState('meals');
+  const contextValue = { recipesContext, setRecipesContext };
 
   return (
     <RecipesContext.Provider value={ contextValue }>
