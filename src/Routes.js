@@ -44,9 +44,17 @@ function Routes() {
       <Route exact path="/explorar/comidas" component={ ExploreFood } />
       <Route path="/explorar" component={ Explore } />
       <Route exact path="/" component={ Login } />
-      <Route exact path="/comidas/:id" component={ DetailsOfFoods } />
+      <Route
+        exact
+        path="/comidas/:id"
+        render={ (props) => <DetailsOfFoods { ...props } /> }
+      />
       <Route exact path="/comidas" component={ Foods } />
-      <Route exact path="/bebidas/:id" component={ DetailsOfDrinks } />
+      <Route
+        exact
+        path="/bebidas/:id"
+        render={ (props) => <DetailsOfDrinks { ...props } /> }
+      />
       <Route exact path="/bebidas" component={ Drinks } />
       <Route exact path="/perfil" component={ ProfileScreen } />
       <Route exact path="/receitas-feitas" component={ RecipesDone } />

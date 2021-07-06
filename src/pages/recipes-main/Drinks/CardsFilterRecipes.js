@@ -1,11 +1,11 @@
 // Drinks
 import React, { useContext } from 'react';
 import { Card } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import Context from '../../../context/Context';
 
 function CardsFilterRecipes() {
-  const { filterDrinks } = useContext(Context);
+  const { filterDrinks, search } = useContext(Context);
   const showFilter = () => {
     const lengthDrinks = 12;
     const recipes = filterDrinks.slice(0, lengthDrinks);
@@ -37,10 +37,30 @@ function CardsFilterRecipes() {
       </div>
     );
   };
+
+  const showErrorMessage = () => {
+    const alert = 'Sinto muito, não encontramos nenhuma receita para esses filtros.';
+    global.alert(alert);
+    return (
+      <div />
+    );
+  };
+
+  const redirect = () => {
+    const id = filterDrinks[0].idDrink;
+    return <Redirect to={ `/bebidas/${id}` } />;
+  };
+
+  const renderCards = () => {
+    if (search && filterDrinks === null) {
+      return showErrorMessage();
+    } if (search && filterDrinks.length === 1) {
+      return redirect();
+    } return showFilter();
+  };
+
   return (
-    <>
-      {showFilter()}
-    </>
+    renderCards()
   );
 }
 
