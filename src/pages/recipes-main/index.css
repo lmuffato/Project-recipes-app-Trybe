@@ -54,6 +54,6 @@ body {
 }
 
 a#startBtn {
-  position: fixed;
   bottom: 0px;
+  position: fixed;
 }

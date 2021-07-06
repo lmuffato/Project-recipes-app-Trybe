@@ -1,19 +1,17 @@
 .card-left {
   float: left;
-  width: 50%;
   padding: 1px;
+  width: 50%;
 }
 
 .card-right {
   float: right;
-  width: 50%;
   padding: 1px;
+  width: 50%;
+
 }
 
 .carousel-indicators {
   visibility: hidden;
 }
 
-/* #startBtn {
-  position: fixed;
-} */
