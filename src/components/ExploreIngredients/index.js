@@ -9,11 +9,11 @@ export default function ExploreIngredients() {
   const { setRecipesDrinks, setRecipesFoods } = useContext(RecipesContext);
   const maxNumber = 12;
   const [ingredientsList, setList] = useState([]);
+  const [place, setPlace] = useState('');
   const history = useHistory();
   const { pathname } = history.location;
   const linkPath = pathname.split('/')[2];
-  const handleLink = async ({ target }) => {
-    const { name } = target;
+  const handleLink = async (name) => {
     if (pathname.includes('comidas')) {
       const api = await SearchFoods('ingredient', name);
       setRecipesFoods(api);
@@ -28,9 +28,11 @@ export default function ExploreIngredients() {
       if (pathname.includes('comidas')) {
         const apiResult = await searchIngredient('meal');
         setList(apiResult.slice(0, maxNumber));
+        setPlace('meal');
       } else {
         const apiResult = await searchIngredient('cocktail');
         setList(apiResult.slice(0, maxNumber));
+        setPlace('cocktail');
       }
     };
     getApi();
@@ -42,10 +44,10 @@ export default function ExploreIngredients() {
           to={ `/${linkPath}` }
           key={ index }
           name={ ingredient }
-          onClick={ handleLink }
+          onClick={ () => handleLink(ingredient) }
         >
           <div data-testid={ `${index}-ingredient-card` }>
-            <img data-testid={ `${index}-card-img` } alt="ingredient" src={ `https://www.themealdb.com/images/ingredients/${ingredient.split(' ').join('-')}.png` } />
+            <img data-testid={ `${index}-card-img` } alt="ingredient" src={ `https://www.the${place}db.com/images/ingredients/${ingredient}-Small.png` } />
             <h1 data-testid={ `${index}-card-name` }>{ingredient}</h1>
           </div>
         </Link>
