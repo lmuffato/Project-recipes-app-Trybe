@@ -3,6 +3,10 @@ footer {
   position: fixed;
 }
 
+img {
+  width: 200px;
+}
+
 header {
   display: flex;
   flex-wrap: wrap;
@@ -19,6 +23,10 @@ header {
   height: 100vh;
   justify-content: center;
   width: 100%;
+}
+
+.recommended-card {
+  display: inline-block;
 }
 
 /*

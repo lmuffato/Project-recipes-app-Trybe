@@ -1,27 +1,20 @@
-import React, { useEffect, useState } from 'react';
-import { fetchRandonDrink } from '../services/getApis';
+import React from 'react';
+import PropTypes from 'prop-types';
 
-function RecomendedDrinks() {
-  const [recomendedDrinks, setRecomendedDrinks] = useState([]);
-  useEffect(() => {
-    const DRINKS_NUMBER = 6;
-    const getRandonDrink = async () => {
-      const result = await fetchRandonDrink();
-      setRecomendedDrinks([...recomendedDrinks, result.drinks[0]]);
-    };
-    if (recomendedDrinks.length < DRINKS_NUMBER) getRandonDrink();
-  }, [recomendedDrinks]);
-
+function RecomendedDrinks({ recommendationId, drinkImg, drinkName, drinkTitleId }) {
   return (
-    <div data-testid="0-recomendation-card">
-      {recomendedDrinks.map((drink, index) => (
-        <div key={ index } data-testid={ `${index}-recomendation-card"` }>
-          <img src={ drink.strDrinkThumb } alt="Recomended drink" />
-          <h3>{ drink.strDrink }</h3>
-        </div>
-      ))}
+    <div data-testid={ recommendationId } className="carousel-card">
+      <img src={ drinkImg } alt="Recomended drink" />
+      <h3 data-testid={ drinkTitleId }>{ drinkName }</h3>
     </div>
   );
 }
+
+RecomendedDrinks.propTypes = {
+  recommendationId: PropTypes.string,
+  drinkImg: PropTypes.string,
+  drinkName: PropTypes.string,
+  drinkTitleId: PropTypes.string,
+}.isRequired;
 
 export default RecomendedDrinks;
