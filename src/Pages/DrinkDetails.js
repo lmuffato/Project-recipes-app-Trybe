@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { actionDetails } from '../redux/actions';
 import shareIcon from '../images/shareIcon.svg';
 import favoriteIcon from '../images/blackHeartIcon.svg';
@@ -9,6 +10,7 @@ function DrinkDetails() {
   const dispatch = useDispatch();
   const [data, setData] = useState();
   const [recomendations, setRecomendations] = useState();
+  const history = useHistory();
 
   useEffect(() => {
     const fetchDrinks = async () => {
@@ -63,7 +65,7 @@ function DrinkDetails() {
         }
       });
 
-      const { strDrink, strAlcoholic, strDrinkThumb, strInstructions } = data[0];
+      const { idDrink, strDrink, strAlcoholic, strDrinkThumb, strInstructions } = data[0];
       return (
         <div>
           <img
@@ -93,7 +95,13 @@ function DrinkDetails() {
           <p data-testid="instructions">{strInstructions}</p>
           <h2>Recomendadas</h2>
           {renderRecomendations(recomendations)}
-          <button type="button" data-testid="start-recipe-btn">Iniciar Receita</button>
+          <button
+            type="button"
+            data-testid="start-recipe-btn"
+            onClick={ () => history.push(`/bebidas/${idDrink}/in-progress`) }
+          >
+            Iniciar Receita
+          </button>
         </div>
       );
     }

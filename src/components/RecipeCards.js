@@ -15,7 +15,7 @@ function GoToDetails(data) {
     }
     return history.push(url);
   }
-  if (data && data.length === 1 && showDetails === false) {
+  if (data && data.length === 1 && !showDetails) {
     return (
       <Link to={ `/comidas/${data[0].idMeal}` } key={ data[0].name }>
         <div

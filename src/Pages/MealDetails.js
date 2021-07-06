@@ -54,7 +54,6 @@ function MealDetails() {
     const ingredients = [];
     const measure = [];
     if (data) {
-      const { idMeal } = data;
       const array = Object.entries(data[0]);
 
       array.forEach((item) => {
@@ -66,7 +65,9 @@ function MealDetails() {
         }
       });
 
-      const { strMeal, strCategory, strMealThumb, strInstructions, strYoutube } = data[0];
+      const {
+        idMeal, strMeal, strCategory, strMealThumb, strInstructions, strYoutube,
+      } = data[0];
       const youtubeEmbed = strYoutube.split('=')[1];
       return (
         <div>
