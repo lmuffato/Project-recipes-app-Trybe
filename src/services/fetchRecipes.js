@@ -48,3 +48,15 @@ export async function getRecipeByID(pathname, id) {
   const result = response.json();
   return result;
 }
+
+export async function getRandomMeal() {
+  const { meals } = await fetch('https://www.themealdb.com/api/json/v1/1/random.php')
+    .then((response) => response.json());
+  return meals[0];
+}
+
+export async function getRandomDrink() {
+  const { drinks } = await fetch('https://www.thecocktaildb.com/api/json/v1/1/random.php')
+    .then((response) => response.json());
+  return drinks[0];
+}

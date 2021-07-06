@@ -4,7 +4,8 @@ import Login from './Pages/Login';
 import Details from './Pages/Details';
 import InProcess from './Pages/InProcess';
 import Explore from './Pages/Explore';
-import ExploreByType from './Pages/ExploreByType';
+import ExploreFoodOpt from './Pages/ExploreFood';
+import ExploreDrinkOpt from './Pages/ExploreDrink';
 import ExploreIngredients from './Pages/ExploreIngredients';
 import ExploreArea from './Pages/ExploreArea';
 import Profile from './Pages/Profile';
@@ -44,12 +45,12 @@ export default function Router() {
         <Route
           exact
           path="/explorar/comidas"
-          render={ (props) => <ExploreByType { ...props } header="Explorar Comidas" /> }
+          render={ (props) => <ExploreFoodOpt { ...props } header="Explorar Comidas" /> }
         />
         <Route
           exact
           path="/explorar/bebidas"
-          render={ (props) => <ExploreByType { ...props } header="Explorar Bebidas" /> }
+          render={ (props) => <ExploreDrinkOpt { ...props } header="Explorar Bebidas" /> }
         />
         <Route
           path="/explorar/comidas/ingredientes"
