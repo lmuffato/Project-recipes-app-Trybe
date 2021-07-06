@@ -11,20 +11,22 @@ function IngredientCards({
   index, thumbnail, name, key, param }) {
   const history = useHistory();
   const {
-    setFilterFoods, setFilterDrinks,
+    setFilterFoods, setFilterDrinks, filterFoods, filterDrinks, setShowFilter,
   } = useContext(Context);
-  // console.log(filterFoods);
-  // console.log(filterDrinks);
+  console.log(filterFoods);
+  console.log(filterDrinks);
   const handleExploreDirection = async () => {
     if (param === '/bebidas') {
       const data = await fetchFilterDrinkByIngredient(name);
       setFilterDrinks(data);
+      setShowFilter(true);
     }
     if (param === '/comidas') {
       const data = await fetchFilterFoodByIngredient(name);
       setFilterFoods(data);
+      setShowFilter(true);
     }
-    console.log('hello');
+    // console.log('hello');
     history.push(param);
   };
 
