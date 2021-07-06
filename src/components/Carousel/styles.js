@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 const CarouselContainer = styled.div`background-color: white;
   display: flex;
+
   /* flex-direction: row; */
   height: 500px;
   margin-bottom: 3rem;
