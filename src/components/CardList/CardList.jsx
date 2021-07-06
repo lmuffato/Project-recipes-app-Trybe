@@ -11,7 +11,8 @@ function CardList({ recipes, type, titleTestId, cardTestId }) {
     searchBarFilters, filteredRecipes } = useFilteredRecipes();
 
   useEffect(() => {
-    getFilteredRecipes(type);
+    const filtering = () => getFilteredRecipes(type);
+    filtering();
   }, [type, searchBarFilters, getFilteredRecipes]);
 
   if (recipes.length === 0) {

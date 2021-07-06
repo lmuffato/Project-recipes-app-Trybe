@@ -31,7 +31,7 @@ function RecipeDetails({ type }) {
       const request = await fetch(url);
       const data = await request.json();
       setRecipe(data[type][0]);
-      // console.log(data[type][0]);
+      console.log(data[type][0]);
       setIsLoading(false);
     } catch (err) {
       console.log(err);
@@ -39,8 +39,11 @@ function RecipeDetails({ type }) {
   }, [type]);
 
   useEffect(() => {
-    handleFetchIngredients();
-    handleFetch(fetchRecipeURL);
+    const unsubscribe = () => {
+      handleFetchIngredients();
+      handleFetch(fetchRecipeURL);
+    };
+    unsubscribe();
   }, [fetchRecipeURL, handleFetch, handleFetchIngredients]);
 
   if (isLoading) {

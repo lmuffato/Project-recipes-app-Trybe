@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import CarouselWrapper from './styles';
-import useFetchRecipes from '../../effects/useFetchRecipes';
+// import useFetchRecipes from '../../effects/useFetchRecipes';
 import CardList from '../CardList/CardList';
 
 const MAX_LENGTH = 6;
@@ -11,7 +11,7 @@ const endpointDrinks = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s
 function Carousel({ type }) {
   const [currentImage, setCurrentImage] = useState(0);
   const [recommendations, setRecomendations] = useState([]);
-  const [, setFetchUrl] = useFetchRecipes(type);
+  // const [, setFetchUrl] = useFetchRecipes(type);
   const currRecomendation = type === 'meals' ? 'drinks' : 'meals';
 
   const fetchMealRecipes = useCallback(async (endpoint) => {
@@ -33,12 +33,14 @@ function Carousel({ type }) {
   }, [currRecomendation]);
 
   useEffect(() => {
-    const setCarousel = () => {
-      if (type === 'meals') return fetchMealRecipes(endpointDrinks);
-      return fetchMealRecipes(endpointMeal);
+    const setCarousel = async () => {
+      if (type === 'meals') {
+        await fetchMealRecipes(endpointDrinks);
+      }
+      await fetchMealRecipes(endpointMeal);
     };
     setCarousel();
-  }, [fetchMealRecipes, setFetchUrl, type]);
+  }, [type]);
 
   return (
     <CarouselWrapper>
