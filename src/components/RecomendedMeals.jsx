@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 function RecomendedMeals({ recommendationId, mealImg, mealName, mealTitleId }) {
   return (
-    <div data-testid={ recommendationId }>
+    <div data-testid={ recommendationId } className="carousel-card">
       <img src={ mealImg } alt="Recomended drink" />
       <h3 data-testid={ mealTitleId }>{ mealName }</h3>
     </div>

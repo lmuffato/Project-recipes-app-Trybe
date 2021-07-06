@@ -42,17 +42,19 @@ function DrinkCardDetail() {
       <h4>Instructions</h4>
       <span data-testid="instructions">{ currentDrink.strInstructions }</span>
       <h4>Recommended Meals</h4>
-      {fullRecipes.map((meal, index) => (
-        index < RECOMMENDED_LENGHT ? (
-          <RecomendedMeals
-            key={ index }
-            recommendationId={ `${index}-recomendation-card` }
-            mealImg={ meal.strMealThumb }
-            mealName={ meal.strMeal }
-            mealTitleId={ `${index}-recomendation-title` }
-          />
-        ) : (null)
-      ))}
+      <div className="carousel-list">
+        {fullRecipes.map((meal, index) => (
+          index < RECOMMENDED_LENGHT ? (
+            <RecomendedMeals
+              key={ index }
+              recommendationId={ `${index}-recomendation-card` }
+              mealImg={ meal.strMealThumb }
+              mealName={ meal.strMeal }
+              mealTitleId={ `${index}-recomendation-title` }
+            />
+          ) : (null)
+        ))}
+      </div>
       <button data-testid="start-recipe-btn" type="button">Iniciar Receita</button>
     </div>
   );

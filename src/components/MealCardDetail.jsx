@@ -50,17 +50,19 @@ function MealCardDetail() {
         url={ youtubeId }
       />
       <h4>Recommended Drinks</h4>
-      {fullDrinks.map((drink, index) => (
-        index < RECOMMENDED_NUMBER ? (
-          <RecomendedDrinks
-            key={ index }
-            recommendationId={ `${index}-recomendation-card` }
-            drinkImg={ drink.strDrinkThumb }
-            drinkName={ drink.strDrink }
-            drinkTitleId={ `${index}-recomendation-title` }
-          />
-        ) : (null)
-      ))}
+      <div className="carousel-list">
+        {fullDrinks.map((drink, index) => (
+          index < RECOMMENDED_NUMBER ? (
+            <RecomendedDrinks
+              key={ index }
+              recommendationId={ `${index}-recomendation-card` }
+              drinkImg={ drink.strDrinkThumb }
+              drinkName={ drink.strDrink }
+              drinkTitleId={ `${index}-recomendation-title` }
+            />
+          ) : (null)
+        ))}
+      </div>
       <button data-testid="start-recipe-btn" type="button">Iniciar Receita</button>
     </div>
   );
