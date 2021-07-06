@@ -10,6 +10,10 @@
   margin: 5px;
 }
 
+.cards-foods img {
+  border-radius: 15px;
+}
+
 .cards-drinks {
   display: flex;
   flex-wrap: wrap;
@@ -20,6 +24,10 @@
 .cards-drinks div {
   border-radius: 15px;
   margin: 5px;
+}
+
+.cards-drinks img {
+  border-radius: 15px;
 }
 
 .buttonsCategoryDrinks {
