@@ -25,7 +25,7 @@ function ReceitasEmAndamento() {
   return (
     <div>
       <h1>Receita em Andamento</h1>
-      {(response) && <ProgressCard recipe={ response } />}
+      {(response) ? <ProgressCard recipe={ response } /> : ''}
     </div>
   );
 }

@@ -10,19 +10,19 @@ function BottomBtn(props) {
   const { info, inProgress } = props;
   const { idMeal, idDrink } = info;
 
-  const listCreator = () => {
-    const ingredients = [];
-    const quantity = [];
-    const ingList = [];
-    Object.entries(info)
-      .filter((e) => e[0].indexOf('strIngredient') === 0 && e[1] !== '' && e[1] !== null)
-      .map((e) => ingredients.push(e[1]));
-    Object.entries(info)
-      .filter((e) => e[0].indexOf('strMeasure') === 0 && e[1] !== '')
-      .map((e) => quantity.push(e[1]));
-    ingList.push(ingredients.map((e, i) => (`${e} ${quantity[i]}`)));
-    return (ingList);
-  };
+  // const listCreator = () => {
+  //   const ingredients = [];
+  //   const quantity = [];
+  //   const ingList = [];
+  //   Object.entries(info)
+  //     .filter((e) => e[0].indexOf('strIngredient') === 0 && e[1] !== '' && e[1] !== null)
+  //     .map((e) => ingredients.push(e[1]));
+  //   Object.entries(info)
+  //     .filter((e) => e[0].indexOf('strMeasure') === 0 && e[1] !== '')
+  //     .map((e) => quantity.push(e[1]));
+  //   ingList.push(ingredients.map((e, i) => (`${e} ${quantity[i]}`)));
+  //   return (ingList);
+  // };
 
   useEffect(() => {
     const toContinue = () => {
@@ -35,7 +35,6 @@ function BottomBtn(props) {
         const filterfood = favoritesFoods.find((e) => e[0] === id);
         const favoriteDrinks = Object.entries(JSON.parse(local).cocktails);
         const filterdrinks = favoriteDrinks.find((e) => e[0] === id);
-        console.log(filterdrinks);
         return (filterfood !== undefined || filterdrinks !== undefined
           ? setbuttonTxt('Continuar Receita') : setbuttonTxt(iniciando));
       }
@@ -51,7 +50,7 @@ function BottomBtn(props) {
   };
 
   const idProgress = {
-    [id]: listCreator()[0],
+    [id]: [],
   };
 
   const localStoragePush = () => {
