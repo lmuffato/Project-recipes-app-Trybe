@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import CarouselWrapper from './styles';
-import CarouselCard from './CarouselCard';
+// import CarouselCard from './CarouselCard';
+import CardList from '../CardList/CardList';
 import useFetchRecipes from '../../effects/useFetchRecipes';
 
 const MAX_LENGTH = 6;
 function Carousel({ type }) {
-  const [currentImage, setCurrentImage] = useState(0);
+  // const [currentImage, setCurrentImage] = useState(0);
   const [recommendations, setRecomendations] = useState([]);
   const currRecomendation = type === 'meals' ? 'drinks' : 'meals';
   const fetchData = useFetchRecipes(currRecomendation);
@@ -16,7 +17,7 @@ function Carousel({ type }) {
   useEffect(() => {
     if (fetchData[currRecomendation]) {
       setRecomendations(fetchData[currRecomendation].slice(0, MAX_LENGTH));
-      setCurrentImage(0);
+      // setCurrentImage(0);
     }
   }, [currRecomendation, fetchData]);
 
@@ -26,19 +27,20 @@ function Carousel({ type }) {
         <h3>Recomendadas</h3>
       </div>
       <div className="card-grid">
-        { recommendations.map((recommendation, index) => (
+        {/* { recommendations.map((recommendation, index) => (
           <div
             className="carousel-card-tracker center"
             data-testid={ `${index}-recommendation-card` }
             key={ index }
           >
-            <CarouselCard
+            <CardList
               recommendation={ recommendation }
               index={ currentImage }
               type={ type }
             />
           </div>
-        ))}
+        ))} */}
+        <CardList recipes={ recommendations } type={ type } />
       </div>
       {/* <div className="right">ícone right</div> */}
       {/* <div className="left">ícone left</div> */}
