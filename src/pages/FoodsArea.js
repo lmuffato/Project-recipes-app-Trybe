@@ -27,7 +27,7 @@ function FoodsArea() {
         .then((responses) => responses.json())
         .then((respos) => respos.meals);
       setMealsRecepies(fetchRecepies);
-      console.log(fetchRecepies)
+
       setShowRecepies(fetchRecepies.slice(0, lastRecipe));
     };
     getMealsRecepies();
@@ -37,8 +37,8 @@ function FoodsArea() {
     const filteredFetch = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?a=${selectedArea}`)
       .then((responses) => responses.json())
       .then((respos) => respos.meals);
-      console.log(filteredFetch);
-      const fils = filteredFetch.filter((element, index) => index <= 12);
+    console.log(filteredFetch);
+    const fils = filteredFetch.filter((element, index) => index <= lastRecipe);
     setShowRecepies(fils);
   }
 
@@ -46,12 +46,11 @@ function FoodsArea() {
     console.log(selectedArea);
     if (selectedArea === 'All') {
       setShowRecepies(mealsRecepies.slice(0, lastRecipe));
-    } else { 
-    getFiltredFetch();
-  }
-  }, [selectedArea])
+    } else {
+      getFiltredFetch();
+    }
+  }, [selectedArea, mealsRecepies]);
 
-  
   return (
     <div>
       <select
