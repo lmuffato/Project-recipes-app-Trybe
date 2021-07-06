@@ -1,0 +1,14 @@
+.recommendation-container {
+  display: flex;
+  flex-flow: row nowrap;
+  overflow-x: scroll;
+  width: 80%;
+}
+
+.recommendation-img {
+  height: 200px;
+}
+
+.card-container {
+  margin: 20px;
+}

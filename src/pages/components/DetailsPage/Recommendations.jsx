@@ -5,6 +5,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import { getDrinks } from '../../../actions/drinks';
 import { getMeals } from '../../../actions/meals';
+import './Recommendations.css';
 
 function Recommendations(props) {
   const { type } = props;
@@ -30,19 +31,24 @@ function Recommendations(props) {
   const numberOfCards = 6;
 
   return (
-    <Container>
+    <Container as="section" className="recommendation-container">
       { recommendations.slice(0, numberOfCards).map((recommendation, index) => (
-        <div key={ index }>
-          <Row data-testid={ `${index}-recomendation-card` }>
+        <div
+          key={ index }
+          className="card-container"
+          data-testid={ `${index}-recomendation-card` }
+        >
+          <Row>
             <img
               src={ recommendation.strDrinkThumb || recommendation.strMealThumb }
               alt={ recommendation.strDrink || recommendation.strMeal }
+              className="recommendation-img"
             />
           </Row>
           <Row>
             { recommendation.strAlcoholic || recommendation.strCategory }
           </Row>
-          <Row>
+          <Row data-testid={ `${index}-recomendation-title` }>
             { recommendation.strDrink || recommendation.strMeal }
           </Row>
         </div>
