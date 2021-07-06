@@ -44,7 +44,7 @@ function RecipeDetails() {
     loading ? null
       : data.map((recipe) => (
         <div key={ recipe.strDrink || recipe.strMeal }>
-          <DetailsHeader recipe={ recipe } />
+          <DetailsHeader recipe={ recipe } type={ type } />
           <Ingredients recipe={ recipe } />
           <Instructions recipe={ recipe } />
           <Video recipe={ recipe } />

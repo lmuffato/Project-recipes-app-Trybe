@@ -7,10 +7,25 @@ import shareIcon from '../../../images/shareIcon.svg';
 import whiteHeartIcon from '../../../images/whiteHeartIcon.svg';
 
 function DetailsHeader(props) {
-  const { recipe } = props;
+  const { recipe, type } = props;
   const title = recipe.strDrink || recipe.strMeal;
   const img = recipe.strDrinkThumb || recipe.strMealThumb;
   const category = recipe.strAlcoholic || recipe.strCategory;
+
+  const favoriteRecipe = () => {
+    const favorites = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    const currentRecipe = {
+      id: recipe.idMeal || recipe.idDrink,
+      type: type === 'meals' ? 'comida' : 'bebida',
+      area: recipe.strArea || '',
+      category: recipe.strCategory || '',
+      alcoholicOrNot: recipe.strAlcoholic || '',
+      name: recipe.strMeal || recipe.strDrink,
+      image: recipe.strDrinkThumb || recipe.strMealThumb,
+    };
+    if (favorites) favorites.push(currentRecipe);
+    localStorage.setItem('favoriteRecipes', JSON.stringify(favorites || [recipe]));
+  };
 
   return (
     <Container>
@@ -23,7 +38,9 @@ function DetailsHeader(props) {
         </Col>
         <Col>
           <img src={ shareIcon } alt="Share icon" data-testid="share-btn" />
-          <img src={ whiteHeartIcon } alt="Share icon" data-testid="favorite-btn" />
+          <button type="button" onClick={ favoriteRecipe }>
+            <img src={ whiteHeartIcon } alt="Share icon" data-testid="favorite-btn" />
+          </button>
         </Col>
       </Row>
       <Row>
