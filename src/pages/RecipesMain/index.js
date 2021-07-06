@@ -4,7 +4,7 @@ import './recipesMain.css';
 import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router';
 import Header from '../../components/header';
-import MenuFoot from '../../components/menuFoot';
+import MenuFooter from '../../components/menuFooter/index';
 
 import RecipeCard from './RecipeCard';
 import Categories from './Categories';
@@ -19,7 +19,7 @@ export default function RecipesMain({ match }) {
 
   useEffect(() => {
     setPageOrigin(path === '/comidas' ? 'themealdb' : 'thecocktaildb');
-  }, []);
+  });
 
   return (
     <div>
@@ -45,7 +45,7 @@ export default function RecipesMain({ match }) {
             ),
           )}
       </div>
-      <MenuFoot />
+      <MenuFooter />
     </div>
   );
 }
