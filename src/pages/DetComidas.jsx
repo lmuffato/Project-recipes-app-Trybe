@@ -2,20 +2,7 @@ import React from 'react';
 import shareIcon from '../images/shareIcon.svg';
 
 class DetComidas extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      valueInput: '',
-      clickRButton: '',
-      api: [],
-      btn: false,
-      foodOrDrink: '',
-      foodOrDrinkApiName: '',
-    };
-  }
-
   render() {
-    console.log(this.state);
     return (
       <>
         <img

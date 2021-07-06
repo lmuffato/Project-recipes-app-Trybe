@@ -1,9 +1,10 @@
 import { combineReducers } from 'redux';
 import user from './user';
+import recipe from './recipe';
 
 const rootReducers = combineReducers({
   user,
-  // food,
+  recipe,
 });
 
 export default rootReducers;

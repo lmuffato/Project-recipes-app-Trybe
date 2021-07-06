@@ -42,7 +42,7 @@ class MainDrinkCard extends React.Component {
               src={ recipe.strDrinkThumb }
               alt={ recipe.strDrink }
               data-testid={ `${index}-card-img` }
-              onClick={ () => history.push(`comidas/${recipe.idMeal}`) }
+              onClick={ () => history.push(`bebidas/${recipe.idDrink}`) }
             />
             <h6 data-testid={ `${index}-card-name` }>{recipe.strDrink}</h6>
           </div>
