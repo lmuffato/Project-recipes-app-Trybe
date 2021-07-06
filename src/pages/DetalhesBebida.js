@@ -89,12 +89,14 @@ function DetalhesBebida({ match: { params: { id } } }) {
 
       return (
         <div className="recipe-container">
-          <img
-            alt="Produto"
-            className="img-details-main"
-            data-testid="recipe-photo"
-            src={ strDrinkThumb }
-          />
+          <div className="">
+            <img
+              alt="Produto"
+              className="img-details-main"
+              data-testid="recipe-photo"
+              src={ strDrinkThumb }
+            />
+          </div>
 
           <h2 data-testid="recipe-title">{ strDrink }</h2>
 
