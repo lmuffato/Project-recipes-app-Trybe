@@ -1,13 +1,30 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { Carousel } from 'react-bootstrap';
+import PropTypes from 'prop-types';
+import Context from '../../../context/Context';
+import makeArray from '../../../services/MakeArray/makeArr';
 
-const Recommends = () => {
-  const index = 1;
+const Recommends = ({ drink }) => {
+  const { foodRecommended, drinkRecommended } = useContext(Context);
+  let arr = [];
+  if (foodRecommended) {
+    arr = makeArray(foodRecommended); // esta funcao recebe um array de 6 objetos, e retorna um de 3, sendo que cada indice desse 3 objetos há 2 cards recomendados
+  }
+  if (drinkRecommended && drink) {
+    arr = makeArray(drinkRecommended);
+  }
   return (
-    <section>
+    <>
       <h4>Recommended</h4>
-      <div data-testid={ `${index}-recomendation-card` } />
-    </section>
+      <Carousel interval={ null }>
+        {arr.map((doubleCard) => doubleCard)}
+      </Carousel>
+    </>
   );
 };
+
+Recommends.propTypes = {
+  drink: PropTypes.object,
+}.isRequired;
 
 export default Recommends;

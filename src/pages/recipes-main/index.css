@@ -1,3 +1,7 @@
+body {
+  margin-bottom: 50px;
+}
+
 .cards-foods {
   display: flex;
   flex-wrap: wrap;
@@ -39,4 +43,9 @@
 .buttonsCategoryDrinks button {
   flex-grow: 1;
   margin: 5px;
+}
+
+a#startBtn {
+  position: fixed;
+  bottom: 0px;
 }

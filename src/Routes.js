@@ -16,8 +16,10 @@ import ExploreFood from './pages/ExplorePage/ExploreFood';
 import ExploreBeverage from './pages/ExplorePage/ExploreBeverage';
 import ExplFoodIng from './pages/ExplorePage/ExplFoodIng';
 import ExplBeverageIng from './pages/ExplorePage/ExplBeverageIng';
-import FoodInProgress from './pages/recipes-main/Foods/FoodInProgess';
-import DrinksInProgress from './pages/recipes-main/Drinks/DrinksInProgress';
+// import FoodInProgress from './pages/recipes-main/Foods/FoodInProgess';
+import DetailsInProgressFood from './pages/DetailsPages/DetailsInProgressFood';
+// import DrinksInProgress from './pages/recipes-main/Drinks/DrinksInProgress';
+import DetailsInProgressDrink from './pages/DetailsPages/DetailsInProgressDrink';
 
 function Routes() {
   return (
@@ -30,8 +32,8 @@ function Routes() {
       <Route exact path="/perfil" component={ ProfileScreen } />
       <Route exact path="/receitas-feitas" component={ RecipesDone } />
       <Route exact path="/receitas-favoritas" component={ RecipesFav } />
-      <Route exact path="/comidas/:id/in-progress" component={ FoodInProgress } />
-      <Route exact path="/bebidas/:id/in-progress" component={ DrinksInProgress } />
+      <Route exact path="/comidas/:id/in-progress" component={ DetailsInProgressFood } />
+      <Route exact path="/bebidas/:id/in-progress" component={ DetailsInProgressDrink } />
       <Route exact path="/explorar/comidas" component={ ExploreFood } />
       <Route exact path="/explorar/bebidas" component={ ExploreBeverage } />
       <Route exact path="/explorar/comidas/ingredientes" component={ ExplFoodIng } />

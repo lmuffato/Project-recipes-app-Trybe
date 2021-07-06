@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import makeObjIngredients from '../../../services/formatObjects/makeObjIngredients';
 
 const Ingredients = ({ recipe }) => {
@@ -25,5 +26,9 @@ const Ingredients = ({ recipe }) => {
     </>
   );
 };
+
+Ingredients.propTypes = {
+  recipe: PropTypes.object,
+}.isRequired;
 
 export default Ingredients;

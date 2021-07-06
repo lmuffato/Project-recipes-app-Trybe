@@ -1,25 +1,34 @@
-import React from 'react';
-import {
-  Image,
-  Heading,
-  Ingredients,
-  Instructions,
-  Recommends,
-  ButtonStartRecipe,
-} from './components/index';
+import React, { useEffect, useState } from 'react';
+// import {
+//   Image,
+//   Heading,
+//   Ingredients,
+//   Instructions,
+//   Recommends,
+//   // ButtonStartRecipe,
+// } from './components/index';
+// import Context from '../../context/Context';
+
+import ComponentAux from './ComponentAux';
 
 const DetailsDrinkRecipe = () => {
-  const instructions = 'Instrucoes para fazer capirinha, comece cortando o limão...';
-  // const drink
+  // const { recipeDrink } = useContext(Context); // variavel q guarda a receita
+  const id = window.location.pathname.match(/(\d+)/)[0];
+  const [loading, setLoading] = useState(true);
+  const [recipeDrink, setRecipeDrink] = useState({});
+  useEffect(() => {
+    async function getRecipe() {
+      const req = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`);
+      const data = await req.json();
+      setRecipeDrink(data.drinks[0]);
+      setLoading(false);
+    }
+    getRecipe();
+  }, [id]);
+
   return (
-    <>
-      <Image />
-      <Heading />
-      <Ingredients />
-      <Instructions instruc={ instructions } />
-      <Recommends />
-      <ButtonStartRecipe />
-    </>
+    loading ? <h1>Carregando....</h1>
+      : <ComponentAux recipeDrink={ recipeDrink } />
   );
 };
 

@@ -4,7 +4,8 @@ import Ingredients from './Ingredients';
 import Instructions from './Instructions';
 import VideoComponent from './Video';
 import Recommends from './Recommends';
-import ButtonStartRecipe from './ButtonStartRecipe';
+import ButtonMakeRecipeFood from './buttons/ButtonMakeRecipeFood';
+import ButtonMakeRecipeDrink from './buttons/ButtonMakeRecipeDrink';
 
 export {
   Image,
@@ -13,5 +14,6 @@ export {
   Instructions,
   VideoComponent,
   Recommends,
-  ButtonStartRecipe,
+  ButtonMakeRecipeFood,
+  ButtonMakeRecipeDrink,
 };

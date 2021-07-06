@@ -8,7 +8,15 @@ import {
   fetchCategoryDrinks,
   fetchFilterFoods,
   fetchFilterDrinks,
-  fetchRecipeFood } from '../services/fetchApi';
+  fetchRecipeFood,
+  fetchRecipeDrink,
+  fetchFoodsRecommended,
+  fetchDrinksRecommended } from '../services/fetchApi';
+
+import { checkExist }
+  from '../pages/DetailsPages/components/buttons/ButtonMakeRecipeDrink';
+
+import setProgressRecipesLS from '../services/localStorage/setProgressRecipesLS';
 
 function Provider({ children }) {
   // useStates...
@@ -25,7 +33,10 @@ function Provider({ children }) {
   const [password, setPassword] = useState('');
   const [search, setSearch] = useState(false);
   const [recipeFood, setRecipeFood] = useState({ });
-
+  const [recipeDrink, setRecipeDrink] = useState({ });
+  const [foodRecommended, setFoodRecommended] = useState([]);
+  const [drinkRecommended, setDrinkRecommended] = useState([]);
+  const [progressRecipes, setProgressRecipes] = useState([]);
   function getFoods() {
     const fetchApis = async () => {
       const dataFoods = await fetchApiFoods();
@@ -74,8 +85,9 @@ function Provider({ children }) {
     }
   };
 
-  const clickRecipeFood = (id) => {
-    console.log(id);
+  const clickRecipeFood = (id) => { // JSON da receita em si, para pagina de Details.
+    // console.log(id);
+    // console.log('fui');
     const getRecipeFood = async (idFood) => {
       const data = await fetchRecipeFood(idFood);
       setRecipeFood(data);
@@ -83,11 +95,68 @@ function Provider({ children }) {
     getRecipeFood(id);
   };
 
-  const clickRecipeDrinks = (id) => {
-    console.log(id);
+  const clickRecipeDrinks = (id) => { // JSON da receita em si, para pagina Details
+    const getRecipeDrink = async (idDrink) => {
+      const data = await fetchRecipeDrink(idDrink);
+      setRecipeDrink(data);
+    };
+    getRecipeDrink(id);
   };
+
+  function foodsRecommendedF() {
+    const fetchAsync = async () => {
+      const data = await fetchFoodsRecommended();
+      setFoodRecommended(data);
+    };
+    fetchAsync();
+  }
+
+  function drinksRecommendedF() {
+    const fetchAsync = async () => {
+      const data = await fetchDrinksRecommended();
+      setDrinkRecommended(data);
+    };
+    fetchAsync();
+  }
+
+  function clickSetProgress(progress, id, type, recipe) {
+    console.log(id);
+    // verificar se o id já está em progresso... (progressRecipes => useState)
+    if (progress === 'in') { //
+      checkExist(id, progressRecipes);
+      setProgressRecipes([...progressRecipes, { id, progress, type }]);
+      setProgressRecipesLS(recipe);
+    }
+    if (progress === 'done') {
+      setProgressRecipes({ id, progress, type });
+      // copia tudo que há no progressRecipe, mas altera o obj q tem recebe o id. (maybe)
+    }
+  }
+
+  function initProgressInLS() {
+    if (localStorage.getItem('inProgressRecipes')) return null;
+    localStorage.setItem('inProgressRecipes',
+      JSON.stringify({ cocktails: {}, meals: {} }));
+  }
+
+  function initDoneRecipesInLS() {
+    if (localStorage.getItem('doneRecipes')) return null;
+    localStorage.setItem('doneRecipes', JSON.stringify([]));
+  }
+
+  function initFavRecipesInLS() {
+    if (localStorage.getItem('favoriteRecipes')) return null;
+    localStorage.setItem('favoriteRecipes', JSON.stringify([]));
+  }
   // ComponentDidMount
-  useEffect(getFoods, []);
+  useEffect(() => {
+    getFoods();
+    foodsRecommendedF();
+    drinksRecommendedF();
+    initProgressInLS();
+    initDoneRecipesInLS();
+    initFavRecipesInLS();
+  }, []);
 
   const dataValue = {
     logout,
@@ -110,7 +179,13 @@ function Provider({ children }) {
     search,
     setSearch,
     recipeFood,
+    recipeDrink,
     setRecipeFood,
+    foodRecommended,
+    drinkRecommended,
+    progressRecipes,
+    setProgressRecipes,
+    clickSetProgress,
   };
 
   return (

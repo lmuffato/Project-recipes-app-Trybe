@@ -45,5 +45,37 @@ export async function fetchFilterDrinks(category) {
 export async function fetchRecipeFood(id) {
   const response = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`);
   const dataResponse = await response.json();
+  // console.log(dataResponse.meals[0]);
+  // console.log('request api');
   return dataResponse.meals[0];
+}
+
+// exportar funcao q faz fetch em drinks
+export async function fetchRecipeDrink(id) {
+  const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`);
+  const dataResponse = await response.json();
+  // console.log(dataResponse);
+  return dataResponse.drinks[0];
+}
+
+export async function fetchFoodsRecommended() {
+  const SIX = 6;
+  const response = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=');
+  const dataResponse = await response.json();
+  const arrLength6 = [];
+  for (let i = 0; i < SIX; i += 1) {
+    arrLength6.push(dataResponse.meals[i]);
+  }
+  return arrLength6;
+}
+
+export async function fetchDrinksRecommended() {
+  const SIX = 6;
+  const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
+  const dataResponse = await response.json();
+  const arrLength6 = [];
+  for (let i = 0; i < SIX; i += 1) {
+    arrLength6.push(dataResponse.drinks[i]);
+  }
+  return arrLength6;
 }
