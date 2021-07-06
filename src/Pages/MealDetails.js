@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { actionDetails } from '../redux/actions';
 import shareIcon from '../images/shareIcon.svg';
 import favoriteIcon from '../images/blackHeartIcon.svg';
+import '../components/Footer.css';
 
 function MealDetails() {
   const id = window.location.href.split('/')[4];
@@ -123,6 +124,7 @@ function MealDetails() {
           <h2>Recomendadas</h2>
           {renderRecomendations(recomendations)}
           <button
+            className="footer"
             type="button"
             data-testid="start-recipe-btn"
             onClick={ () => history.push(`/comidas/${idMeal}/in-progress`) }
