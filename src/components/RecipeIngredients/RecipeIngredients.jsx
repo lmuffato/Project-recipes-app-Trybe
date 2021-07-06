@@ -1,64 +1,29 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
+import formattingMeasuresAndIngredients from '../../services/formatingService';
+// import { formattingCarouselImgs } from '../../helpers/carouselData';
 
-function RecipeIngredients({ id, type }) {
-  const endpointMeals = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
-  const endpointDrinks = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
-  const [fetchRecipeURL, setFetchRecipeURL] = useState('');
-  // const [ingredientsArr, setIngredientsArr] = useState([]);
-  // const [instructionsArr, setInstructionsArr] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [recipe, setRecipe] = useState({});
+function RecipeIngredients({ recipe }) {
+  const keysAndValues = Object.entries(recipe);
 
-  const handleFetchIngredients = useCallback(() => {
-    if (type === 'meals') {
-      setFetchRecipeURL(endpointMeals);
-    }
-    if (type === 'drinks') {
-      setFetchRecipeURL(endpointDrinks);
-    }
-  }, [endpointDrinks, endpointMeals, type]);
-
-  const handleFetch = useCallback(async (url) => {
-    try {
-      const request = await fetch(url);
-      const data = await request.json();
-      setRecipe(data[type][0]);
-      console.log(data[type][0]);
-      setIsLoading(false);
-    } catch (err) {
-      console.log(err);
-    }
-  }, [type]);
-
-  // const { strIngredient1,
-  // strIngredient2, strIngredient3, strIngredient4, strIngredient5, strIngredient6, strIngredient7 } = recipe;
-
-  // const handleIngr = (value) => {
-  //   if (value.trim() !== '') {
-  //     setIngredientsArr([...ingredientsArr].push(value));
-  //     // console.log(ingredientsArr);
-  //   }
-  // };
-
-  // const handleAddIngrToArr = () => {
-  //   handleIngr(strIngredient1);
-  //   console.log(ingredientsArr);
-  // };
-
-  useEffect(() => {
-    handleFetchIngredients();
-    handleFetch(fetchRecipeURL);
-  }, [fetchRecipeURL, handleFetch, handleFetchIngredients]);
-
-  if (isLoading) {
-    return 'Loading';
-  }
+  const formatting = formattingMeasuresAndIngredients(keysAndValues);
+  // const imgsFormatted = formattingCarouselImgs(keysAndValues);
+  // console.log(imgsFormatted);
+  const { ingredients, measures } = formatting;
 
   return (
-    <div>
-      Ingredientes
-      { recipe.strCategory }
+    <div className="ing">
+      <ul>
+        {ingredients.map((element, index) => (
+          <li
+            data-testid={ `${index}-ingredient-name-and-measure` }
+            key={ index }
+          >
+            { measures[index]}
+            {' '}
+            { element }
+          </li>))}
+      </ul>
     </div>
   );
 }
@@ -66,6 +31,5 @@ function RecipeIngredients({ id, type }) {
 export default RecipeIngredients;
 
 RecipeIngredients.propTypes = {
-  type: PropTypes.string.isRequired,
-  id: PropTypes.string.isRequired,
+  recipe: PropTypes.shape().isRequired,
 };
