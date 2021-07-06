@@ -6,7 +6,6 @@ import { fetchApiIngredientsDrink } from '../../services/fetchApi';
 
 function ExploreDrinksByIngredients() {
   const [drinkIngredients, setDrinkIngredients] = useState([]);
-  console.log(drinkIngredients);
 
   useEffect(() => {
     fetchApiIngredientsDrink().then((res) => setDrinkIngredients(res));
@@ -23,6 +22,7 @@ function ExploreDrinksByIngredients() {
           name={ drink.strIngredient1 }
           thumbnail={ `https://www.thecocktaildb.com/images/ingredients/${drink.strIngredient1}-Small.png` }
           index={ index }
+          param="/bebidas"
         />))}
       <Footer />
     </div>

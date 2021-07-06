@@ -21,6 +21,7 @@ function ExploreFoodByIngredients() {
           name={ meal.strIngredient }
           thumbnail={ `https://www.themealdb.com/images/ingredients/${meal.strIngredient}-Small.png` }
           index={ index }
+          param="/comidas"
         />))}
       <Footer />
     </div>
