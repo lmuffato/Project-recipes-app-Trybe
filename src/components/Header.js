@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import { useHistory } from 'react-router';
 import profile from '../images/profileIcon.svg';
 import search from '../images/searchIcon.svg';
-// import BarraBuscar from './BarraBuscar';
+import SearchBar from './SearchBar';
 
-function Header({ title, show = true }) {
+function Header({ title, show }) {
   const history = useHistory();
   const [click, setClick] = useState(false);
 
@@ -43,9 +43,7 @@ function Header({ title, show = true }) {
 
       </div>
       <div>
-        { (click) ? <div data-testid="search-input">barra de buscar aqui</div> : null }
-        {/* coloquei o data-testid aqui para passar no requisto 12, mas ele é para ser colocado no input do
-        componete barrabuscar, e esse componete deve ser renderizado aqui */}
+        { click && <SearchBar type={ title } />}
       </div>
     </section>
   );
@@ -53,7 +51,10 @@ function Header({ title, show = true }) {
 
 Header.propTypes = {
   title: PropTypes.string.isRequired,
-  show: PropTypes.bool.isRequired,
+  show: PropTypes.bool,
+};
+Header.defaultProps = {
+  show: true,
 };
 
 export default Header;

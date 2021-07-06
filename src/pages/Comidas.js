@@ -1,14 +1,15 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import {
-  getFoodCategoriesAPIThunk, getFoodRecipesAPIThunk } from '../redux/actions/mealsAction';
+import { ALL_MEALS_ENDPOINT,
+  MEALS_BY_CATEGORY_ENDPOINT } from '../services/meals';
+import { getFoodCategoriesAPIThunk,
+  getFoodRecipesAPIThunk } from '../redux/actions/mealsAction';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Loading from '../components/Loading';
 import MealsCategoryButtons from '../components/MealsCategoryButtons';
 import MealsCards from '../components/MealsCards';
-import { ALL_MEALS_ENDPOINT, MEALS_BY_CATEGORY_ENDPOINT } from '../services/meals';
 
 const pickEndpoint = (category) => {
   switch (category) {
@@ -18,6 +19,7 @@ const pickEndpoint = (category) => {
     return MEALS_BY_CATEGORY_ENDPOINT(category);
   }
 };
+
 function Comidas() {
   const dispatch = useDispatch();
   const selectedCategory = useSelector((state) => state.meals.selectedCategory);
@@ -27,14 +29,15 @@ function Comidas() {
   useEffect(() => {
     dispatch(getFoodRecipesAPIThunk(pickEndpoint(selectedCategory)));
   }, [dispatch, selectedCategory]);
-  const loadingRecipes = useSelector((state) => state.meals.loadingRecipes);
-  const loadingCategories = useSelector((state) => state.meals.loadingCategories);
+  const loadingRecipes = useSelector((state) => state.loading.loadingRecipes);
+  const loadingCategories = useSelector((state) => state.loading.loadingCategories);
+  const meals = useSelector((state) => state.meals.recipes);
 
   return (
     <section>
       <Header title="Comidas" />
       {loadingCategories ? <Loading /> : <MealsCategoryButtons />}
-      {loadingRecipes ? <Loading /> : <MealsCards />}
+      {loadingRecipes ? <Loading /> : <MealsCards meals={ meals } />}
       <footer>
         <Footer />
       </footer>
