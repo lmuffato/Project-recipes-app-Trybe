@@ -2,24 +2,27 @@ import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { string, number } from 'prop-types';
 import Context from '../../../context/Context';
-import { fetchFilterFoods, fetchFilterDrinks } from '../../../services/fetchApi';
+import {
+  fetchFilterFoodByIngredient,
+  fetchFilterDrinkByIngredient,
+} from '../../../services/fetchApi';
 
 function IngredientCards({
   index, thumbnail, name, key, param }) {
   const history = useHistory();
   const {
-    setFilterFoods, setFilterDrinks, filterDrinks, filterFoods,
+    setFilterFoods, setFilterDrinks,
   } = useContext(Context);
-  console.log(filterFoods);
-  console.log(filterDrinks);
+  // console.log(filterFoods);
+  // console.log(filterDrinks);
   const handleExploreDirection = async () => {
-    if (param === '/comidas') {
-      const data = await fetchFilterFoods(name);
-      setFilterFoods(data);
-    }
     if (param === '/bebidas') {
-      const data = await fetchFilterDrinks(name);
+      const data = await fetchFilterDrinkByIngredient(name);
       setFilterDrinks(data);
+    }
+    if (param === '/comidas') {
+      const data = await fetchFilterFoodByIngredient(name);
+      setFilterFoods(data);
     }
     console.log('hello');
     history.push(param);

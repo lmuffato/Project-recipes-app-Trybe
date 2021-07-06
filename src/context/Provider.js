@@ -8,12 +8,8 @@ import {
   fetchCategoryDrinks,
   fetchFilterFoods,
   fetchFilterDrinks,
-  fetchFilterFoodByIngredient,
-  fetchFilterDrinkByIngredient,
-  fetchFilterFoodByName,
-  fetchFilterDrinkByName,
-  fetchFilterFoodByLetter,
-  fetchFilterDrinkByLetter } from '../services/fetchApi';
+
+} from '../services/fetchApi';
 import Mock from '../services/mokcInformation';
 
 function Provider({ children }) {
@@ -118,58 +114,6 @@ function Provider({ children }) {
   // ComponentDidMount
   useEffect(getInFormations, []);
 
-  const handleClickFilter = () => {
-    if (path === 'comidas' && radio === 'Ingrediente') {
-      const getFoodByIngredient = async () => {
-        setShowFilter(true);
-        setFilterFoods([]);
-        const data = await fetchFilterFoodByIngredient(searchInput);
-        setFilterFoods(data);
-      };
-      getFoodByIngredient();
-    } if (path === 'bebidas' && radio === 'Ingrediente') {
-      setShowFilter(true);
-      setFilterDrinks([]);
-      const getDrinkByIngredient = async () => {
-        const data = await fetchFilterDrinkByIngredient(searchInput);
-        setFilterDrinks(data);
-      };
-      getDrinkByIngredient();
-    } if (path === 'comidas' && radio === 'Nome') {
-      const getFoodByName = async () => {
-        setShowFilter(true);
-        setFilterFoods([]);
-        const data = await fetchFilterFoodByName(searchInput);
-        setFilterFoods(data);
-      };
-      getFoodByName();
-    } if (path === 'bebidas' && radio === 'Nome') {
-      setShowFilter(true);
-      setFilterDrinks([]);
-      const getDrinkByName = async () => {
-        const data = await fetchFilterDrinkByName(searchInput);
-        setFilterDrinks(data);
-      };
-      getDrinkByName();
-    } if (path === 'comidas' && radio === 'Primeira letra') {
-      const getFoodByLetter = async () => {
-        setShowFilter(true);
-        setFilterFoods([]);
-        const data = await fetchFilterFoodByLetter(searchInput);
-        setFilterFoods(data);
-      };
-      getFoodByLetter();
-    } if (path === 'bebidas' && radio === 'Primeira letra') {
-      setShowFilter(true);
-      setFilterDrinks([]);
-      const getDrinkByLetter = async () => {
-        const data = await fetchFilterDrinkByLetter(searchInput);
-        setFilterDrinks(data);
-      };
-      getDrinkByLetter();
-    }
-  };
-
   const dataValue = {
     logout,
     setLogout,
@@ -196,10 +140,10 @@ function Provider({ children }) {
     setRadio,
     path,
     setPath,
-    handleClickFilter,
     doneRecipes,
     doneFilter,
     doneFilterRecipes,
+    setShowFilter,
     setFilterDrinks,
     setFilterFoods,
   };

@@ -8,7 +8,10 @@ import Context from '../context/Context';
 function HeaderWithSearch() {
   const {
     search,
+    setShowFilter,
+    setSearchInput,
     setSearch,
+    showFilter,
   } = useContext(Context);
 
   const pageTitle = () => {
@@ -23,17 +26,25 @@ function HeaderWithSearch() {
     return (title.includes('area')) ? 'Explorar Origem' : title;
   };
 
-  const handleSearch = () => {
-    if (search === false) {
-      setSearch(true);
-    } else if (search === true) {
-      setSearch(false);
-    }
-  };
-
   const style = {
     border: 'none',
     background: 'none',
+  };
+
+  const undoSearch = () => {
+    setShowFilter(false);
+    setSearch(false);
+    setSearchInput('');
+  };
+
+  const handleSearch = () => {
+    if (search === false) {
+      return setSearch(true);
+    } if (search === true && showFilter) {
+      return undoSearch();
+    } if (search === true && !showFilter) {
+      return setSearch(false);
+    }
   };
 
   return (
