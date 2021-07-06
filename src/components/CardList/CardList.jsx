@@ -57,7 +57,7 @@ function CardList({ recipes, type }) {
             </Link>
           )
         ))
-      ) : (recipes.length > 1 && recipes.map((recipe, i) => (
+      ) : (recipes.length > 0 && recipes.map((recipe, i) => (
         type === 'meals' ? (
           <Link
             to={ { pathname: `/comidas/${recipe.idMeal}`, state: { recipe, type } } }

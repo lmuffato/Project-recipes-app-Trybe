@@ -1,22 +1,60 @@
-import React from 'react';
-import { useLocation } from 'react-router-dom';
+import React, { useState, useCallback, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import RecipeInfo from '../components/RecipeInfo/RecipeInfo';
+import Button from '../components/Generics/Button';
 import RecipeIngredients from '../components/RecipeIngredients/RecipeIngredients';
+import Container from '../styles/recipeDetails';
+import MealVideo from '../components/MealVideo/MealVideo';
+import Carousel from '../components/Carousel/Carousel';
 
-function RecipeDetails() {
-  const location = useLocation();
-  const { state } = location;
-  const { recipe, type } = state;
-  // console.log(recipe);
-  const recipeName = recipe.strMeal || recipe.strDrink;
-  const recipeId = recipe.idMeal || recipe.idDrink;
-  const recipeThumb = recipe.strMealThumb || recipe.strDrinkThumb;
-  const recipeCategory = recipe.strCategory;
-  const isAlchooholic = recipe.strAlcoholic || '';
+function RecipeDetails({ type }) {
+  const { id } = useParams();
+  const endpointMeals = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
+  const endpointDrinks = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
+  const [fetchRecipeURL, setFetchRecipeURL] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
+  const [singleRecipe, setRecipe] = useState({});
+
+  const handleFetchIngredients = useCallback(() => {
+    if (type === 'meals') {
+      setFetchRecipeURL(endpointMeals);
+    }
+    if (type === 'drinks') {
+      setFetchRecipeURL(endpointDrinks);
+    }
+  }, [endpointDrinks, endpointMeals, type]);
+
+  const handleFetch = useCallback(async (url) => {
+    try {
+      const request = await fetch(url);
+      const data = await request.json();
+      setRecipe(data[type][0]);
+      // console.log(data[type][0]);
+      setIsLoading(false);
+    } catch (err) {
+      console.log(err);
+    }
+  }, [type]);
+
+  useEffect(() => {
+    handleFetchIngredients();
+    handleFetch(fetchRecipeURL);
+  }, [fetchRecipeURL, handleFetch, handleFetchIngredients]);
+
+  if (isLoading) {
+    return 'Loading';
+  }
+
+  const recipeName = singleRecipe.strMeal || singleRecipe.strDrink;
+  const recipeThumb = singleRecipe.strMealThumb || singleRecipe.strDrinkThumb;
+  const recipeCategory = singleRecipe.strCategory;
+  const isAlchooholic = singleRecipe.strAlcoholic || '';
+  const magicNumber = 32;
+  const youTubeVideo = singleRecipe.strYoutube || '';
 
   return (
-    <div className="recipe-details-page">
+    <Container>
       <RecipeInfo
         recipeName={ recipeName }
         recipeThumb={ recipeThumb }
@@ -24,23 +62,36 @@ function RecipeDetails() {
         { type === 'drinks' ? (<h3 data-testid="recipe-category">{isAlchooholic}</h3>) : (
           <h3 data-testid="recipe-category">{recipeCategory}</h3>)}
       </RecipeInfo>
-      <RecipeIngredients id={ recipeId } type={ type } />
+      <h3>Ingredientes</h3>
+      <div className="ingredients-list">
+        <RecipeIngredients recipe={ singleRecipe } />
+      </div>
+      <h3>Instructions</h3>
       <div className="instructions">
-        <h5>Instructions</h5>
         <p data-testid="instructions">
-          { recipe.strInstructions }
+          { singleRecipe.strInstructions }
         </p>
       </div>
-
-    </div>
+      { type === 'meals' ? (
+        <MealVideo
+          youTubeVideo={ youTubeVideo.substring(magicNumber) }
+          title={ recipeName }
+        />) : ''}
+      <Carousel type={ type } />
+      <Button data-testid="start-recipe-btn">
+        Iniciar receita
+      </Button>
+    </Container>
   );
 }
 
-// fazer um if com o retorno do fetch da receita
-// pegar todas as chaves que iniciam com os ingredientes, concatenar
-// usar o trim() num if para deixar de fora os valores que são strings vazias
 export default RecipeDetails;
 
+// RecipeDetails.defaultProps = {
+//   url: '',
+// };
+
 RecipeDetails.propTypes = {
-  recipe: PropTypes.shape(),
-}.isRequired;
+  type: PropTypes.string.isRequired,
+  // url: PropTypes.string,
+};
