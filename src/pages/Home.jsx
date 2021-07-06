@@ -40,9 +40,8 @@ function Home(props) {
         <SearchBarButton onClick={ handleToggleSearchBar } />
       </Header>
       <div>
-        { isActive ? (<SearchBar type={ type } />) : ''}
+        { isActive ? (<SearchBar type={ type } />) : (<CategoriesList type={ type } />) }
       </div>
-      <CategoriesList type={ type } />
       <RecipesContainer>
         <CardList recipes={ recipes } type={ type } />
       </RecipesContainer>

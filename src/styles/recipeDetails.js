@@ -8,6 +8,14 @@ const Container = styled.div`align-items: center;
   max-width: 1120px;
   overflow: hidden;
 
+
+  h3 {
+    align-self: baseline;
+    display: flex;
+    justify-content: center;
+    margin: 1rem;
+  }
+
   .componente1 {
 
     .recipe-info {
@@ -49,7 +57,8 @@ const Container = styled.div`align-items: center;
         border-radius: 8px;
 
         /* height: auto; */
-        max-width: 90vw;
+        max-height: auto;
+        max-width: 80vw;
         object-fit: cover;
         overflow: hidden;
 

@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import RecipeInfo from '../components/RecipeInfo/RecipeInfo';
 import Button from '../components/Generics/Button';
 import RecipeIngredients from '../components/RecipeIngredients/RecipeIngredients';
+import RecipeInstructions from '../components/RecipeInstructions/RecipeInstructions';
 import Container from '../styles/recipeDetails';
 import MealVideo from '../components/MealVideo/MealVideo';
 import Carousel from '../components/Carousel/Carousel';
@@ -52,6 +53,8 @@ function RecipeDetails({ type }) {
   const isAlchooholic = singleRecipe.strAlcoholic || '';
   const magicNumber = 32;
   const youTubeVideo = singleRecipe.strYoutube || '';
+  console.log(singleRecipe);
+  console.log(youTubeVideo);
 
   return (
     <Container>
@@ -66,12 +69,7 @@ function RecipeDetails({ type }) {
       <div className="ingredients-list">
         <RecipeIngredients recipe={ singleRecipe } />
       </div>
-      <h3>Instructions</h3>
-      <div className="instructions">
-        <p data-testid="instructions">
-          { singleRecipe.strInstructions }
-        </p>
-      </div>
+      <RecipeInstructions singleRecipe={ singleRecipe } />
       { type === 'meals' ? (
         <MealVideo
           youTubeVideo={ youTubeVideo.substring(magicNumber) }
