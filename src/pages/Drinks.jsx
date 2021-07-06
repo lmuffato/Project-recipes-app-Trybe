@@ -6,8 +6,10 @@ import DrinkCard from '../components/DrinkCard';
 import FilterContext from '../context/FilterContext';
 import FilterButtons from '../components/FilterButtons';
 import ButtonAll from '../components/ButtonAll';
+import UserContext from '../context/UserContext';
 
 function Drinks() {
+  const { setGlobalRecipe } = useContext(UserContext);
   const { filteredDrinks, fullDrinks } = useContext(SearchContext);
   const { drinksCategories, drinkFilterButton,
     drinksByCategory, setDrinkFilterButton } = useContext(FilterContext);
@@ -24,6 +26,10 @@ function Drinks() {
       setShowRecipe(fullDrinks);
     }
   }, [fullDrinks, filteredDrinks, drinksByCategory, drinkFilterButton]);
+
+  useEffect(() => {
+    setGlobalRecipe(showRecipe);
+  }, [showRecipe]);
 
   return (
     <div>

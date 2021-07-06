@@ -6,8 +6,10 @@ import Footer from '../components/Footer';
 import FilterButtons from '../components/FilterButtons';
 import FilterContext from '../context/FilterContext';
 import ButtonAll from '../components/ButtonAll';
+import UserContext from '../context/UserContext';
 
 function Foods() {
+  const { setGlobalRecipe } = useContext(UserContext);
   const { filteredRecipes, fullRecipes } = useContext(SearchContext);
   const { mealsCategories, filterButton, mealsByCategory,
     setFilterButton } = useContext(FilterContext);
@@ -22,6 +24,10 @@ function Foods() {
       setShowRecipe(filteredRecipes);
     } else { setShowRecipe(fullRecipes); }
   }, [fullRecipes, filteredRecipes, mealsByCategory]);
+
+  useEffect(() => {
+    setGlobalRecipe(showRecipe);
+  }, [showRecipe]);
 
   return (
     <div>
