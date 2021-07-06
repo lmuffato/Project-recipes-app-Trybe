@@ -4,8 +4,8 @@ import { useHistory } from 'react-router-dom';
 import '../../styles/Card.css';
 import ReceitasContext from '../../contexts/ReceitasContext';
 
-function IngredienteCard({ index, strName, strThumb, page }) {
-  const { setFilterByIngredient } = useContext(ReceitasContext);
+function IngredienteCard({ index, strName, strThumb, page, endpoint }) {
+  const { fetchApi, setExplore } = useContext(ReceitasContext);
 
   const history = useHistory();
   return (
@@ -14,8 +14,8 @@ function IngredienteCard({ index, strName, strThumb, page }) {
       type="button"
       data-testid={ `${index}-ingredient-card` }
       onClick={ () => {
-        setFilterByIngredient(strName, page);
-
+        fetchApi(endpoint, page);
+        setExplore(true);
         history.push(`/${page}`);
       } }
     >
@@ -35,6 +35,7 @@ IngredienteCard.propTypes = {
   strName: PropTypes.string.isRequired,
   strThumb: PropTypes.string.isRequired,
   page: PropTypes.string.isRequired,
+  endpoint: PropTypes.string.isRequired,
 };
 
 export default IngredienteCard;

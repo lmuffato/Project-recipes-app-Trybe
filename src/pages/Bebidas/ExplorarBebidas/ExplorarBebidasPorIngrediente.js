@@ -27,6 +27,7 @@ function ExplorarBebidasPorIngrediente() {
               index={ index }
               strName={ item.strIngredient1 }
               page="bebidas"
+              endpoint={ `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${item.strIngredient1}` }
               strThumb={ `https://www.thecocktaildb.com/images/ingredients/${item.strIngredient1}-Small.png` }
             />
           ))

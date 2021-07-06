@@ -9,40 +9,18 @@ import Filter from '../../components/Filter';
 function Comidas() {
   const { APIFood,
     fetchApi,
-    foodsByIngredient,
+    explore,
   } = useContext(ReceitasContext);
 
   useEffect(() => {
-    fetchApi('https://www.themealdb.com/api/json/v1/1/search.php?s=', 'comidas');
+    if (explore === false) {
+      fetchApi('https://www.themealdb.com/api/json/v1/1/search.php?s=', 'comidas');
+    }
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  if (foodsByIngredient !== undefined
-  ) {
-    if (foodsByIngredient.meals !== null
-        && foodsByIngredient.meals.length >= 1) {
-      return (
-        <div>
-          <Header title="Comidas" />
-          <Filter page="comidas" />
-          <CardList
-            list={ foodsByIngredient.meals }
-          />
-          <Footer />
-        </div>
-      );
-    }
-
-    return (
-      <div>
-        <Header title="comidas" />
-        <Footer />
-      </div>
-    );
-  }
-
-  if (APIFood !== undefined && foodsByIngredient === undefined) {
+  if (APIFood !== undefined) {
     if (APIFood.meals !== null && APIFood.meals.length >= 1) {
       return (
         <div>
