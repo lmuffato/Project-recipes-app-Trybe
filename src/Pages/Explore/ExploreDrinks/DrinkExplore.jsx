@@ -1,7 +1,9 @@
 import React from 'react';
-import Header from '../../../components/Header';
-import Footer from '../../../components/Footer';
-import ExploreButton from '../../../components/ExploreButton';
+import {
+  Header,
+  Footer,
+  ExploreButton,
+} from '../../../components';
 
 function ExploreDrinks() {
   return (
