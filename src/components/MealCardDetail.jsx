@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import ReactPlayer from 'react-player';
 import UserContext from '../context/UserContext';
 import shareIcon from '../images/shareIcon.svg';
@@ -8,9 +8,11 @@ import RecomendedDrinks from './RecomendedDrinks';
 
 function MealCardDetail() {
   const { currentMeal } = useContext(UserContext);
-  const youtubeId = currentMeal.strYoutube;
-  // const splits = youtubeId.split('=', 2);
-  // console.log(splits);
+  const [youtubeId, setYoutubeId] = useState('');
+  useEffect(() => {
+    setYoutubeId(currentMeal.strYoutube);
+  }, [currentMeal]);
+
   return (
     <div>
       <img

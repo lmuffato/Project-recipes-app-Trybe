@@ -21,7 +21,7 @@ function DrinkCardDetail() {
       <button data-testid="favorite-btn" type="button">
         <img src={ whiteHeartIcon } alt="favoritar" />
       </button>
-      <h4 data-testid="recipe-category">{ currentDrink.strCategory }</h4>
+      <h4 data-testid="recipe-category">{ currentDrink.strAlcoholic }</h4>
       <h4>Ingredients</h4>
       <IngredientsList currentMeal={ currentDrink } />
       <h4>Instructions</h4>
