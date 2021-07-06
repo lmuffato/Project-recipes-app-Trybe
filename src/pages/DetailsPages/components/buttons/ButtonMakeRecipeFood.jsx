@@ -35,7 +35,7 @@ const ButtonMakeRecipeFood = ({ recipe }) => {
   const { idMeal } = recipe;
   const { clickSetProgress, progressRecipes } = useContext(Context);
 
-  // componentDidMount
+  // componentDidUpdate observando idMeal e progressRecipes
   useEffect(() => {
     checkExist(idMeal, progressRecipes); // check exist in context
     checkExistInLS(idMeal, 'meal'); // check exist in LS

@@ -163,6 +163,7 @@ function Provider({ children }) {
     initDoneRecipesInLS();
     initFavRecipesInLS();
   }, []);
+
   const doneFilter = (e) => {
     const { innerText } = e.target;
     setDoneFilter([]);
@@ -239,6 +240,22 @@ function Provider({ children }) {
     }
   };
 
+  const undoSearch = () => {
+    setShowFilter(false);
+    setSearch(false);
+    setSearchInput('');
+  };
+
+  const handleSearch = () => {
+    if (search === false) {
+      return setSearch(true);
+    } if (search === true && showFilter) {
+      return undoSearch();
+    } if (search === true && !showFilter) {
+      return setSearch(false);
+    }
+  };
+
   const dataValue = {
     logout,
     setLogout,
@@ -277,6 +294,7 @@ function Provider({ children }) {
     doneRecipes,
     doneFilter,
     doneFilterRecipes,
+    handleSearch,
   };
 
   return (

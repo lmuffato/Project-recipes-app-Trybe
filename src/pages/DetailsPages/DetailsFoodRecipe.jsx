@@ -19,6 +19,7 @@ const DetailsFoodRecipe = () => {
   const id = window.location.pathname.match(/(\d+)/)[0];
   const [loading, setLoading] = useState(true);
   const [recipeFood, setRecipeFood] = useState({});
+  // componentDidUpdate observando "id"
   useEffect(() => {
     async function getRecipe() {
       const req = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`);

@@ -8,7 +8,7 @@ import Context from '../context/Context';
 function HeaderWithSearch() {
   const {
     search,
-    setSearch,
+    handleSearch,
   } = useContext(Context);
 
   const pageTitle = () => {
@@ -21,14 +21,6 @@ function HeaderWithSearch() {
     const title = arr.join(' ');
 
     return (title.includes('area')) ? 'Explorar Origem' : title;
-  };
-
-  const handleSearch = () => {
-    if (search === false) {
-      setSearch(true);
-    } else if (search === true) {
-      setSearch(false);
-    }
   };
 
   const style = {
