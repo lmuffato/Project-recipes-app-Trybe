@@ -4,7 +4,7 @@ import SearchbarContext from './SearchbarContext';
 
 function SearchbarProvider({ children }) {
   const [mealOrDrink, setMealOrDrink] = useState(null);
-  const [recipes, setRecipes] = useState({});
+  const [recipes, setRecipes] = useState([]);
   const [idMeal, setIdMeal] = useState();
   const [idDrink, setIdDrink] = useState();
 

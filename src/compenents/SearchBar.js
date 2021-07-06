@@ -1,23 +1,24 @@
 import React, { useState, useContext } from 'react';
 import { useHistory } from 'react-router';
 import SearchbarContext from '../contexts/SearchbarContext';
+import FilteredCard from './FilteredCard';
 
 function SearchBar() {
   const [name, setName] = useState('');
   const [request, setRequest] = useState('');
   const [letter, setLetter] = useState('');
-  const { mealOrDrink, setRecipes, setIdMeal, setIdDrink } = useContext(SearchbarContext);
+  const { mealOrDrink, setRecipes, setIdMeal, setIdDrink, recipes } = useContext(SearchbarContext);
 
   const history = useHistory();
-
 
   const handleChange = (type, word) => {
     setRequest(type);
     setLetter(word);
   };
 
-  const recipeDescription = (results) => {
+  const recipesFilter = (results) => {
     const data = results;
+    const maxRecipes = 12;
     let drinkId;
     let mealId;
 
@@ -32,8 +33,7 @@ function SearchBar() {
       setIdMeal(mealId);
       history.push(`/comidas/${mealId}`);
     } else {
-      return data;
-      // Implementar req-17 aqui;
+      setRecipes(Object.values(data)[0].slice(0, maxRecipes));
     }
   };
 
@@ -43,10 +43,7 @@ function SearchBar() {
     }
     const endpoint = `https://www.the${mealOrDrink}db.com/api/json/v1/1/${request}.php?${letter}=${name}`;
     await fetch(endpoint).then((data) => data.json())
-      .then((results) => {
-        setRecipes(results);
-        recipeDescription(results);
-      });
+      .then((results) => recipesFilter(results));
   };
 
   return (
@@ -95,6 +92,25 @@ function SearchBar() {
       >
         Buscar
       </button>
+
+      { mealOrDrink === 'meal' ? recipes.map((meal, index) => (
+        <FilteredCard
+          key={ meal.idMeal }
+          index={ index }
+          name={ meal.strMeal }
+          thumbnail={ meal.strMealThumb }
+        />
+      ))
+      :
+      recipes.map((drink, index) => (
+        <FilteredCard
+          key={ drink.idDrink }
+          index={ index }
+          name={ drink.strDrink }
+          thumbnail={ drink.strDrinkThumb }
+        />
+      ))
+     }
     </div>
   );
 }
