@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { node } from 'prop-types';
-import Context from './Context';
 import {
   fetchApiDrinks,
   fetchApiFoods,
@@ -12,11 +11,16 @@ import {
   fetchRecipeDrink,
   fetchFoodsRecommended,
   fetchDrinksRecommended } from '../services/fetchApi';
+import Context from './Context';
+
+// import { fetchApiDrinks } from '../services/fetchApi';
 
 import { checkExist }
   from '../pages/DetailsPages/components/buttons/ButtonMakeRecipeDrink';
 
 import setProgressRecipesLS from '../services/localStorage/setProgressRecipesLS';
+// fetchFilterDrinks } from '../services/fetchApi';
+import Mock from '../services/mokcInformation';
 
 function Provider({ children }) {
   // useStates...
@@ -37,7 +41,12 @@ function Provider({ children }) {
   const [foodRecommended, setFoodRecommended] = useState([]);
   const [drinkRecommended, setDrinkRecommended] = useState([]);
   const [progressRecipes, setProgressRecipes] = useState([]);
-  function getFoods() {
+  // function getFoods() {
+  const [doneRecipes, setDoneRecipes] = useState([]);
+  const [doneFilterRecipes, setDoneFilter] = useState([]);
+
+  function getInFormations() {
+    // const informationLocalStorage = JSON.parse(localStorage.getItem('doneRecipes'))
     const fetchApis = async () => {
       const dataFoods = await fetchApiFoods();
       const dataDrinks = await fetchApiDrinks();
@@ -49,6 +58,7 @@ function Provider({ children }) {
       setDrinks(dataDrinks);
     };
     fetchApis();
+    setDoneRecipes(Mock);
   }
 
   const clickFilterFood = (e) => {
@@ -78,16 +88,16 @@ function Provider({ children }) {
         setFilterDrinks(data);
       };
       getCategoryDrinks();
-    } if (category === e.target.innerText) {
+    }
+    if (category === e.target.innerText) {
       setShowFilter(false);
-    } if (e.target.innerText === 'All') {
+    }
+    if (e.target.innerText === 'All') {
       setShowFilter(false);
     }
   };
 
   const clickRecipeFood = (id) => { // JSON da receita em si, para pagina de Details.
-    // console.log(id);
-    // console.log('fui');
     const getRecipeFood = async (idFood) => {
       const data = await fetchRecipeFood(idFood);
       setRecipeFood(data);
@@ -103,7 +113,7 @@ function Provider({ children }) {
     getRecipeDrink(id);
   };
 
-  function foodsRecommendedF() {
+  function foodsRecommendedF() { // funcao q busca comidas recomendadas e seta na variavel global.
     const fetchAsync = async () => {
       const data = await fetchFoodsRecommended();
       setFoodRecommended(data);
@@ -111,7 +121,7 @@ function Provider({ children }) {
     fetchAsync();
   }
 
-  function drinksRecommendedF() {
+  function drinksRecommendedF() { // funcao q busca drinks recomendados e seta na var global.
     const fetchAsync = async () => {
       const data = await fetchDrinksRecommended();
       setDrinkRecommended(data);
@@ -150,13 +160,37 @@ function Provider({ children }) {
   }
   // ComponentDidMount
   useEffect(() => {
-    getFoods();
+    getInFormations();
+    // getFoods();
     foodsRecommendedF();
     drinksRecommendedF();
     initProgressInLS();
     initDoneRecipesInLS();
     initFavRecipesInLS();
   }, []);
+  const doneFilter = (e) => {
+    const { innerText } = e.target;
+    setDoneFilter([]);
+    if (innerText === 'All') {
+      setShowFilter(false);
+      setDoneRecipes(Mock);
+      setDoneFilter([]);
+    }
+    if (innerText === 'Food') {
+      setShowFilter(true);
+      const newRecipes = doneRecipes
+        .filter((recipe) => (recipe.type === 'comida') && recipe);
+      setDoneFilter(newRecipes);
+    }
+    if (innerText === 'Drinks') {
+      setShowFilter(true);
+      const newRecipes = doneRecipes
+        .filter((recipe) => (recipe.type === 'bebida') && recipe);
+      setDoneFilter(newRecipes);
+    }
+  };
+    // ComponentDidMount
+  // useEffect(getInFormations, []);
 
   const dataValue = {
     logout,
@@ -186,6 +220,9 @@ function Provider({ children }) {
     progressRecipes,
     setProgressRecipes,
     clickSetProgress,
+    doneRecipes,
+    doneFilter,
+    doneFilterRecipes,
   };
 
   return (

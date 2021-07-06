@@ -1,12 +1,10 @@
 export function verifyProgressInLS(id, type) {
   const progressFromLS = JSON.parse(localStorage.getItem('inProgressRecipes'));
   if (!progressFromLS) return false;
-  console.log('Pass 1');
   // verifica meals
   let exist = false;
   if (type === 'meal') {
     const keysOfMeals = Object.keys(progressFromLS.meals); // arr
-    console.log(keysOfMeals);
     if (!keysOfMeals) exist = false; // não há chaves no objeto meals
     keysOfMeals.forEach((key) => {
       if (key === id) exist = true;
@@ -25,7 +23,6 @@ export function verifyProgressInLS(id, type) {
 
 function addRecipeInProgress(recipe) {
   const { idDrink, idMeal } = recipe;
-  console.log(`idDrink:${idDrink} idMeal:${idMeal}`);
   const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
   if (idDrink) {
     inProgressRecipes.cocktails = {
@@ -33,6 +30,7 @@ function addRecipeInProgress(recipe) {
       [idDrink]: [],
     };
   }
+
   if (idMeal) {
     inProgressRecipes.meals = {
       ...inProgressRecipes.meals,
@@ -43,7 +41,6 @@ function addRecipeInProgress(recipe) {
 }
 
 function setProgressRecipesLS(recipe) {
-  console.log('setProgressFromLS on!');
   const { idDrink, idMeal } = recipe;
   const exist = verifyProgressInLS(idDrink || idMeal, idDrink ? 'drink' : 'meal');
   if (!exist) { // se não existe o id passado e não existe idDrink, o que foi passado foi um recipe meals!

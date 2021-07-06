@@ -2,14 +2,14 @@ import React from 'react';
 import HeaderWithSearch from '../../components/HeaderWithSearch';
 import Footer from '../../components/Footer';
 
-function ExploreFoodArea() {
+function ExploreFoodByOrigin() {
   return (
     <div>
       <HeaderWithSearch />
-      Explorar Origem
+      Comidas por Local de Origem
       <Footer />
     </div>
   );
 }
 
-export default ExploreFoodArea;
+export default ExploreFoodByOrigin;

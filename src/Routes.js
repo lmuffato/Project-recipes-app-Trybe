@@ -10,39 +10,49 @@ import ProfileScreen from './pages/ProfileScreen/ProfileScreen';
 import Login from './pages/LoginPage/Login';
 import RecipesDone from './pages/RecipesDone/RecipesDone';
 import RecipesFav from './pages/RecipesFav/RecipesFav';
-import ExploreFoodArea from './pages/ExplorePage/ExploreFoodArea';
-import Explore from './pages/ExplorePage/Explore';
-import ExploreFood from './pages/ExplorePage/ExploreFood';
-import ExploreBeverage from './pages/ExplorePage/ExploreBeverage';
-import ExplFoodIng from './pages/ExplorePage/ExplFoodIng';
-import ExplBeverageIng from './pages/ExplorePage/ExplBeverageIng';
 // import FoodInProgress from './pages/recipes-main/Foods/FoodInProgess';
 import DetailsInProgressFood from './pages/DetailsPages/DetailsInProgressFood';
 // import DrinksInProgress from './pages/recipes-main/Drinks/DrinksInProgress';
 import DetailsInProgressDrink from './pages/DetailsPages/DetailsInProgressDrink';
+import NotFound from './pages/explore/NotFound';
+import Explore from './pages/explore/Explore';
+import ExploreFood from './pages/explore/ExploreFood';
+import ExploreDrinks from './pages/explore/ExploreDrinks';
+import ExploreFoodByIngredients from './pages/explore/ExploreFoodByIngredients';
+import ExploreFoodByOrigin from './pages/explore/ExploreFoodByOrigin';
+import ExploreDrinksByIngredients from './pages/explore/ExploreDrinksByIngredients';
 
 function Routes() {
   return (
     <Switch>
+      <Route path="/perfil" component={ ProfileScreen } />
+      <Route path="/receitas-feitas" component={ RecipesDone } />
+      <Route path="/receitas-favoritas" component={ RecipesFav } />
+      <Route
+        exact
+        path="/explorar/comidas/ingredientes"
+        component={ ExploreFoodByIngredients }
+      />
+      <Route
+        exact
+        path="/explorar/comidas/area"
+        component={ ExploreFoodByOrigin }
+      />
+      <Route path="/explorar/bebidas/area" component={ NotFound } />
+      <Route
+        path="/explorar/bebidas/ingredientes"
+        component={ ExploreDrinksByIngredients }
+      />
+      <Route exact path="/explorar/bebidas" component={ ExploreDrinks } />
+      <Route exact path="/explorar/comidas" component={ ExploreFood } />
       <Route exact path="/" component={ Login } />
       <Route exact path="/comidas/:id" component={ DetailsFoodRecipe } />
       <Route exact path="/comidas" component={ Foods } />
       <Route exact path="/bebidas/:id" component={ DetailsDrinkRecipe } />
       <Route exact path="/bebidas" component={ Drinks } />
-      <Route exact path="/perfil" component={ ProfileScreen } />
-      <Route exact path="/receitas-feitas" component={ RecipesDone } />
-      <Route exact path="/receitas-favoritas" component={ RecipesFav } />
       <Route exact path="/comidas/:id/in-progress" component={ DetailsInProgressFood } />
       <Route exact path="/bebidas/:id/in-progress" component={ DetailsInProgressDrink } />
-      <Route exact path="/explorar/comidas" component={ ExploreFood } />
-      <Route exact path="/explorar/bebidas" component={ ExploreBeverage } />
-      <Route exact path="/explorar/comidas/ingredientes" component={ ExplFoodIng } />
-      <Route exact path="/explorar/bebidas/ingredientes" component={ ExplBeverageIng } />
-      <Route exact path="/explorar/comidas/area" component={ ExploreFoodArea } />
       <Route exact path="/explorar" component={ Explore } />
-      <Route exact path="/perfil" component={ ProfileScreen } />
-      <Route exact path="/receitas-feitas" component={ RecipesDone } />
-      <Route exact path="/receitas-favoritas" component={ RecipesFav } />
     </Switch>
   );
 }
