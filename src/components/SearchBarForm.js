@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Form, Button } from 'react-bootstrap';
-import { useLocation } from 'react-router-dom';
+import { Form, Button, Card } from 'react-bootstrap';
+import { useLocation, useHistory } from 'react-router-dom';
 import { getIngCock, getIngCockTail, getNameCock,
   getNameCockTail, getFirstLetterCock, getFirstLetterCockTail,
 } from '../services/fetchApiSearchBar';
@@ -8,39 +8,104 @@ import { getIngCock, getIngCockTail, getNameCock,
 const SearchBarForm = () => {
   const [busca, setBusca] = useState('');
   const [markBusca, setMarkBusca] = useState('');
-  const location = useLocation();
-  const FirstLetter = 'primeira-letra';
+  const [dataDrinks, setDataDrinks] = useState({});
+  const [dataCocks, setDataCocks] = useState({});
 
-  const handleSearchBarApiComidas = async () => {
-    if (markBusca === 'ingrediente') {
-      getIngCock(busca).then((res) => console.log(res));
-    }
-    if (markBusca === 'nome') {
-      getNameCock(busca).then((res) => res);
-    }
-    if (markBusca === FirstLetter) {
-      getFirstLetterCock(busca).then((res) => res);
-    }
-    if (markBusca === FirstLetter && busca.length > 1) {
-      alert('Sua busca deve conter somente 1 (um) caracter');
-    }
-    return alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+  console.log(dataCocks);
+  console.log(dataDrinks);
+
+  const location = useLocation();
+  const history = useHistory();
+  const FirstLetter = 'primeira-letra';
+  const numberMagic = 12;
+
+  const handleCardMapCocks = () => {
+    const { meals } = dataCocks;
+
+    if (meals === undefined) return 'undefined';
+
+    if (meals.length === 1) return history.push(`/comidas/${meals[0].idMeal}`);
+
+    return meals.map((meal, index) => {
+      if (index < numberMagic) {
+        return (
+          <Card
+            style={ { width: '250px' } }
+            key={ meal.idMeal }
+            data-testid={ `${index}-recipe-card` }
+          >
+            <Card.Img
+              alt={ `${meal.strMeal}` }
+              src={ meal.strMealThumb }
+              data-testid={ `${index}-card-img` }
+            />
+            <Card.Text data-testid={ `${index}-card-name` }>{meal.strMeal}</Card.Text>
+          </Card>
+        );
+      }
+      return null;
+    });
   };
 
-  const handleSearchBarApiBebidas = async () => {
+  const handleSearchBarApiComidas = () => {
     if (markBusca === 'ingrediente') {
-      getIngCockTail(busca).then((res) => res);
+      getIngCock(busca).then(({ meals }) => setDataCocks({ meals }));
     }
     if (markBusca === 'nome') {
-      getNameCockTail(busca).then((res) => res);
+      getNameCock(busca).then(({ meals }) => setDataCocks({ meals }));
     }
     if (markBusca === FirstLetter) {
-      getFirstLetterCockTail(busca).then((res) => console.log(res));
+      getFirstLetterCock(busca).then(({ meals }) => setDataCocks({ meals }));
     }
     if (markBusca === FirstLetter && busca.length > 1) {
       alert('Sua busca deve conter somente 1 (um) caracter');
     }
-    return alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+    // return alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+  };
+
+  const handleCardMapDrinks = () => {
+    const { drinks } = dataDrinks;
+
+    if (drinks === undefined) return 'undefined';
+
+    if (drinks.length === 1) return history.push(`/bebidas/${drinks[0].idDrink}`);
+
+    return drinks.map((drink, index) => {
+      if (index < numberMagic) {
+        return (
+          <Card
+            style={ { width: '250px' } }
+            key={ drink.idDrink }
+            data-testid={ `${index}-recipe-card` }
+          >
+            <Card.Img
+              alt={ `${drink.strDrink}` }
+              src={ drink.strDrinkThumb }
+              data-testid={ `${index}-card-img` }
+            />
+            <Card.Text data-testid={ `${index}-card-name` }>{drink.strDrink}</Card.Text>
+            <Card.Text data-testid={ `${index}-card-name` }>{drink.strTags}</Card.Text>
+          </Card>
+        );
+      }
+      return null;
+    });
+  };
+
+  const handleSearchBarApiBebidas = () => {
+    if (markBusca === 'ingrediente') {
+      getIngCockTail(busca).then(({ drinks }) => setDataDrinks({ drinks }));
+    }
+    if (markBusca === 'nome') {
+      getNameCockTail(busca).then(({ drinks }) => setDataDrinks({ drinks }));
+    }
+    if (markBusca === FirstLetter) {
+      getFirstLetterCockTail(busca).then(({ drinks }) => setDataDrinks({ drinks }));
+    }
+    if (markBusca === FirstLetter && busca.length > 1) {
+      alert('Sua busca deve conter somente 1 (um) caracter');
+    }
+    // return alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
   };
 
   const handleFilterSearchBar = () => {
@@ -51,7 +116,7 @@ const SearchBarForm = () => {
   const handleSearchBarValue = () => (
     <Form.Group>
       <Form.Label htmlFor="id-busca">Busca:</Form.Label>
-      <Form.Control
+      <input
         type="text"
         id="id-busca"
         name="id-busca"
@@ -65,7 +130,7 @@ const SearchBarForm = () => {
     <div>
       <Form.Group>
         <Form.Label>
-          <Form.Control
+          <input
             type="radio"
             name="busca"
             value="ingrediente"
@@ -74,10 +139,10 @@ const SearchBarForm = () => {
           />
           Ingrediente
         </Form.Label>
-      </Form.Group>
-      <Form.Group>
+        {/* </Form.Group> */}
+        {/* <Form.Group> */}
         <Form.Label>
-          <Form.Control
+          <input
             type="radio"
             name="busca"
             value="nome"
@@ -86,10 +151,10 @@ const SearchBarForm = () => {
           />
           Nome
         </Form.Label>
-      </Form.Group>
-      <Form.Group>
+        {/* </Form.Group> */}
+        {/* <Form.Group> */}
         <Form.Label>
-          <Form.Control
+          <input
             type="radio"
             name="busca"
             value="primeira-letra"
@@ -101,6 +166,11 @@ const SearchBarForm = () => {
       </Form.Group>
     </div>
   );
+
+  const handleCards = () => {
+    if (location.pathname === '/comidas') return handleCardMapCocks();
+    if (location.pathname === '/bebidas') return handleCardMapDrinks();
+  };
 
   return (
     <div>
@@ -114,6 +184,7 @@ const SearchBarForm = () => {
           Busca
         </Button>
       </Form>
+      { handleCards() }
     </div>
   );
 };
