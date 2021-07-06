@@ -7,6 +7,7 @@ import RecipeDetails from './pages/RecipeDetails';
 import Profile from './pages/Profile';
 import ExploreFoods from './pages/ExploreFoods';
 import ExploreDrinks from './pages/ExploreDrinks';
+import RecipesInProgess from './pages/RecipesInProgess';
 
 function App() {
   return (
@@ -35,6 +36,16 @@ function App() {
         exact
         path="/bebidas/:id"
         render={ (props) => <RecipeDetails { ...props } type="drinks" /> }
+      />
+      <Route
+        exact
+        path="/comidas/:id/in-progress"
+        render={ (props) => <RecipesInProgess { ...props } type="meals" /> }
+      />
+      <Route
+        exact
+        path="/bebidas/:id/in-progress"
+        render={ (props) => <RecipesInProgess { ...props } type="drinks" /> }
       />
     </Switch>
   );
