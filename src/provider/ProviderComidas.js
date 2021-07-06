@@ -5,16 +5,18 @@ import { categoriaComida } from '../services/apisCategories';
 import { mealsAPI } from '../services/apisMealsAndCocktails';
 
 function ProviderComidas({ children }) {
+  const [originData, setOrigindata] = useState([]);
   const [data, setData] = useState([]);
   const [categoria, setCategoria] = useState([]);
   const [texto, setTexto] = useState('');
+  const [ingredient, setIngradient] = useState('');
 
   const fetchapi = async () => {
     const comidas = await mealsAPI();
-    const categorias = await categoriaComida();
+    const categoriasComidas = await categoriaComida();
 
-    setData(comidas);
-    setCategoria(categorias);
+    setOrigindata(comidas);
+    setCategoria(categoriasComidas);
   };
 
   useEffect(() => {
@@ -23,11 +25,15 @@ function ProviderComidas({ children }) {
 
   const context = {
     data,
-    setData,
     texto,
-    setTexto,
     categoria,
+    originData,
+    ingredient,
+    setData,
+    setTexto,
+    setOrigindata,
     setCategoria,
+    setIngradient,
   };
 
   return (
