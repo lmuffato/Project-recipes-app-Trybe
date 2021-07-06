@@ -33,7 +33,7 @@ function ComidasDetalhes() {
           <div>
             <Recipe.Title title={ strMeal } />
             <Recipe.Category category={ strCategory } />
-            <Recipe.Share />
+            <Recipe.Share id={ id } type="comidas" />
             <Recipe.FavoriteMeal />
           </div>
           <Recipe.Ingredients list={ ingredients } />
