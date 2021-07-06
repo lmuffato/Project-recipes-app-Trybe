@@ -9,6 +9,13 @@ import SearchbarProvider from './contexts/SeachbarProvider';
 // import UserProvider from './contexts/UserProvider';
 import MainMealsRecipes from './pages/MainRecipesPage';
 import RecipesProvider from './contexts/RecipesProvider';
+import UserProvider from './contexts/UserProvider';
+import Explore from './pages/Explore';
+import Foods from './pages/Foods';
+import Drinks from './pages/Drinks';
+import DrinksIngredients from './pages/DrinksIngredients';
+import FoodsIngredients from './pages/FoodsIngredients';
+import FoodsArea from './pages/FoodsArea';
 
 function App() {
   return (
@@ -20,6 +27,18 @@ function App() {
             <Route exact path="/" component={ LoginPage } />
             <Route exact path="/comidas" component={ MainMealsRecipes } />
             <Route exact path="/bebidas" component={ MainMealsRecipes } />
+            <Route exact path="/explorar" component={ Explore } />
+            <Route exact path="/explorar/comidas" component={ Foods } />
+            <Route exact path="/explorar/bebidas" component={ Drinks } />
+            <Route
+              path="/explorar/comidas/ingredientes"
+              component={ FoodsIngredients }
+            />
+            <Route
+              path="/explorar/bebidas/ingredientes"
+              component={ DrinksIngredients }
+            />
+            <Route exact path="/explorar/comidas/area" component={ FoodsArea } />
           </Switch>
           <Footer />
         </RecipesProvider>
