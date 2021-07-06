@@ -11,8 +11,8 @@ const favoriteRecipe = (recipe, type, isFavorited) => {
   const favorites = JSON.parse(localStorage.getItem('favoriteRecipes'));
   if (isFavorited) {
     const removeFromList = favorites.filter((item) => !(
-      item.id !== recipe.idMeal
-      || !item.id !== recipe.idDrink
+      item.id === recipe.idMeal
+      || item.id === recipe.idDrink
     ));
     localStorage.setItem('favoriteRecipes', JSON.stringify(removeFromList));
   } else {
@@ -43,8 +43,8 @@ function DetailsHeader(props) {
     const favorites = JSON.parse(localStorage.getItem('favoriteRecipes'));
     if (!favorites) return;
     const checkFavorited = favorites.find((favoritedRecipe) => (
-      favoritedRecipe.idMeal === recipe.idMeal
-      || favoritedRecipe.idDrink === recipe.idDrink
+      favoritedRecipe.id === recipe.idMeal
+      || favoritedRecipe.id === recipe.idDrink
     ));
     if (checkFavorited) isFavoritedToggle(true);
   });
