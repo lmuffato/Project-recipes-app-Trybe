@@ -1,0 +1,13 @@
+.carousel-container {
+  display: flex;
+  flex-direction: row;
+  padding: 0% 25%;
+  width: 50%;
+}
+
+.carousel-frame {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+  justify-content: center;
+}

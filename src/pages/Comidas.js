@@ -32,7 +32,6 @@ function Comidas() {
   const loadingRecipes = useSelector((state) => state.loading.loadingRecipes);
   const loadingCategories = useSelector((state) => state.loading.loadingCategories);
   const meals = useSelector((state) => state.meals.recipes);
-
   return (
     <section>
       <Header title="Comidas" />
