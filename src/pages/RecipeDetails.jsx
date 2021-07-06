@@ -1,8 +1,6 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import shareIconImg from '../images/shareIcon.svg';
-import favoriteIconImg from '../images/whiteHeartIcon.svg';
 import RecipeInfo from '../components/RecipeInfo/RecipeInfo';
 import Button from '../components/Generics/Button';
 import RecipeIngredients from '../components/RecipeIngredients/RecipeIngredients';
@@ -63,16 +61,12 @@ function RecipeDetails({ type }) {
         { type === 'drinks' ? (<h3 data-testid="recipe-category">{isAlchooholic}</h3>) : (
           <h3 data-testid="recipe-category">{recipeCategory}</h3>)}
       </RecipeInfo>
-      <div className="icons">
-        <img src={ shareIconImg } alt="ícone de compartilhar" data-testid="share-btn" />
-        <img src={ favoriteIconImg } alt="" data-testid="favorite-btn" />
-      </div>
       <h3>Ingredientes</h3>
       <div className="ingredients-list">
         <RecipeIngredients recipe={ singleRecipe } />
       </div>
+      <h3>Instructions</h3>
       <div className="instructions">
-        <h3>Instructions</h3>
         <p data-testid="instructions">
           { singleRecipe.strInstructions }
         </p>
