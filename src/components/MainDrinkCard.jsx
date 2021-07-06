@@ -33,6 +33,7 @@ class MainDrinkCard extends React.Component {
     const { history } = this.props;
     const { drinkData, isLoading } = this.state;
     const loading = (<h1>Carregando...</h1>);
+    console.log(this);
     return (
       <div>
         { isLoading ? loading : drinkData.map((recipe, index) => (
@@ -42,7 +43,8 @@ class MainDrinkCard extends React.Component {
               src={ recipe.strDrinkThumb }
               alt={ recipe.strDrink }
               data-testid={ `${index}-card-img` }
-              onClick={ () => history.push(`bebidas/${recipe.idDrink}`) }
+              width="270px"
+              onClick={ () => history.push(`/bebidas/${recipe.idDrink}`) }
             />
             <h6 data-testid={ `${index}-card-name` }>{recipe.strDrink}</h6>
           </div>
