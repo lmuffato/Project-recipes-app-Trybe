@@ -1,25 +1,18 @@
 import React from 'react';
 import './Styles.css';
-import BlackHeart from '../../images/blackHeartIcon.svg';
-import ShareIcon from '../../images/shareIcon.svg';
 import Header from './Header';
+import FoodImage from './FoodImage';
 import ColoredLine from './ColoredLine';
+import LikeShareButton from './LikeShareButton';
 
 function TelaReceitaEmProgresso() {
   return (
     <div className="backGround">
       <Header />
       <div>
-        <img id="food-picture" src="https://publisher-publish.s3.eu-central-1.amazonaws.com/pb-brasil247/swp/jtjeq9/media/20190703150712_3a5cce71-4170-463c-a9ca-ce55953a8533.webp" alt="foodPicture" />
+        <FoodImage />
       </div>
-      <div className="like-share-container">
-        <button type="button">
-          <img src={ BlackHeart } alt="black heart icon" data-testid="favorite-btn" />
-        </button>
-        <button type="button" data-testid="share-btn">
-          <img src={ ShareIcon } alt="share icon" />
-        </button>
-      </div>
+      <LikeShareButton />
       <div id="title-container" data-testid="recipe-title">
         Chelsea Buns
         <ColoredLine color="#EE9EE1" />
