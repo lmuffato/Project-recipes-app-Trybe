@@ -1,19 +1,21 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { string } from 'prop-types';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import shareIcon from '../../../images/shareIcon.svg';
 import whiteHeartIcon from '../../../images/whiteHeartIcon.svg';
+import blackHeartIcon from '../../../images/blackHeartIcon.svg';
 
-function DetailsHeader(props) {
-  const { recipe, type } = props;
-  const title = recipe.strDrink || recipe.strMeal;
-  const img = recipe.strDrinkThumb || recipe.strMealThumb;
-  const category = recipe.strAlcoholic || recipe.strCategory;
-
-  const favoriteRecipe = () => {
-    const favorites = JSON.parse(localStorage.getItem('favoriteRecipes'));
+const favoriteRecipe = (recipe, type, isFavorited) => {
+  const favorites = JSON.parse(localStorage.getItem('favoriteRecipes'));
+  if (isFavorited) {
+    const removeFromList = favorites.filter((item) => !(
+      item.id !== recipe.idMeal
+      || !item.id !== recipe.idDrink
+    ));
+    localStorage.setItem('favoriteRecipes', JSON.stringify(removeFromList));
+  } else {
     const currentRecipe = {
       id: recipe.idMeal || recipe.idDrink,
       type: type === 'meals' ? 'comida' : 'bebida',
@@ -23,9 +25,29 @@ function DetailsHeader(props) {
       name: recipe.strMeal || recipe.strDrink,
       image: recipe.strDrinkThumb || recipe.strMealThumb,
     };
+
     if (favorites) favorites.push(currentRecipe);
     localStorage.setItem('favoriteRecipes', JSON.stringify(favorites || [currentRecipe]));
-  };
+  }
+};
+
+function DetailsHeader(props) {
+  const { recipe, type } = props;
+  const title = recipe.strDrink || recipe.strMeal;
+  const img = recipe.strDrinkThumb || recipe.strMealThumb;
+  const category = recipe.strAlcoholic || recipe.strCategory;
+
+  const [isFavorited, isFavoritedToggle] = useState(false);
+
+  useEffect(() => {
+    const favorites = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    if (!favorites) return;
+    const checkFavorited = favorites.find((favoritedRecipe) => (
+      favoritedRecipe.idMeal === recipe.idMeal
+      || favoritedRecipe.idDrink === recipe.idDrink
+    ));
+    if (checkFavorited) isFavoritedToggle(true);
+  });
 
   return (
     <Container>
@@ -38,8 +60,18 @@ function DetailsHeader(props) {
         </Col>
         <Col>
           <img src={ shareIcon } alt="Share icon" data-testid="share-btn" />
-          <button type="button" onClick={ favoriteRecipe }>
-            <img src={ whiteHeartIcon } alt="Share icon" data-testid="favorite-btn" />
+          <button
+            type="button"
+            onClick={ () => {
+              favoriteRecipe(recipe, type, isFavorited);
+              isFavoritedToggle(!isFavorited);
+            } }
+          >
+            <img
+              src={ isFavorited ? blackHeartIcon : whiteHeartIcon }
+              alt="Share icon"
+              data-testid="favorite-btn"
+            />
           </button>
         </Col>
       </Row>

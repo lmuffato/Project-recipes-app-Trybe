@@ -20,7 +20,3 @@
   position: fixed;
   transform: translateX(-50%);
 }
-
-.favorite-icon {
-  fill: red;
-}
