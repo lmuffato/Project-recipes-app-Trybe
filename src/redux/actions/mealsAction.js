@@ -10,6 +10,7 @@ import {
 
 export const SET_MEALS = 'SET_MEALS';
 export const SET_SEARCH_BAR_MEALS = 'SET_SEARCH_BAR_MEALS';
+export const SET_MEAL_DETAILS = 'SET_MEAL_DETAILS';
 export const SET_MEAL_CATEGORIES = 'SET_MEAL_CATEGORIES';
 export const CHANGE_MEAL_CATEGORY = 'CHANGE_MEAL_CATEGORY';
 
@@ -38,8 +39,15 @@ function setSearchBarMeals(payload) {
     payload,
   };
 }
+function setMealDetails(payload) {
+  return {
+    type: SET_MEAL_DETAILS,
+    payload,
+  };
+}
 export const getFoodRecipesAPIThunk = APIThunk(setMeals);
 export const getFoodSearchBarAPIThunk = APIThunk(setSearchBarMeals);
+export const getFoodDetailsAPIThunk = APIThunk(setMealDetails);
 
 function setCategories(payload) {
   return {

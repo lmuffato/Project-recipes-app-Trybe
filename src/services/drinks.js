@@ -4,3 +4,4 @@ export const DRINKS_BY_CATEGORY_ENDPOINT = (category) => `https://www.thecocktai
 export const DRINKS_BY_INGREDIENT_ENDPOINT = (ingredient) => `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${ingredient}`;
 export const DRINKS_BY_NAME_ENDPOINT = (name) => `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${name}`;
 export const DRINKS_BY_FIRST_LETTER_ENDPOINT = (firstLetter) => `https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${firstLetter}`;
+export const DRINKS_BY_ID_ENDPOINT = (id) => `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;

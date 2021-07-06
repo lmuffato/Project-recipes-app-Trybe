@@ -1,10 +1,13 @@
 import { CHANGE_DRINK_CATEGORY,
   SET_DRINKS,
-  SET_DRINK_CATEGORIES } from '../actions/drinksAction';
+  SET_DRINK_CATEGORIES,
+  SET_DRINK_DETAILS,
+} from '../actions/drinksAction';
 
 const INITIAL_STATE = {
   recipes: [],
   categories: [],
+  drinkDetails: [],
   selectedCategory: 'All',
 };
 
@@ -14,6 +17,8 @@ export default function drinksReducer(state = INITIAL_STATE, action) {
     return { ...state, recipes: action.payload };
   case SET_DRINK_CATEGORIES:
     return { ...state, categories: action.payload };
+  case SET_DRINK_DETAILS:
+    return { ...state, drinkDetails: action.payload };
   case CHANGE_DRINK_CATEGORY:
     return { ...state, selectedCategory: action.payload };
   default:
