@@ -7,7 +7,6 @@ export default function RecipeShared(state) {
   useEffect(() => {
     if (!state) return;
     const { pathname } = history.location;
-    console.log(pathname);
     Copy(`http://localhost:3000${pathname}`);
   }, [state]);
 }
