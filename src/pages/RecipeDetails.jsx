@@ -87,6 +87,11 @@ function RecipeDetails({ type }) {
 
 export default RecipeDetails;
 
+// RecipeDetails.defaultProps = {
+//   url: '',
+// };
+
 RecipeDetails.propTypes = {
-  recipe: PropTypes.shape(),
-}.isRequired;
+  type: PropTypes.string.isRequired,
+  // url: PropTypes.string,
+};
