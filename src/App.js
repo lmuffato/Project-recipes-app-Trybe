@@ -7,7 +7,7 @@ function App() {
   return (
     <Switch>
       <Route exact path="/" component={ Login } />
-      <Route path="/comidas" component={ MainRecipes } />
+      <Route path={ ['/comidas', '/bebidas'] } component={ MainRecipes } />
     </Switch>
   );
 }
