@@ -9,6 +9,7 @@ import { getFoodRecomendation } from '../services/fetchApiRecomendations';
 
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import blackHeartIcon from '../images/blackHeartIcon.svg';
 import '../styles/DetalhesPaginas.css';
 import { btn } from '../styles/login';
 
@@ -19,6 +20,7 @@ function DetalhesBebida({ match: { params: { id } } }) {
   const [isLoading, setIsLoading] = useState(false);
   const [drinkRecomendation, setDrinkRecomendation] = useState();
   const [clipboardStatus, setClipboardStatus] = useState();
+  const [favoriteDrink, setFavoriteDrink] = useState(false);
   const history = useHistory();
 
   useEffect(() => {
@@ -41,6 +43,12 @@ function DetalhesBebida({ match: { params: { id } } }) {
 
     copy(`http://localhost:3000${pathname}`);
     setClipboardStatus('copied');
+  };
+
+  const favoriteClick = (e) => {
+    e.preventDefault();
+
+    return !favoriteDrink ? setFavoriteDrink(true) : setFavoriteDrink(false);
   };
 
   const handleClick = (e) => {
@@ -100,7 +108,6 @@ function DetalhesBebida({ match: { params: { id } } }) {
         `${strIngredient12} ${strMeasure12}`,
         `${strIngredient13} ${strMeasure13}`,
       ];
-      console.log('Recomendação de Drinks', drinkRecomendation);
 
       return (
         <div className="recipe-container">
@@ -117,8 +124,12 @@ function DetalhesBebida({ match: { params: { id } } }) {
             <button type="button" data-testid="share-btn" onClick={ shareClick }>
               <img alt="Share link" src={ shareIcon } />
             </button>
-            <button type="button" data-testid="favorite-btn">
-              <img alt="Favorite button" src={ whiteHeartIcon } />
+            <button type="button" onClick={ favoriteClick }>
+              <img
+                alt="Favorite button"
+                data-testid="favorite-btn"
+                src={ !favoriteDrink ? whiteHeartIcon : blackHeartIcon }
+              />
             </button>
           </div>
 
@@ -127,13 +138,19 @@ function DetalhesBebida({ match: { params: { id } } }) {
           <p data-testid="recipe-category">{ `${strCategory} - ${strAlcoholic}` }</p>
 
           <ul>
-            { ingredients.map((igredient, index) => (
-              <li
-                key={ igredient }
-                data-testid={ `${index}-ingredient-name-and-measure` }
-              >
-                { igredient }
-              </li>))}
+            { ingredients.map((ingredient, index) => {
+              console.log(ingredients);
+              if (ingredient !== null && ingredient !== ' ' && ingredient !== '  ' && ingredient !== 'null null') {
+                return (
+                  <li
+                    key={ ingredient }
+                    data-testid={ `${index}-ingredient-name-and-measure` }
+                  >
+                    { ingredient }
+                  </li>);
+              }
+              return '';
+            })}
           </ul>
 
           <p data-testid="instructions">{ strInstructions }</p>
