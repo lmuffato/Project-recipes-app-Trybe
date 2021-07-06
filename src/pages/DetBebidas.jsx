@@ -21,6 +21,7 @@ class DetBebidas extends React.Component {
     this.setNewState(drinks);
   /*  this.handleIngredients(); */
   }
+
   /*
   handleIngredients() {
     const ingredients = [];
@@ -55,7 +56,7 @@ class DetBebidas extends React.Component {
             data-testid="recipe-photo"
             alt="imagem da receita"
             src={ recipe[0].strDrinkThumb }
-            width="280px"
+            width="290px"
           />
           <h1 data-testid="recipe-title">{ recipe[0].strDrink }</h1>
           <p data-testid="recipe-category">{ recipe[0].strCategory }</p>
