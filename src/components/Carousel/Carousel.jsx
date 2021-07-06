@@ -24,6 +24,7 @@ function Carousel({ type }) {
       };
       if (formattingData[currRecomendation] !== null) {
         setRecomendations(formattingData[currRecomendation]);
+        setCurrentImage(0);
       }
       console.log(formattingData[currRecomendation]);
     } catch (err) {
