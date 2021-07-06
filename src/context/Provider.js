@@ -14,6 +14,7 @@ import {
   fetchFilterDrinkByName,
   fetchFilterFoodByLetter,
   fetchFilterDrinkByLetter } from '../services/fetchApi';
+import Mock from '../services/mokcInformation';
 
 function Provider({ children }) {
   // useStates...
@@ -32,8 +33,11 @@ function Provider({ children }) {
   const [radio, setRadio] = useState('');
   const [searchInput, setSearchInput] = useState('');
   const [path, setPath] = useState('');
+  const [doneRecipes, setDoneRecipes] = useState([]);
+  const [doneFilterRecipes, setDoneFilter] = useState([]);
 
-  function getFoods() {
+  function getInFormations() {
+    // const informationLocalStorage = JSON.parse(localStorage.getItem('doneRecipes'))
     const fetchApis = async () => {
       const dataFoods = await fetchApiFoods();
       const dataDrinks = await fetchApiDrinks();
@@ -45,6 +49,7 @@ function Provider({ children }) {
       setDrinks(dataDrinks);
     };
     fetchApis();
+    setDoneRecipes(Mock);
   }
 
   const clickFilterFood = (e) => {
@@ -88,8 +93,30 @@ function Provider({ children }) {
   const clickRecipeDrinks = (id) => {
     console.log(id);
   };
+
+  const doneFilter = (e) => {
+    const { innerText } = e.target;
+    setDoneFilter([]);
+    if (innerText === 'All') {
+      setShowFilter(false);
+      setDoneRecipes(Mock);
+      setDoneFilter([]);
+    }
+    if (innerText === 'Food') {
+      setShowFilter(true);
+      const newRecipes = doneRecipes
+        .filter((recipe) => (recipe.type === 'comida') && recipe);
+      setDoneFilter(newRecipes);
+    }
+    if (innerText === 'Drinks') {
+      setShowFilter(true);
+      const newRecipes = doneRecipes
+        .filter((recipe) => (recipe.type === 'bebida') && recipe);
+      setDoneFilter(newRecipes);
+    }
+  };
   // ComponentDidMount
-  useEffect(getFoods, []);
+  useEffect(getInFormations, []);
 
   const handleClickFilter = () => {
     if (path === 'comidas' && radio === 'Ingrediente') {
@@ -170,6 +197,9 @@ function Provider({ children }) {
     path,
     setPath,
     handleClickFilter,
+    doneRecipes,
+    doneFilter,
+    doneFilterRecipes,
   };
 
   return (
