@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import formattingMeasuresAndIngredients from '../../services/fetchFilteredRecipes';
+import formattingMeasuresAndIngredients from '../../services/formatingService';
 
 function RecipeIngredients({ recipe }) {
   const keysAndValues = Object.entries(recipe);
@@ -9,8 +9,7 @@ function RecipeIngredients({ recipe }) {
   const { ingredients, measures } = formatting;
 
   return (
-    <>
-      <h3>Ingredientes</h3>
+    <div className="ing">
       <ul>
         {ingredients.map((element, index) => (
           <li
@@ -22,7 +21,7 @@ function RecipeIngredients({ recipe }) {
             { element }
           </li>))}
       </ul>
-    </>
+    </div>
   );
 }
 

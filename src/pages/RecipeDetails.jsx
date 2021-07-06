@@ -51,6 +51,8 @@ function RecipeDetails({ type }) {
   const recipeThumb = singleRecipe.strMealThumb || singleRecipe.strDrinkThumb;
   const recipeCategory = singleRecipe.strCategory;
   const isAlchooholic = singleRecipe.strAlcoholic || '';
+  const magicNumber = 32;
+  const youTubeVideo = singleRecipe.strYoutube.substring(magicNumber);
 
   return (
     <Container>
@@ -65,17 +67,21 @@ function RecipeDetails({ type }) {
         <img src={ shareIconImg } alt="ícone de compartilhar" data-testid="share-btn" />
         <img src={ favoriteIconImg } alt="" data-testid="favorite-btn" />
       </div>
+      <h3>Ingredientes</h3>
       <div className="ingredients-list">
         <RecipeIngredients recipe={ singleRecipe } type={ type } />
       </div>
-      {/* <RecipeIngredients id={ recipeId } type={ type } /> */}
       <div className="instructions">
         <h5>Instructions</h5>
         <p data-testid="instructions">
           { singleRecipe.strInstructions }
         </p>
       </div>
-      { type === 'meals' ? (<MealVideo />) : ''}
+      { type === 'meals' ? (
+        <MealVideo
+          youTubeVideo={ youTubeVideo }
+          title={ recipeName }
+        />) : ''}
       <Button data-testid="start-recipe-btn">
         Iniciar receita
       </Button>

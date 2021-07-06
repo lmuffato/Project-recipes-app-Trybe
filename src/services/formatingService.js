@@ -1,15 +1,15 @@
 const formattingMeasuresAndIngredients = (keysAndValues) => {
   const mapingValues = keysAndValues.reduce((acc, cur) => {
     const objeto = acc;
-    const currentItem = cur;
+    const [key, value] = cur;
 
-    if (currentItem[0].includes('strIngredient') && currentItem[1]) {
-      objeto.ingredients.push(currentItem[1]);
+    if (key.includes('strIngredient') && value) {
+      objeto.ingredients.push(value);
     }
-    if (currentItem[0].includes('strMeasure') && currentItem[1]) {
-      objeto.measures.push(currentItem[1]);
+    if (key.includes('strMeasure') && value) {
+      objeto.measures.push(value);
     }
-    console.log(objeto);
+    // console.log(objeto);
     return objeto;
   }, {
     ingredients: [],
