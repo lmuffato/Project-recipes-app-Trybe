@@ -30,7 +30,7 @@ function ReceitaBebidaDetalhe({ props }) {
   const favoriteClick = (e) => {
     e.preventDefault();
 
-    const date = new Date().toString();
+    // const date = new Date().toString();
 
     const favoriteRecipe = {
       id,
