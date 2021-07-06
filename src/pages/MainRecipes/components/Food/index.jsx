@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import RecipeCard from '../RecipeCard';
 import getFoodRecipes from '../../../../services/theMealApi';
+import RecipeCard from '../RecipeCard';
 
 function Food() {
   const [recipes, setRecipes] = useState([]);
