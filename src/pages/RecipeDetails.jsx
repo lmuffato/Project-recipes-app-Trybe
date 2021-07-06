@@ -8,6 +8,7 @@ import Video from './components/DetailsPage/Video';
 import Recommendations from './components/DetailsPage/Recommendations';
 import { getSpecificDrink } from '../actions/drinks';
 import { getSpecificMeal } from '../actions/meals';
+import './RecipeDetails.css';
 
 function RecipeDetails() {
   const { location: { pathname } } = useHistory();
@@ -48,7 +49,13 @@ function RecipeDetails() {
           <Instructions recipe={ recipe } />
           <Video recipe={ recipe } />
           <Recommendations type={ type } />
-          <button type="button" data-testid="start-recipe-btn">Começar receita</button>
+          <button
+            type="button"
+            data-testid="start-recipe-btn"
+            className="start-recipe-btn"
+          >
+            Iniciar receita
+          </button>
         </div>
       ))
   );

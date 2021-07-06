@@ -5,7 +5,6 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import { getDrinks } from '../../../actions/drinks';
 import { getMeals } from '../../../actions/meals';
-import './Recommendations.css';
 
 function Recommendations(props) {
   const { type } = props;

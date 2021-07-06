@@ -1,6 +1,7 @@
 .recommendation-container {
   display: flex;
   flex-flow: row nowrap;
+  margin-bottom: 5vh;
   overflow-x: scroll;
   width: 80%;
 }
@@ -11,4 +12,11 @@
 
 .card-container {
   margin: 20px;
+}
+
+.start-recipe-btn {
+  bottom: 0;
+  left: 50%;
+  position: fixed;
+  transform: translateX(-50%);
 }
