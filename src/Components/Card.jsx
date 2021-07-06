@@ -13,11 +13,11 @@ const Card = ({ thumb, name, index, id }) => {
     history.push(`/${recipe}/${id}`);
   };
   return (
-    <div
+    <button
+      type="button"
       className="card-container"
       data-testid={ `${index}-recipe-card` }
       onClick={ handleClick }
-      role="section"
     >
       <img
         src={ thumb }
@@ -26,7 +26,7 @@ const Card = ({ thumb, name, index, id }) => {
         data-testid={ `${index}-card-img` }
       />
       <h3 data-testid={ `${index}-card-name` }>{name}</h3>
-    </div>
+    </button>
   );
 };
 

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useLocation } from 'react-router-dom';
+import { useParams, useLocation, Link } from 'react-router-dom';
+import DetailsButtons from '../Components/DetailsButtons';
 import DetailsCard from '../Components/DetailsCard';
+import RecommendationList from '../Components/RecommendationList';
 
 function DetailsPage() {
   const [product, setProduct] = useState({});
@@ -9,6 +11,16 @@ function DetailsPage() {
   const { id } = useParams();
   const location = useLocation();
   const page = location.pathname.split('/');
+
+  const handleClick = () => {
+    console.log('teste');
+  };
+
+  const btnText = () => {
+    const idRecipe = true;
+    if (!idRecipe) return 'Continuar Receita';
+    return 'Iniciar Receita';
+  };
 
   useEffect(() => {
     const getProduct = async () => {
@@ -31,13 +43,27 @@ function DetailsPage() {
     getProduct();
   }, []);
 
-  return (
-    <>
-      <p>Details Page</p>
-      {isProduct && <DetailsCard product={ product } idn={ idn } />}
-      <span>{ id }</span>
-    </>
-  );
+  if (isProduct) {
+    return (
+      <div className="details-page">
+        <p>Details Page</p>
+        <DetailsCard product={ product } idn={ idn } />
+        <RecommendationList idn={ idn } />
+        <DetailsButtons />
+        <Link to={ `/${page[1]}/${id}/in-progress` }>
+          <button
+            type="button"
+            data-testid="start-recipe-btn"
+            className="init-recipe-btn"
+            onClick={ handleClick }
+          >
+            { btnText() }
+          </button>
+        </Link>
+      </div>
+    );
+  }
+  return (<p>Loading</p>);
 }
 
 export default DetailsPage;

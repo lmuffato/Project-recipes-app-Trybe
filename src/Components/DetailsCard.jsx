@@ -1,19 +1,23 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 function DetailsCard({ product, idn }) {
-  const [ingredients, setIngredients] = React.useState([]);
-
   const pickIngredients = () => {
     const initIngredients = [];
-    for (let i = 1; i <= 20; i += 1) {
+    let length = 0;
+    const lengthMeal = 20;
+    const lengthDrink = 15;
+    if (idn[1] === 'Meal') length = lengthMeal;
+    if (idn[1] === 'Drink') length = lengthDrink;
+    for (let i = 1; i <= length; i += 1) {
       product.forEach((elem) => {
-        initIngredients.push(elem[`strIngredient${i}`]);
+        initIngredients.push(`${elem[`strIngredient${i}`]} - ${elem[`strMeasure${i}`]}`);
       });
     }
     return (
       <ul>
         {initIngredients.map((ingredient, index) => {
-          if (ingredient.length !== 0) {
+          if (ingredient === null || ingredient.length !== 0) {
             return (
               <li
                 data-testid={ `${index}-ingredient-name-and-measure` }
@@ -34,19 +38,36 @@ function DetailsCard({ product, idn }) {
       {product.map((elem) => (
         <div key={ `id${idn[1]}` }>
           {console.log(elem)}
-          <img src={ elem[`str${idn[1]}Thumb`] } data-testid="recipe-photo" />
+          <img
+            src={ elem[`str${idn[1]}Thumb`] }
+            data-testid="recipe-photo"
+            alt="recipe"
+          />
           <h2 data-testid="recipe-title">{elem[`str${idn[1]}`]}</h2>
 
-          <h3 data-testid="recipe-category">{elem.strCategory}</h3>
+          <h3 data-testid="recipe-category">
+            {elem.strCategory}
+            -
+            {elem.strAlcoholic}
+          </h3>
           { pickIngredients() }
-          <h3 data-testid="instructions">{elem.Instructions}</h3>
-          <video width="240" height="240" controls autplay>
-            <source src={ elem.strYoutube } type="video/mp4" />
-          </video>
+          <h3 data-testid="instructions">{elem.strInstructions}</h3>
+          { idn[1] === 'Meal' && <iframe
+            title="Recipe"
+            width="420"
+            height="315"
+            data-testid="video"
+            src={ elem.strYoutube.replace('watch?v=', 'embed/') }
+          />}
         </div>
       ))}
     </section>
   );
 }
+
+DetailsCard.propTypes = {
+  product: PropTypes.arrayOf(PropTypes.object).isRequired,
+  idn: PropTypes.number.isRequired,
+}.isRequired;
 
 export default DetailsCard;
