@@ -7,6 +7,9 @@ import Foods from '../pages/MainFoods';
 import Drinks from '../pages/MainDrinks';
 import FoodDetails from '../pages/FoodDetails';
 import DrinkDetails from '../pages/DrinkDetails';
+import ExploreFood from '../pages/ExploreFood';
+import ExploreDrink from '../pages/ExploreDrink';
+import IngredientsPage from '../pages/IngredientsPage';
 
 const componentWithHeader = ({ title }) => (
   <section>
@@ -53,25 +56,25 @@ export default [
   },
   {
     path: '/explorar/comidas',
-    Component: componentWithHeader,
+    Component: ExploreFood,
     exact: true,
     title: 'Explorar Comidas',
   },
   {
     path: '/explorar/bebidas',
-    Component: componentWithHeader,
+    Component: ExploreDrink,
     exact: true,
     title: 'Explorar Bebidas',
   },
   {
     path: '/explorar/comidas/ingredientes',
-    Component: componentWithHeader,
+    Component: IngredientsPage,
     exact: false,
     title: 'Explorar Ingredientes',
   },
   {
     path: '/explorar/bebidas/ingredientes',
-    Component: componentWithHeader,
+    Component: IngredientsPage,
     exact: false,
     title: 'Explorar Ingredientes',
   },
