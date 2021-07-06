@@ -1,0 +1,26 @@
+@media screen and (max-width: 414px) {
+  .areaRecipie {
+    margin-bottom: 80px;
+
+    .startRecipie {
+      width: 100%;
+      height: 60px;
+      position: fixed;
+      bottom: 0;
+      align-items: center;
+      background: #EB8328;
+      border: none;
+      color: #FFF;
+      cursor: pointer;
+      display: flex;
+      font-family: 'Poppins', sans-serif;
+      font-size: 24px;
+      font-weight: 500;
+      justify-content: center;
+
+      &:hover {
+        background: #f89c2b;
+      }
+    }
+  }
+}

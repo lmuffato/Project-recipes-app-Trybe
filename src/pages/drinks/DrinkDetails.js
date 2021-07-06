@@ -5,6 +5,8 @@ import { useSelector } from 'react-redux';
 import positions from '../../services/data';
 import createIngredients from '../../services/functions';
 
+import styles from '../../styles/DetailsPages.module.scss';
+
 function DrinkDetails(props) {
   const { match: { params: { id } } } = props;
 
@@ -45,7 +47,7 @@ function DrinkDetails(props) {
       Bebida de ID :
       { id }
       {drinks && drinks.map((el) => (
-        <div className="teste-details" key={ el.idDrink }>
+        <div className={ styles.areaRecipie } key={ el.idDrink }>
           <img src={ el.strDrinkThumb } alt={ el.strDrink } data-testid="recipe-photo" />
           <h1 data-testid="recipe-title">{ el.strDrink }</h1>
           <button type="button" data-testid="share-btn">compartilhar</button>
@@ -60,7 +62,13 @@ function DrinkDetails(props) {
           </ul>
           <p data-testid="instructions">{ el.strInstructions }</p>
           <div data-testid="0-recomendation-card">recomendação</div>
-          <button type="button" data-testid="start-recipe-btn">Iniciar</button>
+          <button
+            type="button"
+            data-testid="start-recipe-btn"
+            className={ styles.startRecipie }
+          >
+            Iniciar Receita
+          </button>
         </div>
 
       ))}
