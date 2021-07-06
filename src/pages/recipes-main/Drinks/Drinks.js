@@ -9,7 +9,7 @@ import CardsFilterRecipes from './CardsFilterRecipes';
 import FilterDrinks from './FilterDrinks';
 
 function Drinks() {
-  const { drinks, showFilter, clickRecipeDrinks } = useContext(Context);
+  const { drinks, showFilter, clickRecipeDrinks, search } = useContext(Context);
   const lengthDrinks = 12;
   const CardsRecipes = () => {
     if (drinks !== []) {
@@ -43,11 +43,24 @@ function Drinks() {
       );
     }
   };
+
+  const renderDrinks = () => {
+    if (showFilter === true && search === false) {
+      return <CardsFilterRecipes />;
+    } if (showFilter === false && search === false) {
+      return CardsRecipes();
+    } if (showFilter === false && search === true) {
+      return CardsRecipes();
+    } if (showFilter === true && search === true) {
+      return <CardsFilterRecipes />;
+    }
+  };
+
   return (
     <>
       <HeaderWithSearch />
       <FilterDrinks />
-      {showFilter ? <CardsFilterRecipes /> : CardsRecipes()}
+      {renderDrinks()}
       <Footer />
     </>
   );

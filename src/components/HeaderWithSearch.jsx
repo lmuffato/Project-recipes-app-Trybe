@@ -37,28 +37,30 @@ function HeaderWithSearch() {
   };
 
   return (
-    <>
-      <Link to="/perfil">
-        <img
-          src={ profileIcon }
-          alt="profile-icon"
-          data-testid="profile-top-btn"
-        />
-      </Link>
-      <h4 data-testid="page-title">{pageTitle()}</h4>
-      <button
-        type="button"
-        onClick={ () => handleSearch() }
-        style={ style }
-      >
-        <img
-          src={ searchIcon }
-          alt="search-icon"
-          data-testid="search-top-btn"
-        />
-      </button>
+    <div className="header">
+      <div className="header-search">
+        <Link to="/perfil">
+          <img
+            src={ profileIcon }
+            alt="profile-icon"
+            data-testid="profile-top-btn"
+          />
+        </Link>
+        <h4 data-testid="page-title">{pageTitle()}</h4>
+        <button
+          type="button"
+          onClick={ () => handleSearch() }
+          style={ style }
+        >
+          <img
+            src={ searchIcon }
+            alt="search-icon"
+            data-testid="search-top-btn"
+          />
+        </button>
+      </div>
       {search ? <HeaderSearchbar /> : <p />}
-    </>
+    </div>
   );
 }
 
