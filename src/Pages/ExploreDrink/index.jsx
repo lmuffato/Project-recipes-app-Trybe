@@ -1,20 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import ExploreDrink from '../../Components/ExploreDrink';
 import Footer from '../../Components/Footer';
-import Header from '../../Components/Header';
 
-function ExploreByType({ header }) {
+function ExploreDrinkOpt() {
   return (
     <div>
-      <Header>{ header }</Header>
-      <h1>ExploreByType</h1>
+      <ExploreDrink />
       <Footer />
     </div>
   );
 }
 
-ExploreByType.propTypes = {
+ExploreDrinkOpt.propTypes = {
   header: PropTypes.string,
 }.isRequired;
 
-export default ExploreByType;
+export default ExploreDrinkOpt;
