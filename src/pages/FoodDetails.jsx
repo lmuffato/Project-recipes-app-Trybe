@@ -7,10 +7,16 @@ export default function FoodDetails() {
   const {
     recipe,
     recommended,
+    showClipBoardMsg,
+    blackHeartIcon,
+    whiteHeartIcon,
+    setHeart,
     getIngredientsAndMeasures,
     filterRecommended,
     redirectToProgressPage,
     copyToClipBoard,
+    renderClipBoardMsg,
+    checkFavorite,
   } = useRecipeDetails('meal');
   const recipeMeal = recipe.meals[0];
   const { ingredients, measures } = getIngredientsAndMeasures(recipeMeal);
@@ -29,9 +35,15 @@ export default function FoodDetails() {
         <button type="button" data-testid="share-btn" onClick={ copyToClipBoard }>
           Share button
         </button>
-        <button type="button" data-testid="favorite-btn">
-          Favorite button
+        <button type="button" onClick={ () => setHeart(recipeMeal) }>
+          <img
+            data-testid="favorite-btn"
+            src={ checkFavorite() ? blackHeartIcon : whiteHeartIcon }
+            alt="Favorite"
+          />
         </button>
+
+        {showClipBoardMsg && renderClipBoardMsg()}
 
         <p data-testid="recipe-category">{strCategory}</p>
       </section>

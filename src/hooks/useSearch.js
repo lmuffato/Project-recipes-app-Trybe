@@ -33,7 +33,7 @@ export default function useSearch() {
       if (searchResult.length === 1) {
         return fetchFirstLetter(site, searchResult);
       }
-      alert('Sua busca deve conter somente 1 (um) caracter');
+      global.alert('Sua busca deve conter somente 1 (um) caracter');
       return { meals: [], drinks: [] };
 
     default:

@@ -3,12 +3,19 @@ import useRecipeDetails from '../hooks/useRecipeDetails';
 import CarouselCard from '../components/CarouselCard';
 
 export default function DrinkDetails() {
-  const { recipe,
-    getIngredientsAndMeasures,
+  const {
+    recipe,
     recommended,
+    showClipBoardMsg,
+    blackHeartIcon,
+    whiteHeartIcon,
+    setHeart,
+    getIngredientsAndMeasures,
     filterRecommended,
     redirectToProgressPage,
     copyToClipBoard,
+    renderClipBoardMsg,
+    checkFavorite,
   } = useRecipeDetails('drink');
   // ALERTA ENGENHARIA DE EMERGÊNCIA
   const recipeDrink = recipe.drinks
@@ -35,9 +42,14 @@ export default function DrinkDetails() {
         <button type="button" data-testid="share-btn" onClick={ copyToClipBoard }>
           Share button
         </button>
-        <button type="button" data-testid="favorite-btn">
-          Favorite button
+        <button type="button" onClick={ () => setHeart(recipeDrink) }>
+          <img
+            data-testid="favorite-btn"
+            src={ checkFavorite() ? blackHeartIcon : whiteHeartIcon }
+            alt="Favorite"
+          />
         </button>
+        {showClipBoardMsg && renderClipBoardMsg()}
         <p data-testid="recipe-category">{strAlcoholic}</p>
       </section>
 
