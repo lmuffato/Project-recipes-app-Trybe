@@ -3,7 +3,10 @@ import useRecipeDetails from '../hooks/useRecipeDetails';
 
 export default function DrinkDetails() {
   const { recipe, getIngredientsAndMeasures } = useRecipeDetails('cocktail');
-  const recipeDrink = recipe.drinks[0];
+  // ALERTA GAMBIARRA
+  const recipeDrink = recipe.drinks
+    ? recipe.drinks[0]
+    : { drinks: [{}] };
   const { ingredients, measures } = getIngredientsAndMeasures(recipeDrink);
   const {
     strDrinkThumb,
