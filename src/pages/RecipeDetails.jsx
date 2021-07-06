@@ -7,6 +7,7 @@ import RecipeIngredients from '../components/RecipeIngredients/RecipeIngredients
 import Container from '../styles/recipeDetails';
 import MealVideo from '../components/MealVideo/MealVideo';
 import Carousel from '../components/Carousel/Carousel';
+import useFetchRecipes from '../effects/useFetchRecipes';
 
 function RecipeDetails({ type }) {
   const { id } = useParams();
@@ -15,6 +16,7 @@ function RecipeDetails({ type }) {
   const [fetchRecipeURL, setFetchRecipeURL] = useState('');
   const [isLoading, setIsLoading] = useState(true);
   const [singleRecipe, setRecipe] = useState({});
+  const [recommendations, setRecomendations] = useState([]);
 
   const handleFetchIngredients = useCallback(() => {
     if (type === 'meals') {
@@ -41,6 +43,12 @@ function RecipeDetails({ type }) {
     handleFetchIngredients();
     handleFetch(fetchRecipeURL);
   }, [fetchRecipeURL, handleFetch, handleFetchIngredients]);
+
+  const fetchData = useFetchRecipes(type);
+
+  useEffect(() => {
+    if (fetchData[type]) setRecomendations(fetchData[type]);
+  }, [fetchData, type]);
 
   if (isLoading) {
     return 'Loading';
@@ -77,7 +85,7 @@ function RecipeDetails({ type }) {
           youTubeVideo={ youTubeVideo.substring(magicNumber) }
           title={ recipeName }
         />) : ''}
-      <Carousel />
+      <Carousel recommendations={ recommendations } />
       <Button data-testid="start-recipe-btn">
         Iniciar receita
       </Button>
