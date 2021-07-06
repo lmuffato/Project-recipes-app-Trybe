@@ -35,9 +35,9 @@ function ReceitasProvider({ children }) {
   }
 
   async function setFilterByIngredient(ingredient, foodOrDrink) {
-    console.log(ingredient);
+    console.log(ingredient, foodOrDrink);
 
-    if (foodOrDrink === 'food' && APIFood) {
+    if (foodOrDrink === 'comidas' && APIFood) {
       await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${
         ingredient.toLowerCase()}`)
         .then((response) => response.json())

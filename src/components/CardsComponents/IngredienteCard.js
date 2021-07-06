@@ -1,21 +1,23 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import '../../styles/Card.css';
+import ReceitasContext from '../../contexts/ReceitasContext';
 
 function IngredienteCard({ index, strName, strThumb, page }) {
+  const { setFilterByIngredient } = useContext(ReceitasContext);
+
   const history = useHistory();
   return (
     <button
       className="card"
       type="button"
       data-testid={ `${index}-ingredient-card` }
-      onClick={ () => history.push(
-        `/${page}`,
-        {
-          ingredientName: strName },
+      onClick={ () => {
+        setFilterByIngredient(strName, page);
 
-      ) }
+        history.push(`/${page}`);
+      } }
     >
       <img
         className="card-img"

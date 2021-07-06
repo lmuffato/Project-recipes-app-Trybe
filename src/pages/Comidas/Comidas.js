@@ -1,5 +1,4 @@
 import React, { useContext, useEffect } from 'react';
-import PropTypes from 'prop-types';
 
 import CardList from '../../components/CardList';
 import Header from '../../components/Header';
@@ -7,18 +6,15 @@ import ReceitasContext from '../../contexts/ReceitasContext';
 import Footer from '../../components/Footer';
 import Filter from '../../components/Filter';
 
-function Comidas({ location }) {
+function Comidas() {
   const { APIFood,
     fetchApi,
     foodsByIngredient,
-    setFilterByIngredient } = useContext(ReceitasContext);
+  } = useContext(ReceitasContext);
 
   useEffect(() => {
     fetchApi('https://www.themealdb.com/api/json/v1/1/search.php?s=', 'comidas');
 
-    if (location.state && location.state.ingredientName.length >= 1) {
-      setFilterByIngredient(location.state.ingredientName, 'food');
-    }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -76,23 +72,5 @@ function Comidas({ location }) {
     </div>
   );
 }
-
-Comidas.propTypes = {
-  location: PropTypes.shape({
-    pathname: PropTypes.string,
-    state: PropTypes.shape({
-      ingredientName: PropTypes.string,
-    }),
-  }),
-};
-
-Comidas.defaultProps = {
-  location: {
-    pathname: '',
-    state: {
-      ingredientName: '',
-    },
-  },
-};
 
 export default Comidas;
