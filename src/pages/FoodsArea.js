@@ -29,29 +29,25 @@ function FoodsArea() {
       setMealsRecepies(fetchRecepies);
       setShowRecepies(fetchRecepies.slice(0, lastRecipe));
     };
-
     getMealsRecepies();
   }, []);
 
   useEffect(() => {
+    async function getFiltredFetch() {
+      const filteredFetch = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?a=${selectedArea}`)
+      .then((responses) => responses.json())
+      .then((respos) => respos.meals);
+      /* const filteredRecepies = mealsRecepies.filter((recepi) => (
+        recepi.strArea === selectedArea
+        )); */
+      setShowRecepies(filteredFetch.slice(0, lastRecipe));
+    };
+
     if (selectedArea === 'All') {
       setShowRecepies(mealsRecepies.slice(0, lastRecipe));
     } else {
-      async function getFiltredFetch() {
-        console.log('entrou na função de fetch filtro');
-        const filteredFetch = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?a=${selectedArea}`)
-        .then((responses) => responses.json())
-        .then((respos) => respos.meals);
-        /* const filteredRecepies = mealsRecepies.filter((recepi) => (
-          recepi.strArea === selectedArea
-          )); */
-          console.log('filteredFetch')
-          console.log((filteredFetch));
-          setShowRecepies(filteredFetch.slice(0, lastRecipe));
-        }
-        getFiltredFetch();
-      }
-    console.log(showRecepies)
+        getFiltredFetch();s
+      };
   }, [selectedArea, mealsRecepies]);
 
   return (
