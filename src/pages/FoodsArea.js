@@ -38,7 +38,7 @@ function FoodsArea() {
       .then((responses) => responses.json())
       .then((respos) => respos.meals);
     console.log(filteredFetch);
-    const fils = filteredFetch.filter((element, index) => index <= lastRecipe);
+    const fils = filteredFetch.filter((element, index) => index < lastRecipe);
     setShowRecepies(fils);
   }
 
