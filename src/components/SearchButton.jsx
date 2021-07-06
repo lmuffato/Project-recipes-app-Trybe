@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Redirect } from 'react-router-dom';
 import searchIcon from '../images/searchIcon.svg';
 
 class SearchButton extends React.Component {
@@ -13,6 +14,7 @@ class SearchButton extends React.Component {
       btn: false,
       foodOrDrink: '',
       foodOrDrinkApiName: '',
+      idProduct: '',
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -21,15 +23,16 @@ class SearchButton extends React.Component {
     this.requestApi = this.requestApi.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.apiDrink = this.apiDrink.bind(this);
-    this.renderRadioButtons = this.renderRadioButtons.bind(this);
     this.handlePathName = this.handlePathName.bind(this);
     this.renderFood = this.renderFood.bind(this);
     this.renderDrink = this.renderDrink.bind(this);
     this.verifyRenderApi = this.verifyRenderApi.bind(this);
+    this.saveIdProduct = this.saveIdProduct.bind(this);
   }
 
   componentDidMount() {
     this.handlePathName();
+    this.saveIdProduct();
   }
 
   handlePathName() {
@@ -68,6 +71,21 @@ class SearchButton extends React.Component {
     }
   }
 
+  saveIdProduct() {
+    const { api, foodOrDrink } = this.state;
+    if (foodOrDrink === '/comidas') {
+      const idRecipe = api[0].idMeal;
+      this.setState({
+        idProduct: idRecipe,
+      });
+    } else if (foodOrDrink === '/bebidas') {
+      const idRecipe = api[0].idDrink;
+      this.setState({
+        idProduct: idRecipe,
+      });
+    }
+  }
+
   apiFood(valueInput) {
     const meals = {
       name: `https://www.themealdb.com/api/json/v1/1/search.php?s=${valueInput}`,
@@ -88,17 +106,18 @@ class SearchButton extends React.Component {
 
   async requestApi(endpoint) {
     const { foodOrDrinkApiName } = this.state;
-    const api = await fetch(endpoint);
-    const tratamentoJson = await api.json();
-    if (tratamentoJson === null) {
+    const api = await fetch(endpoint).then((response) => response.json());
+    console.log(typeof api);
+    if (api === null) {
       this.setState({
         api: [],
       });
-    } else {
+    } else if (api) {
       this.setState({
-        api: tratamentoJson[foodOrDrinkApiName],
+        api: api[foodOrDrinkApiName],
       });
     }
+    this.saveIdProduct();
   }
 
   verifyRenderApi() {
@@ -135,22 +154,16 @@ class SearchButton extends React.Component {
   }
 
   renderInputSearch() {
-    const { valueInput } = this.state;
-    return (
-      <input
-        type="text"
-        data-testid="search-input"
-        nome="valueInput"
-        value={ valueInput }
-        onChange={ this.handleChange }
-      />
-    );
-  }
-
-  renderRadioButtons() {
-    const { btn } = this.state;
+    const { valueInput, btn } = this.state;
     return (
       <>
+        <input
+          type="text"
+          data-testid="search-input"
+          nome="valueInput"
+          value={ valueInput }
+          onChange={ this.handleChange }
+        />
         <button
           data-testid="search-top-btn"
           type="button"
@@ -221,10 +234,12 @@ class SearchButton extends React.Component {
   }
 
   render() {
+    const { api, foodOrDrink } = this.state;
     return (
-      <>
-        {this.renderRadioButtons()}
-      </>
+      <div>
+        { api.length === 1 ? <Redirect to={ `/${foodOrDrink}` } />
+          : this.renderInputSearch() }
+      </div>
     );
   }
 }
