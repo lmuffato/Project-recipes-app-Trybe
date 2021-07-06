@@ -10,7 +10,7 @@ function Ingredient({ recipe, type }) {
 
   return (
     <div>
-      <h2>Ingredints</h2>
+      <h2>Ingredients</h2>
       {
         type === 'list' ? (
           <ul>
