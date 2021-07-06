@@ -71,3 +71,39 @@ export async function fetchApiIngredientsDrink() {
   const { drinks } = await response.json();
   return drinks;
 }
+// Req 14 Requisição a Api de acordo com o filtro
+export async function fetchFilterFoodByIngredient(ingredient) {
+  const response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${ingredient}`);
+  const dataIngredientFoods = await response.json();
+  return dataIngredientFoods.meals;
+}
+
+export async function fetchFilterDrinkByIngredient(ingredient) {
+  const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${ingredient}`);
+  const dataIngredientDrinks = await response.json();
+  return dataIngredientDrinks.drinks;
+}
+
+export async function fetchFilterFoodByName(name) {
+  const response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${name}`);
+  const dataNameFoods = await response.json();
+  return dataNameFoods.meals;
+}
+
+export async function fetchFilterDrinkByName(name) {
+  const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${name}`);
+  const dataNameDrinks = await response.json();
+  return dataNameDrinks.drinks;
+}
+
+export async function fetchFilterFoodByLetter(firstLetter) {
+  const response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?f=${firstLetter}`);
+  const dataFirstLetterFoods = await response.json();
+  return dataFirstLetterFoods.meals;
+}
+
+export async function fetchFilterDrinkByLetter(firstLetter) {
+  const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${firstLetter}`);
+  const dataFirstLetterDrinks = await response.json();
+  return dataFirstLetterDrinks.drinks;
+}

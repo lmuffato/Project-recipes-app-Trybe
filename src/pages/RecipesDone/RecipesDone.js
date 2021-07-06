@@ -1,11 +1,15 @@
 import React from 'react';
 import Header from '../../components/Header';
+import ButtonFilter from './ButtonsFilter';
+import Recipes from './Recipes';
+import './index.css';
 
 const RecipesDone = () => (
-  <div>
+  <>
     <Header />
-    <h2>Receitas já feitas</h2>
-  </div>
+    <ButtonFilter />
+    <Recipes />
+  </>
 );
 
 export default RecipesDone;

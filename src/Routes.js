@@ -53,9 +53,6 @@ function Routes() {
       <Route exact path="/receitas-favoritas" component={ RecipesFav } />
       <Route exact path="/comidas/:id/in-progress" component={ FoodInProgress } />
       <Route exact path="/bebidas/:id/in-progress" component={ DrinksInProgress } />
-      <Route exact path="/perfil" component={ ProfileScreen } />
-      <Route exact path="/receitas-feitas" component={ RecipesDone } />
-      <Route exact path="/receitas-favoritas" component={ RecipesFav } />
     </Switch>
   );
 }

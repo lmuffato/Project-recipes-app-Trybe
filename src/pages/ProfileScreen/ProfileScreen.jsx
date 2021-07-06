@@ -5,13 +5,17 @@ import styleCard, { styleBtn } from './index.style';
 import clearLS from '../../services/localStorage/clearLS';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
+// import doneRecipes from '../../services/mokcInformation';
 
 const ProfileScreen = () => {
   const { setLogout } = useContext(Context);
-
+  const user = JSON.parse(localStorage.getItem('user'));
+  // console.log(email);
+  // const email = 'test@test.com';
   const handleClick = ({ target }) => {
     // console.log(target);
     if (target.id === 'recipes-made') {
+      // const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'))
       console.log('Receitas feitas clicked!');
     }
     if (target.id === 'recipes-fav') {
@@ -29,7 +33,7 @@ const ProfileScreen = () => {
       <Header />
       <div className="card" style={ styleCard }>
         <h5 className="card-title">Perfil</h5>
-        <span data-testid="profile-email">email@mail.com</span>
+        { (user) && <span data-testid="profile-email">{ user.email }</span> }
         <div className="btn-group-vertical">
           <Link
             to="/receitas-feitas"

@@ -10,10 +10,6 @@
   margin: 5px;
 }
 
-.cards-foods img {
-  border-radius: 15px;
-}
-
 .cards-drinks {
   display: flex;
   flex-wrap: wrap;
@@ -26,25 +22,34 @@
   margin: 5px;
 }
 
-.cards-drinks img {
-  border-radius: 15px;
-}
-
-.buttonsCategoryDrinks {
+.buttons-filter-done {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
   padding: 3px;
 }
 
-.buttonsCategoryFood {
+.card-img {
+  border: 1px solid black;
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  padding: 3px;
-}
-
-.buttonsCategoryDrinks button {
-  flex-grow: 1;
   margin: 5px;
+}
+
+.card-img-bottom {
+  height: 150px;
+  margin-left: 5px;
+  margin-top: 30px;
+  max-width: 45%;
+}
+
+.button {
+  background-color: white;
+  border: none;
+  margin-left: 120px;
+  width: 35px;
+}
+
+a {
+  color: black;
+  direction: none;
 }
