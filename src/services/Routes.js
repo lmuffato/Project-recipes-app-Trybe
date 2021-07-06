@@ -33,8 +33,8 @@ export default function Routes() {
       <Route path="/explorar/bebidas/ingredientes" component={ DrinkIngredients } />
       <Route path="/explorar/comidas/area" component={ OriginLocation } />
       <Route path="/perfil" component={ ProfilePage } />
-      <Route path="/receitas-favoritas" component={ FavoriteRecipes } />
       <Route path="/receitas-feitas" component={ DoneRecipes } />
+      <Route path="/receitas-favoritas" component={ FavoriteRecipes } />
     </Switch>
   );
 }
