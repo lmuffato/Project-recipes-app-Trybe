@@ -6,6 +6,7 @@ class CategoryButtons extends React.Component {
     this.state = {
       loading: true,
       categories: {},
+    //   drinkOrFood: '',
     //   data: {},
     };
     this.loadingFoodCategories = this.loadingFoodCategories.bind(this);
@@ -24,19 +25,18 @@ class CategoryButtons extends React.Component {
     }
   }
 
-  //   handleClick(e) {
-  //     this.setState({
-  //       loading: true,
-  //     });
-  //     const category = e.target.innerText;
-  //     const checkpage = document.querySelector('h1');
-  //     console.log(checkpage);
-  //     if (checkpage.innerText === 'Comidas') {
-  //       this.FilterCategoryFood(category);
-  //     } else {
-  //       this.FilterCategoryDrinks(category);
-  //     }
+  // handleClick(e) {
+  //   this.setState({
+  //     loading: true,
+  //   });
+  //   const category = e.target.innerText;
+  //   const { drinkOrFood } = this.state;
+  //   if (drinkOrFood === 'food') {
+  //     this.FilterCategoryFood(category);
+  //   } else {
+  //     this.FilterCategoryDrinks(category);
   //   }
+  // }
 
   loadingFoodCategories() {
     const URL = 'https://www.themealdb.com/api/json/v1/1/list.php?c=list';
@@ -48,6 +48,7 @@ class CategoryButtons extends React.Component {
         this.setState({
           loading: false,
           categories: result,
+        //   drinkOrFood: 'food',
         });
       });
   }
@@ -62,6 +63,7 @@ class CategoryButtons extends React.Component {
         this.setState({
           loading: false,
           categories: result,
+        //   drinkOrFood: 'drink',
         });
       });
   }
