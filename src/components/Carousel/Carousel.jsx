@@ -16,6 +16,7 @@ function Carousel({ type }) {
   useEffect(() => {
     if (fetchData[currRecomendation]) {
       setRecomendations(fetchData[currRecomendation].slice(0, MAX_LENGTH));
+      setCurrentImage(0);
     }
   }, [currRecomendation, fetchData]);
 
