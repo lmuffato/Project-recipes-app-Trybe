@@ -8,3 +8,13 @@ export const handleChangeUser = (name, value) => ({
     value,
   },
 });
+
+export const HANDLE_INFO_RECIPE = 'HANDLE_TYPE_RECIPE';
+
+export const handleTypeRecipe = (type, id) => ({
+  type: HANDLE_INFO_RECIPE,
+  payload: {
+    id,
+    type,
+  },
+});
