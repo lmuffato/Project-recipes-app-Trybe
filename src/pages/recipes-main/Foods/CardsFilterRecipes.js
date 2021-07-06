@@ -1,11 +1,11 @@
 // Foods
 import React, { useContext } from 'react';
 import { Card } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import Context from '../../../context/Context';
 
 function CardsFilterRecipes() {
-  const { filterFoods } = useContext(Context);
+  const { filterFoods, search } = useContext(Context);
   const showFilter = () => {
     const lengthFoods = 12;
     const recipes = filterFoods.slice(0, lengthFoods);
@@ -45,10 +45,21 @@ function CardsFilterRecipes() {
     );
   };
 
+  const redirect = () => {
+    const id = filterFoods[0].idMeal;
+    return <Redirect to={ `/comidas/${id}` } />;
+  };
+
+  const renderCards = () => {
+    if (search && filterFoods === null) {
+      return showErrorMessage();
+    } if (search && filterFoods.length === 1) {
+      return redirect();
+    } return showFilter();
+  };
+
   return (
-    <div>
-      {(filterFoods !== null) ? showFilter() : showErrorMessage()}
-    </div>
+    renderCards()
   );
 }
 
