@@ -12,10 +12,13 @@ import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import '../styles/DetalhesPaginas.css';
 import { btn } from '../styles/login';
 
+const copy = require('clipboard-copy');
+
 function DetalhesBebida({ match: { params: { id } } }) {
   const [acctualyDrink, setAcctualyDrink] = useState();
   const [isLoading, setIsLoading] = useState(false);
   const [drinkRecomendation, setDrinkRecomendation] = useState();
+  const [clipboardStatus, setClipboardStatus] = useState();
   const history = useHistory();
 
   useEffect(() => {
@@ -31,6 +34,14 @@ function DetalhesBebida({ match: { params: { id } } }) {
 
     fetchDrink();
   }, [id]);
+
+  const shareClick = (e) => {
+    e.preventDefault();
+    const { location: { pathname } } = history;
+
+    copy(`http://localhost:3000${pathname}`);
+    setClipboardStatus('copied');
+  };
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -103,13 +114,15 @@ function DetalhesBebida({ match: { params: { id } } }) {
           <h2 data-testid="recipe-title">{ strDrink }</h2>
 
           <div>
-            <button type="button" data-testid="share-btn">
+            <button type="button" data-testid="share-btn" onClick={ shareClick }>
               <img alt="Share link" src={ shareIcon } />
             </button>
             <button type="button" data-testid="favorite-btn">
               <img alt="Favorite button" src={ whiteHeartIcon } />
             </button>
           </div>
+
+          {!clipboardStatus ? null : (<h5>Link copiado!</h5>)}
 
           <p data-testid="recipe-category">{ `${strCategory} - ${strAlcoholic}` }</p>
 

@@ -18,6 +18,8 @@ function DetalhesComida({ match: { params: { id } } }) {
   const [acctualyFood, setAcctualyFood] = useState();
   const [isLoading, setIsLoading] = useState(false);
   const [foodRecomendation, setFoodRecomendation] = useState();
+  const [clipboardStatus, setClipboardStatus] = useState();
+  // const [foodRecipeStatus, setFoodRecipeStatus] = useState('start');
   const history = useHistory();
 
   useEffect(() => {
@@ -38,14 +40,14 @@ function DetalhesComida({ match: { params: { id } } }) {
     e.preventDefault();
     const { location: { pathname } } = history;
 
-    // console.log('Teste do copiar', pathname);
-    copy(`http://localhost:3000/${pathname}`);
-    return e.value === 'Link copiado!';
+    copy(`http://localhost:3000${pathname}`);
+    setClipboardStatus('copied');
   };
 
   const handleClick = (e) => {
     e.preventDefault();
 
+    // setFoodRecipeStatus('doing');
     history.push(`/comidas/${id}/in-progress`);
   };
 
@@ -124,6 +126,8 @@ function DetalhesComida({ match: { params: { id } } }) {
             </button>
           </div>
 
+          {!clipboardStatus ? null : (<h5>Link copiado!</h5>)}
+
           <p data-testid="recipe-category">{ strCategory }</p>
 
           <ul>
@@ -167,7 +171,8 @@ function DetalhesComida({ match: { params: { id } } }) {
             data-testid="start-recipe-btn"
             className={ `${btn} button-recipe` }
           >
-            Start recipe
+            Start Recipe
+            {/* foodRecipeStatus === 'start' ? 'Start recipe' : 'Continuar Receita'  */}
           </Button>
         </div>
       );
