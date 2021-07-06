@@ -32,6 +32,7 @@ function addRecipeInProgress(recipe) {
   }
 
   if (idMeal) {
+    console.log(idMeal);
     inProgressRecipes.meals = {
       ...inProgressRecipes.meals,
       [idMeal]: [],

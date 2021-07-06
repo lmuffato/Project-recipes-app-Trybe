@@ -1,5 +1,5 @@
 import React from 'react';
-
+import doneRecipes from '../../services/localStorage/doneRecipes';
 import {
   Image,
   Heading,
@@ -21,7 +21,7 @@ function ComponentAuxProgress(recipe) {
       {recipeDrink ? <Recommends /> : <Recommends drink />}
       <button
         type="button"
-        // onClick={ () => doneRecipe(recipe) }
+        onClick={ () => doneRecipes(recipe) }
       >
         Finalizar Receita
       </button>

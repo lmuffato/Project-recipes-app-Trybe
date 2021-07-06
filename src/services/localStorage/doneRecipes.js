@@ -23,8 +23,10 @@ export function verifyDoneRecipesInLS(id) {
 }
 
 function doneRecipes(recipe) {
-  console.log(recipe);
+  // console.log(recipe);
+  // tenta buscar doneRecipes no LS
   const doneRecipesConst = JSON.parse(localStorage.getItem('doneRecipes'));
+  // monta objeto com variaveis q irão p/ o LS
   const { idDrink, idMeal, strArea, strCategory, strAlcoholic,
     strDrink, strMeal, strDrinkThumb, strMealThumb, strTags } = recipe;
   if (doneRecipesConst.length === 0) {
