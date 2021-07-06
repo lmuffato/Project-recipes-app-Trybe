@@ -15,6 +15,7 @@ export default function Header({ title, show = true }) {
 
   const location = useLocation();
   const url = location.pathname;
+  console.log(url);
 
   function handleSearch() {
     if (show) {

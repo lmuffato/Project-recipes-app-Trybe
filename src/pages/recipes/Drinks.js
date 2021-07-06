@@ -17,7 +17,7 @@ export default function Drinks() {
     const reciveDrinks = async () => {
       setLoading(true);
       const data = await getDrinks();
-      const categoList = await getDrinksCat()
+      const categoList = await getDrinksCat();
       setCategory('All');
       setDrinksList([...data]);
       setCatList([...categoList]);

@@ -1,7 +1,7 @@
 const getCat = (arr) => {
-  const toReturn = arr.map((ele) => ele['strCategory'])
+  const toReturn = arr.map((ele) => ele.strCategory);
   return toReturn;
-}
+};
 
 const getDrinksCat = async () => {
   const endPoint = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list';

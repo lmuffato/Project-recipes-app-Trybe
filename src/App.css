@@ -55,12 +55,12 @@ ul {
 
 .Buttom-filters {
   align-items: center;
+  background-color: antiquewhite;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   position: fixed;
   top: 42px;
-  background-color: antiquewhite;
 }
 
 .buttons-list {

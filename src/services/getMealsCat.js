@@ -1,7 +1,7 @@
 const getCat = (arr) => {
-  const toReturn = arr.map((ele) => ele['strCategory'])
+  const toReturn = arr.map((ele) => ele.strCategory);
   return toReturn;
-}
+};
 
 const getMealsCat = async () => {
   const endPoint = 'https://www.themealdb.com/api/json/v1/1/list.php?c=list';

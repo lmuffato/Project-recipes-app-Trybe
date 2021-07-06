@@ -17,7 +17,7 @@ export default function Foods() {
     const reciveMeals = async () => {
       setLoading(true);
       const data = await getMeals();
-      const categoList = await getMealsCat()
+      const categoList = await getMealsCat();
       setCategory('All');
       setMealsList([...data]);
       setCatList([...categoList]);
