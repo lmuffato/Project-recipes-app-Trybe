@@ -74,6 +74,8 @@ const MainFoods = () => {
 
   const setAllRecipes = () => {
     getRecipes();
+    previousTarget.style.backgroundColor = '#d7d7d7';
+    btnAllRecipes.current.style.backgroundColor = '#ffc529';
   };
 
   const redirectToDescription = ({ target }) => {
