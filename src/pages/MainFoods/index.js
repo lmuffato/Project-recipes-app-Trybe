@@ -64,6 +64,7 @@ const MainFoods = () => {
       target.style.backgroundColor = '#d7d7d7';
       btnAllRecipes.current.style.backgroundColor = '#ffc529';
     } else {
+      console.log('ta aqui');
       setFiltering(true);
       setCategoryName(name);
       getRecipesByCategory(name);
@@ -73,7 +74,9 @@ const MainFoods = () => {
   };
 
   const setAllRecipes = () => {
+    setFiltering(false);
     getRecipes();
+    setCategoryName('');
     previousTarget.style.backgroundColor = '#d7d7d7';
     btnAllRecipes.current.style.backgroundColor = '#ffc529';
   };
