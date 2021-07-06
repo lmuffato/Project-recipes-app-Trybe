@@ -5,11 +5,14 @@ import SearchContext from '../context/SearchContext';
 import DrinkCard from '../components/DrinkCard';
 import FilterContext from '../context/FilterContext';
 import FilterButtons from '../components/FilterButtons';
+import ButtonAll from '../components/ButtonAll';
+import UserContext from '../context/UserContext';
 
 function Drinks() {
+  const { setGlobalRecipe } = useContext(UserContext);
   const { filteredDrinks, fullDrinks } = useContext(SearchContext);
   const { drinksCategories, drinkFilterButton,
-    drinksByCategory } = useContext(FilterContext);
+    drinksByCategory, setDrinkFilterButton } = useContext(FilterContext);
   const CARDS_NUMBER = 11;
   const CATEGORIES_NUMBER = 5;
   const [showRecipe, setShowRecipe] = useState([]);
@@ -24,6 +27,10 @@ function Drinks() {
     }
   }, [fullDrinks, filteredDrinks, drinksByCategory, drinkFilterButton]);
 
+  useEffect(() => {
+    setGlobalRecipe(showRecipe);
+  }, [showRecipe]);
+
   return (
     <div>
       <Header title="Bebidas" searchImg="true" />
@@ -36,6 +43,7 @@ function Drinks() {
           />
         ) : (null)
       ))}
+      <ButtonAll setFiltered={ setDrinkFilterButton } />
       {showRecipe ? showRecipe.map((recipes, index) => (
         index <= CARDS_NUMBER ? (
           <DrinkCard
@@ -45,6 +53,7 @@ function Drinks() {
             testImgId={ `${index}-card-img` }
             testNameId={ `${index}-card-name` }
             testCardId={ `${index}-recipe-card` }
+            mealId={ recipes.idDrink }
           />
         ) : null
       )) : alert('Sinto muito, não encontramos nenhuma receita para esses filtros.')}

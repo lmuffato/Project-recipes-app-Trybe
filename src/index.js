@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import UserProvider from './context/UserProvider';
@@ -9,15 +8,13 @@ import SearchProvider from './context/SearchProvider';
 import FilterProvider from './context/FilterProvider';
 
 ReactDOM.render(
-  <BrowserRouter>
-    <UserProvider>
-      <SearchProvider>
-        <FilterProvider>
-          <App />
-        </FilterProvider>
-      </SearchProvider>
-    </UserProvider>
-  </BrowserRouter>,
+  <UserProvider>
+    <SearchProvider>
+      <FilterProvider>
+        <App />
+      </FilterProvider>
+    </SearchProvider>
+  </UserProvider>,
   document.getElementById('root'),
 );
 

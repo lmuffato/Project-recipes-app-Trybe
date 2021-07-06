@@ -29,12 +29,13 @@ function FilterProvider({ children }) {
   };
 
   const getDrinkByCategory = async (category) => {
-    console.log('entrou: ', category);
-    if (category) {
-      if (category !== 'Beef' && category !== 'Breakfast' && category !== 'Chicken' && category !== 'Dessert' && category !== 'Goat') {
-        const apiResult = await fetchDrinksByCategory(category);
-        setDrinksByCategory(apiResult.drinks);
-      }
+    let canFilter = true;
+    mealsCategories.forEach((mealCategory) => {
+      if (mealCategory.strCategory === category) canFilter = false;
+    });
+    if (category && canFilter) {
+      const apiResult = await fetchDrinksByCategory(category);
+      setDrinksByCategory(apiResult.drinks);
     }
   };
 
