@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import DrinkCards from '../compenents/DrinkCards';
-import MealCards from '../compenents/MealCards';
+import MainRecipes from '../compenents/MainRecipes';
 import RecipesContext from '../contexts/RecipesContext';
 // import RecipeCard from '../compenents/RecipeCard';
 import SearchbarContext from '../contexts/SearchbarContext';
@@ -18,10 +17,8 @@ function MainMealsRecipes() {
   const {
     mealOrDrink, searchCategory, setSearchCategory,
   } = useContext(SearchbarContext);
-  const { states: { type,
-  },
-  setStates: { setType,
-  } } = useContext(RecipesContext);
+  const { type, setType,
+  } = useContext(RecipesContext);
 
   let recipes;
   const history = useHistory();
@@ -36,7 +33,7 @@ function MainMealsRecipes() {
     const endpoints = {
       endpointMealOrDrink: `https://www.the${type}db.com/api/json/v1/1/search.php?s=`,
       lastRecipe: 12,
-      endpointCategories: `https://www.the${type}db.com/api/json/v1/1/list.php?c=${searchCategory}`,
+      endpointCategories: `https://www.the${type}db.com/api/json/v1/1/list.php?c=list`,
       lastCategory: 5,
       endpointCategory: `https://www.the${type}db.com/api/json/v1/1/filter.php?c=${searchCategory}`,
     };
@@ -44,6 +41,7 @@ function MainMealsRecipes() {
     apiRequester(endpoints.endpointMealOrDrink)
       .then((response) => {
         // setRecipes(response); // Salva as 25 receitas retornadas da API, faz um backup
+        console.log(response);
         setTwelveRecipes(Object.values(response)[0].slice(0, endpoints.lastRecipe));
         // setLoading(false);
       });
@@ -64,6 +62,12 @@ function MainMealsRecipes() {
     }
   }, [type, searchCategory]);
 
+  const handleFilter = ({ value }) => {
+    if (searchCategory === value) {
+      setSearchCategory('list');
+    } else { setSearchCategory(value); }
+  };
+
   if (searchCategory !== 'list') {
     recipes = returnedCategoty;
   } else { recipes = twelveRecipes; }
@@ -71,9 +75,15 @@ function MainMealsRecipes() {
   if (recipes !== null && categories !== null) {
     return (
       <>
-        <section>
+        <MainRecipes
+          categories={ categories }
+          recipes={ recipes }
+          handleFilter={ handleFilter }
+        />
+        {/* <section>
           <button
             type="button"
+            data-testid="All-category-filter"
             onClick={ () => setSearchCategory('list') }
           >
             All
@@ -84,7 +94,7 @@ function MainMealsRecipes() {
               type="button"
               value={ strCategory }
               data-testid={ `${strCategory}-category-filter` }
-              onClick={ (e) => setSearchCategory(e.target.value) }
+              onClick={ (e) => handleFilter(e.target) }
             >
               { strCategory }
             </button>
@@ -104,7 +114,7 @@ function MainMealsRecipes() {
               key={ recipe.idDrink }
             />
           ))}
-        </section>
+        </section> */}
       </>
     );
   }
