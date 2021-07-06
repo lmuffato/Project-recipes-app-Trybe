@@ -1,0 +1,48 @@
+const favorite = [{
+  id: '52845',
+  type: 'meal',
+  area: 'British',
+  category: 'Miscellaneous',
+  alcoholicOrNot: 'null',
+  name: 'Spicy Arrabiata Penne',
+  image: 'https://www.themealdb.com/images/media/meals/ypuxtw1511297463.jpg',
+},
+{
+  id: '11470',
+  type: 'drink',
+  area: 'null',
+  category: 'Ordinary Dringfk',
+  alcoholicOrNot: 'Alcoholic',
+  name: 'Havana Cocktail',
+  image: 'https://www.thecocktaildb.com/images/media/drink/59splc1504882899f.jpg',
+},
+{
+  id: '52845',
+  type: 'meal',
+  area: 'British',
+  category: 'Miscellaneous',
+  alcoholicOrNot: 'null',
+  name: 'Turkeaaaaaaaay Meatloaf',
+  image: 'https://www.themealdb.com/images/media/meals/ypuxtw1511297463.jpg',
+},
+{
+  id: '11470',
+  type: 'drink',
+  area: 'null',
+  category: 'Ordinary Drink',
+  alcoholicOrNot: 'Alcoholic',
+  name: 'Havaaaaaaaana Cocktail',
+  image: 'https://www.thecocktaildb.com/images/media/drink/59splc1504882899.jpg',
+},
+{
+  id: '11470',
+  type: 'drink',
+  area: 'null',
+  category: 'Ordinary Drink',
+  doneDate: 'aaa',
+  alcoholicOrNot: 'Alcoholic',
+  name: 'feitaaaaaa Cocktail',
+  image: 'https://www.thecocktaildb.com/images/media/drink/59splc1504882899.jpg',
+}];
+
+export default favorite;
