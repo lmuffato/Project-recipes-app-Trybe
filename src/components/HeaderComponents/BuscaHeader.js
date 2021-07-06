@@ -14,7 +14,7 @@ function BuscaHeader() {
     case 'ingredient':
       if (pathName === '/comidas') {
         endpointIn = `https://www.themealdb.com/api/json/v1/1/filter.php?i=${text}`;
-        fetchApi(endpointIn, 'bebidas');
+        fetchApi(endpointIn, 'comidas');
       } else {
         endpointIn = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${text}`;
         fetchApi(endpointIn, 'bebidas');

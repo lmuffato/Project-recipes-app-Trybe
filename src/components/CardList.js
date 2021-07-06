@@ -4,9 +4,7 @@ import PropTypes from 'prop-types';
 import Card from './CardsComponents/Cards';
 import ReceitasContext from '../contexts/ReceitasContext';
 
-function CardList({ list }) {
-  console.log({ list });
-
+function CardList({ list, type }) {
   const maxLength = 12;
   const { filter } = useContext(ReceitasContext);
 
@@ -19,7 +17,8 @@ function CardList({ list }) {
     return (
       arr.map((recipie, index) => {
         if (recipie !== undefined) {
-          if (recipie.strMeal !== undefined) {
+          if (type === 'comidas') {
+            const { idMeal } = recipie;
             return (
               <Card
                 type="comidas"
@@ -32,7 +31,9 @@ function CardList({ list }) {
                 page="comidas"
               />
             );
-          } return (
+          }
+          const { idDrink } = recipie;
+          return (
             <Card
               type="bebidas"
               id={ recipie.idDrink }
@@ -58,6 +59,7 @@ function CardList({ list }) {
 
 CardList.propTypes = {
   list: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string)).isRequired,
+  type: PropTypes.string.isRequired,
 };
 
 export default CardList;
