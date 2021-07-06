@@ -26,7 +26,6 @@ function FoodsArea() {
       const fetchRecepies = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=')
         .then((responses) => responses.json())
         .then((respos) => respos.meals);
-      console.log(fetchRecepies);
       setMealsRecepies(fetchRecepies);
       setShowRecepies(fetchRecepies.slice(0, lastRecipe));
     };
@@ -40,9 +39,10 @@ function FoodsArea() {
     } else {
       const filteredRecepies = mealsRecepies.filter((recepi) => (
         recepi.strArea === selectedArea
-      ));
-      setShowRecepies(filteredRecepies.slice(0, lastRecipe));
-    }
+        ));
+        setShowRecepies(filteredRecepies.slice(0, lastRecipe));
+      }
+    console.log(showRecepies)
   }, [selectedArea, mealsRecepies]);
 
   return (
