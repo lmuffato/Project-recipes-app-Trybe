@@ -45,13 +45,13 @@ function ComidasDetalhes() {
             <Recipe.Title title={ strMeal } />
             <Recipe.Category category={ strCategory } />
             <Recipe.Share />
-            <Recipe.Favorite />
+            <Recipe.FavoriteMeal />
           </div>
           <Recipe.Ingredients list={ ingredients } />
           <Recipe.Instructions text={ strInstructions } />
           <Recipe.Video url={ strYoutube } />
           <Recipe.Recomendations list={ drinks } />
-          <Recipe.Start />
+          <Recipe.Start type="comidas" />
         </section>
       )
   );

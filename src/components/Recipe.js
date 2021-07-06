@@ -1,7 +1,8 @@
 import Image from './Recipe/Image';
 import Title from './Recipe/Title';
 import Share from './Recipe/Share';
-import Favorite from './Recipe/Favorite';
+import FavoriteMeal from './Recipe/FavoriteMeal';
+import FavoriteDrink from './Recipe/FavoriteDrink';
 import Category from './Recipe/Category';
 import Ingredients from './Recipe/Ingredients';
 import Instructions from './Recipe/Instructions';
@@ -13,7 +14,8 @@ const Recipe = {
   Image,
   Title,
   Share,
-  Favorite,
+  FavoriteMeal,
+  FavoriteDrink,
   Category,
   Ingredients,
   Instructions,

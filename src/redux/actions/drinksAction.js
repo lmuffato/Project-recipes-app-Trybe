@@ -10,6 +10,7 @@ import {
 
 export const SET_DRINKS = 'SET_DRINKS';
 export const SET_SEARCH_BAR_DRINKS = 'SET_SEARCH_BAR_DRINKS';
+export const SET_DRINK_DETAILS = 'SET_DRINK_DETAILS';
 export const SET_DRINK_CATEGORIES = 'SET_DRINK_CATEGORIES';
 export const CHANGE_DRINK_CATEGORY = 'CHANGE_DRINK_CATEGORY';
 
@@ -38,8 +39,15 @@ function setSearchBarDrinks(payload) {
     payload,
   };
 }
+function setDrinkDetails(payload) {
+  return {
+    type: SET_DRINK_DETAILS,
+    payload,
+  };
+}
 export const getDrinkRecipesAPIThunk = APIThunk(setDrinks);
 export const getDrinkSearchBarAPIThunk = APIThunk(setSearchBarDrinks);
+export const getDrinkDetailsAPIThunk = APIThunk(setDrinkDetails);
 
 function setCategories(payload) {
   return {

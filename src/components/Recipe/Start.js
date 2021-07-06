@@ -3,8 +3,9 @@ import { isUndefined } from 'lodash';
 import { useHistory, useParams } from 'react-router-dom';
 
 import '../../styles/recipe.css';
+import { string } from 'prop-types';
 
-function Start() {
+function Start({ type }) {
   const [isDone, setIsDone] = useState(false);
   const [alreadyStarted, setAlreadyStarted] = useState(false);
   const { id } = useParams();
@@ -16,8 +17,14 @@ function Start() {
   }, [id]);
   useEffect(() => {
     const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
-    setAlreadyStarted(inProgressRecipes && !isUndefined(inProgressRecipes.meals[id]));
-  }, [id]);
+    if (type === 'comidas') {
+      setAlreadyStarted(inProgressRecipes && !isUndefined(inProgressRecipes.meals[id]));
+    } else {
+      setAlreadyStarted(
+        inProgressRecipes && !isUndefined(inProgressRecipes.cocktails[id]),
+      );
+    }
+  }, [type, id]);
 
   const visibility = isDone ? 'recipe-start-button-hidden'
     : 'recipe-start-button-show';
@@ -26,11 +33,15 @@ function Start() {
       type="button"
       className={ `recipe-start-button ${visibility}` }
       data-testid="start-recipe-btn"
-      onClick={ () => push(`/comidas/${id}/in-progress`) }
+      onClick={ () => push(`/${type}/${id}/in-progress`) }
     >
       {alreadyStarted ? 'Continuar Receita' : 'Iniciar receita'}
     </button>
   );
 }
+
+Start.propTypes = {
+  type: string.isRequired,
+};
 
 export default Start;

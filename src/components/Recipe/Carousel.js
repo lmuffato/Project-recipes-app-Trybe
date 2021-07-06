@@ -29,12 +29,12 @@ function Carousel({ items }) {
         {'<'}
       </button>
       <div className="carousel-frame">
-        {items.map(({ strDrink, strAlcoholic, strDrinkThumb }, index) => (
+        {items.map(({ title, alcoholic, imgLink }, index) => (
           <CarouselCard
-            key={ strDrink }
-            title={ strDrink }
-            alcoholic={ strAlcoholic }
-            link={ strDrinkThumb }
+            key={ title }
+            title={ title }
+            alcoholic={ alcoholic }
+            link={ imgLink }
             index={ index }
             isVisible={ index === leftItem || index === rightItem }
           />

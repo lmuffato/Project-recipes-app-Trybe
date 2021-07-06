@@ -15,23 +15,23 @@ function removeFromFavorites(id) {
     ),
   );
 }
-function addToFavorites(mealDetails) {
+function addToFavorites(drinkDetails) {
   const favoriteRecipes = JSON.parse(localStorage.getItem(FAVORITE_RECIPES)) || [];
-  const { idMeal: id,
-    strArea: area,
+  const { idDrink: id,
+    strAlcoholic: alcoholicOrNot,
+    strDrinkThumb: image,
     strCategory: category,
-    strMealThumb: image,
-    strMeal: name } = head(mealDetails);
+    strDrink: name } = head(drinkDetails);
   localStorage.setItem(
     FAVORITE_RECIPES, JSON.stringify(
       [...favoriteRecipes, {
         id,
-        area,
+        area: '',
         category,
         image,
         name,
-        alcoholicOrNot: '',
-        type: 'comida' }],
+        alcoholicOrNot,
+        type: 'bebida' }],
     ),
   );
 }
@@ -44,16 +44,14 @@ function Favorite() {
     setIsFavorite(favoriteRecipes && favoriteRecipes
       .some((recipe) => Number(recipe.id) === Number(id)));
   }, [id]);
-  const mealDetails = useSelector((state) => state.meals.mealDetails);
-  console.log(localStorage);
-  console.log(isFavorite);
+  const drinkDetails = useSelector((state) => state.drinks.drinkDetails);
   function toggleStatus() {
     if (isFavorite) {
       setIsFavorite(false);
       return removeFromFavorites(id);
     }
     setIsFavorite(true);
-    return addToFavorites(mealDetails);
+    return addToFavorites(drinkDetails);
   }
   return (
     <button
