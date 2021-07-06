@@ -3,6 +3,8 @@ import Header from '../../components/Header';
 import shareIcon from '../../images/shareIcon.svg';
 import blackHeartIcon from '../../images/blackHeartIcon.svg';
 
+import './style.css';
+
 export default function FavoriteRecipes() {
   const storageFavorite = JSON.parse(localStorage.getItem('favoriteRecipes'));
   const [copyButton, setCopyButton] = useState(false);
@@ -90,9 +92,27 @@ export default function FavoriteRecipes() {
     <div>
       <Header title="Receitas Favoritas" />
       <div className="buttons">
-        <button type="button" data-testid="filter-by-all-btn">All</button>
-        <button type="button" data-testid="filter-by-food-btn">Food</button>
-        <button type="button" data-testid="filter-by-drink-btn">Drinks</button>
+        <button
+          type="button"
+          className="button-favorite"
+          data-testid="filter-by-all-btn"
+        >
+          All
+        </button>
+        <button
+          type="button"
+          className="button-favorite"
+          data-testid="filter-by-food-btn"
+        >
+          Food
+        </button>
+        <button
+          type="button"
+          className="button-favorite"
+          data-testid="filter-by-drink-btn"
+        >
+          Drinks
+        </button>
       </div>
 
       {storageFavorite.map(
