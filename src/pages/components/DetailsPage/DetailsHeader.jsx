@@ -24,7 +24,7 @@ function DetailsHeader(props) {
       image: recipe.strDrinkThumb || recipe.strMealThumb,
     };
     if (favorites) favorites.push(currentRecipe);
-    localStorage.setItem('favoriteRecipes', JSON.stringify(favorites || [recipe]));
+    localStorage.setItem('favoriteRecipes', JSON.stringify(favorites || [currentRecipe]));
   };
 
   return (

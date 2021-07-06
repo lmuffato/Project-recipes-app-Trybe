@@ -11,7 +11,8 @@ import { getSpecificMeal } from '../actions/meals';
 import './RecipeDetails.css';
 
 function RecipeDetails() {
-  const { location: { pathname } } = useHistory();
+  const history = useHistory();
+  const { location: { pathname } } = history;
   const type = pathname.includes('comidas') ? 'meals' : 'drinks';
   const dispatch = useDispatch();
   const loading = useSelector((state) => {
@@ -40,6 +41,10 @@ function RecipeDetails() {
     }
   }, [pathname]); // eslint-disable-line
 
+  const startRecipe = () => {
+    history.push(`${pathname}/in-progress`);
+  };
+
   return (
     loading ? null
       : data.map((recipe) => (
@@ -53,6 +58,7 @@ function RecipeDetails() {
             type="button"
             data-testid="start-recipe-btn"
             className="start-recipe-btn"
+            onClick={ startRecipe }
           >
             Iniciar receita
           </button>
