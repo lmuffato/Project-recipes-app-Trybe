@@ -109,6 +109,7 @@ function FilteredRecipesContextProvider({ children }) {
     searchBarFilters,
     setSearchBarFilters,
     getFilteredRecipes,
+    fetchFilteredMealRecipes,
     isLoading,
     setIsLoading };
 

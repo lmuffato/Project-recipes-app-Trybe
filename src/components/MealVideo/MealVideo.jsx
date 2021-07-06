@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 function MealVideo({ youTubeVideo, title }) {
-
   if (youTubeVideo === '') {
     return (
       <div>

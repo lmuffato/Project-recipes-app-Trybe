@@ -53,8 +53,8 @@ function RecipeDetails({ type }) {
   const isAlchooholic = singleRecipe.strAlcoholic || '';
   const magicNumber = 32;
   const youTubeVideo = singleRecipe.strYoutube || '';
-  console.log(singleRecipe);
-  console.log(youTubeVideo);
+  // console.log(singleRecipe);
+  // console.log(youTubeVideo);
 
   return (
     <Container>
