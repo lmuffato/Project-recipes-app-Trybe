@@ -15,8 +15,6 @@ function Drink() {
     getRecipes();
   }, []);
 
-  console.log(recipes);
-
   return (
     <>
       <h1>Comidas</h1>
