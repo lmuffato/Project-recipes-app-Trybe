@@ -12,10 +12,20 @@ function FoodDetails(props) {
 
   useEffect(() => {
     const fetchRecipie = async () => {
-      const requestFood = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`);
-      const dataFood = await requestFood.json();
-      const responseFood = dataFood.meals;
-      setStateRedux({ actionType: 'FETCH_FOOD', responseFood });
+      const requestFood = fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`);
+      const recommendations = fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
+
+      const [dataFood, dataRecommendations] = await Promise
+        .all([requestFood, recommendations]);
+
+      const resultFood = await dataFood.json();
+      const responseFood = resultFood.meals;
+
+      const resultDrinks = await dataRecommendations.json();
+      const responseReccomendations = resultDrinks.drinks;
+      const INDEX_END = 6;
+      const resultReccomendations = responseReccomendations.slice(0, INDEX_END);
+      setStateRedux({ actionType: 'FETCH_FOOD', responseFood, resultReccomendations });
     };
     fetchRecipie();
   }, []);
