@@ -43,7 +43,7 @@ export const actionDetails = (value) => ({
 
 export const fetchSearch = (type, text, currentPage) => async (dispatch) => {
   let url = '';
-
+  console.log(type, text, currentPage);
   if (type === 'ingredient') {
     if (currentPage === 'comidas') {
       url = `https://www.themealdb.com/api/json/v1/1/filter.php?i=${text}`;
@@ -71,10 +71,11 @@ export const fetchSearch = (type, text, currentPage) => async (dispatch) => {
   try {
     const res = await fetch(url);
     const data = await res.json();
+    console.log(data);
     if (currentPage === 'comidas') {
-      dispatch(actionSearch(data.meals));
+      await dispatch(actionSearch(data.meals));
     } else {
-      dispatch(actionSearch(data.drinks));
+      await dispatch(actionSearch(data.drinks));
     }
   } catch (error) {
     dispatch(actionSearch('error'));

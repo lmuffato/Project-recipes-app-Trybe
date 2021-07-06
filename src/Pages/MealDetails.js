@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { actionDetails } from '../redux/actions';
 import shareIcon from '../images/shareIcon.svg';
 import favoriteIcon from '../images/blackHeartIcon.svg';
@@ -9,6 +10,7 @@ function MealDetails() {
   const dispatch = useDispatch();
   const [data, setData] = useState();
   const [recomendations, setRecomendations] = useState();
+  const history = useHistory();
 
   useEffect(() => {
     const mealDrinks = async () => {
@@ -63,7 +65,9 @@ function MealDetails() {
         }
       });
 
-      const { strMeal, strCategory, strMealThumb, strInstructions, strYoutube } = data[0];
+      const {
+        idMeal, strMeal, strCategory, strMealThumb, strInstructions, strYoutube,
+      } = data[0];
       const youtubeEmbed = strYoutube.split('=')[1];
       return (
         <div>
@@ -118,7 +122,13 @@ function MealDetails() {
           />
           <h2>Recomendadas</h2>
           {renderRecomendations(recomendations)}
-          <button type="button" data-testid="start-recipe-btn">Iniciar Receita</button>
+          <button
+            type="button"
+            data-testid="start-recipe-btn"
+            onClick={ () => history.push(`/comidas/${idMeal}/in-progress`) }
+          >
+            Iniciar Receita
+          </button>
         </div>
       );
     }

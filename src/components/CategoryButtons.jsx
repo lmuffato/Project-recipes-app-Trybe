@@ -24,7 +24,6 @@ function FilterButtons({ props }) {
       const fecthByCategory = async () => {
         const { meals } = await fetchFoodByCategory(category);
         const showDetails = meals.length !== 1;
-        console.log(showDetails);
         dispatch(setInitialMeals(meals, showDetails));
       };
       fecthByCategory();

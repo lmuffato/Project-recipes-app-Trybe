@@ -26,6 +26,7 @@ const searchReducer = (state = INITIAL_STATE, action) => {
       ...state,
       data: action.data,
       item: action.item,
+      showDetails: true,
     };
   case ACTION_MAIN_FOOD_LIST:
     return {
