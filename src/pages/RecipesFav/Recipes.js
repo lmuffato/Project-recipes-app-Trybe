@@ -3,19 +3,20 @@ import { Button, Card } from 'react-bootstrap';
 import './index.css';
 import { Link } from 'react-router-dom';
 import Share from '../../images/shareIcon.svg';
+import Favorite from '../../images/blackHeartIcon.svg';
 import Context from '../../context/Context';
 
 const copy = require('clipboard-copy');
-
+// favRecipes,    favFilterRecipes,    favoriteFilter,
 function Recipes() {
   const [showCopyFood, setShopFood] = useState(false);
   const [showCopyDrinks, setShopDrinks] = useState(false);
-  const { doneRecipes: noFilter, doneFilterRecipes, showFilter } = useContext(Context);
-  let doneRecipes = noFilter;
+  const { favRecipes: noFilter, favFilterRecipes, showFilter } = useContext(Context);
+  let favoriteRecipes = noFilter;
   if (!showFilter) {
-    doneRecipes = noFilter;
+    favoriteRecipes = noFilter;
   } else {
-    doneRecipes = doneFilterRecipes;
+    favoriteRecipes = favFilterRecipes;
   }
   const copyLinkFood = (id) => {
     setShopFood(true);
@@ -32,16 +33,12 @@ function Recipes() {
     show();
   };
 
-  const changeTags = (t, index) => {
-    const tags = t.slice(0, 2);
-    return tags.map((tagName) => (
-      <Card.Text
-        data-testid={ `${index}-${tagName}-horizontal-tag` }
-        key={ tagName }
-      >
-        { tagName}
-      </Card.Text>));
-  };
+  const desfavoriteFood = (id) => (
+    console.log(id)
+  );
+  const desfavoriteDrink = (id) => (
+    console.log(id)
+  );
   const handleFood = (recipe, index) => (
     <Card style={ { width: '22rem' } } bsPrefix="card-img" key={ index }>
       <Link key={ index } to={ `comidas/${recipe.id}` }>
@@ -65,6 +62,17 @@ function Recipes() {
                 src={ Share }
               />
             </Button>)}
+        <Button
+          variant="primary"
+          data-testid={ `${index}-horizontal-favorite-btn` }
+          src={ Share }
+          onClick={ () => desfavoriteFood(recipe.id) }
+        >
+          <Card.Img
+            variant="top"
+            src={ Favorite }
+          />
+        </Button>
         <Card.Text data-testid={ `${index}-horizontal-top-text` }>
           {` ${recipe.area} - ${recipe.category} `}
         </Card.Text>
@@ -75,12 +83,6 @@ function Recipes() {
             {recipe.name}
           </Card.Title>
         </Link>
-        <Card.Text data-testid={ `${index}-horizontal-done-date` }>
-          {`Feita em : ${recipe.doneDate}`}
-        </Card.Text>
-        <span>
-          {changeTags(recipe.tags, index)}
-        </span>
       </Card.Body>
     </Card>
   );
@@ -107,6 +109,17 @@ function Recipes() {
                 src={ Share }
               />
             </Button>)}
+        <Button
+          variant="primary"
+          data-testid={ `${index}-horizontal-favorite-btn` }
+          src={ Share }
+          onClick={ () => desfavoriteDrink(recipe.id) }
+        >
+          <Card.Img
+            variant="top"
+            src={ Favorite }
+          />
+        </Button>
         <Card.Text data-testid={ `${index}-horizontal-top-text` }>
           {`${recipe.alcoholicOrNot}`}
         </Card.Text>
@@ -117,18 +130,12 @@ function Recipes() {
             {recipe.name}
           </Card.Title>
         </Link>
-        <Card.Text data-testid={ `${index}-horizontal-done-date` }>
-          {`Feita em: ${recipe.doneDate}`}
-        </Card.Text>
-        <span>
-          {changeTags(recipe.tags, index)}
-        </span>
       </Card.Body>
     </Card>
   );
   return (
     <>
-      {doneRecipes.map((recipe, index) => (
+      { favoriteRecipes.map((recipe, index) => (
         recipe.type === 'comida' ? handleFood(recipe, index) : handleDrink(recipe, index)
       ))}
     </>

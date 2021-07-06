@@ -10,7 +10,7 @@ import {
   fetchFilterDrinks,
 
 } from '../services/fetchApi';
-import Mock from '../services/mokcInformation';
+import { Mock, MockFavorite } from '../services/mokcInformation';
 
 function Provider({ children }) {
   // useStates...
@@ -31,6 +31,8 @@ function Provider({ children }) {
   const [path, setPath] = useState('');
   const [doneRecipes, setDoneRecipes] = useState([]);
   const [doneFilterRecipes, setDoneFilter] = useState([]);
+  const [favRecipes, setFavRecipes] = useState([]);
+  const [favFilterRecipes, setFavFilter] = useState([]);
 
   function getInFormations() {
     // const informationLocalStorage = JSON.parse(localStorage.getItem('doneRecipes'))
@@ -46,6 +48,7 @@ function Provider({ children }) {
     };
     fetchApis();
     setDoneRecipes(Mock);
+    setFavRecipes(MockFavorite);
   }
 
   const clickFilterFood = (e) => {
@@ -111,6 +114,27 @@ function Provider({ children }) {
       setDoneFilter(newRecipes);
     }
   };
+  const favoriteFilter = (e) => {
+    const { innerText } = e.target;
+    setFavFilter([]);
+    if (innerText === 'All') {
+      setShowFilter(false);
+      setFavRecipes(MockFavorite);
+      setFavFilter([]);
+    }
+    if (innerText === 'Food') {
+      setShowFilter(true);
+      const newRecipes = favRecipes
+        .filter((recipe) => (recipe.type === 'comida') && recipe);
+      setFavFilter(newRecipes);
+    }
+    if (innerText === 'Drinks') {
+      setShowFilter(true);
+      const newRecipes = favRecipes
+        .filter((recipe) => (recipe.type === 'bebida') && recipe);
+      setFavFilter(newRecipes);
+    }
+  };
   // ComponentDidMount
   useEffect(getInFormations, []);
 
@@ -146,6 +170,9 @@ function Provider({ children }) {
     setShowFilter,
     setFilterDrinks,
     setFilterFoods,
+    favRecipes,
+    favFilterRecipes,
+    favoriteFilter,
   };
 
   return (

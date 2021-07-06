@@ -5,7 +5,7 @@ import Context from '../../context/Context';
 
 function ButtonFilter() {
   // const informationLocalStorage = JSON.parse(localStorage.getItem('doneRecipes'))
-  const { doneFilter: handleClick } = useContext(Context);
+  const { favoriteFilter: handleClick } = useContext(Context);
   // setDoneRecipes(informationLocalStorage)
   return (
     <div className="buttons-filter-done">
