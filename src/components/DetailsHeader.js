@@ -1,19 +1,20 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import shareIcon from '../images/shareIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import '../style/DetailsHeader.css';
 
-const copy = require('clipboard-copy')
+const copy = require('clipboard-copy');
 
-export default function DetailsHeader({ recipe, isFood, isDrink }) {
+export default function DetailsHeader({ recipe, isFood }) {
   const recipeId = isFood ? recipe.idMeal : recipe.idDrink;
   const recipeType = isFood ? 'comida' : 'bebida';
-  const recipeArea = recipe.strArea
-  const recipeCategory = recipe.strCategory
-  const recipeAlcoholicOrNot = isFood ? '' : recipe.strAlcoholic
-  const recipeName = isFood ? recipe.strMeal : recipe.strDrink
-  const recipeImage = isFood ? recipe.strMealThumb : recipe.strDrinkThumb
+  const recipeArea = recipe.strArea;
+  const recipeCategory = recipe.strCategory;
+  const recipeAlcoholicOrNot = isFood ? '' : recipe.strAlcoholic;
+  const recipeName = isFood ? recipe.strMeal : recipe.strDrink;
+  const recipeImage = isFood ? recipe.strMealThumb : recipe.strDrinkThumb;
 
   const favorites = JSON.parse(localStorage.getItem('favoriteRecipes'));
 
@@ -42,9 +43,9 @@ export default function DetailsHeader({ recipe, isFood, isDrink }) {
         image: recipeImage,
       }];
     } else {
-      updatedFavorites = favorites.filter((fav) => {
-        return fav.id !== (isFood ? recipe.idMeal : recipe.idDrink);
-      });
+      updatedFavorites = favorites.filter(
+        (fav) => fav.id !== (isFood ? recipe.idMeal : recipe.idDrink),
+      );
     }
     localStorage.setItem('favoriteRecipes', JSON.stringify(updatedFavorites));
   }
@@ -85,3 +86,9 @@ export default function DetailsHeader({ recipe, isFood, isDrink }) {
     </div>
   );
 }
+
+DetailsHeader.propTypes = {
+  recipes: PropTypes.shape({}),
+  isFood: PropTypes.bool,
+  isDrink: PropTypes.bool,
+}.isRequired;
