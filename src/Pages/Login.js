@@ -21,8 +21,9 @@ function Login() {
 
   const loginBtn = () => {
     history.push('/comidas');
-    const lsemail = JSON.stringify(email);
-    window.localStorage.setItem('user', lsemail);
+    const lsEmail = { email };
+    const formatedEmail = JSON.stringify(lsEmail);
+    localStorage.setItem('user', formatedEmail);
     localStorage.setItem('mealsToken', 1);
     localStorage.setItem('cocktailsToken', 1);
   };
