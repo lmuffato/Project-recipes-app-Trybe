@@ -16,16 +16,18 @@ function DrinkId() {
 
   useEffect(() => {
     fetchDrinkForId(id)
-      .then(({ drinks }) => setDrinkForId(drinks));
+      .then((res) => {
+        if (res.drinks) setDrinkForId(res.drinks[0]);
+      });
   }, [id]);
 
-  if (!drinkForId.length) return <div>Loading...</div>;
+  if (!drinkForId) return <div>Loading...</div>;
 
   const {
     strDrink,
     strAlcoholic,
     strInstructions,
-    strDrinkThumb } = drinkForId[0];
+    strDrinkThumb } = drinkForId;
 
   if (shouldRedirect) return <Redirect to={ `/bebidas/${id}/in-progress` } />;
 

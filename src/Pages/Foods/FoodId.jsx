@@ -16,7 +16,9 @@ function FoodId() {
 
   useEffect(() => {
     fetchFoodForId(id)
-      .then(({ meals }) => setFoodForId(meals));
+      .then((res) => {
+        if (res.meals) setFoodForId(res.meals[0]);
+      });
   }, [id]);
 
   if (!foodForId.length) return <div>Loading...</div>;
@@ -26,7 +28,7 @@ function FoodId() {
     strYoutube,
     strCategory,
     strInstructions,
-    strMealThumb } = foodForId[0];
+    strMealThumb } = foodForId;
 
   if (shouldRedirect) return <Redirect to={ `/comidas/${id}/in-progress` } />;
 
