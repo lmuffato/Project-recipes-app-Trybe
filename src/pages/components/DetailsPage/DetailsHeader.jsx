@@ -32,13 +32,15 @@ const favoriteRecipe = (recipe, type, isFavorited) => {
 };
 
 function DetailsHeader(props) {
-  const { recipe, type } = props;
+  const { recipe, type, pathname } = props;
   const title = recipe.strDrink || recipe.strMeal;
   const img = recipe.strDrinkThumb || recipe.strMealThumb;
   const category = recipe.strAlcoholic || recipe.strCategory;
 
   const [isFavorited, isFavoritedToggle] = useState(false);
+  const [copyMessage, copyMessageToggle] = useState(true);
 
+  // eslint-disable-next-line
   useEffect(() => {
     const favorites = JSON.parse(localStorage.getItem('favoriteRecipes'));
     if (!favorites) return;
@@ -48,6 +50,18 @@ function DetailsHeader(props) {
     ));
     if (checkFavorited) isFavoritedToggle(true);
   });
+
+  const copyToClipboard = () => {
+    const link = `http://localhost:3000${pathname}`;
+    navigator.clipboard.writeText(link);
+
+    copyMessageToggle(false);
+
+    const threeSeconds = 3000;
+    setTimeout(() => {
+      copyMessageToggle(true);
+    }, threeSeconds);
+  };
 
   return (
     <Container>
@@ -59,7 +73,15 @@ function DetailsHeader(props) {
           <h1 data-testid="recipe-title">{ title }</h1>
         </Col>
         <Col>
-          <img src={ shareIcon } alt="Share icon" data-testid="share-btn" />
+          <span hidden={ copyMessage }>
+            Link copiado!
+          </span>
+          <button
+            type="button"
+            onClick={ copyToClipboard }
+          >
+            <img src={ shareIcon } alt="Share icon" data-testid="share-btn" />
+          </button>
           <button
             type="button"
             onClick={ () => {
