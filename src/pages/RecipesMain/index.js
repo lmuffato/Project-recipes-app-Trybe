@@ -14,7 +14,6 @@ export default function RecipesMain({ match }) {
   const { path } = match;
   const { context } = useContext(AppContext);
   const { recipesList, setPageOrigin, pageOrigin } = context;
-  // const [title, setTitle] = useState('COMIDAS');
   const history = useHistory();
 
   useEffect(() => {
