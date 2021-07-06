@@ -13,6 +13,7 @@ import Drinks from './pages/Drinks';
 import DrinksIngredients from './pages/DrinksIngredients';
 import FoodsIngredients from './pages/FoodsIngredients';
 import FoodsArea from './pages/FoodsArea';
+import FavoriteRecipes from './pages/FavoriteRecipes';
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
               component={ DrinksIngredients }
             />
             <Route exact path="/explorar/comidas/area" component={ FoodsArea } />
+            <Route exact path="/receitas-favoritas" component={ FavoriteRecipes } />
 
           </Switch>
           <Footer />
