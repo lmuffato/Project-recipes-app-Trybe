@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useLocation } from "react-router-dom";
-import DetailsCard from "../Components/DetailsCard"
-
+import { useParams, useLocation } from 'react-router-dom';
+import DetailsCard from '../Components/DetailsCard';
 
 function DetailsPage() {
   const [product, setProduct] = useState({});
@@ -14,21 +13,21 @@ function DetailsPage() {
   useEffect(() => {
     const getProduct = async () => {
       let pageName = '';
-      let identifier = []
+      let identifier = [];
       if (page[1] === 'bebidas') {
         pageName = 'thecocktaildb';
-        identifier = ["drinks", "Drink"];
+        identifier = ['drinks', 'Drink'];
         setIdn(identifier);
       } else if (page[1] === 'comidas') {
         pageName = 'themealdb';
-        identifier = ["meals", "Meal"];
+        identifier = ['meals', 'Meal'];
         setIdn(identifier);
       }
       const endpoint = `https://www.${pageName}.com/api/json/v1/1/lookup.php?i=${id}`;
       const result = await fetch(endpoint).then((data) => data.json());
       setProduct(result[identifier[0]]);
-      setIsProduct(true)
-    }
+      setIsProduct(true);
+    };
     getProduct();
   }, []);
 

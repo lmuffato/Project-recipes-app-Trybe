@@ -1,20 +1,30 @@
 import React from 'react';
 
+function DetailsButtons() {
+  const [isAFavorite, setFavorite] = React.useState(false);
 
-function DetailsButtons () {
-    const [isAFavorite, setFavorite] = React.useState(false);
-
-    const handleCli = () => {
-        if (isAFavorite === false) {
-            setFavorite(true)
-        }
-    };
-    return (
-        <>
-          <button data-testid="share-btn">Share</button>
-          <button data-testid="favorite-btn" onClick ={ handleCli }>Bookmark</button>
-        </>
-    )
+  const handleClick = () => {
+    if (isAFavorite === false) {
+      setFavorite(true);
+    }
+  };
+  return (
+    <>
+      <button
+        type="button"
+        data-testid="share-btn"
+      >
+        Share
+      </button>
+      <button
+        type="button"
+        data-testid="favorite-btn"
+        onClick={ handleClick }
+      >
+        Bookmark
+      </button>
+    </>
+  );
 }
 
-export default DetailsButtons
+export default DetailsButtons;
