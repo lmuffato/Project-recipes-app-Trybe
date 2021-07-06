@@ -1,6 +1,6 @@
 import React from 'react';
 import Header from '../../components/Header';
-import ButtonFilter from './ButtonsFilter';
+import ButtonFilter from './ButtonFilter';
 import Recipes from './Recipes';
 import './index.css';
 
