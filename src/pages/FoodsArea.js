@@ -1,3 +1,4 @@
+import { func } from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import MealCards from '../compenents/MealCards';
@@ -27,29 +28,31 @@ function FoodsArea() {
         .then((responses) => responses.json())
         .then((respos) => respos.meals);
       setMealsRecepies(fetchRecepies);
+      console.log(fetchRecepies)
       setShowRecepies(fetchRecepies.slice(0, lastRecipe));
     };
     getMealsRecepies();
   }, []);
 
   useEffect(() => {
-    async function getFiltredFetch() {
-      const filteredFetch = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?a=${selectedArea}`)
-      .then((responses) => responses.json())
-      .then((respos) => respos.meals);
-      /* const filteredRecepies = mealsRecepies.filter((recepi) => (
-        recepi.strArea === selectedArea
-        )); */
-      setShowRecepies(filteredFetch.slice(0, lastRecipe));
-    };
-
+    console.log(selectedArea);
     if (selectedArea === 'All') {
       setShowRecepies(mealsRecepies.slice(0, lastRecipe));
-    } else {
-        getFiltredFetch();s
-      };
-  }, [selectedArea, mealsRecepies]);
+    } else { 
+      async function getFiltredFetch() {
+      const filteredFetch = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?a=${selectedArea}`)
+        .then((responses) => responses.json())
+        .then((respos) => respos.meals);
+        console.log(filteredFetch);
+        const fils = filteredFetch.filter((element, index) => index <= 12);
+      setShowRecepies(fils);
+      console.log('caiu no else')
+    }
+    getFiltredFetch();
+  }
+  }, [selectedArea])
 
+  
   return (
     <div>
       <select
