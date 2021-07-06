@@ -4,7 +4,6 @@ const FOOD_API_FILTER_URL = 'https://www.themealdb.com/api/json/v1/1/filter.php?
 const FOOD_API_FIRST_URL = 'https://www.themealdb.com/api/json/v1/1/search.php?f=';
 const FOODS_BY_CATEGORY = 'https://www.themealdb.com/api/json/v1/1/filter.php?c=';
 
-
 export async function fetchFoods() {
   const fetchURL = await fetch(FOOD_API_URL);
   return fetchURL.json();
