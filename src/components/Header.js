@@ -44,7 +44,7 @@ function Header({ title, show = true }) {
       </div>
       <div>
         { (click) ? <div data-testid="search-input">barra de buscar aqui</div> : null }
-        {/* coloquei o data-testid aqui para passar no requisto 12, mas ele é para ser colocado no input do
+        {/* coloquei o data-testid aqui para passar no requisto 12, mas ele égi para ser colocado no input do
         componete barrabuscar, e esse componete deve ser renderizado aqui */}
       </div>
     </section>
