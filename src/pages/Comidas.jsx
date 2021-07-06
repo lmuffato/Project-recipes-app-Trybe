@@ -4,6 +4,7 @@ import Footer from '../components/Footer';
 import Header from '../components/Header';
 import SearchButton from '../components/SearchButton';
 import MainFoodCard from '../components/MainFoodCard';
+import CategoryButtons from '../components/CategoryButtons';
 
 class Comidas extends React.Component {
   render() {
@@ -16,6 +17,7 @@ class Comidas extends React.Component {
           <SearchButton pathname={ pathname } />
         </Header>
         <div>Página principal Receitas COMIDA</div>
+        <CategoryButtons />
         <MainFoodCard />
         <Footer history={ history } />
       </>
