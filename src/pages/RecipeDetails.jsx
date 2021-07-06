@@ -52,7 +52,7 @@ function RecipeDetails({ type }) {
   const recipeCategory = singleRecipe.strCategory;
   const isAlchooholic = singleRecipe.strAlcoholic || '';
   const magicNumber = 32;
-  const youTubeVideo = singleRecipe.strYoutube.substring(magicNumber);
+  const youTubeVideo = singleRecipe.strYoutube || '';
 
   return (
     <Container>
@@ -69,17 +69,17 @@ function RecipeDetails({ type }) {
       </div>
       <h3>Ingredientes</h3>
       <div className="ingredients-list">
-        <RecipeIngredients recipe={ singleRecipe } type={ type } />
+        <RecipeIngredients recipe={ singleRecipe } />
       </div>
       <div className="instructions">
-        <h5>Instructions</h5>
+        <h3>Instructions</h3>
         <p data-testid="instructions">
           { singleRecipe.strInstructions }
         </p>
       </div>
       { type === 'meals' ? (
         <MealVideo
-          youTubeVideo={ youTubeVideo }
+          youTubeVideo={ youTubeVideo.substring(magicNumber) }
           title={ recipeName }
         />) : ''}
       <Button data-testid="start-recipe-btn">
@@ -89,9 +89,6 @@ function RecipeDetails({ type }) {
   );
 }
 
-// fazer um if com o retorno do fetch da receita
-// pegar todas as chaves que iniciam com os ingredientes, concatenar
-// usar o trim() num if para deixar de fora os valores que são strings vazias
 export default RecipeDetails;
 
 RecipeDetails.propTypes = {

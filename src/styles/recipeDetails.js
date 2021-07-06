@@ -5,6 +5,25 @@ const Container = styled.div`align-items: center;
   flex-direction: column;
   margin: 0 auto;
 
+  .componente1 {
+
+    .recipe-info {
+      align-items: center;
+      display: flex;
+      flex-direction: column;
+
+      h1 {
+        align-self: center;
+        display: flex;
+        justify-self: center;
+      }
+
+      .img-container {
+        max-width: 200px;
+      }
+    }
+  }
+
   .ingredient-list {
     align-items: flex-start;
     display: flex;
@@ -15,13 +34,18 @@ const Container = styled.div`align-items: center;
   .instructions {
     display: flex;
     flex-flow: column wrap;
-    margin: 0 2rem auto;
+    margin: 2rem auto;
     max-width: 820px;
   }
 
   iframe {
     border: 0;
     margin: 2.5rem auto;
+  }
+
+  button {
+    bottom: 0;
+    position: fixed;
   }
 `;
 
