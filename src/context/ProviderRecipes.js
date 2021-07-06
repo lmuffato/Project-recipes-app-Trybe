@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import ContextRecipes from './ContextRecipes';
 
 function ProviderRecipes({ children }) {
-  const [email, setEmail] = useState('');
   const [filteredRecipe, setRecipes] = useState([]);
   const [activeFilters, setFilter] = useState([]);
   const [recipeDetail, setDetail] = useState({});
@@ -24,8 +23,6 @@ function ProviderRecipes({ children }) {
   return (
     <ContextRecipes.Provider
       value={ {
-        email,
-        setEmail,
         filteredRecipe,
         fetchRecipes,
         recipeDetail,
