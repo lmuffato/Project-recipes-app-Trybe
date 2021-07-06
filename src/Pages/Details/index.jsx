@@ -19,7 +19,6 @@ function Details() {
     <Container>
       <Row>
         <Col>
-          {console.log(recipesDetails)}
           <Image thumbnail data-testid="recipe-photo" />
           <h1 data-testid="recipe-title">Titulo</h1>
           <button type="button" data-testid="share-btn">Share</button>
