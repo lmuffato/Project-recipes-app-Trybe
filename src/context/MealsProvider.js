@@ -2,8 +2,10 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import MealsContext from './MealsContext';
-import { ApiByCategory, ApiByRandom,
-  ApiFilterByCategory, ApiFirstsResults } from '../services/theMealAPI';
+import {
+  ApiByCategory, ApiByRandom,
+  ApiFilterByCategory, ApiFirstsResults,
+} from '../services/theMealAPI';
 
 function MealsProvider({ children }) {
   const [mealsObject, setMeals] = useState({});
