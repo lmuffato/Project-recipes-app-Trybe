@@ -67,6 +67,7 @@ class DetComidas extends React.Component {
           <button
             type="button"
             data-testid="start-recipe-btn"
+            className="start-btn"
           >
             Iniciar Receita
           </button>
