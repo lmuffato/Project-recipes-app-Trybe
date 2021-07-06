@@ -2,16 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import CardContainer from './styles';
-
+// recommendationCardTestId
+// `${index}-recipe-card`
 function Card(props) {
-  const { recipe, index } = props;
+  const { recipe, index, titleTestId, cardTestId } = props;
   const recipeName = recipe.strMeal || recipe.strDrink;
   const recipeThumb = recipe.strMealThumb || recipe.strDrinkThumb;
 
   return (
 
     <CardContainer>
-      <div data-testid={ `${index}-recipe-card` }>
+      <div data-testid={ cardTestId || `${index}-recipe-card` }>
         <div className="img-wrapper">
           <img
             data-testid={ `${index}-card-img` }
@@ -21,7 +22,7 @@ function Card(props) {
           />
         </div>
         <div className="card-info">
-          <p data-testid={ `${index}-card-name` }>{ recipeName }</p>
+          <p data-testid={ titleTestId || `${index}-recipe-name` }>{ recipeName }</p>
         </div>
       </div>
     </CardContainer>

@@ -6,7 +6,7 @@ import Card from '../Card/Card';
 import useFilteredRecipes from '../../hooks/useFilteredRecipes';
 import CardListContainer from './styles';
 
-function CardList({ recipes, type }) {
+function CardList({ recipes, type, titleTestId, cardTestId }) {
   const { getFilteredRecipes,
     searchBarFilters, filteredRecipes } = useFilteredRecipes();
 
@@ -63,14 +63,26 @@ function CardList({ recipes, type }) {
             to={ { pathname: `/comidas/${recipe.idMeal}`, state: { recipe, type } } }
             key={ i }
           >
-            <Card recipe={ recipe } key={ i } index={ i } />
+            <Card
+              recipe={ recipe }
+              key={ i }
+              index={ i }
+              titleTestId={ titleTestId }
+              cardTestId={ cardTestId }
+            />
           </Link>
         ) : (
           <Link
             to={ { pathname: `/bebidas/${recipe.idDrink}`, state: { recipe, type } } }
             key={ i }
           >
-            <Card recipe={ recipe } key={ i } index={ i } />
+            <Card
+              recipe={ recipe }
+              key={ i }
+              index={ i }
+              titleTestId={ titleTestId }
+              cardTestId={ cardTestId }
+            />
           </Link>)
       ))
       )}

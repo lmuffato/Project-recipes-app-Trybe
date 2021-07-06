@@ -9,12 +9,12 @@ const endpointMeal = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
 const endpointDrinks = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
 
 function Carousel({ type }) {
-  // const [currentImage, setCurrentImage] = useState(0);
+  const [currentImage, setCurrentImage] = useState(0);
   const [recommendations, setRecomendations] = useState([]);
   const [, setFetchUrl] = useFetchRecipes(type);
   const currRecomendation = type === 'meals' ? 'drinks' : 'meals';
 
-  const fetchFilteredMealRecipes = useCallback(async (endpoint) => {
+  const fetchMealRecipes = useCallback(async (endpoint) => {
     try {
       const response = await fetch(endpoint);
       const data = await response.json();
@@ -33,11 +33,11 @@ function Carousel({ type }) {
 
   useEffect(() => {
     const setCarousel = () => {
-      if (type === 'meals') return fetchFilteredMealRecipes(endpointDrinks);
-      return fetchFilteredMealRecipes(endpointMeal);
+      if (type === 'meals') return fetchMealRecipes(endpointDrinks);
+      return fetchMealRecipes(endpointMeal);
     };
     setCarousel();
-  }, [fetchFilteredMealRecipes, setFetchUrl, type]);
+  }, [fetchMealRecipes, setFetchUrl, type]);
 
   return (
     <CarouselWrapper>
@@ -45,7 +45,12 @@ function Carousel({ type }) {
         <h3>Recomendadas</h3>
       </div>
       <div className="card-grid">
-        <CardList recipes={ recommendations } type={ currRecomendation } />
+        <CardList
+          recipes={ recommendations }
+          type={ currRecomendation }
+          titleTestId={ `${currentImage}-recomendation-title` }
+          cardTestId={ `${currentImage}-recomendation-card` }
+        />
       </div>
       {/* <div className="right">ícone right</div> */}
       {/* <div className="left">ícone left</div> */}
