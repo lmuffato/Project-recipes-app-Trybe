@@ -1,0 +1,8 @@
+.carousel-card-show {
+  visibility: visible;
+}
+
+.carousel-card-hidden {
+  visibility: hidden;
+  width: 0;
+}

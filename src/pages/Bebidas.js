@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { ALL_DRINKS_ENDPOINT, DRINKS_BY_CATEGORY_ENDPOINT } from '../services/drinks';
+import { ALL_DRINKS_ENDPOINT,
+  DRINKS_BY_CATEGORY_ENDPOINT } from '../services/drinks';
 import { getDrinkCategoriesAPIThunk,
   getDrinkRecipesAPIThunk } from '../redux/actions/drinksAction';
 import Header from '../components/Header';
@@ -28,14 +29,15 @@ function Bebidas() {
   useEffect(() => {
     dispatch(getDrinkRecipesAPIThunk(pickEndpoint(selectedCategory)));
   }, [dispatch, selectedCategory]);
-  const loadingRecipes = useSelector((state) => state.drinks.loadingRecipes);
-  const loadingCategories = useSelector((state) => state.drinks.loadingCategories);
+  const loadingRecipes = useSelector((state) => state.loading.loadingRecipes);
+  const loadingCategories = useSelector((state) => state.loading.loadingCategories);
+  const drinks = useSelector((state) => state.drinks.recipes);
 
   return (
     <section>
       <Header title="Bebidas" />
       {loadingCategories ? <Loading /> : <DrinksCategoryButtons />}
-      {loadingRecipes ? <Loading /> : <DrinksCards />}
+      {loadingRecipes ? <Loading /> : <DrinksCards drinks={ drinks } />}
       <footer>
         <Footer />
       </footer>
