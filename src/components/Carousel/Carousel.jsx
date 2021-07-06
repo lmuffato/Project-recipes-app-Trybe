@@ -1,10 +1,13 @@
 import React from 'react';
+import CarouselContainer from './styles';
 
 function Carousel() {
   return (
-    <div className="carousel">
-      Carousel
-    </div>
+    <CarouselContainer>
+      <div className="carouselInner">
+        CarouselInner
+      </div>
+    </CarouselContainer>
   );
 }
 

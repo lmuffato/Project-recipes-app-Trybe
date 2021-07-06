@@ -77,9 +77,7 @@ function RecipeDetails({ type }) {
           youTubeVideo={ youTubeVideo.substring(magicNumber) }
           title={ recipeName }
         />) : ''}
-      <div className="carousel-container">
-        <Carousel />
-      </div>
+      <Carousel />
       <Button data-testid="start-recipe-btn">
         Iniciar receita
       </Button>

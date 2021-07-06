@@ -86,15 +86,13 @@ const Container = styled.div`align-items: center;
     max-width: 90vw;
   }
 
-  .carousel-container {
-    display: flex;
+  /* .carousel-container {
     margin: 0 auto 2rem;
 
     div {
-      display: flex;
       margin-bottom: 2rem;
     }
-  }
+  } */
 
   button {
     border: 0;
