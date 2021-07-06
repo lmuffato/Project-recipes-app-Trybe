@@ -3,14 +3,17 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { actionDetails } from '../redux/actions';
 import shareIcon from '../images/shareIcon.svg';
-import favoriteIcon from '../images/blackHeartIcon.svg';
+import blackFavoriteIcon from '../images/blackHeartIcon.svg';
+import whiteFavoriteIcon from '../images/whiteHeartIcon.svg';
 
 function MealDetails() {
   const id = window.location.href.split('/')[4];
   const dispatch = useDispatch();
   const [data, setData] = useState();
+  const [copy, setCopy] = useState('');
   const [recomendations, setRecomendations] = useState();
   const history = useHistory();
+  const [test, setTest] = useState('');
 
   useEffect(() => {
     const mealDrinks = async () => {
@@ -27,6 +30,68 @@ function MealDetails() {
     mealDrinks();
     fetchRecomendations();
   }, [dispatch, id]);
+
+  useEffect(() => {
+    const storage = localStorage.getItem('favoriteRecipes');
+    if (storage) {
+      setTest(JSON.stringify(storage));
+    }
+  }, []);
+
+  const addFavorite = (recipe) => {
+    const obj = {
+      id: recipe.idMeal,
+      type: 'comida',
+      area: recipe.strArea ? recipe.strArea : '',
+      category: recipe.strCategory,
+      alcoholicOrNot: '',
+      name: recipe.strMeal,
+      image: recipe.strMealThumb,
+      // doneDate,
+      // tags,
+    };
+    const previousValue = localStorage.getItem('favoriteRecipes');
+    if (previousValue) {
+      const formatedPreviousValue = JSON.parse(previousValue);
+      const newObj = [...formatedPreviousValue, obj];
+      localStorage.setItem('favoriteRecipes', JSON.stringify(newObj));
+    } else {
+      localStorage.setItem('favoriteRecipes', JSON.stringify([obj]));
+    }
+    setTest(JSON.stringify(localStorage.getItem('favoriteRecipes')));
+  };
+
+  const removeFavorite = (recipe) => {
+    const previousValue = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    const newValue = previousValue.filter((obj) => obj.id !== recipe.idMeal);
+    localStorage.setItem('favoriteRecipes', JSON.stringify(newValue));
+    if ((localStorage.getItem('favoriteRecipes')).length > 0) {
+      setTest([JSON.stringify(localStorage.getItem('favoriteRecipes'))]);
+    } else {
+      setTest('');
+    }
+  };
+
+  const renderFavoriteHeart = (recipe) => {
+    const storage = test;
+    let check = '';
+    if (storage) {
+      const formatedStorage = JSON.parse(JSON.parse(storage));
+      check = formatedStorage.filter((st) => st.id.includes(recipe.idMeal));
+    }
+    if (check !== '' && check.length > 0) {
+      return (
+        <button type="button" onClick={ () => removeFavorite(recipe) }>
+          <img alt="favorite" data-testid="favorite-btn" src={ blackFavoriteIcon } />
+        </button>
+      );
+    }
+    return (
+      <button type="button" onClick={ () => addFavorite(recipe) }>
+        <img alt="favorite" data-testid="favorite-btn" src={ whiteFavoriteIcon } />
+      </button>
+    );
+  };
 
   const renderRecomendations = (param) => {
     if (param) {
@@ -48,6 +113,12 @@ function MealDetails() {
       );
     }
     return '';
+  };
+
+  const copyLink = () => {
+    const url = window.location.href;
+    navigator.clipboard.writeText(url);
+    setCopy('Link copiado!');
   };
 
   const renderMealRecipe = () => {
@@ -79,9 +150,12 @@ function MealDetails() {
           />
           <div>
             <h2 data-testid="recipe-title">{strMeal}</h2>
-            <img alt="share" data-testid="share-btn" src={ shareIcon } />
-            <img alt="favorite" data-testid="favorite-btn" src={ favoriteIcon } />
+            <button data-testid="share-btn" type="button" onClick={ () => copyLink() }>
+              <img alt="share" src={ shareIcon } />
+            </button>
+            {renderFavoriteHeart(data[0])}
           </div>
+          {copy}
           <h3 data-testid="recipe-category">{strCategory}</h3>
           <h2>Ingredients</h2>
           <ul>
