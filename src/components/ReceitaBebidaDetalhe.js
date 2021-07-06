@@ -30,6 +30,33 @@ function ReceitaBebidaDetalhe({ props }) {
   const favoriteClick = (e) => {
     e.preventDefault();
 
+    const date = new Date().toString();
+
+    const favoriteRecipe = {
+      id,
+      type: 'bebida',
+      area: '',
+      category: acctualyDrink.drinks[0].strCategory,
+      alcoholicOrNot: acctualyDrink.drinks[0].strAlcoholic,
+      name: acctualyDrink.drinks[0].strDrink,
+      image: acctualyDrink.drinks[0].strDrinkThumb,
+      doneDate: date,
+      tags: acctualyDrink.drinks[0].strTags,
+    };
+
+    if (JSON.parse(localStorage.getItem('favoriteRecipes') !== null)) {
+      const oldRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
+
+      console.log(oldRecipes);
+
+      const newRecipes = [...oldRecipes, favoriteRecipe];
+
+      console.log('New Recipe', newRecipes);
+      localStorage.setItem('favoriteRecipes', JSON.stringify(newRecipes));
+    } else {
+      localStorage.setItem('favoriteRecipes', JSON.stringify([favoriteRecipe]));
+    }
+
     return !favoriteDrink ? setFavoriteDrink(true) : setFavoriteDrink(false);
   };
 
@@ -97,7 +124,6 @@ function ReceitaBebidaDetalhe({ props }) {
 
           <ul>
             { ingredients.map((ingredient, index) => {
-              console.log(ingredients);
               if (ingredient !== null
                 && ingredient !== ' '
                 && ingredient !== '  '
