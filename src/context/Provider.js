@@ -39,7 +39,7 @@ function Provider({ children }) {
   const [doneFilterRecipes, setDoneFilter] = useState([]);
 
   function getInFormations() {
-    // const informationLocalStorage = JSON.parse(localStorage.getItem('doneRecipes'))
+    const informationLocalStorage = JSON.parse(localStorage.getItem('doneRecipes'));
     const fetchApis = async () => {
       const dataFoods = await fetchApiFoods();
       const dataDrinks = await fetchApiDrinks();
@@ -51,7 +51,7 @@ function Provider({ children }) {
       setDrinks(dataDrinks);
     };
     fetchApis();
-    setDoneRecipes(Mock);
+    if (informationLocalStorage !== []) setDoneRecipes(informationLocalStorage);
   }
 
   const clickFilterFood = (e) => {
@@ -154,7 +154,6 @@ function Provider({ children }) {
   // ComponentDidMount
   useEffect(() => {
     getInFormations();
-    // getFoods();
     foodsRecommendedF();
     drinksRecommendedF();
     initProgressInLS();
