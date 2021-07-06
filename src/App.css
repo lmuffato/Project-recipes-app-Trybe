@@ -119,11 +119,11 @@ header {
 }
 
 .init-recipe-btn {
-  padding: 8px 13px;
-  margin-top: 20px;
   background-color: green;
-  position: fixed;
+  margin-top: 20px;
+  padding: 8px 13px;
   bottom: 0;
+  position: fixed;
   left: 130px;
   z-index: 99;
 }
