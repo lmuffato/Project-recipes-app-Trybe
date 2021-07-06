@@ -12,10 +12,10 @@ import {
   FavoriteRecipes,
   Explore,
   DrinkExplore,
-  DrinksIngredientsExplore,
-  ExploreFoodSource,
+  ExploreDrinksIngredients,
+  ExploreArea,
   FoodExplore,
-  FoodIngredientsExplore,
+  ExploreFoodIngredients,
   RecipesDone,
 } from '../Pages';
 
@@ -39,15 +39,15 @@ function Routes() {
       <Route
         exact
         path="/explorar/bebidas/ingredientes"
-        component={ DrinksIngredientsExplore }
+        component={ ExploreDrinksIngredients }
       />
       {/* EXPLORAR COMIDAS */}
       <Route exact path="/explorar/comidas" component={ FoodExplore } />
-      <Route exact path="/explorar/comidas/area" component={ ExploreFoodSource } />
+      <Route exact path="/explorar/comidas/area" component={ ExploreArea } />
       <Route
         exact
         path="/explorar/comidas/ingredientes"
-        component={ FoodIngredientsExplore }
+        component={ ExploreFoodIngredients }
       />
       {/* PERFIL */}
       <Route path="/perfil" component={ Profile } />

@@ -8,6 +8,11 @@ import {
   fetchAllCategoriesDrinks,
   fetchMealsAndCategory,
   fetchDrinksAndCategory,
+  fetchRandomDrinks,
+  fetchRandomMeal,
+  fetchFoodsIngredients,
+  fetchDrinksIngredients,
+  // fetchArea,
 } from '../services/Data';
 
 function Provider({ children }) {
@@ -22,6 +27,12 @@ function Provider({ children }) {
   const [categoryD, setCategoryD] = useState('All');
   const [dataMealsAndCategory, setDataMealsAndCategory] = useState([]);
   const [dataDrinksAndCategory, setDrinksAndCategory] = useState([]);
+  const [randomDrinkId, setRandomDrinkId] = useState([]);
+  const [randomMealId, setRandomMealId] = useState([]);
+  const [foodsIngredients, setFoodsIngredients] = useState([]);
+  const [drinksIngredients, setDrinksIngredients] = useState([]);
+  const [byIngredient, setByIngredient] = useState(false);
+  const [ingredientByName, setIngredientByName] = useState([]);
 
   useEffect(() => {
     fetchAllCategoriesFoods()
@@ -50,6 +61,28 @@ function Provider({ children }) {
     }
   }, [categoryD]);
 
+  useEffect(() => {
+    fetchRandomDrinks().then((results) => setRandomDrinkId(results.drinks[0].idDrink));
+  }, []);
+
+  useEffect(() => {
+    fetchRandomMeal().then((results) => setRandomMealId(results.meals[0].idMeal));
+  }, []);
+
+  useEffect(() => {
+    const cardSize = 12;
+    fetchFoodsIngredients().then((results) => setFoodsIngredients(
+      results.meals.slice([0], cardSize),
+    ));
+  }, []);
+
+  useEffect(() => {
+    const cardSize = 12;
+    fetchDrinksIngredients().then((results) => setDrinksIngredients(
+      results.drinks.slice([0], cardSize),
+    ));
+  }, []);
+
   const contextValue = {
     foods: dataMealsAndCategory,
     drinks: dataDrinksAndCategory,
@@ -63,6 +96,16 @@ function Provider({ children }) {
     setCategoryF,
     categoryD,
     setCategoryD,
+    randomDrinkId,
+    randomMealId,
+    foodsIngredients,
+    setFoodsIngredients,
+    drinksIngredients,
+    setDrinksIngredients,
+    byIngredient,
+    setByIngredient,
+    ingredientByName,
+    setIngredientByName,
   };
 
   return (
