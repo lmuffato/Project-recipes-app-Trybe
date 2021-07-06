@@ -25,9 +25,10 @@ export const requestRecipies = () => ({
   type: ACTION_LOADING,
 });
 
-export const setInitialMeals = (mealsList) => ({
+export const setInitialMeals = (mealsList, showDetails = true) => ({
   type: ACTION_MAIN_FOOD_LIST,
   mealsList,
+  showDetails,
 });
 
 export const requestInitialDrinks = (drinksList) => ({

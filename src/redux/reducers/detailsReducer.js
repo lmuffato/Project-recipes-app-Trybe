@@ -1,6 +1,10 @@
 import { ACTION_DETAILS } from '../actions';
 
-const detailsReducer = (state = '', action) => {
+const INITIAL_STATE = {
+  data: '',
+};
+
+const detailsReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
   case ACTION_DETAILS:
     return {

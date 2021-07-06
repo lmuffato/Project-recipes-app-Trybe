@@ -1,33 +1,31 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useSelector } from 'react-redux';
-// import { requestInitialDrinks } from '../redux/actions';
-// import { useHistory } from 'react-router-dom';
-// import fetchFoodCategories from '../helpers/fetchFoodCategories';
+import { useSelector, useDispatch } from 'react-redux';
+import { setInitialMeals, requestInitialDrinks } from '../redux/actions';
 import fetchDrinkByCategory from '../helpers/fetchDrinkByCategory';
 import fetchFoodByCategory from '../helpers/fetchFoodByCategory';
 
 function FilterButtons({ props }) {
+  const dispatch = useDispatch();
   const { drinksCategory } = useSelector((state) => state.searchReducer);
   const { mealsCategory } = useSelector((state) => state.searchReducer);
-  // const history = useHistory();
-  const tipe = (props === 'Drinks') ? drinksCategory : mealsCategory;
+  const list = (props === 'Drinks') ? drinksCategory : mealsCategory;
   const FIVE = 5;
 
   const HandleFilterByCategoryButton = (type, category) => {
     if (type === 'Drinks') {
       const fetchByCategory = async () => {
         const { drinks } = await fetchDrinkByCategory(category);
-        // dispatch(requestInitialDrinks(drinks));
-        console.log(drinks);
+        dispatch(requestInitialDrinks(drinks));
       };
       fetchByCategory();
     }
     if (type === 'Meals') {
       const fecthByCategory = async () => {
         const { meals } = await fetchFoodByCategory(category);
-        // dispatch(requestInitialMeals(meals));
-        console.log(meals);
+        const showDetails = meals.length !== 1;
+        console.log(showDetails);
+        dispatch(setInitialMeals(meals, showDetails));
       };
       fecthByCategory();
     }
@@ -36,8 +34,8 @@ function FilterButtons({ props }) {
   return (
     <div>
       {
-        tipe && (
-          tipe.map((e, index) => index < FIVE && (
+        list && (
+          list.map((e, index) => index < FIVE && (
             <button
               key={ index }
               type="button"

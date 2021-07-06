@@ -11,6 +11,7 @@ const INITIAL_STATE = {
   isLoading: false,
   drinksCategory: [],
   mealsCategory: [],
+  showDetails: true,
 };
 
 const searchReducer = (state = INITIAL_STATE, action) => {
@@ -30,6 +31,7 @@ const searchReducer = (state = INITIAL_STATE, action) => {
     return {
       ...state,
       initialMeals: action.mealsList,
+      showDetails: action.showDetails,
       isLoading: false,
     };
   case ACTION_MAIN_DRINK:
@@ -44,7 +46,6 @@ const searchReducer = (state = INITIAL_STATE, action) => {
       drinksCategory: action.drinksCategories,
     };
   case ACTION_FOOD_CATEGORY:
-    console.log(action.foodCategories);
     return {
       ...state,
       mealsCategory: action.foodCategories,

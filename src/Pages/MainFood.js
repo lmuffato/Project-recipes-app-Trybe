@@ -21,7 +21,6 @@ function MainFood() {
     };
     const fecthMealsCategory = async () => {
       const { meals } = await fetchFoodCategories();
-      console.log(meals);
       dispatch(actionFoodCategory(meals));
     };
 
