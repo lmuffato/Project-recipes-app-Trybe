@@ -11,6 +11,7 @@ import Cards from '../components/Card';
 function Bebidas() {
   const {
     data,
+    originData,
     texto,
     categoria,
     ingredient,
@@ -34,7 +35,6 @@ function Bebidas() {
     } else {
       fetchapi();
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const getApis = async () => {
@@ -44,16 +44,19 @@ function Bebidas() {
     }
   };
 
+  const fetchapi2 = () => {
+    setData(originData);
+  };
+
   useEffect(() => {
     if (texto === 'All') {
-      fetchapi();
+      fetchapi2();
     } else if (texto !== '') {
       getApis();
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [texto]);
 
-  if (data.length < 1) return <h1>Loading...</h1>;
+  if (data.length < 1 || data.length === undefined) return <h1>Loading...</h1>;
 
   return (
     <div>

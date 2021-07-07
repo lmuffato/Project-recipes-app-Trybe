@@ -11,6 +11,7 @@ import Cards from '../components/Card';
 function Comidas() {
   const {
     data,
+    originData,
     texto,
     categoria,
     ingredient,
@@ -24,7 +25,6 @@ function Comidas() {
 
   const fetchApiIngredient = async () => {
     const ingredientResp = await apiSearchMeals(ingredient);
-    // console.log(ingredientResp);
     setData(ingredientResp);
   };
 
@@ -35,7 +35,6 @@ function Comidas() {
     } else {
       fetchapi();
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const getApis = async () => {
@@ -45,16 +44,19 @@ function Comidas() {
     }
   };
 
+  const fetchapi2 = () => {
+    setData(originData);
+  };
+
   useEffect(() => {
     if (texto === 'All') {
-      fetchapi();
+      fetchapi2();
     } else if (texto !== '') {
       getApis();
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [texto]);
 
-  if (data.length < 1) return <h1>Loading...</h1>;
+  if (data.length < 1 || data.length === undefined) return <h1>Loading...</h1>;
 
   return (
     <div>

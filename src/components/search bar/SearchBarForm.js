@@ -65,22 +65,20 @@ const SearchBarForm = () => {
   );
 
   return (
-    <div>
-      <Form
-        className="d-flex flex-column align-items-center"
-        style={ { background: 'rgb(122, 122, 122)' } }
-      >
-        { handleSearchBarValue() }
-        <div className="d-flex justify-content-center align-items-center">
-          { handleSearchBarMark() }
-          <Button
-            data-testid="exec-search-btn"
-          >
-            Busca
-          </Button>
-        </div>
-      </Form>
-    </div>
+    <Form
+      className="d-flex flex-column align-items-center"
+      style={ { background: 'rgb(122, 122, 122)' } }
+    >
+      { handleSearchBarValue() }
+      <div className="d-flex justify-content-center align-items-center">
+        { handleSearchBarMark() }
+        <Button
+          data-testid="exec-search-btn"
+        >
+          Busca
+        </Button>
+      </div>
+    </Form>
   );
 };
 
