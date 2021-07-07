@@ -83,7 +83,7 @@ export default function DrinkProgress() {
         type="button"
         data-testid="finish-recipe-btn"
         style={ styleFooter }
-        onClick={ redirectToRecipeDonePage }
+        onClick={ () => redirectToRecipeDonePage(recipeDrink) }
         disabled={ !recipeDoneCheck(ingredients) }
       >
         Finalizar Receita
