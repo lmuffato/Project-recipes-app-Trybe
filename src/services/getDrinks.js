@@ -12,28 +12,32 @@ const getMeasures = (recipe) => {
   return measures;
 };
 
-const setDrinks = (recipes) => {
-  const drinksList = recipes.map((recipe) => {
-    const {
-      idDrink, strDrink, strCategory, strArea,
-      strInstructions, strDrinkThumb, strTags,
-    } = recipe;
-
-    const ingredients = getIngredients(recipe);
-    const measures = getMeasures(recipe);
-    return ({
-      id: idDrink,
-      name: strDrink,
-      category: strCategory,
-      from: strArea,
-      imgSrc: strDrinkThumb,
-      tags: strTags,
-      instructions: strInstructions,
-      ingredients,
-      measures,
+export const setDrinks = (recipes) => {
+  if (recipes === null) {
+    global.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+  } else {
+    const drinksList = recipes.map((recipe) => {
+      const {
+        idDrink, strDrink, strCategory, strArea,
+        strInstructions, strDrinkThumb, strTags,
+      } = recipe;
+      const ingredients = getIngredients(recipe);
+      const measures = getMeasures(recipe);
+      return ({
+        id: idDrink,
+        name: strDrink,
+        category: strCategory,
+        from: strArea,
+        imgSrc: strDrinkThumb,
+        tags: strTags,
+        instructions: strInstructions,
+        ingredients,
+        measures,
+      });
     });
-  });
-  return drinksList;
+    return drinksList;
+  }
+  return [];
 };
 
 export const getDrinks = async () => {

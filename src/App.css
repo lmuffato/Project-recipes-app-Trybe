@@ -44,9 +44,9 @@
 }
 
 .food-page {
+  align-content: space-between;
   display: flex;
   flex-flow: column wrap;
-  align-content: space-between;
   justify-content: space-around;
 }
 

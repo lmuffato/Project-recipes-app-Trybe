@@ -14,13 +14,13 @@ export default function Drinks() {
   } = useContext(Context);
 
   useEffect(() => {
-    setCategory('All');
     const reciveDrinks = async () => {
       setLoading(true);
       const data = await getDrinks();
       const categoList = await getDrinksCat();
-      await setDrinksList([...data]);
-      await setCatList([...categoList]);
+      setCategory('All');
+      setDrinksList([...data]);
+      setCatList([...categoList]);
       setLoading(false);
     };
     reciveDrinks();

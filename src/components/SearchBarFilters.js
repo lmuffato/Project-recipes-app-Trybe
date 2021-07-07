@@ -14,7 +14,7 @@ import {
 } from '../services/getMeals';
 
 export default function SearchBarFilters() {
-  const { setMealsList, setDrinkList } = useContext(Context);
+  const { setMealsList, setDrinksList } = useContext(Context);
   const firstLetter = 'first-letter';
   const history = useHistory();
   const location = useLocation();
@@ -40,7 +40,7 @@ export default function SearchBarFilters() {
     }
     if (check === 'ingredient' && url === '/bebidas') {
       const result = await getDrinkByIngredient(search);
-      setDrinkList(result);
+      setDrinksList(result);
       handleEdgeCase(result);
     }
   };
@@ -53,7 +53,7 @@ export default function SearchBarFilters() {
     }
     if (check === 'name' && url === '/bebidas') {
       const result = await getDrinksByName(search);
-      setDrinkList(result);
+      setDrinksList(result);
       handleEdgeCase(result);
     }
   };
@@ -74,7 +74,7 @@ export default function SearchBarFilters() {
         global.alert('Sua busca deve conter somente 1 (um) caracter');
       } else {
         const result = await getDrinkByFirstLetter(search);
-        setDrinkList(result);
+        setDrinksList(result);
         handleEdgeCase(result);
       }
     }

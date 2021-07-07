@@ -38,6 +38,7 @@ export const setMeals = (recipes) => {
     });
     return mealsList;
   }
+  return [];
 };
 export const getMealsDefault = async () => {
   const endPoint = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
