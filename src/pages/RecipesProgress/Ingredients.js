@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import { Container } from './styles';
+import './Ingredients.css';
 
 export default function Ingredients({ recipe }) {
   function getIngredients() {
@@ -20,22 +20,22 @@ export default function Ingredients({ recipe }) {
 
   return (
     <div className="ingredients">
+
       {getIngredients().map(
         (ingredient, index) => (
-          <>
+          <div key={ index }>
             <label
               data-testid={ `${index}-ingredient-step` }
-              key={ index }
-              htmlFor="ingredient"
+              htmlFor={ ingredient[1] }
             >
               <input
-                id="ingredient"
+                id={ ingredient[1] }
                 type="checkbox"
               />
-              {`${ingredient[1]} - ${getMeasures()[index][1]}`}
+              <span>{`${ingredient[1]} - ${getMeasures()[index][1]}`}</span>
             </label>
             <br />
-          </>
+          </div>
         ),
       )}
     </div>
