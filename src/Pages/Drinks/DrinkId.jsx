@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, Redirect } from 'react-router-dom';
 import { fetchDrinkForId } from '../../services/Data';
+import shareIcon from '../../images/shareIcon.svg';
+import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
 
 function DrinkId() {
   const location = useLocation();
@@ -47,15 +49,13 @@ function DrinkId() {
         <p data-testid="recipe-category">{strAlcoholic}</p>
         <button
           type="button"
-          data-testid="share-btn"
         >
-          Compartilhar
+          <img data-testid="share-btn" src={ shareIcon } alt="share-icon" />
         </button>
         <button
           type="button"
-          data-testid="favorite-btn"
         >
-          Favorito
+          <img data-testid="favorite-btn" src={ whiteHeartIcon } alt="favorite icon" />
         </button>
       </section>
       <section>
