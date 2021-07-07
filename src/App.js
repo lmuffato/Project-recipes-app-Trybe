@@ -3,6 +3,7 @@ import { Switch, Route } from 'react-router-dom';
 import './App.css';
 import RecipesProvider from './provider/RecipesProvider';
 import routes from './helpers/routes';
+import NotFound from './pages/NotFound';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
             render={ () => <Component title={ title } /> }
           />
         ))}
+        <Route component={ NotFound } />
       </Switch>
     </RecipesProvider>
   );
