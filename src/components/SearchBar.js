@@ -54,11 +54,11 @@ function SearchBar() {
   }
 
   useEffect(() => {
-    if (window.location.pathname === '/comidas') {
+    if (path === '/comidas') {
       fetchMealsApiSearch().then(() => {
       });
     }
-    if (window.location.pathname === '/bebidas') {
+    if (path === '/bebidas') {
       fetchDrinksApiSearch();
     }
   }, [ingredient]);
