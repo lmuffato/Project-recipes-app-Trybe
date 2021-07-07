@@ -44,9 +44,12 @@ function Recipes() {
     console.log(newRecipes);
     setFavRecipes(newRecipes);
   };
-  const desfavoriteDrink = (id) => (
-    console.log(id)
-  );
+  // const desfavoriteDrink = (id) => {
+  //   // console.log(id);
+  //   const newRecipes = noFilter.filter((recipe) => (recipe.id !== id) && recipe);
+  //   console.log(newRecipes);
+  //   setFavRecipes(newRecipes);
+  // };
   const handleFood = (recipe, index) => (
     <Card style={ { width: '22rem' } } bsPrefix="card-img" key={ index }>
       <Link key={ index } to={ `comidas/${recipe.id}` }>
@@ -121,7 +124,7 @@ function Recipes() {
           variant="primary"
           data-testid={ `${index}-horizontal-favorite-btn` }
           src={ Favorite }
-          onClick={ () => desfavoriteDrink(recipe.id) }
+          onClick={ () => desfavoriteFood(recipe.id) }
         >
           <Card.Img
             variant="top"
