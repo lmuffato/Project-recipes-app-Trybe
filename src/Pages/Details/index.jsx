@@ -1,12 +1,12 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { Button } from 'react-bootstrap';
 import { useLocation, useParams } from 'react-router';
-import { Link } from 'react-router-dom';
 import UserContext from '../../context/UserContext';
 import { getRecipeByID } from '../../services/fetchRecipes';
 import Ingredient from '../../Components/Ingredients';
 import Slide from '../../Components/Slide';
 import './styles.css';
+import EndButton from '../../Components/EndButton';
+import Video from '../../Components/Video';
 
 import shareIcon from '../../images/shareIcon.svg';
 import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
@@ -15,7 +15,7 @@ function Details() {
   const { pathname } = useLocation();
   const { id } = useParams();
 
-  const [recipesDetails, setRecipesDetails] = useState([]);
+  const [recipesDetails, setRecipesDetails] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [recipeStatus, setRecipeStatus] = useState('Iniciar Receita');
   const { doneRecipes, doingRecipes } = useContext(UserContext);
@@ -75,19 +75,9 @@ function Details() {
               {recipesDetails.strInstructions}
             </p>
           </div>
-          {(recipeType === 'Meal')
-            ? (
-              <div className="video">
-                <h2>Video</h2>
-                <iframe
-                  data-testid="video"
-                  src={ `http://www.youtube.com/embed/${recipesDetails.strYoutube.split('=')[1]}` }
-                  title="How to do"
-                  style={ { border: 'none' } }
-                  allowFullScreen
-                />
-              </div>)
-            : null}
+          { isLoading ? '' : (
+            <Video recipeType={ recipeType } recipesDetails={ recipesDetails } />
+          )}
           <Slide
             toggle={ recipeType }
             category={ toggleCategory }
@@ -95,17 +85,11 @@ function Details() {
           />
           {recipeStatus
             ? (
-              <div className="init-btn">
-                <Link to={ `/${toggleURL}/${id}/in-progress` }>
-                  <Button
-                    data-testid="start-recipe-btn"
-                    size="lg"
-                  >
-                    {recipeStatus}
-                  </Button>
-                </Link>
-              </div>
-            )
+              <EndButton
+                id={ id }
+                toggleURL={ toggleURL }
+                recipeStatus={ recipeStatus }
+              />)
             : null}
         </div>
       )}
