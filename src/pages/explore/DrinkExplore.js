@@ -11,6 +11,7 @@ export default function DrinksExplore() {
       <div className="buttonsExplore">
         <Link to="/explorar/bebidas/ingredientes">
           <button
+            type="button"
             data-testid="explore-by-ingredient"
           >
             Por Ingredientes
@@ -19,6 +20,7 @@ export default function DrinksExplore() {
 
         <Link to="">
           <button
+            type="button"
             data-testid="explore-surprise"
           >
             Me Surpreenda!

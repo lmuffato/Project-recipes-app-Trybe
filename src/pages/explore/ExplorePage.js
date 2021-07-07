@@ -22,7 +22,7 @@ export default function ExplorePage() {
             data-testid="explore-drinks"
             type="button"
           >
-              Explorar Bebidas
+            Explorar Bebidas
           </button>
         </Link>
       </div>

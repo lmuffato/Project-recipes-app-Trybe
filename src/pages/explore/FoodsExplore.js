@@ -1,7 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Header from '../../components/Header';
 import BottomMenu from '../../components/bottomMenu';
-import { Link } from 'react-router-dom';
 
 export default function FoodsExplore() {
   return (
@@ -11,6 +11,7 @@ export default function FoodsExplore() {
       <div className="buttonsExplore">
         <Link to="/explorar/comidas/ingredientes">
           <button
+            type="button"
             data-testid="explore-by-ingredient"
           >
             Por Ingredientes
@@ -19,6 +20,7 @@ export default function FoodsExplore() {
 
         <Link to="/explorar/comidas/area">
           <button
+            type="button"
             data-testid="explore-by-area"
           >
             Por Local de Origem
@@ -27,6 +29,7 @@ export default function FoodsExplore() {
 
         <Link to="">
           <button
+            type="button"
             data-testid="explore-surprise"
           >
             Me Surpreenda!
