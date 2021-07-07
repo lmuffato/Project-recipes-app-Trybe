@@ -2,7 +2,9 @@ import { useHistory } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import Header from '../../components/Header';
 import getRecipes from '../../services/recipesData';
-import RecipeSimpleCard from '../../components/RecipeSimpleCard';
+import RecipesCardsGrid from '../../components/RecipesCardsGrid';
+
+import styles from './styles.module.scss';
 
 function MainRecipes() {
   const { location: { pathname } } = useHistory();
@@ -21,12 +23,12 @@ function MainRecipes() {
   }, [pathname]);
 
   return (
-    <>
+    <div className={ styles.mainRecipes }>
       <Header title={ titlePage } />
-      {recipes.map((recipe, index) => (
-        <RecipeSimpleCard key={ recipe.id } recipe={ recipe } index={ index } />
-      ))}
-    </>
+      <main>
+        <RecipesCardsGrid recipes={ recipes } />
+      </main>
+    </div>
   );
 }
 

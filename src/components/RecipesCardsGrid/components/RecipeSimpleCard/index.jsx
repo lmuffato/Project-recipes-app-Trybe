@@ -1,13 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import plus18Icon from '../../images/plus18.svg';
+import plus18Icon from '../../../../images/plus18.svg';
+
+import styles from './styles.module.scss';
 
 function RecipeSimpleCard({ recipe, index, alcoholic }) {
   return (
-    <div data-testid={ `${index}-recipe-card` }>
+    <div data-testid={ `${index}-recipe-card` } className={ styles.card }>
       { alcoholic && (
-        <span>
+        <span className={ styles.alcoholicTag }>
           <img src={ plus18Icon } alt="18+" />
           Alcoholic
         </span>
@@ -17,7 +19,12 @@ function RecipeSimpleCard({ recipe, index, alcoholic }) {
         alt={ recipe.name }
         data-testid={ `${index}-card-img` }
       />
-      <span data-testid={ `${index}-card-name` }>{recipe.name}</span>
+      <span
+        data-testid={ `${index}-card-name` }
+        className={ styles.title }
+      >
+        {recipe.name}
+      </span>
     </div>
   );
 }
