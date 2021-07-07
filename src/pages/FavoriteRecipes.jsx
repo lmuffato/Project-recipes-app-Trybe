@@ -3,12 +3,24 @@ import FavoriteRecipeCard from '../components/FavoriteRecipeCard/FavoriteRecipeC
 
 function FavoriteRecipes() {
   const [favoriteRecipes, setFavoriteRecipes] = useState([]);
-  // const [haveChanged, setHaveChanged] = useState(false);
+  const [filterByType, setFilterByType] = useState('All');
 
   useEffect(() => {
     const favoriteStorage = JSON.parse(localStorage.getItem('favoriteRecipes'));
     if (favoriteStorage) setFavoriteRecipes(favoriteStorage);
   }, []);
+
+  function filterRecipesByType(recipes, filter) {
+    if (filter === 'Food') {
+      return recipes.filter((recipe) => recipe.type === 'comida');
+    }
+
+    if (filter === 'Drinks') {
+      return recipes.filter((recipe) => recipe.type === 'bebida');
+    }
+
+    return recipes;
+  }
 
   function handleRemoveRecipe(index) {
     const updatedFavoriteRecipes = favoriteRecipes
@@ -30,12 +42,30 @@ function FavoriteRecipes() {
   return (
     <div>
       <div>
-        <button type="button" data-testid="filter-by-all-btn">All</button>
-        <button type="button" data-testid="filter-by-food-btn">Food</button>
-        <button type="button" data-testid="filter-by-drink-btn">Drinks</button>
+        <button
+          type="button"
+          data-testid="filter-by-all-btn"
+          onClick={ () => setFilterByType('All') }
+        >
+          All
+        </button>
+        <button
+          type="button"
+          data-testid="filter-by-food-btn"
+          onClick={ () => setFilterByType('Food') }
+        >
+          Food
+        </button>
+        <button
+          type="button"
+          data-testid="filter-by-drink-btn"
+          onClick={ () => setFilterByType('Drinks') }
+        >
+          Drinks
+        </button>
       </div>
       <h1>Receitas Favoritas</h1>
-      { favoriteRecipes.map((recipe, index) => (
+      { filterRecipesByType(favoriteRecipes, filterByType).map((recipe, index) => (
         <FavoriteRecipeCard
           recipe={ recipe }
           index={ index }
