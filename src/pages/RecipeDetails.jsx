@@ -24,33 +24,30 @@ function RecipeDetails({ type }) {
     isLoading, recipeData,
     recommendations, fetchMealRecipes, currentImage } = useDetailsProvider();
 
-  // const handleFetchIngredients = useCallback(() => {
-  //   if (type === 'meals') {
-  //     handleFetch(endpointMeal, type);
-  //   }
-  //   if (type === 'drinks') {
-  //     handleFetch(endpointDrink, type);
-  //   }
-  // }, [endpointDrink, endpointMeal, handleFetch, type]);
-
   useEffect(() => {
-    const getRecipesAndRecommendations = () => {
+    const getRecipesAndRecommendations = async () => {
       if (type === 'meals') {
-        handleFetch(endpointMeal, type);
-        fetchMealRecipes(endpointCocktails, type);
+        await fetchMealRecipes(endpointCocktails, type);
+        await handleFetch(endpointMeal, type);
       }
-      handleFetch(endpointDrink, type);
-      fetchMealRecipes(endpointRecipes, type);
+      await fetchMealRecipes(endpointRecipes, type);
+      await handleFetch(endpointDrink, type);
     };
-    return getRecipesAndRecommendations();
-  }, [endpointDrink, endpointMeal, fetchMealRecipes, handleFetch, type]);
+    getRecipesAndRecommendations();
+  }, [endpointDrink,
+    endpointMeal, fetchMealRecipes, handleFetch, type]);
 
   useEffect(() => {
+    let cancel = false;
     const settingUp = () => {
+      if (cancel) return;
       setRecipe(recipeData);
       setRecomendations(recommendations);
     };
     settingUp();
+    return () => {
+      cancel = true;
+    };
   }, [recipeData, recommendations]);
 
   if (isLoading) {
@@ -97,11 +94,6 @@ function RecipeDetails({ type }) {
 
 export default RecipeDetails;
 
-// RecipeDetails.defaultProps = {
-//   url: '',
-// };
-
 RecipeDetails.propTypes = {
   type: PropTypes.string.isRequired,
-  // url: PropTypes.string,
 };

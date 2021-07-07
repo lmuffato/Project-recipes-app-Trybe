@@ -30,7 +30,7 @@ function SearchBar({ type }) {
         inputSearch,
       }),
     );
-    // console.log(searchBarFilters);
+    console.log(searchBarFilters);
   }, [inputSearch, radioValue, searchBarFilters, setSearchBarFilters]);
 
   useEffect(() => {

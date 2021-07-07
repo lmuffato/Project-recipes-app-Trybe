@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Redirect } from 'react-router';
 import PropTypes from 'prop-types';
@@ -8,42 +8,56 @@ import CardListContainer from './styles';
 
 function CardList({ recipes, type, titleTestId, cardTestId }) {
   const { getFilteredRecipes,
-    searchBarFilters, filteredRecipes } = useFilteredRecipes();
-  // const history = useHistory();
+    searchBarFilters, filteredData } = useFilteredRecipes();
+  const [receitasFiltradas, setReceitasFiltradas] = useState([]);
+  // const { filteredRecipes } = useFilteredRecipes();
+  // // const history = useHistory();
 
   useEffect(() => {
-    getFilteredRecipes(type);
-  }, [type, searchBarFilters, getFilteredRecipes]);
+    let cancel = false;
+    const getRecipes = async () => {
+      await getFilteredRecipes(type);
+      if (cancel) return;
+      const values = Object.values(filteredData);
+      setReceitasFiltradas(values);
+    };
+    getRecipes();
+    return () => {
+      cancel = true;
+    };
+  }, [type, searchBarFilters, getFilteredRecipes, filteredData]);
 
   if (recipes.length === 0) {
     return 'Loading...';
   }
 
-  if (filteredRecipes.length === 1) {
-    const recipe = filteredRecipes.find((el) => el === filteredRecipes[0]);
-    return type === 'meals' ? (
+  const filteredDataType = Object.keys(filteredData);
+
+  if (receitasFiltradas.length === 1) {
+    const recipe = receitasFiltradas[0].find((el) => el === receitasFiltradas[0][0]);
+
+    return filteredDataType[0] === 'meals' ? (
       <Redirect
         to={ {
           pathname: `/comidas/${recipe.idMeal}`,
-          state: { recipe, pageType: type },
+          state: { recipe, type: filteredDataType[0] },
         } }
       />
-      // history.push(`/comidas/${recipe.idMeal}`)
+      // console.log('receitas filtradas', receitasFiltradas[0][0])
     ) : (
       <Redirect
         to={ {
           pathname: `/bebidas/${recipe.idDrink}`,
-          state: { recipe, type },
+          state: { recipe, type: filteredDataType[0] },
         } }
       />
-      // history.push(`/bebidas/${recipe.idDrink}`)
     );
   }
 
   return (
     <CardListContainer>
-      { filteredRecipes.length > 1 ? (
-        filteredRecipes.map((recipe, index) => (
+      { receitasFiltradas.length > 1 ? (
+        receitasFiltradas.map((recipe, index) => (
           type === 'meals' ? (
             <Link
               to={ { pathname: `/comidas/${recipe.idMeal}`, state: { recipe, type } } }

@@ -28,8 +28,12 @@ function Home(props) {
   }, [setFetchUrl, type]);
 
   useEffect(() => {
-    if (recipesContext[type]) setRecipes(recipesContext[type]);
+    if (recipesContext[type]) setRecipes(recipesContext[type]); // pega do estado global e seta no estado da pg
   }, [recipesContext, type]);
+
+  // useEffect(() => {
+  //   getFilteredRecipes(type);
+  // }, [type, searchBarFilters, getFilteredRecipes]);
 
   return (
     <>

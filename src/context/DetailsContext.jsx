@@ -14,7 +14,7 @@ function DetailsContextProvider({ children }) {
     try {
       const request = await fetch(url);
       const data = await request.json();
-      setRecipe(data[tipo][0]);
+      if (data) setRecipe(data[tipo][0]);
       console.log(data[tipo][0]);
       setIsLoading(false);
     } catch (err) {
