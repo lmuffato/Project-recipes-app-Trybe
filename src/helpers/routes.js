@@ -10,6 +10,7 @@ import DrinkDetails from '../pages/DrinkDetails';
 import ExploreFood from '../pages/ExploreFood';
 import ExploreDrink from '../pages/ExploreDrink';
 import IngredientsPage from '../pages/IngredientsPage';
+import FavoriteRecipes from '../pages/FavoriteRecipes';
 import ExploreByAreaPage from '../pages/ExploreByAreaPage';
 import RecipesDonePage from '../pages/RecipesDonePage';
 
@@ -100,7 +101,7 @@ export default [
   },
   {
     path: '/receitas-favoritas',
-    Component: componentWithHeader,
+    Component: FavoriteRecipes,
     exact: true,
     title: 'Receitas Favoritas',
   },

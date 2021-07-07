@@ -1,22 +1,22 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import foodIcon from '../../images/mealIcon.svg';
 import drinkIcon from '../../images/drinkIcon.svg';
-import searchIcon from '../../images/searchIcon.svg';
+import exploreIcon from '../../images/exploreIcon.svg';
+import mealIcon from '../../images/mealIcon.svg';
 
 import './style.css';
 
 export default function FooterMenu() {
   return (
     <div data-testid="footer" className="footer">
-      <Link data-testid="drinks-bottom-btn" to="/bebidas">
-        <img src={ drinkIcon } alt="glass icon" />
+      <Link to="/bebidas">
+        <img data-testid="drinks-bottom-btn" src={ drinkIcon } alt="glass icon" />
       </Link>
-      <Link data-testid="explore-bottom-btn" to="/explorar">
-        <img src={ searchIcon } alt="compass icon" />
+      <Link to="/explorar">
+        <img data-testid="explore-bottom-btn" src={ exploreIcon } alt="compass icon" />
       </Link>
-      <Link data-testid="food-bottom-btn" to="/comidas">
-        <img src={ foodIcon } alt="meal icon" />
+      <Link to="/comidas">
+        <img data-testid="food-bottom-btn" src={ mealIcon } alt="meal icon" />
       </Link>
     </div>
   );
