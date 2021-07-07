@@ -2,12 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import fetchFoodIngredients from '../helpers/fetchFoodIngredients';
-
-// const renderIngredients = () => {
-//   return (
-//     <h1>Funfou</h1>
-//   );
-// };
+import RenderIngredients from '../util/renderFoodIngredients';
 
 export default function ExploreFoodsByIngredients() {
   const [ingredients, setIngredients] = useState([]);
@@ -19,11 +14,11 @@ export default function ExploreFoodsByIngredients() {
     };
     getIngredients();
   }, []);
-  console.log(ingredients);
+
   return (
     <>
       <Header props={ { search: false, title: 'Explorar Ingredientes' } } />
-      {/* {renderIngredients()} */}
+      {RenderIngredients(ingredients)}
       <Footer />
     </>
   );
