@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
+import '../Style/PagesDetails.css';
 import getIngredientList from '../services/getIngredients';
 
 function DetalhesComidas() {
   const [recipes, setRecipes] = useState({});
   const [ingredients, setIngredients] = useState([]);
+  const [recomendation, setRecomendation] = useState([]);
 
   const { location: { pathname } } = useHistory();
   const splitPathName = pathname.split('/');
@@ -16,8 +18,17 @@ function DetalhesComidas() {
     setRecipes(recipe.meals[0]);
   };
 
+  const fetchRecomendation = async () => {
+    const MAX_RECOMENDATION = 6;
+    const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
+    const json = await response.json();
+    const recommend = json.drinks;
+    setRecomendation(recommend.slice(0, MAX_RECOMENDATION));
+  };
+
   useEffect(() => {
     fetchMealAPI();
+    fetchRecomendation();
   }, []);
 
   useEffect(() => {
@@ -55,8 +66,26 @@ function DetalhesComidas() {
         src={ `https://www.youtube.com/embed/${youTubeAdress[1]}` }
         title="video"
       />
-      <p>Card de receitas recomendadas</p>
-      <button type="button" data-testid="start-recipe-btn">Iniciar receita</button>
+      <div className="recomentadion-container">
+        {recomendation.map(({ strDrinkThumb, strDrink, strAlcoholic }, index) => (
+          <div
+            className="recommended-card"
+            key={ strDrink }
+            data-testid={ `${index}-recomendation-card` }
+          >
+            <img src={ strDrinkThumb } alt={ strDrink } />
+            <p>{ strAlcoholic }</p>
+            <p data-testid={ `${index}-recomendation-title` }>{ strDrink }</p>
+          </div>
+        ))}
+      </div>
+      <button
+        type="button"
+        className="details-button"
+        data-testid="start-recipe-btn"
+      >
+        Iniciar receita
+      </button>
     </div>
   );
 }

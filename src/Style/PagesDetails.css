@@ -1,0 +1,29 @@
+.recomentadion-container {
+  display: flex;
+  overflow-x: scroll;
+}
+
+.recommended-card {
+  background-color: rgb(255, 252, 235);
+  border-radius: 6px;
+  box-shadow: -3px 5px 5px rgba(0, 0, 0, 0.45);
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  height: 170px;
+  justify-content: space-between;
+  margin: 5px;
+  width: 170px;
+}
+
+.recommended-card > img {
+  border-radius: 6px 6px 0 0;
+  height: 85px;
+  object-fit: cover;
+  width: 170px;
+}
+
+.details-button {
+  bottom: 0;
+  position: fixed;
+}
