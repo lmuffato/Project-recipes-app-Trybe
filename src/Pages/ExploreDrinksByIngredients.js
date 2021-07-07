@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import fetchDrinkIngredients from '../helpers/fetchDrinkIngredient';
+import fetchDrinkIngredients from '../helpers/fetchDrinkIngredients';
 import RenderIngredients from '../util/renderDrinkIngredient';
 
 export default function ExploreDrinksByIngredients() {

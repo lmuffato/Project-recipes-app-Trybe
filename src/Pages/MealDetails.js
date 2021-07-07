@@ -7,7 +7,7 @@ import shareIcon from '../images/shareIcon.svg';
 import blackFavoriteIcon from '../images/blackHeartIcon.svg';
 import whiteFavoriteIcon from '../images/whiteHeartIcon.svg';
 import '../components/Footer.css';
-import './PagesCss/Details.css';
+import '../PagesCss/Details.css';
 
 function MealDetails() {
   const id = window.location.href.split('/')[4];
