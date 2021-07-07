@@ -1,0 +1,34 @@
+.categories {
+  display: flex;
+
+  label {
+    align-items: center;
+    color: var(--light-purple);
+    display: flex;
+    font-size: 16px;
+    justify-content: center;
+    padding: 8px 18px;
+    position: relative;
+
+    & + label {
+      margin-left: 10px;
+    }
+
+    input {
+      appearance: none;
+      background: var(--purple);
+      border-radius: 99px;
+      position: absolute;
+      width: 100%;
+      z-index: -1;
+    }
+
+    input:checked {
+      background: var(--yellow);
+    }
+
+    input:checked + span {
+      color: var(--dark-purple);
+    }
+  }
+}

@@ -15,8 +15,11 @@ export default async function getRecipes(path) {
       name: meal.strMeal,
       imagePath: meal.strMealThumb,
     }));
+
+    const categories = await fetchJson('https://www.themealdb.com/api/json/v1/1/list.php?c=list');
     return {
       titlePage: 'Comidas',
+      categories: categories.meals,
       list: resultsParsed,
     };
   }
@@ -29,8 +32,11 @@ export default async function getRecipes(path) {
       name: drink.strDrink,
       imagePath: drink.strDrinkThumb,
     }));
+
+    const categories = await fetchJson('https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list');
     return {
       titlePage: 'Bebidas',
+      categories: categories.drinks,
       list: resultsParsed,
     };
   }
