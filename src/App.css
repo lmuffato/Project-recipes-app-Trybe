@@ -83,3 +83,9 @@ footer {
   flex-direction: column;
   justify-content: center;
 }
+
+.start-btn {
+  border-radius: 3px;
+  bottom: 0;
+  position: fixed;
+}

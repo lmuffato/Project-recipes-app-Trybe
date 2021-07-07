@@ -4,7 +4,6 @@ import Footer from '../components/Footer';
 import Header from '../components/Header';
 import SearchButton from '../components/SearchButton';
 import MainFoodCard from '../components/MainFoodCard';
-import CategoryButtons from '../components/CategoryButtons';
 
 class Comidas extends React.Component {
   render() {
@@ -14,11 +13,10 @@ class Comidas extends React.Component {
     return (
       <>
         <Header title="Comidas">
-          <SearchButton pathname={ pathname } />
+          <SearchButton pathname={ pathname } history={ history } />
         </Header>
         <div>Página principal Receitas COMIDA</div>
-        <CategoryButtons />
-        <MainFoodCard />
+        <MainFoodCard history={ history } />
         <Footer history={ history } />
       </>
     );
@@ -26,6 +24,7 @@ class Comidas extends React.Component {
 }
 
 Comidas.propTypes = {
+  history: PropTypes.shape(),
   pathname: PropTypes.string,
 }.isRequired;
 
