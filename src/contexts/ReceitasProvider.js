@@ -15,6 +15,7 @@ function ReceitasProvider({ children }) {
   const [canRender, setCanRender] = useState(false);
   const [filterValue, setFilterValue] = useState('All');
   const [explore, setExplore] = useState(false);
+  const [foodAreas, setFoodAreas] = useState();
 
   async function fetchApi(endpoint, page) {
     await fetch(endpoint)
@@ -28,6 +29,8 @@ function ReceitasProvider({ children }) {
           setAPIIngredientsFood(response);
         } else if (page === 'ingredientes-bebidas') {
           setAPIIngredientsDrink(response);
+        } else if (page === 'areas-comidas') {
+          setFoodAreas(response);
         }
         setAPIResponse(response);
       });
@@ -59,6 +62,7 @@ function ReceitasProvider({ children }) {
         APIIngredientsDrink,
         explore,
         setExplore,
+        foodAreas,
       } }
     >
       {children}
