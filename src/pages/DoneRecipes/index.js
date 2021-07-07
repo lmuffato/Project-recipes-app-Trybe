@@ -4,31 +4,31 @@ import DoneRecipeCard from '../../components/DoneRecipeCard';
 
 export default function DoneRecipes() {
   // mock localstorage start
-  const receitasFeitas = [
-    {
-      id: '52771',
-      type: 'comida',
-      area: 'Italian',
-      category: 'Vegetarian',
-      alcoholicOrNot: '',
-      name: 'Spicy Arrabiata Penne',
-      image: 'https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg',
-      doneDate: '23/06/2020',
-      tags: ['Pasta', 'Curry'],
-    },
-    {
-      id: '178319',
-      type: 'bebida',
-      area: '',
-      category: 'Cocktail',
-      alcoholicOrNot: 'Alcoholic',
-      name: 'Aquamarine',
-      image: 'https://www.thecocktaildb.com/images/media/drink/zvsre31572902738.jpg',
-      doneDate: '23/06/2020',
-      tags: [],
-    },
-  ];
-  localStorage.setItem('doneRecipes', JSON.stringify(receitasFeitas));
+  // const receitasFeitas = [
+  //   {
+  //     id: '52771',
+  //     type: 'comida',
+  //     area: 'Italian',
+  //     category: 'Vegetarian',
+  //     alcoholicOrNot: '',
+  //     name: 'Spicy Arrabiata Penne',
+  //     image: 'https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg',
+  //     doneDate: '23/06/2020',
+  //     tags: ['Pasta', 'Curry'],
+  //   },
+  //   {
+  //     id: '178319',
+  //     type: 'bebida',
+  //     area: '',
+  //     category: 'Cocktail',
+  //     alcoholicOrNot: 'Alcoholic',
+  //     name: 'Aquamarine',
+  //     image: 'https://www.thecocktaildb.com/images/media/drink/zvsre31572902738.jpg',
+  //     doneDate: '23/06/2020',
+  //     tags: [],
+  //   },
+  // ];
+  // localStorage.setItem('doneRecipes', JSON.stringify(receitasFeitas));
   // mock localstorage end
   document.title = 'Receitas Feitas';
   const [doneRecipes, setDoneRecipes] = useState([]);
@@ -41,7 +41,6 @@ export default function DoneRecipes() {
   function filterFavoriteRecipes(filterName) {
     const filterRecipeType = doneRecipes.filter((recipe) => recipe.type === filterName);
     const allRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
-    console.log(allRecipes);
     if (filterName === '') {
       setFilter(allRecipes);
     } else {

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import clipboardCopy from '../services/clipboardCopy';
 import shareIcon from '../images/shareIcon.svg';
@@ -14,12 +15,14 @@ function DoneRecipeCard({ recipe, index }) {
         maxWidth: '100vw',
         alignItems: 'center' } }
     >
-      <img
-        src={ image }
-        alt="Done Recipe"
-        style={ { width: '80vw' } }
-        data-testid={ `${index}-horizontal-image` }
-      />
+      <Link to={ `${type}s/${id}` }>
+        <img
+          src={ image }
+          alt="Done Recipe"
+          style={ { width: '80vw' } }
+          data-testid={ `${index}-horizontal-image` }
+        />
+      </Link>
       { (type === 'bebida') ? (
         <p
           data-testid={ `${index}-horizontal-top-text` }
@@ -33,11 +36,13 @@ function DoneRecipeCard({ recipe, index }) {
           { `${area} - ${category}` }
         </p>
       ) }
-      <p
-        data-testid={ `${index}-horizontal-name` }
-      >
-        { name }
-      </p>
+      <Link to={ `${type}s/${id}` }>
+        <p
+          data-testid={ `${index}-horizontal-name` }
+        >
+          { name }
+        </p>
+      </Link>
       <p
         data-testid={ `${index}-horizontal-done-date` }
       >
