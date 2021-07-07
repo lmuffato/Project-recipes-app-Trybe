@@ -1,4 +1,5 @@
 import React from 'react';
+import '../styles/SearchBar.css';
 import { string, number } from 'prop-types';
 
 function FilteredCard({ index, thumbnail, name }) {
@@ -8,7 +9,7 @@ function FilteredCard({ index, thumbnail, name }) {
         data-testid={ `${index}-card-img` }
         src={ thumbnail }
         alt={ `${name} recipe` }
-        width="150px"
+        className="filtered-cards"
       />
       <h2 data-testid={ `${index}-card-name` }>{name}</h2>
     </div>
