@@ -2,10 +2,12 @@ import React from 'react';
 import ButtonFiltersRecipe from '../components/ButtonFiltersRecipe';
 import Header from '../components/Header';
 import RecipeDoneCard from '../components/RecipeDoneCard';
+import usePersistedState from '../hooks/usePersistedState';
 import useRecipeFilter from '../hooks/useRecipeFilter';
 
 export default function RecipesDone() {
-  const { changeValueToFilterRecipes, filteredRecipes } = useRecipeFilter('doneRecipes');
+  const [doneRecipes] = usePersistedState('doneRecipes', []);
+  const { changeValueToFilterRecipes, filteredRecipes } = useRecipeFilter(doneRecipes);
 
   return (
     <section>

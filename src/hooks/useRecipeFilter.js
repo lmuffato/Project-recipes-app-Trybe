@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
-import usePersistedState from './usePersistedState';
 
-export default function useRecipeFilter(doneOrFavoriteStr) {
-  const [doneOrFavorite] = usePersistedState(doneOrFavoriteStr, []);
+export default function useRecipeFilter(doneOrFavoritestr, hasBeenChanged = false) {
+  const doneOrFavorite = JSON.parse(localStorage.getItem(doneOrFavoritestr));
   const [filter, setFilter] = useState('all');
   const [filteredRecipes, setFilteredRecipes] = useState(doneOrFavorite);
 
@@ -20,7 +19,7 @@ export default function useRecipeFilter(doneOrFavoriteStr) {
     };
 
     changeFilteredRecipes();
-  }, [filter]);
+  }, [filter, hasBeenChanged]);
 
   return { changeValueToFilterRecipes, filteredRecipes };
 }
