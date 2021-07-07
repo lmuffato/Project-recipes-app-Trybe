@@ -19,12 +19,13 @@ function ShareButton() {
   return (
     <CopyToClipboard text={ `http://localhost:3000${URL}` } onCopy={ onCopyText }>
       <div>
-        <button type="button" data-testid="share-btn">
-          <img
-            src={ shareIcon }
-            alt="do search"
-          />
-        </button>
+        <input
+          className="share-btn"
+          type="image"
+          data-testid="share-btn"
+          src={ shareIcon }
+          alt="share button"
+        />
         { isCopied ? <span> Link copiado! </span> : '' }
       </div>
     </CopyToClipboard>

@@ -3,6 +3,7 @@ import { Button, Card, Col, Container, Form, Image, Row } from 'react-bootstrap'
 import { useLocation, useParams } from 'react-router';
 import { getRecipeByID } from '../../services/fetchRecipes';
 import ShareButton from '../../Components/ShareButton';
+import FavoriteButton from '../../Components/FavoriteButton';
 
 function Details() {
   const { pathname } = useLocation();
@@ -24,7 +25,7 @@ function Details() {
           <Image thumbnail data-testid="recipe-photo" />
           <h1 data-testid="recipe-title">Titulo</h1>
           <ShareButton />
-          <button type="button" data-testid="favorite-btn">Favorite</button>
+          <FavoriteButton />
           <p data-testid="recipe-category">Texto</p>
           <Form.Check data-testid={ `${0}-ingredient-name-and-measure` } />
           <p data-testid="instructions">Instruções</p>
