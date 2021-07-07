@@ -18,14 +18,14 @@ function CardList({ recipes, type, titleTestId, cardTestId }) {
     const getRecipes = async () => {
       await getFilteredRecipes(type);
       if (cancel) return;
-      const values = Object.values(filteredData);
-      setReceitasFiltradas(values);
+      // const values = Object.values(filteredData);
+      setReceitasFiltradas(filteredRecipes);
     };
     getRecipes();
     return () => {
       cancel = true;
     };
-  }, [type, searchBarFilters, getFilteredRecipes, filteredData]);
+  }, [type, searchBarFilters, getFilteredRecipes, filteredData, filteredRecipes]);
 
   if (recipes.length === 0) {
     return 'Loading...';
@@ -33,8 +33,8 @@ function CardList({ recipes, type, titleTestId, cardTestId }) {
 
   const filteredDataType = Object.keys(filteredData);
 
-  if (filteredRecipes.length === 1) {
-    const recipe = receitasFiltradas[0].find((el) => el === receitasFiltradas[0][0]);
+  if (receitasFiltradas.length === 1) {
+    const recipe = filteredRecipes.find((el) => el === filteredRecipes[0]);
 
     return filteredDataType[0] === 'meals' ? (
       <Redirect
