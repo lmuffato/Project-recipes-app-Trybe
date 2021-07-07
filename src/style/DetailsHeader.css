@@ -1,0 +1,9 @@
+.details-header-img {
+  width: 100vw;
+}
+
+.details-header-middle {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
