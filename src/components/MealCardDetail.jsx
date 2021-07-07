@@ -15,6 +15,7 @@ function MealCardDetail() {
       data-testid="start-recipe-btn"
       type="button"
       className="start-recipe-btn"
+      id="start-recipe-btn"
     >
       Iniciar Receita
     </button>);
@@ -22,6 +23,7 @@ function MealCardDetail() {
   const { currentMeal } = useContext(UserContext);
   const [youtubeId, setYoutubeId] = useState('');
   const donedRecipes = getItemFromLocalStorage('doneRecipes');
+  const inProgressRecipes = Object.keys(getItemFromLocalStorage('doneRecipes'));
 
   const RECOMMENDED_NUMBER = 6;
   useEffect(() => {
@@ -34,6 +36,15 @@ function MealCardDetail() {
       return id === idMeal;
     });
     if (findDonedRecipe) buttonIniciarReceita = '';
+  }
+
+  if (inProgressRecipes) {
+    const button = document.getElementById('start-recipe-btn');
+    const findDonedRecipe = inProgressRecipes.find((id) => {
+      const { idMeal } = currentMeal;
+      return id === idMeal;
+    });
+    if (findDonedRecipe) button.innerText = 'Continuar Receita';
   }
 
   return (
