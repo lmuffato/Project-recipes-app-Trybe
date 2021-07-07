@@ -70,7 +70,10 @@ function RecipesInProgress({ type }) {
           { singleRecipe.strInstructions }
         </p>
       </div>
-      <Button data-testid="finish-recipe-btn">
+      <Button
+        data-testid="finish-recipe-btn"
+        disabled
+      >
         Finalizar receita
       </Button>
     </Container>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import formattingMeasuresAndIngredients from '../../services/formatingService';
 
@@ -8,10 +8,20 @@ import Container from './style';
 function RecipeIngredients({ recipe }) {
   const keysAndValues = Object.entries(recipe);
 
+  const [checked, setChecked] = useState([]);
+
   const formatting = formattingMeasuresAndIngredients(keysAndValues);
-  // const imgsFormatted = formattingCarouselImgs(keysAndValues);
-  // console.log(imgsFormatted);
   const { ingredients, measures } = formatting;
+
+  const handleChange = ({ target }) => {
+    if (target.checked) {
+      setChecked([...checked, target.value]);
+      target.parentNode.style.textDecoration = 'line-through';
+    } else {
+      setChecked(checked.filter((check) => check !== target.value));
+      target.parentNode.style.textDecoration = 'none';
+    }
+  };
 
   return (
     <Container className="ing">
@@ -22,6 +32,9 @@ function RecipeIngredients({ recipe }) {
             data-testid={ `${index}-ingredient-step` }
             key={ index }
             id={ element }
+            value={ element }
+            checked={ checked.includes(element) }
+            onChange={ handleChange }
           />
           { measures[index]}
           {' '}
