@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
-import getMealsOrDrinks from '../helper/mealsOrDrinksMethods';
+
+import useClipBoard from './useClipboard';
 import usePersistedState from './usePersistedState';
+
+import getMealsOrDrinks from '../helper/mealsOrDrinksMethods';
 import { fetchById, fetchName } from '../services/data';
+
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 
@@ -10,8 +14,6 @@ const INITIAL_STATE = {
   meals: [{ strYoutube: '' }],
   drinks: [{ strYoutube: '' }],
 };
-
-const copy = require('clipboard-copy');
 
 export default function useRecipeDetails(type) {
   const {
@@ -22,15 +24,15 @@ export default function useRecipeDetails(type) {
     typeFood,
     foodUpperCase,
   } = getMealsOrDrinks(type);
-  const { location, push } = useHistory();
+  const { push } = useHistory();
   const { id } = useParams();
   const [recipe, setRecipe] = useState(INITIAL_STATE);
   const [recommended, setRecommended] = useState(INITIAL_STATE);
-  const [showClipBoardMsg, setShowClipBoardMsg] = useState(false);
   const [favoriteRecipes, setFavoriteRecipes] = usePersistedState(
     'favoriteRecipes',
     [],
   );
+  const { showClipBoardMsg, copyToClipBoard } = useClipBoard(id, portugueseFood);
 
   const getIngredientsAndMeasures = (rcp) => {
     const entriesRecipe = Object.entries(rcp);
@@ -57,11 +59,6 @@ export default function useRecipeDetails(type) {
 
   const redirectToProgressPage = () => {
     push(`/${portugueseFood}/${id}/in-progress`);
-  };
-
-  const copyToClipBoard = () => {
-    copy(`http://localhost:3000${location.pathname}`);
-    setShowClipBoardMsg(true);
   };
 
   const renderClipBoardMsg = () => <div>Link copiado!</div>;
