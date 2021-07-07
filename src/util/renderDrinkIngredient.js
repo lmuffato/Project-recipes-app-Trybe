@@ -1,8 +1,12 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
+import { requestInitialDrinks } from '../redux/actions';
+import fetchDrinksByIngredient from '../helpers/fetchDrinksByIngredient';
 import '../PagesCss/DrinkIngredient.css';
 
-const filter = (name) => {
-  console.log(name);
+const filter = async (name) => {
+  const { drinks } = await fetchDrinksByIngredient(name);
+  console.log(drinks);
 };
 
 export default function RenderIngredients(ingredients) {
