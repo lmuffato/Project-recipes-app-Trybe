@@ -146,3 +146,55 @@ describe('Header está presente com os componentes corretos nas páginas correta
     expect(title.innerHTML).toBe('Receitas Favoritas');
   });
 });
+
+describe('Botões do header realizam açoes corretamente', () => {
+  const rigthEmail = 'xablau@google.com';
+  const loginBtnId = 'login-submit-btn';
+  const profileTopBtn = 'profile-top-btn';
+  const pageTitle = 'page-title';
+  const searchTopBtn = 'search-top-btn';
+  const emailInput = 'email-input';
+  const passwordInput = 'password-input';
+  it('testa botão perfil', () => {
+    const { getByTestId, history } = renderWithRouter(<App />);
+    const email = getByTestId(emailInput);
+    const senha = getByTestId(passwordInput);
+    const loginBtn = getByTestId(loginBtnId);
+
+    userEvent.type(email, rigthEmail);
+    userEvent.type(senha, '1234567');
+    userEvent.click(loginBtn);
+
+    const profileBtn = getByTestId(profileTopBtn);
+    userEvent.click(profileBtn);
+
+    const { pathname } = history.location;
+    expect(pathname).toBe('/perfil');
+  });
+
+  it('Testa se ao clicar no btn de busca renderiza o formulario de filtro', () => {
+    const { getByTestId, history } = renderWithRouter(<App />);
+
+    history.push('/comidas');
+    const profileBtn = getByTestId(profileTopBtn);
+    const title = getByTestId(pageTitle);
+    const searchBtn = getByTestId(searchTopBtn);
+    expect(profileBtn).toBeInTheDocument();
+    expect(title.innerHTML).toBe('Comidas');
+    expect(searchBtn).toBeInTheDocument();
+
+    userEvent.click(searchBtn);
+
+    const search = getByTestId('search-input');
+    const ingredient = getByTestId('ingredient-search-radio');
+    const name = getByTestId('name-search-radio');
+    const firstLetter = getByTestId('first-letter-search-radio');
+    const BTNSearch = getByTestId('exec-search-btn');
+
+    expect(search).toBeInTheDocument();
+    expect(ingredient).toBeInTheDocument();
+    expect(name).toBeInTheDocument();
+    expect(firstLetter).toBeInTheDocument();
+    expect(BTNSearch).toBeInTheDocument();
+  });
+});
