@@ -9,6 +9,10 @@ function FoodId() {
   const [shouldRedirect, setShouldRedirect] = useState(false);
 
   const index = 0;
+  const style = {
+    bottom: '0px',
+    position: 'fixed',
+  };
 
   const handleClick = () => {
     setShouldRedirect(true);
@@ -16,17 +20,19 @@ function FoodId() {
 
   useEffect(() => {
     fetchFoodForId(id)
-      .then(({ meals }) => setFoodForId(meals));
+      .then((res) => {
+        if (res.meals) setFoodForId(res.meals[0]);
+      });
   }, [id]);
 
-  if (!foodForId.length) return <div>Loading...</div>;
+  if (!foodForId) return <div>Loading...</div>;
 
   const {
     strMeal,
     strYoutube,
     strCategory,
     strInstructions,
-    strMealThumb } = foodForId[0];
+    strMealThumb } = foodForId;
 
   if (shouldRedirect) return <Redirect to={ `/comidas/${id}/in-progress` } />;
 
@@ -56,7 +62,7 @@ function FoodId() {
       <section>
         <p>Ingredients</p>
         <ul>
-          <li data-testid={ `${index}-ingredient-name-and-measure` } />
+          <li data-testid={ `${index}-ingredient-name-and-measure` }>penne rigate</li>
         </ul>
       </section>
       <section>
@@ -81,6 +87,7 @@ function FoodId() {
         type="button"
         onClick={ handleClick }
         data-testid="start-recipe-btn"
+        style={ style }
       >
         Iniciar Receita
       </button>
