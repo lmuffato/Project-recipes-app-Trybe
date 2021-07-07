@@ -1,0 +1,21 @@
+/* body {
+  width: 62vw;
+} */
+
+.recipes-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.recipe {
+  height: 50px;
+  width: 35%;
+}
+
+.recipe-title {
+  font-size: 6pt;
+}
+
+.recipe-image {
+  width: 40px;
+}
