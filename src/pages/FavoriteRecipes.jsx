@@ -28,7 +28,7 @@ export default function FavoriteRecipes() {
         changeValueToFilterRecipes={ changeValueToFilterRecipes }
       />
       <main>
-        {filteredRecipes.map((recipe, index) => (
+        {filteredRecipes && filteredRecipes.map((recipe, index) => (
           <RecipeFavoriteCard
             key={ recipe.id }
             recipeFavorite={ recipe }
