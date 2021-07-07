@@ -10,11 +10,12 @@ export default function DrinkProgress() {
     renderClipBoardMsg,
     getIngredientsAndMeasures,
     checkFavorite,
-    redirectToProgressPage,
+    redirectToRecipeDonePage,
     sendToLocalStorage,
     isChecked,
     setHeart,
     copyToClipBoard,
+    recipeDoneCheck,
   } = useRecipeProgress('drink');
   const recipeDrink = recipeProgress.drinks[0];
   const { strAlcoholic, strInstructions, strDrink, strDrinkThumb } = recipeDrink;
@@ -82,7 +83,8 @@ export default function DrinkProgress() {
         type="button"
         data-testid="finish-recipe-btn"
         style={ styleFooter }
-        onClick={ redirectToProgressPage }
+        onClick={ redirectToRecipeDonePage }
+        disabled={ !recipeDoneCheck(ingredients) }
       >
         Finalizar Receita
       </button>

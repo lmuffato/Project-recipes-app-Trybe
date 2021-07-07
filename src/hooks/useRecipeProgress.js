@@ -96,10 +96,6 @@ export default function useRecipeProgress(type) {
   const checkFavorite = () => favoriteRecipes.some((fav) => fav.id === id);
 
   const renderClipBoardMsg = () => <div>Link copiado!</div>;
-
-  const redirectToProgressPage = () => {
-    push(`/${portugueseFood}/${id}/in-progress`);
-  };
   // REFATORAR ^^^^^^^^
 
   const addToLocalStorage = (idArray, value) => {
@@ -140,6 +136,13 @@ export default function useRecipeProgress(type) {
     return inProgressRecipes[sites][id].some((ingred) => ingred === ingredient);
   };
 
+  const recipeDoneCheck = (ingredients) => {
+    const checkedIngredients = inProgressRecipes[sites][id] || [];
+    return ingredients.length === checkedIngredients.length;
+  };
+
+  const redirectToRecipeDonePage = () => push('/receitas-feitas');
+
   return {
     inProgressRecipes,
     recipeProgress,
@@ -154,7 +157,8 @@ export default function useRecipeProgress(type) {
     setHeart,
     renderClipBoardMsg,
     getIngredientsAndMeasures,
-    redirectToProgressPage,
     sendToLocalStorage,
+    recipeDoneCheck,
+    redirectToRecipeDonePage,
   };
 }

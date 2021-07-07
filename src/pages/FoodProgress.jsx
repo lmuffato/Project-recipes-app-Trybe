@@ -7,10 +7,11 @@ export default function FoodProgress() {
     showClipBoardMsg,
     blackHeartIcon,
     whiteHeartIcon,
+    recipeDoneCheck,
     renderClipBoardMsg,
     getIngredientsAndMeasures,
     checkFavorite,
-    redirectToProgressPage,
+    redirectToRecipeDonePage,
     sendToLocalStorage,
     isChecked,
     setHeart,
@@ -83,7 +84,8 @@ export default function FoodProgress() {
         type="button"
         data-testid="finish-recipe-btn"
         style={ styleFooter }
-        onClick={ redirectToProgressPage }
+        onClick={ redirectToRecipeDonePage }
+        disabled={ !recipeDoneCheck(ingredients) }
       >
         Finalizar Receita
       </button>
