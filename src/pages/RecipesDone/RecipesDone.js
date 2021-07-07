@@ -4,12 +4,14 @@ import ButtonFilter from './ButtonFilter';
 import Recipes from './Recipes';
 import './index.css';
 
-const RecipesDone = () => (
-  <>
-    <Header />
-    <ButtonFilter />
-    <Recipes />
-  </>
-);
+function RecipesDone() {
+  return (
+    <>
+      <Header />
+      <ButtonFilter />
+      <Recipes />
+    </>
+  );
+}
 
 export default RecipesDone;

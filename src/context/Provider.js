@@ -53,13 +53,13 @@ function Provider({ children }) {
     if (infoFavorite !== true) {
       setFavRecipes(infoFavorite);
       setInfoFav(infoFavorite);
+      console.log(infoFavorite);
     }
     if (infoDone !== true) {
       setDoneRecipes(infoDone);
       setInfoDone(infoDone);
     }
   }
-
   const clickFilterFood = (e) => {
     setCategory(e.target.innerText);
     if (e.target.innerText !== 'All') {
@@ -155,50 +155,6 @@ function Provider({ children }) {
     localStorage.setItem('favoriteRecipes', JSON.stringify([]));
   }
 
-  const doneFilter = (e) => {
-    const { innerText } = e.target;
-    setDoneFilter([]);
-    setDoneRecipes(informationDone);
-    if (innerText === 'All') {
-      setShowFilter(false);
-      setDoneRecipes(informationDone);
-      setDoneFilter([]);
-    }
-    if (innerText === 'Food') {
-      setShowFilter(true);
-      const newRecipes = doneRecipes
-        .filter((recipe) => (recipe.type === 'comida') && recipe);
-      setDoneFilter(newRecipes);
-    }
-    if (innerText === 'Drinks') {
-      setShowFilter(true);
-      const newRecipes = doneRecipes
-        .filter((recipe) => (recipe.type === 'bebida') && recipe);
-      setDoneFilter(newRecipes);
-    }
-  };
-  const favoriteFilter = (e) => {
-    const { innerText } = e.target;
-    setFavFilter([]);
-    setFavRecipes(informationFavarite);
-    if (innerText === 'All') {
-      setShowFilter(false);
-      setFavRecipes(informationFavarite);
-      setFavFilter([]);
-    }
-    if (innerText === 'Food') {
-      setShowFilter(true);
-      const newRecipes = favRecipes
-        .filter((recipe) => (recipe.type === 'comida') && recipe);
-      setFavFilter(newRecipes);
-    }
-    if (innerText === 'Drinks') {
-      setShowFilter(true);
-      const newRecipes = favRecipes
-        .filter((recipe) => (recipe.type === 'bebida') && recipe);
-      setFavFilter(newRecipes);
-    }
-  };
   useEffect(() => {
     getInFormations();
     foodsRecommendedF();
@@ -207,49 +163,56 @@ function Provider({ children }) {
     initDoneRecipesInLS();
     initFavRecipesInLS();
   }, []);
+
   const dataValue = {
     logout,
-    setLogout,
     foods,
     drinks,
     categoryFoods,
     categoryDrinks,
     filterFoods,
     filterDrinks,
+    showFilter,
+    email,
+    password,
+    search,
+    recipeFood,
+    recipeDrink,
+    foodRecommended,
+    drinkRecommended,
+    progressRecipes,
+    searchInput,
+    radio,
+    path,
+    doneRecipes,
+    favRecipes,
+    favFilterRecipes,
+    doneFilterRecipes,
+    informationDone,
+    informationFavarite,
+    setFavRecipes,
+    setFavFilter,
+    setDoneFilter,
+    setInfoDone,
+    setDoneRecipes,
+    setEmail,
+    setLogout,
     clickFilterFood,
     clickFilterDrinks,
     clickRecipeFood,
     clickRecipeDrinks,
-    showFilter,
-    email,
-    setEmail,
-    password,
     setPassword,
-    search,
     setSearch,
-    recipeFood,
-    recipeDrink,
     setRecipeFood,
-    foodRecommended,
-    drinkRecommended,
-    progressRecipes,
     setProgressRecipes,
     clickSetProgress,
-    searchInput,
     setSearchInput,
-    radio,
     setRadio,
-    path,
     setPath,
-    doneRecipes,
-    doneFilter,
-    doneFilterRecipes,
     setShowFilter,
     setFilterDrinks,
     setFilterFoods,
-    favRecipes,
-    favFilterRecipes,
-    favoriteFilter,
+    setInfoFav,
   };
 
   return (

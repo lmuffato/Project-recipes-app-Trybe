@@ -1,3 +1,4 @@
+// Receitas favoriteRecipes
 import React, { useContext, useState } from 'react';
 import { Button, Card } from 'react-bootstrap';
 import './index.css';
@@ -7,7 +8,7 @@ import Favorite from '../../images/blackHeartIcon.svg';
 import Context from '../../context/Context';
 
 const copy = require('clipboard-copy');
-// favRecipes,    favFilterRecipes,    favoriteFilter,
+
 function Recipes() {
   const [showCopyFood, setShopFood] = useState(false);
   const [showCopyDrinks, setShopDrinks] = useState(false);
@@ -134,11 +135,11 @@ function Recipes() {
     </Card>
   );
   return (
-    <>
-      { favoriteRecipes.map((recipe, index) => (
+    <div>
+      { (favoriteRecipes) && favoriteRecipes.map((recipe, index) => (
         recipe.type === 'comida' ? handleFood(recipe, index) : handleDrink(recipe, index)
       ))}
-    </>
+    </div>
   );
 }
 

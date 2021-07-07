@@ -1,12 +1,37 @@
+// Filtros doneRecipes
 import React, { useContext } from 'react';
 import { Button } from 'react-bootstrap';
 import Context from '../../context/Context';
-// import Mock from '../../services/mokcInformation';
 
 function ButtonFilter() {
-  // const informationLocalStorage = JSON.parse(localStorage.getItem('doneRecipes'))
-  const { doneFilter: handleClick } = useContext(Context);
-  // setDoneRecipes(informationLocalStorage)
+  const {
+    setDoneFilter,
+    setDoneRecipes,
+    setShowFilter,
+    informationDone,
+    doneRecipes } = useContext(Context);
+  const handleClick = (e) => {
+    const { innerText } = e.target;
+    setDoneFilter([]);
+    setDoneRecipes(informationDone);
+    if (innerText === 'All') {
+      setShowFilter(false);
+      setDoneRecipes(informationDone);
+      setDoneFilter([]);
+    }
+    if (innerText === 'Food') {
+      setShowFilter(true);
+      const newRecipes = doneRecipes
+        .filter((recipe) => (recipe.type === 'comida') && recipe);
+      setDoneFilter(newRecipes);
+    }
+    if (innerText === 'Drinks') {
+      setShowFilter(true);
+      const newRecipes = doneRecipes
+        .filter((recipe) => (recipe.type === 'bebida') && recipe);
+      setDoneFilter(newRecipes);
+    }
+  };
   return (
     <div className="buttons-filter-done">
       <Button

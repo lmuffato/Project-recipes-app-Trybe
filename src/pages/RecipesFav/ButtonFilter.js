@@ -1,12 +1,39 @@
+// Filtros favoriteRecipes
 import React, { useContext } from 'react';
 import { Button } from 'react-bootstrap';
 import Context from '../../context/Context';
-// import Mock from '../../services/mokcInformation';
 
 function ButtonFilter() {
-  // const informationLocalStorage = JSON.parse(localStorage.getItem('doneRecipes'))
-  const { favoriteFilter: handleClick } = useContext(Context);
-  // setDoneRecipes(informationLocalStorage)
+  const {
+    setFavFilter,
+    setFavRecipes,
+    setShowFilter,
+    informationFavarite,
+    favRecipes,
+  } = useContext(Context);
+
+  const handleClick = (e) => {
+    const { innerText } = e.target;
+    setFavFilter([]);
+    setFavRecipes(informationFavarite);
+    if (innerText === 'All') {
+      setShowFilter(false);
+      setFavRecipes(informationFavarite);
+      setFavFilter([]);
+    }
+    if (innerText === 'Food') {
+      setShowFilter(true);
+      const newRecipes = favRecipes
+        .filter((recipe) => (recipe.type === 'comida') && recipe);
+      setFavFilter(newRecipes);
+    }
+    if (innerText === 'Drinks') {
+      setShowFilter(true);
+      const newRecipes = favRecipes
+        .filter((recipe) => (recipe.type === 'bebida') && recipe);
+      setFavFilter(newRecipes);
+    }
+  };
   return (
     <div className="buttons-filter-done">
       <Button
