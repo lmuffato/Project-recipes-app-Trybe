@@ -18,7 +18,7 @@ code {
   border-radius: 3px;
   display: flex;
   flex-direction: column;
-  height: 370px;
+  height: auto;
   margin: 5px;
   overflow: hidden;
   width: 300px;
