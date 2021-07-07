@@ -7,24 +7,38 @@ import { fetchFoodByCategoryName, fetchFoods } from '../../services/mealAPI';
 import { fetchDrinkByCategoryName, fetchCocktails } from '../../services/cocktailAPI';
 
 const NUMBER_OF_CATEGORIES = 5;
-let COUNTER_OF_CLICKS = 1;
 
 export default function CategoryButtons({ categories }) {
   const { setFoods } = useContext(FoodContext);
   const { setDrinks } = useContext(DrinkContext);
   const { pathname } = useLocation();
 
-  console.log('Clicado');
+  function handleFilterByCategoryName(ev, categoryName) {
 
-  function handleFilterByCategoryName(categoryName) {
-    if (pathname === '/comidas' && COUNTER_OF_CLICKS % 2 === 0) {
+    const buttons = document.querySelectorAll('.category-buttons');
+
+    let NUMBER_OF_CLICKED_CATEGORIES = 0;
+    console.log('NUMBER_OF_CLICKED_CATEGORIES', NUMBER_OF_CLICKED_CATEGORIES);
+    for (let index = 0; index < buttons.length; index += 1) {
+      if (buttons[index].checked) {
+        NUMBER_OF_CLICKED_CATEGORIES += 1;
+        console.log('existem ', NUMBER_OF_CLICKED_CATEGORIES);
+      }
+    }
+
+    if (pathname === '/comidas' && NUMBER_OF_CLICKED_CATEGORIES === 1) {
       fetchFoodByCategoryName(categoryName).then((data) => setFoods(data.meals));
-    } else if (pathname === '/comidas' && COUNTER_OF_CLICKS % 2 !== 0) {
+    } else if (pathname === '/comidas' && NUMBER_OF_CLICKED_CATEGORIES === 0) {
       fetchFoods().then((data) => setFoods(data.meals));
-    } else if (pathname === '/bebidas' && COUNTER_OF_CLICKS % 2 === 0) {
+    } else if (pathname === '/bebidas' && NUMBER_OF_CLICKED_CATEGORIES === 1) {
       fetchDrinkByCategoryName(categoryName).then((data) => setDrinks(data.drinks));
-    } else if (pathname === '/bebidas' && COUNTER_OF_CLICKS % 2 !== 0) {
+    } else if (pathname === '/bebidas' && NUMBER_OF_CLICKED_CATEGORIES === 0) {
       fetchCocktails().then((data) => setDrinks(data.drinks));
+    } else {
+      global.alert('Não é possível marcar mais de 1 categoria');
+      ev.target.checked = false;
+      NUMBER_OF_CLICKED_CATEGORIES -= 1;
+      console.log('existem ', NUMBER_OF_CLICKED_CATEGORIES);
     }
   }
 
@@ -35,15 +49,14 @@ export default function CategoryButtons({ categories }) {
           <label htmlFor="category-button">
             {categoryName.strCategory}
             <input
-              id="checkbox-category"
+              className="category-buttons"
               name="category-button"
               value={ categoryName.strCategory }
               type="checkbox"
               key={ index }
               data-testid={ `${categoryName.strCategory}-category-filter` }
-              onClick={ () => {
-                COUNTER_OF_CLICKS += 1;
-                handleFilterByCategoryName(categoryName.strCategory);
+              onClick={ (ev) => {
+                handleFilterByCategoryName(ev, categoryName.strCategory);
               } }
             />
           </label>
