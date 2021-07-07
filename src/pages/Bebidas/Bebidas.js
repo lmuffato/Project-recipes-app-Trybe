@@ -6,10 +6,15 @@ import Footer from '../../components/Footer';
 import Filter from '../../components/Filter';
 
 function Bebidas() {
-  const { APIDrink, fetchApi } = useContext(ReceitasContext);
+  const { APIDrink,
+    fetchApi,
+    explore,
+  } = useContext(ReceitasContext);
 
   useEffect(() => {
-    fetchApi('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=', 'bebidas');
+    if (explore === false) {
+      fetchApi('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=', 'bebidas');
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -21,11 +26,13 @@ function Bebidas() {
           <Filter page="bebidas" />
           <CardList
             list={ APIDrink.drinks }
+            type="bebidas"
           />
           <Footer />
         </div>
       );
     }
+
     // eslint-disable-next-line no-alert
     alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
     return (
@@ -35,6 +42,7 @@ function Bebidas() {
       </div>
     );
   }
+
   return (
     <div>
       <Header title="Bebidas" />

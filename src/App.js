@@ -21,6 +21,8 @@ import ReceitaBebidas from './pages/Bebidas/Receitas/ReceitaBebidas';
 import receitasFeitas from './pages/ReceitasFeitas';
 import receitasFavoritas from './pages/ReceitasFavoritas';
 import recipesInProgress from './pages/ReceitasEmAndamento';
+import ExplorarBebidasPorArea from
+  './pages/Bebidas/ExplorarBebidas/ExplorarBebidasPorArea';
 
 function App() {
   return (
@@ -40,6 +42,7 @@ function App() {
             component={ ExplorarComidasPorIngrediente }
           />
           <Route path="/explorar/comidas/area" component={ ExplorarComidasPorArea } />
+          <Route path="/explorar/bebidas/area" component={ ExplorarBebidasPorArea } />
           <Route
             path="/explorar/bebidas/ingredientes"
             component={ ExplorarBebidasPorIngrediente }
