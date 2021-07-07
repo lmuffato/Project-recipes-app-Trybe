@@ -1,12 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 import '../Style/PagesDetails.css';
+import blackHeartIcon from '../images/blackHeartIcon.svg';
+import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import shareIcon from '../images/shareIcon.svg';
 import getIngredientList from '../services/getIngredients';
 
 function DetalhesComidas() {
   const [recipes, setRecipes] = useState({});
   const [ingredients, setIngredients] = useState([]);
   const [recomendation, setRecomendation] = useState([]);
+  const [inProgress, setInProgress] = useState('');
+  const [done, setDone] = useState('');
+  const [shareButton, setShareButton] = useState(false);
+  const [favorited, setFavorited] = useState('');
+
+  const history = useHistory();
 
   const { location: { pathname } } = useHistory();
   const splitPathName = pathname.split('/');
@@ -42,12 +51,64 @@ function DetalhesComidas() {
     youTubeAdress = strYoutube.split('=');
   }
 
+  const clickFavorite = () => {
+    setFavorited(!favorited);
+  };
+
+  const clickShare = () => {
+    setShareButton(true);
+    const myPath = window.location.href;
+    navigator.clipboard.writeText(myPath);
+  };
+
+  const checkInList = (myList, id) => myList.some((item) => item.id === id);
+
+  const checkDoneButton = () => {
+    const myDoneList = (JSON.parse(localStorage.getItem('doneRecipes'))
+      ? JSON.parse(localStorage.getItem('doneRecipes')) : []);
+    setDone(checkInList(myDoneList, idFood));
+  };
+
+  const checkInProgress = () => {
+    const myProgress = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    if (myProgress) {
+      setInProgress(Object.keys(myProgress.meals).includes(idFood));
+    }
+  };
+
+  const clickStartButton = () => {
+    history.push(`/comidas/${idFood}/in-progress`);
+  };
+
+  useEffect(() => {
+    checkDoneButton();
+    checkInProgress();
+  });
+
   return (
     <div>
       <img data-testid="recipe-photo" width="350" src={ strMealThumb } alt="" />
       <h2 data-testid="recipe-title">{strMeal}</h2>
-      <button type="button" data-testid="share-btn">Share</button>
-      <button type="button" data-testid="favorite-btn">Favoritar</button>
+      {shareButton ? <span>Link copiado!</span> : null}
+      <button
+        type="button"
+        data-testid="share-btn"
+        onClick={ clickShare }
+      >
+        <img src={ shareIcon } alt="share-button" />
+      </button>
+      <button
+        type="button"
+        onClick={ clickFavorite }
+      >
+        <img
+          src={ favorited
+            ? blackHeartIcon
+            : whiteHeartIcon }
+          alt="favorite-button"
+          data-testid="favorite-btn"
+        />
+      </button>
       <p data-testid="recipe-category">{strCategory}</p>
       <ul>
         <h1>Ingredientes</h1>
@@ -79,13 +140,15 @@ function DetalhesComidas() {
           </div>
         ))}
       </div>
-      <button
-        type="button"
-        className="details-button"
-        data-testid="start-recipe-btn"
-      >
-        Iniciar receita
-      </button>
+      {done ? null : (
+        <button
+          type="button"
+          data-testid="start-recipe-btn"
+          onClick={ clickStartButton }
+        >
+          { inProgress ? 'Continuar Receita' : 'Iniciar Receita' }
+        </button>
+      )}
     </div>
   );
 }
