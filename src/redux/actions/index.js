@@ -81,24 +81,3 @@ export const fetchSearch = (type, text, currentPage) => async (dispatch) => {
     dispatch(actionSearch('error'));
   }
 };
-
-// export const fetchById = (currentPage, id) => async (dispatch) => {
-//   let url = '';
-//   if (currentPage === 'comidas') {
-//     url = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
-//   } else {
-//     url = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
-//   }
-
-//   try {
-//     const res = await fetch(url);
-//     const data = await res.json();
-//     if (currentPage === 'comidas') {
-//       dispatch(actionDetails(data.meals));
-//     } else {
-//       dispatch(actionDetails(data.drinks));
-//     }
-//   } catch (error) {
-//     dispatch(actionDetails('error'));
-//   }
-// };
