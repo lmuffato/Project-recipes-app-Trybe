@@ -22,20 +22,23 @@ function FoodInProgress() {
     strInstructions } = foodDetail[0];
 
   function ingredientsList() {
-    const ingredients = Object.entries(foodDetail[0]);
+    const ingrediEntries = Object.entries(foodDetail[0]);
     const start = 9;
     const end = 28;
-    const slicing = ingredients.slice(start, end);
-    const mapSlice = slicing.map((ingredient, index) => (
-      <label key={ index } htmlFor="ingredient">
+    const slicing = ingrediEntries.slice(start, end);
+    const ingredients = slicing.map((ingredient, index) => (
+      <label
+        key={ index }
+        htmlFor="ingredient"
+        data-testid={ `${index}-ingredient-step` }
+      >
         <input
           id="ingredient"
           type="checkbox"
-          data-testid={ `${index}-ingredient-step` }
         />
         {ingredient[1]}
       </label>));
-    return mapSlice;
+    return ingredients;
   }
 
   return (
