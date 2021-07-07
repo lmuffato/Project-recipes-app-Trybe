@@ -7,7 +7,7 @@ import './style.css';
 
 const Explore = () => (
   <div className="container">
-    <Header />
+    <Header title="Explorar" />
     <div className="buttons line">
       <Link to="/explorar/comidas">
         <button
