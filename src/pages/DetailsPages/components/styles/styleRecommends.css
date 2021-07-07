@@ -15,3 +15,9 @@
   visibility: hidden;
 }
 
+.startBtn {
+  bottom: 0;
+  position: fixed;
+}
+
+

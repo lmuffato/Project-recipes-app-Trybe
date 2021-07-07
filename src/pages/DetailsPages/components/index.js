@@ -6,6 +6,7 @@ import VideoComponent from './Video';
 import Recommends from './Recommends';
 import ButtonMakeRecipeFood from './buttons/ButtonMakeRecipeFood';
 import ButtonMakeRecipeDrink from './buttons/ButtonMakeRecipeDrink';
+import IngredientsRadios from './IngredinetsRadio';
 
 export {
   Image,
@@ -16,4 +17,5 @@ export {
   Recommends,
   ButtonMakeRecipeFood,
   ButtonMakeRecipeDrink,
+  IngredientsRadios,
 };
