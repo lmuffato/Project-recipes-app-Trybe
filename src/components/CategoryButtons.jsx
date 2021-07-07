@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 import { setInitialMeals, requestInitialDrinks } from '../redux/actions';
 import fetchDrinkByCategory from '../helpers/fetchDrinkByCategory';
 import fetchFoodByCategory from '../helpers/fetchFoodByCategory';
+import fetchInitialMeals from '../helpers/fetchInicialMeals';
+import fetchDrinks from '../helpers/fetchInitialDrinks';
 
 function FilterButtons({ props }) {
   const dispatch = useDispatch();
@@ -11,8 +13,24 @@ function FilterButtons({ props }) {
   const { mealsCategory } = useSelector((state) => state.searchReducer);
   const list = (props === 'Drinks') ? drinksCategory : mealsCategory;
   const FIVE = 5;
+  const [selectedCategory, setSelectedCategory] = useState('');
 
   const HandleFilterByCategoryButton = (type, category) => {
+    if (selectedCategory === category || category === 'all') {
+      setSelectedCategory('');
+      if (type === 'Drinks') {
+        const fetchInitialDrinks = async () => {
+          const { drinks } = await fetchDrinks();
+          dispatch(requestInitialDrinks(drinks));
+        };
+        return fetchInitialDrinks();
+      }
+      const fetchMeals = async () => {
+        const { meals } = await fetchInitialMeals();
+        dispatch(setInitialMeals(meals));
+      };
+      return fetchMeals();
+    }
     if (type === 'Drinks') {
       const fetchByCategory = async () => {
         const { drinks } = await fetchDrinkByCategory(category);
@@ -28,6 +46,7 @@ function FilterButtons({ props }) {
       };
       fecthByCategory();
     }
+    setSelectedCategory(category);
   };
 
   return (
@@ -46,6 +65,13 @@ function FilterButtons({ props }) {
           ))
         )
       }
+      <button
+        type="button"
+        onClick={ () => HandleFilterByCategoryButton(props, 'all') }
+        data-testid="All-category-filter"
+      >
+        All
+      </button>
     </div>
   );
 }
