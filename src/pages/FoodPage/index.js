@@ -39,8 +39,7 @@ function FoodPage() {
   const maxLength = 11;
   return (
     <section>
-      <Header searchBar="true" />
-      <SearchBar />
+      <Header searchBar="true" type="food" />
       { categories
         && <CategoriesButtons
           categories={ categories }

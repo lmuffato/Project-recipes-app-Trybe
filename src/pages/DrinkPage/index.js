@@ -40,8 +40,7 @@ function DrinkPage() {
   const maxLength = 11;
   return (
     <section>
-      <Header searchBar="true" />
-      <SearchBar />
+      <Header searchBar="true" type="drink" />
       { categories
         && <CategoriesButtons
           categories={ categories }

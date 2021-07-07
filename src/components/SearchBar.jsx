@@ -1,20 +1,36 @@
 import React, { useContext } from 'react';
+import PropTypes from 'prop-types';
 
 import RecipeContext from '../context/RecipeContext';
 import * as API from '../services/apiRequests';
 
-function SearchBar() {
+function SearchBar({ type: requestType }) {
   const { setRecipes } = useContext(RecipeContext);
   const filter = (type, value) => {
-    switch (type) {
-    case 'ingrediente':
-      return API.foodsByIngredient(value, setRecipes);
-    case 'name':
-      return API.foodsByName(value, setRecipes);
-    case 'firstLetter':
-      return API.foodsByFirstLetter(value, setRecipes);
-    default:
-      break;
+    if (requestType === 'food') {
+      switch (type) {
+      case 'ingrediente':
+        return API.foodsByIngredient(value, setRecipes);
+      case 'name':
+        return API.foodsByName(value, setRecipes);
+      case 'firstLetter':
+        return API.foodsByFirstLetter(value, setRecipes);
+      default:
+        break;
+      }
+    } else if (requestType === 'drink') {
+      switch (type) {
+      case 'ingrediente':
+        return API.drinksByIngredient(value, setRecipes);
+      case 'name':
+        return API.drinksByName(value, setRecipes);
+      case 'firstLetter':
+        return API.drinksByFirstLetter(value, setRecipes);
+      default:
+        break;
+      }
+    } else {
+      alert('Não é possivel fazer requisição');
     }
   };
   return (
@@ -66,4 +82,9 @@ function SearchBar() {
     </form>
   );
 }
+
+SearchBar.propTypes = {
+  type: PropTypes.string.isRequired,
+};
+
 export default SearchBar;
