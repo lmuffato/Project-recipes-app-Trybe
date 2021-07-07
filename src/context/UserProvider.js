@@ -9,6 +9,7 @@ function UserProvider({ children }) {
   const [globalId, setGlobalId] = useState('');
   const [currentMeal, setCurrentMeal] = useState({});
   const [currentDrink, setCurrentDrink] = useState({});
+  const [favoriteRecipe, setFavoriteRecipe] = useState([]);
 
   const getMealById = async (id) => {
     if (id) {
@@ -41,6 +42,8 @@ function UserProvider({ children }) {
         currentMeal,
         getDrinkById,
         currentDrink,
+        favoriteRecipe,
+        setFavoriteRecipe,
       } }
     >
       {children}

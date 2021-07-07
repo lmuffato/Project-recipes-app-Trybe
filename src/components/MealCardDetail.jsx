@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import ReactPlayer from 'react-player';
+import { useHistory } from 'react-router-dom';
 import ButtonStartRecipe from './ButtonStartRecipe';
 import UserContext from '../context/UserContext';
 import shareIcon from '../images/shareIcon.svg';
@@ -10,12 +11,17 @@ import SearchContext from '../context/SearchContext';
 import { getItemFromLocalStorage } from '../services/localStorage';
 import { recipeRow } from '../services/recipeRow';
 
+const copy = require('clipboard-copy');
+
 function MealCardDetail() {
   const { fullDrinks } = useContext(SearchContext);
   const { currentMeal } = useContext(UserContext);
   const [youtubeId, setYoutubeId] = useState('');
   const [textButton, setTextButton] = useState('Iniciar Receita');
+  const [copyLink, setCopyLink] = useState(false);
   const donedRecipes = getItemFromLocalStorage('doneRecipes');
+  const history = useHistory();
+
   let inProgressRecipes;
   if (getItemFromLocalStorage('inProgressRecipes')) {
     inProgressRecipes = Object.keys(getItemFromLocalStorage('inProgressRecipes').meals);
@@ -37,6 +43,13 @@ function MealCardDetail() {
     recipeRow(obj);
   });
 
+  const shareClick = () => {
+    const URL = history.location.pathname.replace('in-progress', '');
+    copy(`http://localhost:3000${URL}`);
+    // global.alert('Link copiado!');
+    setCopyLink(true);
+  };
+
   return (
     <div>
       <img
@@ -45,9 +58,10 @@ function MealCardDetail() {
         data-testid="recipe-photo"
       />
       <h3 data-testid="recipe-title">{ currentMeal.strMeal }</h3>
-      <button data-testid="share-btn" type="button">
+      <button data-testid="share-btn" type="button" onClick={ shareClick }>
         <img src={ shareIcon } alt="compartilhar" />
       </button>
+      {copyLink ? <span>Link copiado!</span> : null}
       <button data-testid="favorite-btn" type="button">
         <img src={ whiteHeartIcon } alt="favoritar" />
       </button>
@@ -77,7 +91,11 @@ function MealCardDetail() {
         ))}
       </div>
       {textButton !== '' ? (
-        <ButtonStartRecipe buttonText={ textButton } />
+        <ButtonStartRecipe
+          buttonText={ textButton }
+          type="comidas"
+          id={ currentMeal.idMeal }
+        />
       ) : (null)}
     </div>
   );

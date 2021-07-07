@@ -1,4 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import UserContext from '../context/UserContext';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
@@ -10,12 +11,16 @@ import { getItemFromLocalStorage } from '../services/localStorage';
 import ButtonStartRecipe from './ButtonStartRecipe';
 import { recipeDrinkRow } from '../services/recipeRow';
 
+const copy = require('clipboard-copy');
+
 function DrinkCardDetail() {
   const { currentDrink } = useContext(UserContext);
   const { fullRecipes } = useContext(SearchContext);
+  const [copyLink, setCopyLink] = useState(false);
   const [recomendedMeals, setRecomendedMeals] = useState([]);
   const [textButton, setTextButton] = useState('Iniciar Receita');
   const donedRecipes = getItemFromLocalStorage('doneRecipes');
+  const history = useHistory();
   let inProgressRecipes;
   if (getItemFromLocalStorage('inProgressRecipes')) {
     inProgressRecipes = Object.keys(getItemFromLocalStorage('inProgressRecipes')
@@ -42,13 +47,12 @@ function DrinkCardDetail() {
     };
     recipeDrinkRow(obj);
   });
-  // if (donedRecipes) {
-  //   const findDonedRecipe = donedRecipes.find(({ id }) => {
-  //     const { idDrink } = currentDrink;
-  //     return id === idDrink;
-  //   });
-  //   if (findDonedRecipe) buttonIniciarReceita = '';
-  // }
+
+  const shareClick = () => {
+    const URL = history.location.pathname.replace('in-progress', '');
+    copy(`http://localhost:3000${URL}`);
+    setCopyLink(true);
+  };
 
   return (
     <div>
@@ -58,9 +62,10 @@ function DrinkCardDetail() {
         data-testid="recipe-photo"
       />
       <h3 data-testid="recipe-title">{ currentDrink.strDrink }</h3>
-      <button data-testid="share-btn" type="button">
+      <button data-testid="share-btn" type="button" onClick={ shareClick }>
         <img src={ shareIcon } alt="compartilhar" />
       </button>
+      {copyLink ? <span>Link copiado!</span> : null}
       <button data-testid="favorite-btn" type="button">
         <img src={ whiteHeartIcon } alt="favoritar" />
       </button>
@@ -84,7 +89,11 @@ function DrinkCardDetail() {
         ))}
       </div>
       {textButton !== '' ? (
-        <ButtonStartRecipe buttonText={ textButton } />
+        <ButtonStartRecipe
+          buttonText={ textButton }
+          type="bebidas"
+          id={ currentDrink.idDrink }
+        />
       ) : (null)}
     </div>
   );
