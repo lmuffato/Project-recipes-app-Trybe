@@ -22,7 +22,7 @@ function Card(props) {
           />
         </div>
         <div className="card-info">
-          <p data-testid={ titleTestId || `${index}-recipe-name` }>{ recipeName }</p>
+          <p data-testid={ titleTestId || `${index}-card-name` }>{ recipeName }</p>
         </div>
       </div>
     </CardContainer>
