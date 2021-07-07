@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import shareIcon from '../images/shareIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import '../style/DetailsHeader.css';
+
+import FavoritesContext from '../contexts/FavoritesContext';
 
 const copy = require('clipboard-copy');
 
@@ -16,11 +18,7 @@ export default function DetailsHeader({ recipe, isFood }) {
   const recipeName = isFood ? recipe.strMeal : recipe.strDrink;
   const recipeImage = isFood ? recipe.strMealThumb : recipe.strDrinkThumb;
 
-  const favorites = JSON.parse(localStorage.getItem('favoriteRecipes'));
-
-  if (!favorites) {
-    localStorage.setItem('favoriteRecipes', JSON.stringify([]));
-  }
+  const { favorites, setFavorites, saveFavoritesToLS } = useContext(FavoritesContext);
 
   const [isFavorite, setIsFavorite] = useState(
     favorites.map((fav) => fav.id).includes(recipeId),
@@ -44,10 +42,11 @@ export default function DetailsHeader({ recipe, isFood }) {
       }];
     } else {
       updatedFavorites = favorites.filter(
-        (fav) => fav.id !== (isFood ? recipe.idMeal : recipe.idDrink),
+        (fav) => fav.id !== (recipeId),
       );
     }
-    localStorage.setItem('favoriteRecipes', JSON.stringify(updatedFavorites));
+    setFavorites(updatedFavorites);
+    saveFavoritesToLS(updatedFavorites);
   }
 
   return (
@@ -78,7 +77,7 @@ export default function DetailsHeader({ recipe, isFood }) {
               handleFavoriteClick();
             } }
           >
-            <img src={ isFavorite ? whiteHeartIcon : blackHeartIcon } alt="favoritar" />
+            <img src={ isFavorite ? blackHeartIcon : whiteHeartIcon } alt="favoritar" />
           </button>
         </div>
       </div>
