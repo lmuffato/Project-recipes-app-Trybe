@@ -8,3 +8,10 @@ export const handleChangeUser = (name, value) => ({
     value,
   },
 });
+
+// export const SEARCHING_FOOD = 'SEARCHING';
+
+// export const searching = (food) => ({
+//   type: SEARCHING_FOOD,
+//   food,
+// });
