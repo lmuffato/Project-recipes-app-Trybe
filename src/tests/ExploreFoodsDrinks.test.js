@@ -4,6 +4,10 @@ import userEvent from '@testing-library/user-event';
 import renderWithRouter from './renderWithRouter';
 import App from '../App';
 
+const nine = 9;
+// const byIngredientes = screen.getByTestId('explore-by-ingredient');
+
+
 function loginAndAcessExplorePage() {
   const getInputEmail = screen.getByTestId('email-input');
   const getInputPassw = screen.getByTestId('password-input');
@@ -33,7 +37,7 @@ describe('testing explore foods page', () => {
     exploreFoodPage();
     const { pathname } = history.location;
     expect(pathname).toBe('/explorar/comidas');
-    const byIngredientes = screen.getByTestId('explore-by-ingredient');
+    const byIngredientes = screen.getByText('Por Ingredientes');
     expect(byIngredientes).toBeInTheDocument();
     expect(byIngredientes).toHaveTextContent('Por Ingredientes');
     const byArea = screen.getByTestId('explore-by-area');
@@ -65,7 +69,7 @@ describe('testing explore foods page', () => {
     const surpriseMe = screen.getByTestId('explore-surprise');
     userEvent.click(surpriseMe);
     const { pathname } = history.location;
-    const firstPathname = pathname.slice(0, 9);
+    const firstPathname = pathname.slice(0, nine);
     expect(firstPathname).toBe('/comidas/');
     // corresponde aos ultimos 5 digitos da URL, o ID da receita:
     // const idPathname = pathname.slice(10, 14);
@@ -82,7 +86,7 @@ describe('testing explore drinks page', () => {
     const byIngredientes = screen.getByTestId('explore-by-ingredient');
     expect(byIngredientes).toBeInTheDocument();
     expect(byIngredientes).toHaveTextContent('Por Ingredientes');
-    const surpriseMe = screen.getByTestId('explore-surprise');
+    const surpriseMe = screen.getByText('Me Surpreenda!');
     expect(surpriseMe).toBeInTheDocument();
     expect(surpriseMe).toHaveTextContent('Me Surpreenda!');
   });
@@ -100,7 +104,7 @@ describe('testing explore drinks page', () => {
     const surpriseMe = screen.getByTestId('explore-surprise');
     userEvent.click(surpriseMe);
     const { pathname } = history.location;
-    const firstPathname = pathname.slice(0, 9);
+    const firstPathname = pathname.slice(0, nine);
     expect(firstPathname).toBe('/bebidas/');
   });
 });
