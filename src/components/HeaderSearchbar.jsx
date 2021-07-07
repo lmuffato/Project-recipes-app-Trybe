@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { Form, Button } from 'react-bootstrap';
 import Context from '../context/Context';
 import {
   fetchFilterFoodByIngredient,
@@ -7,6 +8,7 @@ import {
   fetchFilterDrinkByName,
   fetchFilterFoodByLetter,
   fetchFilterDrinkByLetter } from '../services/fetchApi';
+import './Style.css';
 
 function HeaderSearchbar() {
   const {
@@ -85,60 +87,55 @@ function HeaderSearchbar() {
   };
 
   return (
-    <div>
-      <input
-        type="text"
-        data-testid="search-input"
-        onChange={ (e) => handleChange(e) }
-        value={ searchInput }
-        disabled={ (radio === '') }
-      />
-      <div>
-        <label
-          htmlFor="ingredient-search-radio"
+    <Form className="search-form">
+      <div className="btn-div">
+        <Form.Control
+          type="text"
+          data-testid="search-input"
+          onChange={ (e) => handleChange(e) }
+          value={ searchInput }
+          disabled={ (radio === '') }
+        />
+        <Button
+          variant="primary"
+          data-testid="exec-search-btn"
+          onClick={ handleClickFilter }
+          type="button"
+          size="sm"
         >
-          <input
-            type="radio"
-            data-testid="ingredient-search-radio"
-            name="filter-radio"
-            value="Ingrediente"
-            onClick={ (e) => setRadio(e.target.value) }
-          />
-          Ingrediente
-        </label>
-        <label
-          htmlFor="name-search-radio"
-        >
-          <input
-            type="radio"
-            data-testid="name-search-radio"
-            name="filter-radio"
-            value="Nome"
-            onClick={ (e) => setRadio(e.target.value) }
-          />
-          Nome
-        </label>
-        <label
-          htmlFor="first-letter-search-radio"
-        >
-          <input
-            type="radio"
-            data-testid="first-letter-search-radio"
-            name="filter-radio"
-            value="Primeira letra"
-            onClick={ (e) => setRadio(e.target.value) }
-          />
-          Primeira letra
-        </label>
+          Buscar
+        </Button>
       </div>
-      <button
-        type="button"
-        data-testid="exec-search-btn"
-        onClick={ handleClickFilter }
-      >
-        Buscar
-      </button>
-    </div>
+      <div className="radio-group">
+        <Form.Check
+          inline
+          label="Ingrediente"
+          type="radio"
+          data-testid="ingredient-search-radio"
+          name="filter-radio"
+          value="Ingrediente"
+          onClick={ (e) => setRadio(e.target.value) }
+        />
+        <Form.Check
+          inline
+          label="Nome"
+          type="radio"
+          data-testid="name-search-radio"
+          name="filter-radio"
+          value="Nome"
+          onClick={ (e) => setRadio(e.target.value) }
+        />
+        <Form.Check
+          inline
+          label="Primeira letra"
+          type="radio"
+          data-testid="first-letter-search-radio"
+          name="filter-radio"
+          value="Primeira letra"
+          onClick={ (e) => setRadio(e.target.value) }
+        />
+      </div>
+    </Form>
   );
 }
 

@@ -1,0 +1,15 @@
+.input {
+  margin: 20px auto;
+  max-width: 90%;
+}
+
+.btn-div {
+  display: flex;
+  justify-content: center;
+}
+
+img {
+  height: auto;
+  width: 100%;
+}
+

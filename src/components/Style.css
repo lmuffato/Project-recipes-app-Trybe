@@ -32,3 +32,25 @@
 .header-content h4 {
   margin-left: 33%;
 }
+
+.search-form {
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 15px;
+  margin: 10px;
+  padding: 10px;
+}
+
+.btn-div {
+  display: flex;
+  justify-content: space-around;
+  margin: 5px 0;
+}
+
+.btn-div input {
+  margin-right: 20px;
+}
+
+.radio-group {
+  display: flex;
+  justify-content: space-around;
+}
