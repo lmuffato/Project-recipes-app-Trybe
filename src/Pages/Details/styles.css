@@ -1,0 +1,75 @@
+.main-parent {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  min-height: 100vw;
+  margin-bottom: 4rem;
+}
+
+.main-parent > div {
+  display: flex;
+  flex-flow: column;
+}
+
+.hero {
+  max-width: 100vw;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+}
+
+.hero > img {
+  max-width: 100%;
+}
+
+.header {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content:space-between;
+  padding: 1rem;
+}
+
+.header:first-child {
+  display: flex;
+  align-items: center;
+  align-content: center;
+}
+
+.header:last-child {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.header h3 {
+  margin-top: 0;
+  font-size: 1.5rem;
+  color: rgb(124, 124, 124);
+}
+
+h1 {
+  margin: 0;
+}
+
+h2 {
+  margin-bottom: 1rem;
+}
+
+.instructions {
+  padding: 1rem;
+  text-align: justify;
+}
+
+.video {
+  padding: 1rem;
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+.init-btn {
+  text-align: center;
+  width: 100vw;
+  bottom: 1rem;
+  position: fixed;
+}

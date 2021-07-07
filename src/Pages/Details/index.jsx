@@ -1,11 +1,12 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { Button, Image } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import { useLocation, useParams } from 'react-router';
 import { Link } from 'react-router-dom';
 import UserContext from '../../context/UserContext';
 import { getRecipeByID } from '../../services/fetchRecipes';
 import Ingredient from '../../Components/Ingredients';
 import Slide from '../../Components/Slide';
+import './styles.css';
 
 import shareIcon from '../../images/shareIcon.svg';
 import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
@@ -39,50 +40,71 @@ function Details() {
   }, [doingRecipes, doneRecipes, id, pathname, toggleApi]);
 
   return (
-    <div>
+    <div className="main-parent">
       {isLoading ? 'Carregando' : (
         <div>
-          <Image
-            thumbnail
-            data-testid="recipe-photo"
-            src={ recipesDetails[`str${recipeType}Thumb`] }
-          />
-          <h1 data-testid="recipe-title">
-            {recipesDetails[`str${recipeType}`]}
-          </h1>
-          <h3 data-testid="recipe-category">
-            {recipesDetails[toggleCategory]}
-          </h3>
-          <button type="button" data-testid="share-btn">
-            <img src={ shareIcon } alt="share" />
-          </button>
-          <button type="button" data-testid="favorite-btn">
-            <img src={ whiteHeartIcon } alt="favorite" />
-          </button>
-
+          <div className="hero">
+            <img
+              alt="hero"
+              data-testid="recipe-photo"
+              src={ recipesDetails[`str${recipeType}Thumb`] }
+            />
+          </div>
+          <div className="header">
+            <div>
+              <h1 data-testid="recipe-title">
+                {recipesDetails[`str${recipeType}`]}
+              </h1>
+              <h3 data-testid="recipe-category">
+                {recipesDetails[toggleCategory]}
+              </h3>
+            </div>
+            <div>
+              <button type="button" data-testid="share-btn">
+                <img src={ shareIcon } alt="share" />
+              </button>
+              <button type="button" data-testid="favorite-btn">
+                <img src={ whiteHeartIcon } alt="favorite" />
+              </button>
+            </div>
+          </div>
           <Ingredient type="list" recipe={ recipesDetails } />
-
-          <p data-testid="instructions">
-            {recipesDetails.strInstructions}
-          </p>
-
+          <div className="instructions">
+            <h2>Instructions</h2>
+            <p data-testid="instructions">
+              {recipesDetails.strInstructions}
+            </p>
+          </div>
           {(recipeType === 'Meal')
             ? (
-              <div>
+              <div className="video">
                 <h2>Video</h2>
                 <iframe
                   data-testid="video"
                   src={ `http://www.youtube.com/embed/${recipesDetails.strYoutube.split('=')[1]}` }
                   title="How to do"
+                  style={ { border: 'none' } }
+                  allowFullScreen
                 />
               </div>)
             : null}
-          <Slide toggle={ recipeType } category={ toggleCategory } />
-          { recipeStatus
+          <Slide
+            toggle={ recipeType }
+            category={ toggleCategory }
+            className="ingredients"
+          />
+          {recipeStatus
             ? (
-              <Link to={ `/${toggleURL}/${id}/in-progress` }>
-                <Button data-testid="start-recipe-btn">{ recipeStatus }</Button>
-              </Link>
+              <div className="init-btn">
+                <Link to={ `/${toggleURL}/${id}/in-progress` }>
+                  <Button
+                    data-testid="start-recipe-btn"
+                    size="lg"
+                  >
+                    {recipeStatus}
+                  </Button>
+                </Link>
+              </div>
             )
             : null}
         </div>

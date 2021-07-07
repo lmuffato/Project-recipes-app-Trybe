@@ -2,3 +2,41 @@
   display: flex;
   flex-flow: column;
 }
+
+.slide-parent h2 {
+  margin-left: 1rem;
+}
+
+.suggestions-carousel {
+  /* background-color: rgb(25, 25, 25); */
+  width: 100vw;
+  height: fit-content;
+  padding: 1rem;
+}
+
+.box {
+  background-color: rgb(47, 47, 47);
+  background-clip: content-box;
+  background-position: center;
+  max-height: 224px;
+  text-align: center;
+  margin-right: 0.9rem;
+}
+
+.box img {
+  width: 10rem;
+}
+
+.box h6 {
+  font-size: 0.75rem;
+  margin: 0;
+  color: rgb(85, 85, 85);
+}
+
+.box h4 {
+  font-size: 1rem;
+  margin: 0;
+  font-weight: 700;
+  color: rgb(156, 154, 154);
+  margin-bottom: 0.3rem;
+}
