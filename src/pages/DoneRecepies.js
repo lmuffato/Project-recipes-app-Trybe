@@ -63,23 +63,23 @@ function DoneRecepies () {
     {showDoneRecepies.map((recepie, index) => {
       if (recepie.type === meal) {
         // <Componente cardFood image, name, category, area, doneDate, tags />
-        <div>
-        <img data-testid={`${index}-horizontal-image`}>{ recepie.image }</img>
-        <p data-testid={`${index}-horizontal-name`}>{recepie.name}</p>
-        <p data-testid={`${index}-horizontal-top-text>`}>{recepie.category}</p>
-        <p>{recepie.area}</p>
-        <p data-testid={`${index}-horizontal-done-date`}>{recepie.doneDate}</p>
-        <p data-testid={`${index}-${tags}-horizontal-tag`}>{`recepie.tags[0]}, {recepie.tags[1]`}</p>
-        <img data-testid={`${index}-horizontal-share-btn`} src={Share} alt="share"></img>
-      </div>
+        <Link to={`/comidas/${recepi.id}`}>
+          <img data-testid={`${index}-horizontal-image`}>{ recepie.image }</img>
+          <p data-testid={`${index}-horizontal-name`}>{recepie.name}</p>
+          <p data-testid={`${index}-horizontal-top-text>`}>{recepie.category}</p>
+          <p>{recepie.area}</p>
+          <p data-testid={`${index}-horizontal-done-date`}>{recepie.doneDate}</p>
+          <p data-testid={`${index}-${tags}-horizontal-tag`}>{`recepie.tags[0]}, {recepie.tags[1]`}</p>
+          <img data-testid={`${index}-horizontal-share-btn`} src={Share} alt="share"></img>
+        </Link>
     } else if (recepie.type === drink) {
       // // <Componente cardDrink image, name, doneDate, alcoholicOrNot />
-      <div>
+      <Link to={`/bebidas/${recepi.id}`}>
         <img data-testid={`${index}-horizontal-image`}>{ recepie.image }</img>
         <p>alcólica:{recepie.alcoholicOrNot}</p> 
         <p data-testid={`${index}-horizontal-done-date`}>{recepie.doneDate}</p>
         <img data-testid={`${index}-horizontal-share-btn`} src={Share} alt="share"></img>
-      </div>
+      </Link>
     }
     })
   }
