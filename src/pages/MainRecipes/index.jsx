@@ -2,6 +2,7 @@ import { useHistory } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import Header from '../../components/Header';
 import getRecipes from '../../services/recipesData';
+import RecipeSimpleCard from '../../components/RecipeSimpleCard';
 
 function MainRecipes() {
   const { location: { pathname } } = useHistory();
@@ -23,14 +24,7 @@ function MainRecipes() {
     <>
       <Header title={ titlePage } />
       {recipes.map((recipe, index) => (
-        <div key={ recipe.id } data-testid={ `${index}-recipe-card` }>
-          <h1 data-testid={ `${index}-card-name` }>{recipe.name}</h1>
-          <img
-            src={ recipe.imagePath }
-            alt={ recipe.name }
-            data-testid={ `${index}-card-img` }
-          />
-        </div>
+        <RecipeSimpleCard key={ recipe.id } recipe={ recipe } index={ index } />
       ))}
     </>
   );
