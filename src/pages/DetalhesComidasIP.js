@@ -1,20 +1,28 @@
-import React, { useContext } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import FoodContext from '../contexts/FoodContext';
 
 import DetailsHeader from '../components/DetailsHeader';
+import IngredientListCheckbox from '../components/RecipesIP/IngredientsListCheckbox';
+
+import { fetchFoodByID } from '../services/mealAPI';
 
 export default function DetalhesComidasIP() {
-  const { foods } = useContext(FoodContext);
   const { pathname } = useLocation();
   const foodId = pathname.split('/')[2];
+  const [food, setFood] = useState({});
 
-  const foodData = foods.find((food) => food.idMeal === foodId);
+  useEffect(() => {
+    fetchFoodByID(foodId).then((data) => setFood(data.meals[0]));
+  }, [foodId]);
 
   return (
     <div>
-      {foodData && (
-        <DetailsHeader recipe={ foodData } isFood />
+      {food && (
+        <div>
+          <DetailsHeader recipe={ food } isFood />
+          <IngredientListCheckbox recipe={ food } />
+          <p data-testid="instructions">{food.strInstructions}</p>
+        </div>
       )}
     </div>
   );

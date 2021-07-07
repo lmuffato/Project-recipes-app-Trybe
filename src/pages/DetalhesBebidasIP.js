@@ -1,20 +1,28 @@
-import React, { useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import DrinkContext from '../contexts/DrinkContext';
 
 import DetailsHeader from '../components/DetailsHeader';
+import IngredientListCheckbox from '../components/RecipesIP/IngredientsListCheckbox';
 
-export default function DetalhesBebidasIP() {
-  const { drinks } = useContext(DrinkContext);
+import { fetchDrinkByID } from '../services/cocktailAPI';
+
+export default function DetalhesComidasIP() {
   const { pathname } = useLocation();
   const drinkId = pathname.split('/')[2];
+  const [drink, setDrink] = useState({});
 
-  const drinkData = drinks.find((drink) => drink.idDrink === drinkId);
+  useEffect(() => {
+    fetchDrinkByID(drinkId).then((data) => setDrink(data.drinks[0]));
+  }, [drinkId]);
 
   return (
     <div>
-      {drinkData && (
-        <DetailsHeader recipe={ drinkData } isDrink />
+      {drink && (
+        <div>
+          <DetailsHeader recipe={ drink } isDrink />
+          <IngredientListCheckbox recipe={ drink } />
+          <p data-testid="instructions">{drink.strInstructions}</p>
+        </div>
       )}
     </div>
   );
