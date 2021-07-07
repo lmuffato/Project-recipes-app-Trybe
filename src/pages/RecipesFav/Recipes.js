@@ -66,7 +66,7 @@ function Recipes() {
         <Button
           variant="primary"
           data-testid={ `${index}-horizontal-favorite-btn` }
-          src={ Share }
+          src={ Favorite }
           onClick={ () => desfavoriteFood(recipe.id) }
         >
           <Card.Img
@@ -113,7 +113,7 @@ function Recipes() {
         <Button
           variant="primary"
           data-testid={ `${index}-horizontal-favorite-btn` }
-          src={ Share }
+          src={ Favorite }
           onClick={ () => desfavoriteDrink(recipe.id) }
         >
           <Card.Img
