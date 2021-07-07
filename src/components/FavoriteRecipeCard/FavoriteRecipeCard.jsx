@@ -6,7 +6,7 @@ import blackHeartIcon from '../../images/blackHeartIcon.svg';
 // import CardContainer from './styles';
 
 function FavoriteRecipeCard(props) {
-  const { recipe, index } = props;
+  const { recipe, index, handleRemoveRecipe } = props;
 
   return (
     <div key={ index }>
@@ -31,7 +31,7 @@ function FavoriteRecipeCard(props) {
           alt="share-btn"
         />
       </button>
-      <button type="button">
+      <button type="button" onClick={ () => handleRemoveRecipe(index) }>
         <img
           data-testid={ `${index}-horizontal-favorite-btn` }
           src={ blackHeartIcon }
@@ -44,6 +44,7 @@ function FavoriteRecipeCard(props) {
 
 FavoriteRecipeCard.propTypes = {
   recipe: PropTypes.shape(),
+  handleRemoveRecipe: PropTypes.func,
 }.isRequired;
 
 export default FavoriteRecipeCard;

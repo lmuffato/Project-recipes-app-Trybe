@@ -3,11 +3,21 @@ import FavoriteRecipeCard from '../components/FavoriteRecipeCard/FavoriteRecipeC
 
 function FavoriteRecipes() {
   const [favoriteRecipes, setFavoriteRecipes] = useState([]);
+  // const [haveChanged, setHaveChanged] = useState(false);
 
   useEffect(() => {
     const favoriteStorage = JSON.parse(localStorage.getItem('favoriteRecipes'));
     if (favoriteStorage) setFavoriteRecipes(favoriteStorage);
   }, []);
+
+  function handleRemoveRecipe(index) {
+    const updatedFavoriteRecipes = favoriteRecipes
+      .slice(0, index)
+      .concat(favoriteRecipes.slice(index + 1));
+
+    localStorage.setItem('favoriteRecipes', JSON.stringify(updatedFavoriteRecipes));
+    setFavoriteRecipes(updatedFavoriteRecipes);
+  }
 
   if (favoriteRecipes.length === 0) {
     return (
@@ -26,7 +36,12 @@ function FavoriteRecipes() {
       </div>
       <h1>Receitas Favoritas</h1>
       { favoriteRecipes.map((recipe, index) => (
-        <FavoriteRecipeCard recipe={ recipe } index={ index } key={ index } />
+        <FavoriteRecipeCard
+          recipe={ recipe }
+          index={ index }
+          key={ index }
+          handleRemoveRecipe={ handleRemoveRecipe }
+        />
       )) }
     </div>
   );
