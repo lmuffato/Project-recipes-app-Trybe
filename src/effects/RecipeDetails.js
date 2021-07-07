@@ -27,12 +27,13 @@ function checkDoneRecipes(id) {
 function checkInprogressRecipes(id, pathname) {
   const storage = getItemFromLocalStorage('inProgressRecipes');
   if (!storage) return false;
-  if (pathname.includes('comidas')) {
+  if (pathname.includes('comidas') && storage.meals) {
     return storage.meals[id];
   }
-  if (pathname.includes('bebidas')) {
+  if (pathname.includes('bebidas') && storage.cocktails) {
     return storage.cocktails[id];
   }
+  return false;
 }
 export default function RecipeDetail(state, apiCallbackByID, apiCallBack, stateCallback) {
   const history = useHistory();
