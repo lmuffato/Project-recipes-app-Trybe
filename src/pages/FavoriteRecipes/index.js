@@ -1,89 +1,152 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import Header from '../../components/Header';
 import shareIcon from '../../images/shareIcon.svg';
 import blackHeartIcon from '../../images/blackHeartIcon.svg';
 
 import './style.css';
 
-export default function FavoriteRecipes() {
-  const storageFavorite = JSON.parse(localStorage.getItem('favoriteRecipes'));
-  const [copyButton, setCopyButton] = useState(false);
+/**
+ * Consultei o repositório do Grupo 23 da turma 09 para fazer essa classe.
+ * Link do repositório: https://github.com/tryber/sd-09-project-recipes-app/tree/main-group-23
+ */
+const FavoriteRecipes = () => {
+  const [favoriteList, setFavoriteList] = useState([]);
+  const [filterList, setFilterList] = useState([]);
+  const [reload, setReaload] = useState(false);
+  const [shareButton, setShareButton] = useState(false);
 
-  const handleClick = ({ target }) => {
-    const { alt } = target;
-    setCopyButton(true);
-    const path = `http://localhost:3000${alt}`;
-    navigator.clipboard.writeText(path);
+  const loadStorage = () => {
+    const list = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    if (list) {
+      JSON.parse(localStorage.getItem('favoriteRecipes'));
+    } else {
+      return [];
+    }
+    setFavoriteList(list);
+    setFilterList(list);
   };
 
-  /* Source: https://github.com/tryber/sd-09-project-recipes-app/tree/524b096830480588272f95f19414d77636fb705f */
+  // Source: https://developer.mozilla.org/en-US/docs/Web/API/Clipboard/writeText
+  const handleShare = ({ target: { alt } }) => {
+    setShareButton(true);
+    const url = `http://localhost:3000${alt}`;
+    navigator.clipboard.writeText(url);
+  };
+
+  const handleFavorite = ({ target: { alt } }) => {
+    const newList = favoriteList.filter((item) => item.id !== alt);
+    localStorage.setItem('favoriteRecipes', JSON.stringify(newList));
+    setFavoriteList(newList);
+    setReaload(!reload);
+  };
+
+  const handleClick = ({ target: { innerText } }) => {
+    if (innerText === 'All') {
+      setFilterList(favoriteList);
+    }
+
+    if (innerText === 'Food') {
+      setFilterList(favoriteList.filter(
+        (item) => item.type === 'comida',
+      ));
+    }
+
+    if (innerText === 'Drinks') {
+      setFilterList(favoriteList.filter(
+        (item) => item.type === 'bebida',
+      ));
+    }
+  };
+
+  useEffect(() => {
+    loadStorage();
+  }, [reload]);
+
+  /* Source: https://github.com/tryber/sd-09-project-recipes-app/tree/main-group-23 */
   const isFood = ({ id, image, type, name, category, area, alcoholicOrNot }, index) => {
     if (type === 'comida') {
       return (
-        <div key={ id }>
-          { copyButton ? <span>Link copiado!</span> : null }
-
-          <span data-testid={ `${index}-horizontal-top-text` }>
-            { `${area} - ${category}` }
-          </span>
-
-          <img
-            src={ image }
-            alt="comida"
-            data-testid={ `${index}-horizontal-image` }
-          />
-
-          <span data-testid={ `${index}-horizontal-name` }>
-            { name }
-          </span>
-
-          <button type="button" onClick={ handleClick }>
+        <div key={ index } className="favorite-recipe-card">
+          <Link to={ `/comidas/${id}` }>
             <img
-              data-testid={ `${index}-horizontal-share-btn` }
-              src={ shareIcon }
-              alt={ `/${type}s/${id}` }
+              src={ image }
+              alt="comida"
+              data-testid={ `${index}-horizontal-image` }
+              className="favorite-recipe-img"
             />
-          </button>
+          </Link>
 
-          <button type="button">
-            <img
-              data-testid={ `${index}-horizontal-favorite-btn` }
-              src={ blackHeartIcon }
-              alt="favorite"
-            />
-          </button>
+          <div className="itens-favorite-recipe-card">
+            <p data-testid={ `${index}-horizontal-top-text` }>
+              { `${area} - ${category}` }
+            </p>
+            <Link to={ `/comidas/${id}` }>
+              <p data-testid={ `${index}-horizontal-name` }>
+                { name }
+              </p>
+            </Link>
+
+            <div className="container-buttons">
+              <button type="button" onClick={ handleShare }>
+                <img
+                  data-testid={ `${index}-horizontal-share-btn` }
+                  src={ shareIcon }
+                  alt={ `/${type}s/${id}` }
+                />
+              </button>
+
+              <button type="button" onClick={ handleFavorite }>
+                <img
+                  data-testid={ `${index}-horizontal-favorite-btn` }
+                  src={ blackHeartIcon }
+                  alt={ id }
+                />
+              </button>
+            </div>
+          </div>
         </div>
       );
     }
+
     return (
-      <div key={ type }>
-        <button type="button" onClick={ handleClick }>
+      <div key={ index } className="favorite-recipe-card">
+        <Link to={ `/bebidas/${id}` }>
           <img
-            data-testid={ `${index}-horizontal-share-btn` }
-            src={ shareIcon }
-            alt={ `${type}s/${id}` }
+            src={ image }
+            alt="bebida"
+            data-testid={ `${index}-horizontal-image` }
           />
-        </button>
+        </Link>
 
-        <button type="button">
-          <img
-            data-testid={ `${index}-horizontal-favorite-btn` }
-            src={ blackHeartIcon }
-            alt="favorite"
-          />
-        </button>
+        <div className="itens-favorite-recipe-card">
+          <p data-testid={ `${index}-horizontal-top-text` }>
+            { alcoholicOrNot }
+          </p>
+          <Link to={ `/bebidas/${id}` }>
+            <p data-testid={ `${index}-horizontal-name` }>
+              { name }
+            </p>
+          </Link>
 
-        { copyButton ? <span>Link copiado!</span> : null }
+          <div className="buttons">
+            <button type="button" onClick={ handleShare }>
+              <img
+                data-testid={ `${index}-horizontal-share-btn` }
+                src={ shareIcon }
+                alt={ `${type}s/${id}` }
+              />
+            </button>
 
-        <img src={ image } alt="bebida" data-testid={ `${index}-horizontal-image` } />
-
-        <span data-testid={ `${index}-horizontal-top-text` }>
-          { alcoholicOrNot }
-        </span>
-
-        <span data-testid={ `${index}-horizontal-name` }>
-          { name }
-        </span>
+            <button type="button" onClick={ handleFavorite }>
+              <img
+                data-testid={ `${index}-horizontal-favorite-btn` }
+                src={ blackHeartIcon }
+                alt={ id }
+              />
+            </button>
+          </div>
+        </div>
       </div>
     );
   };
@@ -94,32 +157,39 @@ export default function FavoriteRecipes() {
       <div className="buttons">
         <button
           type="button"
-          className="button-favorite"
           data-testid="filter-by-all-btn"
+          onClick={ handleClick }
+          className="button-favorite"
         >
           All
         </button>
         <button
           type="button"
-          className="button-favorite"
           data-testid="filter-by-food-btn"
+          onClick={ handleClick }
+          className="button-favorite"
         >
           Food
         </button>
         <button
           type="button"
-          className="button-favorite"
           data-testid="filter-by-drink-btn"
+          onClick={ handleClick }
+          className="button-favorite"
         >
           Drinks
         </button>
       </div>
 
-      {storageFavorite.map(
+      { shareButton ? <span>Link copiado!</span> : null }
+
+      {filterList.map(
         ({ id, image, type, name, category, area, alcoholicOrNot }, index) => (
           isFood({ id, image, type, name, category, area, alcoholicOrNot }, index)
         ),
       )}
     </div>
   );
-}
+};
+
+export default FavoriteRecipes;
