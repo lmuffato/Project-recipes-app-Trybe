@@ -9,10 +9,10 @@ import CardListContainer from './styles';
 function CardList({ recipes, type, titleTestId, cardTestId }) {
   const { getFilteredRecipes,
     searchBarFilters, filteredRecipes } = useFilteredRecipes();
+  // const history = useHistory();
 
   useEffect(() => {
-    const filtering = () => getFilteredRecipes(type);
-    filtering();
+    getFilteredRecipes(type);
   }, [type, searchBarFilters, getFilteredRecipes]);
 
   if (recipes.length === 0) {
@@ -25,9 +25,10 @@ function CardList({ recipes, type, titleTestId, cardTestId }) {
       <Redirect
         to={ {
           pathname: `/comidas/${recipe.idMeal}`,
-          state: { recipe, type },
+          state: { recipe, pageType: type },
         } }
       />
+      // history.push(`/comidas/${recipe.idMeal}`)
     ) : (
       <Redirect
         to={ {
@@ -35,6 +36,7 @@ function CardList({ recipes, type, titleTestId, cardTestId }) {
           state: { recipe, type },
         } }
       />
+      // history.push(`/bebidas/${recipe.idDrink}`)
     );
   }
 
@@ -47,14 +49,26 @@ function CardList({ recipes, type, titleTestId, cardTestId }) {
               to={ { pathname: `/comidas/${recipe.idMeal}`, state: { recipe, type } } }
               key={ index }
             >
-              <Card recipe={ recipe } index={ index } type={ type } />
+              <Card
+                recipe={ recipe }
+                index={ index }
+                type={ type }
+                titleTestId={ titleTestId }
+                cardTestId={ cardTestId }
+              />
             </Link>
           ) : (
             <Link
               to={ { pathname: `/bebidas/${recipe.idDrink}`, state: { recipe, type } } }
               key={ index }
             >
-              <Card recipe={ recipe } index={ index } type={ type } />
+              <Card
+                recipe={ recipe }
+                index={ index }
+                type={ type }
+                titleTestId={ titleTestId }
+                cardTestId={ cardTestId }
+              />
             </Link>
           )
         ))

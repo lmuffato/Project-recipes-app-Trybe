@@ -1,17 +1,19 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useContext, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import useFetchRecipes from '../../effects/useFetchRecipes';
 import useFilteredRecipes from '../../hooks/useFilteredRecipes';
 import Button from '../Generics/Button';
 import ResetSearchBarFiltersButton from './ResetSearchBarFiltersButton';
 import SearchBarContainer from './styles';
+import { RecipesContext } from '../../context/RecipesContext';
 
 function SearchBar({ type }) {
   const [inputSearch, setInputSearch] = useState('');
   const [radioValue, setRadioValue] = useState('');
   const { searchBarFilters,
-    setSearchBarFilters, setFilteredRecipes, filteredRecipes } = useFilteredRecipes();
-  const fetchData = useFetchRecipes(type);
+    setSearchBarFilters, setFilteredRecipes } = useFilteredRecipes();
+  const [, setFetchUrl] = useFetchRecipes(type);
+  const { recipesContext } = useContext(RecipesContext);
 
   // configura o onChange dos radio inputs
   const handleChange = useCallback((event) => {
@@ -31,14 +33,18 @@ function SearchBar({ type }) {
     // console.log(searchBarFilters);
   }, [inputSearch, radioValue, searchBarFilters, setSearchBarFilters]);
 
+  useEffect(() => {
+    if (type === 'meals') return setFetchUrl('https://www.themealdb.com/api/json/v1/1/search.php?s=');
+    return setFetchUrl('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
+  }, [setFetchUrl, type]);
+
   const handleResetFilters = useCallback((ev) => {
     ev.preventDefault();
     setInputSearch('');
     setRadioValue('');
     setSearchBarFilters([]);
-    if (fetchData[type]) setFilteredRecipes(fetchData[type]);
-    console.log(filteredRecipes);
-  }, [fetchData, filteredRecipes, setFilteredRecipes, setSearchBarFilters, type]);
+    if (recipesContext[type]) setFilteredRecipes(recipesContext[type]);
+  }, [recipesContext, setFilteredRecipes, setSearchBarFilters, type]);
 
   return (
     <SearchBarContainer>

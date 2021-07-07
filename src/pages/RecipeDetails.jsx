@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import RecipeInfo from '../components/RecipeInfo/RecipeInfo';
@@ -8,43 +8,50 @@ import RecipeInstructions from '../components/RecipeInstructions/RecipeInstructi
 import Container from '../styles/recipeDetails';
 import MealVideo from '../components/MealVideo/MealVideo';
 import Carousel from '../components/Carousel/Carousel';
+import useDetailsProvider from '../hooks/useDetailsProvider';
 
 function RecipeDetails({ type }) {
   const { id } = useParams();
-  const endpointMeals = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
-  const endpointDrinks = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
-  const [fetchRecipeURL, setFetchRecipeURL] = useState('');
-  const [isLoading, setIsLoading] = useState(true);
+  const endpointMeal = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
+  const endpointDrink = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
+  const endpointRecipes = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
+  const endpointCocktails = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
+  // const [fetchRecipeURL, setFetchRecipeURL] = useState('');
+  const [carouselRecommendations, setRecomendations] = useState([]);
+  const currRecomendation = type === 'meals' ? 'drinks' : 'meals';
   const [singleRecipe, setRecipe] = useState({});
+  const { handleFetch,
+    isLoading, recipeData,
+    recommendations, fetchMealRecipes, currentImage } = useDetailsProvider();
 
-  const handleFetchIngredients = useCallback(() => {
-    if (type === 'meals') {
-      setFetchRecipeURL(endpointMeals);
-    }
-    if (type === 'drinks') {
-      setFetchRecipeURL(endpointDrinks);
-    }
-  }, [endpointDrinks, endpointMeals, type]);
-
-  const handleFetch = useCallback(async (url) => {
-    try {
-      const request = await fetch(url);
-      const data = await request.json();
-      setRecipe(data[type][0]);
-      console.log(data[type][0]);
-      setIsLoading(false);
-    } catch (err) {
-      console.log(err);
-    }
-  }, [type]);
+  // const handleFetchIngredients = useCallback(() => {
+  //   if (type === 'meals') {
+  //     handleFetch(endpointMeal, type);
+  //   }
+  //   if (type === 'drinks') {
+  //     handleFetch(endpointDrink, type);
+  //   }
+  // }, [endpointDrink, endpointMeal, handleFetch, type]);
 
   useEffect(() => {
-    const unsubscribe = () => {
-      handleFetchIngredients();
-      handleFetch(fetchRecipeURL);
+    const getRecipesAndRecommendations = () => {
+      if (type === 'meals') {
+        handleFetch(endpointMeal, type);
+        fetchMealRecipes(endpointCocktails, type);
+      }
+      handleFetch(endpointDrink, type);
+      fetchMealRecipes(endpointRecipes, type);
     };
-    unsubscribe();
-  }, [fetchRecipeURL, handleFetch, handleFetchIngredients]);
+    return getRecipesAndRecommendations();
+  }, [endpointDrink, endpointMeal, fetchMealRecipes, handleFetch, type]);
+
+  useEffect(() => {
+    const settingUp = () => {
+      setRecipe(recipeData);
+      setRecomendations(recommendations);
+    };
+    settingUp();
+  }, [recipeData, recommendations]);
 
   if (isLoading) {
     return 'Loading';
@@ -56,8 +63,6 @@ function RecipeDetails({ type }) {
   const isAlchooholic = singleRecipe.strAlcoholic || '';
   const magicNumber = 32;
   const youTubeVideo = singleRecipe.strYoutube || '';
-  // console.log(singleRecipe);
-  // console.log(youTubeVideo);
 
   return (
     <Container>
@@ -78,7 +83,11 @@ function RecipeDetails({ type }) {
           youTubeVideo={ youTubeVideo.substring(magicNumber) }
           title={ recipeName }
         />) : ''}
-      <Carousel type={ type } />
+      <Carousel
+        recipeRecommendations={ carouselRecommendations }
+        currentImg={ currentImage }
+        currRecommendation={ currRecomendation }
+      />
       <Button data-testid="start-recipe-btn">
         Iniciar receita
       </Button>
