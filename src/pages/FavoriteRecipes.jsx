@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import FavoriteRecipeCard from '../components/FavoriteRecipeCard/FavoriteRecipeCard';
 
 function FavoriteRecipes() {
   const [favoriteRecipes, setFavoriteRecipes] = useState([]);
@@ -25,37 +26,8 @@ function FavoriteRecipes() {
       </div>
       <h1>Receitas Favoritas</h1>
       { favoriteRecipes.map((recipe, index) => (
-        <div key={ index }>
-          <img
-            data-testid={ `${index}-horizontal-image` }
-            style={ { maxWidth: '100px' } }
-            src={ recipe.image }
-            alt="Delicious food/drink"
-          />
-          <span data-testid={ `${index}-horizontal-top-text` }>
-            { recipe.category }
-          </span>
-          <span data-testid={ `${index}-horizontal-name` }>
-            { recipe.name }
-          </span>
-          <button type="button" data-testid={ `${index}-horizontal-share-btn` }>
-            Share
-          </button>
-          <button type="button" data-testid={ `${index}-horizontal-favorite-btn` }>
-            Favorite
-          </button>
-        </div>
+        <FavoriteRecipeCard recipe={ recipe } index={ index } key={ index } />
       )) }
-
-      {
-        /*
-          cy.get('[data-testid="0-horizontal-image"]');
-          cy.get('[data-testid="0-horizontal-top-text"]');
-          cy.get('[data-testid="0-horizontal-name"]');
-          cy.get('[data-testid="0-horizontal-share-btn"]');
-          cy.get('[data-testid="0-horizontal-favorite-btn"]');
-         */
-      }
     </div>
   );
 }
