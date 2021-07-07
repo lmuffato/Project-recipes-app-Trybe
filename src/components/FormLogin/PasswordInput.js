@@ -4,8 +4,7 @@ import LoginContext from '../../contexts/loginContext';
 import passwordAction from '../../actions/passwordLogin.action';
 
 export default function PasswordInput() {
-  const { stateLogin, dispatch } = useContext(LoginContext);
-  console.log(stateLogin);
+  const { dispatch } = useContext(LoginContext);
   return (
     <input
       data-testid="password-input"
