@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import shareIcon from '../../images/shareIcon.svg';
 import blackHeartIcon from '../../images/blackHeartIcon.svg';
 
@@ -7,23 +8,29 @@ import blackHeartIcon from '../../images/blackHeartIcon.svg';
 
 function FavoriteRecipeCard(props) {
   const { recipe, index, handleRemoveRecipe } = props;
+  const detailsUrl = recipe.type === 'comida' ? `/comidas/${recipe.id}`
+    : `/bebidas/${recipe.id}`;
 
   return (
     <div key={ index }>
-      <img
-        data-testid={ `${index}-horizontal-image` }
-        style={ { maxWidth: '100px' } }
-        src={ recipe.image }
-        alt="Delicious food/drink"
-      />
+      <Link to={ detailsUrl }>
+        <img
+          data-testid={ `${index}-horizontal-image` }
+          style={ { maxWidth: '100px' } }
+          src={ recipe.image }
+          alt="Delicious food/drink"
+        />
+      </Link>
       <p data-testid={ `${index}-horizontal-top-text` }>
         { recipe.type === 'comida' && `${recipe.area} - ` }
         { recipe.alcoholicOrNot === 'Alcoholic' && 'Alcoholic - ' }
         { recipe.category }
       </p>
-      <p data-testid={ `${index}-horizontal-name` }>
-        { recipe.name }
-      </p>
+      <Link to={ detailsUrl }>
+        <p data-testid={ `${index}-horizontal-name` }>
+          { recipe.name }
+        </p>
+      </Link>
       <button type="button">
         <img
           data-testid={ `${index}-horizontal-share-btn` }
