@@ -12,6 +12,8 @@ const pageTitle = (type) => {
   if (type === 'meals') return 'Comidas';
   if (type === 'drinks') return 'Bebidas';
   if (type === 'search') return 'Explorar';
+  if (type === 'search-drinks') return 'Explorar Bebidas';
+  if (type === 'search-meals') return 'Explorar Comidas';
   if (type === 'search-ingredients') return 'Explorar Ingredientes';
   if (type === 'search-origin') return 'Explorar Origem';
   if (type === 'profile') return 'Perfil';

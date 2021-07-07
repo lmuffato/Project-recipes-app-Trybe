@@ -8,6 +8,7 @@ import Profile from './pages/Profile';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Search from './pages/Search';
+import SearchMealOrDrink from './pages/SearchMealOrDrink';
 
 function App() {
   return (
@@ -19,6 +20,8 @@ function App() {
         <Route exact path="/bebidas/:id" component={ RecipeDetails } />
         <Route exact path="/bebidas" component={ Drinks } />
         <Route exact path="/perfil" component={ Profile } />
+        <Route exact path="/explorar/comidas" component={ SearchMealOrDrink } />
+        <Route exact path="/explorar/bebidas" component={ SearchMealOrDrink } />
         <Route exact path="/explorar" component={ Search } />
       </Switch>
     </div>
