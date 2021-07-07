@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
+import * as moment from 'moment';
 
 import usePersistedState from './usePersistedState';
 import useClipBoard from './useClipboard';
@@ -25,6 +26,7 @@ export default function useRecipeProgress(type) {
     'favoriteRecipes',
     [],
   );
+  const [doneRecipes] = usePersistedState('doneRecipes', []);
   const [recipeProgress, setRecipeProgress] = useState(INITIAL_STATE_HOOKS);
   const { push } = useHistory();
   const { id } = useParams();
@@ -141,7 +143,25 @@ export default function useRecipeProgress(type) {
     return ingredients.length === checkedIngredients.length;
   };
 
-  const redirectToRecipeDonePage = () => push('/receitas-feitas');
+  const getRecipeDoneInfo = (recipeDone) => {
+    const date = moment().format('DD/MM/YYYY');
+    return {
+      ...getFavoriteInfos(recipeDone),
+      doneDate: date,
+      tags: recipeDone.strTags || '',
+    };
+  };
+
+  const redirectToRecipeDonePage = (recipeDone) => {
+    const recipeDoneInfo = getRecipeDoneInfo(recipeDone);
+    localStorage.setItem(
+      'doneRecipes',
+      JSON.stringify([...doneRecipes, recipeDoneInfo]),
+    );
+    // Bug com o usePersistedState
+    // setDoneRecipes([...doneRecipes, recipeDoneInfo]);
+    push('/receitas-feitas');
+  };
 
   return {
     inProgressRecipes,

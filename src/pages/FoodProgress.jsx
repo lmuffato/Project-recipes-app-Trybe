@@ -84,7 +84,7 @@ export default function FoodProgress() {
         type="button"
         data-testid="finish-recipe-btn"
         style={ styleFooter }
-        onClick={ redirectToRecipeDonePage }
+        onClick={ () => redirectToRecipeDonePage(recipeMeal) }
         disabled={ !recipeDoneCheck(ingredients) }
       >
         Finalizar Receita
