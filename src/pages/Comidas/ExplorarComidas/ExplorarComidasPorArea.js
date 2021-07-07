@@ -16,7 +16,7 @@ function ExplorarBebidasPorArea() {
     if (APIFood.meals !== null && APIFood.meals.length >= 1) {
       return (
         <div>
-          <Header title="Comidas" />
+          <Header title="Explorar Origem" />
           <AreasDropdown />
           <CardList
             list={ APIFood.meals }

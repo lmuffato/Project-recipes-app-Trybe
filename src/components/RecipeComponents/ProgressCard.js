@@ -31,7 +31,7 @@ const mountObject = (recipe) => {
     strCategory, strAlcoholic, strDrink, strDrinkThumb } = recipe.drinks[0];
   return {
     id: idDrink,
-    type: 'drinks',
+    type: 'bebida',
     area: '',
     category: strCategory || '',
     alcoholicOrNot: strAlcoholic,
@@ -42,6 +42,7 @@ const mountObject = (recipe) => {
 };
 
 function ProgressCard({ recipe }) {
+  const locate = window.location.href.split('/in-progress')[0];
   const recipeInfo = mountObject(recipe);
   const { meals: foods } = recipe;
   const { id, image, name, category, alcoholicOrNot,
@@ -138,10 +139,7 @@ function ProgressCard({ recipe }) {
   };
 
   const isChecked = (items, key) => items[1].filter((n) => {
-    if (n === key) {
-      return 'teste';
-    }
-    return false;
+    if (n === key) { return 'teste'; } return false;
   });
 
   const markedItems = () => {
@@ -208,12 +206,19 @@ function ProgressCard({ recipe }) {
       </ol>
     );
   };
+
+  const favoriteInfo = () => {
+    delete recipeInfo.ingredients;
+    delete recipeInfo.instructions;
+    return ([recipeInfo]);
+  };
+
   return (
     <div className="recipe_details">
       <RecipeImage origin={ image } />
       <RecipeTitle title={ name } />
-      <ShareBtn />
-      <FavBtn info={ recipeInfo } />
+      <ShareBtn dataTest="share-btn" path={ `${locate}` } />
+      <FavBtn info={ favoriteInfo() } />
       <RecipeCatg category={ `${category} ${alcoholicOrNot}` } />
       <h3>Ingredientes</h3>
       {listIngredients(ingredients)}
