@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import { useHistory } from 'react-router-dom';
 import RecomendacoesCard from './RecomendacoesCard';
@@ -18,6 +18,19 @@ function ReceitaBebidaDetalhe({ props }) {
   const history = useHistory();
 
   const { acctualyDrink, drinkRecomendation, id } = props;
+
+  useEffect(() => {
+    const verifyFavorite = () => {
+      if (JSON.parse(localStorage.getItem('favoriteRecipes') !== null)) {
+        const recipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
+        const checkRecipe = recipes.find((recipe) => recipe.id === id);
+
+        if (checkRecipe) setFavoriteDrink(true);
+      }
+    };
+
+    verifyFavorite();
+  }, [id]);
 
   const shareClick = (e) => {
     e.preventDefault();
