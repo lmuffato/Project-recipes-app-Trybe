@@ -10,6 +10,8 @@ class DetComidas extends React.Component {
       foods: [],
     };
     this.fetchFoodsById = this.fetchFoodsById.bind(this);
+    this.copy = this.copy.bind(this);
+    this.timer = this.timer.bind(this);
   }
 
   async componentDidMount() {
@@ -33,13 +35,35 @@ class DetComidas extends React.Component {
     return foods;
   }
 
+  timer() {
+    const div = document.querySelector('#recipeCopy');
+    const tagP = document.querySelector('#tagP');
+    div.removeChild(tagP);
+  }
+
+  copy() {
+    const el = document.createElement('input');
+    el.value = window.location.href;
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand('copy');
+    document.body.removeChild(el);
+    const div = document.querySelector('#recipeCopy');
+    const tagP = document.createElement('p');
+    tagP.setAttribute('id', 'tagP');
+    div.appendChild(tagP);
+    tagP.innerText = 'Link copiado!';
+    const time = 15000;
+    setTimeout(this.timer, time);
+  }
+
   render() {
     const { foods } = this.state;
     const food = Object.values(foods);
     console.log(food);
     return (
       food.map((recipe) => (
-        <div key="recipe">
+        <div id="recipeCopy" key="recipe">
           <img
             data-testid="recipe-photo"
             alt="imagem da receita"
@@ -53,6 +77,7 @@ class DetComidas extends React.Component {
             data-testid="share-btn"
             src={ shareIcon }
             alt="Compartilhar receita"
+            onClick={ this.copy }
           />
           <input
             type="image"
