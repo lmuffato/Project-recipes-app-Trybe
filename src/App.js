@@ -34,6 +34,16 @@ function App() {
         <Switch>
           <Route
             exact
+            path="/comidas/:id/in-progress"
+            render={ (props) => <ComidasAtiva { ...props } /> }
+          />
+          <Route
+            exact
+            path="/bebidas/:id/in-progress"
+            render={ (props) => <BebidasAtiva { ...props } /> }
+          />
+          <Route
+            exact
             path="/comidas/:id"
             render={ ({ match }) => renderDetalheReceitaComida(match) }
           />
@@ -42,8 +52,6 @@ function App() {
             path="/bebidas/:id"
             render={ ({ match }) => renderDetalheReceitaBebida(match) }
           />
-          <Route path="/comidas/:id-da-receita/in-progress" component={ ComidasAtiva } />
-          <Route path="/bebidas/:id-da-receita/in-progress" component={ BebidasAtiva } />
           <Route exact path="/explorar" component={ Explorar } />
           <Route exact path="/explorar/comidas" component={ ExplorarComidas } />
           <Route exact path="/explorar/bebidas" component={ ExplorarBebidas } />

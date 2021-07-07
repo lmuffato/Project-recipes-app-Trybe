@@ -1,14 +1,16 @@
 .explorar-buttons {
   display: flex;
   flex-direction: column;
-  height: 20%;
-  margin-top: 15px;
+  height: 70vh;
+  justify-content: space-evenly;
+  margin: 15px auto;
+  width: 80%;
 }
 
 .explorar-buttons > button {
   background-color: rgb(167, 166, 166);
   border-style: none;
-  height: 150px;
+  height: 80px;
 }
 
 .explorar-buttons > button:focus {
