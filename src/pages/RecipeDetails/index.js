@@ -3,21 +3,32 @@ import { AppContext } from '../../context/AppContext';
 import ShareIcon from '../../images/shareIcon.svg';
 import WhiteHeartIcon from '../../images/whiteHeartIcon.svg';
 import fetchByIdApi from '../../services/fetchApiDetails';
+import { fetchRecipesApi } from '../../services/fetchApiMain';
 import RecomCard from './RecomCard';
 
 export default function RecipeDetails(props) {
   const { context } = useContext(AppContext);
   const { pageOrigin } = context;
   const [recipe, setRecipe] = useState({});
+  const [recomRecipes, setRecomRecipes] = useState([]);
   const { match: { params: { id } } } = props;
+  const NUM_RECIPES_SHOWN = 6;
 
   useEffect(() => {
     fetchByIdApi(pageOrigin, id)
       .then((recipeCrr) => {
-        console.log(recipeCrr);
         setRecipe(recipeCrr);
       });
+    fetchRecipesApi(pageOrigin === 'themealdb' ? 'thecocktaildb' : 'themealdb')
+      .then((recipes) => {
+        recipes.splice(NUM_RECIPES_SHOWN, recipes.length - 1);
+        setRecomRecipes(recipes);
+      });
   }, []);
+
+  console.log(recipe);
+
+  console.log(recomRecipes);
 
   function getYouTubeURL() {
     const recipeURL = recipe.strYoutube.split('=');
@@ -40,6 +51,10 @@ export default function RecipeDetails(props) {
         return checkKey && checkValue;
       });
     return measures;
+  }
+
+  function fetchRecommended() {
+
   }
 
   return (
@@ -69,7 +84,7 @@ export default function RecipeDetails(props) {
             { recipe.strCategory }
           </p>
           <h3>Ingredients</h3>
-          <ul data-testid="0-ingredient-name-and-measure">
+          <ul>
             {getIngredients().map(
               (ingredient, index) => (
                 <li
@@ -90,7 +105,15 @@ export default function RecipeDetails(props) {
               data-testid="video"
             />
           ) : ''}
-          <RecomCard data-testid="${index}-recomendation-card" />
+          { recomRecipes ? recomRecipes.map(
+            (recomRecipe, index) => (
+              <RecomCard
+                data-testid={ `${index}-recomendation-card` }
+                key={ index }
+                recipe={ recomRecipe }
+              />
+            ),
+          ) : ''}
           <button type="button" data-testid="start-recipe-btn">Iniciar Receita</button>
         </div>)
         : ''}
