@@ -53,7 +53,6 @@ function Provider({ children }) {
     if (infoFavorite !== true) {
       setFavRecipes(infoFavorite);
       setInfoFav(infoFavorite);
-      console.log(infoFavorite);
     }
     if (infoDone !== true) {
       setDoneRecipes(infoDone);
