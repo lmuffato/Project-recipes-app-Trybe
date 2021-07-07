@@ -1,8 +1,9 @@
 .carousel-container {
-  height: 40vh;
+  display: flex;
+  flex-flow: row nowrap;
   margin-bottom: 5vh;
-  margin-left: 2.5vw;
-  width: 100vw;
+  overflow-x: scroll;
+  width: 90%;
 }
 
 .recipies-list {
