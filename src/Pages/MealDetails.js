@@ -6,6 +6,7 @@ import shareIcon from '../images/shareIcon.svg';
 import blackFavoriteIcon from '../images/blackHeartIcon.svg';
 import whiteFavoriteIcon from '../images/whiteHeartIcon.svg';
 import '../components/Footer.css';
+import './PagesCss/MealDetails.css';
 
 function MealDetails() {
   const id = window.location.href.split('/')[4];
@@ -94,27 +95,24 @@ function MealDetails() {
     );
   };
 
-  const renderRecomendations = (param) => {
-    if (param) {
-      return (
-        param.map((recipe, index) => {
-          const { strDrink, strAlcoholic, strDrinkThumb } = recipe;
-          const limitNumber = 6;
-          if (index <= limitNumber) {
-            return (
-              <div data-testid={ `${index}-recomendation-card` } key={ index }>
-                <img alt={ strDrink } src={ strDrinkThumb } />
-                <h3>{strAlcoholic}</h3>
-                <h2>{strDrink}</h2>
-              </div>
-            );
-          }
-          return '';
-        })
-      );
-    }
-    return '';
-  };
+  const renderRecomendations = (param) => (
+    param && (
+      param.map((recipe, index) => {
+        const { strDrink, strAlcoholic, strDrinkThumb } = recipe;
+        const limitNumber = 6;
+        return index < limitNumber && (
+          <div
+            data-testid={ `${index}-recomendation-card` }
+            key={ index }
+            className="carousel-container"
+          >
+            <img alt={ strDrink } src={ strDrinkThumb } />
+            <h4>{strAlcoholic}</h4>
+            <h3 data-testid={ `${index}-recomendation-title` }>{strDrink}</h3>
+          </div>
+        );
+      }))
+  );
 
   const copyLink = () => {
     const url = window.location.href;
@@ -142,7 +140,7 @@ function MealDetails() {
       } = data[0];
       const youtubeEmbed = strYoutube.split('=')[1];
       return (
-        <div>
+        <div className="util-area">
           <img
             className="recipe-img"
             alt="recipe"
@@ -190,7 +188,7 @@ function MealDetails() {
           <iframe
             type="text/html"
             title="recipe"
-            width="420"
+            width="330"
             height="315"
             src={ `https://www.youtube.com/embed/${youtubeEmbed}` }
             data-testid="video"
@@ -211,7 +209,7 @@ function MealDetails() {
   };
 
   return (
-    <div>
+    <div className="container">
       {renderMealRecipe()}
     </div>
   );
