@@ -15,6 +15,7 @@ const CardContainer = styled.div`margin: 8px 8px 32px;
 
     img {
       bottom: auto;
+      height: 100%;
       left: auto;
       min-width: 100%;
       object-fit: cover;
@@ -41,7 +42,6 @@ const CardContainer = styled.div`margin: 8px 8px 32px;
     align-items: center;
     margin: 0 auto;
   }
-
 `;
 
 export default CardContainer;

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import CarouselWrapper from './styles';
-import CardList from '../CardList/CardList';
+import CardGrid from '../CardList/CardGrid';
 import useDetailsProvider from '../../hooks/useDetailsProvider';
 
 function Carousel({ recipeRecommendations, type }) {
@@ -21,7 +21,7 @@ function Carousel({ recipeRecommendations, type }) {
         <h3>Recomendadas</h3>
       </div>
       <div className="card-grid">
-        <CardList
+        <CardGrid
           recipes={ recommend }
           type={ currRecomendation || type }
         />

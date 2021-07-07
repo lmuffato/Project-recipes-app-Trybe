@@ -26,7 +26,12 @@ function Card(props) {
               />
             </div>
             <div className="card-info">
-              <p data-testid={ `${index}-recomendation-card` }>{ recipeName }</p>
+              <p
+                data-testid={ `${index}-recomendation-title` }
+                className="card-info-paragraph"
+              >
+                { recipeName }
+              </p>
             </div>
           </div>
         ) : (
@@ -41,7 +46,12 @@ function Card(props) {
               />
             </div>
             <div className="card-info">
-              <p data-testid={ `${index}-recomendation-card` }>{ recipeName }</p>
+              <p
+                data-testid={ `${index}-recomendation-title` }
+                className="card-info-paragraph"
+              >
+                { recipeName }
+              </p>
             </div>
           </div>
         )}
@@ -50,13 +60,11 @@ function Card(props) {
   }
 
   return (
-
     <CardContainer>
       <div data-testid={ `${index}-recipe-card` }>
         <div className="img-wrapper">
           <img
             data-testid={ `${index}-card-img` }
-            style={ { maxWidth: '100px' } }
             src={ recipeThumb }
             alt="Delicious food/drink"
           />
@@ -66,7 +74,6 @@ function Card(props) {
         </div>
       </div>
     </CardContainer>
-
   );
 }
 
