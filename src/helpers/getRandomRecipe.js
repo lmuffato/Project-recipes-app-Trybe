@@ -16,7 +16,7 @@ function RandomRecipe(type) {
       }
     };
     fetchApi();
-  }, []);
+  }, [url]);
   return dataLocal;
 }
 
