@@ -10,7 +10,7 @@ import CategoriesButtons from '../../components/CategoriesButtons';
 
 function FoodPage() {
   document.title = 'Comidas';
-  const { recipes, setRecipes } = useContext(RecipeContext);
+  const { recipes, setRecipes, redirect } = useContext(RecipeContext);
   const [isLoading, setIsLoading] = useState(true);
   const [categories, setCategories] = useState([]);
   const [choosedCategory, toggleCategory] = useState('');
@@ -54,6 +54,7 @@ function FoodPage() {
           />
         ))}
       <FooterMenu />
+      { redirect }
     </section>
   );
 }

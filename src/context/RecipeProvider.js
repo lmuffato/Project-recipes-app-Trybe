@@ -7,6 +7,7 @@ import RecipeContext from './RecipeContext';
 function RecipeProvider({ children }) {
   // const [isLoading, setIsLoading] = useState(false);
   const [recipes, setRecipes] = useState([]);
+  const [redirect, setRedirect] = useState(null);
 
   // async function fetchMeals() {
   //   setIsLoading(true);
@@ -20,6 +21,8 @@ function RecipeProvider({ children }) {
     setRecipes,
     // fetchMeals,
     // isLoading,
+    redirect,
+    setRedirect,
   };
 
   return (
