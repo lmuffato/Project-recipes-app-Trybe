@@ -88,7 +88,7 @@ function Provider({ children }) {
   }, []);
 
   useEffect(() => {
-    fetchArea().then((results) => setMealArea([...mealArea, ...results.meals]));
+    fetchArea().then((results) => setMealArea([...results.meals]));
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
