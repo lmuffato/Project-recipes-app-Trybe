@@ -3,10 +3,14 @@ import { Route, Switch } from 'react-router-dom';
 import LoginPage from './pages/LoginPage';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Header from './compenents/Header';
 import Footer from './compenents/Footer';
-// import MainRecepies from './compenents/MainRecepies';
-import SearchbarProvider from './contexts/SeachbarProvider';
+import Profile from './pages/ProfilePage';
+import ReceitasFeitas from './pages/ReceitasFeitas';
+import ReceitasFavoritas from './pages/ReceitasFavoritas';
 import UserProvider from './contexts/UserProvider';
+import SearchbarProvider from './contexts/SeachbarProvider';
+import HeaderProvider from './contexts/HeaderProvider';
 import Explore from './pages/Explore';
 import Foods from './pages/Foods';
 import Drinks from './pages/Drinks';
@@ -17,6 +21,9 @@ import FoodsArea from './pages/FoodsArea';
 function App() {
   return (
     <div className="meals">
+      <HeaderProvider>
+        <Header />
+      </HeaderProvider>
       <UserProvider>
         <SearchbarProvider>
           <Switch>
@@ -24,6 +31,9 @@ function App() {
             <Route exact path="/explorar" component={ Explore } />
             <Route exact path="/explorar/comidas" component={ Foods } />
             <Route exact path="/explorar/bebidas" component={ Drinks } />
+            <Route path="/perfil" component={ Profile } />
+            <Route path="/receitas-feitas" component={ ReceitasFeitas } />
+            <Route path="/receitas-favoritas" component={ ReceitasFavoritas } />
             <Route
               path="/explorar/comidas/ingredientes"
               component={ FoodsIngredients }
@@ -33,7 +43,6 @@ function App() {
               component={ DrinksIngredients }
             />
             <Route exact path="/explorar/comidas/area" component={ FoodsArea } />
-
           </Switch>
           <Footer />
         </SearchbarProvider>
