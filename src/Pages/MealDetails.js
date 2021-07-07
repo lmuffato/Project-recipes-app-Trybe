@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { actionDetails } from '../redux/actions';
+import RecomendationCard from '../util/renderRecomendationCard';
 import shareIcon from '../images/shareIcon.svg';
 import blackFavoriteIcon from '../images/blackHeartIcon.svg';
 import whiteFavoriteIcon from '../images/whiteHeartIcon.svg';
@@ -98,20 +99,14 @@ function MealDetails() {
   const renderRecomendations = (param) => (
     param && (
       param.map((recipe, index) => {
-        const { strDrink, strAlcoholic, strDrinkThumb } = recipe;
         const limitNumber = 6;
         return index < limitNumber && (
-          <div
-            data-testid={ `${index}-recomendation-card` }
-            key={ index }
-            className="carousel-container"
-          >
-            <img alt={ strDrink } src={ strDrinkThumb } />
-            <h4>{strAlcoholic}</h4>
-            <h3 data-testid={ `${index}-recomendation-title` }>{strDrink}</h3>
+          <div className="recipe-card">
+            {RecomendationCard('comidas', recipe, index)}
           </div>
         );
-      }))
+      })
+    )
   );
 
   const copyLink = () => {
@@ -119,6 +114,49 @@ function MealDetails() {
     navigator.clipboard.writeText(url);
     setCopy('Link copiado!');
   };
+
+  const renderInstructions = (strInst, ytEmb) => (
+    <>
+      <p data-testid="instructions">{strInst}</p>
+      <h2>Video</h2>
+      <iframe
+        type="text/html"
+        title="recipe"
+        width="330"
+        height="315"
+        src={ `https://www.youtube.com/embed/${ytEmb}` }
+        data-testid="video"
+      />
+    </>
+  );
+
+  const renderIngredients = (ingredients, measure) => (
+    <ul>
+      { ingredients.map((item, index) => {
+        if (item !== '') {
+          if (measure[index].length > 1) {
+            return (
+              <li
+                key={ index }
+                data-testid={ `${index}-ingredient-name-and-measure` }
+              >
+                {`${item} - ${measure[index]}`}
+              </li>
+            );
+          }
+          return (
+            <li
+              key={ index }
+              data-testid={ `${index}-ingredient-name-and-measure` }
+            >
+              {`${item} - ${measure[index]} un`}
+            </li>
+          );
+        }
+        return '';
+      })}
+    </ul>
+  );
 
   const renderMealRecipe = () => {
     const ingredients = [];
@@ -140,7 +178,7 @@ function MealDetails() {
       } = data[0];
       const youtubeEmbed = strYoutube.split('=')[1];
       return (
-        <div className="util-area">
+        <div>
           <img
             className="recipe-img"
             alt="recipe"
@@ -157,44 +195,18 @@ function MealDetails() {
           {copy}
           <h3 data-testid="recipe-category">{strCategory}</h3>
           <h2>Ingredients</h2>
-          <ul>
-            { ingredients.map((item, index) => {
-              if (item !== '') {
-                if (measure[index].length > 1) {
-                  return (
-                    <li
-                      key={ index }
-                      data-testid={ `${index}-ingredient-name-and-measure` }
-                    >
-                      {`${item} - ${measure[index]}`}
-                    </li>
-                  );
-                }
-                return (
-                  <li
-                    key={ index }
-                    data-testid={ `${index}-ingredient-name-and-measure` }
-                  >
-                    {`${item} - ${measure[index]} un`}
-                  </li>
-                );
-              }
-              return '';
-            })}
-          </ul>
+          {renderIngredients(ingredients, measure)}
+
           <h2>Instructions</h2>
-          <p data-testid="instructions">{strInstructions}</p>
-          <h2>Video</h2>
-          <iframe
-            type="text/html"
-            title="recipe"
-            width="330"
-            height="315"
-            src={ `https://www.youtube.com/embed/${youtubeEmbed}` }
-            data-testid="video"
-          />
+          {renderInstructions(strInstructions, youtubeEmbed)}
+
           <h2>Recomendadas</h2>
-          {renderRecomendations(recomendations)}
+          <div className="carousel-container">
+            <div className="recipies-list">
+              {renderRecomendations(recomendations)}
+            </div>
+          </div>
+
           <button
             className="footer"
             type="button"
@@ -209,7 +221,7 @@ function MealDetails() {
   };
 
   return (
-    <div className="container">
+    <div className="meal-detail-container">
       {renderMealRecipe()}
     </div>
   );
