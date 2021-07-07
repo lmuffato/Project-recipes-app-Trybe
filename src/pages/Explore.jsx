@@ -25,7 +25,6 @@ function Explore() {
           </a>
         </section>
       </section>
-      Tela explorar
       <Footer />
     </div>
   );

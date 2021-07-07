@@ -1,8 +1,15 @@
 import React from 'react';
+import { Link, useHistory } from 'react-router-dom';
 import Header from '../components/Header/Header';
 import Footer from '../components/Footer/Footer';
+import { fetchRandomDrink } from '../hooks/useFetchRandom';
 
 function ExploreDrinks() {
+  const history = useHistory();
+  const handleRandom = async () => {
+    const idRandomDrink = await fetchRandomDrink();
+    history.push(`/bebidas/${idRandomDrink}`);
+  };
   return (
     <div>
       <Header>
@@ -17,11 +24,12 @@ function ExploreDrinks() {
           </a>
         </section>
         <section data-testid="explore-surprise">
-          <a
+          <Link
             href="/explorar/bebidas/me-surpreenda"
+            onClick={ handleRandom }
           >
             <h2>Me Surpreenda!</h2>
-          </a>
+          </Link>
         </section>
       </section>
       <Footer />
