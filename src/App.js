@@ -15,7 +15,7 @@ import ExploreDrinksByIngredients from './Pages/ExploreDrinksByIngredients';
 import ExploreFoodByArea from './Pages/ExploreFoodByArea';
 import UserProfile from './Pages/UserProfile';
 import DoneRecepies from './Pages/DoneRecepies';
-import FavoriteRecepies from './Pages/FavoriteRecepies';
+import FavoriteRecipes from './Pages/FavoriteRecipes';
 import NotFound from './Pages/NotFound';
 
 function App() {
@@ -49,7 +49,7 @@ function App() {
       <Route path="/explorar" component={ Explore } />
       <Route path="/perfil" component={ UserProfile } />
       <Route path="/receitas-feitas" component={ DoneRecepies } />
-      <Route path="/receitas-favoritas" component={ FavoriteRecepies } />
+      <Route path="/receitas-favoritas" component={ FavoriteRecipes } />
     </Switch>
   );
 }
