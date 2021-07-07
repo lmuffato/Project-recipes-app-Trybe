@@ -21,7 +21,7 @@ function DetailsCard({ product, idn }) {
             return (
               <li
                 data-testid={ `${index}-ingredient-name-and-measure` }
-                key={ ingredient }
+                key={ `${ingredient}-${index}` }
               >
                 {ingredient}
               </li>

@@ -58,6 +58,7 @@ const ButtonsCategory = ({ page, identifier }) => {
                 type="button"
                 data-testid={ `${category.strCategory}-category-filter` }
                 onClick={ () => handleClick(category.strCategory) }
+                key={ category.strCategory }
               >
                 {category.strCategory}
               </button>
