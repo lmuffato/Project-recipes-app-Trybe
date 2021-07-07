@@ -32,7 +32,7 @@ export default function IngredientsListCheckbox({ recipe }) {
           key={ index }
           data-testid={ `${index}-ingredient-step` }
         >
-          {`${ing[0]}: ${ing[1] ? ing[1] : 'a vonts'}`}
+          {`${ing[0]} - ${ing[1] ? ing[1] : 'a vonts'}`}
         </p>
       ))}
 

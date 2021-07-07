@@ -6,7 +6,7 @@ import IngredientListCheckbox from '../components/RecipesIP/IngredientsListCheck
 
 import { fetchDrinkByID } from '../services/cocktailAPI';
 
-export default function DetalhesComidasIP() {
+export default function DetalhesBebidasIP() {
   const { pathname } = useLocation();
   const drinkId = pathname.split('/')[2];
   const [drink, setDrink] = useState({});
