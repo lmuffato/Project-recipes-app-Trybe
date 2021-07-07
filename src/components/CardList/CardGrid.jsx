@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Slide } from 'pure-react-carousel';
 import PropTypes from 'prop-types';
 import Card from '../Card/Card';
 // import useFilteredRecipes from '../../hooks/useFilteredRecipes';
@@ -18,19 +19,23 @@ function CardGrid({ recipes, type }) {
     <CarouselCardContainer>
       {recipes.length > 0 && recipes.map((recipe, i) => (
         type === 'meals' ? (
-          <Link
-            to={ { pathname: `/comidas/${recipe.idMeal}` } }
-            key={ i }
-          >
-            <Card recipe={ recipe } index={ i } />
-          </Link>
+          <Slide index={ i } className="slide-size" key={ i }>
+            <Link
+              to={ { pathname: `/comidas/${recipe.idMeal}` } }
+              key={ i }
+            >
+              <Card recipe={ recipe } index={ i } />
+            </Link>
+          </Slide>
         ) : (
-          <Link
-            to={ `/bebidas/${recipe.idDrink}` }
-            key={ i }
-          >
-            <Card recipe={ recipe } index={ i } />
-          </Link>
+          <Slide index={ i } className="slide-size" key={ i }>
+            <Link
+              to={ `/bebidas/${recipe.idDrink}` }
+              key={ i }
+            >
+              <Card recipe={ recipe } index={ i } />
+            </Link>
+          </Slide>
         )
       ))}
     </CarouselCardContainer>

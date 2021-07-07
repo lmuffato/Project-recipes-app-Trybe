@@ -95,13 +95,21 @@ const Container = styled.div`align-items: center;
     max-width: 90vw;
   }
 
-  /* .carousel-container {
-    margin: 0 auto 2rem;
+  .title-wrapper {
+    border: 0;
+    font: inherit;
+    font-size: 1em;
+    margin: 0;
+    padding: 0;
+    vertical-align: baseline;
 
-    div {
-      margin-bottom: 2rem;
+    h3 {
+      color: #707070;
+      font-size: 18px;
+      line-height: 29px;
+      margin: 0 0 28px;
     }
-  } */
+  }
 
   button {
     border: 0;

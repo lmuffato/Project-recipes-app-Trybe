@@ -4,43 +4,44 @@ const CarouselWrapper = styled.div`background-color: white;
   display: flex;
   flex-flow: column wrap;
   justify-content: center;
-  margin: 0 auto;
-  max-width: calc(90vw);
-  scroll-behavior: smooth;
-  width: 100%;
 
-  .title-wrapper {
-    border: 0;
-    font: inherit;
-    font-size: 1em;
-    margin: 0;
-    padding: 0;
-    vertical-align: baseline;
+  /* margin: 0 auto; */
+  overflow-x: auto;
 
-    h3 {
-      color: #707070;
-      font-size: 18px;
-      line-height: 29px;
-      margin: 0 0 28px;
-    }
+  ::-webkit-scrollbar {
+    display: none;
   }
 
+  /* max-width: calc(100vw); */
+
+  /* scroll-behavior: smooth; */
+  width: 100%;
+
   .card-grid {
-    overflow-x: scroll;
+
+    /* overflow-x: scroll; */
     padding: 0;
-    scroll-snap-type: x mandatory;
+
+    /* scroll-snap-type: x mandatory; */
+    div li {
+      list-style-type: none;
+
+      div {
+        margin: 0 10px 9px auto;
+      }
+    }
 
     img {
       object-fit: cover;
     }
 
-    .invisible {
+    /* .invisible {
       visibility: hidden;
-    }
+    } */
 
-    .visible {
+    /* .visible {
       margin: 0 auto;
-    }
+    } */
   }
 `;
 
@@ -58,10 +59,6 @@ export const CarouselCardContainer = styled.div`align-content: normal;
     color: black;
     text-decoration: none;
   }
-
-
 `;
-
-// images are in an array, img path, title, subtitle
 
 export default CarouselWrapper;

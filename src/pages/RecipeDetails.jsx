@@ -87,6 +87,9 @@ function RecipeDetails({ type }) {
           youTubeVideo={ youTubeVideo.substring(magicNumber) }
           title={ recipeName }
         />) : ''}
+      <div className="title-wrapper">
+        <h3>Recomendadas</h3>
+      </div>
       <Carousel
         recipeRecommendations={ carouselRecommendations }
         type={ type }

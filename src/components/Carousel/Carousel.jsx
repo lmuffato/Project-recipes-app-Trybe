@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { CarouselProvider, Slider } from 'pure-react-carousel';
 import CarouselWrapper from './styles';
 import CardGrid from '../CardList/CardGrid';
 import useDetailsProvider from '../../hooks/useDetailsProvider';
@@ -17,15 +18,18 @@ function Carousel({ recipeRecommendations, type }) {
 
   return (
     <CarouselWrapper>
-      <div className="title-wrapper">
-        <h3>Recomendadas</h3>
-      </div>
-      <div className="card-grid">
-        <CardGrid
-          recipes={ recommend }
-          type={ currRecomendation || type }
-        />
-      </div>
+      <CarouselProvider
+        naturalSlideWidth={ 100 }
+        naturalSlideHeight={ 100 }
+        visibleSlides={ 2 }
+        totalSlides={ 6 }
+      >
+        <div className="card-grid">
+          <Slider>
+            <CardGrid recipes={ recommend } type={ currRecomendation || type } />
+          </Slider>
+        </div>
+      </CarouselProvider>
     </CarouselWrapper>
   );
 }
