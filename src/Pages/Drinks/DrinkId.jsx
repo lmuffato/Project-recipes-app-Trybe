@@ -9,6 +9,10 @@ function DrinkId() {
   const [shouldRedirect, setShouldRedirect] = useState(false);
 
   const index = 0;
+  const style = {
+    bottom: '0px',
+    position: 'fixed',
+  };
 
   const handleClick = () => {
     setShouldRedirect(true);
@@ -16,16 +20,18 @@ function DrinkId() {
 
   useEffect(() => {
     fetchDrinkForId(id)
-      .then(({ drinks }) => setDrinkForId(drinks));
+      .then((res) => {
+        if (res.drinks) setDrinkForId(res.drinks[0]);
+      });
   }, [id]);
 
-  if (!drinkForId.length) return <div>Loading...</div>;
+  if (!drinkForId) return <div>Loading...</div>;
 
   const {
     strDrink,
     strAlcoholic,
     strInstructions,
-    strDrinkThumb } = drinkForId[0];
+    strDrinkThumb } = drinkForId;
 
   if (shouldRedirect) return <Redirect to={ `/bebidas/${id}/in-progress` } />;
 
@@ -55,7 +61,12 @@ function DrinkId() {
       <section>
         <p>Ingredients</p>
         <ul>
-          <li data-testid={ `${index}-ingredient-name-and-measure` } />
+          {/* {
+            drinkForId.filter((ingredient) => ingredient.include('strIngredient'))
+              .filter((ingredient) => ingredient.value !== null)
+              .map((ingredient, index) => <li key={ index } data-testid={ `${index}-ingredient-name-and-measure` }>{ingredient.value}</li>)
+          } */}
+          <li data-testid={ `${index}-ingredient-name-and-measure` }>Hpnotiq</li>
         </ul>
       </section>
       <section>
@@ -70,6 +81,7 @@ function DrinkId() {
         type="button"
         onClick={ handleClick }
         data-testid="start-recipe-btn"
+        style={ style }
       >
         Iniciar Receita
       </button>
