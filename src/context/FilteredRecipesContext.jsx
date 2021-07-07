@@ -25,7 +25,7 @@ function FilteredRecipesContextProvider(props) {
       //   setFilteredRecipes(formattingData[type]);
       // }
       setFilteredData(formattingData);
-      setFilteredRecipes(formattingData);
+      setFilteredRecipes(formattingData[type]);
       // setFilteredData(formattingData);
       // console.log(formattingData[type] !== null ? 'sim' : 'no');
       console.log(formattingData[type]);

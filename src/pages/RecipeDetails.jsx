@@ -84,6 +84,7 @@ function RecipeDetails({ type }) {
         recipeRecommendations={ carouselRecommendations }
         currentImg={ currentImage }
         currRecommendation={ currRecomendation }
+        type={ type }
       />
       <Button data-testid="start-recipe-btn">
         Iniciar receita

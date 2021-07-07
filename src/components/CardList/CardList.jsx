@@ -7,7 +7,7 @@ import useFilteredRecipes from '../../hooks/useFilteredRecipes';
 import CardListContainer from './styles';
 
 function CardList({ recipes, type, titleTestId, cardTestId }) {
-  const { getFilteredRecipes,
+  const { getFilteredRecipes, filteredRecipes,
     searchBarFilters, filteredData } = useFilteredRecipes();
   const [receitasFiltradas, setReceitasFiltradas] = useState([]);
   // const { filteredRecipes } = useFilteredRecipes();
@@ -33,7 +33,7 @@ function CardList({ recipes, type, titleTestId, cardTestId }) {
 
   const filteredDataType = Object.keys(filteredData);
 
-  if (receitasFiltradas.length === 1) {
+  if (filteredRecipes.length === 1) {
     const recipe = receitasFiltradas[0].find((el) => el === receitasFiltradas[0][0]);
 
     return filteredDataType[0] === 'meals' ? (
@@ -56,9 +56,9 @@ function CardList({ recipes, type, titleTestId, cardTestId }) {
 
   return (
     <CardListContainer>
-      { receitasFiltradas.length > 1 ? (
-        receitasFiltradas.map((recipe, index) => (
-          type === 'meals' ? (
+      { filteredRecipes.length > 1 ? (
+        filteredRecipes.map((recipe, index) => (
+          filteredDataType[0] === 'meals' ? (
             <Link
               to={ { pathname: `/comidas/${recipe.idMeal}`, state: { recipe, type } } }
               key={ index }
@@ -66,7 +66,7 @@ function CardList({ recipes, type, titleTestId, cardTestId }) {
               <Card
                 recipe={ recipe }
                 index={ index }
-                type={ type }
+                // type={ filteredDataType[0] }
                 titleTestId={ titleTestId }
                 cardTestId={ cardTestId }
               />
@@ -79,7 +79,7 @@ function CardList({ recipes, type, titleTestId, cardTestId }) {
               <Card
                 recipe={ recipe }
                 index={ index }
-                type={ type }
+                // type={ filteredDataType[0] }
                 titleTestId={ titleTestId }
                 cardTestId={ cardTestId }
               />

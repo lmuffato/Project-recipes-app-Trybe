@@ -10,20 +10,20 @@ function DetailsContextProvider({ children }) {
   const [currentImage, setCurrentImage] = useState(0);
   const [recommendations, setRecomendations] = useState([]);
 
-  const handleFetch = useCallback(async (url, tipo) => {
+  const handleFetch = useCallback(async (url, type) => {
     try {
       const request = await fetch(url);
       const data = await request.json();
-      if (data) setRecipe(data[tipo][0]);
-      console.log(data[tipo][0]);
+      if (data) setRecipe(data[type][0]);
+      console.log(data[type][0]);
       setIsLoading(false);
     } catch (err) {
       console.log(err);
     }
   }, []);
 
-  const fetchMealRecipes = useCallback(async (endpoint, typeOfPage) => {
-    const currRecomendation = typeOfPage === 'meals' ? 'drinks' : 'meals';
+  const fetchMealRecipes = useCallback(async (endpoint, type) => {
+    const currRecomendation = type === 'meals' ? 'drinks' : 'meals';
     try {
       const response = await fetch(endpoint);
       const data = await response.json();
