@@ -3,7 +3,7 @@ import { BrowserRouter } from 'react-router-dom';
 
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Rotas from './services/Routes';
+import Routes from './services/Routes';
 
 import UserProvider from './context/UserProvider';
 import RecipeProvider from './context/RecipeProvider';
@@ -13,7 +13,7 @@ function App() {
     <RecipeProvider>
       <UserProvider>
         <BrowserRouter>
-          <Rotas />
+          <Routes />
         </BrowserRouter>
       </UserProvider>
     </RecipeProvider>
