@@ -24,7 +24,7 @@ function DoneRecipesCards() {
       {
         retrieveLocalInfo() !== false
       && retrieveLocalInfo().map((e, i) => (
-        <>
+        <div key={ i } className="doneComponents">
           <Link to={ `${e.type}s/${e.id}` }>
             <img
               src={ e.image }
@@ -33,12 +33,18 @@ function DoneRecipesCards() {
               key={ i }
               className="image"
             />
-            <h4 data-testid={ `${i}-horizontal-top-text` }>
+            <h4 data-testid={ `${i}-horizontal-top-text` } className="doneCategory">
               {e.alcoholicOrNot !== ''
                 ? `${e.category} - ${e.alcoholicOrNot}`
                 : `${e.area} - ${e.category}` }
             </h4>
-            <h2 data-testid={ `${i}-horizontal-name` }>{e.name}</h2>
+            <h2
+              data-testid={ `${i}-horizontal-name` }
+              className="doneTitle"
+            >
+              {e.name}
+
+            </h2>
           </Link>
           <p data-testid={ `${i}-horizontal-done-date` }>{e.doneDate}</p>
           <ShareBtn
@@ -46,7 +52,7 @@ function DoneRecipesCards() {
             path={ `${locate}${e.type}s/${e.id}` }
           />
           <TagMaker index={ i } />
-        </>
+        </div>
       ))
       }
     </div>);

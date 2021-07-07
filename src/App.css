@@ -1,20 +1,34 @@
 * {
   font-size: 0.96em;
 }
+
 .progressTitle {
   font-size: 1.3em;
+}
+
+.doneComponents {
+  display: flex;
+  font-size: 12px;
+}
+
+.doneCategory {
+  font-size: 1.3em;
+}
+
+.doneTitle {
+  font-size: 1.4em;
 }
 
 .ol-ingredients {
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
   line-height: 0.7em;
 }
+
 .li-ingredients {
- display: flex;
- width: 35%;
- flex-direction: row;
+  display: flex;
+  flex-direction: row;
+  width: 35%;
 }
 
 .page-title {
@@ -41,10 +55,10 @@
   width: 100%;
 }
 
-.finish-recipe{
-    border: 1px solid black;
-    bottom: 0;
-    height: 50px;
-    position: fixed;
-    width: 100%;
+.finish-recipe {
+  border: 1px solid black;
+  bottom: 0;
+  height: 50px;
+  position: fixed;
+  width: 100%;
 }

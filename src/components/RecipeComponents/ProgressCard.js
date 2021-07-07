@@ -14,7 +14,7 @@ const filterIngredients = (recipeItems) => Object.entries(recipeItems)
 const mountObject = (recipe) => {
   if (recipe.meals) {
     const { idMeal, strArea,
-      strCategory, strMeal, strMealThumb, strInstructions } = recipe.meals[0];
+      strCategory, strMeal, strMealThumb, strInstructions, strTags } = recipe.meals[0];
     return {
       id: idMeal,
       type: 'comida',
@@ -25,10 +25,11 @@ const mountObject = (recipe) => {
       image: strMealThumb,
       instructions: strInstructions,
       ingredients: filterIngredients(recipe.meals[0]),
+      tags: [strTags] || '',
     };
   }
   const { idDrink,
-    strCategory, strAlcoholic, strDrink, strDrinkThumb } = recipe.drinks[0];
+    strCategory, strAlcoholic, strDrink, strDrinkThumb, strTags } = recipe.drinks[0];
   return {
     id: idDrink,
     type: 'bebida',
@@ -38,9 +39,9 @@ const mountObject = (recipe) => {
     name: strDrink,
     image: strDrinkThumb,
     ingredients: filterIngredients(recipe.drinks[0]),
+    tags: [strTags] || '',
   };
 };
-
 function ProgressCard({ recipe }) {
   const locate = window.location.href.split('/in-progress')[0];
   const recipeInfo = mountObject(recipe);
@@ -53,28 +54,21 @@ function ProgressCard({ recipe }) {
 
   useEffect(() => {
     const element = document.querySelectorAll('.input-ingredients');
-    Object.values(element)
-      .filter((el) => el.checked)
-      .forEach((el) => {
-        el.parentNode.style.textDecoration = lineThrough;
-      });
+    Object.values(element).filter((el) => el.checked).forEach((el) => {
+      el.parentNode.style.textDecoration = lineThrough;
+    });
   }, []);
 
   const enableButton = useCallback(() => {
     const inputs = document.querySelectorAll('.input-ingredients');
-    const checkedsInputs = Object.values(inputs)
-      .filter((el) => el.checked);
-    if (checkedsInputs.length === ingredients.length) {
+    const check = Object.values(inputs).filter((el) => el.checked);
+    if (check.length === ingredients.length) {
       setIsDisable(false);
     } else {
       setIsDisable(true);
     }
   }, [ingredients.length]);
-
-  useEffect(() => {
-    enableButton();
-  }, [enableButton]);
-
+  useEffect(() => { enableButton(); }, [enableButton]);
   const changeTextDecoration = (parentNode) => {
     if (parentNode.style.textDecoration !== lineThrough) {
       parentNode.style.textDecoration = lineThrough;
@@ -82,7 +76,6 @@ function ProgressCard({ recipe }) {
       parentNode.style.textDecoration = 'none';
     }
   };
-
   const lsMountMealsObject = (lsRecipe, valInt, minusOne) => {
     const { meals: food, cocktails } = lsRecipe;
     Object.entries(food).forEach(([idItem, val]) => {
@@ -118,11 +111,9 @@ function ProgressCard({ recipe }) {
       }
     });
   };
-
   const setLocalStorage = (lsRecipe, value) => {
     const minusOne = -1;
     const valInt = Number.parseInt(value, 10);
-
     if (foods) {
       lsMountMealsObject(lsRecipe, valInt, minusOne);
     } else {
@@ -206,13 +197,23 @@ function ProgressCard({ recipe }) {
       </ol>
     );
   };
-
   const favoriteInfo = () => {
-    delete recipeInfo.ingredients;
-    delete recipeInfo.instructions;
-    return ([recipeInfo]);
+    delete recipeInfo.ingredients; delete recipeInfo.instructions; return ([recipeInfo]);
   };
-
+  const handleClick = () => {
+    const date = new Date();
+    // source: https://blog.betrybe.com/javascript/javascript-date-format/
+    const data = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
+    recipeInfo.doneDate = data;
+    const local = localStorage.getItem('doneRecipes');
+    if (local === '' || local === null) {
+      localStorage.setItem('doneRecipes', JSON.stringify([recipeInfo]));
+    } else {
+      const doneRecipes = JSON.parse(local);
+      const addDoneRecipes = doneRecipes.concat(recipeInfo);
+      localStorage.setItem('doneRecipes', JSON.stringify(addDoneRecipes));
+    }
+  };
   return (
     <div className="recipe_details">
       <RecipeImage origin={ image } />
@@ -231,15 +232,13 @@ function ProgressCard({ recipe }) {
         data-testid="finish-recipe-btn"
         type="button"
         disabled={ isDisable }
-        onClick={ () => history.push('/receitas-feitas') }
+        onClick={ () => { history.push('/receitas-feitas'); handleClick(); } }
       >
         Finalizar Receita
       </button>
     </div>
   );
 }
-
 ProgressCard.propTypes = {
-  recipe: PropTypes.objectOf(PropTypes.any),
-}.isRequired;
+  recipe: PropTypes.objectOf(PropTypes.any) }.isRequired;
 export default ProgressCard;
