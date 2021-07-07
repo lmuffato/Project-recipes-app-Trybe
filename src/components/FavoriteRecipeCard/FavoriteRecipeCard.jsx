@@ -18,6 +18,7 @@ function FavoriteRecipeCard(props) {
       />
       <p data-testid={ `${index}-horizontal-top-text` }>
         { recipe.type === 'comida' && `${recipe.area} - ` }
+        { recipe.alcoholicOrNot === 'Alcoholic' && 'Alcoholic - ' }
         { recipe.category }
       </p>
       <p data-testid={ `${index}-horizontal-name` }>
