@@ -4,6 +4,7 @@ import FavoriteRecipeCard from '../components/FavoriteRecipeCard/FavoriteRecipeC
 function FavoriteRecipes() {
   const [favoriteRecipes, setFavoriteRecipes] = useState([]);
   const [filterByType, setFilterByType] = useState('All');
+  const [copiedToClipboard, setCopiedToClipboard] = useState(false);
 
   useEffect(() => {
     const favoriteStorage = JSON.parse(localStorage.getItem('favoriteRecipes'));
@@ -41,6 +42,8 @@ function FavoriteRecipes() {
 
   return (
     <div>
+      <h1>Receitas Favoritas</h1>
+      { copiedToClipboard && 'Link copiado!' }
       <div>
         <button
           type="button"
@@ -64,13 +67,13 @@ function FavoriteRecipes() {
           Drinks
         </button>
       </div>
-      <h1>Receitas Favoritas</h1>
       { filterRecipesByType(favoriteRecipes, filterByType).map((recipe, index) => (
         <FavoriteRecipeCard
           recipe={ recipe }
           index={ index }
           key={ index }
           handleRemoveRecipe={ handleRemoveRecipe }
+          setCopiedToClipboard={ setCopiedToClipboard }
         />
       )) }
     </div>

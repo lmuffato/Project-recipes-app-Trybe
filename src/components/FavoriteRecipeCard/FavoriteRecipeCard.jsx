@@ -7,9 +7,16 @@ import blackHeartIcon from '../../images/blackHeartIcon.svg';
 // import CardContainer from './styles';
 
 function FavoriteRecipeCard(props) {
-  const { recipe, index, handleRemoveRecipe } = props;
+  const { recipe, index, handleRemoveRecipe, setCopiedToClipboard } = props;
   const detailsUrl = recipe.type === 'comida' ? `/comidas/${recipe.id}`
     : `/bebidas/${recipe.id}`;
+
+  function handleCopyToClipboard() {
+    // Lógica de copiar para o clipboard pesquisada no StackOverflow
+    // Link: https://stackoverflow.com/questions/39501289/in-reactjs-how-to-copy-text-to-clipboard
+    navigator.clipboard.writeText(`http://localhost:3000${detailsUrl}`);
+    setCopiedToClipboard(true);
+  }
 
   return (
     <div key={ index }>
@@ -31,7 +38,7 @@ function FavoriteRecipeCard(props) {
           { recipe.name }
         </p>
       </Link>
-      <button type="button">
+      <button type="button" onClick={ () => handleCopyToClipboard() }>
         <img
           data-testid={ `${index}-horizontal-share-btn` }
           src={ shareIcon }
@@ -52,6 +59,7 @@ function FavoriteRecipeCard(props) {
 FavoriteRecipeCard.propTypes = {
   recipe: PropTypes.shape(),
   handleRemoveRecipe: PropTypes.func,
+  setCopiedToClipboard: PropTypes.func,
 }.isRequired;
 
 export default FavoriteRecipeCard;
