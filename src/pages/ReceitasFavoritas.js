@@ -1,17 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import { isNull } from 'lodash';
+import React, { useContext, useState } from 'react';
 
 import Header from '../components/Header';
 import FavoriteCard from '../components/FavoriteCard';
+import storageContext from '../context/StorageContext';
 
 function ReceitasFavoritas() {
-  const [favoriteRecipes, setFavoriteRecipes] = useState([]);
+  const { favoriteRecipes } = useContext(storageContext);
   const [selectedCategory, setSelectedCategory] = useState('todos');
-  useEffect(() => {
-    setFavoriteRecipes(
-      JSON.parse(localStorage.getItem('favoriteRecipes')),
-    );
-  }, []);
 
   function changeSelectedCategory({ target: { name } }) {
     setSelectedCategory(name);
@@ -49,7 +44,7 @@ function ReceitasFavoritas() {
           Drinks
         </button>
       </section>
-      { !isNull(favoriteRecipes)
+      { favoriteRecipes
       && favoriteRecipes
         .filter(byCategory)
         .map((recipe, index) => (
