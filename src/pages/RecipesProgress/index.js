@@ -1,4 +1,5 @@
-import React from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useState, useEffect } from 'react';
 import Image from './Image';
 import Title from './Title';
 import BtnShare from './BtnShare';
@@ -125,11 +126,15 @@ const oneDrink = {
   ],
 };
 const { drinks } = oneDrink;
-
 export default function RecipesProgress() {
+  const [recipeInProgress, setRecipeInProgress] = useState('');
+
+  useEffect(() => {
+    setRecipeInProgress(meals);
+  }, [recipeInProgress]);
   return (
-    <>
-      {meals.map((recipe, index) => (
+    <div>
+      {recipeInProgress && recipeInProgress.map((recipe, index) => (
         <div key={ index } className="recipes-progress">
           <Image src={ recipe.strMealThumb || recipe.strDrinkThumb } />
 
@@ -154,7 +159,6 @@ export default function RecipesProgress() {
         </div>
 
       ))}
-    </>
-
+    </div>
   );
 }
