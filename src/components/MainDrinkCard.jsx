@@ -44,6 +44,7 @@ class MainDrinkCard extends React.Component {
       .then((response) => response.json())
       .then((allDrinks) => {
         const result = allDrinks.drinks.slice(0, limitNumber);
+        console.log(result);
         this.setState({
           drinkData: result,
           isLoading: false,
