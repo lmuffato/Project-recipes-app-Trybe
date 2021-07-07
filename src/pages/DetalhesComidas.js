@@ -55,12 +55,6 @@ function DetalhesComidas() {
     setFavorited(!favorited);
   };
 
-  const clickShare = () => {
-    setShareButton(true);
-    const myPath = window.location.href;
-    navigator.clipboard.writeText(myPath);
-  };
-
   const checkInList = (myList, id) => myList.some((item) => item.id === id);
 
   const checkDoneButton = () => {
@@ -89,11 +83,9 @@ function DetalhesComidas() {
     <div>
       <img data-testid="recipe-photo" width="350" src={ strMealThumb } alt="" />
       <h2 data-testid="recipe-title">{strMeal}</h2>
-      {shareButton ? <span>Link copiado!</span> : null}
       <button
         type="button"
         data-testid="share-btn"
-        onClick={ clickShare }
       >
         <img src={ shareIcon } alt="share-button" />
       </button>
@@ -142,6 +134,7 @@ function DetalhesComidas() {
       </div>
       {done ? null : (
         <button
+          className="details-button"
           type="button"
           data-testid="start-recipe-btn"
           onClick={ clickStartButton }
