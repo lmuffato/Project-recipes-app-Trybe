@@ -11,6 +11,12 @@ import ReceitasFavoritas from './pages/ReceitasFavoritas';
 import UserProvider from './contexts/UserProvider';
 import SearchbarProvider from './contexts/SeachbarProvider';
 import HeaderProvider from './contexts/HeaderProvider';
+import Explore from './pages/Explore';
+import Foods from './pages/Foods';
+import Drinks from './pages/Drinks';
+import DrinksIngredients from './pages/DrinksIngredients';
+import FoodsIngredients from './pages/FoodsIngredients';
+import FoodsArea from './pages/FoodsArea';
 
 function App() {
   return (
@@ -19,16 +25,28 @@ function App() {
         <Header />
       </HeaderProvider>
       <UserProvider>
-        <Switch>
-          <Route exact path="/" component={ LoginPage } />
-          <Route path="/perfil" component={ Profile } />
-          <Route path="/receitas-feitas" component={ ReceitasFeitas } />
-          <Route path="/receitas-favoritas" component={ ReceitasFavoritas } />
-        </Switch>
+        <SearchbarProvider>
+          <Switch>
+            <Route exact path="/" component={ LoginPage } />
+            <Route exact path="/explorar" component={ Explore } />
+            <Route exact path="/explorar/comidas" component={ Foods } />
+            <Route exact path="/explorar/bebidas" component={ Drinks } />
+            <Route path="/perfil" component={ Profile } />
+            <Route path="/receitas-feitas" component={ ReceitasFeitas } />
+            <Route path="/receitas-favoritas" component={ ReceitasFavoritas } />
+            <Route
+              path="/explorar/comidas/ingredientes"
+              component={ FoodsIngredients }
+            />
+            <Route
+              path="/explorar/bebidas/ingredientes"
+              component={ DrinksIngredients }
+            />
+            <Route exact path="/explorar/comidas/area" component={ FoodsArea } />
+          </Switch>
+          <Footer />
+        </SearchbarProvider>
       </UserProvider>
-      <SearchbarProvider>
-        <Footer />
-      </SearchbarProvider>
     </div>
   );
 }
