@@ -20,8 +20,9 @@ export default function DetalhesComidasIP() {
       {food && (
         <div>
           <DetailsHeader recipe={ food } isFood />
-          <IngredientListCheckbox recipe={ food } />
+          <IngredientListCheckbox recipe={ food } isFood />
           <p data-testid="instructions">{food.strInstructions}</p>
+          <button type="button" data-testid="finish-recipe-btn">Finalizar Receita</button>
         </div>
       )}
     </div>
