@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import './RecipeList.css';
+import Context from '../context/Context';
 
 function RecipesList({ data, path }) {
+  const { category, filtredList } = useContext(Context);
   const renderCards = () => {
     const magicNum = 12;
-    const first12 = data.slice(0, magicNum);
+    const first12 = category === 'All' ? data.slice(0, magicNum)
+      : filtredList.slice(0, magicNum);
     const toReturn = first12.map((recipe, index) => {
       const { name, imgSrc, id } = recipe;
       return (
