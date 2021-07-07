@@ -3,7 +3,7 @@ import Header from '../../components/Header';
 import BottomMenu from '../../components/bottomMenu';
 import RecipesList from '../../components/RecipesList';
 import Context from '../../context/Context';
-import { getMealsByName } from '../../services/getMeals';
+import { getMealsDefault } from '../../services/getMeals';
 import '../../App.css';
 
 export default function Foods() {
@@ -11,8 +11,8 @@ export default function Foods() {
   useEffect(() => {
     const reciveMeals = async () => {
       setLoading(true);
-      const data = await getMealsByName();
-      setMealsList([...data]);
+      const data = await getMealsDefault();
+      setMealsList(data);
       setLoading(false);
     };
     reciveMeals();

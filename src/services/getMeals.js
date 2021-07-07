@@ -13,30 +13,35 @@ export const getMeasures = (recipe) => {
 };
 
 export const setMeals = (recipes) => {
-  const mealsList = recipes.map((recipe) => {
-    const {
-      idMeal, strMeal, strCategory, strArea,
-      strInstructions, strMealThumb, strTags,
-    } = recipe;
+  if (recipes === null) {
+    global.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+  } else {
+    const mealsList = recipes.map((recipe) => {
+      const {
+        idMeal, strMeal, strCategory, strArea,
+        strInstructions, strMealThumb, strTags,
+      } = recipe;
 
-    const ingredients = getIngredients(recipe);
-    const measures = getMeasures(recipe);
-    return ({
-      id: idMeal,
-      name: strMeal,
-      category: strCategory,
-      from: strArea,
-      imgSrc: strMealThumb,
-      tags: strTags,
-      instructions: strInstructions,
-      ingredients,
-      measures,
+      const ingredients = getIngredients(recipe);
+      const measures = getMeasures(recipe);
+      return ({
+        id: idMeal,
+        name: strMeal,
+        category: strCategory,
+        from: strArea,
+        imgSrc: strMealThumb,
+        tags: strTags,
+        instructions: strInstructions,
+        ingredients,
+        measures,
+      });
     });
-  });
-  return mealsList;
+    console.log('getMeals passando aqui', mealsList);
+    return mealsList;
+  }
 };
 
-export const getMealsByName = async () => {
+export const getMealsDefault = async () => {
   const endPoint = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
   const response = await fetch(endPoint);
   const data = await response.json();
@@ -45,16 +50,23 @@ export const getMealsByName = async () => {
   return dataFormat;
 };
 
+export const getMealsByName = async (name) => {
+  const endPoint = `https://www.themealdb.com/api/json/v1/1/search.php?s=${name}`;
+  const response = await fetch(endPoint);
+  const data = await response.json();
+  const { meals } = data;
+  const dataFormat = setMeals(meals);
+  return dataFormat;
+};
+
 export const getMealsByIngredient = async (ingredient) => {
-  try {
-    const fetchApi = await fetch(
-      `https://www.themealdb.com/api/json/v1/1/filter.php?i=${ingredient}`,
-    );
-    const data = await fetchApi.json();
-    return data;
-  } catch (error) {
-    return error;
-  }
+  const fetchApi = await fetch(
+    `https://www.themealdb.com/api/json/v1/1/filter.php?i=${ingredient}`,
+  );
+  const data = await fetchApi.json();
+  const { meals } = data;
+  const dataFormat = setMeals(meals);
+  return dataFormat;
 };
 
 export const getMealsByFirstLetter = async (letter) => {
@@ -62,6 +74,8 @@ export const getMealsByFirstLetter = async (letter) => {
     `https://www.themealdb.com/api/json/v1/1/search.php?f=${letter}`,
   );
   const data = await fetchApi.json();
+  const { meals } = data;
+  const dataFormat = setMeals(meals);
   console.log(data);
-  return data;
+  return dataFormat;
 };

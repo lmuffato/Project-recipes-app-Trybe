@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import './SearchBarFilters.css';
-import { useLocation } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import Context from '../context/Context';
 import {
   getDrinkByFirstLetter,
@@ -14,52 +14,89 @@ import {
 } from '../services/getMeals';
 
 export default function SearchBarFilters() {
+  const { setMealsList, setDrinkList } = useContext(Context);
+  const firstLetter = 'first-letter';
+  const history = useHistory();
+  const location = useLocation();
+  const url = location.pathname;
+  const isMeal = url === '/comidas';
   const [searchValue, setSearchValue] = useState({
     search: '',
     check: '',
   });
+  const { search, check } = searchValue;
 
-  const location = useLocation();
+  const handleEdgeCase = (result) => {
+    if (result.length === 1) {
+      history.push(`${url}/${isMeal ? result[0].id : result[0].id}`);
+    }
+  };
 
-  const { setMealsList, setDrinkList } = useContext(Context);
-  const firstLetter = 'first-letter';
-
-  const handleClick = async () => {
-    const { search, check } = searchValue;
-    const url = location.pathname;
+  const handleSearchByIngredient = async () => {
     if (check === 'ingredient' && url === '/comidas') {
       const result = await getMealsByIngredient(search);
       setMealsList(result);
-      console.log('teste', setMealsList);
+      handleEdgeCase(result);
     }
     if (check === 'ingredient' && url === '/bebidas') {
       const result = await getDrinkByIngredient(search);
       setDrinkList(result);
+      handleEdgeCase(result);
     }
+  };
+
+  const handleSearchByName = async () => {
     if (check === 'name' && url === '/comidas') {
       const result = await getMealsByName(search);
       setMealsList(result);
+      handleEdgeCase(result);
     }
     if (check === 'name' && url === '/bebidas') {
       const result = await getDrinksByName(search);
       setDrinkList(result);
+      handleEdgeCase(result);
     }
+  };
+
+  const handleSearchByFirstLetter = async () => {
     if (check === firstLetter && url === '/comidas') {
-      const result = await getMealsByFirstLetter(search);
-      setMealsList(result);
+      if (search.length !== 1) {
+        global.alert('Sua busca deve conter somente 1 (um) caracter');
+      } else {
+        const result = await getMealsByFirstLetter(search);
+        setMealsList(result);
+        handleEdgeCase(result);
+        console.log(result);
+      }
     }
     if (check === firstLetter && url === '/bebidas') {
-      const result = await getDrinkByFirstLetter(search);
-      setDrinkList(result);
+      if (search.length !== 1) {
+        global.alert('Sua busca deve conter somente 1 (um) caracter');
+      } else {
+        const result = await getDrinkByFirstLetter(search);
+        setDrinkList(result);
+        handleEdgeCase(result);
+      }
+    }
+  };
+
+  const handleClick = (event) => {
+    event.preventDefault();
+    switch (check) {
+    case 'name':
+      handleSearchByName();
+      break;
+    case 'ingredient':
+      handleSearchByIngredient();
+      break;
+    case 'first-letter':
+      handleSearchByFirstLetter();
+      break;
+    default:
     }
   };
 
   const handleChange = ({ target }) => {
-    const { check, search } = searchValue;
-    if (search.length > 1 && check === firstLetter) {
-      // eslint-disable-next-line no-alert
-      alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
-    }
     if (target.name === 'check') {
       setSearchValue({ ...searchValue, check: target.value });
     } else {
@@ -73,6 +110,7 @@ export default function SearchBarFilters() {
         <input
           className="search"
           type="text"
+          placeholder="pesquise uma receita aqui"
           data-testid="search-input"
           onChange={ handleChange }
         />
@@ -104,7 +142,7 @@ export default function SearchBarFilters() {
             data-testid="first-letter-search-radio"
             id="firstLetter-radio"
             name="check"
-            value="name"
+            value="first-letter"
             onChange={ handleChange }
           />
           Primeira letra
@@ -112,7 +150,7 @@ export default function SearchBarFilters() {
         <button
           type="button"
           data-testid="exec-search-btn"
-          onClick={ handleClick }
+          onClick={ (event) => handleClick(event) }
         >
           Buscar
         </button>
