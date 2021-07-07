@@ -3,11 +3,11 @@ import '../styles/Header.css';
 import { Link } from 'react-router-dom';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
-import HeaderContext from '../contexts/HeaderContext';
+import SearchbarContext from '../contexts/SearchbarContext';
 import SearchBar from './SearchBar';
 
 function Header() {
-  const { searchBtn, setSearchBtn } = useContext(HeaderContext);
+  const { searchBtn, setSearchBtn } = useContext(SearchbarContext);
 
   function getSearchBar() {
     return searchBtn ? setSearchBtn(false) : setSearchBtn(true);
@@ -29,7 +29,7 @@ function Header() {
           <img src={ searchIcon } alt="magnifier" />
         </button>
       </header>
-      <SearchBar />
+      { searchBtn && <SearchBar /> }
     </div>
   );
 }
