@@ -5,6 +5,7 @@ import renderWithRouter from './renderWithRouter';
 import App from '../App';
 
 const nine = 9;
+const totalLinksExploreDrinksPage = 5;
 
 function loginAndAcessExplorePage() {
   const getInputEmail = screen.getByTestId('email-input');
@@ -37,13 +38,11 @@ describe('testing explore foods page', () => {
     expect(pathname).toBe('/explorar/comidas');
     const byIngredientes = screen.getByText('Por Ingredientes');
     expect(byIngredientes).toBeInTheDocument();
-    // expect(byIngredientes).toHaveTextContent('Por Ingredientes');
     const byArea = screen.getByTestId('explore-by-area');
     expect(byArea).toBeInTheDocument();
     expect(byArea).toHaveTextContent('Por Local de Origem');
-    const surpriseMe = screen.getByTestId('explore-surprise');
+    const surpriseMe = screen.getByText('Me Surpreenda!');
     expect(surpriseMe).toBeInTheDocument();
-    expect(surpriseMe).toHaveTextContent('Me Surpreenda!');
   });
   test('redirect of byIngredients button', () => {
     const { history } = renderWithRouter(<App />);
@@ -82,7 +81,7 @@ describe('testing explore drinks page', () => {
     const { pathname } = history.location;
     expect(pathname).toBe('/explorar/bebidas');
     const allLinks = screen.getAllByRole('link');
-    expect(allLinks.length).toBe(5);
+    expect(allLinks.length).toBe(totalLinksExploreDrinksPage);
     expect(allLinks[0]).toHaveTextContent('Por Ingredientes');
     expect(allLinks[1]).toHaveTextContent('Me Surpreenda!');
   });
