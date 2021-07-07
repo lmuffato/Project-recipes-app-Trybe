@@ -18,7 +18,6 @@ function CardList({ list, type }) {
       arr.map((recipie, index) => {
         if (recipie !== undefined) {
           if (type === 'comidas') {
-            const { idMeal } = recipie;
             return (
               <Card
                 type="comidas"
@@ -32,7 +31,6 @@ function CardList({ list, type }) {
               />
             );
           }
-          const { idDrink } = recipie;
           return (
             <Card
               type="bebidas"
