@@ -1,4 +1,6 @@
 // https://pt.stackoverflow.com/questions/6526/como-formatar-data-no-javascript
+// import { Redirect } from 'react-router';
+
 function dataAtualFormatada() {
   const data = new Date();
   const dia = data.getDate().toString();
@@ -23,7 +25,7 @@ export function verifyDoneRecipesInLS(id) {
 }
 
 function doneRecipes(recipe) {
-  // console.log(recipe);
+  console.log(recipe);
   // tenta buscar doneRecipes no LS
   const doneRecipesConst = JSON.parse(localStorage.getItem('doneRecipes'));
   // monta objeto com variaveis q irão p/ o LS
