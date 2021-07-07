@@ -1,29 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Header from '../components/Header';
 import RecipeDoneCard from '../components/RecipeDoneCard';
-import usePersistedState from '../hooks/usePersistedState';
+import useRecipeFilter from '../hooks/useRecipeFilter';
 
 export default function RecipesDone() {
-  const [doneRecipes] = usePersistedState('doneRecipes', []);
-  const [filter, setFilter] = useState('all');
-  const [filteredRecipes, setFilteredRecipes] = useState(doneRecipes);
-
-  const changeValueToFilterRecipes = ({ target }) => {
-    const { name } = target;
-    setFilter(name);
-  };
-
-  useEffect(() => {
-    const changeFilteredRecipes = () => {
-      const fixedFilter = filter === 'all' ? '' : filter;
-      const newFilteredRecipes = doneRecipes
-        .filter(({ type }) => type.includes(fixedFilter));
-
-      setFilteredRecipes(newFilteredRecipes);
-    };
-
-    changeFilteredRecipes();
-  }, [filter]);
+  const { changeValueToFilterRecipes, filteredRecipes } = useRecipeFilter();
+  console.log(filteredRecipes);
 
   return (
     <section>
