@@ -4,7 +4,6 @@ import Footer from '../components/Footer';
 import Header from '../components/Header';
 import SearchButton from '../components/SearchButton';
 import MainDrinkCard from '../components/MainDrinkCard';
-import CategoryButtons from '../components/CategoryButtons';
 
 class Bebidas extends React.Component {
   render() {
@@ -17,7 +16,6 @@ class Bebidas extends React.Component {
           <SearchButton pathname={ pathname } history={ history } />
         </Header>
         <div>Página principal receitas BEBIDAS</div>
-        <CategoryButtons />
         <MainDrinkCard history={ history } />
         <Footer history={ history } />
       </>
