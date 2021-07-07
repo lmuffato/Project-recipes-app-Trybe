@@ -7,7 +7,7 @@ import Receitas from './pages/Receitas';
 function App() {
   return (
     <Switch>
-      <Route path="/explorar" component={ Explore } />
+      <Route exact path="/explorar" component={ Explore } />
       <Route exact path="/" component={ Login } />
       <Route path="/comidas" component={ Receitas } />
     </Switch>
