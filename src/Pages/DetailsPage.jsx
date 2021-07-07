@@ -49,7 +49,7 @@ function DetailsPage() {
         <p>Details Page</p>
         <DetailsCard product={ product } idn={ idn } />
         <RecommendationList idn={ idn } />
-        <DetailsButtons />
+        <DetailsButtons product={ product } idn={ idn } />
         <Link to={ `/${page[1]}/${id}/in-progress` }>
           <button
             type="button"

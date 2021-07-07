@@ -1,39 +1,35 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import FavoriteButton from './FavoriteButton';
 import shareBtnImg from '../images/shareIcon.svg';
-import whiteHeart from '../images/whiteHeartIcon.svg';
-import blackHeart from '../images/blackHeartIcon.svg';
 
-function DetailsButtons() {
+function DetailsButtons({ product, idn }) {
   const [isCopy, setIsCopy] = React.useState(false);
-  const [isAFavorite, setFavorite] = React.useState(false);
-
-  const handleClickFavorite = () => {
-    setFavorite(!isAFavorite);
-  };
 
   const handleClickShare = () => {
     setIsCopy(true);
     navigator.clipboard.writeText(window.location.href);
   };
+
   return (
-    <div>
-      <button
-        type="button"
+    <>
+      { isCopy && <h4>Link copiado!</h4> }
+      <FavoriteButton product={ product } idn={ idn } />
+      <input
+        type="image"
         data-testid="share-btn"
-        onClick={ handleClickFavorite }
-      >
-        <img src={ isAFavorite ? blackHeart : whiteHeart } alt="Favorite button" />
-      </button>
-      <button
-        type="button"
-        data-testid="favorite-btn"
         onClick={ handleClickShare }
-      >
-        <img src={ shareBtnImg } alt="Share button" />
-        { isCopy && <h4>Link copiado!</h4> }
-      </button>
-    </div>
+        id="share-btn"
+        src={ shareBtnImg }
+        alt="Share button"
+      />
+    </>
   );
 }
+
+DetailsButtons.propTypes = {
+  product: PropTypes.array,
+  idn: PropTypes.string,
+}.isRequired;
 
 export default DetailsButtons;
