@@ -6,11 +6,22 @@ import IngredientsList from './IngredientsList';
 import RecomendedMeals from './RecomendedMeals';
 import { fetchRandonMeal } from '../services/getApis';
 import SearchContext from '../context/SearchContext';
+import { getItemFromLocalStorage } from '../services/localStorage';
 
 function DrinkCardDetail() {
+  let buttonIniciarReceita = (
+    <button
+      data-testid="start-recipe-btn"
+      type="button"
+      className="start-recipe-btn"
+    >
+      Iniciar Receita
+    </button>);
+
   const { currentDrink } = useContext(UserContext);
   const { fullRecipes } = useContext(SearchContext);
   const [recomendedMeals, setRecomendedMeals] = useState([]);
+  const donedRecipes = getItemFromLocalStorage('doneRecipes');
 
   const RECOMMENDED_LENGHT = 6;
   useEffect(() => {
@@ -21,6 +32,14 @@ function DrinkCardDetail() {
     };
     if (recomendedMeals.length < MEALS_NUMBER) getRandonDrink();
   }, [recomendedMeals]);
+
+  if (donedRecipes) {
+    const findDonedRecipe = donedRecipes.find(({ id }) => {
+      const { idDrink } = currentDrink;
+      return id === idDrink;
+    });
+    if (findDonedRecipe) buttonIniciarReceita = '';
+  }
 
   return (
     <div>
@@ -55,13 +74,7 @@ function DrinkCardDetail() {
           ) : (null)
         ))}
       </div>
-      <button
-        data-testid="start-recipe-btn"
-        type="button"
-        className="start-recipe-btn"
-      >
-        Iniciar Receita
-      </button>
+      { buttonIniciarReceita }
     </div>
   );
 }

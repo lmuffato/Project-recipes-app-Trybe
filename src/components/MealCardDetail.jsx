@@ -7,22 +7,34 @@ import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import IngredientsList from './IngredientsList';
 import RecomendedDrinks from './RecomendedDrinks';
 import SearchContext from '../context/SearchContext';
+import { getItemFromLocalStorage } from '../services/localStorage';
 
 function MealCardDetail() {
+  let buttonIniciarReceita = (
+    <button
+      data-testid="start-recipe-btn"
+      type="button"
+      className="start-recipe-btn"
+    >
+      Iniciar Receita
+    </button>);
   const { fullDrinks } = useContext(SearchContext);
   const { currentMeal } = useContext(UserContext);
   const [youtubeId, setYoutubeId] = useState('');
-  // const settings = {
-  //   dots: false,
-  //   infinite: false,
-  //   speed: 500,
-  //   slidesToShow: 1,
-  //   slidesToScroll: 1,
-  // };
+  const donedRecipes = getItemFromLocalStorage('doneRecipes');
+
   const RECOMMENDED_NUMBER = 6;
   useEffect(() => {
     setYoutubeId(currentMeal.strYoutube);
   }, [currentMeal]);
+
+  if (donedRecipes) {
+    const findDonedRecipe = donedRecipes.find(({ id }) => {
+      const { idMeal } = currentMeal;
+      return id === idMeal;
+    });
+    if (findDonedRecipe) buttonIniciarReceita = '';
+  }
 
   return (
     <div>
@@ -63,13 +75,7 @@ function MealCardDetail() {
           ) : (null)
         ))}
       </div>
-      <button
-        data-testid="start-recipe-btn"
-        type="button"
-        className="start-recipe-btn"
-      >
-        Iniciar Receita
-      </button>
+      {buttonIniciarReceita}
     </div>
   );
 }
