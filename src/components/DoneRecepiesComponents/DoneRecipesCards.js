@@ -18,7 +18,6 @@ function DoneRecipesCards() {
     }
     return (local !== null && local);
   };
-  console.log(retrieveLocalInfo());
   return (
     <div>
       {

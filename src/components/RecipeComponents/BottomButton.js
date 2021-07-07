@@ -1,35 +1,39 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Button from 'react-bootstrap/Button';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 function BottomBtn(props) {
   const iniciando = 'Iniciar Receita';
-  const [buttonTxt, setbuttonTxt] = useState(iniciando);
   const id = window.location.pathname.match(/(\d+)/)[0];
   const { info } = props;
   const { idMeal, idDrink } = info;
 
-  useEffect(() => {
-    const toContinue = () => {
-      const infoReceiver = {
-        meals: {},
-        cocktails: {},
-      };
-      const local = localStorage.getItem('inProgressRecipes');
-      if (local === '' || local === null || local === infoReceiver) {
-        setbuttonTxt(iniciando);
-      } else {
-        const favoritesFoods = Object.entries(JSON.parse(local).meals);
-        const filterfood = favoritesFoods.find((e) => e[0] === id);
-        const favoriteDrinks = Object.entries(JSON.parse(local).cocktails);
-        const filterdrinks = favoriteDrinks.find((e) => e[0] === id);
-        return (filterfood !== undefined || filterdrinks !== undefined
-          ? setbuttonTxt('Continuar Receita') : setbuttonTxt(iniciando));
-      }
+  const toContinue = () => {
+    const infoReceiver = {
+      meals: {},
+      cocktails: {},
     };
-    toContinue();
-  }, [id]);
+    const local = localStorage.getItem('inProgressRecipes');
+    const localDone = JSON.parse(localStorage.getItem('doneRecipes'));
+    const favorites = JSON.parse(local);
+    const button = document.getElementsByClassName('startBtn')[0];
+
+    if (!favorites || local === infoReceiver) {
+      return (iniciando);
+    }
+    if (localDone) {
+      if (localDone.find((e) => e.id === id && button)) {
+        button.style.display = 'none';
+      }
+    } else if (local) {
+      const continueRecipe = Object.values(favorites).filter((e) => e[id] >= 0);
+      if (continueRecipe) {
+        return ('Continuar Receita');
+      }
+      return (iniciando);
+    }
+  };
 
   const pathFinder = () => {
     if (idMeal !== undefined) {
@@ -46,7 +50,7 @@ function BottomBtn(props) {
         variant="secondary"
         className="startBtn"
       >
-        {buttonTxt}
+        {toContinue()}
       </Button>
     </Link>
   );

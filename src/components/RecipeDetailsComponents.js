@@ -37,7 +37,6 @@ function ComponentGen(props) {
       image: strMealThumb,
     }];
   }
-
   return (
     <div className="recipe_details">
       <RecipeImage origin={ strMealThumb || strDrinkThumb } />

@@ -198,7 +198,11 @@ function ProgressCard({ recipe }) {
     );
   };
   const favoriteInfo = () => {
-    delete recipeInfo.ingredients; delete recipeInfo.instructions; return ([recipeInfo]);
+    const favRecipe = { ...recipeInfo };
+    delete favRecipe.ingredients;
+    delete favRecipe.instructions;
+    delete favRecipe.tags;
+    return ([favRecipe]);
   };
   const handleClick = () => {
     const date = new Date();

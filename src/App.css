@@ -6,6 +6,10 @@
   font-size: 1.3em;
 }
 
+.doneFilter {
+  display: flex;
+}
+
 .doneComponents {
   display: flex;
   font-size: 12px;

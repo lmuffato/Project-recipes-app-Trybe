@@ -9,7 +9,7 @@ export default function DoneFilter() {
   }
 
   return (
-    <>
+    <div className="doneFilter">
       <div>
         <input
           type="button"
@@ -40,6 +40,6 @@ export default function DoneFilter() {
           onClick={ (e) => handleClick(e) }
         />
       </div>
-    </>
+    </div>
   );
 }
