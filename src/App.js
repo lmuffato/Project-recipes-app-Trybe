@@ -8,6 +8,7 @@ import Profile from './pages/Profile';
 import ExploreFoods from './pages/ExploreFoods';
 import ExploreDrinks from './pages/ExploreDrinks';
 import DetailsContextProvider from './context/DetailsContext';
+import FavoriteRecipes from './pages/FavoriteRecipes';
 
 function App() {
   return (
@@ -38,9 +39,9 @@ function App() {
           path="/bebidas/:id"
           render={ (props) => <RecipeDetails { ...props } type="drinks" /> }
         />
+        <Route path="/receitas-favoritas" component={ FavoriteRecipes } />
       </Switch>
     </DetailsContextProvider>
   );
 }
-
 export default App;
