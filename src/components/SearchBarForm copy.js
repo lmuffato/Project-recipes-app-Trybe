@@ -12,7 +12,7 @@ const SearchBarForm = () => {
   const [dataCocks, setDataCocks] = useState({});
 
   // console.log(dataCocks);
-  console.log(dataDrinks);
+  // console.log(dataDrinks);
 
   const location = useLocation();
   const history = useHistory();
@@ -24,9 +24,8 @@ const SearchBarForm = () => {
 
     if (meals === undefined) return 'undefined';
 
-    if (meals.length === 1 && meals.length !== undefined) {
-      history.push(`/comidas/${meals[0].idMeal}`); // req -16
-    }
+    if (meals.length === 1) return history.push(`/comidas/${meals[0].idMeal}`); // req -16
+
     return meals.map((meal, index) => {
       if (index < numberMagic) { // req - 17
         return (
@@ -50,20 +49,18 @@ const SearchBarForm = () => {
 
   const handleSearchBarApiComidas = () => {
     if (markBusca === 'ingrediente') {
-      getIngCock(busca).then(({ meals }) => setDataCocks({ ...dataCocks, meals }));
+      getIngCock(busca).then(({ meals }) => setDataCocks({ meals }));
     }
     if (markBusca === 'nome') {
-      getNameCock(busca).then(({ meals }) => setDataCocks({ ...dataCocks, meals }));
+      getNameCock(busca).then(({ meals }) => setDataCocks({ meals }));
     }
     if (markBusca === FirstLetter) {
-      getFirstLetterCock(busca).then(({ meals }) => setDataCocks(
-        { ...dataCocks, meals },
-      ));
+      getFirstLetterCock(busca).then(({ meals }) => setDataCocks({ meals }));
     }
     if (markBusca === FirstLetter && busca.length > 1) {
       alert('Sua busca deve conter somente 1 (um) caracter');
     }
-    return alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+    // return alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
   };
 
   const handleCardMapDrinks = () => {
@@ -71,9 +68,7 @@ const SearchBarForm = () => {
 
     if (drinks === undefined) return 'undefined';
 
-    if (drinks.length === 1 && drinks.length !== undefined) {
-      history.push(`/bebidas/${drinks[0].idDrink}`); // req - 16
-    }
+    if (drinks.length === 1) return history.push(`/bebidas/${drinks[0].idDrink}`); // req - 16
 
     return drinks.map((drink, index) => {
       if (index < numberMagic) { // req- 17
@@ -99,24 +94,18 @@ const SearchBarForm = () => {
 
   const handleSearchBarApiBebidas = () => {
     if (markBusca === 'ingrediente') {
-      getIngCockTail(busca).then(({ drinks }) => setDataDrinks(
-        { ...dataDrinks, drinks },
-      ));
+      getIngCockTail(busca).then(({ drinks }) => setDataDrinks({ drinks }));
     }
     if (markBusca === 'nome') {
-      getNameCockTail(busca).then(({ drinks }) => {
-        setDataDrinks({ ...dataDrinks, drinks });
-      });
+      getNameCockTail(busca).then(({ drinks }) => setDataDrinks({ drinks }));
     }
     if (markBusca === FirstLetter) {
-      getFirstLetterCockTail(busca).then(({ drinks }) => {
-        setDataDrinks({ ...dataDrinks, drinks });
-      });
+      getFirstLetterCockTail(busca).then(({ drinks }) => setDataDrinks({ drinks }));
     }
     if (markBusca === FirstLetter && busca.length > 1) {
       alert('Sua busca deve conter somente 1 (um) caracter');
     }
-    return alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+    // return alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
   };
 
   const handleFilterSearchBar = () => { // req - 15

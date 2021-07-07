@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import searchIcon from '../images/searchIcon.svg';
 import profileIcon from '../images/profileIcon.svg';
 import SearchBarForm from './SearchBarForm';
+// import header from '../styles/header';
 import '../styles/Header.css';
 
 function Header({ title }) {
