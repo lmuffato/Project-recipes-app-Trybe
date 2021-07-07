@@ -1,4 +1,5 @@
 import React from 'react';
+import { number, shape, string } from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import useClipBoard from '../hooks/useClipboard';
 import shareIcon from '../images/shareIcon.svg';
@@ -83,3 +84,18 @@ export default function RecipeDoneCard({ recipeDone, index }) {
     </section>
   );
 }
+
+RecipeDoneCard.propTypes = {
+  recipeDone: shape({
+    id: string,
+    type: string,
+    area: string,
+    category: string,
+    alcoholicOrNot: string,
+    name: string,
+    image: string,
+    doneDate: string,
+    tags: string,
+  }),
+  index: number,
+}.isRequired;
