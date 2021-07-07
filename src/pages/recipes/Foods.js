@@ -23,13 +23,14 @@ export default function Foods() {
       setCatList([...categoList]);
       setLoading(false);
     };
+
     reciveMeals();
   }, []);
 
   return (
     <div className="food-page">
       <Header title="Comidas" show />
-      <ButtomFilters data={ catList } />
+      <ButtomFilters data={ catList } path="comidas" />
       { isLoading ? <h1>Loading...</h1>
         : <RecipesList data={ mealsList } path="comidas" /> }
       <BottomMenu />

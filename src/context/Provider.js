@@ -11,6 +11,7 @@ function Provider({ children }) {
   const [isLoading, setLoading] = useState(false);
   const [catList, setCatList] = useState([]);
   const [category, setCategory] = useState('All');
+  const [filtredList, setFiltredList] = useState([]);
 
   const store = {
     userEmail,
@@ -29,6 +30,8 @@ function Provider({ children }) {
     setCatList,
     category,
     setCategory,
+    filtredList,
+    setFiltredList,
   };
 
   return (

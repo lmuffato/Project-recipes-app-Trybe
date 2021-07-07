@@ -1,8 +1,27 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
+import PropTypes from 'prop-types';
 import Context from '../context/Context';
+import getFiltredMeals from '../services/getFiltredMeals';
+import getFiltredDrinks from '../services/getFiltredDrinks';
 
-function ButtomFilters({ data }) {
-  const { setCategory } = useContext(Context);
+function ButtomFilters({ data, path }) {
+  const { setCategory, setFiltredList } = useContext(Context);
+  const [toggle, setToggle] = useState({});
+
+  const handleButtom = async (value) => {
+    setCategory(value);
+    let list = [];
+    if (value !== 'All') {
+      list = path === 'comidas' ? await getFiltredMeals(value)
+        : await getFiltredDrinks(value);
+    }
+    setFiltredList([...list]);
+    if (toggle[value]) {
+      setCategory('All');
+    }
+    setToggle({ ...toggle, [value]: !toggle[value] });
+    console.log(toggle[value]);
+  };
 
   const renderButtoms = () => {
     const magicNum = 5;
@@ -15,7 +34,7 @@ function ButtomFilters({ data }) {
           value={ categoryName }
           data-testid={ `${categoryName}-category-filter` }
           className="buttons"
-          onClick={ ({ target: { value } }) => setCategory(value) }
+          onClick={ ({ target: { value } }) => handleButtom(value) }
         >
           { categoryName }
         </button>
@@ -34,6 +53,7 @@ function ButtomFilters({ data }) {
 
 ButtomFilters.propTypes = {
   data: PropTypes.arrayOf(PropTypes.string).isRequired,
+  path: PropTypes.string.isRequired,
 };
 
 export default ButtomFilters;

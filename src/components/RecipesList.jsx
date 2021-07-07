@@ -4,11 +4,11 @@ import { Link } from 'react-router-dom';
 import Context from '../context/Context';
 
 function RecipesList({ data, path }) {
-  const { category } = useContext(Context);
+  const { category, filtredList } = useContext(Context);
   const renderCards = () => {
     const magicNum = 12;
     const first12 = category === 'All' ? data.slice(0, magicNum)
-      : data.filter((recipe) => recipe.category === category);
+      : filtredList.slice(0, magicNum);
     const toReturn = first12.map((recipe, index) => {
       const { name, imgSrc, id } = recipe;
       return (
