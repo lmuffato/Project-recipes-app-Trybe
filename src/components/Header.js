@@ -3,6 +3,7 @@ import { useHistory, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
+import SearchBarFilters from './SearchBarFilters';
 
 export default function Header({ title, show = true }) {
   const redirect = useHistory();
@@ -58,7 +59,7 @@ export default function Header({ title, show = true }) {
         { handleSearch() }
       </div>
       <div>
-        { (click) ? <p data-testid="search-input">teste</p> : null}
+        { (click) ? <SearchBarFilters /> : null}
       </div>
     </section>
   );

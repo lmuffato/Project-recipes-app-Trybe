@@ -4,7 +4,7 @@ import BottomMenu from '../../components/bottomMenu';
 import RecipesList from '../../components/RecipesList';
 import ButtomFilters from '../../components/ButtomFilters';
 import Context from '../../context/Context';
-import getMeals from '../../services/getMeals';
+import { getMealsDefault } from '../../services/getMeals';
 import getMealsCat from '../../services/getMealsCat';
 import '../../App.css';
 
@@ -16,7 +16,7 @@ export default function Foods() {
   useEffect(() => {
     const reciveMeals = async () => {
       setLoading(true);
-      const data = await getMeals();
+      const data = await getMealsDefault();
       const categoList = await getMealsCat();
       setCategory('All');
       setMealsList([...data]);

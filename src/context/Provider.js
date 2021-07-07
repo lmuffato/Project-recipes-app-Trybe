@@ -7,6 +7,7 @@ function Provider({ children }) {
   const [password, setPassword] = useState('');
   const [isDisabled, setIsDisabled] = useState(true);
   const [mealsList, setMealsList] = useState([]);
+  const [drinkList, setDrinkList] = useState([]);
   const [drinksList, setDrinksList] = useState([]);
   const [isLoading, setLoading] = useState(false);
   const [catList, setCatList] = useState([]);
@@ -22,6 +23,8 @@ function Provider({ children }) {
     setIsDisabled,
     mealsList,
     setMealsList,
+    drinkList,
+    setDrinkList,
     isLoading,
     setLoading,
     drinksList,

@@ -44,6 +44,7 @@
 }
 
 .food-page {
+  align-content: space-between;
   display: flex;
   flex-flow: column wrap;
   justify-content: space-around;
@@ -59,8 +60,8 @@ ul {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  position: fixed;
-  top: 42px;
+  position: relative;
+  top: 40px;
 }
 
 .buttons-list {
@@ -127,4 +128,17 @@ ul {
   flex-direction: column;
   position: absolute;
   top: 115px;
+}
+
+.searchbar-form {
+  align-items: center;
+}
+
+.searchbar-container {
+  margin-top: 50px;
+  text-align: center;
+}
+
+.search {
+  width: 90vw;
 }
