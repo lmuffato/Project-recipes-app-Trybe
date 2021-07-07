@@ -127,3 +127,7 @@ header {
   position: fixed;
   z-index: 99;
 }
+
+.check {
+  text-decoration: line-through;
+}

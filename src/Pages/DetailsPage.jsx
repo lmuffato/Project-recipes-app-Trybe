@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useParams, useLocation, Link } from 'react-router-dom';
 import DetailsButtons from '../Components/DetailsButtons';
 import DetailsCard from '../Components/DetailsCard';
 import RecommendationList from '../Components/RecommendationList';
+import { FoodContext } from '../Context/FoodProvider';
 
 function DetailsPage() {
   const [product, setProduct] = useState({});
@@ -11,6 +12,7 @@ function DetailsPage() {
   const { id } = useParams();
   const location = useLocation();
   const page = location.pathname.split('/');
+  const { setCurrentProduct } = useContext(FoodContext);
 
   const handleClick = () => {
     console.log('teste');
@@ -39,6 +41,7 @@ function DetailsPage() {
       const result = await fetch(endpoint).then((data) => data.json());
       setProduct(result[identifier[0]]);
       setIsProduct(true);
+      setCurrentProduct(result[identifier[0]]);
     };
     getProduct();
   }, []);

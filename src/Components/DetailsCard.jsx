@@ -11,13 +11,20 @@ function DetailsCard({ product, idn }) {
     if (idn[1] === 'Drink') length = lengthDrink;
     for (let i = 1; i <= length; i += 1) {
       product.forEach((elem) => {
-        initIngredients.push(`${elem[`strIngredient${i}`]} - ${elem[`strMeasure${i}`]}`);
+        if (elem[`strIngredient${i}`] !== null || elem[`strMeasure${i}`] !== null) {
+          initIngredients
+            .push(`${elem[`strIngredient${i}`]} - ${elem[`strMeasure${i}`]}`);
+        }
       });
     }
+    console.log(initIngredients);
     return (
       <ul>
         {initIngredients.map((ingredient, index) => {
-          if (ingredient === null || ingredient.length !== 0) {
+          const lengthMax = 4;
+          const lengthMmax2 = 3;
+          if (ingredient.length !== 0 && ingredient.length !== lengthMax
+            && ingredient.length !== lengthMmax2) {
             return (
               <li
                 data-testid={ `${index}-ingredient-name-and-measure` }

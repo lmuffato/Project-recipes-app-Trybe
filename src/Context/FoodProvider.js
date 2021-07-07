@@ -10,6 +10,7 @@ function FoodProvider({ children }) {
   const [currentPage, setCurrentPage] = useState('');
   const [identifier, setIdentifier] = useState('');
   const [category, setCategory] = useState(false);
+  const [currentProduct, setCurrentProduct] = useState([]);
   const contextValue = {
     foods,
     setFoods,
@@ -23,6 +24,8 @@ function FoodProvider({ children }) {
     setIdentifier,
     category,
     setCategory,
+    currentProduct,
+    setCurrentProduct,
   };
 
   useEffect(() => {
