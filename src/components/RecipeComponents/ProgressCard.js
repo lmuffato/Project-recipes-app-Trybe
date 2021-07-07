@@ -192,7 +192,6 @@ function ProgressCard({ recipe }) {
               htmlFor={ `ingredient${key}` }
               data-testid={ `${key}-ingredient-step` }
             >
-              {ingredient[1]}
               <input
                 className="input-ingredients"
                 id={ `ingredient${key}` }
@@ -201,6 +200,7 @@ function ProgressCard({ recipe }) {
                 onClick={ markAsDone }
                 defaultChecked={ isChecked(markedItems(), key + 1)[0] }
               />
+              {ingredient[1]}
             </label>
           </li>))}
       </ol>
@@ -216,22 +216,24 @@ function ProgressCard({ recipe }) {
   return (
     <div className="recipe_details">
       <RecipeImage origin={ image } />
-      <RecipeTitle title={ name } />
-      <ShareBtn dataTest="share-btn" path={ `${locate}` } />
-      <FavBtn info={ favoriteInfo() } />
+      <div className="TitleShare">
+        <RecipeTitle title={ name } />
+        <ShareBtn dataTest="share-btn" path={ `${locate}` } />
+        <FavBtn info={ favoriteInfo() } />
+      </div>
       <RecipeCatg category={ `${category} ${alcoholicOrNot}` } />
-      <h3>Ingredientes</h3>
+      <h3 className="recipe-ingredientes">Ingredientes</h3>
       {listIngredients(ingredients)}
       <h3>Instruções</h3>
       <RecipeInst instructions={ instructions } />
       <button
+        className="finish-recipe"
         data-testid="finish-recipe-btn"
         type="button"
         disabled={ isDisable }
         onClick={ () => history.push('/receitas-feitas') }
       >
         Finalizar Receita
-
       </button>
     </div>
   );

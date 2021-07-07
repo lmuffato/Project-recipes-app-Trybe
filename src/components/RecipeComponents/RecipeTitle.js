@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 export default function RecipeTitle(props) {
   const { title } = props;
-  return (<h1 data-testid="recipe-title">{title}</h1>);
+  return (<h1 data-testid="recipe-title" className="title">{title}</h1>);
 }
 
 RecipeTitle.propTypes = {

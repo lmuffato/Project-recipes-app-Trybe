@@ -1,21 +1,29 @@
 .footer {
   background-color: rgb(67, 163, 58);
-  bottom          : 0;
-  display         : flex;
-  position        : fixed;
-  width           : 100%;
+  bottom: 0;
+  display: flex;
+  position: fixed;
+  width: 100%;
 }
 
 .footer ul {
-  display        : flex;
+  display: flex;
   justify-content: space-around;
   list-style-type: none;
-  margin         : auto;
-  padding        : 0.5em;
-  width          : 100%;
+  margin: auto;
+  padding: 0.5em;
+  width: 100%;
 }
 
 .footer ul li button {
   background-color: transparent;
-  border          : none;
+  border: none;
+}
+
+.header {
+  background-color: rgb(67, 163, 58);
+  display: flex;
+  height: 54px;
+  justify-content: space-around;
+  width: 100%;
 }

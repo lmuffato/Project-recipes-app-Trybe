@@ -9,7 +9,7 @@ function Header(props) {
   const { title, displayButton } = props;
   const [input, setInput] = useState(false);
   return (
-    <header>
+    <header className="header">
       <Link to="/perfil">
         <img
           src={ profileIMG }
@@ -17,7 +17,7 @@ function Header(props) {
           alt="profileIMG"
         />
       </Link>
-      <p data-testid="page-title">
+      <p data-testid="page-title" className="page-title">
         {title}
       </p>
       {(displayButton !== false)

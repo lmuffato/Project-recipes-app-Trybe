@@ -24,7 +24,7 @@ function ReceitasEmAndamento() {
   }, [params.id, url, urlToFetch]);
   return (
     <div>
-      <h1>Receita em Andamento</h1>
+      <h1 className="progressTitle">Receita em Andamento</h1>
       {(response) ? <ProgressCard recipe={ response } /> : ''}
     </div>
   );
