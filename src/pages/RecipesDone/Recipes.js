@@ -127,11 +127,11 @@ function Recipes() {
     </Card>
   );
   return (
-    <>
-      {doneRecipes.map((recipe, index) => (
+    <div>
+      {(doneRecipes) && doneRecipes.map((recipe, index) => (
         recipe.type === 'comida' ? handleFood(recipe, index) : handleDrink(recipe, index)
       ))}
-    </>
+    </div>
   );
 }
 

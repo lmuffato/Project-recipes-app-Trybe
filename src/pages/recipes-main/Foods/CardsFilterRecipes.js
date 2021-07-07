@@ -5,7 +5,11 @@ import { Link, Redirect } from 'react-router-dom';
 import Context from '../../../context/Context';
 
 function CardsFilterRecipes() {
-  const { filterFoods, search } = useContext(Context);
+// <<<<<<< HEAD
+  const { filterFoods, clickRecipeFood, search } = useContext(Context);
+  // =======
+  // const { filterFoods, search } = useContext(Context);
+  // >>>>>>> main-group-12
   const showFilter = () => {
     const lengthFoods = 12;
     const recipes = filterFoods.slice(0, lengthFoods);
@@ -15,8 +19,10 @@ function CardsFilterRecipes() {
           // Código fonte da biblioteca Bootstrap
           <Link key={ index } to={ `comidas/${recipe.idMeal}` }>
             <Card
+              onClick={ () => clickRecipeFood(recipe.idMeal) }
               style={ { width: '10rem' } }
               data-testid={ `${index}-recipe-card` }
+              key={ index }
             >
               <Card.Img
                 variant="top"
