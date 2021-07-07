@@ -18,6 +18,8 @@ import FoodsIngredients from './pages/FoodsIngredients';
 import FoodsArea from './pages/FoodsArea';
 import MealDescription from './compenents/MealDescription';
 import DrinkDescription from './compenents/DrinkDescription';
+import Comidas from './pages/Comidas';
+import Bebidas from './pages/Bebidas';
 
 function App() {
   return (
@@ -29,6 +31,8 @@ function App() {
             <Route path="/comidas/:detalhes" component={ MealDescription } />
             <Route path="/bebidas/:detalhes" component={ DrinkDescription } />
             <Route exact path="/" component={ LoginPage } />
+            <Route path="/comidas" component={ Comidas } />
+            <Route path="/bebidas" componet={ Bebidas } />
             <Route exact path="/explorar" component={ Explore } />
             <Route exact path="/explorar/comidas" component={ Foods } />
             <Route exact path="/explorar/bebidas" component={ Drinks } />
