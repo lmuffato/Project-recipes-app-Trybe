@@ -5,6 +5,7 @@ import DetailsHeader from './components/DetailsPage/DetailsHeader';
 import Ingredients from './components/DetailsPage/Ingredients';
 import Instructions from './components/DetailsPage/Instructions';
 import Video from './components/DetailsPage/Video';
+import StartRecipeBtn from './components/DetailsPage/StartRecipeBtn';
 import Recommendations from './components/DetailsPage/Recommendations';
 import { getSpecificDrink } from '../actions/drinks';
 import { getSpecificMeal } from '../actions/meals';
@@ -41,10 +42,6 @@ function RecipeDetails() {
     }
   }, [pathname]); // eslint-disable-line
 
-  const startRecipe = () => {
-    history.push(`${pathname}/in-progress`);
-  };
-
   return (
     loading ? null
       : data.map((recipe) => (
@@ -54,14 +51,7 @@ function RecipeDetails() {
           <Instructions recipe={ recipe } />
           <Video recipe={ recipe } />
           <Recommendations type={ type } />
-          <button
-            type="button"
-            data-testid="start-recipe-btn"
-            className="start-recipe-btn"
-            onClick={ startRecipe }
-          >
-            Iniciar receita
-          </button>
+          <StartRecipeBtn pathname={ pathname } recipe={ recipe } type={ type } />
         </div>
       ))
   );
