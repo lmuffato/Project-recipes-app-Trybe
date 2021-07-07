@@ -4,7 +4,6 @@ import {
   initialFoods, getCategoriesFoods, foodsByCategory } from '../../services/apiRequests';
 
 import Header from '../../components/Header';
-import SearchBar from '../../components/SearchBar';
 import FooterMenu from '../../components/footerMenu';
 import RecipeCardFood from '../../components/RecipeCardFood';
 import CategoriesButtons from '../../components/CategoriesButtons';

@@ -5,7 +5,6 @@ import {
   initialDrinks, drinksByCategory } from '../../services/apiRequests';
 
 import Header from '../../components/Header';
-import SearchBar from '../../components/SearchBar';
 import FooterMenu from '../../components/footerMenu';
 import RecipeCardDrink from '../../components/RecipeCardDrink';
 import CategoriesButtons from '../../components/CategoriesButtons';

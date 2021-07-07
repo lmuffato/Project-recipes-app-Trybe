@@ -42,7 +42,7 @@ function SearchBar({ type: requestType }) {
       } }
     >
       <div>
-        <input type="text" name="value" placeholder="Buscar Receita" />
+        <input type="text" name="value" placeholder="Buscar Receita" required />
         <label htmlFor="type">
           <label
             htmlFor="ingrediente"
