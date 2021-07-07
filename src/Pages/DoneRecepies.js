@@ -68,7 +68,7 @@ export default function DoneRecepies() {
     <>
       <Header props={ { search: false, title: 'Receitas Feitas' } } />
       {filterButtons()}
-      {renderCards(doneRecipies)}
+      {doneRecipies ? renderCards(doneRecipies) : null}
     </>
   );
 }
