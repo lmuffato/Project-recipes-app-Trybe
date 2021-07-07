@@ -54,7 +54,15 @@ function Comidas() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [texto]);
 
-  if (data.length < 1) return <h1>Loading...</h1>;
+  if (data.length < 1) {
+    return (
+      <div>
+        <Header title="Comidas" />
+        <h1>Loading...</h1>
+        <Footer />
+      </div>
+    );
+  }
 
   return (
     <div>
