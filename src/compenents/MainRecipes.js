@@ -19,7 +19,6 @@ function MainRecipes() {
     renderRecipes = recipes;
   }
 
-  console.log(searchedRecipes);
   return (
     <>
       { searchBtn ? <SearchBar /> : <FilterButtons /> }
