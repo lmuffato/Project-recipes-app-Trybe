@@ -5,11 +5,9 @@ import {
   fetchAllFoods,
   fetchAllDrinks,
   fetchAllCategoriesFoods,
-  fetchMealDetails,
   fetchAllCategoriesDrinks,
   fetchMealsAndCategory,
   fetchDrinksAndCategory,
-  fetchDrinkDetails,
 } from '../services/Data';
 
 function Provider({ children }) {
@@ -24,8 +22,6 @@ function Provider({ children }) {
   const [categoryD, setCategoryD] = useState('All');
   const [dataMealsAndCategory, setDataMealsAndCategory] = useState([]);
   const [dataDrinksAndCategory, setDrinksAndCategory] = useState([]);
-  const [foodDetails, setFoodDetails] = useState([]);
-  const [drinkDetails, setDrinkDetails] = useState([]);
 
   useEffect(() => {
     fetchAllCategoriesFoods()
@@ -54,11 +50,6 @@ function Provider({ children }) {
     }
   }, [categoryD]);
 
-  useEffect(() => {
-    fetchMealDetails().then(({ details }) => setFoodDetails(details));
-    fetchDrinkDetails().then(({ details }) => setDrinkDetails(details));
-  }, []);
-
   const contextValue = {
     foods: dataMealsAndCategory,
     drinks: dataDrinksAndCategory,
@@ -66,10 +57,6 @@ function Provider({ children }) {
     catDrinks: dataCategoriesDrinks,
     setDrinks: setDrinksAndCategory,
     setFoods: setDataMealsAndCategory,
-    foodDetails,
-    drinkDetails,
-    setFoodDetails,
-    setDrinkDetails,
     infoUser,
     setDatainfoUser,
     categoryF,
