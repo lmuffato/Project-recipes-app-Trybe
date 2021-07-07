@@ -1,3 +1,52 @@
+* {
+  font-size: 0.96em;
+}
+
+.progressTitle {
+  font-size: 1.3em;
+}
+
+.doneFilter {
+  display: flex;
+}
+
+.doneComponents {
+  display: flex;
+  font-size: 12px;
+}
+
+.doneCategory {
+  font-size: 1.3em;
+}
+
+.doneTitle {
+  font-size: 1.4em;
+}
+
+.ol-ingredients {
+  display: flex;
+  flex-direction: column;
+  line-height: 0.7em;
+}
+
+.li-ingredients {
+  display: flex;
+  flex-direction: row;
+  width: 35%;
+}
+
+.page-title {
+  font-size: 3em;
+}
+
+.TitleShare {
+  display: flex;
+}
+
+.recipe-ingredientes {
+  font-size: 1.3em;
+}
+
 .meals {
   align-items: center;
   background: #0fa36b;
@@ -10,17 +59,10 @@
   width: 100%;
 }
 
-/*
-#iceLeft {
-  animation: clink .8s infinite ease;
-  opacity: 0.6;
-  transform-origin: 36px 66px;
+.finish-recipe {
+  border: 1px solid black;
+  bottom: 0;
+  height: 50px;
+  position: fixed;
+  width: 100%;
 }
-
-#iceRight {
-  animation: clink .8s .2s infinite ease;
-  opacity: 0.6;
-  transform-origin: 60px 78px;
-}
-*/
-

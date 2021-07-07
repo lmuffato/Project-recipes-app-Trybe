@@ -28,12 +28,12 @@ form {
   width: 100%;
 }
 
-label {
+/* label {
   display: flex;
   flex-direction: column;
   padding-bottom: 1em;
   width: 100%;
-}
+} */
 
 .lbl-txt-login {
   display: none;
