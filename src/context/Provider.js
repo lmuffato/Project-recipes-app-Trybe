@@ -8,6 +8,7 @@ function Provider({ children }) {
   const [isDisabled, setIsDisabled] = useState(true);
   const [mealsList, setMealsList] = useState([]);
   const [drinkList, setDrinkList] = useState([]);
+  const [drinksList, setDrinksList] = useState([]);
   const [isLoading, setLoading] = useState(false);
 
   const store = {
@@ -23,6 +24,8 @@ function Provider({ children }) {
     setDrinkList,
     isLoading,
     setLoading,
+    drinksList,
+    setDrinksList,
   };
 
   return (

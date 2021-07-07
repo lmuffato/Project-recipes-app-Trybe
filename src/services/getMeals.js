@@ -36,11 +36,9 @@ export const setMeals = (recipes) => {
         measures,
       });
     });
-    console.log('getMeals passando aqui', mealsList);
     return mealsList;
   }
 };
-
 export const getMealsDefault = async () => {
   const endPoint = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
   const response = await fetch(endPoint);

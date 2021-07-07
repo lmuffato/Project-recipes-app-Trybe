@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import Context from '../../context/Context';
+import setTokenLocalStorage from '../../services/localStorage';
 
 function loginValidation(email, password) {
   const regex2Email = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i;
@@ -12,13 +13,7 @@ function loginValidation(email, password) {
 
 export default function Login() {
   const { setUserEmail, setPassword, userEmail, password } = useContext(Context);
-
-  function setTokenLocalStorage() {
-    const Obj = { email: userEmail };
-    localStorage.setItem('mealsToken', JSON.stringify(1));
-    localStorage.setItem('cocktailsToken', JSON.stringify(1));
-    localStorage.setItem('user', JSON.stringify(Obj));
-  }
+  console.log(userEmail);
   return (
     <div className="meals">
       <Form>
@@ -47,7 +42,7 @@ export default function Login() {
             variant="dark"
             type="button"
             data-testid="login-submit-btn"
-            onClick={ setTokenLocalStorage }
+            onClick={ () => setTokenLocalStorage(userEmail) }
           >
             Entrar
           </Button>

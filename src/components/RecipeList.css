@@ -1,8 +1,8 @@
 .recipe-img {
-  border-radius: 6px 6px 0 0;
-  height: 110px;
+  border-radius: 6px;
+  height: 109px;
   position: absolute;
-  width: 160px;
+  width: 161px;
 }
 
 .recipe-name {
@@ -21,10 +21,9 @@
 .card {
   align-items: center;
   border-color: black;
-  border-radius: 6px 6px 0 0;
+  border-radius: 6px;
   display: flex;
   flex-flow: column wrap;
-  flex-direction: row;
   height: 172px;
   justify-content: space-around;
   width: 161px;

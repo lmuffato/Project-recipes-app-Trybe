@@ -16,13 +16,13 @@ export default function Foods() {
       setLoading(false);
     };
     reciveMeals();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <div className="food-page">
       <Header title="Comidas" show />
-      { isLoading ? <h1>Loading...</h1> : <RecipesList data={ mealsList } /> }
+      { isLoading ? <h1>Loading...</h1>
+        : <RecipesList data={ mealsList } path="comidas" /> }
       <BottomMenu />
     </div>
   );

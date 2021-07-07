@@ -2,26 +2,29 @@ import React, { useContext, useEffect } from 'react';
 import Header from '../../components/Header';
 import BottomMenu from '../../components/bottomMenu';
 import RecipesList from '../../components/RecipesList';
-import { getDrinksDefault } from '../../services/getDrinks';
 import Context from '../../context/Context';
+import { getDrinks } from '../../services/getDrinks';
+import '../../App.css';
 
-export default function Foods() {
-  const { drinkList, setDrinkList, isLoading, setLoading } = useContext(Context);
+export default function Drinks() {
+  const { drinksList, setDrinksList, isLoading, setLoading } = useContext(Context);
+
   useEffect(() => {
     const reciveDrinks = async () => {
       setLoading(true);
-      const data = await getDrinksDefault();
-      setDrinkList(data);
+      const data = await getDrinks();
+      setDrinksList([...data]);
       setLoading(false);
     };
     reciveDrinks();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    console.log(drinksList);
   }, []);
 
   return (
     <div className="food-page">
       <Header title="Bebidas" show />
-      { isLoading ? <h1>Loading...</h1> : <RecipesList data={ drinkList } /> }
+      { isLoading ? <h1>Loading...</h1>
+        : <RecipesList data={ drinksList } path="bebidas" /> }
       <BottomMenu />
     </div>
   );
