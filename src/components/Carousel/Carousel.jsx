@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import CarouselWrapper from './styles';
 // import useFetchRecipes from '../../effects/useFetchRecipes';
@@ -8,10 +8,18 @@ import CardList from '../CardList/CardList';
 // const endpointMeal = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
 // const endpointDrinks = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
 
-function Carousel({ recipeRecommendations, currentImg, currRecommendation, type }) {
+function Carousel({ recipeRecommendations, currentImg, type }) {
+  const currRecomendation = type === 'meals' ? 'drinks' : 'meals';
   const recommend = recipeRecommendations;
   const imgAtual = currentImg;
-  const typeOfPage = currRecommendation;
+  // const typeOfPage = currRecommendation;
+  const [firstSelectedImageIndex, setSelectedImageIndex] = useState(0);
+  const [secondSelectedImageIndex, setSecondSelectedImageIndex] = useState(1);
+
+  useEffect(() => {
+    setSelectedImageIndex(0);
+    setSecondSelectedImageIndex(1);
+  }, []);
 
   return (
     <CarouselWrapper>
@@ -21,13 +29,25 @@ function Carousel({ recipeRecommendations, currentImg, currRecommendation, type 
       <div className="card-grid">
         <CardList
           recipes={ recommend }
-          type={ typeOfPage || type }
-          titleTestId={ `${imgAtual}-recomendation-title` }
-          cardTestId={ `${imgAtual}-recomendation-card` }
+          type={ currRecomendation || type }
+          titleTestId={ `${imgAtual}-recomendation-title` } // provavel que vai sair daqui
+          cardTestId={ `${imgAtual}-recomendation-card` } // provavel que vai sair daqui
         />
       </div>
-      {/* <div className="right">ícone right</div> */}
-      {/* <div className="left">ícone left</div> */}
+      <div className="carousel">
+        <button
+          type="button"
+          // onClick={ handleLeftClick }
+        >
+          Prev
+        </button>
+        <button
+          type="button"
+          // onClick={ handleRightClick }
+        >
+          Next
+        </button>
+      </div>
     </CarouselWrapper>
   );
 }

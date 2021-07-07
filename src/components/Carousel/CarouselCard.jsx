@@ -1,62 +1,49 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link, useHistory } from 'react-router-dom';
-import Button from '../Generics/Button';
-import { CarouselCardContainer } from './styles';
+import { Link } from 'react-router-dom';
+import CardContainer from '../Card/styles';
 
-function CarouselCard({ index, recommendation, type }) {
+function CarouselCard({ index, recommendation }) {
   const recipe = recommendation;
-  const history = useHistory();
-  const recipeName = recommendation.strMeal || recommendation.strDrink;
-  const recipeThumb = recommendation.strMealThumb || recommendation.strDrinkThumb;
-  const handleClick = (ev) => {
-    ev.preventDefault();
-    history.push(`/comidas/${recipe.idMeal}`);
-  };
 
-  return (
-    type === 'meals ' ? (
-      <CarouselCardContainer>
-        <Button
-          onClick={ (ev) => handleClick(ev) }
-        >
-          <div>
+  const recipeName = recipe.strDrink || recipe.strMeal;
+  const recipeThumb = recipe.strDrinkThumb || recipe.strMealThumb;
+  const recipeCategory = recipe.strCategory || '';
+  const recipeAlcoholic = recipe.strAlcoholic || '';
+  const recipeURLPath = `/bebidas/${recipe.idDrink}` || `/comidas/${recipe.idMeal}`;
+
+  // if (type === 'comidas') {
+  //   recipeName = recipe.strDrink;
+  //   recipeThumb = recipe.strDrinkThumb;
+  //   recipeCategory = recipe.strAlcoholic;
+  //   recipeURLPath = `/bebidas/${recipe.idDrink}`;
+  // } else {
+  //   recipeName = recipe.strMeal;
+  //   recipeThumb = recipe.strMealThumb;
+  //   recipeCategory = recipe.strCategory;
+  //   recipeURLPath = `/comidas/${recipe.idMeal}`;
+  // }
+
+  if (recipe) {
+    return (
+      <Link to={ recipeURLPath }>
+        <CardContainer>
+          <div datat-testid={ `${index}-recomendation-card` }>
             <div className="img-wrapper">
-              <img
-                data-testid={ `${index}-card-img` }
-                src={ recipeThumb }
-                alt="Delicious food/drink"
-              />
+              <img src={ recipeThumb } alt="Delicious food/drink" />
             </div>
-            <div className="recipe-info">
-              <div data-testid={ `${index}-recomendation-title` }>{recipeName}</div>
+            <div className="card-info">
+              <p data-testid={ `${index}-recomendation-title` }>
+                { recipeName }
+              </p>
+              { recipeAlcoholic
+                ? (<p>{ recipeAlcoholic }</p>) : (<p>{ recipeCategory }</p>)}
             </div>
           </div>
-        </Button>
-      </CarouselCardContainer>
-    ) : (
-      <CarouselCardContainer>
-        <Link
-          to={ {
-            pathname: `/bebidas/${recommendation.idDrink}`,
-            state: { recipe, type } } }
-        >
-          <div>
-            <div className="img-wrapper">
-              <img
-                data-testid={ `${index}-card-img` }
-                src={ recipeThumb }
-                alt="Delicious food/drink"
-              />
-            </div>
-            <div className="recipe-info">
-              <div data-testid={ `${index}-recomendation-title` }>{recipeName}</div>
-            </div>
-          </div>
-        </Link>
-      </CarouselCardContainer>
-    )
-  );
+        </CardContainer>
+      </Link>
+    );
+  }
 }
 
 export default CarouselCard;

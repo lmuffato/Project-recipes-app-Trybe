@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import RecipeInfo from '../components/RecipeInfo/RecipeInfo';
 import Button from '../components/Generics/Button';
@@ -8,34 +8,38 @@ import RecipeInstructions from '../components/RecipeInstructions/RecipeInstructi
 import Container from '../styles/recipeDetails';
 import MealVideo from '../components/MealVideo/MealVideo';
 import Carousel from '../components/Carousel/Carousel';
+import CarouselImages from '../components/Carousel/CarouselImages';
 import useDetailsProvider from '../hooks/useDetailsProvider';
+
+const endpointRecipes = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
+const endpointCocktails = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
 
 function RecipeDetails({ type }) {
   const { id } = useParams();
+  const history = useHistory();
   const endpointMeal = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
   const endpointDrink = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
-  const endpointRecipes = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
-  const endpointCocktails = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
-  // const [fetchRecipeURL, setFetchRecipeURL] = useState('');
+  const [isFetching, setIsFetching] = useState(true);
   const [carouselRecommendations, setRecomendations] = useState([]);
-  const currRecomendation = type === 'meals' ? 'drinks' : 'meals';
   const [singleRecipe, setRecipe] = useState({});
   const { handleFetch,
     isLoading, recipeData,
-    recommendations, fetchMealRecipes, currentImage } = useDetailsProvider();
+    recommendations, fetchMealRecipes,
+    currentImage } = useDetailsProvider();
 
   useEffect(() => {
-    const getRecipesAndRecommendations = async () => {
+    const getRecipesAndRecommendations = () => {
       if (type === 'meals') {
-        await fetchMealRecipes(endpointCocktails, type);
-        await handleFetch(endpointMeal, type);
+        fetchMealRecipes(endpointCocktails, type);
+        handleFetch(endpointMeal, type);
+        setIsFetching(false);
       }
-      await fetchMealRecipes(endpointRecipes, type);
-      await handleFetch(endpointDrink, type);
+      fetchMealRecipes(endpointRecipes, type);
+      handleFetch(endpointDrink, type);
+      setIsFetching(false);
     };
     getRecipesAndRecommendations();
-  }, [endpointDrink,
-    endpointMeal, fetchMealRecipes, handleFetch, type]);
+  }, [endpointDrink, endpointMeal, fetchMealRecipes, handleFetch, type]);
 
   useEffect(() => {
     let cancel = false;
@@ -50,7 +54,12 @@ function RecipeDetails({ type }) {
     };
   }, [recipeData, recommendations]);
 
-  if (isLoading) {
+  const handleClick = (ev) => {
+    ev.preventDefault();
+    history.push(`${id}/in-progress`);
+  };
+
+  if (isLoading || isFetching) {
     return 'Loading';
   }
 
@@ -83,10 +92,15 @@ function RecipeDetails({ type }) {
       <Carousel
         recipeRecommendations={ carouselRecommendations }
         currentImg={ currentImage }
-        currRecommendation={ currRecomendation }
         type={ type }
       />
-      <Button data-testid="start-recipe-btn">
+      {/* <CarouselImages
+        recipeRecommendations={ carouselRecommendations }
+      /> */}
+      <Button
+        data-testid="start-recipe-btn"
+        onClick={ (ev) => handleClick(ev) }
+      >
         Iniciar receita
       </Button>
     </Container>

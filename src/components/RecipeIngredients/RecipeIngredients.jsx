@@ -7,6 +7,8 @@ function RecipeIngredients({ recipe }) {
   const keysAndValues = Object.entries(recipe);
 
   const formatting = formattingMeasuresAndIngredients(keysAndValues);
+  // const formatCarousel = formattingCarouselImages(keysAndValues);
+  // console.log(formatCarousel);
   // const imgsFormatted = formattingCarouselImgs(keysAndValues);
   // console.log(imgsFormatted);
   const { ingredients, measures } = formatting;
