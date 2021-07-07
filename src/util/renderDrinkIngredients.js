@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { requestInitialDrinks } from '../redux/actions';
 import fetchDrinksByIngredient from '../helpers/fetchDrinksByIngredient';
-import '../PagesCss/DrinkIngredient.css';
+import '../PagesCss/Ingredients.css';
 
 const Filter = async (dispat, history, name) => {
   const { drinks } = await fetchDrinksByIngredient(name);
@@ -21,7 +21,7 @@ export default function RenderIngredients(ingredients) {
         <button
           type="button"
           key={ index }
-          className="drink-ingredient-btn"
+          className="ingredients-btn"
           onClick={ () => Filter(dispatch, history, e.strIngredient1) }
         >
           <div data-testid={ `${index}-ingredient-card` }>

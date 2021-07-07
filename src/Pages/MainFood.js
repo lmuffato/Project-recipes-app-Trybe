@@ -11,6 +11,7 @@ import FilterButtons from '../components/CategoryButtons';
 function MainFood() {
   const dispatch = useDispatch();
   const isLoading = useSelector((state) => state.searchReducer.isLoading);
+  const firstTime = useSelector((state) => state.searchReducer.initialMeals);
   const loading = <h1>Loading...</h1>;
 
   useEffect(() => {
@@ -25,8 +26,8 @@ function MainFood() {
     };
 
     fecthMealsCategory();
-    getMeals();
-  }, [dispatch]);
+    if (firstTime.length === 0) getMeals();
+  }, [dispatch, firstTime]);
 
   return (
     <>
