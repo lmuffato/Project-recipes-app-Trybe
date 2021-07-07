@@ -31,6 +31,7 @@ function HeaderSearchbar() {
     setPath(pathName);
     if (radio === letter && e.target.value.length > 1) {
       global.alert('Sua busca deve conter somente 1 (um) caracter');
+      setSearchInput('');
     }
   };
 
@@ -84,6 +85,7 @@ function HeaderSearchbar() {
       };
       getDrinkByLetter();
     }
+    setSearchInput('');
   };
 
   return (
