@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { Button, Card, Image } from 'react-bootstrap';
+import { Button, Card } from 'react-bootstrap';
 import RecipeDetail from '../effects/RecipeDetails';
 import { ApiCocktailFirstItems } from '../services/theCockTailAPI';
 import { ApiRecipeDetail } from '../services/theMealAPI';
-import shareIcon from '../images/shareIcon.svg';
-import favoriteIcon from '../images/whiteHeartIcon.svg';
 import RecipeShared from '../effects/RecipeShared';
+import FavoriteButton from '../components/FavoriteButton';
+import IngredientsChecks from '../components/IngredientsChecks';
+import ShareButton from '../components/ShareButton';
 
 export default function FoodInProgress() {
   const [currMeal, setCurrMeal] = useState({
@@ -22,7 +23,7 @@ export default function FoodInProgress() {
   RecipeDetail(currMeal, ApiRecipeDetail, ApiCocktailFirstItems, setCurrMeal);
   RecipeShared(currMeal.shareRecipe);
 
-  const { recipe, arrRecipeIngredients, shareRecipe } = currMeal;
+  const { recipe, arrRecipeIngredients } = currMeal;
   return (
     <Card style={ { width: '18rem' } }>
       <img
@@ -31,36 +32,10 @@ export default function FoodInProgress() {
         data-testid="recipe-photo"
       />
       <h2 data-testid="recipe-title">{recipe.strMeal}</h2>
-      {shareRecipe && <span>Link copiado!</span>}
-      <Image
-        type="button"
-        style={ { width: '2rem' } }
-        data-testid="share-btn"
-        src={ shareIcon }
-        alt="Compartilhar"
-        onClick={ () => setCurrMeal({ ...currMeal, shareRecipe: true }) }
-      />
-      <img
-        style={ { width: '2rem' } }
-        data-testid="favorite-btn"
-        src={ favoriteIcon }
-        alt="favoritar"
-      />
+      <ShareButton />
+      <FavoriteButton recipe={ recipe } />
       <h3 data-testid="recipe-category">{recipe.strCategory}</h3>
-      {arrRecipeIngredients.map((ingredient, index) => (
-        <div
-          key={ `${index}-${ingredient[1]}` }
-          data-testid={ `${index}-ingredient-step` }
-        >
-          <input
-            type="checkbox"
-            id={ ingredient[1] }
-            name={ ingredient[1] }
-            value={ ingredient[1] }
-          />
-          <label htmlFor={ ingredient[1] }>{ingredient[1]}</label>
-        </div>
-      ))}
+      <IngredientsChecks ingredients={ arrRecipeIngredients } />
       <p data-testid="instructions">{ recipe.strInstructions }</p>
       <Button
         variant="dark"

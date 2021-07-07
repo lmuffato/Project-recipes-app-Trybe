@@ -4,10 +4,8 @@ import { getItemFromLocalStorage, setToLocalStorage } from '../services/localSto
 
 function checkFavRecipes(id, storageItems, setShouldColor) {
   const itemFound = storageItems.find((item) => item.id === id);
-  console.log(itemFound);
   if (itemFound) {
     const newStorage = storageItems.filter((items) => items !== itemFound);
-    console.log(newStorage);
     setShouldColor(false);
     return setToLocalStorage('favoriteRecipes', newStorage);
   }
