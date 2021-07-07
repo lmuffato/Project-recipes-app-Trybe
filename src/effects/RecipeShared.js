@@ -16,6 +16,7 @@ export default function RecipeShared(state) {
     if (pathname.includes('in-progress') && pathname.includes('bebidas')) {
       return Copy(`http://localhost:3000/bebidas/${getId}`);
     }
-    Copy(`http://localhost:3000/${getId}`);
+    Copy(`http://localhost:3000${history.location
+      .pathname}`);
   }, [state]);
 }
