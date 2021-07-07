@@ -7,7 +7,11 @@ function Provider({ children }) {
   const [password, setPassword] = useState('');
   const [isDisabled, setIsDisabled] = useState(true);
   const [mealsList, setMealsList] = useState([]);
+  const [drinksList, setDrinksList] = useState([]);
   const [isLoading, setLoading] = useState(false);
+  const [catList, setCatList] = useState([]);
+  const [category, setCategory] = useState('All');
+  const [filtredList, setFiltredList] = useState([]);
 
   const store = {
     userEmail,
@@ -20,6 +24,14 @@ function Provider({ children }) {
     setMealsList,
     isLoading,
     setLoading,
+    drinksList,
+    setDrinksList,
+    catList,
+    setCatList,
+    category,
+    setCategory,
+    filtredList,
+    setFiltredList,
   };
 
   return (

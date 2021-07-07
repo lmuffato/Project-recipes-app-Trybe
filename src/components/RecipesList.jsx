@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import './RecipeList.css';
+import Context from '../context/Context';
 
-function RecipesList({ data }) {
-  const renderCards = (card) => {
-    const twelve = 12;
-    const first12 = card.slice(0, twelve);
+function RecipesList({ data, path }) {
+  const { category, filtredList } = useContext(Context);
+  const renderCards = () => {
+    const magicNum = 12;
+    const first12 = category === 'All' ? data.slice(0, magicNum)
+      : filtredList.slice(0, magicNum);
     const toReturn = first12.map((recipe, index) => {
       const { name, imgSrc, id } = recipe;
       return (
@@ -14,7 +16,7 @@ function RecipesList({ data }) {
           key={ index }
           data-testid={ `${index}-recipe-card` }
         >
-          <Link to={ { pathname: `/comidas/${id}` } }>
+          <Link to={ { pathname: `/${path}/${id}` } }>
             <div className="card">
               <img
                 src={ `${imgSrc}` }
@@ -39,14 +41,15 @@ function RecipesList({ data }) {
   return (
     <div className="component">
       <ul className="card-list">
-        { renderCards(data) }
+        { renderCards() }
       </ul>
     </div>
   );
 }
 
 RecipesList.propTypes = {
-  data: PropTypes.arrayOf(Object).isRequired,
+  data: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string)).isRequired,
+  path: PropTypes.string.isRequired,
 };
 
 export default RecipesList;
