@@ -14,7 +14,6 @@ export default function CategoryButtons({ categories }) {
   const { pathname } = useLocation();
 
   function handleFilterByCategoryName(ev, categoryName) {
-
     const buttons = document.querySelectorAll('.category-buttons');
 
     let NUMBER_OF_CLICKED_CATEGORIES = 0;
