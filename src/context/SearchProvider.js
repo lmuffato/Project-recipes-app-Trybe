@@ -14,7 +14,6 @@ function SearchProvider({ children }) {
   const [fullRecipes, setFullRecipes] = useState([]);
   const [fullDrinks, setFullDrinks] = useState([]);
   const history = useHistory();
-  console.log(history);
 
   const getRecipes = async (text, radio) => {
     setIsloading(true);
@@ -23,9 +22,7 @@ function SearchProvider({ children }) {
     if (!apiRecipes.meals) {
       setFilteredRecipes([]);
     } else if (apiRecipes.meals && apiRecipes.meals.length === 1) {
-      console.log(history);
       history.push(`/comidas/${apiRecipes.meals[0].idMeal}`);
-      // console.log('testou');
     }
     setIsloading(false);
   };

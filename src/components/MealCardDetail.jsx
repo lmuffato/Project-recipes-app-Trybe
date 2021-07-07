@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import ReactPlayer from 'react-player';
-// import Slider from 'react-slick';
+import ButtonStartRecipe from './ButtonStartRecipe';
 import UserContext from '../context/UserContext';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
@@ -8,44 +8,34 @@ import IngredientsList from './IngredientsList';
 import RecomendedDrinks from './RecomendedDrinks';
 import SearchContext from '../context/SearchContext';
 import { getItemFromLocalStorage } from '../services/localStorage';
+import { recipeRow } from '../services/recipeRow';
 
 function MealCardDetail() {
-  let buttonIniciarReceita = (
-    <button
-      data-testid="start-recipe-btn"
-      type="button"
-      className="start-recipe-btn"
-      id="start-recipe-btn"
-    >
-      Iniciar Receita
-    </button>);
   const { fullDrinks } = useContext(SearchContext);
   const { currentMeal } = useContext(UserContext);
   const [youtubeId, setYoutubeId] = useState('');
+  const [textButton, setTextButton] = useState('Iniciar Receita');
   const donedRecipes = getItemFromLocalStorage('doneRecipes');
-  const inProgressRecipes = Object.keys(getItemFromLocalStorage('doneRecipes'));
+  let inProgressRecipes;
+  if (getItemFromLocalStorage('inProgressRecipes')) {
+    inProgressRecipes = Object.keys(getItemFromLocalStorage('inProgressRecipes').meals);
+  }
 
   const RECOMMENDED_NUMBER = 6;
   useEffect(() => {
     setYoutubeId(currentMeal.strYoutube);
   }, [currentMeal]);
 
-  if (donedRecipes) {
-    const findDonedRecipe = donedRecipes.find(({ id }) => {
-      const { idMeal } = currentMeal;
-      return id === idMeal;
-    });
-    if (findDonedRecipe) buttonIniciarReceita = '';
-  }
-
-  if (inProgressRecipes) {
-    const button = document.getElementById('start-recipe-btn');
-    const findDonedRecipe = inProgressRecipes.find((id) => {
-      const { idMeal } = currentMeal;
-      return id === idMeal;
-    });
-    if (findDonedRecipe) button.innerText = 'Continuar Receita';
-  }
+  useEffect(() => {
+    const obj = {
+      donedRecipes,
+      textButton,
+      inProgressRecipes,
+      setTextButton,
+      currentMeal,
+    };
+    recipeRow(obj);
+  });
 
   return (
     <div>
@@ -86,7 +76,9 @@ function MealCardDetail() {
           ) : (null)
         ))}
       </div>
-      {buttonIniciarReceita}
+      {textButton !== '' ? (
+        <ButtonStartRecipe buttonText={ textButton } />
+      ) : (null)}
     </div>
   );
 }

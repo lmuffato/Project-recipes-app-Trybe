@@ -7,21 +7,20 @@ import RecomendedMeals from './RecomendedMeals';
 import { fetchRandonMeal } from '../services/getApis';
 import SearchContext from '../context/SearchContext';
 import { getItemFromLocalStorage } from '../services/localStorage';
+import ButtonStartRecipe from './ButtonStartRecipe';
+import { recipeDrinkRow } from '../services/recipeRow';
 
 function DrinkCardDetail() {
-  let buttonIniciarReceita = (
-    <button
-      data-testid="start-recipe-btn"
-      type="button"
-      className="start-recipe-btn"
-    >
-      Iniciar Receita
-    </button>);
-
   const { currentDrink } = useContext(UserContext);
   const { fullRecipes } = useContext(SearchContext);
   const [recomendedMeals, setRecomendedMeals] = useState([]);
+  const [textButton, setTextButton] = useState('Iniciar Receita');
   const donedRecipes = getItemFromLocalStorage('doneRecipes');
+  let inProgressRecipes;
+  if (getItemFromLocalStorage('inProgressRecipes')) {
+    inProgressRecipes = Object.keys(getItemFromLocalStorage('inProgressRecipes')
+      .cocktails);
+  }
 
   const RECOMMENDED_LENGHT = 6;
   useEffect(() => {
@@ -33,13 +32,23 @@ function DrinkCardDetail() {
     if (recomendedMeals.length < MEALS_NUMBER) getRandonDrink();
   }, [recomendedMeals]);
 
-  if (donedRecipes) {
-    const findDonedRecipe = donedRecipes.find(({ id }) => {
-      const { idDrink } = currentDrink;
-      return id === idDrink;
-    });
-    if (findDonedRecipe) buttonIniciarReceita = '';
-  }
+  useEffect(() => {
+    const obj = {
+      donedRecipes,
+      textButton,
+      inProgressRecipes,
+      setTextButton,
+      currentDrink,
+    };
+    recipeDrinkRow(obj);
+  });
+  // if (donedRecipes) {
+  //   const findDonedRecipe = donedRecipes.find(({ id }) => {
+  //     const { idDrink } = currentDrink;
+  //     return id === idDrink;
+  //   });
+  //   if (findDonedRecipe) buttonIniciarReceita = '';
+  // }
 
   return (
     <div>
@@ -74,7 +83,9 @@ function DrinkCardDetail() {
           ) : (null)
         ))}
       </div>
-      { buttonIniciarReceita }
+      {textButton !== '' ? (
+        <ButtonStartRecipe buttonText={ textButton } />
+      ) : (null)}
     </div>
   );
 }

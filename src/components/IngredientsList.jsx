@@ -11,9 +11,6 @@ function IngredientsList({ currentMeal }) {
     return meal[0].includes('Measure') && xablau;
   });
 
-  console.log(ingredientsArray);
-  console.log(measureArray);
-
   return (
     <ul>
       {ingredientsArray.map((ingredient, index) => (
