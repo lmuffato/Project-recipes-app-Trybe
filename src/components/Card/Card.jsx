@@ -37,6 +37,7 @@ function Card(props) {
         ) : (
           <div
             data-testid={ `${index}-recomendation-card` }
+            className="visible"
           >
             <div className="img-wrapper">
               <img

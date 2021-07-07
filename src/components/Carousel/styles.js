@@ -26,14 +26,6 @@ const CarouselWrapper = styled.div`background-color: white;
   }
 
   .card-grid {
-
-    /* border: 0;
-    display: flex;
-    flex-flow: row wrap;
-    font: inherit;
-    font-size: 1em;
-    margin: 0 auto;
-    max-width: 700px; */
     overflow-x: scroll;
     padding: 0;
     scroll-snap-type: x mandatory;
@@ -42,9 +34,13 @@ const CarouselWrapper = styled.div`background-color: white;
       object-fit: cover;
     }
 
-    /* .invisible {
+    .invisible {
       visibility: hidden;
-    } */
+    }
+
+    .visible {
+      margin: 0 auto;
+    }
   }
 `;
 
@@ -56,7 +52,7 @@ export const CarouselCardContainer = styled.div`align-content: normal;
   justify-content: center;
   margin: 0 auto;
   margin-bottom: 80px;
-  max-width: 1500px;
+  max-width: 100%;
 
   a {
     color: black;
