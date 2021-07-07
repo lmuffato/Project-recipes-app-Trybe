@@ -11,6 +11,7 @@ import ExploreFood from '../pages/ExploreFood';
 import ExploreDrink from '../pages/ExploreDrink';
 import IngredientsPage from '../pages/IngredientsPage';
 import ExploreByAreaPage from '../pages/ExploreByAreaPage';
+import RecipesDonePage from '../pages/RecipesDonePage';
 
 const componentWithHeader = ({ title }) => (
   <section>
@@ -93,7 +94,7 @@ export default [
   },
   {
     path: '/receitas-feitas',
-    Component: componentWithHeader,
+    Component: RecipesDonePage,
     exact: true,
     title: 'Receitas Feitas',
   },
