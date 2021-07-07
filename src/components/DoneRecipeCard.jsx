@@ -1,16 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import clipboardCopy from '../services/clipboardCopy';
 import shareIcon from '../images/shareIcon.svg';
 
 function DoneRecipeCard({ recipe, index }) {
-  console.log(recipe);
   const {
-    image, category, name, doneDate, tags, type, area, alcoholicOrNot } = recipe;
+    id, image, category, name, doneDate, tags, type, area, alcoholicOrNot } = recipe;
   return (
-    <div>
+    <div
+      style={ {
+        display: 'flex',
+        flexDirection: 'column',
+        maxWidth: '100vw',
+        alignItems: 'center' } }
+    >
       <img
         src={ image }
         alt="Done Recipe"
+        style={ { width: '80vw' } }
         data-testid={ `${index}-horizontal-image` }
       />
       { (type === 'bebida') ? (
@@ -36,11 +43,17 @@ function DoneRecipeCard({ recipe, index }) {
       >
         { doneDate }
       </p>
-      <img
-        src={ shareIcon }
-        alt="Share Icon"
-        data-testid={ `${index}-horizontal-share-btn` }
-      />
+      <button
+        type="button"
+        onClick={ () => clipboardCopy(type, id) }
+      >
+        <img
+          src={ shareIcon }
+          alt="Share Icon"
+          data-testid={ `${index}-horizontal-share-btn` }
+        />
+        <span id={ `copyMessage${id}` }>Compartilhar</span>
+      </button>
       { type === 'comida' && tags.map((tag) => (
         <p
           key={ index }
