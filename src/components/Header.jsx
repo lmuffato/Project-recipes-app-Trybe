@@ -35,7 +35,7 @@ function Header({ props: { search, title } }) {
 
   const clickSearch = () => {
     if (searchText.length > 1 && radioValue === 'first') {
-      alert('Sua busca deve conter somente 1 (um) caracter');
+      global.alert('Sua busca deve conter somente 1 (um) caracter');
     } else {
       dispatch(fetchSearch(radioValue, searchText, window.location.href.split('/')[3]));
     }
