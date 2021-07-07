@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { Button, Image } from 'react-bootstrap';
 import { useLocation, useParams } from 'react-router';
+import { Link } from 'react-router-dom';
+import UserContext from '../../context/UserContext';
 import { getRecipeByID } from '../../services/fetchRecipes';
 import Ingredient from '../../Components/Ingredients';
 import Slide from '../../Components/Slide';
@@ -11,19 +13,30 @@ import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
 function Details() {
   const { pathname } = useLocation();
   const { id } = useParams();
+
   const [recipesDetails, setRecipesDetails] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [recipeStatus, setRecipeStatus] = useState('Iniciar Receita');
+  const { doneRecipes, doingRecipes } = useContext(UserContext);
 
   const recipeType = (pathname.includes('comidas')) ? 'Meal' : 'Drink';
   const toggleApi = (pathname.includes('comidas')) ? 'meals' : 'drinks';
   const toggleCategory = recipeType === 'Meal' ? 'strCategory' : 'strAlcoholic';
+  const toggleURL = (pathname.includes('comidas')) ? 'comidas' : 'bebidas';
 
   useEffect(() => {
     getRecipeByID(pathname, id).then((response) => {
       setRecipesDetails(response[toggleApi][0]);
       setIsLoading(false);
     });
-  }, [id, pathname, toggleApi]);
+    const checkRecipe = () => {
+      const done = doneRecipes.find((recipe) => recipe.id === id);
+      const doing = doingRecipes.find((recipe) => recipe.id === id);
+      if (done) return setRecipeStatus('');
+      if (doing) return setRecipeStatus('Continuar Receita');
+    };
+    checkRecipe();
+  }, [doingRecipes, doneRecipes, id, pathname, toggleApi]);
 
   return (
     <div>
@@ -65,7 +78,13 @@ function Details() {
               </div>)
             : null}
           <Slide toggle={ recipeType } category={ toggleCategory } />
-          <Button data-testid="start-recipe-btn">Iniciar Receita</Button>
+          { recipeStatus
+            ? (
+              <Link to={ `/${toggleURL}/${id}/in-progress` }>
+                <Button data-testid="start-recipe-btn">{ recipeStatus }</Button>
+              </Link>
+            )
+            : null}
         </div>
       )}
     </div>
