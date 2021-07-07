@@ -3,8 +3,8 @@ import { Button } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import './PagesCss/Explore.css';
 import RandomRecipe from '../helpers/getRandomRecipe';
+import '../PagesCss/Explore.css';
 
 function ExploreDrinks() {
   const history = useHistory();

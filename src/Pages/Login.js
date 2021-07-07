@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Form, Button } from 'react-bootstrap';
-import './PagesCss/Login.css';
+import '../PagesCss/Login.css';
 
 function Login() {
   const [email, setEmail] = useState('');
