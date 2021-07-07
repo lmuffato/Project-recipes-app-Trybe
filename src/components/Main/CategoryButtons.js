@@ -51,6 +51,19 @@ export default function CategoryButtons({ categories }) {
     }
   }
 
+  function handleFilterAll(ev) {
+    if (pathname === '/comidas') {
+      fetchFoods().then((data) => setFoods(data.meals));
+      resetAllCheckbox();
+      ev.target.checked = !checked;
+    }
+    if (pathname === '/bebidas') {
+      fetchCocktails().then((data) => setDrinks(data.drinks));
+      resetAllCheckbox();
+      ev.target.checked = !checked;
+    }
+  }
+
   return (
     <div className="category-button">
       {categories.map((categoryName, index) => (
@@ -79,7 +92,9 @@ export default function CategoryButtons({ categories }) {
         <input
           type="checkbox"
           name="category-buttons"
-          onClick={ (ev) => console.log(ev.target) }
+          className="category-buttons"
+          data-testid="All-category-filter"
+          onClick={ (ev) => handleFilterAll(ev) }
         />
         All
       </label>
