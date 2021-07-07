@@ -12,7 +12,7 @@ const RecipeInProgress = () => {
   const { path } = useRouteMatch();
   const { id } = useParams();
   const { inProgressRecipes } = useContext(RecipesContext);
-  const { updateFavoriteRecipes } = useLocalStorage();
+  // const { updateFavoriteRecipes } = useLocalStorage();
   const {
     addNewInProgressMealsRecipes,
     addNewInProgressCocktailsRecipes,

@@ -10,25 +10,21 @@ const state = {
     meals: {},
   },
   favoriteRecipes: [],
+  addNewInProgressMealsRecipes: () => {},
+  addNewInProgressCocktailsRecipes: () => {},
+  setFavoriteRecipes: () => {},
 };
 
 describe('Tela de receita em progresso', () => {
-  test('O header possui o titulo, imagem, categoria da receita', () => {
-    try {
-      jest.spyOn(global, 'fetch');
-      global.fetch.mockResolvedValue({
-        json: jest.fn().mockResolvedValue(recipeDetailsData),
-      }).mockRejectedValue({
-        json: jest.fn().mockRejectedValue(new Error('Deu erro')),
-      });
+  test('O header possui o titulo, imagem, categoria da receita', async () => {
+    jest.spyOn(global, 'fetch');
+    global.fetch.mockResolvedValue({
+      json: jest.fn().mockResolvedValue(recipeDetailsData),
+    });
 
-      const { history } = renderWithRouterAndProvider(<App />, state);
-      history.push('/comidas/52977/in-progress');
-      const recipeName = screen.findByText('Corba');
-
-      expect(recipeName).toBeInTheDocument();
-    } catch (error) {
-      console.log(error);
-    }
+    const { history } = renderWithRouterAndProvider(<App />, state);
+    history.push('/comidas/52977/in-progress');
+    const recipeName = await screen.findByText('Corba');
+    expect(recipeName).toBeInTheDocument();
   });
 });

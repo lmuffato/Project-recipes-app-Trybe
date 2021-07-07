@@ -10,10 +10,11 @@ import {
   foodsCategories,
 } from './tests/mocks/recipesPageData';
 
-const renderWithRouterAndProvider = (component, state) => {
+const renderWithRouterAndProvider = (component, state = {}) => {
   const history = createMemoryHistory();
 
   const globalState = {
+    ...state,
     recipes: {
       drinks: drinksRecipes,
       foods: foodsRecipes,
@@ -22,6 +23,17 @@ const renderWithRouterAndProvider = (component, state) => {
       drinks: drinksCategories,
       foods: foodsCategories,
     },
+    inProgressRecipes: {},
+    setFoodsRecipes: () => {},
+    setDrinksRecipes: () => {},
+    foodsRecipes: [],
+    drinksRecipes: [],
+    addNewInProgressMealsRecipes: () => {},
+    addNewInProgressCocktailsRecipes: () => {},
+    foodOrDrinksPathName: '',
+    setfoodOrDrinksPathName: () => {},
+    favoriteRecipes: {},
+    setFavoriteRecipes: () => {},
   };
 
   return ({
