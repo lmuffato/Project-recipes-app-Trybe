@@ -32,7 +32,9 @@ export default function useRecipeDetails(type) {
     'favoriteRecipes',
     [],
   );
-  const { showClipBoardMsg, copyToClipBoard } = useClipBoard(id, portugueseFood);
+  const {
+    showClipBoardMsg, copyToClipBoard, renderClipBoardMsg,
+  } = useClipBoard(id, portugueseFood);
 
   const getIngredientsAndMeasures = (rcp) => {
     const entriesRecipe = Object.entries(rcp);
@@ -60,8 +62,6 @@ export default function useRecipeDetails(type) {
   const redirectToProgressPage = () => {
     push(`/${portugueseFood}/${id}/in-progress`);
   };
-
-  const renderClipBoardMsg = () => <div>Link copiado!</div>;
 
   const getFavoriteInfos = (recipeStorage) => {
     let alcoholTest;

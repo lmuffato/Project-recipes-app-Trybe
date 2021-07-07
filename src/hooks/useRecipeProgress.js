@@ -26,7 +26,7 @@ export default function useRecipeProgress(type) {
     'favoriteRecipes',
     [],
   );
-  const [doneRecipes, setDoneRecipes] = usePersistedState('doneRecipes', []);
+  const [doneRecipes] = usePersistedState('doneRecipes', []);
   const [recipeProgress, setRecipeProgress] = useState(INITIAL_STATE_HOOKS);
   const { push } = useHistory();
   const { id } = useParams();
@@ -148,15 +148,18 @@ export default function useRecipeProgress(type) {
     return {
       ...getFavoriteInfos(recipeDone),
       doneDate: date,
-      tags: recipeDone.strTags || [],
+      tags: recipeDone.strTags || '',
     };
   };
 
   const redirectToRecipeDonePage = (recipeDone) => {
     const recipeDoneInfo = getRecipeDoneInfo(recipeDone);
-    console.log(recipeDoneInfo);
-
-    setDoneRecipes(recipeDoneInfo);
+    localStorage.setItem(
+      'doneRecipes',
+      JSON.stringify([...doneRecipes, recipeDoneInfo]),
+    );
+    // Bug com o usePersistedState
+    // setDoneRecipes([...doneRecipes, recipeDoneInfo]);
     push('/receitas-feitas');
   };
 

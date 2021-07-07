@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 const copy = require('clipboard-copy');
 
@@ -10,5 +10,7 @@ export default function useClipBoard(id, type) {
     setShowClipBoardMsg(true);
   };
 
-  return { showClipBoardMsg, copyToClipBoard };
+  const renderClipBoardMsg = () => <div>Link copiado!</div>;
+
+  return { showClipBoardMsg, copyToClipBoard, renderClipBoardMsg };
 }
