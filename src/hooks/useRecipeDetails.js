@@ -24,8 +24,7 @@ export default function useRecipeDetails(type) {
     typeFood,
     foodUpperCase,
   } = getMealsOrDrinks(type);
-  const { location, push } = useHistory();
-  const { showClipBoardMsg, copyToClipBoard } = useClipBoard(location);
+  const { push } = useHistory();
   const { id } = useParams();
   const [recipe, setRecipe] = useState(INITIAL_STATE);
   const [recommended, setRecommended] = useState(INITIAL_STATE);
@@ -33,6 +32,7 @@ export default function useRecipeDetails(type) {
     'favoriteRecipes',
     [],
   );
+  const { showClipBoardMsg, copyToClipBoard } = useClipBoard(id, portugueseFood);
 
   const getIngredientsAndMeasures = (rcp) => {
     const entriesRecipe = Object.entries(rcp);

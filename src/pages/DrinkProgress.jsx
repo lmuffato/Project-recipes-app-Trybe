@@ -2,7 +2,8 @@ import React from 'react';
 import useRecipeProgress from '../hooks/useRecipeProgress';
 
 export default function DrinkProgress() {
-  const { recipeProgress,
+  const {
+    recipeProgress,
     showClipBoardMsg,
     blackHeartIcon,
     whiteHeartIcon,
@@ -10,13 +11,21 @@ export default function DrinkProgress() {
     getIngredientsAndMeasures,
     checkFavorite,
     redirectToProgressPage,
+    sendToLocalStorage,
+    isChecked,
+    setHeart,
+    copyToClipBoard,
   } = useRecipeProgress('drink');
   const recipeDrink = recipeProgress.drinks[0];
   const { strAlcoholic, strInstructions, strDrink, strDrinkThumb } = recipeDrink;
   const { ingredients, measures } = getIngredientsAndMeasures(recipeDrink);
+
   const styleFooter = {
     bottom: '0px',
     position: 'fixed',
+  };
+  const styledChecked = {
+    textDecoration: 'line-through',
   };
 
   return (
@@ -24,11 +33,11 @@ export default function DrinkProgress() {
       <section>
         <img data-testid="recipe-photo" src={ strDrinkThumb } alt="Recipe" />
         <h1 data-testid="recipe-title">{strDrink}</h1>
-        <button type="button" data-testid="share-btn">
+        <button type="button" data-testid="share-btn" onClick={ copyToClipBoard }>
           Share button
         </button>
 
-        <button type="button">
+        <button type="button" onClick={ () => setHeart(recipeDrink) }>
           <img
             data-testid="favorite-btn"
             src={ checkFavorite() ? blackHeartIcon : whiteHeartIcon }
@@ -46,8 +55,17 @@ export default function DrinkProgress() {
           <h2>Ingredients</h2>
           <ul>
             {ingredients.map((ingredient, index) => (
-              <li data-testid={ `${index}-ingredient-step` } key={ index }>
-                <input type="checkbox" />
+              <li
+                data-testid={ `${index}-ingredient-step` }
+                key={ index }
+                style={ isChecked(ingredient) ? styledChecked : {} }
+              >
+                <input
+                  type="checkbox"
+                  value={ ingredient }
+                  onChange={ sendToLocalStorage }
+                  checked={ isChecked(ingredient) }
+                />
                 {`${ingredient} - ${measures[index]}`}
               </li>
             ))}

@@ -26,10 +26,12 @@ export default function useRecipeProgress(type) {
     [],
   );
   const [recipeProgress, setRecipeProgress] = useState(INITIAL_STATE_HOOKS);
-  const { push, location } = useHistory();
+  const { push } = useHistory();
   const { id } = useParams();
-  const { showClipBoardMsg, copyToClipBoard } = useClipBoard(location);
-  const { site, sites, idFood, typeFood, foodUpperCase, portugueseFood } = getMealsOrDrinks(type);
+  const {
+    site, sites, idFood, typeFood, foodUpperCase, portugueseFood,
+  } = getMealsOrDrinks(type);
+  const { showClipBoardMsg, copyToClipBoard } = useClipBoard(id, portugueseFood);
 
   useEffect(() => {
     const fetchDidMount = async () => {
@@ -133,6 +135,11 @@ export default function useRecipeProgress(type) {
     addToLocalStorage(idArray, value);
   };
 
+  const isChecked = (ingredient) => {
+    if (!inProgressRecipes[sites][id]) return false;
+    return inProgressRecipes[sites][id].some((ingred) => ingred === ingredient);
+  };
+
   return {
     inProgressRecipes,
     recipeProgress,
@@ -141,6 +148,7 @@ export default function useRecipeProgress(type) {
     whiteHeartIcon,
     showClipBoardMsg,
     push,
+    isChecked,
     copyToClipBoard,
     checkFavorite,
     setHeart,

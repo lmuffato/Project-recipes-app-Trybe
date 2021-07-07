@@ -12,6 +12,9 @@ export default function FoodProgress() {
     checkFavorite,
     redirectToProgressPage,
     sendToLocalStorage,
+    isChecked,
+    setHeart,
+    copyToClipBoard,
   } = useRecipeProgress('meal');
   const recipeMeal = recipeProgress.meals[0];
   const { strCategory, strInstructions, strMeal, strMealThumb } = recipeMeal;
@@ -23,7 +26,7 @@ export default function FoodProgress() {
   };
 
   const styledChecked = {
-    textDecoration: 'dashed',
+    textDecoration: 'line-through',
   };
 
   return (
@@ -31,11 +34,11 @@ export default function FoodProgress() {
       <section>
         <img data-testid="recipe-photo" src={ strMealThumb } alt="Recipe" />
         <h1 data-testid="recipe-title">{strMeal}</h1>
-        <button type="button" data-testid="share-btn">
+        <button type="button" data-testid="share-btn" onClick={ copyToClipBoard }>
           Share button
         </button>
 
-        <button type="button">
+        <button type="button" onClick={ () => setHeart(recipeMeal) }>
           <img
             data-testid="favorite-btn"
             src={ checkFavorite() ? blackHeartIcon : whiteHeartIcon }
@@ -53,11 +56,16 @@ export default function FoodProgress() {
           <h2>Ingredients</h2>
           <ul>
             {ingredients.map((ingredient, index) => (
-              <li data-testid={ `${index}-ingredient-step` } key={ index }>
+              <li
+                data-testid={ `${index}-ingredient-step` }
+                key={ index }
+                style={ isChecked(ingredient) ? styledChecked : {} }
+              >
                 <input
                   type="checkbox"
                   value={ ingredient }
                   onChange={ sendToLocalStorage }
+                  checked={ isChecked(ingredient) }
                 />
                 {`${ingredient} - ${measures[index]}`}
               </li>
