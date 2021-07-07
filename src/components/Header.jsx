@@ -95,10 +95,14 @@ function Header({ props: { search, title } }) {
 
   useEffect(() => {
     if ((data === null) || data === 'error') {
-      return alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+      return (
+        global.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.')
+      );
     }
     if ((data === null) || data === 'error') {
-      return alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+      return (
+        global.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.')
+      );
     }
   }, [data]);
 
