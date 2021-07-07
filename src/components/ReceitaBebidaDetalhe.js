@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import { useHistory } from 'react-router-dom';
 import RecomendacoesCard from './RecomendacoesCard';
@@ -19,6 +19,19 @@ function ReceitaBebidaDetalhe({ props }) {
 
   const { acctualyDrink, drinkRecomendation, id } = props;
 
+  useEffect(() => {
+    const verifyFavorite = () => {
+      if (JSON.parse(localStorage.getItem('favoriteRecipes') !== null)) {
+        const recipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
+        const checkRecipe = recipes.find((recipe) => recipe.id === id);
+
+        if (checkRecipe) setFavoriteDrink(true);
+      }
+    };
+
+    verifyFavorite();
+  }, [id]);
+
   const shareClick = (e) => {
     e.preventDefault();
     const { location: { pathname } } = history;
@@ -29,6 +42,33 @@ function ReceitaBebidaDetalhe({ props }) {
 
   const favoriteClick = (e) => {
     e.preventDefault();
+
+    // const date = new Date().toString();
+
+    const favoriteRecipe = {
+      id,
+      type: 'bebida',
+      area: '',
+      category: acctualyDrink.drinks[0].strCategory,
+      alcoholicOrNot: acctualyDrink.drinks[0].strAlcoholic,
+      name: acctualyDrink.drinks[0].strDrink,
+      image: acctualyDrink.drinks[0].strDrinkThumb,
+      // doneDate: date,
+      // tags: acctualyDrink.drinks[0].strTags,
+    };
+
+    if (JSON.parse(localStorage.getItem('favoriteRecipes') !== null)) {
+      const oldRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
+
+      console.log(oldRecipes);
+
+      const newRecipes = [...oldRecipes, favoriteRecipe];
+
+      console.log('New Recipe', newRecipes);
+      localStorage.setItem('favoriteRecipes', JSON.stringify(newRecipes));
+    } else {
+      localStorage.setItem('favoriteRecipes', JSON.stringify([favoriteRecipe]));
+    }
 
     return !favoriteDrink ? setFavoriteDrink(true) : setFavoriteDrink(false);
   };
@@ -97,7 +137,6 @@ function ReceitaBebidaDetalhe({ props }) {
 
           <ul>
             { ingredients.map((ingredient, index) => {
-              console.log(ingredients);
               if (ingredient !== null
                 && ingredient !== ' '
                 && ingredient !== '  '
