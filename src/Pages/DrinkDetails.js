@@ -5,8 +5,8 @@ import { actionDetails } from '../redux/actions';
 import shareIcon from '../images/shareIcon.svg';
 import blackFavoriteIcon from '../images/blackHeartIcon.svg';
 import whiteFavoriteIcon from '../images/whiteHeartIcon.svg';
-import '../components/Footer.css';
 import RecomendationCard from '../util/renderRecomendationCard';
+import '../components/Footer.css';
 
 function DrinkDetails() {
   const id = window.location.href.split('/')[4];
