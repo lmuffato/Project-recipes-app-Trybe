@@ -22,6 +22,7 @@ const searchReducer = (state = INITIAL_STATE, action) => {
       isLoading: true,
     };
   case ACTION_SEARCH:
+    console.log(action.item);
     return {
       ...state,
       data: action.data,

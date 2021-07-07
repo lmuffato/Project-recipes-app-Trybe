@@ -9,9 +9,9 @@ function GoToDetails(data) {
   let url = '';
   if (data && data.length === 1 && showDetails) {
     if (typePt === 'bebidas') {
-      url = `${data[0].idDrink}`;
+      url = `bebidas/${data[0].idDrink}`;
     } else {
-      url = `${data[0].idMeal}`;
+      url = `comidas/${data[0].idMeal}`;
     }
     return history.push(url);
   }
