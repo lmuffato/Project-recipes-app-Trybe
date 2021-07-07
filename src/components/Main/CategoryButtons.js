@@ -40,7 +40,7 @@ export default function CategoryButtons({ categories }) {
     if (ev.target.checked) {
       fetchDrinkByCategoryName(categoryName).then((data) => setDrinks(data.drinks));
       resetAllCheckbox();
-      ev.target.checked = !ev.target.checked;
+      ev.target.checked = true;
     } else if (ev.target.checked === false) {
       fetchCocktails().then((data) => setDrinks(data.drinks));
       resetAllCheckbox();
@@ -50,6 +50,7 @@ export default function CategoryButtons({ categories }) {
       ev.target.checked = !checked;
     }
   }
+
   return (
     <div className="category-button">
       {categories.map((categoryName, index) => (
