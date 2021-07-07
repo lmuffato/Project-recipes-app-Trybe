@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
+import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import ShareBtn from './ShareButton';
 import FavBtn from './FavoriteButton';
@@ -30,7 +31,7 @@ const mountObject = (recipe) => {
     strCategory, strAlcoholic, strDrink, strDrinkThumb } = recipe.drinks[0];
   return {
     id: idDrink,
-    type: 'bebida',
+    type: 'drinks',
     area: '',
     category: strCategory || '',
     alcoholicOrNot: strAlcoholic,
@@ -42,9 +43,12 @@ const mountObject = (recipe) => {
 
 function ProgressCard({ recipe }) {
   const recipeInfo = mountObject(recipe);
-  const { meals, drinks } = recipe;
-  const { image, name, category, alcoholicOrNot, ingredients, instructions } = recipeInfo;
+  const { meals: foods } = recipe;
+  const { id, image, name, category, alcoholicOrNot,
+    ingredients, instructions } = recipeInfo;
   const lineThrough = 'line-through';
+  const [isDisable, setIsDisable] = useState(true);
+  const history = useHistory();
 
   useEffect(() => {
     const element = document.querySelectorAll('.input-ingredients');
@@ -55,37 +59,82 @@ function ProgressCard({ recipe }) {
       });
   }, []);
 
-  const markAsDone = ({ target }) => {
-    const { parentNode, value } = target;
-    const lsRecipe = JSON.parse(localStorage.getItem('inProgressRecipes'));
+  const enableButton = useCallback(() => {
+    const inputs = document.querySelectorAll('.input-ingredients');
+    const checkedsInputs = Object.values(inputs)
+      .filter((el) => el.checked);
+    if (checkedsInputs.length === ingredients.length) {
+      setIsDisable(false);
+    } else {
+      setIsDisable(true);
+    }
+  }, [ingredients.length]);
+
+  useEffect(() => {
+    enableButton();
+  }, [enableButton]);
+
+  const changeTextDecoration = (parentNode) => {
     if (parentNode.style.textDecoration !== lineThrough) {
       parentNode.style.textDecoration = lineThrough;
-      if (meals) {
-        const { meals: food, cocktails } = lsRecipe;
-        const mealsId = meals[0].idMeal;
-        Object.entries(lsRecipe.meals).forEach(([id, val]) => {
-          if (id === mealsId) {
-            const object = { meals: { ...food,
-              [mealsId]: [...val, Number.parseInt(value, 10)] },
-            cocktails: { ...cocktails } };
-            localStorage.setItem('inProgressRecipes', JSON.stringify(object));
-          }
-        });
-      } else {
-        const { meals: food, cocktails } = lsRecipe;
-        const drinksId = drinks[0].idDrink;
-        Object.entries(lsRecipe.cocktails).forEach(([id, val]) => {
-          if (id === drinksId) {
-            const object = { meals: { ...food },
-              cocktails: { ...cocktails,
-                [drinksId]: [...val, Number.parseInt(value, 10)] } };
-            localStorage.setItem('inProgressRecipes', JSON.stringify(object));
-          }
-        });
-      }
     } else {
       parentNode.style.textDecoration = 'none';
     }
+  };
+
+  const lsMountMealsObject = (lsRecipe, valInt, minusOne) => {
+    const { meals: food, cocktails } = lsRecipe;
+    Object.entries(food).forEach(([idItem, val]) => {
+      if (idItem === id) {
+        const item = food[id];
+        const index = item.indexOf(valInt);
+        if (index > minusOne) {
+          item.splice(index, 1);
+          const object = { meals: { ...food, [id]: item }, cocktails };
+          localStorage.setItem('inProgressRecipes', JSON.stringify(object));
+        } else {
+          const object = { meals: { ...food, [id]: [...val, valInt] }, cocktails };
+          localStorage.setItem('inProgressRecipes', JSON.stringify(object));
+        }
+      }
+    });
+  };
+
+  const lsMountDrinksObject = (lsRecipe, valInt, minusOne) => {
+    const { meals, cocktails } = lsRecipe;
+    Object.entries(cocktails).forEach(([itemId, val]) => {
+      if (itemId === id) {
+        const item = cocktails[id];
+        const index = item.indexOf(valInt);
+        if (index > minusOne) {
+          item.splice(index, 1);
+          const object = { meals, cocktails: { ...cocktails, [id]: item } };
+          localStorage.setItem('inProgressRecipes', JSON.stringify(object));
+        } else {
+          const object = { meals, cocktails: { ...cocktails, [id]: [...val, valInt] } };
+          localStorage.setItem('inProgressRecipes', JSON.stringify(object));
+        }
+      }
+    });
+  };
+
+  const setLocalStorage = (lsRecipe, value) => {
+    const minusOne = -1;
+    const valInt = Number.parseInt(value, 10);
+
+    if (foods) {
+      lsMountMealsObject(lsRecipe, valInt, minusOne);
+    } else {
+      lsMountDrinksObject(lsRecipe, valInt, minusOne);
+    }
+  };
+
+  const markAsDone = ({ target }) => {
+    const { parentNode, value } = target;
+    const lsRecipe = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    enableButton();
+    setLocalStorage(lsRecipe, value);
+    changeTextDecoration(parentNode);
   };
 
   const isChecked = (items, key) => items[1].filter((n) => {
@@ -97,28 +146,45 @@ function ProgressCard({ recipe }) {
 
   const markedItems = () => {
     const lsItems = JSON.parse(localStorage.getItem('inProgressRecipes'));
-    if (meals) {
+    if (foods) {
       const { meals: food } = lsItems;
       const lsIngredients = Object.entries(food)
-        .find(([i]) => i === meals[0].idMeal);
+        .find(([i]) => i === id);
       return lsIngredients;
     }
     const { cocktails } = lsItems;
     const lsIngredients = Object.entries(cocktails)
-      .find(([i]) => i === drinks[0].idDrink);
+      .find(([i]) => i === id);
     return lsIngredients;
   };
 
   const listIngredients = (recipeIngredients) => {
     let lsItems = JSON.parse(localStorage.getItem('inProgressRecipes'));
-    if (meals) {
-      if (!lsItems) {
-        lsItems = { meals: { [meals[0].idMeal]: [] }, cocktails: {} };
-      }
-    } else if (!lsItems) {
-      lsItems = { meals: {}, cocktails: { [drinks[0].idDrink]: [] } };
+    if (!lsItems) {
+      lsItems = { meals: {}, cocktails: {} };
+      localStorage.setItem('inProgressRecipes', JSON.stringify(lsItems));
     }
-    localStorage.setItem('inProgressRecipes', JSON.stringify(lsItems));
+    if (foods) {
+      const { meals, cocktails } = lsItems;
+      if (Object.entries(meals).length === 0) {
+        lsItems = { meals: { [id]: [] }, cocktails };
+      } else if (!meals[id]) {
+        lsItems = { meals: { ...meals, [id]: [] }, cocktails };
+      } else {
+        lsItems = { meals, cocktails };
+      }
+      localStorage.setItem('inProgressRecipes', JSON.stringify(lsItems));
+    } else {
+      const { meals, cocktails } = lsItems;
+      if (Object.entries(lsItems.cocktails).length === 0) {
+        lsItems = { meals, cocktails: { [id]: [] } };
+      } else if (!cocktails[id]) {
+        lsItems = { meals, cocktails: { ...cocktails, [id]: [] } };
+      } else {
+        lsItems = { meals, cocktails };
+      }
+      localStorage.setItem('inProgressRecipes', JSON.stringify(lsItems));
+    }
     return (
       <ol className="ol-ingredients">
         {recipeIngredients.map((ingredient, key) => (
@@ -156,7 +222,8 @@ function ProgressCard({ recipe }) {
       <button
         data-testid="finish-recipe-btn"
         type="button"
-        disabled
+        disabled={ isDisable }
+        onClick={ () => history.push('/receitas-feitas') }
       >
         Finalizar Receita
 

@@ -38,11 +38,6 @@ function ComponentGen(props) {
     }];
   }
 
-  const infoReceiver = {
-    meals: {},
-    cocktails: {},
-  };
-
   return (
     <div className="recipe_details">
       <RecipeImage origin={ strMealThumb || strDrinkThumb } />
@@ -61,7 +56,7 @@ function ComponentGen(props) {
       <Carousel>
         {recomendList}
       </Carousel>
-      <BottomBtn info={ info } inProgress={ infoReceiver } />
+      <BottomBtn info={ info } />
     </div>
   );
 }
