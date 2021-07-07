@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import shareIcon from '../../images/shareIcon.svg';
+import blackHeartIcon from '../../images/blackHeartIcon.svg';
 
 // import CardContainer from './styles';
 
@@ -14,17 +16,26 @@ function FavoriteRecipeCard(props) {
         src={ recipe.image }
         alt="Delicious food/drink"
       />
-      <span data-testid={ `${index}-horizontal-top-text` }>
+      <p data-testid={ `${index}-horizontal-top-text` }>
+        { recipe.type === 'comida' && `${recipe.area} - ` }
         { recipe.category }
-      </span>
-      <span data-testid={ `${index}-horizontal-name` }>
+      </p>
+      <p data-testid={ `${index}-horizontal-name` }>
         { recipe.name }
-      </span>
-      <button type="button" data-testid={ `${index}-horizontal-share-btn` }>
-        Share
+      </p>
+      <button type="button">
+        <img
+          data-testid={ `${index}-horizontal-share-btn` }
+          src={ shareIcon }
+          alt="share-btn"
+        />
       </button>
-      <button type="button" data-testid={ `${index}-horizontal-favorite-btn` }>
-        Favorite
+      <button type="button">
+        <img
+          data-testid={ `${index}-horizontal-favorite-btn` }
+          src={ blackHeartIcon }
+          alt="share-btn"
+        />
       </button>
     </div>
   );
