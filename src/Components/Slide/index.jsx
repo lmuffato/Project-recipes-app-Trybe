@@ -10,14 +10,16 @@ function Slide({ toggle, category }) {
   const fixedToggle = toggle === 'Meal' ? 'Drink' : 'Meal';
   const fixedCategory = category === 'strCategory' ? 'strAlcoholic' : 'strCategory';
 
+  const MAX_NUMBER_SUGGESTIONS = 6;
+
   useEffect(() => {
     if (fixedToggle === 'Drink') {
       getDrinks().then((response) => {
-        setRecomendations(response);
+        setRecomendations(response.slice(0, MAX_NUMBER_SUGGESTIONS));
       });
     } else {
       getMeals().then((response) => {
-        setRecomendations(response);
+        setRecomendations(response.slice(0, MAX_NUMBER_SUGGESTIONS));
       });
     }
   }, [fixedToggle]);
@@ -39,7 +41,9 @@ function Slide({ toggle, category }) {
               <div data-testid={ `${index}-recomendation-card` }>
                 <img src={ item[`str${fixedToggle}Thumb`] } alt="drink" />
                 <h6>{item[fixedCategory]}</h6>
-                <h4>{item[`str${fixedToggle}`]}</h4>
+                <h4 data-testid={ `${index}-recomendation-title` }>
+                  {item[`str${fixedToggle}`]}
+                </h4>
               </div>
             </Link>
           </div>

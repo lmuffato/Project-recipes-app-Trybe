@@ -8,19 +8,20 @@
 }
 
 .suggestions-carousel {
-  /* background-color: rgb(25, 25, 25); */
-  width: 100vw;
   height: fit-content;
   padding: 1rem;
+
+  /* background-color: rgb(25, 25, 25); */
+  width: 100vw;
 }
 
 .box {
-  background-color: rgb(47, 47, 47);
   background-clip: content-box;
+  background-color: rgb(47, 47, 47);
   background-position: center;
+  margin-right: 0.9rem;
   max-height: 224px;
   text-align: center;
-  margin-right: 0.9rem;
 }
 
 .box img {
@@ -28,15 +29,15 @@
 }
 
 .box h6 {
+  color: rgb(85, 85, 85);
   font-size: 0.75rem;
   margin: 0;
-  color: rgb(85, 85, 85);
 }
 
 .box h4 {
-  font-size: 1rem;
-  margin: 0;
-  font-weight: 700;
   color: rgb(156, 154, 154);
+  font-size: 1rem;
+  font-weight: 700;
+  margin: 0;
   margin-bottom: 0.3rem;
 }
