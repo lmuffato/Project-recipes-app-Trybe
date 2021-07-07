@@ -8,7 +8,6 @@ import RecipeInstructions from '../components/RecipeInstructions/RecipeInstructi
 import Container from '../styles/recipeDetails';
 import MealVideo from '../components/MealVideo/MealVideo';
 import Carousel from '../components/Carousel/Carousel';
-import CarouselImages from '../components/Carousel/CarouselImages';
 import useDetailsProvider from '../hooks/useDetailsProvider';
 
 const endpointRecipes = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
@@ -24,8 +23,7 @@ function RecipeDetails({ type }) {
   const [singleRecipe, setRecipe] = useState({});
   const { handleFetch,
     isLoading, recipeData,
-    recommendations, fetchMealRecipes,
-    currentImage } = useDetailsProvider();
+    recommendations, fetchMealRecipes } = useDetailsProvider();
 
   useEffect(() => {
     const getRecipesAndRecommendations = () => {
@@ -91,12 +89,8 @@ function RecipeDetails({ type }) {
         />) : ''}
       <Carousel
         recipeRecommendations={ carouselRecommendations }
-        currentImg={ currentImage }
         type={ type }
       />
-      {/* <CarouselImages
-        recipeRecommendations={ carouselRecommendations }
-      /> */}
       <Button
         data-testid="start-recipe-btn"
         onClick={ (ev) => handleClick(ev) }

@@ -7,8 +7,8 @@ const MAX_LENGTH = 6;
 function DetailsContextProvider({ children }) {
   const [recipeData, setRecipe] = useState({}); // a receita da pg detalhes
   const [isLoading, setIsLoading] = useState(true);
-  const [currentImage, setCurrentImage] = useState(0);
   const [recommendations, setRecomendations] = useState([]);
+  const [isRecommended, setIsRecommended] = useState(false);
 
   const handleFetch = useCallback(async (url, type) => {
     try {
@@ -47,9 +47,10 @@ function DetailsContextProvider({ children }) {
     handleFetch,
     isLoading,
     recipeData,
-    currentImage,
     recommendations,
     fetchMealRecipes,
+    isRecommended,
+    setIsRecommended,
   };
 
   return (

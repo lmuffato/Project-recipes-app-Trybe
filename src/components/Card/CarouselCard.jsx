@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import CardContainer from '../Card/styles';
+import CardContainer from './styles';
 
 function CarouselCard({ index, recommendation }) {
   const recipe = recommendation;

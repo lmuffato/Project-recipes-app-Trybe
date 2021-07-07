@@ -41,6 +41,7 @@ const CardContainer = styled.div`margin: 8px 8px 32px;
     align-items: center;
     margin: 0 auto;
   }
+
 `;
 
 export default CardContainer;

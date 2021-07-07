@@ -12,6 +12,7 @@ function Explore() {
         <section data-testid="explore-food">
           <a
             href="/explorar/comidas"
+            // onClick={}
           >
             <h2>Explorar Comidas</h2>
           </a>
@@ -24,7 +25,6 @@ function Explore() {
           </a>
         </section>
       </section>
-      Tela explorar
       <Footer />
     </div>
   );

@@ -32,24 +32,12 @@ const CarouselWrapper = styled.div`background-color: white;
     font: inherit;
     font-size: 1em;
     margin: 0 auto;
-    max-width: 500px;
+    max-width: 700px;
     padding: 0;
-    scroll-behavior: smooth;
-    vertical-align: baseline;
 
-    /* .left, .right {
-      background-color: rgba(0, 0, 0, 0.6);
-      display: grid;
-      flex: 5%;
-      height: 100%;
-      place-items: center;
-    }
+    /* scroll-behavior: smooth; */
 
-    .center {
-      flex: 90%;
-      height: 100%;
-    } */
-
+    /* vertical-align: baseline; */
     .carousel-card-tracker {
       border: 0;
       font: inherit;
@@ -59,6 +47,15 @@ const CarouselWrapper = styled.div`background-color: white;
       min-width: auto;
       padding: 0;
       vertical-align: baseline;
+    }
+
+    img {
+      object-fit: cover;
+
+    }
+
+    .invisible {
+      visibility: hidden;
     }
   }
 `;
