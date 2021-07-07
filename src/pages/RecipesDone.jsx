@@ -12,7 +12,7 @@ export default function RecipesDone() {
       <Header title="Receitas Feitas" />
       <ButtonFiltersRecipe changeValueToFilterRecipes={ changeValueToFilterRecipes } />
       <main>
-        {filteredRecipes.map((recipe, index) => (
+        { filteredRecipes && filteredRecipes.map((recipe, index) => (
           <RecipeDoneCard key={ recipe.id } recipeDone={ recipe } index={ index } />
         ))}
       </main>

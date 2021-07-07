@@ -13,8 +13,9 @@ export default function useRecipeFilter(doneOrFavoritestr, hasBeenChanged = fals
   useEffect(() => {
     const changeFilteredRecipes = () => {
       const fixedFilter = filter === 'all' ? '' : filter;
-      const newFilteredRecipes = doneOrFavorite
-        .filter(({ type }) => type.includes(fixedFilter));
+      const newFilteredRecipes = doneOrFavorite && doneOrFavorite.filter(
+        ({ type }) => type.includes(fixedFilter),
+      );
       setFilteredRecipes(newFilteredRecipes);
     };
 
