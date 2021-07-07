@@ -65,8 +65,11 @@ describe('testing explore foods page', () => {
     const surpriseMe = screen.getByTestId('explore-surprise');
     userEvent.click(surpriseMe);
     const { pathname } = history.location;
-    // expect(pathname).toBe('/explorar/comidas/');
-    // COMO TESTAR O REDIRECT AQUI, SENDO QUE VEM 5 NUMERO APOS A /
+    const firstPathname = pathname.slice(0, 9);
+    expect(firstPathname).toBe('/comidas/');
+    // corresponde aos ultimos 5 digitos da URL, o ID da receita:
+    // const idPathname = pathname.slice(10, 14);
+    // expect(idPathname.length).toBe(5);
   });
 });
 
@@ -93,11 +96,11 @@ describe('testing explore drinks page', () => {
   });
   test('redirect of bySurprise button', () => {
     const { history } = renderWithRouter(<App />);
-    exploreFoodPage();
+    exploreDrinksPage();
     const surpriseMe = screen.getByTestId('explore-surprise');
     userEvent.click(surpriseMe);
     const { pathname } = history.location;
-    // expect(pathname).toBe('/explorar/bebidas/');
-    // COMO TESTAR O REDIRECT AQUI, SENDO QUE VEM 5 NUMERO APOS A /
+    const firstPathname = pathname.slice(0, 9);
+    expect(firstPathname).toBe('/bebidas/');
   });
 });
