@@ -45,6 +45,7 @@ const ButtonMakeRecipeFood = ({ recipe }) => {
     <Link
       to={ `/comidas/${idMeal}/in-progress` }
       id="startBtn"
+      className="startBtn"
       data-testid="start-recipe-btn"
       onClick={ () => clickSetProgress('in', idMeal, 'meal', recipe) }
     >

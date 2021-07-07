@@ -1,30 +1,34 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import doneRecipes from '../../services/localStorage/doneRecipes';
 import {
   Image,
   Heading,
-  Ingredients,
+  IngredientsRadios,
   Instructions,
   Recommends,
 } from './components/index';
 
 function ComponentAuxProgress(recipe) {
   const { recipeFood, recipeDrink } = recipe;
-  console.log(recipeDrink);
-
+  // console.log(recipeDrink);
   return (
     <div className="container">
       <Image recipe={ recipeFood || recipeDrink } />
       <Heading recipe={ recipeFood || recipeDrink } />
-      <Ingredients recipe={ recipeFood || recipeDrink } />
+      <IngredientsRadios recipe={ recipeFood || recipeDrink } />
       <Instructions recipe={ recipeFood || recipeDrink } />
       {recipeDrink ? <Recommends /> : <Recommends drink />}
-      <button
-        type="button"
-        onClick={ () => doneRecipes(recipe) }
-      >
-        Finalizar Receita
-      </button>
+      <Link to="/receitas-feitas">
+        <button
+          disabled
+          data-testid="finish-recipe-btn"
+          type="button"
+          onClick={ () => doneRecipes(recipe) }
+        >
+          Finalizar Receita
+        </button>
+      </Link>
     </div>
   );
 }

@@ -8,7 +8,11 @@ const copy = require('clipboard-copy');
 function ButtonShare() {
   const shareUrl = (e) => {
     e.preventDefault();
-    copy(window.location.href);
+    let url = window.location.href;
+    // removendo "in-progress" do final do link, se houver
+    url = url.replace('/in-progress', '');
+    // console.log(url);
+    copy(url);
     document.getElementById('shareButton').innerText = 'Link copiado!';
   };
 
