@@ -63,7 +63,13 @@ function MealCardDetail() {
           ) : (null)
         ))}
       </div>
-      <button data-testid="start-recipe-btn" type="button">Iniciar Receita</button>
+      <button
+        data-testid="start-recipe-btn"
+        type="button"
+        className="start-recipe-btn"
+      >
+        Iniciar Receita
+      </button>
     </div>
   );
 }
