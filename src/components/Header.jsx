@@ -35,7 +35,7 @@ function Header({ props: { search, title } }) {
 
   const clickSearch = () => {
     if (searchText.length > 1 && radioValue === 'first') {
-      alert('Sua busca deve conter somente 1 (um) caracter');
+      global.alert('Sua busca deve conter somente 1 (um) caracter');
     } else {
       dispatch(fetchSearch(radioValue, searchText, window.location.href.split('/')[3]));
     }
@@ -95,10 +95,14 @@ function Header({ props: { search, title } }) {
 
   useEffect(() => {
     if ((data === null) || data === 'error') {
-      return alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+      return (
+        global.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.')
+      );
     }
     if ((data === null) || data === 'error') {
-      return alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+      return (
+        global.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.')
+      );
     }
   }, [data]);
 
