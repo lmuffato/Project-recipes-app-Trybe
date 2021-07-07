@@ -5,7 +5,7 @@ import shareIcon from '../images/shareIcon.svg';
 function DoneRecipeCard({ recipe, index }) {
   console.log(recipe);
   const {
-    image, category, name, doneDate, tags } = recipe;
+    image, category, name, doneDate, tags, type, area } = recipe;
   return (
     <div>
       <img
@@ -16,7 +16,7 @@ function DoneRecipeCard({ recipe, index }) {
       <p
         data-testid={ `${index}-horizontal-top-text` }
       >
-        { category }
+        { `${area} - ${category}` }
       </p>
       <p
         data-testid={ `${index}-horizontal-name` }
@@ -33,7 +33,7 @@ function DoneRecipeCard({ recipe, index }) {
         alt="Share Icon"
         data-testid={ `${index}-horizontal-share-btn` }
       />
-      { tags.map((tag) => (
+      { type === 'comida' && tags.map((tag) => (
         <p
           key={ index }
           data-testid={ `${index}-${tag}-horizontal-tag` }
