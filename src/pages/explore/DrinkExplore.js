@@ -1,7 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Header from '../../components/Header';
 import BottomMenu from '../../components/bottomMenu';
-import { Link } from 'react-router-dom';
 
 export default function DrinksExplore() {
   return (
@@ -18,7 +18,7 @@ export default function DrinksExplore() {
           </button>
         </Link>
 
-        <Link to="">
+        <Link to="/">
           <button
             type="button"
             data-testid="explore-surprise"

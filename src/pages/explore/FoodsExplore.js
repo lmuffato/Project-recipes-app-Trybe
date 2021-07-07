@@ -27,7 +27,7 @@ export default function FoodsExplore() {
           </button>
         </Link>
 
-        <Link to="">
+        <Link to="/">
           <button
             type="button"
             data-testid="explore-surprise"
