@@ -100,7 +100,7 @@ function DrinkDetails() {
       param.map((recipe, index) => {
         const limitNumber = 6;
         return index < limitNumber && (
-          <div className="recipe-card">
+          <div className="recipe-card" key={ index }>
             {RecomendationCard('bebidas', recipe, index)}
           </div>
         );

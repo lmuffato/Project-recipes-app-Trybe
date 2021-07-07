@@ -7,7 +7,7 @@ import shareIcon from '../images/shareIcon.svg';
 import blackFavoriteIcon from '../images/blackHeartIcon.svg';
 import whiteFavoriteIcon from '../images/whiteHeartIcon.svg';
 import '../components/Footer.css';
-import './PagesCss/MealDetails.css';
+import './PagesCss/Details.css';
 
 function MealDetails() {
   const id = window.location.href.split('/')[4];
@@ -101,12 +101,11 @@ function MealDetails() {
       param.map((recipe, index) => {
         const limitNumber = 6;
         return index < limitNumber && (
-          <div className="recipe-card">
+          <div className="recipe-card" key={ index }>
             {RecomendationCard('comidas', recipe, index)}
           </div>
         );
-      })
-    )
+      }))
   );
 
   const copyLink = () => {

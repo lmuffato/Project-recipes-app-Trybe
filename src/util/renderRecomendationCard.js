@@ -13,15 +13,16 @@ export default function RecomendationCard(type, recipe, index) {
     img = recipe.strMealThumb;
     category = recipe.strCategory;
   }
-  return (
-    <div
-      className="card-item"
-      data-testid={ `${index}-recomendation-card` }
-      key={ title }
-    >
-      <span data-testid={ `${index}-recomendation-title` }>{title}</span>
-      <span>{category}</span>
-      <img alt={ title } src={ img } />
-    </div>
-  );
+  if (recipe) {
+    return (
+      <div
+        className="card-item"
+        data-testid={ `${index}-recomendation-card` }
+      >
+        <span data-testid={ `${index}-recomendation-title` }>{title}</span>
+        <span>{category}</span>
+        <img alt={ title } src={ img } />
+      </div>
+    );
+  }
 }
