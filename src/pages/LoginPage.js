@@ -34,11 +34,11 @@ function LoginPage() {
 
   return (
     <div>
-      <label htmlFor="email-input">
+      <label htmlFor="emailInput">
         E-mail
         <input
           data-testid="email-input"
-          id="email-input"
+          id="emailInput"
           type="email"
           name="email"
           value={ userEmail }
@@ -48,11 +48,11 @@ function LoginPage() {
         />
       </label>
 
-      <label htmlFor="password-input">
+      <label htmlFor="passwordInput">
         Senha
         <input
           data-testid="password-input"
-          id="password-input"
+          id="passwordInput"
           type="password"
           name="password"
           value={ userPassw }
