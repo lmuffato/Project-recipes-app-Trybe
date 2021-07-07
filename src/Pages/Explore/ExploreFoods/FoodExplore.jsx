@@ -1,13 +1,15 @@
 import React from 'react';
-import Footer from '../../../components/Footer';
-import ButtonExplore from '../../../components/ButtonExplore';
-import Header from '../../../components/Header';
+import {
+  Header,
+  Footer,
+  ExploreButton,
+} from '../../../components';
 
 function ExploreFoods() {
   return (
     <>
       <Header title="Explorar Comidas" searchBtn={ false } />
-      <ButtonExplore type="comidas" />
+      <ExploreButton type="comidas" />
       <Footer />
     </>
   );
