@@ -1,11 +1,13 @@
 .carousel-container {
   height: 40vh;
+  margin-bottom: 5vh;
+  margin-left: 2.5vw;
   width: 100vw;
 }
 
 .recipies-list {
   display: flex;
-  overflow-x: auto;
+  overflow-x: scroll;
   scroll-snap-type: x mandatory;
 }
 
@@ -16,6 +18,21 @@
 }
 
 .card-item > img {
+  border-radius: 2vh;
   height: 100%;
   width: 90%;
 }
+
+.card-item > span {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* .card-item {
+  visibility: visible;
+} */
