@@ -38,7 +38,7 @@ export default function DoneRecipes() {
     setDoneRecipes(allRecipes);
     setFilter(allRecipes);
   }, []);
-  function filterFavoriteRecipes(filterName) {
+  function filterDoneRecipesType(filterName) {
     const filterRecipeType = doneRecipes.filter((recipe) => recipe.type === filterName);
     const allRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
     if (filterName === '') {
@@ -53,21 +53,21 @@ export default function DoneRecipes() {
       <button
         type="button"
         data-testid="filter-by-all-btn"
-        onClick={ () => filterFavoriteRecipes('') }
+        onClick={ () => filterDoneRecipesType('') }
       >
         All
       </button>
       <button
         type="button"
         data-testid="filter-by-food-btn"
-        onClick={ () => filterFavoriteRecipes('comida') }
+        onClick={ () => filterDoneRecipesType('comida') }
       >
         Food
       </button>
       <button
         type="button"
         data-testid="filter-by-drink-btn"
-        onClick={ () => filterFavoriteRecipes('bebida') }
+        onClick={ () => filterDoneRecipesType('bebida') }
       >
         Drinks
       </button>
