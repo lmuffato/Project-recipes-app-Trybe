@@ -1,18 +1,14 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
 import '../../style/IngredientsListCheckbox.css';
-import InProgressContext from '../../contexts/InProgressContext';
 
-export default function IngredientsListCheckbox({ recipe, isFood, isDrink }) {
-  const recipeId = isFood ? recipe.idMeal : recipe.idDrink;
-
+export default function IngredientsListCheckbox({
+  recipe,
+  handleCheckIngredient,
+  usedIngredients }) {
   const [fullRecipe, setFullRecipe] = useState([]);
-  const [usedIngredients, setUsedIngredients] = useState([]);
-
-  const {
-    setInProgressDrinks,
-    setInProgressFoods } = useContext(InProgressContext);
+  // const [usedIngredients, setUsedIngredients] = useState([]);
 
   useEffect(() => {
     // define state with recipe
@@ -35,39 +31,6 @@ export default function IngredientsListCheckbox({ recipe, isFood, isDrink }) {
     setFullRecipe(ingredientsAndMeasures);
   }, [recipe]);
 
-  useEffect(() => {
-    if (usedIngredients) {
-      if (isFood) {
-        setInProgressFoods({ [recipeId]: usedIngredients });
-      } else {
-        setInProgressDrinks({ [recipeId]: usedIngredients });
-      }
-    }
-  }, [usedIngredients, isFood, setInProgressFoods, setInProgressDrinks, recipeId]);
-
-  useEffect(() => {
-    const inProgressRecipesLS = JSON.parse(localStorage.getItem('inProgressRecipes'));
-    const foodsInLS = inProgressRecipesLS.meals;
-    const drinksInLS = inProgressRecipesLS.cocktails;
-
-    if (isFood && Object.keys(foodsInLS).length > 0) {
-      setUsedIngredients(foodsInLS[recipeId]);
-    }
-    if (isDrink && Object.keys(drinksInLS).length > 0) {
-      setUsedIngredients(drinksInLS[recipeId]);
-    }
-  }, [isFood, isDrink, recipeId]);
-
-  function handleCheckIngredient(ev) {
-    const ingredient = ev.target.value;
-    const isUsed = usedIngredients.includes(ingredient);
-    if (!isUsed) {
-      setUsedIngredients([...usedIngredients, ingredient]);
-    } else {
-      setUsedIngredients(usedIngredients.filter(((ing) => ing !== ingredient)));
-    }
-  }
-  console.log('primeiro render');
   return (
     <div className="ingredients-checkbox-container">
       <strong>Ingredients</strong>
