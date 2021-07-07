@@ -1,10 +1,11 @@
 import React from 'react';
 import FooterBar from '../components/FooterBar';
+import SearchBar from '../components/SearchBar';
 
 function MainFood() {
   return (
     <main>
-      tela principal
+      <SearchBar />
       <FooterBar />
     </main>
   );
