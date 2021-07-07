@@ -76,20 +76,23 @@ function Header({ page, title }) {
     <section>
       <header>
         <Link to="/perfil">
-          <button type="button" data-testid="profile-top-btn">
-            <img src={ profileIcon } alt="profile user" />
-          </button>
+          <input
+            type="image"
+            data-testid="profile-top-btn"
+            src={ profileIcon }
+            alt="profile user"
+          />
         </Link>
-        <h1 data-testid="page-title">{ title }</h1>
-        <button
-          type="button"
+        <h1 data-testid="page-title">{title}</h1>
+        <input
+          type="image"
           data-testid="search-top-btn"
           onClick={ () => setShowSearch(!showSearch) }
-        >
-          <img src={ searchIcon } alt="search bar" />
-        </button>
+          src={ searchIcon }
+          alt="search bar"
+        />
       </header>
-      {showSearch && searchInputs() }
+      {showSearch && searchInputs()}
     </section>
   );
 }

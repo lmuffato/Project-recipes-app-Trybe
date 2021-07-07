@@ -32,6 +32,7 @@ function FoodList({ page }) {
               name={ food[`str${identifier}`] }
               key={ food[`str${identifier}`] }
               index={ index }
+              id={ food[`id${identifier}`] }
             />
           );
         }

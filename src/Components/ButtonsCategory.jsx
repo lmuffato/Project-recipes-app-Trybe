@@ -34,8 +34,21 @@ const ButtonsCategory = ({ page, identifier }) => {
     }
   };
 
+  const handleClickAll = async () => {
+    const response2 = await fetch(`https://www.${page}.com/api/json/v1/1/search.php?s=`);
+    const json2 = await response2.json();
+    setFoods(json2[identifier]);
+  };
+
   return (
     <section>
+      <button
+        type="button"
+        onClick={ handleClickAll }
+        data-testid="All-category-filter"
+      >
+        All
+      </button>
       {
         categorys.map((category, index) => {
           const maxLength = 4;
@@ -45,6 +58,7 @@ const ButtonsCategory = ({ page, identifier }) => {
                 type="button"
                 data-testid={ `${category.strCategory}-category-filter` }
                 onClick={ () => handleClick(category.strCategory) }
+                key={ category.strCategory }
               >
                 {category.strCategory}
               </button>

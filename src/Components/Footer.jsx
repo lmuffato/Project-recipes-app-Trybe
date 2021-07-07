@@ -15,19 +15,31 @@ const Footer = () => {
   return (
     <footer data-testid="footer">
       <Link to="/bebidas">
-        <button type="button" onClick={ handleClick }>
-          <img src={ drinkIcon } alt="Drink icon" data-testid="drinks-bottom-btn" />
-        </button>
+        <input
+          type="image"
+          data-testid="drinks-bottom-btn"
+          onClick={ handleClick }
+          src={ drinkIcon }
+          alt="Drink icon"
+        />
       </Link>
       <Link to="/explorar">
-        <button type="button" onClick={ handleClick }>
-          <img src={ exploreIcon } alt="Explore icon" data-testid="explore-bottom-btn" />
-        </button>
+        <input
+          type="image"
+          data-testid="explore-bottom-btn"
+          onClick={ handleClick }
+          src={ exploreIcon }
+          alt="Explore icon"
+        />
       </Link>
       <Link to="/comidas">
-        <button type="button" onClick={ handleClick }>
-          <img src={ mealIcon } alt="Food icon" data-testid="food-bottom-btn" />
-        </button>
+        <input
+          type="image"
+          data-testid="food-bottom-btn"
+          onClick={ handleClick }
+          src={ mealIcon }
+          alt="Food icon"
+        />
       </Link>
     </footer>);
 };

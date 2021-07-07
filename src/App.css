@@ -10,6 +10,10 @@
   width: 100%;
 }
 
+body {
+  position: relative;
+}
+
 .rocksGlass {
   animation: shake 1s infinite ease;
   max-height: 80vh;
@@ -45,6 +49,10 @@ footer {
   font-family: Montserrat , sans-serif;
   font-size: 3em;
   font-weight: 900;
+}
+
+.slider {
+  padding-bottom: 70px;
 }
 
 header {
@@ -108,4 +116,18 @@ header {
   100% {
     transform: rotate(-10deg);
   }
+}
+
+.init-recipe-btn {
+  background-color: green;
+  bottom: 0;
+  left: 130px;
+  margin-top: 20px;
+  padding: 8px 13px;
+  position: fixed;
+  z-index: 99;
+}
+
+.check {
+  text-decoration: line-through;
 }
