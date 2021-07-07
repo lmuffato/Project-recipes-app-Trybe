@@ -12,7 +12,11 @@ const copy = require('clipboard-copy');
 function Recipes() {
   const [showCopyFood, setShopFood] = useState(false);
   const [showCopyDrinks, setShopDrinks] = useState(false);
-  const { favRecipes: noFilter, favFilterRecipes, showFilter } = useContext(Context);
+  const {
+    favRecipes: noFilter,
+    favFilterRecipes,
+    showFilter,
+    setFavRecipes } = useContext(Context);
   let favoriteRecipes = noFilter;
   if (!showFilter) {
     favoriteRecipes = noFilter;
@@ -34,9 +38,12 @@ function Recipes() {
     show();
   };
 
-  const desfavoriteFood = (id) => (
-    console.log(id)
-  );
+  const desfavoriteFood = (id) => {
+    // console.log(id);
+    const newRecipes = noFilter.filter((recipe) => (recipe.id !== id) && recipe);
+    console.log(newRecipes);
+    setFavRecipes(newRecipes);
+  };
   const desfavoriteDrink = (id) => (
     console.log(id)
   );
