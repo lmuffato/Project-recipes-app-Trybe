@@ -1,20 +1,53 @@
 import React from 'react';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+// import { Route, Switch } from 'react-router';
 import './App.css';
-import rockGlass from './images/rockGlass.svg';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import ProviderRecipes from './context/ProviderRecipes';
+import ByIngredients from './screens/ByIngredients';
+import ByOrigin from './screens/ByOrigin';
+import Detail from './screens/Detail';
+import Explore from './screens/Explore';
+import ExploreFilters from './screens/ExploreFilters';
+import Favorites from './screens/Favorites';
+import InProcess from './screens/InProcess';
+import Login from './screens/Login';
+import MadeRecipes from './screens/MadeRecipes';
+import MainFood from './screens/MainFood';
+import MainDrink from './screens/MainDrink';
+import NotFound from './screens/NotFound';
+import Profile from './screens/Profile';
 
 function App() {
   return (
-    <div className="meals">
-      <span className="logo">TRYBE</span>
-      <object
-        className="rocksGlass"
-        type="image/svg+xml"
-        data={ rockGlass }
-      >
-        Glass
-      </object>
-    </div>
+    <BrowserRouter>
+      <ProviderRecipes>
+        <Switch>
+          <Route exact path="/" component={ Login } />
+          <Route
+            path="/comidas/:id/in-progress"
+            render={ (props) => <InProcess { ...props } /> }
+          />
+          <Route
+            path="/bebidas/:id/in-progress"
+            render={ (props) => <InProcess { ...props } /> }
+          />
+          <Route path="/comidas/:id" render={ (props) => <Detail { ...props } /> } />
+          <Route path="/bebidas/:id" render={ (props) => <Detail { ...props } /> } />
+          <Route path="/comidas" component={ MainFood } />
+          <Route path="/bebidas" component={ MainDrink } />
+          <Route path="/explorar" component={ Explore } />
+          <Route path="/explorar/comidas" component={ ExploreFilters } />
+          <Route path="/explorar/bebidas" component={ ExploreFilters } />
+          <Route path="/explorar/bebidas/ingredientes" component={ ByIngredients } />
+          <Route path="/explorar/comidas/area" component={ ByOrigin } />
+          <Route path="/receitas-feitas" component={ MadeRecipes } />
+          <Route path="/perfil" component={ Profile } />
+          <Route path="/receitas-favoritas" component={ Favorites } />
+          <Route component={ NotFound } />
+        </Switch>
+      </ProviderRecipes>
+    </BrowserRouter>
   );
 }
 
