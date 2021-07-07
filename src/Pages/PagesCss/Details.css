@@ -1,0 +1,32 @@
+.carousel-container {
+  display: flex;
+  flex-flow: row nowrap;
+  margin-bottom: 12vh;
+  overflow-x: scroll;
+  width: 97%;
+}
+
+.recipies-list {
+  display: flex;
+  overflow-x: scroll;
+  scroll-snap-type: x mandatory;
+}
+
+.recipe-card {
+  flex: none;
+  scroll-snap-align: start;
+  width: 50vw;
+}
+
+.card-item > img {
+  border-radius: 2vh;
+  height: 100%;
+  width: 90%;
+}
+
+.card-item > span {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}

@@ -5,6 +5,7 @@ import { actionDetails } from '../redux/actions';
 import shareIcon from '../images/shareIcon.svg';
 import blackFavoriteIcon from '../images/blackHeartIcon.svg';
 import whiteFavoriteIcon from '../images/whiteHeartIcon.svg';
+import RecomendationCard from '../util/renderRecomendationCard';
 import '../components/Footer.css';
 
 function DrinkDetails() {
@@ -94,27 +95,18 @@ function DrinkDetails() {
     );
   };
 
-  const renderRecomendations = (param) => {
-    if (param) {
-      return (
-        param.map((recipe, index) => {
-          const { strMeal, strCategory, strMealThumb } = recipe;
-          const limitNumber = 6;
-          if (index <= limitNumber) {
-            return (
-              <div data-testid={ `${index}-recomendation-card` } key={ index }>
-                <img alt={ strMeal } src={ strMealThumb } />
-                <h3>{strCategory}</h3>
-                <h2>{strMeal}</h2>
-              </div>
-            );
-          }
-          return '';
-        })
-      );
-    }
-    return '';
-  };
+  const renderRecomendations = (param) => (
+    param && (
+      param.map((recipe, index) => {
+        const limitNumber = 6;
+        return index < limitNumber && (
+          <div className="recipe-card" key={ index }>
+            {RecomendationCard('bebidas', recipe, index)}
+          </div>
+        );
+      })
+    )
+  );
 
   const copyLink = () => {
     const url = window.location.href;
@@ -168,8 +160,14 @@ function DrinkDetails() {
           </ul>
           <h2>Instructions</h2>
           <p data-testid="instructions">{strInstructions}</p>
+
           <h2>Recomendadas</h2>
-          {renderRecomendations(recomendations)}
+          <div className="carousel-container">
+            <div className="recipies-list">
+              {renderRecomendations(recomendations)}
+            </div>
+          </div>
+
           <button
             className="footer"
             type="button"

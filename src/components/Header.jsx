@@ -37,6 +37,7 @@ function Header({ props: { search, title } }) {
     if (searchText.length > 1 && radioValue === 'first') {
       global.alert('Sua busca deve conter somente 1 (um) caracter');
     } else {
+      console.log(window.location.href.split('/')[3]);
       dispatch(fetchSearch(radioValue, searchText, window.location.href.split('/')[3]));
     }
   };
