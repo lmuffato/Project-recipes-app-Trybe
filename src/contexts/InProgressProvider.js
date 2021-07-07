@@ -7,13 +7,6 @@ export default function InProgressProvider({ children }) {
   const [inProgressDrinks, setInProgressDrinks] = useState({});
   const [inProgressFoods, setInProgressFoods] = useState({});
 
-  function saveInProgressToLS() {
-    localStorage.setItem('inProgressRecipes', JSON.stringify({
-      cocktails: inProgressDrinks,
-      meals: inProgressFoods,
-    }));
-  }
-
   useEffect(() => {
     if (localStorage.getItem('inProgressRecipes')) {
       const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
@@ -27,14 +20,20 @@ export default function InProgressProvider({ children }) {
     }
   }, []);
 
+  useEffect(() => {
+    localStorage.setItem('inProgressRecipes', JSON.stringify({
+      cocktails: inProgressDrinks,
+      meals: inProgressFoods,
+    }));
+  }, [inProgressDrinks, inProgressFoods]);
+
   return (
     <InProgressContext.Provider
       value={ {
         inProgressDrinks,
         setInProgressDrinks,
         inProgressFoods,
-        setInProgressFoods,
-        saveInProgressToLS } }
+        setInProgressFoods } }
     >
       {children}
     </InProgressContext.Provider>
