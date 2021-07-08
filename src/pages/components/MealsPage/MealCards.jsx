@@ -10,13 +10,13 @@ function MealCards() {
   const loading = useSelector((state) => state.meals.loading);
   const ingredient = useSelector((state) => state.meals.ingredient);
   const meals = useSelector((state) => state.meals.meals);
-  const filter = useSelector((state) => state.meals.ingredient);
+  const filter = useSelector((state) => state.meals.filter);
   const dispatch = useDispatch();
 
   useEffect(() => {
     if (!search) dispatch(getMeals(filter));
     else dispatch(getMealsByIgredient(ingredient));
-  }, []); // eslint-disable-line
+  }, [filter]); // eslint-disable-line
 
   return (
     <div>

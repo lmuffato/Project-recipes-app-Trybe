@@ -10,13 +10,13 @@ function DrinkCards() {
   const loading = useSelector((state) => state.drinks.loading);
   const ingredient = useSelector((state) => state.drinks.ingredient);
   const drinks = useSelector((state) => state.drinks.drinks);
-  const filter = useSelector((state) => state.drinks.ingredient);
+  const filter = useSelector((state) => state.drinks.filter);
   const dispatch = useDispatch();
 
   useEffect(() => {
     if (!search) dispatch(getDrinks(filter));
     else dispatch(getDrinksByIgredient(ingredient));
-  }, []); // eslint-disable-line
+  }, [filter]); // eslint-disable-line
 
   return (
     <div>
