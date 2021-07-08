@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Header from '../components/Header';
 import shareIcon from '../images/shareIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
+import '../styles/FavoriteCards.css';
 
 function ReceitasFavoritas() {
   const favoritesStorage = JSON.parse(localStorage.getItem('favoriteRecipes')) || {};
