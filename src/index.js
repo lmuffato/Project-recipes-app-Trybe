@@ -4,13 +4,9 @@ import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-import InProgressProvider from './contexts/InProgressProvider';
-
 ReactDOM.render(
   <BrowserRouter>
-    <InProgressProvider>
-      <App />
-    </InProgressProvider>
+    <App />
   </BrowserRouter>,
   document.getElementById('root'),
 );
