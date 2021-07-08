@@ -3,6 +3,7 @@ import Header from '../components/Header';
 import ReceitasFavoritasCard from './ReceitasFavoritasCard';
 
 function ReceitasFavoritas() {
+  const [acctualyRecipes, setAcctualyRecipes] = useState();
   const [favoriteRecipes, setFavoriteRecipes] = useState();
 
   useEffect(() => {
@@ -10,7 +11,10 @@ function ReceitasFavoritas() {
       if (JSON.parse(localStorage.getItem('favoriteRecipes') !== null)) {
         const recipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
 
-        if (recipes) setFavoriteRecipes(recipes);
+        if (recipes) {
+          setFavoriteRecipes(recipes);
+          setAcctualyRecipes(recipes);
+        }
       }
     };
     verifyFavorite();
@@ -19,6 +23,42 @@ function ReceitasFavoritas() {
   return favoriteRecipes ? (
     <div>
       <Header title="Receitas Favoritas" />
+
+      <div>
+        <button
+          type="button"
+          data-testid="filter-by-all-btn"
+          onClick={ (e) => {
+            e.preventDefault();
+            setFavoriteRecipes(acctualyRecipes);
+          } }
+        >
+          All
+        </button>
+        <button
+          type="button"
+          data-testid="filter-by-food-btn"
+          onClick={ (e) => {
+            e.preventDefault();
+            setFavoriteRecipes(acctualyRecipes
+              .filter((recipe) => recipe.type === 'comida'));
+          } }
+        >
+          Food
+        </button>
+        <button
+          type="button"
+          data-testid="filter-by-drink-btn"
+          onClick={ (e) => {
+            e.preventDefault();
+            setFavoriteRecipes(acctualyRecipes
+              .filter((recipe) => recipe.type === 'bebida'));
+          } }
+        >
+          Drinks
+        </button>
+      </div>
+
       { favoriteRecipes
         .map((recipe, index) => {
           const props = {
@@ -28,7 +68,7 @@ function ReceitasFavoritas() {
           };
 
           return <ReceitasFavoritasCard key={ index } props={ props } />;
-        }) }
+        })}
     </div>
   ) : <span>Nenhuma receita favoritada</span>;
 }
