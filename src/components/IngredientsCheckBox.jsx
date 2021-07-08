@@ -4,11 +4,8 @@ import UserContext from '../context/UserContext';
 import { setToLocalStorage, getItemFromLocalStorage } from '../services/localStorage';
 
 function IngredientsCheckBox({ currentMeal }) {
-  // let initialChecked = [];
-  // const local = getItemFromLocalStorage('inProgressRecipes');
-  // if (local) initialChecked = local;
-  const [checkeds, setCheckeds] = useState([]);
   const { globalId, setInProgressStorage, inProgressStorage } = useContext(UserContext);
+  const [checkeds, setCheckeds] = useState([]);
   const mealObj = Object.entries(currentMeal);
   const ingredientsArray = mealObj.filter((meal) => (
     meal[0].includes('Ingredient') && meal[1]
@@ -33,6 +30,7 @@ function IngredientsCheckBox({ currentMeal }) {
   useEffect(() => {
     if (globalId) {
       setInProgressStorage({
+        ...inProgressStorage,
         meals: {
           ...inProgressStorage.meals,
           [globalId]: checkeds,
@@ -43,7 +41,6 @@ function IngredientsCheckBox({ currentMeal }) {
 
   useEffect(() => {
     setToLocalStorage('inProgressRecipes', inProgressStorage);
-    console.log(getItemFromLocalStorage('inProgressRecipes'));
   }, [inProgressStorage]);
 
   // useEffect(() => {
