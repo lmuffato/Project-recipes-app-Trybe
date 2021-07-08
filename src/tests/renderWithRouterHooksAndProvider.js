@@ -5,6 +5,7 @@ import { render } from '@testing-library/react';
 import UserContextProvider from '../context/UserContext';
 import RecipesContextProvider from '../context/RecipesContext';
 import FiltredRecipesContextProvider from '../context/FilteredRecipesContext';
+import DetailsContextProvider from '../context/DetailsContext';
 
 const renderWithRouterHooksAndProvider = (component, route = '/') => {
   const history = createMemoryHistory();
@@ -12,11 +13,13 @@ const renderWithRouterHooksAndProvider = (component, route = '/') => {
 
   return ({
     ...render(
-      <Router>
+      <Router history={ history }>
         <UserContextProvider>
           <RecipesContextProvider>
             <FiltredRecipesContextProvider>
-              { component }
+              <DetailsContextProvider>
+                { component }
+              </DetailsContextProvider>
             </FiltredRecipesContextProvider>
           </RecipesContextProvider>
         </UserContextProvider>
