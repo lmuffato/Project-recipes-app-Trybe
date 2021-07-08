@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
 
 import DetailsHeader from '../components/DetailsHeader';
 import IngredientListCheckbox from '../components/RecipesIP/IngredientsListCheckbox';
+import DoneRecipesContext from '../contexts/DoneRecipesContext';
 
 import { fetchDrinkByID } from '../services/cocktailAPI';
 
@@ -12,6 +13,8 @@ export default function DetalhesBebidasIP() {
 
   const [drink, setDrink] = useState({});
   const [usedIngredients, setUsedIngredients] = useState([]);
+
+  const { doneRecipes, setDoneRecipes } = useContext(DoneRecipesContext);
 
   function handleCheckIngredient(ev) {
     // adds or removes clicked ingredient from usedIngredients list
@@ -47,7 +50,17 @@ export default function DetalhesBebidasIP() {
 
   const history = useHistory();
   function finishRecipe() {
-    // save recipe data to LS!
+    setDoneRecipes([...doneRecipes, {
+      id: drink.idDrink,
+      type: 'bebida',
+      area: drink.strArea ? drink.strArea : '',
+      category: drink.strCategory ? drink.strCategory : '',
+      alcoholicOrNot: drink.strAlcoholic,
+      name: drink.strDrink,
+      image: drink.strDrinkThumb,
+      doneDate: new Date(),
+      tags: drink.strTags ? [...drink.strTags] : [],
+    }]);
     history.push('/receitas-feitas');
   }
 

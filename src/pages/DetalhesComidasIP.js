@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
 
 import DetailsHeader from '../components/DetailsHeader';
 import IngredientListCheckbox from '../components/RecipesIP/IngredientsListCheckbox';
+import DoneRecipesContext from '../contexts/DoneRecipesContext';
 
 import { fetchFoodByID } from '../services/mealAPI';
 
@@ -12,6 +13,8 @@ export default function DetalhesComidasIP() {
 
   const [food, setFood] = useState({});
   const [usedIngredients, setUsedIngredients] = useState([]);
+
+  const { doneRecipes, setDoneRecipes } = useContext(DoneRecipesContext);
 
   function handleCheckIngredient(ev) {
     // adds or removes clicked ingredient from usedIngredients list
@@ -47,7 +50,17 @@ export default function DetalhesComidasIP() {
 
   const history = useHistory();
   function finishRecipe() {
-    // save recipe data to LS!
+    setDoneRecipes([...doneRecipes, {
+      id: food.idMeal,
+      type: 'comida',
+      area: food.strArea ? food.strArea : '',
+      category: food.strCategory ? food.strCategory : '',
+      alcoholicOrNot: '',
+      name: food.strMeal,
+      image: food.strMealThumb,
+      doneDate: new Date(),
+      tags: food.strTags ? [...food.strTags] : [],
+    }]);
     history.push('/receitas-feitas');
   }
 
