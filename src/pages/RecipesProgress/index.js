@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import PropTypes from 'prop-types';
 import Image from './Image';
 import Title from './Title';
 import BtnShare from './BtnShare';
@@ -7,6 +8,7 @@ import BtnFavorite from './BtnFavorite';
 import Category from './Category';
 import Ingredients from './Ingredients';
 import Instructions from './Instructions';
+import { AppContext } from '../../context/AppContext';
 
 const oneMeal = {
   meals: [
@@ -16,7 +18,16 @@ const oneMeal = {
       strDrinkAlternate: null,
       strCategory: 'Vegetarian',
       strArea: 'Italian',
-      strInstructions: 'Bring a large pot of water to a boil. Add kosher salt to the boiling water, then add the pasta. Cook according to the package instructions, about 9 minutes.\r\nIn a large skillet over medium-high heat, add the olive oil and heat until the oil starts to shimmer. Add the garlic and cook, stirring, until fragrant, 1 to 2 minutes. Add the chopped tomatoes, red chile flakes, Italian seasoning and salt and pepper to taste. Bring to a boil and cook for 5 minutes. Remove from the heat and add the chopped basil.\r\nDrain the pasta and add it to the sauce. Garnish with Parmigiano-Reggiano flakes and more basil and serve warm.',
+      strInstructions: `Bring a large pot of water to a boil. 
+      Add kosher salt to the boiling water, 
+      then add the pasta. Cook according to the package instructions, about 9 minutes.\r\n
+      In a large skillet over medium-high heat, add the olive oil
+      and heat until the oil starts to shimmer. 
+      Add the garlic and cook, stirring, until fragrant, 1 to 2 minutes. 
+      Add the chopped tomatoes, red chile flakes, Italian seasoning and salt 
+      and pepper to taste. Bring to a boil and cook for 5 minutes. Remove from the 
+      heat and add the chopped basil.\r\nDrain the pasta and add it to the sauce. 
+      Garnish with Parmigiano-Reggiano flakes and more basil and serve warm.`,
       strMealThumb: 'https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg',
       strTags: 'Pasta,Curry',
       strYoutube: 'https://www.youtube.com/watch?v=1IszT_guI08',
@@ -66,71 +77,105 @@ const oneMeal = {
   ],
 };
 const { meals } = oneMeal;
-const oneDrink = {
-  drinks: [
-    {
-      idDrink: '178319',
-      strDrink: 'Aquamarine',
-      strDrinkAlternate: null,
-      strDrinkES: null,
-      strDrinkDE: null,
-      strDrinkFR: null,
-      'strDrinkZH-HANS': null,
-      'strDrinkZH-HANT': null,
-      strTags: null,
-      strVideo: null,
-      strCategory: 'Cocktail',
-      strIBA: null,
-      strAlcoholic: 'Alcoholic',
-      strGlass: 'Martini Glass',
-      strInstructions: 'Shake well in a shaker with ice.\r\nStrain in a martini glass.',
-      strInstructionsES: null,
-      strInstructionsDE: null,
-      strInstructionsFR: null,
-      'strInstructionsZH-HANS': null,
-      'strInstructionsZH-HANT': null,
-      strDrinkThumb: 'https://www.thecocktaildb.com/images/media/drink/zvsre31572902738.jpg',
-      strIngredient1: 'Hpnotiq',
-      strIngredient2: 'Pineapple Juice',
-      strIngredient3: 'Banana Liqueur',
-      strIngredient4: '',
-      strIngredient5: '',
-      strIngredient6: '',
-      strIngredient7: '',
-      strIngredient8: null,
-      strIngredient9: null,
-      strIngredient10: null,
-      strIngredient11: null,
-      strIngredient12: null,
-      strIngredient13: null,
-      strIngredient14: null,
-      strIngredient15: null,
-      strMeasure1: '2 oz',
-      strMeasure2: '1 oz',
-      strMeasure3: '1 oz',
-      strMeasure4: '',
-      strMeasure5: '',
-      strMeasure6: '',
-      strMeasure7: '',
-      strMeasure8: null,
-      strMeasure9: null,
-      strMeasure10: null,
-      strMeasure11: null,
-      strMeasure12: null,
-      strMeasure13: null,
-      strMeasure14: null,
-      strMeasure15: null,
-      strCreativeCommonsConfirmed: 'No',
-      dateModified: null,
-    },
-  ],
-};
-const { drinks } = oneDrink;
-export default function RecipesProgress() {
+// const oneDrink = {
+//   drinks: [
+//     {
+//       idDrink: '178319',
+//       strDrink: 'Aquamarine',
+//       strDrinkAlternate: null,
+//       strDrinkES: null,
+//       strDrinkDE: null,
+//       strDrinkFR: null,
+//       'strDrinkZH-HANS': null,
+//       'strDrinkZH-HANT': null,
+//       strTags: null,
+//       strVideo: null,
+//       strCategory: 'Cocktail',
+//       strIBA: null,
+//       strAlcoholic: 'Alcoholic',
+//       strGlass: 'Martini Glass',
+//       strInstructions: 'Shake well in a shaker with ice.\r\nStrain in a martini glass.',
+//       strInstructionsES: null,
+//       strInstructionsDE: null,
+//       strInstructionsFR: null,
+//       'strInstructionsZH-HANS': null,
+//       'strInstructionsZH-HANT': null,
+//       strDrinkThumb: 'https://www.thecocktaildb.com/images/media/drink/zvsre31572902738.jpg',
+//       strIngredient1: 'Hpnotiq',
+//       strIngredient2: 'Pineapple Juice',
+//       strIngredient3: 'Banana Liqueur',
+//       strIngredient4: '',
+//       strIngredient5: '',
+//       strIngredient6: '',
+//       strIngredient7: '',
+//       strIngredient8: null,
+//       strIngredient9: null,
+//       strIngredient10: null,
+//       strIngredient11: null,
+//       strIngredient12: null,
+//       strIngredient13: null,
+//       strIngredient14: null,
+//       strIngredient15: null,
+//       strMeasure1: '2 oz',
+//       strMeasure2: '1 oz',
+//       strMeasure3: '1 oz',
+//       strMeasure4: '',
+//       strMeasure5: '',
+//       strMeasure6: '',
+//       strMeasure7: '',
+//       strMeasure8: null,
+//       strMeasure9: null,
+//       strMeasure10: null,
+//       strMeasure11: null,
+//       strMeasure12: null,
+//       strMeasure13: null,
+//       strMeasure14: null,
+//       strMeasure15: null,
+//       strCreativeCommonsConfirmed: 'No',
+//       dateModified: null,
+//     },
+//   ],
+// };
+// const { drinks } = oneDrink;
+
+export default function RecipesProgress({ match }) {
+  const { path } = match;
+  const { context } = useContext(AppContext);
+  const { setPageOrigin, pageOrigin } = context;
   const [recipeInProgress, setRecipeInProgress] = useState('');
+  const key = 'inProgressRecipes';
+  const [fromStorage, setFromStorage] = useState('');
+
+  function getFromStorage() {
+    const storageValue = localStorage.getItem(key);
+    if (storageValue) {
+      const result = JSON.parse(storageValue);
+      const values = Object.keys(result);
+      const [id] = values;
+      setFromStorage(id);
+    }
+  }
+
+  async function getRecipeStorage() {
+    if (fromStorage && pageOrigin) {
+      const data = await
+      fetch(`https://www.${pageOrigin}.com/api/json/v1/1/lookup.php?i=${fromStorage}`);
+      const results = await data.json();
+      return setRecipeInProgress(results.meals || results.drinks);
+    }
+    setRecipeInProgress(meals);
+  }
 
   useEffect(() => {
-    setRecipeInProgress(meals);
+    setPageOrigin(path === '/comidas/:id/in-progress' ? 'themealdb' : 'thecocktaildb');
+  }, []);
+
+  useEffect(() => {
+    getRecipeStorage();
+  }, [pageOrigin, fromStorage]);
+
+  useEffect(() => {
+    getFromStorage();
   }, [recipeInProgress]);
   return (
     <div>
@@ -162,3 +207,9 @@ export default function RecipesProgress() {
     </div>
   );
 }
+
+RecipesProgress.propTypes = {
+  match: PropTypes.arrayOf(PropTypes.shape({
+    path: PropTypes.string.isRequired,
+  })).isRequired,
+};
