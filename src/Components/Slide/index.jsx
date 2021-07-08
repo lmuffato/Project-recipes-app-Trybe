@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import Carousel from 'react-elastic-carousel';
+// import Carousel from 'react-elastic-carousel';
 import { getDrinks, getMeals } from '../../services/fetchRecipes';
 import './styles.css';
 
@@ -27,11 +27,7 @@ function Slide({ toggle, category }) {
   return (
     <div className="slide-parent">
       <h2>Recomendadas</h2>
-      <Carousel
-        itemsToShow={ 2 }
-        className="suggestions-carousel"
-        showArrows={ false }
-      >
+      <div className="suggestions-carousel">
         {recomendations.map((item, index) => (
           <div key={ `Card-${index}` } className="box">
             <Link
@@ -48,7 +44,7 @@ function Slide({ toggle, category }) {
             </Link>
           </div>
         ))}
-      </Carousel>
+      </div>
     </div>
   );
 }

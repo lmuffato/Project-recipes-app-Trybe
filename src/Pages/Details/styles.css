@@ -68,12 +68,13 @@ h2 {
 }
 
 .btn-cntl {
-  margin-left: 25vw;
+  width: 100vw;
 }
 
 .init-btn {
   bottom: 0;
+  padding: 1rem;
   position: fixed;
   text-align: center;
-  width: 50vw;
+  width: 100%;
 }
