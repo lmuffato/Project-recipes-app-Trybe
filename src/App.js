@@ -1,15 +1,8 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
-import LoginPage from './pages/LoginPage';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Header from './compenents/Header';
-import Footer from './compenents/Footer';
-import Profile from './pages/ProfilePage';
-import ReceitasFeitas from './pages/ReceitasFeitas';
-import ReceitasFavoritas from './pages/ReceitasFavoritas';
-import UserProvider from './contexts/UserProvider';
 import SearchbarProvider from './contexts/SeachbarProvider';
+<<<<<<< HEAD
 import Explore from './pages/Explore';
 import Foods from './pages/Foods';
 import Drinks from './pages/Drinks';
@@ -19,10 +12,14 @@ import FoodsArea from './pages/FoodsArea';
 import NotFound from './compenents/NotFound';
 import MealDescription from './compenents/MealDescription';
 import DrinkDescription from './compenents/DrinkDescription';
+=======
+import ProvidersManager from './contexts/ProvidersManager';
+>>>>>>> b2e4ddb7360ba0d39f6cee355582cc4e135476a9
 
 function App() {
   return (
     <div className="meals">
+<<<<<<< HEAD
       <UserProvider>
         <SearchbarProvider>
           <Header />
@@ -50,6 +47,11 @@ function App() {
           <Footer />
         </SearchbarProvider>
       </UserProvider>
+=======
+      <SearchbarProvider>
+        <ProvidersManager />
+      </SearchbarProvider>
+>>>>>>> b2e4ddb7360ba0d39f6cee355582cc4e135476a9
     </div>
   );
 }
