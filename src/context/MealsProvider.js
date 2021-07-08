@@ -13,6 +13,7 @@ function MealsProvider({ children }) {
   const [mealsCategories, setMealsCategories] = useState([]);
   const [currCategory, setCurrCategory] = useState('');
   const [currCategoryId, setCurrCategoryId] = useState('');
+  const [currMealsIngredients, setCurrMealsIngredients] = useState([]);
   const history = useHistory();
 
   const setCurrID = (id) => {
@@ -57,6 +58,8 @@ function MealsProvider({ children }) {
     handleRandomMealDetails,
     setCurrID,
     currCategoryId,
+    currMealsIngredients,
+    setCurrMealsIngredients,
   };
 
   return (
