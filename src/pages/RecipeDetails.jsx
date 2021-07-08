@@ -73,6 +73,8 @@ function RecipeDetails({ type }) {
       <RecipeInfo
         recipeName={ recipeName }
         recipeThumb={ recipeThumb }
+        type={ type }
+        recipe={ singleRecipe }
       >
         { type === 'drinks' ? (<h3 data-testid="recipe-category">{isAlchooholic}</h3>) : (
           <h3 data-testid="recipe-category">{recipeCategory}</h3>)}
@@ -97,6 +99,7 @@ function RecipeDetails({ type }) {
       <Button
         data-testid="start-recipe-btn"
         onClick={ (ev) => handleClick(ev) }
+        className="recipe-btn"
       >
         Iniciar receita
       </Button>

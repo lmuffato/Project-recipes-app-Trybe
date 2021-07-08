@@ -4,8 +4,7 @@ const CarouselWrapper = styled.div`background-color: white;
   display: flex;
   flex-flow: column wrap;
   justify-content: center;
-
-  /* margin: 0 auto; */
+  margin: 0 auto;
   overflow-x: auto;
 
   ::-webkit-scrollbar {
@@ -18,11 +17,8 @@ const CarouselWrapper = styled.div`background-color: white;
   width: 100%;
 
   .card-grid {
-
-    /* overflow-x: scroll; */
     padding: 0;
 
-    /* scroll-snap-type: x mandatory; */
     div li {
       list-style-type: none;
 
