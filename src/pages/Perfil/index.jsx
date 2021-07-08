@@ -2,6 +2,7 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import md5 from 'md5';
 import useLocalStorage from '../../hooks/useLocalStorage';
+import styles from './styles.module.scss';
 
 function Perfil() {
   const { user } = useLocalStorage('user');
@@ -23,14 +24,15 @@ function Perfil() {
     history.push('/receitas-favoritas');
   };
   return (
-    <div>
-
-      <img src={ gravatarProfile } alt="Imagem de perfil" />
-      <h3 data-testid="profile-email">{ user.email }</h3>
-
+    <div className={ styles.perfilPage }>
+      <div className={ styles.imagemEmail }>
+        <img src={ gravatarProfile } alt="Imagem de perfil" />
+        <h3 data-testid="profile-email">{user.email}</h3>
+      </div>
       <button
         name="Receitas Feitas"
         type="button"
+        className="primary-btn"
         data-testid="profile-done-btn"
         onClick={ doneRecipes }
       >
@@ -39,6 +41,7 @@ function Perfil() {
       <button
         name="Receitas Favoritas"
         type="button"
+        className="primary-btn"
         data-testid="profile-favorite-btn"
         onClick={ favoriteRecipes }
       >
@@ -47,6 +50,7 @@ function Perfil() {
       <button
         name="Sair"
         type="button"
+        className="primary-btn"
         data-testid="profile-logout-btn"
         onClick={ logout }
       >
