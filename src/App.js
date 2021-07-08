@@ -13,8 +13,6 @@ import ExplorarBebidas from './pages/ExplorarBebidas';
 import ExplorarComidasIng from './pages/ExplorarComidasIng';
 import ExplorarBebidasIng from './pages/ExplorarBebidasIng';
 import ExplorarComidasArea from './pages/ExplorarComidasArea';
-import RandomFood from './pages/RandomFood';
-import RandomDrink from './pages/RandomDrink';
 import Perfil from './pages/Perfil';
 import ReceitasFeitas from './pages/ReceitasFeitas';
 import ReceitasFavoritas from './pages/ReceitasFavoritas';
@@ -44,16 +42,6 @@ function App() {
               exact
               path="/explorar/bebidas/ingredientes"
               component={ ExplorarBebidasIng }
-            />
-            <Route
-              exact
-              path="/explorar/comidas/surprise"
-              component={ RandomFood }
-            />
-            <Route
-              exact
-              path="/explorar/bebidas/surprise"
-              component={ RandomDrink }
             />
             <Route
               exact

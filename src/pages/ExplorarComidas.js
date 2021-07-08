@@ -1,9 +1,15 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import { fetchRandomFood } from '../services/mealAPI';
 
 export default function ExplorarComidas() {
+  const [randomFoodId, setRandomFoodId] = useState();
+  useEffect(() => {
+    fetchRandomFood().then((res) => setRandomFoodId(res.meals[0].idMeal));
+  }, []);
+  console.log(randomFoodId);
   return (
     <div>
       <Header
@@ -29,7 +35,7 @@ export default function ExplorarComidas() {
         </button>
       </Link>
 
-      <Link to="/explorar/comidas/surprise">
+      <Link to={ `/comidas/${randomFoodId} ` }>
         <button
           type="submit"
           data-testid="explore-surprise"
