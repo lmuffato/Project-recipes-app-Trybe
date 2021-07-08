@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { string, shape, bool } from 'prop-types';
 import ProfileIcon from '../../images/profileIcon.svg';
 
-import SearchButton from '../searchButton';
+import SearchButton from '../SearchButton';
 import SearchBar from '../SearchBar';
 
 function Header({ pageTitle, location, showButton }) {
