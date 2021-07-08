@@ -1,5 +1,4 @@
-import React from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import shareIcon from '../images/shareIcon.svg';
@@ -11,16 +10,19 @@ const copy = require('clipboard-copy');
 
 function ReceitasFavoritasCard({ props: { recipe, index } }) {
   // const [favoriteRecipe, setFavoriteRecipe] = useState(true);
-  const history = useHistory();
+  const [clipboardStatus, setClipboardStatus] = useState();
 
-  const { area, alcoholicOrNot, category, name, image, type } = recipe;
+  const { area, alcoholicOrNot, category, id, name, image, type } = recipe;
 
   const shareClick = (e) => {
     e.preventDefault();
-    const { location: { pathname } } = history;
 
-    copy(`http://localhost:3000${pathname}`);
-    // setClipboardStatus('copied');
+    if (type === 'comida') {
+      copy(`http://localhost:3000/comidas/${id}`);
+    } else {
+      copy(`http://localhost:3000/bebidas/${id}`);
+    }
+    setClipboardStatus('copied');
   };
 
   const favoriteClick = (e) => {
@@ -110,6 +112,7 @@ function ReceitasFavoritasCard({ props: { recipe, index } }) {
             : drinkSpecs() }
           <span data-testid={ `${index}-horizontal-name` }>{ name }</span>
           { createButtons() }
+          {!clipboardStatus ? null : (<h5>Link copiado!</h5>)}
         </div>
       </main>
     </>
