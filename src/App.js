@@ -7,6 +7,7 @@ import DrinkDetails from './pages/DrinkDetails/index';
 import Explore from './pages/Explore/index';
 import AppProvider from './context/AppContext';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import RecipesDone from './pages/RecipesDone';
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
             <Route path="/explorar" component={ Explore } />
             {/* <Route path="/explorar/comidas" component={ ExploreFoods } />
             <Route path="/explorar/bebidas" component={ ExploreDrinks } /> */}
+            <Route exact patch="/receitas-feitas" component={ RecipesDone } />
           </Switch>
         </BrowserRouter>
       </AppProvider>
