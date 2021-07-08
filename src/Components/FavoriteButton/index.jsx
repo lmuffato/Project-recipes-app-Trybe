@@ -9,6 +9,12 @@ function FavoriteButton({ recipe, recipeType }) {
   const [isFavorite, setIsFavorite] = useState(false);
   const findFavorite = favoriteRecipes.favRecipes
     .find((fav) => fav[`id${recipeType}`] === recipe[`id${recipeType}`]);
+  const localFavorites = JSON.parse(localStorage.getItem('favoriteRecipes'));
+  let findFavoriteLocal;
+  if (localFavorites) {
+    findFavoriteLocal = localFavorites
+      .find((fav) => fav.id === recipe[`id${recipeType}`]);
+  }
 
   const objLocalStorage = {
     id: recipe[`id${recipeType}`],
@@ -21,13 +27,12 @@ function FavoriteButton({ recipe, recipeType }) {
   };
 
   useEffect(() => {
-    if (findFavorite) {
+    if (findFavorite || findFavoriteLocal) {
       setIsFavorite(true);
     }
-  }, [findFavorite]);
+  }, [findFavoriteLocal, findFavorite]);
 
   const saveFavoriteButton = (item) => {
-    const localFavorites = JSON.parse(localStorage.getItem('favoriteRecipes'));
     if (!isFavorite) {
       setIsFavorite(true);
       setFavoriteRecipes({
@@ -46,19 +51,19 @@ function FavoriteButton({ recipe, recipeType }) {
       setFavoriteRecipes({
         favRecipes: removedItem,
       });
-      localStorage.setItem('favoriteRecipes', JSON.stringify(
+      return localStorage.setItem('favoriteRecipes', JSON.stringify(
         localFavorites.filter((value) => value.id !== recipe[`id${recipeType}`]),
       ));
     }
+    return localStorage.setItem('favoriteRecipes', JSON.stringify([]));
   };
 
   return (
     <div>
-      { console.log(findFavorite) }
       <input
         type="image"
         data-testid="favorite-btn"
-        src={ findFavorite ? blackHeartIcon : whiteHeartIcon }
+        src={ isFavorite ? blackHeartIcon : whiteHeartIcon }
         alt="favorite button"
         onClick={ () => saveFavoriteButton(recipe) }
       />
