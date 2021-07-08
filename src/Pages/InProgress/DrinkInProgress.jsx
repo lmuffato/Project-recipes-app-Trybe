@@ -42,7 +42,9 @@ function DrinkInProgress() {
     for (let index = 1; index <= fifteen; index += 1) {
       list.push(ingredientList[`strIngredient${index}`]);
     }
-    const filtered = list.filter((ingredient) => ingredient !== null);
+    const filtered = list.filter(
+      (ingredient) => ingredient !== '' && ingredient !== null,
+    );
     const listIngredients = filtered.map((ingredient, index) => (
       <>
         <label
@@ -51,8 +53,8 @@ function DrinkInProgress() {
           data-testid={ `${index}-ingredient-step` }
         >
           <input
-            id="ingredient"
             type="checkbox"
+            id="ingredient"
           />
           {ingredient}
         </label>

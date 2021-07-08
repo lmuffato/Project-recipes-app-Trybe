@@ -40,17 +40,19 @@ function FoodInProgress() {
     for (let index = 1; index <= twenty; index += 1) {
       list.push(ingredientList[`strIngredient${index}`]);
     }
-    const filtered = list.filter((ingredient) => ingredient !== '');
+    const filtered = list.filter(
+      (ingredient) => ingredient !== '' && ingredient !== null,
+    );
     const listIngredients = filtered.map((ingredient, index) => (
       <>
         <label
           key=""
-          htmlFor="ingredient"
+          htmlFor="ingredients"
+          data-testid={ `${index}-ingredient-step` }
         >
           <input
-            data-testid={ `${index}-ingredient-step` }
-            id="ingredient"
             type="checkbox"
+            id="ingredient"
           />
           {ingredient}
         </label>
@@ -66,7 +68,9 @@ function FoodInProgress() {
     for (let index = 1; index <= twenty; index += 1) {
       list.push(measureList[`strMeasure${index}`]);
     }
-    const filtered = list.filter((ingredient) => ingredient !== '');
+    const filtered = list.filter(
+      (ingredient) => ingredient !== '' || ingredient !== null,
+    );
     const listMeasure = filtered.map((measure, index) => (
       <p key={ index }>
         {measure}
