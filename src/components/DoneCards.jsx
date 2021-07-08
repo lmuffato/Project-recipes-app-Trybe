@@ -9,7 +9,7 @@ export default function DoneCards() {
   console.log(doneRecipes);
 
   return (
-    doneRecipes.map(({ id, name, image, category, doneDate, tags }, index) => (
+    doneRecipes.map(({ name, image, category, doneDate, tags }, index) => (
       <div key={ index }>
         <img
           data-testid={ `${index}-horizontal-image` }
