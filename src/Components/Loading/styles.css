@@ -1,0 +1,10 @@
+.loading {
+  align-items: center;
+  background-color: rgb(37, 95, 133);
+  color: rgb(252, 252, 113);
+  display: flex;
+  font-size: 1.3rem;
+  height: 100vh;
+  justify-content: center;
+  width: 100vw;
+}

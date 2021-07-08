@@ -1,19 +1,22 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { Button, Image } from 'react-bootstrap';
+import { Image } from 'react-bootstrap';
 import { useLocation, useParams } from 'react-router';
-import { Link } from 'react-router-dom';
 import UserContext from '../../context/UserContext';
 import { getRecipeByID } from '../../services/fetchRecipes';
 import Ingredient from '../../Components/Ingredients';
 import Slide from '../../Components/Slide';
 import ShareButton from '../../Components/ShareButton';
 import FavoriteButton from '../../Components/FavoriteButton';
+import EndButton from '../../Components/EndButton';
+import Video from '../../Components/Video';
+import Loading from '../../Components/Loading';
+import './styles.css';
 
 function Details() {
   const { pathname } = useLocation();
   const { id } = useParams();
 
-  const [recipesDetails, setRecipesDetails] = useState([]);
+  const [recipesDetails, setRecipesDetails] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [recipeStatus, setRecipeStatus] = useState('Iniciar Receita');
   const { doneRecipes, doingRecipes } = useContext(UserContext);
@@ -38,8 +41,8 @@ function Details() {
   }, [doingRecipes, doneRecipes, id, pathname, toggleApi]);
 
   return (
-    <div>
-      {isLoading ? 'Carregando' : (
+    <div className="main-parent">
+      {isLoading ? <Loading /> : (
         <div>
           <Image
             thumbnail
@@ -57,31 +60,28 @@ function Details() {
           <FavoriteButton recipe={ recipesDetails } recipeType={ recipeType } />
 
           <Ingredient type="list" recipe={ recipesDetails } />
-
-          <p data-testid="instructions">
-            {recipesDetails.strInstructions}
-          </p>
-
-          {(recipeType === 'Meal')
+          <div className="instructions">
+            <h2>Instructions</h2>
+            <p data-testid="instructions">
+              {recipesDetails.strInstructions}
+            </p>
+          </div>
+          { isLoading ? '' : (
+            <Video recipeType={ recipeType } recipesDetails={ recipesDetails } />
+          )}
+          <Slide
+            toggle={ recipeType }
+            category={ toggleCategory }
+            className="ingredients"
+          />
+          {recipeStatus
             ? (
-              <div>
-                <h2>Video</h2>
-                <iframe
-                  data-testid="video"
-                  src={ `http://www.youtube.com/embed/${recipesDetails.strYoutube.split('=')[1]}` }
-                  title="How to do"
-                />
-              </div>)
+              <EndButton
+                id={ id }
+                toggleURL={ toggleURL }
+                recipeStatus={ recipeStatus }
+              />)
             : null}
-          <Slide toggle={ recipeType } category={ toggleCategory } />
-          { recipeStatus
-            ? (
-              <Link to={ `/${toggleURL}/${id}/in-progress` }>
-                <Button data-testid="start-recipe-btn">{ recipeStatus }</Button>
-              </Link>
-            )
-            : null}
-          <Link to={ `/${toggleURL}/` }>Teste</Link>
         </div>
       )}
     </div>

@@ -1,0 +1,6 @@
+.parent {
+  background-color: rgb(253, 253, 216);
+  display: flex;
+  flex-flow: column nowrap;
+  padding: 1rem;
+}

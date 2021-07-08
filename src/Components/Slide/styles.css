@@ -2,3 +2,46 @@
   display: flex;
   flex-flow: column;
 }
+
+.slide-parent h2 {
+  margin-left: 1rem;
+}
+
+.suggestions-carousel {
+  display: flex;
+  flex-flow: row nowrap;
+  height: fit-content;
+  overflow-x: scroll;
+  padding: 1rem;
+
+  /* background-color: rgb(25, 25, 25); */
+  width: 100vw;
+}
+
+.box {
+  background-clip: content-box;
+  background-color: rgb(47, 47, 47);
+  background-position: center;
+  margin-right: 2vw;
+  max-height: fit-content;
+  text-align: center;
+  width: 48vw;
+}
+
+.box img {
+  width: 48vw;
+}
+
+.box h6 {
+  color: rgb(85, 85, 85);
+  font-size: 0.75rem;
+  margin: 0;
+}
+
+.box h4 {
+  color: rgb(156, 154, 154);
+  font-size: 1rem;
+  font-weight: 700;
+  margin: 0;
+  margin-bottom: 0.3rem;
+}

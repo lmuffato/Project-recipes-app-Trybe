@@ -1,15 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Form } from 'react-bootstrap';
+import './styles.css';
 
 function Ingredient({ recipe, type }) {
   const ingredients = Object.entries(recipe)
-    .filter((pair) => pair[0].includes('strIngredient') && pair[1] !== '');
-  const mensures = Object.entries(recipe)
+    .filter((pair) => (
+      pair[0].includes('strIngredient') && pair[1]));
+  const measures = Object.entries(recipe)
     .filter((pair) => pair[0].includes('strMeasure'));
 
   return (
-    <div>
+    <div className="parent">
       <h2>Ingredients</h2>
       {
         type === 'list' ? (
@@ -19,7 +21,7 @@ function Ingredient({ recipe, type }) {
                 key={ `ingredient-${index}` }
                 data-testid={ `${index}-ingredient-name-and-measure` }
               >
-                {`${item[1]} - ${mensures[index][1]}`}
+                {`${item[1]} - ${measures[index][1]}`}
               </li>
             ))}
           </ul>
@@ -29,7 +31,7 @@ function Ingredient({ recipe, type }) {
               <Form.Check
                 key={ `ingredient-${index}` }
                 type="checkbox"
-                label={ `${item[1]} - ${mensures[index][1]}` }
+                label={ `${item[1]} - ${measures[index][1]}` }
                 data-testid={ `${0}-ingredient-name-and-measure` }
               />
             )) }
