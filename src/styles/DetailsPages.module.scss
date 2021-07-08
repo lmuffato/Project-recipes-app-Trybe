@@ -1,6 +1,54 @@
 @media screen and (max-width: 414px) {
   .areaRecipie {
     margin-bottom: 80px;
+    width: 100%;
+
+    img {
+      width: 100%;
+    }
+
+    .containerContent {
+      width: 95%;
+      margin: 0 auto;
+      font-family: 'Poppins', sans-serif;
+
+      embed {
+        width: 100%;
+        height: auto;
+      }
+
+      // referência para a construção do carousel de Maurício Viegas
+      // https://trybecourse.slack.com/archives/C01L16B9XC7/p1625677249432100?thread_ts=1625670818.424000&cid=C01L16B9XC7 
+
+      .carousel {
+        display: flex;
+        flex-flow: row nowrap;
+        overflow-x: scroll;
+        
+        .cardRecommendation {
+          width: 48%;
+          flex: none;
+          margin-right: 10px;
+          background: #ffd6a5;
+          border-radius: 5px;
+          cursor: pointer;
+
+          img {
+            width: 100%;
+          }
+
+          h3 {
+            font-size: 20px;
+            text-align: center;
+          }
+
+          &:hover {
+            opacity: 0.9;
+          }
+        }
+      }
+    }
+
 
     .startRecipie {
       width: 100%;
