@@ -4,12 +4,12 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 
 function ProfileBody() {
-  const { email } = JSON.parse(localStorage.getItem('user'));
+  const user = JSON.parse(localStorage.getItem('user'));
 
   return (
     <Container>
       <Row data-testid="profile-email">
-        { email }
+        { user ? user.email : 'Email do usuário' }
       </Row>
       <Row>
         <Link to="/receitas-feitas">
