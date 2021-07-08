@@ -15,6 +15,8 @@ export default function DrinkDetails() {
   const [copy, setCopy] = useState('');
   const [recomendations, setRecomendations] = useState();
   const history = useHistory();
+  const INICIAR_RECEITA = 'Iniciar Receita';
+  const [startButton, setStartButton] = useState(INICIAR_RECEITA);
 
   useEffect(() => {
     const fetchDrinks = async () => {
@@ -31,6 +33,21 @@ export default function DrinkDetails() {
     fetchDrinks();
     fetchRecomendations();
   }, [dispatch, id]);
+
+  useEffect(() => {
+    if (data) {
+      const lsValue = () => {
+        const ids = Object.keys(
+          (JSON.parse(localStorage.getItem('inProgressRecipes'))).meals,
+        );
+        if (ids.length === 0) setStartButton('Iniciar Receita');
+        if (ids.length > 0) {
+          ids.forEach((e) => e === id && setStartButton('Continuar Receita'));
+        }
+      };
+      lsValue();
+    }
+  }, [id, data]);
 
   const renderRecomendations = (param) => (
     param && (
@@ -106,10 +123,13 @@ export default function DrinkDetails() {
           <button
             className="footer"
             type="button"
-            data-testid="start-recipe-btn"
+            data-testid={
+              startButton === INICIAR_RECEITA ? 'start-recipe-btn'
+                : 'start-recipe-btn'
+            }
             onClick={ () => history.push(`/bebidas/${idDrink}/in-progress`) }
           >
-            Iniciar Receita
+            { startButton }
           </button>
         </div>
       );

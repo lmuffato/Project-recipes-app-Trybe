@@ -19,7 +19,8 @@ export default function MealDetails() {
   const [recomendations, setRecomendations] = useState();
   const globalState = useSelector((state) => state.detailsReducer.favorites);
   const history = useHistory();
-  const [startButton, setStartButton] = useState('Iniciar Receita');
+  const INICIAR_RECEITA = 'Iniciar Receita';
+  const [startButton, setStartButton] = useState(INICIAR_RECEITA);
 
   useEffect(() => {
     const mealDrinks = async () => {
@@ -113,7 +114,10 @@ export default function MealDetails() {
           <button
             className="footer"
             type="button"
-            data-testid="start-recipe-btn"
+            data-testid={
+              startButton === INICIAR_RECEITA ? 'start-recipe-btn'
+                : 'start-recipe-btn'
+            }
             onClick={ () => history.push(`/comidas/${idMeal}/in-progress`) }
           >
             { startButton }
