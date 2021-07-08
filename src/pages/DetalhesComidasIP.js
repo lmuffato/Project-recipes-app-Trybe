@@ -9,6 +9,7 @@ import { fetchFoodByID } from '../services/mealAPI';
 export default function DetalhesComidasIP() {
   const { pathname } = useLocation();
   const foodId = pathname.split('/')[2];
+
   const [food, setFood] = useState({});
   const [usedIngredients, setUsedIngredients] = useState([]);
 
@@ -22,8 +23,30 @@ export default function DetalhesComidasIP() {
     }
   }
 
+  function allIngredientsChecked() {
+    const allIngredients = Object.entries(food).filter(
+      (entry) => entry[0].includes('Ingredient'),
+    );
+
+    const validIngredients = allIngredients
+      .filter((ing) => ing[1])
+      .map((ingStr) => ingStr[1]);
+
+    let isEqual = true;
+
+    validIngredients.forEach((ing, index) => {
+      if (ing !== usedIngredients[index]) {
+        isEqual = false;
+      }
+    });
+
+    return isEqual;
+  }
+
   useEffect(() => {
+    // get food data from API
     fetchFoodByID(foodId).then((data) => setFood(data.meals[0]));
+    // Check if there is data in LS, if not, create it
     if (!localStorage.getItem('inProgressRecipes')) {
       localStorage.setItem('inProgressRecipes', JSON.stringify({
         cocktails: {},
@@ -48,6 +71,7 @@ export default function DetalhesComidasIP() {
   useEffect(() => {
     // save ingredients list to LS
     const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
+
     localStorage.setItem('inProgressRecipes', JSON.stringify({
       ...inProgressRecipes,
       meals: { ...inProgressRecipes.meals, [foodId]: usedIngredients },
@@ -66,7 +90,13 @@ export default function DetalhesComidasIP() {
             usedIngredients={ usedIngredients }
           />
           <p data-testid="instructions">{food.strInstructions}</p>
-          <button type="button" data-testid="finish-recipe-btn">Finalizar Receita</button>
+          <button
+            type="button"
+            data-testid="finish-recipe-btn"
+            disabled={ !allIngredientsChecked() }
+          >
+            Finalizar Receita
+          </button>
         </div>
       )}
     </div>

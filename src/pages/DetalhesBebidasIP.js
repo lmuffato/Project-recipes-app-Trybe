@@ -9,6 +9,7 @@ import { fetchDrinkByID } from '../services/cocktailAPI';
 export default function DetalhesBebidasIP() {
   const { pathname } = useLocation();
   const drinkId = pathname.split('/')[2];
+
   const [drink, setDrink] = useState({});
   const [usedIngredients, setUsedIngredients] = useState([]);
 
@@ -22,8 +23,30 @@ export default function DetalhesBebidasIP() {
     }
   }
 
+  function allIngredientsChecked() {
+    const allIngredients = Object.entries(drink).filter(
+      (entry) => entry[0].includes('Ingredient'),
+    );
+
+    const validIngredients = allIngredients
+      .filter((ing) => ing[1])
+      .map((ingStr) => ingStr[1]);
+
+    let isEqual = true;
+
+    validIngredients.forEach((ing, index) => {
+      if (ing !== usedIngredients[index]) {
+        isEqual = false;
+      }
+    });
+
+    return isEqual;
+  }
+
   useEffect(() => {
+    // get drink data from API
     fetchDrinkByID(drinkId).then((data) => setDrink(data.drinks[0]));
+    // Check if there is data in LS, if not, create it
     if (!localStorage.getItem('inProgressRecipes')) {
       localStorage.setItem('inProgressRecipes', JSON.stringify({
         cocktails: {},
@@ -67,7 +90,13 @@ export default function DetalhesBebidasIP() {
             usedIngredients={ usedIngredients }
           />
           <p data-testid="instructions">{drink.strInstructions}</p>
-          <button type="button" data-testid="finish-recipe-btn">Finalizar Receita</button>
+          <button
+            type="button"
+            data-testid="finish-recipe-btn"
+            disabled={ !allIngredientsChecked() }
+          >
+            Finalizar Receita
+          </button>
         </div>
       )}
     </div>
