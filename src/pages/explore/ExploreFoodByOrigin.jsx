@@ -12,8 +12,6 @@ function ExploreFoodByOrigin() {
   const [countriesList, setCountriesList] = useState([]);
   const [foodListByCountry, setFoodListByCountry] = useState([]);
   const history = useHistory();
-  // console.log(countriesList);
-  console.log(foodListByCountry);
 
   useEffect(() => {
     fetchMealsCountries()
@@ -24,10 +22,6 @@ function ExploreFoodByOrigin() {
     fetchApiFoods()
       .then((res) => setFoodListByCountry(res));
   }, []);
-  // const allFoodOption = async () => {
-  //   const food = await fetchMealsCountries();
-  //   setFoodListByCountry(food);
-  // };
 
   const filterMealByCountry = async ({ target: { value } }) => {
     if (value === 'All') {
@@ -37,7 +31,6 @@ function ExploreFoodByOrigin() {
     if (value !== 'All') {
       const foodCountry = await fetchSearchMealByCountry(value);
       setFoodListByCountry(foodCountry);
-    // console.log(foodCountry);
     }
   };
 
