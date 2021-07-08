@@ -1,9 +1,9 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
 import context from '../../store/Context';
 
 function Login() {
-  const { infoUser, setDatainfoUser } = useContext(context);
+  const { infoUser, setDatainfoUser, inProgressRecipes } = useContext(context);
   const { email, password, shouldRedirect } = infoUser;
   const validateFields = () => {
     const passwordLength = 7;
@@ -20,6 +20,10 @@ function Login() {
     localStorage.setItem('mealsToken', JSON.stringify(token));
     localStorage.setItem('cocktailsToken', JSON.stringify(token));
   };
+
+  useEffect(() => {
+    localStorage.setItem('inProgressRecipes', JSON.stringify(inProgressRecipes));
+  }, [inProgressRecipes]);
 
   const handleChange = ({ target }) => {
     setDatainfoUser((oldState) => ({
