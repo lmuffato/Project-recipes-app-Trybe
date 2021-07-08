@@ -24,8 +24,8 @@ function Login() {
     const lsEmail = { email };
     const formatedEmail = JSON.stringify(lsEmail);
     localStorage.setItem('user', formatedEmail);
-    localStorage.setItem('mealsToken', 1);
-    localStorage.setItem('cocktailsToken', 1);
+    localStorage.setItem('mealsToken', '1');
+    localStorage.setItem('cocktailsToken', '1');
   };
 
   return (
