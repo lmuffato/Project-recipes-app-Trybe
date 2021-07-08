@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { useLocation, Redirect } from 'react-router-dom';
+import React, { useEffect, useState, useContext } from 'react';
+import { useLocation, Redirect, Link } from 'react-router-dom';
 import { fetchFoodForId } from '../../services/Data';
 import shareIcon from '../../images/shareIcon.svg';
+import context from '../../store/Context';
 import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
 
 function FoodInProgress() {
@@ -9,10 +10,15 @@ function FoodInProgress() {
   const id = location.pathname.split('/')[2];
   const [foodDetail, setFoodDetail] = useState([]);
   const [shouldRedirect, setShouldRedirect] = useState(false);
+  const { inProgressRecipes } = useContext(context);
 
   const handleClick = () => {
     setShouldRedirect(true);
   };
+
+  useEffect(() => {
+    localStorage.setItem('inProgressRecipes', JSON.stringify(inProgressRecipes));
+  }, [inProgressRecipes]);
 
   useEffect(() => {
     fetchFoodForId(id)
@@ -79,6 +85,7 @@ function FoodInProgress() {
       {measuresList()}
       <h4>Instructions :</h4>
       <p data-testid="instructions">{strInstructions}</p>
+      <Link to="/comidas">Voltar</Link>
       <button
         type="button"
         data-testid="finish-recipe-btn"
