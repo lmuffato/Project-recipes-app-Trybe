@@ -8,18 +8,28 @@ import Footer from '../../components/Footer';
 // import doneRecipes from '../../services/mokcInformation';
 
 const ProfileScreen = () => {
-  const { setLogout } = useContext(Context);
+  const {
+    setLogout,
+    setFavRecipes,
+    setInfoFav,
+    setDoneRecipes,
+    setInfoDone,
+  } = useContext(Context);
   const user = JSON.parse(localStorage.getItem('user'));
-  // console.log(email);
-  // const email = 'test@test.com';
+
   const handleClick = ({ target }) => {
-    // console.log(target);
     if (target.id === 'recipes-made') {
-      // const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'))
-      console.log('Receitas feitas clicked!');
+      const infoDone = JSON.parse(localStorage.getItem('doneRecipes'));
+      if (infoDone !== true) {
+        setDoneRecipes(infoDone);
+        setInfoDone(infoDone);
+      }
     }
     if (target.id === 'recipes-fav') {
-      console.log('Receitas fav clicked!');
+      const infoFavorite = JSON.parse(localStorage.getItem('favoriteRecipes'));
+      setInfoFav(infoFavorite);
+      setFavRecipes(infoFavorite);
+      console.log(infoFavorite);
     }
     if (target.id === 'logout') {
       console.log('Logout clcikec!');
