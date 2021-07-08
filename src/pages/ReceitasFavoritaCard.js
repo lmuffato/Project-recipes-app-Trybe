@@ -13,7 +13,7 @@ function ReceitasFavoritasCard({ props: { recipe, index } }) {
   // const [favoriteRecipe, setFavoriteRecipe] = useState(true);
   const history = useHistory();
 
-  const { category, name, image } = recipe;
+  const { area, alcoholicOrNot, category, name, image, type } = recipe;
 
   const shareClick = (e) => {
     e.preventDefault();
@@ -58,10 +58,13 @@ function ReceitasFavoritasCard({ props: { recipe, index } }) {
       <div>
         <button
           type="button"
-          data-testid={ `${index}-horizontal-share-btn` }
           onClick={ shareClick }
         >
-          <img alt="Share link" src={ shareIcon } />
+          <img
+            alt="Share link"
+            data-testid={ `${index}-horizontal-share-btn` }
+            src={ shareIcon }
+          />
         </button>
         <button type="button" onClick={ favoriteClick }>
           <img
@@ -74,6 +77,14 @@ function ReceitasFavoritasCard({ props: { recipe, index } }) {
     );
   };
   console.log(recipe, index);
+
+  const foodSpecs = () => (
+    <span
+      data-testid={ `${index}-horizontal-top-text` }
+    >
+      { `${area} - ${category}` }
+    </span>
+  );
 
   return (
     <>
@@ -90,7 +101,9 @@ function ReceitasFavoritasCard({ props: { recipe, index } }) {
           data-testid={ `${index}-horizontal-image` }
         />
         <div>
-          <span data-testid={ `${index}-horizontal-top-text` }>{ category }</span>
+          { type === 'comida'
+            ? foodSpecs()
+            : <span data-testid={ `${index}-horizontal-top-text` }>{ alcoholicOrNot }</span> }
           <span data-testid={ `${index}-horizontal-name` }>{ name }</span>
           { createButtons() }
         </div>
