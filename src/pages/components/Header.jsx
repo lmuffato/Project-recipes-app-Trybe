@@ -24,7 +24,7 @@ function Header(props) {
   const [searchBar, toggleSearchBar] = useState(false);
 
   const showSearchIcon = () => {
-    if (['meals', 'drinks', 'search-origin'].includes(type)) return true;
+    if (['meals', 'drinks', 'search-area'].includes(type)) return true;
     return false;
   };
 
