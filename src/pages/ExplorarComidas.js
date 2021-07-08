@@ -5,11 +5,11 @@ import Footer from '../components/Footer';
 import { fetchRandomFood } from '../services/mealAPI';
 
 export default function ExplorarComidas() {
-  const [randomFoodId, setRandomFoodId] = useState();
+  const [randomFoodId, setRandomFoodId] = useState(0);
   useEffect(() => {
     fetchRandomFood().then((res) => setRandomFoodId(res.meals[0].idMeal));
   }, []);
-  console.log(randomFoodId);
+
   return (
     <div>
       <Header

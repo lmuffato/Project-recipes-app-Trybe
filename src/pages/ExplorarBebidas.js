@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import { fetchRandomDrink } from '../services/mealAPI';
+import { fetchRandomDrink } from '../services/cocktailAPI';
 
 export default function ExplorarBebidas() {
   const [randomDrinkId, setRandomDrinkId] = useState(0);
