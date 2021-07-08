@@ -4,7 +4,6 @@ import RecipeDetail from '../effects/RecipeDetails';
 import RecipeInit from '../effects/RecipeInit';
 import { ApiDetailsById } from '../services/theCockTailAPI';
 import { ApiFirstsResults } from '../services/theMealAPI';
-import RecipeShared from '../effects/RecipeShared';
 import FavoriteButton from '../components/FavoriteButton';
 import ShareButton from '../components/ShareButton';
 
@@ -17,11 +16,9 @@ export default function DrinkDetails() {
     doneRecipe: false,
     inProgress: false,
     recipeInit: false,
-    shareRecipe: false,
   });
   RecipeDetail(currDrink, ApiDetailsById, ApiFirstsResults, setCurrDrink);
   RecipeInit(currDrink);
-  RecipeShared(currDrink.shareRecipe);
 
   if (!currDrink.recipe) return;
   const { arrRecipeIngredients, arrRecipeMeasureUnit,
