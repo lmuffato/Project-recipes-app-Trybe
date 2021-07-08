@@ -9,6 +9,7 @@ import DetailsPage from './Pages/DetailsPage';
 import ExplorePage from './Pages/ExplorePage';
 import ProgressPage from './Pages/ProgressPage';
 import './App.css';
+import DoneRecipes from './Pages/DoneRecipes';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route exact path="/bebidas/:id/in-progress" component={ ProgressPage } />
           <Route exact path="/perfil" component={ ProfilePage } />
           <Route exact path="/explorar" component={ ExplorePage } />
+          <Route exact path="/receitas-feitas" component={ DoneRecipes } />
         </Switch>
       </BrowserRouter>
     </FoodProvider>
