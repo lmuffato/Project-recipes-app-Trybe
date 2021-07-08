@@ -16,7 +16,6 @@ function UserProvider({ children }) {
   const [currentDrink, setCurrentDrink] = useState({});
   const [favoriteRecipe, setFavoriteRecipe] = useState(storage);
 
-
   const getMealById = async (id) => {
     if (id) {
       const result = await fetchMealById(id);
