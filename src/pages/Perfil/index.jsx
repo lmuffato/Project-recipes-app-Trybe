@@ -1,6 +1,21 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 
 function Perfil() {
+  const history = useHistory();
+  const logout = (event) => {
+    event.preventDefault();
+    localStorage.clear();
+    history.push('/');
+  };
+  const doneRecipes = (event) => {
+    event.preventDefault();
+    history.push('/receitas-feitas');
+  };
+  const favoriteRecipes = (event) => {
+    event.preventDefault();
+    history.push('/receitas-favoritas');
+  };
   return (
     <div>
 
@@ -11,6 +26,7 @@ function Perfil() {
         name="Receitas Feitas"
         type="button"
         data-testid="profile-done-btn"
+        onClick={ doneRecipes }
       >
         Receitas Feitas
       </button>
@@ -18,6 +34,7 @@ function Perfil() {
         name="Receitas Favoritas"
         type="button"
         data-testid="profile-favorite-btn"
+        onClick={ favoriteRecipes }
       >
         Receitas Favoritas
       </button>
@@ -25,6 +42,7 @@ function Perfil() {
         name="Sair"
         type="button"
         data-testid="profile-logout-btn"
+        onClick={ logout }
       >
         Sair
       </button>
