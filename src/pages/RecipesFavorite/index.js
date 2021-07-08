@@ -5,7 +5,7 @@ import shareIcon from '../../images/shareIcon.svg';
 import blackHeartIcon from '../../images/blackHeartIcon.svg';
 import './index.css';
 
-export default function RecipesFavorite() {
+export default function RecipesFavorites() {
   const favoriteRecipes = [
     {
       id: '52771',
