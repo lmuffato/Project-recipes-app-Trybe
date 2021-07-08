@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import UserContext from './UserContext';
 import MealsProvider from './MealsProvider';
 import CocktailsProvider from './CocktailsProvider';
+import FavoritesProvider from './FavoritesProvider';
 
 function UserProvider({ children }) {
   const [user, setUser] = useState({});
@@ -12,13 +13,15 @@ function UserProvider({ children }) {
   };
 
   return (
-    <CocktailsProvider>
-      <MealsProvider>
-        <UserContext.Provider value={ context }>
-          {children}
-        </UserContext.Provider>
-      </MealsProvider>
-    </CocktailsProvider>
+    <FavoritesProvider>
+      <CocktailsProvider>
+        <MealsProvider>
+          <UserContext.Provider value={ context }>
+            {children}
+          </UserContext.Provider>
+        </MealsProvider>
+      </CocktailsProvider>
+    </FavoritesProvider>
   );
 }
 
