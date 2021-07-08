@@ -10,6 +10,8 @@ import ExplorePage from './Pages/ExplorePage';
 import ProgressPage from './Pages/ProgressPage';
 import './App.css';
 import DoneRecipes from './Pages/DoneRecipes';
+import ExploreDrinks from './Pages/ExploreDrinks';
+import ExploreFood from './Pages/ExploreFood';
 
 function App() {
   return (
@@ -25,6 +27,8 @@ function App() {
           <Route exact path="/bebidas/:id/in-progress" component={ ProgressPage } />
           <Route exact path="/perfil" component={ ProfilePage } />
           <Route exact path="/explorar" component={ ExplorePage } />
+          <Route exact path="/explorar/comidas" component={ ExploreFood } />
+          <Route exact path="/explorar/bebidas" component={ ExploreDrinks } />
           <Route exact path="/receitas-feitas" component={ DoneRecipes } />
         </Switch>
       </BrowserRouter>
