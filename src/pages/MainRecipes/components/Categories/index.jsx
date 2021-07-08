@@ -1,9 +1,10 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useContext } from 'react';
+import { RecipesContext } from '../../../../context/Recipes';
 
 import styles from './styles.module.scss';
 
-function Categories({ categories }) {
+function Categories() {
+  const { categories, filterByCategory } = useContext(RecipesContext);
   return (
     <div className={ styles.categories }>
       <label htmlFor="All">
@@ -17,11 +18,15 @@ function Categories({ categories }) {
         </span>
       </label>
       { categories.map((category) => (
-        <label key={ category.strCategory } htmlFor={ category.strCategory }>
+        <label
+          key={ category.strCategory }
+          htmlFor={ category.strCategory }
+        >
           <input
             type="radio"
             id={ category.strCategory }
             name="category"
+            onClick={ (event) => filterByCategory(category.strCategory, event) }
           />
           <span data-testid={ `${category.strCategory}-category-filter` }>
             { category.strCategory }
@@ -31,11 +36,5 @@ function Categories({ categories }) {
     </div>
   );
 }
-
-Categories.propTypes = {
-  categories: PropTypes.arrayOf(PropTypes.oneOfType(
-    [PropTypes.object, PropTypes.string],
-  )).isRequired,
-};
 
 export default Categories;
