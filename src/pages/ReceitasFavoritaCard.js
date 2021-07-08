@@ -86,6 +86,10 @@ function ReceitasFavoritasCard({ props: { recipe, index } }) {
     </span>
   );
 
+  const drinkSpecs = () => (
+    <span data-testid={ `${index}-horizontal-top-text` }>{ alcoholicOrNot }</span>
+  );
+
   return (
     <>
       <div>
@@ -103,7 +107,7 @@ function ReceitasFavoritasCard({ props: { recipe, index } }) {
         <div>
           { type === 'comida'
             ? foodSpecs()
-            : <span data-testid={ `${index}-horizontal-top-text` }>{ alcoholicOrNot }</span> }
+            : drinkSpecs() }
           <span data-testid={ `${index}-horizontal-name` }>{ name }</span>
           { createButtons() }
         </div>
