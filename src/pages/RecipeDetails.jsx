@@ -18,24 +18,26 @@ function RecipeDetails({ type }) {
   const history = useHistory();
   const endpointMeal = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
   const endpointDrink = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
-  const [isFetching, setIsFetching] = useState(true);
+  // const [isFetching, setIsFetching] = useState(true);
   const [carouselRecommendations, setRecomendations] = useState([]);
   const [singleRecipe, setRecipe] = useState({});
   const [, setRecipeInProgress] = useState('Iniciar receita');
-  const { handleFetch,
-    isLoading, recipeData,
-    recommendations, fetchMealRecipes } = useDetailsProvider();
+  const { handleFetch, isLoading, recipeData, recommendations,
+    fetchMealRecipes } = useDetailsProvider();
+  const recipeName = singleRecipe.strMeal || singleRecipe.strDrink;
+  const recipeThumb = singleRecipe.strMealThumb || singleRecipe.strDrinkThumb;
+  const recipeCategory = singleRecipe.strCategory;
 
   useEffect(() => {
     const getRecipesAndRecommendations = () => {
       if (type === 'meals') {
         fetchMealRecipes(endpointCocktails, type);
         handleFetch(endpointMeal, type);
-        setIsFetching(false);
+        // setIsFetching(false);
       }
       fetchMealRecipes(endpointRecipes, type);
       handleFetch(endpointDrink, type);
-      setIsFetching(false);
+      // setIsFetching(false);
     };
     getRecipesAndRecommendations();
     setRecipeInProgress('Iniciar receita');
@@ -59,13 +61,10 @@ function RecipeDetails({ type }) {
     history.push(`${id}/in-progress`);
   };
 
-  if (isLoading || isFetching) {
+  if (isLoading) {
     return 'Loading';
   }
 
-  const recipeName = singleRecipe.strMeal || singleRecipe.strDrink;
-  const recipeThumb = singleRecipe.strMealThumb || singleRecipe.strDrinkThumb;
-  const recipeCategory = singleRecipe.strCategory;
   const isAlchooholic = singleRecipe.strAlcoholic || '';
   const magicNumber = 32;
   const youTubeVideo = singleRecipe.strYoutube || '';
