@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { Card, Carousel, Button, Image } from 'react-bootstrap';
+import { Card, Carousel, Button } from 'react-bootstrap';
 import FavoriteButton from '../components/FavoriteButton';
 import RecipeDetail from '../effects/RecipeDetails';
 import RecipeInit from '../effects/RecipeInit';
-import shareIcon from '../images/shareIcon.svg';
 import { ApiCocktailFirstItems } from '../services/theCockTailAPI';
 import { ApiRecipeDetail } from '../services/theMealAPI';
 import RecipeShared from '../effects/RecipeShared';
+import ShareButton from '../components/ShareButton';
 
 export default function FoodDetails() {
   const [currMeal, setCurrMeal] = useState({
@@ -26,7 +26,7 @@ export default function FoodDetails() {
 
   if (!currMeal.recipe) return;
   const { arrRecipeIngredients, arrRecipeMeasureUnit,
-    recipe, recomends, doneRecipe, inProgress, shareRecipe } = currMeal;
+    recipe, recomends, doneRecipe, inProgress } = currMeal;
 
   return (
     <Card style={ { width: '18rem' } }>
@@ -36,15 +36,7 @@ export default function FoodDetails() {
         alt={ recipe.strMeal }
         data-testid="recipe-photo"
       />
-      {shareRecipe && <span>Link copiado!</span>}
-      <Image
-        type="button"
-        style={ { width: '2rem' } }
-        data-testid="share-btn"
-        src={ shareIcon }
-        alt="Compartilhar"
-        onClick={ () => setCurrMeal({ ...currMeal, shareRecipe: true }) }
-      />
+      <ShareButton />
       <FavoriteButton recipe={ recipe } />
       <h3 data-testid="recipe-category">{recipe.strCategory}</h3>
       <h3>Ingredientes:</h3>
