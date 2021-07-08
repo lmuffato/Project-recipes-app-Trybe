@@ -6,9 +6,10 @@ import Header from '../../components/Header';
 import './style.css';
 
 const Explore = () => (
-  <div className="container">
+  <div>
     <Header title="Explorar" />
-    <div className="buttons line">
+
+    <div className="buttons">
       <Link to="/explorar/comidas">
         <button
           className="button"
@@ -29,6 +30,7 @@ const Explore = () => (
         </button>
       </Link>
     </div>
+
     <Footer />
   </div>
 );
