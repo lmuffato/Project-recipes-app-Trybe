@@ -9,7 +9,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 export default function FavotireFilters(props) {
   const { handleClick } = props;
   const setFilter = (e) => {
-    handleClick(e.target.textContent);
+    handleClick(e.target.name);
   };
   return (
     <Container className="categories-container">
@@ -20,6 +20,7 @@ export default function FavotireFilters(props) {
             variant="outline-dark"
             data-testid="filter-by-all-btn"
             type="button"
+            name="All"
           >
             All
           </Button>
@@ -30,6 +31,7 @@ export default function FavotireFilters(props) {
             variant="outline-dark"
             data-testid="filter-by-food-btn"
             type="button"
+            name="comida"
           >
             Food
           </Button>
@@ -40,6 +42,7 @@ export default function FavotireFilters(props) {
             variant="outline-dark"
             data-testid="filter-by-drink-btn"
             type="button"
+            name="bebida"
           >
             Drink
           </Button>
