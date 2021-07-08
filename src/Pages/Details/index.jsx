@@ -54,7 +54,7 @@ function Details() {
           </h3>
 
           <ShareButton />
-          <FavoriteButton />
+          <FavoriteButton recipe={ recipesDetails } recipeType={ recipeType } />
 
           <Ingredient type="list" recipe={ recipesDetails } />
 
@@ -81,6 +81,7 @@ function Details() {
               </Link>
             )
             : null}
+          <Link to={ `/${toggleURL}/` }>Teste</Link>
         </div>
       )}
     </div>
