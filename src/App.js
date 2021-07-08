@@ -24,6 +24,7 @@ function App() {
             <Route path="/explorar" component={ Explore } />
             <Route path="/explorar/comidas" component={ ExploreFoods } />
             <Route path="/explorar/bebidas" component={ ExploreDrinks } /> */}
+            <Route path="/receitas-favoritas" component={ RecipesFavorite } />
           </Switch>
         </BrowserRouter>
       </AppProvider>
