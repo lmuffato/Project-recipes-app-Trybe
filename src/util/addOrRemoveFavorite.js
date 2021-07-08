@@ -39,7 +39,7 @@ export default function RenderFavoriteHeart(type, recipe, dispatch) {
   const recipeId = type === 'comida' ? recipe.idMeal : recipe.idDrink;
   const storage = JSON.parse(localStorage.getItem('favoriteRecipes'));
   let check = '';
-  if (storage.length > 0) {
+  if (storage && storage.length > 0) {
     check = storage.filter((st) => st.id.includes(recipeId));
   }
   if (check.length > 0) {
