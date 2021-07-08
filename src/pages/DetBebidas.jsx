@@ -109,20 +109,22 @@ class DetBebidas extends React.Component {
             Lista de Ingredientes
           </h2>
           <table border="1">
-            {ingredientes.map((ingredient, index) => (
-              <tr key="row">
-                <td
-                  key={ index }
-                  data-testid={ `${index}-ingredient-name-and-measure` }
-                >
-                  {ingredient}
-                </td>
-                <td
-                  key={ measures }
-                >
-                  {measures[index]}
-                </td>
-              </tr>))}
+            <tbody>
+              {ingredientes.map((ingredient, index) => (
+                <tr key={ `row${index}` }>
+                  <td
+                    key={ index }
+                    data-testid={ `${index}-ingredient-name-and-measure` }
+                  >
+                    {ingredient}
+                  </td>
+                  <td
+                    key={ measures }
+                  >
+                    {measures[index]}
+                  </td>
+                </tr>))}
+            </tbody>
           </table>
           <h2
             data-testid="instructions"
@@ -134,7 +136,7 @@ class DetBebidas extends React.Component {
           </p>
           <h2>Comidas Recomendadas</h2>
           {recommended.map((food, index) => (
-            <div key={ food } data-testid={ `${index}-recomendation-card` }>
+            <div key={ food.idMeal } data-testid={ `${index}-recomendation-card` }>
               <input
                 width="350"
                 type="image"

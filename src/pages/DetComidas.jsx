@@ -88,7 +88,6 @@ class DetComidas extends React.Component {
     const { history } = this.props;
     const { foods, measures, ingredientes, video, recommended } = this.state;
     const food = Object.values(foods);
-    console.log(recommended);
     return (
       food.map((recipe) => (
         <div key="recipe">
@@ -150,7 +149,7 @@ class DetComidas extends React.Component {
           />
           <h2>Drinks Recomendados</h2>
           {recommended.map((drink, index) => (
-            <div key={ drink } data-testid={ `${index}-recomendation-card` }>
+            <div key={ drink.idDrink } data-testid={ `${index}-recomendation-card` }>
               <input
                 width="350"
                 type="image"
