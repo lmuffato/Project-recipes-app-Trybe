@@ -38,6 +38,7 @@ function RecipeDetails({ type }) {
       setIsFetching(false);
     };
     getRecipesAndRecommendations();
+    setRecipeInProgress('Iniciar receita');
   }, [endpointDrink, endpointMeal, fetchMealRecipes, handleFetch, type]);
 
   useEffect(() => {

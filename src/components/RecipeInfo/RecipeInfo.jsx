@@ -4,12 +4,14 @@ import { useHistory } from 'react-router-dom';
 import shareIconImg from '../../images/shareIcon.svg';
 import favoriteIconImg from '../../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../../images/blackHeartIcon.svg';
-import Button from '../Generics/Button';
-import handleSetFavoritesToLocalStorage from '../../helpers/localStorageHelper';
+// import handleSetFavoritesToLocalStorage from '../../helpers/localStorageHelper';
 
 const THREE_SECONDS = 3000;
 function RecipeInfo(props) {
-  const { recipeName, recipeThumb, children, type, recipe } = props;
+  const { recipeName, recipeThumb,
+    // type, recipe,
+    children,
+  } = props;
   const history = useHistory();
   const recipeURL = history.location.pathname;
   const [copyToClipboard, setCopyToClipboard] = useState(false);
@@ -79,16 +81,16 @@ function RecipeInfo(props) {
 
 export default RecipeInfo;
 
-RecipeInfo.defaultProps = {
-  recipe: {},
-};
+// RecipeInfo.defaultProps = {
+//   recipe: {},
+// };
 
 RecipeInfo.propTypes = {
   recipeName: PropTypes.string.isRequired,
   recipeThumb: PropTypes.string.isRequired,
   children: PropTypes.node.isRequired,
-  type: PropTypes.string.isRequired,
-  recipe: PropTypes.shape(),
+  // type: PropTypes.string.isRequired,
+  // recipe: PropTypes.shape(),
 };
 
 // Lógica de copiar para o clipboard pesquisada no StackOverflow
