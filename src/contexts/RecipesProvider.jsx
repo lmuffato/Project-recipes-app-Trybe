@@ -19,7 +19,7 @@ export default function RecipesProvider({ children }) {
 
   const [foodsRecipes, setFoodsRecipes] = useState([]);
   const [drinksRecipes, setDrinksRecipes] = useState([]);
-
+  const [doneRecipes, setDoneRecipes] = useState([]);
   const [inProgressRecipes, setInProgressRecipes] = useState({
     cocktails: {},
     meals: {},
@@ -87,6 +87,8 @@ export default function RecipesProvider({ children }) {
     setfoodOrDrinksPathName,
     favoriteRecipes,
     setFavoriteRecipes,
+    doneRecipes,
+    setDoneRecipes,
   };
 
   useEffect(() => {

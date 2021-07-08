@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { useHistory } from 'react-router';
 import UserContext from '../contexts/UserContext';
+import Recipes from '../images/Recipes.gif';
 import '../styles/login.css';
 
 const validateEmail = (email, password) => {
@@ -57,8 +58,11 @@ function Login() {
 
   return (
     <div className="login_container">
+      <img className="logo-login" src={ Recipes } alt="logo" />
       <form>
         <div className="children_container">
+          <h3>Login</h3>
+          <h5>Welcome to Recipe App</h5>
           <label htmlFor="email-input">
             <input
               className="input-email"
@@ -87,12 +91,13 @@ function Login() {
             }
           </label>
           <button
+            className="btn-login"
             type="button"
             data-testid="login-submit-btn"
             disabled={ validateEmail(email, password) }
             onClick={ () => handleClick(email) }
           >
-            To enter
+            ENTRAR
           </button>
         </div>
       </form>

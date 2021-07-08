@@ -12,7 +12,7 @@ const RecipeInProgress = () => {
   const { path } = useRouteMatch();
   const { id } = useParams();
   const { inProgressRecipes } = useContext(RecipesContext);
-  const { updateFavoriteRecipes } = useLocalStorage();
+  const { updateFavoriteRecipes, updateDoneRecipes } = useLocalStorage();
   const {
     addNewInProgressMealsRecipes,
     addNewInProgressCocktailsRecipes,
@@ -23,6 +23,7 @@ const RecipeInProgress = () => {
   const { ingredients, ingredientsMeasures } = useIngredients(recipe);
   const [usedIngredients = [], setUsedIngredients] = useState([]);
   const [isRecipeCompleted, setIsRecipeCompleted] = useState(false);
+  console.log(recipe);
 
   const handleIngredientChecked = ({ target }) => {
     if (target.checked) {
@@ -46,6 +47,8 @@ const RecipeInProgress = () => {
   const handleFavoriteClick = () => {
     updateFavoriteRecipes(recipe, recipeType);
   };
+
+  const handleDoneClick = () => updateDoneRecipes(recipe, recipeType);
 
   useEffect(() => {
     setUsedIngredients(inProgressRecipes.cocktails[id] || inProgressRecipes.meals[id]);
@@ -105,6 +108,9 @@ const RecipeInProgress = () => {
             type="button"
             data-testid="finish-recipe-btn"
             disabled={ !isRecipeCompleted }
+            onClick={ () => {
+              handleDoneClick();
+            } }
           >
             Finalizar receita
           </button>

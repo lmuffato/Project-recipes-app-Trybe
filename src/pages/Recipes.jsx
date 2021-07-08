@@ -6,6 +6,7 @@ import Header from '../components/Header';
 import RecipesList from '../components/RecipesList';
 import RecipesContext from '../contexts/RecipesContext';
 import useRecipesFilter from '../hooks/useRecipesFilter';
+import '../styles/Recipes.css';
 
 export default function Recipes() {
   const { path } = useRouteMatch();
@@ -35,9 +36,10 @@ export default function Recipes() {
         categories={ categories.drinks }
         handleCategoryClick={ handleCategoryClick }
       /> }
-
-      {isRecipesFoods && <RecipesList recipes={ recipes.foods } /> }
-      {isRecipesDrinks && <RecipesList recipes={ recipes.drinks } /> }
+      <div className="card-container">
+        {isRecipesFoods && <RecipesList recipes={ recipes.foods } /> }
+        {isRecipesDrinks && <RecipesList recipes={ recipes.drinks } /> }
+      </div>
 
       <BottomMenu />
     </div>
