@@ -10,6 +10,11 @@
   width: 100%;
 }
 
+.image-click {
+  height: 120px;
+  width: 120px;
+}
+
 body {
   position: relative;
 }

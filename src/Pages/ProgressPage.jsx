@@ -42,13 +42,13 @@ function ProgressPage() {
   if (isProduct) {
     return (
       <>
-        <PhotoOfProduct idn={ idn } currentProduct={ product } />
-        <TitleOfProduct idn={ idn } currentProduct={ product } />
+        <PhotoOfProduct idn={ idn } currentProduct={ product } id={ id } />
+        <TitleOfProduct idn={ idn } currentProduct={ product } id={ id } />
         <CategoryOfProduct idn={ idn } currentProduct={ product } />
         <p data-testid="instructions">{ product[0].strInstructions}</p>
         <Ingredients currentProduct={ product } page={ page[1] } />
         <DetailsButtons product={ product } idn={ idn } />
-        <FinishBtn checksDone={ checksDone } />
+        <FinishBtn checksDone={ checksDone } currentProduct={ product } idn={ idn } />
       </>
     );
   }

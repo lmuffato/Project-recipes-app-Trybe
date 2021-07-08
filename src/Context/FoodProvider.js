@@ -12,6 +12,8 @@ function FoodProvider({ children }) {
   const [category, setCategory] = useState(false);
   const [checksDone, setChecksDone] = useState(0);
   const [currentProduct, setCurrentProduct] = useState([]);
+  const [doneRecipesFilter, setDoneRecipesFilter] = useState(null);
+  const [favoriteRecipesFilter, setFavoriteRecipesFilter] = useState(null);
   const contextValue = {
     foods,
     setFoods,
@@ -29,6 +31,10 @@ function FoodProvider({ children }) {
     setCurrentProduct,
     checksDone,
     setChecksDone,
+    doneRecipesFilter,
+    setDoneRecipesFilter,
+    favoriteRecipesFilter,
+    setFavoriteRecipesFilter,
   };
 
   useEffect(() => {

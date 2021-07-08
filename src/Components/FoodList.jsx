@@ -23,6 +23,7 @@ function FoodList({ page }) {
   return (
     <div className="foodlist">
       {foods.map((food, index) => {
+        console.log(food);
         // TAVA ASSIM => if (foods.length === 1 && !category / 16 NAO TAVA PASSANDO!!)
         if (foods.length === 1) {
           redirectRecipe(foods, identifier);
