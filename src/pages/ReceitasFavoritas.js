@@ -24,6 +24,7 @@ function ReceitasFavoritas() {
           const props = {
             recipe,
             index,
+            setFavoriteRecipes,
           };
 
           return <ReceitasFavoritasCard key={ index } props={ props } />;

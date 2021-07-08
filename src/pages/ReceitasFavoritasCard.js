@@ -8,7 +8,7 @@ import '../styles/ReceitasFavoritas.css';
 
 const copy = require('clipboard-copy');
 
-function ReceitasFavoritasCard({ props: { recipe, index } }) {
+function ReceitasFavoritasCard({ props: { recipe, index, setFavoriteRecipes } }) {
   // const [favoriteRecipe, setFavoriteRecipe] = useState(true);
   const [clipboardStatus, setClipboardStatus] = useState();
 
@@ -25,33 +25,21 @@ function ReceitasFavoritasCard({ props: { recipe, index } }) {
     setClipboardStatus('copied');
   };
 
-  const favoriteClick = (e) => {
+  const unfavoriteClick = (e) => {
     e.preventDefault();
 
-    // const favoriteRecipe = {
-    //   id,
-    //   type: 'bebida',
-    //   area: '',
-    //   category: acctualyDrink.drinks[0].strCategory,
-    //   alcoholicOrNot: acctualyDrink.drinks[0].strAlcoholic,
-    //   name: acctualyDrink.drinks[0].strDrink,
-    //   image: acctualyDrink.drinks[0].strDrinkThumb,
-    // };
+    if (JSON.parse(localStorage.getItem('favoriteRecipes') !== null)) {
+      const oldRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
 
-    // if (JSON.parse(localStorage.getItem('favoriteRecipes') !== null)) {
-    //   const oldRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
+      const filterRecipes = oldRecipes.filter((actualRecipe) => actualRecipe.id !== id);
 
-    //   console.log(oldRecipes);
+      const newRecipes = [...filterRecipes];
 
-    //   const newRecipes = [...oldRecipes, favoriteRecipe];
-
-    //   console.log('New Recipe', newRecipes);
-    //   localStorage.setItem('favoriteRecipes', JSON.stringify(newRecipes));
-    // } else {
-    //   localStorage.setItem('favoriteRecipes', JSON.stringify([favoriteRecipe]));
-    // }
-
-    // return !favoriteDrink ? setFavoriteDrink(true) : setFavoriteDrink(false);
+      console.log('New Recipe', newRecipes);
+      console.log('Old Recipes', oldRecipes);
+      localStorage.setItem('favoriteRecipes', JSON.stringify(newRecipes));
+      setFavoriteRecipes(newRecipes);
+    }
   };
 
   const createButtons = () => {
@@ -68,7 +56,7 @@ function ReceitasFavoritasCard({ props: { recipe, index } }) {
             src={ shareIcon }
           />
         </button>
-        <button type="button" onClick={ favoriteClick }>
+        <button type="button" onClick={ unfavoriteClick }>
           <img
             alt="Favorite button"
             data-testid={ `${index}-horizontal-favorite-btn` }
