@@ -3,6 +3,9 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { actionDetails } from '../redux/actions';
 import RecomendationCard from '../util/renderRecomendationCard';
+import RenderRecipeImg from '../util/mealDetailsComponents/renderRecipeImg';
+import RenderIngredients from '../util/mealDetailsComponents/renderIngredients';
+import RenderInstructions from '../util/mealDetailsComponents/renderInstructions';
 import shareIcon from '../images/shareIcon.svg';
 import blackFavoriteIcon from '../images/blackHeartIcon.svg';
 import whiteFavoriteIcon from '../images/whiteHeartIcon.svg';
@@ -114,49 +117,6 @@ function MealDetails() {
     setCopy('Link copiado!');
   };
 
-  const renderInstructions = (strInst, ytEmb) => (
-    <>
-      <p data-testid="instructions">{strInst}</p>
-      <h2>Video</h2>
-      <iframe
-        type="text/html"
-        title="recipe"
-        width="330"
-        height="315"
-        src={ `https://www.youtube.com/embed/${ytEmb}` }
-        data-testid="video"
-      />
-    </>
-  );
-
-  const renderIngredients = (ingredients, measure) => (
-    <ul>
-      { ingredients.map((item, index) => {
-        if (item !== '') {
-          if (measure[index].length > 1) {
-            return (
-              <li
-                key={ index }
-                data-testid={ `${index}-ingredient-name-and-measure` }
-              >
-                {`${item} - ${measure[index]}`}
-              </li>
-            );
-          }
-          return (
-            <li
-              key={ index }
-              data-testid={ `${index}-ingredient-name-and-measure` }
-            >
-              {`${item} - ${measure[index]} un`}
-            </li>
-          );
-        }
-        return '';
-      })}
-    </ul>
-  );
-
   const renderMealRecipe = () => {
     const ingredients = [];
     const measure = [];
@@ -178,12 +138,7 @@ function MealDetails() {
       const youtubeEmbed = strYoutube.split('=')[1];
       return (
         <div>
-          <img
-            className="recipe-img"
-            alt="recipe"
-            data-testid="recipe-photo"
-            src={ strMealThumb }
-          />
+          {RenderRecipeImg(strMealThumb)}
           <div>
             <h2 data-testid="recipe-title">{strMeal}</h2>
             <button data-testid="share-btn" type="button" onClick={ () => copyLink() }>
@@ -194,10 +149,10 @@ function MealDetails() {
           {copy}
           <h3 data-testid="recipe-category">{strCategory}</h3>
           <h2>Ingredients</h2>
-          {renderIngredients(ingredients, measure)}
+          {RenderIngredients(ingredients, measure)}
 
           <h2>Instructions</h2>
-          {renderInstructions(strInstructions, youtubeEmbed)}
+          {RenderInstructions(strInstructions, youtubeEmbed)}
 
           <h2>Recomendadas</h2>
           <div className="carousel-container">
