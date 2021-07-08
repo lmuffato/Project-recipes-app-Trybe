@@ -12,6 +12,7 @@ function CardDrinkDoneFav(recepie, index) {
           alt="the recepie drink"
           src={ image }
         />
+        <p data-testid={ `${index}-horizontal-name` }>{ name }</p>
         <p>{alcoholicOrNot}</p>
         <p data-testid={ `${index}-horizontal-done-date` }>{ doneDate }</p>
         <img data-testid={ `${index}-horizontal-share-btn` } src={ Share } alt="share" />
