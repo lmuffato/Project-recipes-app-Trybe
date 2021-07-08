@@ -20,13 +20,13 @@ export default function Routes() {
   return (
     <Switch>
       <Route exact path="/" component={ Login } />
-      <Route path="/comidas" component={ FoodPage } />
-      <Route path="/bebidas" component={ DrinkPage } />
+      <Route exact path="/comidas" component={ FoodPage } />
+      <Route exact path="/bebidas" component={ DrinkPage } />
       <Route path="/comidas/:idMeal" component={ RecipeDetails } />
       <Route path="/bebidas/:idDrink" component={ RecipeDetails } />
       <Route path="/comidas/:idMeal/in-progress" component={ FoodInProcess } />
       <Route path="/comidas/:idDrink/in-progress" component={ DrinkInProcess } />
-      <Route path="/explorar" component={ ExplorePage } />
+      <Route exact path="/explorar" component={ ExplorePage } />
       <Route path="/explorar/comidas" component={ ExploreFoods } />
       <Route path="/explorar/bebidas" component={ ExploreDrinks } />
       <Route path="/explorar/comidas/ingredientes" component={ FoodIngredients } />
