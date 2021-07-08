@@ -24,6 +24,12 @@ export default function DetalhesComidasIP() {
 
   useEffect(() => {
     fetchFoodByID(foodId).then((data) => setFood(data.meals[0]));
+    if (!localStorage.getItem('inProgressRecipes')) {
+      localStorage.setItem('inProgressRecipes', JSON.stringify({
+        cocktails: {},
+        meals: {},
+      }));
+    }
   }, [foodId]);
 
   useEffect(() => {
@@ -38,6 +44,15 @@ export default function DetalhesComidasIP() {
       setUsedIngredients(foodsInLS[foodId]);
     }
   }, [foodId]);
+
+  useEffect(() => {
+    // save ingredients list to LS
+    const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    localStorage.setItem('inProgressRecipes', JSON.stringify({
+      ...inProgressRecipes,
+      meals: { ...inProgressRecipes.meals, [foodId]: usedIngredients },
+    }));
+  }, [usedIngredients, foodId]);
 
   return (
     <div>

@@ -24,6 +24,12 @@ export default function DetalhesBebidasIP() {
 
   useEffect(() => {
     fetchDrinkByID(drinkId).then((data) => setDrink(data.drinks[0]));
+    if (!localStorage.getItem('inProgressRecipes')) {
+      localStorage.setItem('inProgressRecipes', JSON.stringify({
+        cocktails: {},
+        meals: {},
+      }));
+    }
   }, [drinkId]);
 
   useEffect(() => {
@@ -38,6 +44,16 @@ export default function DetalhesBebidasIP() {
       setUsedIngredients(drinksInLS[drinkId]);
     }
   }, [drinkId]);
+
+  useEffect(() => {
+    // save ingredients list to LS
+    const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
+
+    localStorage.setItem('inProgressRecipes', JSON.stringify({
+      ...inProgressRecipes,
+      cocktails: { ...inProgressRecipes.cocktails, [drinkId]: usedIngredients },
+    }));
+  }, [usedIngredients, drinkId]);
 
   return (
     <div>
