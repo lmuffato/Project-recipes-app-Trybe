@@ -17,10 +17,11 @@
   display: flex;
   flex-basis: content;
   flex-direction: column;
+  background-color: white;
 }
 
 .input {
-  border: 1px solid #272d2f;
+  border: 2px solid #272d2f;
   border-radius: 4px;
   color: #272d2f;
   display: flex;
@@ -29,6 +30,7 @@
   margin-bottom: 20px;
   margin-top: 20px;
   width: 200px;
+  padding-left: 0.7rem;
 }
 
 .login-submit-btn {
