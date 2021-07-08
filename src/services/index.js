@@ -16,10 +16,10 @@ const fetchMealsAndDrinks = async (query, type, page) => {
   if (type === 'Nome') endpoint = byName;
   if (type === 'Primeira letra') endpoint = byFirstLetter;
 
-  let apiResults = await fetch(endpoint)
+  const apiResults = await fetch(endpoint)
     .then((results) => results.json()
       .then((data) => data));
-  if (apiResults === null) { apiResults = {}; }
+  if (apiResults[objNameKey] === null) { return []; }
 
   return apiResults[objNameKey];
 };

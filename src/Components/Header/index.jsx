@@ -44,8 +44,8 @@ function Header(props) {
           )
       }
       {
-        serching ? (
-          <SearchBar page={ children.includes('Comida') ? 'meals' : 'drinks' } />)
+        serching
+          ? <SearchBar page={ children.includes('Comida') ? 'meals' : 'drinks' } />
           : <SearchCategories page={ children.includes('Comida') ? 'meals' : 'drinks' } />
       }
     </div>
