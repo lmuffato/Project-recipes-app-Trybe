@@ -13,6 +13,7 @@ import FilterButtons from '../components/CategoryButtons';
 function MainDrink() {
   const dispatch = useDispatch();
   const isLoading = useSelector((state) => state.searchReducer.isLoading);
+  const firstTime = useSelector((state) => state.searchReducer.initialDrinks);
   const loading = <h1>Loading...</h1>;
 
   useEffect(() => {
@@ -27,8 +28,8 @@ function MainDrink() {
     };
 
     fetchDrinksCategory();
-    getDrinks();
-  }, [dispatch]);
+    if (firstTime.length === 0) getDrinks();
+  }, [dispatch, firstTime]);
   return (
     <>
       <Header props={ { search: true, title: 'Bebidas' } } />

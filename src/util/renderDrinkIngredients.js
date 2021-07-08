@@ -1,11 +1,19 @@
 import React from 'react';
-import '../PagesCss/DrinkIngredient.css';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import { requestInitialDrinks } from '../redux/actions';
+import fetchDrinksByIngredient from '../helpers/fetchDrinksByIngredient';
+import '../PagesCss/Ingredients.css';
 
-const filter = (name) => {
-  console.log(name);
+const Filter = async (dispat, history, name) => {
+  const { drinks } = await fetchDrinksByIngredient(name);
+  dispat(requestInitialDrinks(drinks));
+  history.push('/bebidas');
 };
 
 export default function RenderIngredients(ingredients) {
+  const dispatch = useDispatch();
+  const history = useHistory();
   const LIMIT = 12;
   if (ingredients) {
     return (
@@ -13,8 +21,8 @@ export default function RenderIngredients(ingredients) {
         <button
           type="button"
           key={ index }
-          className="drink-ingredient-btn"
-          onClick={ () => filter(e.strIngredient1) }
+          className="ingredients-btn"
+          onClick={ () => Filter(dispatch, history, e.strIngredient1) }
         >
           <div data-testid={ `${index}-ingredient-card` }>
             <img
