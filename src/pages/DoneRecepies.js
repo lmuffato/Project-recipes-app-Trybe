@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import Share from '../images/shareIcon.svg';
+import CardMealDoneFav from '../compenents/CardMealDoneFav';
+import CardDrinkDoneFav from '../compenents/CardDrinkDoneFav';
 
 function DoneRecepies () {
-    const [doneRecepies, setDoneRecepies] = useState([]);
-    const [showDoneRecepies, setShowRecepies] = useState(doneRecepies);
+  const [doneRecepies, setDoneRecepies] = useState([]);
+  const [showDoneRecepies, setShowRecepies] = useState(doneRecepies);
   
   // funções para pegar as receitas do local storage
   const getDoneRecepies = () => {
@@ -26,64 +27,72 @@ function DoneRecepies () {
     checkDoneRecepies();
   }, []);
 
-  function handleContent(all, food, drink) {
-    if(all) {
+  function setMealOrDrink({ type, id, image, name, category, area, doneDate, tags, alcoholicOrNot }, index) {
+    if (type === 'meal') {
+      return (
+        <CardMealDoneFav
+          id={ id }
+          index={ index }
+          image={ image }
+          name={ name }
+          category={ category }
+          area={ area }
+          doneDate={ doneDate }
+          tags={ tags }
+        />
+      )
+    } else if (type === 'drink') {
+      return (
+        <CardDrinkDoneFav
+          id={ id }
+          index={ index }
+          image={ image }
+          alcoholicOrNot={ alcoholicOrNot }
+          doneDate={ doneDate }
+        />
+      )
+    }
+  }
+
+      function handleContent(param) {
+    if(param === 'all') {
       setShowRecepies(doneRecepies);
-    } else if(food) {
-      const mealsRecepi = recepiesStorage.filter((recepie) => recepi.type === 'meals');
+    } else if(param === 'food') {
+      const mealsRecepi = doneRecepies.filter((recepi) => recepi.type === 'meals');
       setShowRecepies(mealsRecepi);
-    } else if(drink) {
-      const drinksRecepi = recepiesStorage.filter((recepie) => recepi.type === 'drinks');
+    } else if(param === 'drink') {
+      const drinksRecepi = doneRecepies.filter((recepi) => recepi.type === 'drinks');
       setShowRecepies(drinksRecepi);
     }
   }
 
   return (
-    <div>
+    <section>
       <div>
         <button
           data-testid="filter-by-all-btn"
-          onClick={handleContent(all)}
+          onClick={ () => handleContent('all') }
         >
           All
         </button>
         <button
           data-testid="filter-by-food-btn"
-          onClick={handleContent(food)}
+          onClick={ () => handleContent('food')}
         >
           Food
         </button>
         <button
           data-testid="filter-by-drink-btn"
-          onClick={handleContent(drink)}
+          onClick={ () => handleContent('drink')}
         >
           Drinks
         </button>
       </div>
-    {showDoneRecepies.map((recepie, index) => {
-      if (recepie.type === meal) {
-        // <Componente cardFood image, name, category, area, doneDate, tags />
-        <Link to={`/comidas/${recepi.id}`}>
-          <img data-testid={`${index}-horizontal-image`}>{ recepie.image }</img>
-          <p data-testid={`${index}-horizontal-name`}>{recepie.name}</p>
-          <p data-testid={`${index}-horizontal-top-text>`}>{recepie.category}</p>
-          <p>{recepie.area}</p>
-          <p data-testid={`${index}-horizontal-done-date`}>{recepie.doneDate}</p>
-          <p data-testid={`${index}-${tags}-horizontal-tag`}>{`recepie.tags[0]}, {recepie.tags[1]`}</p>
-          <img data-testid={`${index}-horizontal-share-btn`} src={Share} alt="share"></img>
-        </Link>
-    } else if (recepie.type === drink) {
-      // // <Componente cardDrink image, name, doneDate, alcoholicOrNot />
-      <Link to={`/bebidas/${recepi.id}`}>
-        <img data-testid={`${index}-horizontal-image`}>{ recepie.image }</img>
-        <p>alcólica:{recepie.alcoholicOrNot}</p> 
-        <p data-testid={`${index}-horizontal-done-date`}>{recepie.doneDate}</p>
-        <img data-testid={`${index}-horizontal-share-btn`} src={Share} alt="share"></img>
-      </Link>
-    }
-    })
-  }
-    </div>
+
+      {showDoneRecepies.map(({type, id, image, name, category, area, doneDate, tags, alcoholicOrNot }, index ) => (
+        setMealOrDrink({type, id, image, name, category, area, doneDate, tags, alcoholicOrNot }, index )))}
+
+    </section>
   )
 }
 
