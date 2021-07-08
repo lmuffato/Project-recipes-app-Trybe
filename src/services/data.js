@@ -39,3 +39,9 @@ export const fetchById = async (site, id) => {
   const result = await genericFetch(URL);
   return result;
 };
+
+export const fetchSurprise = async (site) => {
+  const URL = `https://www.the${site}db.com/api/json/v1/1/random.php`;
+  const result = await genericFetch(URL);
+  return result;
+};

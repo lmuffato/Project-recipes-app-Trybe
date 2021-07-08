@@ -1,10 +1,14 @@
 import { useEffect, useState } from 'react';
-import usePersistedState from './usePersistedState';
+import useRecipe from './useRecipe';
 
-export default function useRecipeFilter() {
-  const [doneRecipes] = usePersistedState('doneRecipes', []);
+export default function useRecipeFilter(doneOrFavoritestr) {
+  const { favoriteRecipes, doneRecipes } = useRecipe();
+  const doneOrFavorite = doneOrFavoritestr === 'doneRecipes'
+    ? doneRecipes
+    : favoriteRecipes;
+  console.log(doneRecipes);
   const [filter, setFilter] = useState('all');
-  const [filteredRecipes, setFilteredRecipes] = useState(doneRecipes);
+  const [filteredRecipes, setFilteredRecipes] = useState(doneOrFavorite);
 
   const changeValueToFilterRecipes = ({ target }) => {
     const { name } = target;
@@ -14,14 +18,14 @@ export default function useRecipeFilter() {
   useEffect(() => {
     const changeFilteredRecipes = () => {
       const fixedFilter = filter === 'all' ? '' : filter;
-      const newFilteredRecipes = doneRecipes
-        .filter(({ type }) => type.includes(fixedFilter));
-
+      const newFilteredRecipes = doneOrFavorite && doneOrFavorite.filter(
+        ({ type }) => type.includes(fixedFilter),
+      );
       setFilteredRecipes(newFilteredRecipes);
     };
 
     changeFilteredRecipes();
-  }, [filter]);
+  }, [filter, doneOrFavorite]);
 
   return { changeValueToFilterRecipes, filteredRecipes };
 }

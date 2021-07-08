@@ -2,13 +2,14 @@ import { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 
 import useClipBoard from './useClipboard';
-import usePersistedState from './usePersistedState';
+import useFavoriteRecipe from './useFavoriteRecipe';
 
 import getMealsOrDrinks from '../helper/mealsOrDrinksMethods';
 import { fetchById, fetchName } from '../services/data';
 
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import useRecipe from './useRecipe';
 
 const INITIAL_STATE = {
   meals: [{ strYoutube: '' }],
@@ -16,25 +17,21 @@ const INITIAL_STATE = {
 };
 
 export default function useRecipeDetails(type) {
-  const {
-    recommendedSite,
-    portugueseFood,
-    site,
-    idFood,
-    typeFood,
-    foodUpperCase,
-  } = getMealsOrDrinks(type);
+  const { recommendedSite, portugueseFood, site } = getMealsOrDrinks(type);
   const { push } = useHistory();
+  const { doneRecipes } = useRecipe();
   const { id } = useParams();
   const [recipe, setRecipe] = useState(INITIAL_STATE);
   const [recommended, setRecommended] = useState(INITIAL_STATE);
-  const [favoriteRecipes, setFavoriteRecipes] = usePersistedState(
-    'favoriteRecipes',
-    [],
-  );
   const {
     showClipBoardMsg, copyToClipBoard, renderClipBoardMsg,
   } = useClipBoard(id, portugueseFood);
+  const {
+    setHeart,
+    getFavoriteInfos,
+    checkFavorite,
+    favoriteRecipes,
+  } = useFavoriteRecipe(type, id);
 
   const getIngredientsAndMeasures = (rcp) => {
     const entriesRecipe = Object.entries(rcp);
@@ -63,42 +60,7 @@ export default function useRecipeDetails(type) {
     push(`/${portugueseFood}/${id}/in-progress`);
   };
 
-  const getFavoriteInfos = (recipeStorage) => {
-    let alcoholTest;
-
-    if (
-      recipeStorage.strAlcoholic
-      && recipeStorage.strAlcoholic === 'Alcoholic'
-    ) {
-      alcoholTest = 'Alcoholic';
-    } else if (recipeStorage.strAlcoholic) {
-      alcoholTest = 'non-alcoholic';
-    } else alcoholTest = '';
-
-    return {
-      id: recipeStorage[idFood],
-      type: typeFood,
-      area: recipeStorage.strArea || '',
-      category: recipeStorage.strCategory,
-      alcoholicOrNot: alcoholTest,
-      name: recipeStorage[`str${foodUpperCase}`],
-      image: recipeStorage[`str${foodUpperCase}Thumb`],
-    };
-  };
-
-  const setHeart = (recipeStorage) => {
-    const favoriteObj = getFavoriteInfos(recipeStorage);
-    const newFavoritedRecipes = favoriteRecipes.length
-      ? favoriteRecipes.reduce((acc, cur) => {
-        if (cur.id === favoriteObj.id) return acc;
-        return acc.concat(cur);
-      }, [])
-      : [favoriteObj];
-
-    setFavoriteRecipes(newFavoritedRecipes);
-  };
-
-  const checkFavorite = () => favoriteRecipes.some((fav) => fav.id === id);
+  const diplayNoneButton = () => doneRecipes.some((doneRcp) => doneRcp.id === id);
 
   useEffect(() => {
     const fetchDidMount = async () => {
@@ -126,5 +88,6 @@ export default function useRecipeDetails(type) {
     getFavoriteInfos,
     setHeart,
     checkFavorite,
+    diplayNoneButton,
   };
 }

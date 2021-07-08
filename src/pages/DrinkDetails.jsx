@@ -16,6 +16,7 @@ export default function DrinkDetails() {
     copyToClipBoard,
     renderClipBoardMsg,
     checkFavorite,
+    diplayNoneButton,
   } = useRecipeDetails('drink');
   // ALERTA ENGENHARIA DE EMERGÊNCIA
   const recipeDrink = recipe.drinks
@@ -32,6 +33,7 @@ export default function DrinkDetails() {
   const styleFooter = {
     bottom: '0px',
     position: 'fixed',
+    display: diplayNoneButton() ? 'none' : 'block',
   };
 
   return (
@@ -73,6 +75,7 @@ export default function DrinkDetails() {
           <p data-testid="instructions">{strInstructions}</p>
         </section>
       </section>
+
       <section>
         <h2>Recommended</h2>
         <div className="carousel">

@@ -2,11 +2,9 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-// import usePersistedState from '../hooks/usePersistedState';
 
 export default function Profile() {
   const user = JSON.parse(localStorage.getItem('user'));
-  // const [user] = usePersistedState('user', { email: '' });
   const history = useHistory();
   function Logout() {
     localStorage.clear();
