@@ -1,0 +1,11 @@
+.Header {
+  background-color: #ce964a;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  max-width: 100%;
+}
+
+.Explore {
+  width: 65%;
+}
