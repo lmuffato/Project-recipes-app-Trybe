@@ -60,11 +60,26 @@ export async function fetchRecipeDrink(id) {
   return dataResponse.drinks[0];
 }
 
+function shuffle(array) {
+  let currentIndex = array.length;
+  let temporaryValue; let
+    randomIndex;
+  while (currentIndex !== 0) {
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+  return array;
+}
+
 export async function fetchFoodsRecommended() {
   const SIX = 6;
   const response = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=');
   const dataResponse = await response.json();
   const arrLength6 = [];
+  shuffle(dataResponse.meals);
   for (let i = 0; i < SIX; i += 1) {
     arrLength6.push(dataResponse.meals[i]);
   }
@@ -76,6 +91,7 @@ export async function fetchDrinksRecommended() {
   const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
   const dataResponse = await response.json();
   const arrLength6 = [];
+  shuffle(dataResponse.drinks);
   for (let i = 0; i < SIX; i += 1) {
     arrLength6.push(dataResponse.drinks[i]);
   }
