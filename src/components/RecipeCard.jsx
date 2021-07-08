@@ -4,12 +4,15 @@ import { useHistory } from 'react-router-dom';
 
 export default function RecipeCard({ index, thumb, title, id }) {
   const { location, push } = useHistory();
+  const isDrinkOrFood = location.pathname.includes('comidas')
+    ? 'comidas'
+    : 'bebidas';
 
   return (
     <section
       data-testid={ `${index}-recipe-card` }
-      onClick={ () => push(`${location.pathname}/${id}`) }
-      onKeyDown={ () => push(`${location.pathname}/${id}`) }
+      onClick={ () => push(`/${isDrinkOrFood}/${id}`) }
+      onKeyDown={ () => push(`/${isDrinkOrFood}/${id}`) }
       role="button"
       tabIndex="0"
     >

@@ -45,3 +45,21 @@ export const fetchSurprise = async (site) => {
   const result = await genericFetch(URL);
   return result;
 };
+
+export const fetchIngredients = async (site) => {
+  const URL = `https://www.the${site}db.com/api/json/v1/1/list.php?i=list`;
+  const result = await genericFetch(URL);
+  return result;
+};
+
+export const fetchAreas = async () => {
+  const URL = 'https://www.themealdb.com/api/json/v1/1/list.php?a=list';
+  const result = await genericFetch(URL);
+  return result;
+};
+
+export const fetchByArea = async (area) => {
+  const URL = `https://www.themealdb.com/api/json/v1/1/filter.php?a=${area}`;
+  const result = await genericFetch(URL);
+  return result;
+};

@@ -13,6 +13,7 @@ const INITIAL_STATE_STORAGE = { cocktails: {}, meals: {} };
 export const RecipeContext = createContext();
 
 export function RecipeContextProvider({ value = INITIAL_VALUE, children }) {
+  const [loading, setLoading] = useState(false);
   const [recipe, setRecipe] = useState(value);
   const [searchedByCategory, setSearchedByCategory] = useState(false);
   const [favoriteRecipes, setFavoriteRecipes] = usePersistedState(
@@ -38,6 +39,8 @@ export function RecipeContextProvider({ value = INITIAL_VALUE, children }) {
         setDoneRecipes,
         inProgressRecipes,
         setInProgressRecipes,
+        loading,
+        setLoading,
       } }
     >
       {children}
