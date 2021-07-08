@@ -1,53 +1,48 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import shareIconImg from '../../images/shareIcon.svg';
 import favoriteIconImg from '../../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../../images/blackHeartIcon.svg';
-import useDetailsProvider from '../../hooks/useDetailsProvider';
-// import handleSetFavoritesToLocalStorage from '../../helpers/localStorageHelper';
+import handleSetFavoritesToLocalStorage from '../../helpers/localStorageHelper';
 
 const THREE_SECONDS = 3000;
 function RecipeInfo(props) {
   const { recipeName, recipeThumb,
-    // type, recipe,
+    type, recipe,
     children,
   } = props;
+  const { id } = useParams();
   const history = useHistory();
   const recipeURL = history.location.pathname;
   const [copyToClipboard, setCopyToClipboard] = useState(false);
-  const { isFavorite, setIsFavorite } = useDetailsProvider();
-  const [, setFavoriteRecipes] = useState([]);
-  // const recipeId = type === 'meals' ? recipe.idMeal : recipe.idDrink;
-  // const recipeType = type === 'meals' ? 'comida' : 'bebida';
+  const [isFavorite, setIsFavorite] = useState(false);
+  const recipeId = type === 'meals' ? recipe.idMeal : recipe.idDrink;
+  const recipeType = type === 'meals' ? 'comida' : 'bebida';
+
+  const recipesObject = {
+    id: recipeId,
+    type: recipeType,
+    area: recipe.strArea || '',
+    category: recipe.strCategory || '',
+    name: recipeName,
+    image: recipeThumb,
+    alcoholicOrNot: recipe.strAlcoholic || '',
+  };
 
   useEffect(() => {
-    const favoriteStorage = JSON.parse(localStorage.getItem('favoriteRecipes'));
-    if (favoriteStorage) setFavoriteRecipes(favoriteStorage);
-  }, []);
-
-  // useEffect(() => {
-  //   let cancel = false;
-  //   const recipeObj = {
-  //     id: recipeId,
-  //     type: recipeType,
-  //     area: recipe.strArea || '',
-  //     category: recipe.strCategory || '',
-  //     alcoholicOrNot: recipe.strAlcoholic || '',
-  //     name: recipeName,
-  //     image: recipeThumb,
-  //   };
-  //   if (isFavorite) {
-  //     // const updatedRecipes = favoriteRecipes.filter((it) => it !== recipeId);
-  //     // localStorage.setItem('favoriteRecipes', JSON.stringify(updatedRecipes));
-  //     if (cancel === true) return;
-  //     handleSetFavoritesToLocalStorage(recipeObj);
-  //   }
-  //   return () => {
-  //     cancel = true;
-  //   };
-  // }, [isFavorite, recipe.strAlcoholic,
-  //   recipe.strArea, recipe.strCategory, recipeId, recipeName, recipeThumb, recipeType]);
+    const handleCreateLocalStorageFavKey = () => {
+      const getFavoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
+      if (getFavoriteRecipes && getFavoriteRecipes.some((item) => (
+        item.id === id))) {
+        setIsFavorite(true);
+      } else if (!getFavoriteRecipes) {
+        setIsFavorite(false);
+        localStorage.setItem('favoriteRecipes', JSON.stringify([]));
+      }
+    };
+    handleCreateLocalStorageFavKey();
+  }, [id]);
 
   const handleCopyToClipboard = () => {
     navigator.clipboard.writeText(`http://localhost:3000${recipeURL}`);
@@ -57,8 +52,9 @@ function RecipeInfo(props) {
     }, THREE_SECONDS);
   };
 
-  const handleFavoriteRecipe = () => {
-    setIsFavorite((previousState) => !previousState);
+  const handleAddFavoriteRecipe = () => {
+    setIsFavorite((prevState) => !prevState);
+    handleSetFavoritesToLocalStorage(recipesObject, isFavorite, 'favoriteRecipes', id);
   };
 
   return (
@@ -82,7 +78,7 @@ function RecipeInfo(props) {
             src={ isFavorite ? blackHeartIcon : favoriteIconImg }
             alt="ícone de favoritar"
             data-testid="favorite-btn"
-            onClick={ handleFavoriteRecipe }
+            onClick={ handleAddFavoriteRecipe }
           />
 
         </div>
@@ -94,16 +90,16 @@ function RecipeInfo(props) {
 
 export default RecipeInfo;
 
-// RecipeInfo.defaultProps = {
-//   recipe: {},
-// };
+RecipeInfo.defaultProps = {
+  recipe: {},
+};
 
 RecipeInfo.propTypes = {
   recipeName: PropTypes.string.isRequired,
   recipeThumb: PropTypes.string.isRequired,
   children: PropTypes.node.isRequired,
-  // type: PropTypes.string.isRequired,
-  // recipe: PropTypes.shape(),
+  type: PropTypes.string.isRequired,
+  recipe: PropTypes.shape(),
 };
 
 // Lógica de copiar para o clipboard pesquisada no StackOverflow

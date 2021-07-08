@@ -18,10 +18,9 @@ function RecipeDetails({ type }) {
   const history = useHistory();
   const endpointMeal = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
   const endpointDrink = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
-  // const [isFetching, setIsFetching] = useState(true);
-  const [carouselRecommendations, setRecomendations] = useState([]);
+  // const [carouselRecommendations, setRecomendations] = useState([]);
   const [singleRecipe, setRecipe] = useState({});
-  const [, setRecipeInProgress] = useState('Iniciar receita');
+  // const [, setRecipeInProgress] = useState('Iniciar receita');
   const { handleFetch, isLoading, recipeData, recommendations,
     fetchMealRecipes } = useDetailsProvider();
   const recipeName = singleRecipe.strMeal || singleRecipe.strDrink;
@@ -33,14 +32,12 @@ function RecipeDetails({ type }) {
       if (type === 'meals') {
         fetchMealRecipes(endpointCocktails, type);
         handleFetch(endpointMeal, type);
-        // setIsFetching(false);
       }
       fetchMealRecipes(endpointRecipes, type);
       handleFetch(endpointDrink, type);
-      // setIsFetching(false);
     };
     getRecipesAndRecommendations();
-    setRecipeInProgress('Iniciar receita');
+    // setRecipeInProgress('Iniciar receita');
   }, [endpointDrink, endpointMeal, fetchMealRecipes, handleFetch, type]);
 
   useEffect(() => {
@@ -48,7 +45,7 @@ function RecipeDetails({ type }) {
     const settingUp = () => {
       if (cancel) return;
       setRecipe(recipeData);
-      setRecomendations(recommendations);
+      // setRecomendations(recommendations);
     };
     settingUp();
     return () => {
@@ -92,7 +89,7 @@ function RecipeDetails({ type }) {
         />) : ''}
       <div className="title-wrapper"><h3>Recomendadas</h3></div>
       <Carousel
-        recipeRecommendations={ carouselRecommendations }
+        recipeRecommendations={ recommendations }
         type={ type }
       />
       {/* {
