@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useHistory } from 'react-router-dom';
 
 import DetailsHeader from '../components/DetailsHeader';
 import IngredientListCheckbox from '../components/RecipesIP/IngredientsListCheckbox';
@@ -14,6 +14,7 @@ export default function DetalhesBebidasIP() {
   const [usedIngredients, setUsedIngredients] = useState([]);
 
   function handleCheckIngredient(ev) {
+    // adds or removes clicked ingredient from usedIngredients list
     const ingredient = ev.target.value;
     const isUsed = usedIngredients.includes(ingredient);
     if (!isUsed) {
@@ -24,6 +25,7 @@ export default function DetalhesBebidasIP() {
   }
 
   function allIngredientsChecked() {
+    // return true if all ingredients are checked
     const allIngredients = Object.entries(drink).filter(
       (entry) => entry[0].includes('Ingredient'),
     );
@@ -41,6 +43,12 @@ export default function DetalhesBebidasIP() {
     });
 
     return isEqual;
+  }
+
+  const history = useHistory();
+  function finishRecipe() {
+    // save recipe data to LS!
+    history.push('/receitas-feitas');
   }
 
   useEffect(() => {
@@ -94,6 +102,7 @@ export default function DetalhesBebidasIP() {
             type="button"
             data-testid="finish-recipe-btn"
             disabled={ !allIngredientsChecked() }
+            onClick={ () => finishRecipe() }
           >
             Finalizar Receita
           </button>
