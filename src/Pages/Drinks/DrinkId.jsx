@@ -1,41 +1,64 @@
-import React, { useEffect, useState } from 'react';
-import { useLocation, Redirect } from 'react-router-dom';
+import React, { useEffect, useState, useContext } from 'react';
+import { useLocation, Redirect, Link } from 'react-router-dom';
 import { fetchDrinkForId } from '../../services/Data';
 import shareIcon from '../../images/shareIcon.svg';
 import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
+import context from '../../store/Context';
 
 function DrinkId() {
   const location = useLocation();
   const id = location.pathname.split('/')[2];
-  const [drinkForId, setDrinkForId] = useState([]);
-  const [shouldRedirect, setShouldRedirect] = useState(false);
-
   const index = 0;
   const style = {
     bottom: '0px',
     position: 'fixed',
   };
 
-  const handleClick = () => {
-    setShouldRedirect(true);
-  };
-
-  useEffect(() => {
-    fetchDrinkForId(id)
-      .then((res) => {
-        if (res.drinks) setDrinkForId(res.drinks[0]);
-      });
-  }, [id]);
-
-  if (!drinkForId) return <div>Loading...</div>;
-
+  const [drinkForId, setDrinkForId] = useState([]);
+  const [hiddenValue, setHiddenValue] = useState(false);
+  const [textBtn, setTextBtn] = useState('');
+  const [shouldRedirect, setShouldRedirect] = useState(false);
+  const { inProgressRecipes, setInProgressRecipes } = useContext(context);
+  const { cocktails } = inProgressRecipes;
+  const arrIngredients = Object.entries(drinkForId);
   const {
     strDrink,
     strAlcoholic,
     strInstructions,
     strDrinkThumb } = drinkForId;
 
+  const setHidden = () => (
+    (JSON.parse(localStorage.getItem('doneRecipes')) || [])
+      .filter(({ id: localStorageId }) => localStorageId === id)
+      .length ? setHiddenValue(true) : setHiddenValue(false)
+  );
+
+  const getDrinksLocalStorage = () => (
+    localStorage.getItem('inProgressRecipes')
+    && Object.keys(JSON.parse(localStorage.getItem('inProgressRecipes')).cocktails)
+      .includes(id) ? setTextBtn('Continuar Receita') : setTextBtn('Iniciar Receita')
+  );
+
+  useEffect(() => {
+    setHidden();
+    getDrinksLocalStorage();
+    fetchDrinkForId(id)
+      .then((res) => {
+        if (res.drinks) setDrinkForId(res.drinks[0]);
+      });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [id, cocktails]);
+
+  const handleClick = () => {
+    setShouldRedirect(true);
+    setInProgressRecipes({
+      cocktails: { ...cocktails, [id]: [] },
+      meals: {},
+    });
+  };
+
   if (shouldRedirect) return <Redirect to={ `/bebidas/${id}/in-progress` } />;
+  if (!drinkForId) return <div>Loading...</div>;
 
   return (
     <div>
@@ -61,12 +84,21 @@ function DrinkId() {
       <section>
         <p>Ingredients</p>
         <ul>
-          {/* {
-            drinkForId.filter((ingredient) => ingredient.include('strIngredient'))
-              .filter((ingredient) => ingredient.value !== null)
-              .map((ingredient, index) => <li key={ index } data-testid={ `${index}-ingredient-name-and-measure` }>{ingredient.value}</li>)
-          } */}
-          <li data-testid={ `${index}-ingredient-name-and-measure` }>Hpnotiq</li>
+          {
+            arrIngredients.filter(([key]) => key.includes('strIngredient'))
+              .filter(([, value]) => value !== null)
+              .map(([, value], i) => (
+                <li
+                  key={ i }
+                  data-testid={ `${i}-ingredient-name-and-measure` }
+                >
+                  {
+                    `${value} ${(drinkForId[`strMeasure${i + 1}`] === null) ? ''
+                      : drinkForId[`strMeasure${i + 1}`]}`
+                  }
+                </li>
+              ))
+          }
         </ul>
       </section>
       <section>
@@ -77,13 +109,15 @@ function DrinkId() {
         <p>Recomendadas</p>
         <div data-testid={ `${index}-recomendation-card` } />
       </section>
+      <Link to="/bebidas">Voltar</Link>
       <button
         type="button"
         onClick={ handleClick }
         data-testid="start-recipe-btn"
         style={ style }
+        hidden={ hiddenValue }
       >
-        Iniciar Receita
+        {textBtn}
       </button>
     </div>
   );

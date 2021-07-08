@@ -81,9 +81,14 @@ export const fetchDrinksIngredients = async () => {
 // AREA //
 
 export const fetchArea = async () => {
-  const response = await fetch('//www.themealdb.com/api/json/v1/1/list.php?a=list');
+  const response = await fetch('https://www.themealdb.com/api/json/v1/1/list.php?a=list');
   const result = await response.json();
   return result;
+};
+
+export const fetchFilterMealArea = async (meal) => {
+  const response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?a=${meal}`);
+  return response;
 };
 
 // SEARCH BUTTON //

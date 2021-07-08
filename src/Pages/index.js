@@ -14,6 +14,7 @@ import ExploreArea from './Explore/ExploreFoods/ExploreArea';
 import FoodExplore from './Explore/ExploreFoods/FoodExplore';
 import ExploreFoodIngredients from './Explore/ExploreFoods/ExploreFoodIngredients';
 import RecipesDone from './Profile/RecipesDone';
+import NotFound from './Explore/NotFound';
 
 export {
   Login,
@@ -32,4 +33,5 @@ export {
   FoodExplore,
   ExploreFoodIngredients,
   RecipesDone,
+  NotFound,
 };
