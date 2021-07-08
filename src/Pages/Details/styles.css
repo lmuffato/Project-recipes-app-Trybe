@@ -1,11 +1,5 @@
 .main-parent {
-  align-content: center;
-  align-items: center;
-  display: flex;
-  flex-flow: column;
-  justify-content: center;
   margin-bottom: 4rem;
-  min-height: 100vw;
 }
 
 .main-parent > div {

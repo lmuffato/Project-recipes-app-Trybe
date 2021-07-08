@@ -4,9 +4,10 @@ import UserContext from '../../context/UserContext';
 import { getRecipeByID } from '../../services/fetchRecipes';
 import Ingredient from '../../Components/Ingredients';
 import Slide from '../../Components/Slide';
-import './styles.css';
 import EndButton from '../../Components/EndButton';
 import Video from '../../Components/Video';
+import Loading from '../../Components/Loading';
+import './styles.css';
 
 import shareIcon from '../../images/shareIcon.svg';
 import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
@@ -41,7 +42,7 @@ function Details() {
 
   return (
     <div className="main-parent">
-      {isLoading ? 'Carregando' : (
+      {isLoading ? <Loading /> : (
         <div>
           <div className="hero">
             <img
