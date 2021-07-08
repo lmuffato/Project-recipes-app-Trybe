@@ -1,7 +1,6 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
-import FavoriteDrinks from '../components/FavoriteDrinks';
-import FavoriteMeals from '../components/FavoriteMeals';
+import FavoriteCards from '../components/FavoriteCards';
 import Header from '../components/Header';
 
 export default function FavoriteRecipes() {
@@ -13,8 +12,7 @@ export default function FavoriteRecipes() {
       <Button data-testid="filter-by-all-btn">All</Button>
       <Button data-testid="filter-by-food-btn">Food</Button>
       <Button data-testid="filter-by-drink-btn">Drinks</Button>
-      <FavoriteDrinks />
-      <FavoriteMeals />
+      <FavoriteCards />
     </div>
   );
 }

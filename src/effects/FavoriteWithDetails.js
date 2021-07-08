@@ -10,16 +10,16 @@ const FavoriteWithDetails = (setAllWithDetails) => {
     const fetchItems = () => {
       let allItems = [];
       allFavorites.forEach(async (item) => {
-        if (item.type === 'comida') {
-          const request = await ApiRecipeDetail(item.id);
-          const { meals } = request;
-          allItems = [...allItems, meals[0]];
+        const request = await ApiDetailsById(item.id);
+        const { drinks } = request;
+        const requestMeal = await ApiRecipeDetail(item.id);
+        const { meals } = requestMeal;
+        if (!meals) {
+          allItems = [...allItems, drinks[0]];
           setAllWithDetails(allItems);
         }
-        if (item.type === 'bebida') {
-          const request = await ApiDetailsById(item.id);
-          const { drinks } = request;
-          allItems = [...allItems, drinks[0]];
+        if (!drinks) {
+          allItems = [...allItems, meals[0]];
           setAllWithDetails(allItems);
         }
       });
