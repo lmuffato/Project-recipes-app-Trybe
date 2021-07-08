@@ -20,15 +20,13 @@ export default function ShareButton({ recipeId, recipeType }) {
   }
 
   return (
-    <div>
-      <button
-        type="button"
-        data-testid="share-btn"
-        onClick={ handleShareClick }
-      >
-        <img src={ shareIcon } alt="compartilhar" />
-      </button>
-    </div>
+    <button
+      type="button"
+      data-testid="share-btn"
+      onClick={ handleShareClick }
+    >
+      <img src={ shareIcon } alt="compartilhar" />
+    </button>
   );
 }
 
