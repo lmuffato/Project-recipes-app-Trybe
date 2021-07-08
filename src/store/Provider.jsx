@@ -12,7 +12,8 @@ import {
   fetchRandomMeal,
   fetchFoodsIngredients,
   fetchDrinksIngredients,
-  // fetchArea,
+  fetchArea,
+  fetchFilterMealArea,
 } from '../services/Data';
 
 function Provider({ children }) {
@@ -37,6 +38,10 @@ function Provider({ children }) {
     cocktails: {},
     meals: {},
   });
+
+  const [mealArea, setMealArea] = useState([]);
+  const [options, setOptions] = useState([]);
+  const [dataOptions, setDataOptions] = useState([]);
 
   useEffect(() => {
     fetchAllCategoriesFoods()
@@ -87,6 +92,23 @@ function Provider({ children }) {
     ));
   }, []);
 
+  useEffect(() => {
+    fetchArea().then((results) => setMealArea([...results.meals]));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    if (options && options !== 'All') {
+      fetchFilterMealArea(options)
+        .then((response) => response.json())
+        .then((result) => setDataOptions(result.meals));
+    } else if (options && options === 'All') {
+      fetchAllFoods()
+        .then((response) => response.json())
+        .then((result) => setDataOptions(result.meals));
+    }
+  }, [options]);
+
   const contextValue = {
     foods: dataMealsAndCategory,
     drinks: dataDrinksAndCategory,
@@ -112,6 +134,10 @@ function Provider({ children }) {
     setIngredientByName,
     inProgressRecipes,
     setInProgressRecipes,
+    mealArea,
+    setMealArea,
+    dataOptions,
+    setOptions,
   };
 
   return (

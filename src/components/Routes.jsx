@@ -17,6 +17,7 @@ import {
   FoodExplore,
   ExploreFoodIngredients,
   RecipesDone,
+  NotFound,
 } from '../Pages';
 
 function Routes() {
@@ -49,6 +50,7 @@ function Routes() {
         path="/explorar/comidas/ingredientes"
         component={ ExploreFoodIngredients }
       />
+      <Route exact path="/explorar/bebidas/area" component={ NotFound } />
       {/* PERFIL */}
       <Route path="/perfil" component={ Profile } />
       <Route exact path="/receitas-favoritas" component={ FavoriteRecipes } />
