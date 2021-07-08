@@ -17,7 +17,9 @@ function ExplorerFoods() {
         <Link to="/explorar/comidas/ingredientes">
           <Button { ...propsButtonExploreByIngredient } />
         </Link>
-        <Button { ...propsButtonExploreByArea } />
+        <Link to="/explorar/comidas/area">
+          <Button { ...propsButtonExploreByArea } />
+        </Link>
         <Button { ...propsButtonExploreSurprise } />
       </div>
       <Footer />
