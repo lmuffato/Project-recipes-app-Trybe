@@ -12,7 +12,7 @@ function InProgressMealCard() {
   const [copyLink, setCopyLink] = useState(false);
   const history = useHistory();
   const shareClick = () => {
-    const URL = history.location.pathname;
+    const URL = history.location.pathname.replace('/in-progress', '');
     copy(`http://localhost:3000${URL}`);
     setCopyLink(true);
   };
@@ -33,7 +33,7 @@ function InProgressMealCard() {
       <h4>Ingredients</h4>
       <IngredientsCheckBox currentMeal={ currentMeal } />
       <h4>Instructions</h4>
-      <span data-testid="instructions">{ currentMeal.strInstructions }</span>
+      <p data-testid="instructions">{ currentMeal.strInstructions }</p>
       <button type="button" data-testid="finish-recipe-btn">Finalizar Receita</button>
     </div>
   );
