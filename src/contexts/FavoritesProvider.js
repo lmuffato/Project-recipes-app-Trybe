@@ -9,6 +9,8 @@ export default function FavoritesProvider({ children }) {
   useEffect(() => {
     if (localStorage.getItem('favoriteRecipes')) {
       setFavorites(JSON.parse(localStorage.getItem('favoriteRecipes')));
+    } else {
+      localStorage.setItem('favoriteRecipes', JSON.stringify([]));
     }
   }, []);
 
