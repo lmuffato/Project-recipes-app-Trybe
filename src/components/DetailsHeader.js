@@ -1,14 +1,12 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import shareIcon from '../images/shareIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import '../style/DetailsHeader.css';
 
 import FavoritesContext from '../contexts/FavoritesContext';
 
-const copy = require('clipboard-copy');
+import ShareButton from './ShareButton';
 
 export default function DetailsHeader({ recipe, isFood }) {
   const recipeId = isFood ? recipe.idMeal : recipe.idDrink;
@@ -32,23 +30,6 @@ export default function DetailsHeader({ recipe, isFood }) {
       if (isFavoriteLS) setIsFavorite(true);
     }
   }, [recipeId]);
-
-  const { pathname } = useLocation();
-
-  function handleShareClick() {
-    const pageType = pathname.split('/')[1];
-    const id = pathname.split('/')[2];
-    copy(`${window.location.origin}/${pageType}/${id}`);
-
-    const copyMsg = document.createElement('p');
-    copyMsg.innerText = 'Link copiado!';
-    copyMsg.className = 'toast';
-    document.getElementsByTagName('body')[0].appendChild(copyMsg);
-    const WAIT_TIME = 4000;
-    setTimeout(() => {
-      copyMsg.remove();
-    }, WAIT_TIME);
-  }
 
   function handleFavoriteClick() {
     let updatedFavorites;
@@ -84,13 +65,7 @@ export default function DetailsHeader({ recipe, isFood }) {
           { recipeName }
         </h1>
         <div className="buttons-container">
-          <button
-            type="button"
-            data-testid="share-btn"
-            onClick={ handleShareClick }
-          >
-            <img src={ shareIcon } alt="compartilhar" />
-          </button>
+          <ShareButton recipeId={ recipeId } recipeType={ recipeType } />
           <button
             type="button"
             onClick={ () => {
