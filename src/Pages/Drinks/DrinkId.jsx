@@ -1,6 +1,8 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { useLocation, Redirect, Link } from 'react-router-dom';
 import { fetchDrinkForId } from '../../services/Data';
+import shareIcon from '../../images/shareIcon.svg';
+import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
 import context from '../../store/Context';
 
 function DrinkId() {
@@ -26,7 +28,8 @@ function DrinkId() {
     strDrinkThumb } = drinkForId;
 
   const setHidden = () => (
-    (JSON.parse(localStorage.getItem('doneRecipes')) || [])
+    localStorage.getItem('doneRecipes')
+    && JSON.parse(localStorage.getItem('doneRecipes'))
       .filter(({ id: localStorageId }) => localStorageId === id)
       .length ? setHiddenValue(true) : setHiddenValue(false)
   );
@@ -70,15 +73,13 @@ function DrinkId() {
         <p data-testid="recipe-category">{strAlcoholic}</p>
         <button
           type="button"
-          data-testid="share-btn"
         >
-          Compartilhar
+          <img data-testid="share-btn" src={ shareIcon } alt="share-icon" />
         </button>
         <button
           type="button"
-          data-testid="favorite-btn"
         >
-          Favorito
+          <img data-testid="favorite-btn" src={ whiteHeartIcon } alt="favorite icon" />
         </button>
       </section>
       <section>

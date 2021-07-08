@@ -6,8 +6,8 @@ import {
   FoodId,
   FoodInProgress,
   DrinkId,
+  DrinkInProgress,
   Drinks,
-  DrinksInProgress,
   Profile,
   FavoriteRecipes,
   Explore,
@@ -32,7 +32,7 @@ function Routes() {
       {/* BEBIDAS */}
       <Route exact path="/bebidas" component={ Drinks } />
       <Route exact path="/bebidas/:id" component={ DrinkId } />
-      <Route exact path="/bebidas/:id/in-progress" component={ DrinksInProgress } />
+      <Route exact path="/bebidas/:id/in-progress" component={ DrinkInProgress } />
       {/* EXPLORAR */}
       <Route exact path="/explorar" component={ Explore } />
       {/* EXPLORAR BEBIDAS */}

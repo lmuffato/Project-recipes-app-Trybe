@@ -1,10 +1,10 @@
 import Login from './Profile/Login';
 import Foods from './Foods/Foods';
 import FoodId from './Foods/FoodId';
-import FoodInProgress from './Foods/FoodInProgress';
+import FoodInProgress from './InProgress/FoodInProgress';
 import DrinkId from './Drinks/DrinkId';
+import DrinkInProgress from './InProgress/DrinkInProgress';
 import Drinks from './Drinks/Drinks';
-import DrinksInProgress from './Drinks/DrinkInProgress';
 import Profile from './Profile/Profile';
 import FavoriteRecipes from './Profile/FavoriteRecipes';
 import Explore from './Explore/Explore';
@@ -22,8 +22,8 @@ export {
   FoodId,
   FoodInProgress,
   DrinkId,
+  DrinkInProgress,
   Drinks,
-  DrinksInProgress,
   Profile,
   FavoriteRecipes,
   Explore,

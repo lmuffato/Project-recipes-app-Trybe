@@ -1,6 +1,8 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { useLocation, Redirect, Link } from 'react-router-dom';
 import { fetchFoodForId } from '../../services/Data';
+import shareIcon from '../../images/shareIcon.svg';
+import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
 import context from '../../store/Context';
 
 function FoodId() {
@@ -71,15 +73,13 @@ function FoodId() {
         <p data-testid="recipe-category">{strCategory}</p>
         <button
           type="button"
-          data-testid="share-btn"
         >
-          Compartilhar
+          <img data-testid="share-btn" src={ shareIcon } alt="share-icon" />
         </button>
         <button
           type="button"
-          data-testid="favorite-btn"
         >
-          Favorito
+          <img data-testid="favorite-btn" src={ whiteHeartIcon } alt="favorite icon" />
         </button>
       </section>
       <section>
