@@ -19,13 +19,14 @@ export default function MealDetails() {
   const [recomendations, setRecomendations] = useState();
   const globalState = useSelector((state) => state.detailsReducer.favorites);
   const history = useHistory();
+  const [startButton, setStartButton] = useState('Iniciar Receita');
 
   useEffect(() => {
     const mealDrinks = async () => {
       const url = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
       const { meals } = await fetch(url).then((r) => r.json());
-      dispatch(actionDetails(meals));
       setData(meals);
+      dispatch(actionDetails(meals));
     };
     const fetchRecomendations = async () => {
       const url = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
@@ -35,6 +36,21 @@ export default function MealDetails() {
     mealDrinks();
     fetchRecomendations();
   }, [dispatch, id]);
+
+  useEffect(() => {
+    if (data) {
+      const lsValue = () => {
+        const ids = Object.keys(
+          (JSON.parse(localStorage.getItem('inProgressRecipes'))).meals,
+        );
+        if (ids.length === 0) setStartButton('Iniciar Receita');
+        if (ids.length > 0) {
+          ids.forEach((e) => e === id && setStartButton('Continuar Receita'));
+        }
+      };
+      lsValue();
+    }
+  }, [id, data]);
 
   const renderRecomendations = (param) => (
     param && (
@@ -100,7 +116,7 @@ export default function MealDetails() {
             data-testid="start-recipe-btn"
             onClick={ () => history.push(`/comidas/${idMeal}/in-progress`) }
           >
-            Iniciar Receita
+            { startButton }
           </button>
         </div>
       );
