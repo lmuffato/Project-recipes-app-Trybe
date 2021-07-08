@@ -66,6 +66,8 @@ function Cards({ param }) {
     return '';
   });
 
+  if (dataDrink === undefined || datafood === undefined) return <h1>Loading...</h1>;
+
   return (
     param === 'bebidas' ? bebidas() : comidas()
   );
