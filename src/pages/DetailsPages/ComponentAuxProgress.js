@@ -11,7 +11,7 @@ import {
 
 function ComponentAuxProgress(recipe) {
   const { recipeFood, recipeDrink } = recipe;
-  // console.log(recipeDrink);
+  console.log(recipeDrink);
   return (
     <div className="container">
       <Image recipe={ recipeFood || recipeDrink } />
@@ -21,7 +21,6 @@ function ComponentAuxProgress(recipe) {
       {recipeDrink ? <Recommends /> : <Recommends drink />}
       <Link to="/receitas-feitas">
         <button
-          disabled
           data-testid="finish-recipe-btn"
           type="button"
           onClick={ () => doneRecipes(recipe) }
