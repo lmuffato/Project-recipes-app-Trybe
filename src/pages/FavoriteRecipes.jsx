@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import FavoriteRecipeCard from '../components/FavoriteRecipeCard/FavoriteRecipeCard';
 import filterRecipesByType from '../utils/filterRecipesByType';
+import Header from '../components/Header/Header';
 
 function FavoriteRecipes() {
   const [favoriteRecipes, setFavoriteRecipes] = useState([]);
@@ -24,6 +25,9 @@ function FavoriteRecipes() {
   if (favoriteRecipes.length === 0) {
     return (
       <div>
+        <Header>
+          <h1 data-testid="page-title">Receitas Favoritas</h1>
+        </Header>
         <h2>Você não possui receitas favoritas!</h2>
       </div>
     );
@@ -31,6 +35,9 @@ function FavoriteRecipes() {
 
   return (
     <div>
+      <Header>
+        <h1 data-testid="page-title">Receitas Favoritas</h1>
+      </Header>
       <h1>Receitas Favoritas</h1>
       { copiedToClipboard && 'Link copiado!' }
       <div>

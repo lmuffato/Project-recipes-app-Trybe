@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import DoneRecipeCard from '../components/DoneRecipeCard/DoneRecipeCard';
 import filterRecipesByType from '../utils/filterRecipesByType';
+import Header from '../components/Header/Header';
 
 function DoneRecipes() {
   const [doneRecipes, setDoneRecipes] = useState([]);
@@ -24,6 +25,9 @@ function DoneRecipes() {
   if (doneRecipes.length === 0) {
     return (
       <div>
+        <Header>
+          <h1 data-testid="page-title">Receitas Feitas</h1>
+        </Header>
         <h2>Você não possui receitas feitas!</h2>
       </div>
     );
@@ -31,7 +35,9 @@ function DoneRecipes() {
 
   return (
     <div>
-      <h1>Receitas Feitas</h1>
+      <Header>
+        <h1 data-testid="page-title">Receitas Feitas</h1>
+      </Header>
       { copiedToClipboard && 'Link copiado!' }
       <div>
         <button
