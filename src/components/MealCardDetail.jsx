@@ -1,28 +1,53 @@
 import React, { useContext, useEffect, useState } from 'react';
 import ReactPlayer from 'react-player';
-// import Slider from 'react-slick';
+import { useHistory } from 'react-router-dom';
+import ButtonStartRecipe from './ButtonStartRecipe';
 import UserContext from '../context/UserContext';
 import shareIcon from '../images/shareIcon.svg';
-import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import IngredientsList from './IngredientsList';
 import RecomendedDrinks from './RecomendedDrinks';
 import SearchContext from '../context/SearchContext';
+import { getItemFromLocalStorage } from '../services/localStorage';
+import { recipeRow } from '../services/recipeRow';
+import FavoriteButton from './FavoriteButton';
+
+const copy = require('clipboard-copy');
 
 function MealCardDetail() {
   const { fullDrinks } = useContext(SearchContext);
   const { currentMeal } = useContext(UserContext);
   const [youtubeId, setYoutubeId] = useState('');
-  // const settings = {
-  //   dots: false,
-  //   infinite: false,
-  //   speed: 500,
-  //   slidesToShow: 1,
-  //   slidesToScroll: 1,
-  // };
+  const [textButton, setTextButton] = useState('Iniciar Receita');
+  const [copyLink, setCopyLink] = useState(false);
+  const donedRecipes = getItemFromLocalStorage('doneRecipes');
+  const history = useHistory();
+
+  let inProgressRecipes;
+  if (getItemFromLocalStorage('inProgressRecipes')) {
+    inProgressRecipes = Object.keys(getItemFromLocalStorage('inProgressRecipes').meals);
+  }
+
   const RECOMMENDED_NUMBER = 6;
   useEffect(() => {
     setYoutubeId(currentMeal.strYoutube);
   }, [currentMeal]);
+
+  useEffect(() => {
+    const obj = {
+      donedRecipes,
+      textButton,
+      inProgressRecipes,
+      setTextButton,
+      currentMeal,
+    };
+    recipeRow(obj);
+  });
+
+  const shareClick = () => {
+    const URL = history.location.pathname.replace('in-progress', '');
+    copy(`http://localhost:3000${URL}`);
+    setCopyLink(true);
+  };
 
   return (
     <div>
@@ -32,12 +57,11 @@ function MealCardDetail() {
         data-testid="recipe-photo"
       />
       <h3 data-testid="recipe-title">{ currentMeal.strMeal }</h3>
-      <button data-testid="share-btn" type="button">
+      <button data-testid="share-btn" type="button" onClick={ shareClick }>
         <img src={ shareIcon } alt="compartilhar" />
       </button>
-      <button data-testid="favorite-btn" type="button">
-        <img src={ whiteHeartIcon } alt="favoritar" />
-      </button>
+      {copyLink ? <span>Link copiado!</span> : null}
+      <FavoriteButton type="comida" />
       <h4 data-testid="recipe-category">{ currentMeal.strCategory }</h4>
       <h4>Ingredients</h4>
       <IngredientsList currentMeal={ currentMeal } />
@@ -63,7 +87,13 @@ function MealCardDetail() {
           ) : (null)
         ))}
       </div>
-      <button data-testid="start-recipe-btn" type="button">Iniciar Receita</button>
+      {textButton !== '' ? (
+        <ButtonStartRecipe
+          buttonText={ textButton }
+          type="comidas"
+          id={ currentMeal.idMeal }
+        />
+      ) : (null)}
     </div>
   );
 }

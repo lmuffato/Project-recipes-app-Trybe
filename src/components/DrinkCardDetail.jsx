@@ -1,16 +1,31 @@
 import React, { useContext, useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import UserContext from '../context/UserContext';
 import shareIcon from '../images/shareIcon.svg';
-import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import FavoriteButton from './FavoriteButton';
 import IngredientsList from './IngredientsList';
 import RecomendedMeals from './RecomendedMeals';
 import { fetchRandonMeal } from '../services/getApis';
 import SearchContext from '../context/SearchContext';
+import { getItemFromLocalStorage } from '../services/localStorage';
+import ButtonStartRecipe from './ButtonStartRecipe';
+import { recipeDrinkRow } from '../services/recipeRow';
+
+const copy = require('clipboard-copy');
 
 function DrinkCardDetail() {
   const { currentDrink } = useContext(UserContext);
   const { fullRecipes } = useContext(SearchContext);
+  const [copyLink, setCopyLink] = useState(false);
   const [recomendedMeals, setRecomendedMeals] = useState([]);
+  const [textButton, setTextButton] = useState('Iniciar Receita');
+  const donedRecipes = getItemFromLocalStorage('doneRecipes');
+  const history = useHistory();
+  let inProgressRecipes;
+  if (getItemFromLocalStorage('inProgressRecipes')) {
+    inProgressRecipes = Object.keys(getItemFromLocalStorage('inProgressRecipes')
+      .cocktails);
+  }
 
   const RECOMMENDED_LENGHT = 6;
   useEffect(() => {
@@ -22,6 +37,23 @@ function DrinkCardDetail() {
     if (recomendedMeals.length < MEALS_NUMBER) getRandonDrink();
   }, [recomendedMeals]);
 
+  useEffect(() => {
+    const obj = {
+      donedRecipes,
+      textButton,
+      inProgressRecipes,
+      setTextButton,
+      currentDrink,
+    };
+    recipeDrinkRow(obj);
+  });
+
+  const shareClick = () => {
+    const URL = history.location.pathname.replace('in-progress', '');
+    copy(`http://localhost:3000${URL}`);
+    setCopyLink(true);
+  };
+
   return (
     <div>
       <img
@@ -30,12 +62,11 @@ function DrinkCardDetail() {
         data-testid="recipe-photo"
       />
       <h3 data-testid="recipe-title">{ currentDrink.strDrink }</h3>
-      <button data-testid="share-btn" type="button">
+      <button data-testid="share-btn" type="button" onClick={ shareClick }>
         <img src={ shareIcon } alt="compartilhar" />
       </button>
-      <button data-testid="favorite-btn" type="button">
-        <img src={ whiteHeartIcon } alt="favoritar" />
-      </button>
+      {copyLink ? <span>Link copiado!</span> : null}
+      <FavoriteButton type="bebida" />
       <h4 data-testid="recipe-category">{ currentDrink.strAlcoholic }</h4>
       <h4>Ingredients</h4>
       <IngredientsList currentMeal={ currentDrink } />
@@ -55,7 +86,13 @@ function DrinkCardDetail() {
           ) : (null)
         ))}
       </div>
-      <button data-testid="start-recipe-btn" type="button">Iniciar Receita</button>
+      {textButton !== '' ? (
+        <ButtonStartRecipe
+          buttonText={ textButton }
+          type="bebidas"
+          id={ currentDrink.idDrink }
+        />
+      ) : (null)}
     </div>
   );
 }

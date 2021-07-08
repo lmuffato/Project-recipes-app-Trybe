@@ -2,13 +2,19 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import UserContext from './UserContext';
 import { fetchMealById, fetchDrinkById } from '../services/getApis';
+import { getItemFromLocalStorage } from '../services/localStorage';
 
 function UserProvider({ children }) {
+  let storage = [];
+  const localStorage = getItemFromLocalStorage('favoriteRecipes');
+  if (localStorage) storage = localStorage;
+
   const [email, setEmail] = useState('');
   const [globalRecipe, setGlobalRecipe] = useState('');
   const [globalId, setGlobalId] = useState('');
   const [currentMeal, setCurrentMeal] = useState({});
   const [currentDrink, setCurrentDrink] = useState({});
+  const [favoriteRecipe, setFavoriteRecipe] = useState(storage);
 
   const getMealById = async (id) => {
     if (id) {
@@ -41,6 +47,8 @@ function UserProvider({ children }) {
         currentMeal,
         getDrinkById,
         currentDrink,
+        favoriteRecipe,
+        setFavoriteRecipe,
       } }
     >
       {children}
