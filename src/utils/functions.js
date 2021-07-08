@@ -30,3 +30,8 @@ export function filterMethodDrinks(text, ingredients, name, firstLetter) {
 export function alertRequestApi() {
   return alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
 }
+
+export function fetchURLIngredients(ingredients, foodOrDrink) {
+  if (foodOrDrink === 'comida') return `https://www.themealdb.com/images/ingredients/${ingredients}-Small.png`;
+  return `https://www.thecocktaildb.com/images/ingredients/${ingredients}-Small.png`;
+}
