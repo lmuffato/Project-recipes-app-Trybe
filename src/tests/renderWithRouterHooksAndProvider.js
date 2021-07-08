@@ -6,7 +6,7 @@ import UserContextProvider from '../context/UserContext';
 import RecipesContextProvider from '../context/RecipesContext';
 import FiltredRecipesContextProvider from '../context/FilteredRecipesContext';
 
-const renderWithRouterHooksAndHooks = (component, route = '/') => {
+const renderWithRouterHooksAndProvider = (component, route = '/') => {
   const history = createMemoryHistory();
   history.push(route);
 
@@ -16,7 +16,7 @@ const renderWithRouterHooksAndHooks = (component, route = '/') => {
         <UserContextProvider>
           <RecipesContextProvider>
             <FiltredRecipesContextProvider>
-              { component}
+              { component }
             </FiltredRecipesContextProvider>
           </RecipesContextProvider>
         </UserContextProvider>
@@ -26,4 +26,4 @@ const renderWithRouterHooksAndHooks = (component, route = '/') => {
   });
 };
 
-export default renderWithRouterHooksAndHooks;
+export default renderWithRouterHooksAndProvider;
