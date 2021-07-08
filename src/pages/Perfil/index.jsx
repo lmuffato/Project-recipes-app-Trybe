@@ -1,13 +1,13 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import md5 from 'md5';
-import useLocalStorage from '../../hooks/useLocalStorage';
 import styles from './styles.module.scss';
 
 function Perfil() {
-  const { user } = useLocalStorage('user');
-
-  const gravatarProfile = `https://www.gravatar.com/avatar/${md5(user.email)}`;
+  const emailReceived = localStorage.getItem('email');
+  const emailConverted = JSON.stringify(emailReceived);
+  const emailUser = emailConverted.replace(/"/g, '');
+  const gravatarProfile = `https://www.gravatar.com/avatar/${md5(emailUser)}`;
 
   const history = useHistory();
   const logout = (event) => {
@@ -27,7 +27,7 @@ function Perfil() {
     <div className={ styles.perfilPage }>
       <div className={ styles.imagemEmail }>
         <img src={ gravatarProfile } alt="Imagem de perfil" />
-        <h3 data-testid="profile-email">{user.email}</h3>
+        <h3 data-testid="profile-email">{ emailReceived }</h3>
       </div>
       <button
         name="Receitas Feitas"
