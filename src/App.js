@@ -1,20 +1,15 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
-import LoginPage from './pages/LoginPage';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Footer from './compenents/Footer';
-import UserProvider from './contexts/UserProvider';
+import SearchbarProvider from './contexts/SeachbarProvider';
+import ProvidersManager from './contexts/ProvidersManager';
 
 function App() {
   return (
     <div className="meals">
-      <UserProvider>
-        <Switch>
-          <Route exact path="/" component={ LoginPage } />
-        </Switch>
-      </UserProvider>
-      <Footer />
+      <SearchbarProvider>
+        <ProvidersManager />
+      </SearchbarProvider>
     </div>
   );
 }
