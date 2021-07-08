@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import shareIcon from '../images/shareIcon.svg';
-// import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import '../styles/ReceitasFavoritas.css';
 
 const copy = require('clipboard-copy');
 
 function ReceitasFavoritasCard({ props: { recipe, index, setFavoriteRecipes } }) {
-  // const [favoriteRecipe, setFavoriteRecipe] = useState(true);
   const [clipboardStatus, setClipboardStatus] = useState();
 
   const { area, alcoholicOrNot, category, id, name, image, type } = recipe;
@@ -66,7 +65,6 @@ function ReceitasFavoritasCard({ props: { recipe, index, setFavoriteRecipes } })
       </div>
     );
   };
-  console.log(recipe, index);
 
   const foodSpecs = () => (
     <span
@@ -87,21 +85,30 @@ function ReceitasFavoritasCard({ props: { recipe, index, setFavoriteRecipes } })
         <button type="button" data-testid="filter-by-food-btn">Food</button>
         <button type="button" data-testid="filter-by-drink-btn">Drinks</button>
       </div>
+
       <main>
-        <img
-          alt="Receita Favoritada"
-          src={ image }
-          className="img-card-favorite"
-          data-testid={ `${index}-horizontal-image` }
-        />
+        <Link to={ type === 'comida' ? `/comidas/${id}` : `/bebidas/${id}` }>
+          <img
+            alt="Receita Favoritada"
+            src={ image }
+            className="img-card-favorite"
+            data-testid={ `${index}-horizontal-image` }
+          />
+        </Link>
+
         <div>
           { type === 'comida'
             ? foodSpecs()
             : drinkSpecs() }
-          <span data-testid={ `${index}-horizontal-name` }>{ name }</span>
+
+          <Link to={ type === 'comida' ? `/comidas/${id}` : `/bebidas/${id}` }>
+            <span data-testid={ `${index}-horizontal-name` }>{ name }</span>
+          </Link>
+
           { createButtons() }
           {!clipboardStatus ? null : (<h5>Link copiado!</h5>)}
         </div>
+
       </main>
     </>
   );
