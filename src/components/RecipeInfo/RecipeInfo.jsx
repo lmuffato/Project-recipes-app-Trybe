@@ -29,6 +29,7 @@ function RecipeInfo(props) {
 
   const handleFavoriteRecipe = (ev) => {
     ev.preventDefault();
+    setIsFavorite((previousState) => !previousState);
     const favoriteRecipesArr = [];
     const recipeObj = {
       id: recipeId,
@@ -50,7 +51,6 @@ function RecipeInfo(props) {
       const newFavoriteRecipes = [...favoriteRecipesArr, recipeObj];
       localStorage.setItem('favoriteRecipes', JSON.stringify(newFavoriteRecipes));
     }
-    setIsFavorite((previousState) => !previousState);
   };
 
   return (
