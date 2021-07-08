@@ -18,6 +18,12 @@ class MainFoodCard extends React.Component {
   }
 
   componentDidMount() {
+    // const { history: { location: { pathname } } } = this.props;
+    // if (pathname !== '/comidas') {
+    //   this.FilterCategoryFood();
+    //   this.loadingFoodCategories();
+    // }
+
     this.FilterCategoryFood();
     this.loadingFoodCategories();
   }
@@ -38,7 +44,7 @@ class MainFoodCard extends React.Component {
     }
   }
 
-  async FilterCategoryFood() {
+  async FilterCategoryFood() { // render principal-inicial dos cards
     const URL = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
     const limitNumber = 12;
     fetch(URL)
@@ -52,7 +58,7 @@ class MainFoodCard extends React.Component {
       });
   }
 
-  loadingFoodCategories() {
+  loadingFoodCategories() { // render categories buttons
     const URL = 'https://www.themealdb.com/api/json/v1/1/list.php?c=list';
     const limitNumber = 5;
     fetch(URL)
@@ -66,7 +72,7 @@ class MainFoodCard extends React.Component {
       });
   }
 
-  FilterCategoryFoods(props) {
+  FilterCategoryFoods(props) { // render dos cards de acordo com click category
     const URL = `https://www.themealdb.com/api/json/v1/1/filter.php?c=${props}`;
     const limitNumber = 12;
     fetch(URL)
@@ -133,3 +139,19 @@ MainFoodCard.propTypes = {
 };
 
 export default MainFoodCard;
+
+// o clique de pesquisar(ou no card ingredientes) dispara a action pro global com  dizendo "tem uma pesquisa corrente"
+// setta no global o resultado do fetch de pesquisa
+
+// REFACTOR MAIN PAGE
+// componente mainfoodcard lê essa chave do state global no didmount
+// e condiciona sua renderização natural (12 cards random) ou (se houver pesquisa corrente) prioriza pesquisa do global
+// no didmount da main page - action para limpar o global de pesquisa corrente
+
+// -- COMPONENTE SEARCH BUTTON
+// resolver bugzinho renderização dos inputs - verificar updates Will -
+// refactor onde precisa no componente search bar pra receber a logica de disptach da pesquisa
+// verificar lógica do length = 1 redirect p/ detalhes
+
+// settar o reducer/actions - DONE
+// settar o disparo action nas pag explorar ingredientes - DONE
