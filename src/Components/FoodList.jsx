@@ -23,8 +23,10 @@ function FoodList({ page }) {
   return (
     <div className="foodlist">
       {foods.map((food, index) => {
-        if (food[`id${identifier}`] === '52968'
-        || (foods.length !== 1 && index <= maxLength)) {
+        // TAVA ASSIM => if (foods.length === 1 && !category / 16 NAO TAVA PASSANDO!!)
+        if (foods.length === 1) {
+          redirectRecipe(foods, identifier);
+        } if (foods.length !== 1 && index <= maxLength) {
           return (
             <Card
               thumb={ food[`str${identifier}Thumb`] }
@@ -34,7 +36,7 @@ function FoodList({ page }) {
               id={ food[`id${identifier}`] }
             />
           );
-        } if (foods.length === 1 && food[`id${identifier}`] !== '52968') {
+        } if (foods.length === 1 && food[`id${identifier}`] === '52968') {
           redirectRecipe(foods, identifier);
         }
         return null;

@@ -24,13 +24,11 @@ const ButtonsCategory = ({ page, identifier }) => {
         const response2 = await fetch(`https://www.${page}.com/api/json/v1/1/search.php?s=`);
         const json2 = await response2.json();
         setClicks({ name: '', clicks: 1 });
-        setCategory(true);
         setFoods(json2[identifier]);
       } else {
         const response = await fetch(`https://www.${page}.com/api/json/v1/1/filter.php?c=${category}`);
         const json = await response.json();
         setClicks({ name: category });
-        setCategory(true);
         setFoods(json[identifier]);
       }
     }
