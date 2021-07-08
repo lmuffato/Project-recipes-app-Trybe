@@ -38,6 +38,7 @@ function ReceitasFavoritas() {
           </span>
 
           <img
+            className="image"
             src={ image }
             alt="comida"
             data-testid={ `${index}-horizontal-image` }
@@ -86,7 +87,12 @@ function ReceitasFavoritas() {
 
         { mimeButton ? <span>Link copiado!</span> : null }
 
-        <img src={ image } alt="bebida" data-testid={ `${index}-horizontal-image` } />
+        <img
+          className="image"
+          src={ image }
+          alt="bebida"
+          data-testid={ `${index}-horizontal-image` }
+        />
 
         <span data-testid={ `${index}-horizontal-top-text` }>
           { alcoholicOrNot }
@@ -108,6 +114,17 @@ function ReceitasFavoritas() {
     );
   };
 
+  const renderFilteredItems = (foodType) => {
+    const dataItems = favData || JSON.parse(localStorage.getItem('favoriteRecipes'));
+    return dataItems
+      .filter((item) => item.type === foodType)
+      .map(
+        ({ id, image, type, name, category, area, alcoholicOrNot }, index) => (
+          isFood({ id, image, type, name, category, area, alcoholicOrNot }, index)
+        ),
+      );
+  };
+
   useEffect(() => {
     renderFavData();
   });
@@ -116,12 +133,32 @@ function ReceitasFavoritas() {
     <div className="favorite_recipes">
       <Header title="Receitas Favoritas" />
       <div className="buttons">
-        <button type="button" data-testid="filter-by-all-btn">All</button>
-        <button type="button" data-testid="filter-by-food-btn">Food</button>
-        <button type="button" data-testid="filter-by-drink-btn">Drinks</button>
+        <button
+          type="button"
+          data-testid="filter-by-all-btn"
+        >
+          All
+
+        </button>
+        <button
+          type="button"
+          data-testid="filter-by-food-btn"
+          onClick={ renderFilteredItems('comida') }
+        >
+          Food
+
+        </button>
+        <button
+          type="button"
+          data-testid="filter-by-drink-btn"
+          onClick={ renderFilteredItems('bebida') }
+        >
+          Drinks
+
+        </button>
       </div>
 
-      {renderFavData()}
+      {renderFavData() || renderFilteredItems}
     </div>
   );
 }
