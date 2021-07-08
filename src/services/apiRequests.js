@@ -102,21 +102,3 @@ export const drinkById = async (id) => {
   const { drinks } = ApiData;
   return drinks[0];
 };
-
-export const getDrinksRecomends = async () => {
-  const rawApiData = await fetch(
-    `https://www.thecocktaildb.com/api/json/v1/1/random.php`,
-  );
-  const ApiData = await rawApiData.json();
-  const { drinks } = ApiData;
-  return drinks;
-};
-
-export const getFoodsRecomends = async () => {
-  const rawApiData = await fetch(
-    'https://www.themealdb.com/api/json/v1/1/random.php',
-  );
-  const ApiData = await rawApiData.json();
-  const { meals } = ApiData;
-  return meals;
-};

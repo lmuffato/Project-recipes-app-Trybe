@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import { drinkById } from '../services/apiRequests';
-// import FoodsRecomends from './componentsDetails/FoodsRecomends';
+import FoodsRecomends from './componentsDetails/FoodsRecomends';
 
 export default function RecipeCardDetailDrink() {
   const [drinkDetails, setDrinkDetails] = useState({});
@@ -55,8 +55,9 @@ export default function RecipeCardDetailDrink() {
           </li>
         ))}
       </ul>
-      <h3 data-testid="instructions">{ drinkDetails.strInstructions }</h3>
-      {/* <FoodsRecomends /> */}
+      <h4>Instructions: </h4>
+      <h2 data-testid="instructions">{ drinkDetails.strInstructions }</h2>
+      <FoodsRecomends />
       <button type="button" data-testid="start-recipe-btn">
         PlayReceita (FALTAAQUI ONCLICK PARA MUDAR DE TELA!!!)
       </button>

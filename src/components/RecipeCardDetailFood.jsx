@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import { foodById } from '../services/apiRequests';
-// import DrinksRecomends from './componentsDetails/DrinksRecomends';
+import DrinksRecomends from './componentsDetails/DrinksRecomends';
 
 export default function RecipeCardDetailFood() {
   const [foodDetails, setFoodDetails] = useState({});
@@ -56,12 +56,13 @@ export default function RecipeCardDetailFood() {
           </li>
         ))}
       </ul>
-      <h3 data-testid="instructions">{ foodDetails.strInstructions }</h3>
+      <h4>Instructions: </h4>
+      <h2 data-testid="instructions">{ foodDetails.strInstructions }</h2>
       <ReactPlayer
         data-testid="video"
         url={ foodDetails.strYoutube }
       />
-      {/* <DrinksRecomends /> */}
+      <DrinksRecomends />
       <button type="button" data-testid="start-recipe-btn">
         PlayReceita (FALTAAQUI ONCLICK PARA MUDAR DE TELA!!!)
       </button>
