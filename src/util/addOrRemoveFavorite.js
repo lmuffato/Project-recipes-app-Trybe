@@ -39,7 +39,7 @@ export default function RenderFavoriteHeart(type, recipe, dispatch, globalState 
   const recipeId = type === 'comida' ? recipe.idMeal : recipe.idDrink;
   const storage = globalState;
   let check = '';
-  if (storage) {
+  if (storage.length > 0) {
     check = storage.filter((st) => st.id.includes(recipeId));
   }
   if (check.length > 0) {
