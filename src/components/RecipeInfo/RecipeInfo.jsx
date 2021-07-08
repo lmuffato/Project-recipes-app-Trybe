@@ -7,8 +7,8 @@ import Button from '../Generics/Button';
 function RecipeInfo(props) {
   const { recipeName, recipeThumb, children, type, recipe } = props;
   const [copyToClipboard, setCopyToClipboard] = useState(false);
-  const detailsUrl = type === 'comida' ? `/comidas/${recipe.id}`
-    : `/bebidas/${recipe.id}`;
+  const detailsUrl = type === 'comida' ? `/comidas/${recipe.idMeal}`
+    : `/bebidas/${recipe.idDrink}`;
 
   function handleCopyToClipboard(ev) {
     // Lógica de copiar para o clipboard pesquisada no StackOverflow
@@ -34,11 +34,13 @@ function RecipeInfo(props) {
               data-testid="share-btn"
             />
           </Button>
-          <img
-            src={ favoriteIconImg }
-            alt="ícone de favoritar"
-            data-testid="favorite-btn"
-          />
+          <Button className="icon-btn">
+            <img
+              src={ favoriteIconImg }
+              alt="ícone de favoritar"
+              data-testid="favorite-btn"
+            />
+          </Button>
         </div>
       </div>
       <div>{ children }</div>
