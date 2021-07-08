@@ -1,9 +1,12 @@
 import { object } from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import '../App.css';
 
 function EmProgresso({ props }) {
   const [data, setData] = useState({});
+  const [instructArray, setInstructArray] = useState([]);
+
   const magicNumber = 0;
 
   const fetchData = () => {
@@ -14,14 +17,72 @@ function EmProgresso({ props }) {
     fetchData();
   }, [props]);
 
+  const verifyLocalStorage = () => {
+    const progressRecipes = JSON.parse(localStorage
+      .getItem('inProgressRecipes'));
+
+    if (progressRecipes !== null) {
+      const { cocktails, meals } = progressRecipes;
+      // console.log(target);
+      console.log(cocktails);
+    }
+  };
+
+  useEffect(() => {
+    // verifyLocalStorage();
+  }, []);
+
   if (!data) return <h1>Loading...</h1>;
 
   const ingredients = Object.entries(data)
     .filter((item) => item[0].includes('Ingredient'))
     .filter((element) => element[1] !== '' && element[1] !== null);
 
-  const isCheckedBool = ({ currentTarget }) => {
-    console.log(currentTarget);
+  const localSTSettings = (target) => {
+    // console.log(ingredients[target.id]);
+    // console.log(searchItem.idDrink);
+    const progressRecipes = JSON.parse(localStorage
+      .getItem('inProgressRecipes'));
+    // console.log(progressRecipes);
+    const foodsOrCocktails = Object.keys(data)
+      .find((item) => item === 'idDrink' || item === 'idMeal');
+
+    // const teste = ingredients.filter((item) => item === ingredients[target.id]);
+    // console.log(teste);
+
+    setInstructArray([...instructArray, ingredients[target.id][1]]);
+    console.log(instructArray);
+    if (foodsOrCocktails === 'idMeal') {
+      localStorage
+        .setItem(
+          'inProgressRecipes', JSON
+            .stringify({
+              meals: {
+                [data.idMeal]: [...instructArray, ingredients[target.id][1]],
+              } }),
+        );
+    } else {
+      localStorage
+        .setItem(
+          'inProgressRecipes', JSON
+            .stringify({
+              cocktails: {
+                [data.idDrink]: [...instructArray, ...ingredients[target.id][1]],
+              } }),
+        );
+    }
+  };
+
+  const isCheckedBool = ({ target }) => {
+    if (target.nextSibling.className === '') {
+      target.nextSibling.className = 'isCheckedCss';
+      const isChecked = target.nextSibling.className;
+      localSTSettings(target);
+      return isChecked;
+    }
+    target.nextSibling.className = '';
+    const notChecked = target.nextSibling.className;
+    return notChecked;
   };
 
   return (
@@ -48,6 +109,7 @@ function EmProgresso({ props }) {
           <div
             key={ index }
             className="d-flex align-items-baseline"
+            data-testid={ `${index}-ingredient-step` }
           >
             <input
               className="mr-2"
@@ -56,7 +118,6 @@ function EmProgresso({ props }) {
               onClick={ isCheckedBool }
             />
             <label
-              data-testid={ `${index}-ingredient-step` }
               htmlFor={ index }
             >
               {`Ingrediente ${index}: ${ingredient[1]}`}

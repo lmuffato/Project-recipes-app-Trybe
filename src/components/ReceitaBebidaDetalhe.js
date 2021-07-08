@@ -97,7 +97,6 @@ function ReceitaBebidaDetalhe({ props }) {
 
           <ul>
             { ingredients.map((ingredient, index) => {
-              console.log(ingredients);
               if (ingredient !== null
                 && ingredient !== ' '
                 && ingredient !== '  '
