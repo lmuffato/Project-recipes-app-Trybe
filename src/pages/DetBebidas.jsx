@@ -9,10 +9,12 @@ class DetBebidas extends React.Component {
     this.state = {
       drinks: [],
       ingredientes: [],
+      recommended: [],
       measures: [],
     };
     this.fetchDrinksById = this.fetchDrinksById.bind(this);
     this.handleIngredients = this.handleIngredients.bind(this);
+    this.fetchRecommendedFoods = this.fetchRecommendedFoods.bind(this);
   }
 
   async componentDidMount() {
@@ -20,7 +22,8 @@ class DetBebidas extends React.Component {
     const { location: { pathname } } = history;
     const id = pathname.split('/').pop();
     const drinks = await this.fetchDrinksById(id);
-    this.setNewState(drinks);
+    const recommended = await this.fetchRecommendedFoods();
+    this.setNewState(drinks, recommended);
     this.handleIngredients();
   }
 
@@ -53,20 +56,31 @@ class DetBebidas extends React.Component {
     });
   }
 
-  setNewState(drinks) {
+  setNewState(drinks, recommended) {
     this.setState({
       drinks,
+      recommended,
     });
   }
 
-  fetchDrinksById(endPoint) {
-    const drinks = fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${endPoint}`)
+  fetchDrinksById(id) {
+    const drinks = fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`)
       .then((response) => response.json());
     return drinks;
   }
 
+  fetchRecommendedFoods() {
+    const min = 0;
+    const max = 6;
+    const recommended = fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=')
+      .then((response) => response.json())
+      .then((response) => response.meals.slice(min, max));
+    return recommended;
+  }
+
   render() {
-    const { drinks, ingredientes, measures } = this.state;
+    const history = this.props;
+    const { drinks, ingredientes, measures, recommended } = this.state;
     const drink = Object.values(drinks);
     return (
       drink.map((recipe) => (
@@ -75,7 +89,7 @@ class DetBebidas extends React.Component {
             data-testid="recipe-photo"
             alt="imagem da receita"
             src={ recipe[0].strDrinkThumb }
-            width="290px"
+            width="300px"
           />
           <h1 data-testid="recipe-title">{ recipe[0].strDrink }</h1>
           <p data-testid="recipe-category">{ recipe[0].strCategory }</p>
@@ -118,6 +132,19 @@ class DetBebidas extends React.Component {
           <p>
             {recipe[0].strInstructions}
           </p>
+          <h2>Comidas Recomendadas</h2>
+          {recommended.map((food, index) => (
+            <div key={ food } data-testid={ `${index}-recomendation-card` }>
+              <input
+                width="350"
+                type="image"
+                src={ food.strMealThumb }
+                data-testid="recipe-photo"
+                alt="recipe-img"
+                onClick={ () => history.push(`/comidas/${food.idMeal}`) }
+              />
+            </div>
+          ))}
           <button
             type="button"
             data-testid="start-recipe-btn"

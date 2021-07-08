@@ -42,9 +42,7 @@ class DetComidas extends React.Component {
       for (let index = 1; index <= ingredientLimit; index += 1) {
         ingrediente = `strIngredient${index}`;
         measure = `strMeasure${index}`;
-        // console.log(recipe[ingrediente]);
         ingredientes.push(recipe[ingrediente]);
-        // console.log(recipe[measure])
         measures.push(recipe[measure]);
         if (ingredientes[ingredientes.length - 1] === '') {
           ingredientes.pop();
@@ -90,6 +88,7 @@ class DetComidas extends React.Component {
     const { history } = this.props;
     const { foods, measures, ingredientes, video, recommended } = this.state;
     const food = Object.values(foods);
+    console.log(recommended);
     return (
       food.map((recipe) => (
         <div key="recipe">
@@ -97,7 +96,7 @@ class DetComidas extends React.Component {
             data-testid="recipe-photo"
             alt="imagem da receita"
             src={ recipe[0].strMealThumb }
-            width="290px"
+            width="300px"
           />
           <h1 data-testid="recipe-title">{ recipe[0].strFood }</h1>
           <p data-testid="recipe-category">{ recipe[0].strCategory }</p>
