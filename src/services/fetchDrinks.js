@@ -34,3 +34,9 @@ export async function fetchSpecificDrink(id) {
   const { drinks } = await (await fetch(endpoint)).json();
   return drinks;
 }
+
+export async function fetchDrinksByIngredient(ingredient) {
+  const endpoint = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${ingredient}`;
+  const { drinks } = await (await fetch(endpoint)).json();
+  return drinks;
+}

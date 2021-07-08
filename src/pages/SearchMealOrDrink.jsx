@@ -26,7 +26,7 @@ function SearchMealOrDrink() {
       }
     };
     fetchId();
-  });
+  }, []); // eslint-disable-line
 
   return (
     <>

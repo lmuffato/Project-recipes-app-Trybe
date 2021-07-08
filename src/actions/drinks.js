@@ -1,5 +1,6 @@
 import fetchDrinks,
-{ fetchMealSearched, fetchSpecificDrink } from '../services/fetchDrinks';
+{ fetchDrinksByIngredient,
+  fetchMealSearched, fetchSpecificDrink } from '../services/fetchDrinks';
 import { fetchDrinksCategories } from '../services/fetchCategories';
 
 export const API_DRINK_FETCH = 'API_DRINK_FETCH';
@@ -7,6 +8,7 @@ export const STORE_DRINKS = 'STORE_DRINKS';
 export const STORE_CATEGORIES = 'STORE_CATEGORIES';
 export const SET_DRINKS_FILTER = 'SET_DRINKS_FILTER';
 export const SPECIFIC_DRINK = 'SPECIFIC_DRINK';
+export const SET_DRINK_INGREDIENT = 'SET_DRINK_INGREDIENT';
 
 export const apiFetch = () => ({ type: API_DRINK_FETCH });
 
@@ -17,6 +19,8 @@ export const storeDrinks = (payload) => ({ type: STORE_DRINKS, payload });
 export const setDrinksFilter = (payload) => ({ type: SET_DRINKS_FILTER, payload });
 
 export const storeSpecificDrink = (payload) => ({ type: SPECIFIC_DRINK, payload });
+
+export const setDrinkIngredient = (payload) => ({ type: SET_DRINK_INGREDIENT, payload });
 
 export function getDrinksCategories() {
   return async (dispatch) => {
@@ -47,5 +51,13 @@ export function getSpecificDrink(id) {
     dispatch(apiFetch());
     const drink = await fetchSpecificDrink(id);
     dispatch(storeSpecificDrink(drink));
+  };
+}
+
+export function getDrinksByIgredient(filter) {
+  return async (dispatch) => {
+    dispatch(apiFetch());
+    const drinks = await fetchDrinksByIngredient(filter);
+    dispatch(storeDrinks(drinks));
   };
 }

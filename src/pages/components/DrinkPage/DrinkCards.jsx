@@ -1,31 +1,38 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { arrayOf, func, object } from 'prop-types';
-import { connect } from 'react-redux';
-import { getDrinks } from '../../../actions/drinks';
+import { useSelector, useDispatch } from 'react-redux';
+import { getDrinks, getDrinksByIgredient } from '../../../actions/drinks';
 
-function DrinkCards(props) {
-  const { fetchDrinks, drinks, filter } = props;
+function DrinkCards() {
   const size = 12;
+  const search = useSelector((state) => state.drinks.search);
+  const loading = useSelector((state) => state.drinks.loading);
+  const ingredient = useSelector((state) => state.drinks.ingredient);
+  const drinks = useSelector((state) => state.drinks.drinks);
+  const filter = useSelector((state) => state.drinks.ingredient);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    fetchDrinks(filter);
-  }, [fetchDrinks, filter]);
+    if (!search) dispatch(getDrinks(filter));
+    else dispatch(getDrinksByIgredient(ingredient));
+  }, []); // eslint-disable-line
 
   return (
     <div>
-      { drinks.slice(0, size).map(({ idDrink, strDrink, strDrinkThumb }, index) => (
-        <div key={ strDrink } data-testid={ `${index}-recipe-card` }>
-          <Link to={ `/bebidas/${idDrink}` }>
-            <h2 data-testid={ `${index}-card-name` }>{strDrink}</h2>
-            <img
-              src={ strDrinkThumb }
-              alt={ strDrink }
-              data-testid={ `${index}-card-img` }
-            />
-          </Link>
-        </div>
-      )) }
+      { loading ? null
+        : drinks.slice(0, size).map(({ idDrink, strDrink, strDrinkThumb }, index) => (
+          <div key={ strDrink } data-testid={ `${index}-recipe-card` }>
+            <Link to={ `/bebidas/${idDrink}` }>
+              <h2 data-testid={ `${index}-card-name` }>{strDrink}</h2>
+              <img
+                src={ strDrinkThumb }
+                alt={ strDrink }
+                data-testid={ `${index}-card-img` }
+              />
+            </Link>
+          </div>
+        )) }
     </div>
   );
 }
@@ -35,13 +42,4 @@ DrinkCards.propTypes = {
   fetchMeals: func,
 }.isRequired;
 
-const mapStateToProps = (state) => ({
-  drinks: state.drinks.drinks,
-  filter: state.drinks.filter,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  fetchDrinks: (filter) => dispatch(getDrinks(filter)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(DrinkCards);
+export default DrinkCards;
