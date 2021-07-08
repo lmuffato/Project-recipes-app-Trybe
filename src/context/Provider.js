@@ -4,17 +4,11 @@ import { fetchApiDrinks, fetchApiFoods, fetchCategoryFoods, fetchCategoryDrinks,
   fetchFilterFoods, fetchFilterDrinks, fetchRecipeFood, fetchRecipeDrink,
   fetchFoodsRecommended, fetchDrinksRecommended } from '../services/fetchApi';
 import Context from './Context';
-
-// import { fetchApiDrinks } from '../services/fetchApi';
-
 import { checkExist }
   from '../pages/DetailsPages/components/buttons/ButtonMakeRecipeDrink';
-
 import setProgressRecipesLS from '../services/localStorage/setProgressRecipesLS';
-import Mock from '../services/mokcInformation';
 
 function Provider({ children }) {
-  // useStates...
   const [logout, setLogout] = useState(false);
   const [foods, setFoods] = useState([]);
   const [drinks, setDrinks] = useState([]);
@@ -36,10 +30,15 @@ function Provider({ children }) {
   const [searchInput, setSearchInput] = useState('');
   const [path, setPath] = useState('');
   const [doneRecipes, setDoneRecipes] = useState([]);
+  const [informationDone, setInfoDone] = useState([]);
   const [doneFilterRecipes, setDoneFilter] = useState([]);
+  const [favRecipes, setFavRecipes] = useState([]);
+  const [favFilterRecipes, setFavFilter] = useState([]);
+  const [informationFavarite, setInfoFav] = useState([]);
 
   function getInFormations() {
-    // const informationLocalStorage = JSON.parse(localStorage.getItem('doneRecipes'))
+    const infoDone = JSON.parse(localStorage.getItem('doneRecipes'));
+    const infoFavorite = JSON.parse(localStorage.getItem('favoriteRecipes'));
     const fetchApis = async () => {
       const dataFoods = await fetchApiFoods();
       const dataDrinks = await fetchApiDrinks();
@@ -51,9 +50,15 @@ function Provider({ children }) {
       setDrinks(dataDrinks);
     };
     fetchApis();
-    setDoneRecipes(Mock);
+    if (infoFavorite !== true) {
+      setFavRecipes(infoFavorite);
+      setInfoFav(infoFavorite);
+    }
+    if (infoDone !== true) {
+      setDoneRecipes(infoDone);
+      setInfoDone(infoDone);
+    }
   }
-
   const clickFilterFood = (e) => {
     setCategory(e.target.innerText);
     if (e.target.innerText !== 'All') {
@@ -123,8 +128,6 @@ function Provider({ children }) {
   }
 
   function clickSetProgress(progress, id, type, recipe) {
-    console.log(id);
-    // verificar se o id já está em progresso... (progressRecipes => useState)
     if (progress === 'in') { //
       checkExist(id, progressRecipes);
       setProgressRecipes([...progressRecipes, { id, progress, type }]);
@@ -132,7 +135,6 @@ function Provider({ children }) {
     }
     if (progress === 'done') {
       setProgressRecipes({ id, progress, type });
-      // copia tudo que há no progressRecipe, mas altera o obj q tem recebe o id. (maybe)
     }
   }
 
@@ -151,10 +153,9 @@ function Provider({ children }) {
     if (localStorage.getItem('favoriteRecipes')) return null;
     localStorage.setItem('favoriteRecipes', JSON.stringify([]));
   }
-  // ComponentDidMount
+
   useEffect(() => {
     getInFormations();
-    // getFoods();
     foodsRecommendedF();
     drinksRecommendedF();
     initProgressInLS();
@@ -162,70 +163,55 @@ function Provider({ children }) {
     initFavRecipesInLS();
   }, []);
 
-  const doneFilter = (e) => {
-    const { innerText } = e.target;
-    setDoneFilter([]);
-    if (innerText === 'All') {
-      setShowFilter(false);
-      setDoneRecipes(Mock);
-      setDoneFilter([]);
-    }
-    if (innerText === 'Food') {
-      setShowFilter(true);
-      const newRecipes = doneRecipes
-        .filter((recipe) => (recipe.type === 'comida') && recipe);
-      setDoneFilter(newRecipes);
-    }
-    if (innerText === 'Drinks') {
-      setShowFilter(true);
-      const newRecipes = doneRecipes
-        .filter((recipe) => (recipe.type === 'bebida') && recipe);
-      setDoneFilter(newRecipes);
-    }
-  };
-    // ComponentDidMount
-  // useEffect(getInFormations, []);
-
   const dataValue = {
     logout,
-    setLogout,
     foods,
     drinks,
     categoryFoods,
     categoryDrinks,
     filterFoods,
     filterDrinks,
+    showFilter,
+    email,
+    password,
+    search,
+    recipeFood,
+    recipeDrink,
+    foodRecommended,
+    drinkRecommended,
+    progressRecipes,
+    searchInput,
+    radio,
+    path,
+    doneRecipes,
+    favRecipes,
+    favFilterRecipes,
+    doneFilterRecipes,
+    informationDone,
+    informationFavarite,
+    setFavRecipes,
+    setFavFilter,
+    setDoneFilter,
+    setInfoDone,
+    setDoneRecipes,
+    setEmail,
+    setLogout,
     clickFilterFood,
     clickFilterDrinks,
     clickRecipeFood,
     clickRecipeDrinks,
-    showFilter,
-    email,
-    setEmail,
-    password,
     setPassword,
-    search,
     setSearch,
-    recipeFood,
-    recipeDrink,
     setRecipeFood,
-    foodRecommended,
-    drinkRecommended,
-    progressRecipes,
     setProgressRecipes,
     clickSetProgress,
-    searchInput,
     setSearchInput,
-    radio,
     setRadio,
-    path,
     setPath,
-    doneRecipes,
-    doneFilter,
-    doneFilterRecipes,
     setShowFilter,
     setFilterDrinks,
     setFilterFoods,
+    setInfoFav,
   };
 
   return (

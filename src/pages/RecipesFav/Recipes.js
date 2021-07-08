@@ -1,9 +1,10 @@
-// Receitas doneRecipes
+// Receitas favoriteRecipes
 import React, { useContext, useState } from 'react';
 import { Button, Card } from 'react-bootstrap';
 import './index.css';
 import { Link } from 'react-router-dom';
 import Share from '../../images/shareIcon.svg';
+import Favorite from '../../images/blackHeartIcon.svg';
 import Context from '../../context/Context';
 
 const copy = require('clipboard-copy');
@@ -11,12 +12,16 @@ const copy = require('clipboard-copy');
 function Recipes() {
   const [showCopyFood, setShopFood] = useState(false);
   const [showCopyDrinks, setShopDrinks] = useState(false);
-  const { doneRecipes: noFilter, doneFilterRecipes, showFilter } = useContext(Context);
-  let doneRecipes = noFilter;
+  const {
+    favRecipes: noFilter,
+    favFilterRecipes,
+    showFilter,
+    setFavRecipes } = useContext(Context);
+  let favoriteRecipes = noFilter;
   if (!showFilter) {
-    doneRecipes = noFilter;
+    favoriteRecipes = noFilter;
   } else {
-    doneRecipes = doneFilterRecipes;
+    favoriteRecipes = favFilterRecipes;
   }
   const copyLinkFood = (id) => {
     setShopFood(true);
@@ -33,17 +38,14 @@ function Recipes() {
     show();
   };
 
-  const changeTags = (t, index) => {
-    const tags = t.slice(0, 2);
-    if (!Array.isArray(tags)) return null;
-    return tags.map((tagName) => (
-      <Card.Text
-        data-testid={ `${index}-${tagName}-horizontal-tag` }
-        key={ tagName }
-      >
-        { tagName}
-      </Card.Text>));
+  const desfavoiteRecipe = (id) => {
+    // console.log(id);
+    const newRecipes = noFilter.filter((recipe) => (recipe.id !== id) && recipe);
+    console.log(newRecipes);
+    setFavRecipes(newRecipes);
+    localStorage.setItem('favoriteRecipes', JSON.stringify(newRecipes));
   };
+
   const handleFood = (recipe, index) => (
     <Card style={ { width: '22rem' } } bsPrefix="card-img" key={ index }>
       <Link key={ index } to={ `comidas/${recipe.id}` }>
@@ -67,6 +69,17 @@ function Recipes() {
                 src={ Share }
               />
             </Button>)}
+        <Button
+          variant="primary"
+          data-testid={ `${index}-horizontal-favorite-btn` }
+          src={ Favorite }
+          onClick={ () => desfavoiteRecipe(recipe.id) }
+        >
+          <Card.Img
+            variant="top"
+            src={ Favorite }
+          />
+        </Button>
         <Card.Text data-testid={ `${index}-horizontal-top-text` }>
           {` ${recipe.area} - ${recipe.category} `}
         </Card.Text>
@@ -77,12 +90,6 @@ function Recipes() {
             {recipe.name}
           </Card.Title>
         </Link>
-        <Card.Text data-testid={ `${index}-horizontal-done-date` }>
-          {`Feita em : ${recipe.doneDate}`}
-        </Card.Text>
-        <span>
-          {changeTags(recipe.tags, index)}
-        </span>
       </Card.Body>
     </Card>
   );
@@ -109,6 +116,17 @@ function Recipes() {
                 src={ Share }
               />
             </Button>)}
+        <Button
+          variant="primary"
+          data-testid={ `${index}-horizontal-favorite-btn` }
+          src={ Favorite }
+          onClick={ () => desfavoiteRecipe(recipe.id) }
+        >
+          <Card.Img
+            variant="top"
+            src={ Favorite }
+          />
+        </Button>
         <Card.Text data-testid={ `${index}-horizontal-top-text` }>
           {`${recipe.alcoholicOrNot}`}
         </Card.Text>
@@ -119,18 +137,12 @@ function Recipes() {
             {recipe.name}
           </Card.Title>
         </Link>
-        <Card.Text data-testid={ `${index}-horizontal-done-date` }>
-          {`Feita em: ${recipe.doneDate}`}
-        </Card.Text>
-        <span>
-          {changeTags(recipe.tags, index)}
-        </span>
       </Card.Body>
     </Card>
   );
   return (
     <div>
-      {(doneRecipes) && doneRecipes.map((recipe, index) => (
+      { (favoriteRecipes) && favoriteRecipes.map((recipe, index) => (
         recipe.type === 'comida' ? handleFood(recipe, index) : handleDrink(recipe, index)
       ))}
     </div>

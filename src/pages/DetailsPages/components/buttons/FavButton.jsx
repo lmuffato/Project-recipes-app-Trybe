@@ -17,6 +17,9 @@ function FavButton({ props }) {
     name: strDrink || strMeal,
     image: strDrinkThumb || strMealThumb,
   };
+  const handleClick = () => {
+    setFavRecipe(objectToLS);
+  };
   useEffect(() => { // componentDidMount, td vez q o component for montaod, vai verificar a existencia do id no LS
     if (verifyInLS(idMeal || idDrink)) { // se existir o id no LS, ALTERAR coracao pra preto.
       document.getElementById('heart-x').src = blackHeartIcon;
@@ -26,7 +29,7 @@ function FavButton({ props }) {
   }, [idMeal, idDrink]);
   return (
     <button
-      onClick={ () => setFavRecipe(objectToLS) }
+      onClick={ () => handleClick() }
       type="button"
       id={ idMeal || idDrink }
     >
