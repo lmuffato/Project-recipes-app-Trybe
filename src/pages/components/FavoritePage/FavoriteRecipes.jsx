@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import FavoriteMeals from './FavoriteMeals';
 import FavoriteDrinks from './FavoriteDrinks';
+import './cards.css';
 
 export default function FavoriteRecipes(props) {
   const [favoriteList, setFavoriteList] = useState('');
@@ -15,9 +16,7 @@ export default function FavoriteRecipes(props) {
 
   const unFavorite = (e) => {
     const recipeName = e.target.parentNode.name;
-    console.log(recipeName);
     const oldFavoriteList = JSON.parse(localStorage.getItem('favoriteRecipes'));
-    console.log(oldFavoriteList);
     const newFavorite = oldFavoriteList
       .filter((favoriteRecipe) => favoriteRecipe.name !== recipeName);
     setFavoriteList(newFavorite);
@@ -37,7 +36,7 @@ export default function FavoriteRecipes(props) {
   }, [filter, favoriteList]);
 
   return (
-    <div>
+    <div className="card-list">
       {filteredList ? filteredList.map((recipe, index) => (
         <div key={ index }>
           {recipe.type === 'comida'
