@@ -35,6 +35,7 @@ function Recipes() {
 
   const changeTags = (t, index) => {
     const tags = t.slice(0, 2);
+    if (!Array.isArray(tags)) return null;
     return tags.map((tagName) => (
       <Card.Text
         data-testid={ `${index}-${tagName}-horizontal-tag` }
