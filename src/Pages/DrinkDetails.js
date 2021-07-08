@@ -1,21 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { actionDetails } from '../redux/actions';
 import shareIcon from '../images/shareIcon.svg';
-import blackFavoriteIcon from '../images/blackHeartIcon.svg';
-import whiteFavoriteIcon from '../images/whiteHeartIcon.svg';
 import RecomendationCard from '../util/renderRecomendationCard';
 import '../components/Footer.css';
+import RenderFavoriteHeart from '../util/addOrRemoveFavorite';
 
-function DrinkDetails() {
+export default function DrinkDetails() {
   const id = window.location.href.split('/')[4];
   const dispatch = useDispatch();
+  const globalState = useSelector((state) => state.detailsReducer.favorites);
   const [data, setData] = useState();
   const [copy, setCopy] = useState('');
   const [recomendations, setRecomendations] = useState();
   const history = useHistory();
-  const [test, setTest] = useState('');
 
   useEffect(() => {
     const fetchDrinks = async () => {
@@ -32,68 +31,6 @@ function DrinkDetails() {
     fetchDrinks();
     fetchRecomendations();
   }, [dispatch, id]);
-
-  useEffect(() => {
-    const storage = localStorage.getItem('favoriteRecipes');
-    if (storage) {
-      setTest(JSON.stringify(storage));
-    }
-  }, []);
-
-  const addFavorite = (recipe) => {
-    const obj = {
-      id: recipe.idDrink,
-      type: 'bebida',
-      area: recipe.strArea ? recipe.strArea : '',
-      category: recipe.strCategory,
-      alcoholicOrNot: recipe.strAlcoholic,
-      name: recipe.strDrink,
-      image: recipe.strDrinkThumb,
-      // doneDate,
-      // tags,
-    };
-    const previousValue = localStorage.getItem('favoriteRecipes');
-    if (previousValue) {
-      const formatedPreviousValue = JSON.parse(previousValue);
-      const newObj = [...formatedPreviousValue, obj];
-      localStorage.setItem('favoriteRecipes', JSON.stringify(newObj));
-    } else {
-      localStorage.setItem('favoriteRecipes', JSON.stringify([obj]));
-    }
-    setTest(JSON.stringify(localStorage.getItem('favoriteRecipes')));
-  };
-
-  const removeFavorite = (recipe) => {
-    const previousValue = JSON.parse(localStorage.getItem('favoriteRecipes'));
-    const newValue = previousValue.filter((obj) => obj.id !== recipe.idDrink);
-    localStorage.setItem('favoriteRecipes', JSON.stringify(newValue));
-    if ((localStorage.getItem('favoriteRecipes')).length > 0) {
-      setTest([JSON.stringify(localStorage.getItem('favoriteRecipes'))]);
-    } else {
-      setTest('');
-    }
-  };
-
-  const renderFavoriteHeart = (recipe) => {
-    const storage = test;
-    let check = '';
-    if (storage) {
-      const formatedStorage = JSON.parse(JSON.parse(storage));
-      check = formatedStorage.filter((st) => st.id.includes(recipe.idDrink));
-    }
-    if (check !== '' && check.length > 0) {
-      return (
-        <button type="button" onClick={ () => removeFavorite(recipe) }>
-          <img alt="favorite" data-testid="favorite-btn" src={ blackFavoriteIcon } />
-        </button>
-      );
-    }
-    return (
-      <button type="button" onClick={ () => addFavorite(recipe) }>
-        <img alt="favorite" data-testid="favorite-btn" src={ whiteFavoriteIcon } />
-      </button>
-    );
-  };
 
   const renderRecomendations = (param) => (
     param && (
@@ -143,7 +80,7 @@ function DrinkDetails() {
             <button data-testid="share-btn" type="button" onClick={ () => copyLink() }>
               <img alt="share" src={ shareIcon } />
             </button>
-            {renderFavoriteHeart(data[0])}
+            {RenderFavoriteHeart('bebida', data[0], dispatch, globalState)}
           </div>
           {copy}
           <h3 data-testid="recipe-category">{strAlcoholic}</h3>
@@ -160,14 +97,12 @@ function DrinkDetails() {
           </ul>
           <h2>Instructions</h2>
           <p data-testid="instructions">{strInstructions}</p>
-
           <h2>Recomendadas</h2>
           <div className="carousel-container">
             <div className="recipies-list">
               {renderRecomendations(recomendations)}
             </div>
           </div>
-
           <button
             className="footer"
             type="button"
@@ -187,5 +122,3 @@ function DrinkDetails() {
     </div>
   );
 }
-
-export default DrinkDetails;
