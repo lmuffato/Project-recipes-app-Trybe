@@ -38,16 +38,13 @@ export default function FavoriteRecipes(props) {
 
   return (
     <div>
-      {filteredList ? filteredList.map((recipe, index) => {
-        console.log(recipe);
-        return (
-          <div key={ index }>
-            {recipe.type === 'comida'
-              ? <FavoriteMeals props={ { recipe, index, unFavorite } } />
-              : <FavoriteDrinks props={ { recipe, index, unFavorite } } />}
-          </div>
-        );
-      }) : ''}
+      {filteredList ? filteredList.map((recipe, index) => (
+        <div key={ index }>
+          {recipe.type === 'comida'
+            ? <FavoriteMeals props={ { recipe, index, unFavorite } } />
+            : <FavoriteDrinks props={ { recipe, index, unFavorite } } />}
+        </div>
+      )) : ''}
     </div>
   );
 }

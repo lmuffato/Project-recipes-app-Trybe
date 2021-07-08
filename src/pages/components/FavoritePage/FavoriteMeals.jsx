@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import shareIcon from '../../../images/shareIcon.svg';
 import unFavoriteIcon from '../../../images/blackHeartIcon.svg';
+import './cards.css';
 
 export default function FavoriteMeals({ props:
   { recipe, index, unFavorite } }) {
   const [show, setShow] = useState(false);
   const handleClick = () => {
-    const treeSeconds = 3000;
+    const treeSeconds = 6000;
     setShow(true);
     setTimeout(() => { setShow(false); }, treeSeconds);
   };
@@ -16,7 +17,7 @@ export default function FavoriteMeals({ props:
     const { name, id, image, area, category } = recipe;
     return (
       <div key={ name }>
-        <span style={ show ? {} : { display: 'none' } }>Link copiado!</span>
+        <h1 style={ show ? {} : { display: 'none' } }>Link copiado!</h1>
         <Link to={ `/comidas/${id}` }>
           <h2 data-testid={ `${index}-horizontal-name` }>{name}</h2>
           <img
