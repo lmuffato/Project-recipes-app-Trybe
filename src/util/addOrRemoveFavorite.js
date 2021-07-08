@@ -35,9 +35,9 @@ const RemoveFavorite = (type, recipe, dispatch) => {
   dispatch(actionFavorites(newValue));
 };
 
-export default function RenderFavoriteHeart(type, recipe, dispatch, globalState = '') {
+export default function RenderFavoriteHeart(type, recipe, dispatch) {
   const recipeId = type === 'comida' ? recipe.idMeal : recipe.idDrink;
-  const storage = globalState;
+  const storage = JSON.parse(localStorage.getItem('favoriteRecipes'));
   let check = '';
   if (storage.length > 0) {
     check = storage.filter((st) => st.id.includes(recipeId));
