@@ -7,10 +7,11 @@ import useRecipe from './useRecipe';
 const maxList = 4;
 
 export default function useMainRecipe(type) {
-  const { recipe, setRecipe, setSearchedByCategory } = useRecipe();
+  const { recipe, setRecipe, setSearchedByCategory, loading } = useRecipe();
   const { foods, site, foodUpperCase, idFood } = getMealsOrDrinks(type);
   const [category, setCategory] = useState('');
   const [toggleCategory, setToggleCategory] = useState(false);
+  const [hasBeenChosenCategory, setHasBeenChosenCategory] = useState(false);
 
   const fetchAllCategories = async () => {
     const responseRecipe = await fetchName(site);
@@ -58,35 +59,41 @@ export default function useMainRecipe(type) {
     }
 
     setCategory(innerText);
+    setHasBeenChosenCategory(true);
   };
 
   useEffect(() => {
     if (toggleCategory) {
       setToggleCategory(false);
       fetchAllCategories();
+      console.log('toggleCategory');
     }
   }, [toggleCategory]);
 
   useEffect(() => {
-    if (category === 'All') {
-      fetchAllCategories();
-      return;
-    }
+    if (hasBeenChosenCategory) {
+      if (category === 'All') {
+        fetchAllCategories();
+        setHasBeenChosenCategory(false);
+        return;
+      }
 
-    if (category) {
-      const fetchUpdateRecipe = async () => {
-        setSearchedByCategory(true);
-        const updateRecipeByCategory = await fetchByCategory(site, category);
-        setRecipe({ ...recipe, [foods]: updateRecipeByCategory[foods] });
-      };
+      if (category) {
+        const fetchUpdateRecipe = async () => {
+          setSearchedByCategory(true);
+          const updateRecipeByCategory = await fetchByCategory(site, category);
+          setRecipe({ ...recipe, [foods]: updateRecipeByCategory[foods] });
+          setHasBeenChosenCategory(false);
+        };
 
-      fetchUpdateRecipe();
+        fetchUpdateRecipe();
+      }
     }
   }, [category]);
 
   useEffect(() => {
-    fetchAllCategories();
+    if (!loading) fetchAllCategories();
   }, []);
 
-  return { recipe, setRecipe, renderCards, handleClickCategory };
+  return { recipe, setRecipe, renderCards, handleClickCategory, loading };
 }
