@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import Context from '../../context/Context';
 import doneRecipes from '../../services/localStorage/doneRecipes';
 import {
   Image,
@@ -10,8 +11,18 @@ import {
 } from './components/index';
 
 function ComponentAuxProgress(recipe) {
+  const { setDoneRecipes, setInfoDone } = useContext(Context);
   const { recipeFood, recipeDrink } = recipe;
-  console.log(recipeDrink);
+  const handleClick = () => {
+    doneRecipes(recipe);
+    const infoDone = JSON.parse(localStorage.getItem('doneRecipes'));
+    if (infoDone !== true) {
+      setDoneRecipes(infoDone);
+      setInfoDone(infoDone);
+    }
+    // const doneRecipesConst = JSON.parse(localStorage.getItem('doneRecipes'));
+    // console.log(doneRecipesConst);
+  };
   return (
     <div className="container">
       <Image recipe={ recipeFood || recipeDrink } />
@@ -23,7 +34,7 @@ function ComponentAuxProgress(recipe) {
         <button
           data-testid="finish-recipe-btn"
           type="button"
-          onClick={ () => doneRecipes(recipe) }
+          onClick={ () => handleClick() }
         >
           Finalizar Receita
         </button>

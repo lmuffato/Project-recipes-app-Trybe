@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 // https://pt.stackoverflow.com/questions/6526/como-formatar-data-no-javascript
 // import { Redirect } from 'react-router';
 
