@@ -1,0 +1,14 @@
+.ingredients-checkbox-container {
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+}
+
+.checkbox-container {
+  align-items: center;
+  display: flex;
+}
+
+.crossed {
+  text-decoration: line-through;
+}

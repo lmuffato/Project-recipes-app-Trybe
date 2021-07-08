@@ -1,33 +1,53 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import shareIcon from '../images/shareIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import '../style/DetailsHeader.css';
 
+import FavoritesContext from '../contexts/FavoritesContext';
+
 const copy = require('clipboard-copy');
 
 export default function DetailsHeader({ recipe, isFood }) {
   const recipeId = isFood ? recipe.idMeal : recipe.idDrink;
   const recipeType = isFood ? 'comida' : 'bebida';
-  const recipeArea = recipe.strArea;
+  const recipeArea = recipe.strArea ? recipe.strArea : '';
   const recipeCategory = recipe.strCategory;
   const recipeAlcoholicOrNot = isFood ? '' : recipe.strAlcoholic;
   const recipeName = isFood ? recipe.strMeal : recipe.strDrink;
   const recipeImage = isFood ? recipe.strMealThumb : recipe.strDrinkThumb;
 
-  const favorites = JSON.parse(localStorage.getItem('favoriteRecipes'));
-
-  if (!favorites) {
-    localStorage.setItem('favoriteRecipes', JSON.stringify([]));
-  }
+  const { favorites, setFavorites, saveFavoritesToLS } = useContext(FavoritesContext);
 
   const [isFavorite, setIsFavorite] = useState(
     favorites.map((fav) => fav.id).includes(recipeId),
   );
 
+  useEffect(() => {
+    const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    if (favoriteRecipes) {
+      const isFavoriteLS = favoriteRecipes.map((fav) => fav.id).includes(recipeId);
+      if (isFavoriteLS) setIsFavorite(true);
+    }
+  }, [recipeId]);
+
+  const { pathname } = useLocation();
+
   function handleShareClick() {
-    copy(window.location.href);
+    const pageType = pathname.split('/')[1];
+    const id = pathname.split('/')[2];
+    copy(`${window.location.origin}/${pageType}/${id}`);
+
+    const copyMsg = document.createElement('p');
+    copyMsg.innerText = 'Link copiado!';
+    copyMsg.className = 'toast';
+    document.getElementsByTagName('body')[0].appendChild(copyMsg);
+    const WAIT_TIME = 4000;
+    setTimeout(() => {
+      copyMsg.remove();
+    }, WAIT_TIME);
   }
 
   function handleFavoriteClick() {
@@ -44,10 +64,11 @@ export default function DetailsHeader({ recipe, isFood }) {
       }];
     } else {
       updatedFavorites = favorites.filter(
-        (fav) => fav.id !== (isFood ? recipe.idMeal : recipe.idDrink),
+        (fav) => fav.id !== (recipeId),
       );
     }
-    localStorage.setItem('favoriteRecipes', JSON.stringify(updatedFavorites));
+    setFavorites(updatedFavorites);
+    saveFavoritesToLS(updatedFavorites);
   }
 
   return (
@@ -72,13 +93,16 @@ export default function DetailsHeader({ recipe, isFood }) {
           </button>
           <button
             type="button"
-            data-testid="favorite-btn"
             onClick={ () => {
               setIsFavorite(!isFavorite);
               handleFavoriteClick();
             } }
           >
-            <img src={ isFavorite ? whiteHeartIcon : blackHeartIcon } alt="favoritar" />
+            <img
+              data-testid="favorite-btn"
+              src={ isFavorite ? blackHeartIcon : whiteHeartIcon }
+              alt="favoritar"
+            />
           </button>
         </div>
       </div>

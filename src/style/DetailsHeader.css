@@ -7,3 +7,10 @@
   display: flex;
   justify-content: space-between;
 }
+
+.toast {
+  background-color: white;
+  left: 50%;
+  position: fixed;
+  top: 0;
+}
