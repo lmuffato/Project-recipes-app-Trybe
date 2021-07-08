@@ -4,12 +4,12 @@ import { useHistory } from 'react-router-dom';
 import ButtonStartRecipe from './ButtonStartRecipe';
 import UserContext from '../context/UserContext';
 import shareIcon from '../images/shareIcon.svg';
-import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import IngredientsList from './IngredientsList';
 import RecomendedDrinks from './RecomendedDrinks';
 import SearchContext from '../context/SearchContext';
 import { getItemFromLocalStorage } from '../services/localStorage';
 import { recipeRow } from '../services/recipeRow';
+import FavoriteButton from './FavoriteButton';
 
 const copy = require('clipboard-copy');
 
@@ -46,7 +46,6 @@ function MealCardDetail() {
   const shareClick = () => {
     const URL = history.location.pathname.replace('in-progress', '');
     copy(`http://localhost:3000${URL}`);
-    // global.alert('Link copiado!');
     setCopyLink(true);
   };
 
@@ -62,9 +61,7 @@ function MealCardDetail() {
         <img src={ shareIcon } alt="compartilhar" />
       </button>
       {copyLink ? <span>Link copiado!</span> : null}
-      <button data-testid="favorite-btn" type="button">
-        <img src={ whiteHeartIcon } alt="favoritar" />
-      </button>
+      <FavoriteButton type="comida" />
       <h4 data-testid="recipe-category">{ currentMeal.strCategory }</h4>
       <h4>Ingredients</h4>
       <IngredientsList currentMeal={ currentMeal } />

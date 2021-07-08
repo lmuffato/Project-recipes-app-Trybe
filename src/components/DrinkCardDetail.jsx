@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import UserContext from '../context/UserContext';
 import shareIcon from '../images/shareIcon.svg';
-import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import FavoriteButton from './FavoriteButton';
 import IngredientsList from './IngredientsList';
 import RecomendedMeals from './RecomendedMeals';
 import { fetchRandonMeal } from '../services/getApis';
@@ -66,9 +66,7 @@ function DrinkCardDetail() {
         <img src={ shareIcon } alt="compartilhar" />
       </button>
       {copyLink ? <span>Link copiado!</span> : null}
-      <button data-testid="favorite-btn" type="button">
-        <img src={ whiteHeartIcon } alt="favoritar" />
-      </button>
+      <FavoriteButton type="bebida" />
       <h4 data-testid="recipe-category">{ currentDrink.strAlcoholic }</h4>
       <h4>Ingredients</h4>
       <IngredientsList currentMeal={ currentDrink } />
