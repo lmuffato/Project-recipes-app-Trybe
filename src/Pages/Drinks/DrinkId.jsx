@@ -28,7 +28,8 @@ function DrinkId() {
     strDrinkThumb } = drinkForId;
 
   const setHidden = () => (
-    (JSON.parse(localStorage.getItem('doneRecipes')) || [])
+    localStorage.getItem('doneRecipes')
+    && JSON.parse(localStorage.getItem('doneRecipes'))
       .filter(({ id: localStorageId }) => localStorageId === id)
       .length ? setHiddenValue(true) : setHiddenValue(false)
   );

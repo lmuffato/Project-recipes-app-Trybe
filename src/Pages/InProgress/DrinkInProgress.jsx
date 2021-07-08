@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { useLocation, Redirect, Link } from 'react-router-dom';
-import { fetchFoodForId } from '../../services/Data';
+import { fetchDrinkForId } from '../../services/Data';
 import shareIcon from '../../images/shareIcon.svg';
 import context from '../../store/Context';
 import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
@@ -21,20 +21,22 @@ function DrinkInProgress() {
   }, [inProgressRecipes]);
 
   useEffect(() => {
-    fetchFoodForId(id)
-      .then(({ drinks }) => setDrinkDetail(drinks));
+    fetchDrinkForId(id)
+      .then((res) => {
+        if (res.drinks) setDrinkDetail(res.drinks[0]);
+      });
   }, [id]);
 
-  if (!drinkDetail.length) return <div>Preparing Ingredients...</div>;
+  if (!drinkDetail) return <div>Preparing Ingredients...</div>;
   if (shouldRedirect) return <Redirect to="/comidas/receitas-feitas" />;
   const {
     strDrinkThumb,
     strDrink,
     strAlcoholic,
-    strInstructions } = drinkDetail[0];
+    strInstructions } = drinkDetail;
 
   function ingredientsList() {
-    const ingredientList = drinkDetail[0];
+    const ingredientList = drinkDetail;
     const fifteen = 15;
     const list = [];
     for (let index = 1; index <= fifteen; index += 1) {
@@ -61,7 +63,7 @@ function DrinkInProgress() {
   }
 
   function measuresList() {
-    const measureList = drinkDetail[0];
+    const measureList = drinkDetail;
     const fifteen = 15;
     const list = [];
     for (let index = 1; index <= fifteen; index += 1) {
