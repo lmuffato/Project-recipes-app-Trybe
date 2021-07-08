@@ -9,7 +9,7 @@ const Explore = () => (
   <div>
     <Header title="Explorar" />
 
-    <div className="buttons">
+    <div className="buttons-explore">
       <Link to="/explorar/comidas">
         <button
           className="button"

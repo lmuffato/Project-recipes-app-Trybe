@@ -14,10 +14,7 @@
   border-radius: 4px;
   font-size: 16px;
   height: auto;
-  margin-bottom: 10px;
-  margin-left: 10px;
-  margin-right: 10px;
-  margin-top: 10px;
+  margin: 10px;
   transition: 0.4s;
   width: 205px;
 }
