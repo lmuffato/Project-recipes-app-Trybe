@@ -7,10 +7,7 @@ import DrinkDetails from './pages/DrinkDetails/index';
 import Explore from './pages/Explore/index';
 import AppProvider from './context/AppContext';
 import 'bootstrap/dist/css/bootstrap.min.css';
-<<<<<<< HEAD
 import RecipesFavorites from './pages/RecipesFavorite';
-=======
->>>>>>> d9d2bd7837e2fe8e6b105cc4e40d70c9fd2eba9c
 
 function App() {
   return (
@@ -34,11 +31,7 @@ function App() {
             <Route path="/explorar" component={ Explore } />
             {/* <Route path="/explorar/comidas" component={ ExploreFoods } />
             <Route path="/explorar/bebidas" component={ ExploreDrinks } /> */}
-<<<<<<< HEAD
             <Route path="/receitas-favoritas" component={ RecipesFavorites } />
-=======
-
->>>>>>> d9d2bd7837e2fe8e6b105cc4e40d70c9fd2eba9c
           </Switch>
         </BrowserRouter>
       </AppProvider>
