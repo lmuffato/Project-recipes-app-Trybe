@@ -7,6 +7,7 @@ import RecipeDetails from './pages/RecipeDetails';
 import Profile from './pages/Profile';
 import ExploreFoods from './pages/ExploreFoods';
 import ExploreDrinks from './pages/ExploreDrinks';
+import ExploreIngredients from './pages/ExploreIngredients';
 import FavoriteRecipes from './pages/FavoriteRecipes';
 
 function App() {
@@ -27,6 +28,16 @@ function App() {
       <Route path="/explorar" exact component={ Explore } />
       <Route path="/explorar/comidas" component={ ExploreFoods } />
       <Route path="/explorar/bebidas" component={ ExploreDrinks } />
+      <Route
+        exact
+        path="/explorar/comidas/ingredientes"
+        render={ (props) => <ExploreIngredients { ...props } type="meals" /> }
+      />
+      {/* <Route
+        exact
+        path="/explorar/bebidas/ingredientes"
+        render={ (props) => <ExploreIngredients { ...props } type="drinks" /> }
+      /> */}
       <Route
         exact
         path="/comidas/:id"
