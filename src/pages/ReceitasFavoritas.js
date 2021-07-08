@@ -1,14 +1,26 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import shareIcon from '../images/shareIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import '../styles/FavoriteCards.css';
 
 function ReceitasFavoritas() {
-  const favoritesStorage = JSON.parse(localStorage.getItem('favoriteRecipes')) || {};
-  const [favData, setFavData] = useState(favoritesStorage);
-  // const { favoriteStorage, setFavoriteStorage } = useState(false);
+  const [favData, setFavData] = useState([]);
+  const [filteredItems, setFilteredItems] = useState([]);
   const [mimeButton, setMimeButton] = useState(false);
+  const [doReload, setDoReload] = useState(false);
+
+  const fetchStorage = () => {
+    const storage = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    if (storage) {
+      JSON.parse(localStorage.getItem('favoriteRecipes'));
+    } else {
+      return [];
+    }
+    setFavData(storage);
+    setFilteredItems(storage);
+  };
 
   const handleClick = ({ target }) => {
     const { alt } = target;
@@ -24,30 +36,32 @@ function ReceitasFavoritas() {
     const toRemove = favs.find((e) => (e.id === alt));
     const removed = favs.filter((e) => e !== toRemove);
     setFavData(localStorage.setItem('favoriteRecipes', JSON.stringify(removed)));
+    setDoReload(!doReload);
   };
 
   /* Source: https://github.com/tryber/sd-09-project-recipes-app/tree/524b096830480588272f95f19414d77636fb705f */
   const isFood = ({ id, image, type, name, category, area, alcoholicOrNot }, index) => {
     if (type === 'comida') {
       return (
-        <div key={ id }>
+        <div key={ index }>
           { mimeButton ? <span>Link copiado!</span> : null }
 
           <span data-testid={ `${index}-horizontal-top-text` }>
             { `${area} - ${category}` }
           </span>
-
-          <img
-            className="image"
-            src={ image }
-            alt="comida"
-            data-testid={ `${index}-horizontal-image` }
-          />
-
-          <span data-testid={ `${index}-horizontal-name` }>
-            { name }
-          </span>
-
+          <Link to={ `/comidas/${id}` }>
+            <img
+              className="image"
+              src={ image }
+              alt="comida"
+              data-testid={ `${index}-horizontal-image` }
+            />
+          </Link>
+          <Link to={ `/comidas/${id}` }>
+            <span data-testid={ `${index}-horizontal-name` }>
+              { name }
+            </span>
+          </Link>
           <button type="button" onClick={ handleClick }>
             <img
               data-testid={ `${index}-horizontal-share-btn` }
@@ -68,7 +82,7 @@ function ReceitasFavoritas() {
       );
     }
     return (
-      <div key={ type }>
+      <div key={ index }>
         <button type="button" onClick={ handleClick }>
           <img
             data-testid={ `${index}-horizontal-share-btn` }
@@ -87,47 +101,42 @@ function ReceitasFavoritas() {
 
         { mimeButton ? <span>Link copiado!</span> : null }
 
-        <img
-          className="image"
-          src={ image }
-          alt="bebida"
-          data-testid={ `${index}-horizontal-image` }
-        />
-
+        <Link to={ `/bebidas/${id}` }>
+          <img
+            className="image"
+            src={ image }
+            alt="bebida"
+            data-testid={ `${index}-horizontal-image` }
+          />
+        </Link>
         <span data-testid={ `${index}-horizontal-top-text` }>
           { alcoholicOrNot }
         </span>
-
-        <span data-testid={ `${index}-horizontal-name` }>
-          { name }
-        </span>
+        <Link to={ `/bebidas/${id}` }>
+          <span data-testid={ `${index}-horizontal-name` }>
+            { name }
+          </span>
+        </Link>
       </div>
     );
   };
 
-  const renderFavData = () => {
-    const data = favData || JSON.parse(localStorage.getItem('favoriteRecipes'));
-    return data.map(
-      ({ id, image, type, name, category, area, alcoholicOrNot }, index) => (
-        isFood({ id, image, type, name, category, area, alcoholicOrNot }, index)
-      ),
-    );
-  };
-
-  const renderFilteredItems = (foodType) => {
-    const dataItems = favData || JSON.parse(localStorage.getItem('favoriteRecipes'));
-    return dataItems
-      .filter((item) => item.type === foodType)
-      .map(
-        ({ id, image, type, name, category, area, alcoholicOrNot }, index) => (
-          isFood({ id, image, type, name, category, area, alcoholicOrNot }, index)
-        ),
-      );
+  const renderFavData = (filterType) => {
+    console.log(`FilterType: ${filterType}`);
+    if (filterType.includes('todos')) {
+      setFilteredItems(favData);
+    }
+    if (filterType.includes('bebida')) {
+      setFilteredItems(favData.filter((item) => item.type === 'bebida'));
+    }
+    if (filterType.includes('comida')) {
+      setFilteredItems(favData.filter((item) => item.type === 'comida'));
+    }
   };
 
   useEffect(() => {
-    renderFavData();
-  });
+    fetchStorage();
+  }, [doReload]);
 
   return (
     <div className="favorite_recipes">
@@ -136,6 +145,7 @@ function ReceitasFavoritas() {
         <button
           type="button"
           data-testid="filter-by-all-btn"
+          onClick={ () => renderFavData('todos') }
         >
           All
 
@@ -143,7 +153,7 @@ function ReceitasFavoritas() {
         <button
           type="button"
           data-testid="filter-by-food-btn"
-          onClick={ renderFilteredItems('comida') }
+          onClick={ () => renderFavData('comida') }
         >
           Food
 
@@ -151,14 +161,17 @@ function ReceitasFavoritas() {
         <button
           type="button"
           data-testid="filter-by-drink-btn"
-          onClick={ renderFilteredItems('bebida') }
+          onClick={ () => renderFavData('bebida') }
         >
           Drinks
 
         </button>
       </div>
-
-      {renderFavData() || renderFilteredItems}
+      {filteredItems.map(
+        ({ id, image, type, name, category, area, alcoholicOrNot }, index) => (
+          isFood({ id, image, type, name, category, area, alcoholicOrNot }, index)
+        ),
+      )}
     </div>
   );
 }
