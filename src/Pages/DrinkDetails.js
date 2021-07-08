@@ -7,7 +7,7 @@ import shareIcon from '../images/shareIcon.svg';
 // import whiteFavoriteIcon from '../images/whiteHeartIcon.svg';
 import RecomendationCard from '../util/renderRecomendationCard';
 import '../components/Footer.css';
-import RenderFavoriteHeart from '../util/addOrRemoveFavorite';
+// import RenderFavoriteHeart from '../util/addOrRemoveFavorite';
 
 function DrinkDetails() {
   const id = window.location.href.split('/')[4];

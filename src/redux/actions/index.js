@@ -5,6 +5,12 @@ export const ACTION_MAIN_FOOD_LIST = 'ACTION_MAIN_FOOD_LIST';
 export const ACTION_MAIN_DRINK = 'ACTION_MAIN_DRINK';
 export const ACTION_DRINKS_CATEGORY = 'ACTION_DRINKS_CATEGORY';
 export const ACTION_FOOD_CATEGORY = 'ACTION_FOOD_CATEGORY';
+export const ACTION_FAVORITES = 'ACTION_FAVORITES';
+
+export const actionFavorites = (obj) => ({
+  type: ACTION_FAVORITES,
+  obj,
+});
 
 export const actionDrinksCategory = (drinksCategories) => ({
   type: ACTION_DRINKS_CATEGORY,

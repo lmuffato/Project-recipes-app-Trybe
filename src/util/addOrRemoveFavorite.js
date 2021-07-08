@@ -1,8 +1,9 @@
 import React from 'react';
+import { actionFavorites } from '../redux/actions';
 import blackFavoriteIcon from '../images/blackHeartIcon.svg';
 import whiteFavoriteIcon from '../images/whiteHeartIcon.svg';
 
-const addFavorite = (type, recipe) => {
+const AddFavorite = (type, recipe, dispatch) => {
   const obj = {
     id: type === 'bebida' ? recipe.idDrink : recipe.idMeal,
     type: type === 'bebida' ? 'bebida' : 'comida',
@@ -19,35 +20,37 @@ const addFavorite = (type, recipe) => {
     const formatedPreviousValue = JSON.parse(previousValue);
     const newObj = [...formatedPreviousValue, obj];
     localStorage.setItem('favoriteRecipes', JSON.stringify(newObj));
+    dispatch(actionFavorites(newObj));
   } else {
     localStorage.setItem('favoriteRecipes', JSON.stringify([obj]));
+    dispatch(actionFavorites([obj]));
   }
 };
 
-const removeFavorite = (type, recipe) => {
+const RemoveFavorite = (type, recipe, dispatch) => {
   const recipeId = type === 'comida' ? recipe.idMeal : recipe.idDrink;
   const previousValue = JSON.parse(localStorage.getItem('favoriteRecipes'));
   const newValue = previousValue.filter((obj) => obj.id !== recipeId);
   localStorage.setItem('favoriteRecipes', JSON.stringify(newValue));
+  dispatch(actionFavorites(newValue));
 };
 
-export default function RenderFavoriteHeart(type, recipe) {
+export default function RenderFavoriteHeart(type, recipe, dispatch, globalState = '') {
   const recipeId = type === 'comida' ? recipe.idMeal : recipe.idDrink;
-  const storage = localStorage.getItem('favoriteRecipes');
+  const storage = globalState;
   let check = '';
   if (storage) {
-    const formatedStorage = JSON.parse(storage);
-    check = formatedStorage.filter((st) => st.id.includes(recipeId));
+    check = storage.filter((st) => st.id.includes(recipeId));
   }
   if (check.length > 0) {
     return (
-      <button type="button" onClick={ () => removeFavorite(type, recipe) }>
+      <button type="button" onClick={ () => RemoveFavorite(type, recipe, dispatch) }>
         <img alt="favorite" data-testid="favorite-btn" src={ blackFavoriteIcon } />
       </button>
     );
   }
   return (
-    <button type="button" onClick={ () => addFavorite(type, recipe) }>
+    <button type="button" onClick={ () => AddFavorite(type, recipe, dispatch) }>
       <img alt="favorite" data-testid="favorite-btn" src={ whiteFavoriteIcon } />
     </button>
   );

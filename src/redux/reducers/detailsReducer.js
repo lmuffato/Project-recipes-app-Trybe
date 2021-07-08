@@ -1,11 +1,17 @@
-import { ACTION_DETAILS } from '../actions';
+import { ACTION_DETAILS, ACTION_FAVORITES } from '../actions';
 
 const INITIAL_STATE = {
+  favorites: [],
   data: '',
 };
 
 const detailsReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
+  case ACTION_FAVORITES:
+    return {
+      ...state,
+      favorites: action.obj,
+    };
   case ACTION_DETAILS:
     return {
       ...state,

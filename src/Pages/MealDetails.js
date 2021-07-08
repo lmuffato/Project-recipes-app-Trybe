@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { actionDetails } from '../redux/actions';
 import RecomendationCard from '../util/renderRecomendationCard';
@@ -17,6 +17,7 @@ export default function MealDetails() {
   const [data, setData] = useState();
   const [copy, setCopy] = useState('');
   const [recomendations, setRecomendations] = useState();
+  const globalState = useSelector((state) => state.detailsReducer.favorites);
   const history = useHistory();
 
   useEffect(() => {
@@ -79,7 +80,7 @@ export default function MealDetails() {
             <button data-testid="share-btn" type="button" onClick={ () => copyLink() }>
               <img alt="share" src={ shareIcon } />
             </button>
-            {RenderFavoriteHeart('comida', data[0])}
+            {RenderFavoriteHeart('comida', data[0], dispatch, globalState)}
           </div>
           {copy}
           <h3 data-testid="recipe-category">{strCategory}</h3>
