@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-// import usePersistedState from '../hooks/usePersistedState';
 
 function Login() {
   const history = useHistory();

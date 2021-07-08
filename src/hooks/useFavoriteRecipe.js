@@ -1,11 +1,8 @@
-import { useState } from 'react';
-// import usePersistedState from './usePersistedState';
+import useRecipe from './useRecipe';
 import getMealsOrDrinks from '../helper/mealsOrDrinksMethods';
 
 export default function useFavoriteRecipe(type, id, isCard = false) {
-  const favRecipesLocalStorage = JSON
-    .parse(localStorage.getItem('favoriteRecipes')) || [];
-  const [favoriteRecipes, setFavoriteRecipes] = useState(favRecipesLocalStorage);
+  const { favoriteRecipes, setFavoriteRecipes } = useRecipe();
 
   const {
     idFood,
@@ -50,10 +47,6 @@ export default function useFavoriteRecipe(type, id, isCard = false) {
     const favoriteObj = isCard ? recipeStorage : getFavoriteInfos(recipeStorage);
     const newFavoritedRecipes = setFav(favoriteObj);
     setFavoriteRecipes(newFavoritedRecipes);
-    localStorage.setItem(
-      'favoriteRecipes',
-      JSON.stringify(newFavoritedRecipes),
-    );
   };
 
   const checkFavorite = () => favoriteRecipes.some((fav) => fav.id === id);

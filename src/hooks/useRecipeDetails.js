@@ -9,6 +9,7 @@ import { fetchById, fetchName } from '../services/data';
 
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import useRecipe from './useRecipe';
 
 const INITIAL_STATE = {
   meals: [{ strYoutube: '' }],
@@ -18,6 +19,7 @@ const INITIAL_STATE = {
 export default function useRecipeDetails(type) {
   const { recommendedSite, portugueseFood, site } = getMealsOrDrinks(type);
   const { push } = useHistory();
+  const { doneRecipes } = useRecipe();
   const { id } = useParams();
   const [recipe, setRecipe] = useState(INITIAL_STATE);
   const [recommended, setRecommended] = useState(INITIAL_STATE);
@@ -58,6 +60,8 @@ export default function useRecipeDetails(type) {
     push(`/${portugueseFood}/${id}/in-progress`);
   };
 
+  const diplayNoneButton = () => doneRecipes.some((doneRcp) => doneRcp.id === id);
+
   useEffect(() => {
     const fetchDidMount = async () => {
       const resultRecipe = await fetchById(site, id);
@@ -84,5 +88,6 @@ export default function useRecipeDetails(type) {
     getFavoriteInfos,
     setHeart,
     checkFavorite,
+    diplayNoneButton,
   };
 }

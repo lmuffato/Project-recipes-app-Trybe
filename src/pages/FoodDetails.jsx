@@ -17,6 +17,7 @@ export default function FoodDetails() {
     copyToClipBoard,
     renderClipBoardMsg,
     checkFavorite,
+    diplayNoneButton,
   } = useRecipeDetails('meal');
   const recipeMeal = recipe.meals[0];
   const { ingredients, measures } = getIngredientsAndMeasures(recipeMeal);
@@ -25,6 +26,7 @@ export default function FoodDetails() {
   const styleFooter = {
     bottom: '0px',
     position: 'fixed',
+    display: diplayNoneButton() ? 'none' : 'block',
   };
 
   return (

@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import * as moment from 'moment';
 
-import usePersistedState from './usePersistedState';
 import useClipBoard from './useClipboard';
 import useFavoriteRecipe from './useFavoriteRecipe';
 
@@ -11,19 +10,20 @@ import { fetchById } from '../services/data';
 
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import useRecipe from './useRecipe';
 
-const INITIAL_STATE_STORAGE = { cocktails: {}, meals: {} };
 const INITIAL_STATE_HOOKS = {
   meals: [{}],
   drinks: [{}],
 };
 
 export default function useRecipeProgress(type) {
-  const [inProgressRecipes, setInProgressRecipes] = usePersistedState(
-    'inProgressRecipes',
-    INITIAL_STATE_STORAGE,
-  );
-  const [doneRecipes] = usePersistedState('doneRecipes', []);
+  const {
+    inProgressRecipes,
+    setInProgressRecipes,
+    doneRecipes,
+    setDoneRecipes,
+  } = useRecipe();
   const [recipeProgress, setRecipeProgress] = useState(INITIAL_STATE_HOOKS);
   const { push } = useHistory();
   const { id } = useParams();
@@ -115,12 +115,7 @@ export default function useRecipeProgress(type) {
 
   const redirectToRecipeDonePage = (recipeDone) => {
     const recipeDoneInfo = getRecipeDoneInfo(recipeDone);
-    localStorage.setItem(
-      'doneRecipes',
-      JSON.stringify([...doneRecipes, recipeDoneInfo]),
-    );
-    // Bug com o usePersistedState
-    // setDoneRecipes([...doneRecipes, recipeDoneInfo]);
+    setDoneRecipes([...doneRecipes, recipeDoneInfo]);
     push('/receitas-feitas');
   };
 
