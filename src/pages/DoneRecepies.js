@@ -2,66 +2,55 @@ import React, { useEffect, useState } from 'react';
 import CardMealDoneFav from '../compenents/CardMealDoneFav';
 import CardDrinkDoneFav from '../compenents/CardDrinkDoneFav';
 
-function DoneRecepies () {
-  const [doneRecepies, setDoneRecepies] = useState([]);
+function DoneRecepies() {
+  const [myDoneRecepies, setMyDoneRecepies] = useState([]);
   const [showDoneRecepies, setShowRecepies] = useState(doneRecepies);
-  
+
   // funções para pegar as receitas do local storage
   const getDoneRecepies = () => {
     const doneRecepiesString = localStorage.getItem('doneRecipes');
-    const doneRecepies = JSON.parse(doneRecepiesString);
-    return doneRecepies;
-  }
+    const allDoneRecepies = JSON.parse(doneRecepiesString);
+    return allDoneRecepies;
+  };
 
   useEffect(() => {
     // função que checa se há receitas no local storage
     const checkDoneRecepies = () => {
       const recepiesStorage = getDoneRecepies();
       if (recepiesStorage === null) {
-        alert('Você ainda não concluiu nenhuma receita!')
+        global.alert('Você ainda não concluiu nenhuma receita!');
       } else {
-        setDoneRecepies(recepiesStorage);
+        setMyDoneRecepies(recepiesStorage);
       }
-    }
+    };
 
     checkDoneRecepies();
   }, []);
 
-  function setMealOrDrink({ type, id, image, name, category, area, doneDate, tags, alcoholicOrNot }, index) {
-    if (type === 'meal') {
+  function setMealOrDrink(recepie, index) {
+    if (recepie.type === 'meal') {
       return (
         <CardMealDoneFav
-          id={ id }
+          recepie={ recepie }
           index={ index }
-          image={ image }
-          name={ name }
-          category={ category }
-          area={ area }
-          doneDate={ doneDate }
-          tags={ tags }
         />
-      )
-    } else if (type === 'drink') {
-      return (
-        <CardDrinkDoneFav
-          id={ id }
-          index={ index }
-          image={ image }
-          alcoholicOrNot={ alcoholicOrNot }
-          doneDate={ doneDate }
-        />
-      )
-    }
+      );
+    } return (
+      <CardDrinkDoneFav
+        recepie={ recepie }
+        index={ index }
+      />
+    );
   }
 
-      function handleContent(param) {
-    if(param === 'all') {
-      setShowRecepies(doneRecepies);
-    } else if(param === 'food') {
-      const mealsRecepi = doneRecepies.filter((recepi) => recepi.type === 'meals');
+  function handleContent(param) {
+    if (param === 'all') {
+      setShowRecepies(myDoneRecepies);
+    } else if (param === 'food') {
+      const mealsRecepi = myDoneRecepies.filter((recepi) => recepi.type === 'meals');
       setShowRecepies(mealsRecepi);
-    } else if(param === 'drink') {
-      const drinksRecepi = doneRecepies.filter((recepi) => recepi.type === 'drinks');
+    } else if (param === 'drink') {
+      const drinksRecepi = myDoneRecepies.filter((recepi) => recepi.type === 'drinks');
       setShowRecepies(drinksRecepi);
     }
   }
@@ -71,29 +60,32 @@ function DoneRecepies () {
       <div>
         <button
           data-testid="filter-by-all-btn"
+          type="button"
           onClick={ () => handleContent('all') }
         >
           All
         </button>
         <button
           data-testid="filter-by-food-btn"
-          onClick={ () => handleContent('food')}
+          type="button"
+          onClick={ () => handleContent('food') }
         >
           Food
         </button>
         <button
           data-testid="filter-by-drink-btn"
-          onClick={ () => handleContent('drink')}
+          type="button"
+          onClick={ () => handleContent('drink') }
         >
           Drinks
         </button>
       </div>
 
-      {showDoneRecepies.map(({type, id, image, name, category, area, doneDate, tags, alcoholicOrNot }, index ) => (
-        setMealOrDrink({type, id, image, name, category, area, doneDate, tags, alcoholicOrNot }, index )))}
+      {showDoneRecepies.map((recepie, index) => (
+        setMealOrDrink(recepie, index)))}
 
     </section>
-  )
+  );
 }
 
 export default DoneRecepies;
