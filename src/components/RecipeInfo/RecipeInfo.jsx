@@ -73,6 +73,7 @@ function RecipeInfo(props) {
             data-testid="share-btn"
             onClick={ handleCopyToClipboard }
           />
+
           <input
             type="image"
             src={ isFavorite ? blackHeartIcon : favoriteIconImg }

@@ -5,9 +5,7 @@ import shareIcon from '../../images/shareIcon.svg';
 import blackHeartIcon from '../../images/blackHeartIcon.svg';
 import handleCopyToClipboard from '../../utils/handleCopyToClipboard';
 
-// import CardContainer from './styles';
-
-function FavoriteRecipeCard(props) {
+function DoneRecipeCard(props) {
   const { recipe, index, handleRemoveRecipe, setCopiedToClipboard } = props;
   const detailsUrl = recipe.type === 'comida' ? `/comidas/${recipe.id}`
     : `/bebidas/${recipe.id}`;
@@ -32,6 +30,7 @@ function FavoriteRecipeCard(props) {
           { recipe.name }
         </p>
       </Link>
+      <p data-testid={ `${index}-horizontal-done-date` }>{ recipe.doneDate }</p>
       <button
         type="button"
         onClick={ () => handleCopyToClipboard(detailsUrl, setCopiedToClipboard) }
@@ -49,14 +48,22 @@ function FavoriteRecipeCard(props) {
           alt="share-btn"
         />
       </button>
+      <ul>
+        { recipe.tags.map(
+          (tag, i) => (
+            <li key={ i } data-testid={ `${index}-${tag}-horizontal-tag` }>
+              { tag }
+            </li>),
+        ) }
+      </ul>
     </div>
   );
 }
 
-FavoriteRecipeCard.propTypes = {
+DoneRecipeCard.propTypes = {
   recipe: PropTypes.shape(),
   handleRemoveRecipe: PropTypes.func,
   setCopiedToClipboard: PropTypes.func,
 }.isRequired;
 
-export default FavoriteRecipeCard;
+export default DoneRecipeCard;

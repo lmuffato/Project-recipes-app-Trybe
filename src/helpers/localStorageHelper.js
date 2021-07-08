@@ -1,3 +1,9 @@
+const handleRemoveFavorite = (id, key) => {
+  const getLocalStorage = JSON.parse(localStorage.getItem(key));
+  const newArrOfRecipes = getLocalStorage.filter((it) => it.id !== id);
+  localStorage.setItem(key, JSON.stringify(newArrOfRecipes));
+};
+
 const handleSetFavoritesToLocalStorage = (recipe, bool, key, id) => {
   const getLocalStorage = JSON.parse(localStorage.getItem(key));
 
@@ -10,14 +16,12 @@ const handleSetFavoritesToLocalStorage = (recipe, bool, key, id) => {
       }
       return item.id === id;
     });
-
-    if (!checkLocalStorage && bool) {
+    if (!checkLocalStorage) {
       const newArr = [...getLocalStorage, recipe];
       localStorage.setItem(key, JSON.stringify(newArr));
     }
   } else {
-    const newArrOfRecipes = getLocalStorage.filter((it) => it.id !== id);
-    localStorage.setItem(key, JSON.stringify(newArrOfRecipes));
+    handleRemoveFavorite(id, key);
   }
 };
 

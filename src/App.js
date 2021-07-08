@@ -9,6 +9,7 @@ import ExploreFoods from './pages/ExploreFoods';
 import ExploreDrinks from './pages/ExploreDrinks';
 import DetailsContextProvider from './context/DetailsContext';
 import FavoriteRecipes from './pages/FavoriteRecipes';
+import DoneRecipes from './pages/DoneRecipes';
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function App() {
           render={ (props) => <RecipeDetails { ...props } type="drinks" /> }
         />
         <Route path="/receitas-favoritas" component={ FavoriteRecipes } />
+        <Route path="/receitas-feitas" component={ DoneRecipes } />
       </Switch>
     </DetailsContextProvider>
   );
