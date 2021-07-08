@@ -10,7 +10,7 @@ import Cards from '../components/Card';
 
 function Comidas() {
   const {
-    data,
+    // data,
     texto,
     categoria,
     ingredient,
@@ -54,7 +54,7 @@ function Comidas() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [texto]);
 
-  if (data.length < 1) return <h1>Loading...</h1>;
+  // if (data.length < 1) return <h1>Loading...</h1>;
 
   return (
     <div>
