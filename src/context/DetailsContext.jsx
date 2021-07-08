@@ -9,6 +9,7 @@ function DetailsContextProvider({ children }) {
   const [isLoading, setIsLoading] = useState(true);
   const [recommendations, setRecomendations] = useState([]);
   const [isRecommended, setIsRecommended] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(false);
 
   const handleFetch = useCallback(async (url, type) => {
     try {
@@ -51,6 +52,8 @@ function DetailsContextProvider({ children }) {
     fetchMealRecipes,
     isRecommended,
     setIsRecommended,
+    isFavorite,
+    setIsFavorite,
   };
 
   return (

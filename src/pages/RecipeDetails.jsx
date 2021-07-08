@@ -21,7 +21,7 @@ function RecipeDetails({ type }) {
   const [isFetching, setIsFetching] = useState(true);
   const [carouselRecommendations, setRecomendations] = useState([]);
   const [singleRecipe, setRecipe] = useState({});
-  const [isRecipeInProgress, setRecipeInProgress] = useState('Iniciar receita');
+  const [, setRecipeInProgress] = useState('Iniciar receita');
   const { handleFetch,
     isLoading, recipeData,
     recommendations, fetchMealRecipes } = useDetailsProvider();
@@ -96,17 +96,18 @@ function RecipeDetails({ type }) {
         recipeRecommendations={ carouselRecommendations }
         type={ type }
       />
-      {
+      {/* {
         isRecipeInProgress
-          ? (
-            <Button
-              data-testid="start-recipe-btn"
-              onClick={ (ev) => handleClick(ev) }
-              className="recipe-btn"
-            >
-              { isRecipeInProgress }
-            </Button>) : ('')
-      }
+          ? ( */}
+      <Button
+        data-testid="start-recipe-btn"
+        onClick={ (ev) => handleClick(ev) }
+        className="recipe-btn"
+      >
+        Iniciar receita
+      </Button>
+      {/* ) : ('')
+      } */}
     </Container>
   );
 }
