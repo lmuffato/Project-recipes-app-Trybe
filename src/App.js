@@ -10,6 +10,7 @@ import ExploreDrinks from './pages/ExploreDrinks';
 import DetailsContextProvider from './context/DetailsContext';
 import FavoriteRecipes from './pages/FavoriteRecipes';
 import DoneRecipes from './pages/DoneRecipes';
+import ExploreOrigin from './pages/ExploreArea';
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
         <Route path="/explorar" exact component={ Explore } />
         <Route path="/explorar/comidas" component={ ExploreFoods } />
         <Route path="/explorar/bebidas" component={ ExploreDrinks } />
+        <Route path="/explorar/comidas/area" component={ ExploreOrigin } />
         <Route
           exact
           path="/comidas/:id"
