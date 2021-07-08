@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 
 export default function Ingredients({ recipe }) {
   const [ingredients, setIngredients] = useState([]);
@@ -21,6 +22,7 @@ export default function Ingredients({ recipe }) {
   }
 
   useEffect(() => {
+    console.log(recipe);
     setIngredients(getIngredients());
     // setMeasures(getMeasures());
   }, [recipe]);
@@ -43,3 +45,7 @@ export default function Ingredients({ recipe }) {
     </div>
   );
 }
+
+Ingredients.propTypes = {
+  recipe: PropTypes.objectOf(PropTypes.string).isRequired,
+};

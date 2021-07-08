@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export default function RecomCard({ recipe }) {
   return (
@@ -15,3 +16,7 @@ export default function RecomCard({ recipe }) {
     </div>
   );
 }
+
+RecomCard.propTypes = {
+  recipe: PropTypes.objectOf(PropTypes.string).isRequired,
+};
