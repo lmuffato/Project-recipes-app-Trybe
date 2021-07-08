@@ -5,9 +5,9 @@ import shareIcon from '../images/shareIcon.svg';
 
 const copy = require('clipboard-copy');
 
-export default function ShareButton({ recipeId, recipeType }) {
+export default function ShareButton({ recipeId, isFood }) {
   function handleShareClick() {
-    copy(`${window.location.origin}/${recipeType}s/${recipeId}`);
+    copy(`${window.location.origin}/${isFood ? 'comidas' : 'bebidas'}/${recipeId}`);
 
     const toast = document.createElement('p');
     toast.innerText = 'Link copiado!';
@@ -32,5 +32,6 @@ export default function ShareButton({ recipeId, recipeType }) {
 
 ShareButton.propTypes = {
   recipeId: PropTypes.string,
-  recipeType: PropTypes.string,
+  isFood: PropTypes.string,
+  isDrink: PropTypes.string,
 }.isRequired;
