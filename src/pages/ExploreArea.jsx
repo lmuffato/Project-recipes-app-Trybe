@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext } from 'react';
-import PropTypes from 'prop-types';
 import Header from '../components/Header/Header';
 import Footer from '../components/Footer/Footer';
 import useFetchRecipes from '../effects/useFetchRecipes';
@@ -20,10 +19,6 @@ function ExploreOrigin() {
     if (recipesContext.meals) setRecipes(recipesContext.meals); // pega do estado global e seta no estado da pg
   }, [recipesContext]);
 
-  // useEffect(() => {
-  //   getFilteredRecipes(type);
-  // }, [type, searchBarFilters, getFilteredRecipes]);
-
   return (
     <>
       <Header>
@@ -36,9 +31,5 @@ function ExploreOrigin() {
     </>
   );
 }
-
-ExploreOrigin.propTypes = {
-  recipe: PropTypes.string,
-}.isRequired;
 
 export default ExploreOrigin;

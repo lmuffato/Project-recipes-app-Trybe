@@ -13,7 +13,6 @@ function AreasList() {
       const data = await res.json();
       const treatedData = data.meals.map((category) => category.strArea);
       setAreas(treatedData);
-      console.log(treatedData);
     };
 
     fetchCategories();
