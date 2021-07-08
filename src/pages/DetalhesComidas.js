@@ -19,7 +19,6 @@ function DetalhesComidas() {
   const { location: { pathname } } = useHistory();
   const splitPathName = pathname.split('/');
   const idFood = splitPathName[2];
-  console.log('ola');
 
   const fetchMealAPI = async () => {
     const response = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${idFood}`);
