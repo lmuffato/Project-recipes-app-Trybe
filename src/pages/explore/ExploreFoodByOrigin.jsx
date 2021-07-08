@@ -5,14 +5,13 @@ import Footer from '../../components/Footer';
 import {
   fetchMealsCountries,
   fetchSearchMealByCountry,
+  fetchApiFoods,
 } from '../../services/fetchApi';
 
 function ExploreFoodByOrigin() {
   const [countriesList, setCountriesList] = useState([]);
   const [foodListByCountry, setFoodListByCountry] = useState([]);
   const history = useHistory();
-  // console.log(countriesList);
-  // console.log(foodListByCountry);
 
   useEffect(() => {
     fetchMealsCountries()
@@ -20,20 +19,19 @@ function ExploreFoodByOrigin() {
   }, []);
 
   useEffect(() => {
-    fetchSearchMealByCountry('British')
+    fetchApiFoods()
       .then((res) => setFoodListByCountry(res));
   }, []);
-  // const allFoodOption = async () => {
-  //   const food = await fetchMealsCountries();
-  //   setFoodListByCountry(food);
-  // };
 
   const filterMealByCountry = async ({ target: { value } }) => {
-    // if (value === 'All') {
-    //   setFoodListByCountry({});
-    // }
-    const foodCountry = await fetchSearchMealByCountry(value);
-    setFoodListByCountry(foodCountry);
+    if (value === 'All') {
+      const allFood = await fetchApiFoods();
+      setFoodListByCountry(allFood);
+    }
+    if (value !== 'All') {
+      const foodCountry = await fetchSearchMealByCountry(value);
+      setFoodListByCountry(foodCountry);
+    }
   };
 
   const TWELVE = 12;

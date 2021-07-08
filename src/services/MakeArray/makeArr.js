@@ -1,5 +1,6 @@
 import React from 'react';
 import { Carousel } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import generateIdSecondCard, { generateIdFirstCard } from '../MakeIds/generateIdByIndex';
 
 export default function makeArray(array) {
@@ -14,13 +15,19 @@ export default function makeArray(array) {
           className="card card-left"
           data-testid={ `${generateIdFirstCard(i)}-recomendation-card` }
         >
-          <img
-            className="card-img-top"
-            src={ array[generateIdFirstCard(i)].strMealThumb
+          <Link
+            to={ `/${array[generateIdFirstCard(i)].idMeal ? 'comidas'
+              : 'bebidas'}/${array[generateIdFirstCard(i)].idMeal
+                || array[generateIdFirstCard(i)].idDrink}` }
+          >
+            <img
+              className="card-img-top"
+              src={ array[generateIdFirstCard(i)].strMealThumb
               || array[generateIdFirstCard(i)].strDrinkThumb }
-            alt="recipe"
-            height="150px"
-          />
+              alt="recipe"
+              height="150px"
+            />
+          </Link>
           <p>
             { array[generateIdFirstCard(i)].strArea
           || array[generateIdFirstCard(i)].strAlcholic}
@@ -37,13 +44,19 @@ export default function makeArray(array) {
           className="card card-right"
           data-testid={ `${generateIdSecondCard(i)}-recomendation-card` }
         >
-          <img
-            className="card-img-top"
-            src={ array[generateIdSecondCard(i)].strMealThumb
+          <Link
+            to={ `/${array[generateIdSecondCard(i)].idMeal ? 'comidas'
+              : 'bebidas'}/${array[generateIdSecondCard(i)].idMeal
+                || array[generateIdSecondCard(i)].idDrink}` }
+          >
+            <img
+              className="card-img-top"
+              src={ array[generateIdSecondCard(i)].strMealThumb
               || array[generateIdSecondCard(i)].strDrinkThumb }
-            alt="recipe"
-            height="150px"
-          />
+              alt="recipe"
+              height="150px"
+            />
+          </Link>
           <p>{ array[generateIdSecondCard(i)].strArea}</p>
           <h5
             className="card-title"
