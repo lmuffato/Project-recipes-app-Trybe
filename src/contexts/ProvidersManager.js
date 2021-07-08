@@ -1,12 +1,18 @@
 import React from 'react';
 import RecipesProvider from './RecipesProvider';
 import Switcher from '../compenents/Switcher';
+import UserProvider from './UserProvider';
+import SearchbarProvider from './SeachbarProvider';
 
 function ProvidersManager() {
   return (
-    <RecipesProvider>
-      <Switcher />
-    </RecipesProvider>
+    <UserProvider>
+      <SearchbarProvider>
+        <RecipesProvider>
+          <Switcher />
+        </RecipesProvider>
+      </SearchbarProvider>
+    </UserProvider>
   );
 }
 
