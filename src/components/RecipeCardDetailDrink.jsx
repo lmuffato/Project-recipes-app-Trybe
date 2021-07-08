@@ -8,7 +8,7 @@ import FoodsRecomends from './componentsDetails/FoodsRecomends';
 export default function RecipeCardDetailDrink() {
   const [drinkDetails, setDrinkDetails] = useState({});
   const { idDrink } = useParams();
-
+  console.log(drinkDetails);
   useEffect(() => {
     const fetchDrink = async () => {
       const drink = await drinkById(idDrink);
@@ -35,13 +35,14 @@ export default function RecipeCardDetailDrink() {
         data-testid="recipe-photo"
       />
       <h1 data-testid="recipe-title">{ drinkDetails.strDrink }</h1>
+
       <button type="button" data-testid="share-btn">
         <img src={ shareIcon } alt="compartilhar" />
       </button>
       <button type="button" data-testid="favorite-btn">
         <img src={ whiteHeartIcon } alt="favoritar" />
       </button>
-      <h2 data-testid="recipe-category">{ drinkDetails.strCategory }</h2>
+      <h2 data-testid="recipe-category">{ drinkDetails.strAlcoholic }</h2>
       <h3>Ingredientes:</h3>
       <ul>
         {listIngredients.map((ingredient, index) => (

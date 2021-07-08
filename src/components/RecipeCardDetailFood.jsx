@@ -35,7 +35,7 @@ export default function RecipeCardDetailFood() {
         alt="imagem da comida"
         data-testid="recipe-photo"
       />
-      <h1 data-testid="recipe-title">{ foodDetails.strFood }</h1>
+      <h1 data-testid="recipe-title">{ foodDetails.strMeal }</h1>
       <button type="button" data-testid="share-btn">
         <img src={ shareIcon } alt="compartilhar" />
       </button>
