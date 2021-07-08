@@ -13,8 +13,8 @@ import OriginLocation from '../pages/OriginLocation';
 import ProfilePage from '../pages/ProfilePage';
 import DoneRecipes from '../pages/DoneRecipes';
 import FavoriteRecipes from '../pages/FavoriteRecipes';
-import FoodInProcess from '../pages/FoodInProcess';
-import DrinkInProcess from '../pages/DrinkInProcess';
+import FoodInProgress from '../pages/FoodInProgress';
+import DrinkInProgress from '../pages/DrinkInProgress';
 import FoodDetails from '../pages/FoodDetails';
 import DrinkDetails from '../pages/DrinkDetails';
 
@@ -26,8 +26,8 @@ export default function Routes() {
       <Route exact path="/bebidas" component={ DrinkPage } />
       <Route exact path="/comidas/:idMeal" component={ FoodDetails } />
       <Route exact path="/bebidas/:idDrink" component={ DrinkDetails } />
-      <Route exact path="/comidas/:idMeal/in-progress" component={ FoodInProcess } />
-      <Route exact path="/comidas/:idDrink/in-progress" component={ DrinkInProcess } />
+      <Route exact path="/comidas/:idMeal/in-progress" component={ FoodInProgress } />
+      <Route exact path="/comidas/:idDrink/in-progress" component={ DrinkInProgress } />
       <Route exact path="/explorar" component={ ExplorePage } />
       <Route exact path="/explorar/comidas" component={ ExploreFoods } />
       <Route exact path="/explorar/bebidas" component={ ExploreDrinks } />
