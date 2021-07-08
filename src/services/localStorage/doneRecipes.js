@@ -23,14 +23,18 @@ export function verifyDoneRecipesInLS(id) {
   return exist;
 }
 
-function removeRecipeFromProgress(recipe) { // falta implementar esta função
-  const { idDrink, idMeal } = recipe;
-  if (idDrink) {
-    console.log(`Removendo drink ${idDrink}`);
+function removeRecipeFromProgress(id, type) { // falta implementar esta função
+  // const { idDrink, idMeal } = recipe;
+  const progressFromLS = JSON.parse(localStorage.getItem('inProgressRecipes'));
+  if (type === 'drink') {
+    console.log(`Removendo drink ${id}`);
+    delete progressFromLS.cocktails[id];
   }
-  if (idMeal) {
-    console.log(`Removendo meal ${idMeal}`);
+  if (type === 'meal') {
+    console.log(`Removendo meal ${id}`);
+    delete progressFromLS.meals[id];
   }
+  localStorage.setItem('inProgressRecipes', JSON.stringify(progressFromLS));
 }
 
 function doneRecipes(recipe) {
@@ -40,6 +44,7 @@ function doneRecipes(recipe) {
   // monta objeto com variaveis q irão p/ o LS
   const { idDrink, idMeal, strArea, strCategory, strAlcoholic,
     strDrink, strMeal, strDrinkThumb, strMealThumb, strTags } = recipeDrink || recipeFood;
+  removeRecipeFromProgress(idDrink || idMeal, idDrink ? 'drink' : 'meal'); // ao colocar uma receita em doneRecipe, devemos remover de progress.
   if (verifyDoneRecipesInLS(idDrink || idMeal)) {
     alert('Não é possível finalizar uma receita já finalizada!');
     return null;
@@ -55,7 +60,6 @@ function doneRecipes(recipe) {
     doneDate: dataAtualFormatada(),
     tags: strTags || [],
   });
-  removeRecipeFromProgress(recipe); // ao colocar uma receita em doneRecipe, devemos remover de progress.
   localStorage.setItem('doneRecipes', JSON.stringify(doneRecipesConst));
 }
 

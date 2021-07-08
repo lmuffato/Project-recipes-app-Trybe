@@ -14,7 +14,7 @@ function altTextDecorationWithId(recipeL) { // funcao chamada qnd o component é
   // console.log(ingredients[1]);
   if (!ingredients) return null;
   for (let i = 0; i < checkboxs.length; i += 1) {
-    console.log(checkboxs[i].value === ingredients[i]);
+    // console.log(checkboxs[i].value === ingredients[i]);
     if (checkboxs[i].value === (ingredients[i])) {
       checkboxs[i].checked = true;
       // checkboxs[i].id = 'checked';
@@ -28,7 +28,7 @@ function altTextDecorationWithId(recipeL) { // funcao chamada qnd o component é
 function observeAndEnableBtn() {
   const checkBoxs = document.getElementsByName('checkboxInput');
   const checkeds = [];
-  console.log('observando checkboxs...');
+  // console.log('observando checkboxs...');
   checkBoxs.forEach((checkbox) => {
     if (checkbox.checked) checkeds.push(checkbox.value);
   });
@@ -51,9 +51,7 @@ const IngredientsRadios = ({ recipe }) => {
   function altTextDecoration(e) {
     const labels = document.getElementsByTagName('label');
     // const checkboxs = document.getElementsByName('checkboxInput');
-    console.log(e.target);
     const idCheck = e.target.id;
-    // console.log(checkboxs[idCheck]);
     if (labels[idCheck].className === FORM_CHECK_LABEL_CHECKED) {
       labels[idCheck].className = 'form-check-label';
       labels[idCheck].style.textDecorationLine = 'none';
@@ -66,7 +64,7 @@ const IngredientsRadios = ({ recipe }) => {
   function handleChange(e) {
     altTextDecoration(e); // altera o a classe
     observeAndEnableBtn(); // td vez q eu alterar checkboxs vai verificar se pode ativar btn finish
-    console.log(e.target.checked);
+    // console.log(e.target.checked);
     const checkBoxs = document.getElementsByName('checkboxInput');
     const checkeds = [];
     checkBoxs.forEach((checkbox) => {
