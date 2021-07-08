@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-// import useFetchRecipes from '../../effects/useFetchRecipes';
+import useFetchRecipes from '../../effects/useFetchRecipes';
 
 function AreasList() {
   const fetchAreasUrl = 'https://www.themealdb.com/api/json/v1/1/list.php?a=list';
-  // const [, setFetchUrl] = useFetchRecipes('meals');
+  const [, setFetchUrl] = useFetchRecipes('meals');
+  const [selectAreaValue, setSelectAreaValue] = useState('Choose');
   const [areas, setAreas] = useState([]);
 
   useEffect(() => {
@@ -18,31 +19,28 @@ function AreasList() {
     fetchCategories();
   }, [fetchAreasUrl]);
 
-  // const handleCategoryClick = (category) => {
-  //   if (lastCategoryClicked !== category && category !== 'All') {
-  //     const fetchRecipesByCategoryUrl = type === 'meals'
-  //       ? 'https://www.themealdb.com/api/json/v1/1/filter.php?c='
-  //       : 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=';
+  function handleDropdownChange(event) {
+    const { target: { value } } = event;
+    setSelectAreaValue(value);
 
-  //     setLastCategoryClicked(category);
-  //     return setFetchUrl(`${fetchRecipesByCategoryUrl}${category}`);
-  //   }
-
-  //   if (category === 'All') {
-  //     setLastCategoryClicked('All');
-  //   } else {
-  //     setLastCategoryClicked('');
-  //   }
-
-  //   if (type === 'meals') return setFetchUrl('https://www.themealdb.com/api/json/v1/1/search.php?s=');
-  //   return setFetchUrl('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
-  // };
+    if (value === 'All') {
+      return setFetchUrl('https://www.themealdb.com/api/json/v1/1/search.php?s=');
+    }
+    setFetchUrl(`https://www.themealdb.com/api/json/v1/1/filter.php?a=${value}`);
+  }
 
   if (areas.length === 0) return 'Loading locations';
 
   return (
     <div>
-      <select data-testid="explore-by-area-dropdown">
+      <select
+        data-testid="explore-by-area-dropdown"
+        value={ selectAreaValue }
+        onChange={ handleDropdownChange }
+      >
+        {/* Implementação do placeholder 'Escolha um local' conforme dica do estudante Carlos Sá no Slack
+        Link: https://trybecourse.slack.com/archives/C01L16B9XC7/p1625440257358800 */}
+        <option disabled hidden value="Choose">Escolha um local</option>
         { areas.map((area, index) => (
           <option
             key={ index }
@@ -52,6 +50,7 @@ function AreasList() {
             { area }
           </option>
         )) }
+        <option data-testid="All-option" value="All">All</option>
       </select>
     </div>
   );
