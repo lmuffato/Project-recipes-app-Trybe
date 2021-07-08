@@ -21,6 +21,7 @@ function RecipeDetails({ type }) {
   const [isFetching, setIsFetching] = useState(true);
   const [carouselRecommendations, setRecomendations] = useState([]);
   const [singleRecipe, setRecipe] = useState({});
+  const [isRecipeInProgress, setRecipeInProgress] = useState('Iniciar receita');
   const { handleFetch,
     isLoading, recipeData,
     recommendations, fetchMealRecipes } = useDetailsProvider();
@@ -89,20 +90,22 @@ function RecipeDetails({ type }) {
           youTubeVideo={ youTubeVideo.substring(magicNumber) }
           title={ recipeName }
         />) : ''}
-      <div className="title-wrapper">
-        <h3>Recomendadas</h3>
-      </div>
+      <div className="title-wrapper"><h3>Recomendadas</h3></div>
       <Carousel
         recipeRecommendations={ carouselRecommendations }
         type={ type }
       />
-      <Button
-        data-testid="start-recipe-btn"
-        onClick={ (ev) => handleClick(ev) }
-        className="recipe-btn"
-      >
-        Iniciar receita
-      </Button>
+      {
+        isRecipeInProgress
+          ? (
+            <Button
+              data-testid="start-recipe-btn"
+              onClick={ (ev) => handleClick(ev) }
+              className="recipe-btn"
+            >
+              { isRecipeInProgress }
+            </Button>) : ('')
+      }
     </Container>
   );
 }

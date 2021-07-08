@@ -39,3 +39,6 @@ Carousel.propTypes = {
   recipeRecommendations: PropTypes.arrayOf(PropTypes.object).isRequired,
   type: PropTypes.string.isRequired,
 };
+
+// Source - documentação da bilioteca de carousel: https://github.com/express-labs/pure-react-carousel#image-
+// https://express-labs.github.io/pure-react-carousel/

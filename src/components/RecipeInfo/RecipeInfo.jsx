@@ -1,56 +1,49 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import format from 'date-fns/format';
-import ptBR from 'date-fns/locale/pt-BR';
+import { useHistory } from 'react-router-dom';
 import shareIconImg from '../../images/shareIcon.svg';
 import favoriteIconImg from '../../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../../images/blackHeartIcon.svg';
 import Button from '../Generics/Button';
+import handleSetFavoritesToLocalStorage from '../../helpers/localStorageHelper';
 
+const THREE_SECONDS = 3000;
 function RecipeInfo(props) {
   const { recipeName, recipeThumb, children, type, recipe } = props;
+  const history = useHistory();
+  const recipeURL = history.location.pathname;
   const [copyToClipboard, setCopyToClipboard] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
-  const recipeId = type === 'meals' ? recipe.idMeal : recipe.idDrink;
-  const detailsUrl = type === 'meals' ? `/comidas/${recipe.idMeal}`
-    : `/bebidas/${recipe.idDrink}`;
+  const [, setFavoriteRecipes] = useState([]);
+  // const recipeId = type === 'meals' ? recipe.idMeal : recipe.idDrink;
+  // const recipeType = type === 'meals' ? 'comida' : 'bebida';
 
-  const currentDate = format(new Date(), 'EEEEEE, d MMMM YYY', {
-    locale: ptBR,
-  });
+  useEffect(() => {
+    const favoriteStorage = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    if (favoriteStorage) setFavoriteRecipes(favoriteStorage);
+  }, []);
 
-  function handleCopyToClipboard(ev) {
-    // Lógica de copiar para o clipboard pesquisada no StackOverflow
-    // Link: https://stackoverflow.com/questions/39501289/in-reactjs-how-to-copy-text-to-clipboard
-    ev.preventDefault();
-    navigator.clipboard.writeText(`http://localhost:3000${detailsUrl}`);
+  const handleCopyToClipboard = () => {
+    navigator.clipboard.writeText(`http://localhost:3000${recipeURL}`);
     setCopyToClipboard(true);
-  }
+    setTimeout(() => {
+      setCopyToClipboard(false);
+    }, THREE_SECONDS);
+  };
 
-  const handleFavoriteRecipe = (ev) => {
-    ev.preventDefault();
+  const handleFavoriteRecipe = () => {
     setIsFavorite((previousState) => !previousState);
-    const favoriteRecipesArr = [];
-    const recipeObj = {
-      id: recipeId,
-      type,
-      area: recipe.strArea || '',
-      category: recipe.strCategory,
-      alcoholicOrNot: recipe.strAlcoholic || '',
-      name: recipeName,
-      image: recipeThumb,
-      doneDate: currentDate,
-      tags: recipe.strTags,
-    };
-    const getFavoriteRecipe = JSON.parse(localStorage.getItem('favoriteRecipes'));
-    if (getFavoriteRecipe) {
-      const getFavorites = JSON.parse(localStorage.getItem('favoriteRecipes'));
-      const setToFavoriteRecipes = [...getFavorites, recipeObj];
-      localStorage.setItem('favoriteRecipes', JSON.stringify(setToFavoriteRecipes));
-    } else {
-      const newFavoriteRecipes = [...favoriteRecipesArr, recipeObj];
-      localStorage.setItem('favoriteRecipes', JSON.stringify(newFavoriteRecipes));
-    }
+    // const recipeObj = {
+    //   id: recipeId,
+    //   type: recipeType,
+    //   area: recipe.strArea || '',
+    //   category: recipe.strCategory || '',
+    //   alcoholicOrNot: recipe.strAlcoholic || '',
+    //   name: recipeName,
+    //   image: recipeThumb,
+    // };
+    // // handleRemove();
+    // handleSetFavoritesToLocalStorage(recipeObj);
   };
 
   return (
@@ -59,23 +52,24 @@ function RecipeInfo(props) {
         <img src={ recipeThumb } alt="Foto da receita" data-testid="recipe-photo" />
       </div>
       <div className="recipe-info">
-        { copyToClipboard && 'Link copiado!' }
         <h2 data-testid="recipe-title">{ recipeName }</h2>
         <div className="icons">
-          <Button className="icon-btn" onClick={ (ev) => handleCopyToClipboard(ev) }>
-            <img
-              src={ shareIconImg }
-              alt="ícone de compartilhar"
-              data-testid="share-btn"
-            />
-          </Button>
-          <Button className="icon-btn" onClick={ (ev) => handleFavoriteRecipe(ev) }>
-            <img
-              src={ isFavorite ? blackHeartIcon : favoriteIconImg }
-              alt="ícone de favoritar"
-              data-testid="favorite-btn"
-            />
-          </Button>
+          { copyToClipboard ? <span>Link copiado!</span> : '' }
+          <input
+            type="image"
+            src={ shareIconImg }
+            alt="ícone de compartilhar"
+            data-testid="share-btn"
+            onClick={ handleCopyToClipboard }
+          />
+          <input
+            type="image"
+            src={ isFavorite ? blackHeartIcon : favoriteIconImg }
+            alt="ícone de favoritar"
+            data-testid="favorite-btn"
+            onClick={ handleFavoriteRecipe }
+          />
+
         </div>
       </div>
       <div>{ children }</div>
@@ -96,3 +90,7 @@ RecipeInfo.propTypes = {
   type: PropTypes.string.isRequired,
   recipe: PropTypes.shape(),
 };
+
+// Lógica de copiar para o clipboard pesquisada no StackOverflow
+// Link: https://stackoverflow.com/questions/39501289/in-reactjs-how-to-copy-text-to-clipboard
+// https://dev.to/myogeshchavan97/an-easy-way-for-adding-copy-to-clipboard-functionality-in-react-app-4oo0
