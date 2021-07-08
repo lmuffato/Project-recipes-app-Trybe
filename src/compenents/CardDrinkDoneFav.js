@@ -3,13 +3,14 @@ import { Link } from 'react-router-dom';
 import Share from '../images/shareIcon.svg';
 
 function CardDrinkDoneFav(recepie, index) {
-  const { id, image, doneDate, alcoholicOrNot } = recepie;
+  const { id, name, image, doneDate, alcoholicOrNot } = recepie.recepie;
   return (
     <div>
       <Link to={ `/bebidas/${id}` }>
         <img
           data-testid={ `${index}-horizontal-image` }
           alt="the recepie drink"
+          width='50px'
           src={ image }
         />
         <p data-testid={ `${index}-horizontal-name` }>{ name }</p>

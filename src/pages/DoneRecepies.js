@@ -1,19 +1,40 @@
-import React, { useEffect, useState } from 'react';
+import React, { /* useEffect,  */useState } from 'react';
 import CardMealDoneFav from '../compenents/CardMealDoneFav';
 import CardDrinkDoneFav from '../compenents/CardDrinkDoneFav';
 
 function DoneRecepies() {
-  const [myDoneRecepies, setMyDoneRecepies] = useState([]);
-  const [showDoneRecepies, setShowRecepies] = useState(doneRecepies);
+  const [myDoneRecepies/* , setMyDoneRecepies */] = useState();
+  const [showDoneRecepies, setShowRecepies] = useState([{
+    id: 12345,
+    type: 'meal',
+    area: 'japonese',
+    category: 'Beef',
+    alcoholicOrNot: 'not',
+    name: 'pao com bife',
+    image: 'https://st2.depositphotos.com/1571400/5785/i/600/depositphotos_57856553-stock-photo-candy.jpg',
+    doneDate: '14/16/22',
+    tags: ['tag1', 'tag2'],
+  }, 
+  {
+    id: 12345,
+    type: 'drink',
+    area: 'japonese',
+    category: 'Beef',
+    alcoholicOrNot: 'not',
+    name: 'pao com bife',
+    image: 'https://st2.depositphotos.com/1571400/5785/i/600/depositphotos_57856553-stock-photo-candy.jpg',
+    doneDate: '14/16/22',
+    tags: ['tag1', 'tag1'],
+  }]);
 
-  // funções para pegar as receitas do local storage
+  /*   // funções para pegar as receitas do local storage
   const getDoneRecepies = () => {
-    const doneRecepiesString = localStorage.getItem('doneRecipes');
+    const doneRecepiesString = localStorage.getItem('doneRecepies');
     const allDoneRecepies = JSON.parse(doneRecepiesString);
     return allDoneRecepies;
-  };
+  }; */
 
-  useEffect(() => {
+  /*   useEffect(() => {
     // função que checa se há receitas no local storage
     const checkDoneRecepies = () => {
       const recepiesStorage = getDoneRecepies();
@@ -21,14 +42,15 @@ function DoneRecepies() {
         global.alert('Você ainda não concluiu nenhuma receita!');
       } else {
         setMyDoneRecepies(recepiesStorage);
+        setShowRecepies(recepiesStorage);
       }
+      checkDoneRecepies();
     };
-
-    checkDoneRecepies();
-  }, []);
+  }, []); */
 
   function setMealOrDrink(recepie, index) {
     if (recepie.type === 'meal') {
+      console.log(recepie);
       return (
         <CardMealDoneFav
           recepie={ recepie }
