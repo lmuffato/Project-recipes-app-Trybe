@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import FavoriteRecipeCard from '../components/FavoriteRecipeCard/FavoriteRecipeCard';
+import filterRecipesByType from '../utils/filterRecipesByType';
 
 function FavoriteRecipes() {
   const [favoriteRecipes, setFavoriteRecipes] = useState([]);
@@ -10,18 +11,6 @@ function FavoriteRecipes() {
     const favoriteStorage = JSON.parse(localStorage.getItem('favoriteRecipes'));
     if (favoriteStorage) setFavoriteRecipes(favoriteStorage);
   }, []);
-
-  function filterRecipesByType(recipes, filter) {
-    if (filter === 'Food') {
-      return recipes.filter((recipe) => recipe.type === 'comida');
-    }
-
-    if (filter === 'Drinks') {
-      return recipes.filter((recipe) => recipe.type === 'bebida');
-    }
-
-    return recipes;
-  }
 
   function handleRemoveRecipe(index) {
     const updatedFavoriteRecipes = favoriteRecipes

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import DoneRecipeCard from '../components/DoneRecipeCard/DoneRecipeCard';
+import filterRecipesByType from '../utils/filterRecipesByType';
 
 function DoneRecipes() {
   const [doneRecipes, setDoneRecipes] = useState([]);
@@ -10,18 +11,6 @@ function DoneRecipes() {
     const doneStorage = JSON.parse(localStorage.getItem('doneRecipes'));
     if (doneStorage) setDoneRecipes(doneStorage);
   }, []);
-
-  function filterRecipesByType(recipes, filter) {
-    if (filter === 'Food') {
-      return recipes.filter((recipe) => recipe.type === 'comida');
-    }
-
-    if (filter === 'Drinks') {
-      return recipes.filter((recipe) => recipe.type === 'bebida');
-    }
-
-    return recipes;
-  }
 
   function handleRemoveRecipe(index) {
     const updatedDoneRecipes = doneRecipes
