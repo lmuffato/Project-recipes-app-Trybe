@@ -8,7 +8,7 @@ import heartColorService from '../services/heartColorService';
 function FavoriteButton({ type }) {
   const { currentDrink, currentMeal,
     setFavoriteRecipe, favoriteRecipe } = useContext(UserContext);
-  const [heartColor, setHeartColor] = useState('white');
+  const [heartColor, setHeartColor] = useState('');
 
   const handleClick = () => {
     if (type === 'comida') {
@@ -64,14 +64,14 @@ function FavoriteButton({ type }) {
       setHeartColor,
     };
     heartColorService(obj);
-  }, [favoriteRecipe]);
+  });
 
   return (
-    <button data-testid="favorite-btn" type="button" onClick={ handleClick }>
+    <button type="button" onClick={ handleClick }>
       {heartColor === 'white' ? (
-        <img src={ whiteHeartIcon } alt="favoritar" />
+        <img data-testid="favorite-btn" src={ whiteHeartIcon } alt="favoritar" />
       ) : (
-        <img src={ blackHeartIcon } alt="favoritar" />
+        <img data-testid="favorite-btn" src={ blackHeartIcon } alt="favoritar" />
       )}
     </button>
   );
