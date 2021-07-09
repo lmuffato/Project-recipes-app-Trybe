@@ -5,15 +5,26 @@ import shareIcon from '../../images/shareIcon.svg';
 import context from '../../store/Context';
 import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
 
+const copy = require('clipboard-copy');
+
 function DrinkInProgress() {
   const location = useLocation();
   const id = location.pathname.split('/')[2];
   const [drinkDetail, setDrinkDetail] = useState([]);
   const [shouldRedirect, setShouldRedirect] = useState(false);
+  const [alert, setAlert] = useState('');
   const { inProgressRecipes } = useContext(context);
 
   const handleClick = () => {
     setShouldRedirect(true);
+  };
+
+  const copyLink = () => {
+    const shareLink = location.pathname;
+    copy(`http://localhost:3000/${shareLink}`);
+    if (alert === '') {
+      setAlert(<div>Link copiado!</div>);
+    }
   };
 
   useEffect(() => {
@@ -84,8 +95,18 @@ function DrinkInProgress() {
       <img data-testid="recipe-photo" src={ strDrinkThumb } alt="drink" />
       <h1 data-testid="recipe-title">{strDrink}</h1>
       <h2 data-testid="recipe-category">{strAlcoholic}</h2>
-      <img data-testid="share-btn" src={ shareIcon } alt="share-icon" />
-      <img data-testid="favorite-btn" src={ whiteHeartIcon } alt="favorite icon" />
+      <button
+        type="button"
+        onClick={ copyLink }
+      >
+        <img data-testid="share-btn" src={ shareIcon } alt="share-icon" />
+      </button>
+      <button
+        type="button"
+      >
+        <img data-testid="favorite-btn" src={ whiteHeartIcon } alt="favorite icon" />
+      </button>
+      {alert}
       <h4>Ingredients :</h4>
       {ingredientsList()}
       {measuresList()}

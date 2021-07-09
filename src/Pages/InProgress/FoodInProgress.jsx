@@ -1,19 +1,31 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { useLocation, Redirect, Link } from 'react-router-dom';
+import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
+import blackHeartIcon from '../../images/blackHeartIcon.svg';
 import { fetchFoodForId } from '../../services/Data';
 import shareIcon from '../../images/shareIcon.svg';
 import context from '../../store/Context';
-import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
+
+const copy = require('clipboard-copy');
 
 function FoodInProgress() {
   const location = useLocation();
   const id = location.pathname.split('/')[2];
   const [foodDetail, setFoodDetail] = useState([]);
   const [shouldRedirect, setShouldRedirect] = useState(false);
+  const [alert, setAlert] = useState('');
   const { inProgressRecipes } = useContext(context);
 
   const handleClick = () => {
     setShouldRedirect(true);
+  };
+
+  const copyLink = () => {
+    const shareLink = location.pathname;
+    copy(`http://localhost:3000/${shareLink}`);
+    if (alert === '') {
+      setAlert(<div>Link copiado!</div>);
+    }
   };
 
   useEffect(() => {
@@ -82,8 +94,18 @@ function FoodInProgress() {
       <img data-testid="recipe-photo" src={ strMealThumb } alt="food" />
       <h1 data-testid="recipe-title">{strMeal}</h1>
       <h2 data-testid="recipe-category">{strCategory}</h2>
-      <img data-testid="share-btn" src={ shareIcon } alt="share-icon" />
-      <img data-testid="favorite-btn" src={ whiteHeartIcon } alt="favorite icon" />
+      <button
+        type="button"
+        onClick={ copyLink }
+      >
+        <img data-testid="share-btn" src={ shareIcon } alt="share-icon" />
+      </button>
+      <button
+        type="button"
+      >
+        <img data-testid="favorite-btn" src={ whiteHeartIcon } alt="favorite icon" />
+      </button>
+      {alert}
       <h4>Ingredients :</h4>
       {ingredientsList()}
       {measuresList()}
