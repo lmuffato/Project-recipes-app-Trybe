@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { handleCurrentSearch } from '../actions';
 
 class MainFoodCard extends React.Component {
   constructor(props) {
@@ -18,14 +20,18 @@ class MainFoodCard extends React.Component {
   }
 
   componentDidMount() {
-    // const { history: { location: { pathname } } } = this.props;
-    // if (pathname !== '/comidas') {
-    //   this.FilterCategoryFood();
-    //   this.loadingFoodCategories();
-    // }
+    const { currentSearch } = this.props;
+    if (currentSearch.length > 1) {
+      this.renderCurrentSearch();
+    } else {
+      this.FilterCategoryFood();
+      this.loadingFoodCategories();
+    }
+  }
 
-    this.FilterCategoryFood();
-    this.loadingFoodCategories();
+  componentWillUnmount() {
+    const { cleanGlobalSearch } = this.props;
+    cleanGlobalSearch([]);
   }
 
   handleClick(e) {
@@ -86,6 +92,19 @@ class MainFoodCard extends React.Component {
       });
   }
 
+  renderCurrentSearch() {
+    const { currentSearch } = this.props;
+    if (currentSearch.length > 1) {
+      this.setState({
+        isLoading: false,
+        foodData: currentSearch,
+      });
+    } else {
+      this.FilterCategoryFood();
+      this.loadingFoodCategories();
+    }
+  }
+
   render() {
     const { history } = this.props;
     const { foodData, isLoading, categories, isCharging } = this.state;
@@ -134,24 +153,18 @@ class MainFoodCard extends React.Component {
   }
 }
 
+const mapStateToProps = (state) => ({
+  currentSearch: state.recipe.currentSearch,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  cleanGlobalSearch: (currentSearch) => dispatch(handleCurrentSearch(currentSearch)),
+});
+
 MainFoodCard.propTypes = {
   history: PropTypes.shape().isRequired,
+  currentSearch: PropTypes.shape().isRequired,
+  cleanGlobalSearch: PropTypes.func.isRequired,
 };
 
-export default MainFoodCard;
-
-// o clique de pesquisar(ou no card ingredientes) dispara a action pro global com  dizendo "tem uma pesquisa corrente"
-// setta no global o resultado do fetch de pesquisa
-
-// REFACTOR MAIN PAGE
-// componente mainfoodcard lê essa chave do state global no didmount
-// e condiciona sua renderização natural (12 cards random) ou (se houver pesquisa corrente) prioriza pesquisa do global
-// no didmount da main page - action para limpar o global de pesquisa corrente
-
-// -- COMPONENTE SEARCH BUTTON
-// resolver bugzinho renderização dos inputs - verificar updates Will -
-// refactor onde precisa no componente search bar pra receber a logica de disptach da pesquisa
-// verificar lógica do length = 1 redirect p/ detalhes
-
-// settar o reducer/actions - DONE
-// settar o disparo action nas pag explorar ingredientes - DONE
+export default connect(mapStateToProps, mapDispatchToProps)(MainFoodCard);

@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { handleCurrentSearch } from '../actions';
 
 class MainDrinkCard extends React.Component {
   constructor(props) {
@@ -18,8 +20,18 @@ class MainDrinkCard extends React.Component {
   }
 
   componentDidMount() {
-    this.FilterCategoryDrink();
-    this.loadingDrinkCategories();
+    const { currentSearch } = this.props;
+    if (currentSearch.length > 1) {
+      this.renderCurrentSearch();
+    } else {
+      this.FilterCategoryDrink();
+      this.loadingDrinkCategories();
+    }
+  }
+
+  componentWillUnmount() {
+    const { cleanGlobalSearch } = this.props;
+    cleanGlobalSearch([]);
   }
 
   handleClick(e) {
@@ -80,6 +92,14 @@ class MainDrinkCard extends React.Component {
       });
   }
 
+  renderCurrentSearch() {
+    const { currentSearch } = this.props;
+    this.setState({
+      isLoading: false,
+      drinkData: currentSearch,
+    });
+  }
+
   render() {
     const { history } = this.props;
     const { drinkData, isLoading, categories, isCharging } = this.state;
@@ -129,8 +149,18 @@ class MainDrinkCard extends React.Component {
   }
 }
 
-MainDrinkCard.propTypes = {
-  history: PropTypes.shape(),
-}.isRequired;
+const mapStateToProps = (state) => ({
+  currentSearch: state.recipe.currentSearch,
+});
 
-export default MainDrinkCard;
+const mapDispatchToProps = (dispatch) => ({
+  cleanGlobalSearch: (currentSearch) => dispatch(handleCurrentSearch(currentSearch)),
+});
+
+MainDrinkCard.propTypes = {
+  history: PropTypes.shape().isRequired,
+  currentSearch: PropTypes.shape().isRequired,
+  cleanGlobalSearch: PropTypes.func.isRequired,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(MainDrinkCard);
