@@ -7,6 +7,9 @@ function ProviderRecipes({ children }) {
   const [activeFilters, setFilter] = useState([]);
   const [recipeDetail, setDetail] = useState({});
   const [categories, setCategories] = useState([]);
+  const [search, setSearch] = useState('');
+  const [radioFilter, setRadioFilter] = useState('');
+  const [searchBtn, setSearchBtn] = useState(false);
 
   const getCategories = async (type) => {
     const siteName = type === 'Meal' ? 'meal' : 'cocktail';
@@ -41,8 +44,34 @@ function ProviderRecipes({ children }) {
     console.log(activeFilters, recipeList);
     setRecipes(recipeList);
   };
+
+  // esta função retorna o endpoint da API baseado no filtro escolhido
+  const chooseEndpoint = () => {
+    let endpoint = '';
+    if (radioFilter === 'nome') {
+      endpoint = `https://www.themealdb.com/api/json/v1/1/search.php?s=${search}`;
+    }
+    if (radioFilter === 'ingrediente') {
+      endpoint = `https://www.themealdb.com/api/json/v1/1/filter.php?i=${search}`;
+    }
+    if (radioFilter === 'primeira-letra') {
+      endpoint = `https://www.themealdb.com/api/json/v1/1/search.php?f=${search}`;
+    }
+    return endpoint;
+  };
+
+  // esta função vai fazer a solicitação das receitas e
+  // aplicar os filtros devidos
+  const fetchRecipes = async () => {
+    const endpoint = chooseEndpoint();
+    const response = await fetch(endpoint);
+    const data = await response.json();
+    setRecipes(data);
+    console.log(data);
+  };
+
   const fetchDetail = (recipeId) => {
-    // Esta função deveria fazer a requisitção de detalhes de
+    // Esta função deveria fazer a requisição de detalhes de
     // uma receita quando esta for clicada
     console.log(recipeId);
     setDetail({});
@@ -51,6 +80,7 @@ function ProviderRecipes({ children }) {
   return (
     <ContextRecipes.Provider
       value={ {
+        activeFilters,
         filteredRecipe,
         getRecipes,
         categories,
@@ -58,6 +88,13 @@ function ProviderRecipes({ children }) {
         recipeDetail,
         fetchDetail,
         setFilter,
+        search,
+        setSearch,
+        radioFilter,
+        setRadioFilter,
+        searchBtn,
+        setSearchBtn,
+        fetchRecipes,
       } }
     >
       { children }
