@@ -3,7 +3,7 @@ import useCategories from '../../hooks/useCategories';
 import useRecipes from '../../hooks/useRecipes';
 import MainCard from '../../components/MainCard';
 import { fetchRecipesByCategory } from '../../services/MainScreenAPI';
-import Header from '../../components/Header/Header';
+import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 
 const dataForDrinkApi = {

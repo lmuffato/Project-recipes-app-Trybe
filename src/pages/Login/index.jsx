@@ -53,8 +53,8 @@ function Login() {
             id="password-input"
             data-testid="password-input"
             value={ userPwd }
+            type="password"
             onChange={ (event) => handleChange(event, setUserPwd) }
-            type="text"
             placeholder="Password"
           />
         </label>

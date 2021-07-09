@@ -3,8 +3,9 @@ import useCategories from '../../hooks/useCategories';
 import useRecipes from '../../hooks/useRecipes';
 import MainCard from '../../components/MainCard';
 import { fetchRecipesByCategory } from '../../services/MainScreenAPI';
-import Header from '../../components/Header/Header';
+import Header from '../../components/Header';
 import Footer from '../../components/Footer';
+import Search from '../../components/Search';
 
 const dataForMealApi = {
   domain: 'themealdb',
@@ -74,7 +75,7 @@ function MealScreen() {
 
   return (
     <div>
-      <Header title="Comidas" icon="true" currentPage="Foods" />
+      <Header title="Comidas" icon="true" currentPage="Foods" component={ <Search /> } />
       {renderFilters()}
       {renderCards()}
       <Footer />
