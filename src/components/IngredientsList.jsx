@@ -7,8 +7,8 @@ function IngredientsList({ currentMeal }) {
     meal[0].includes('Ingredient') && meal[1]
   ));
   const measureArray = mealObj.filter((meal) => {
-    const xablau = meal[1] !== ' ' && meal[1] !== null;
-    return meal[0].includes('Measure') && xablau;
+    const measure = meal[1] !== ' ' && meal[1] !== null;
+    return meal[0].includes('Measure') && measure;
   });
 
   return (

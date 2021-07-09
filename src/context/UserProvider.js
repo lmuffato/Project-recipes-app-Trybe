@@ -8,7 +8,10 @@ function UserProvider({ children }) {
   let storage = [];
   const localStorage = getItemFromLocalStorage('favoriteRecipes');
   if (localStorage) storage = localStorage;
-
+  let inProgress = { meals: {}, cocktails: {} };
+  const localInProgress = getItemFromLocalStorage('inProgressRecipes');
+  if (localInProgress && localInProgress.meals !== {}) inProgress = localInProgress;
+  const [inProgressStorage, setInProgressStorage] = useState(inProgress);
   const [email, setEmail] = useState('');
   const [globalRecipe, setGlobalRecipe] = useState('');
   const [globalId, setGlobalId] = useState('');
@@ -49,6 +52,8 @@ function UserProvider({ children }) {
         currentDrink,
         favoriteRecipe,
         setFavoriteRecipe,
+        inProgressStorage,
+        setInProgressStorage,
       } }
     >
       {children}

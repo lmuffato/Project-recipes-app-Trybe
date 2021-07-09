@@ -66,7 +66,7 @@ function MealCardDetail() {
       <h4>Ingredients</h4>
       <IngredientsList currentMeal={ currentMeal } />
       <h4>Instructions</h4>
-      <span data-testid="instructions">{ currentMeal.strInstructions }</span>
+      <p data-testid="instructions">{ currentMeal.strInstructions }</p>
       <ReactPlayer
         data-testid="video"
         width="320"

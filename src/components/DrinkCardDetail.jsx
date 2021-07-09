@@ -71,7 +71,7 @@ function DrinkCardDetail() {
       <h4>Ingredients</h4>
       <IngredientsList currentMeal={ currentDrink } />
       <h4>Instructions</h4>
-      <span data-testid="instructions">{ currentDrink.strInstructions }</span>
+      <p data-testid="instructions">{ currentDrink.strInstructions }</p>
       <h4>Recommended Meals</h4>
       <div className="carousel-list">
         {fullRecipes.map((meal, index) => (
