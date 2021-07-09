@@ -19,6 +19,8 @@ export default function MealDetails() {
   const [recomendations, setRecomendations] = useState();
   const globalState = useSelector((state) => state.detailsReducer.favorites);
   const history = useHistory();
+  const INICIAR_RECEITA = 'Iniciar Receita';
+  // const [startButton, setStartButton] = useState(INICIAR_RECEITA);
 
   useEffect(() => {
     const mealDrinks = async () => {
@@ -54,10 +56,26 @@ export default function MealDetails() {
     setCopy('Link copiado!');
   };
 
+  const testButton = () => {
+    const lS = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    if (lS) {
+      const ids = Object.keys(lS);
+      if (ids.length > 0) {
+        const find = ids.filter((e) => e === id);
+        return (
+          find ? 'Continuar Receita' : INICIAR_RECEITA
+        );
+      }
+    }
+    return INICIAR_RECEITA;
+  };
+
   const renderMealRecipe = () => {
     const ingredients = [];
     const measure = [];
-    if (data) {
+    const result = testButton();
+
+    if (data && data.length > 0) {
       const array = Object.entries(data[0]);
       array.forEach((item) => {
         if (item[0].includes('strIngredient') && item[1] !== null) {
@@ -100,7 +118,7 @@ export default function MealDetails() {
             data-testid="start-recipe-btn"
             onClick={ () => history.push(`/comidas/${idMeal}/in-progress`) }
           >
-            Iniciar Receita
+            { result }
           </button>
         </div>
       );

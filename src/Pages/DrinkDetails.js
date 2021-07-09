@@ -6,6 +6,7 @@ import shareIcon from '../images/shareIcon.svg';
 import RecomendationCard from '../util/renderRecomendationCard';
 import '../components/Footer.css';
 import RenderFavoriteHeart from '../util/addOrRemoveFavorite';
+import RenderIngredients from '../util/mealDetailsComponents/renderIngredients';
 
 export default function DrinkDetails() {
   const id = window.location.href.split('/')[4];
@@ -15,6 +16,8 @@ export default function DrinkDetails() {
   const [copy, setCopy] = useState('');
   const [recomendations, setRecomendations] = useState();
   const history = useHistory();
+  const INICIAR_RECEITA = 'Iniciar Receita';
+  // const [startButton, setStartButton] = useState(INICIAR_RECEITA);
 
   useEffect(() => {
     const fetchDrinks = async () => {
@@ -51,12 +54,27 @@ export default function DrinkDetails() {
     setCopy('Link copiado!');
   };
 
+  const testButton = () => {
+    const lS = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    if (lS) {
+      const ids = Object.keys(lS);
+      if (ids.length > 0) {
+        const find = ids.filter((e) => e === id);
+        return (
+          find ? 'Continuar Receita' : INICIAR_RECEITA
+        );
+      }
+    }
+    return INICIAR_RECEITA;
+  };
+
   const renderDrinkRecipe = () => {
     const ingredients = [];
     const measure = [];
+    const result = testButton();
+
     if (data) {
       const array = Object.entries(data[0]);
-
       array.forEach((item) => {
         if (item[0].includes('strIngredient') && item[1] !== null && item[1] !== '') {
           ingredients.push(item[1]);
@@ -86,14 +104,7 @@ export default function DrinkDetails() {
           <h3 data-testid="recipe-category">{strAlcoholic}</h3>
           <h2>Ingredients</h2>
           <ul>
-            { ingredients.map((item, index) => (
-              <li
-                key={ index }
-                data-testid={ `${index}-ingredient-name-and-measure` }
-              >
-                {`${item} ${(measure[index] ? `- ${measure[index]}` : '')}`}
-              </li>
-            ))}
+            {RenderIngredients(ingredients, measure)}
           </ul>
           <h2>Instructions</h2>
           <p data-testid="instructions">{strInstructions}</p>
@@ -109,7 +120,7 @@ export default function DrinkDetails() {
             data-testid="start-recipe-btn"
             onClick={ () => history.push(`/bebidas/${idDrink}/in-progress`) }
           >
-            Iniciar Receita
+            { result }
           </button>
         </div>
       );
