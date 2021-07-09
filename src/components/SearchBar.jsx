@@ -1,20 +1,28 @@
 import React, { useContext } from 'react';
+import { useLocation } from 'react-router';
 import ContextRecipes from '../context/ContextRecipes';
 
 function SearchBar() {
   const { setSearch, setRadioFilter,
     setSearchBtn, fetchRecipes, search, radioFilter } = useContext(ContextRecipes);
+  const { pathname } = useLocation();
 
+  /*  Ternário pra identificar a rota da página e enviá-la pro filtro de comidas/bebidas */
+  const link = pathname === '/comidas' ? 'mealdb' : 'cocktaildb';
+
+  /* Alerta quando mais de um caracter é escrito na opção de filtro primeira letra */
   function alertOneLetter() {
     if (search.length > 1 && radioFilter === 'primeira-letra') {
       return window.alert('Sua busca deve conter somente 1 (um) caracter');
     }
   }
 
+  /* Captura o valor da barra de input */
   function handleChangeSearch({ target }) {
     setSearch(target.value);
   }
 
+  /* Captura o valor do input radio selecionado */
   function handleChangeRadio({ target }) {
     setRadioFilter(target.value);
   }
@@ -63,8 +71,8 @@ function SearchBar() {
       <button
         type="button"
         data-testid="exec-search-btn"
-        onClick={ () => {
-          fetchRecipes();
+        onClick={ async () => {
+          await fetchRecipes(link);
           setSearchBtn(true);
           alertOneLetter();
         } }
