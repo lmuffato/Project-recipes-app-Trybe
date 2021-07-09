@@ -20,7 +20,7 @@ function MainRecipes() {
     if (recipes) setRenderRecipes(recipes);
     if (mealsAndDrinkByIngredients) setRenderRecipes(mealsAndDrinkByIngredients);
     if (searchedRecipes) setRenderRecipes(searchedRecipes);
-  }, [recipes]);
+  }, [recipes, mealsAndDrinkByIngredients, searchedRecipes]);
 
   console.log(mealsAndDrinkByIngredients);
 

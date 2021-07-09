@@ -1,12 +1,16 @@
 import React, { useEffect, useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
+import Footer from '../compenents/Footer';
+import Header from '../compenents/Header';
 import RecipesContext from '../contexts/RecipesContext';
+import SearchbarContext from '../contexts/SearchbarContext';
 
 function DrinksIngredients() {
   const [drinkIngredients, setDrinkIngredients] = useState([]);
   const {
     mealsAndDrinkByIngredients, setMealsAndDrinkByIngredients,
   } = useContext(RecipesContext);
+  const { setHideSearchBtn } = useContext(SearchbarContext);
   const TWELVE = 12;
 
   useEffect(() => {
@@ -14,9 +18,9 @@ function DrinksIngredients() {
       const endpoint = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list';
       const { drinks } = await fetch(endpoint).then((data) => data.json());
       setDrinkIngredients(drinks);
-      // console.log(mealsAndDrinkByIngredients);
     };
     getIngredients();
+    setHideSearchBtn(false);
   }, []);
 
   const getRecipesByIngredient = async (param) => {
@@ -53,7 +57,11 @@ function DrinksIngredients() {
   };
 
   return (
-    getTwelveIngredients()
+    <>
+      <Header />
+      { getTwelveIngredients() }
+      <Footer />
+    </>
   );
 }
 

@@ -1,11 +1,15 @@
 import React, { useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import Footer from '../compenents/Footer';
+import Header from '../compenents/Header';
 import RecipesContext from '../contexts/RecipesContext';
+import SearchbarContext from '../contexts/SearchbarContext';
 
 function FoodsIngredients() {
   const {
     ingredients, setIngredients, setMealsAndDrinkByIngredients,
   } = useContext(RecipesContext);
+  const { setHideSearchBtn } = useContext(SearchbarContext);
   const TWELVE = 12;
 
   const getRecipesByIngredients = async (param) => {
@@ -22,6 +26,7 @@ function FoodsIngredients() {
       setIngredients(meals);
     };
     getIngredients();
+    setHideSearchBtn(false);
   }, []);
 
   const getTwelveIngredients = () => {
@@ -32,33 +37,37 @@ function FoodsIngredients() {
         // const id = index - 1;
         const name = eachIngredient.strIngredient;
         return (
-          <div data-testid={ `${index}-ingredient-card` } key={ index }>
-            <Link
-              to="/comidas"
-              onClick={
-                (e) => getRecipesByIngredients(e.target.alt || e.target.innerText)
-              }
+          <Link
+            to="/comidas"
+            onClick={
+              (e) => getRecipesByIngredients(e.target.alt || e.target.innerText)
+            }
+            data-testid={ `${index}-ingredient-card` }
+            key={ index }
+          >
+            <img
+              data-testid={ `${index}-card-img` }
+              src={ `https://www.themealdb.com/images/ingredients/${name}-Small.png` }
+              alt={ name }
+            />
+            <p
+              value={ name }
+              data-testid={ `${index}-card-name` }
             >
-              <img
-                data-testid={ `${index}-card-img` }
-                src={ `https://www.themealdb.com/images/ingredients/${name}-Small.png` }
-                alt={ name }
-              />
-              <p
-                value={ name }
-                data-testid={ `${index}-card-name` }
-              >
-                { name }
-              </p>
-            </Link>
-          </div>
+              { name }
+            </p>
+          </Link>
         );
       })
     );
   };
 
   return (
-    getTwelveIngredients()
+    <>
+      <Header />
+      { getTwelveIngredients() }
+      <Footer />
+    </>
   );
 }
 
