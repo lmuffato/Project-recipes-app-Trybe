@@ -155,7 +155,7 @@ describe('4 - Crie um componente Header de acordo com os seguintes parâmetros',
 
   it('Checa se os títulos das páginas de explorar comidas e bebidas '
     + 'está correto', () => {
-    act( () => {
+    act(() => {
       const { getByRole } = renderWithRouterHooksAndProvider(<ExploreFoods />,
         '/explorar/comidas');
       const exploreFoodsPage = getByRole('heading', {
