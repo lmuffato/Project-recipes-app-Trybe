@@ -1,9 +1,6 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import { Form, Button, Image } from 'react-bootstrap';
 import Context from '../../context/Context';
-import './Style.css';
-import Logo from '../../images/Logo.png';
 
 function Login(props) {
   const {
@@ -32,41 +29,30 @@ function Login(props) {
   };
 
   return (
-    <Form>
-      <Image src={ Logo } fluid />
-      <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Control
-          type="email"
+    <form>
+      <fieldset>
+        <input
+          type="text"
           data-testid="email-input"
           onChange={ (e) => setEmail(e.target.value) }
           value={ email }
-          placeholder="Enter email"
-          className="input"
         />
-      </Form.Group>
-      <Form.Group className="mb-3" controlId="formBasicPassword">
-        <Form.Control
+        <input
           type="password"
           data-testid="password-input"
           onChange={ (e) => setPassword(e.target.value) }
           value={ password }
-          placeholder="Password"
-          className="input"
         />
-      </Form.Group>
-      <div className="btn-div">
-        <Button
-          variant="custom"
+        <button
+          type="button"
           data-testid="login-submit-btn"
           disabled={ validate() }
           onClick={ () => handleClick() }
-          type="submit"
-          className="submit"
         >
           Entrar
-        </Button>
-      </div>
-    </Form>
+        </button>
+      </fieldset>
+    </form>
   );
 }
 
