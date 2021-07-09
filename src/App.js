@@ -1,6 +1,5 @@
 import React from 'react';
-import { BrowserRouter } from 'react-router-dom';
-import { Route, Switch } from 'react-router';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ProviderRecipes from './context/ProviderRecipes';
@@ -13,8 +12,7 @@ import Favorites from './screens/Favorites';
 import InProcess from './screens/InProcess';
 import Login from './screens/Login';
 import MadeRecipes from './screens/MadeRecipes';
-import MainFood from './screens/MainFood';
-import MainDrink from './screens/MainDrink';
+import Main from './screens/Main';
 import NotFound from './screens/NotFound';
 import Profile from './screens/Profile';
 
@@ -24,28 +22,25 @@ function App() {
       <ProviderRecipes>
         <Switch>
           <Route exact path="/" component={ Login } />
-          <Route exact path="/comidas" component={ MainFood } />
-          <Route exact path="/bebidas" component={ MainDrink } />
-          <Route path="/comidas/:id" component={ Detail } />
-          <Route path="/bebidas/:id" component={ Detail } />
-          <Route path="/comidas/:id/in-progress" component={ InProcess } />
-          <Route path="/bebidas/:id/in-progress" component={ InProcess } />
-          <Route exact path="/explorar" component={ Explore } />
-          <Route exact path="/explorar/comidas" component={ ExploreFilters } />
           <Route
-            exact
-            path="/explorar/comidas/ingredientes"
-            component={ ByIngredients }
+            path="/comidas/:id/in-progress"
+            render={ (props) => <InProcess { ...props } /> }
           />
-          <Route exact path="/explorar/bebidas" component={ ExploreFilters } />
           <Route
-            exact
-            path="/explorar/bebidas/ingredientes"
-            component={ ByIngredients }
+            path="/bebidas/:id/in-progress"
+            render={ (props) => <InProcess { ...props } /> }
           />
+          <Route path="/comidas/:id" render={ (props) => <Detail { ...props } /> } />
+          <Route path="/bebidas/:id" render={ (props) => <Detail { ...props } /> } />
+          <Route path="/comidas" component={ Main } />
+          <Route path="/bebidas" component={ Main } />
+          <Route path="/explorar" component={ Explore } />
+          <Route path="/explorar/comidas" component={ ExploreFilters } />
+          <Route path="/explorar/bebidas" component={ ExploreFilters } />
+          <Route path="/explorar/bebidas/ingredientes" component={ ByIngredients } />
           <Route path="/explorar/comidas/area" component={ ByOrigin } />
-          <Route path="/perfil" component={ Profile } />
           <Route path="/receitas-feitas" component={ MadeRecipes } />
+          <Route path="/perfil" component={ Profile } />
           <Route path="/receitas-favoritas" component={ Favorites } />
           <Route component={ NotFound } />
         </Switch>
