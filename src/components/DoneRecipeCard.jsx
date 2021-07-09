@@ -1,18 +1,16 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import shareIcon from '../images/shareIcon.svg';
 
 const copy = require('clipboard-copy');
 
 function DoneRecipeCard({ area, imgSrc, imgId, category,
-  categoryId, mealName, nameId, dateId, tag, doneDate, shareId, indexTag }) {
+  categoryId, mealName, nameId, dateId, tag,
+  doneDate, shareId, indexTag, alcoholic, recipeId, type }) {
   const [copyLink, setCopyLink] = useState(false);
 
-  const history = useHistory();
   const shareClick = () => {
-    const URL = history.location.pathname.replace('/in-progress', '');
-    copy(`http://localhost:3000${URL}`);
+    copy(`http://localhost:3000/${type}s/${recipeId}`);
     setCopyLink(true);
   };
 
@@ -22,6 +20,7 @@ function DoneRecipeCard({ area, imgSrc, imgId, category,
       {area !== '' ? (
         <h4 data-testid={ categoryId }>{ `${area} - ${category}` }</h4>
       ) : (<h4 data-testid={ categoryId }>{ category }</h4>)}
+      {alcoholic !== '' ? (<h4 data-testid={ categoryId }>{ alcoholic }</h4>) : (null)}
       <h4 data-testid={ categoryId }>{ category }</h4>
       <h3 data-testid={ nameId }>{ mealName }</h3>
       <span data-testid={ dateId }>{ doneDate }</span>

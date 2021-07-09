@@ -28,6 +28,9 @@ function DoneRecipes() {
           indexTag={ index }
           shareId={ `${index}-horizontal-share-btn` }
           area={ recipe.area }
+          alcoholic={ recipe.alcoholicOrNot }
+          recipeId={ recipe.id }
+          type={ recipe.type }
         />
       ))}
     </div>
