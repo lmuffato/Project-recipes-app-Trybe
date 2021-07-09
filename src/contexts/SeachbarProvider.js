@@ -13,7 +13,6 @@ function SearchbarProvider({ children }) {
   // const [mealOrDrink, setMealOrDrink] = useState('meal');
   const [searchCategory, setSearchCategory] = useState('list');
   const [categories, setCategories] = useState();
-  // const [] = useState();
 
   const contextValue = {
     // mealOrDrink,

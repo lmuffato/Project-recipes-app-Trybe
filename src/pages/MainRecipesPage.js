@@ -13,7 +13,7 @@ function MainMealsRecipes() {
   const [returnedCategoty, setReturnedCategory] = useState(null);
 
   const {
-    searchCategory, categories, setCategories,
+    searchCategory, categories, setCategories, setHideSearchBtn,
   } = useContext(SearchbarContext);
   const { mealOrDrink, type, setType, setRecipes, recipes,
   } = useContext(RecipesContext);
@@ -25,6 +25,10 @@ function MainMealsRecipes() {
   } else if (history.location.pathname === '/comidas' || mealOrDrink === 'meal') {
     setType('meal');
   }
+
+  useEffect(() => {
+    setHideSearchBtn(true);
+  }, []);
 
   useEffect(() => {
     const endpoints = {

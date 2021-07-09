@@ -1,11 +1,15 @@
 import React, { useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import Footer from '../compenents/Footer';
+import Header from '../compenents/Header';
 import RecipesContext from '../contexts/RecipesContext';
+import SearchbarContext from '../contexts/SearchbarContext';
 
 function FoodsIngredients() {
   const {
     ingredients, setIngredients, setMealsAndDrinkByIngredients,
   } = useContext(RecipesContext);
+  const { setHideSearchBtn } = useContext(SearchbarContext);
   const TWELVE = 12;
 
   const getRecipesByIngredients = async (param) => {
@@ -22,6 +26,7 @@ function FoodsIngredients() {
       setIngredients(meals);
     };
     getIngredients();
+    setHideSearchBtn(false);
   }, []);
 
   const getTwelveIngredients = () => {
@@ -58,7 +63,11 @@ function FoodsIngredients() {
   };
 
   return (
-    getTwelveIngredients()
+    <>
+      <Header />
+      { getTwelveIngredients() }
+      <Footer />
+    </>
   );
 }
 
