@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import { useRouteMatch } from 'react-router-dom';
 import isFavorite from '../../images/blackHeartIcon.svg';
 import isNotFavorite from '../../images/whiteHeartIcon.svg';
 
 export default function FavBtn(props) {
   const { info } = props;
   const [favorite, setFavorite] = useState(false);
-  const id = window.location.pathname.match(/(\d+)/)[0];
+  const { params } = useRouteMatch();
+  const { id } = params;
 
   useEffect(() => {
     const isFavorito = () => {
