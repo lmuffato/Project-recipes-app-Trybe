@@ -18,7 +18,6 @@ function InProgressMealCard() {
     setCopyLink(true);
   };
 
-  console.log(showButtonFinished);
   return (
     <div>
       <img
