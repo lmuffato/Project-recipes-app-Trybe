@@ -86,7 +86,7 @@ function ExplorarComidasArea() {
     <div>
       <Header title="Explorar Origem" />
       <select data-testid="explore-by-area-dropdown" onChange={ handleChange }>
-        { areas !== ''
+        { areas !== '' && areas !== undefined && areas.meals !== undefined
           ? areas.meals
             .map(
               (area, index) => (
@@ -101,7 +101,7 @@ function ExplorarComidasArea() {
             )
           : null }
       </select>
-      { acctualyFood !== [] ? areasCard() : null }
+      { acctualyFood !== [] && areas !== undefined && areas.meals !== undefined ? areasCard() : null }
       <Footer />
     </div>
   );
