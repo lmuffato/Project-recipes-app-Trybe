@@ -84,6 +84,19 @@ export const foodById = async (id) => {
   return meals[0];
 };
 
+export const randomMeal = async (callback) => {
+  const rawApiData = await fetch('https://www.themealdb.com/api/json/v1/1/random.php');
+  const apiData = await rawApiData.json();
+  const { meals } = apiData;
+  callback(meals.pop());
+};
+export const randomDrink = async (callback) => {
+  const rawApiData = await fetch('https://www.thecocktaildb.com/api/json/v1/1/random.php');
+  const apiData = await rawApiData.json();
+  const { drinks } = apiData;
+  callback(drinks.pop());
+};
+
 export const drinkById = async (id) => {
   const rawApiData = await fetch(
     `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`,
@@ -91,5 +104,4 @@ export const drinkById = async (id) => {
   const ApiData = await rawApiData.json();
   const { drinks } = ApiData;
   return drinks[0];
-
 };
