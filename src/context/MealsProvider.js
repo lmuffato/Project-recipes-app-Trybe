@@ -11,7 +11,6 @@ function MealsProvider({ children }) {
   const [mealsObject, setMeals] = useState({});
   const [mealsCopyObject, setMealsCopy] = useState({});
   const [mealsCategories, setMealsCategories] = useState([]);
-  const [favMeals, setFavMeals] = useState([]);
   const [currCategory, setCurrCategory] = useState('');
   const [currCategoryId, setCurrCategoryId] = useState('');
   const history = useHistory();
@@ -58,8 +57,6 @@ function MealsProvider({ children }) {
     handleRandomMealDetails,
     setCurrID,
     currCategoryId,
-    favMeals,
-    setFavMeals,
   };
 
   return (

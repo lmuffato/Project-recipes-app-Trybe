@@ -1,5 +1,5 @@
 // import { Button } from 'bootstrap';
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { Image } from 'react-bootstrap';
 import RecipeFav from '../effects/RecipeFav';
