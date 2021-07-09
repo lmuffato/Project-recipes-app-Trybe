@@ -4,11 +4,12 @@ import UserContext from '../context/UserContext';
 import shareIcon from '../images/shareIcon.svg';
 import FavoriteButton from './FavoriteButton';
 import IngredientsCheckBox from './IngredientsCheckBox';
+import { setToLocalStorage } from '../services/localStorage';
 
 const copy = require('clipboard-copy');
 
 function InProgressMealCard() {
-  const { currentMeal } = useContext(UserContext);
+  const { currentMeal, setDoneRecipes, doneRecipes } = useContext(UserContext);
   const [copyLink, setCopyLink] = useState(false);
   const [showButtonFinished, setShowButtonFinished] = useState(true);
   const history = useHistory();
@@ -16,6 +17,39 @@ function InProgressMealCard() {
     const URL = history.location.pathname.replace('/in-progress', '');
     copy(`http://localhost:3000${URL}`);
     setCopyLink(true);
+  };
+
+  const handleClick = () => {
+    const date = new Date();
+    setToLocalStorage('doneRecipes', [
+      ...doneRecipes,
+      {
+        id: currentMeal.idMeal,
+        type: 'comida',
+        area: currentMeal.strArea,
+        category: currentMeal.strCategory,
+        alcoholicOrNot: '',
+        name: currentMeal.strMeal,
+        image: currentMeal.strMealThumb,
+        doneDate: `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`,
+        tags: (currentMeal.strTags !== null) ? [currentMeal.strTags] : [],
+      },
+    ]);
+    setDoneRecipes([
+      ...doneRecipes,
+      {
+        id: currentMeal.idMeal,
+        type: 'comida',
+        area: currentMeal.strArea,
+        category: currentMeal.strCategory,
+        alcoholicOrNot: '',
+        name: currentMeal.strMeal,
+        image: currentMeal.strMealThumb,
+        doneDate: `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`,
+        tags: (currentMeal.strTags !== null) ? [currentMeal.strTags] : [],
+      },
+    ]);
+    history.push('/receitas-feitas');
   };
 
   return (
@@ -43,7 +77,7 @@ function InProgressMealCard() {
         type="button"
         data-testid="finish-recipe-btn"
         disabled={ showButtonFinished }
-        onClick={ () => history.push('/receitas-feitas') }
+        onClick={ handleClick }
       >
         Finalizar Receita
       </button>

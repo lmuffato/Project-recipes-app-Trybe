@@ -11,6 +11,9 @@ function UserProvider({ children }) {
   let inProgress = { meals: {}, cocktails: {} };
   const localInProgress = getItemFromLocalStorage('inProgressRecipes');
   if (localInProgress && localInProgress.meals !== {}) inProgress = localInProgress;
+  let doneStorage = [];
+  const localDone = getItemFromLocalStorage('doneRecipes');
+  if (localDone && localDone !== []) doneStorage = localDone;
   const [inProgressStorage, setInProgressStorage] = useState(inProgress);
   const [email, setEmail] = useState('');
   const [globalRecipe, setGlobalRecipe] = useState('');
@@ -18,6 +21,7 @@ function UserProvider({ children }) {
   const [currentMeal, setCurrentMeal] = useState({});
   const [currentDrink, setCurrentDrink] = useState({});
   const [favoriteRecipe, setFavoriteRecipe] = useState(storage);
+  const [doneRecipes, setDoneRecipes] = useState(doneStorage);
 
   const getMealById = async (id) => {
     if (id) {
@@ -54,6 +58,8 @@ function UserProvider({ children }) {
         setFavoriteRecipe,
         inProgressStorage,
         setInProgressStorage,
+        doneRecipes,
+        setDoneRecipes,
       } }
     >
       {children}
