@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import ShareButton from '../ShareButton';
@@ -7,42 +8,46 @@ import '../../style/DoneRecipeCard.css';
 
 export default function DoneRecipeCard({ recipe, index }) {
   const isFood = recipe.type === 'comida';
-  console.log(recipe);
+
   return (
     <div className="done-recipe-card">
-      <img
-        src={ recipe.image }
-        alt={ recipe.name }
-        data-testid={ `${index}-horizontal-image` }
-      />
-      {isFood ? (
-        <span data-testid={ `${index}-horizontal-top-text` }>
-          {`${recipe.area} - ${recipe.category}`}
-        </span>
-      ) : (
-        <span data-testid={ `${index}-horizontal-top-text` }>
-          {recipe.alcoholicOrNot}
-        </span>
-      )}
-      <div data-testid={ `${index}-horizontal-share-btn` }>
-        <ShareButton recipeId={ recipe.id } isFood={ isFood } />
-      </div>
-      <p data-testid={ `${index}-horizontal-name` }>
-        {recipe.name}
-      </p>
-      <p data-testid={ `${index}-horizontal-done-date` }>
-        {JSON.stringify(recipe.doneDate)}
-      </p>
-      {recipe.tags && recipe.tags
-        .slice(0, 2)
-        .map((tag, i) => (
-          <p
-            key={ i }
-            data-testid={ `${index}-${tag}-horizontal-tag` }
-          >
-            {tag}
+      <Link to={ `/${isFood ? 'comidas' : 'bebidas'}/${recipe.id}` }>
+        <img
+          src={ recipe.image }
+          alt={ recipe.name }
+          data-testid={ `${index}-horizontal-image` }
+        />
+      </Link>
+      <div className="done-recipe-info">
+        <div className="horizontal-top-text">
+          <span data-testid={ `${index}-horizontal-top-text` }>
+            {isFood ? `${recipe.area} - ${recipe.category}` : recipe.alcoholicOrNot}
+          </span>
+          <ShareButton
+            recipeId={ recipe.id }
+            isFood={ isFood }
+            index={ index }
+          />
+        </div>
+        <Link to={ `/${isFood ? 'comidas' : 'bebidas'}/${recipe.id}` }>
+          <p data-testid={ `${index}-horizontal-name` }>
+            {recipe.name}
           </p>
-        )) }
+        </Link>
+        <p data-testid={ `${index}-horizontal-done-date` }>
+          {`Feita em: ${recipe.doneDate.toLocaleDateString()}`}
+        </p>
+        {recipe.tags && recipe.tags
+          .slice(0, 2)
+          .map((tag, i) => (
+            <span
+              key={ i }
+              data-testid={ `${index}-${tag}-horizontal-tag` }
+            >
+              {tag}
+            </span>
+          )) }
+      </div>
     </div>
   );
 }
