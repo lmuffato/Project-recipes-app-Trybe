@@ -13,8 +13,7 @@ import Favorites from './screens/Favorites';
 import InProcess from './screens/InProcess';
 import Login from './screens/Login';
 import MadeRecipes from './screens/MadeRecipes';
-import MainFood from './screens/MainFood';
-import MainDrink from './screens/MainDrink';
+import Main from './screens/Main';
 import NotFound from './screens/NotFound';
 import Profile from './screens/Profile';
 
@@ -34,8 +33,8 @@ function App() {
           />
           <Route path="/comidas/:id" render={ (props) => <Detail { ...props } /> } />
           <Route path="/bebidas/:id" render={ (props) => <Detail { ...props } /> } />
-          <Route path="/comidas" component={ MainFood } />
-          <Route path="/bebidas" component={ MainDrink } />
+          <Route path="/comidas" component={ Main } />
+          <Route path="/bebidas" component={ Main } />
           <Route path="/explorar" component={ Explore } />
           <Route path="/explorar/comidas" component={ ExploreFilters } />
           <Route path="/explorar/bebidas" component={ ExploreFilters } />
