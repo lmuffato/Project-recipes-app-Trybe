@@ -3,7 +3,7 @@ import { useLocation, useHistory } from 'react-router-dom';
 import ContextRecipes from '../context/ContextRecipes';
 import FooterBar from '../components/FooterBar';
 import SearchBar from '../components/SearchBar';
-
+import Header from '../components/Header';
 import Card from '../components/Card';
 import CategoriesButtons from '../components/CategoriesButtons';
 import '../styleSheets/Main.css';
@@ -32,6 +32,7 @@ function Main() {
   }, [pathname]);
   return (
     <main className="main-container">
+      <Header />
       <SearchBar />
       <section className="content-container">
         <section className="recipe-cards-container">

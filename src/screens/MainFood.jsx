@@ -2,14 +2,14 @@ import React from 'react';
 import FooterBar from '../components/FooterBar';
 import Header from '../components/Header';
 
-function ByOrigin() {
+function MainFood() {
   return (
     <main>
       <Header />
-      renderiza a tela de busca de receitas por origem
+      tela principal das comidas
       <FooterBar />
     </main>
   );
 }
 
-export default ByOrigin;
+export default MainFood;
