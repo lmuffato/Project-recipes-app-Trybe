@@ -11,6 +11,8 @@ export default function AppProvider({ children }) {
   const [pageOrigin, setPageOrigin] = useState('');
   const [recipesList, setRecipesList] = useState([]);
   const [categoriesList, setCategoriesList] = useState([]);
+  const [recipeContext, setRecipeContext] = useState('');
+  const [toStorage, setToStorage] = useState('');
   const NUM_RECIPES_SHOWN = 12;
   const NUM_CATEG_SHOWN = 5;
   const context = {
@@ -26,8 +28,25 @@ export default function AppProvider({ children }) {
     setRecipesList,
     categoriesList,
     setCategoriesList,
+    setRecipeContext,
+    toStorage,
 
   };
+
+  useEffect(() => {
+    const storage = [{
+      id: recipeContext.idMeal || recipeContext.idDrink,
+      type: pageOrigin === 'themealdb' ? 'comida' : 'bebida',
+      area: recipeContext.strArea || null,
+      category: recipeContext.strCategory,
+      alcoholicOrNot: recipeContext.strAlcoholic || null,
+      name: recipeContext.strMeal || recipeContext.strDrink,
+      image: recipeContext.strMealThumb || recipeContext.strDrinkThumb,
+      doneDate: new Date(),
+      tags: recipeContext.strTags || null,
+    }];
+    setToStorage(storage);
+  }, [recipeContext]);
 
   useEffect(() => {
     fetchCategoriesApi(pageOrigin)

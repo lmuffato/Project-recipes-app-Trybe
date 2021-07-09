@@ -45,7 +45,7 @@ export default function Ingredients({ recipe }) {
 
   useEffect(() => {
     setRecipeId(recipe.idMeal || recipe.idDrink);
-  }, [recipeId]);
+  }, [recipeId, recipe.idMeal, recipe.idDrink]);
 
   useEffect(() => {
     getIngredients();

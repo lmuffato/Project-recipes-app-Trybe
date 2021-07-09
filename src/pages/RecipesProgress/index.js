@@ -177,6 +177,7 @@ export default function RecipesProgress({ match }) {
   useEffect(() => {
     getFromStorage();
   }, [recipeInProgress]);
+
   return (
     <div>
       {recipeInProgress && recipeInProgress.map((recipe, index) => (
