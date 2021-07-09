@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import RenderFavoriteHeart from '../util/addOrRemoveFavorite';
-import RenderIngredients from '../util/mealDetailsComponents/renderIngredients';
 import RenderInstructions from '../util/mealDetailsComponents/renderInstructions';
 import RenderRecipeImg from '../util/mealDetailsComponents/renderRecipeImg';
 import shareIcon from '../images/shareIcon.svg';
+import RenderCheckboxIngredients from '../util/renderCheckboxIngredients';
 
 export default function MealInProgress() {
   const id = window.location.href.split('/')[4];
@@ -47,24 +47,24 @@ export default function MealInProgress() {
         <div>
           {RenderRecipeImg(strMealThumb)}
           <div>
-            <h2>{strMeal}</h2>
+            <h2 data-testid="recipe-title">{strMeal}</h2>
             {RenderFavoriteHeart('comida', data[0], dispatch, globalState)}
             {copy}
             <button data-testid="share-btn" type="button" onClick={ () => copyLink() }>
               <img alt="share" src={ shareIcon } />
             </button>
-            <h3>{strCategory}</h3>
+            <h3 data-testid="recipe-category">{strCategory}</h3>
           </div>
           <h2>Ingredients</h2>
-          {RenderIngredients(ingredients, measure)}
+          {RenderCheckboxIngredients(ingredients, measure)}
           <h2>Instructions</h2>
           {RenderInstructions(strInstructions)}
           <button
             className="footer"
             type="button"
-            data-testid="start-recipe-btn"
+            data-testid="finish-recipe-btn"
           >
-            Finalizar
+            Finalizar Receita
           </button>
         </div>
       );

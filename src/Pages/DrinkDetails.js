@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { actionDetails } from '../redux/actions';
+import { actionDetails, actionIdRecipeInProgress } from '../redux/actions';
 import shareIcon from '../images/shareIcon.svg';
 import RecomendationCard from '../util/renderRecomendationCard';
 import '../components/Footer.css';
@@ -68,6 +68,21 @@ export default function DrinkDetails() {
     return INICIAR_RECEITA;
   };
 
+  const goToRecipeInProgress = (idDrink, ingredients, measure) => {
+    const ls = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    if (ls && ls.length > 0) {
+      const addDrink = {
+        ...ls, drinks: { ...ls.drinks, [idDrink]: [ingredients, measure] },
+      };
+      localStorage.setItem('inProgressRecipes', JSON.stringify(addDrink));
+    } else {
+      const addDrink = { drinks: { [idDrink]: [ingredients, measure] }, meals: {} };
+      localStorage.setItem('inProgressRecipes', JSON.stringify(addDrink));
+    }
+    dispatch(actionIdRecipeInProgress(idDrink, ingredients, measure));
+    history.push(`/bebidas/${idDrink}/in-progress`);
+  };
+
   const renderDrinkRecipe = () => {
     const ingredients = [];
     const measure = [];
@@ -118,7 +133,7 @@ export default function DrinkDetails() {
             className="footer"
             type="button"
             data-testid="start-recipe-btn"
-            onClick={ () => history.push(`/bebidas/${idDrink}/in-progress`) }
+            onClick={ () => goToRecipeInProgress(idDrink, ingredients, measure) }
           >
             { result }
           </button>
