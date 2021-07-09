@@ -1,16 +1,16 @@
 import React, { useEffect, useState, useContext } from 'react';
+import { Image } from 'react-bootstrap';
 import { useLocation, useParams } from 'react-router';
 import UserContext from '../../context/UserContext';
 import { getRecipeByID } from '../../services/fetchRecipes';
 import Ingredient from '../../Components/Ingredients';
 import Slide from '../../Components/Slide';
+import ShareButton from '../../Components/ShareButton';
+import FavoriteButton from '../../Components/FavoriteButton';
 import EndButton from '../../Components/EndButton';
 import Video from '../../Components/Video';
 import Loading from '../../Components/Loading';
 import './styles.css';
-
-import shareIcon from '../../images/shareIcon.svg';
-import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
 
 function Details() {
   const { pathname } = useLocation();
@@ -44,14 +44,12 @@ function Details() {
     <div className="main-parent">
       {isLoading ? <Loading /> : (
         <div>
-          <div className="hero">
-            <img
-              alt="hero"
-              data-testid="recipe-photo"
-              src={ recipesDetails[`str${recipeType}Thumb`] }
-            />
-          </div>
-          <div className="header">
+          <Image
+            thumbnail
+            data-testid="recipe-photo"
+            src={ recipesDetails[`str${recipeType}Thumb`] }
+          />
+          <div className="top-components">
             <div>
               <h1 data-testid="recipe-title">
                 {recipesDetails[`str${recipeType}`]}
@@ -60,13 +58,9 @@ function Details() {
                 {recipesDetails[toggleCategory]}
               </h3>
             </div>
-            <div>
-              <button type="button" data-testid="share-btn">
-                <img src={ shareIcon } alt="share" />
-              </button>
-              <button type="button" data-testid="favorite-btn">
-                <img src={ whiteHeartIcon } alt="favorite" />
-              </button>
+            <div className="btn-components">
+              <ShareButton />
+              <FavoriteButton recipe={ recipesDetails } recipeType={ recipeType } />
             </div>
           </div>
           <Ingredient type="list" recipe={ recipesDetails } />

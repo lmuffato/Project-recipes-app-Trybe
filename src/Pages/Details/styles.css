@@ -72,3 +72,15 @@ h2 {
   text-align: center;
   width: 100%;
 }
+
+.top-components {
+  align-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.btn-components {
+  align-items: center;
+  display: flex;
+}
