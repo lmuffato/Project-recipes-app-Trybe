@@ -13,6 +13,7 @@ export default function MealInProgress() {
   const [data, setData] = useState();
   const dispatch = useDispatch();
   const [copy, setCopy] = useState('');
+  // const [value, setValue] = useState(false);
   const history = useHistory();
 
   useEffect(() => {
