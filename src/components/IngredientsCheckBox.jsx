@@ -4,7 +4,7 @@ import { useLocation } from 'react-router';
 import UserContext from '../context/UserContext';
 import { setToLocalStorage, getItemFromLocalStorage } from '../services/localStorage';
 
-function IngredientsCheckBox({ currentMeal }) {
+function IngredientsCheckBox({ currentMeal, setShowButtonFinished }) {
   const location = useLocation();
   const newLocation = location.pathname.replace('/in-progress', '');
   const idURL = newLocation.replace('/comidas/', '');
@@ -52,6 +52,16 @@ function IngredientsCheckBox({ currentMeal }) {
     setToLocalStorage('inProgressRecipes', inProgressStorage);
   }, [inProgressStorage]);
 
+  function verifyIfAllIsChecked() {
+    const ingredientSteps = document.querySelectorAll('.ingredientStep');
+    const stepsChecked = [...ingredientSteps].filter((step) => step.checked === true);
+    if (ingredientSteps.length === stepsChecked.length) setShowButtonFinished(false);
+  }
+
+  useEffect(() => {
+    verifyIfAllIsChecked();
+  });
+
   return (
     <div>
       {ingredientsArray.map((ingredient, index) => {
@@ -67,6 +77,7 @@ function IngredientsCheckBox({ currentMeal }) {
                 id={ `${index}-ingredient-step` }
                 onChange={ (event) => handleChange(event) }
                 checked={ isChecked }
+                className="ingredientStep"
               />
               {measureArray[index] ? (
                 `${ingredient[1]} - ${measureArray[index][1]}`
