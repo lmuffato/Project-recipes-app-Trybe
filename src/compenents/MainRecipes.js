@@ -15,7 +15,6 @@ function MainRecipes() {
   } = useContext(RecipesContext);
 
   useEffect(() => {
-    console.log('Entra ai');
     if (recipes) setRenderRecipes(recipes);
     if (mealsAndDrinkByIngredients) setRenderRecipes(mealsAndDrinkByIngredients);
     if (searchedRecipes) setRenderRecipes(searchedRecipes);
@@ -32,6 +31,7 @@ function MainRecipes() {
             data={ recipe }
             index={ index }
             key={ recipe.idMeal }
+            // data-testid={ `${index}-ingredient-card` }
           />
         )) : renderRecipes.map((recipe, index) => (
           <DrinkCards

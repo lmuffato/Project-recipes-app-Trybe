@@ -1,29 +1,34 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import RecipesContext from '../contexts/RecipesContext';
 
 function DrinksIngredients() {
+  const [drinkIngredients, setDrinkIngredients] = useState([]);
   const {
     mealsAndDrinkByIngredients, setMealsAndDrinkByIngredients,
   } = useContext(RecipesContext);
+  const TWELVE = 12;
 
   useEffect(() => {
     const getIngredients = async () => {
       const endpoint = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list';
       const { drinks } = await fetch(endpoint).then((data) => data.json());
-      setMealsAndDrinkByIngredients(drinks);
-      console.log(mealsAndDrinkByIngredients);
+      setDrinkIngredients(drinks);
+      // console.log(mealsAndDrinkByIngredients);
     };
     getIngredients();
   }, []);
 
-  // https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${}
+  const getRecipesByIngredient = async (param) => {
+    const endpoint = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${param}`;
+    const { drinks } = await fetch(endpoint).then((data) => data.json());
+    setMealsAndDrinkByIngredients(drinks.slice(0, TWELVE));
+  };
 
   console.log(mealsAndDrinkByIngredients);
 
   const getTwelveIngredients = () => {
-    const TWELVE = 12;
-    const twelveIngredients = mealsAndDrinkByIngredients
+    const twelveIngredients = drinkIngredients
       .filter((ingredient, index) => index < TWELVE);
     return (
       twelveIngredients.map((ingredient, index) => {
@@ -33,7 +38,7 @@ function DrinksIngredients() {
             to="/bebidas"
             key={ index }
             data-testid={ `${index}-ingredient-card` }
-            // onClick={}
+            onClick={ (e) => getRecipesByIngredient(e.target.innerText || e.target.alt) }
           >
             <img
               data-testid={ `${index}-card-img` }

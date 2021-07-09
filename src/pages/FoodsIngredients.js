@@ -4,8 +4,7 @@ import RecipesContext from '../contexts/RecipesContext';
 
 function FoodsIngredients() {
   const {
-    ingredients, setIngredients,
-    setMealsAndDrinkByIngredients, mealsAndDrinkByIngredients,
+    ingredients, setIngredients, setMealsAndDrinkByIngredients,
   } = useContext(RecipesContext);
   const TWELVE = 12;
 
@@ -15,8 +14,6 @@ function FoodsIngredients() {
     console.log(meals);
     setMealsAndDrinkByIngredients(meals.slice(0, TWELVE));
   };
-
-  console.log(mealsAndDrinkByIngredients);
 
   useEffect(() => {
     const getIngredients = async () => {
@@ -32,15 +29,16 @@ function FoodsIngredients() {
       .filter((ingredient, index) => index < TWELVE);
     return (
       twelveIngredients.map((eachIngredient, index) => {
+        // const id = index - 1;
         const name = eachIngredient.strIngredient;
         return (
-          <Link
-            to="/comidas"
-            data-testid={ `${index}-ingredient-card` }
-            key={ index }
-            onClick={ (e) => getRecipesByIngredients(e.target.alt || e.target.innerText) }
-          >
-            <div>
+          <div data-testid={ `${index}-ingredient-card` } key={ index }>
+            <Link
+              to="/comidas"
+              onClick={
+                (e) => getRecipesByIngredients(e.target.alt || e.target.innerText)
+              }
+            >
               <img
                 data-testid={ `${index}-card-img` }
                 src={ `https://www.themealdb.com/images/ingredients/${name}-Small.png` }
@@ -52,8 +50,8 @@ function FoodsIngredients() {
               >
                 { name }
               </p>
-            </div>
-          </Link>
+            </Link>
+          </div>
         );
       })
     );
