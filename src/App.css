@@ -19,11 +19,6 @@ body {
   position: relative;
 }
 
-.rocksGlass {
-  animation: shake 1s infinite ease;
-  max-height: 80vh;
-}
-
 footer {
   background: rgb(184, 184, 184);
   bottom: 0;
@@ -32,28 +27,6 @@ footer {
   left: 0;
   position: fixed;
   width: 100%;
-}
-
-/*
-#iceLeft {
-  animation: clink .8s infinite ease;
-  opacity: 0.6;
-  transform-origin: 36px 66px;
-}
-
-#iceRight {
-  animation: clink .8s .2s infinite ease;
-  opacity: 0.6;
-  transform-origin: 60px 78px;
-}
-*/
-
-.meals > .logo {
-  animation: shake 1.5s infinite ease;
-  color: aliceblue;
-  font-family: Montserrat , sans-serif;
-  font-size: 3em;
-  font-weight: 900;
 }
 
 .slider {
@@ -65,6 +38,137 @@ header {
   background: rgb(184, 184, 184);
   display: flex;
   justify-content: space-around;
+}
+
+.login-container {
+  align-items: center;
+  background: linear-gradient(to top, black 15%, rgba(0, 0, 0, 0) ), url('./images/joseph-gonzalez-fdlZBWIP0aM-unsplash.jpg');
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: center;
+  object-fit: cover;
+  object-position: top;
+  position: relative;
+  width: 360px;
+}
+
+.buttons {
+  position: absolute;
+  bottom: 120px;
+  display: flex;
+  flex-direction: column;
+}
+
+.title, .login-text {
+  color: rgb(241, 241, 241);
+  font-family: 'Poppins', sans-serif;
+  font-size: 2rem;
+}
+
+.title {
+  font-style: italic;
+  position: absolute;
+  top: 30px;
+  animation: initTitle 0.6s ;
+}
+
+.login-text {
+  bottom: 230px;
+  font-size: 1.5rem;
+  position: absolute;
+  animation: initLogin 1.5s;
+}
+
+.logo {
+  color: rgb(241, 241, 241);
+  font-size: 3rem;
+  position: absolute;
+  top: 120px;
+  animation: initLogo 0.6s ;
+}
+
+@keyframes initLogo {
+  0% {
+    transform: translateX(-500px);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateX(0px);
+    opacity: 1;
+  }
+}
+
+@keyframes initTitle {
+  0% {
+    transform: translateX(500px);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateX(0px);
+    opacity: 1;
+  }
+}
+
+@keyframes initLogin {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.input-login {
+  background: none;
+  border: none;
+  border-bottom: 2px solid rgb(224, 224, 224);
+  color: rgb(241, 241, 241);
+  outline: none;
+  width: 200px;
+  animation: initLogin 1.5s;
+}
+
+.input-login:focus{
+  border-bottom: 2px solid rgb(57, 156, 0);
+}
+
+.input-login::placeholder {
+  color: rgb(224, 224, 224);
+}
+
+.entrar-btn {
+  background: rgb(48, 48, 48);
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  margin-top: 20px;
+  outline: none;
+  padding: 8px 14px;
+  width: 100%;
+  animation: initLogin 1.5s;
+}
+
+.enable {
+  border-bottom: 2px solid rgb(140, 243, 140);
+  color: rgb(140, 243, 140);
+  text-shadow: 0 0 2px green;
+}
+
+.enable:hover {
+  border-bottom: 2px solid rgb(255, 255, 255);
+  color: rgb(255, 255, 255);
+  text-shadow: 0 0 2px rgb(255, 255, 255);
+}
+
+.disable {
+  border-bottom: 2px solid rgb(235, 116, 116);;
+  color: rgb(235, 116, 116);
+  text-shadow: 0 0 2px red;
 }
 
 .card-container {
