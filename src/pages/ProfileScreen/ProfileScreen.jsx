@@ -2,10 +2,9 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import Context from '../../context/Context';
 import styleCard, { styleBtn } from './index.style';
-import clearLS from '../../services/localStorage/clearLS';
+// import clearLS from '../../services/localStorage/clearLS';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
-// import doneRecipes from '../../services/mokcInformation';
 
 const ProfileScreen = () => {
   const {
@@ -34,7 +33,8 @@ const ProfileScreen = () => {
     if (target.id === 'logout') {
       console.log('Logout clcikec!');
       setLogout(true); // setando variavel "logout" para verdadeiro, usuário deslogado!
-      clearLS();
+      // clearLS();
+      localStorage.setItem('user', JSON.stringify({}));
     }
   };
 
