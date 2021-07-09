@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { useLocation } from 'react-router';
 import UserContext from '../context/UserContext';
 import { setToLocalStorage, getItemFromLocalStorage } from '../services/localStorage';
+import verifyIfAllIsChecked from '../services/verifyIfAllIsChecked';
 
 function IngredientsCheckBox({ currentMeal, setShowButtonFinished }) {
   const location = useLocation();
@@ -52,14 +53,8 @@ function IngredientsCheckBox({ currentMeal, setShowButtonFinished }) {
     setToLocalStorage('inProgressRecipes', inProgressStorage);
   }, [inProgressStorage]);
 
-  function verifyIfAllIsChecked() {
-    const ingredientSteps = document.querySelectorAll('.ingredientStep');
-    const stepsChecked = [...ingredientSteps].filter((step) => step.checked === true);
-    if (ingredientSteps.length === stepsChecked.length) setShowButtonFinished(false);
-  }
-
   useEffect(() => {
-    verifyIfAllIsChecked();
+    verifyIfAllIsChecked(setShowButtonFinished);
   });
 
   return (
