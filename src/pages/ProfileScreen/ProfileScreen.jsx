@@ -5,7 +5,6 @@ import styleCard, { styleBtn } from './index.style';
 // import clearLS from '../../services/localStorage/clearLS';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
-// import doneRecipes from '../../services/mokcInformation';
 
 const ProfileScreen = () => {
   const {
