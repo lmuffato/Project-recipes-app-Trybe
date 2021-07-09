@@ -1,19 +1,46 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Header from '../components/Header';
 import UserContext from '../context/UserContext';
 import DoneRecipeCard from '../components/DoneRecipeCard';
 
 function DoneRecipes() {
   const { doneRecipes } = useContext(UserContext);
+  const [filterButton, setFilterButton] = useState('all');
+  const [filteredRecipes, setFilteredRecipes] = useState(doneRecipes);
+
+  useEffect(() => {
+    if (filterButton !== 'all') {
+      setFilteredRecipes(doneRecipes.filter((recipe) => recipe.type === filterButton));
+    } else { setFilteredRecipes(doneRecipes); }
+  }, [filterButton]);
+
   return (
     <div>
       <Header title="Receitas Feitas" />
       <div className="categoriesBTNRecipesDone">
-        <button type="button" data-testid="filter-by-all-btn">All</button>
-        <button type="button" data-testid="filter-by-food-btn">Food</button>
-        <button type="button" data-testid="filter-by-drink-btn">Drinks</button>
+        <button
+          type="button"
+          data-testid="filter-by-all-btn"
+          onClick={ () => setFilterButton('all') }
+        >
+          All
+        </button>
+        <button
+          type="button"
+          data-testid="filter-by-food-btn"
+          onClick={ () => setFilterButton('comida') }
+        >
+          Food
+        </button>
+        <button
+          type="button"
+          data-testid="filter-by-drink-btn"
+          onClick={ () => setFilterButton('bebida') }
+        >
+          Drinks
+        </button>
       </div>
-      {doneRecipes.map((recipe, index) => (
+      {filteredRecipes.map((recipe, index) => (
         <DoneRecipeCard
           key={ index }
           imgSrc={ recipe.image }
@@ -27,6 +54,10 @@ function DoneRecipes() {
           tag={ recipe.tags }
           indexTag={ index }
           shareId={ `${index}-horizontal-share-btn` }
+          area={ recipe.area }
+          alcoholic={ recipe.alcoholicOrNot }
+          recipeId={ recipe.id }
+          type={ recipe.type }
         />
       ))}
     </div>

@@ -1,29 +1,36 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import shareIcon from '../images/shareIcon.svg';
 
 const copy = require('clipboard-copy');
 
-function DoneRecipeCard({ imgSrc, imgId, category,
-  categoryId, mealName, nameId, dateId, tag, doneDate, shareId, indexTag }) {
+function DoneRecipeCard({ area, imgSrc, imgId, category,
+  categoryId, mealName, nameId, dateId, tag,
+  doneDate, shareId, indexTag, alcoholic, recipeId, type }) {
   const [copyLink, setCopyLink] = useState(false);
 
-  const history = useHistory();
   const shareClick = () => {
-    const URL = history.location.pathname.replace('/in-progress', '');
-    copy(`http://localhost:3000${URL}`);
+    copy(`http://localhost:3000/${type}s/${recipeId}`);
     setCopyLink(true);
   };
 
   return (
     <div>
-      <img src={ imgSrc } alt="Done Recipe Card" data-testid={ imgId } />
+      <Link to={ `/${type}s/${recipeId}` }>
+        <img src={ imgSrc } alt="Done Recipe Card" data-testid={ imgId } />
+      </Link>
+      {area !== '' ? (
+        <h4 data-testid={ categoryId }>{ `${area} - ${category}` }</h4>
+      ) : (<h4 data-testid={ categoryId }>{ category }</h4>)}
+      {alcoholic !== '' ? (<h4 data-testid={ categoryId }>{ alcoholic }</h4>) : (null)}
       <h4 data-testid={ categoryId }>{ category }</h4>
-      <h3 data-testid={ nameId }>{ mealName }</h3>
+      <Link to={ `/${type}s/${recipeId}` }>
+        <h3 data-testid={ nameId }>{ mealName }</h3>
+      </Link>
       <span data-testid={ dateId }>{ doneDate }</span>
-      <button data-testid={ shareId } type="button" onClick={ shareClick }>
-        <img src={ shareIcon } alt="compartilhar" />
+      <button type="button" onClick={ shareClick }>
+        <img data-testid={ shareId } src={ shareIcon } alt="compartilhar" />
       </button>
       {copyLink ? <span>Link copiado!</span> : null}
       {tag.map((name, index) => (
