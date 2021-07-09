@@ -14,6 +14,9 @@ function FoodInProgress() {
   const [foodDetail, setFoodDetail] = useState([]);
   const [shouldRedirect, setShouldRedirect] = useState(false);
   const [alert, setAlert] = useState('');
+  const [favHeart, setFavHeart] = useState(
+    <img src={ whiteHeartIcon } alt="favorite icon" />,
+  );
   const { inProgressRecipes } = useContext(context);
 
   const handleClick = () => {
@@ -96,14 +99,17 @@ function FoodInProgress() {
       <h2 data-testid="recipe-category">{strCategory}</h2>
       <button
         type="button"
+        data-testid="share-btn"
         onClick={ copyLink }
       >
-        <img data-testid="share-btn" src={ shareIcon } alt="share-icon" />
+        <img src={ shareIcon } alt="share-icon" />
       </button>
       <button
         type="button"
+        data-testid="favorite-btn"
+        onClick={ () => setFavHeart(<img src={ blackHeartIcon } alt="favorite icon" />) }
       >
-        <img data-testid="favorite-btn" src={ whiteHeartIcon } alt="favorite icon" />
+        {favHeart}
       </button>
       {alert}
       <h4>Ingredients :</h4>
