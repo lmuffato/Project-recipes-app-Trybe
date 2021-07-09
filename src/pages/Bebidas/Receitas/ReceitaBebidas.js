@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import Carousel from 'react-bootstrap/Carousel';
-import { Link } from 'react-router-dom';
+import { Link, useRouteMatch } from 'react-router-dom';
 import ComponentGen from '../../../components/RecipeDetailsComponents';
 import '../../../styles/RecipeDetails.css';
 
 function Receita() {
-  const id = window.location.pathname.match(/(\d+)/)[0];
+  const { params } = useRouteMatch();
   const [loading, setLoading] = useState(true);
   const [info, setInfo] = useState('');
   const [recomend, setRecomend] = useState();
 
   useEffect(() => {
     async function FoodAPI() {
-      const requesition = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`);
+      const requesition = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${params.id}`);
       const result = await requesition.json();
       async function recomendCard() {
         const data = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=');
@@ -24,7 +24,7 @@ function Receita() {
       setInfo(result.drinks[0]);
     }
     FoodAPI();
-  }, [id]);
+  }, [params.id]);
 
   const listCreator = () => {
     const ingredients = [];
