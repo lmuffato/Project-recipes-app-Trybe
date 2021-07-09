@@ -36,11 +36,13 @@ function FavoriteRecipes() {
     navigator.clipboard.writeText(path);
   };
 
-  const setMealOrDrink = ({ id, type, area, category, alcoholicOrNot, name, image }, index) => {    
+  const renderFilter = (
+    { id, type, area, category, alcoholicOrNot, name, image }, index,
+  ) => {
     if (type === 'comidas') {
       return (
         <div key={ id }>
-          { isCopy ? <p>Link copiado!</p>  : null }
+          { isCopy ? <p>Link copiado!</p> : null }
 
           <img
             data-testid={ `${index}-horizontal-image` }
@@ -111,17 +113,19 @@ function FavoriteRecipes() {
   return (
     <div>
       <button type="button" data-testid="filter-by-all-btn">All</button>
-      <button type="button" data-testid="filter-by-food-btn" onClick={ setMealOrDrink }>Food</button>
-      <button type="button" data-testid="filter-by-drink-btn" onClick={ setMealOrDrink }>Drinks</button>
+      <button type="button" data-testid="filter-by-food-btn">Food</button>
+      <button type="button" data-testid="filter-by-drink-btn">Drinks</button>
 
       {
         console.log(getFavorites)
       }
 
       {
-        getFavorites.map(({ id, type, area, category, alcoholicOrNot, name, image }, index) => (
-          setMealOrDrink({ id, type, area, category, alcoholicOrNot, name, image }, index)
-        ))
+        getFavorites.map(
+          ({ id, type, area, category, alcoholicOrNot, name, image }, index) => (
+            renderFilter({ id, type, area, category, alcoholicOrNot, name, image }, index)
+          ),
+        )
       }
     </div>
   );
