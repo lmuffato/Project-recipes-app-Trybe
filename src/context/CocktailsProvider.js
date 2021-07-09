@@ -13,7 +13,7 @@ function CocktailsProvider(props) {
   const [currCategory, setCurrCategory] = useState('');
   const [currCategoryId, setCurrCategoryId] = useState('');
   const [currCocktail, setCurrCocktail] = useState({});
-  const [currIngredients, setCurrIngredients] = useState([]);
+  const [cocktailsIngredients, setCocktailsIngredients] = useState([]);
   const history = useHistory();
 
   const handleRandomDrinkDetails = async () => {
@@ -63,8 +63,8 @@ function CocktailsProvider(props) {
     currCocktail,
     setCurrCategoryId,
     handleRandomDrinkDetails,
-    currIngredients,
-    setCurrIngredients,
+    cocktailsIngredients,
+    setCocktailsIngredients,
   };
 
   const { children } = props;

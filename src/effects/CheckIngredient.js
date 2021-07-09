@@ -1,19 +1,16 @@
 import { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import CocktailsContext from '../context/CocktailsContext';
-import MealsContext from '../context/MealsContext';
 import { getItemFromLocalStorage, setToLocalStorage } from '../services/localStorage';
 
-const addIngredientToLocalStorage = (pathname, state, storage, setglobalIngredients) => {
-  const { currIngredients, setCurrIngredients,
-    setCurrMealsIngredients, currMealsIngredients } = setglobalIngredients;
-  const { currIngredient } = state;
+const addIngredientToLocalStorage = (pathname, state, storage, globalState) => {
+  const { cocktailsIngredients, setCocktailsIngredients } = globalState;
+  const { currIngredient, finish } = state;
   const regExp = /[0-9]/gi;
   const getId = pathname.match(regExp).reduce((acc, item) => acc + item, '');
   if (pathname.includes('bebidas')) {
     if (!storage) {
       storage = { ...storage, cocktails: { [getId]: currIngredient } };
-      setCurrIngredients(currIngredient);
       return setToLocalStorage('inProgressRecipes', storage);
     }
     const ingredientsKeyValue = Object.entries(storage.cocktails)[0];
@@ -21,19 +18,18 @@ const addIngredientToLocalStorage = (pathname, state, storage, setglobalIngredie
     if (ingredients.includes(currIngredient)) {
       const index = ingredients.indexOf(currIngredient);
       ingredients.splice(index, 1);
-      setCurrIngredients(ingredients);
+      setCocktailsIngredients(ingredients);
       storage = { ...storage, cocktails: { [getId]: ingredients } };
       return setToLocalStorage('inProgressRecipes', storage);
     }
     storage = { ...storage,
       cocktails: { [getId]: [...storage.cocktails[getId], currIngredient] } };
-    setCurrIngredients([...currIngredients, currIngredient]);
+    setCocktailsIngredients([...cocktailsIngredients, currIngredient]);
     return setToLocalStorage('inProgressRecipes', storage);
   }
   if (pathname.includes('comidas')) {
     if (!storage) {
       storage = { meals: { [getId]: currIngredient } };
-      setCurrMealsIngredients(currIngredient);
       return setToLocalStorage('inProgressRecipes', storage);
     }
     const ingredientsKeyValue = Object.entries(storage.meals)[0];
@@ -41,13 +37,11 @@ const addIngredientToLocalStorage = (pathname, state, storage, setglobalIngredie
     if (ingredients.includes(currIngredient)) {
       const index = ingredients.indexOf(currIngredient);
       ingredients.splice(index, 1);
-      setCurrMealsIngredients(ingredients);
       storage = { ...storage, meals: { [getId]: ingredients } };
       return setToLocalStorage('inProgressRecipes', storage);
     }
     storage = { ...storage,
       meals: { [getId]: [...storage.meals[getId], currIngredient] } };
-    setCurrMealsIngredients([...currMealsIngredients, currIngredient]);
     return setToLocalStorage('inProgressRecipes', storage);
   }
 };
@@ -66,12 +60,8 @@ function renderCheckboxChecked(state, callbackState, storage, pathname) {
 }
 
 export default function CheckIngredient(ingredients, state, callbackState) {
-  const { currIngredients, setCurrIngredients } = useContext(CocktailsContext);
-  const { currMealsIngredients, setCurrMealsIngredients } = useContext(MealsContext);
-  const setglobalIngredients = { currIngredients,
-    setCurrIngredients,
-    currMealsIngredients,
-    setCurrMealsIngredients };
+  const { cocktailsIngredients, setCocktailsIngredients } = useContext(CocktailsContext);
+  const globalState = { cocktailsIngredients, setCocktailsIngredients };
   const { filterIngredients, checkLocalStorage, currIngredient } = state;
   const history = useHistory();
   const { pathname } = history.location;
@@ -81,7 +71,7 @@ export default function CheckIngredient(ingredients, state, callbackState) {
   const ingredientsStorage = ingredients.map((item) => item[1]);
   useEffect(() => {
     if (!currIngredient) return;
-    addIngredientToLocalStorage(pathname, state, storage, setglobalIngredients);
+    addIngredientToLocalStorage(pathname, state, storage, globalState);
   }, [filterIngredients, currIngredient]);
   useEffect(() => {
     callbackState({ ...state, ingredientsInit: ingredientsStorage });
