@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import MainMealsRecipes from '../pages/MainRecipesPage';
+import MainRecipesPage from '../pages/MainRecipesPage';
 import Explore from '../pages/Explore';
 import Foods from '../pages/Foods';
 import Drinks from '../pages/Drinks';
@@ -21,8 +21,8 @@ function Switcher() {
       <Route path="/comidas/:detalhes" component={ MealDescription } />
       <Route path="/bebidas/:detalhes" component={ DrinkDescription } />
       <Route exact path="/" component={ LoginPage } />
-      <Route exact path="/comidas" component={ MainMealsRecipes } />
-      <Route exact path="/bebidas" component={ MainMealsRecipes } />
+      <Route exact path="/comidas" component={ MainRecipesPage } />
+      <Route exact path="/bebidas" component={ MainRecipesPage } />
       <Route exact path="/explorar" component={ Explore } />
       <Route exact path="/explorar/comidas" component={ Foods } />
       <Route exact path="/explorar/bebidas" component={ Drinks } />

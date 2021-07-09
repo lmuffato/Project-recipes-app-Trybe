@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Footer from '../compenents/Footer';
 
 function Explore() {
   return (
@@ -21,6 +22,7 @@ function Explore() {
           Explorar Bebidas
         </button>
       </Link>
+      <Footer />
     </div>
   );
 }
