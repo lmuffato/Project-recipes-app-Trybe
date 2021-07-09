@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import ContextRecipes from '../context/ContextRecipes';
 import FooterBar from '../components/FooterBar';
+
 import Card from '../components/Card';
 import CategoriesButtons from '../components/CategoriesButtons';
 import '../styleSheets/Main.css';
