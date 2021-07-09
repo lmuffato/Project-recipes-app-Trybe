@@ -52,7 +52,7 @@ function ExplorarComidasArea() {
       const magicNumber = 12;
       if (index < magicNumber) {
         return (
-          <Link to="/comidas" key={ index }>
+          <Link to={ `/comidas/${item.idMeal}` } key={ index }>
             <Card
               key={ item.strArea }
               style={ { width: '8rem' } }
@@ -101,7 +101,8 @@ function ExplorarComidasArea() {
             )
           : null }
       </select>
-      { acctualyFood !== [] && areas !== undefined && areas.meals !== undefined ? areasCard() : null }
+      { acctualyFood !== [] && areas !== undefined && areas.meals !== undefined
+        ? areasCard() : null }
       <Footer />
     </div>
   );
