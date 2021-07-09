@@ -50,6 +50,11 @@ function App() {
           <Route path="/explorar/bebidas/ingredientes" component={ ExplorarBebidasING } />
           <Route path="/explorar/comidas/ingredientes" component={ ExplorarComidasING } />
           <Route exact path="/explorar/comidas/area" component={ ExplorarComidasArea } />
+          <Route
+            exact
+            path="/explorar/bebidas/area"
+            render={ () => <span>Not Found</span> }
+          />
           <Route path="/receitas-feitas" component={ ReceitasFeitas } />
           <Route path="/receitas-favoritas" component={ ReceitasFavoritas } />
           <Route exact path="/bebidas" component={ Bebidas } />
