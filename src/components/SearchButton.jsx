@@ -105,18 +105,17 @@ class SearchButton extends React.Component {
   }
 
   async requestApi(endpoint) {
-    const { foodOrDrinkApiName } = this.state;
+    const { foodOrDrinkApiName, foodOrDrink } = this.state;
     const api = await fetch(endpoint).then((response) => response.json());
-    console.log(typeof api);
-    if (api === null) {
-      this.setState({
-        api: [],
-      });
-    } else if (api) {
-      this.setState({
-        api: api[foodOrDrinkApiName],
-      });
+    const numMax = 12;
+    const api12 = api[foodOrDrinkApiName].slice(0, numMax);
+    console.log(api12);
+    if (api12.length === 1) {
+      return <Redirect to={ `/${foodOrDrink}` } />;
     }
+    this.setState({
+      api: api12,
+    });
     this.saveIdProduct();
   }
 
@@ -132,8 +131,11 @@ class SearchButton extends React.Component {
   renderFood() {
     const { api } = this.state;
     return (
-      api.map((paran) => (
-        <div key={ paran.idMeal }>
+      api.map((paran, index) => (
+        <div
+          key={ paran.idMeal }
+          data-testid={ `${index}-card-name` }
+        >
           <h1>{paran.strMeal}</h1>
           <img src={ paran.strMealThumb } alt="food" />
         </div>
@@ -234,11 +236,9 @@ class SearchButton extends React.Component {
   }
 
   render() {
-    const { api, foodOrDrink } = this.state;
     return (
       <div>
-        { api.length === 1 ? <Redirect to={ `/${foodOrDrink}` } />
-          : this.renderInputSearch() }
+        { this.renderInputSearch() }
       </div>
     );
   }
