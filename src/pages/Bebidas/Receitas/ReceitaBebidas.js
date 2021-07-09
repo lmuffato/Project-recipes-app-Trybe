@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import Carousel from 'react-bootstrap/Carousel';
-import { Link } from 'react-router-dom';
+import { Link, useRouteMatch } from 'react-router-dom';
 import ComponentGen from '../../../components/RecipeDetailsComponents';
 import '../../../styles/RecipeDetails.css';
 
 function Receita() {
-  const id = window.location.pathname.match(/(\d+)/)[0];
+  const { params } = useRouteMatch();
+  const { id } = params;
   const [loading, setLoading] = useState(true);
   const [info, setInfo] = useState('');
   const [recomend, setRecomend] = useState();
