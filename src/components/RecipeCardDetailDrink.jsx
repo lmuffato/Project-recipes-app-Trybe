@@ -4,6 +4,7 @@ import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import { drinkById } from '../services/apiRequests';
 import FoodsRecomends from './componentsDetails/FoodsRecomends';
+import './DetailsScreen.css';
 
 export default function RecipeCardDetailDrink() {
   const [drinkDetails, setDrinkDetails] = useState({});
@@ -59,8 +60,8 @@ export default function RecipeCardDetailDrink() {
       <h4>Instructions: </h4>
       <h2 data-testid="instructions">{ drinkDetails.strInstructions }</h2>
       <FoodsRecomends />
-      <button type="button" data-testid="start-recipe-btn">
-        PlayReceita (FALTAAQUI ONCLICK PARA MUDAR DE TELA!!!)
+      <button type="button" data-testid="start-recipe-btn" className="playRecipe">
+        Iniciar Receita
       </button>
     </div>
   );

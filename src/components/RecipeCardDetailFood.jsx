@@ -5,6 +5,7 @@ import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import { foodById } from '../services/apiRequests';
 import DrinksRecomends from './componentsDetails/DrinksRecomends';
+import './DetailsScreen.css';
 
 export default function RecipeCardDetailFood() {
   const [foodDetails, setFoodDetails] = useState({});
@@ -63,8 +64,8 @@ export default function RecipeCardDetailFood() {
         url={ foodDetails.strYoutube }
       />
       <DrinksRecomends />
-      <button type="button" data-testid="start-recipe-btn">
-        PlayReceita (FALTAAQUI ONCLICK PARA MUDAR DE TELA!!!)
+      <button type="button" data-testid="start-recipe-btn" className="playRecipe">
+        Iniciar Receita
       </button>
     </div>
   );
