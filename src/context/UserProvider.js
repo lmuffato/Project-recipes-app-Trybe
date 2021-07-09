@@ -5,8 +5,11 @@ import UserContext from './UserContext';
 function UserProvider({ children }) {
   const [user, setUser] = useState('');
   const [password, setPassword] = useState('');
-  // const [mealsToken, setMealsToken] = useState(1);
-  // const [cocktailsToken, setCocktailsToken] = useState(1);
+  const [doneRecipes, setDoneRecipes] = useState([]);
+  const [doingRecipes, setDoingRecipes] = useState([]);
+  // cada receita deve ser um objeto dentro do array, deve ter uma chave 'id' que
+  // armazena o id da receita;
+  // Caso uma receita tenha sido feita, não esquecer de retirar de doing.
 
   function successLogin(loginText, passwordText) {
     setUser(loginText);
@@ -15,7 +18,16 @@ function UserProvider({ children }) {
     localStorage.setItem('cocktailsToken', 1);
     localStorage.setItem('user', JSON.stringify({ email: loginText }));
   }
-  const context = { successLogin, user, password };
+  const context = {
+    successLogin,
+    user,
+    password,
+    doneRecipes,
+    setDoneRecipes,
+    doingRecipes,
+    setDoingRecipes,
+  };
+
   return (
     <UserContext.Provider value={ context }>
       {children}

@@ -23,14 +23,13 @@ export default function SearchBar({ page }) {
     let array = await fetchMealsAndDrinks(searchTerm, radioOption, page);
     const MAX_ARRAY_SIZE = 12;
     const objIdKey = (page === 'meals') ? 'idMeal' : 'idDrink';
-    if (array === null) {
-      array = [];
+    if (array.length === 0) {
       // eslint-disable-next-line no-alert
       alert(
         'Sinto muito, não encontramos nenhuma receita para esses filtros.',
       );
     }
-    if (array.length === 1) return history.push(`${pathname}/${array[0][objIdKey]}`);
+    if (array.length === 1) { history.push(`${pathname}/${array[0][objIdKey]}`); }
     if (array.length > MAX_ARRAY_SIZE) {
       array = array.reduce((acc, curr, index) => (
         index < MAX_ARRAY_SIZE ? [...acc, curr] : acc
@@ -47,7 +46,7 @@ export default function SearchBar({ page }) {
           ...recipes,
           [page]: { results: response },
         });
-      // eslint-disable-next-line no-alert
+        // eslint-disable-next-line no-alert
       } else { return alert('Sua busca deve conter somente 1 (um) caracter'); }
     } else {
       const response = await handleLength();
