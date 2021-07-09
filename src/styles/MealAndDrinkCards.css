@@ -4,7 +4,6 @@ body {
 }
 
 .recipes-container {
-  /* background-color: red; */
   display: flex;
   flex-flow: row wrap;
   height: 78%;
@@ -13,7 +12,6 @@ body {
 
 .recipe {
   align-items: center;
-  /* background-color: royalblue; */
   display: flex;
   flex-direction: column;
   height: 15%;
