@@ -29,9 +29,10 @@ function App() {
         />
         <Route path="/perfil" component={ Profile } />
         <Route path="/explorar" exact component={ Explore } />
-        <Route path="/explorar/comidas" component={ ExploreFoods } />
-        <Route path="/explorar/bebidas" component={ ExploreDrinks } />
+        <Route path="/explorar/comidas" exact component={ ExploreFoods } />
+        <Route path="/explorar/bebidas" exact component={ ExploreDrinks } />
         <Route path="/explorar/comidas/area" component={ ExploreOrigin } />
+        <Route path="/explorar/bebidas/area" render={ () => <h1>Not Found</h1> } />
         <Route
           exact
           path="/comidas/:id"
