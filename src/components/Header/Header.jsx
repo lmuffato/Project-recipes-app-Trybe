@@ -5,7 +5,7 @@ import profileIconImg from '../../images/profileIcon.svg';
 import Button from '../Generics/Button';
 import HeaderContainer from './styles';
 
-function Header({ children }) {
+function Header({ children, heading }) {
   const history = useHistory();
 
   const handleRedirectToProfile = (ev) => {
@@ -24,13 +24,19 @@ function Header({ children }) {
           />
         </Button>
       </div>
+      <h1 data-testid="page-title">{ heading }</h1>
       { children }
     </HeaderContainer>
   );
 }
 
+Header.defaultProps = {
+  children: '',
+};
+
 Header.propTypes = {
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node,
+  heading: PropTypes.string.isRequired,
 };
 
 export default Header;

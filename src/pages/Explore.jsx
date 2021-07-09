@@ -5,9 +5,7 @@ import Footer from '../components/Footer/Footer';
 function Explore() {
   return (
     <div>
-      <Header>
-        <h2 data-testid="page-title">Explorar</h2>
-      </Header>
+      <Header heading="Explorar" />
       <section>
         <section data-testid="explore-food">
           <a

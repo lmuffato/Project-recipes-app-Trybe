@@ -25,9 +25,7 @@ function FavoriteRecipes() {
   if (favoriteRecipes.length === 0) {
     return (
       <div>
-        <Header>
-          <h1 data-testid="page-title">Receitas Favoritas</h1>
-        </Header>
+        <Header heading="Receitas Favoritas" />
         <h2>Você não possui receitas favoritas!</h2>
       </div>
     );

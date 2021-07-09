@@ -40,10 +40,7 @@ function Home(props) {
 
   return (
     <>
-      <Header>
-        { type === 'meals'
-          ? (<h2 data-testid="page-title">Comidas</h2>) : (
-            <h2 data-testid="page-title">Bebidas</h2>)}
+      <Header heading={ type === 'meals' ? 'Comidas' : 'Bebidas' }>
         <SearchBarButton onClick={ handleToggleSearchBar } />
       </Header>
       <div>

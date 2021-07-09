@@ -28,9 +28,7 @@ function Profile() {
 
   return (
     <div>
-      <Header>
-        <h2 data-testid="page-title">Perfil</h2>
-      </Header>
+      <Header heading="Perfil" />
       <Wrapper>
         <strong data-testid="profile-email">{ email || 'email@teste.com' }</strong>
         <Link to="/receitas-feitas">
