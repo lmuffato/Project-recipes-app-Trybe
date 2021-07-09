@@ -4,12 +4,6 @@ import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 import searchIcon from '../images/searchIcon.svg';
 
-import {
-  apiFood,
-  apiDrink,
-  requestApi,
-} from '../services/requestApi';
-
 class SearchButton extends React.Component {
   constructor(props) {
     super(props);
@@ -62,18 +56,17 @@ class SearchButton extends React.Component {
     });
   }
 
-  async handleClick() {
-    const { clickRButton, valueInput, foodOrDrink, foodOrDrinkApiName } = this.state;
-    let result;
+  handleClick() {
+    const { clickRButton, valueInput, foodOrDrink, api } = this.state;
     if (valueInput.length > 1 && clickRButton === 'firstLetter') {
       alert('Sua busca deve conter somente 1 (um) caracter');
-      return;
-    }
-
-    if (foodOrDrink === '/comidas') {
-      result = await requestApi(apiFood(valueInput)[clickRButton], foodOrDrinkApiName);
+    } else if (api.length === 0) {
+      // eslint-disable-next-line no-alert
+      alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+    } else if (foodOrDrink === '/comidas') {
+      return this.requestApi(this.apiFood(valueInput)[clickRButton]);
     } else if (foodOrDrink === '/bebidas') {
-      result = await requestApi(apiDrink(valueInput)[clickRButton], foodOrDrinkApiName);
+      return this.requestApi(this.apiDrink(valueInput)[clickRButton]);
     }
 
     if (result === 'error') return;
@@ -86,7 +79,7 @@ class SearchButton extends React.Component {
     this.saveIdProduct();
   }
 
-  /*   saveIdProduct() {
+  saveIdProduct() {
     const { api, foodOrDrink } = this.state;
     if (foodOrDrink === '/comidas') {
       const idRecipe = api[0].idMeal;
@@ -99,7 +92,40 @@ class SearchButton extends React.Component {
         idProduct: idRecipe,
       });
     }
-  } */
+  }
+
+  apiFood(valueInput) {
+    const meals = {
+      name: `https://www.themealdb.com/api/json/v1/1/search.php?s=${valueInput}`,
+      ingrendient: `https://www.themealdb.com/api/json/v1/1/filter.php?i=${valueInput}`,
+      firstLetter: `https://www.themealdb.com/api/json/v1/1/search.php?f=${valueInput}`,
+    };
+    return meals;
+  }
+
+  apiDrink(valueInput) {
+    const drinks = {
+      name: `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${valueInput}`,
+      ingrendient: `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${valueInput}`,
+      firstLetter: `https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${valueInput}`,
+    };
+    return drinks;
+  }
+
+  async requestApi(endpoint) {
+    const { foodOrDrinkApiName, foodOrDrink } = this.state;
+    const api = await fetch(endpoint).then((response) => response.json());
+    const numMax = 12;
+    const api12 = api[foodOrDrinkApiName].slice(0, numMax);
+    console.log(api12);
+    if (api12.length === 1) {
+      return <Redirect to={ `/${foodOrDrink}` } />;
+    }
+    this.setState({
+      api: api12,
+    });
+    this.saveIdProduct();
+  }
 
   verifyRenderApi() {
     const { foodOrDrink } = this.state;
