@@ -134,10 +134,16 @@ class SearchButton extends React.Component {
       api.map((paran, index) => (
         <div
           key={ paran.idMeal }
-          data-testid={ `${index}-card-name` }
+          data-testid={ `${index}-recipe-card` }
         >
-          <h1>{paran.strMeal}</h1>
-          <img src={ paran.strMealThumb } alt="food" />
+          <h1 data-testid={ `${index}-card-img` }>
+            {paran.strMeal}
+          </h1>
+          <img
+            src={ paran.strMealThumb }
+            alt="food"
+            data-testid={ `${index}-card-name` }
+          />
         </div>
       ))
     );
@@ -146,10 +152,19 @@ class SearchButton extends React.Component {
   renderDrink() {
     const { api } = this.state;
     return (
-      api.map((paran) => (
-        <div key={ paran.idDrink }>
-          <h1>{paran.strDrink}</h1>
-          <img src={ paran.strDrinkThumb } alt="drink" />
+      api.map((paran, index) => (
+        <div
+          key={ paran.idDrink }
+          data-testid={ `${index}-card-card` }
+        >
+          <h1 data-testid={ `${index}-card-name` }>
+            {paran.strDrink}
+          </h1>
+          <img
+            src={ paran.strDrinkThumb }
+            alt="drink"
+            data-testid={ `${index}-card-img` }
+          />
         </div>
       ))
     );
