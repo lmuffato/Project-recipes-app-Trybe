@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Form, Button } from 'react-bootstrap';
+import image from '../images/image.jpg';
 import '../PagesCss/Login.css';
 
 function Login() {
@@ -32,6 +33,9 @@ function Login() {
 
   return (
     <main className="login-container">
+      <div className="img-container">
+        <img className="back" src={ image } alt="background" />
+      </div>
       <Form className="login-form">
         <Form.Label>
           <Form.Control

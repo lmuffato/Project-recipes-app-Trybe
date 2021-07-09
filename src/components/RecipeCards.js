@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
+import './RecipeCards.css';
 
 function GoToDetails(data) {
   const typePt = window.location.href.split('/')[3];

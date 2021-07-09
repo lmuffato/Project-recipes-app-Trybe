@@ -1,6 +1,8 @@
 .ingredients-btn {
+  align-items: center;
   background-color: white;
   border: none;
   display: flex;
+  justify-content: center;
   text-decoration: none;
 }
