@@ -16,12 +16,13 @@ class MainDrinkCard extends React.Component {
     this.FilterCategoryDrink = this.FilterCategoryDrink.bind(this);
     this.FilterCategoryDrinks = this.FilterCategoryDrinks.bind(this);
     this.loadingDrinkCategories = this.loadingDrinkCategories.bind(this);
+    this.renderCurrentSearch = this.renderCurrentSearch.bind(this);
     this.handleClick = this.handleClick.bind(this);
   }
 
   componentDidMount() {
     const { currentSearch } = this.props;
-    if (currentSearch.length > 1) {
+    if (currentSearch) {
       this.renderCurrentSearch();
     } else {
       this.FilterCategoryDrink();
@@ -92,11 +93,17 @@ class MainDrinkCard extends React.Component {
       });
   }
 
-  renderCurrentSearch() {
+  async renderCurrentSearch() {
     const { currentSearch } = this.props;
+    const endpoint = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${currentSearch}`;
+    const request = await fetch(endpoint).then((response) => response.json())
+      .catch((erro) => console.log(erro));
+
+    const limit = 12;
+    const sliced = request.drinks.slice(0, limit);
     this.setState({
+      drinkData: sliced,
       isLoading: false,
-      drinkData: currentSearch,
     });
   }
 

@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -12,7 +11,6 @@ class ExpComidasIng extends React.Component {
 
     this.state = {
       ingredientList: [],
-      searchByIngredient: [],
     };
 
     this.returnSrcImg.this = this.returnSrcImg.bind(this);
@@ -34,32 +32,12 @@ class ExpComidasIng extends React.Component {
     });
   }
 
-  async setGlobalRedirect(e) { // readequedar logica para fazer a chamada da api de pesquisa e settar no global
+  setGlobalRedirect(e) { // readequedar logica para fazer a chamada da api de pesquisa e settar no global
     e.preventDefault();
-    const { handleSearch } = this.props;
+    const { handleSearch, history } = this.props;
     const { target } = e;
-    const endpoint = `https://www.themealdb.com/api/json/v1/1/filter.php?i=${target.alt}`;
-    const request = await fetch(endpoint).then((response) => response.json())
-      .catch((erro) => console.log(erro));
-
-    const limit = 12;
-    const sliced = request.meals.slice(0, limit);
-    handleSearch(sliced);
-    this.setState({
-      searchByIngredient: sliced,
-    });
-
-    // console.log(request);
-
-    // if (request.meals.length > 1) {
-    //   const maxLength = 12;
-    //   const slicedData = request.meals.slice(0, maxLength);
-    //   handleSearch(slicedData);
-    //   history.push('/comidas');
-    // } else {
-    //   const singleResponseId = request.meals[0].idMeal;
-    //   history.push(`/comidas/${singleResponseId}`);
-    // }
+    handleSearch(target.alt || target.innerText);
+    return history.push('/comidas');
   }
 
   returnSrcImg(ingredient) {
@@ -68,10 +46,9 @@ class ExpComidasIng extends React.Component {
 
   render() {
     const { history } = this.props;
-    const { ingredientList, searchByIngredient } = this.state;
+    const { ingredientList } = this.state;
     return (
       <>
-        { (searchByIngredient.length > 1) && <Redirect to="/comidas" />}
         <Header title="Explorar Ingredientes" />
         {ingredientList.map((eachIngredient, index) => (
           <div
