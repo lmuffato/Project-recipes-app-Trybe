@@ -13,7 +13,7 @@ class ExpComidas extends React.Component {
       // typeRecipe: 'meal',
     };
 
-    this.dispatchToGlobal.this = this.dispatchToGlobal.bind(this);
+    this.redirectToRandom.this = this.redirectToRandom.bind(this);
   }
 
   componentDidMount() {
@@ -29,9 +29,11 @@ class ExpComidas extends React.Component {
     });
   }
 
-  dispatchToGlobal() {
-    console.log('função faz o dispatch, encaminha para o url dinâmica com o id do state');
-    // talvez dispatch p/ global da info "meal/drink" seja necessário p/ fins de api
+  redirectToRandom(e) {
+    e.preventDefault();
+    const { history } = this.props;
+    const { currentRandom } = this.state;
+    history.push(`/comidas/${currentRandom}`);
   }
 
   render() {
@@ -54,7 +56,7 @@ class ExpComidas extends React.Component {
         />
         <ExploreButton
           textButton="Me Surpreenda!"
-          onClick={ () => this.dispatchToGlobal() }
+          onClick={ (e) => this.redirectToRandom(e) }
           datatestId="explore-surprise"
         />
         <Footer history={ history } />

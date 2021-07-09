@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { handleCurrentSearch } from '../actions';
 
 class MainDrinkCard extends React.Component {
   constructor(props) {
@@ -14,12 +16,23 @@ class MainDrinkCard extends React.Component {
     this.FilterCategoryDrink = this.FilterCategoryDrink.bind(this);
     this.FilterCategoryDrinks = this.FilterCategoryDrinks.bind(this);
     this.loadingDrinkCategories = this.loadingDrinkCategories.bind(this);
+    this.renderCurrentSearch = this.renderCurrentSearch.bind(this);
     this.handleClick = this.handleClick.bind(this);
   }
 
   componentDidMount() {
-    this.FilterCategoryDrink();
-    this.loadingDrinkCategories();
+    const { currentSearch } = this.props;
+    if (currentSearch.length !== 0) {
+      this.renderCurrentSearch();
+    } else {
+      this.FilterCategoryDrink();
+      this.loadingDrinkCategories();
+    }
+  }
+
+  componentWillUnmount() {
+    const { cleanGlobalSearch } = this.props;
+    cleanGlobalSearch([]);
   }
 
   handleClick(e) {
@@ -80,6 +93,20 @@ class MainDrinkCard extends React.Component {
       });
   }
 
+  async renderCurrentSearch() {
+    const { currentSearch } = this.props;
+    const endpoint = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${currentSearch}`;
+    const request = await fetch(endpoint).then((response) => response.json());
+
+    const limit = 12;
+    const sliced = request.drinks.slice(0, limit);
+    console.log(sliced);
+    this.setState({
+      drinkData: sliced,
+      isLoading: false,
+    });
+  }
+
   render() {
     const { history } = this.props;
     const { drinkData, isLoading, categories, isCharging } = this.state;
@@ -129,8 +156,20 @@ class MainDrinkCard extends React.Component {
   }
 }
 
-MainDrinkCard.propTypes = {
-  history: PropTypes.shape(),
-}.isRequired;
+const mapStateToProps = (state) => ({
+  currentSearch: state.recipe.currentSearch,
+});
 
-export default MainDrinkCard;
+const mapDispatchToProps = (dispatch) => ({
+  cleanGlobalSearch: (currentSearch) => dispatch(handleCurrentSearch(currentSearch)),
+});
+
+MainDrinkCard.propTypes = {
+  history: PropTypes.shape().isRequired,
+  currentSearch: PropTypes.arrayOf(
+    PropTypes.string,
+  ).isRequired,
+  cleanGlobalSearch: PropTypes.func.isRequired,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(MainDrinkCard);
