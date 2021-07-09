@@ -9,7 +9,7 @@ function ProviderRecipes({ children }) {
   const [search, setSearch] = useState('');
   const [radioFilter, setRadioFilter] = useState('');
   const [searchBtn, setSearchBtn] = useState(false);
-  const [type, setType] = useState('');
+  // const [type, setType] = useState('');
   const [dataDrinkCards, setDataDrinkCards] = useState('');
   const [loadingCards, setLoadingCards] = useState(false);
 
@@ -41,11 +41,15 @@ function ProviderRecipes({ children }) {
   // esta função vai fazer a solicitação das receitas e
   // aplicar os filtros devidos
   const fetchRecipes = async (link) => {
+    const type = link === 'mealdb' ? 'Meal' : 'Drink';
     const endpoint = chooseEndpoint(link);
-    const response = await fetch(endpoint);
-    const data = await response.json();
-    setRecipes(data);
     setLoadingCards(true);
+    const response = await fetch(endpoint)
+      .then((r) => r.json())
+      .then((r) => r[`${type.toLowerCase()}s`]);
+    setLoadingCards(false);
+
+    setRecipes(response);
   };
 
   const fetchDetail = (recipeId) => {
@@ -68,8 +72,6 @@ function ProviderRecipes({ children }) {
         searchBtn,
         setSearchBtn,
         fetchRecipes,
-        type,
-        setType,
         dataDrinkCards,
         setDataDrinkCards,
         loadingCards,
