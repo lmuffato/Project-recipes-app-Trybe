@@ -46,7 +46,12 @@ function Header(props) {
       {
         serching
           ? <SearchBar page={ children.includes('Comida') ? 'meals' : 'drinks' } />
-          : <SearchCategories page={ children.includes('Comida') ? 'meals' : 'drinks' } />
+          : null
+      }
+      {
+        !toHideSearchIcon.includes(children) && !serching
+          ? <SearchCategories page={ children.includes('Comida') ? 'meals' : 'drinks' } />
+          : null
       }
     </div>
   );
