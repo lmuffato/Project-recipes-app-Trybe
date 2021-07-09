@@ -3,7 +3,7 @@ import { Switch, Route } from 'react-router-dom';
 import Login from '../pages/Login';
 import FoodPage from '../pages/FoodPage';
 import DrinkPage from '../pages/DrinkPage';
-import RecipeDetails from '../pages/RecipeDetails';
+// import RecipeDetails from '../pages/RecipeDetails';
 import ExplorePage from '../pages/ExplorePage';
 import ExploreFoods from '../pages/ExploreFoods';
 import ExploreDrinks from '../pages/ExploreDrinks';
@@ -13,8 +13,10 @@ import OriginLocation from '../pages/OriginLocation';
 import ProfilePage from '../pages/ProfilePage';
 import DoneRecipes from '../pages/DoneRecipes';
 import FavoriteRecipes from '../pages/FavoriteRecipes';
-import FoodInProcess from '../pages/FoodInProcess';
-import DrinkInProcess from '../pages/DrinkInProcess';
+import FoodInProgress from '../pages/FoodInProgress';
+import DrinkInProgress from '../pages/DrinkInProgress';
+import FoodDetails from '../pages/FoodDetails';
+import DrinkDetails from '../pages/DrinkDetails';
 
 export default function Routes() {
   return (
@@ -22,19 +24,19 @@ export default function Routes() {
       <Route exact path="/" component={ Login } />
       <Route exact path="/comidas" component={ FoodPage } />
       <Route exact path="/bebidas" component={ DrinkPage } />
-      <Route path="/comidas/:idMeal" component={ RecipeDetails } />
-      <Route path="/bebidas/:idDrink" component={ RecipeDetails } />
-      <Route path="/comidas/:idMeal/in-progress" component={ FoodInProcess } />
-      <Route path="/comidas/:idDrink/in-progress" component={ DrinkInProcess } />
+      <Route exact path="/comidas/:idMeal" component={ FoodDetails } />
+      <Route exact path="/bebidas/:idDrink" component={ DrinkDetails } />
+      <Route exact path="/comidas/:idMeal/in-progress" component={ FoodInProgress } />
+      <Route exact path="/comidas/:idDrink/in-progress" component={ DrinkInProgress } />
       <Route exact path="/explorar" component={ ExplorePage } />
-      <Route path="/explorar/comidas" component={ ExploreFoods } />
-      <Route path="/explorar/bebidas" component={ ExploreDrinks } />
-      <Route path="/explorar/comidas/ingredientes" component={ FoodIngredients } />
-      <Route path="/explorar/bebidas/ingredientes" component={ DrinkIngredients } />
-      <Route path="/explorar/comidas/area" component={ OriginLocation } />
-      <Route path="/perfil" component={ ProfilePage } />
-      <Route path="/receitas-feitas" component={ DoneRecipes } />
-      <Route path="/receitas-favoritas" component={ FavoriteRecipes } />
+      <Route exact path="/explorar/comidas" component={ ExploreFoods } />
+      <Route exact path="/explorar/bebidas" component={ ExploreDrinks } />
+      <Route exact path="/explorar/comidas/ingredientes" component={ FoodIngredients } />
+      <Route exact path="/explorar/bebidas/ingredientes" component={ DrinkIngredients } />
+      <Route exact path="/explorar/comidas/area" component={ OriginLocation } />
+      <Route exact path="/perfil" component={ ProfilePage } />
+      <Route exact path="/receitas-feitas" component={ DoneRecipes } />
+      <Route exact path="/receitas-favoritas" component={ FavoriteRecipes } />
     </Switch>
   );
 }

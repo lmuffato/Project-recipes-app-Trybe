@@ -74,6 +74,16 @@ export const drinksByCategory = async (callback, category) => {
   const { drinks } = ApiData;
   callback(drinks);
 };
+
+export const foodById = async (id) => {
+  const rawApiData = await fetch(
+    `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`,
+  );
+  const ApiData = await rawApiData.json();
+  const { meals } = ApiData;
+  return meals[0];
+};
+
 export const randomMeal = async (callback) => {
   const rawApiData = await fetch('https://www.themealdb.com/api/json/v1/1/random.php');
   const apiData = await rawApiData.json();
@@ -85,4 +95,13 @@ export const randomDrink = async (callback) => {
   const apiData = await rawApiData.json();
   const { drinks } = apiData;
   callback(drinks.pop());
+};
+
+export const drinkById = async (id) => {
+  const rawApiData = await fetch(
+    `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`,
+  );
+  const ApiData = await rawApiData.json();
+  const { drinks } = ApiData;
+  return drinks[0];
 };
