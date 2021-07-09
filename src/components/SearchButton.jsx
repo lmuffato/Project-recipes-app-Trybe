@@ -4,6 +4,12 @@ import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 import searchIcon from '../images/searchIcon.svg';
 
+import {
+  apiFood,
+  apiDrink,
+  requestApi,
+} from '../services/requestApi';
+
 class SearchButton extends React.Component {
   constructor(props) {
     super(props);
@@ -18,11 +24,8 @@ class SearchButton extends React.Component {
     };
 
     this.handleChange = this.handleChange.bind(this);
-    this.apisFood = this.apiFood.bind(this);
     this.renderInputSearch = this.renderInputSearch.bind(this);
-    this.requestApi = this.requestApi.bind(this);
     this.handleClick = this.handleClick.bind(this);
-    this.apiDrink = this.apiDrink.bind(this);
     this.handlePathName = this.handlePathName.bind(this);
     this.renderFood = this.renderFood.bind(this);
     this.renderDrink = this.renderDrink.bind(this);
@@ -59,15 +62,28 @@ class SearchButton extends React.Component {
     });
   }
 
-  handleClick() {
-    const { clickRButton, valueInput, foodOrDrink } = this.state;
+  async handleClick() {
+    const { clickRButton, valueInput, foodOrDrink, foodOrDrinkApiName } = this.state;
+    let result;
     if (valueInput.length > 1 && clickRButton === 'firstLetter') {
       alert('Sua busca deve conter somente 1 (um) caracter');
-    } else if (foodOrDrink === '/comidas') {
-      this.requestApi(this.apiFood(valueInput)[clickRButton]);
-    } else if (foodOrDrink === '/bebidas') {
-      this.requestApi(this.apiDrink(valueInput)[clickRButton]);
+      return;
     }
+
+    if (foodOrDrink === '/comidas') {
+      result = await requestApi(apiFood(valueInput)[clickRButton], foodOrDrinkApiName);
+    } else if (foodOrDrink === '/bebidas') {
+      result = await requestApi(apiDrink(valueInput)[clickRButton], foodOrDrinkApiName);
+    }
+
+    if (result === 'error') return;
+
+    if (result === 'redirect') return <Redirect to={ `/${foodOrDrink}` } />;
+
+    this.setState({
+      api: result,
+    });
+    this.saveIdProduct();
   }
 
   saveIdProduct() {
@@ -85,50 +101,6 @@ class SearchButton extends React.Component {
     }
   }
 
-  apiFood(valueInput) {
-    const meals = {
-      name: `https://www.themealdb.com/api/json/v1/1/search.php?s=${valueInput}`,
-      ingrendient: `https://www.themealdb.com/api/json/v1/1/filter.php?i=${valueInput}`,
-      firstLetter: `https://www.themealdb.com/api/json/v1/1/search.php?f=${valueInput}`,
-    };
-    return meals;
-  }
-
-  apiDrink(valueInput) {
-    const drinks = {
-      name: `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${valueInput}`,
-      ingrendient: `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${valueInput}`,
-      firstLetter: `https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${valueInput}`,
-    };
-    return drinks;
-  }
-
-  async requestApi(endpoint) {
-    const { foodOrDrinkApiName, foodOrDrink } = this.state;
-    const numMax = 12;
-    const msgErro = 'Sinto muito, não encontramos nenhuma receita para esses filtros.';
-    const api = await fetch(endpoint).then((response) => response.json())
-      .catch((err) => {
-        console.log(err);
-        // eslint-disable-next-line no-alert
-        return { [foodOrDrinkApiName]: null };
-      });
-    console.log(api);
-    if (api[foodOrDrinkApiName] === null) {
-      // eslint-disable-next-line no-alert
-      alert(msgErro);
-      return api;
-    }
-    const api12 = api[foodOrDrinkApiName].slice(0, numMax);
-    if (api12.length === 1) {
-      return <Redirect to={ `/${foodOrDrink}` } />;
-    }
-    this.setState({
-      api: api12,
-    });
-    this.saveIdProduct();
-  }
-
   verifyRenderApi() {
     const { foodOrDrink } = this.state;
     if (foodOrDrink === '/comidas') {
@@ -139,9 +111,7 @@ class SearchButton extends React.Component {
   }
 
   renderFood() {
-    const { history } = this.props;
     const { api } = this.state;
-    console.log(api);
     return (
       api.map((paran, index) => (
         <div
@@ -162,7 +132,6 @@ class SearchButton extends React.Component {
   }
 
   renderDrink() {
-    const { history } = this.props;
     const { api } = this.state;
     return (
       api.map((paran, index) => (
