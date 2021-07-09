@@ -122,7 +122,6 @@ function ReceitasFavoritas() {
   };
 
   const renderFavData = (filterType) => {
-    console.log(`FilterType: ${filterType}`);
     if (filterType.includes('todos')) {
       setFilteredItems(favData);
     }
@@ -140,7 +139,7 @@ function ReceitasFavoritas() {
 
   return (
     <div className="favorite_recipes">
-      <Header title="Receitas Favoritas" />
+      <Header title="Receitas Favoritas" displayButton={ false } />
       <div className="buttons">
         <button
           type="button"
