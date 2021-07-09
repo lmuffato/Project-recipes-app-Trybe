@@ -39,18 +39,26 @@ export default function DetalhesBebidas() {
 
   return (
     <div>
-      <DetailsHeader recipe={ recipe } isDrink />
-      <Text>Ingredients</Text>
+      <DetailsHeader
+        recipe={ recipe }
+        isDrink
+      />
+      <Text>
+        Ingredients
+      </Text>
       <List
         list={ filterIngredient }
-        dataTestid="-ingredient-name-and-measure"
       />
-      <Text>Instructions</Text>
+      <Text>
+        Instructions
+      </Text>
       {
         recipe.strInstructions
         && <Paragraphs dataTestid="instructions">{ recipe.strInstructions }</Paragraphs>
       }
-      <Text>Recomendadas</Text>
+      <Text>
+        Recomendadas
+      </Text>
       <Button
         dataTestid="start-recipe-btn"
       >

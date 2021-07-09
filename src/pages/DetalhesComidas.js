@@ -49,7 +49,6 @@ export default function DetalhesComidas() {
       </Text>
       <List
         list={ filterIngredient }
-        datatestid="-ingredient-name-and-measure"
       />
       <Text>
         Instructions
