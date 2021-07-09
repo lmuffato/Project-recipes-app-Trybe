@@ -1,9 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Proptypes from 'prop-types';
 import '../PagesCss/Checkbox.css';
 
 export default function RenderCheckboxIngredients({ ingredients, measure }) {
   const [value, setValue] = useState(false);
+  const [check, setCheck] = useState([]);
+
+  useEffect(() => {
+    
+  }, []);
+
+  const checked = (index) => {
+    setCheck(true[index]);
+  };
 
   return (
     <>
@@ -19,8 +28,8 @@ export default function RenderCheckboxIngredients({ ingredients, measure }) {
                 {name}
                 <input
                   name="ingredient"
-                  checked={ value }
-                  onChange={ () => setValue(!value) }
+                  checked={ check }
+                  onChange={ () => checked(index) }
                   type="checkbox"
                   data-testid={ `${index}-ingredient-step` }
                 />
