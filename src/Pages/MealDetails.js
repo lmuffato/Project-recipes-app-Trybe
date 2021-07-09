@@ -20,14 +20,14 @@ export default function MealDetails() {
   const globalState = useSelector((state) => state.detailsReducer.favorites);
   const history = useHistory();
   const INICIAR_RECEITA = 'Iniciar Receita';
-  const [startButton, setStartButton] = useState(INICIAR_RECEITA);
+  // const [startButton, setStartButton] = useState(INICIAR_RECEITA);
 
   useEffect(() => {
     const mealDrinks = async () => {
       const url = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
       const { meals } = await fetch(url).then((r) => r.json());
-      setData(meals);
       dispatch(actionDetails(meals));
+      setData(meals);
     };
     const fetchRecomendations = async () => {
       const url = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
@@ -37,21 +37,6 @@ export default function MealDetails() {
     mealDrinks();
     fetchRecomendations();
   }, [dispatch, id]);
-
-  useEffect(() => {
-    if (data) {
-      const lsValue = () => {
-        const ids = Object.keys(
-          (JSON.parse(localStorage.getItem('inProgressRecipes'))).meals,
-        );
-        if (ids.length === 0) setStartButton('Iniciar Receita');
-        if (ids.length > 0) {
-          ids.forEach((e) => e === id && setStartButton('Continuar Receita'));
-        }
-      };
-      lsValue();
-    }
-  }, [id, data]);
 
   const renderRecomendations = (param) => (
     param && (
@@ -71,10 +56,26 @@ export default function MealDetails() {
     setCopy('Link copiado!');
   };
 
+  const testButton = () => {
+    const lS = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    if (lS) {
+      const ids = Object.keys(lS);
+      if (ids.length > 0) {
+        const find = ids.filter((e) => e === id);
+        return (
+          find ? 'Continuar Receita' : INICIAR_RECEITA
+        );
+      }
+    }
+    return INICIAR_RECEITA;
+  };
+
   const renderMealRecipe = () => {
     const ingredients = [];
     const measure = [];
-    if (data) {
+    const result = testButton();
+
+    if (data && data.length > 0) {
       const array = Object.entries(data[0]);
       array.forEach((item) => {
         if (item[0].includes('strIngredient') && item[1] !== null) {
@@ -114,13 +115,10 @@ export default function MealDetails() {
           <button
             className="footer"
             type="button"
-            data-testid={
-              startButton === INICIAR_RECEITA ? 'start-recipe-btn'
-                : 'start-recipe-btn'
-            }
+            data-testid="start-recipe-btn"
             onClick={ () => history.push(`/comidas/${idMeal}/in-progress`) }
           >
-            { startButton }
+            { result }
           </button>
         </div>
       );
