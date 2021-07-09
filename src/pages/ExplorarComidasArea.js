@@ -19,14 +19,7 @@ function ExplorarComidasArea() {
   const fetchapi = async () => {
     const comidas = await mealsAPI();
     setData(comidas);
-    // setAcctualyFood(comidas);
   };
-
-  // const fetchByArea = async (area) => {
-  //   const filterFoods = await getFoodsByArea(area);
-  //   console.log('Tentando', filterFoods.meals);
-  //   setAcctualyFood(filterFoods);
-  // };
 
   useEffect(() => {
     setData([]);
@@ -44,7 +37,7 @@ function ExplorarComidasArea() {
     if (filterArea !== 'All') {
       const fetchByArea = async (area) => {
         const filterFoods = await getFoodsByArea(area);
-        console.log('Tentando', filterFoods.meals);
+
         setAcctualyFood(filterFoods.meals);
       };
 
@@ -73,7 +66,6 @@ function ExplorarComidasArea() {
                 style={ { width: '8rem' } }
                 data-testid={ `${index}-recipe-card` }
                 className="shadow m-1 rounded"
-                // onClick={ handleClick }
               >
                 <Card.Img
                   variant="top"
@@ -93,34 +85,7 @@ function ExplorarComidasArea() {
         return null;
       });
     }
-    console.log('Diferente de All');
-    // return acctualyFood.map((item, index) => (
-    //   <Link to={ `/comidas/${item.idMeal}` } key={ index }>
-    //     <Card
-    //       key={ item.strArea }
-    //       style={ { width: '8rem' } }
-    //       data-testid={ `${index}-recipe-card` }
-    //       className="shadow m-1 rounded"
-    //       // onClick={ handleClick }
-    //     >
-    //       <Card.Img
-    //         variant="top"
-    //         data-testid={ `${index}-card-img` }
-    //         alt={ item.strMeal }
-    //         src={ item.strMealThumb }
-    //       />
-    //       <Card.Body>
-    //         <Card.Title data-testid={ `${index}-card-name` }>
-    //           { item.strMeal }
-    //         </Card.Title>
-    //       </Card.Body>
-    //     </Card>
-    //   </Link>
-    // ));
   };
-
-  // console.log('Teste data', data);
-  console.log('Teste de', acctualyFood);
 
   return (
     <div>
