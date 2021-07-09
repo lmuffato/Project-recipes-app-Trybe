@@ -17,7 +17,7 @@ function Footer() {
   };
 
   return (
-    <footer data-testid="footer">
+    <footer data-testid="footer" title="footer">
       <Link to="/bebidas" onClick={ () => handleClick('cocktail') }>
         <img src={ drinkIcon } alt="drinks" data-testid="drinks-bottom-btn" />
       </Link>

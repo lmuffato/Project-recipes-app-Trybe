@@ -1,14 +1,21 @@
 body {
-  width: 62vw;
+  height: 100vh;
+  width: 100vw;
 }
 
 .recipes-container {
   display: flex;
-  flex-flow: column wrap;
+  flex-flow: row wrap;
+  height: 78%;
+  justify-content: space-around;
 }
 
 .recipe {
-  height: 50px;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 15%;
+  justify-content: space-around;
   width: 35%;
 }
 
