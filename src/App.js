@@ -8,6 +8,14 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
+  const progress = {
+    meals: {},
+    cocktails: {},
+  };
+
+  const storage = JSON.parse(localStorage.getItem('inProgressRecipes'));
+  if (!storage) localStorage.setItem('inProgressRecipes', JSON.stringify(progress));
+
   return (
     <Provider store={ store }>
       <BrowserRouter>
