@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import copy from 'clipboard-copy';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
@@ -17,6 +18,7 @@ class DetBebidas extends React.Component {
     this.fetchDrinksById = this.fetchDrinksById.bind(this);
     this.handleIngredients = this.handleIngredients.bind(this);
     this.fetchRecommendedFoods = this.fetchRecommendedFoods.bind(this);
+    this.onClickShare = this.onClickShare.bind(this);
   }
 
   async componentDidMount() {
@@ -60,6 +62,15 @@ class DetBebidas extends React.Component {
     });
   }
 
+  async onClickShare(path) {
+    const p = document.createElement('p');
+    const pai = document.querySelector('#share');
+    p.innerText = 'Link copiado!';
+    const url = `http://localhost:3000${path}`;
+    pai.appendChild(p);
+    await copy(url);
+  }
+
   setNewState(drinks, recommended) {
     this.setState({
       drinks,
@@ -83,7 +94,9 @@ class DetBebidas extends React.Component {
   }
 
   render() {
+    console.log(this.props);
     const history = this.props;
+    const { pathname } = history.location;
     const { drinks, ingredientes, measures, recommended } = this.state;
     const drink = Object.values(drinks);
     return (
@@ -98,18 +111,21 @@ class DetBebidas extends React.Component {
           <h1 data-testid="recipe-title">{ recipe[0].strDrink }</h1>
           <p data-testid="recipe-category">{ recipe[0].strCategory }</p>
           <p data-testid="recipe-category">{`Alcoholic? ${recipe[0].strAlcoholic}`}</p>
-          <input
-            type="image"
-            data-testid="share-btn"
-            src={ shareIcon }
-            alt="Compartilhar receita"
-          />
-          <input
-            type="image"
-            data-testid="favorite-btn"
-            src={ whiteHeartIcon }
-            alt="favoritar receita"
-          />
+          <div id="share">
+            <input
+              type="image"
+              data-testid="share-btn"
+              src={ shareIcon }
+              alt="Compartilhar receita"
+              onClick={ () => this.onClickShare(pathname) }
+            />
+            <input
+              type="image"
+              data-testid="favorite-btn"
+              src={ whiteHeartIcon }
+              alt="favoritar receita"
+            />
+          </div>
           <h2>
             Lista de Ingredientes
           </h2>
