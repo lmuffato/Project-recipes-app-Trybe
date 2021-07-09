@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import recipesContext from '../../context/RecipesContext';
 import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../../images/blackHeartIcon.svg';
+import './styles.css';
 
 function FavoriteButton({ recipe, recipeType }) {
   const { setFavoriteRecipes, favoriteRecipes } = useContext(recipesContext);
@@ -27,7 +28,7 @@ function FavoriteButton({ recipe, recipeType }) {
   };
 
   useEffect(() => {
-    if (findFavorite || findFavoriteLocal) {
+    if (findFavoriteLocal || findFavorite) {
       setIsFavorite(true);
     }
   }, [findFavoriteLocal, findFavorite]);
@@ -59,7 +60,7 @@ function FavoriteButton({ recipe, recipeType }) {
   };
 
   return (
-    <div>
+    <div className="fav-btn">
       <input
         type="image"
         data-testid="favorite-btn"

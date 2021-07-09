@@ -49,16 +49,20 @@ function Details() {
             data-testid="recipe-photo"
             src={ recipesDetails[`str${recipeType}Thumb`] }
           />
-          <h1 data-testid="recipe-title">
-            {recipesDetails[`str${recipeType}`]}
-          </h1>
-          <h3 data-testid="recipe-category">
-            {recipesDetails[toggleCategory]}
-          </h3>
-
-          <ShareButton />
-          <FavoriteButton recipe={ recipesDetails } recipeType={ recipeType } />
-
+          <div className="top-components">
+            <div>
+              <h1 data-testid="recipe-title">
+                {recipesDetails[`str${recipeType}`]}
+              </h1>
+              <h3 data-testid="recipe-category">
+                {recipesDetails[toggleCategory]}
+              </h3>
+            </div>
+            <div className="btn-components">
+              <ShareButton />
+              <FavoriteButton recipe={ recipesDetails } recipeType={ recipeType } />
+            </div>
+          </div>
           <Ingredient type="list" recipe={ recipesDetails } />
           <div className="instructions">
             <h2>Instructions</h2>

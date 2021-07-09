@@ -20,7 +20,6 @@ function ShareButton() {
     <CopyToClipboard text={ `http://localhost:3000${URL}` } onCopy={ onCopyText }>
       <div>
         <input
-          className="share-btn"
           type="image"
           data-testid="share-btn"
           src={ shareIcon }
