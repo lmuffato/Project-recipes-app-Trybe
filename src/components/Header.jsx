@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import profileIcon from '../images/profileIcon.svg';
 import './Style.css';
 
+// Stan <3
+
 function Header() {
   const pageTitle = () => {
     const path = window.location.pathname;
