@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { actionDetails } from '../redux/actions';
+import { actionDetails, actionIdRecipeInProgress } from '../redux/actions';
 import RecomendationCard from '../util/renderRecomendationCard';
 import RenderRecipeImg from '../util/mealDetailsComponents/renderRecipeImg';
 import RenderIngredients from '../util/mealDetailsComponents/renderIngredients';
@@ -20,7 +20,6 @@ export default function MealDetails() {
   const globalState = useSelector((state) => state.detailsReducer.favorites);
   const history = useHistory();
   const INICIAR_RECEITA = 'Iniciar Receita';
-  // const [startButton, setStartButton] = useState(INICIAR_RECEITA);
 
   useEffect(() => {
     const mealDrinks = async () => {
@@ -70,6 +69,19 @@ export default function MealDetails() {
     return INICIAR_RECEITA;
   };
 
+  const goToRecipeInProgress = (idMeal, ingredients, measure) => {
+    const ls = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    if (ls && ls.length > 0) {
+      const addMeal = { ...ls, meals: { ...ls.meals, [idMeal]: [ingredients, measure] } };
+      localStorage.setItem('inProgressRecipes', JSON.stringify(addMeal));
+    } else {
+      const addMeal = { drinks: {}, meals: { [idMeal]: [ingredients, measure] } };
+      localStorage.setItem('inProgressRecipes', JSON.stringify(addMeal));
+    }
+    dispatch(actionIdRecipeInProgress(idMeal, ingredients, measure));
+    history.push(`/comidas/${idMeal}/in-progress`);
+  };
+
   const renderMealRecipe = () => {
     const ingredients = [];
     const measure = [];
@@ -116,7 +128,7 @@ export default function MealDetails() {
             className="footer"
             type="button"
             data-testid="start-recipe-btn"
-            onClick={ () => history.push(`/comidas/${idMeal}/in-progress`) }
+            onClick={ () => goToRecipeInProgress(idMeal, ingredients, measure) }
           >
             { result }
           </button>

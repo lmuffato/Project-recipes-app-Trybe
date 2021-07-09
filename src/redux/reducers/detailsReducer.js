@@ -1,8 +1,13 @@
-import { ACTION_DETAILS, ACTION_FAVORITES } from '../actions';
+import { ACTION_DETAILS, ACTION_FAVORITES, ID_REC_IN_PROGRESS } from '../actions';
 
 const INITIAL_STATE = {
   favorites: [],
   data: '',
+  recInProgress: {
+    id: '',
+    ingredients: '',
+    measure: '',
+  },
 };
 
 const detailsReducer = (state = INITIAL_STATE, action) => {
@@ -16,6 +21,15 @@ const detailsReducer = (state = INITIAL_STATE, action) => {
     return {
       ...state,
       data: action.data,
+    };
+  case ID_REC_IN_PROGRESS:
+    return {
+      ...state,
+      recInProgress: {
+        id: action.idMeal,
+        ingredients: action.ingredients,
+        measure: action.measure,
+      },
     };
   default:
     return state;
