@@ -2,7 +2,7 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import HeaderBack from '../../components/HeaderBack';
 import styles from './styles.module.scss';
-import useLocalStorage from '../../hooks/useLocalStorage';
+import useLocalStorage from '../../hooks/useLocalStorage.js';
 
 function Perfil() {
   /* const emailReceived = localStorage.getItem('email');
