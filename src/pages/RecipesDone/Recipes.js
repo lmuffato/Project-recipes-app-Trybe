@@ -45,7 +45,7 @@ function Recipes() {
       </Card.Text>));
   };
   const handleFood = (recipe, index) => (
-    <Card style={ { width: '22rem' } } bsPrefix="card-img" key={ index }>
+    <Card style={ { width: '22rem' } } key={ index }>
       <Link key={ index } to={ `comidas/${recipe.id}` }>
         <Card.Img
           variant="bottom"

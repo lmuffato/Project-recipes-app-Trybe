@@ -1,55 +1,55 @@
-/* .cards-foods {
+.cards-foods {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
   padding: 5px;
-} */
+}
 
-/* .cards-foods div {
+.cards-foods div {
   border-radius: 15px;
   margin: 5px;
-} */
+}
 
-/* .cards-drinks {
+.cards-drinks {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
   padding: 5px;
-} */
+}
 
-/* .cards-drinks div {
+.cards-drinks div {
   border-radius: 15px;
   margin: 5px;
-} */
+}
 
-/* .buttons-filter-done {
+.buttons-filter-done {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
   padding: 3px;
-} */
+}
 
-/* .card-img {
+.card-img {
   border: 1px solid black;
   display: flex;
   margin: 5px;
-} */
+}
 
-/* .card-img-bottom {
+.card-img-bottom {
   height: 150px;
   margin-left: 5px;
   margin-top: 30px;
   max-width: 45%;
-} */
+}
 
-/* .button {
+.button {
   background-color: white;
   border: none;
   margin-left: 120px;
   width: 35px;
-} */
+}
 
-/* a {
+a {
   color: black;
   direction: none;
-} */
+}
