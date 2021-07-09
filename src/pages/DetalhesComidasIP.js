@@ -50,17 +50,22 @@ export default function DetalhesComidasIP() {
 
   const history = useHistory();
   function finishRecipe() {
-    setDoneRecipes([...doneRecipes, {
-      id: food.idMeal,
-      type: 'comida',
-      area: food.strArea ? food.strArea : '',
-      category: food.strCategory ? food.strCategory : '',
-      alcoholicOrNot: '',
-      name: food.strMeal,
-      image: food.strMealThumb,
-      doneDate: new Date(),
-      tags: food.strTags ? [...food.strTags] : [],
-    }]);
+    const doneRecipesIds = doneRecipes.map(((doceRecipe) => doceRecipe.id));
+    const isAlreadyDone = doneRecipesIds.includes(food.idMeal);
+
+    if (!isAlreadyDone) {
+      setDoneRecipes([...doneRecipes, {
+        id: food.idMeal,
+        type: 'comida',
+        area: food.strArea ? food.strArea : '',
+        category: food.strCategory ? food.strCategory : '',
+        alcoholicOrNot: '',
+        name: food.strMeal,
+        image: food.strMealThumb,
+        doneDate: new Date(),
+        tags: food.strTags ? [...food.strTags] : [],
+      }]);
+    }
     history.push('/receitas-feitas');
   }
 

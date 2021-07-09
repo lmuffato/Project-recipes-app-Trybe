@@ -50,17 +50,22 @@ export default function DetalhesBebidasIP() {
 
   const history = useHistory();
   function finishRecipe() {
-    setDoneRecipes([...doneRecipes, {
-      id: drink.idDrink,
-      type: 'bebida',
-      area: drink.strArea ? drink.strArea : '',
-      category: drink.strCategory ? drink.strCategory : '',
-      alcoholicOrNot: drink.strAlcoholic,
-      name: drink.strDrink,
-      image: drink.strDrinkThumb,
-      doneDate: new Date(),
-      tags: drink.strTags ? [...drink.strTags] : [],
-    }]);
+    const doneRecipesIds = doneRecipes.map(((doceRecipe) => doceRecipe.id));
+    const isAlreadyDone = doneRecipesIds.includes(drink.idDrink);
+
+    if (!isAlreadyDone) {
+      setDoneRecipes([...doneRecipes, {
+        id: drink.idDrink,
+        type: 'bebida',
+        area: drink.strArea ? drink.strArea : '',
+        category: drink.strCategory ? drink.strCategory : '',
+        alcoholicOrNot: drink.strAlcoholic,
+        name: drink.strDrink,
+        image: drink.strDrinkThumb,
+        doneDate: new Date(),
+        tags: drink.strTags ? [...drink.strTags] : [],
+      }]);
+    }
     history.push('/receitas-feitas');
   }
 
