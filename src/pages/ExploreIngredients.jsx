@@ -1,26 +1,21 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import Header from '../components/Header/Header';
 import Footer from '../components/Footer/Footer';
 
 function ExploreIngredients({ type }) {
   const [ingredients, setIngredients] = useState([]);
-  const i = useParams();
-  console.log(type);
-  console.log(i);
   const MAX_INGREDIENTS = 12;
 
   const fetchIngredientsFood = useCallback(async () => {
     if (type === 'meals') {
       const data = await fetch('https://www.themealdb.com/api/json/v1/1/list.php?i=list');
       const ingredientsFood = await data.json();
-      console.log(ingredientsFood.meals.slice(0, MAX_INGREDIENTS));
       setIngredients(ingredientsFood.meals.slice(0, MAX_INGREDIENTS));
     }
     if (type === 'drinks') {
       const data = await fetch('https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list');
       const ingredientsDrink = await data.json();
-      console.log(ingredientsDrink.drinks.slice(0, MAX_INGREDIENTS)); // .meals.slice(0, MAX_INGREDIENTS));
       setIngredients(ingredientsDrink.drinks.slice(0, MAX_INGREDIENTS));
     }
   }, [type]);
@@ -28,7 +23,6 @@ function ExploreIngredients({ type }) {
   useEffect(() => {
     fetchIngredientsFood();
   }, [fetchIngredientsFood]);
-  console.log(ingredients);
 
   return (
     <div>
