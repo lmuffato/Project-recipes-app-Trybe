@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { initialFoods } from '../../services/apiRequests';
 import RecFoodCard from './RecFoodCard';
+import './Recommends.css';
 
 export default function FoodsRecomends() {
   const [foodsRecommends, setFoodsRecommends] = useState([]);
@@ -13,7 +14,7 @@ export default function FoodsRecomends() {
   const maxLength = 5;
 
   return (
-    <div>
+    <div className="recommendsList">
       { !isLoading && foodsRecommends
         .filter((_, index) => index <= maxLength)
         .map((food, index) => (
