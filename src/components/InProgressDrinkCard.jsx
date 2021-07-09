@@ -42,6 +42,7 @@ function InProgressDrinkCard() {
         type="button"
         data-testid="finish-recipe-btn"
         disabled={ showButtonFinished }
+        onClick={ () => history.push('/receitas-feitas') }
       >
         Finalizar Receita
       </button>
