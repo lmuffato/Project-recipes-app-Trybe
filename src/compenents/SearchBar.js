@@ -31,7 +31,7 @@ function SearchBar() {
       global.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
     } else if (mealOrDrink === 'cocktail' && data.drinks.length === 1) {
       drinkId = data.drinks[0].idDrink;
-      setIdDrink(drinkId);99999
+      setIdDrink(drinkId);
       history.push(`/bebidas/${drinkId}`);
     } else if (mealOrDrink === 'meal' && data.meals.length === 1) {
       mealId = data.meals[0].idMeal;
@@ -106,35 +106,6 @@ function SearchBar() {
       </button>
     </div>
   );
-
-  // const getIngredientsFiltered = () => (
-  //   mealOrDrink === 'meal' ? recipes.map((recipe, index) => (
-  //     // <FilteredCard
-  //     //   key={ meal.idMeal }
-  //     //   index={ index }
-  //     //   name={ meal.strMeal }
-  //     //   thumbnail={ meal.strMealThumb }
-  //     // />
-  //     <MealCards
-  //       data={ recipe }
-  //       index={ index }
-  //       key={ recipe.idMeal }
-  //     />
-  //   ))
-  //     : recipes.map((recipe, index) => (
-  //       // <FilteredCard
-  //       //   key={ drink.idDrink }
-  //       //   index={ index }
-  //       //   name={ drink.strDrink }
-  //       //   thumbnail={ drink.strDrinkThumb }
-  //       // />
-  //       <DrinkCards
-  //         data={ recipe }
-  //         index={ index }
-  //         key={ recipe.idDrink }
-  //       />
-  //     ))
-  // );
 
   return (
     <>

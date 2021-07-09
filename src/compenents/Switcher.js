@@ -10,7 +10,8 @@ import FoodsArea from '../pages/FoodsArea';
 import LoginPage from '../pages/LoginPage';
 import Profile from '../pages/ProfilePage';
 import ReceitasFeitas from '../pages/ReceitasFeitas';
-import ReceitasFavoritas from '../pages/ReceitasFavoritas';
+// import ReceitasFavoritas from '../pages/ReceitasFavoritas';
+import FavoriteRecipes from '../pages/FavoriteRecipes';
 import MealDescription from './MealDescription';
 import DrinkDescription from './DrinkDescription';
 
@@ -27,7 +28,7 @@ function Switcher() {
       <Route exact path="/explorar/bebidas" component={ Drinks } />
       <Route path="/perfil" component={ Profile } />
       <Route path="/receitas-feitas" component={ ReceitasFeitas } />
-      <Route path="/receitas-favoritas" component={ ReceitasFavoritas } />
+      <Route path="/receitas-favoritas" component={ FavoriteRecipes } />
       <Route
         path="/explorar/comidas/ingredientes"
         component={ FoodsIngredients }
