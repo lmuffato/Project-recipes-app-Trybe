@@ -74,7 +74,7 @@ function DrinkScreen() {
 
   return (
     <div>
-      <Header title="Bebidas" icon="true" currentPage="Drink" />
+      <Header title="Bebidas" icon="true" currentPage="Drinks" />
       {renderFilters()}
       {renderCards()}
       <Footer />
