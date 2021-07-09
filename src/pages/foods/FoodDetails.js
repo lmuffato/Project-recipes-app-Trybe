@@ -3,8 +3,10 @@ import PropTypes from 'prop-types';
 import { useStateEasyRedux } from 'easy-redux-trybe';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import copy from 'clipboard-copy';
 import positions from '../../services/data';
 import createIngredients from '../../services/functions';
+import shareIcon from '../../images/shareIcon.svg';
 
 import styles from '../../styles/DetailsPages.module.scss';
 
@@ -13,6 +15,7 @@ function FoodDetails(props) {
 
   const history = useHistory();
   const [, setStateRedux] = useStateEasyRedux(FoodDetails, {});
+  const [, setCopyUrl] = useStateEasyRedux({ name: 'copyFood' }, {});
 
   useEffect(() => {
     const fetchRecipie = async () => {
@@ -30,6 +33,7 @@ function FoodDetails(props) {
       const INDEX_END = 6;
       const resultRecommendations = responseRecommendations.slice(0, INDEX_END);
       setStateRedux({ actionType: 'FETCH_FOOD', responseFood, resultRecommendations });
+      setCopyUrl({ actionType: 'COPY_URL', copyRecipie: false });
     };
     fetchRecipie();
   }, []);
@@ -42,7 +46,20 @@ function FoodDetails(props) {
     state.FoodDetails ? state.FoodDetails.resultRecommendations : undefined
   ));
 
+  const copyTrue = useSelector((state) => (
+    state.copyFood ? state.copyFood.copyRecipie : undefined
+  ));
+
   const choiceRec = (element) => history.push(`/bebidas/${element}`);
+
+  const copyUrl = () => {
+    copy(window.location.href.toString());
+    setCopyUrl({ copyRecipie: true });
+    const time = 3000;
+    setTimeout(() => {
+      setCopyUrl({ copyRecipie: false });
+    }, time);
+  };
 
   console.log(foods);
 
@@ -58,14 +75,25 @@ function FoodDetails(props) {
               className={ styles.imgThumb }
             />
             <div className={ styles.containerContent }>
-              <h1 data-testid="recipe-title">{ el.strMeal }</h1>
-              <button type="button" data-testid="share-btn">compartilhar</button>
-              <button type="button" data-testid="favorite-btn">favoritar</button>
+              {copyTrue && <span className={ styles.copyUrl }>Link copiado!</span>}
+              <div className={ styles.headerContent }>
+                <h1 data-testid="recipe-title">{ el.strMeal }</h1>
+                <button
+                  type="button"
+                  data-testid="share-btn"
+                  onClick={ () => copyUrl() }
+                >
+                  <img src={ shareIcon } alt="Compartilhar" />
+                </button>
+                <button type="button" data-testid="favorite-btn">favoritar</button>
+              </div>
               <p data-testid="recipe-category">{ el.strCategory }</p>
+              <h3>Ingredients</h3>
               <ul>
                 {positions
                   .map((position, index) => createIngredients({ el, position, index }))}
               </ul>
+              <h3>Instructions</h3>
               <p data-testid="instructions">{ el.strInstructions }</p>
               <embed
                 type="video/mp4"
@@ -74,7 +102,7 @@ function FoodDetails(props) {
                 height="300"
                 data-testid="video"
               />
-              <h3>Recomendações</h3>
+              <h3>Recommendations</h3>
               <div className={ styles.carousel }>
                 {drinksRecommendations && drinksRecommendations.map((element, index) => (
                   <div

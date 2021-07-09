@@ -8,9 +8,49 @@
     }
 
     .containerContent {
-      width: 95%;
+      width: 93%;
       margin: 0 auto;
       font-family: 'Poppins', sans-serif;
+
+      .copyUrl {
+        position: absolute;
+        margin-left: 30vw;
+        background-color: rgba(0, 0, 0, 0.7);
+        padding: 2px 5px;
+        color: white;
+        border-radius: 5px;
+      }
+
+      .headerContent {
+        display: grid;
+        grid-template-columns: 5fr 1fr 1fr;
+
+        h1 {
+          margin-bottom: 0;
+        }
+
+        button {
+          border: none;
+          background: transparent;
+          cursor: pointer;
+
+          &:hover {
+            opacity: 0.9;
+          }
+        }
+      }
+
+      p {
+
+        &:first-of-type {
+          margin: 0;
+          color: grey;
+        }
+
+        &:last-of-type {
+          text-align: justify;
+        }
+      }
 
       embed {
         width: 100%;

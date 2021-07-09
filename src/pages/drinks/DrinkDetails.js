@@ -3,8 +3,10 @@ import PropTypes from 'prop-types';
 import { useStateEasyRedux } from 'easy-redux-trybe';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import copy from 'clipboard-copy';
 import positions from '../../services/data';
 import createIngredients from '../../services/functions';
+import shareIcon from '../../images/shareIcon.svg';
 
 import styles from '../../styles/DetailsPages.module.scss';
 
@@ -13,6 +15,7 @@ function DrinkDetails(props) {
 
   const history = useHistory();
   const [, setStateRedux] = useStateEasyRedux(DrinkDetails, {});
+  const [, setCopyUrl] = useStateEasyRedux({ name: 'copyDrink' }, {});
 
   useEffect(() => {
     const fetchRecipie = async () => {
@@ -30,6 +33,7 @@ function DrinkDetails(props) {
       const INDEX_END = 6;
       const resultRecommendations = responseRecommendations.slice(0, INDEX_END);
       setStateRedux({ actionType: 'FETCH_DRINK', responseDrink, resultRecommendations });
+      setCopyUrl({ actionType: 'COPY_URL', copyRecipie: false });
     };
     fetchRecipie();
   }, []);
@@ -42,13 +46,26 @@ function DrinkDetails(props) {
     state.DrinkDetails ? state.DrinkDetails.resultRecommendations : undefined
   ));
 
+  const copyTrue = useSelector((state) => (
+    state.copyDrink ? state.copyDrink.copyRecipie : undefined
+  ));
+
   const verifyAlcohol = (el) => {
     if (el.strAlcoholic === 'Alcoholic') {
       return (<p>{ el.strAlcoholic }</p>);
     }
   };
 
-  const choiceRec = (element) => history.push(`/bebidas/${element}`);
+  const choiceRec = (element) => history.push(`/comidas/${element}`);
+
+  const copyUrl = () => {
+    copy(window.location.href.toString());
+    setCopyUrl({ copyRecipie: true });
+    const time = 3000;
+    setTimeout(() => {
+      setCopyUrl({ copyRecipie: false });
+    }, time);
+  };
 
   return (
     <div>
@@ -56,9 +73,18 @@ function DrinkDetails(props) {
         <div className={ styles.areaRecipie } key={ el.idDrink }>
           <img src={ el.strDrinkThumb } alt={ el.strDrink } data-testid="recipe-photo" />
           <div className={ styles.containerContent }>
-            <h1 data-testid="recipe-title">{ el.strDrink }</h1>
-            <button type="button" data-testid="share-btn">compartilhar</button>
-            <button type="button" data-testid="favorite-btn">favoritar</button>
+            {copyTrue && <span className={ styles.copyUrl }>Link copiado!</span>}
+            <div className={ styles.headerContent }>
+              <h1 data-testid="recipe-title">{ el.strDrink }</h1>
+              <button
+                type="button"
+                data-testid="share-btn"
+                onClick={ () => copyUrl() }
+              >
+                <img src={ shareIcon } alt="Compartilhar" />
+              </button>
+              <button type="button" data-testid="favorite-btn">favoritar</button>
+            </div>
             <p data-testid="recipe-category">
               { el.strCategory }
               {verifyAlcohol(el)}
