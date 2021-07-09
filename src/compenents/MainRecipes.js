@@ -6,6 +6,8 @@ import MealCards from './MealCards';
 import RecipesContext from '../contexts/RecipesContext';
 import FilterButtons from './FilterButtons';
 import SearchBar from './SearchBar';
+import '../App.css';
+import '../styles/MainRecipes.css';
 
 function MainRecipes() {
   const { searchBtn } = useContext(SearchbarContext);
@@ -20,7 +22,7 @@ function MainRecipes() {
   }
 
   return (
-    <main data-testid="main-recipes">
+    <main data-testid="main-recipes" className="main">
       { searchBtn ? <SearchBar /> : <FilterButtons /> }
       <section className="recipes-container">
         { type === 'meal' ? renderRecipes.map((recipe, index) => (

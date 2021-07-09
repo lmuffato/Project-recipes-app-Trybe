@@ -6,9 +6,7 @@ import ProvidersManager from './contexts/ProvidersManager';
 
 function App() {
   return (
-    <div className="meals">
-      <ProvidersManager />
-    </div>
+    <ProvidersManager />
   );
 }
 

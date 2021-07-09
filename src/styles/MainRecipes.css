@@ -1,0 +1,17 @@
+.main {
+  /* background-color: purple; */
+  /* display: flex;
+  flex-flow: column wrap; */
+}
+
+.button-container {
+  /* background-color: sienna; */
+  display: flex;
+  justify-content: space-around;
+}
+
+.button {
+  /* background-color: seagreen; */
+  border-radius: 5px;
+  padding: 1%;
+}

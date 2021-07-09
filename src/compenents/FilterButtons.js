@@ -11,9 +11,10 @@ function FilterButtons() {
   };
 
   return (
-    <section>
+    <section className="button-container">
       <button
         type="button"
+        className="button"
         data-testid="All-category-filter"
         onClick={ () => setSearchCategory('list') }
       >
@@ -24,6 +25,7 @@ function FilterButtons() {
           key={ index }
           type="button"
           value={ strCategory }
+          className="button"
           data-testid={ `${strCategory}-category-filter` }
           onClick={ (e) => handleFilter(e.target) }
         >
