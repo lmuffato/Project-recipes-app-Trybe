@@ -53,6 +53,9 @@ export default function DetalhesComidasIP() {
     const doneRecipesIds = doneRecipes.map(((doceRecipe) => doceRecipe.id));
     const isAlreadyDone = doneRecipesIds.includes(food.idMeal);
 
+    const now = new Date();
+    const dateString = `${now.getDate()}/${now.getMonth()}/${now.getFullYear()}`;
+
     if (!isAlreadyDone) {
       setDoneRecipes([...doneRecipes, {
         id: food.idMeal,
@@ -62,7 +65,7 @@ export default function DetalhesComidasIP() {
         alcoholicOrNot: '',
         name: food.strMeal,
         image: food.strMealThumb,
-        doneDate: new Date(),
+        doneDate: `Feita em: ${dateString}`,
         tags: food.strTags ? [food.strTags.split(',')] : [],
       }]);
     }
