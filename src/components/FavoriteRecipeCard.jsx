@@ -1,12 +1,25 @@
-import React from 'react';
+import React/* , { useContext, useState } */ from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+// import RecipeContext from '../context/RecipeContext';
 import clipboardCopy from '../services/clipboardCopy';
 import shareIcon from '../images/shareIcon.svg';
+import favoriteIcon from '../images/blackHeartIcon.svg';
 
-function doneRecipeCard({ recipe, index }) {
+function FavoriteRecipeCard({ recipe, index }) {
+  // const { favoriteRecipes } = useContext(RecipeContext);
+  // const [ newFavoriteRecipes, setFavoriteRecipes] = useState(favoriteRecipes);
+  // console.log(`Receitas favoritas: ${favoriteRecipes}` );
   const {
-    id, image, category, name, doneDate, tags, type, area, alcoholicOrNot } = recipe;
+    id, image, category, name, type, area, alcoholicOrNot } = recipe;
+  function removeFavorite(favoriteID) {
+    const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    const deleteFavoriteIndex = favoriteRecipes
+      .map((favRecipe) => favRecipe.id).indexOf({ favoriteID });
+    favoriteRecipes.splice(deleteFavoriteIndex, 1);
+    console.log(favoriteRecipes);
+    localStorage.setItem('favoriteRecipes', JSON.stringify(favoriteRecipes));
+  }
   return (
     <div
       style={ {
@@ -18,7 +31,7 @@ function doneRecipeCard({ recipe, index }) {
       <Link to={ `${type}s/${id}` }>
         <img
           src={ image }
-          alt="Done Recipe"
+          alt="Favorite Recipe"
           style={ { width: '80vw' } }
           data-testid={ `${index}-horizontal-image` }
         />
@@ -43,11 +56,6 @@ function doneRecipeCard({ recipe, index }) {
           { name }
         </p>
       </Link>
-      <p
-        data-testid={ `${index}-horizontal-done-date` }
-      >
-        { doneDate }
-      </p>
       <button
         type="button"
         onClick={ () => clipboardCopy(type, id) }
@@ -59,20 +67,22 @@ function doneRecipeCard({ recipe, index }) {
         />
         <span id={ `copyMessage${id}` }>Compartilhar</span>
       </button>
-      { type === 'comida' && tags.map((tag) => (
-        <p
-          key={ index }
-          data-testid={ `${index}-${tag}-horizontal-tag` }
-        >
-          { tag }
-        </p>
-      )) }
+      <button
+        type="button"
+        onClick={ () => removeFavorite(id) }
+      >
+        <img
+          src={ favoriteIcon }
+          alt="Favorite Icon"
+          data-testid={ `${index}-horizontal-favorite-btn` }
+        />
+      </button>
     </div>
   );
 }
 
-doneRecipeCard.propTypes = {
+FavoriteRecipeCard.propTypes = {
   recipe: PropTypes.arrayOf(PropTypes.object),
 }.isRequired;
 
-export default doneRecipeCard;
+export default FavoriteRecipeCard;
