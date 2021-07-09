@@ -9,7 +9,7 @@ import FavoriteRecipes from '../pages/FavoriteRecipes';
 import DoneRecipes from '../pages/DoneRecipes';
 import ExploreFoods from '../pages/ExploreFoods';
 import ExploreDrinks from '../pages/ExploreDrinks';
-import ExploreOrigin from '../pages/ExploreArea';
+import ExploreOrigin from '../pages/ExploreOrigin';
 import App from '../App';
 
 const HOMEPAGE_TITLE_TESTID = 'page-title';
