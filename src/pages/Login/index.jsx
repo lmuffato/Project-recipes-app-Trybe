@@ -32,6 +32,11 @@ function Login() {
     history.push('/comidas');
   };
 
+  /*   const emailToStorage = (event) => {
+    setEmail(event.target.value);
+    localStorage.setItem('email', event.target.value);
+  }; */
+
   return (
     <div className={ styles.loginPage }>
       <header className={ styles.loginHeader }>
