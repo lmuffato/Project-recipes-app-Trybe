@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import RenderFavoriteHeart from '../util/addOrRemoveFavorite';
 import RenderInstructions from '../util/mealDetailsComponents/renderInstructions';
 import RenderRecipeImg from '../util/mealDetailsComponents/renderRecipeImg';
@@ -12,6 +13,7 @@ export default function DrinkInProgress() {
   const [data, setData] = useState();
   const dispatch = useDispatch();
   const [copy, setCopy] = useState('');
+  const history = useHistory();
 
   useEffect(() => {
     const mealDrinks = async () => {
@@ -63,6 +65,7 @@ export default function DrinkInProgress() {
             className="footer"
             type="button"
             data-testid="finish-recipe-btn"
+            onClick={ () => history.push('/receitas-feitas') }
           >
             Finalizar Receita
           </button>
