@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
 import context from '../../store/Context';
+import '../../Styles/loginPage.css';
 
 function Login() {
   const { infoUser, setDatainfoUser, inProgressRecipes } = useContext(context);
