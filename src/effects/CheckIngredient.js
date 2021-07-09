@@ -1,10 +1,12 @@
 import { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import CocktailsContext from '../context/CocktailsContext';
+import MealsContext from '../context/MealsContext';
 import { getItemFromLocalStorage, setToLocalStorage } from '../services/localStorage';
 
 const addIngredientToLocalStorage = (pathname, state, storage, globalState) => {
-  const { cocktailsIngredients, setCocktailsIngredients } = globalState;
+  const { cocktailsIngredients, setCocktailsIngredients,
+    mealsIngredients, setMealsIngredients } = globalState;
   const { currIngredient, finish } = state;
   const regExp = /[0-9]/gi;
   const getId = pathname.match(regExp).reduce((acc, item) => acc + item, '');
@@ -37,11 +39,13 @@ const addIngredientToLocalStorage = (pathname, state, storage, globalState) => {
     if (ingredients.includes(currIngredient)) {
       const index = ingredients.indexOf(currIngredient);
       ingredients.splice(index, 1);
+      setMealsIngredients(ingredients);
       storage = { ...storage, meals: { [getId]: ingredients } };
       return setToLocalStorage('inProgressRecipes', storage);
     }
     storage = { ...storage,
       meals: { [getId]: [...storage.meals[getId], currIngredient] } };
+    setMealsIngredients([...mealsIngredients, currIngredient]);
     return setToLocalStorage('inProgressRecipes', storage);
   }
 };
@@ -61,7 +65,11 @@ function renderCheckboxChecked(state, callbackState, storage, pathname) {
 
 export default function CheckIngredient(ingredients, state, callbackState) {
   const { cocktailsIngredients, setCocktailsIngredients } = useContext(CocktailsContext);
-  const globalState = { cocktailsIngredients, setCocktailsIngredients };
+  const { mealsIngredients, setMealsIngredients } = useContext(MealsContext);
+  const globalState = { cocktailsIngredients,
+    setCocktailsIngredients,
+    mealsIngredients,
+    setMealsIngredients };
   const { filterIngredients, checkLocalStorage, currIngredient } = state;
   const history = useHistory();
   const { pathname } = history.location;
