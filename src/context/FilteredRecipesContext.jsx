@@ -5,8 +5,10 @@ export const FilteredRecipesContext = createContext({});
 
 const MAX_RECIPES = 12;
 
-function FilteredRecipesContextProvider({ children }) {
+function FilteredRecipesContextProvider(props) {
+  const { children } = props;
   const [filteredRecipes, setFilteredRecipes] = useState([]); // estado que armazena as buscas feitas na searchBar
+  const [filteredData, setFilteredData] = useState({});
   const [searchBarFilters, setSearchBarFilters] = useState([]); // estado que armazena os filtros (input de busca e input radio) da searchBar
   const [isLoading, setIsLoading] = useState(true); // será utilizado depois pra renderizar um componente de loading
 
@@ -19,11 +21,15 @@ function FilteredRecipesContextProvider({ children }) {
         ...data,
         [type]: data[type].slice(0, MAX_RECIPES),
       };
-      if (formattingData[type] !== null) {
-        setFilteredRecipes(formattingData[type]);
-      }
+      // if (formattingData[type] !== null) {
+      //   setFilteredRecipes(formattingData[type]);
+      // }
+      setFilteredData(formattingData);
+      setFilteredRecipes(formattingData[type]);
+      // setFilteredData(formattingData);
       // console.log(formattingData[type] !== null ? 'sim' : 'no');
       console.log(formattingData[type]);
+      console.log(formattingData);
     } catch (err) {
       console.log(err);
       global.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
@@ -90,6 +96,7 @@ function FilteredRecipesContextProvider({ children }) {
   // vai ser chamada no useEffect do componente CardList --> array de filtros como dependência
   const getFilteredRecipes = (type) => {
     if (searchBarFilters.length > 0) {
+      console.log(searchBarFilters);
       searchBarFilters.forEach((item) => {
         const { inputSearch, radioValue } = item;
         if (type === 'meals') {
@@ -105,10 +112,12 @@ function FilteredRecipesContextProvider({ children }) {
 
   const contextValue = {
     filteredRecipes,
+    filteredData,
     setFilteredRecipes,
     searchBarFilters,
     setSearchBarFilters,
     getFilteredRecipes,
+    fetchFilteredMealRecipes,
     isLoading,
     setIsLoading };
 

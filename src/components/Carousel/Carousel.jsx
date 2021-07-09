@@ -1,54 +1,44 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { CarouselProvider, Slider } from 'pure-react-carousel';
 import CarouselWrapper from './styles';
-// import CarouselCard from './CarouselCard';
-import CardList from '../CardList/CardList';
-import useFetchRecipes from '../../effects/useFetchRecipes';
+import CardGrid from '../CardList/CardGrid';
+import useDetailsProvider from '../../hooks/useDetailsProvider';
 
-const MAX_LENGTH = 6;
-function Carousel({ type }) {
-  // const [currentImage, setCurrentImage] = useState(0);
-  const [recommendations, setRecomendations] = useState([]);
+function Carousel({ recipeRecommendations, type }) {
   const currRecomendation = type === 'meals' ? 'drinks' : 'meals';
-  const fetchData = useFetchRecipes(currRecomendation);
-  // espera que o fetch à API tenha sido realizado -- se pg de comidas, recomendaçoes de bebidas
-  // se pg de bebidas, recomendaçoes de comidas
+  const recommend = recipeRecommendations;
+  const { setIsRecommended } = useDetailsProvider();
+  // const [firstSelectedImageIndex, setSelectedImageIndex] = useState(0);
+  // const [secondSelectedImageIndex, setSecondSelectedImageIndex] = useState(1);
 
   useEffect(() => {
-    if (fetchData[currRecomendation]) {
-      setRecomendations(fetchData[currRecomendation].slice(0, MAX_LENGTH));
-      // setCurrentImage(0);
-    }
-  }, [currRecomendation, fetchData]);
+    setIsRecommended(true);
+  }, [setIsRecommended]);
 
   return (
     <CarouselWrapper>
-      <div className="title-wrapper">
-        <h3>Recomendadas</h3>
-      </div>
-      <div className="card-grid">
-        {/* { recommendations.map((recommendation, index) => (
-          <div
-            className="carousel-card-tracker center"
-            data-testid={ `${index}-recommendation-card` }
-            key={ index }
-          >
-            <CardList
-              recommendation={ recommendation }
-              index={ currentImage }
-              type={ type }
-            />
-          </div>
-        ))} */}
-        <CardList recipes={ recommendations } type={ type } />
-      </div>
-      {/* <div className="right">ícone right</div> */}
-      {/* <div className="left">ícone left</div> */}
+      <CarouselProvider
+        naturalSlideWidth={ 100 }
+        naturalSlideHeight={ 100 }
+        visibleSlides={ 2 }
+        totalSlides={ 6 }
+      >
+        <div className="card-grid">
+          <Slider>
+            <CardGrid recipes={ recommend } type={ currRecomendation || type } />
+          </Slider>
+        </div>
+      </CarouselProvider>
     </CarouselWrapper>
   );
 }
 
 export default Carousel;
 Carousel.propTypes = {
+  recipeRecommendations: PropTypes.arrayOf(PropTypes.object).isRequired,
   type: PropTypes.string.isRequired,
 };
+
+// Source - documentação da bilioteca de carousel: https://github.com/express-labs/pure-react-carousel#image-
+// https://express-labs.github.io/pure-react-carousel/

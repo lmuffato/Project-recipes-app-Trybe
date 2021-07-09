@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Redirect } from 'react-router';
 import PropTypes from 'prop-types';
@@ -7,31 +7,49 @@ import useFilteredRecipes from '../../hooks/useFilteredRecipes';
 import CardListContainer from './styles';
 
 function CardList({ recipes, type }) {
-  const { getFilteredRecipes,
-    searchBarFilters, filteredRecipes } = useFilteredRecipes();
+  const { getFilteredRecipes, filteredRecipes,
+    searchBarFilters, filteredData } = useFilteredRecipes();
+  const [receitasFiltradas, setReceitasFiltradas] = useState([]);
+
+  // const { filteredRecipes } = useFilteredRecipes();
+  // // const history = useHistory();
 
   useEffect(() => {
-    getFilteredRecipes(type);
-  }, [type, searchBarFilters, getFilteredRecipes]);
+    let cancel = false;
+    const getRecipes = async () => {
+      await getFilteredRecipes(type);
+      if (cancel) return;
+      // const values = Object.values(filteredData);
+      setReceitasFiltradas(filteredRecipes);
+    };
+    getRecipes();
+    return () => {
+      cancel = true;
+    };
+  }, [type, searchBarFilters, getFilteredRecipes, filteredData, filteredRecipes]);
 
   if (recipes.length === 0) {
     return 'Loading...';
   }
 
-  if (filteredRecipes.length === 1) {
+  const filteredDataType = Object.keys(filteredData);
+
+  if (receitasFiltradas.length === 1) {
     const recipe = filteredRecipes.find((el) => el === filteredRecipes[0]);
-    return type === 'meals' ? (
+
+    return filteredDataType[0] === 'meals' ? (
       <Redirect
         to={ {
           pathname: `/comidas/${recipe.idMeal}`,
-          state: { recipe, type },
+          state: { recipe, type: filteredDataType[0] },
         } }
       />
+      // console.log('receitas filtradas', receitasFiltradas[0][0])
     ) : (
       <Redirect
         to={ {
           pathname: `/bebidas/${recipe.idDrink}`,
-          state: { recipe, type },
+          state: { recipe, type: filteredDataType[0] },
         } }
       />
     );
@@ -41,36 +59,36 @@ function CardList({ recipes, type }) {
     <CardListContainer>
       { filteredRecipes.length > 1 ? (
         filteredRecipes.map((recipe, index) => (
-          type === 'meals' ? (
+          filteredDataType[0] === 'meals' ? (
             <Link
               to={ { pathname: `/comidas/${recipe.idMeal}`, state: { recipe, type } } }
               key={ index }
             >
-              <Card recipe={ recipe } index={ index } type={ type } />
+              <Card recipe={ recipe } index={ index } />
             </Link>
           ) : (
             <Link
               to={ { pathname: `/bebidas/${recipe.idDrink}`, state: { recipe, type } } }
               key={ index }
             >
-              <Card recipe={ recipe } index={ index } type={ type } />
+              <Card recipe={ recipe } index={ index } />
             </Link>
           )
         ))
       ) : (recipes.length > 0 && recipes.map((recipe, i) => (
         type === 'meals' ? (
           <Link
-            to={ { pathname: `/comidas/${recipe.idMeal}`, state: { recipe, type } } }
+            to={ { pathname: `/comidas/${recipe.idMeal}` } }
             key={ i }
           >
-            <Card recipe={ recipe } key={ i } index={ i } />
+            <Card recipe={ recipe } index={ i } />
           </Link>
         ) : (
           <Link
-            to={ { pathname: `/bebidas/${recipe.idDrink}`, state: { recipe, type } } }
+            to={ `/bebidas/${recipe.idDrink}` }
             key={ i }
           >
-            <Card recipe={ recipe } key={ i } index={ i } />
+            <Card recipe={ recipe } index={ i } />
           </Link>)
       ))
       )}

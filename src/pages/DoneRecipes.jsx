@@ -1,34 +1,34 @@
 import React, { useState, useEffect } from 'react';
-import FavoriteRecipeCard from '../components/FavoriteRecipeCard/FavoriteRecipeCard';
+import DoneRecipeCard from '../components/DoneRecipeCard/DoneRecipeCard';
 import filterRecipesByType from '../utils/filterRecipesByType';
 import Header from '../components/Header/Header';
 
-function FavoriteRecipes() {
-  const [favoriteRecipes, setFavoriteRecipes] = useState([]);
+function DoneRecipes() {
+  const [doneRecipes, setDoneRecipes] = useState([]);
   const [filterByType, setFilterByType] = useState('All');
   const [copiedToClipboard, setCopiedToClipboard] = useState(false);
 
   useEffect(() => {
-    const favoriteStorage = JSON.parse(localStorage.getItem('favoriteRecipes'));
-    if (favoriteStorage) setFavoriteRecipes(favoriteStorage);
+    const doneStorage = JSON.parse(localStorage.getItem('doneRecipes'));
+    if (doneStorage) setDoneRecipes(doneStorage);
   }, []);
 
   function handleRemoveRecipe(index) {
-    const updatedFavoriteRecipes = favoriteRecipes
+    const updatedDoneRecipes = doneRecipes
       .slice(0, index)
-      .concat(favoriteRecipes.slice(index + 1));
+      .concat(doneRecipes.slice(index + 1));
 
-    localStorage.setItem('favoriteRecipes', JSON.stringify(updatedFavoriteRecipes));
-    setFavoriteRecipes(updatedFavoriteRecipes);
+    localStorage.setItem('doneRecipes', JSON.stringify(updatedDoneRecipes));
+    setDoneRecipes(updatedDoneRecipes);
   }
 
-  if (favoriteRecipes.length === 0) {
+  if (doneRecipes.length === 0) {
     return (
       <div>
         <Header>
-          <h1 data-testid="page-title">Receitas Favoritas</h1>
+          <h1 data-testid="page-title">Receitas Feitas</h1>
         </Header>
-        <h2>Você não possui receitas favoritas!</h2>
+        <h2>Você não possui receitas feitas!</h2>
       </div>
     );
   }
@@ -36,9 +36,8 @@ function FavoriteRecipes() {
   return (
     <div>
       <Header>
-        <h1 data-testid="page-title">Receitas Favoritas</h1>
+        <h1 data-testid="page-title">Receitas Feitas</h1>
       </Header>
-      <h1>Receitas Favoritas</h1>
       { copiedToClipboard && 'Link copiado!' }
       <div>
         <button
@@ -63,8 +62,8 @@ function FavoriteRecipes() {
           Drinks
         </button>
       </div>
-      { filterRecipesByType(favoriteRecipes, filterByType).map((recipe, index) => (
-        <FavoriteRecipeCard
+      { filterRecipesByType(doneRecipes, filterByType).map((recipe, index) => (
+        <DoneRecipeCard
           recipe={ recipe }
           index={ index }
           key={ index }
@@ -76,4 +75,4 @@ function FavoriteRecipes() {
   );
 }
 
-export default FavoriteRecipes;
+export default DoneRecipes;
