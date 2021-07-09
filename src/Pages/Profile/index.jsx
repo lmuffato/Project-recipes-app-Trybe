@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
+import Button from 'react-bootstrap/Button';
 import Footer from '../../Components/Footer';
-import './Profile.css';
+import './styles.css';
 
 const Profile = () => {
   const history = useHistory();
@@ -14,35 +15,35 @@ const Profile = () => {
   }
   return (
     <div className="container">
-      <h1>Perfil</h1>
       <h5 data-testid="profile-email">{email}</h5>
       <Link to="/receitas-feitas">
-        <button
-          className="myButton"
+        <Button
+          className="mybutton btn-lg btn-warning"
           type="button"
           data-testid="profile-done-btn"
         >
           Receitas Feitas
-        </button>
+        </Button>
       </Link>
       <Link to="/receitas-favoritas">
-        <button
-          className="myButton"
+        <Button
+          className="mybutton btn-lg btn-warning"
           type="button"
           data-testid="profile-favorite-btn"
         >
           Receitas Favoritas
-        </button>
+        </Button>
       </Link>
       <Link to="/">
-        <button
-          className="myButton"
+        <Button
+          className="mybutton btn-lg"
           type="button"
           data-testid="profile-logout-btn"
+          size="sm"
           onClick={ handleLogout }
         >
           Sair
-        </button>
+        </Button>
       </Link>
       <Footer />
     </div>
