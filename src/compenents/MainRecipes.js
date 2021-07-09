@@ -20,7 +20,7 @@ function MainRecipes() {
   }
 
   return (
-    <>
+    <main data-testid="main-recipes">
       { searchBtn ? <SearchBar /> : <FilterButtons /> }
       <section className="recipes-container">
         { type === 'meal' ? renderRecipes.map((recipe, index) => (
@@ -37,7 +37,7 @@ function MainRecipes() {
           />
         ))}
       </section>
-    </>
+    </main>
   );
 }
 

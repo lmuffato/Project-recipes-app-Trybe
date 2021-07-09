@@ -15,7 +15,7 @@ function Header() {
 
   return (
     <div className="header-cotainer">
-      <header className="header">
+      <header className="header" data-testid="header">
         <Link to="/perfil" data-testid="profile-top-btn" className="profile">
           <img src={ profileIcon } alt="profile" />
         </Link>

@@ -4,27 +4,11 @@ import shareIcon from '../images/shareIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 
 function FavoriteRecipes() {
-  const getFavorites = [
-    {
-      id: 52771,
-      type: 'meal',
-      area: 'Italian',
-      category: 'Vegetarian',
-      name: 'Spicy Arrabiata Penne',
-      image: 'https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg',
-    },
-    {
-      id: 178319,
-      type: 'cocktail',
-      alcoholicOrNot: 'Alcoholic',
-      name: 'Aquamarine',
-      image: 'https://www.thecocktaildb.com/images/media/drink/zvsre31572902738.jpg',
-    },
-  ];
-
+  const [showRecipes, setShowRecipes] = useState();
   const [isCopy, setIsCopy] = useState(false);
 
-  // const getFavorites = localStorage.getItem('favoriteRecipes');
+  const getFavorites = JSON.parse(localStorage.getItem('favoriteRecipes'));
+  setShowRecipes(getFavorites);
 
   const copyToClipboard = ({ target }) => {
     setIsCopy(true);
@@ -33,7 +17,7 @@ function FavoriteRecipes() {
     navigator.clipboard.writeText(path);
   };
 
-  const renderFilter = (
+  const renderCards = (
     { id, type, area, category, alcoholicOrNot, name, image }, index,
   ) => {
     if (type === 'meal') {
@@ -114,16 +98,48 @@ function FavoriteRecipes() {
     );
   };
 
+  const handleContent = (param) => {
+    if (param === 'all') {
+      return setShowRecipes(getFavorites);
+    } if (param === 'meals') {
+      const mealsRecipes = showRecipes.filter((recipe) => recipe.type === 'meal');
+      setShowRecipes(mealsRecipes);
+    } else if (param === 'cocktails') {
+      const drinksRecipes = showRecipes.filter((recipe) => recipe.type === 'cocktail');
+      setShowRecipes(drinksRecipes);
+    }
+  };
+
   return (
     <div>
-      <button type="button" data-testid="filter-by-all-btn">All</button>
-      <button type="button" data-testid="filter-by-food-btn">Food</button>
-      <button type="button" data-testid="filter-by-drink-btn">Drinks</button>
+      <button
+        type="button"
+        data-testid="filter-by-all-btn"
+        onClick={ () => handleContent('all') }
+      >
+      All
+      </button>
+
+      <button
+        type="button"
+        data-testid="filter-by-food-btn"
+        onClick={ () => handleContent('meals') }
+      >
+      Food
+      </button>
+
+      <button
+        type="button"
+        data-testid="filter-by-drink-btn"
+        onClick={ () => handleContent('cocktails') }
+      >
+      Drinks
+      </button>
 
       {
-        getFavorites.map(
+        showRecipes.map(
           ({ id, type, area, category, alcoholicOrNot, name, image }, index) => (
-            renderFilter({ id, type, area, category, alcoholicOrNot, name, image }, index)
+            renderCards({ id, type, area, category, alcoholicOrNot, name, image }, index)
           ),
         )
       }
