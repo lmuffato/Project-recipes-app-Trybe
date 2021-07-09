@@ -53,15 +53,7 @@ function Bebidas() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [texto]);
 
-  if (data.length < 1) {
-    return (
-      <div>
-        <Header title="Bebidas" />
-        <h1>Loading...</h1>
-        <Footer />
-      </div>
-    );
-  }
+  if (data.length < 1) return <h1>Loading...</h1>;
 
   return (
     <div>
