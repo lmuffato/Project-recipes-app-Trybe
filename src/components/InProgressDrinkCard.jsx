@@ -4,11 +4,12 @@ import UserContext from '../context/UserContext';
 import shareIcon from '../images/shareIcon.svg';
 import FavoriteButton from './FavoriteButton';
 import IngredientsCheckboxDrink from './IngredientsCheckboxDrink';
+import { setToLocalStorage } from '../services/localStorage';
 
 const copy = require('clipboard-copy');
 
 function InProgressDrinkCard() {
-  const { currentDrink } = useContext(UserContext);
+  const { currentDrink, doneRecipes, setDoneRecipes } = useContext(UserContext);
   const [copyLink, setCopyLink] = useState(false);
   const [showButtonFinished, setShowButtonFinished] = useState(true);
   const history = useHistory();
@@ -17,6 +18,40 @@ function InProgressDrinkCard() {
     copy(`http://localhost:3000${URL}`);
     setCopyLink(true);
   };
+
+  const handleClick = () => {
+    const date = new Date();
+    setToLocalStorage('doneRecipes', [
+      ...doneRecipes,
+      {
+        id: currentDrink.idDrink,
+        type: 'bebida',
+        area: '',
+        category: '',
+        alcoholicOrNot: currentDrink.strAlcoholic,
+        name: currentDrink.strDrink,
+        image: currentDrink.strDrinkThumb,
+        doneDate: `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`,
+        tags: (currentDrink.strTags !== null) ? [currentDrink.strTags] : [],
+      },
+    ]);
+    setDoneRecipes([
+      ...doneRecipes,
+      {
+        id: currentDrink.idDrink,
+        type: 'bebida',
+        area: '',
+        category: '',
+        alcoholicOrNot: currentDrink.strAlcoholic,
+        name: currentDrink.strDrink,
+        image: currentDrink.strDrinkThumb,
+        doneDate: `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`,
+        tags: (currentDrink.strTags !== null) ? [currentDrink.strTags] : [],
+      },
+    ]);
+    history.push('/receitas-feitas');
+  };
+
   return (
     <div>
       <img
@@ -42,7 +77,7 @@ function InProgressDrinkCard() {
         type="button"
         data-testid="finish-recipe-btn"
         disabled={ showButtonFinished }
-        onClick={ () => history.push('/receitas-feitas') }
+        onClick={ handleClick }
       >
         Finalizar Receita
       </button>

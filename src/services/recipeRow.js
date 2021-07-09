@@ -10,7 +10,7 @@ export function recipeRow(obj) {
     });
     if (findDonedRecipe) setTextButton('');
   }
-  if (inProgressRecipes && textButton !== CONTINUAR) {
+  if (inProgressRecipes && textButton !== CONTINUAR && textButton !== '') {
     const findDonedRecipe = inProgressRecipes.find((id) => {
       const { idMeal } = currentMeal;
       return id === idMeal;
