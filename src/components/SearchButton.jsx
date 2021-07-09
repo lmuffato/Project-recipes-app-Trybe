@@ -20,7 +20,7 @@ class SearchButton extends React.Component {
       btn: false,
       foodOrDrink: '',
       foodOrDrinkApiName: '',
-      idProduct: '',
+      // idProduct: '',
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -86,7 +86,7 @@ class SearchButton extends React.Component {
     this.saveIdProduct();
   }
 
-  saveIdProduct() {
+  /*   saveIdProduct() {
     const { api, foodOrDrink } = this.state;
     if (foodOrDrink === '/comidas') {
       const idRecipe = api[0].idMeal;
@@ -99,7 +99,7 @@ class SearchButton extends React.Component {
         idProduct: idRecipe,
       });
     }
-  }
+  } */
 
   verifyRenderApi() {
     const { foodOrDrink } = this.state;
