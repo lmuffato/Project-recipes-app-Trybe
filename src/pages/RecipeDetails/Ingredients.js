@@ -5,10 +5,9 @@ export default function Ingredients({ recipe }) {
   const [ingredients, setIngredients] = useState([]);
 
   function getIngredients() {
-    console.log('CHAMOU O GET INGREDIENTS', recipe);
-    const ingredientsList = Object.entries(recipe)
-      .filter((property) => property[0].includes('strIngredient') && property[1]);
-    return ingredientsList;
+    return Object.entries(recipe)
+      .filter((property) => (
+        property[0].includes('strIngredient') && property[1]));
   }
 
   function getMeasures() {
@@ -22,9 +21,7 @@ export default function Ingredients({ recipe }) {
   }
 
   useEffect(() => {
-    console.log(recipe);
     setIngredients(getIngredients());
-    // setMeasures(getMeasures());
   }, [recipe]);
 
   return (

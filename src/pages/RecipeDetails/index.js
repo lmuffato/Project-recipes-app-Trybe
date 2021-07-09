@@ -15,11 +15,10 @@ export default function RecipeDetails({ match: { params: { id }, path } }) {
   const [render, setRender] = useState(false);
 
   useEffect(() => {
-    fetchByIdApi(pageOrigin, id)
+    fetchByIdApi(path.includes('/comidas') ? 'themealdb' : 'thecocktaildb', id)
       .then((recipeCrr) => {
         setRecipe(recipeCrr);
       });
-    console.log(path);
   }, [pageOrigin]);
 
   useEffect(() => {
@@ -36,28 +35,51 @@ export default function RecipeDetails({ match: { params: { id }, path } }) {
             width="200px"
             alt="recipe details"
           />
-          <h2 data-testid="recipe-title">
+          <h2
+            data-testid="recipe-title"
+          >
             { recipe.strMeal || recipe.strDrink }
           </h2>
-          <button type="button" onClick="">
-            <img src={ ShareIcon } alt="share button" data-testid="share-btn" />
+          <button
+            type="button"
+            onClick=""
+          >
+            <img
+              src={ ShareIcon }
+              alt="share button"
+              data-testid="share-btn"
+            />
           </button>
-          <button type="button" onClick="">
+          <button
+            type="button"
+            onClick=""
+          >
             <img
               src={ WhiteHeartIcon }
               alt="favorite button"
               data-testid="favorite-btn"
             />
           </button>
-          <p data-testid="recipe-category">
-            { recipe.strCategory }
+          <p
+            data-testid="recipe-category"
+          >
+            { recipe.strAlcoholic || recipe.strCategory }
           </p>
           <Video recipe={ recipe } />
           <Ingredients recipe={ recipe } />
           <h3>Instructions</h3>
-          <p data-testid="instructions">{ recipe.strInstructions }</p>
-          <Recommendations />
-          <button type="button" data-testid="start-recipe-btn">Iniciar Receita</button>
+          <p
+            data-testid="instructions"
+          >
+            { recipe.strInstructions }
+          </p>
+          <Recommendations path={ path } />
+          <button
+            type="button"
+            data-testid="start-recipe-btn"
+          >
+            Iniciar Receita
+          </button>
         </div>
       ) : ''}
     </div>

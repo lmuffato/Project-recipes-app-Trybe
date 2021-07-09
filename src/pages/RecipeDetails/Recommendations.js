@@ -1,16 +1,15 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import RecomCard from './RecomCard';
 import { fetchRecipesApi } from '../../services/fetchApiMain';
-import { AppContext } from '../../context/AppContext';
 
-export default function Recommendations() {
-  const { context } = useContext(AppContext);
-  const { pageOrigin } = context;
+export default function Recommendations({ path }) {
   const [recommended, setRecommended] = useState([]);
+
   const NUM_RECIPES_SHOWN = 6;
 
   useEffect(() => {
-    fetchRecipesApi(pageOrigin === 'themealdb' ? 'thecocktaildb' : 'themealdb')
+    fetchRecipesApi(path.includes('/comidas') ? 'thecocktaildb' : 'themealdb')
       .then((recipes) => {
         recipes.splice(NUM_RECIPES_SHOWN, recipes.length - 1);
         setRecommended(recipes);
@@ -34,3 +33,7 @@ export default function Recommendations() {
     </div>
   );
 }
+
+Recommendations.propTypes = {
+  path: PropTypes.string.isRequired,
+};
