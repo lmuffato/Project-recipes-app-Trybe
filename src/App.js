@@ -32,6 +32,8 @@ function App() {
         <Route path="/explorar/comidas" exact component={ ExploreFoods } />
         <Route path="/explorar/bebidas" component={ ExploreDrinks } />
         <Route path="/explorar/comidas/area" exact component={ ExploreOrigin } />
+        <Route path="/explorar/bebidas" exact component={ ExploreDrinks } />
+        <Route path="/explorar/bebidas/area" render={ () => <h1>Not Found</h1> } />
         <Route
           exact
           path="/comidas/:id"
