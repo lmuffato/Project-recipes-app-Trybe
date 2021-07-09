@@ -17,6 +17,7 @@ function Footer() {
             src={ drinkIcon }
             alt="drink-icon"
             data-testid="drinks-bottom-btn"
+            className="altSvg"
           />
         </Link>
         <Link to="/explorar">
@@ -24,6 +25,7 @@ function Footer() {
             src={ exploreIcon }
             alt="explore-icon"
             data-testid="explore-bottom-btn"
+            className="altSvg"
           />
         </Link>
         <Link to="/comidas">
@@ -31,6 +33,7 @@ function Footer() {
             src={ mealIcon }
             alt="meal-icon"
             data-testid="food-bottom-btn"
+            className="altSvg"
           />
         </Link>
       </div>

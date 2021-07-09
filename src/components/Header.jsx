@@ -3,8 +3,6 @@ import { Link } from 'react-router-dom';
 import profileIcon from '../images/profileIcon.svg';
 import './Style.css';
 
-// Stan <3
-
 function Header() {
   const pageTitle = () => {
     const path = window.location.pathname;
@@ -31,7 +29,7 @@ function Header() {
             src={ profileIcon }
             alt="profile-icon"
             data-testid="profile-top-btn"
-            className="profile-top-btn"
+            className="profile-top-btn altSvg"
           />
         </Link>
         <h4 data-testid="page-title">{pageTitle()}</h4>

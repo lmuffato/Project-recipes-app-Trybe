@@ -13,6 +13,7 @@
 
 .header-content {
   background-color: #80ab82;
+  color: white;
   display: flex;
   margin-bottom: 10px;
   padding: 10px;
@@ -21,10 +22,16 @@
 
 .header-search {
   background-color: #80ab82;
+  color: white;
   display: flex;
   justify-content: space-between;
   margin-bottom: 10px;
   padding: 10px;
+}
+
+h4 {
+  margin-bottom: 0;
+  margin-top: 3px;
 }
 
 .header-content h4 {
@@ -59,3 +66,6 @@
   color: #c2e1c2;
 }
 
+.altSvg {
+  filter: invert(100%);
+}
