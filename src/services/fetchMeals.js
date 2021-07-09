@@ -24,3 +24,15 @@ export async function fetchMealSearched(text, option) {
     return meals || [];
   }
 }
+
+export async function fetchSpecificMeal(id) {
+  const endpoint = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
+  const { meals } = await (await fetch(endpoint)).json();
+  return meals || [];
+}
+
+export async function fetchMealsByIngredient(ingredient) {
+  const endpoint = `https://www.themealdb.com/api/json/v1/1/filter.php?i=${ingredient}`;
+  const { meals } = await (await fetch(endpoint)).json();
+  return meals;
+}

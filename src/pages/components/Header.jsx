@@ -8,20 +8,23 @@ import profileIcon from '../../images/profileIcon.svg';
 import searchIcon from '../../images/searchIcon.svg';
 import SearchBar from './SearchBar';
 
+const pageTitle = (type) => {
+  if (type === 'meals') return 'Comidas';
+  if (type === 'drinks') return 'Bebidas';
+  if (type === 'search') return 'Explorar';
+  if (type === 'search-drinks') return 'Explorar Bebidas';
+  if (type === 'search-meals') return 'Explorar Comidas';
+  if (type === 'search-ingredients') return 'Explorar Ingredientes';
+  if (type === 'search-area') return 'Explorar Origem';
+  if (type === 'profile') return 'Perfil';
+};
+
 function Header(props) {
   const { type } = props;
   const [searchBar, toggleSearchBar] = useState(false);
 
-  const pageTitle = () => {
-    if (type === 'meals') return 'Comidas';
-    if (type === 'drinks') return 'Bebidas';
-    if (type === 'search') return 'Explorar';
-    if (type === 'search-ingredients') return 'Explorar Ingredientes';
-    if (type === 'search-origin') return 'Explorar Origem';
-  };
-
   const showSearchIcon = () => {
-    if (['meals', 'drinks', 'search-origin'].includes(type)) return true;
+    if (['meals', 'drinks', 'search-area'].includes(type)) return true;
     return false;
   };
 
@@ -34,7 +37,7 @@ function Header(props) {
           </Link>
         </Col>
         <Col>
-          <h3 data-testid="page-title">{ pageTitle() }</h3>
+          <h3 data-testid="page-title">{ pageTitle(type) }</h3>
         </Col>
         <Col>
           { showSearchIcon() ? (
