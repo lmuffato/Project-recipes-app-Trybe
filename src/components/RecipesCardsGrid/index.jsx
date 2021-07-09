@@ -1,11 +1,12 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useContext } from 'react';
 
+import { RecipesContext } from '../../context/Recipes';
 import RecipeSimpleCard from './components/RecipeSimpleCard';
 
 import styles from './styles.module.scss';
 
-function RecipesCardsGrid({ recipes }) {
+function RecipesCardsGrid() {
+  const { recipes } = useContext(RecipesContext);
   return (
     <section className={ styles.grid }>
       {recipes.map((recipe, index) => (
@@ -14,9 +15,5 @@ function RecipesCardsGrid({ recipes }) {
     </section>
   );
 }
-
-RecipesCardsGrid.propTypes = {
-  recipes: PropTypes.arrayOf(PropTypes.object).isRequired,
-};
 
 export default RecipesCardsGrid;

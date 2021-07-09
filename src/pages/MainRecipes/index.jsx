@@ -9,7 +9,7 @@ import Carousel from '../../components/Carousel';
 import styles from './styles.module.scss';
 
 function MainRecipes() {
-  const { recipes, titlePage, loadRecipes } = useContext(RecipesContext);
+  const { titlePage, loadRecipes } = useContext(RecipesContext);
   const { location: { pathname } } = useHistory();
 
   useEffect(() => {
@@ -25,7 +25,7 @@ function MainRecipes() {
         </Carousel>
       </div>
       <main>
-        <RecipesCardsGrid recipes={ recipes } />
+        <RecipesCardsGrid />
       </main>
     </div>
   );

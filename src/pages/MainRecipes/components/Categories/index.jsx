@@ -5,13 +5,16 @@ import styles from './styles.module.scss';
 
 function Categories() {
   const { categories, filterByCategory } = useContext(RecipesContext);
+
   return (
     <div className={ styles.categories }>
-      <label htmlFor="All">
+      <label htmlFor="All" data-testid="All-category-filter">
         <input
           type="radio"
           id="All"
           name="category"
+          onClick={ () => filterByCategory('All') }
+          defaultChecked
         />
         <span>
           All

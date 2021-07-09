@@ -32,21 +32,24 @@ export function RecipesProvider({ children }) {
       setRecipes(results.list.slice(0, recipesLimit));
       setCategories(results.categories.slice(0, categoriesLimit));
       setTitlePage(results.titlePage);
+      setCurrentFilter('All');
     }
   }, []);
 
-  async function filterByCategory(categoryName, { target }) {
+  async function filterByCategory(categoryName, event) {
     let results = [];
     const recipesLimit = 12;
 
-    if (currentFilter !== categoryName) {
+    if (currentFilter !== categoryName && categoryName !== 'All') {
       results = await getRecipes(location.pathname, categoryName);
       setCurrentFilter(categoryName);
     } else {
-      target.checked = false;
+      if (event) {
+        event.target.checked = false;
+      }
       results = await getRecipes(location.pathname);
       results = results.list;
-      setCurrentFilter('');
+      setCurrentFilter('All');
     }
 
     setRecipes(results.slice(0, recipesLimit));
