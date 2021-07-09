@@ -25,8 +25,8 @@ html {
   display: flex;
   justify-content: center;
   margin: auto;
-  padding-top: 13vh;
   padding-bottom: 5vh;
+  padding-top: 13vh;
   width: 70vw;
 }
 
