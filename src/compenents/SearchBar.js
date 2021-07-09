@@ -28,7 +28,7 @@ function SearchBar() {
     let mealId;
 
     if (data.meals === null || data.drinks === null) {
-      alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+      global.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
     } else if (mealOrDrink === 'cocktail' && data.drinks.length === 1) {
       drinkId = data.drinks[0].idDrink;
       setIdDrink(drinkId);
@@ -47,7 +47,7 @@ function SearchBar() {
 
   const getData = async () => {
     if (letter === 'f' && name.length > 1) {
-      alert('Sua busca deve conter somente 1 (um) caracter');
+      global.alert('Sua busca deve conter somente 1 (um) caracter');
     }
     if (mealOrDrink) {
       console.log('aqui');
