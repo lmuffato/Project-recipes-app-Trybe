@@ -3,8 +3,8 @@ import { Link, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import searchIcon from '../images/searchIcon.svg';
 import profileIcon from '../images/profileIcon.svg';
+import SearchBarForm from './SearchBarForm';
 // import header from '../styles/header';
-import SearchBarForm from './search bar/SearchBarForm';
 import '../styles/Header.css';
 
 function Header({ title }) {

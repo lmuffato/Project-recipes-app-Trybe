@@ -44,6 +44,8 @@ function Categorias({ param }) {
     </button>
   );
 
+  // if (param.length < 1) return <h1>Loading...</h1>;
+
   if (param === undefined || param.length < 1) return <h1>Loading...</h1>;
 
   return (
