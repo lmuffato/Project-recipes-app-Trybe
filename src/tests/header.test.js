@@ -229,3 +229,7 @@ describe('5 - O header possui os ícones corretos', () => {
     });
   });
 });
+
+// Source: https://stackoverflow.com/questions/57971189/testing-react-do-not-await-the-result-of-calling-act-with-sync-logic
+// https://stackoverflow.com/questions/56722139/when-testing-code-that-causes-react-state-updates-should-be-wrapped-into-act
+// https://pt-br.reactjs.org/docs/test-utils.html#act
