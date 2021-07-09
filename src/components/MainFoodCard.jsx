@@ -22,8 +22,7 @@ class MainFoodCard extends React.Component {
 
   componentDidMount() {
     const { currentSearch } = this.props;
-    console.log(currentSearch);
-    if (currentSearch) {
+    if (currentSearch.length !== 0) {
       this.renderCurrentSearch();
     } else {
       this.FilterCategoryFood();
@@ -166,7 +165,9 @@ const mapDispatchToProps = (dispatch) => ({
 
 MainFoodCard.propTypes = {
   history: PropTypes.shape().isRequired,
-  currentSearch: PropTypes.shape().isRequired,
+  currentSearch: PropTypes.arrayOf(
+    PropTypes.string,
+  ).isRequired,
   cleanGlobalSearch: PropTypes.func.isRequired,
 };
 

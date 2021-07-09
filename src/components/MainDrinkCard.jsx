@@ -22,7 +22,7 @@ class MainDrinkCard extends React.Component {
 
   componentDidMount() {
     const { currentSearch } = this.props;
-    if (currentSearch) {
+    if (currentSearch.length !== 0) {
       this.renderCurrentSearch();
     } else {
       this.FilterCategoryDrink();
@@ -96,11 +96,11 @@ class MainDrinkCard extends React.Component {
   async renderCurrentSearch() {
     const { currentSearch } = this.props;
     const endpoint = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${currentSearch}`;
-    const request = await fetch(endpoint).then((response) => response.json())
-      .catch((erro) => console.log(erro));
+    const request = await fetch(endpoint).then((response) => response.json());
 
     const limit = 12;
     const sliced = request.drinks.slice(0, limit);
+    console.log(sliced);
     this.setState({
       drinkData: sliced,
       isLoading: false,
@@ -166,7 +166,9 @@ const mapDispatchToProps = (dispatch) => ({
 
 MainDrinkCard.propTypes = {
   history: PropTypes.shape().isRequired,
-  currentSearch: PropTypes.shape().isRequired,
+  currentSearch: PropTypes.arrayOf(
+    PropTypes.string,
+  ).isRequired,
   cleanGlobalSearch: PropTypes.func.isRequired,
 };
 

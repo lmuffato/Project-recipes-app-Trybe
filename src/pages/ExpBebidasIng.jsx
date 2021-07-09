@@ -36,7 +36,7 @@ class ExpBebidasIng extends React.Component {
     e.preventDefault();
     const { handleSearch, history } = this.props;
     const { target } = e;
-    handleSearch(target.alt || target.innerText);
+    handleSearch([target.alt] || [target.innerText]);
     return history.push('/bebidas');
   }
 
