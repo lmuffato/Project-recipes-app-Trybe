@@ -5,9 +5,10 @@ import Footer from '../components/Footer';
 import Header from '../components/Header';
 
 import ContextComidas from '../provider/ContextComida';
-
 import { getAreas, getFoodsByArea } from '../services/apisArea';
 import { mealsAPI } from '../services/apisMealsAndCocktails';
+
+import '../styles/ExplorarComidasArea.css';
 
 function ExplorarComidasArea() {
   const [areas, setAreas] = useState('');
@@ -90,31 +91,35 @@ function ExplorarComidasArea() {
   return (
     <div>
       <Header title="Explorar Origem" />
-      <select data-testid="explore-by-area-dropdown" onChange={ handleChange }>
-        <option
-          key="All"
-          value="All"
-          data-testid="All-option"
-        >
-          All
-        </option>
-        { areas !== '' && areas !== undefined && areas.meals !== undefined
-          ? areas.meals
-            .map(
-              (area, index) => (
-                <option
-                  key={ index }
-                  value={ area.strArea }
-                  data-testid={ `${area.strArea}-option` }
-                >
-                  { area.strArea }
-                </option>
-              ),
-            )
-          : null }
-      </select>
-      { acctualyFood !== [] && areas !== undefined && areas.meals !== undefined
-        ? areasCard() : null }
+      <main>
+        <select data-testid="explore-by-area-dropdown" onChange={ handleChange }>
+          <option
+            key="All"
+            value="All"
+            data-testid="All-option"
+          >
+            All
+          </option>
+          { areas !== '' && areas !== undefined && areas.meals !== undefined
+            ? areas.meals
+              .map(
+                (area, index) => (
+                  <option
+                    key={ index }
+                    value={ area.strArea }
+                    data-testid={ `${area.strArea}-option` }
+                  >
+                    { area.strArea }
+                  </option>
+                ),
+              )
+            : null }
+        </select>
+        <div className="filter-cards-area">
+          { acctualyFood !== [] && areas !== undefined && areas.meals !== undefined
+            ? areasCard() : null }
+        </div>
+      </main>
       <Footer />
     </div>
   );

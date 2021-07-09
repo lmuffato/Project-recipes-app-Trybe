@@ -1,0 +1,12 @@
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  text-align: center;
+}
+
+.filter-cards-area {
+  background-color: rgb(86, 124, 45);
+  display: flex;
+  flex-direction: row;
+}
