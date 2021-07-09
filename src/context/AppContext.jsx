@@ -26,6 +26,7 @@ export default function AppProvider({ children }) {
     setRecipesList,
     categoriesList,
     setCategoriesList,
+
   };
 
   useEffect(() => {
