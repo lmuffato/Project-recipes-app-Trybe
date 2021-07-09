@@ -38,7 +38,9 @@ describe('1 - Crie uma página inicial de login de acordo com os seguintes '
     act(() => {
       renderWithRouterHooksAndProvider(<App />, '/');
 
-      const button = screen.getByText(/Entrar/i);
+      const button = screen.getByRole('button', {
+        name: /entrar/i,
+      });
       expect(button).toBeInTheDocument();
     });
   });
@@ -49,7 +51,9 @@ describe('2 - Na tela de login são realizadas as seguintes verificações: ', (
     act(() => {
       renderWithRouterHooksAndProvider(<App />, '/');
 
-      const button = screen.getByText(/Entrar/i);
+      const button = screen.getByRole('button', {
+        name: /entrar/i,
+      });
       expect(button).toBeDisabled();
     });
   });
@@ -60,7 +64,9 @@ describe('2 - Na tela de login são realizadas as seguintes verificações: ', (
 
       const email = screen.getByTestId(EMAIL_INPUT_TEST_ID);
       const password = screen.getByTestId(PASSWORD_INPUT_TEST_ID);
-      const button = screen.getByText(/Entrar/i);
+      const button = screen.getByRole('button', {
+        name: /entrar/i,
+      });
 
       userEvent.type(email, 'email');
       userEvent.type(password, VALID_PASSWORD);
@@ -83,7 +89,9 @@ describe('2 - Na tela de login são realizadas as seguintes verificações: ', (
 
       const email = screen.getByTestId(EMAIL_INPUT_TEST_ID);
       const password = screen.getByTestId(PASSWORD_INPUT_TEST_ID);
-      const button = screen.getByText(/Entrar/i);
+      const button = screen.getByRole('button', {
+        name: /entrar/i,
+      });
 
       userEvent.type(email, VALID_EMAIL);
       userEvent.type(password, '123');
@@ -110,7 +118,9 @@ describe('2 - Na tela de login são realizadas as seguintes verificações: ', (
 
       const email = screen.getByTestId(EMAIL_INPUT_TEST_ID);
       const password = screen.getByTestId(PASSWORD_INPUT_TEST_ID);
-      const button = screen.getByTestId(BUTTON_TEST_ID);
+      const button = screen.getByRole('button', {
+        name: /entrar/i,
+      });
 
       await userEvent.type(email, VALID_EMAIL);
       await userEvent.type(password, VALID_PASSWORD);
