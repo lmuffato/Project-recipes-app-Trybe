@@ -1,24 +1,27 @@
-import React/* , { useContext, useState } */ from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-// import RecipeContext from '../context/RecipeContext';
+import RecipeContext from '../context/RecipeContext';
 import clipboardCopy from '../services/clipboardCopy';
 import shareIcon from '../images/shareIcon.svg';
 import favoriteIcon from '../images/blackHeartIcon.svg';
 
 function FavoriteRecipeCard({ recipe, index }) {
-  // const { favoriteRecipes } = useContext(RecipeContext);
-  // const [ newFavoriteRecipes, setFavoriteRecipes] = useState(favoriteRecipes);
-  // console.log(`Receitas favoritas: ${favoriteRecipes}` );
+  const { favoriteRecipes, setFavoriteRecipes } = useContext(RecipeContext);
+
   const {
     id, image, category, name, type, area, alcoholicOrNot } = recipe;
+
   function removeFavorite(favoriteID) {
-    const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    const locStorageFavRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
     const deleteFavoriteIndex = favoriteRecipes
-      .map((favRecipe) => favRecipe.id).indexOf({ favoriteID });
-    favoriteRecipes.splice(deleteFavoriteIndex, 1);
+      .map((favRecipe) => favRecipe.id).indexOf(favoriteID);
     console.log(favoriteRecipes);
-    localStorage.setItem('favoriteRecipes', JSON.stringify(favoriteRecipes));
+    console.log(deleteFavoriteIndex);
+    locStorageFavRecipes.splice(deleteFavoriteIndex, 1);
+    setFavoriteRecipes(locStorageFavRecipes);
+    localStorage.setItem('favoriteRecipes', JSON.stringify(locStorageFavRecipes));
+    console.log(favoriteRecipes);
   }
   return (
     <div
