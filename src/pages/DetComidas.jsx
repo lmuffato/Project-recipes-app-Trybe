@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import copy from 'clipboard-copy';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 
@@ -17,6 +19,7 @@ class DetComidas extends React.Component {
     this.fetchFoodsById = this.fetchFoodsById.bind(this);
     this.handleIngredients = this.handleIngredients.bind(this);
     this.fetchRecommendedDrinks = this.fetchRecommendedDrinks.bind(this);
+    this.onClickShare = this.onClickShare.bind(this);
   }
 
   async componentDidMount() {
@@ -30,7 +33,7 @@ class DetComidas extends React.Component {
   }
 
   handleIngredients() {
-    const ingredientes = [];
+    const ingredients = [];
     const measures = [];
     let ingrediente;
     let measure;
@@ -42,21 +45,30 @@ class DetComidas extends React.Component {
       for (let index = 1; index <= ingredientLimit; index += 1) {
         ingrediente = `strIngredient${index}`;
         measure = `strMeasure${index}`;
-        // console.log(recipe[ingrediente]);
-        ingredientes.push(recipe[ingrediente]);
-        // console.log(recipe[measure])
+        ingredients.push(recipe[ingrediente]);
         measures.push(recipe[measure]);
-        if (ingredientes[ingredientes.length - 1] === '') {
-          ingredientes.pop();
-        } if (measures[measures.length - 1] === '') {
+        if (ingredients[ingredients.length - 1] === ''
+        || ingredients[ingredients.length - 1] === null) {
+          ingredients.pop();
+        } if (measures[measures.length - 1] === ''
+        || ingredients[ingredients.length - 1] === null) {
           measures.pop();
         }
       }
       return this.setState({
-        ingredientes,
+        ingredientes: ingredients,
         measures,
       });
     });
+  }
+
+  async onClickShare(path) {
+    const p = document.createElement('p');
+    const pai = document.querySelector('#share');
+    p.innerText = 'Link copiado!';
+    const url = `http://localhost:3000${path}`;
+    pai.appendChild(p);
+    await copy(url);
   }
 
   setNewState(foods, recommended) {
@@ -88,6 +100,7 @@ class DetComidas extends React.Component {
 
   render() {
     const { history } = this.props;
+    const { pathname } = history.location;
     const { foods, measures, ingredientes, video, recommended } = this.state;
     const food = Object.values(foods);
     return (
@@ -97,26 +110,33 @@ class DetComidas extends React.Component {
             data-testid="recipe-photo"
             alt="imagem da receita"
             src={ recipe[0].strMealThumb }
-            width="290px"
+            width="300px"
           />
-          <h1 data-testid="recipe-title">{ recipe[0].strFood }</h1>
+          <h1 data-testid="recipe-title">{ recipe[0].strMeal }</h1>
           <p data-testid="recipe-category">{ recipe[0].strCategory }</p>
-          <input
-            type="image"
-            data-testid="share-btn"
-            src={ shareIcon }
-            alt="Compartilhar receita"
-          />
-          <input
-            type="image"
-            data-testid="favorite-btn"
-            src={ whiteHeartIcon }
-            alt="favoritar receita"
-          />
+          <div id="share">
+            <input
+              type="image"
+              data-testid="share-btn"
+              src={ shareIcon }
+              alt="Compartilhar receita"
+              onClick={ () => this.onClickShare(pathname) }
+            />
+            <input
+              type="image"
+              data-testid="favorite-btn"
+              src={ whiteHeartIcon }
+              alt="favoritar receita"
+            />
+          </div>
           <h2>
             Lista de Ingredientes
           </h2>
           <table border="1">
+            <thead>
+              Ingredients
+              Measures
+            </thead>
             {ingredientes.map((ingredient, index) => (
               <tr key={ `row${index}` }>
                 <td
@@ -127,17 +147,16 @@ class DetComidas extends React.Component {
                 </td>
                 <td
                   key={ measures }
+                  data-testid={ `${index}-ingredient-name-and-measure` }
                 >
                   {measures[index]}
                 </td>
               </tr>))}
           </table>
-          <h2
-            data-testid="instructions"
-          >
+          <h2>
             Modo de Preparo:
           </h2>
-          <p>
+          <p data-testid="instructions">
             {recipe[0].strInstructions}
           </p>
           <iframe
@@ -151,7 +170,7 @@ class DetComidas extends React.Component {
           />
           <h2>Drinks Recomendados</h2>
           {recommended.map((drink, index) => (
-            <div key={ drink } data-testid={ `${index}-recomendation-card` }>
+            <div key={ drink.idDrink } data-testid={ `${index}-recomendation-card` }>
               <input
                 width="350"
                 type="image"
