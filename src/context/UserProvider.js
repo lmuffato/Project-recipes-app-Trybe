@@ -8,7 +8,7 @@ function UserProvider({ children }) {
   let storage = [];
   const localStorage = getItemFromLocalStorage('favoriteRecipes');
   if (localStorage) storage = localStorage;
-  let inProgress = { meals: {} };
+  let inProgress = { meals: {}, cocktails: {} };
   const localInProgress = getItemFromLocalStorage('inProgressRecipes');
   if (localInProgress && localInProgress.meals !== {}) inProgress = localInProgress;
   const [inProgressStorage, setInProgressStorage] = useState(inProgress);

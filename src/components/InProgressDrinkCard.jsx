@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import UserContext from '../context/UserContext';
 import shareIcon from '../images/shareIcon.svg';
 import FavoriteButton from './FavoriteButton';
-import IngredientsCheckBox from './IngredientsCheckBox';
+import IngredientsCheckboxDrink from './IngredientsCheckboxDrink';
 
 const copy = require('clipboard-copy');
 
@@ -31,7 +31,7 @@ function InProgressDrinkCard() {
       <FavoriteButton type="bebida" />
       <h4 data-testid="recipe-category">{ currentDrink.strAlcoholic }</h4>
       <h4>Ingredients</h4>
-      <IngredientsCheckBox currentMeal={ currentDrink } />
+      <IngredientsCheckboxDrink currentMeal={ currentDrink } />
       <h4>Instructions</h4>
       <p data-testid="instructions">{ currentDrink.strInstructions }</p>
       <button type="button" data-testid="finish-recipe-btn">Finalizar Receita</button>

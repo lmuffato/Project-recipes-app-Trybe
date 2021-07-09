@@ -1,17 +1,17 @@
 import React, { useEffect, useState, useContext } from 'react';
-import PropTypes from 'prop-types';
 import { useLocation } from 'react-router';
+import PropTypes from 'prop-types';
 import UserContext from '../context/UserContext';
 import { setToLocalStorage, getItemFromLocalStorage } from '../services/localStorage';
 
-function IngredientsCheckBox({ currentMeal }) {
+function IngredientsCheckboxDrink({ currentMeal }) {
   const location = useLocation();
   const newLocation = location.pathname.replace('/in-progress', '');
-  const idURL = newLocation.replace('/comidas/', '');
+  const idURL = newLocation.replace('/bebidas/', '');
   let initialState = [];
   const local = getItemFromLocalStorage('inProgressRecipes');
-  if (local && local.meals[idURL]) {
-    initialState = local.meals[idURL];
+  if (local && local.cocktails[idURL]) {
+    initialState = local.cocktails[idURL];
   }
   const { globalId, setInProgressStorage, inProgressStorage } = useContext(UserContext);
   const [checkeds, setCheckeds] = useState(initialState);
@@ -40,8 +40,8 @@ function IngredientsCheckBox({ currentMeal }) {
     if (globalId) {
       setInProgressStorage({
         ...inProgressStorage,
-        meals: {
-          ...inProgressStorage.meals,
+        cocktails: {
+          ...inProgressStorage.cocktails,
           [globalId]: checkeds,
         },
       });
@@ -56,8 +56,8 @@ function IngredientsCheckBox({ currentMeal }) {
     <div>
       {ingredientsArray.map((ingredient, index) => {
         let isChecked = false;
-        if (inProgressStorage.meals[idURL]
-          && inProgressStorage.meals[idURL].includes(ingredient[1])) isChecked = true;
+        if (inProgressStorage.cocktails[idURL]
+          && inProgressStorage.cocktails[idURL].includes(ingredient[1])) isChecked = true;
         return (
           <div key={ index } data-testid={ `${index}-ingredient-step` }>
             <label htmlFor={ `${index}-ingredient-step` }>
@@ -79,8 +79,8 @@ function IngredientsCheckBox({ currentMeal }) {
   );
 }
 
-IngredientsCheckBox.propTypes = {
+IngredientsCheckboxDrink.propTypes = {
   currentMeal: PropTypes.object,
 }.isRequired;
 
-export default IngredientsCheckBox;
+export default IngredientsCheckboxDrink;
