@@ -8,8 +8,6 @@ import ContextComidas from '../provider/ContextComida';
 import { getAreas, getFoodsByArea } from '../services/apisArea';
 import { mealsAPI } from '../services/apisMealsAndCocktails';
 
-import '../styles/ExplorarComidasArea.css';
-
 function ExplorarComidasArea() {
   const [areas, setAreas] = useState('');
   const [acctualyFood, setAcctualyFood] = useState([]);
