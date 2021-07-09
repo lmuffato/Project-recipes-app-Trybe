@@ -11,6 +11,8 @@ function FilterDrinks() {
       return (
         <div className="buttonsCategoryDrinks">
           <Button
+            bsPrefix="btn"
+            className="buttons-filter"
             key={ (0) }
             variant="secondary"
             size="sm"
@@ -22,6 +24,8 @@ function FilterDrinks() {
           {categorys.map((category, index) => (
             // https://react-bootstrap.netlify.app/components/buttons/#buttons
             <Button
+              bsPrefix="btn"
+              className="buttons-filter"
               key={ (index + 1) }
               variant="secondary"
               size="sm"

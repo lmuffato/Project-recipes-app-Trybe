@@ -11,7 +11,14 @@ body {
 
 .cards-foods div {
   border-radius: 15px;
+  color: #334031;
   margin: 5px;
+}
+
+.cards-recipes {
+  align-items: center;
+  border: 1px solid #334031;
+  box-shadow: 5px 3px 1px hsl(138, 10%, 90%);
 }
 
 .cards-foods img {
@@ -27,11 +34,12 @@ body {
 
 .cards-drinks div {
   border-radius: 15px;
+  color: #334031;
   margin: 5px;
 }
 
 .cards-drinks img {
-  border-radius: 15px;
+  border-radius: 10px;
 }
 
 .buttonsCategoryDrinks {
@@ -51,4 +59,9 @@ body {
 .buttonsCategoryDrinks button {
   flex-grow: 1;
   margin: 5px;
+}
+
+.buttons-filter {
+  background-color: #334031;
+  color: #c2e1c2;
 }
