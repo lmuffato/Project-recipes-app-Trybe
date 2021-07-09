@@ -37,7 +37,7 @@ function ExplorarBebidasPorArea() {
   }
   return (
     <div>
-      <Header title="Comidas" />
+      <Header title="Explorar Origem" />
       <AreasDropdown />
       <Footer />
     </div>
