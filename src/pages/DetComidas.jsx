@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 
@@ -30,7 +31,7 @@ class DetComidas extends React.Component {
   }
 
   handleIngredients() {
-    const ingredientes = [];
+    const ingredients = [];
     const measures = [];
     let ingrediente;
     let measure;
@@ -42,16 +43,18 @@ class DetComidas extends React.Component {
       for (let index = 1; index <= ingredientLimit; index += 1) {
         ingrediente = `strIngredient${index}`;
         measure = `strMeasure${index}`;
-        ingredientes.push(recipe[ingrediente]);
+        ingredients.push(recipe[ingrediente]);
         measures.push(recipe[measure]);
-        if (ingredientes[ingredientes.length - 1] === '') {
-          ingredientes.pop();
-        } if (measures[measures.length - 1] === '') {
+        if (ingredients[ingredients.length - 1] === ''
+        || ingredients[ingredients.length - 1] === null) {
+          ingredients.pop();
+        } if (measures[measures.length - 1] === ''
+        || ingredients[ingredients.length - 1] === null) {
           measures.pop();
         }
       }
       return this.setState({
-        ingredientes,
+        ingredientes: ingredients,
         measures,
       });
     });
@@ -97,7 +100,7 @@ class DetComidas extends React.Component {
             src={ recipe[0].strMealThumb }
             width="300px"
           />
-          <h1 data-testid="recipe-title">{ recipe[0].strFood }</h1>
+          <h1 data-testid="recipe-title">{ recipe[0].strMeal }</h1>
           <p data-testid="recipe-category">{ recipe[0].strCategory }</p>
           <input
             type="image"
@@ -115,6 +118,10 @@ class DetComidas extends React.Component {
             Lista de Ingredientes
           </h2>
           <table border="1">
+            <thead>
+              Ingredients
+              Measures
+            </thead>
             {ingredientes.map((ingredient, index) => (
               <tr key={ `row${index}` }>
                 <td
@@ -125,17 +132,16 @@ class DetComidas extends React.Component {
                 </td>
                 <td
                   key={ measures }
+                  data-testid={ `${index}-ingredient-name-and-measure` }
                 >
                   {measures[index]}
                 </td>
               </tr>))}
           </table>
-          <h2
-            data-testid="instructions"
-          >
+          <h2>
             Modo de Preparo:
           </h2>
-          <p>
+          <p data-testid="instructions">
             {recipe[0].strInstructions}
           </p>
           <iframe

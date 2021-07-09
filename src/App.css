@@ -89,3 +89,7 @@ footer {
   bottom: 0;
   position: fixed;
 }
+
+.carousel-item.Corba {
+  display:block
+}
