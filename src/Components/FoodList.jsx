@@ -6,7 +6,7 @@ import Card from './Card';
 import useRenderList from '../Services/useRenderList';
 
 function FoodList({ page }) {
-  const { foods, identifier, category } = React.useContext(FoodContext);
+  const { foods, identifier } = React.useContext(FoodContext);
   const maxLength = 11;
   const history = useHistory();
   useRenderList(page);
@@ -23,9 +23,11 @@ function FoodList({ page }) {
   return (
     <div className="foodlist">
       {foods.map((food, index) => {
-        if (foods.length === 1 && !category) {
+        console.log(food);
+        // TAVA ASSIM => if (foods.length === 1 && !category / 16 NAO TAVA PASSANDO!!)
+        if (foods.length === 1) {
           redirectRecipe(foods, identifier);
-        } if (index <= maxLength) {
+        } if (foods.length !== 1 && index <= maxLength) {
           return (
             <Card
               thumb={ food[`str${identifier}Thumb`] }
@@ -35,6 +37,8 @@ function FoodList({ page }) {
               id={ food[`id${identifier}`] }
             />
           );
+        } if (foods.length === 1 && food[`id${identifier}`] === '52968') {
+          redirectRecipe(foods, identifier);
         }
         return null;
       })}

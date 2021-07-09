@@ -13,8 +13,8 @@ const ButtonsCategory = ({ page, identifier }) => {
       const request = await fetch(endpoint);
       const resolve = await request.json();
       setCategorys(resolve[identifier]);
-      setCategory(true);
     };
+    setCategory(true);
     getCategorys();
   }, []);
 

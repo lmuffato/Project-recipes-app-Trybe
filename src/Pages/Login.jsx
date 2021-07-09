@@ -17,35 +17,44 @@ function Login() {
   };
 
   return (
-    <section>
-      <input
-        name="email"
-        type="email"
-        data-testid="email-input"
-        placeholder="Email"
-        value={ emailInput }
-        autoComplete="none"
-        onChange={ (e) => setEmailInput(e.target.value) }
-      />
-      <br />
-      <input
-        name="password"
-        type="password"
-        data-testid="password-input"
-        minLength="6"
-        placeholder="Senha"
-        onChange={ (e) => setPasswordInput(e.target.value) }
-      />
-      <Link to="/comidas">
-        <button
-          type="button"
-          data-testid="login-submit-btn"
-          disabled={ !(checkEmail() && checkPass()) }
-          onClick={ handleClick }
-        >
-          Entrar
-        </button>
-      </Link>
+    <section className="login-container">
+      <h2 className="title">Master Your Kitchen</h2>
+      <i className="fas fa-utensils logo" />
+      <h4 className="login-text">Login</h4>
+      <div className="buttons">
+        <input
+          name="email"
+          type="email"
+          data-testid="email-input"
+          placeholder="Email"
+          value={ emailInput }
+          autoComplete="none"
+          onChange={ (e) => setEmailInput(e.target.value) }
+          className="input-login"
+        />
+        <br />
+        <input
+          name="password"
+          type="password"
+          data-testid="password-input"
+          minLength="6"
+          placeholder="Senha"
+          onChange={ (e) => setPasswordInput(e.target.value) }
+          className="input-login"
+        />
+        <Link to="/comidas">
+          <button
+            type="button"
+            data-testid="login-submit-btn"
+            disabled={ !(checkEmail() && checkPass()) }
+            onClick={ handleClick }
+            className={ `entrar-btn ${!(checkEmail() && checkPass())
+              ? 'disable' : 'enable'}` }
+          >
+            Entrar
+          </button>
+        </Link>
+      </div>
     </section>
   );
 }

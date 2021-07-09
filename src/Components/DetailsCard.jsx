@@ -17,7 +17,6 @@ function DetailsCard({ product, idn }) {
         }
       });
     }
-    console.log(initIngredients);
     return (
       <ul>
         {initIngredients.map((ingredient, index) => {
@@ -44,7 +43,6 @@ function DetailsCard({ product, idn }) {
     <section>
       {product.map((elem) => (
         <div key={ `id${idn[1]}` }>
-          {console.log(elem)}
           <img
             src={ elem[`str${idn[1]}Thumb`] }
             data-testid="recipe-photo"

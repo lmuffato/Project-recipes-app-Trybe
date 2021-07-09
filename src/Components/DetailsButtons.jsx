@@ -8,7 +8,15 @@ function DetailsButtons({ product, idn }) {
 
   const handleClickShare = () => {
     setIsCopy(true);
-    navigator.clipboard.writeText(window.location.href);
+    // navigator.clipboard.writeText(window.location.href)
+    const url = window.location.href.split('/');
+    const maxLength = 6;
+    if (url.length === maxLength) {
+      url.pop();
+      navigator.clipboard.writeText(url.join('/'));
+    } else {
+      navigator.clipboard.writeText(window.location.href);
+    }
   };
 
   return (
