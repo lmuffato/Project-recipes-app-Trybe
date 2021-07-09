@@ -10,6 +10,7 @@ const copy = require('clipboard-copy');
 function InProgressDrinkCard() {
   const { currentDrink } = useContext(UserContext);
   const [copyLink, setCopyLink] = useState(false);
+  const [showButtonFinished, setShowButtonFinished] = useState(true);
   const history = useHistory();
   const shareClick = () => {
     const URL = history.location.pathname.replace('/in-progress', '');
@@ -31,10 +32,20 @@ function InProgressDrinkCard() {
       <FavoriteButton type="bebida" />
       <h4 data-testid="recipe-category">{ currentDrink.strAlcoholic }</h4>
       <h4>Ingredients</h4>
-      <IngredientsCheckboxDrink currentMeal={ currentDrink } />
+      <IngredientsCheckboxDrink
+        currentMeal={ currentDrink }
+        setShowButtonFinished={ setShowButtonFinished }
+      />
       <h4>Instructions</h4>
       <p data-testid="instructions">{ currentDrink.strInstructions }</p>
-      <button type="button" data-testid="finish-recipe-btn">Finalizar Receita</button>
+      <button
+        type="button"
+        data-testid="finish-recipe-btn"
+        disabled={ showButtonFinished }
+        onClick={ () => history.push('/receitas-feitas') }
+      >
+        Finalizar Receita
+      </button>
     </div>
   );
 }
