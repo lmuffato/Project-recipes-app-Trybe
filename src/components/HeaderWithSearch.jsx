@@ -55,6 +55,7 @@ function HeaderWithSearch() {
             src={ profileIcon }
             alt="profile-icon"
             data-testid="profile-top-btn"
+            className="altSvg"
           />
         </Link>
         <h4 data-testid="page-title">{pageTitle()}</h4>
@@ -67,6 +68,7 @@ function HeaderWithSearch() {
             src={ searchIcon }
             alt="search-icon"
             data-testid="search-top-btn"
+            className="altSvg"
           />
         </button>
       </div>

@@ -47,7 +47,7 @@ function doneRecipes(recipe) {
     strDrink, strMeal, strDrinkThumb, strMealThumb, strTags } = recipeDrink || recipeFood;
   removeRecipeFromProgress(idDrink || idMeal, idDrink ? 'drink' : 'meal'); // ao colocar uma receita em doneRecipe, devemos remover de progress.
   if (verifyDoneRecipesInLS(idDrink || idMeal)) {
-    alert('Não é possível finalizar uma receita já finalizada!');
+    global.alert('Não é possível finalizar uma receita já finalizada!');
     return null;
   }
   doneRecipesConst.push({

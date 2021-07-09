@@ -29,7 +29,7 @@ function Header() {
             src={ profileIcon }
             alt="profile-icon"
             data-testid="profile-top-btn"
-            className="profile-top-btn"
+            className="profile-top-btn altSvg"
           />
         </Link>
         <h4 data-testid="page-title">{pageTitle()}</h4>
