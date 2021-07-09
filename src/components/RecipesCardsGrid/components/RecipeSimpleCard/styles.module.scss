@@ -1,0 +1,38 @@
+.card {
+  display: grid;
+  position: relative;
+
+  img {
+    border-radius: 8px 8px 0 0;
+    height: 125px;
+    object-fit: cover;
+    width: 100%;
+  }
+
+  .alcoholicTag {
+    align-items: center;
+    background: black;
+    border-radius: 99px;
+    color: white;
+    display: flex;
+    font-size: 12px;
+    padding: 4px 5px;
+    position: absolute;
+    right: 8px;
+    top: 8px;
+
+    img {
+      height: 18px;
+      margin-right: 7px;
+      width: 18px;
+    }
+  }
+
+  .title {
+    background: var(--purple);
+    border-radius: 0 0 8px 8px;
+    color: var(--light-purple);
+    font-size: 14px;
+    padding: 5px 10px;
+  }
+}
