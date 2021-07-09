@@ -63,7 +63,7 @@ export default function DetalhesBebidasIP() {
         name: drink.strDrink,
         image: drink.strDrinkThumb,
         doneDate: new Date(),
-        tags: drink.strTags ? [...drink.strTags] : [],
+        tags: drink.strTags ? [drink.strTags.split(',')] : [],
       }]);
     }
     history.push('/receitas-feitas');

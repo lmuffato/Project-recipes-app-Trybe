@@ -63,7 +63,7 @@ export default function DetalhesComidasIP() {
         name: food.strMeal,
         image: food.strMealThumb,
         doneDate: new Date(),
-        tags: food.strTags ? [...food.strTags] : [],
+        tags: food.strTags ? [food.strTags.split(',')] : [],
       }]);
     }
     history.push('/receitas-feitas');
