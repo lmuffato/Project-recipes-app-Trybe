@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event';
 import { screen } from '@testing-library/react';
 import renderWithRouter from './renderWithRouter';
 import App from '../App';
-import FoodsIngredients from '../pages/FoodsIngredients';
+// import FoodsIngredients from '../pages/FoodsIngredients';
 
 function login() {
   const getInputEmail = screen.getByTestId('email-input');
@@ -50,7 +50,7 @@ describe('Testing FoodsIngredients page', () => {
     //   json: jest.fn().mockResolvedValue(ingredients),
     // });
 
-    const { findByText } = renderWithRouter(<FoodsIngredients />);
+    // const { findByText } = renderWithRouter(<FoodsIngredients />);
 
     // expect(global.fetch).toBeCalledTimes(1);
     // const chicken = getByRole('img', {

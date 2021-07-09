@@ -1,9 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import RecipesContext from '../contexts/RecipesContext';
 
 function FoodsIngredients() {
-  const [ingredients, setIngredients] = useState([]);
-  // const [selectedIngredient, setSelectedIngredient] = useState('');
+  const {
+    ingredients, setIngredients, setMealsAndDrinkByIngredients,
+  } = useContext(RecipesContext);
+  const TWELVE = 12;
 
   useEffect(() => {
     const getIngredients = async () => {
@@ -15,27 +18,40 @@ function FoodsIngredients() {
   }, []);
 
   const getTwelveIngredients = () => {
-    const TWELVE = 12;
+    const getRecipesByIngredients = async (param) => {
+      const endpoint = `https://www.themealdb.com/api/json/v1/1/filter.php?i=${param}`;
+      const { meals } = await fetch(endpoint).then((data) => data.json());
+      console.log(meals);
+      setMealsAndDrinkByIngredients(meals.slice(0, TWELVE));
+    };
+
     const twelveIngredients = ingredients
       .filter((ingredient, index) => index < TWELVE);
     return (
-      twelveIngredients.map((ingredient, index) => {
-        const name = ingredient.strIngredient;
+      twelveIngredients.map((eachIngredient, index) => {
+        // const id = index - 1;
+        const name = eachIngredient.strIngredient;
         return (
-          <Link
-            to="/comidas"
-            key={ index }
-            data-testid={ `${index}-ingredient-card` }
-            // Passar o nome do ingrediente para um estado global para filtra-lo por receita
-            // onClick={ setSelectedIngredient(name) }
-          >
-            <img
-              data-testid={ `${index}-card-img` }
-              src={ `https://www.themealdb.com/images/ingredients/${name}-Small.png` }
-              alt={ name }
-            />
-            <p data-testid={ `${index}-card-name` }>{ name }</p>
-          </Link>
+          <div data-testid={ `${index}-ingredient-card` } key={ index }>
+            <Link
+              to="/comidas"
+              onClick={
+                (e) => getRecipesByIngredients(e.target.alt || e.target.innerText)
+              }
+            >
+              <img
+                data-testid={ `${index}-card-img` }
+                src={ `https://www.themealdb.com/images/ingredients/${name}-Small.png` }
+                alt={ name }
+              />
+              <p
+                value={ name }
+                data-testid={ `${index}-card-name` }
+              >
+                { name }
+              </p>
+            </Link>
+          </div>
         );
       })
     );
