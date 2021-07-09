@@ -1,13 +1,10 @@
-.header-cotainer {
-  width: 100%;
-}
-
 .header {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
   padding: 1%;
   top: 0;
+  width: 100%;
 }
 
 .searchBtn {
