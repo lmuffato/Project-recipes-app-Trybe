@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import SearchbarContext from '../contexts/SearchbarContext';
 import DrinkCards from './DrinkCards';
@@ -8,16 +8,19 @@ import FilterButtons from './FilterButtons';
 import SearchBar from './SearchBar';
 
 function MainRecipes() {
+  const [renderRecipes, setRenderRecipes] = useState([]);
   const { searchBtn } = useContext(SearchbarContext);
-  const { type, recipes, searchedRecipes } = useContext(RecipesContext);
+  const {
+    type, recipes, searchedRecipes, mealsAndDrinkByIngredients,
+  } = useContext(RecipesContext);
 
-  let renderRecipes;
+  useEffect(() => {
+    if (recipes) setRenderRecipes(recipes);
+    if (mealsAndDrinkByIngredients) setRenderRecipes(mealsAndDrinkByIngredients);
+    if (searchedRecipes) setRenderRecipes(searchedRecipes);
+  }, [recipes]);
 
-  if (searchedRecipes) {
-    renderRecipes = searchedRecipes;
-  } else {
-    renderRecipes = recipes;
-  }
+  console.log(mealsAndDrinkByIngredients);
 
   return (
     <>
@@ -28,6 +31,7 @@ function MainRecipes() {
             data={ recipe }
             index={ index }
             key={ recipe.idMeal }
+            // data-testid={ `${index}-ingredient-card` }
           />
         )) : renderRecipes.map((recipe, index) => (
           <DrinkCards
