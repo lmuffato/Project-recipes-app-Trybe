@@ -8,9 +8,11 @@ class DetBebidas extends React.Component {
     super();
     this.state = {
       drinks: [],
+      ingredientes: [],
+      measures: [],
     };
-    /*  this.handleIngredients = this.handleIngredients.bind(this); */
     this.fetchDrinksById = this.fetchDrinksById.bind(this);
+    this.handleIngredients = this.handleIngredients.bind(this);
   }
 
   async componentDidMount() {
@@ -19,20 +21,37 @@ class DetBebidas extends React.Component {
     const id = pathname.split('/').pop();
     const drinks = await this.fetchDrinksById(id);
     this.setNewState(drinks);
-  /*  this.handleIngredients(); */
+    this.handleIngredients();
   }
 
-  /*
   handleIngredients() {
-    const ingredients = [];
+    const ingredientes = [];
     const measures = [];
-    let ingredient;
+    let ingrediente;
     let measure;
     const { drinks } = this.state;
-    const drink = Object.values(drinks);
-    drink.map((recipe) =>
-      console.log(recipe.filter((value) => value === 'Galliano')));
-  } */
+    const bebidas = Object.values(drinks);
+    bebidas[0].map((recipe) => {
+      const ingredientLimit = 15;
+      for (let index = 1; index <= ingredientLimit; index += 1) {
+        ingrediente = `strIngredient${index}`;
+        measure = `strMeasure${index}`;
+        // console.log(recipe[ingrediente]);
+        ingredientes.push(recipe[ingrediente]);
+        // console.log(recipe[measure])
+        measures.push(recipe[measure]);
+        if (ingredientes[ingredientes.length - 1] === null) {
+          ingredientes.pop();
+        } if (measures[measures.length - 1] === null) {
+          measures.pop();
+        }
+      }
+      return this.setState({
+        ingredientes,
+        measures,
+      });
+    });
+  }
 
   setNewState(drinks) {
     this.setState({
@@ -47,7 +66,7 @@ class DetBebidas extends React.Component {
   }
 
   render() {
-    const { drinks } = this.state;
+    const { drinks, ingredientes, measures } = this.state;
     const drink = Object.values(drinks);
     return (
       drink.map((recipe) => (
@@ -72,10 +91,33 @@ class DetBebidas extends React.Component {
             src={ whiteHeartIcon }
             alt="favoritar receita"
           />
-          <ul>
+          <h2>
             Lista de Ingredientes
-            <li>{}</li>
-          </ul>
+          </h2>
+          <table border="1">
+            {ingredientes.map((ingredient, index) => (
+              <tr key="row">
+                <td
+                  key={ index }
+                  data-testid={ `${index}-ingredient-name-and-measure` }
+                >
+                  {ingredient}
+                </td>
+                <td
+                  key={ measures }
+                >
+                  {measures[index]}
+                </td>
+              </tr>))}
+          </table>
+          <h2
+            data-testid="instructions"
+          >
+            Modo de Preparo:
+          </h2>
+          <p>
+            {recipe[0].strInstructions}
+          </p>
           <button
             type="button"
             data-testid="start-recipe-btn"
