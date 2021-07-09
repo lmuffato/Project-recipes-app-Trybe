@@ -1,6 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import md5 from 'md5';
+import HeaderBack from '../../components/HeaderBack';
 import styles from './styles.module.scss';
 
 function Perfil() {
@@ -24,41 +25,44 @@ function Perfil() {
     history.push('/receitas-favoritas');
   };
   return (
-    <div className={ styles.perfilPage }>
-      <div className={ styles.imagemEmail }>
-        <img src={ gravatarProfile } alt="Imagem de perfil" />
-        <h3 data-testid="profile-email">{ emailReceived }</h3>
+    <div>
+      <HeaderBack />
+      <div className={ styles.perfilPage }>
+        <div className={ styles.imagemEmail }>
+          <img src={ gravatarProfile } alt="Imagem de perfil" />
+          <h3 data-testid="profile-email">{ emailReceived }</h3>
+        </div>
+        <button
+          name="Receitas Feitas"
+          type="button"
+          className="primary-btn"
+          data-testid="profile-done-btn"
+          onClick={ doneRecipes }
+        >
+          Receitas Feitas
+        </button>
+        <button
+          name="Receitas Favoritas"
+          type="button"
+          className="primary-btn"
+          data-testid="profile-favorite-btn"
+          onClick={ favoriteRecipes }
+        >
+          Receitas Favoritas
+        </button>
+        <button
+          name="Sair"
+          type="button"
+          className="primary-btn"
+          data-testid="profile-logout-btn"
+          onClick={ logout }
+        >
+          Sair
+        </button>
+        <footer>
+          <img src="/logo_darkbg.svg" alt="Squarefood" />
+        </footer>
       </div>
-      <button
-        name="Receitas Feitas"
-        type="button"
-        className="primary-btn"
-        data-testid="profile-done-btn"
-        onClick={ doneRecipes }
-      >
-        Receitas Feitas
-      </button>
-      <button
-        name="Receitas Favoritas"
-        type="button"
-        className="primary-btn"
-        data-testid="profile-favorite-btn"
-        onClick={ favoriteRecipes }
-      >
-        Receitas Favoritas
-      </button>
-      <button
-        name="Sair"
-        type="button"
-        className="primary-btn"
-        data-testid="profile-logout-btn"
-        onClick={ logout }
-      >
-        Sair
-      </button>
-      <footer>
-        <img src="/logo_darkbg.svg" alt="Squarefood" />
-      </footer>
     </div>
   );
 }
