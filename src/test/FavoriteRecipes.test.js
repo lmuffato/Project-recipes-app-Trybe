@@ -7,6 +7,7 @@ const favoriteAdress = '/receitas-favoritas';
 const CardTitle1 = '1-horizontal-name';
 const CardTitle0 = '0-horizontal-name';
 const foodFilterButton = 'filter-by-food-btn';
+const shareBtn0 = '0-horizontal-share-btn';
 
 const favoriteRecipes = [
   {
@@ -61,7 +62,7 @@ describe('Testa se a página renderiza corretamente', () => {
     expect(await findByTestId('0-horizontal-image')).toBeInTheDocument();
     expect(await findByTestId('0-horizontal-top-text')).toBeInTheDocument();
     expect(await findByTestId(CardTitle0)).toBeInTheDocument();
-    expect(await findByTestId('0-horizontal-share-btn')).toBeInTheDocument();
+    expect(await findByTestId(shareBtn0)).toBeInTheDocument();
     expect(await findByTestId('0-horizontal-favorite-btn')).toBeInTheDocument();
     expect(await findByTestId('1-horizontal-image')).toBeInTheDocument();
     expect(await findByTestId('1-horizontal-top-text')).toBeInTheDocument();
@@ -139,16 +140,23 @@ describe('Verifica ao clicar no botão de favoritos a receita sai da tela', () =
   });
 });
 
-// describe('O botão "share" deve copiar a URL da tela de detalhes da receita', () => {
-//   jest.spyOn(navigator.clipboard, 'writeText');
-//   it('A URL da tela de detalhes da receita é copiada', async () => {
-//     const { history, findByTestId } = renderWithRouter(<App />);
-//     history.push(favoriteAdress);
-//     const shareBtn = await findByTestId('0-horizontal-share-btn');
-//     userEvent.click(shareBtn);
-//     const path = window.navigator.clipboard.writeText();
-//     Object.defineProperty(navigator, { clipboard: { writeText: () => {} },
-//     });
-//     expect(path).toBe('http://localhost:3000/comidas/52771');
-//   });
-// });
+describe('O botão "share" deve copiar a URL da tela de detalhes da receita', () => {
+  it('A URL da tela de detalhes da receita é copiada', async () => {
+    const { history, findByTestId } = renderWithRouter(<App />);
+    history.push(favoriteAdress);
+    const shareBtn = await findByTestId(shareBtn0);
+    document.execCommand = jest.fn();
+    userEvent.click(shareBtn);
+    expect(document.execCommand).toHaveBeenCalledWith('copy');
+  });
+
+  it('Aparece a mensagem Link Copiado na tela', async () => {
+    const { history, findByTestId, getByText } = renderWithRouter(<App />);
+    history.push(favoriteAdress);
+    const shareBtn = await findByTestId(shareBtn0);
+    document.execCommand = jest.fn();
+    userEvent.click(shareBtn);
+    const message = getByText('Link copiado!');
+    expect(message).toBeInTheDocument();
+  });
+});
