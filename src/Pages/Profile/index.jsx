@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import Footer from '../../Components/Footer';
+import Header from '../../Components/Header';
 import './Profile.css';
 
 const Profile = () => {
@@ -8,13 +9,15 @@ const Profile = () => {
   const email = JSON.parse(localStorage.getItem('user'))
     ? JSON.parse(localStorage.getItem('user')).email
     : '';
+
   function handleLogout() {
     localStorage.clear();
     history.push('/');
   }
+
   return (
     <div className="container">
-      <h1>Perfil</h1>
+      <Header>Perfil</Header>
       <h5 data-testid="profile-email">{email}</h5>
       <Link to="/receitas-feitas">
         <button
