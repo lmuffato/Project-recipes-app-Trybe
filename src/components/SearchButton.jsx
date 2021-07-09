@@ -60,17 +60,14 @@ class SearchButton extends React.Component {
   }
 
   handleClick() {
-    const { clickRButton, valueInput, foodOrDrink, api } = this.state;
+    const { clickRButton, valueInput, foodOrDrink } = this.state;
     if (valueInput.length > 1 && clickRButton === 'firstLetter') {
       // eslint-disable-next-line no-alert
       alert('Sua busca deve conter somente 1 (um) caracter');
-    } else if (api.length === 0) {
-      // eslint-disable-next-line no-alert
-      alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
     } else if (foodOrDrink === '/comidas') {
-      return this.requestApi(this.apiFood(valueInput)[clickRButton]);
+      this.requestApi(this.apiFood(valueInput)[clickRButton]);
     } else if (foodOrDrink === '/bebidas') {
-      return this.requestApi(this.apiDrink(valueInput)[clickRButton]);
+      this.requestApi(this.apiDrink(valueInput)[clickRButton]);
     }
   }
 
@@ -109,10 +106,21 @@ class SearchButton extends React.Component {
 
   async requestApi(endpoint) {
     const { foodOrDrinkApiName, foodOrDrink } = this.state;
-    const api = await fetch(endpoint).then((response) => response.json());
     const numMax = 12;
+    const msgErro = 'Sinto muito, não encontramos nenhuma receita para esses filtros.';
+    const api = await fetch(endpoint).then((response) => response.json())
+      .catch((err) => {
+        console.log(err);
+        // eslint-disable-next-line no-alert
+        return { [foodOrDrinkApiName]: null };
+      });
+    console.log(api);
+    if (api[foodOrDrinkApiName] === null) {
+      // eslint-disable-next-line no-alert
+      alert(msgErro);
+      return api;
+    }
     const api12 = api[foodOrDrinkApiName].slice(0, numMax);
-    console.log(api12);
     if (api12.length === 1) {
       return <Redirect to={ `/${foodOrDrink}` } />;
     }
