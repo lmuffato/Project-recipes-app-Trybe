@@ -1,11 +1,13 @@
-/* eslint-disable no-alert */
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import searchIcon from '../images/searchIcon.svg';
+import { handleCurrentSearch } from '../actions';
 
 class SearchButton extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
       valueInput: '',
       clickRButton: '',
@@ -56,9 +58,10 @@ class SearchButton extends React.Component {
     });
   }
 
-  handleClick() {
+  handleClick() { // LÓGICA do redirect api.lenght = 1 pode acontecer aqui
     const { clickRButton, valueInput, foodOrDrink } = this.state;
     if (valueInput.length > 1 && clickRButton === 'firstLetter') {
+      // eslint-disable-next-line no-alert
       alert('Sua busca deve conter somente 1 (um) caracter');
     } else if (foodOrDrink === '/comidas') {
       return this.requestApi(this.apiFood(valueInput)[clickRButton]);
@@ -85,7 +88,7 @@ class SearchButton extends React.Component {
     return drinks;
   }
 
-  async requestApi(endpoint) {
+  async requestApi(endpoint) { // disptach aqui
     const { foodOrDrinkApiName } = this.state;
     const api = await fetch(endpoint);
     const tratamentoJson = await api.json();
@@ -94,13 +97,13 @@ class SearchButton extends React.Component {
         api: [],
       });
     } else {
-      this.setState({
+      this.setState({ // ao inves de settar estado, dispatch
         api: tratamentoJson[foodOrDrinkApiName],
       });
     }
   }
 
-  verifyRenderApi() {
+  verifyRenderApi() { // // provavel saída
     const { foodOrDrink } = this.state;
     if (foodOrDrink === '/comidas') {
       return this.renderFood();
@@ -109,38 +112,25 @@ class SearchButton extends React.Component {
     }
   }
 
-  renderFood() {
-    const { history } = this.props;
+  renderFood() { // provavelmente saída
     const { api } = this.state;
-    console.log(api);
     return (
       api.map((paran) => (
         <div key={ paran.idMeal }>
           <h1>{paran.strMeal}</h1>
-          <input
-            type="image"
-            src={ paran.strMealThumb }
-            alt="food"
-            onClick={ () => history.push(`/comidas/${paran.idMeal}`) }
-          />
+          <img src={ paran.strMealThumb } alt="food" />
         </div>
       ))
     );
   }
 
-  renderDrink() {
-    const { history } = this.props;
+  renderDrink() { // provavel saída
     const { api } = this.state;
     return (
       api.map((paran) => (
         <div key={ paran.idDrink }>
           <h1>{paran.strDrink}</h1>
-          <input
-            type="image"
-            src={ paran.strDrinkThumb }
-            alt="drink"
-            onClick={ () => history.push(`/comidas/${paran.idMeal}`) }
-          />
+          <img src={ paran.strDrinkThumb } alt="drink" />
         </div>
       ))
     );
@@ -241,9 +231,12 @@ class SearchButton extends React.Component {
   }
 }
 
+const mapDispatchToProps = (dispatch) => ({
+  handleSearch: (currentSearch) => dispatch(handleCurrentSearch(currentSearch)),
+});
+
 SearchButton.propTypes = {
   pathname: PropTypes.string,
-  history: PropTypes.shape(),
 }.isRequired;
 
-export default SearchButton;
+export default connect(null, mapDispatchToProps)(SearchButton);

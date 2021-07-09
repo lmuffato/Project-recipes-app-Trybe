@@ -11,7 +11,6 @@ class DetBebidas extends React.Component {
       drinks: [],
       ingredientes: [],
       measures: [],
-      address: '',
     };
     this.fetchDrinksById = this.fetchDrinksById.bind(this);
     this.handleIngredients = this.handleIngredients.bind(this);
@@ -71,7 +70,7 @@ class DetBebidas extends React.Component {
   }
 
   render() {
-    const { drinks, ingredientes, measures, address } = this.state;
+    const { drinks, ingredientes, measures } = this.state;
     const drink = Object.values(drinks);
     return (
       drink.map((recipe) => (

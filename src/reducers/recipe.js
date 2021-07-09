@@ -1,8 +1,9 @@
-import { HANDLE_INFO_RECIPE } from '../actions';
+import { HANDLE_INFO_RECIPE, HANDLE_CURRENT_SEARCH } from '../actions';
 
 const INITIAL_STATE = {
   id: '',
   type: '',
+  currentSearch: [],
 };
 
 const recipe = (state = INITIAL_STATE, action) => {
@@ -12,6 +13,11 @@ const recipe = (state = INITIAL_STATE, action) => {
       ...state,
       id: action.id,
       type: action.type,
+    };
+  case HANDLE_CURRENT_SEARCH:
+    return {
+      ...state,
+      currentSearch: action.currentSearch,
     };
   default:
     return {

@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { handleCurrentSearch } from '../actions';
 
 class MainFoodCard extends React.Component {
   constructor(props) {
@@ -14,12 +16,23 @@ class MainFoodCard extends React.Component {
     this.loadingFoodCategories = this.loadingFoodCategories.bind(this);
     this.FilterCategoryFoods = this.FilterCategoryFoods.bind(this);
     this.FilterCategoryFood = this.FilterCategoryFood.bind(this);
+    this.renderCurrentSearch = this.renderCurrentSearch.bind(this);
     this.handleClick = this.handleClick.bind(this);
   }
 
   componentDidMount() {
-    this.FilterCategoryFood();
-    this.loadingFoodCategories();
+    const { currentSearch } = this.props;
+    if (currentSearch.length !== 0) {
+      this.renderCurrentSearch();
+    } else {
+      this.FilterCategoryFood();
+      this.loadingFoodCategories();
+    }
+  }
+
+  componentWillUnmount() {
+    const { cleanGlobalSearch } = this.props;
+    cleanGlobalSearch([]);
   }
 
   handleClick(e) {
@@ -38,7 +51,7 @@ class MainFoodCard extends React.Component {
     }
   }
 
-  async FilterCategoryFood() {
+  async FilterCategoryFood() { // render principal-inicial dos cards
     const URL = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
     const limitNumber = 12;
     fetch(URL)
@@ -52,7 +65,7 @@ class MainFoodCard extends React.Component {
       });
   }
 
-  loadingFoodCategories() {
+  loadingFoodCategories() { // render categories buttons
     const URL = 'https://www.themealdb.com/api/json/v1/1/list.php?c=list';
     const limitNumber = 5;
     fetch(URL)
@@ -66,7 +79,7 @@ class MainFoodCard extends React.Component {
       });
   }
 
-  FilterCategoryFoods(props) {
+  FilterCategoryFoods(props) { // render dos cards de acordo com click category
     const URL = `https://www.themealdb.com/api/json/v1/1/filter.php?c=${props}`;
     const limitNumber = 12;
     fetch(URL)
@@ -78,6 +91,20 @@ class MainFoodCard extends React.Component {
           isLoading: false,
         });
       });
+  }
+
+  async renderCurrentSearch() {
+    const { currentSearch } = this.props;
+    const endpoint = `https://www.themealdb.com/api/json/v1/1/filter.php?i=${currentSearch}`;
+    const request = await fetch(endpoint).then((response) => response.json())
+      .catch((erro) => console.log(erro));
+
+    const limit = 12;
+    const sliced = request.meals.slice(0, limit);
+    this.setState({
+      foodData: sliced,
+      isLoading: false,
+    });
   }
 
   render() {
@@ -128,8 +155,20 @@ class MainFoodCard extends React.Component {
   }
 }
 
+const mapStateToProps = (state) => ({
+  currentSearch: state.recipe.currentSearch,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  cleanGlobalSearch: (currentSearch) => dispatch(handleCurrentSearch(currentSearch)),
+});
+
 MainFoodCard.propTypes = {
   history: PropTypes.shape().isRequired,
+  currentSearch: PropTypes.arrayOf(
+    PropTypes.string,
+  ).isRequired,
+  cleanGlobalSearch: PropTypes.func.isRequired,
 };
 
-export default MainFoodCard;
+export default connect(mapStateToProps, mapDispatchToProps)(MainFoodCard);

@@ -13,7 +13,6 @@ class DetComidas extends React.Component {
       recommended: [],
       measures: [],
       video: '',
-      address: '',
     };
     this.embedvideo = this.embedvideo.bind(this);
     this.fetchFoodsById = this.fetchFoodsById.bind(this);
@@ -84,28 +83,6 @@ class DetComidas extends React.Component {
     return foods;
   }
 
-  timer() {
-    const div = document.querySelector('#recipeCopy');
-    const tagP = document.querySelector('#tagP');
-    div.removeChild(tagP);
-  }
-
-  copy() {
-    const el = document.createElement('input');
-    el.value = window.location.href;
-    document.body.appendChild(el);
-    el.select();
-    document.execCommand('copy');
-    document.body.removeChild(el);
-    const div = document.querySelector('#recipeCopy');
-    const tagP = document.createElement('p');
-    tagP.setAttribute('id', 'tagP');
-    div.appendChild(tagP);
-    tagP.innerText = 'Link copiado!';
-    const time = 15000;
-    setTimeout(this.timer, time);
-  }
-
   fetchRecommendedDrinks() {
     const min = 0;
     const max = 6;
@@ -117,7 +94,8 @@ class DetComidas extends React.Component {
 
   render() {
     const { history } = this.props;
-    const { foods, measures, ingredientes, video, recommended, address } = this.state;
+
+    const { foods, measures, ingredientes, video, recommended } = this.state;
     const food = Object.values(foods);
     return (
       food.map((recipe) => (
