@@ -12,6 +12,7 @@ import './App.css';
 import DoneRecipes from './Pages/DoneRecipes';
 import ExploreDrinks from './Pages/ExploreDrinks';
 import ExploreFood from './Pages/ExploreFood';
+import Area from './Pages/Area';
 import FavoriteRecipes from './Pages/FavoriteRecipes';
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
         <Route exact path="/explorar/bebidas" component={ ExploreDrinks } />
         <Route exact path="/receitas-feitas" component={ DoneRecipes } />
         <Route exact path="/receitas-favoritas" component={ FavoriteRecipes } />
+        <Route exact path="/explorar/comidas/area" component={ Area } />
       </Switch>
     </FoodProvider>
   );
