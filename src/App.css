@@ -57,8 +57,8 @@ header {
 .buttons {
   bottom: 120px;
   display: flex;
-  position: absolute;
   flex-direction: column;
+  position: absolute;
 }
 
 .title, .login-text {
@@ -68,7 +68,7 @@ header {
 }
 
 .title {
-  animation: initTitle 0.6s ;
+  animation: initTitle 0.6s;
   font-style: italic;
   position: absolute;
   top: 30px;
@@ -82,7 +82,7 @@ header {
 }
 
 .logo {
-  animation: initLogo 0.6s ;
+  animation: initLogo 0.6s;
   color: rgb(241, 241, 241);
   font-size: 3rem;
   position: absolute;
