@@ -5,12 +5,14 @@ import Routes from './routes/Routes';
 
 import { RecipeContextProvider } from './store/RecipeContext';
 
-import './App.css';
+
 import 'bootstrap/dist/css/bootstrap.min.css';
+import GlobalStyle from './styles/globals';
 
 function App() {
   return (
     <RecipeContextProvider>
+      <GlobalStyle />
       <Router>
         <Routes />
       </Router>

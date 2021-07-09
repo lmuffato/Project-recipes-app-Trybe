@@ -25,7 +25,6 @@ export function RecipeContextProvider({ value = INITIAL_VALUE, children }) {
     INITIAL_STATE_STORAGE,
   );
   const [doneRecipes, setDoneRecipes] = usePersistedState('doneRecipes', []);
-
   return (
     <RecipeContext.Provider
       value={ {
