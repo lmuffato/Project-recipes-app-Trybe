@@ -16,9 +16,11 @@ describe('test the component', () => {
   };
   const history = createMemoryHistory();
   history.push('/comidas/ingredientes');
-  it('test the function call', () => {
+  it('test the function call', async () => {
     api.default = jest.fn().mockReturnValue([]);
-    renderWithRouter(<ExploreIngredients />);
+    await act(() => {
+      renderWithRouter(<ExploreIngredients />);
+    });
     expect(api.default).toHaveBeenCalled();
   });
   it('test the rendering and the link', async () => {

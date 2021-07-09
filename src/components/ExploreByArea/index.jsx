@@ -4,7 +4,7 @@ import searchAreas from '../../services/searchAreas';
 import SearchFoods from '../../services/searchFoods';
 import searchFoodByArea from '../../services/searchFoodByArea';
 
-export default function ExploreByAre() {
+export default function ExploreByArea() {
   const maxLenght = 12;
   const [area, setAreas] = useState([]);
   const [meals, setMeals] = useState([]);
