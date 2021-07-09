@@ -20,7 +20,6 @@ export default function MealDetails() {
   const globalState = useSelector((state) => state.detailsReducer.favorites);
   const history = useHistory();
   const INICIAR_RECEITA = 'Iniciar Receita';
-  // const [startButton, setStartButton] = useState(INICIAR_RECEITA);
 
   useEffect(() => {
     const mealDrinks = async () => {
