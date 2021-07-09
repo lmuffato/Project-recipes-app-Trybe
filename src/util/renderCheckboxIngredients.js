@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import Proptypes from 'prop-types';
 import '../PagesCss/Checkbox.css';
+import { forEach } from 'lodash-es';
 
 export default function RenderCheckboxIngredients({ ingredients, measure }) {
   const [value, setValue] = useState(false);
   const [check, setCheck] = useState([]);
 
   useEffect(() => {
-    
+    // ingredients.forEach((e) => setCheck.push(e));
   }, []);
 
   const checked = (index) => {
