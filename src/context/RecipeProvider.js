@@ -6,11 +6,14 @@ import RecipeContext from './RecipeContext';
 function RecipeProvider({ children }) {
   const [recipes, setRecipes] = useState([]);
   const [redirect, setRedirect] = useState(null);
+  const [favoriteRecipes, setFavoriteRecipes] = useState([]);
   const contextValue = {
     recipes,
     setRecipes,
     redirect,
     setRedirect,
+    favoriteRecipes,
+    setFavoriteRecipes,
   };
   return (
     <RecipeContext.Provider value={ contextValue }>
