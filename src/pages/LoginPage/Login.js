@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Form, Button, Image } from 'react-bootstrap';
 import Context from '../../context/Context';
 import './Style.css';
-import login from '../../images/login.jpeg';
+import Logo from '../../images/Logo.png';
 
 function Login(props) {
   const {
@@ -33,7 +33,7 @@ function Login(props) {
 
   return (
     <Form>
-      <Image src={ login } fluid />
+      <Image src={ Logo } fluid />
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Control
           type="email"
@@ -56,11 +56,12 @@ function Login(props) {
       </Form.Group>
       <div className="btn-div">
         <Button
-          variant="success"
+          variant="custom"
           data-testid="login-submit-btn"
           disabled={ validate() }
           onClick={ () => handleClick() }
           type="submit"
+          className="submit"
         >
           Entrar
         </Button>

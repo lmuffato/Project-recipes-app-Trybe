@@ -13,3 +13,7 @@ img {
   width: 100%;
 }
 
+.btn-custom {
+  background-color: #334031;
+  color: #c2e1c2;
+}

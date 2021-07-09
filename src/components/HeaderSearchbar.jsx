@@ -99,7 +99,7 @@ function HeaderSearchbar() {
           disabled={ (radio === '') }
         />
         <Button
-          variant="primary"
+          variant="custom"
           data-testid="exec-search-btn"
           onClick={ handleClickFilter }
           type="button"
