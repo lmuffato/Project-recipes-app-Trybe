@@ -7,6 +7,8 @@ import copy from 'clipboard-copy';
 import positions from '../../services/data';
 import createIngredients from '../../services/functions';
 import shareIcon from '../../images/shareIcon.svg';
+import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
+import blackHeartIcon from '../../images/blackHeartIcon.svg';
 
 import styles from '../../styles/DetailsPages.module.scss';
 
@@ -16,9 +18,10 @@ function FoodDetails(props) {
   const history = useHistory();
   const [, setStateRedux] = useStateEasyRedux(FoodDetails, {});
   const [, setCopyUrl] = useStateEasyRedux({ name: 'copyFood' }, {});
+  const [, setFavoriteRecipe] = useStateEasyRedux({ name: 'favoriteRecipe' }, {});
 
   useEffect(() => {
-    const fetchRecipie = async () => {
+    const fetchRecipe = async () => {
       const requestFood = fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`);
       const recommendations = fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
 
@@ -33,9 +36,13 @@ function FoodDetails(props) {
       const INDEX_END = 6;
       const resultRecommendations = responseRecommendations.slice(0, INDEX_END);
       setStateRedux({ actionType: 'FETCH_FOOD', responseFood, resultRecommendations });
-      setCopyUrl({ actionType: 'COPY_URL', copyRecipie: false });
+      setCopyUrl({ actionType: 'COPY_URL', copyRecipe: false });
+
+      const getRecipe = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
+      const resultGet = getRecipe.some((element) => element.id === id);
+      setFavoriteRecipe({ actionType: 'FAVORITE_RECIPE', favorite: resultGet });
     };
-    fetchRecipie();
+    fetchRecipe();
   }, []);
 
   const foods = useSelector((state) => (
@@ -47,18 +54,42 @@ function FoodDetails(props) {
   ));
 
   const copyTrue = useSelector((state) => (
-    state.copyFood ? state.copyFood.copyRecipie : undefined
+    state.copyFood ? state.copyFood.copyRecipe : undefined
+  ));
+
+  const favorite = useSelector((state) => (
+    state.favoriteRecipe ? state.favoriteRecipe.favorite : undefined
   ));
 
   const choiceRec = (element) => history.push(`/bebidas/${element}`);
 
   const copyUrl = () => {
     copy(window.location.href.toString());
-    setCopyUrl({ copyRecipie: true });
+    setCopyUrl({ copyRecipe: true });
     const time = 3000;
     setTimeout(() => {
-      setCopyUrl({ copyRecipie: false });
+      setCopyUrl({ copyRecipe: false });
     }, time);
+  };
+
+  const clickFavorite = ({ idMeal, strArea, strCategory, strMeal, strMealThumb }) => {
+    if (!favorite) {
+      const favoriteRecipe = [{
+        id: idMeal,
+        type: 'comida',
+        area: strArea,
+        category: strCategory,
+        alcoholicOrNot: '',
+        name: strMeal,
+        image: strMealThumb,
+      }];
+      localStorage.setItem('favoriteRecipes', JSON.stringify(favoriteRecipe));
+    } else {
+      const removeFavorite = JSON.parse(localStorage.getItem('favoriteRecipes'))
+        .filter((el) => el.id !== idMeal);
+      localStorage.setItem('favoriteRecipes', JSON.stringify(removeFavorite));
+    }
+    setFavoriteRecipe({ favorite: !favorite });
   };
 
   console.log(foods);
@@ -67,7 +98,7 @@ function FoodDetails(props) {
     <div>
       {foods && foods.map(
         (el) => (
-          <div className={ styles.areaRecipie } key={ el.idMeal }>
+          <div className={ styles.areaRecipe } key={ el.idMeal }>
             <img
               src={ el.strMealThumb }
               alt={ el.strMeal }
@@ -85,7 +116,17 @@ function FoodDetails(props) {
                 >
                   <img src={ shareIcon } alt="Compartilhar" />
                 </button>
-                <button type="button" data-testid="favorite-btn">favoritar</button>
+                <button
+                  type="button"
+                  onClick={ () => clickFavorite(el) }
+                  src={ favorite ? blackHeartIcon : whiteHeartIcon }
+                  data-testid="favorite-btn"
+                >
+                  <img
+                    src={ favorite ? blackHeartIcon : whiteHeartIcon }
+                    alt="Favoritado"
+                  />
+                </button>
               </div>
               <p data-testid="recipe-category">{ el.strCategory }</p>
               <h3>Ingredients</h3>
@@ -123,7 +164,7 @@ function FoodDetails(props) {
             <button
               type="button"
               data-testid="start-recipe-btn"
-              className={ styles.startRecipie }
+              className={ styles.startRecipe }
             >
               Iniciar Receita
             </button>
