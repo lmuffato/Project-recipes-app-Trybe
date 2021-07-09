@@ -6,9 +6,9 @@ import FoodDetails from './pages/FoodDetails/index';
 import DrinkDetails from './pages/DrinkDetails/index';
 import Explore from './pages/Explore/index';
 import AppProvider from './context/AppContext';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import RecipesFavorites from './pages/RecipesFavorite';
 import RecipesDone from './pages/RecipesDone';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (
