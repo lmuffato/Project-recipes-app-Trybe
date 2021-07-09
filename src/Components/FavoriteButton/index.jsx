@@ -8,9 +8,9 @@ import './styles.css';
 function FavoriteButton({ recipe, recipeType }) {
   const { setFavoriteRecipes, favoriteRecipes } = useContext(recipesContext);
   const [isFavorite, setIsFavorite] = useState(false);
-  const findFavorite = favoriteRecipes.favRecipes
-    .find((fav) => fav[`id${recipeType}`] === recipe[`id${recipeType}`]);
+
   const localFavorites = JSON.parse(localStorage.getItem('favoriteRecipes'));
+
   let findFavoriteLocal;
   if (localFavorites) {
     findFavoriteLocal = localFavorites
@@ -28,10 +28,14 @@ function FavoriteButton({ recipe, recipeType }) {
   };
 
   useEffect(() => {
-    if (findFavoriteLocal || findFavorite) {
+    const findFavorite = favoriteRecipes.favRecipes
+      .find((fav) => fav[`id${recipeType}`] === recipe[`id${recipeType}`]);
+    if (findFavorite || findFavoriteLocal) {
       setIsFavorite(true);
+    } else {
+      setIsFavorite(false);
     }
-  }, [findFavoriteLocal, findFavorite]);
+  }, [findFavoriteLocal, favoriteRecipes.favRecipes, recipeType, recipe]);
 
   const saveFavoriteButton = (item) => {
     if (!isFavorite) {

@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { Image } from 'react-bootstrap';
 import { useLocation, useParams } from 'react-router';
 import UserContext from '../../context/UserContext';
 import { getRecipeByID } from '../../services/fetchRecipes';
@@ -44,10 +43,11 @@ function Details() {
     <div className="main-parent">
       {isLoading ? <Loading /> : (
         <div>
-          <Image
-            thumbnail
+          <img
+            className="hero"
             data-testid="recipe-photo"
             src={ recipesDetails[`str${recipeType}Thumb`] }
+            alt="hero"
           />
           <div className="top-components">
             <div>
@@ -60,7 +60,11 @@ function Details() {
             </div>
             <div className="btn-components">
               <ShareButton />
-              <FavoriteButton recipe={ recipesDetails } recipeType={ recipeType } />
+              <FavoriteButton
+                recipe={ recipesDetails }
+                recipeType={ recipeType }
+                isLoading={ isLoading }
+              />
             </div>
           </div>
           <Ingredient type="list" recipe={ recipesDetails } />
@@ -76,7 +80,7 @@ function Details() {
           <Slide
             toggle={ recipeType }
             category={ toggleCategory }
-            className="ingredients"
+            cleanState={ setRecipesDetails }
           />
           {recipeStatus
             ? (

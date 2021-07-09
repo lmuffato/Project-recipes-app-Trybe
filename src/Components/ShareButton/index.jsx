@@ -16,6 +16,7 @@ function ShareButton() {
       setIsCopied(false);
     }, SECONDS_COPY);
   };
+
   return (
     <CopyToClipboard text={ `http://localhost:3000${URL}` } onCopy={ onCopyText }>
       <div>
