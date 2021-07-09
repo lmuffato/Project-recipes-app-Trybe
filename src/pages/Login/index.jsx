@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import md5 from 'md5';
 import brandFace from '../../images/brand/face.svg';
 import styles from './styles.module.scss';
 
@@ -27,13 +28,14 @@ function Login() {
     localStorage.setItem('user', JSON.stringify(userEmail));
     localStorage.setItem('mealsToken', '1');
     localStorage.setItem('cocktailsToken', '1');
+    localStorage.setItem('gravatar', `https://www.gravatar.com/avatar/${md5(email)}`);
     history.push('/comidas');
   };
 
-  const emailToStorage = (event) => {
+  /*   const emailToStorage = (event) => {
     setEmail(event.target.value);
     localStorage.setItem('email', event.target.value);
-  };
+  }; */
 
   return (
     <div className={ styles.loginPage }>
@@ -57,7 +59,7 @@ function Login() {
             data-testid="email-input"
             placeholder="E-mail"
             value={ email }
-            onChange={ emailToStorage }
+            onChange={ (event) => setEmail(event.target.value) }
           />
           <input
             type="password"

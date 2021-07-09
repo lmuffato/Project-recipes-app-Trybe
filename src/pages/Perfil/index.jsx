@@ -1,14 +1,18 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import md5 from 'md5';
 import HeaderBack from '../../components/HeaderBack';
 import styles from './styles.module.scss';
+import useLocalStorage from '../../hooks/useLocalStorage';
 
 function Perfil() {
-  const emailReceived = localStorage.getItem('email');
+  /* const emailReceived = localStorage.getItem('email');
   const emailConverted = JSON.stringify(emailReceived);
   const emailUser = emailConverted.replace(/"/g, '');
-  const gravatarProfile = `https://www.gravatar.com/avatar/${md5(emailUser)}`;
+  const gravatarProfile = `https://www.gravatar.com/avatar/${md5(emailUser)}`; */
+
+  const { gravatar } = useLocalStorage('gravatar');
+  const user = JSON.parse(localStorage.getItem('user'));
+  const { email } = user;
 
   const history = useHistory();
   const logout = (event) => {
@@ -29,8 +33,8 @@ function Perfil() {
       <HeaderBack />
       <div className={ styles.perfilPage }>
         <div className={ styles.imagemEmail }>
-          <img src={ gravatarProfile } alt="Imagem de perfil" />
-          <h3 data-testid="profile-email">{ emailReceived }</h3>
+          <img src={ gravatar } alt="Imagem de perfil" />
+          <h3 data-testid="profile-email">{ email }</h3>
         </div>
         <button
           name="Receitas Feitas"

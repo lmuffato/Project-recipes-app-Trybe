@@ -1,6 +1,12 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import Perfil from '../pages/Perfil';
+import LocalStorageMock from './lib/LocalStorageMock';
+
+// https://stackoverflow.com/questions/32911630/how-do-i-deal-with-localstorage-in-jest-tests
+
+global.localStorage = new LocalStorageMock();
+localStorage.setItem('user', JSON.stringify({ email: 'user@trybe.com' }));
 
 describe('Tela de Perfil', () => {
   test('Exibe uma imagem de perfil', () => {
