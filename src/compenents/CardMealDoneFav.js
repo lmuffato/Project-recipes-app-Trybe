@@ -25,25 +25,25 @@ function CardMealDoneFav({ recepie }, index) {
           alt="the food recepie"
         />
         <p data-testid={ `${index}-horizontal-name` }>{ name }</p>
-        <p data-testid={ `${index}-horizontal-top-text>` }>{ category }</p>
-        <p>{ area }</p>
-        <p data-testid={ `${index}-horizontal-done-date` }>{ doneDate }</p>
-        <p
-          data-testid={ `${index}-${tags}-horizontal-tag` }
-        >
-          { `${tags[0]}, ${tags[1]}` }
-        </p>
-        <button
-          type="button"
-          onClick={ () => copyLink() }
-        >
-          <img
-            data-testid={ `${index}-horizontal-share-btn` }
-            src={ Share }
-            alt="share"
-          />
-        </button>
       </Link>
+      <p data-testid={ `${index}-horizontal-top-text>` }>{ category }</p>
+      <p>{ area }</p>
+      <p data-testid={ `${index}-horizontal-done-date` }>{ doneDate }</p>
+      <p
+        data-testid={ `${index}-${tags}-horizontal-tag` }
+      >
+        { `${tags[0]}, ${tags[1]}` }
+      </p>
+      <button
+        type="button"
+        onClick={ () => copyLink() }
+      >
+        <img
+          data-testid={ `${index}-horizontal-share-btn` }
+          src={ Share }
+          alt="share"
+        />
+      </button>
     </div>
   );
 }

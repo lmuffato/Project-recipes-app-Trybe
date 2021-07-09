@@ -13,7 +13,7 @@ function CardDrinkDoneFav({ recepie }, index) {
     copy(linkToCopy);
     global.alert('Link copiado!');
   }
-
+  // talvez o link deva ser apenas na imagem e no nome
   return (
     <div>
       <Link to={ `/bebidas/${id}` }>
@@ -24,19 +24,19 @@ function CardDrinkDoneFav({ recepie }, index) {
           src={ image }
         />
         <p data-testid={ `${index}-horizontal-name` }>{ name }</p>
-        <p>{alcoholicOrNot}</p>
-        <p data-testid={ `${index}-horizontal-done-date` }>{ doneDate }</p>
-        <button
-          type="button"
-          onClick={ () => copyLink() }
-        >
-          <img
-            data-testid={ `${index}-horizontal-share-btn` }
-            src={ Share }
-            alt="share"
-          />
-        </button>
       </Link>
+      <p>{alcoholicOrNot}</p>
+      <p data-testid={ `${index}-horizontal-done-date` }>{ doneDate }</p>
+      <button
+        type="button"
+        onClick={ () => copyLink() }
+      >
+        <img
+          data-testid={ `${index}-horizontal-share-btn` }
+          src={ Share }
+          alt="share"
+        />
+      </button>
     </div>
   );
 }
