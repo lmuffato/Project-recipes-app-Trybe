@@ -38,16 +38,16 @@ function FoodsArea() {
     getMealsRecepies();
   }, []);
 
-  async function getFiltredFetch() {
-    const filteredFetch = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?a=${selectedArea}`)
-      .then((responses) => responses.json())
-      .then((respos) => respos.meals);
-    console.log(filteredFetch);
-    const fils = filteredFetch.filter((element, index) => index < lastRecipe);
-    setShowRecepies(fils);
-  }
-
   useEffect(() => {
+    async function getFiltredFetch() {
+      const filteredFetch = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?a=${selectedArea}`)
+        .then((responses) => responses.json())
+        .then((respos) => respos.meals);
+      console.log(filteredFetch);
+      const fils = filteredFetch.filter((element, index) => index < lastRecipe);
+      setShowRecepies(fils);
+    }
+
     console.log(selectedArea);
     if (selectedArea === 'All') {
       setShowRecepies(mealsRecepies.slice(0, lastRecipe));

@@ -1,9 +1,9 @@
-.meals {
+.main {
   align-items: center;
   background: #0fa36b;
   color: #464646;
   display: flex;
-  flex-direction: column;
+  flex-flow: column wrap;
   font-family: sans-serif;
   height: 100vh;
   justify-content: space-around;
