@@ -35,7 +35,7 @@ export default function DoneRecipeCard({ recipe, index }) {
           </p>
         </Link>
         <p data-testid={ `${index}-horizontal-done-date` }>
-          {`Feita em: ${recipe.doneDate.toLocaleDateString()}`}
+          {recipe.doneDate}
         </p>
         {recipe.tags && recipe.tags
           .slice(0, 2)
