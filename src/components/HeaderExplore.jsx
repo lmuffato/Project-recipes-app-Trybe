@@ -6,7 +6,10 @@ import '../style/Header.css';
 function HeaderExplore() {
   const location = useLocation();
   const title = location.pathname.substring(1);
-  const titleRoute = title.slice(title.indexOf('/')).substring(1);
+  let titleRoute = title.slice(title.indexOf('/')).substring(1);
+  if (titleRoute.includes('/')) {
+    titleRoute = titleRoute.slice(title.indexOf('/'));
+  }
   const titleCapitalize = titleRoute.charAt(0).toUpperCase() + titleRoute.slice(1);
   // fonte: https://flexiple.com/javascript-capitalize-first-letter/#:~:text=To%20capitalize%20the%20first%20character,()%20function%20to%20capitalize%20it.
 

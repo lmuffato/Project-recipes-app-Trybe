@@ -32,9 +32,17 @@ function App() {
           <Route path="/bebidas/:id/in-progress" component={ InProcess } />
           <Route exact path="/explorar" component={ Explore } />
           <Route exact path="/explorar/comidas" component={ ExploreFilters } />
-          <Route exact path="/explorar/comidas/ingredientes" component={ ByIngredients } />
+          <Route
+            exact
+            path="/explorar/comidas/ingredientes"
+            component={ ByIngredients }
+          />
           <Route exact path="/explorar/bebidas" component={ ExploreFilters } />
-          <Route exact path="/explorar/bebidas/ingredientes" component={ ByIngredients } />
+          <Route
+            exact
+            path="/explorar/bebidas/ingredientes"
+            component={ ByIngredients }
+          />
           <Route path="/explorar/comidas/area" component={ ByOrigin } />
           <Route path="/perfil" component={ Profile } />
           <Route path="/receitas-feitas" component={ MadeRecipes } />
