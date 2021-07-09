@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
@@ -6,7 +7,6 @@ import searchIcon from '../images/searchIcon.svg';
 class SearchButton extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
       valueInput: '',
       clickRButton: '',
@@ -62,7 +62,6 @@ class SearchButton extends React.Component {
   handleClick() {
     const { clickRButton, valueInput, foodOrDrink, api } = this.state;
     if (valueInput.length > 1 && clickRButton === 'firstLetter') {
-      // eslint-disable-next-line no-alert
       alert('Sua busca deve conter somente 1 (um) caracter');
     } else if (api.length === 0) {
       // eslint-disable-next-line no-alert
@@ -132,7 +131,9 @@ class SearchButton extends React.Component {
   }
 
   renderFood() {
+    const { history } = this.props;
     const { api } = this.state;
+    console.log(api);
     return (
       api.map((paran, index) => (
         <div
@@ -153,6 +154,7 @@ class SearchButton extends React.Component {
   }
 
   renderDrink() {
+    const { history } = this.props;
     const { api } = this.state;
     return (
       api.map((paran, index) => (
@@ -264,6 +266,7 @@ class SearchButton extends React.Component {
 
 SearchButton.propTypes = {
   pathname: PropTypes.string,
+  history: PropTypes.shape(),
 }.isRequired;
 
 export default SearchButton;
