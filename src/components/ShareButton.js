@@ -5,7 +5,7 @@ import shareIcon from '../images/shareIcon.svg';
 
 const copy = require('clipboard-copy');
 
-export default function ShareButton({ recipeId, isFood }) {
+export default function ShareButton({ recipeId, isFood, index }) {
   function handleShareClick() {
     copy(`${window.location.origin}/${isFood ? 'comidas' : 'bebidas'}/${recipeId}`);
 
@@ -22,8 +22,9 @@ export default function ShareButton({ recipeId, isFood }) {
   return (
     <button
       type="button"
-      data-testid="share-btn"
+      data-testid={ `${index !== undefined ? `${index}-horizontal-` : ''}share-btn` }
       onClick={ handleShareClick }
+      src={ shareIcon }
     >
       <img src={ shareIcon } alt="compartilhar" />
     </button>
@@ -34,4 +35,5 @@ ShareButton.propTypes = {
   recipeId: PropTypes.string,
   isFood: PropTypes.string,
   isDrink: PropTypes.string,
+  index: PropTypes.number,
 }.isRequired;
