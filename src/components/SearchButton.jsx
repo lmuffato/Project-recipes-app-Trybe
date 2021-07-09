@@ -1,4 +1,3 @@
-/* eslint-disable no-alert */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
@@ -7,6 +6,7 @@ import searchIcon from '../images/searchIcon.svg';
 class SearchButton extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
       valueInput: '',
       clickRButton: '',
@@ -14,12 +14,15 @@ class SearchButton extends React.Component {
       btn: false,
       foodOrDrink: '',
       foodOrDrinkApiName: '',
-      // idProduct: '',
+      idProduct: '',
     };
 
     this.handleChange = this.handleChange.bind(this);
+    this.apisFood = this.apiFood.bind(this);
     this.renderInputSearch = this.renderInputSearch.bind(this);
+    this.requestApi = this.requestApi.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.apiDrink = this.apiDrink.bind(this);
     this.handlePathName = this.handlePathName.bind(this);
     this.renderFood = this.renderFood.bind(this);
     this.renderDrink = this.renderDrink.bind(this);
@@ -57,26 +60,15 @@ class SearchButton extends React.Component {
   }
 
   handleClick() {
-    const { clickRButton, valueInput, foodOrDrink, api } = this.state;
+    const { clickRButton, valueInput, foodOrDrink } = this.state;
     if (valueInput.length > 1 && clickRButton === 'firstLetter') {
-      alert('Sua busca deve conter somente 1 (um) caracter');
-    } else if (api.length === 0) {
       // eslint-disable-next-line no-alert
-      alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+      alert('Sua busca deve conter somente 1 (um) caracter');
     } else if (foodOrDrink === '/comidas') {
-      return this.requestApi(this.apiFood(valueInput)[clickRButton]);
+      this.requestApi(this.apiFood(valueInput)[clickRButton]);
     } else if (foodOrDrink === '/bebidas') {
-      return this.requestApi(this.apiDrink(valueInput)[clickRButton]);
+      this.requestApi(this.apiDrink(valueInput)[clickRButton]);
     }
-
-    if (result === 'error') return;
-
-    if (result === 'redirect') return <Redirect to={ `/${foodOrDrink}` } />;
-
-    this.setState({
-      api: result,
-    });
-    this.saveIdProduct();
   }
 
   saveIdProduct() {
@@ -114,10 +106,20 @@ class SearchButton extends React.Component {
 
   async requestApi(endpoint) {
     const { foodOrDrinkApiName, foodOrDrink } = this.state;
-    const api = await fetch(endpoint).then((response) => response.json());
     const numMax = 12;
+    const msgErro = 'Sinto muito, não encontramos nenhuma receita para esses filtros.';
+    const api = await fetch(endpoint).then((response) => response.json())
+      .catch((err) => {
+        console.log(err);
+        // eslint-disable-next-line no-alert
+        return { [foodOrDrinkApiName]: null };
+      });
+    if (api[foodOrDrinkApiName] === null) {
+      // eslint-disable-next-line no-alert
+      alert(msgErro);
+      return api;
+    }
     const api12 = api[foodOrDrinkApiName].slice(0, numMax);
-    console.log(api12);
     if (api12.length === 1) {
       return <Redirect to={ `/${foodOrDrink}` } />;
     }
