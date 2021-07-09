@@ -5,7 +5,7 @@ import shareIcon from '../images/shareIcon.svg';
 
 const copy = require('clipboard-copy');
 
-function DoneRecipeCard({ imgSrc, imgId, category,
+function DoneRecipeCard({ area, imgSrc, imgId, category,
   categoryId, mealName, nameId, dateId, tag, doneDate, shareId, indexTag }) {
   const [copyLink, setCopyLink] = useState(false);
 
@@ -19,11 +19,14 @@ function DoneRecipeCard({ imgSrc, imgId, category,
   return (
     <div>
       <img src={ imgSrc } alt="Done Recipe Card" data-testid={ imgId } />
+      {area !== '' ? (
+        <h4 data-testid={ categoryId }>{ `${area} - ${category}` }</h4>
+      ) : (<h4 data-testid={ categoryId }>{ category }</h4>)}
       <h4 data-testid={ categoryId }>{ category }</h4>
       <h3 data-testid={ nameId }>{ mealName }</h3>
       <span data-testid={ dateId }>{ doneDate }</span>
-      <button data-testid={ shareId } type="button" onClick={ shareClick }>
-        <img src={ shareIcon } alt="compartilhar" />
+      <button type="button" onClick={ shareClick }>
+        <img data-testid={ shareId } src={ shareIcon } alt="compartilhar" />
       </button>
       {copyLink ? <span>Link copiado!</span> : null}
       {tag.map((name, index) => (
