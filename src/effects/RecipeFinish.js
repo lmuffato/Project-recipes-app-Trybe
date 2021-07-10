@@ -5,21 +5,15 @@ import MealsContext from '../context/MealsContext';
 import { getItemFromLocalStorage } from '../services/localStorage';
 
 function checkMeals(mealsIngredients, state, callbackState, ingredients) {
-  // const ingredientsKeyValue = Object.entries(storage.meals)[0];
-  // const ingredientsFromLocalStorage = ingredientsKeyValue[1];
   if (mealsIngredients.length === ingredients.length) {
-    callbackState({ ...state, finish: true });
+    return callbackState({ ...state, finish: true });
   }
   callbackState({ ...state, finish: false });
 }
 
 function checkCocktails(cocktailsIngredients, state, callbackState, ingredietsArr) {
-  // const { currIngredientsLocal } = state;
-  // const ingredientsKeyValue = Object.entries(storage.cocktails)[0];
-  // const ingredientsFromLocalStorage = ingredientsKeyValue[1];
-  // console.log(ingredientsFromLocalStorage.length, ingredietsArr.length);
   if (cocktailsIngredients.length === ingredietsArr.length) {
-    callbackState({ ...state, finish: true });
+    return callbackState({ ...state, finish: true });
   }
   callbackState({ ...state, finish: false });
 }
@@ -40,25 +34,24 @@ function getCocktailsStorage(storage, state, callbackState, setCocktailsIngredie
 export default function RecipeFinish(ingredients, state, callbackState) {
   const { cocktailsIngredients, setCocktailsIngredients } = useContext(CocktailsContext);
   const { mealsIngredients, setMealsIngredients } = useContext(MealsContext);
-  const { currIngredientsLocal, finish } = state;
   const history = useHistory();
   const { pathname } = history.location;
-  const regExp = /[0-9]/gi;
-  const getId = pathname.match(regExp).reduce((acc, item) => acc + item, '');
   const storage = getItemFromLocalStorage('inProgressRecipes');
   const ingredientsArr = ingredients.map((item) => item[1]);
 
   useEffect(() => {
-    if (pathname.includes('comidas')) {
-      return checkMeals(mealsIngredients, state, callbackState, ingredientsArr);
+    if (pathname.includes('bebidas')) {
+      return checkCocktails(cocktailsIngredients, state, callbackState, ingredientsArr);
     }
-    checkCocktails(cocktailsIngredients, state, callbackState, ingredientsArr);
-  }, [cocktailsIngredients]);
+    checkMeals(mealsIngredients, state, callbackState, ingredientsArr);
+  }, [cocktailsIngredients, mealsIngredients]);
 
   useEffect(() => {
     if (pathname.includes('bebidas')) {
+      if (!storage) return;
       return getCocktailsStorage(storage, state, callbackState, setCocktailsIngredients);
     }
+    if (!storage) return;
     getMealsStorage(storage, state, callbackState, setMealsIngredients);
   }, []);
 }

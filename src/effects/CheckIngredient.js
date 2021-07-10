@@ -7,7 +7,7 @@ import { getItemFromLocalStorage, setToLocalStorage } from '../services/localSto
 const addIngredientToLocalStorage = (pathname, state, storage, globalState) => {
   const { cocktailsIngredients, setCocktailsIngredients,
     mealsIngredients, setMealsIngredients } = globalState;
-  const { currIngredient, finish } = state;
+  const { currIngredient } = state;
   const regExp = /[0-9]/gi;
   const getId = pathname.match(regExp).reduce((acc, item) => acc + item, '');
   if (pathname.includes('bebidas')) {
