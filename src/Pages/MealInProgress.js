@@ -24,8 +24,8 @@ export default function MealInProgress() {
     mealDrinks();
   }, [id]);
 
-  const copyLink = () => {
-    const url = window.location.href;
+  const copyLink = (recipeId) => {
+    const url = `http://localhost:3000/comidas/${recipeId}`;
     navigator.clipboard.writeText(url);
     setCopy('Link copiado!');
   };
@@ -43,18 +43,21 @@ export default function MealInProgress() {
           measure.push(item[1]);
         }
       });
-      const { strMealThumb, strMeal, strCategory, strInstructions } = data[0];
-
+      const { idMeal, strMealThumb, strMeal, strCategory, strInstructions } = data[0];
       return (
         <div>
           {RenderRecipeImg(strMealThumb)}
           <div>
             <h2 data-testid="recipe-title">{strMeal}</h2>
             {RenderFavoriteHeart('comida', data[0], dispatch, globalState)}
-            {copy}
-            <button data-testid="share-btn" type="button" onClick={ () => copyLink() }>
+            <button
+              data-testid="share-btn"
+              type="button"
+              onClick={ () => copyLink(idMeal) }
+            >
               <img alt="share" src={ shareIcon } />
             </button>
+            {copy}
             <h3 data-testid="recipe-category">{strCategory}</h3>
           </div>
           <h2>Ingredients</h2>
