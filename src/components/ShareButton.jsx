@@ -10,7 +10,7 @@ export default function ShareButton({ data, id, type }) {
   const history = useHistory();
   const { pathname } = history.location;
 
-  const checkpathname = () => {
+  const checkpathname = (index) => {
     if (pathname.includes('feitas') || pathname.includes('favoritas')) {
       return `${index}-horizontal-share-btn`;
     }
@@ -25,7 +25,7 @@ export default function ShareButton({ data, id, type }) {
       <Image
         type="button"
         style={ { width: '2rem' } }
-        data-testid={ checkpathname() }
+        data-testid={ checkpathname(data) }
         src={ shareIcon }
         onClick={ () => setShareRecipe(true) }
       />

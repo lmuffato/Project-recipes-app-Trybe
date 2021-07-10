@@ -55,7 +55,7 @@ export default function FavoriteCardMeal({ item, index }) {
         {item.strTags}
       </Card.Text>
       <ShareButton
-        data={ `${index}-horizontal-share-btn` }
+        data={ index }
         id={ item.idMeal }
         type="comida"
       />
