@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom';
 
 import Input from '../shared/input';
 import Button from '../shared/button';
-import CardRecipe from '../CardRecipe';
+// import CardRecipe from '../CardRecipe';
 import {
   propsSearchFirstLetter,
   propsSearchIngredients,
@@ -13,7 +13,7 @@ import {
 } from './data';
 import recipesContext from '../../context/recipesContext/recipesContext';
 
-const LIMIT_RECIPES = 11;
+// const LIMIT_RECIPES = 12;
 
 function SearchBar({ location }) {
   const [searchText, setSearchText] = useState('');
@@ -82,7 +82,7 @@ function SearchBar({ location }) {
         name="Buscar"
         onClick={ handleClick }
       />
-      {recipes.filter((item, index) => index <= LIMIT_RECIPES)
+      {/* {recipes.filter((_item, index) => index < LIMIT_RECIPES)
         .map((recipe, index) => (
           <CardRecipe
             typeFilter={ typeFilter }
@@ -90,7 +90,7 @@ function SearchBar({ location }) {
             index={ index }
             recipe={ recipe }
           />
-        ))}
+        ))} */}
     </section>
   );
 }

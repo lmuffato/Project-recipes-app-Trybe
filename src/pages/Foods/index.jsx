@@ -1,16 +1,19 @@
 import React, { useContext, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import { shape } from 'prop-types';
 import Header from '../../components/Header/index';
 import Footer from '../../components/Footer';
 import Button from '../../components/shared/button';
-import ItemCard from '../../components/ItemCard';
+// import ItemCard from '../../components/ItemCard';
 import recipesContext from '../../context/recipesContext/recipesContext';
+import CardRecipe from '../../components/CardRecipe';
+
+const LIMIT_RECIPES = 12;
 
 function Foods({ location }) {
   const {
     fetchRecipes,
-    dataRecipes,
+    recipes,
+    typeFilter,
     loading,
     fetchCategoryRecipes,
     categorys,
@@ -38,15 +41,16 @@ function Foods({ location }) {
           key={ index }
           dataTestid={ `${category.strCategory}-category-filter` }
         />))}
-      { loading ? <span>carregando</span> : dataRecipes.map((meal, index) => (
-        <Link to={ `/comidas/${meal.idMeal}` } key={ meal.idMeal }>
-          <ItemCard
-            name={ meal.strMeal }
-            image={ meal.strMealThumb }
-            dataTestId={ index }
+      { loading ? <span>carregando</span> : recipes
+        .filter((item, index) => index < LIMIT_RECIPES)
+        .map((recipe, index) => (
+          <CardRecipe
+            typeFilter={ typeFilter }
+            key={ index }
+            index={ index }
+            recipe={ recipe }
           />
-        </Link>
-      ))}
+        ))}
       <Footer />
     </div>
 

@@ -11,7 +11,6 @@ import {
 function RecipesProvider({ children }) {
   const [recipes, setRecipes] = useState([]);
   const [typeFilter, setTypeFilter] = useState('');
-  const [dataRecipes, setDataRecipes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [categorys, setCategorys] = useState([]);
   const [toggle, setToggle] = useState('');
@@ -45,12 +44,13 @@ function RecipesProvider({ children }) {
   async function fetchRecipes(pathName) {
     const str = pathName === '/comidas' ? 'themealdb' : 'thecocktaildb';
     const property = pathName === '/comidas' ? 'meals' : 'drinks';
-    const maxMeal = 12;
+    const type = pathName === '/comidas' ? 'Meal' : 'Drink';
+    // const maxMeal = 12;
     const fetchApi = await fetch(`https://www.${str}.com/api/json/v1/1/search.php?s=`);
     const result = await fetchApi.json();
-    const slice = result[property].slice(0, maxMeal);
-    setDataRecipes(slice);
-    console.log(slice);
+    // const slice = result[property].slice(0, maxMeal);
+    setTypeFilter(type);
+    setRecipes(result[property]);
     setLoading(false);
   }
 
@@ -66,8 +66,9 @@ function RecipesProvider({ children }) {
 
   async function filterByCategory(category, pathName) {
     const property = pathName === '/comidas' ? 'meals' : 'drinks';
+    const type = pathName === '/comidas' ? 'Meal' : 'Drink';
     const str = pathName === '/comidas' ? 'themealdb' : 'thecocktaildb';
-    const maxMeal = 12;
+    // const maxMeal = 12;
     if (category === toggle) {
       return fetchRecipes(pathName);
     }
@@ -75,9 +76,10 @@ function RecipesProvider({ children }) {
     setLoading(true);
     const fetchApi = await fetch(`https://www.${str}.com/api/json/v1/1/filter.php?c=${category}`);
     const result = await fetchApi.json();
-    const newdata = result[property];
-    const slice = newdata.slice(0, maxMeal);
-    setDataRecipes(slice);
+    // const newdata = result[property];
+    // const slice = newdata.slice(0, maxMeal);
+    setTypeFilter(type);
+    setRecipes(result[property]);
     setLoading(false);
   }
 
@@ -86,7 +88,6 @@ function RecipesProvider({ children }) {
     typeFilter,
     getSubmitApiDrinks,
     getSubmitApiFoods,
-    dataRecipes,
     loading,
     categorys,
     fetchRecipes,
