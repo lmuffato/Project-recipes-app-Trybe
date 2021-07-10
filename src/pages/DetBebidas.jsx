@@ -19,6 +19,7 @@ class DetBebidas extends React.Component {
     this.handleIngredients = this.handleIngredients.bind(this);
     this.fetchRecommendedFoods = this.fetchRecommendedFoods.bind(this);
     this.onClickShare = this.onClickShare.bind(this);
+    this.checkRecipe = this.checkRecipe.bind(this);
   }
 
   async componentDidMount() {
@@ -43,9 +44,7 @@ class DetBebidas extends React.Component {
       for (let index = 1; index <= ingredientLimit; index += 1) {
         ingrediente = `strIngredient${index}`;
         measure = `strMeasure${index}`;
-        // console.log(recipe[ingrediente]);
         ingredients.push(recipe[ingrediente]);
-        // console.log(recipe[measure])
         measures.push(recipe[measure]);
         if (ingredients[ingredients.length - 1] === ''
         || ingredients[ingredients.length - 1] === null) {
@@ -93,8 +92,18 @@ class DetBebidas extends React.Component {
     return recommended;
   }
 
+  checkRecipe({ idMeal }) {
+    if (localStorage.doneRecipes) {
+      const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
+      const done = doneRecipes.find((element) => (element.id === idMeal));
+      if (done) {
+        return true;
+      }
+      return false;
+    }
+  }
+
   render() {
-    console.log(this.props);
     const history = this.props;
     const { pathname } = history.location;
     const { drinks, ingredientes, measures, recommended } = this.state;
@@ -103,6 +112,7 @@ class DetBebidas extends React.Component {
       drink.map((recipe) => (
         <div key="recipe">
           <img
+            className="detImg"
             data-testid="recipe-photo"
             alt="imagem da receita"
             src={ recipe[0].strDrinkThumb }
@@ -129,10 +139,14 @@ class DetBebidas extends React.Component {
           <h2>
             Lista de Ingredientes
           </h2>
-          <table border="1" width="350px">
+          <table border="1" width="340px">
+            <thead>
+              <tr>
+                <td>Ingredients</td>
+                <td>Measures</td>
+              </tr>
+            </thead>
             <tbody>
-              <td>Ingredients</td>
-              <td>Measures</td>
               {ingredientes.map((ingredient, index) => (
                 <tr key={ `row${index}` }>
                   <td
@@ -153,7 +167,7 @@ class DetBebidas extends React.Component {
           <h2>
             Modo de Preparo:
           </h2>
-          <p data-testid="instructions">
+          <p data-testid="instructions" className="instructions">
             {recipe[0].strInstructions}
           </p>
           <h2>Comidas Recomendadas</h2>
@@ -169,13 +183,15 @@ class DetBebidas extends React.Component {
               />
             </div>
           ))}
-          <button
-            type="button"
-            data-testid="start-recipe-btn"
-            className="start-btn"
-          >
-            Iniciar Receita
-          </button>
+          {(!this.checkRecipe(recipe[0]))
+          && (
+            <button
+              type="button"
+              data-testid="start-recipe-btn"
+              className="start-btn"
+            >
+              Iniciar Receita
+            </button>)}
         </div>
       ))
     );

@@ -107,6 +107,7 @@ class DetComidas extends React.Component {
       food.map((recipe) => (
         <div key="recipe">
           <img
+            className="detImg"
             data-testid="recipe-photo"
             alt="imagem da receita"
             src={ recipe[0].strMealThumb }
@@ -132,31 +133,35 @@ class DetComidas extends React.Component {
           <h2>
             Lista de Ingredientes
           </h2>
-          <table border="1">
+          <table border="1" width="340px">
             <thead>
-              Ingredients
-              Measures
+              <tr>
+                <td>Ingredients</td>
+                <td>Measures</td>
+              </tr>
             </thead>
-            {ingredientes.map((ingredient, index) => (
-              <tr key={ `row${index}` }>
-                <td
-                  key={ index }
-                  data-testid={ `${index}-ingredient-name-and-measure` }
-                >
-                  {ingredient}
-                </td>
-                <td
-                  key={ measures }
-                  data-testid={ `${index}-ingredient-name-and-measure` }
-                >
-                  {measures[index]}
-                </td>
-              </tr>))}
+            <tbody>
+              {ingredientes.map((ingredient, index) => (
+                <tr key={ `row${index}` }>
+                  <td
+                    key={ index }
+                    data-testid={ `${index}-ingredient-name-and-measure` }
+                  >
+                    {ingredient}
+                  </td>
+                  <td
+                    key={ measures }
+                    data-testid={ `${index}-ingredient-name-and-measure` }
+                  >
+                    {measures[index]}
+                  </td>
+                </tr>))}
+            </tbody>
           </table>
           <h2>
             Modo de Preparo:
           </h2>
-          <p data-testid="instructions">
+          <p data-testid="instructions" className="instructions">
             {recipe[0].strInstructions}
           </p>
           <iframe
