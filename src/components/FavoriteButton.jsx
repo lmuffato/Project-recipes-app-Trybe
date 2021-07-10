@@ -5,7 +5,7 @@ import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import heartColorService from '../services/heartColorService';
 
-function FavoriteButton({ type }) {
+function FavoriteButton({ type, favoriteId = 'favorite-btn' }) {
   const { currentDrink, currentMeal,
     setFavoriteRecipe, favoriteRecipe } = useContext(UserContext);
   const [heartColor, setHeartColor] = useState('');
@@ -69,13 +69,15 @@ function FavoriteButton({ type }) {
   return (
     <button type="button" onClick={ handleClick }>
       {heartColor === 'white' ? (
-        <img data-testid="favorite-btn" src={ whiteHeartIcon } alt="favoritar" />
+        <img data-testid={ favoriteId } src={ whiteHeartIcon } alt="favoritar" />
       ) : (
-        <img data-testid="favorite-btn" src={ blackHeartIcon } alt="favoritar" />
+        <img data-testid={ favoriteId } src={ blackHeartIcon } alt="favoritar" />
       )}
     </button>
   );
 }
+
+// "favorite-btn"
 
 FavoriteButton.propTypes = {
   type: PropTypes.string,
