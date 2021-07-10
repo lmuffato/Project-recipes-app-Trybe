@@ -17,7 +17,8 @@ function ReceitasEmAndamento() {
         setUrlToFetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${params.id}`);
       }
       const responseItem = await fetch(urlToFetch);
-      setResponse(await responseItem.json());
+      const responseJson = await responseItem.json();
+      setResponse(responseJson);
     };
 
     fetchRecipes();

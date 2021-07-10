@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import ShareBtn from './ShareButton';
 import FavBtn from './FavoriteButton';
@@ -28,8 +28,8 @@ const mountObject = (recipe) => {
       tags: [strTags] || '',
     };
   }
-  const { idDrink,
-    strCategory, strAlcoholic, strDrink, strDrinkThumb, strTags } = recipe.drinks[0];
+  const { idDrink, strCategory, strAlcoholic, strInstructions,
+    strDrink, strDrinkThumb, strTags } = recipe.drinks[0];
   return {
     id: idDrink,
     type: 'bebida',
@@ -38,12 +38,14 @@ const mountObject = (recipe) => {
     alcoholicOrNot: strAlcoholic,
     name: strDrink,
     image: strDrinkThumb,
+    instructions: strInstructions,
     ingredients: filterIngredients(recipe.drinks[0]),
     tags: [strTags] || '',
   };
 };
 function ProgressCard({ recipe }) {
-  const locate = window.location.href.split('/in-progress')[0];
+  const location = useLocation();
+  const locate = location.pathname.split('/in-progress')[0];
   const recipeInfo = mountObject(recipe);
   const { meals: foods } = recipe;
   const { id, image, name, category, alcoholicOrNot,
@@ -128,7 +130,6 @@ function ProgressCard({ recipe }) {
     setLocalStorage(lsRecipe, value);
     changeTextDecoration(parentNode);
   };
-
   const isChecked = (items, key) => items[1].filter((n) => {
     if (n === key) { return 'teste'; } return false;
   });
@@ -223,7 +224,7 @@ function ProgressCard({ recipe }) {
       <RecipeImage origin={ image } />
       <div className="TitleShare">
         <RecipeTitle title={ name } />
-        <ShareBtn dataTest="share-btn" path={ `${locate}` } />
+        <ShareBtn dataTest="share-btn" path={ `http://localhost:3000${locate}` } />
         <FavBtn info={ favoriteInfo() } />
       </div>
       <RecipeCatg category={ `${category} ${alcoholicOrNot}` } />
