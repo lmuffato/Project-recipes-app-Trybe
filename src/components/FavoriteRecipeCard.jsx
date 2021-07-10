@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import FavoritedRecipesButton from './FavoritedRecipesButton';
 import shareIcon from '../images/shareIcon.svg';
 
 const copy = require('clipboard-copy');
 
-function DoneRecipeCard({ area, imgSrc, imgId, category,
-  categoryId, mealName, nameId, dateId, tag,
-  doneDate, shareId, indexTag, alcoholic, recipeId, type }) {
+function FavoriteRecipeCard({ imgSrc, imgId, category, categoryId,
+  nameId, mealName, shareId, area, alcoholic, recipeId, type, indexCard }) {
   const [copyLink, setCopyLink] = useState(false);
 
   const shareClick = () => {
@@ -18,7 +18,7 @@ function DoneRecipeCard({ area, imgSrc, imgId, category,
   return (
     <div>
       <Link to={ `/${type}s/${recipeId}` }>
-        <img data-testid={ imgId } src={ imgSrc } alt="Done Recipe Card" />
+        <img src={ imgSrc } alt="Done Recipe Card" data-testid={ imgId } />
       </Link>
       {area !== '' ? (
         <h4 data-testid={ categoryId }>{ `${area} - ${category}` }</h4>
@@ -27,23 +27,19 @@ function DoneRecipeCard({ area, imgSrc, imgId, category,
       <Link to={ `/${type}s/${recipeId}` }>
         <h3 data-testid={ nameId }>{ mealName }</h3>
       </Link>
-      <span data-testid={ dateId }>{ doneDate }</span>
       <button type="button" onClick={ shareClick }>
         <img data-testid={ shareId } src={ shareIcon } alt="compartilhar" />
       </button>
+      <FavoritedRecipesButton
+        elementId={ recipeId }
+        favoriteId={ `${indexCard}-horizontal-favorite-btn` }
+      />
       {copyLink ? <span>Link copiado!</span> : null}
-      {tag.map((name, index) => (
-        <span
-          key={ index }
-          data-testid={ `${indexTag}-${name}-horizontal-tag` }
-        >
-          { name }
-        </span>))}
     </div>
   );
 }
 
-DoneRecipeCard.propTypes = {
+FavoriteRecipeCard.propTypes = {
   imgSrc: PropTypes.string,
   imgId: PropTypes.string,
   category: PropTypes.string,
@@ -52,4 +48,4 @@ DoneRecipeCard.propTypes = {
   dateId: PropTypes.string,
 }.isRequired;
 
-export default DoneRecipeCard;
+export default FavoriteRecipeCard;
