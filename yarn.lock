@@ -10583,6 +10583,11 @@
     "array-slice" "^0.2.3"
     "console" "^0.5.2"
 
+"react-mock@^6.0.1":
+  "integrity" "sha512-mftvdN9AqKE/9MVqdKGRGiR5HG5ajEJwDkzyvMM5kBfMBaTEJTUXDLgDQvjb7EspKMe2yrBfytrxuJGPaYyoxw=="
+  "resolved" "https://registry.npmjs.org/react-mock/-/react-mock-6.0.1.tgz"
+  "version" "6.0.1"
+
 "react-overlays@^4.1.0":
   "integrity" "sha512-WtJifh081e6M24KnvTQoNjQEpz7HoLxqt8TwZM7LOYIkYJ8i/Ly1Xi7RVte87ZVnmqQ4PFaFiNHZhSINPSpdBQ=="
   "resolved" "https://registry.npmjs.org/react-overlays/-/react-overlays-4.1.1.tgz"

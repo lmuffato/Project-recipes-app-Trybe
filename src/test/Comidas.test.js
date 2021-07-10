@@ -173,16 +173,13 @@ describe('testa se os filtros "botões" funcionam corretamente', () => {
 //     global.fetch.mockResolvedValue({
 //       json: jest.fn().mockResolvedValue(meals),
 //     });
-
 //     const { findByTestId, history } = renderWithRouter(<App />);
 //     history.push('/comidas');
 
 //     const card1 = await findByTestId('0-recipe-card');
-//     expect(card1).toBeInTheDocument();
+//     userEvent.click(card1);
 
-//     // userEvent.click(card1);
-//     fireEvent.click(card1);
-//     // const { pathname } = history.location;
-//     // expect(pathname).toBe('/comidas/52977');
+//     const { pathname } = history.location;
+//     expect(pathname).toBe('/comidas/52977');
 //   });
 // });
