@@ -29,7 +29,8 @@ function MainRecipes() {
           <MealCards
             data={ recipe }
             index={ index }
-            testid={ `${index}-recomendation-card` }
+            linkTestid={ `${index}-recipe-card` }
+            titleTestid={ `${index}-card-name` }
             key={ recipe.idMeal }
           />
         )) : renderRecipes.map((recipe, index) => (
