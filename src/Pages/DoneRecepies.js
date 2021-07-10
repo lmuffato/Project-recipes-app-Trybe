@@ -36,7 +36,7 @@ export default function DoneRecepies() {
 
   const renderCards = (data) => (
     data.map((recipe, index) => {
-      const { type, id, doneDate, image, category, name, area } = recipe;
+      const { type, id, doneDate, image, category, name, area, alcoholicOrNot } = recipe;
       return (
         <Link to={ `/${type}s/${id}` } key={ name }>
           <div
@@ -44,7 +44,9 @@ export default function DoneRecepies() {
             className="card"
           >
             <h5 data-testid={ `${index}-horizontal-top-text` }>
-              { area !== '' ? `${area} - ${category}` : category}
+              {
+                area !== '' ? `${area} - ${category}` : `${alcoholicOrNot} - ${category}`
+              }
             </h5>
             <img
               alt="recipe"
@@ -54,7 +56,6 @@ export default function DoneRecepies() {
             />
             <button
               type="button"
-              // data-testid={ `${index}-horizontal-share-btn` }
               onClick={ () => copyLink() }
             >
               <img
