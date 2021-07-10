@@ -5,7 +5,19 @@ import FavoriteCardMeal from './FavoriteCardMeal';
 import FavoriteCardDrink from './FavoriteCardDrink';
 
 export default function FavoriteCards() {
-  const { allFavorites } = useContext(FavoritesContext);
+  const { allFavorites,
+    renderMeals,
+    renderDrinks } = useContext(FavoritesContext);
+
+  const filterAllFavorites = () => {
+    if (renderMeals) {
+      return allFavorites.filter((item) => Object.keys(item).includes('idMeal'));
+    }
+    if (renderDrinks) {
+      return allFavorites.filter((item) => Object.keys(item).includes('idDrink'));
+    }
+    return allFavorites;
+  };
 
   const checkType = (item, index) => {
     const keys = Object.keys(item);
@@ -20,7 +32,7 @@ export default function FavoriteCards() {
 
   return allFavorites && (
     <div>
-      { allFavorites.map((item, index) => checkType(item, index)) }
+      { filterAllFavorites().map((item, index) => checkType(item, index)) }
     </div>
   );
 }

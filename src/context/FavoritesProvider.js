@@ -1,50 +1,31 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import FavoritesContext from './FavoritesContext';
-import { getItemFromLocalStorage } from '../services/localStorage';
-import { ApiRecipeDetail } from '../services/theMealAPI';
-import { ApiDetailsById } from '../services/theCockTailAPI';
+import GetFavoritesDetails from '../services/GetFavoritesDetails';
 
 export default function FavoritesProvider({ children }) {
   const [allFavorites, setAllFavorites] = useState([]);
-
-  const fetchItemsDetails = async () => {
-    const storageItems = getItemFromLocalStorage('favoriteRecipes');
-    let list = [];
-
-    if (storageItems) {
-      const promises = storageItems.map((item) => {
-        if (item.type === 'comida') {
-          return ApiRecipeDetail(item.id);
-        }
-        return ApiDetailsById(item.id);
-      });
-      // Fonte: https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Promise/all
-      list = await Promise.all(promises);
-    }
-
-    const listItems = list.map((item) => {
-      const keys = Object.keys(item);
-      if (keys.includes('meals')) {
-        return item.meals[0];
-      }
-      return item.drinks[0];
-    });
-
-    return listItems;
-  };
+  const [renderAll, setRenderAll] = useState(true);
+  const [renderMeals, setRenderMeals] = useState(false);
+  const [renderDrinks, setRenderDrinks] = useState(false);
 
   useEffect(() => {
     const request = async () => {
-      const data = await fetchItemsDetails();
+      const data = await GetFavoritesDetails();
       setAllFavorites(data);
     };
     request();
-  }, []);
+  }, [setAllFavorites]);
 
   const context = {
     allFavorites,
     setAllFavorites,
+    renderAll,
+    setRenderAll,
+    renderMeals,
+    setRenderMeals,
+    renderDrinks,
+    setRenderDrinks,
   };
 
   return (

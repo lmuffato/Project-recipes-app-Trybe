@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { Image } from 'react-bootstrap';
 import RecipeShared from '../effects/RecipeShared';
 import shareIcon from '../images/shareIcon.svg';
 
-export default function ShareButton() {
+export default function ShareButton({ data, id, type }) {
   const [shareRecipe, setShareRecipe] = useState(false);
 
-  RecipeShared(shareRecipe);
+  RecipeShared(shareRecipe, id, type);
 
   return (
     <>
@@ -14,10 +15,14 @@ export default function ShareButton() {
       <Image
         type="button"
         style={ { width: '2rem' } }
-        data-testid="share-btn"
+        data-testid={ data }
         src={ shareIcon }
         onClick={ () => setShareRecipe(true) }
       />
     </>
   );
 }
+
+ShareButton.propTypes = {
+  data: PropTypes.string,
+}.isRequired;
