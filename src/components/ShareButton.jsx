@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { Image } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 import RecipeShared from '../effects/RecipeShared';
 import shareIcon from '../images/shareIcon.svg';
 
-export default function ShareButton() {
+export default function ShareButton({ data, id, type }) {
   const [shareRecipe, setShareRecipe] = useState(false);
   const history = useHistory();
   const { pathname } = history.location;
@@ -16,7 +17,7 @@ export default function ShareButton() {
     return 'share-btn';
   };
 
-  RecipeShared(shareRecipe);
+  RecipeShared(shareRecipe, id, type);
 
   return (
     <>
@@ -31,3 +32,7 @@ export default function ShareButton() {
     </>
   );
 }
+
+ShareButton.propTypes = {
+  data: PropTypes.string,
+}.isRequired;
