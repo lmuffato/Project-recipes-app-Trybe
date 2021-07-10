@@ -1,62 +1,80 @@
 import userEvent from '@testing-library/user-event';
 import React from 'react';
-import Perfil from '../pages/Perfil';
+import App from '../App';
 import renderWithRouter from './renderWithRouter';
+
+const EMAIL_TEST_ID = 'email-input';
+const PASSWORD_TEST_ID = 'password-input';
+const LOGIN_BTN_TEST_ID = 'login-submit-btn';
+const MOCK_EMAIL = 'alguem@alguem.com';
 
 describe('Testa a página de perfil', () => {
   // incluir o contexto: https://testing-library.com/docs/example-react-context/
 
-  test('O campo de email está visível', () => {
-    const { getByTestId } = renderWithRouter(<Perfil />);
-    const email = getByTestId('profile-email');
-    const doneBtn = getByTestId('profile-done-btn');
-    const favoriteBtn = getByTestId('profile-favorite-btn');
-    const logoutBtn = getByTestId('profile-logout-btn');
+  test('O campo de email está visível e é correto', () => {
+    const { getByTestId, history } = renderWithRouter(<App />);
 
-    expect(email).toBeInTheDocument();
-    expect(doneBtn).toBeInTheDocument();
-    expect(favoriteBtn).toBeInTheDocument();
-    expect(logoutBtn).toBeInTheDocument();
-  });
+    userEvent.type(getByTestId(EMAIL_TEST_ID), MOCK_EMAIL);
+    userEvent.type(getByTestId(PASSWORD_TEST_ID), '1234567');
+    userEvent.click(getByTestId(LOGIN_BTN_TEST_ID));
 
-  test('O email do usuario no local Storage aparece na tela', () => {
-    const { getByText } = renderWithRouter(<Perfil />);
-    const userEmail = JSON.parse(localStorage.getItem('user')).email;
-    expect(getByText(userEmail).toBeInTheDocument());
-  });
+    history.push('/perfil');
 
-  test('Ir para tela receitas favoritas ao clicar no botão', () => {
-    const { getByTestId, history } = renderWithRouter(<Perfil />);
-    const favoriteBtn = getByTestId('profile-favorite-btn');
+    expect(history.location.pathname).toBe('/perfil');
 
-    userEvent.click(favoriteBtn);
-
-    expect(history.location.pathname).toBe('/receitas-favoritas');
+    const profileEmail = getByTestId('profile-email');
+    expect(profileEmail).toBeInTheDocument();
+    expect(profileEmail).toHaveTextContent(MOCK_EMAIL);
   });
 
   test('Ir para tela receitas feitas ao clicar no botão', () => {
-    const { getByTestId, history } = renderWithRouter(<Perfil />);
-    const doneBtn = getByTestId('profile-done-btn');
+    const { getByTestId, history } = renderWithRouter(<App />);
 
-    userEvent.click(doneBtn);
+    userEvent.type(getByTestId(EMAIL_TEST_ID), MOCK_EMAIL);
+    userEvent.type(getByTestId(PASSWORD_TEST_ID), '1234567');
+    userEvent.click(getByTestId(LOGIN_BTN_TEST_ID));
+
+    history.push('/perfil');
+
+    const doneRecipesBtn = getByTestId('profile-done-btn');
+    expect(doneRecipesBtn).toBeInTheDocument();
+
+    userEvent.click(doneRecipesBtn);
 
     expect(history.location.pathname).toBe('/receitas-feitas');
   });
 
+  test('Ir para tela receitas favoritas ao clicar no botão', () => {
+    const { getByTestId, history } = renderWithRouter(<App />);
+
+    userEvent.type(getByTestId(EMAIL_TEST_ID), MOCK_EMAIL);
+    userEvent.type(getByTestId(PASSWORD_TEST_ID), '1234567');
+    userEvent.click(getByTestId(LOGIN_BTN_TEST_ID));
+
+    history.push('/perfil');
+
+    const favoriteRecipesBtn = getByTestId('profile-favorite-btn');
+    expect(favoriteRecipesBtn).toBeInTheDocument();
+
+    userEvent.click(favoriteRecipesBtn);
+
+    expect(history.location.pathname).toBe('/receitas-favoritas');
+  });
+
   test('Comportamento do botão logout', () => {
-    const { getByTestId, history } = renderWithRouter(<Perfil />);
+    const { getByTestId, history } = renderWithRouter(<App />);
+
+    userEvent.type(getByTestId(EMAIL_TEST_ID), MOCK_EMAIL);
+    userEvent.type(getByTestId(PASSWORD_TEST_ID), '1234567');
+    userEvent.click(getByTestId(LOGIN_BTN_TEST_ID));
+
+    history.push('/perfil');
+
     const logoutBtn = getByTestId('profile-logout-btn');
+    expect(logoutBtn).toBeInTheDocument();
 
     userEvent.click(logoutBtn);
 
     expect(history.location.pathname).toBe('/');
-
-    const mealsToken = localStorage.getItem('mealsToken');
-    const cocktailsToken = localStorage.getItem('cocktailsToken');
-    const user = localStorage.getItem('user');
-
-    expect(mealsToken).toBe('');
-    expect(cocktailsToken).toBe('');
-    expect(user).toBe('');
   });
 });
