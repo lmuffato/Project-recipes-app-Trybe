@@ -1,11 +1,11 @@
 .card {
   display: flex;
   flex-direction: column;
-  height: 50vh;
+  width: 70vw;
 }
 
 .card > img {
-  object-fit: fill;
+  object-fit: cover;
   overflow-x: hidden;
-  width: 90%;
+  width: 100%;
 }

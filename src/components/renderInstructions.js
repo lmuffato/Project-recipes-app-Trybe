@@ -1,6 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-export default function RenderInstructions(strInst, ytEmb) {
+export default function RenderInstructions({ strInst, ytEmb }) {
   return (
     <>
       <p data-testid="instructions">{strInst}</p>
@@ -20,3 +21,12 @@ export default function RenderInstructions(strInst, ytEmb) {
     </>
   );
 }
+
+RenderInstructions.propTypes = {
+  strInst: PropTypes.string.isRequired,
+  ytEmb: PropTypes.string,
+};
+
+RenderInstructions.defaultProps = {
+  ytEmb: '',
+};
