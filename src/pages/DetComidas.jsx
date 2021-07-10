@@ -30,6 +30,7 @@ class DetComidas extends React.Component {
     const recommended = await this.fetchRecommendedDrinks();
     this.setNewState(foods, recommended);
     this.handleIngredients();
+    // this.InProgressButton(id);
   }
 
   handleIngredients() {
@@ -96,6 +97,26 @@ class DetComidas extends React.Component {
       .then((response) => response.json())
       .then((response) => response.drinks.slice(min, max));
     return recommended;
+  }
+
+  /*
+  InProgressButton(id) {
+    const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    if (inProgressRecipes.meals[id]) {
+      const button = document.querySelector('.start-btn');
+      button.innerHTML = 'Continuar Receita';
+    }
+  }
+  */
+  checkRecipe({ idMeal }) {
+    if (localStorage.doneRecipes) {
+      const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
+      const done = doneRecipes.find((element) => (element.id === idMeal));
+      if (done) {
+        return true;
+      }
+      return false;
+    }
   }
 
   render() {
@@ -186,13 +207,16 @@ class DetComidas extends React.Component {
               />
             </div>
           ))}
-          <button
-            type="button"
-            data-testid="start-recipe-btn"
-            className="start-btn"
-          >
-            Iniciar Receita
-          </button>
+          {(!this.checkRecipe(recipe[0]))
+          && (
+            <button
+              type="button"
+              data-testid="start-recipe-btn"
+              className="start-btn"
+              onClick={ () => history.push(`/comidas/${recipe[0].idMeal}/in-progress`) }
+            >
+              Iniciar Receita
+            </button>)}
         </div>
       ))
     );

@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import copy from 'clipboard-copy';
+import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
@@ -30,6 +31,7 @@ class DetBebidas extends React.Component {
     const recommended = await this.fetchRecommendedFoods();
     this.setNewState(drinks, recommended);
     this.handleIngredients();
+    // this.inProgressButton(id);
   }
 
   handleIngredients() {
@@ -91,6 +93,15 @@ class DetBebidas extends React.Component {
       .then((response) => response.meals.slice(min, max));
     return recommended;
   }
+  /*
+  InProgressButton(id) {
+    const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    if (inProgressRecipes.cocktails[id]) {
+      const button = document.querySelector('.start-btn');
+      button.innerHTML = 'Continuar Receita';
+    }
+  }
+  */
 
   checkRecipe({ idMeal }) {
     if (localStorage.doneRecipes) {
@@ -173,25 +184,29 @@ class DetBebidas extends React.Component {
           <h2>Comidas Recomendadas</h2>
           {recommended.map((food, index) => (
             <div key={ food.idMeal } data-testid={ `${index}-recomendation-card` }>
-              <input
-                width="350"
-                type="image"
-                src={ food.strMealThumb }
-                data-testid="recipe-photo"
-                alt="recipe-img"
-                onClick={ () => history.push(`/comidas/${food.idMeal}`) }
-              />
+              <Link to={ `/comidas/${food.idMeal}` }>
+                <input
+                  width="350"
+                  type="image"
+                  src={ food.strMealThumb }
+                  data-testid="recipe-photo"
+                  alt="recipe-img"
+                />
+              </Link>
             </div>
           ))}
           {(!this.checkRecipe(recipe[0]))
           && (
-            <button
-              type="button"
-              data-testid="start-recipe-btn"
-              className="start-btn"
-            >
-              Iniciar Receita
-            </button>)}
+            <Link to={ `/bebidas/${recipe[0].idDrink}/in-progress` }>
+              <button
+                type="button"
+                data-testid="start-recipe-btn"
+                className="start-btn"
+              >
+                Iniciar Receita
+              </button>
+              )
+            </Link>)}
         </div>
       ))
     );
