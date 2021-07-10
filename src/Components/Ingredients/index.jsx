@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
+import userProvider from '../../context/UserContext';
+import { handleProgress, shouldBeChecked } from '../../helpers';
 import './styles.css';
 
-function Ingredient({ recipe, type, validate }) {
+function Ingredient({ recipe, type, validate = () => ('empty'), id }) {
   const ingredients = Object.entries(recipe)
     .filter((pair) => (
       pair[0].includes('strIngredient') && pair[1]));
@@ -10,6 +12,7 @@ function Ingredient({ recipe, type, validate }) {
     .filter((pair) => pair[0].includes('strMeasure'));
 
   const [list, setList] = useState([]);
+  const { doingRecipes, setDoingRecipes } = useContext(userProvider);
 
   const handleClick = ({ target }) => {
     if (target.checked) {
@@ -20,6 +23,9 @@ function Ingredient({ recipe, type, validate }) {
       list.includes(target.parentNode)
         ? list.filter((item) => item !== target.parentNode)
         : [...list, target.parentNode],
+    );
+    handleProgress(
+      target.parentNode.innerText, doingRecipes, setDoingRecipes, id,
     );
   };
 
@@ -60,6 +66,9 @@ function Ingredient({ recipe, type, validate }) {
                   type="checkbox"
                   className="form-check-input"
                   onClick={ handleClick }
+                  checked={ shouldBeChecked(
+                    `${item[1]} - ${measures[index][1]}`, doingRecipes, id,
+                  ) }
                 />
                 { `${item[1]} - ${measures[index][1]}` }
               </label>
@@ -74,7 +83,6 @@ function Ingredient({ recipe, type, validate }) {
 Ingredient.propTypes = {
   recipe: PropTypes.objectOf(PropTypes.string),
   type: PropTypes.string,
-  validate: PropTypes.func,
 }.isRequired;
 
 export default Ingredient;

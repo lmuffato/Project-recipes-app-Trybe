@@ -67,7 +67,11 @@ function Details() {
               />
             </div>
           </div>
-          <Ingredient type="list" recipe={ recipesDetails } />
+          <Ingredient
+            type="list"
+            recipe={ recipesDetails }
+            id={ id }
+          />
           <div className="instructions">
             <h2>Instructions</h2>
             <p data-testid="instructions">

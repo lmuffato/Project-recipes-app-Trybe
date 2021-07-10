@@ -55,6 +55,7 @@ function InProcess() {
             type="checkbox"
             recipe={ recipe }
             validate={ setFinished }
+            id={ id }
           />
           <div className="instructions">
             <h2>Instructions</h2>
