@@ -19,28 +19,35 @@ function DoneRecipeCard({ area, imgSrc, imgId, category,
     <div className="cardRecipeFinished">
       <div className="imgRecipeFinished">
         <Link to={ `/${type}s/${recipeId}` }>
-          <img data-testid={ imgId } src={ imgSrc } alt="Done Recipe Card" width="200" />
+          <img
+            data-testid={ imgId }
+            src={ imgSrc }
+            alt="Done Recipe Card"
+            className="imgRecipeFinished"
+          />
         </Link>
       </div>
-      {area !== '' ? (
-        <h4 data-testid={ categoryId }>{ `${area} - ${category}` }</h4>
-      ) : (<h4 data-testid={ categoryId }>{ category }</h4>)}
-      {alcoholic !== '' ? (<h4 data-testid={ categoryId }>{ alcoholic }</h4>) : (null)}
-      <Link to={ `/${type}s/${recipeId}` }>
-        <h3 data-testid={ nameId }>{ mealName }</h3>
-      </Link>
-      <span data-testid={ dateId }>{ doneDate }</span>
-      <button type="button" onClick={ shareClick }>
-        <img data-testid={ shareId } src={ shareIcon } alt="compartilhar" />
-      </button>
-      {copyLink ? <span>Link copiado!</span> : null}
-      {tag.map((name, index) => (
-        <span
-          key={ index }
-          data-testid={ `${indexTag}-${name}-horizontal-tag` }
-        >
-          { name }
-        </span>))}
+      <div>
+        {area !== '' ? (
+          <h4 data-testid={ categoryId }>{ `${area} - ${category}` }</h4>
+        ) : (<h4 data-testid={ categoryId }>{ category }</h4>)}
+        {alcoholic !== '' ? (<h4 data-testid={ categoryId }>{ alcoholic }</h4>) : (null)}
+        <Link to={ `/${type}s/${recipeId}` }>
+          <h3 data-testid={ nameId }>{ mealName }</h3>
+        </Link>
+        <span data-testid={ dateId }>{ doneDate }</span>
+        <button type="button" onClick={ shareClick }>
+          <img data-testid={ shareId } src={ shareIcon } alt="compartilhar" />
+        </button>
+        {copyLink ? <span>Link copiado!</span> : null}
+        {tag.map((name, index) => (
+          <span
+            key={ index }
+            data-testid={ `${indexTag}-${name}-horizontal-tag` }
+          >
+            { name }
+          </span>))}
+      </div>
     </div>
   );
 }

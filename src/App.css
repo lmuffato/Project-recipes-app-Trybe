@@ -64,7 +64,11 @@ header {
 }
 
 .imgRecipeFinished {
-  width: 40px;
+  width: 100px;
+}
+
+.cardRecipeFinished, .cardRecipeFavorited {
+  display: flex;
 }
 
 /*
