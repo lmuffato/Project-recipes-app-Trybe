@@ -55,12 +55,21 @@ export default function DrinkDetails() {
     setCopy('Link copiado!');
   };
 
-  const testButton = () => {
+  const enableDisableButton = (recId) => {
+    const doneRec = JSON.parse(localStorage.getItem('doneRecipes'));
+    if (doneRec) {
+      const doneMeals = doneRec.filter((e) => e.id === recId);
+      if (doneMeals.length > 0) return false;
+    }
+    return true;
+  };
+
+  const textForButton = (recId) => {
     const lS = JSON.parse(localStorage.getItem('inProgressRecipes'));
     if (lS) {
       const ids = Object.keys(lS);
       if (ids.length > 0) {
-        const find = ids.filter((e) => e === id);
+        const find = ids.filter((e) => e === recId);
         return (
           find ? 'Continuar Receita' : INICIAR_RECEITA
         );
@@ -87,7 +96,6 @@ export default function DrinkDetails() {
   const renderDrinkRecipe = () => {
     const ingredients = [];
     const measure = [];
-    const result = testButton();
 
     if (data) {
       const array = Object.entries(data[0]);
@@ -101,6 +109,8 @@ export default function DrinkDetails() {
       });
 
       const { idDrink, strDrink, strAlcoholic, strDrinkThumb, strInstructions } = data[0];
+      const showButton = enableDisableButton(idDrink);
+      const result = textForButton(idDrink);
       return (
         <div>
           <img
@@ -131,7 +141,7 @@ export default function DrinkDetails() {
             </div>
           </div>
           <button
-            className="footer"
+            className={ showButton ? 'footer' : 'hide-button' }
             type="button"
             data-testid="start-recipe-btn"
             onClick={ () => goToRecipeInProgress(idDrink, ingredients, measure) }

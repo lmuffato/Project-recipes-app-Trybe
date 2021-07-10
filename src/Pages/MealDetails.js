@@ -55,14 +55,23 @@ export default function MealDetails() {
     setCopy('Link copiado!');
   };
 
-  const testButton = () => {
+  const enableDisableButton = (recId) => {
+    const doneRec = JSON.parse(localStorage.getItem('doneRecipes'));
+    if (doneRec) {
+      const doneMeals = doneRec.filter((e) => e.id === recId);
+      if (doneMeals.length > 0) return false;
+    }
+    return true;
+  };
+
+  const textForButton = (recId) => {
     const lS = JSON.parse(localStorage.getItem('inProgressRecipes'));
     if (lS) {
-      const ids = Object.keys(lS);
+      const ids = Object.keys(lS.meals);
       if (ids.length > 0) {
-        const find = ids.filter((e) => e === id);
+        const find = ids.filter((e) => e === recId);
         return (
-          find ? 'Continuar Receita' : INICIAR_RECEITA
+          find.length > 0 ? 'Continuar Receita' : INICIAR_RECEITA
         );
       }
     }
@@ -85,10 +94,10 @@ export default function MealDetails() {
   const renderMealRecipe = () => {
     const ingredients = [];
     const measure = [];
-    const result = testButton();
 
     if (data && data.length > 0) {
       const array = Object.entries(data[0]);
+
       array.forEach((item) => {
         if (item[0].includes('strIngredient') && item[1] !== null) {
           ingredients.push(item[1]);
@@ -101,6 +110,8 @@ export default function MealDetails() {
       const {
         idMeal, strMeal, strCategory, strMealThumb, strInstructions, strYoutube,
       } = data[0];
+      const showButton = enableDisableButton(idMeal);
+      const result = textForButton(idMeal);
       const youtubeEmbed = strYoutube.split('=')[1];
       return (
         <div>
@@ -125,7 +136,7 @@ export default function MealDetails() {
             </div>
           </div>
           <button
-            className="footer"
+            className={ showButton ? 'footer' : 'hide-button' }
             type="button"
             data-testid="start-recipe-btn"
             onClick={ () => goToRecipeInProgress(idMeal, ingredients, measure) }
