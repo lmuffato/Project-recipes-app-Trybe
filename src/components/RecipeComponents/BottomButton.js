@@ -1,11 +1,12 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Link, useRouteMatch } from 'react-router-dom';
 
 function BottomBtn(props) {
   const iniciando = 'Iniciar Receita';
-  const id = window.location.pathname.match(/(\d+)/)[0];
+  const { params } = useRouteMatch();
+  const { id } = params;
   const { info } = props;
   const { idMeal, idDrink } = info;
 

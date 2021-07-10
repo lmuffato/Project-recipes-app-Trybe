@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../components/Header';
-import shareIcon from '../images/shareIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import '../styles/FavoriteCards.css';
+import ShareBtn from '../components/RecipeComponents/ShareButton';
 
 function ReceitasFavoritas() {
   const [favData, setFavData] = useState([]);
   const [filteredItems, setFilteredItems] = useState([]);
-  const [mimeButton, setMimeButton] = useState(false);
   const [doReload, setDoReload] = useState(false);
 
   const fetchStorage = () => {
@@ -20,13 +19,6 @@ function ReceitasFavoritas() {
     }
     setFavData(storage);
     setFilteredItems(storage);
-  };
-
-  const handleClick = ({ target }) => {
-    const { alt } = target;
-    setMimeButton(true);
-    const path = `http://localhost:3000${alt}`;
-    navigator.clipboard.writeText(path);
   };
 
   const localStorageRetriever = ({ target }) => {
@@ -44,8 +36,6 @@ function ReceitasFavoritas() {
     if (type === 'comida') {
       return (
         <div key={ index }>
-          { mimeButton ? <span>Link copiado!</span> : null }
-
           <span data-testid={ `${index}-horizontal-top-text` }>
             { `${area} - ${category}` }
           </span>
@@ -62,13 +52,10 @@ function ReceitasFavoritas() {
               { name }
             </span>
           </Link>
-          <button type="button" onClick={ handleClick }>
-            <img
-              data-testid={ `${index}-horizontal-share-btn` }
-              src={ shareIcon }
-              alt={ `/${type}s/${id}` }
-            />
-          </button>
+          <ShareBtn
+            dataTest={ `${index}-horizontal-share-btn` }
+            path={ `http://localhost:3000/${type}s/${id}` }
+          />
 
           <button type="button" onClick={ localStorageRetriever } key={ id }>
             <img
@@ -83,13 +70,10 @@ function ReceitasFavoritas() {
     }
     return (
       <div key={ index }>
-        <button type="button" onClick={ handleClick }>
-          <img
-            data-testid={ `${index}-horizontal-share-btn` }
-            src={ shareIcon }
-            alt={ `${type}s/${id}` }
-          />
-        </button>
+        <ShareBtn
+          dataTest={ `${index}-horizontal-share-btn` }
+          path={ `http://localhost:3000/${type}s/${id}` }
+        />
 
         <button type="button" onClick={ localStorageRetriever } key={ id }>
           <img
@@ -98,8 +82,6 @@ function ReceitasFavoritas() {
             alt={ id }
           />
         </button>
-
-        { mimeButton ? <span>Link copiado!</span> : null }
 
         <Link to={ `/bebidas/${id}` }>
           <img
@@ -122,7 +104,6 @@ function ReceitasFavoritas() {
   };
 
   const renderFavData = (filterType) => {
-    console.log(`FilterType: ${filterType}`);
     if (filterType.includes('todos')) {
       setFilteredItems(favData);
     }
@@ -140,7 +121,7 @@ function ReceitasFavoritas() {
 
   return (
     <div className="favorite_recipes">
-      <Header title="Receitas Favoritas" />
+      <Header title="Receitas Favoritas" displayButton={ false } />
       <div className="buttons">
         <button
           type="button"
