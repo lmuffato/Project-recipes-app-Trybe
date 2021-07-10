@@ -19,6 +19,8 @@ function RendersFiltersArea({ area }) {
     }
   };
 
+  // ok git
+
   const handleClick = (idMeal) => {
     const path = `/comidas/${idMeal}`;
     history.replace(path);
