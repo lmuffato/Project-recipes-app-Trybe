@@ -4,8 +4,11 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 
 export default function Perfil() {
-  console.log(localStorage.user);
-  const { email } = JSON.parse(localStorage.user);
+  let email;
+  if (localStorage.user) {
+    email = JSON.parse(localStorage.getItem('user')).email;
+  }
+
   return (
     <div>
       <Header
