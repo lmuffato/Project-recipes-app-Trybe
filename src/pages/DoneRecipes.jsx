@@ -12,14 +12,11 @@ export default function DoneRecipes() {
   });
 
   RecipeDone(state, setState);
-  // const { recipes, getItems } = state;
-  // if (!getItems) {
-  //   return (
-  //     <Header>
-  //       <h1 data-testid="page-title">Receitas Feitas</h1>
-  //     </Header>
-  //   );
-  // }
+  const { recipes, getItems } = state;
+  if (!getItems) {
+    return <h1>Loading...</h1>;
+  }
+  if (!recipes) return <h1>Você não possui nenhuma receita concluida...</h1>;
   return (
     <div>
       <Header>
@@ -33,7 +30,7 @@ export default function DoneRecipes() {
           <h1 data-testid={ `${index}-horizontal-name` } />
           <p data-testid={ `${index}-horizontal-done-date` } />
           <ShareButton />
-          <h3 data-testid={ `${index}-${tagName}-horizontal-tag` } />
+          <h3 data-testid={ `${index}-${item.tagName}-horizontal-tag` } />
         </>
       ))} */}
     </div>

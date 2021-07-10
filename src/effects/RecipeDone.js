@@ -1,9 +1,17 @@
 import { useEffect } from 'react';
-import { getItemFromLocalStorage } from '../services/localStorage';
+import GetDoneDetails from '../services/GetDoneDetails';
+// import { getItemFromLocalStorage } from '../services/localStorage';
 
-const setRecipes = (state, setState) => {
-  const storage = getItemFromLocalStorage('doneRecipes');
-  setState({ ...state, recipes: storage, getItems: true });
+const setRecipes = async (state, setState) => {
+  // const recipes = GetDoneDetails();
+  const apiResults = await GetDoneDetails();
+  // console.log(apiResults);
+  // const data = apiResults.map((item => ({
+
+  // })));
+  // const [data] = apiResults;
+  // const storage = getItemFromLocalStorage('doneRecipes');
+  setState({ ...state, recipes: apiResults, getItems: true });
 };
 
 export default function RecipeDone(state, setState) {
