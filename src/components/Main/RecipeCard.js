@@ -1,11 +1,17 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 export default function RecipeCard({ recipe, index, type }) {
-  console.log(recipe.strMealThumb);
   return (
-    <div data-testid={ `${index}-recipe-card` }>
-      <li>
+    <Link
+      to={
+        type === '/comidas'
+          ? `/comidas/${recipe.idMeal}`
+          : `/bebidas/${recipe.idDrink}`
+      }
+    >
+      <div data-testid={ `${index}-recipe-card` }>
         <img
           data-testid={ `${index}-card-img` }
           src={ type === '/comidas' ? recipe.strMealThumb : recipe.strDrinkThumb }
@@ -15,8 +21,8 @@ export default function RecipeCard({ recipe, index, type }) {
         <p data-testid={ `${index}-card-name` }>
           { type === '/comidas' ? recipe.strMeal : recipe.strDrink }
         </p>
-      </li>
-    </div>
+      </div>
+    </Link>
   );
 }
 
