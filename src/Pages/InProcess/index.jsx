@@ -23,7 +23,7 @@ function InProcess() {
       setRecipe(response[toggleApi][0]);
       setLoading(false);
     });
-  }, []);
+  }, [id, pathname, toggleApi]);
 
   return (
     <div className="main-parent">

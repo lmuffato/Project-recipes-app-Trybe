@@ -4,3 +4,10 @@
   flex-flow: column nowrap;
   padding: 1rem;
 }
+
+.checks {
+  display: flex;
+  flex-flow:column;
+  margin-left: 1rem;
+  font-size: 1.2rem;
+}

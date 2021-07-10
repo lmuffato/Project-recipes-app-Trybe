@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Form } from 'react-bootstrap';
 import './styles.css';
 
 function Ingredient({ recipe, type }) {
@@ -9,6 +8,12 @@ function Ingredient({ recipe, type }) {
       pair[0].includes('strIngredient') && pair[1]));
   const measures = Object.entries(recipe)
     .filter((pair) => pair[0].includes('strMeasure'));
+
+  const handleClick = ({ target }) => {
+    if (target.checked) {
+      target.parentNode.style.textDecoration = 'line-through';
+    } else { target.parentNode.style.textDecoration = ''; }
+  };
 
   return (
     <div className="parent">
@@ -26,14 +31,21 @@ function Ingredient({ recipe, type }) {
             ))}
           </ul>
         ) : (
-          <div>
+          <div className="checks">
             { ingredients.map((item, index) => (
-              <Form.Check
+              <label
                 key={ `ingredient-${index}` }
-                type="checkbox"
-                label={ `${item[1]} - ${measures[index][1]}` }
                 data-testid={ `${index}-ingredient-step` }
-              />
+                htmlFor={ `${index}-checkbox` }
+              >
+                <input
+                  id={ `${index}-checkbox` }
+                  type="checkbox"
+                  className="form-check-input"
+                  onClick={ handleClick }
+                />
+                { `${item[1]} - ${measures[index][1]}` }
+              </label>
             )) }
           </div>
         )
