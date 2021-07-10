@@ -28,8 +28,8 @@ export default function DoneRecepies() {
       ))
     )
   );
-  const copyLink = () => {
-    const url = window.location.href;
+  const copyLink = (type, id) => {
+    const url = type === 'comida' ? `http://localhost:3000/comidas/${id}` : `http://localhost:3000/bebidas/${id}`;
     navigator.clipboard.writeText(url);
     setCopy('Link copiado!');
   };
@@ -38,45 +38,48 @@ export default function DoneRecepies() {
     data.map((recipe, index) => {
       const { type, id, doneDate, image, category, name, area, alcoholicOrNot } = recipe;
       return (
-        <Link to={ `/${type}s/${id}` } key={ name }>
-          <div
-            key={ index }
-            className="card"
-          >
-            <h5 data-testid={ `${index}-horizontal-top-text` }>
-              {
-                area !== '' ? `${area} - ${category}` : `${alcoholicOrNot} - ${category}`
-              }
-            </h5>
-            <img
-              alt="recipe"
-              data-testid={ `${index}-horizontal-image` }
-              className="recipe-card-image"
-              src={ image }
-            />
-            <button
-              type="button"
-              onClick={ () => copyLink() }
-            >
-              <img
-                src={ shareIcon }
-                alt="share"
-                data-testid={ `${index}-horizontal-share-btn` }
-              />
-            </button>
-            {copy}
-            <h4
-              data-testid={ `${index}-horizontal-name` }
-              className="title"
-            >
-              {name}
-            </h4>
-            <h5 data-testid={ `${index}-horizontal-done-date` }>{doneDate}</h5>
+        <div
+          key={ index }
+          className="card"
+        >
+          <Link to={ `/${type}s/${id}` } key={ name }>
             <div>
-              {recipe.tags ? mapTags(recipe.tags, index) : null}
+              <h5 data-testid={ `${index}-horizontal-top-text` }>
+                {
+                  area !== '' ? `${area} - ${category}`
+                    : `${alcoholicOrNot} - ${category}`
+                }
+              </h5>
+              <img
+                alt="recipe"
+                data-testid={ `${index}-horizontal-image` }
+                className="recipe-card-image"
+                src={ image }
+              />
             </div>
+          </Link>
+          <button
+            type="button"
+            onClick={ () => copyLink(type, id) }
+          >
+            <img
+              src={ shareIcon }
+              alt="share"
+              data-testid={ `${index}-horizontal-share-btn` }
+            />
+          </button>
+          {copy}
+          <h4
+            data-testid={ `${index}-horizontal-name` }
+            className="title"
+          >
+            {name}
+          </h4>
+          <h5 data-testid={ `${index}-horizontal-done-date` }>{doneDate}</h5>
+          <div>
+            {recipe.tags ? mapTags(recipe.tags, index) : null}
           </div>
-        </Link>
+        </div>
       );
     })
   );
