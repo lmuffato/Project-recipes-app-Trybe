@@ -107,3 +107,17 @@ export async function fetchRandomMeal() {
   const resultJson = await result.json();
   return resultJson;
 }
+
+export async function fetchMealIngredients() {
+  const endpoint = 'https://www.themealdb.com/api/json/v1/1/list.php?i=list';
+  const result = await fetch(endpoint);
+  const resultJson = await result.json();
+  return resultJson;
+}
+
+export async function fetchDrinkIngredients() {
+  const endpoint = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list';
+  const result = await fetch(endpoint);
+  const resultJson = await result.json();
+  return resultJson;
+}
