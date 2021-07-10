@@ -14,6 +14,7 @@ import ReceitasFavoritas from '../pages/ReceitasFavoritas';
 import MealDescription from './MealDescription';
 import DrinkDescription from './DrinkDescription';
 import NotFound from './NotFound';
+import MealsRecepiesProgress from '../pages/MealsRecepiesProgress';
 
 function Switcher() {
   return (
@@ -30,6 +31,7 @@ function Switcher() {
       <Route path="/receitas-feitas" component={ DoneRecepies } />
       <Route path="/receitas-favoritas" component={ ReceitasFavoritas } />
       <Route path="/explorar/bebidas/area" component={ NotFound } />
+      <Route path="/comidas/:id/in-progress" component={ MealsRecepiesProgress } />
       <Route
         path="/explorar/comidas/ingredientes"
         component={ FoodsIngredients }
