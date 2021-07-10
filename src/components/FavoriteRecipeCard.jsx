@@ -18,7 +18,7 @@ function FavoriteRecipeCard({ imgSrc, imgId, category, categoryId,
   return (
     <div>
       <Link to={ `/${type}s/${recipeId}` }>
-        <img src={ imgSrc } alt="Done Recipe Card" data-testid={ imgId } />
+        <img src={ imgSrc } alt="Done Recipe Card" data-testid={ imgId } width="200" />
       </Link>
       {area !== '' ? (
         <h4 data-testid={ categoryId }>{ `${area} - ${category}` }</h4>
