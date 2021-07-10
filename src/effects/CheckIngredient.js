@@ -1,8 +1,12 @@
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+import CocktailsContext from '../context/CocktailsContext';
+import MealsContext from '../context/MealsContext';
 import { getItemFromLocalStorage, setToLocalStorage } from '../services/localStorage';
 
-const addIngredientToLocalStorage = (pathname, state, storage) => {
+const addIngredientToLocalStorage = (pathname, state, storage, globalState) => {
+  const { cocktailsIngredients, setCocktailsIngredients,
+    mealsIngredients, setMealsIngredients } = globalState;
   const { currIngredient } = state;
   const regExp = /[0-9]/gi;
   const getId = pathname.match(regExp).reduce((acc, item) => acc + item, '');
@@ -16,11 +20,13 @@ const addIngredientToLocalStorage = (pathname, state, storage) => {
     if (ingredients.includes(currIngredient)) {
       const index = ingredients.indexOf(currIngredient);
       ingredients.splice(index, 1);
+      setCocktailsIngredients(ingredients);
       storage = { ...storage, cocktails: { [getId]: ingredients } };
       return setToLocalStorage('inProgressRecipes', storage);
     }
     storage = { ...storage,
       cocktails: { [getId]: [...storage.cocktails[getId], currIngredient] } };
+    setCocktailsIngredients([...cocktailsIngredients, currIngredient]);
     return setToLocalStorage('inProgressRecipes', storage);
   }
   if (pathname.includes('comidas')) {
@@ -33,11 +39,13 @@ const addIngredientToLocalStorage = (pathname, state, storage) => {
     if (ingredients.includes(currIngredient)) {
       const index = ingredients.indexOf(currIngredient);
       ingredients.splice(index, 1);
+      setMealsIngredients(ingredients);
       storage = { ...storage, meals: { [getId]: ingredients } };
       return setToLocalStorage('inProgressRecipes', storage);
     }
     storage = { ...storage,
       meals: { [getId]: [...storage.meals[getId], currIngredient] } };
+    setMealsIngredients([...mealsIngredients, currIngredient]);
     return setToLocalStorage('inProgressRecipes', storage);
   }
 };
@@ -56,23 +64,26 @@ function renderCheckboxChecked(state, callbackState, storage, pathname) {
 }
 
 export default function CheckIngredient(ingredients, state, callbackState) {
+  const { cocktailsIngredients, setCocktailsIngredients } = useContext(CocktailsContext);
+  const { mealsIngredients, setMealsIngredients } = useContext(MealsContext);
+  const globalState = { cocktailsIngredients,
+    setCocktailsIngredients,
+    mealsIngredients,
+    setMealsIngredients };
   const { filterIngredients, checkLocalStorage, currIngredient } = state;
   const history = useHistory();
   const { pathname } = history.location;
   const regExp = /[0-9]/gi;
   const getId = pathname.match(regExp).reduce((acc, item) => acc + item, '');
   let storage = getItemFromLocalStorage('inProgressRecipes');
-  const currIngredients = ingredients.map((item) => item[1]);
-
+  const ingredientsStorage = ingredients.map((item) => item[1]);
   useEffect(() => {
     if (!currIngredient) return;
-    addIngredientToLocalStorage(pathname, state, storage);
+    addIngredientToLocalStorage(pathname, state, storage, globalState);
   }, [filterIngredients, currIngredient]);
-
   useEffect(() => {
-    callbackState({ ...state, ingredientsInit: currIngredients });
+    callbackState({ ...state, ingredientsInit: ingredientsStorage });
   }, [ingredients]);
-
   useEffect(() => {
     const getLocalStorage = () => {
       if (pathname.includes('comidas')) {
@@ -83,7 +94,7 @@ export default function CheckIngredient(ingredients, state, callbackState) {
         const ingredientsKeyValue = Object.entries(storage.meals)[0];
         const ingredientsFromLocalStorage = ingredientsKeyValue[1];
         if (ingredientsFromLocalStorage.length > 0) {
-          return callbackState({ ...currIngredients, checkLocalStorage: true });
+          return callbackState({ ...ingredientsStorage, checkLocalStorage: true });
         }
         return;
       }
@@ -92,7 +103,7 @@ export default function CheckIngredient(ingredients, state, callbackState) {
         return setToLocalStorage('inProgressRecipes', storage);
       }
       if (storage.cocktails[getId].length > 0) {
-        return callbackState({ ...currIngredients, checkLocalStorage: true });
+        return callbackState({ ...ingredientsStorage, checkLocalStorage: true });
       }
     };
     getLocalStorage();
