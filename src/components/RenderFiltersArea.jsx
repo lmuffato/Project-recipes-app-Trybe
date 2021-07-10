@@ -30,7 +30,7 @@ function RendersFiltersArea({ area }) {
 
   useEffect(() => {
     if (area === 'All') setApiHandleArea(foods);
-  });
+  }, [area, foods]);
 
   return (
     <div>
