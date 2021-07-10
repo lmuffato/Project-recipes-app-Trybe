@@ -14,9 +14,7 @@ function SearchMealsIngredients() {
     };
     getIngredients();
   }, []);
-
   const URL = 'https://www.themealdb.com/images/ingredients/';
-
   return (
     <div>
       Pagina SearchMealsIngredients
@@ -28,6 +26,7 @@ function SearchMealsIngredients() {
             index={ index }
             ingredientImg={ `${URL}${ingredient.strIngredient}-Small.png` }
             ingredientName={ ingredient.strIngredient }
+            type="comidas"
           />
         ) : (null)
       ))}

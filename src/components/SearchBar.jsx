@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { useLocation } from 'react-router';
 import SearchContext from '../context/SearchContext';
+import filterClick from '../services/filterClick';
 
 function SearchBar() {
   const { inputText, setInputText,
@@ -11,14 +12,17 @@ function SearchBar() {
   const handleRadios = ({ target }) => {
     if (target.checked) setInputRadios(target.id);
   };
-
-  const onClick = () => {
-    if (inputRadios === 'first-letter' && inputText.length > 1) {
-      window.alert('Sua busca deve conter somente 1 (um) caracter');
-    } else if (location.pathname === '/comidas') {
-      getRecipes(inputText, inputRadios);
-    } else { getDrinksRecipes(inputText, inputRadios); }
+  const obj = {
+    inputRadios, inputText, location, getRecipes, getDrinksRecipes,
   };
+
+  // const onClick = () => {
+  //   if (inputRadios === 'first-letter' && inputText.length > 1) {
+  //     global.alert('Sua busca deve conter somente 1 (um) caracter');
+  //   } else if (location.pathname === '/comidas') {
+  //     getRecipes(inputText, inputRadios);
+  //   } else { getDrinksRecipes(inputText, inputRadios); }
+  // };
 
   return (
     <div>
@@ -66,7 +70,7 @@ function SearchBar() {
       <button
         type="button"
         data-testid="exec-search-btn"
-        onClick={ onClick }
+        onClick={ () => filterClick(obj) }
       >
         Buscar
       </button>
