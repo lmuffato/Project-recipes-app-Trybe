@@ -1,27 +1,28 @@
 import React from 'react';
+import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
-import './ExploreButtons.css';
+import './styles.css';
 
 function ExploreButtons() {
   return (
     <div className="container">
       <Link to="/explorar/comidas">
-        <button
-          className="myButton"
+        <Button
+          className="myButton btn-lg btn-warning"
           data-testid="explore-food"
           type="button"
         >
           Explorar Comidas
-        </button>
+        </Button>
       </Link>
       <Link to="/explorar/bebidas">
-        <button
-          className="myButton"
+        <Button
+          className="myButton btn-lg btn-warning"
           data-testid="explore-drinks"
           type="button"
         >
           Explorar Bebidas
-        </button>
+        </Button>
       </Link>
     </div>
   );

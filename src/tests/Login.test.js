@@ -38,7 +38,7 @@ describe('3 - A pessoa deve conseguir escrever seu email no input de email', () 
   });
 });
 
-describe('4 - A pessoa deve conseguir escrever sua senha no inout de senha', () => {
+describe('4 - A pessoa deve conseguir escrever sua senha no input de senha', () => {
   test('É possível escrever a senha', () => {
     const { getByTestId } = render(
       <MemoryRouter>

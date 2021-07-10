@@ -5,11 +5,10 @@ import { Link } from 'react-router-dom';
 import { getDrinks, getMeals } from '../../services/fetchRecipes';
 import './styles.css';
 
-function Slide({ toggle, category }) {
+function Slide({ toggle, category, cleanState }) {
   const [recomendations, setRecomendations] = useState([]);
   const fixedToggle = toggle === 'Meal' ? 'Drink' : 'Meal';
   const fixedCategory = category === 'strCategory' ? 'strAlcoholic' : 'strCategory';
-
   const MAX_NUMBER_SUGGESTIONS = 6;
 
   useEffect(() => {
@@ -31,6 +30,7 @@ function Slide({ toggle, category }) {
         {recomendations.map((item, index) => (
           <div key={ `Card-${index}` } className="box">
             <Link
+              onClick={ () => cleanState({}) }
               to={ fixedToggle === 'Drink'
                 ? `/bebidas/${item.idDrink}` : `/comidas/${item.idMeal}` }
             >

@@ -1,51 +1,58 @@
 import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
+import Button from 'react-bootstrap/Button';
 import Footer from '../../Components/Footer';
-import './Profile.css';
+import Header from '../../Components/Header';
+import './styles.css';
 
 const Profile = () => {
   const history = useHistory();
   const email = JSON.parse(localStorage.getItem('user'))
     ? JSON.parse(localStorage.getItem('user')).email
     : '';
+
   function handleLogout() {
     localStorage.clear();
     history.push('/');
   }
+
   return (
-    <div className="container">
-      <h1>Perfil</h1>
-      <h5 data-testid="profile-email">{email}</h5>
-      <Link to="/receitas-feitas">
-        <button
-          className="myButton"
-          type="button"
-          data-testid="profile-done-btn"
-        >
-          Receitas Feitas
-        </button>
-      </Link>
-      <Link to="/receitas-favoritas">
-        <button
-          className="myButton"
-          type="button"
-          data-testid="profile-favorite-btn"
-        >
-          Receitas Favoritas
-        </button>
-      </Link>
-      <Link to="/">
-        <button
-          className="myButton"
-          type="button"
-          data-testid="profile-logout-btn"
-          onClick={ handleLogout }
-        >
-          Sair
-        </button>
-      </Link>
+    <section>
+      <Header>Perfil</Header>
+      <div className="container">
+        <h5 data-testid="profile-email">{email}</h5>
+        <Link to="/receitas-feitas">
+          <Button
+            className="mybutton btn-lg btn-warning"
+            type="button"
+            data-testid="profile-done-btn"
+          >
+            Receitas Feitas
+          </Button>
+        </Link>
+        <Link to="/receitas-favoritas">
+          <Button
+            className="mybutton btn-lg btn-warning"
+            type="button"
+            data-testid="profile-favorite-btn"
+          >
+            Receitas Favoritas
+          </Button>
+        </Link>
+        <Link to="/">
+          <Button
+            className="mybutton btn-lg"
+            type="button"
+            data-testid="profile-logout-btn"
+            size="sm"
+            onClick={ handleLogout }
+          >
+            Sair
+          </Button>
+        </Link>
+      </div>
       <Footer />
-    </div>
+    </section>
   );
 };
 
