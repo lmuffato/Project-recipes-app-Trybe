@@ -22,18 +22,12 @@ function BottomBtn(props) {
 
     if (!favorites || local === infoReceiver) {
       return (iniciando);
+    } if (localDone && localDone.find((e) => e.id === id && button)) {
+      button.style.display = 'none';
+    } else if (Object.values(favorites).filter((e) => e[id] >= 0).length > 0) {
+      return ('Continuar Receita');
     }
-    if (localDone) {
-      if (localDone.find((e) => e.id === id && button)) {
-        button.style.display = 'none';
-      }
-    } else if (local) {
-      const continueRecipe = Object.values(favorites).filter((e) => e[id] >= 0);
-      if (continueRecipe) {
-        return ('Continuar Receita');
-      }
-      return (iniciando);
-    }
+    return (iniciando);
   };
 
   const pathFinder = () => {
