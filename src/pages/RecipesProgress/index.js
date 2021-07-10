@@ -9,6 +9,7 @@ import Category from './Category';
 import Ingredients from './Ingredients';
 import Instructions from './Instructions';
 import { AppContext } from '../../context/AppContext';
+import BtnFinishRecipe from './BtnFinishRecipe';
 
 const oneMeal = {
   meals: [
@@ -196,17 +197,12 @@ export default function RecipesProgress({ match }) {
             <Ingredients recipe={ recipe } />
             <h2>Instruções</h2>
             <Instructions instruction={ recipe.strInstructions } />
-            <button
-              data-testid="finish-recipe-btn"
-              type="button"
-            >
-              Finalizar Receita
-
-            </button>
           </div>
         </div>
 
       ))}
+      <BtnFinishRecipe />
+
     </div>
   );
 }

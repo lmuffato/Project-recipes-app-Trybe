@@ -13,6 +13,7 @@ export default function AppProvider({ children }) {
   const [categoriesList, setCategoriesList] = useState([]);
   const [recipeContext, setRecipeContext] = useState('');
   const [toStorage, setToStorage] = useState('');
+  const [checkedState, setCheckedState] = useState(true);
   const NUM_RECIPES_SHOWN = 12;
   const NUM_CATEG_SHOWN = 5;
   const context = {
@@ -30,6 +31,8 @@ export default function AppProvider({ children }) {
     setCategoriesList,
     setRecipeContext,
     toStorage,
+    checkedState,
+    setCheckedState,
 
   };
 
@@ -46,7 +49,7 @@ export default function AppProvider({ children }) {
       tags: recipeContext.strTags || null,
     }];
     setToStorage(storage);
-  }, [recipeContext]);
+  }, [recipeContext, pageOrigin]);
 
   useEffect(() => {
     fetchCategoriesApi(pageOrigin)

@@ -1,24 +1,41 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState, useRef, useContext } from 'react';
 import PropTypes from 'prop-types';
 import './Ingredients.css';
+import { AppContext } from '../../context/AppContext';
 
 export default function Ingredients({ recipe }) {
   const [textInput, setTextInput] = useState('');
   const [recipeId, setRecipeId] = useState('');
   const [recipeIngredients, setRecipeIngredients] = useState('');
   const [fromStorage, setFromStorage] = useState('');
+  const { context } = useContext(AppContext);
+  const { setCheckedState } = context;
   const key = 'inProgressRecipes';
+  const inputRef = useRef(null);
 
-  function getFromStorage() {
+  const getFromStorage = useCallback(() => {
     const storageValue = localStorage.getItem(key);
     if (storageValue) {
       const result = JSON.parse(storageValue);
       const values = Object.values(result);
       setFromStorage(values[0]);
     }
+  }, []);
+
+  function handleCheckbox() {
+    let checkBoxCounter = 0;
+    const inputCheckbox = inputRef.current.querySelectorAll('.checkbox');
+    inputCheckbox.forEach((input) => {
+      if (input.checked === true) {
+        checkBoxCounter += 1;
+      } if (checkBoxCounter === inputCheckbox.length) {
+        setCheckedState(false);
+      }
+    });
   }
 
-  function handleInput({ target }) {
+  const handleInput = useCallback(({ target }) => {
+    handleCheckbox();
     const { name } = target;
     if (target.checked) {
       setTextInput([
@@ -26,13 +43,13 @@ export default function Ingredients({ recipe }) {
         name,
       ]);
     }
-  }
+  }, [textInput]);
 
-  function getIngredients() {
+  const getIngredients = useCallback(() => {
     const ingredients = Object.entries(recipe)
       .filter((property) => property[0].includes('strIngredient') && property[1]);
     setRecipeIngredients(ingredients);
-  }
+  }, []);
 
   useEffect(() => {
     const toStorage = {
@@ -50,25 +67,28 @@ export default function Ingredients({ recipe }) {
   useEffect(() => {
     getIngredients();
     getFromStorage();
-  }, []);
+  }, [getFromStorage, getIngredients]);
 
   return (
-    <div className="ingredients">
+    <div ref={ inputRef } className="ingredients">
 
       {recipeIngredients && recipeIngredients.map(
         (ingredient, index) => (
 
-          <div key={ index }>
+          <div
+            key={ index }
+          >
             <label
               data-testid={ `${index}-ingredient-step` }
               htmlFor={ ingredient[1] }
 
             >
               <input
+                className="checkbox"
                 id={ ingredient[1] }
                 type="checkbox"
                 name={ `${ingredient[1]} ` }
-                onChange={ handleInput }
+                onClick={ handleInput }
                 defaultChecked={
                   fromStorage
                    && fromStorage.some((value) => value.includes(ingredient[1]))
