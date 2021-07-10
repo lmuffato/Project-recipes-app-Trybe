@@ -5,7 +5,7 @@ import shareIcon from '../images/shareIcon.svg';
 import FavoriteButton from './FavoriteButton';
 import IngredientsList from './IngredientsList';
 import RecomendedMeals from './RecomendedMeals';
-import { fetchRandonMeal } from '../services/getApis';
+// import { fetchRandomMeal } from '../services/getApis';
 import SearchContext from '../context/SearchContext';
 import { getItemFromLocalStorage } from '../services/localStorage';
 import ButtonStartRecipe from './ButtonStartRecipe';
@@ -17,7 +17,7 @@ function DrinkCardDetail() {
   const { currentDrink } = useContext(UserContext);
   const { fullRecipes } = useContext(SearchContext);
   const [copyLink, setCopyLink] = useState(false);
-  const [recomendedMeals, setRecomendedMeals] = useState([]);
+  // const [recomendedMeals, setRecomendedMeals] = useState([]);
   const [textButton, setTextButton] = useState('Iniciar Receita');
   const donedRecipes = getItemFromLocalStorage('doneRecipes');
   const history = useHistory();
@@ -28,14 +28,14 @@ function DrinkCardDetail() {
   }
 
   const RECOMMENDED_LENGHT = 6;
-  useEffect(() => {
-    const MEALS_NUMBER = 6;
-    const getRandonDrink = async () => {
-      const result = await fetchRandonMeal();
-      setRecomendedMeals([...recomendedMeals, result.meals[0]]);
-    };
-    if (recomendedMeals.length < MEALS_NUMBER) getRandonDrink();
-  }, [recomendedMeals]);
+  // useEffect(() => {
+  //   const MEALS_NUMBER = 6;
+  //   const getRandonDrink = async () => {
+  //     const result = await fetchRandomMeal();
+  //     setRecomendedMeals([...recomendedMeals, result.meals[0]]);
+  //   };
+  //   if (recomendedMeals.length < MEALS_NUMBER) getRandonDrink();
+  // }, [recomendedMeals]);
 
   useEffect(() => {
     const obj = {
