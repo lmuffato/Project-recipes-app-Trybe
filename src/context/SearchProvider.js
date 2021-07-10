@@ -73,6 +73,8 @@ function SearchProvider({ children }) {
         fullDrinks,
         ingredientButton,
         setIngredientButton,
+        setFilteredRecipes,
+        setFilteredDrinks,
       } }
     >
       {children}
