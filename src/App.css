@@ -92,9 +92,9 @@ footer {
 
 .recipeImg {
   border-radius: 60px;
-  margin-bottom: 4px;
   transition: 500ms;
   width: 109px;
+  margin-bottom: 4px;
 }
 
 .recipeImg:hover {
@@ -102,9 +102,9 @@ footer {
 }
 
 .recipeCard {
-  border:groove 1px;
-  border-radius: 5px;
   display: flex;
+  border-radius: 5px;
+  border:groove 1px;
   flex-direction: column;
   margin: 2px;
   text-align: center;
@@ -112,7 +112,8 @@ footer {
 
 .recipeContainer {
   display: flex;
-  flex-flow: row wrap;
+  flex-direction: row;
+  flex-wrap: wrap;
   width: 360px;
 }
 
