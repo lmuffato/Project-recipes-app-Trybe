@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
+import { useLocation, useParams, Link } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 import FavoriteButton from '../../Components/FavoriteButton';
 import Ingredient from '../../Components/Ingredients';
@@ -13,6 +13,7 @@ function InProcess() {
 
   const [isLoading, setLoading] = useState(true);
   const [recipe, setRecipe] = useState({});
+  const [finished, setFinished] = useState(false);
 
   const recipeType = (pathname.includes('comidas')) ? 'Meal' : 'Drink';
   const toggleApi = (pathname.includes('comidas')) ? 'meals' : 'drinks';
@@ -50,18 +51,25 @@ function InProcess() {
               />
             </div>
           </div>
-          <Ingredient type="checkbox" recipe={ recipe } />
+          <Ingredient
+            type="checkbox"
+            recipe={ recipe }
+            validate={ setFinished }
+          />
           <div className="instructions">
             <h2>Instructions</h2>
             <p data-testid="instructions">
               {recipe.strInstructions}
             </p>
           </div>
-          <Button
-            data-testid="finish-recipe-btn"
-          >
-            Finalizar Receita
-          </Button>
+          <Link to="/receitas-feitas">
+            <Button
+              data-testid="finish-recipe-btn"
+              disabled={ !finished }
+            >
+              Finalizar Receita
+            </Button>
+          </Link>
         </div>
       )}
     </div>
