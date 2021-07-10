@@ -33,11 +33,11 @@ function EmProgresso({ props }) {
 
   if (!data) return <h1>Loading...</h1>;
 
-  const ingredients = Object.entries(data)
+  const ingredientsList = Object.entries(data)
     .filter((item) => item[0].includes('Ingredient'))
     .filter((element) => element[1] !== '' && element[1] !== null);
 
-  const obj = { ingredients, data };
+  const obj = { ingredientsList, data };
 
   return (
     <div className="m-1 pb-4">
@@ -60,7 +60,7 @@ function EmProgresso({ props }) {
           <h3 data-testid="recipe-category">{ data.strCategory }</h3>
         </div>
 
-        <Ingredientes ingredients={ obj } />
+        <Ingredientes params={ obj } />
 
         <div className="py-2">
           <h4>Instruções</h4>

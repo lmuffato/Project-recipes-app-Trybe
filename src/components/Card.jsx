@@ -8,7 +8,7 @@ function Cards({ param }) {
   const { data: dataDrink } = useContext(ContextBebidas);
   const { data: datafood } = useContext(ContextComidas);
 
-  const comidas = () => datafood.map((item, index) => {
+  const comidas = () => datafood && datafood.map((item, index) => {
     const magicNumber = 12;
     if (index < magicNumber) {
       return (
@@ -37,7 +37,7 @@ function Cards({ param }) {
     return '';
   });
 
-  const bebidas = () => dataDrink.map((item, index) => {
+  const bebidas = () => dataDrink && dataDrink.map((item, index) => {
     const magicNumber = 12;
     if (index < magicNumber) {
       return (
@@ -65,6 +65,8 @@ function Cards({ param }) {
     }
     return '';
   });
+
+  if (dataDrink === undefined || datafood === undefined) return <h1>Loading...</h1>;
 
   return (
     param === 'bebidas' ? bebidas() : comidas()

@@ -1,10 +1,9 @@
-import { element } from 'prop-types';
+import { object } from 'prop-types';
 import React, { useEffect, useState } from 'react';
 
-function Ingredientes({ ingredients: { ingredients, data } }) {
+function Ingredientes({ params: { ingredientsList, data } }) {
   const [ingArray, setIngArray] = useState([]);
   const [isChecked, setIsChecked] = useState([]);
-  const [teste10, setTeste10] = useState(false);
 
   const achando = () => {
     const progressRecipes = JSON.parse(localStorage
@@ -29,17 +28,12 @@ function Ingredientes({ ingredients: { ingredients, data } }) {
     }
   };
 
-  const test3 = () => {
-    setIsChecked(ingredients.map((item, index) => false));
-  };
-
   useEffect(() => {
-    test3();
     achando();
   }, []);
 
   const localSTSettings = (target) => {
-    console.log(ingredients[target.id], target.id);
+    // console.log(ingredientsList[target.id], target.id);
     const progressRecipes = JSON.parse(localStorage
       .getItem('inProgressRecipes'));
     // console.log(progressRecipes);
@@ -74,54 +68,49 @@ function Ingredientes({ ingredients: { ingredients, data } }) {
   };
 
   const isCheckedBool = ({ target }) => {
-    let { checked, name, id } = target;
-    if (!checked[id]) {
-      // document.querySelectorAll('.mr-2')[id].checked = true;
-      // target.parentNode.className = 'isCheckedCss';
+    const { checked, name, id } = target;
+
+    if (checked) {
+      document.querySelectorAll('.mr-2')[6].checked = true;
+      target.parentNode.className = 'isCheckedCss';
+      const isClass = target.parentNode.className;
       localSTSettings(target);
-      // return null;
-    //   console.log(isChecked[0]);
-      return setIsChecked(isChecked.map((element1, index) => {
-        if (index === Number(id)) {
-          element1 = true;
-          return element1;
-        }
-        return element1;
-      }));
+      return isClass;
     }
-    // target.parentNode.className = '';
-    // const notClass = target.parentNode.className;
-    // return null;
-    // document.querySelectorAll('.mr-2')[id].checked = true;
-    // return null;
+    target.parentNode.className = '';
+    const notClass = target.parentNode.className;
+    return notClass;
   };
 
   return (
     <div>
-      {ingredients.map((ingredient, index) => {
-        return (
-          <div
-            key={ index }
-            className="d-flex align-items-baseline"
-            data-testid={ `${index}-ingredient-step` }
+      {ingredientsList.map((ingredient, index) => (
+        <div
+          key={ index }
+          className="d-flex align-items-baseline"
+          data-testid={ `${index}-ingredient-step` }
+        >
+          <label
+            htmlFor={ index }
           >
-            <label
-              htmlFor={ index }
-            >
-              <input
-                className="mr-2"
-                type="checkbox"
-                name={ ingredient[1] }
-                id={ index }
-                onClick={ isCheckedBool }
-                checked={ isChecked[index] }
-              />
-              {`Ingrediente ${index}: ${ingredient[1]}`}
-            </label>
-          </div>
-        )})}
+            <input
+              className="mr-2"
+              type="checkbox"
+              name={ ingredient[1] }
+              id={ index }
+              onClick={ isCheckedBool }
+              checked={ isChecked }
+            />
+            {`Ingrediente ${index}: ${ingredient[1]}`}
+          </label>
+        </div>
+      ))}
     </div>
   );
 }
+
+Ingredientes.propTypes = {
+  params: object,
+}.isRequired;
 
 export default Ingredientes;
