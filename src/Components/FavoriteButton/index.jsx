@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import checkLocalStorage from '../../helpers';
 import recipesContext from '../../context/RecipesContext';
 import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../../images/blackHeartIcon.svg';
@@ -10,12 +11,7 @@ function FavoriteButton({ recipe, recipeType }) {
   const [isFavorite, setIsFavorite] = useState(false);
 
   const localFavorites = JSON.parse(localStorage.getItem('favoriteRecipes'));
-
-  let findFavoriteLocal;
-  if (localFavorites) {
-    findFavoriteLocal = localFavorites
-      .find((fav) => fav.id === recipe[`id${recipeType}`]);
-  }
+  const findFavoriteLocal = checkLocalStorage('favoriteRecipes', recipe, recipeType);
 
   const objLocalStorage = {
     id: recipe[`id${recipeType}`],
