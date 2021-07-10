@@ -1,11 +1,21 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Image } from 'react-bootstrap';
+import { useHistory } from 'react-router-dom';
 import RecipeShared from '../effects/RecipeShared';
 import shareIcon from '../images/shareIcon.svg';
 
 export default function ShareButton({ data, id, type }) {
   const [shareRecipe, setShareRecipe] = useState(false);
+  const history = useHistory();
+  const { pathname } = history.location;
+
+  const checkpathname = (index) => {
+    if (pathname.includes('feitas') || pathname.includes('favoritas')) {
+      return `${index}-horizontal-share-btn`;
+    }
+    return 'share-btn';
+  };
 
   RecipeShared(shareRecipe, id, type);
 
@@ -15,7 +25,7 @@ export default function ShareButton({ data, id, type }) {
       <Image
         type="button"
         style={ { width: '2rem' } }
-        data-testid={ data }
+        data-testid={ checkpathname(data) }
         src={ shareIcon }
         onClick={ () => setShareRecipe(true) }
       />

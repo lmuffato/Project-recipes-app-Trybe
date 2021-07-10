@@ -3,7 +3,7 @@ import { Card } from 'react-bootstrap';
 import MealsContext from '../context/MealsContext';
 
 export default function MealsCards() {
-  const { mealsObject, setCurrID } = useContext(MealsContext);
+  const { mealsObject, setCurrCategoryId } = useContext(MealsContext);
   const { meals } = mealsObject;
   const end = 12;
   const recipesArray = meals ? meals.slice(0, end) : [];
@@ -12,7 +12,7 @@ export default function MealsCards() {
       {recipesArray.length > 0
       && recipesArray.map((recipe, index) => (
         <Card
-          onClick={ () => setCurrID(recipe.idMeal) }
+          onClick={ () => setCurrCategoryId(recipe.idMeal) }
           style={ { width: '18rem' } }
           key={ index }
           data-testid={ `${index}-recipe-card` }
