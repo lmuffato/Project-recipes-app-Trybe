@@ -5,7 +5,7 @@ import { actionDetails, actionIdRecipeInProgress } from '../redux/actions';
 import RecomendationCard from '../util/renderRecomendationCard';
 import RenderRecipeImg from '../util/mealDetailsComponents/renderRecipeImg';
 import RenderIngredients from '../util/mealDetailsComponents/renderIngredients';
-import RenderInstructions from '../util/mealDetailsComponents/renderInstructions';
+import RenderInstructions from '../components/renderInstructions';
 import shareIcon from '../images/shareIcon.svg';
 import '../components/Footer.css';
 import '../PagesCss/Details.css';
@@ -117,7 +117,7 @@ export default function MealDetails() {
           <h2>Ingredients</h2>
           {RenderIngredients(ingredients, measure)}
           <h2>Instructions</h2>
-          {RenderInstructions(strInstructions, youtubeEmbed)}
+          <RenderInstructions strInst={ strInstructions } ytEmb={ youtubeEmbed } />
           <h2>Recomendadas</h2>
           <div className="carousel-container">
             <div className="recipies-list">

@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { actionDetails, actionIdRecipeInProgress } from '../redux/actions';
 import shareIcon from '../images/shareIcon.svg';
 import RecomendationCard from '../util/renderRecomendationCard';
+import RenderInstructions from '../components/renderInstructions';
 import '../components/Footer.css';
 import RenderFavoriteHeart from '../util/addOrRemoveFavorite';
 import RenderIngredients from '../util/mealDetailsComponents/renderIngredients';
@@ -122,7 +123,7 @@ export default function DrinkDetails() {
             {RenderIngredients(ingredients, measure)}
           </ul>
           <h2>Instructions</h2>
-          <p data-testid="instructions">{strInstructions}</p>
+          <RenderInstructions strInst={ strInstructions } />
           <h2>Recomendadas</h2>
           <div className="carousel-container">
             <div className="recipies-list">

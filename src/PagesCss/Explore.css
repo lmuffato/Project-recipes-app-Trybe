@@ -13,7 +13,7 @@ html {
   background-color: var(--main-background);
   display: flex;
   flex-direction: column;
-  height: 80.4vh;
+  height: 100vh;
   justify-content: center;
 }
 

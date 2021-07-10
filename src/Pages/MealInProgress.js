@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import RenderFavoriteHeart from '../util/addOrRemoveFavorite';
-import RenderInstructions from '../util/mealDetailsComponents/renderInstructions';
+import RenderInstructions from '../components/renderInstructions';
 import RenderRecipeImg from '../util/mealDetailsComponents/renderRecipeImg';
 import shareIcon from '../images/shareIcon.svg';
 import RenderCheckboxIngredients from '../util/renderCheckboxIngredients';
@@ -13,7 +13,6 @@ export default function MealInProgress() {
   const [data, setData] = useState();
   const dispatch = useDispatch();
   const [copy, setCopy] = useState('');
-  // const [value, setValue] = useState(false);
   const history = useHistory();
 
   useEffect(() => {
@@ -59,9 +58,9 @@ export default function MealInProgress() {
             <h3 data-testid="recipe-category">{strCategory}</h3>
           </div>
           <h2>Ingredients</h2>
-          {RenderCheckboxIngredients(ingredients, measure)}
+          <RenderCheckboxIngredients ingredients={ ingredients } measure={ measure } />
           <h2>Instructions</h2>
-          {RenderInstructions(strInstructions)}
+          <RenderInstructions strInst={ strInstructions } />
           <button
             className="footer"
             type="button"
