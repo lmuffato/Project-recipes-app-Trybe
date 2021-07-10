@@ -32,7 +32,7 @@ function Ingredient({ recipe, type }) {
                 key={ `ingredient-${index}` }
                 type="checkbox"
                 label={ `${item[1]} - ${measures[index][1]}` }
-                data-testid={ `${0}-ingredient-name-and-measure` }
+                data-testid={ `${index}-ingredient-step` }
               />
             )) }
           </div>
