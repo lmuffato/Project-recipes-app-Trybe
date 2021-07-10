@@ -6,7 +6,16 @@ function Perfil() {
   return (
     <div>
       <Header title="Perfil" />
-      PERFILLLLLLLLLLLL
+      <h2 data-testid="profile-email">E-mail</h2>
+      <button type="button" data-testid="profile-done-btn">
+        Receitas Feitas
+      </button>
+      <button type="button" data-testid="profile-favorite-btn">
+        Receitas Favoritas
+      </button>
+      <button type="button" data-testid="profile-logout-btn">
+        Sair
+      </button>
       <Footer />
     </div>
   );

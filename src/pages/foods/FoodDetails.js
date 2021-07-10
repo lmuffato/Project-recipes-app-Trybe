@@ -43,6 +43,7 @@ function FoodDetails(props) {
       setFavoriteRecipe({ actionType: 'FAVORITE_RECIPE', favorite: resultGet });
     };
     fetchRecipe();
+    // eslint-disable-next-line
   }, []);
 
   const foods = useSelector((state) => (

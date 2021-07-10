@@ -26,6 +26,7 @@ export default function Bebidas(props) {
       setStateRedux({ resultsTwelveItems });
     };
     fetchApi();
+    // eslint-disable-next-line
   }, []);
 
   const resultsTwelveItems = useSelector((state) => (

@@ -43,6 +43,7 @@ function DrinkDetails(props) {
       setFavoriteRecipe({ actionType: 'FAVORITE_RECIPE', favorite: resultGet });
     };
     fetchRecipe();
+    // eslint-disable-next-line
   }, []);
 
   const drinks = useSelector((state) => (
@@ -63,7 +64,7 @@ function DrinkDetails(props) {
 
   const verifyAlcohol = (el) => {
     if (el.strAlcoholic === 'Alcoholic') {
-      return (<p>{ el.strAlcoholic }</p>);
+      return `(${el.strAlcoholic})`;
     }
   };
 
@@ -129,6 +130,7 @@ function DrinkDetails(props) {
             </div>
             <p data-testid="recipe-category">
               { el.strCategory }
+              {' '}
               {verifyAlcohol(el)}
             </p>
             <h3>Ingredients</h3>

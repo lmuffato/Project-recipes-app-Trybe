@@ -26,6 +26,7 @@ function Comidas(props) {
       setStateRedux({ actionType: 'FETCH_COMPLETED_DID_MOUNT', resultsTwelveItems });
     };
     fetchApi();
+    // eslint-disable-next-line
   }, []);
 
   const resultsTwelveItems = useSelector((state) => (
