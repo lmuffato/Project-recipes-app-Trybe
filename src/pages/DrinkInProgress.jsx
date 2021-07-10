@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Card, Button } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import FavoriteButton from '../components/FavoriteButton';
+import FinishButton from '../components/FinishButton';
 import IngredientsChecks from '../components/IngredientsChecks';
 import ShareButton from '../components/ShareButton';
 import RecipeDetail from '../effects/RecipeDetails';
@@ -35,13 +36,7 @@ export default function DrinkInProgress() {
       <h3 data-testid="recipe-category">{recipe.strAlcoholic}</h3>
       <IngredientsChecks ingredients={ arrRecipeIngredients } />
       <p data-testid="instructions">{ recipe.strInstructions }</p>
-      <Button
-        className="fixed-bottom"
-        variant="dark"
-        data-testid="finish-recipe-btn"
-      >
-        Finish Recipe
-      </Button>
+      <FinishButton ingredients={ arrRecipeIngredients } />
     </Card>
   );
 }

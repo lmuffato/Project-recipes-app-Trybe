@@ -10,6 +10,7 @@ export default function IngredientsChecks({ ingredients }) {
     currIngredient: '',
     checkLocalStorage: false,
     arrFromLocalStorage: [],
+    finish: false,
   });
 
   CheckIngredient(ingredients, currIngredients, setCurrIngredients);
