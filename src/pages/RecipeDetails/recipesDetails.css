@@ -14,6 +14,14 @@
   margin-bottom: 20px;
 }
 
+.start-recipe-btn {
+  bottom: 0;
+  position: fixed;
+}
+
+.disappear-btn {
+  display: none;
+}
 
 /* .list-main-recipes {
   display: flex;
