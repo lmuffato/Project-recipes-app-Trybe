@@ -3,42 +3,30 @@ import Proptypes from 'prop-types';
 import '../PagesCss/Checkbox.css';
 
 export default function RenderCheckboxIngredients({ ingredients, measure }) {
-  // const [value, setValue] = useState(false);
-  // const [check, setCheck] = useState([]);
-
-  // useEffect(() => {
-  //   // ingredients.forEach((e) => setCheck.push(e));
-  // }, []);
-
-  // const checked = (index) => {
-  //   setCheck(true[index]);
-  // };
+  const itens = [];
+  ingredients.forEach(
+    (ingredient, index) => ingredient !== '' && measure[index] !== '' && (
+      itens.push(`${ingredient} - ${measure[index]}`)
+    ),
+  );
 
   return (
     <>
-      { ingredients.map((item, index) => {
-        if (item !== '') {
-          let name = `${item}`;
-          if (measure[index] !== '' && measure[index] !== null) {
-            name = `${name} - ${measure[index]}`;
-          }
-          return (
-            <div key={ name }>
-              <label htmlFor="ingredient">
-                {name}
-                <input
-                  name="ingredient"
-                  // checked={ check }
-                  // onChange={ () => checked(index) }
-                  type="checkbox"
-                  data-testid={ `${index}-ingredient-step` }
-                />
-              </label>
-            </div>
-          );
-        }
-        return '';
-      })}
+      {
+        itens.map((item, index) => (
+          <div key={ item } data-testid={ `${index}-ingredient-step` }>
+            <label htmlFor="ingredient">
+              {item}
+              <input
+                name="ingredient"
+                // checked={ check }
+                // onChange={ () => checked(index) }
+                type="checkbox"
+              />
+            </label>
+          </div>
+        ))
+      }
     </>
   );
 }
