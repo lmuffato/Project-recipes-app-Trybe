@@ -18,13 +18,12 @@ function DoneRecipeCard({ area, imgSrc, imgId, category,
   return (
     <div>
       <Link to={ `/${type}s/${recipeId}` }>
-        <img src={ imgSrc } alt="Done Recipe Card" data-testid={ imgId } />
+        <img data-testid={ imgId } src={ imgSrc } alt="Done Recipe Card" />
       </Link>
       {area !== '' ? (
         <h4 data-testid={ categoryId }>{ `${area} - ${category}` }</h4>
       ) : (<h4 data-testid={ categoryId }>{ category }</h4>)}
       {alcoholic !== '' ? (<h4 data-testid={ categoryId }>{ alcoholic }</h4>) : (null)}
-      <h4 data-testid={ categoryId }>{ category }</h4>
       <Link to={ `/${type}s/${recipeId}` }>
         <h3 data-testid={ nameId }>{ mealName }</h3>
       </Link>

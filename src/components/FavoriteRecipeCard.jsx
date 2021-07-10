@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import FavoriteButton from './FavoriteButton';
+import FavoritedRecipesButton from './FavoritedRecipesButton';
 import shareIcon from '../images/shareIcon.svg';
 
 const copy = require('clipboard-copy');
@@ -24,15 +24,14 @@ function FavoriteRecipeCard({ imgSrc, imgId, category, categoryId,
         <h4 data-testid={ categoryId }>{ `${area} - ${category}` }</h4>
       ) : (<h4 data-testid={ categoryId }>{ category }</h4>)}
       {alcoholic !== '' ? (<h4 data-testid={ categoryId }>{ alcoholic }</h4>) : (null)}
-      <h4 data-testid={ categoryId }>{ category }</h4>
       <Link to={ `/${type}s/${recipeId}` }>
         <h3 data-testid={ nameId }>{ mealName }</h3>
       </Link>
       <button type="button" onClick={ shareClick }>
         <img data-testid={ shareId } src={ shareIcon } alt="compartilhar" />
       </button>
-      <FavoriteButton
-        type={ type }
+      <FavoritedRecipesButton
+        elementId={ recipeId }
         favoriteId={ `${indexCard}-horizontal-favorite-btn` }
       />
       {copyLink ? <span>Link copiado!</span> : null}

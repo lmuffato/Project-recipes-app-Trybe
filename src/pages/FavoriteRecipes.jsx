@@ -12,7 +12,7 @@ function FavoriteRecipes() {
     if (filterButton !== 'all') {
       setFilteredRecipes(favoriteRecipe.filter((recipe) => recipe.type === filterButton));
     } else { setFilteredRecipes(favoriteRecipe); }
-  }, [filterButton]);
+  }, [filterButton, favoriteRecipe]);
 
   return (
     <div>
