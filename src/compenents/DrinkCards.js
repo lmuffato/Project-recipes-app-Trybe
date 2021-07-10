@@ -1,15 +1,14 @@
 import React from 'react';
-// import histo
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-function DrinkCards({ data, index }) {
+function DrinkCards({ data, index, testId }) {
   const { idDrink, strDrinkThumb, strDrink } = data;
   return (
     <Link
       to={ `/bebidas/${idDrink}` }
       className="recipe"
-      data-testid={ `${index}-recipe-card` }
+      data-testid={ testId }
     >
       <img
         data-testid={ `${index}-card-img` }

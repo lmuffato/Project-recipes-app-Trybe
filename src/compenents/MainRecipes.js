@@ -29,12 +29,14 @@ function MainRecipes() {
           <MealCards
             data={ recipe }
             index={ index }
+            testid={ `${index}-recomendation-card` }
             key={ recipe.idMeal }
           />
         )) : renderRecipes.map((recipe, index) => (
           <DrinkCards
             data={ recipe }
             index={ index }
+            testId={ `${index}-recipe-card` }
             key={ recipe.idDrink }
           />
         ))}

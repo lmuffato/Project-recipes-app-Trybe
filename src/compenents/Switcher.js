@@ -11,15 +11,14 @@ import LoginPage from '../pages/LoginPage';
 import Profile from '../pages/ProfilePage';
 import DoneRecepies from '../pages/DoneRecepies';
 import ReceitasFavoritas from '../pages/ReceitasFavoritas';
-import MealDescription from './MealDescription';
-import DrinkDescription from './DrinkDescription';
+import RecipeDescription from './RecipeDescription';
 import NotFound from './NotFound';
 
 function Switcher() {
   return (
     <Switch>
-      <Route path="/comidas/:detalhes" component={ MealDescription } />
-      <Route path="/bebidas/:detalhes" component={ DrinkDescription } />
+      <Route path="/comidas/:detalhes" component={ RecipeDescription } />
+      <Route path="/bebidas/:detalhes" component={ RecipeDescription } />
       <Route exact path="/" component={ LoginPage } />
       <Route exact path="/comidas" component={ MainRecipesPage } />
       <Route exact path="/bebidas" component={ MainRecipesPage } />

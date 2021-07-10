@@ -46,7 +46,10 @@ function SearchBar() {
   checkPath(history, setMealOrDrink);
 
   const getData = async () => {
-    if (letter === 'f' && name.length > 1) {
+    if (!letter && !name) {
+      global.alert('Nenhum filtro definido');
+    }
+    if (letter === 'f' && name.length < 1) {
       global.alert('Sua busca deve conter somente 1 (um) caracter');
     }
     if (mealOrDrink) {

@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import '../styles/MainRecipes.css';
 
-function MealCards({ data, index }) {
+function MealCards({ data, index, testId }) {
   const { idMeal, strMealThumb, strMeal } = data;
   return (
     <Link
       to={ `/comidas/${idMeal}` }
       className="recipe"
-      data-testid={ `${index}-recipe-card` }
+      data-testid={ testId }
     >
       <img
         data-testid={ `${index}-card-img` }
