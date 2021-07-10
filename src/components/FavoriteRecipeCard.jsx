@@ -16,25 +16,34 @@ function FavoriteRecipeCard({ imgSrc, imgId, category, categoryId,
   };
 
   return (
-    <div>
-      <Link to={ `/${type}s/${recipeId}` }>
-        <img src={ imgSrc } alt="Done Recipe Card" data-testid={ imgId } />
-      </Link>
-      {area !== '' ? (
-        <h4 data-testid={ categoryId }>{ `${area} - ${category}` }</h4>
-      ) : (<h4 data-testid={ categoryId }>{ category }</h4>)}
-      {alcoholic !== '' ? (<h4 data-testid={ categoryId }>{ alcoholic }</h4>) : (null)}
-      <Link to={ `/${type}s/${recipeId}` }>
-        <h3 data-testid={ nameId }>{ mealName }</h3>
-      </Link>
-      <button type="button" onClick={ shareClick }>
-        <img data-testid={ shareId } src={ shareIcon } alt="compartilhar" />
-      </button>
-      <FavoritedRecipesButton
-        elementId={ recipeId }
-        favoriteId={ `${indexCard}-horizontal-favorite-btn` }
-      />
-      {copyLink ? <span>Link copiado!</span> : null}
+    <div className="cardRecipeFavorited">
+      <div>
+        <Link to={ `/${type}s/${recipeId}` }>
+          <img
+            src={ imgSrc }
+            alt="Done Recipe Card"
+            data-testid={ imgId }
+            className="imgRecipeFinished"
+          />
+        </Link>
+      </div>
+      <div>
+        {area !== '' ? (
+          <h4 data-testid={ categoryId }>{ `${area} - ${category}` }</h4>
+        ) : (<h4 data-testid={ categoryId }>{ category }</h4>)}
+        {alcoholic !== '' ? (<h4 data-testid={ categoryId }>{ alcoholic }</h4>) : (null)}
+        <Link to={ `/${type}s/${recipeId}` }>
+          <h3 data-testid={ nameId }>{ mealName }</h3>
+        </Link>
+        <button type="button" onClick={ shareClick }>
+          <img data-testid={ shareId } src={ shareIcon } alt="compartilhar" />
+        </button>
+        <FavoritedRecipesButton
+          elementId={ recipeId }
+          favoriteId={ `${indexCard}-horizontal-favorite-btn` }
+        />
+        {copyLink ? <span>Link copiado!</span> : null}
+      </div>
     </div>
   );
 }
