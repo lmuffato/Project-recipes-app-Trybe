@@ -5,7 +5,7 @@ const setRecipes = async (state, setState) => {
   // time.split(' ')[0]
   // const time = new Date().toLocaleString();
   const apiResults = await GetDoneDetails();
-  const data = apiResults.map((item) => ({
+  const data = apiResults && apiResults.map((item) => ({
     id: item.idMeal ? item.idMeal : item.idDrink,
     type: item.idMeal ? 'comida' : 'bebida',
     area: item.strArea ? item.strArea : '',

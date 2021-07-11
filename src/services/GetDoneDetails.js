@@ -16,7 +16,7 @@ const GetDoneDetails = async () => {
     list = await Promise.all(promises);
   }
 
-  if (storageItems.type === 'comida') {
+  if (storageItems !== null && storageItems.type === 'comida') {
     return ApiRecipeDetail(storageItems.id);
   }
 
@@ -31,7 +31,7 @@ const GetDoneDetails = async () => {
     return listItems;
   }
 
-  return ApiDetailsById(storageItems.id);
+  return storageItems !== null && ApiDetailsById(storageItems.id);
 };
 
 export default GetDoneDetails;
