@@ -31,7 +31,8 @@ export default function DoneRecipes() {
             data-testid={ `${index}-horizontal-image` }
           />
           <h2 data-testid={ `${index}-horizontal-top-text` }>
-            {`${item.area} - ${item.category}`}
+            {`${item.area} - ${item.category} ${item.alcoholicOrNot
+              ? item.alcoholicOrNot : ''}`}
           </h2>
           <h1 data-testid={ `${index}-horizontal-name` }>{item.name}</h1>
           <p data-testid={ `${index}-horizontal-done-date` }>{item.doneDate}</p>

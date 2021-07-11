@@ -10,7 +10,7 @@ const setRecipes = async (state, setState) => {
     type: item.idMeal ? 'comida' : 'bebida',
     area: item.strArea ? item.strArea : '',
     category: item.strCategory ? item.strCategory : '',
-    alcoholicOrNot: item.alcoholicOrNot ? item.alcoholicOrNot : '',
+    alcoholicOrNot: item.idDrink ? item.strAlcoholic : '',
     name: item.strMeal ? item.strMeal : item.strDrink,
     image: item.strMealThumb ? item.strMealThumb : item.strDrinkThumb,
     doneDate: '23/06/2020',
