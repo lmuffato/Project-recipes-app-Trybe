@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { Link } from 'react-router-dom';
 import { useLocation, useParams } from 'react-router';
 import UserContext from '../../context/UserContext';
 import { getRecipeByID } from '../../services/fetchRecipes';
@@ -91,7 +90,6 @@ function Details() {
                 recipeStatus={ recipeStatus }
               />)
             : null}
-          <Link to="/receitas-favoritas">Teste</Link>
         </div>
       )}
     </div>
