@@ -32,7 +32,7 @@ export default function DrinkDetails() {
         alt={ recipe.strDrink }
         data-testid="recipe-photo"
       />
-      <ShareButton data="share-btn" />
+      <ShareButton />
       <FavoriteButton recipe={ recipe } />
       <h3 data-testid="recipe-category">{recipe.strAlcoholic}</h3>
       <h3>Ingredientes:</h3>

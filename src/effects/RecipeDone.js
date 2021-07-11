@@ -1,17 +1,22 @@
 import { useEffect } from 'react';
 import GetDoneDetails from '../services/GetDoneDetails';
-// import { getItemFromLocalStorage } from '../services/localStorage';
 
 const setRecipes = async (state, setState) => {
-  // const recipes = GetDoneDetails();
+  // time.split(' ')[0]
+  // const time = new Date().toLocaleString();
   const apiResults = await GetDoneDetails();
-  // console.log(apiResults);
-  // const data = apiResults.map((item => ({
-
-  // })));
-  // const [data] = apiResults;
-  // const storage = getItemFromLocalStorage('doneRecipes');
-  setState({ ...state, recipes: apiResults, getItems: true });
+  const data = apiResults.map((item) => ({
+    id: item.idMeal ? item.idMeal : item.idDrink,
+    type: item.idMeal ? 'comida' : 'bebida',
+    area: item.strArea ? item.strArea : '',
+    category: item.strCategory ? item.strCategory : '',
+    alcoholicOrNot: item.idDrink ? item.strAlcoholic : '',
+    name: item.strMeal ? item.strMeal : item.strDrink,
+    image: item.strMealThumb ? item.strMealThumb : item.strDrinkThumb,
+    doneDate: '23/06/2020',
+    tags: item.strTags ? item.strTags.split(',') : [''],
+  }));
+  return setState({ ...state, recipes: data, getItems: true });
 };
 
 export default function RecipeDone(state, setState) {
