@@ -17,7 +17,6 @@ export default function DoneRecipes() {
     return <h1>Loading...</h1>;
   }
   if (!recipes) return <h1>Você não possui nenhuma receita concluida...</h1>;
-  console.log(recipes);
   return (
     <div>
       <Header>
@@ -39,17 +38,16 @@ export default function DoneRecipes() {
             id={ item.id }
             type={ item.type }
           />
-          { item.tags ? item.tags.map((tag, index2) => index2 < 2 && (
-            <div
+          { item.tags.map((tag, index2) => index2 < 2 && (
+            <p
               key={ tag }
-              data-testid={ `${index2}-${item.tags}-horizontal-tag` }
+              data-testid={ `${index}-${tag}-horizontal-tag` }
             >
               {tag}
-            </div>
-          )) : ''}
+            </p>
+          )) }
         </div>
       ))}
     </div>
   );
 }
-// data-testid={ `${index}-${item.tags}-horizontal-tag` }

@@ -2,6 +2,22 @@ import { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import Copy from 'clipboard-copy';
 
+const isNotInProgress = (pathname, id, type) => {
+  if (pathname.includes('feitas') && type === 'comida') {
+    return Copy(`http://localhost:3000/comidas/${id}`);
+  }
+  if (pathname.includes('feitas') && type === 'bebida') {
+    return Copy(`http://localhost:3000/bebidas/${id}`);
+  }
+
+  if (pathname.includes('favoritas') && type === 'comida') {
+    return Copy(`http://localhost:3000/comidas/${id}`);
+  }
+  if (pathname.includes('favoritas') && type === 'bebida') {
+    return Copy(`http://localhost:3000/bebidas/${id}`);
+  }
+};
+
 export default function RecipeShared(state, id, type) {
   const history = useHistory();
   useEffect(() => {
@@ -20,19 +36,8 @@ export default function RecipeShared(state, id, type) {
           .pathname.match(regExp).reduce((acc, item) => acc + item, '');
         return Copy(`http://localhost:3000/bebidas/${getId}`);
       }
-
-      if (pathname.includes('feitas') && type === 'comida') {
-        return Copy(`http://localhost:3000/comidas/${id}`);
-      }
-      if (pathname.includes('feitas') && type === 'bebida') {
-        return Copy(`http://localhost:3000/bebidas/${id}`);
-      }
-
-      if (pathname.includes('favoritas') && type === 'comida') {
-        return Copy(`http://localhost:3000/comidas/${id}`);
-      }
-      if (pathname.includes('favoritas') && type === 'bebida') {
-        return Copy(`http://localhost:3000/bebidas/${id}`);
+      if (pathname.includes('feitas') || pathname.includes('favoritas')) {
+        return isNotInProgress(pathname, id, type);
       }
       Copy(`http://localhost:3000${history.location
         .pathname}`);
