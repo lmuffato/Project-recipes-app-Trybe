@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Image } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 import RecipeShared from '../effects/RecipeShared';
 import shareIcon from '../images/shareIcon.svg';
@@ -20,16 +19,17 @@ export default function ShareButton({ data, id, type }) {
   RecipeShared(shareRecipe, id, type);
 
   return (
-    <>
+    <div>
       {shareRecipe && <span>Link copiado!</span>}
-      <Image
+      <button
         type="button"
-        style={ { width: '2rem' } }
         data-testid={ checkpathname(data) }
         src={ shareIcon }
         onClick={ () => setShareRecipe(true) }
-      />
-    </>
+      >
+        <img style={ { width: '2rem' } } src={ shareIcon } alt="compartilhar" />
+      </button>
+    </div>
   );
 }
 

@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import Copy from 'clipboard-copy';
 
 const isNotInProgress = (pathname, id, type) => {
+  console.log(pathname, id, type);
   if (pathname.includes('feitas') && type === 'comida') {
     return Copy(`http://localhost:3000/comidas/${id}`);
   }

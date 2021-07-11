@@ -13,6 +13,13 @@ export default function DoneRecipes() {
 
   RecipeDone(state, setState);
   const { recipes, getItems } = state;
+
+  // const share = (href) => {
+  //   const { location: { origin } } = window;
+  //   navigator.clipboard.writeText(`${origin}${href}`);
+  //   setCopy(true);
+  // };
+
   if (!getItems) {
     return <h1>Loading...</h1>;
   }
@@ -36,6 +43,16 @@ export default function DoneRecipes() {
           </h2>
           <h1 data-testid={ `${index}-horizontal-name` }>{item.name}</h1>
           <p data-testid={ `${index}-horizontal-done-date` }>{item.doneDate}</p>
+
+          {/* <button
+            data-testid={ `${index}-horizontal-share-btn` }
+            type="button"
+            src={ shareIcon }
+            onClick={ () => share(`/${item.type}s/${item.id}`) }
+          >
+            <img src={ shareIcon } alt="Share Icon" />
+          </button> */}
+
           <ShareButton
             data={ index }
             id={ item.id }

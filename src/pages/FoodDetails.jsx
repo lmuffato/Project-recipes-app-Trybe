@@ -33,7 +33,7 @@ export default function FoodDetails() {
         alt={ recipe.strMeal }
         data-testid="recipe-photo"
       />
-      <ShareButton data="share-btn" />
+      <ShareButton />
       <FavoriteButton recipe={ recipe } />
       <h3 data-testid="recipe-category">{recipe.strCategory}</h3>
       <h3>Ingredientes:</h3>
