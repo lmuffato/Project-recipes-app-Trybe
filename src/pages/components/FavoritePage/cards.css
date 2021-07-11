@@ -1,0 +1,52 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.card-list {
+  align-content: space-around;
+  align-items: stretch;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  padding-top: 20px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  height: 250px;
+  justify-content: space-between;
+  position: relative;
+  text-align: center;
+  width: 125px;
+}
+
+.recipe-picture {
+  align-self: center;
+  height: 125px;
+  width: 125px;
+}
+
+.recipe-name {
+  font-size: 15px;
+}
+
+.recipe-info {
+  font-size: 12px;
+}
+
+.share-favorite {
+  align-items: stretch;
+  align-self: flex-end;
+  display: flex;
+  justify-content: center;
+}
+
+.share-button {
+  width: 62.5px;
+}
+
+.favorite-button {
+  width: 62.5px;
+}
