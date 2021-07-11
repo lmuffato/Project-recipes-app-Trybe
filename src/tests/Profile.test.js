@@ -3,24 +3,22 @@ import { screen } from '@testing-library/react';
 import renderWithRouterAndContext from './helper/renders/renderWithRouterAndContext';
 import getTest from './helper/mocks/getTestInfo';
 
-const { headerRenderTests, footerRenderTests, doTheLoginProcess } = getTest('/profile');
+const {
+  headerRenderTests,
+  footerRenderTests,
+  redirectToProfileScreen,
+} = getTest('/profile');
 const { queryByTestId, getByTestId } = screen;
 const { itDoesntRenderSearchIcon } = headerRenderTests();
 
 describe('Profile Screen', () => {
-  const redirectToProfileScreen = () => {
-    doTheLoginProcess(getByTestId, userEvent);
-
-    const profilePageButton = getByTestId('profile-top-btn');
-    userEvent.click(profilePageButton);
-  };
   const backToProfilePage = () => userEvent.click(getByTestId('profile-top-btn'));
 
   describe('Check Header and Footer components', () => {
     it('does Header and Footer tests', async () => {
       await renderWithRouterAndContext();
 
-      redirectToProfileScreen();
+      redirectToProfileScreen(getByTestId, userEvent);
 
       itDoesntRenderSearchIcon(queryByTestId, getByTestId);
       footerRenderTests().itRenderAllIcons(getByTestId);

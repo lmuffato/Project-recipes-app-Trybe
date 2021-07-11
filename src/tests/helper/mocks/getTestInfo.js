@@ -77,12 +77,20 @@ const doTheLoginProcess = (getId, userEvent) => {
   userEvent.click(loginSubmitButton);
 };
 
+const redirectToProfileScreen = (getId, userEvent) => {
+  doTheLoginProcess(getId, userEvent);
+
+  const profilePageButton = getId('profile-top-btn');
+  userEvent.click(profilePageButton);
+};
+
 export default function getTestInfo() {
   return {
     headerRenderTests,
     footerRenderTests,
     recipeCardsTest,
     doTheLoginProcess,
+    redirectToProfileScreen,
     testsIds,
   };
 }
