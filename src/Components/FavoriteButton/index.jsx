@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import checkLocalStorage from '../../helpers';
 import recipesContext from '../../context/RecipesContext';
 import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../../images/blackHeartIcon.svg';
@@ -8,14 +9,9 @@ import './styles.css';
 function FavoriteButton({ recipe, recipeType }) {
   const { setFavoriteRecipes, favoriteRecipes } = useContext(recipesContext);
   const [isFavorite, setIsFavorite] = useState(false);
-  const findFavorite = favoriteRecipes.favRecipes
-    .find((fav) => fav[`id${recipeType}`] === recipe[`id${recipeType}`]);
+
   const localFavorites = JSON.parse(localStorage.getItem('favoriteRecipes'));
-  let findFavoriteLocal;
-  if (localFavorites) {
-    findFavoriteLocal = localFavorites
-      .find((fav) => fav.id === recipe[`id${recipeType}`]);
-  }
+  const findFavoriteLocal = checkLocalStorage('favoriteRecipes', recipe, recipeType);
 
   const objLocalStorage = {
     id: recipe[`id${recipeType}`],
@@ -28,10 +24,14 @@ function FavoriteButton({ recipe, recipeType }) {
   };
 
   useEffect(() => {
-    if (findFavoriteLocal || findFavorite) {
+    const findFavorite = favoriteRecipes.favRecipes
+      .find((fav) => fav[`id${recipeType}`] === recipe[`id${recipeType}`]);
+    if (findFavorite || findFavoriteLocal) {
       setIsFavorite(true);
+    } else {
+      setIsFavorite(false);
     }
-  }, [findFavoriteLocal, findFavorite]);
+  }, [findFavoriteLocal, favoriteRecipes.favRecipes, recipeType, recipe]);
 
   const saveFavoriteButton = (item) => {
     if (!isFavorite) {

@@ -1,18 +1,41 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Header from '../../Components/Header';
 import ButtonByCategory from '../../Components/ButtonByCategory';
-// import FavoritesCard from '../../Components/FavoritesCard';
-// import recipesContext from '../../context/RecipesContext';
+import FavoritesCard from '../../Components/FavoritesCard';
 
 function ListOfRecipes({ header }) {
-  // const { favoriteRecipes } = useContext(recipesContext);
-  // const { favRecipes } = favoriteRecipes;
+  const recipesFromStorage = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
+  const [favRecipesStorage, setFavRecipesStorage] = useState(recipesFromStorage);
+
+  const filterDrinks = (evt) => {
+    evt.preventDefault();
+    const drinks = recipesFromStorage.filter((recipe) => recipe.type === 'bebida');
+    return setFavRecipesStorage(drinks);
+  };
+  const filterFoods = (evt) => {
+    evt.preventDefault();
+    const food = recipesFromStorage.filter((recipe) => recipe.type === 'comida');
+    return setFavRecipesStorage(food);
+  };
+
+  const filterAll = (evt) => {
+    evt.preventDefault();
+    setFavRecipesStorage(recipesFromStorage);
+  };
+
   return (
     <div>
       <Header>{ header }</Header>
-      <ButtonByCategory />
-      {/* <FavoritesCard recipeArray={ favRecipes } /> */}
+      <ButtonByCategory
+        filterAll={ filterAll }
+        filterFoods={ filterFoods }
+        filterDrinks={ filterDrinks }
+      />
+      <FavoritesCard
+        recipeArray={ favRecipesStorage }
+        setFavRecipesStorage={ setFavRecipesStorage }
+      />
     </div>
   );
 }

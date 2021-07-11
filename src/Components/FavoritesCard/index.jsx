@@ -1,13 +1,17 @@
 import React from 'react';
 import { Card } from 'react-bootstrap';
-import { Link, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import ShareButton from '../ShareButton';
+import { Link } from 'react-router-dom';
+import blackHeartIcon from '../../images/blackHeartIcon.svg';
+import ShareButtonRecipes from '../ShareButtonRecipes';
 
-function FavoritesCard({ recipeArray }) {
-  const { pathname } = useLocation();
+function FavoritesCard({ recipeArray, setFavRecipesStorage }) {
+  const removeFavorite = (recipe) => {
+    const removedItem = recipeArray.filter((item) => item.id !== recipe.id);
+    localStorage.setItem('favoriteRecipes', JSON.stringify(removedItem));
+    setFavRecipesStorage(removedItem);
+  };
 
-  const toggleLink = (pathname.includes('comidas')) ? 'comidas' : 'bebidas';
   return (
     <div>
       {recipeArray.map((recipe, index) => (
@@ -15,33 +19,48 @@ function FavoritesCard({ recipeArray }) {
           key={ `recipe-card-${index}` }
         >
           <Link
-            key={ index }
-            to={ {
-              pathname: pathname.includes('comidas')
-                ? `/${toggleLink}/${recipe.idMeal}`
-                : `/${toggleLink}/${recipe.idDrink}`,
-              state: recipe,
-            } }
+            to={ recipe.type === 'comida'
+              ? `comidas/${recipe.id}`
+              : `bebidas/${recipe.id}` }
           >
             <Card.Img
               variant="top"
-              src={ recipe[`${toggleApiReturn}Thumb`] }
+              src={ recipe.image }
               data-testid={ `${index}-horizontal-image` }
             />
           </Link>
           <Card.Header
             data-testid={ `${index}-horizontal-top-text` }
           >
-            Teste
+            {recipe.type === 'comida'
+              ? ` ${recipe.area} - ${recipe.category} `
+              : recipe.alcoholicOrNot}
           </Card.Header>
           <Card.Body>
-            <Card.Title
-              data-testid={ `${index}-horizontal-name` }
+            <Link
+              to={ recipe.type === 'comida'
+                ? `comidas/${recipe.id}`
+                : `bebidas/${recipe.id}` }
             >
-              {recipe[toggleApiReturn]}
-            </Card.Title>
-
-            <ShareButton dataTest={ `${index}-horizontal-share-btn` } />
+              <Card.Title
+                data-testid={ `${index}-horizontal-name` }
+              >
+                {recipe.name}
+              </Card.Title>
+            </Link>
+            <ShareButtonRecipes
+              dataTest={ `${index}-horizontal-share-btn` }
+              recipe={ recipe }
+            />
+            <div>
+              <input
+                type="image"
+                data-testid={ `${index}-horizontal-favorite-btn` }
+                src={ blackHeartIcon }
+                alt="favorite button"
+                onClick={ () => removeFavorite(recipe) }
+              />
+            </div>
           </Card.Body>
         </Card>
       ))}
@@ -51,7 +70,6 @@ function FavoritesCard({ recipeArray }) {
 
 FavoritesCard.propTypes = {
   recipeArray: PropTypes.objectOf(PropTypes.string),
-
 }.isRequired;
 
 export default FavoritesCard;

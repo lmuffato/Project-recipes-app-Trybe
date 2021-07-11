@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { Image } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { useLocation, useParams } from 'react-router';
 import UserContext from '../../context/UserContext';
@@ -45,10 +44,11 @@ function Details() {
     <div className="main-parent">
       {isLoading ? <Loading /> : (
         <div>
-          <Image
-            thumbnail
+          <img
+            className="hero"
             data-testid="recipe-photo"
             src={ recipesDetails[`str${recipeType}Thumb`] }
+            alt="hero"
           />
           <div className="top-components">
             <div>
@@ -64,6 +64,7 @@ function Details() {
               <FavoriteButton
                 recipe={ recipesDetails }
                 recipeType={ recipeType }
+                isLoading={ isLoading }
               />
             </div>
           </div>
@@ -80,7 +81,7 @@ function Details() {
           <Slide
             toggle={ recipeType }
             category={ toggleCategory }
-            className="ingredients"
+            cleanState={ setRecipesDetails }
           />
           {recipeStatus
             ? (

@@ -4,6 +4,7 @@ import ExploreDrink from '../../Components/ExploreDrink';
 import Footer from '../../Components/Footer';
 
 function ExploreDrinkOpt() {
+  document.title = 'Explorar Bebidas';
   return (
     <div>
       <ExploreDrink />
