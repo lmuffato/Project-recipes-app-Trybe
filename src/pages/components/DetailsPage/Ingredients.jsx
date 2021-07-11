@@ -15,6 +15,7 @@ function Ingredients(props) {
       { ingredients.map((ingredient, index) => (
         <Row key={ ingredient } data-testid={ `${index}-ingredient-name-and-measure` }>
           { recipe[measures[index]] }
+          { ' ' }
           { recipe[ingredient] }
         </Row>
       )) }

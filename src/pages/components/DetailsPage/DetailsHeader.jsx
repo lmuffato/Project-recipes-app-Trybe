@@ -66,7 +66,7 @@ function DetailsHeader(props) {
   return (
     <Container>
       <Row>
-        <img src={ img } alt={ title } data-testid="recipe-photo" />
+        <img src={ img } alt={ title } className="details-img" data-testid="recipe-photo" />
       </Row>
       <Row>
         <Col>

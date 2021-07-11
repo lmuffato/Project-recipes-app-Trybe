@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { arrayOf, object } from 'prop-types';
 import Container from 'react-bootstrap/Container';
@@ -37,19 +38,22 @@ function Recommendations(props) {
           className="card-container"
           data-testid={ `${index}-recomendation-card` }
         >
-          <Row>
-            <img
-              src={ recommendation.strDrinkThumb || recommendation.strMealThumb }
-              alt={ recommendation.strDrink || recommendation.strMeal }
-              className="recommendation-img"
-            />
-          </Row>
-          <Row>
-            { recommendation.strAlcoholic || recommendation.strCategory }
-          </Row>
-          <Row data-testid={ `${index}-recomendation-title` }>
-            { recommendation.strDrink || recommendation.strMeal }
-          </Row>
+          <Link to={ recommendation.idMeal ? `/comidas/${recommendation.idMeal}`
+            : `/bebidas/${recommendation.idDrink}` }>
+            <Row>
+              <img
+                src={ recommendation.strDrinkThumb || recommendation.strMealThumb }
+                alt={ recommendation.strDrink || recommendation.strMeal }
+                className="recommendation-img"
+              />
+            </Row>
+            <Row>
+              { recommendation.strAlcoholic || recommendation.strCategory }
+            </Row>
+            <Row data-testid={ `${index}-recomendation-title` }>
+              { recommendation.strDrink || recommendation.strMeal }
+            </Row>
+          </Link>
         </div>
       )) }
     </Container>
