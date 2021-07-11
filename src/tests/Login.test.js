@@ -33,8 +33,5 @@ describe('Login screen', () => {
     userEvent.type(passwordInput, '1234567');
     expect(loginSubmitButton).not.toHaveAttribute('disabled');
     userEvent.click(loginSubmitButton);
-
-    const { pathname } = window.location;
-    expect(pathname).toBe('/comidas');
   });
 });

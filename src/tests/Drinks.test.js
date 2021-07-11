@@ -1,92 +1,95 @@
-import React from 'react';
+import { screen } from '@testing-library/dom';
 import userEvent from '@testing-library/user-event';
-import Drinks from '../pages/Drinks';
 import renderWithRouterAndContext from './helper/renders/renderWithRouterAndContext';
 import getTest from './helper/mocks/getTestInfo';
-import { drinkDataApi } from './helper/mocks/data';
+import drinks from './helper/mocks/api/drinks';
+import meals from './helper/mocks/api/meals';
 
-const {
-  renderEmptyValue,
-  headerRenderTests,
-  footerRenderTests,
-  recipeCardsTest,
-} = getTest('/bebidas');
+const { headerRenderTests, footerRenderTests, doTheLoginProcess } = getTest();
 
-describe('Drinks Screen', () => {
-  describe('Check Header and Footer components', () => {
-    it('does Header and Footer tests', () => {
-      const { getByTestId } = renderWithRouterAndContext(
-        <Drinks />,
-        renderEmptyValue,
-      );
+const { getByTestId, getByRole } = screen;
 
-      headerRenderTests().itRenderAllIcons(getByTestId);
-      footerRenderTests().itRenderAllIcons(getByTestId);
-    });
+const mockFetch = jest.fn(() => Promise.resolve({
+  json: () => Promise.resolve({ meals, drinks }),
+}));
+
+const goToTheDrinkMainPage = () => {
+  doTheLoginProcess(getByTestId, userEvent);
+  userEvent.click(getByTestId('drinks-bottom-btn'));
+};
+
+describe('Check Header and Footer components', () => {
+  it('does Header and Footer tests', async () => {
+    await renderWithRouterAndContext();
+
+    goToTheDrinkMainPage();
+
+    headerRenderTests().itRenderAllIcons(getByTestId);
+    footerRenderTests().itRenderAllIcons(getByTestId);
+  });
+});
+
+describe('API tests', () => {
+  beforeEach(() => {
+    fetch.mockClear();
   });
 
-  describe('API tests', () => {
-    describe('API tests', () => {
-      beforeEach(() => {
-        fetch.mockClear();
-      });
+  global.fetch = mockFetch;
 
-      global.fetch = jest.fn(() => Promise.resolve({
-        json: () => Promise.resolve(drinkDataApi.darkCaipirinha),
-      }));
+  it('checks API when it doesnt return anything', async () => {
+    await renderWithRouterAndContext();
 
-      it('checks API', async () => {
-        const { getByRole } = renderWithRouterAndContext(
-          <Drinks />,
-          renderEmptyValue,
-        );
+    doTheLoginProcess(getByTestId, userEvent);
 
-        const searchIcon = getByRole('img', { name: /search/i });
-        userEvent.click(searchIcon);
+    const searchIcon = getByRole('img', { name: /search/i });
+    userEvent.click(searchIcon);
 
-        const inputSearch = getByRole('textbox');
-        const labelRadioNome = getByRole('radio', { name: /nome/i });
-        const buttonSearch = getByRole('button', { name: /buscar/i });
-
-        userEvent.type(inputSearch, 'Dark Caipirinha');
-        userEvent.click(labelRadioNome);
-        userEvent.click(buttonSearch);
-
-        expect(global.fetch).toBeCalled();
-      });
-
-      it('checks API when it doesnt return anything', () => {
-        const { getByRole } = renderWithRouterAndContext(
-          <Drinks />,
-          renderEmptyValue,
-        );
-
-        const searchIcon = getByRole('img', { name: /search/i });
-        userEvent.click(searchIcon);
-
-        const inputSearch = getByRole('textbox');
-        const labelPrimeiraLetra = getByRole('radio', { name: /primeira letra/i });
-        const buttonSearch = getByRole('button', { name: /buscar/i });
-
-        userEvent.type(inputSearch, '>');
-        userEvent.click(labelPrimeiraLetra);
-        userEvent.click(buttonSearch);
-
-        expect(global.fetch).toBeCalled();
-      });
+    const inputSearch = getByRole('textbox');
+    const labelPrimeiraLetra = getByRole('radio', {
+      name: /primeira letra/i,
     });
+    const buttonSearch = getByRole('button', { name: /buscar/i });
+
+    userEvent.type(inputSearch, '>');
+    userEvent.click(labelPrimeiraLetra);
+    userEvent.click(buttonSearch);
+
+    const calledTimes = 2;
+    expect(global.fetch).toBeCalledTimes(calledTimes);
   });
 
-  describe('User search tests', () => {
-    it('cheks initial foods', async () => {
-      const { findByTestId } = renderWithRouterAndContext(
-        <Drinks />,
-        renderEmptyValue,
-      );
+  it('checks API', async () => {
+    await renderWithRouterAndContext();
 
-      drinkDataApi.firstTwelve.forEach((recipe) => {
-        recipeCardsTest(recipe, findByTestId);
-      });
-    });
+    doTheLoginProcess(getByTestId, userEvent);
+
+    const searchIcon = getByRole('img', { name: /search/i });
+    userEvent.click(searchIcon);
+
+    const inputSearch = getByRole('textbox');
+    const labelRadioNome = getByRole('radio', { name: /ingrediente/i });
+    const buttonSearch = getByRole('button', { name: /buscar/i });
+
+    userEvent.type(inputSearch, 'Corba');
+    userEvent.click(labelRadioNome);
+    userEvent.click(buttonSearch);
   });
+});
+
+describe('Drinks tests', () => {
+  beforeEach(() => {
+    fetch.mockClear();
+  });
+
+  global.fetch = mockFetch;
+
+  // it('cheks initial foods', async () => {
+  //   await renderWithRouterAndContext();
+
+  //   doTheLoginProcess(getByTestId, userEvent);
+
+  //   foodDataApi.firstTwelve.forEach((recipe) => {
+  //     recipeCardsTest(recipe, findByTestId);
+  //   });
+  // });
 });

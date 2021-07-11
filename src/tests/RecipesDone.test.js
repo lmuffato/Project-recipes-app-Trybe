@@ -18,7 +18,7 @@ const mockFetch = () => {
   jest.spyOn(global, 'fetch').mockImplementation(() => Promise.resolve({
     status: 200,
     ok: true,
-    json: () => Promise.resolve(meals),
+    json: () => Promise.resolve({ meals }),
   }));
 };
 
@@ -43,6 +43,11 @@ describe('RecipesDone screen', () => {
   describe('Recipes Done Page tests', () => {
     it('tests the buttons on Recipes Done page', async () => {
       await renderWithRouterAndContext();
+
+      redirectToProfileScreen(getByTestId, userEvent);
+
+      const buttonRecipesDone = getByTestId('profile-done-btn');
+      userEvent.click(buttonRecipesDone);
 
       const buttonAll = getByTestId('filter-by-all-btn');
       const buttonFoods = getByTestId('filter-by-food-btn');

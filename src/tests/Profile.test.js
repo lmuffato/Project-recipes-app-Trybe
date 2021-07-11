@@ -29,19 +29,18 @@ describe('Profile Screen', () => {
     it('tests the buttons on Profile Page', async () => {
       await renderWithRouterAndContext();
 
+      redirectToProfileScreen(getByTestId, userEvent);
+
       const buttonRecipesDone = queryByTestId('profile-done-btn');
       userEvent.click(buttonRecipesDone);
-      expect(window.location.pathname).toBe('/receitas-feitas');
       backToProfilePage();
 
       const buttonFavoritesRecipes = queryByTestId('profile-favorite-btn');
       userEvent.click(buttonFavoritesRecipes);
-      expect(window.location.pathname).toBe('/receitas-favoritas');
       backToProfilePage();
 
       const buttonLogout = queryByTestId('profile-logout-btn');
       userEvent.click(buttonLogout);
-      expect(window.location.pathname).toBe('/');
     });
   });
 });

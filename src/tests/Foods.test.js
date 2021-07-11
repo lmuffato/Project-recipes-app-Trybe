@@ -13,7 +13,7 @@ const {
 const { getByTestId, getByRole } = screen;
 
 const mockFetch = jest.fn(() => Promise.resolve({
-  json: () => Promise.resolve(meals),
+  json: () => Promise.resolve({ meals }),
 }));
 
 describe('Check Header and Footer components', () => {
