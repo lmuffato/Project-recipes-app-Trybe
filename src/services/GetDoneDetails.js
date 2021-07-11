@@ -16,15 +16,22 @@ const GetDoneDetails = async () => {
     list = await Promise.all(promises);
   }
 
-  const listItems = list.map((item) => {
-    const keys = Object.keys(item);
-    if (keys.includes('meals')) {
-      return item.meals[0];
-    }
-    return item.drinks[0];
-  });
+  if (storageItems.type === 'comida') {
+    return ApiRecipeDetail(storageItems.id);
+  }
 
-  return listItems;
+  if (list) {
+    const listItems = list.map((item) => {
+      const keys = Object.keys(item);
+      if (keys.includes('meals')) {
+        return item.meals[0];
+      }
+      return item.drinks[0];
+    });
+    return listItems;
+  }
+
+  return ApiDetailsById(storageItems.id);
 };
 
 export default GetDoneDetails;

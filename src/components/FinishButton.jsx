@@ -21,7 +21,7 @@ const shouldRedirect = (history, globalContext, ingredient, setIngredients) => {
       alcoholicOrNot: currCocktail.strAlcoholic ? currCocktail.strAlcoholic : '',
       name: currCocktail.strDrink,
       image: currCocktail.strDrinkThumb,
-      doneDate: time,
+      doneDate: time.split(' ')[0],
       tags: currCocktail.strTags,
     }];
   }
@@ -34,7 +34,7 @@ const shouldRedirect = (history, globalContext, ingredient, setIngredients) => {
       alcoholicOrNot: currMeal.strAlcoholic ? currMeal.strAlcoholic : '',
       name: currMeal.strMeal,
       image: currMeal.strMealThumb,
-      doneDate: time,
+      doneDate: time.split(' ')[0],
       tags: currMeal.strTags,
     }];
   }

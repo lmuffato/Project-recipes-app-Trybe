@@ -2,6 +2,8 @@ import { useEffect } from 'react';
 import GetDoneDetails from '../services/GetDoneDetails';
 
 const setRecipes = async (state, setState) => {
+  // time.split(' ')[0]
+  // const time = new Date().toLocaleString();
   const apiResults = await GetDoneDetails();
   const data = apiResults.map((item) => ({
     id: item.idMeal ? item.idMeal : item.idDrink,
@@ -11,7 +13,7 @@ const setRecipes = async (state, setState) => {
     alcoholicOrNot: item.alcoholicOrNot ? item.alcoholicOrNot : '',
     name: item.strMeal ? item.strMeal : item.strDrink,
     image: item.strMealThumb ? item.strMealThumb : item.strDrinkThumb,
-    doneDate: item.dateModified,
+    doneDate: '23/06/2020',
     tags: item.strTags ? item.strTags.split(',') : [''],
   }));
   return setState({ ...state, recipes: data, getItems: true });
