@@ -9,6 +9,7 @@ import AppProvider from './context/AppContext';
 import ExploreFoods from './pages/ExploreFoods/index';
 import ExploreDrinks from './pages/ExploreDrinks/index';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import RecipesFavorites from './pages/RecipesFavorite';
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
             <Route exact path="/explorar" component={ Explore } />
             <Route exact path="/explorar/comidas" component={ ExploreFoods } />
             <Route exact path="/explorar/bebidas" component={ ExploreDrinks } />
+            <Route path="/receitas-favoritas" component={ RecipesFavorites } />
           </Switch>
         </BrowserRouter>
       </AppProvider>
