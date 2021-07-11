@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { Image } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import { useLocation, useParams } from 'react-router';
 import UserContext from '../../context/UserContext';
 import { getRecipeByID } from '../../services/fetchRecipes';
@@ -59,8 +60,11 @@ function Details() {
               </h3>
             </div>
             <div className="btn-components">
-              <ShareButton />
-              <FavoriteButton recipe={ recipesDetails } recipeType={ recipeType } />
+              <ShareButton dataTest="share-btn" />
+              <FavoriteButton
+                recipe={ recipesDetails }
+                recipeType={ recipeType }
+              />
             </div>
           </div>
           <Ingredient type="list" recipe={ recipesDetails } />
@@ -86,6 +90,7 @@ function Details() {
                 recipeStatus={ recipeStatus }
               />)
             : null}
+          <Link to="/receitas-favoritas">Teste</Link>
         </div>
       )}
     </div>

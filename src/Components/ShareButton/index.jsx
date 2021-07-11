@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import CopyToClipboard from 'react-copy-to-clipboard';
+import PropTypes from 'prop-types';
 import { useHistory } from 'react-router';
 
 import shareIcon from '../../images/shareIcon.svg';
 
-function ShareButton() {
+function ShareButton({ dataTest }) {
   const history = useHistory();
   const URL = history.location.pathname;
   const [isCopied, setIsCopied] = useState(false);
@@ -21,7 +22,7 @@ function ShareButton() {
       <div>
         <input
           type="image"
-          data-testid="share-btn"
+          data-testid={ dataTest }
           src={ shareIcon }
           alt="share button"
         />
@@ -31,4 +32,7 @@ function ShareButton() {
   );
 }
 // REF: https://dev.to/myogeshchavan97/an-easy-way-for-adding-copy-to-clipboard-functionality-in-react-app-4oo0
+ShareButton.propTypes = {
+  dataTest: PropTypes.string,
+}.isRequired;
 export default ShareButton;
