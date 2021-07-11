@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Image } from 'react-bootstrap';
+import { Redirect } from 'react-router-dom';
 import FilterDoneRecipes from '../components/FilterDoneRecipes';
 import Header from '../components/Header';
 import ShareButton from '../components/ShareButton';
@@ -10,6 +11,9 @@ export default function DoneRecipes() {
     recipes: [],
     getItems: false,
     curFilter: 'All',
+    redirectTo: '',
+    redirect: false,
+    ByCLickName: false,
   });
 
   function setCurrFilter(string) {
@@ -17,7 +21,7 @@ export default function DoneRecipes() {
   }
 
   RecipeDone(state, setState);
-  const { recipes, curFilter, getItems } = state;
+  const { recipes, curFilter, getItems, redirectTo, redirect } = state;
 
   const filterAllFavorites = () => {
     if (curFilter === 'Food') {
@@ -28,6 +32,8 @@ export default function DoneRecipes() {
     }
     return recipes;
   };
+
+  if (redirect) return <Redirect to={ `${redirectTo}` } />;
 
   if (!getItems) {
     return <h1>Loading...</h1>;
@@ -44,13 +50,25 @@ export default function DoneRecipes() {
           <Image
             style={ { width: '18rem' } }
             src={ item.image }
+            onClick={ () => setState({ ...state,
+              redirectTo: `${item.type}s/${item.id}`,
+              redirect: true }) }
             data-testid={ `${index}-horizontal-image` }
           />
           <h2 data-testid={ `${index}-horizontal-top-text` }>
             {`${item.area} - ${item.category} ${item.alcoholicOrNot
               ? item.alcoholicOrNot : ''}`}
           </h2>
-          <h1 data-testid={ `${index}-horizontal-name` }>{item.name}</h1>
+          <button
+            type="button"
+            data-testid={ `${index}-horizontal-name` }
+            onClick={ () => setState({ ...state,
+              redirectTo: `${item.type}s/${item.id}`,
+              ByCLickName: false,
+              redirect: true }) }
+          >
+            {item.name}
+          </button>
           <p data-testid={ `${index}-horizontal-done-date` }>{item.doneDate}</p>
 
           <ShareButton
