@@ -15,3 +15,9 @@ export function fetchByCategoryApi(typeRecipe, category) {
     .then((response) => response.json())
     .then((data) => (typeRecipe === 'themealdb' ? data.meals : data.drinks));
 }
+
+export function fetchRandonApi(typeRecipe) {
+  return fetch(`https://www.${typeRecipe}.com/api/json/v1/1/random.php`)
+    .then((response) => response.json())
+    .then((data) => (typeRecipe === 'themealdb' ? data.meals : data.drinks));
+}

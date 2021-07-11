@@ -8,6 +8,10 @@ import Explore from './pages/Explore/index';
 import AppProvider from './context/AppContext';
 import ExploreFoods from './pages/ExploreFoods/index';
 import ExploreDrinks from './pages/ExploreDrinks/index';
+import ExploreByIngredientFoods from './pages/ExploreByIngredientFoods';
+import ExploreByIngredientDrinks from './pages/ExploreByIngredientDrinks';
+import ExploreByAreaFoods from './pages/ExploreByAreaFoods';
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
@@ -32,6 +36,17 @@ function App() {
             <Route exact path="/explorar" component={ Explore } />
             <Route exact path="/explorar/comidas" component={ ExploreFoods } />
             <Route exact path="/explorar/bebidas" component={ ExploreDrinks } />
+            <Route
+              exact
+              path="/explorar/comidas/ingredientes"
+              component={ ExploreByIngredientFoods }
+            />
+            <Route
+              exact
+              path="/explorar/bebidas/ingredientes"
+              component={ ExploreByIngredientDrinks }
+            />
+            <Route exact path="/explorar/comidas/area" component={ ExploreByAreaFoods } />
           </Switch>
         </BrowserRouter>
       </AppProvider>
