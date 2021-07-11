@@ -1,0 +1,23 @@
+.end-btn-cntl {
+  width: 100vw;
+}
+
+.end-btn-cntl button {
+  bottom: 0;
+  padding: 1rem;
+  position: fixed;
+  width: 100%;
+}
+
+.title-cntl {
+  align-items: center;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  padding: 0.5rem;
+}
+
+.title-cntl:first-child {
+  display: flex;
+  flex-flow: column;
+}

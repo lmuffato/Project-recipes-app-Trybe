@@ -49,7 +49,7 @@ function Details() {
             src={ recipesDetails[`str${recipeType}Thumb`] }
             alt="hero"
           />
-          <div className="top-components">
+          <div className="title-cntl">
             <div>
               <h1 data-testid="recipe-title">
                 {recipesDetails[`str${recipeType}`]}
@@ -58,7 +58,7 @@ function Details() {
                 {recipesDetails[toggleCategory]}
               </h3>
             </div>
-            <div className="btn-components">
+            <div>
               <ShareButton />
               <FavoriteButton
                 recipe={ recipesDetails }

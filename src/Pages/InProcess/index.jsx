@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useLocation, useParams, Link } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 import FavoriteButton from '../../Components/FavoriteButton';
@@ -6,6 +6,8 @@ import Ingredient from '../../Components/Ingredients';
 import Loading from '../../Components/Loading';
 import ShareButton from '../../Components/ShareButton';
 import { getRecipeByID } from '../../services/fetchRecipes';
+import UserContext from '../../context/UserContext';
+import './styles.css';
 
 function InProcess() {
   const { id } = useParams();
@@ -14,6 +16,7 @@ function InProcess() {
   const [isLoading, setLoading] = useState(true);
   const [recipe, setRecipe] = useState({});
   const [finished, setFinished] = useState(false);
+  const { doneRecipes, setDoneRecipes } = useContext(UserContext);
 
   const recipeType = (pathname.includes('comidas')) ? 'Meal' : 'Drink';
   const toggleApi = (pathname.includes('comidas')) ? 'meals' : 'drinks';
@@ -36,13 +39,15 @@ function InProcess() {
             src={ recipe[`str${recipeType}Thumb`] }
             alt="hero"
           />
-          <div>
-            <h1 data-testid="recipe-title">
-              {recipe[`str${recipeType}`]}
-            </h1>
-            <h3 data-testid="recipe-category">
-              {recipe[toggleCategory]}
-            </h3>
+          <div className="title-cntl">
+            <div>
+              <h1 data-testid="recipe-title">
+                {recipe[`str${recipeType}`]}
+              </h1>
+              <h3 data-testid="recipe-category">
+                {recipe[toggleCategory]}
+              </h3>
+            </div>
             <div className="btn-components">
               <ShareButton />
               <FavoriteButton
@@ -63,14 +68,17 @@ function InProcess() {
               {recipe.strInstructions}
             </p>
           </div>
-          <Link to="/receitas-feitas">
-            <Button
-              data-testid="finish-recipe-btn"
-              disabled={ !finished }
-            >
-              Finalizar Receita
-            </Button>
-          </Link>
+          <div className="end-btn-cntl">
+            <Link to="/receitas-feitas">
+              <Button
+                data-testid="finish-recipe-btn"
+                disabled={ !finished }
+                onClick={ () => setDoneRecipes([...doneRecipes, { id }]) }
+              >
+                Finalizar Receita
+              </Button>
+            </Link>
+          </div>
         </div>
       )}
     </div>
