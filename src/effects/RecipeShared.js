@@ -20,6 +20,14 @@ export default function RecipeShared(state, id, type) {
           .pathname.match(regExp).reduce((acc, item) => acc + item, '');
         return Copy(`http://localhost:3000/bebidas/${getId}`);
       }
+
+      if (pathname.includes('feitas') && type === 'comida') {
+        return Copy(`http://localhost:3000/comidas/${id}`);
+      }
+      if (pathname.includes('feitas') && type === 'bebida') {
+        return Copy(`http://localhost:3000/bebidas/${id}`);
+      }
+
       if (pathname.includes('favoritas') && type === 'comida') {
         return Copy(`http://localhost:3000/comidas/${id}`);
       }

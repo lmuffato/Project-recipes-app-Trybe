@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-// import { Image } from 'react-bootstrap';
-// import FilterDoneRecipes from '../components/FilterDoneRecipes';
+import { Image } from 'react-bootstrap';
+import FilterDoneRecipes from '../components/FilterDoneRecipes';
 import Header from '../components/Header';
-// import ShareButton from '../components/ShareButton';
+import ShareButton from '../components/ShareButton';
 import RecipeDone from '../effects/RecipeDone';
 
 export default function DoneRecipes() {
@@ -17,22 +17,39 @@ export default function DoneRecipes() {
     return <h1>Loading...</h1>;
   }
   if (!recipes) return <h1>Você não possui nenhuma receita concluida...</h1>;
+  console.log(recipes);
   return (
     <div>
       <Header>
         <h1 data-testid="page-title">Receitas Feitas</h1>
       </Header>
-      {/* {recipes.map((item, index) => (
-        <>
-          <FilterDoneRecipes />
-          <Image src={ item.image } data-testid={ `${index}-horizontal-image` } />
-          <h2 data-testid={ `${index}-horizontal-top-text` } />
-          <h1 data-testid={ `${index}-horizontal-name` } />
-          <p data-testid={ `${index}-horizontal-done-date` } />
-          <ShareButton />
-          <h3 data-testid={ `${index}-${item.tagName}-horizontal-tag` } />
-        </>
-      ))} */}
+      <FilterDoneRecipes />
+      {recipes.map((item, index) => (
+        <div key={ `${item.index}-${item.name}` }>
+          <Image
+            style={ { width: '18rem' } }
+            src={ item.image }
+            data-testid={ `${index}-horizontal-image` }
+          />
+          <h2 data-testid={ `${index}-horizontal-top-text` }>{item.category}</h2>
+          <h1 data-testid={ `${index}-horizontal-name` }>{item.name}</h1>
+          <p data-testid={ `${index}-horizontal-done-date` }>{item.doneDate}</p>
+          <ShareButton
+            data={ index }
+            id={ item.id }
+            type={ item.type }
+          />
+          { item.tags ? item.tags.map((tag, index2) => index2 < 2 && (
+            <div
+              key={ tag }
+              data-testid={ `${index2}-${item.tags}-horizontal-tag` }
+            >
+              {tag}
+            </div>
+          )) : ''}
+        </div>
+      ))}
     </div>
   );
 }
+// data-testid={ `${index}-${item.tags}-horizontal-tag` }
