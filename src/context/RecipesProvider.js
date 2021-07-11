@@ -17,6 +17,8 @@ const RecipesProvider = ({ children }) => {
   const [foodAreas, setFoodAreas] = useState([]);
   const [foodCategories, setFoodCategories] = useState([]);
   const [drinkCategories, setDrinkCategories] = useState([]);
+  const [fetchFood, setFetchFood] = useState([]);
+  const [fetchDrinks, setFetchDrinks] = useState([]);
 
   useEffect(() => {
     fetchFoodsAPI().then((meals) => {
@@ -74,6 +76,12 @@ const RecipesProvider = ({ children }) => {
     setAuxRecipesFoods,
     auxRecipesDrinks,
     setAuxRecipesDrinks,
+    recipes: {
+      food: fetchFood,
+      drinks: fetchDrinks,
+    },
+    setFetchFood,
+    setFetchDrinks,
   };
 
   return (

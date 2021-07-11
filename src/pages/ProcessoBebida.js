@@ -1,9 +1,10 @@
 import React from 'react';
+import InProgressDrinkOrFood from '../components/InProgressDrinkOrFood';
 
 function ProcessoBebida() {
   return (
     <div>
-      <h2>Processo Bebidas</h2>
+      <InProgressDrinkOrFood />
     </div>
   );
 }
