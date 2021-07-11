@@ -17,6 +17,7 @@ import FoodArea from '../pages/FoodArea';
 import FavoriteRecipes from '../pages/FavoriteRecipes';
 import FoodProgress from '../pages/FoodProgress';
 import DrinkProgress from '../pages/DrinkProgress';
+import NotFound from '../pages/NotFound';
 
 function Routes() {
   return (
@@ -56,6 +57,8 @@ function Routes() {
       <Route exact path="/bebidas" component={ Drinks } />
 
       <Route exact path="/" component={ Login } />
+
+      <Route component={ NotFound } />
     </Switch>
   );
 }

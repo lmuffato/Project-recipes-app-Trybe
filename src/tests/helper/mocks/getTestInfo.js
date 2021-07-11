@@ -57,17 +57,32 @@ const footerRenderTests = () => {
   return { itDoesntRenderFooter, itRenderAllIcons };
 };
 
-export default function getTestInfo(path = '/') {
-  const recipe = { meals: [], drinks: [] };
-  const renderEmptyValue = {
-    value: { recipe },
-    initialEntries: [path],
-  };
+const recipeCardsTest = async ({ id, name, image }, findByTestId) => {
+  const sectionCard = await findByTestId(`${id}-recipe-card`);
+  const titleCard = await findByTestId(`${id}-card-name`);
+  const imgCard = await findByTestId(`${id}-card-img`);
 
+  expect(sectionCard).toBeInTheDocument();
+  expect(titleCard).toHaveTextContent(name);
+  expect(imgCard).toHaveAttribute('src', image);
+};
+
+const doTheLoginProcess = (getId, userEvent) => {
+  const passwordInput = getId('password-input');
+  const emailInput = getId('email-input');
+  const loginSubmitButton = getId('login-submit-btn');
+
+  userEvent.type(emailInput, 'renzo@gmail.com');
+  userEvent.type(passwordInput, '1234567');
+  userEvent.click(loginSubmitButton);
+};
+
+export default function getTestInfo() {
   return {
-    renderEmptyValue,
     headerRenderTests,
     footerRenderTests,
+    recipeCardsTest,
+    doTheLoginProcess,
     testsIds,
   };
 }

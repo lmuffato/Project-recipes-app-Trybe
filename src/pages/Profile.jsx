@@ -2,20 +2,20 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-// import usePersistedState from '../hooks/usePersistedState';
 
 export default function Profile() {
   const user = JSON.parse(localStorage.getItem('user'));
-  // const [user] = usePersistedState('user', { email: '' });
   const history = useHistory();
+
   function Logout() {
     localStorage.clear();
     history.push('/');
   }
+
   return (
     <div>
       <Header title="Perfil" />
-      <h1 data-testid="profile-email">{ user.email }</h1>
+      <h1 data-testid="profile-email">{ user && user.email }</h1>
       <button
         type="button"
         onClick={ () => history.push('/receitas-feitas') }

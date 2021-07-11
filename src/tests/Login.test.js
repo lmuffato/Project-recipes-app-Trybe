@@ -10,7 +10,7 @@ const { itDoesntRenderHeader } = headerRenderTests();
 const { itDoesntRenderFooter } = footerRenderTests();
 
 describe('Login screen', () => {
-  describe('Check Header and Footer components', () => {
+  describe('Check Header and Footer components', async () => {
     it('doesnt render the Header and Footer on the Login screen', async () => {
       await renderWithRouterAndContext();
 

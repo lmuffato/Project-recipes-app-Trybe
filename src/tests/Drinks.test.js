@@ -9,6 +9,7 @@ const {
   renderEmptyValue,
   headerRenderTests,
   footerRenderTests,
+  recipeCardsTest,
 } = getTest('/bebidas');
 
 describe('Drinks Screen', () => {
@@ -26,20 +27,19 @@ describe('Drinks Screen', () => {
 
   describe('API tests', () => {
     describe('API tests', () => {
+      beforeEach(() => {
+        fetch.mockClear();
+      });
+
+      global.fetch = jest.fn(() => Promise.resolve({
+        json: () => Promise.resolve(drinkDataApi.darkCaipirinha),
+      }));
+
       it('checks API', async () => {
         const { getByRole } = renderWithRouterAndContext(
           <Drinks />,
           renderEmptyValue,
         );
-
-        const apiResponse = Promise.resolve({
-          json: () => Promise.resolve(drinkDataApi.darkCaipirinha),
-          ok: true,
-        });
-
-        const mockRecipeApi = jest
-          .spyOn(global, 'fetch')
-          .mockImplementation(() => apiResponse);
 
         const searchIcon = getByRole('img', { name: /search/i });
         userEvent.click(searchIcon);
@@ -52,7 +52,40 @@ describe('Drinks Screen', () => {
         userEvent.click(labelRadioNome);
         userEvent.click(buttonSearch);
 
-        expect(mockRecipeApi).toBeCalled();
+        expect(global.fetch).toBeCalled();
+      });
+
+      it('checks API when it doesnt return anything', () => {
+        const { getByRole } = renderWithRouterAndContext(
+          <Drinks />,
+          renderEmptyValue,
+        );
+
+        const searchIcon = getByRole('img', { name: /search/i });
+        userEvent.click(searchIcon);
+
+        const inputSearch = getByRole('textbox');
+        const labelPrimeiraLetra = getByRole('radio', { name: /primeira letra/i });
+        const buttonSearch = getByRole('button', { name: /buscar/i });
+
+        userEvent.type(inputSearch, '>');
+        userEvent.click(labelPrimeiraLetra);
+        userEvent.click(buttonSearch);
+
+        expect(global.fetch).toBeCalled();
+      });
+    });
+  });
+
+  describe('User search tests', () => {
+    it('cheks initial foods', async () => {
+      const { findByTestId } = renderWithRouterAndContext(
+        <Drinks />,
+        renderEmptyValue,
+      );
+
+      drinkDataApi.firstTwelve.forEach((recipe) => {
+        recipeCardsTest(recipe, findByTestId);
       });
     });
   });
