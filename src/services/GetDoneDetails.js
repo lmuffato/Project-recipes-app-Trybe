@@ -20,7 +20,7 @@ const GetDoneDetails = async () => {
     return ApiRecipeDetail(storageItems.id);
   }
 
-  if (list) {
+  if (list.length) {
     const listItems = list.map((item) => {
       const keys = Object.keys(item);
       if (keys.includes('meals')) {

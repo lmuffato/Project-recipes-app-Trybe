@@ -9,16 +9,25 @@ export default function DoneRecipes() {
   const [state, setState] = useState({
     recipes: [],
     getItems: false,
+    curFilter: 'All',
   });
 
-  RecipeDone(state, setState);
-  const { recipes, getItems } = state;
+  function setCurrFilter(string) {
+    setState({ ...state, curFilter: string });
+  }
 
-  // const share = (href) => {
-  //   const { location: { origin } } = window;
-  //   navigator.clipboard.writeText(`${origin}${href}`);
-  //   setCopy(true);
-  // };
+  RecipeDone(state, setState);
+  const { recipes, curFilter, getItems } = state;
+
+  const filterAllFavorites = () => {
+    if (curFilter === 'Food') {
+      return recipes.filter((item) => item.type.includes('comida'));
+    }
+    if (curFilter === 'Drinks') {
+      return recipes.filter((item) => item.type.includes('bebida'));
+    }
+    return recipes;
+  };
 
   if (!getItems) {
     return <h1>Loading...</h1>;
@@ -29,8 +38,8 @@ export default function DoneRecipes() {
       <Header>
         <h1 data-testid="page-title">Receitas Feitas</h1>
       </Header>
-      <FilterDoneRecipes />
-      {recipes.map((item, index) => (
+      <FilterDoneRecipes setCurrFilter={ setCurrFilter } />
+      {filterAllFavorites().map((item, index) => (
         <div key={ `${item.index}-${item.name}` }>
           <Image
             style={ { width: '18rem' } }
@@ -43,15 +52,6 @@ export default function DoneRecipes() {
           </h2>
           <h1 data-testid={ `${index}-horizontal-name` }>{item.name}</h1>
           <p data-testid={ `${index}-horizontal-done-date` }>{item.doneDate}</p>
-
-          {/* <button
-            data-testid={ `${index}-horizontal-share-btn` }
-            type="button"
-            src={ shareIcon }
-            onClick={ () => share(`/${item.type}s/${item.id}`) }
-          >
-            <img src={ shareIcon } alt="Share Icon" />
-          </button> */}
 
           <ShareButton
             data={ index }
