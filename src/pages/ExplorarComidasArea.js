@@ -3,7 +3,7 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import FoodContext from '../contexts/FoodContext';
 import RecipeCard from '../components/Main/RecipeCard';
-import { fetchFoodArea, fetchFoods } from '../services/mealAPI';
+import { fetchFoodArea, fetchFoodAreaGeneral, fetchFoods } from '../services/mealAPI';
 
 export default function ExplorarComidasArea() {
   const { foods, setFoods } = useContext(FoodContext);
@@ -11,7 +11,7 @@ export default function ExplorarComidasArea() {
   const NUMBER_OF_RECIPES = 12;
 
   useEffect(() => {
-    fetchFoodArea().then((res) => setAreaNameToOptions(res.meals));
+    fetchFoodAreaGeneral().then((res) => setAreaNameToOptions(res.meals));
   }, []);
 
   function filterFoodByArea(area) {
@@ -20,9 +20,8 @@ export default function ExplorarComidasArea() {
         setFoods(meals);
       });
     } else {
-      fetchFoods().then(({ meals }) => {
-        const filteredMeal = meals.filter((meal) => meal.strArea === area);
-        setFoods(filteredMeal);
+      fetchFoodArea(area).then(({ meals }) => {
+        setFoods(meals);
       });
     }
   }
