@@ -65,3 +65,7 @@ body {
   background-color: #334031;
   color: #c2e1c2;
 }
+
+.card-title {
+  text-align: center;
+}
