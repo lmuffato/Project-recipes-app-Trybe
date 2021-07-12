@@ -1,32 +1,16 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+import ExploreButtons from './components/ExploreButtons';
 import styles from './styles.module.scss';
 
 function Explore() {
+  const { meal } = useParams();
+
   return (
     <div className={ styles.explorePage }>
       <div className={ styles.exploreContent }>
-        <Link to="/explorar/comidas" className="first">
-          <button
-            id={ styles.first }
-            data-testid="explore-food"
-            type="button"
-            className="primary-btn"
-          >
-            Explorar Comidas
-          </button>
-        </Link>
-        <Link to="/explorar/bebidas">
-          <button
-            type="button"
-            data-testid="explore-drinks"
-            className="primary-btn"
-          >
-            Explorar Bebidas
-          </button>
-        </Link>
+        <ExploreButtons title={ meal } />
       </div>
-
     </div>
   );
 }
