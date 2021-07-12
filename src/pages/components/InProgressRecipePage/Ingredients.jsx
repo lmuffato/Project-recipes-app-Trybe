@@ -1,11 +1,29 @@
 import { arrayOf, string } from 'prop-types';
 import React, { useState, useEffect } from 'react';
-import Form from 'react-bootstrap/Form';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+
+const handleChange = (
+  index, ingredientList, setIngredientList, recipe,
+) => {
+  ingredientList[index][1] = !ingredientList[index][1];
+  setIngredientList([...ingredientList]);
+  const inProgress = JSON.parse(localStorage.getItem('inProgressRecipes'));
+  const { idMeal, idDrink } = recipe;
+  if (idMeal) {
+    inProgress.meals[idMeal] = ingredientList;
+    localStorage.setItem('inProgressRecipes', JSON.stringify(inProgress));
+  } else {
+    inProgress.cocktails[idDrink] = ingredientList;
+    localStorage.setItem('inProgressRecipes', JSON.stringify(inProgress));
+  }
+};
 
 function Ingredients(props) {
   const [ingredientList, setIngredientList] = useState('');
-  const { recipe } = props;
-  console.log(recipe);
+  console.log(ingredientList);
+  const { recipe, inProgressUpdate, setInprogressUpdate } = props;
+  const { idMeal, idDrink } = recipe;
   const recipeKeys = Object.keys(recipe);
   const ingredients = recipeKeys.filter((key) => key.includes('Ingredient'));
   const measures = recipeKeys.filter((key) => key.includes('Measure'));
@@ -15,10 +33,10 @@ function Ingredients(props) {
     const itensFiltered = itens.filter((item) => item[1]);
     const inProgress = JSON.parse(localStorage.getItem('inProgressRecipes'));
     let ingredientChecks = itensFiltered.map((item) => [item[1], false]);
-    if (recipe.idMeal && inProgress && inProgress.meals.idMeal) {
-      ingredientChecks = inProgress.meals.idMeal;
-    } else if (recipe.idDrink && inProgress && inProgress.cocktails.idDrink) {
-      ingredientChecks = inProgress.cocktails.idDrink;
+    if (recipe.idMeal && inProgress && inProgress.meals[idMeal]) {
+      ingredientChecks = inProgress.meals[idMeal];
+    } else if (recipe.idDrink && inProgress && inProgress.cocktails[idDrink]) {
+      ingredientChecks = inProgress.cocktails[idDrink];
     }
     if (!inProgress) {
       const meals = {};
@@ -34,36 +52,46 @@ function Ingredients(props) {
     setIngredientList(ingredientChecks);
   }, []);
 
-  const handleChange = (index) => {
-    ingredientList[index][1] = !ingredientList[index][1];
-    setIngredientList([...ingredientList]);
-    const inProgress = JSON.parse(localStorage.getItem('inProgressRecipes'));
-    const { idMeal } = recipe;
-    if (idMeal) {
-      inProgress.meals.idMeal = ingredientList;
-      localStorage.setItem('inProgressRecipes', JSON.stringify(inProgress));
-    } else {
-      inProgress.cocktails.idDrink = ingredientList;
-      localStorage.setItem('inProgressRecipes', JSON.stringify(inProgress));
-    }
-  };
+  useEffect(() => {
+    setInprogressUpdate(!inProgressUpdate);
+  }, [ingredientList]);
 
   return (
-    <Form>
+    <Container>
       <h2>Ingredients</h2>
       { ingredientList ? ingredientList.map((ingredient, index) => (
-        <label key={ ingredient[0] } htmlFor={ ingredient[0] }>
-          <input
-            type="checkbox"
-            checked={ ingredient[1] }
-            key={ ingredient[0] }
-            onChange={ () => handleChange(index) }
-            data-testid={ `${index}-ingredient-step` }
-          />
-          { `${recipe[measures[index]]} ${ingredient[0]}`}
-        </label>
+        <Row key={ ingredient } data-testid={ `${index}-ingredient-step` }>
+          <label key={ ingredient[0] } htmlFor={ ingredient[0] }>
+            <input
+              type="checkbox"
+              checked={ ingredient[1] }
+              key={ ingredient[0] }
+              onChange={
+                () => handleChange(index, ingredientList, setIngredientList, recipe)
+              }
+              // data-testid={ `${index}-ingredient-step` }
+            />
+            {!ingredient[1] ? (
+              <div>
+                <p>
+                  {recipe[measures[index]]}
+                </p>
+                <p>{ingredient[0]}</p>
+              </div>
+            )
+              : (
+                <div>
+                  <p>
+                    <s>
+                      {recipe[measures[index]]}
+                    </s>
+                  </p>
+                  <p><s>{ingredient[0]}</s></p>
+                </div>)}
+          </label>
+        </Row>
       )) : '' }
-    </Form>
+    </Container>
   );
 }
 

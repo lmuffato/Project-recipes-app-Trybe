@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import DetailsHeader from './components/DetailsPage/DetailsHeader';
@@ -10,6 +10,7 @@ import { getSpecificMeal } from '../actions/meals';
 import './RecipeDetails.css';
 
 function RecipeDetails() {
+  const [inProgressUpdate, setInprogressUpdate] = useState(true);
   const history = useHistory();
   const { location: { pathname } } = history;
   const type = pathname.includes('comidas') ? 'meals' : 'drinks';
@@ -30,7 +31,6 @@ function RecipeDetails() {
       return state.drinks.specificDrink;
     }
   });
-
   useEffect(() => {
     if (type === 'meals') {
       dispatch(getSpecificMeal(pathname.split('/')[2]));
@@ -45,9 +45,18 @@ function RecipeDetails() {
       : data.map((recipe) => (
         <div key={ recipe.strDrink || recipe.strMeal }>
           <DetailsHeader recipe={ recipe } type={ type } pathname={ pathname } />
-          <Ingredients recipe={ recipe } />
+          <Ingredients
+            recipe={ recipe }
+            inProgressUpdate={ inProgressUpdate }
+            setInprogressUpdate={ setInprogressUpdate }
+          />
           <Instructions recipe={ recipe } />
-          <FinishRecipeBtn pathname={ pathname } recipe={ recipe } type={ type } />
+          <FinishRecipeBtn
+            inProgressUpdate={ inProgressUpdate }
+            pathname={ pathname }
+            recipe={ recipe }
+            type={ type }
+          />
         </div>
       ))
   );

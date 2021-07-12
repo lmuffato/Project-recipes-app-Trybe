@@ -6,6 +6,7 @@ import Col from 'react-bootstrap/Col';
 import shareIcon from '../../../images/shareIcon.svg';
 import whiteHeartIcon from '../../../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../../../images/blackHeartIcon.svg';
+import './details.css';
 
 const favoriteRecipe = (recipe, type, isFavorited) => {
   const favorites = JSON.parse(localStorage.getItem('favoriteRecipes'));
@@ -52,7 +53,7 @@ function DetailsHeader(props) {
   });
 
   const copyToClipboard = () => {
-    const link = `http://localhost:3000${pathname}`;
+    const link = `http://localhost:3000${pathname.split('/in-progress')[0]}`;
     navigator.clipboard.writeText(link);
 
     copyMessageToggle(false);
