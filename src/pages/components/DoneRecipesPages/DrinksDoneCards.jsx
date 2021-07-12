@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import shareIcon from '../../../images/shareIcon.svg';
-import './cards.css';
 
 export default function DrinksDoneCards({ props: { recipe, index } }) {
   const [show, setShow] = useState(false);
