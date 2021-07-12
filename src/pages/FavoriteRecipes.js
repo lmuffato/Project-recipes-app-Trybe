@@ -1,36 +1,26 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import shareIcon from '../images/shareIcon.svg';
 import FavoriteBtn from '../compenents/FavoriteBtn';
 import RecipesContext from '../contexts/RecipesContext';
 
 function FavoriteRecipes() {
-  const { favoriteRecipes, setFavRecipes } = useContext(RecipesContext);
-
-
-  const [showRecipes, setShowRecipes] = useState(favoriteRecipes);
-  // const [showRecipes, setShowRecipes] = useState(() => {
-  //   const getFavorites = JSON.parse(localStorage.getItem('favoriteRecipes'));
-  //   return getFavorites ? getFavorites : [];
-  // });
-  const [isCopy, setIsCopy] = useState(false);
+  const { favoriteRecipes, showRecipes, setShowRecipes } = useContext(RecipesContext);
 
   useEffect(() => {
     const recipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
-
     if (recipes === null) {
-      global.alert('Nenhuma receita favorita encontrada!'); 
+      global.alert('Nenhuma receita favorita encontrada!');
     } else {
       setShowRecipes(recipes);
-      setFavRecipes(recipes);
     }
-  }, []);
+  }, [favoriteRecipes]);
 
   const copyToClipboard = ({ target }) => {
-    setIsCopy(true);
     const { alt } = target;
     const path = `http://localhost:3000/${alt}`;
     navigator.clipboard.writeText(path);
+    global.alert('Link copiado!');
   };
 
   const renderCards = (
@@ -39,7 +29,6 @@ function FavoriteRecipes() {
     if (type === 'meal') {
       return (
         <div key={ id }>
-          { isCopy ? <p>Link copiado!</p> : null }
           <Link to={ `/comidas/${id}` }>
             <img
               data-testid={ `${index}-horizontal-image` }
@@ -73,7 +62,6 @@ function FavoriteRecipes() {
     }
     return (
       <div key={ id }>
-        { isCopy ? <p>Link copiado!</p> : null }
         <Link to={ `/bebidas/${id}` }>
           <img
             data-testid={ `${index}-horizontal-image` }
@@ -113,7 +101,8 @@ function FavoriteRecipes() {
       const mealsRecipes = favoriteRecipes.filter((recipe) => recipe.type === 'meal');
       setShowRecipes(mealsRecipes);
     } else if (param === 'cocktails') {
-      const drinksRecipes = favoriteRecipes.filter((recipe) => recipe.type === 'cocktail');
+      const drinksRecipes = favoriteRecipes
+        .filter((recipe) => recipe.type === 'cocktail');
       setShowRecipes(drinksRecipes);
     }
   };
@@ -125,7 +114,7 @@ function FavoriteRecipes() {
         data-testid="filter-by-all-btn"
         onClick={ () => handleContent('all') }
       >
-      All
+        All
       </button>
 
       <button
@@ -133,7 +122,7 @@ function FavoriteRecipes() {
         data-testid="filter-by-food-btn"
         onClick={ () => handleContent('meals') }
       >
-      Food
+        Food
       </button>
 
       <button
@@ -141,7 +130,7 @@ function FavoriteRecipes() {
         data-testid="filter-by-drink-btn"
         onClick={ () => handleContent('cocktails') }
       >
-      Drinks
+        Drinks
       </button>
 
       {

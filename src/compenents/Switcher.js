@@ -14,7 +14,6 @@ import DoneRecepies from '../pages/DoneRecepies';
 import MealDescription from './MealDescription';
 import DrinkDescription from './DrinkDescription';
 import NotFound from './NotFound';
-import Teste from '../pages/Teste';
 
 function Switcher() {
   return (

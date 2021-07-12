@@ -6,39 +6,33 @@ import RecipesContext from '../contexts/RecipesContext';
 
 function FavoriteBtn({ id, type, area, category, alcoholicOrNot, name, image }) {
   const { favoriteRecipes, setFavRecipes } = useContext(RecipesContext);
-
   const [isFavorite, setIsFavorite] = useState(false);
+  const recipeId = id;
 
   useEffect(() => {
     localStorage.setItem('favoriteRecipes', JSON.stringify(favoriteRecipes));
-  }, [favoriteRecipes]);
+  }, [favoriteRecipes.length]);
 
   const setFavorite = () => {
     const recipeDetails = {
-      id: id,
-      type: type,
-      area: area,
-      category: category,
-      alcoholicOrNot: alcoholicOrNot,
-      name: name,
-      image: image,
+      id,
+      type,
+      area,
+      category,
+      alcoholicOrNot,
+      name,
+      image,
     };
     setFavRecipes((prevRecipes) => [...prevRecipes, recipeDetails]);
     setIsFavorite(true);
   };
 
   const setUnfavorite = () => {
-    const recipeId = id;
-    
-    // const getFavRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
-    const removeFav = Object.values(favoriteRecipes).filter(({ id }) => id !== recipeId);
-
-    localStorage.setItem('favoriteRecipes', JSON.stringify(removeFav));
+    const removeFav = favoriteRecipes.filter(({ id }) => id !== recipeId);
     setFavRecipes(removeFav);
   };
 
   const setButton = () => {
-    const recipeId = id;
     const getLocalStr = JSON.parse(localStorage.getItem('favoriteRecipes'));
     let checkLocalStr;
 
