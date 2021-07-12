@@ -13,6 +13,7 @@ import ExploreByIngredientDrinks from './pages/ExploreByIngredientDrinks';
 import ExploreByAreaFoods from './pages/ExploreByAreaFoods';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import RecipesFavorites from './pages/RecipesFavorite';
+import RecipesDone from './pages/RecipesDone';
 
 function App() {
   return (
@@ -45,6 +46,7 @@ function App() {
             />
             <Route exact path="/explorar/comidas/area" component={ ExploreByAreaFoods } />
             <Route path="/receitas-favoritas" component={ RecipesFavorites } />
+            <Route patch="receitas-feitas" component={ RecipesDone } />
           </Switch>
         </BrowserRouter>
       </AppProvider>
