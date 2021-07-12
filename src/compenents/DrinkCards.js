@@ -4,13 +4,13 @@ import { Link } from 'react-router-dom';
 // import '../styles/MealDescription.css';
 import '../styles/MainRecipes.css';
 
-function DrinkCards({ data, index, linkTestid, titleTestid }) {
+function DrinkCards({ data, index }) {
   const { idDrink, strDrinkThumb, strDrink } = data;
   return (
     <Link
       to={ `/bebidas/${idDrink}` }
-      className="recipe"
-      data-testid={ linkTestid }
+      className="recipe recomedation-card"
+      data-testid={ `${index}-recipe-card` }
     >
       <img
         data-testid={ `${index}-card-img` }
@@ -18,7 +18,7 @@ function DrinkCards({ data, index, linkTestid, titleTestid }) {
         alt="Drink"
         className="recipe-image"
       />
-      <p className="recipe-title" data-testid={ titleTestid }>{strDrink}</p>
+      <p className="recipe-title" data-testid={ `${index}-card-name` }>{strDrink}</p>
     </Link>
   );
 }

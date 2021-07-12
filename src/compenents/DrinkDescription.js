@@ -5,9 +5,10 @@ import RecipesContext from '../contexts/RecipesContext';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
-import MealCards from './MealCards';
+// import MealCards from './MealCards';
 import '../styles/MealDescription.css';
 import copyToClipboard from '../services/copyToClipboard';
+import Recomendations from './Recomendations';
 
 function DrinkDescription({ recipe, recipeId }) {
   const { recomendations } = useContext(RecipesContext);
@@ -77,18 +78,28 @@ function DrinkDescription({ recipe, recipeId }) {
         <p data-testid="instructions">{ strInstructions }</p>
         <iframe title="YouTube video player" data-testid="video" />
       </section>
-      <section className="carousel">
-        <section className="recipes" onWheel={ handleScroll }>
-          { recomendations.map((recomendation, index) => (
-            <MealCards
-              data={ recomendation }
+      <section>
+        <section className="recipes carousel" onWheel={ handleScroll }>
+          { recomendations.map(({ idMeal, strMealThumb, strMeal }, index) => (
+            <Recomendations
+              // data={ recomendation }
               index={ index }
-              linkTestid={ `${index}-recomendation-card` }
-              titleTestid={ `${index}-recomendation-title` }
-              key={ recomendation.idMeal }
-            />))}
+              key={ idMeal }
+              id={ idMeal }
+              thumb={ strMealThumb }
+              recipeName={ strMeal }
+            />
+            // <MealCards
+            //   data={ recomendation }
+            //   index={ index }
+            //   linkTestid={ `${index}-recomendation-card` }
+            //   titleTestid={ `${index}-recomendation-title` }
+            //   key={ recomendation.idMeal }
+            // />
+          ))}
         </section>
       </section>
+      <Recomendations />
       <Link to={ `/bebidas/${recipeId}/in-progress` }>
         <button
           type="button"

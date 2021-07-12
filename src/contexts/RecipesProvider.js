@@ -11,6 +11,10 @@ function RecipesProvider({ children }) {
   const [idMeal, setIdMeal] = useState();
   const [idDrink, setIdDrink] = useState();
   const [recomendations, setRecomendations] = useState(null);
+  const [favoriteRecipes, setFavRecipes] = useState(() => {
+    const favRecipe = localStorage.getItem('favoriteRecipes');
+    return favRecipe ? JSON.parse(favRecipe) : [];
+  });
 
   const contextValue = {
     type,
@@ -29,6 +33,8 @@ function RecipesProvider({ children }) {
     setIdDrink,
     recomendations,
     setRecomendations,
+    favoriteRecipes,
+    setFavRecipes,
   };
 
   return (

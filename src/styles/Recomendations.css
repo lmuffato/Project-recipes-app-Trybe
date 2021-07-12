@@ -1,0 +1,10 @@
+.carousel {
+  display: flex;
+  max-width: 100%;
+  overflow-x: scroll;
+}
+
+.recomendation-card img {
+  max-height: auto;
+  max-width: 200px;
+}

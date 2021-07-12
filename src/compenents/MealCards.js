@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import '../styles/MainRecipes.css';
 
-function MealCards({ data, index, linkTestid, titleTestid }) {
+function MealCards({ data, index }) {
   const { idMeal, strMealThumb, strMeal } = data;
   return (
     <Link
       to={ `/comidas/${idMeal}` }
-      className="recipe"
-      data-testid={ linkTestid }
+      className="recipe recomendation-card"
+      data-testid={ `${index}-recipe-card` }
     >
       <img
         data-testid={ `${index}-card-img` }
@@ -17,7 +17,7 @@ function MealCards({ data, index, linkTestid, titleTestid }) {
         alt="Meal"
         className="recipe-image"
       />
-      <p className="recipe-title" data-testid={ titleTestid }>{strMeal}</p>
+      <p className="recipe-title" data-testid={ `${index}-card-name` }>{strMeal}</p>
     </Link>
   );
 }

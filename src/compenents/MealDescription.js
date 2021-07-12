@@ -2,19 +2,21 @@ import React, { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import RecipesContext from '../contexts/RecipesContext';
-import shareIcon from '../images/shareIcon.svg';
+// import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
-import DrinkCards from './DrinkCards';
+// import DrinkCards from './DrinkCards';
 import '../styles/MealDescription.css';
-import copyToClipboard from '../services/copyToClipboard';
+import InteractiveButtons from './InteractiveButtons';
+import Recomendations from './Recomendations';
+// import copyToClipboard from '../services/copyToClipboard';
 
 function MealDescription({ recipe, recipeId }) {
   const { recomendations } = useContext(RecipesContext);
   const {
     idMeal, strMealThumb, strMeal, strCategory, strInstructions, strYoutube,
   } = recipe;
-  const [isCopy, setIsCopy] = useState(null);
+  // const [isCopy, setIsCopy] = useState(null);
   // Estados fake, até poder pegar o estado do localStorage
   const [isFav, setIsFav] = useState(false);
   const [isStarted, setIsStarted] = useState(false);
@@ -54,13 +56,8 @@ function MealDescription({ recipe, recipeId }) {
           className="recomedation-img"
         />
         <h1 data-testid="recipe-title">{ strMeal }</h1>
-        <button
-          data-testid="share-btn"
-          type="button"
-          onClick={ (event) => copyToClipboard(event, setIsCopy) }
-        >
-          <img src={ shareIcon } alt={ `comidas/${idMeal}` } />
-        </button>
+        <InteractiveButtons idRecipe={ `comidas/${idMeal}` } />
+        { /* Botão temporário */}
         <button
           data-testid="favorite-btn"
           type="button"
@@ -69,7 +66,6 @@ function MealDescription({ recipe, recipeId }) {
         >
           <img src={ isFav ? blackHeartIcon : whiteHeartIcon } alt="botão de favoritar" />
         </button>
-        {isCopy ? <span>Link copiado!</span> : null}
         <h3 data-testid="recipe-category">{ strCategory }</h3>
         <h2>Ingredients</h2>
         { ingredients.map((ingredient, index) => (
@@ -86,14 +82,22 @@ function MealDescription({ recipe, recipeId }) {
       </section>
       <section className="carousel">
         <section className="recipes" onWheel={ handleScroll }>
-          { recomendations.map((recomendation, index) => (
-            <DrinkCards
-              data={ recomendation }
+          { recomendations.map(({ idDrink, strDrinkThumb, strDrink }, index) => (
+            <Recomendations
               index={ index }
-              linkTestid={ `${index}-recomendation-card` }
-              titleTestid={ `${index}-recomendation-title` }
-              key={ recomendation.idDrink }
-            />))}
+              key={ idDrink }
+              id={ idDrink }
+              thumb={ strDrinkThumb }
+              recipeName={ strDrink }
+            />
+            // <DrinkCards
+            //   data={ recomendation }
+            //   index={ index }
+            //   linkTestid={ `${index}-recomendation-card` }
+            //   titleTestid={ `${index}-recomendation-title` }
+            //   key={ recomendation.idDrink }
+            // />
+          ))}
         </section>
       </section>
       <Link to={ `/comidas/${recipeId}/in-progress` }>

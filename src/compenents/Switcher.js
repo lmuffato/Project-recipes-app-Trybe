@@ -9,10 +9,11 @@ import FoodsIngredients from '../pages/FoodsIngredients';
 import FoodsArea from '../pages/FoodsArea';
 import LoginPage from '../pages/LoginPage';
 import Profile from '../pages/ProfilePage';
+import FavoriteRecipes from '../pages/FavoriteRecipes';
 import DoneRecepies from '../pages/DoneRecepies';
-import ReceitasFavoritas from '../pages/ReceitasFavoritas';
 import RecipeDescription from './RecipeDescription';
 import NotFound from './NotFound';
+// import Teste from '../pages/Teste';
 
 function Switcher() {
   return (
@@ -26,8 +27,8 @@ function Switcher() {
       <Route exact path="/explorar/comidas" component={ Foods } />
       <Route exact path="/explorar/bebidas" component={ Drinks } />
       <Route path="/perfil" component={ Profile } />
+      <Route path="/receitas-favoritas" component={ FavoriteRecipes } />
       <Route path="/receitas-feitas" component={ DoneRecepies } />
-      <Route path="/receitas-favoritas" component={ ReceitasFavoritas } />
       <Route path="/explorar/bebidas/area" component={ NotFound } />
       <Route
         path="/explorar/comidas/ingredientes"
