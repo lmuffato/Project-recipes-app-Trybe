@@ -5,7 +5,7 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 
 function Perfil() {
-  const userEmailStorage = JSON.parse(localStorage.getItem('user'));
+  const userEmailStorage = JSON.parse(localStorage.getItem('user')) || { email: '' };
   const userEmail = userEmailStorage.email;
 
   const clearStorage = () => localStorage.clear();
