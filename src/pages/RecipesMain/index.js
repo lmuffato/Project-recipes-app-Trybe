@@ -45,7 +45,7 @@ export default function RecipesMain({ match }) {
 }
 
 RecipesMain.propTypes = {
-  match: PropTypes.arrayOf(PropTypes.shape({
+  match: PropTypes.shape({
     path: PropTypes.string.isRequired,
-  })).isRequired,
+  }).isRequired,
 };

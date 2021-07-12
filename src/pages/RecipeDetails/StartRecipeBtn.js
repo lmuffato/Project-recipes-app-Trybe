@@ -1,7 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { AppContext } from '../../context/AppContext';
 
 export default function StartRecipeBtn({ recipe }) {
+  const { context } = useContext(AppContext);
+  const { pageOrigin } = context;
   useEffect(() => {
     const doneRecipes = [ // Info mockada
       {
@@ -40,13 +44,20 @@ export default function StartRecipeBtn({ recipe }) {
 
   return (
     <div>
-      <button
-        type="button"
-        data-testid="start-recipe-btn"
-        className="start-recipe-btn "
+      <Link
+        to={ pageOrigin === 'themealdb'
+          ? `${recipe.idMeal}/in-progress`
+          : `${recipe.idDrink}/in-progress` }
+
       >
-        Iniciar Receita
-      </button>
+        <button
+          type="button"
+          data-testid="start-recipe-btn"
+          className="start-recipe-btn "
+        >
+          Iniciar Receita
+        </button>
+      </Link>
     </div>
   );
 }
