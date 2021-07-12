@@ -1,10 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react';
-// import { Form, Button, Card } from 'react-bootstrap';
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, FormControl, Navbar,
+  ButtonGroup, ToggleButton,
+} from 'react-bootstrap';
 import { useLocation, useHistory } from 'react-router-dom';
 import { getIngCock, getIngCockTail, getNameCock,
   getNameCockTail, getFirstLetterCock, getFirstLetterCockTail,
 } from '../services/fetchApiSearchBar';
+import './searchBar.css';
 
 import ContextComidas from '../provider/ContextComida';
 import ContextBebidas from '../provider/ContextBebida';
@@ -21,7 +23,9 @@ const SearchBarForm = () => {
 
   const HISTORY = useHistory();
   const LOCATION = useLocation();
-  const FIRST_LETTER = 'primeira-letra';
+  const INGREDIENT = 'ingredient';
+  const NAME = 'name';
+  const FIRST_LETTER = 'first-letter';
   const ALERT_SINTO_MUITO = 'Sinto muito,'
     + ' não encontramos nenhuma receita para esses filtros.';
 
@@ -40,10 +44,10 @@ const SearchBarForm = () => {
   }, [dataCocks, dataDrinks]);
 
   const handleSearchBarApiComidas = () => {
-    if (markBusca === 'ingrediente') {
+    if (markBusca === INGREDIENT) {
       getIngCock(busca).then(({ meals }) => setDataCocks(meals));
     }
-    if (markBusca === 'nome') {
+    if (markBusca === NAME) {
       getNameCock(busca).then(({ meals }) => setDataCocks(meals));
     }
     if (markBusca === FIRST_LETTER) {
@@ -55,11 +59,11 @@ const SearchBarForm = () => {
   };
 
   const handleSearchBarApiBebidas = () => {
-    if (markBusca === 'ingrediente') {
+    if (markBusca === INGREDIENT) {
       getIngCockTail(busca).then(({ drinks }) => setDataDrinks(drinks))
         .catch(() => alert(ALERT_SINTO_MUITO));
     }
-    if (markBusca === 'nome') {
+    if (markBusca === NAME) {
       getNameCockTail(busca).then(({ drinks }) => setDataDrinks(drinks));
     }
     if (markBusca === FIRST_LETTER) {
@@ -76,67 +80,65 @@ const SearchBarForm = () => {
   };
 
   const handleSearchBarValue = () => (
-    <Form.Group>
-      <Form.Label htmlFor="id-busca">Busca:</Form.Label>
-      <input
+    // {/* className="d-flex" ou inline */}
+    <div className="textBtn">
+      <FormControl
         type="text"
         id="id-busca"
         name="id-busca"
-        onChange={ (e) => setBusca(e.target.value) }
+        onChange={ ({ target }) => setBusca(target.value) }
         data-testid="search-input"
+        placeholder="Search"
+        // className="mr-sm-2"
+        className="text"
       />
-    </Form.Group>
-  );
-
-  const handleSearchBarMark = () => (
-    <div>
-      <Form.Group>
-        <Form.Label>
-          <input
-            type="radio"
-            name="busca"
-            value="ingrediente"
-            onChange={ (e) => setMarkBusca(e.target.value) }
-            data-testid="ingredient-search-radio"
-          />
-          Ingrediente
-        </Form.Label>
-        <Form.Label>
-          <input
-            type="radio"
-            name="busca"
-            value="nome"
-            onChange={ (e) => setMarkBusca(e.target.value) }
-            data-testid="name-search-radio"
-          />
-          Nome
-        </Form.Label>
-        <Form.Label>
-          <input
-            type="radio"
-            name="busca"
-            value="primeira-letra"
-            onChange={ (e) => setMarkBusca(e.target.value) }
-            data-testid="first-letter-search-radio"
-          />
-          Primeira Letra
-        </Form.Label>
-      </Form.Group>
+      <Button
+        className="button"
+        variant="outline-info"
+        data-testid="exec-search-btn"
+        onClick={ handleFilterSearchBar }
+      >
+        Search
+      </Button>
     </div>
   );
 
+  const handleSearchBarMark = () => {
+    const RADIOS = [
+      { name: 'Ingredient', value: INGREDIENT, dataTestid: 'ingredient-search-radio' },
+      { name: 'Name', value: NAME, dataTestid: 'name-search-radio' },
+      { name: 'First Letter',
+        value: FIRST_LETTER,
+        dataTestid: 'first-letter-search-radio' },
+    ];
+    return (
+      <ButtonGroup toggle className="radios">
+        {RADIOS.map((radio, idx) => (
+          <ToggleButton
+            key={ idx }
+            type="radio"
+            name="radio"
+            value={ radio.value }
+            variant="outline-info"
+            checked={ markBusca === radio.value }
+            data-testid={ `${radio.dataTestid}` }
+            onChange={ ({ target }) => setMarkBusca(target.value) }
+          >
+            {radio.name}
+          </ToggleButton>
+        ))}
+      </ButtonGroup>
+    );
+  };
+
   return (
     <div>
-      <Form>
-        { handleSearchBarValue() }
-        { handleSearchBarMark() }
-        <Button
-          data-testid="exec-search-btn"
-          onClick={ handleFilterSearchBar }
-        >
-          Busca
-        </Button>
-      </Form>
+      <Navbar bg="dark" variant="dark">
+        <Form className="form">
+          { handleSearchBarValue() }
+          { handleSearchBarMark() }
+        </Form>
+      </Navbar>
     </div>
   );
 };
