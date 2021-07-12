@@ -3,6 +3,8 @@ import { array } from 'prop-types';
 import ContextComidas from '../provider/ContextComida';
 import ContextBebidas from '../provider/ContextBebida';
 
+import '../styles/custom.scss';
+
 function Categorias({ param }) {
   const { setTexto: setComidas } = useContext(ContextComidas);
   const { setTexto: setBebidas } = useContext(ContextBebidas);
@@ -22,7 +24,7 @@ function Categorias({ param }) {
           value={ item.strCategory }
           onClick={ handleClick }
           data-testid={ `${item.strCategory}-category-filter` }
-          className="btn btn-secondary border-secondary rounded-0"
+          className="btn btn-secondary border-secondary rounded-0 filters-buttons"
         >
           {item.strCategory}
         </button>
@@ -38,7 +40,7 @@ function Categorias({ param }) {
       value="All"
       name="All"
       onClick={ handleClick }
-      className="btn btn-secondary border-secondary rounded-0"
+      className="btn btn-secondary border-secondary rounded-0 filters-buttons danger"
     >
       All
     </button>

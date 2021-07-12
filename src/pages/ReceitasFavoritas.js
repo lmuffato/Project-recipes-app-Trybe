@@ -20,7 +20,23 @@ function ReceitasFavoritas() {
     verifyFavorite();
   }, []);
 
-  return favoriteRecipes ? (
+  const createRecipeList = () => {
+    console.log('teste');
+    return (
+      favoriteRecipes
+        .map((recipe, index) => {
+          const props = {
+            recipe,
+            index,
+            setFavoriteRecipes,
+          };
+
+          return <ReceitasFavoritasCard key={ index } props={ props } />;
+        })
+    );
+  };
+
+  return (
     <div>
       <Header title="Receitas Favoritas" />
 
@@ -59,18 +75,9 @@ function ReceitasFavoritas() {
         </button>
       </div>
 
-      { favoriteRecipes
-        .map((recipe, index) => {
-          const props = {
-            recipe,
-            index,
-            setFavoriteRecipes,
-          };
-
-          return <ReceitasFavoritasCard key={ index } props={ props } />;
-        })}
+      { favoriteRecipes ? createRecipeList() : <span>Nenhuma receita favoritada</span> }
     </div>
-  ) : <span>Nenhuma receita favoritada</span>;
+  );
 }
 
 export default ReceitasFavoritas;

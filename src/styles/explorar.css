@@ -2,13 +2,19 @@
   display: flex;
   flex-direction: column;
   height: 20%;
-  margin-top: 15px;
+  margin-bottom: 48%;
+  margin-top: 30%;
 }
 
 .explorar-buttons > button {
-  background-color: rgb(167, 166, 166);
+  align-self: center;
+  background-color: #692c03;
+  border-radius: 8px;
   border-style: none;
-  height: 150px;
+  color: white;
+  height: 100px;
+  margin-bottom: 10px;
+  width: 200px;
 }
 
 .explorar-buttons > button:focus {
@@ -16,5 +22,5 @@
 }
 
 .explorar-buttons > button:hover {
-  background-color: rgb(122, 122, 122);
+  background-color: #a1480c;
 }
