@@ -33,7 +33,7 @@ function Search({ visibility }) {
 }
 
 Search.propTypes = {
-  visibility: PropTypes.string.isRequired,
+  visibility: PropTypes.bool.isRequired,
 };
 
 export default Search;
