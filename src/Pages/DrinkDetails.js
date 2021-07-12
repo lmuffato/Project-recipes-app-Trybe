@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { actionDetails, actionIdRecipeInProgress } from '../redux/actions';
 import shareIcon from '../images/shareIcon.svg';
 import RecomendationCard from '../util/renderRecomendationCard';
+import RenderInstructions from '../components/renderInstructions';
 import '../components/Footer.css';
 import RenderFavoriteHeart from '../util/addOrRemoveFavorite';
 import RenderIngredients from '../util/mealDetailsComponents/renderIngredients';
@@ -54,12 +55,21 @@ export default function DrinkDetails() {
     setCopy('Link copiado!');
   };
 
-  const testButton = () => {
+  const enableDisableButton = (recId) => {
+    const doneRec = JSON.parse(localStorage.getItem('doneRecipes'));
+    if (doneRec) {
+      const doneMeals = doneRec.filter((e) => e.id === recId);
+      if (doneMeals.length > 0) return false;
+    }
+    return true;
+  };
+
+  const textForButton = (recId) => {
     const lS = JSON.parse(localStorage.getItem('inProgressRecipes'));
     if (lS) {
       const ids = Object.keys(lS);
       if (ids.length > 0) {
-        const find = ids.filter((e) => e === id);
+        const find = ids.filter((e) => e === recId);
         return (
           find ? 'Continuar Receita' : INICIAR_RECEITA
         );
@@ -86,7 +96,6 @@ export default function DrinkDetails() {
   const renderDrinkRecipe = () => {
     const ingredients = [];
     const measure = [];
-    const result = testButton();
 
     if (data) {
       const array = Object.entries(data[0]);
@@ -100,6 +109,8 @@ export default function DrinkDetails() {
       });
 
       const { idDrink, strDrink, strAlcoholic, strDrinkThumb, strInstructions } = data[0];
+      const showButton = enableDisableButton(idDrink);
+      const result = textForButton(idDrink);
       return (
         <div>
           <img
@@ -122,7 +133,7 @@ export default function DrinkDetails() {
             {RenderIngredients(ingredients, measure)}
           </ul>
           <h2>Instructions</h2>
-          <p data-testid="instructions">{strInstructions}</p>
+          <RenderInstructions strInst={ strInstructions } />
           <h2>Recomendadas</h2>
           <div className="carousel-container">
             <div className="recipies-list">
@@ -130,7 +141,7 @@ export default function DrinkDetails() {
             </div>
           </div>
           <button
-            className="footer"
+            className={ showButton ? 'footer' : 'hide-button' }
             type="button"
             data-testid="start-recipe-btn"
             onClick={ () => goToRecipeInProgress(idDrink, ingredients, measure) }

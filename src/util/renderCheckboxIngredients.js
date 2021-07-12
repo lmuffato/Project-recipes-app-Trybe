@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Proptypes from 'prop-types';
 import '../PagesCss/Checkbox.css';
 
@@ -55,32 +55,22 @@ export default function RenderCheckboxIngredients({ ingredients, measure }) {
 
   return (
     <>
-      { inProgress && (
-        ingredients.map((item, index) => {
-          if (item !== '') {
-            let name = `${item}`;
-            if (measure[index] !== '' && measure[index] !== null) {
-              name = `${name} - ${measure[index]}`;
-            }
-            return (
-              <div key={ name }>
-                <label htmlFor="ingredient">
-                  {name}
-                  <input
-                    name="ingredient"
-                    checked={ getStorage(item) }
-                    onChange={ ({ target }) => updateStorage(item, target.checked) }
-                    type="checkbox"
-                    data-testid={ `${index}-ingredient-step` }
-                  />
-                </label>
-              </div>
-            );
-          }
-          return '';
-        })
-      )}
-      .
+      {
+        itens.map((item, index) => (
+          <div key={ item } data-testid={ `${index}-ingredient-step` }>
+            <label htmlFor="ingredient" className={ checks[index] ? 'risca' : '' }>
+              {item}
+              <input
+                id={ index }
+                name="ingredient"
+                checked={ getStorage(item) }
+                onChange={ ({ target }) => updateStorage(item, target.checked) }
+                type="checkbox"
+              />
+            </label>
+          </div>
+        ))
+      }
     </>
   );
 }
