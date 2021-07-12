@@ -49,15 +49,8 @@ function BuscaHeader() {
   }
 
   return (
-    <form>
-      <input
-        data-testid="search-input"
-        type="text"
-        value={ text }
-        onChange={ (event) => setText(event.target.value) }
-        required
-      />
-      <div>
+    <form className="inp-search">
+      <div className="inp-group-search">
         <label htmlFor="ingredient">
           <input
             type="radio"
@@ -95,13 +88,25 @@ function BuscaHeader() {
           Primeira letra
         </label>
       </div>
-      <button
-        type="submit"
-        data-testid="exec-search-btn"
-        onClick={ handleClick }
-      >
-        Filtrar
-      </button>
+      <div className="group-submit-txt">
+        <input
+          data-testid="search-input"
+          className="inp-txt-search"
+          type="text"
+          value={ text }
+          onChange={ (event) => setText(event.target.value) }
+          required
+        />
+        <div />
+        <button
+          type="submit"
+          className="btn-search-submit"
+          data-testid="exec-search-btn"
+          onClick={ handleClick }
+        >
+          Filtrar
+        </button>
+      </div>
     </form>
   );
 }

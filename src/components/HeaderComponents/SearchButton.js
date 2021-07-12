@@ -8,6 +8,7 @@ function SearchButton(props) {
     <button
       type="button"
       onClick={ () => setInput(!input) }
+      className="btn-search"
     >
       <img
         src={ searchIMG }
