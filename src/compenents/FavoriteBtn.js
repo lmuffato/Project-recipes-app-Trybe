@@ -28,7 +28,7 @@ function FavoriteBtn({ id, type, area, category, alcoholicOrNot, name, image }) 
   };
 
   const setUnfavorite = () => {
-    const removeFav = favoriteRecipes.filter(({ id }) => id !== recipeId);
+    const removeFav = favoriteRecipes.filter(({ id: favId }) => favId !== recipeId);
     setFavRecipes(removeFav);
   };
 
@@ -39,7 +39,7 @@ function FavoriteBtn({ id, type, area, category, alcoholicOrNot, name, image }) 
     if (getLocalStr !== null) {
       // procura o recipeId no LS
       checkLocalStr = Object.values(getLocalStr)
-        .find(({ id }) => id === recipeId);
+        .find(({ id: strId }) => strId === recipeId);
     }
 
     if (checkLocalStr || isFavorite) {
