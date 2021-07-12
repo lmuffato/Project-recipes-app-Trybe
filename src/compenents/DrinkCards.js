@@ -6,7 +6,6 @@ import '../styles/MainRecipes.css';
 
 function DrinkCards({ data, index, linkTestid, titleTestid }) {
   const { idDrink, strDrinkThumb, strDrink } = data;
-  console.log(`${index}-recipe-card`);
   return (
     <Link
       to={ `/bebidas/${idDrink}` }

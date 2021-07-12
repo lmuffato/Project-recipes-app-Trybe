@@ -17,7 +17,6 @@ function RecipeDescription() {
   if (recipeType === 'comidas') {
     recipeSearch = 'meal';
     type = 'cocktail';
-    console.log(recipeSearch);
   } else if (recipeType === 'bebidas') {
     recipeSearch = 'cocktail';
     type = 'meal';
@@ -32,8 +31,6 @@ function RecipeDescription() {
       const recipeEndpoint = `https://www.the${recipeSearch}db.com/api/json/v1/1/lookup.php?i=${recipeId}`;
       await fetch(recipeEndpoint).then((data) => data.json())
         .then((result) => {
-          console.log('Opa');
-          console.log(result);
           setRecipe(result);
         })
         .catch(() => global.alert(
@@ -53,9 +50,6 @@ function RecipeDescription() {
     };
     getMeal();
   }, [recipeId, recipeSearch, type, setRecomendations]);
-
-  console.log(recipe);
-  console.log(recipeSearch);
 
   const recipeRender = () => (
     recipeSearch === 'meal'

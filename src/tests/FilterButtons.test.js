@@ -6,8 +6,10 @@ import App from '../App';
 
 const buttonsLength = 7;
 
-const testIdArray = ['All-category-filter', 'Beef-category-filter', 'Breakfast-category-filter', 'Chicken-category-filter', 'Dessert-category-filter', 'Goat-category-filter'];
-const categoriesArray = ['All', 'Beef', 'Breakfast', 'Chicken', 'Dessert', 'Goat'];
+const testIdArray = [
+  'All-category-filter', 'Beef-category-filter', 'Breakfast-category-filter',
+  'Chicken-category-filter', 'Dessert-category-filter', 'Goat-category-filter'];
+// const categoriesArray = ['All', 'Beef', 'Breakfast', 'Chicken', 'Dessert', 'Goat'];
 
 describe('Tests the filter buttons at the main recipes page', () => {
   it('Verify how many filter buttons there ara', async () => {
@@ -19,7 +21,7 @@ describe('Tests the filter buttons at the main recipes page', () => {
     const buttons = await findAllByRole('button');
     expect(buttons.length).toBe(buttonsLength);
 
-    testIdArray.forEach(async (testId, index) => {
+    testIdArray.forEach(async (testId /* , index */) => {
       const button = await findByRole(testId);
       expect(button).toBeInTheDocument();
     });

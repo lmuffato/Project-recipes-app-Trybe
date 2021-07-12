@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import RecipesContext from '../contexts/RecipesContext';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import blackHeartIcon from '../images/blackHeartIcon.svg';
 import MealCards from './MealCards';
 import '../styles/MealDescription.css';
 import copyToClipboard from '../services/copyToClipboard';
@@ -14,6 +15,9 @@ function DrinkDescription({ recipe, recipeId }) {
     idDrink, strDrinkThumb, strDrink, strCategory, strInstructions, strAlcoholic,
   } = recipe;
   const [isCopy, setIsCopy] = useState(null);
+  // Estados fake, até poder pegar o estado do localStorage
+  const [isFav, setIsFav] = useState(false);
+  const [isStarted, setIsStarted] = useState(false);
   const body = document.querySelector('body');
 
   const ingredients = Object.entries(recipe)
@@ -54,10 +58,15 @@ function DrinkDescription({ recipe, recipeId }) {
         >
           <img src={ shareIcon } alt={ `bebidas/${idDrink}` } />
         </button>
-        <button data-testid="favorite-btn" type="button">
-          <img src={ whiteHeartIcon } alt="botão de favoritar" />
+        <button
+          data-testid="favorite-btn"
+          type="button"
+          onClick={ () => setIsFav(!isFav) }
+          src={ isFav ? blackHeartIcon : whiteHeartIcon }
+        >
+          <img src={ isFav ? blackHeartIcon : whiteHeartIcon } alt="botão de favoritar" />
         </button>
-        {isCopy ? <span>Link copiado!</span> : null}
+        {isCopy && <span>Link copiado!</span>}
         <h3 data-testid="recipe-category">{`${strCategory} ${strAlcoholic}`}</h3>
         <h2>Ingredients</h2>
         { ingredients.map((ingredient, index) => (
@@ -86,7 +95,7 @@ function DrinkDescription({ recipe, recipeId }) {
           className="start-recipe"
           data-testid="start-recipe-btn"
         >
-          Iniciar Receita
+          { isStarted ? 'Continuar Receita' : 'Iniciar Receita' }
         </button>
       </Link>
     </>

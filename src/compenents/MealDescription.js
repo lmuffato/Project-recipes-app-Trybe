@@ -4,37 +4,34 @@ import { Link } from 'react-router-dom';
 import RecipesContext from '../contexts/RecipesContext';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import blackHeartIcon from '../images/blackHeartIcon.svg';
 import DrinkCards from './DrinkCards';
 import '../styles/MealDescription.css';
 import copyToClipboard from '../services/copyToClipboard';
 
 function MealDescription({ recipe, recipeId }) {
   const { recomendations } = useContext(RecipesContext);
-  console.log(recomendations);
   const {
     idMeal, strMealThumb, strMeal, strCategory, strInstructions, strYoutube,
   } = recipe;
   const [isCopy, setIsCopy] = useState(null);
+  // Estados fake, até poder pegar o estado do localStorage
+  const [isFav, setIsFav] = useState(false);
+  const [isStarted, setIsStarted] = useState(false);
   const body = document.querySelector('body');
-
-  // Estado fake, até poder pegar o estado do localStorage
-  // const [start, setStart] = useState(false);
 
   const ingredients = Object.entries(recipe)
     .filter(([key, value]) => (key.includes('strIngredient') ? value : null))
     .map((ingredient) => ingredient[1]);
-  console.log(ingredients);
 
   const measures = Object.entries(recipe)
     .filter(([key, value]) => (key
       .includes('strMeasure') ? value : null))
     .map((measure) => measure[1])
     .filter((measure) => measure.length > 1);
-  console.log(measures);
 
   const handleScroll = (event) => {
     body.style.overflowY = 'hidden';
-    // setStart(true);
     const scrollValue = 300;
     if (event.deltaY > 0) {
       event.target.scrollBy(scrollValue, 0);
@@ -64,8 +61,13 @@ function MealDescription({ recipe, recipeId }) {
         >
           <img src={ shareIcon } alt={ `comidas/${idMeal}` } />
         </button>
-        <button data-testid="favorite-btn" type="button">
-          <img src={ whiteHeartIcon } alt="botão de favoritar" />
+        <button
+          data-testid="favorite-btn"
+          type="button"
+          onClick={ () => setIsFav(!isFav) }
+          src={ isFav ? blackHeartIcon : whiteHeartIcon }
+        >
+          <img src={ isFav ? blackHeartIcon : whiteHeartIcon } alt="botão de favoritar" />
         </button>
         {isCopy ? <span>Link copiado!</span> : null}
         <h3 data-testid="recipe-category">{ strCategory }</h3>
@@ -100,7 +102,7 @@ function MealDescription({ recipe, recipeId }) {
           className="start-recipe"
           data-testid="start-recipe-btn"
         >
-          Iniciar Receita
+          { isStarted ? 'Continuar Receita' : 'Iniciar Receita' }
         </button>
       </Link>
     </>
