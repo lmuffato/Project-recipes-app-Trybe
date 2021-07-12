@@ -14,3 +14,7 @@
   outline: inherit;
   padding: 0;
 }
+
+.m-Header h1 {
+  font-size: 20px;
+}
