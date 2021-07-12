@@ -8,6 +8,7 @@ import FilterButtons from './FilterButtons';
 import SearchBar from './SearchBar';
 import '../App.css';
 import '../styles/MainRecipes.css';
+import Loading from './Loading';
 
 function MainRecipes() {
   const { searchBtn } = useContext(SearchbarContext);
@@ -21,28 +22,34 @@ function MainRecipes() {
     renderRecipes = recipes;
   }
 
+  if (renderRecipes) {
+    return (
+      <main data-testid="main-recipes" className="main">
+        { searchBtn ? <SearchBar /> : <FilterButtons /> }
+        <section className="recipes-container">
+          { type === 'meal' ? renderRecipes.map((recipe, index) => (
+            <MealCards
+              data={ recipe }
+              index={ index }
+              linkTestid={ `${index}-recipe-card` }
+              titleTestid={ `${index}-card-name` }
+              key={ recipe.idMeal }
+            />
+          )) : renderRecipes.map((recipe, index) => (
+            <DrinkCards
+              data={ recipe }
+              index={ index }
+              linkTestid={ `${index}-recipe-card` }
+              titleTestid={ `${index}-card-name` }
+              key={ recipe.idDrink }
+            />
+          ))}
+        </section>
+      </main>
+    );
+  }
   return (
-    <main data-testid="main-recipes" className="main">
-      { searchBtn ? <SearchBar /> : <FilterButtons /> }
-      <section className="recipes-container">
-        { type === 'meal' ? renderRecipes.map((recipe, index) => (
-          <MealCards
-            data={ recipe }
-            index={ index }
-            linkTestid={ `${index}-recipe-card` }
-            titleTestid={ `${index}-card-name` }
-            key={ recipe.idMeal }
-          />
-        )) : renderRecipes.map((recipe, index) => (
-          <DrinkCards
-            data={ recipe }
-            index={ index }
-            testId={ `${index}-recipe-card` }
-            key={ recipe.idDrink }
-          />
-        ))}
-      </section>
-    </main>
+    <Loading />
   );
 }
 

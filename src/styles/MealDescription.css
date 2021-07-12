@@ -1,4 +1,4 @@
-/* Estilização de carousel retirada desse vídeo:
+/* /* Estilização de carousel retirada desse vídeo:
 https://www.youtube.com/watch?v=SGwHpzgqzgk */
 
 * {
@@ -27,7 +27,8 @@ https://www.youtube.com/watch?v=SGwHpzgqzgk */
   flex: none;
   height: 150px;
   margin-right: 10%;
-  pointer-events: none;
+
+  /* pointer-events: none; */
   scroll-snap-align: start;
   width: 40%;
 }

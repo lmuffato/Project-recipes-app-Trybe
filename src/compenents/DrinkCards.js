@@ -1,10 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import '../styles/MealDescription.css';
+// import '../styles/MealDescription.css';
+import '../styles/MainRecipes.css';
 
 function DrinkCards({ data, index, linkTestid, titleTestid }) {
   const { idDrink, strDrinkThumb, strDrink } = data;
+  console.log(`${index}-recipe-card`);
   return (
     <Link
       to={ `/bebidas/${idDrink}` }

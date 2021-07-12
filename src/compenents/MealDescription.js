@@ -1,18 +1,23 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import RecipesContext from '../contexts/RecipesContext';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import DrinkCards from './DrinkCards';
 import '../styles/MealDescription.css';
 
-function MealDescription({ recipe }) {
+function MealDescription({ recipe, recipeId }) {
   const { recomendations } = useContext(RecipesContext);
   console.log(recomendations);
   const {
-    strMealThumb, strMeal, strCategory, strInstructions, strYoutube,
+    idMeal, strMealThumb, strMeal, strCategory, strInstructions, strYoutube,
   } = recipe;
+  const [isCopy, setIsCopy] = useState(null);
   const body = document.querySelector('body');
+
+  // Estado fake, até poder pegar o estado do localStorage
+  // const [start, setStart] = useState(false);
 
   const ingredients = Object.entries(recipe)
     .filter(([key, value]) => (key.includes('strIngredient') ? value : null))
@@ -28,6 +33,7 @@ function MealDescription({ recipe }) {
 
   const handleScroll = (event) => {
     body.style.overflowY = 'hidden';
+    // setStart(true);
     const scrollValue = 300;
     if (event.deltaY > 0) {
       event.target.scrollBy(scrollValue, 0);
@@ -40,6 +46,14 @@ function MealDescription({ recipe }) {
     body.style.overflowY = 'scroll';
   };
 
+  const copyToClipboard = ({ target }) => {
+    setIsCopy(true);
+    console.log(target);
+    const { alt } = target;
+    const path = `http://localhost:3000/${alt}`;
+    navigator.clipboard.writeText(path);
+  };
+
   return (
     <>
       <section className="detail-container" onWheel={ handleBodyScroll }>
@@ -50,12 +64,13 @@ function MealDescription({ recipe }) {
           className="recomedation-img"
         />
         <h1 data-testid="recipe-title">{ strMeal }</h1>
-        <button data-testid="share-btn" type="button">
-          <img src={ shareIcon } alt="botão de compartilhar" />
+        <button data-testid="share-btn" type="button" onClick={ copyToClipboard }>
+          <img src={ shareIcon } alt={ `comidas/${idMeal}` } />
         </button>
         <button data-testid="favorite-btn" type="button">
           <img src={ whiteHeartIcon } alt="botão de favoritar" />
         </button>
+        {isCopy ? <span>Link copiado!</span> : null}
         <h3 data-testid="recipe-category">{ strCategory }</h3>
         <h2>Ingredients</h2>
         { ingredients.map((ingredient, index) => (
@@ -75,20 +90,22 @@ function MealDescription({ recipe }) {
           { recomendations.map((recomendation, index) => (
             <DrinkCards
               data={ recomendation }
+              index={ index }
               linkTestid={ `${index}-recomendation-card` }
               titleTestid={ `${index}-recomendation-title` }
-              index={ index }
               key={ recomendation.idDrink }
             />))}
         </section>
       </section>
-      <button
-        type="button"
-        className="start-recipe"
-        data-testid="start-recipe-btn"
-      >
-        Iniciar Receita
-      </button>
+      <Link to={ `/comidas/${recipeId}/in-progress` }>
+        <button
+          type="button"
+          className="start-recipe"
+          data-testid="start-recipe-btn"
+        >
+          Iniciar Receita
+        </button>
+      </Link>
     </>
   );
 }

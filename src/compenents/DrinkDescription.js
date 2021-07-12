@@ -1,14 +1,14 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import RecipesContext from '../contexts/RecipesContext';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import MealCards from './MealCards';
 import '../styles/MealDescription.css';
 
-function DrinkDescription({ recipe }) {
+function DrinkDescription({ recipe, recipeId }) {
   const { recomendations } = useContext(RecipesContext);
-  console.log(recomendations);
   const {
     strDrinkThumb, strDrink, strCategory, strInstructions, strAlcoholic,
   } = recipe;
@@ -73,13 +73,15 @@ function DrinkDescription({ recipe }) {
             />))}
         </section>
       </section>
-      <button
-        type="button"
-        className="start-recipe"
-        data-testid="start-recipe-btn"
-      >
-        Iniciar Receita
-      </button>
+      <Link to={ `/bebidas/${recipeId}/in-progress` }>
+        <button
+          type="button"
+          className="start-recipe"
+          data-testid="start-recipe-btn"
+        >
+          Iniciar Receita
+        </button>
+      </Link>
     </>
   );
 }

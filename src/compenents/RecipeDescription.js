@@ -31,31 +31,38 @@ function RecipeDescription() {
     const getMeal = async () => {
       const recipeEndpoint = `https://www.the${recipeSearch}db.com/api/json/v1/1/lookup.php?i=${recipeId}`;
       await fetch(recipeEndpoint).then((data) => data.json())
-        .then((result) => setRecipe(result))
+        .then((result) => {
+          console.log('Opa');
+          console.log(result);
+          setRecipe(result);
+        })
         .catch(() => global.alert(
           'Falha na receita, por favor, volte na tela anterior e tente novamente!',
         ));
+
       const recomendationsEndpoint = `https://www.the${type}db.com/api/json/v1/1/search.php?s=`;
       const lastRecomendation = 6;
       await fetch(recomendationsEndpoint).then((data) => data.json())
-        .then((result) => setRecomendations(Object.values(result)[0]
-          .slice(0, lastRecomendation)))
+        .then((result) => {
+          setRecomendations(Object.values(result)[0]
+            .slice(0, lastRecomendation));
+        })
         .catch(() => global.alert(
           'Falha nas recomendações, por favor, volte na tela anterior e tente novamente!',
         ));
     };
     getMeal();
-    console.log(recipeSearch);
-    console.log(recipeId);
   }, [recipeId, recipeSearch, type, setRecomendations]);
+
+  console.log(recipe);
+  console.log(recipeSearch);
 
   const recipeRender = () => (
     recipeSearch === 'meal'
-      ? <MealDescription recipe={ recipe.meals[0] } />
-      : <DrinkDescription recipe={ recipe.drinks[0] } />
+      ? <MealDescription recipe={ Object.values(recipe)[0][0] } recipeId={ recipeId } />
+      : <DrinkDescription recipe={ Object.values(recipe)[0][0] } recipeId={ recipeId } />
   );
 
-  console.log(recipe);
   return (
     recipe && recomendations ? recipeRender() : <Loading />
   );
