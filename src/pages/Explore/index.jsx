@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styles from './styles.module.scss';
+import Footer from '../../components/footer';
 
 function Explore() {
   return (
@@ -26,7 +27,7 @@ function Explore() {
           </button>
         </Link>
       </div>
-
+      <Footer />
     </div>
   );
 }
