@@ -5,6 +5,7 @@ const FOOD_API_FIRST_URL = 'https://www.themealdb.com/api/json/v1/1/search.php?f
 const FOODS_BY_CATEGORY = 'https://www.themealdb.com/api/json/v1/1/filter.php?c=';
 const FOOD_BY_ID = 'https://www.themealdb.com/api/json/v1/1/lookup.php?i=';
 const RANDOM_FOOD = 'https://www.themealdb.com/api/json/v1/1/random.php';
+const FOOD_BY_AREA = 'https://www.themealdb.com/api/json/v1/1/list.php?a=list';
 
 export async function fetchFoods() {
   const fetchURL = await fetch(FOOD_API_URL);
@@ -43,5 +44,10 @@ export async function fetchFoodByID(foodId) {
 
 export async function fetchRandomFood() {
   const fetchURL = await fetch(RANDOM_FOOD);
+  return fetchURL.json();
+}
+
+export async function fetchFoodArea() {
+  const fetchURL = await fetch(FOOD_BY_AREA);
   return fetchURL.json();
 }
