@@ -8,6 +8,7 @@ function ButtonAll({ setFiltered }) {
   return (
     <button
       type="button"
+      className="filterButtons"
       data-testid="All-category-filter"
       onClick={ onClick }
     >

@@ -10,18 +10,20 @@ function Header({ title, searchImg = false }) {
 
   return (
     <header>
-      <Link to="/perfil">
-        <img data-testid="profile-top-btn" src={ profileIcon } alt="imagem perfil" />
-      </Link>
-      <h2 data-testid="page-title">{title}</h2>
-      {searchImg ? (
-        <button
-          type="button"
-          onClick={ () => setSearchInput(!searchInput) }
-        >
-          <img data-testid="search-top-btn" src={ searchIcon } alt="botão buscar" />
-        </button>
-      ) : null}
+      <div className="headerTop">
+        <Link to="/perfil">
+          <img data-testid="profile-top-btn" src={ profileIcon } alt="imagem perfil" />
+        </Link>
+        <h2 data-testid="page-title">{title}</h2>
+        {searchImg ? (
+          <button
+            type="button"
+            onClick={ () => setSearchInput(!searchInput) }
+          >
+            <img data-testid="search-top-btn" src={ searchIcon } alt="botão buscar" />
+          </button>
+        ) : null}
+      </div>
       {searchInput ? (<SearchBar />) : null}
 
     </header>

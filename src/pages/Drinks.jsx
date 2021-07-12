@@ -34,29 +34,33 @@ function Drinks() {
   return (
     <div>
       <Header title="Bebidas" searchImg="true" />
-      {drinksCategories.map((category, index) => (
-        index < CATEGORIES_NUMBER ? (
-          <FilterButtons
-            key={ index }
-            categoryName={ category.strCategory }
-            testId={ `${category.strCategory}-category-filter` }
-          />
-        ) : (null)
-      ))}
-      <ButtonAll setFiltered={ setDrinkFilterButton } />
-      {showRecipe ? showRecipe.map((recipes, index) => (
-        index <= CARDS_NUMBER ? (
-          <DrinkCard
-            key={ recipes.idDrink }
-            mealName={ recipes.strDrink }
-            mealImg={ recipes.strDrinkThumb }
-            testImgId={ `${index}-card-img` }
-            testNameId={ `${index}-card-name` }
-            testCardId={ `${index}-recipe-card` }
-            mealId={ recipes.idDrink }
-          />
-        ) : null
-      )) : alert('Sinto muito, não encontramos nenhuma receita para esses filtros.')}
+      <div className="headerFilterButtons">
+        {drinksCategories.map((category, index) => (
+          index < CATEGORIES_NUMBER ? (
+            <FilterButtons
+              key={ index }
+              categoryName={ category.strCategory }
+              testId={ `${category.strCategory}-category-filter` }
+            />
+          ) : (null)
+        ))}
+        <ButtonAll setFiltered={ setDrinkFilterButton } />
+      </div>
+      <div className="itensGroup">
+        {showRecipe ? showRecipe.map((recipes, index) => (
+          index <= CARDS_NUMBER ? (
+            <DrinkCard
+              key={ recipes.idDrink }
+              mealName={ recipes.strDrink }
+              mealImg={ recipes.strDrinkThumb }
+              testImgId={ `${index}-card-img` }
+              testNameId={ `${index}-card-name` }
+              testCardId={ `${index}-recipe-card` }
+              mealId={ recipes.idDrink }
+            />
+          ) : null
+        )) : alert('Sinto muito, não encontramos nenhuma receita para esses filtros.')}
+      </div>
       <Footer />
     </div>
   );
