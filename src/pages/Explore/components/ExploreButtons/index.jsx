@@ -25,8 +25,8 @@ function ExploreButtons({ title }) {
   }
 
   async function getRandomId() {
-    const { getRandom } = await getRecipes(`/${title}`);
-    setRandomId(getRandom[0].id);
+    const response = await getRecipes(`/${title}`);
+    if (response) setRandomId(response.getRandom[0].id);
   }
 
   useEffect(() => {
