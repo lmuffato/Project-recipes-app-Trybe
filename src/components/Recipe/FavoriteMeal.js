@@ -45,6 +45,7 @@ function Favorite() {
       .some((recipe) => Number(recipe.id) === Number(id)));
   }, [id]);
   const mealDetails = useSelector((state) => state.meals.mealDetails);
+
   function toggleStatus() {
     if (isFavorite) {
       setIsFavorite(false);

@@ -11,7 +11,6 @@ function divide(dividend, divisor) {
 }
 
 function Carousel({ items }) {
-  // TODO descobrir porque items está chegando undefined
   const [position, setPosition] = useState(0);
   const [leftItem, setLeftItem] = useState({});
   const [rightItem, setRightItem] = useState({});

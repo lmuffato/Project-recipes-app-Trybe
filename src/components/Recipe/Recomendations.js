@@ -15,7 +15,6 @@ function mapper(item) {
   return mapToMeal(item);
 }
 function Recomendations({ list }) {
-  console.log(list);
   const CAROUSEL_TOTAL_ITEMS = 6;
   return (
     <Carousel

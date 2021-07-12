@@ -33,7 +33,7 @@ function BebidasDetalhes() {
           <div>
             <Recipe.Title title={ strDrink } />
             <Recipe.Category category={ strAlcoholic } />
-            <Recipe.Share type="bebidas" />
+            <Recipe.Share id={ id } type="bebidas" />
             <Recipe.FavoriteDrink />
           </div>
           <Recipe.Ingredients list={ ingredients } />
