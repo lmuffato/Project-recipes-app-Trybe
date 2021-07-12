@@ -33,7 +33,6 @@ export default function AppProvider({ children }) {
     toStorage,
     checkedState,
     setCheckedState,
-
   };
 
   useEffect(() => {
