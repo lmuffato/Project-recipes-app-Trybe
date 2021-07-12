@@ -1,11 +1,11 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { Form, Button, ButtonGroup } from 'react-bootstrap';
 import Context from '../../context/Context';
-import styleCard, { styleBtn } from './index.style';
 import clearLS from '../../services/localStorage/clearLS';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
-// import doneRecipes from '../../services/mokcInformation';
+import './Style.css';
 
 const ProfileScreen = () => {
   const {
@@ -32,7 +32,7 @@ const ProfileScreen = () => {
       console.log(infoFavorite);
     }
     if (target.id === 'logout') {
-      console.log('Logout clcikec!');
+      console.log('Logout clciked!');
       setLogout(true); // setando variavel "logout" para verdadeiro, usuário deslogado!
       clearLS();
     }
@@ -41,54 +41,51 @@ const ProfileScreen = () => {
   return (
     <>
       <Header />
-      <div className="card" style={ styleCard }>
-        <h5 className="card-title">Perfil</h5>
+      <Form className="form">
         { (user) && <span data-testid="profile-email">{ user.email }</span> }
-        <div className="btn-group-vertical">
+        <ButtonGroup vertical>
+
           <Link
             to="/receitas-feitas"
-            style={ styleBtn }
           >
-            <button
+            <Button
+              variant="custom"
               id="recipes-made"
               type="button"
               data-testid="profile-done-btn"
               onClick={ handleClick }
-              className="btn btn-primary"
             >
               Receitas Feitas
-            </button>
+            </Button>
           </Link>
           <Link
             to="receitas-favoritas"
-            style={ styleBtn }
           >
-            <button
+            <Button
+              variant="custom"
               id="recipes-fav"
               type="button"
               data-testid="profile-favorite-btn"
-              className="btn btn-primary"
               onClick={ handleClick }
             >
               Receitas Favoritas
-            </button>
+            </Button>
           </Link>
           <Link
             to="/"
-            style={ styleBtn }
           >
-            <button
+            <Button
+              variant="custom"
               id="logout"
               type="button"
               data-testid="profile-logout-btn"
-              className="btn btn-danger"
               onClick={ handleClick }
             >
               Sair
-            </button>
+            </Button>
           </Link>
-        </div>
-      </div>
+        </ButtonGroup>
+      </Form>
       <Footer />
     </>
   );
