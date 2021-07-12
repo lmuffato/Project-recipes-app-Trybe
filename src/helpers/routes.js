@@ -1,8 +1,6 @@
-import React from 'react';
 import Login from '../pages/Login';
 import Profile from '../pages/Profile';
 import Explore from '../pages/Explore';
-import Header from '../components/Header';
 import Foods from '../pages/MainFoods';
 import Drinks from '../pages/MainDrinks';
 import FoodDetails from '../pages/FoodDetails';
@@ -10,15 +8,11 @@ import DrinkDetails from '../pages/DrinkDetails';
 import ExploreFood from '../pages/ExploreFood';
 import ExploreDrink from '../pages/ExploreDrink';
 import IngredientsPage from '../pages/IngredientsPage';
+import FavoriteRecipes from '../pages/FavoriteRecipes';
 import ExploreByAreaPage from '../pages/ExploreByAreaPage';
 import FoodInProgress from '../pages/FoodInProgress';
 import DrinkInProgress from '../pages/DrinkInProgress';
-
-const componentWithHeader = ({ title }) => (
-  <section>
-    <Header title={ title } />
-  </section>
-);
+import RecipesDonePage from '../pages/RecipesDonePage';
 
 export default [
   {
@@ -95,13 +89,13 @@ export default [
   },
   {
     path: '/receitas-feitas',
-    Component: componentWithHeader,
+    Component: RecipesDonePage,
     exact: true,
     title: 'Receitas Feitas',
   },
   {
     path: '/receitas-favoritas',
-    Component: componentWithHeader,
+    Component: FavoriteRecipes,
     exact: true,
     title: 'Receitas Favoritas',
   },

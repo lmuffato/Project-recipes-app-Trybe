@@ -4,7 +4,7 @@ import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import profileIcon from '../../images/profileIcon.svg';
 import searchIcon from '../../images/searchIcon.svg';
-import SearchBar from '../SearchBar';
+import HeaderSearchBar from '../SearchBar';
 
 import './style.css';
 
@@ -44,17 +44,19 @@ export default function Header({ title }) {
 
   const renderSearchBar = () => {
     if (searchActive) {
-      return <SearchBar searchActive={ searchActive } path={ path } />;
+      return <HeaderSearchBar path={ path } />;
     }
   };
 
   return (
     <header className="header-container" data-testid="header">
-      <Link to="/perfil">
-        <img src={ profileIcon } alt="" data-testid="profile-top-btn" />
-      </Link>
-      <h1 data-testid="page-title">{title}</h1>
-      {renderSearchButton()}
+      <div className="header-top">
+        <Link to="/perfil">
+          <img src={ profileIcon } alt="" data-testid="profile-top-btn" />
+        </Link>
+        <h1 data-testid="page-title">{title}</h1>
+        {renderSearchButton()}
+      </div>
       {renderSearchBar()}
     </header>
   );

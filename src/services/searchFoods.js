@@ -1,19 +1,25 @@
 const searchByIngredient = async (name) => {
-  const recipes = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${name}`)
+  const recipes = await fetch(
+    `https://www.themealdb.com/api/json/v1/1/filter.php?i=${name}`,
+  )
     .then((request) => request.json())
     .then((response) => response.meals);
   return recipes;
 };
 
 const searchByName = async (name) => {
-  const recipes = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${name}`)
+  const recipes = await fetch(
+    `https://www.themealdb.com/api/json/v1/1/search.php?s=${name}`,
+  )
     .then((response) => response.json())
     .then((response) => response.meals);
   return recipes;
 };
 
 const searchbyLetter = async (name) => {
-  const recipes = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?f=${name}`)
+  const recipes = await fetch(
+    `https://www.themealdb.com/api/json/v1/1/search.php?f=${name}`,
+  )
     .then((response) => response.json())
     .then((response) => response.meals);
   return recipes;
