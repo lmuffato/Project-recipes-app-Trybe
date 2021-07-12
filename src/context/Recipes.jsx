@@ -11,7 +11,7 @@ export function RecipesProvider({ children }) {
   const [categories, setCategories] = useState([]);
   const [titlePage, setTitlePage] = useState('');
   const [currentFilter, setCurrentFilter] = useState('');
-  const { location } = useHistory();
+  const { location, push: historyPush } = useHistory();
 
   // async function loadRecipes(pathname) {
   //   const recipesLimit = 12;
@@ -36,10 +36,8 @@ export function RecipesProvider({ children }) {
     }
   }, []);
 
-  async function filterRecipe(filter, event) {
+  async function switchFilters(filter, event) {
     let results = [];
-    const recipesLimit = 12;
-
     switch (filter.type) {
     case 'category': {
       if (currentFilter.category !== filter.content && filter.content !== 'All') {
@@ -84,7 +82,21 @@ export function RecipesProvider({ children }) {
       break;
     }
     }
-    setRecipes(results.slice(0, recipesLimit));
+    return results;
+  }
+
+  async function filterRecipe(filter, event) {
+    const recipesLimit = 12;
+    try {
+      const results = await switchFilters(filter, event);
+      if (results.length === 1) {
+        historyPush(`${location.pathname}/${results[0].id}`);
+      }
+
+      setRecipes(results.slice(0, recipesLimit));
+    } catch (error) {
+      alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+    }
   }
 
   const value = {
