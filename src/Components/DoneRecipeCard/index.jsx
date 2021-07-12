@@ -1,20 +1,13 @@
 import React from 'react';
-import { Card } from 'react-bootstrap';
 import PropTypes from 'prop-types';
+import { Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import blackHeartIcon from '../../images/blackHeartIcon.svg';
 import ShareButtonRecipes from '../ShareButtonRecipes';
 
-function FavoritesCard({ recipes, setStorage }) {
-  const removeFavorite = (recipe) => {
-    const removedItem = recipes.filter((item) => item.id !== recipe.id);
-    localStorage.setItem('favoriteRecipes', JSON.stringify(removedItem));
-    setStorage(removedItem);
-  };
-
+function DoneRecipeCard({ doneRecipes }) {
   return (
     <div>
-      {recipes.map((recipe, index) => (
+      { doneRecipes.map((recipe, index) => (
         <Card
           key={ `recipe-card-${index}` }
         >
@@ -52,15 +45,19 @@ function FavoritesCard({ recipes, setStorage }) {
               dataTest={ `${index}-horizontal-share-btn` }
               recipe={ recipe }
             />
-            <div>
-              <input
-                type="image"
-                data-testid={ `${index}-horizontal-favorite-btn` }
-                src={ blackHeartIcon }
-                alt="favorite button"
-                onClick={ () => removeFavorite(recipe) }
-              />
-            </div>
+            <p data-testid={ `${index}-horizontal-done-date` }>
+              {`Feita em: ${recipe.doneDate}`}
+            </p>
+            <span
+              data-testid={ `${index}-${recipe.tags[0]}-horizontal-tag` }
+            >
+              {recipe.tags[0]}
+            </span>
+            <span
+              data-testid={ `${index}-${recipe.tags[1]}-horizontal-tag` }
+            >
+              {recipe.tags[1]}
+            </span>
           </Card.Body>
         </Card>
       ))}
@@ -68,8 +65,8 @@ function FavoritesCard({ recipes, setStorage }) {
   );
 }
 
-FavoritesCard.propTypes = {
-  recipes: PropTypes.objectOf(PropTypes.string),
+DoneRecipeCard.propTypes = {
+  doneRecipes: PropTypes.objectOf(PropTypes.string),
 }.isRequired;
 
-export default FavoritesCard;
+export default DoneRecipeCard;

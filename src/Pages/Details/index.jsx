@@ -33,6 +33,7 @@ function Details() {
     const checkRecipe = () => {
       const done = doneRecipes.find((recipe) => recipe.id === id);
       const doing = doingRecipes[toggleLocalDoing][id];
+      console.log(doing);
       if (done) return setRecipeStatus('');
       if (doing) return setRecipeStatus('Continuar Receita');
     };
