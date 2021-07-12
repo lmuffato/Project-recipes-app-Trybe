@@ -7,8 +7,8 @@ function Explore() {
   return (
     <main>
       <HeaderExplore />
-      <Link to="/explorar/comidas"> Explorar Comidas </Link>
-      <Link to="/explorar/bebidas"> Explorar Bebidas </Link>
+      <Link to="/explorar/comidas" data-testid="explore-food"> Explorar Comidas </Link>
+      <Link to="/explorar/bebidas" data-testid="explore-drinks"> Explorar Bebidas </Link>
       <FooterBar />
     </main>
   );

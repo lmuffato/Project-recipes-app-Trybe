@@ -17,7 +17,7 @@ function Profile() {
           Receitas Favoritas
         </button>
       </Link>
-      <Link to="/comidas">
+      <Link to="/">
         <button type="button" data-testid="profile-logout-btn">
           Sair
         </button>
