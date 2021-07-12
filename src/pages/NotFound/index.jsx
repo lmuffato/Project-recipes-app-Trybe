@@ -3,7 +3,7 @@ import React from 'react';
 function NotFound() {
   return (
     <main>
-      <p>DEU RUIM</p>
+      <p>Not Found</p>
 
     </main>
   );
