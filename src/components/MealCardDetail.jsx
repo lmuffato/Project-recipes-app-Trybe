@@ -50,11 +50,12 @@ function MealCardDetail() {
   };
 
   return (
-    <div>
+    <div className="detailMeal">
       <img
         src={ currentMeal.strMealThumb }
         alt="imagem da receita"
         data-testid="recipe-photo"
+        className="detailImage"
       />
       <h3 data-testid="recipe-title">{ currentMeal.strMeal }</h3>
       <button data-testid="share-btn" type="button" onClick={ shareClick }>

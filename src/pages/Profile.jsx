@@ -13,10 +13,14 @@ function Profile() {
     setEmail('');
   };
 
+  const user = getItemFromLocalStorage('user');
+
   return (
     <div>
       <Header title="Perfil" />
-      <h3 data-testid="profile-email">{ getItemFromLocalStorage('user').email }</h3>
+      {user ? (
+        <h3 data-testid="profile-email">{ user.email }</h3>
+      ) : (null)}
       <Link to="/receitas-feitas">
         <button type="button" data-testid="profile-done-btn">Receitas Feitas</button>
       </Link>
