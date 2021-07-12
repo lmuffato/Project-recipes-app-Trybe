@@ -49,7 +49,10 @@ function DoneRecepies() {
   }
 
   function handleContent(param) {
-    if (param === 'all') {
+    const recepiesStorage = getDoneRecepies();
+    if (recepiesStorage === null) {
+      global.alert('Você ainda não concluiu nenhuma receita!');
+    } else if (param === 'all') {
       setShowRecepies(myDoneRecepies);
     } else if (param === 'food') {
       const mealsRecepi = myDoneRecepies.filter((recepi) => recepi.type === 'meals');
