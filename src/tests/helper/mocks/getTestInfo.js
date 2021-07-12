@@ -84,6 +84,20 @@ const redirectToProfileScreen = (getId, userEvent) => {
   userEvent.click(profilePageButton);
 };
 
+const redirectToExploreScreen = (getId, userEvent) => {
+  doTheLoginProcess(getId, userEvent);
+
+  const exploreBtnIcon = getId('explore-bottom-btn');
+  userEvent.click(exploreBtnIcon);
+};
+
+const redirectToExploreTypeScreen = (getId, userEvent, type) => {
+  redirectToExploreScreen(getId, userEvent);
+
+  const typeExplorePageButton = getId(`explore-${type}`);
+  userEvent.click(typeExplorePageButton);
+};
+
 export default function getTestInfo() {
   return {
     headerRenderTests,
@@ -91,6 +105,8 @@ export default function getTestInfo() {
     recipeCardsTest,
     doTheLoginProcess,
     redirectToProfileScreen,
+    redirectToExploreScreen,
+    redirectToExploreTypeScreen,
     testsIds,
   };
 }

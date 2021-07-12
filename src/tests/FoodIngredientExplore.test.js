@@ -1,24 +1,31 @@
-import React from 'react';
-
-import FoodExplore from '../pages/FoodExplore';
+import { screen } from '@testing-library/dom';
+import userEvent from '@testing-library/user-event';
 import renderWithRouterAndContext from './helper/renders/renderWithRouterAndContext';
 import getTest from './helper/mocks/getTestInfo';
 
+const { queryByTestId, getByTestId } = screen;
+
 const {
-  renderEmptyValue,
   headerRenderTests,
   footerRenderTests,
-} = getTest('/explorar/comidas/ingredientes');
+  redirectToExploreTypeScreen,
+} = getTest();
 
 const { itDoesntRenderSearchIcon } = headerRenderTests();
 
-describe('FoodExplore Screen', () => {
+const redirectToExploreDrinkIngredientScreen = () => {
+  redirectToExploreTypeScreen(getByTestId, userEvent, 'food');
+
+  const exploreByIngredientsButton = getByTestId('explore-by-ingredient');
+  userEvent.click(exploreByIngredientsButton);
+};
+
+describe('DrinkExplore Screen', () => {
   describe('Check Header and Footer components', () => {
-    it('does Header and Footer tests', () => {
-      const { getByTestId, queryByTestId } = renderWithRouterAndContext(
-        <FoodExplore />,
-        renderEmptyValue,
-      );
+    it('does Header and Footer tests', async () => {
+      await renderWithRouterAndContext();
+
+      redirectToExploreDrinkIngredientScreen();
 
       itDoesntRenderSearchIcon(queryByTestId, getByTestId);
       footerRenderTests().itRenderAllIcons(getByTestId);

@@ -6,26 +6,19 @@ import getTest from './helper/mocks/getTestInfo';
 const { getByTestId, queryByTestId } = screen;
 
 const {
-  doTheLoginProcess,
   headerRenderTests,
   footerRenderTests,
 } = getTest();
 
 const { itDoesntRenderSearchIcon } = headerRenderTests();
 
-const redirectToExploreScreen = () => {
-  doTheLoginProcess(getByTestId, userEvent);
-
-  const exploreBtnIcon = getByTestId('explore-bottom-btn');
-  userEvent.click(exploreBtnIcon);
-};
+const { redirectToExploreScreen } = getTest();
 
 describe('Explore Screen', () => {
   describe('Check Header and Footer components', () => {
     it('does Header and Footer tests', async () => {
       await renderWithRouterAndContext();
-
-      redirectToExploreScreen();
+      redirectToExploreScreen(getByTestId, userEvent);
 
       itDoesntRenderSearchIcon(queryByTestId, getByTestId);
       footerRenderTests().itRenderAllIcons(getByTestId);
@@ -35,7 +28,7 @@ describe('Explore Screen', () => {
   describe('Check elements on Explore Page', () => {
     it('check Explore Foods button', async () => {
       await renderWithRouterAndContext();
-      redirectToExploreScreen();
+      redirectToExploreScreen(getByTestId, userEvent);
 
       const exploreFoodsButton = getByTestId('explore-food');
       expect(exploreFoodsButton).toHaveTextContent('Explorar Comidas');
@@ -43,7 +36,7 @@ describe('Explore Screen', () => {
     });
     it('check Explore Drinks button', async () => {
       await renderWithRouterAndContext();
-      redirectToExploreScreen();
+      redirectToExploreScreen(getByTestId, userEvent);
 
       const exploreDrinksButton = getByTestId('explore-drinks');
       expect(exploreDrinksButton).toHaveTextContent('Explorar Bebidas');
