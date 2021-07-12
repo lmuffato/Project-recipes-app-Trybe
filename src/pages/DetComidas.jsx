@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import copy from 'clipboard-copy';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import shareIcon from '../images/shareIcon.svg';
+import { fetchFoodsById, fetchRecommendedDrinks } from '../services/index';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import blackHeartIcon from '../images/blackHeartIcon.svg';
 
 class DetComidas extends React.Component {
   constructor() {
@@ -16,20 +17,20 @@ class DetComidas extends React.Component {
       video: '',
     };
     this.embedvideo = this.embedvideo.bind(this);
-    this.fetchFoodsById = this.fetchFoodsById.bind(this);
     this.handleIngredients = this.handleIngredients.bind(this);
-    this.fetchRecommendedDrinks = this.fetchRecommendedDrinks.bind(this);
     this.onClickShare = this.onClickShare.bind(this);
+  //  this.saveFavorite = this.saveFavorite.bind(this);
   }
 
   async componentDidMount() {
     const { history } = this.props;
     const { location: { pathname } } = history;
     const id = pathname.split('/').pop();
-    const foods = await this.fetchFoodsById(id);
-    const recommended = await this.fetchRecommendedDrinks();
+    const foods = await fetchFoodsById(id);
+    const recommended = await fetchRecommendedDrinks();
     this.setNewState(foods, recommended);
     this.handleIngredients();
+    // this.InProgressButton(id);
   }
 
   handleIngredients() {
@@ -83,19 +84,62 @@ class DetComidas extends React.Component {
     this.setState({ video });
   }
 
-  fetchFoodsById(id) {
-    const foods = fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`)
-      .then((response) => response.json());
-    return foods;
+  saveFavorite(recipe) {
+    const favorite = [{
+      id: recipe.idMeal,
+      type: 'comida',
+      area: recipe.strArea,
+      category: recipe.strCategory,
+      alcoholicOrNot: '',
+      name: recipe.strMeal,
+      image: recipe.strMealThumb,
+    }];
+    if (!localStorage.getItem('favoriteRecipes')) {
+      localStorage.setItem('favoriteRecipes', JSON.stringify(favorite));
+    }
+    const favBtn = document.querySelector('.fav-btn');
+    const url = 'http://localhost:3000/static/media/whiteHeartIcon.ea3b6ba8.svg';
+    if (favBtn.src === url) {
+      const parseSave = JSON.parse(localStorage.getItem('favoriteRecipes'));
+      console.log(parseSave);
+      const combineObj = parseSave.concat(favorite);
+      localStorage.clear();
+      localStorage.setItem('favoriteRecipes', JSON.stringify(combineObj));
+    } else {
+      console.log('nãopassou');
+    }
   }
 
-  fetchRecommendedDrinks() {
-    const min = 0;
-    const max = 6;
-    const recommended = fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=')
-      .then((response) => response.json())
-      .then((response) => response.drinks.slice(min, max));
-    return recommended;
+  checkFavorite(recipe) {
+    if (localStorage.favoriteRecipes) {
+      const favorites = JSON.parse(localStorage.getItem('favoriteRecipes'));
+      const current = favorites.find((element) => (element.id === recipe.idMeal));
+      if (favorites.includes(current)) {
+        return blackHeartIcon;
+      }
+      return whiteHeartIcon;
+    }
+    return whiteHeartIcon;
+  }
+
+  /*
+  InProgressButton(id) {
+    const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    if (inProgressRecipes.meals[id]) {
+      const button = document.querySelector('.start-btn');
+      button.innerHTML = 'Continuar Receita';
+    }
+  }
+  */
+  checkRecipe({ idMeal }) {
+    if (localStorage.doneRecipes) {
+      const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
+      const done = doneRecipes.find((element) => (element.id === idMeal));
+      if (done) {
+        return true;
+      }
+      return false;
+    }
   }
 
   render() {
@@ -107,6 +151,7 @@ class DetComidas extends React.Component {
       food.map((recipe) => (
         <div key="recipe">
           <img
+            className="detImg"
             data-testid="recipe-photo"
             alt="imagem da receita"
             src={ recipe[0].strMealThumb }
@@ -125,38 +170,36 @@ class DetComidas extends React.Component {
             <input
               type="image"
               data-testid="favorite-btn"
-              src={ whiteHeartIcon }
+              src={ this.checkFavorite(recipe[0]) }
               alt="favoritar receita"
+              onClick={ () => this.saveFavorite(recipe[0]) }
+              className="fav-btn"
             />
           </div>
           <h2>
             Lista de Ingredientes
           </h2>
-          <table border="1">
+          <table border="1" width="340px">
             <thead>
-              Ingredients
-              Measures
+              <tr>
+                <td>Ingredients</td>
+                <td>Measures</td>
+              </tr>
             </thead>
-            {ingredientes.map((ingredient, index) => (
-              <tr key={ `row${index}` }>
-                <td
-                  key={ index }
-                  data-testid={ `${index}-ingredient-name-and-measure` }
-                >
-                  {ingredient}
-                </td>
-                <td
-                  key={ measures }
-                  data-testid={ `${index}-ingredient-name-and-measure` }
-                >
-                  {measures[index]}
-                </td>
-              </tr>))}
+            <tbody>
+              {ingredientes.map((ingredient, i) => (
+                <tr key={ `row${i}` }>
+                  <td key={ i } data-testid={ `${i}-ingredient-name-and-measure` }>
+                    {ingredient}
+                  </td>
+                  <td key={ measures } data-testid={ `${i}-ingredient-name-and-measure` }>
+                    {measures[i]}
+                  </td>
+                </tr>))}
+            </tbody>
           </table>
-          <h2>
-            Modo de Preparo:
-          </h2>
-          <p data-testid="instructions">
+          <h2> Modo de Preparo:</h2>
+          <p data-testid="instructions" className="instructions">
             {recipe[0].strInstructions}
           </p>
           <iframe
@@ -181,13 +224,16 @@ class DetComidas extends React.Component {
               />
             </div>
           ))}
-          <button
-            type="button"
-            data-testid="start-recipe-btn"
-            className="start-btn"
-          >
-            Iniciar Receita
-          </button>
+          {(!this.checkRecipe(recipe[0]))
+          && (
+            <button
+              type="button"
+              data-testid="start-recipe-btn"
+              className="start-btn"
+              onClick={ () => history.push(`/comidas/${recipe[0].idMeal}/in-progress`) }
+            >
+              Iniciar Receita
+            </button>)}
         </div>
       ))
     );

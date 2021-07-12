@@ -159,19 +159,20 @@ class MainDrinkCard extends React.Component {
             {item.strCategory}
           </button>
         ))}
-        <div>
+        <div className="recipeContainer">
           { isLoading ? loading : drinkData.map((recipe, index) => (
             <div
               key={ index }
               data-testid={ `${index}-recipe-card` }
               id={ recipe.idDrink }
+              className="recipeCard"
             >
               <input
+                className="recipeImg"
                 type="image"
                 src={ recipe.strDrinkThumb }
                 alt={ recipe.strDrink }
                 data-testid={ `${index}-card-img` }
-                width="350px"
                 onClick={ () => history.push(`/bebidas/${recipe.idDrink}`) }
               />
               <h6 data-testid={ `${index}-card-name` }>{recipe.strDrink}</h6>
