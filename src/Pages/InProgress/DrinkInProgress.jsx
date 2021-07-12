@@ -4,6 +4,7 @@ import { fetchDrinkForId } from '../../services/Data';
 import shareIcon from '../../images/shareIcon.svg';
 import context from '../../store/Context';
 import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
+import blackHeartIcon from '../../images/blackHeartIcon.svg';
 
 const copy = require('clipboard-copy');
 
@@ -13,6 +14,9 @@ function DrinkInProgress() {
   const [drinkDetail, setDrinkDetail] = useState([]);
   const [shouldRedirect, setShouldRedirect] = useState(false);
   const [alert, setAlert] = useState('');
+  const [favHeart, setFavHeart] = useState(
+    <img src={ whiteHeartIcon } alt="favorite icon" />,
+  );
   const { inProgressRecipes } = useContext(context);
 
   const handleClick = () => {
@@ -103,8 +107,9 @@ function DrinkInProgress() {
       </button>
       <button
         type="button"
+        onClick={ () => setFavHeart(<img src={ blackHeartIcon } alt="favorite icon" />) }
       >
-        <img data-testid="favorite-btn" src={ whiteHeartIcon } alt="favorite icon" />
+        {favHeart}
       </button>
       {alert}
       <h4>Ingredients :</h4>
