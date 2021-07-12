@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import copy from 'clipboard-copy';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import shareIcon from '../images/shareIcon.svg';
+import { fetchFoodsById, fetchRecommendedDrinks } from '../services/index';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import blackHeartIcon from '../images/blackHeartIcon.svg';
 
 class DetComidas extends React.Component {
   constructor() {
@@ -16,18 +17,17 @@ class DetComidas extends React.Component {
       video: '',
     };
     this.embedvideo = this.embedvideo.bind(this);
-    this.fetchFoodsById = this.fetchFoodsById.bind(this);
     this.handleIngredients = this.handleIngredients.bind(this);
-    this.fetchRecommendedDrinks = this.fetchRecommendedDrinks.bind(this);
     this.onClickShare = this.onClickShare.bind(this);
+  //  this.saveFavorite = this.saveFavorite.bind(this);
   }
 
   async componentDidMount() {
     const { history } = this.props;
     const { location: { pathname } } = history;
     const id = pathname.split('/').pop();
-    const foods = await this.fetchFoodsById(id);
-    const recommended = await this.fetchRecommendedDrinks();
+    const foods = await fetchFoodsById(id);
+    const recommended = await fetchRecommendedDrinks();
     this.setNewState(foods, recommended);
     this.handleIngredients();
     // this.InProgressButton(id);
@@ -84,19 +84,37 @@ class DetComidas extends React.Component {
     this.setState({ video });
   }
 
-  fetchFoodsById(id) {
-    const foods = fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`)
-      .then((response) => response.json());
-    return foods;
+  /*
+saveFavorite(recipe) {
+    const favorite = {
+      id: recipe.idMeal,
+      type: 'comida',
+      area: recipe.strArea,
+      category: recipe.strCategory,
+      alcoholicOrNot: '',
+      name: recipe.strMeal,
+      image: recipe.strMealThumb,
+    };
+    const favBtn = document.querySelector('.fav-btn');
+    console.log(favBtn)
+    const { src } = favBtn[0];
+    if (src === whiteHeartIcon) {
+      const parseSave = JSON.parse(localStorage.getItem('favoriteRecipes'));
+      const combineObj = parseSave.concat(favorite);
+      localStorage.setItem('favoriteRecipes', JSON.stringify(combineObj));
+    }
   }
-
-  fetchRecommendedDrinks() {
-    const min = 0;
-    const max = 6;
-    const recommended = fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=')
-      .then((response) => response.json())
-      .then((response) => response.drinks.slice(min, max));
-    return recommended;
+*/
+  checkFavorite(recipe) {
+    if (localStorage.favoriteRecipes) {
+      const favorites = JSON.parse(localStorage.getItem('favoriteRecipes'));
+      const current = favorites.find((element) => (element.id === recipe.idDrink));
+      if (favorites.includes(current)) {
+        return blackHeartIcon;
+      }
+      return whiteHeartIcon;
+    }
+    return whiteHeartIcon;
   }
 
   /*
@@ -147,8 +165,10 @@ class DetComidas extends React.Component {
             <input
               type="image"
               data-testid="favorite-btn"
-              src={ whiteHeartIcon }
+              src={ this.checkFavorite(recipe[0]) }
               alt="favoritar receita"
+              //  onClick={ this.saveFavorite(recipe[0]) }
+              className="fav-btn"
             />
           </div>
           <h2>
@@ -162,26 +182,18 @@ class DetComidas extends React.Component {
               </tr>
             </thead>
             <tbody>
-              {ingredientes.map((ingredient, index) => (
-                <tr key={ `row${index}` }>
-                  <td
-                    key={ index }
-                    data-testid={ `${index}-ingredient-name-and-measure` }
-                  >
+              {ingredientes.map((ingredient, i) => (
+                <tr key={ `row${i}` }>
+                  <td key={ i } data-testid={ `${i}-ingredient-name-and-measure` }>
                     {ingredient}
                   </td>
-                  <td
-                    key={ measures }
-                    data-testid={ `${index}-ingredient-name-and-measure` }
-                  >
-                    {measures[index]}
+                  <td key={ measures } data-testid={ `${i}-ingredient-name-and-measure` }>
+                    {measures[i]}
                   </td>
                 </tr>))}
             </tbody>
           </table>
-          <h2>
-            Modo de Preparo:
-          </h2>
+          <h2> Modo de Preparo:</h2>
           <p data-testid="instructions" className="instructions">
             {recipe[0].strInstructions}
           </p>
