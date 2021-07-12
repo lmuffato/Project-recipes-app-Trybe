@@ -70,13 +70,13 @@ export default function DrinkDetails() {
 
   const goToRecipeInProgress = (idDrink, ingredients, measure) => {
     const ls = JSON.parse(localStorage.getItem('inProgressRecipes'));
-    if (ls && ls.length > 0) {
+    if (ls && Object.keys(ls.drinks).length > 0) {
       const addDrink = {
-        ...ls, drinks: { ...ls.drinks, [idDrink]: [ingredients, measure] },
+        ...ls, drinks: { ...ls.drinks, [idDrink]: [] },
       };
       localStorage.setItem('inProgressRecipes', JSON.stringify(addDrink));
     } else {
-      const addDrink = { drinks: { [idDrink]: [ingredients, measure] }, meals: {} };
+      const addDrink = { drinks: { [idDrink]: [] }, meals: {} };
       localStorage.setItem('inProgressRecipes', JSON.stringify(addDrink));
     }
     dispatch(actionIdRecipeInProgress(idDrink, ingredients, measure));

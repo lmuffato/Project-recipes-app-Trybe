@@ -59,7 +59,7 @@ export default function MealInProgress() {
             <h3 data-testid="recipe-category">{strCategory}</h3>
           </div>
           <h2>Ingredients</h2>
-          {RenderCheckboxIngredients(ingredients, measure)}
+          <RenderCheckboxIngredients ingredients={ ingredients } measure={ measure } />
           <h2>Instructions</h2>
           {RenderInstructions(strInstructions)}
           <button
