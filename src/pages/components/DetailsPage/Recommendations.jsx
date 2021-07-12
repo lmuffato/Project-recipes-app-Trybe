@@ -38,8 +38,10 @@ function Recommendations(props) {
           className="card-container"
           data-testid={ `${index}-recomendation-card` }
         >
-          <Link to={ recommendation.idMeal ? `/comidas/${recommendation.idMeal}`
-            : `/bebidas/${recommendation.idDrink}` }>
+          <Link
+            to={ recommendation.idMeal ? `/comidas/${recommendation.idMeal}`
+              : `/bebidas/${recommendation.idDrink}` }
+          >
             <Row>
               <img
                 src={ recommendation.strDrinkThumb || recommendation.strMealThumb }
