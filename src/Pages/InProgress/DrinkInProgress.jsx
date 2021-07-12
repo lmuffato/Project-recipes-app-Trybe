@@ -4,36 +4,85 @@ import { fetchDrinkForId } from '../../services/Data';
 import shareIcon from '../../images/shareIcon.svg';
 import context from '../../store/Context';
 import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
+import blackHeartIcon from '../../images/blackHeartIcon.svg';
+
+const copy = require('clipboard-copy');
+
+const getDrinksFavorites = (setFavHeart, id) => (
+  (JSON.parse(localStorage.getItem('favoriteRecipes')) || [])
+    .filter(({ id: localStorageId }) => localStorageId === id)
+    .length ? setFavHeart(blackHeartIcon) : setFavHeart(whiteHeartIcon)
+);
+
+const copyLink = (id, alert, setAlert) => {
+  copy(`http://localhost:3000/bebidas/${id}`);
+  if (alert === '') {
+    setAlert(<div>Link copiado!</div>);
+  }
+};
 
 function DrinkInProgress() {
   const location = useLocation();
   const id = location.pathname.split('/')[2];
   const [drinkDetail, setDrinkDetail] = useState([]);
   const [shouldRedirect, setShouldRedirect] = useState(false);
-  const { inProgressRecipes } = useContext(context);
-
-  const handleClick = () => {
-    setShouldRedirect(true);
-  };
-
-  useEffect(() => {
-    localStorage.setItem('inProgressRecipes', JSON.stringify(inProgressRecipes));
-  }, [inProgressRecipes]);
-
-  useEffect(() => {
-    fetchDrinkForId(id)
-      .then((res) => {
-        if (res.drinks) setDrinkDetail(res.drinks[0]);
-      });
-  }, [id]);
-
-  if (!drinkDetail) return <div>Preparing Ingredients...</div>;
-  if (shouldRedirect) return <Redirect to="/comidas/receitas-feitas" />;
+  const [alert, setAlert] = useState('');
+  const [favHeart, setFavHeart] = useState(whiteHeartIcon);
+  const { inProgressRecipes, setInProgressRecipes } = useContext(context);
+  const { cocktails } = inProgressRecipes;
   const {
+    idDrink,
+    strCategory,
     strDrinkThumb,
     strDrink,
     strAlcoholic,
     strInstructions } = drinkDetail;
+
+  useEffect(() => {
+    const favoriteRecipes = (JSON.parse(localStorage.getItem('favoriteRecipes')) || []);
+    localStorage.setItem('favoriteRecipes', JSON.stringify([...favoriteRecipes]));
+    getDrinksFavorites(setFavHeart, id);
+    fetchDrinkForId(id)
+      .then((res) => {
+        if (res.drinks) setDrinkDetail(res.drinks[0]);
+      });
+  }, [id, cocktails]);
+
+  const handleClick = () => {
+    setShouldRedirect(true);
+    setInProgressRecipes({
+      cocktails: { ...cocktails, [id]: [] },
+      meals: {},
+    });
+  };
+
+  const addFavoriteRecipes = () => {
+    const favoriteRecipes = (JSON.parse(localStorage.getItem('favoriteRecipes')) || []);
+    localStorage.setItem('favoriteRecipes', JSON.stringify([...favoriteRecipes, {
+      id: idDrink,
+      type: 'bebida',
+      area: '',
+      category: strCategory,
+      alcoholicOrNot: strAlcoholic,
+      name: strDrink,
+      image: strDrinkThumb,
+    }]));
+    getDrinksFavorites(setFavHeart, id);
+  };
+
+  const delFavoriteRecipes = () => {
+    const favoriteRecipes = (JSON.parse(localStorage.getItem('favoriteRecipes')) || []);
+    localStorage
+      .setItem('favoriteRecipes', JSON
+        .stringify(favoriteRecipes.filter((recipe) => recipe.id !== id)));
+    getDrinksFavorites(setFavHeart, id);
+  };
+
+  const clickFavorite = () => (
+    (JSON.parse(localStorage.getItem('favoriteRecipes')) || [])
+      .filter(({ id: localStorageId }) => localStorageId === id)
+      .length ? delFavoriteRecipes() : addFavoriteRecipes()
+  );
 
   function ingredientsList() {
     const ingredientList = drinkDetail;
@@ -49,46 +98,49 @@ function DrinkInProgress() {
       <>
         <label
           key=""
-          htmlFor="ingredient"
+          htmlFor="ingredients"
           data-testid={ `${index}-ingredient-step` }
         >
           <input
             type="checkbox"
-            id="ingredient"
+            id="ingredients"
           />
           {ingredient}
+          {' '}
+          {ingredientList[`strMeasure${index}`]}
         </label>
         <br />
       </>
     ));
     return listIngredients;
   }
-
-  function measuresList() {
-    const measureList = drinkDetail;
-    const fifteen = 15;
-    const list = [];
-    for (let index = 1; index <= fifteen; index += 1) {
-      list.push(measureList[`strMeasure${index}`]);
-    }
-    const filtered = list.filter((ingredient) => ingredient !== '');
-    const listMeasure = filtered.map((measure, index) => (
-      <p key={ index }>
-        {measure}
-      </p>));
-    return listMeasure;
-  }
-
+  if (drinkDetail.length === 0) return <div>Preparing Ingredients...</div>;
+  if (shouldRedirect) return <Redirect to="/receitas-feitas" />;
   return (
     <>
       <img data-testid="recipe-photo" src={ strDrinkThumb } alt="drink" />
       <h1 data-testid="recipe-title">{strDrink}</h1>
       <h2 data-testid="recipe-category">{strAlcoholic}</h2>
-      <img data-testid="share-btn" src={ shareIcon } alt="share-icon" />
-      <img data-testid="favorite-btn" src={ whiteHeartIcon } alt="favorite icon" />
+      <button
+        type="button"
+        data-testid="share-btn"
+        onClick={ () => copyLink(id, alert, setAlert) }
+      >
+        <img src={ shareIcon } alt="share-icon" />
+      </button>
+      <button
+        type="button"
+        onClick={ clickFavorite }
+      >
+        <img
+          data-testid="favorite-btn"
+          src={ favHeart }
+          alt="favorite icon"
+        />
+      </button>
+      {alert}
       <h4>Ingredients :</h4>
       {ingredientsList()}
-      {measuresList()}
       <h4>Instructions :</h4>
       <p data-testid="instructions">{strInstructions}</p>
       <Link to="/bebidas">Voltar</Link>
