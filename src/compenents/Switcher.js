@@ -19,8 +19,8 @@ import MealsRecepiesProgress from '../pages/MealsRecepiesProgress';
 function Switcher() {
   return (
     <Switch>
-      <Route path="/comidas/:detalhes" component={ MealDescription } />
-      <Route path="/bebidas/:detalhes" component={ DrinkDescription } />
+      <Route exact path="/comidas/:id" component={ MealDescription } />
+      <Route exact path="/bebidas/:id" component={ DrinkDescription } />
       <Route exact path="/" component={ LoginPage } />
       <Route exact path="/comidas" component={ MainRecipesPage } />
       <Route exact path="/bebidas" component={ MainRecipesPage } />
@@ -31,7 +31,7 @@ function Switcher() {
       <Route path="/receitas-feitas" component={ DoneRecepies } />
       <Route path="/receitas-favoritas" component={ ReceitasFavoritas } />
       <Route path="/explorar/bebidas/area" component={ NotFound } />
-      <Route path="/comidas/:id/in-progress" component={ MealsRecepiesProgress } />
+      <Route exact path="/comidas/:id/in-progress" component={ MealsRecepiesProgress } />
       <Route
         path="/explorar/comidas/ingredientes"
         component={ FoodsIngredients }
