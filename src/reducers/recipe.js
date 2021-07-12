@@ -1,4 +1,4 @@
-import { HANDLE_INFO_RECIPE, HANDLE_CURRENT_SEARCH } from '../actions';
+import { HANDLE_CURRENT_SEARCH } from '../actions';
 
 const INITIAL_STATE = {
   typeRecipe: '',
@@ -7,15 +7,11 @@ const INITIAL_STATE = {
 
 const recipe = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-  case HANDLE_INFO_RECIPE:
-    return {
-      ...state,
-      typeRecipe: action.typeRecipe,
-    };
   case HANDLE_CURRENT_SEARCH:
     return {
       ...state,
-      currentSearch: action.currentSearch,
+      currentSearch: action.payload.currentSearch,
+      typeRecipe: action.payload.typeRecipe,
     };
   default:
     return {
