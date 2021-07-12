@@ -88,7 +88,8 @@ export const fetchArea = async () => {
 
 export const fetchFilterMealArea = async (meal) => {
   const response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?a=${meal}`);
-  return response;
+  const result = await response.json();
+  return result;
 };
 
 // SEARCH BUTTON //

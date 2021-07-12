@@ -13,7 +13,6 @@ import {
   fetchFoodsIngredients,
   fetchDrinksIngredients,
   fetchArea,
-  fetchFilterMealArea,
 } from '../services/Data';
 
 function Provider({ children }) {
@@ -39,8 +38,7 @@ function Provider({ children }) {
     meals: {},
   });
 
-  const [mealArea, setMealArea] = useState([]);
-  const [options, setOptions] = useState([]);
+  const [mealArea, setMealArea] = useState([{ strArea: 'All' }]);
   const [dataOptions, setDataOptions] = useState([]);
 
   useEffect(() => {
@@ -93,21 +91,12 @@ function Provider({ children }) {
   }, []);
 
   useEffect(() => {
-    fetchArea().then((results) => setMealArea([...results.meals]));
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    fetchArea().then((results) => setMealArea([{ strArea: 'All' }, ...results.meals]));
   }, []);
 
   useEffect(() => {
-    if (options && options !== 'All') {
-      fetchFilterMealArea(options)
-        .then((response) => response.json())
-        .then((result) => setDataOptions(result.meals));
-    } else if (options && options === 'All') {
-      fetchAllFoods()
-        .then((response) => response.json())
-        .then((result) => setDataOptions(result.meals));
-    }
-  }, [options]);
+    fetchAllFoods().then((result) => setDataOptions(result.meals));
+  }, []);
 
   const contextValue = {
     foods: dataMealsAndCategory,
@@ -137,7 +126,7 @@ function Provider({ children }) {
     mealArea,
     setMealArea,
     dataOptions,
-    setOptions,
+    setDataOptions,
   };
 
   return (

@@ -1,23 +1,36 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import context from '../../../store/Context';
+import { fetchAllFoods, fetchFilterMealArea } from '../../../services/Data';
 import { Header, Footer } from '../../../components';
 
 function ExploreArea() {
-  const { mealArea, setOptions, dataOptions } = useContext(context);
+  const { mealArea, dataOptions, setDataOptions } = useContext(context);
 
   const cardSize = 12;
+
+  const filterMealByCountry = async ({ target: { value } }) => {
+    if (value === 'All') {
+      const allFood = await fetchAllFoods();
+      setDataOptions(allFood.meals);
+    }
+    if (value !== 'All') {
+      const foodCountry = await fetchFilterMealArea(value);
+      setDataOptions(foodCountry.meals);
+    }
+  };
+
   return (
     <>
       <Header title="Explorar Origem" />
       <main>
         <select
-          onChange={ ({ target }) => setOptions(target.value) }
+          onChange={ filterMealByCountry }
           data-testid="explore-by-area-dropdown"
         >
           {mealArea.map(({ strArea }, index) => (
             <option
-              onChange={ ({ target }) => setOptions(target.value) }
+              onChange={ filterMealByCountry }
               value={ strArea }
               data-testid={ `${strArea}-option` }
               key={ index }
