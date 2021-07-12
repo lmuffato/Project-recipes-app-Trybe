@@ -5,13 +5,14 @@ import Meals from './pages/Meals';
 import Drinks from './pages/Drinks';
 import RecipeDetails from './pages/RecipeDetails';
 import Profile from './pages/Profile';
-import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import Search from './pages/Search';
 import SearchMealOrDrink from './pages/SearchMealOrDrink';
 import SearchIngredients from './pages/SearchIngredients';
 import SearchArea from './pages/SearchArea';
 import NotFound from './pages/NotFound';
+import InProgressRecipe from './pages/InProgressRecipe';
+import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import Favotire from './pages/Favotire';
 
 function App() {
@@ -20,8 +21,10 @@ function App() {
       <Switch>
         <Route exact path="/" component={ Login } />
         <Route exact path="/comidas/:id" component={ RecipeDetails } />
+        <Route exact path="/comidas/:id/in-progress" component={ InProgressRecipe } />
         <Route exact path="/comidas" component={ Meals } />
         <Route exact path="/bebidas/:id" component={ RecipeDetails } />
+        <Route exact path="/bebidas/:id/in-progress" component={ InProgressRecipe } />
         <Route exact path="/bebidas" component={ Drinks } />
         <Route exact path="/perfil" component={ Profile } />
         <Route

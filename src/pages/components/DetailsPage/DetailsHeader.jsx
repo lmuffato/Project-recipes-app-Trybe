@@ -52,7 +52,7 @@ function DetailsHeader(props) {
   });
 
   const copyToClipboard = () => {
-    const link = `http://localhost:3000${pathname}`;
+    const link = `http://localhost:3000${pathname.split('/in-progress')[0]}`;
     navigator.clipboard.writeText(link);
 
     copyMessageToggle(false);

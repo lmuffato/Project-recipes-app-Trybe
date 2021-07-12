@@ -8,7 +8,6 @@ export default function FavoriteRecipes(props) {
   const [favoriteList, setFavoriteList] = useState('');
   const [filteredList, setFilteredList] = useState('');
   const { filter } = props;
-
   useEffect(() => {
     setFavoriteList(JSON.parse(localStorage.getItem('favoriteRecipes')));
     const list = JSON.parse(localStorage.getItem('favoriteRecipes'));
