@@ -6,7 +6,7 @@ import Header from '../../components/Header';
 import './style.css';
 
 const Explore = () => (
-  <div>
+  <div className="screen-explore">
     <Header title="Explorar" />
 
     <div className="buttons-explore">
