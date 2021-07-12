@@ -1,7 +1,7 @@
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 import App from '../App';
-import renderWithRouter from './renderWithRouter';
+import renderWithRouterAndContext from './renderWithRouterAndContext';
 
 const EMAIL_TEST_ID = 'email-input';
 const PASSWORD_TEST_ID = 'password-input';
@@ -10,7 +10,7 @@ const MOCK_EMAIL = 'alguem@alguem.com';
 
 describe('Teste da página de Comidas', () => {
   test('A paǵina de comidas é a primeira a aparecer após o login', () => {
-    const { getByTestId, history } = renderWithRouter(<App />);
+    const { getByTestId, history } = renderWithRouterAndContext(<App />);
 
     userEvent.type(getByTestId(EMAIL_TEST_ID), MOCK_EMAIL);
     userEvent.type(getByTestId(PASSWORD_TEST_ID), '1234567');
@@ -20,7 +20,7 @@ describe('Teste da página de Comidas', () => {
   });
 
   test('A tela de comidas possui um header com os botões corretos', () => {
-    const { getByTestId } = renderWithRouter(<App />);
+    const { getByTestId } = renderWithRouterAndContext(<App />);
 
     userEvent.type(getByTestId(EMAIL_TEST_ID), MOCK_EMAIL);
     userEvent.type(getByTestId(PASSWORD_TEST_ID), '1234567');
@@ -32,7 +32,7 @@ describe('Teste da página de Comidas', () => {
   });
 
   test('A barra de busca é renderizada ao clicar no botão', () => {
-    const { getByTestId } = renderWithRouter(<App />);
+    const { getByTestId } = renderWithRouterAndContext(<App />);
 
     userEvent.type(getByTestId(EMAIL_TEST_ID), MOCK_EMAIL);
     userEvent.type(getByTestId(PASSWORD_TEST_ID), '1234567');
@@ -50,7 +50,7 @@ describe('Teste da página de Comidas', () => {
   });
 
   test('A página renderiza inicialmente 12 comidas', async () => {
-    const { getByTestId, findAllByTestId } = renderWithRouter(<App />);
+    const { getByTestId, findAllByTestId } = renderWithRouterAndContext(<App />);
 
     userEvent.type(getByTestId(EMAIL_TEST_ID), MOCK_EMAIL);
     userEvent.type(getByTestId(PASSWORD_TEST_ID), '1234567');

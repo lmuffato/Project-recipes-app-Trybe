@@ -1,7 +1,7 @@
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 import App from '../App';
-import renderWithRouter from './renderWithRouter';
+import renderWithRouterAndContext from './renderWithRouterAndContext';
 
 const EMAIL_TEST_ID = 'email-input';
 const PASSWORD_TEST_ID = 'password-input';
@@ -10,7 +10,7 @@ const MOCK_EMAIL = 'alguem@alguem.com';
 
 describe('Testa a página de perfil', () => {
   test('O campo de email está visível e é correto', () => {
-    const { getByTestId, history } = renderWithRouter(<App />);
+    const { getByTestId, history } = renderWithRouterAndContext(<App />);
 
     userEvent.type(getByTestId(EMAIL_TEST_ID), MOCK_EMAIL);
     userEvent.type(getByTestId(PASSWORD_TEST_ID), '1234567');
@@ -26,7 +26,7 @@ describe('Testa a página de perfil', () => {
   });
 
   test('Ir para tela receitas feitas ao clicar no botão', () => {
-    const { getByTestId, history } = renderWithRouter(<App />);
+    const { getByTestId, history } = renderWithRouterAndContext(<App />);
 
     userEvent.type(getByTestId(EMAIL_TEST_ID), MOCK_EMAIL);
     userEvent.type(getByTestId(PASSWORD_TEST_ID), '1234567');
@@ -43,7 +43,7 @@ describe('Testa a página de perfil', () => {
   });
 
   test('Ir para tela receitas favoritas ao clicar no botão', () => {
-    const { getByTestId, history } = renderWithRouter(<App />);
+    const { getByTestId, history } = renderWithRouterAndContext(<App />);
 
     userEvent.type(getByTestId(EMAIL_TEST_ID), MOCK_EMAIL);
     userEvent.type(getByTestId(PASSWORD_TEST_ID), '1234567');
@@ -60,7 +60,7 @@ describe('Testa a página de perfil', () => {
   });
 
   test('Comportamento do botão logout', () => {
-    const { getByTestId, history } = renderWithRouter(<App />);
+    const { getByTestId, history } = renderWithRouterAndContext(<App />);
 
     userEvent.type(getByTestId(EMAIL_TEST_ID), MOCK_EMAIL);
     userEvent.type(getByTestId(PASSWORD_TEST_ID), '1234567');
