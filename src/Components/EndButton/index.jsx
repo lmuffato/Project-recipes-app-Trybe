@@ -36,12 +36,12 @@ function EndButton({ id, toggleURL, recipeStatus }) {
 
   return (
     <div className="btn-cntl">
-      <Link to={`/${toggleURL}/${id}/in-progress`}>
+      <Link to={ `/${toggleURL}/${id}/in-progress` }>
         <button
           type="button"
           data-testid="start-recipe-btn"
           className="init-btn btn btn-primary"
-          onClick={() => handleStart() }
+          onClick={ () => handleStart() }
         >
           {recipeStatus}
         </button>

@@ -57,3 +57,14 @@ export const createDoneRecipe = (id, recipeType, recipesDetails) => {
   };
   return doneObj;
 };
+
+export const createToggles = (pathname) => {
+  const recipeType = (pathname.includes('comidas')) ? 'Meal' : 'Drink';
+  const toggleApi = (pathname.includes('comidas')) ? 'meals' : 'drinks';
+  const toggleCategory = recipeType === 'Meal' ? 'strCategory' : 'strAlcoholic';
+  const toggleURL = (pathname.includes('comidas')) ? 'comidas' : 'bebidas';
+  const toggleLocalDoing = recipeType === 'Meal' ? 'meals' : 'cocktails';
+  return {
+    recipeType, toggleApi, toggleCategory, toggleURL, toggleLocalDoing,
+  };
+};
