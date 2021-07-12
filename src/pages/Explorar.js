@@ -1,32 +1,34 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 
-import styles from '../styles/Explore.module.scss';
+import styles from '../styles/Profile.module.scss';
 
 function Explorar() {
+  const redirect = (ev) => {
+    const { innerHTML } = ev.target;
+    if (innerHTML === 'Explorar Comidas') {
+      window.location.href = '/explorar/comidas';
+    } else {
+      window.location.href = '/explorar/bebidas';
+    }
+  };
+
   return (
-    <div className={ styles.container }>
+    <div>
       <Header title="Explorar" />
-      <button type="button">
-        <Link
-          to="/explorar/comidas"
-          data-testid="explore-food"
-          className={ styles.redirect }
-        >
+      <div className={ styles.container }>
+        <button type="button" data-testid="explore-food" onClick={ (ev) => redirect(ev) }>
           Explorar Comidas
-        </Link>
-      </button>
-      <button type="button">
-        <Link
-          to="/explorar/bebidas"
+        </button>
+        <button
+          type="button"
           data-testid="explore-drinks"
-          className={ styles.redirect }
+          onClick={ (ev) => redirect(ev) }
         >
           Explorar Bebidas
-        </Link>
-      </button>
+        </button>
+      </div>
       <Footer />
     </div>
   );

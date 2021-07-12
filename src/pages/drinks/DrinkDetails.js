@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useStateEasyRedux } from 'easy-redux-trybe';
-import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import copy from 'clipboard-copy';
 import positions from '../../services/data';
@@ -9,6 +8,7 @@ import createIngredients from '../../services/functions';
 import shareIcon from '../../images/shareIcon.svg';
 import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../../images/blackHeartIcon.svg';
+import { setLocalStorage, getLocalStorage } from '../../helper';
 
 import styles from '../../styles/DetailsPages.module.scss';
 
@@ -16,9 +16,11 @@ function DrinkDetails(props) {
   const { match: { params: { id } } } = props;
 
   const history = useHistory();
-  const [, setStateRedux] = useStateEasyRedux(DrinkDetails, {});
-  const [, setCopyUrl] = useStateEasyRedux({ name: 'copyDrink' }, {});
-  const [, setFavoriteRecipe] = useStateEasyRedux({ name: 'favoriteRecipe' }, {});
+  const [stateRedux, setStateRedux] = useStateEasyRedux(DrinkDetails, {});
+  const [copyUrl, setCopyUrl] = useStateEasyRedux({ name: 'copyDrink' }, {});
+  const [favoriteRecipe, setFavoriteRecipe] = useStateEasyRedux(
+    { name: 'favoriteRecipe' }, {},
+  );
 
   useEffect(() => {
     const fetchRecipe = async () => {
@@ -38,38 +40,27 @@ function DrinkDetails(props) {
       setStateRedux({ actionType: 'FETCH_DRINK', responseDrink, resultRecommendations });
       setCopyUrl({ actionType: 'COPY_URL', copyRecipe: false });
 
-      const getRecipe = JSON.parse(localStorage.getItem('favoriteRecipes'));
+      const getRecipe = getLocalStorage('favoriteRecipes');
       const resultGet = getRecipe && getRecipe.some((element) => element.id === id);
       setFavoriteRecipe({ actionType: 'FAVORITE_RECIPE', favorite: resultGet });
     };
     fetchRecipe();
+    // eslint-disable-next-line
   }, []);
 
-  const drinks = useSelector((state) => (
-    state.DrinkDetails ? state.DrinkDetails.responseDrink : undefined
-  ));
-
-  const foodRecommendations = useSelector((state) => (
-    state.DrinkDetails ? state.DrinkDetails.resultRecommendations : undefined
-  ));
-
-  const copyTrue = useSelector((state) => (
-    state.copyDrink ? state.copyDrink.copyRecipe : undefined
-  ));
-
-  const favorite = useSelector((state) => (
-    state.favoriteRecipe ? state.favoriteRecipe.favorite : undefined
-  ));
+  const { responseDrink, resultRecommendations } = stateRedux;
+  const { copyRecipe } = copyUrl;
+  const { favorite } = favoriteRecipe;
 
   const verifyAlcohol = (el) => {
     if (el.strAlcoholic === 'Alcoholic') {
-      return (<p>{ el.strAlcoholic }</p>);
+      return `(${el.strAlcoholic})`;
     }
   };
 
   const choiceRec = (element) => history.push(`/comidas/${element}`);
 
-  const copyUrl = () => {
+  const copyUrlLink = () => {
     copy(window.location.href.toString());
     setCopyUrl({ copyRecipe: true });
     const time = 3000;
@@ -81,7 +72,7 @@ function DrinkDetails(props) {
   const clickFavorite = ({ idDrink, strCategory,
     strDrink, strDrinkThumb, strAlcoholic }) => {
     if (!favorite) {
-      const favoriteRecipe = [{
+      const favoriteRecipeObj = [{
         id: idDrink,
         type: 'bebida',
         area: '',
@@ -90,28 +81,28 @@ function DrinkDetails(props) {
         name: strDrink,
         image: strDrinkThumb,
       }];
-      localStorage.setItem('favoriteRecipes', JSON.stringify(favoriteRecipe));
+      setLocalStorage('favoriteRecipes', favoriteRecipeObj);
     } else {
-      const removeFavorite = JSON.parse(localStorage.getItem('favoriteRecipes'))
+      const removeFavorite = getLocalStorage('favoriteRecipes')
         .filter((el) => el.id !== idDrink);
-      localStorage.setItem('favoriteRecipes', JSON.stringify(removeFavorite));
+      setLocalStorage('favoriteRecipes', removeFavorite);
     }
     setFavoriteRecipe({ favorite: !favorite });
   };
 
   return (
     <div>
-      {drinks && drinks.map((el) => (
+      {responseDrink && responseDrink.map((el) => (
         <div className={ styles.areaRecipe } key={ el.idDrink }>
           <img src={ el.strDrinkThumb } alt={ el.strDrink } data-testid="recipe-photo" />
           <div className={ styles.containerContent }>
-            {copyTrue && <span className={ styles.copyUrl }>Link copiado!</span>}
+            {copyRecipe && <span className={ styles.copyUrl }>Link copiado!</span>}
             <div className={ styles.headerContent }>
               <h1 data-testid="recipe-title">{ el.strDrink }</h1>
               <button
                 type="button"
                 data-testid="share-btn"
-                onClick={ () => copyUrl() }
+                onClick={ () => copyUrlLink() }
               >
                 <img src={ shareIcon } alt="Compartilhar" />
               </button>
@@ -129,6 +120,7 @@ function DrinkDetails(props) {
             </div>
             <p data-testid="recipe-category">
               { el.strCategory }
+              {' '}
               {verifyAlcohol(el)}
             </p>
             <h3>Ingredients</h3>
@@ -140,7 +132,7 @@ function DrinkDetails(props) {
             <p data-testid="instructions">{ el.strInstructions }</p>
             <h3>Recommendations</h3>
             <div className={ styles.carousel }>
-              {foodRecommendations && foodRecommendations.map((element, index) => (
+              {resultRecommendations && resultRecommendations.map((element, index) => (
                 <div
                   key={ element.idMeal }
                   data-testid={ `${index}-recomendation-card` }
