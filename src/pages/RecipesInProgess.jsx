@@ -7,6 +7,7 @@ import
 RecipeIngredientsInProgress from
   '../components/RecipesIngredientsInProgress/RecipesIngredientsInProgress';
 import Container from '../styles/recipeDetails';
+import RecipesInProgressContextProvider from '../context/RecipesInProgressContext';
 
 function RecipesInProgress({ type }) {
   const { id } = useParams();
@@ -50,33 +51,42 @@ function RecipesInProgress({ type }) {
   const recipeThumb = singleRecipe.strMealThumb || singleRecipe.strDrinkThumb;
   const recipeCategory = singleRecipe.strCategory;
   const isAlchooholic = singleRecipe.strAlcoholic || '';
+  const recipeId = singleRecipe.idMeal || '';
 
   return (
-    <Container>
-      <RecipeInfo
-        recipeName={ recipeName }
-        recipeThumb={ recipeThumb }
-      >
-        { type === 'drinks' ? (<h3 data-testid="recipe-category">{isAlchooholic}</h3>) : (
-          <h3 data-testid="recipe-category">{recipeCategory}</h3>)}
-      </RecipeInfo>
-      <h3>Ingredientes</h3>
-      <div className="ingredients-list">
-        <RecipeIngredientsInProgress recipe={ singleRecipe } />
-      </div>
-      <h3>Instructions</h3>
-      <div className="instructions">
-        <p data-testid="instructions">
-          { singleRecipe.strInstructions }
-        </p>
-      </div>
-      <Button
-        data-testid="finish-recipe-btn"
-        disabled
-      >
-        Finalizar receita
-      </Button>
-    </Container>
+    <RecipesInProgressContextProvider>
+      <Container>
+        <RecipeInfo
+          recipeName={ recipeName }
+          recipeThumb={ recipeThumb }
+        >
+          { type === 'drinks'
+            ? (<h3 data-testid="recipe-category">{isAlchooholic}</h3>)
+            : (
+              <h3 data-testid="recipe-category">{recipeCategory}</h3>)}
+        </RecipeInfo>
+        <h3>Ingredientes</h3>
+        <div className="ingredients-list">
+          <RecipeIngredientsInProgress
+            recipe={ singleRecipe }
+            idMeal={ recipeId }
+            type={ type }
+          />
+        </div>
+        <h3>Instructions</h3>
+        <div className="instructions">
+          <p data-testid="instructions">
+            { singleRecipe.strInstructions }
+          </p>
+        </div>
+        <Button
+          data-testid="finish-recipe-btn"
+          disabled
+        >
+          Finalizar receita
+        </Button>
+      </Container>
+    </RecipesInProgressContextProvider>
   );
 }
 

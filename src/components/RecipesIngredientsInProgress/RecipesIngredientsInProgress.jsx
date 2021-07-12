@@ -1,27 +1,86 @@
-import React, { useState } from 'react';
+import React, { useContext, useState, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import formattingMeasuresAndIngredients from '../../services/formatingService';
 
 import Container from './style';
-// import { formattingCarouselImgs } from '../../helpers/carouselData';
+import { RecipesInProgressContext } from '../../context/RecipesInProgressContext';
 
-function RecipeIngredients({ recipe }) {
+function RecipeIngredients({ recipe, idMeal, type }) {
   const keysAndValues = Object.entries(recipe);
 
   const [checked, setChecked] = useState([]);
 
+  const {
+    cocktails,
+    setCocktailsIngredients,
+    meals,
+    setMealsIngredients } = useContext(RecipesInProgressContext);
+
   const formatting = formattingMeasuresAndIngredients(keysAndValues);
   const { ingredients, measures } = formatting;
 
+  const setContextIngredients = useCallback(() => {
+    switch (type) {
+    case 'meals':
+      setMealsIngredients({
+        [idMeal]: checked,
+      });
+      break;
+    case 'drinks':
+      setCocktailsIngredients({
+        [idMeal]: checked,
+      });
+      break;
+    default:
+      break;
+    }
+  }, [
+    checked,
+    idMeal,
+    type,
+    setMealsIngredients,
+    setCocktailsIngredients]);
+
+  useEffect(() => {
+    setContextIngredients();
+  }, [checked, setContextIngredients]);
+
   const handleChange = ({ target }) => {
     if (target.checked) {
-      setChecked([...checked, target.value]);
+      setChecked([...checked, parseInt(target.value, 10)]);
       target.parentNode.style.textDecoration = 'line-through';
     } else {
-      setChecked(checked.filter((check) => check !== target.value));
+      setChecked(checked.filter((check) => check !== parseInt(target.value, 10)));
       target.parentNode.style.textDecoration = 'none';
     }
   };
+
+  useEffect(() => {
+    if (checked.length > 0) {
+      const recipesKeys = {
+        cocktails,
+        meals,
+      };
+      const jsonRecipes = JSON.stringify(recipesKeys);
+      localStorage.setItem('inProgressRecipes', jsonRecipes);
+    }
+  }, [cocktails, meals, checked]);
+
+  useEffect(() => {
+    const recipesJson = localStorage.getItem('inProgressRecipes');
+    const storageRecipes = JSON.parse(recipesJson);
+
+    switch (type) {
+    case 'meals':
+      setChecked(storageRecipes.meals[idMeal]);
+      break;
+    case 'drinks':
+      setChecked(storageRecipes.cocktails[idMeal]);
+      break;
+    default:
+      break;
+    }
+  }, [idMeal, type]);
 
   return (
     <Container className="ing">
@@ -32,8 +91,8 @@ function RecipeIngredients({ recipe }) {
             data-testid={ `${index}-ingredient-step` }
             key={ index }
             id={ element }
-            value={ element }
-            checked={ checked.includes(element) }
+            value={ index }
+            checked={ checked.includes(index) }
             onChange={ handleChange }
           />
           { measures[index]}
@@ -48,4 +107,6 @@ export default RecipeIngredients;
 
 RecipeIngredients.propTypes = {
   recipe: PropTypes.shape().isRequired,
+  idMeal: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
 };
