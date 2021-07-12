@@ -13,6 +13,7 @@ import NotFound from './pages/NotFound';
 import InProgressRecipe from './pages/InProgressRecipe';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Favotire from './pages/Favotire';
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function App() {
         <Route exact path="/explorar/comidas" component={ SearchMealOrDrink } />
         <Route exact path="/explorar/bebidas" component={ SearchMealOrDrink } />
         <Route exact path="/explorar" component={ Search } />
+        <Route exact path="/receitas-favoritas" component={ Favotire } />
         <Route component={ NotFound } />
       </Switch>
     </div>

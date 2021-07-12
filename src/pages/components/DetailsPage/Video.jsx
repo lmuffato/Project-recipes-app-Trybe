@@ -18,6 +18,7 @@ function Video(props) {
               encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
             title="Embedded youtube"
+            className="card-video"
           />
         ) }
     </div>
