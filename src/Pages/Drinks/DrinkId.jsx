@@ -28,6 +28,17 @@ const getDrinksFavorites = (setImgFavorite, id) => (
     .length ? setImgFavorite(blackHeartIcon) : setImgFavorite(whiteHeartIcon)
 );
 
+const copyURL = (route, setTextLink, textLink) => {
+  const SEC = 3000;
+  copy(`http://localhost:3000${route}`);
+  if (textLink === '') {
+    setTextLink('Link copiado!');
+    setTimeout(() => {
+      setTextLink('');
+    }, SEC);
+  }
+};
+
 function DrinkId() {
   const location = useLocation();
   const id = location.pathname.split('/')[2];
@@ -48,12 +59,16 @@ function DrinkId() {
   const { cocktails } = inProgressRecipes;
   const arrIngredients = Object.entries(drinkForId);
   const {
+    idDrink,
     strDrink,
     strAlcoholic,
     strInstructions,
+    strCategory,
     strDrinkThumb } = drinkForId;
 
   useEffect(() => {
+    const favoriteRecipes = (JSON.parse(localStorage.getItem('favoriteRecipes')) || []);
+    localStorage.setItem('favoriteRecipes', JSON.stringify([...favoriteRecipes]));
     setHidden(setHiddenValue, id);
     getDrinksLocalStorage(setTextBtn, id);
     getDrinksFavorites(setImgFavorite, id);
@@ -72,16 +87,33 @@ function DrinkId() {
     });
   };
 
-  const copyURL = () => {
-    const SEC = 3000;
-    copy(`http://localhost:3000${route}`);
-    if (textLink === '') {
-      setTextLink('Link copiado!');
-      setTimeout(() => {
-        setTextLink('');
-      }, SEC);
-    }
+  const addFavoriteRecipes = () => {
+    const favoriteRecipes = (JSON.parse(localStorage.getItem('favoriteRecipes')) || []);
+    localStorage.setItem('favoriteRecipes', JSON.stringify([...favoriteRecipes, {
+      id: idDrink,
+      type: 'bebida',
+      area: '',
+      category: strCategory,
+      alcoholicOrNot: strAlcoholic,
+      name: strDrink,
+      image: strDrinkThumb,
+    }]));
+    getDrinksFavorites(setImgFavorite, id);
   };
+
+  const delFavoriteRecipes = () => {
+    const favoriteRecipes = (JSON.parse(localStorage.getItem('favoriteRecipes')) || []);
+    localStorage
+      .setItem('favoriteRecipes', JSON
+        .stringify(favoriteRecipes.filter((recipe) => recipe.id !== id)));
+    getDrinksFavorites(setImgFavorite, id);
+  };
+
+  const clickFavorite = () => (
+    (JSON.parse(localStorage.getItem('favoriteRecipes')) || [])
+      .filter(({ id: localStorageId }) => localStorageId === id)
+      .length ? delFavoriteRecipes() : addFavoriteRecipes()
+  );
 
   if (shouldRedirect) return <Redirect to={ `/bebidas/${id}/in-progress` } />;
   if (!drinkForId) return <div>Loading...</div>;
@@ -89,6 +121,7 @@ function DrinkId() {
   return (
     <div>
       <img
+        className="img-details"
         src={ strDrinkThumb }
         alt="receita pronta"
         data-testid="recipe-photo"
@@ -99,13 +132,14 @@ function DrinkId() {
         <p data-testid="recipe-category">{strAlcoholic}</p>
         <button
           type="button"
-          onClick={ copyURL }
+          onClick={ () => copyURL(route, setTextLink, textLink) }
           data-testid="share-btn"
         >
           <img src={ shareIcon } alt="share-icon" />
         </button>
         <button
           type="button"
+          onClick={ clickFavorite }
           src={ imgFavorite }
           data-testid="favorite-btn"
         >

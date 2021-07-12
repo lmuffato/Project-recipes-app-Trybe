@@ -8,3 +8,8 @@
   max-height: auto;
   max-width: 200px;
 }
+
+.img-details {
+  max-height: auto;
+  max-width: 100%;
+}

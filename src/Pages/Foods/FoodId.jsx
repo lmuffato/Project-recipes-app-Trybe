@@ -4,6 +4,7 @@ import { fetchFoodForId } from '../../services/Data';
 import shareIcon from '../../images/shareIcon.svg';
 import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../../images/blackHeartIcon.svg';
+import '../../Styles/Recomendation.css';
 import context from '../../store/Context';
 
 const copy = require('clipboard-copy');
@@ -26,6 +27,17 @@ const getFoodsFavorites = (setImgFavorite, id) => (
     .length ? setImgFavorite(blackHeartIcon) : setImgFavorite(whiteHeartIcon)
 );
 
+const copyURL = (route, setTextLink, textLink) => {
+  const SEC = 3000;
+  copy(`http://localhost:3000${route}`);
+  if (textLink === '') {
+    setTextLink('Link copiado!');
+    setTimeout(() => {
+      setTextLink('');
+    }, SEC);
+  }
+};
+
 function FoodId() {
   const location = useLocation();
   const id = location.pathname.split('/')[2];
@@ -47,12 +59,16 @@ function FoodId() {
   const arrIngredients = Object.entries(foodForId);
   const {
     strMeal,
+    idMeal,
+    strArea,
     strYoutube,
     strCategory,
     strInstructions,
     strMealThumb } = foodForId;
 
   useEffect(() => {
+    const favoriteRecipes = (JSON.parse(localStorage.getItem('favoriteRecipes')) || []);
+    localStorage.setItem('favoriteRecipes', JSON.stringify([...favoriteRecipes]));
     getFoodsLocalStorage(setTextBtn, id);
     setHidden(setHiddenValue, id);
     getFoodsFavorites(setImgFavorite, id);
@@ -71,16 +87,33 @@ function FoodId() {
     });
   };
 
-  const copyURL = () => {
-    const SEC = 3000;
-    copy(`http://localhost:3000${route}`);
-    if (textLink === '') {
-      setTextLink('Link copiado!');
-      setTimeout(() => {
-        setTextLink('');
-      }, SEC);
-    }
+  const addFavoriteRecipes = () => {
+    const favoriteRecipes = (JSON.parse(localStorage.getItem('favoriteRecipes')) || []);
+    localStorage.setItem('favoriteRecipes', JSON.stringify([...favoriteRecipes, {
+      id: idMeal,
+      type: 'comida',
+      area: strArea,
+      category: strCategory,
+      alcoholicOrNot: '',
+      name: strMeal,
+      image: strMealThumb,
+    }]));
+    getFoodsFavorites(setImgFavorite, id);
   };
+
+  const delFavoriteRecipes = () => {
+    const favoriteRecipes = (JSON.parse(localStorage.getItem('favoriteRecipes')) || []);
+    localStorage
+      .setItem('favoriteRecipes', JSON
+        .stringify(favoriteRecipes.filter((recipe) => recipe.id !== id)));
+    getFoodsFavorites(setImgFavorite, id);
+  };
+
+  const clickFavorite = () => (
+    (JSON.parse(localStorage.getItem('favoriteRecipes')) || [])
+      .filter(({ id: localStorageId }) => localStorageId === id)
+      .length ? delFavoriteRecipes() : addFavoriteRecipes()
+  );
 
   if (shouldRedirect) return <Redirect to={ `/comidas/${id}/in-progress` } />;
   if (!foodForId) return <div>Loading...</div>;
@@ -88,6 +121,7 @@ function FoodId() {
   return (
     <div>
       <img
+        className="img-details"
         src={ strMealThumb }
         alt="receita pronta"
         data-testid="recipe-photo"
@@ -98,7 +132,7 @@ function FoodId() {
         <p data-testid="recipe-category">{strCategory}</p>
         <button
           type="button"
-          onClick={ copyURL }
+          onClick={ () => copyURL(route, setTextLink, textLink) }
         >
           <img data-testid="share-btn" src={ shareIcon } alt="share-icon" />
         </button>
@@ -106,6 +140,7 @@ function FoodId() {
           type="button"
           src={ imgFavorite }
           data-testid="favorite-btn"
+          onClick={ clickFavorite }
         >
           <img src={ imgFavorite } alt="favorite icon" />
         </button>
