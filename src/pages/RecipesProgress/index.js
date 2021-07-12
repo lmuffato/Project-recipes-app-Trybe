@@ -128,9 +128,7 @@ export default function RecipesProgress({ match }) {
           <div className="title">
             <Title title={ recipe.strMeal || recipe.strDrink } />
             <BtnShare match={ match } />
-            <BtnFavorite
-              recipe={ recipe }
-            />
+            <BtnFavorite />
             <Category category={ recipe.strCategory || recipe.strAlcoholic } />
 
             <h2>Ingredientes</h2>

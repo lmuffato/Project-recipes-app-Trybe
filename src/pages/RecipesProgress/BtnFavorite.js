@@ -5,9 +5,9 @@ import whiteHeart from '../../images/whiteHeartIcon.svg';
 import blackHeart from '../../images/blackHeartIcon.svg';
 import { AppContext } from '../../context/AppContext';
 
-export default function BtnFavorite({ recipe }) {
+export default function BtnFavorite({ id }) {
   const { context } = useContext(AppContext);
-  const { setRecipeContext, toStorage } = context;
+  const { setRecipeContext, toStorage, recipeContext, recipe } = context;
   const [isFavorite, setIsFavorite] = useState(false);
 
   const key = 'favoriteRecipes';
@@ -18,19 +18,19 @@ export default function BtnFavorite({ recipe }) {
 
   useEffect(() => {
     setRecipeContext(recipe);
-  }, [recipe, setRecipeContext]);
+  }, [recipe]);
 
   useEffect(() => {
     const storageValue = localStorage.getItem(key);
     if (storageValue) {
       const result = JSON.parse(storageValue);
       const comparison = result && result.some((item) => (
-        item.id.includes(recipe.idMeal || recipe.idDrink)));
+        item.id === id));
       if (comparison) {
         setIsFavorite(true);
       }
     }
-  }, [recipe.idMeal, recipe.idDrink]);
+  }, [recipe.idMeal, recipe.idDrink, recipeContext, id]);
 
   useEffect(() => {
     if (isFavorite === true) {
@@ -56,16 +56,5 @@ export default function BtnFavorite({ recipe }) {
 }
 
 BtnFavorite.propTypes = {
-  recipe: PropTypes.shape({
-    idMeal: PropTypes.string,
-    idDrink: PropTypes.string,
-    strArea: PropTypes.string,
-    strCategory: PropTypes.string,
-    strAlcoholic: PropTypes.string,
-    strMeal: PropTypes.string,
-    strDrink: PropTypes.string,
-    strMealThumb: PropTypes.string,
-    strDrinkThumb: PropTypes.string,
-    strTags: PropTypes.string,
-  }).isRequired,
+  id: PropTypes.string.isRequired,
 };

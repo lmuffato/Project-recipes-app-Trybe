@@ -9,7 +9,7 @@ export default function BtnShare({ match }) {
   const [isCopied, setIsCopied] = useState(false);
   const { url } = match;
   async function handleShareBtn() {
-    await copy(`http://localhost:3000${url}`);
+    await copy(`http://localhost:3000${url || match}`);
     setIsCopied(true);
   }
   return (
