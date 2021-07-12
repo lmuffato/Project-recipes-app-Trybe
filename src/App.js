@@ -6,6 +6,7 @@ import Meals from './pages/Meals';
 import Drinks from './pages/Drinks';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
+import DoneFilters from './pages/components/DoneRecipesPages/DoneFilters';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route exact path="/" component={ Login } />
         <Route exact path="/comidas" component={ Meals } />
         <Route exact path="/bebidas" component={ Drinks } />
+        <Route exact path="/receitas-feitas" component={ DoneFilters } />
       </Switch>
     </div>
   );
