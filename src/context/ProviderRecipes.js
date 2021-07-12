@@ -13,6 +13,7 @@ function ProviderRecipes({ children }) {
   // const [type, setType] = useState('');
   const [dataDrinkCards, setDataDrinkCards] = useState('');
   const [loadingCards, setLoadingCards] = useState(false);
+  const [showSearchBar, setShowSearchBar] = useState(false);
 
   const getCategories = async (type) => {
     const siteName = type === 'Meal' ? 'meal' : 'cocktail';
@@ -105,6 +106,8 @@ function ProviderRecipes({ children }) {
         setDataDrinkCards,
         loadingCards,
         setLoadingCards,
+        showSearchBar,
+        setShowSearchBar,
       } }
     >
       { children }

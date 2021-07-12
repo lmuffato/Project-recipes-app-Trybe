@@ -10,7 +10,7 @@ import '../styleSheets/Main.css';
 
 function Main() {
   const { getRecipes, getCategories, filteredRecipe,
-    searchBtn } = useContext(ContextRecipes);
+    searchBtn, showSearchBar } = useContext(ContextRecipes);
   const { pathname } = useLocation();
   const history = useHistory();
   const type = pathname === '/comidas' ? 'Meal' : 'Drink';
@@ -33,7 +33,7 @@ function Main() {
   return (
     <main className="main-container">
       <Header />
-      <SearchBar />
+      {showSearchBar ? <SearchBar /> : null}
       <section className="content-container">
         <section className="recipe-cards-container">
           { filteredRecipe && filteredRecipe.reduce((acc, recipe, index) => {
