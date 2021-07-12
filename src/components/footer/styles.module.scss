@@ -1,0 +1,11 @@
+.footer {
+  align-items: center;
+  background: var(--purple);
+  display: flex;
+  height: 54px;
+  justify-content: space-around;
+
+  .icons {
+    height: 24px;
+  }
+}
