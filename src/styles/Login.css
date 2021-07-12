@@ -1,0 +1,6 @@
+.body-test {
+  background-color: #fabb8b;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
