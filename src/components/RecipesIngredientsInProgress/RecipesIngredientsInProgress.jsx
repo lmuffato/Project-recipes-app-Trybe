@@ -49,10 +49,8 @@ function RecipeIngredients({ recipe, idMeal, idDrink, type }) {
   const handleChange = ({ target }) => {
     if (target.checked) {
       setChecked([...checkedBox, parseInt(target.value, 10)]);
-      target.parentNode.style.textDecoration = 'line-through';
     } else {
       setChecked(checkedBox.filter((check) => check !== parseInt(target.value, 10)));
-      target.parentNode.style.textDecoration = 'none';
     }
   };
 
