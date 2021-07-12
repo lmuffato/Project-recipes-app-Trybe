@@ -1,7 +1,8 @@
-import React from 'react';
 
-export default function FoodInProgress() {
+
+export default function FoodInProgress(props) {
+  
   return (
-    <div />
+    <button type="button">Finalizar Receita</button>
   );
 }

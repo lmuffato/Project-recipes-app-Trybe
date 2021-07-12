@@ -13,18 +13,18 @@ import OriginLocation from '../pages/OriginLocation';
 import ProfilePage from '../pages/ProfilePage';
 import DoneRecipes from '../pages/DoneRecipes';
 import FavoriteRecipes from '../pages/FavoriteRecipes';
-import FoodInProcess from '../pages/FoodInProcess';
+import FoodInProgress from '../pages/FoodInProgress';
 import DrinkInProcess from '../pages/DrinkInProcess';
 
 export default function Routes() {
   return (
     <Switch>
       <Route exact path="/" component={ Login } />
-      <Route path="/comidas" component={ FoodPage } />
+      <Route exact path="/comidas" component={ FoodPage } />
       <Route path="/bebidas" component={ DrinkPage } />
-      <Route path="/comidas/:idMeal" component={ RecipeDetails } />
+      <Route exact path="/comidas/:idMeal" component={ RecipeDetails } />
       <Route path="/bebidas/:idDrink" component={ RecipeDetails } />
-      <Route path="/comidas/:idMeal/in-progress" component={ FoodInProcess } />
+      <Route path="/comidas/:idMeal/in-progress" component={ FoodInProgress } />
       <Route path="/comidas/:idDrink/in-progress" component={ DrinkInProcess } />
       <Route path="/explorar" component={ ExplorePage } />
       <Route path="/explorar/comidas" component={ ExploreFoods } />
