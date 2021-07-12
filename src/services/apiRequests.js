@@ -66,6 +66,12 @@ export const foodsByCategory = async (callback, category) => {
   const { meals } = ApiData;
   callback(meals);
 };
+export const foodsByArea = async (callback, area) => {
+  const rawApiData = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?a=${area}`);
+  const ApiData = await rawApiData.json();
+  const { meals } = ApiData;
+  callback(meals);
+};
 export const drinksByCategory = async (callback, category) => {
   const rawApiData = await fetch(
     `https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${category}`,
@@ -120,4 +126,11 @@ export const getDrinksIngredientList = async (callback) => {
   const ApiData = await rawApiData.json();
   const { drinks } = ApiData;
   callback(drinks);
+};
+
+export const getAllOrigins = async (callback) => {
+  const rawApiData = await fetch('https://www.themealdb.com/api/json/v1/1/list.php?a=list');
+  const ApiData = await rawApiData.json();
+  const { meals } = ApiData;
+  callback(meals);
 };
