@@ -7,7 +7,6 @@ import Instructions from './components/DetailsPage/Instructions';
 import FinishRecipeBtn from './components/InProgressRecipePage/FinishRecipeBtn';
 import { getSpecificDrink } from '../actions/drinks';
 import { getSpecificMeal } from '../actions/meals';
-import './RecipeDetails.css';
 
 function RecipeDetails() {
   const [inProgressUpdate, setInprogressUpdate] = useState(true);
