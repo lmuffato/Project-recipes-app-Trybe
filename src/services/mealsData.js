@@ -25,6 +25,30 @@ export default async function mealsData(options) {
     return parseMealResults(filter);
   }
 
+  if (options && options.ingredient) {
+    const filter = await fetchJson(
+      `https://www.themealdb.com/api/json/v1/1/filter.php?i=${options.ingredient}`,
+    );
+
+    return parseDrinkResults(filter);
+  }
+
+  if (options && options.name) {
+    const filter = await fetchJson(
+      `https://www.themealdb.com/api/json/v1/1/search.php?s=${options.name}`,
+    );
+
+    return parseDrinkResults(filter);
+  }
+
+  if (options && options.firstletter) {
+    const filter = await fetchJson(
+      `https://www.themealdb.com/api/json/v1/1/search.php?f=${options.firstletter}`,
+    );
+
+    return parseDrinkResults(filter);
+  }
+
   return {
     titlePage: 'Comidas',
     categories: categories.meals,
