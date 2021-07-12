@@ -27,7 +27,7 @@ function MealArea() {
   useEffect(() => {
     if (globalArea === 'All') {
       setShowRecipe(fullRecipes);
-    };
+    }
   }, [fullRecipes, globalArea]);
 
   return (
