@@ -8,6 +8,7 @@ export default function FavoriteRecipes(props) {
   const [favoriteList, setFavoriteList] = useState('');
   const [filteredList, setFilteredList] = useState('');
   const { filter } = props;
+
   useEffect(() => {
     setFavoriteList(JSON.parse(localStorage.getItem('favoriteRecipes')));
     const list = JSON.parse(localStorage.getItem('favoriteRecipes'));
@@ -28,10 +29,10 @@ export default function FavoriteRecipes(props) {
   useEffect(() => {
     if (filter === 'All' && filteredList) {
       setFilteredList((favoriteList.filter((recipe) => !recipe.doneDate)));
-    } if (filter === 'comida' && filteredList) {
+    } else if (filter === 'comida' && filteredList) {
       setFilteredList(favoriteList
         .filter((recipe) => !recipe.doneDate && recipe.type === 'comida'));
-    } if (filter === 'bebida' && filteredList) {
+    } else if (filter === 'bebida' && filteredList) {
       setFilteredList(favoriteList
         .filter((recipe) => !recipe.doneDate && recipe.type === 'bebida'));
     }
@@ -49,6 +50,7 @@ export default function FavoriteRecipes(props) {
     </div>
   );
 }
+
 FavoriteRecipes.propTypes = {
   filter: PropTypes.string.isRequired,
 };
