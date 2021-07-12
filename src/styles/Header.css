@@ -25,4 +25,8 @@
   outline: none;
 }
 
+.explore-header {
+  font-size: 32px;
+}
+
 @import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap') ;
