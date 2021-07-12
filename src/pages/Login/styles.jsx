@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+import SharedInput from '../../styles/shared/Input';
+import SharedButton from '../../styles/shared/Button';
 
 export const FormContainer = styled.form`
   height: 100vh;
@@ -27,7 +29,7 @@ export const ContainerLogo = styled.div`
     font-weight: bold;
     font-size: 3rem;
     font-family: var(--font-first);
-    color: #ff2637;
+    color: var(--red-first-color);
   }
 `;
 
@@ -46,32 +48,14 @@ export const ContainerInputs = styled.div`
   }
 `;
 
-export const Input = styled.input`
-  outline: none;
-  background: #ffeee1;
-  border: 1px solid #80808063;
-  border-radius: 12px;
+export const Input = styled(SharedInput)`
   padding: 0.8rem;
   font-size: 0.9rem;
-  letter-spacing: 1px;
   width: 75%;
-  box-shadow: 0 3px 6px 0 rgb(0 0 0 / 10%);
 `;
 
-export const StyledButton = styled.button`
-  border: none;
-  color: #FFF;
-  background: #fc4c4a;
-  font-size: 0.9rem;
-  cursor: pointer;
-  margin: 0 auto;
+export const StyledButton = styled(SharedButton)`
   width: 75%;
-  border-radius: 12px;
   padding: 0.8rem;
-  font-weight: bold;
-  transition: all 0.3s;
-
-  &:disabled {
-    opacity: 30%;
-  }
+  font-size: 0.9rem;
 `;

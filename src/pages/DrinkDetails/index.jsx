@@ -1,14 +1,21 @@
 import React from 'react';
+import { BiShareAlt } from 'react-icons/bi';
+import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
+import useCarousel from '../../hooks/useCarousel';
 import useRecipeDetails from '../../hooks/useRecipeDetails';
-import CarouselCard from '../../components/CarouselCard';
+import {
+  ContainerFood,
+  MainContainerDetails,
+  ContainerRecipes,
+  ContainerCarousel,
+  ButtonDetails,
+} from '../../styles/shared/Details/DetailsStyles';
 
 export default function DrinkDetails() {
   const {
     recipe,
     recommended,
     showClipBoardMsg,
-    blackHeartIcon,
-    whiteHeartIcon,
     setHeart,
     getIngredientsAndMeasures,
     filterRecommended,
@@ -18,6 +25,10 @@ export default function DrinkDetails() {
     checkFavorite,
     diplayNoneButton,
   } = useRecipeDetails('drink');
+  const { renderCarouselCards } = useCarousel(
+    filterRecommended(recommended.meals),
+    'meal',
+  );
   // ALERTA ENGENHARIA DE EMERGÊNCIA
   const recipeDrink = recipe.drinks
     ? recipe.drinks[0]
@@ -30,39 +41,41 @@ export default function DrinkDetails() {
     strAlcoholic,
   } = recipeDrink;
 
-  const styleFooter = {
-    bottom: '0px',
-    position: 'fixed',
-    display: diplayNoneButton() ? 'none' : 'block',
-  };
-
   return (
-    <main>
-      <section>
-        <img data-testid="recipe-photo" src={ strDrinkThumb } alt="Recipe" />
+    <MainContainerDetails>
+      <ContainerFood>
         <h1 data-testid="recipe-title">{strDrink}</h1>
-        <button type="button" data-testid="share-btn" onClick={ copyToClipBoard }>
-          Share button
-        </button>
-        <button type="button" onClick={ () => setHeart(recipeDrink) }>
-          <img
-            data-testid="favorite-btn"
-            src={ checkFavorite() ? blackHeartIcon : whiteHeartIcon }
-            alt="Favorite"
-          />
-        </button>
-        {showClipBoardMsg && renderClipBoardMsg()}
-        <p data-testid="recipe-category">{strAlcoholic}</p>
-      </section>
+        <img data-testid="recipe-photo" src={strDrinkThumb} alt="Recipe" />
 
-      <section>
+        <div>
+          <button
+            type="button"
+            data-testid="share-btn"
+            onClick={copyToClipBoard}
+          >
+            <BiShareAlt alt="Share" />
+          </button>
+
+          <button type="button" onClick={() => setHeart(recipeDrink)}>
+            {checkFavorite() ? <AiFillHeart /> : <AiOutlineHeart />}
+          </button>
+        </div>
+
+        {showClipBoardMsg && renderClipBoardMsg()}
+
+        <h2 data-testid="recih2e-category">{strAlcoholic}</h2>
+      </ContainerFood>
+
+      <hr />
+
+      <ContainerRecipes>
         <section>
           <h2>Ingredients</h2>
           <ul>
             {ingredients.map((ingredient, index) => (
               <li
-                data-testid={ `${index}-ingredient-name-and-measure` }
-                key={ index }
+                data-testid={`${index}-ingredient-name-and-measure`}
+                key={index}
               >
                 {`${ingredient} - ${measures[index]}`}
               </li>
@@ -74,31 +87,21 @@ export default function DrinkDetails() {
           <h2>Instructions</h2>
           <p data-testid="instructions">{strInstructions}</p>
         </section>
-      </section>
 
-      <section>
-        <h2>Recommended</h2>
-        <div className="carousel">
-          {filterRecommended(recommended.meals).map((rec, index) => (
-            <CarouselCard
-              key={ index }
-              cardImg={ rec.strMealThumb }
-              cardTitle={ rec.strMeal }
-              cardCategory={ rec.strCategory }
-              index={ index }
-            />
-          ))}
-        </div>
-      </section>
+        <ContainerCarousel>
+          <h2>Recommended</h2>
+          {renderCarouselCards()}
+        </ContainerCarousel>
+      </ContainerRecipes>
 
-      <button
+      <ButtonDetails
         type="button"
         data-testid="start-recipe-btn"
-        style={ styleFooter }
-        onClick={ redirectToProgressPage }
+        disabled={diplayNoneButton()}
+        onClick={redirectToProgressPage}
       >
         Continuar Receita
-      </button>
-    </main>
+      </ButtonDetails>
+    </MainContainerDetails>
   );
 }

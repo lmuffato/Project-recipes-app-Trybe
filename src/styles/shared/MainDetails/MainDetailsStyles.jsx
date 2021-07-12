@@ -1,9 +1,7 @@
 import styled from 'styled-components';
-import SharedDropdownButton from '../../styles/shared/DropdownButton';
+import SharedDropdownButton from '../DropdownButton';
 
-export const MainContainerDetails = styled.main`
-  padding: var(--global-space);
-`;
+export const MainContainerDetails = styled.main``;
 
 export const DropdownButton = styled(SharedDropdownButton)``;
 
@@ -18,7 +16,7 @@ export const FilterContainer = styled.div`
     font-size: 1.2rem;
     border: 1px solid var(--red-first-color);
     border-radius: 6px;
-    width: 25%;
+    width: 35%;
     padding: 0.24rem;
 
     overflow: hidden;

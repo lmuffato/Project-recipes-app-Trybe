@@ -1,8 +1,15 @@
 import React from 'react';
 import { string, bool } from 'prop-types';
 import { CgProfile } from 'react-icons/cg';
-import { ContainerMainInfos } from './styles';
-import searchSvg from '../../images/searchIcon.svg';
+import { BiSearchAlt2 } from 'react-icons/bi';
+import {
+  ContainerShowSearch,
+  ContainerMainInfos,
+  Button,
+  ButtonProfile,
+  ButtonSearch,
+  Input,
+} from './styles';
 import useSearch from '../../hooks/useSearch';
 
 export default function Header({ title, searchIcon = false }) {
@@ -25,73 +32,77 @@ export default function Header({ title, searchIcon = false }) {
 
   return (
     <header>
+      <ButtonProfile type="button" onClick={ () => history.push('/perfil') }>
+        <CgProfile data-testid="profile-top-btn" />
+      </ButtonProfile>
+
       <ContainerMainInfos>
         <h1 data-testid="page-title">{title}</h1>
-
-        <button type="button" onClick={ () => history.push('/perfil') }>
-          <CgProfile data-testid="profile-top-btn" />
-        </button>
       </ContainerMainInfos>
 
       {searchIcon && (
-        <button type="button" onClick={ () => setShowSearch(!showSearch) }>
-          <img src={ searchSvg } alt="Search" data-testid="search-top-btn" />
-        </button>
+        <ButtonSearch type="button" onClick={ () => setShowSearch(!showSearch) }>
+          <BiSearchAlt2 />
+        </ButtonSearch>
       )}
 
       <div>
         {showSearch && (
-          <div>
-            <input
-              data-testid="search-input"
-              placeholder="Buscar Receita"
-              onChange={ ({ target }) => setSearchResult(target.value) }
-            />
-
-            <label htmlFor="ingredient-search-radio">
-              Ingrediente
-              <input
-                data-testid="ingredient-search-radio"
-                type="radio"
-                name="search-radio"
-                id="ingredient-search-radio"
-                value="ingredient"
-                onChange={ ({ target }) => setSelectedSearch(target.value) }
+          <ContainerShowSearch>
+            <div>
+              <Input
+                data-testid="search-input"
+                placeholder="Buscar Receita"
+                onChange={ ({ target }) => setSearchResult(target.value) }
               />
-            </label>
 
-            <label htmlFor="name-search-radio">
-              Nome
-              <input
-                data-testid="name-search-radio"
-                type="radio"
-                name="search-radio"
-                id="name-search-radio"
-                value="name"
-                onChange={ ({ target }) => setSelectedSearch(target.value) }
-              />
-            </label>
+              <Button
+                data-testid="exec-search-btn"
+                type="button"
+                onClick={ getSearch }
+              >
+                Buscar
+              </Button>
+            </div>
 
-            <label htmlFor="first-letter-search-radio">
-              Primeira letra
-              <input
-                data-testid="first-letter-search-radio"
-                type="radio"
-                name="search-radio"
-                id="first-letter-search-radio"
-                value="firstLetter"
-                onChange={ ({ target }) => setSelectedSearch(target.value) }
-              />
-            </label>
+            <div>
+              <label htmlFor="ingredient-search-radio">
+                Ingrediente
+                <input
+                  data-testid="ingredient-search-radio"
+                  type="radio"
+                  name="search-radio"
+                  id="ingredient-search-radio"
+                  value="ingredient"
+                  onChange={ ({ target }) => setSelectedSearch(target.value) }
+                />
+              </label>
 
-            <button
-              data-testid="exec-search-btn"
-              type="button"
-              onClick={ getSearch }
-            >
-              Buscar
-            </button>
-          </div>
+              <label htmlFor="name-search-radio">
+                Nome
+                <input
+                  data-testid="name-search-radio"
+                  type="radio"
+                  name="search-radio"
+                  id="name-search-radio"
+                  value="name"
+                  onChange={ ({ target }) => setSelectedSearch(target.value) }
+                />
+              </label>
+
+              <label htmlFor="first-letter-search-radio">
+                Primeira letra
+                <input
+                  data-testid="first-letter-search-radio"
+                  type="radio"
+                  name="search-radio"
+                  id="first-letter-search-radio"
+                  value="firstLetter"
+                  onChange={ ({ target }) => setSelectedSearch(target.value) }
+                />
+              </label>
+            </div>
+          </ContainerShowSearch>
         )}
       </div>
     </header>

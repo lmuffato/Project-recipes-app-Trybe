@@ -1,26 +1,28 @@
 import React from 'react';
+import { BiDrink } from 'react-icons/bi';
+import { MdExplore } from 'react-icons/md';
+import { IoFastFoodSharp } from 'react-icons/io5';
 import { useHistory } from 'react-router-dom';
-import drinkIcon from '../../images/drinkIcon.svg';
-import exploreIcon from '../../images/exploreIcon.svg';
-import mealIcon from '../../images/mealIcon.svg';
+import FooterContainerButtons from './styles';
 
 export default function Footer() {
-  const styleFooter = {
-    bottom: '0px',
-    position: 'fixed',
-  };
   const history = useHistory();
   return (
-    <footer className="footer" data-testid="footer" style={ styleFooter }>
+    <FooterContainerButtons
+      className="footer"
+      data-testid="footer"
+    >
       <button type="button" onClick={ () => history.push('/bebidas') }>
-        <img src={ drinkIcon } alt="Drink Icon" data-testid="drinks-bottom-btn" />
+        <BiDrink alt="Drink Icon" data-testid="drinks-bottom-btn" />
       </button>
+
       <button type="button" onClick={ () => history.push('/explorar') }>
-        <img src={ exploreIcon } alt="Explore Icon" data-testid="explore-bottom-btn" />
+        <MdExplore alt="Explore Icon" data-testid="explore-bottom-btn" />
       </button>
+
       <button type="button" onClick={ () => history.push('/comidas') }>
-        <img src={ mealIcon } alt="Food Icon" data-testid="food-bottom-btn" />
+        <IoFastFoodSharp alt="Food Icon" data-testid="food-bottom-btn" />
       </button>
-    </footer>
+    </FooterContainerButtons>
   );
 }

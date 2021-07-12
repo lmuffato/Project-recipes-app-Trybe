@@ -1,15 +1,21 @@
 import React from 'react';
-import CarouselCard from '../../components/CarouselCard';
+import { BiShareAlt } from 'react-icons/bi';
+import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
+import useCarousel from '../../hooks/useCarousel';
 import useRecipeDetails from '../../hooks/useRecipeDetails';
-import '../../styles/PageDetails.css';
+import {
+  ContainerFood,
+  MainContainerDetails,
+  ContainerRecipes,
+  ContainerCarousel,
+  ButtonDetails,
+} from '../../styles/shared/Details/DetailsStyles';
 
 export default function FoodDetails() {
   const {
     recipe,
     recommended,
     showClipBoardMsg,
-    blackHeartIcon,
-    whiteHeartIcon,
     setHeart,
     getIngredientsAndMeasures,
     filterRecommended,
@@ -19,38 +25,39 @@ export default function FoodDetails() {
     checkFavorite,
     diplayNoneButton,
   } = useRecipeDetails('meal');
+  const { renderCarouselCards } = useCarousel(
+    filterRecommended(recommended.drinks),
+    'drink',
+  );
   const recipeMeal = recipe.meals[0];
   const { ingredients, measures } = getIngredientsAndMeasures(recipeMeal);
   const { strMealThumb, strMeal, strCategory, strInstructions, strYoutube } = recipeMeal;
 
-  const styleFooter = {
-    bottom: '0px',
-    position: 'fixed',
-    display: diplayNoneButton() ? 'none' : 'block',
-  };
-
   return (
-    <main>
-      <section>
-        <img data-testid="recipe-photo" src={ strMealThumb } alt="Recipe" />
+    <MainContainerDetails>
+      <ContainerFood>
         <h1 data-testid="recipe-title">{strMeal}</h1>
-        <button type="button" data-testid="share-btn" onClick={ copyToClipBoard }>
-          Share button
-        </button>
-        <button type="button" onClick={ () => setHeart(recipeMeal) }>
-          <img
-            data-testid="favorite-btn"
-            src={ checkFavorite() ? blackHeartIcon : whiteHeartIcon }
-            alt="Favorite"
-          />
-        </button>
+        <img data-testid="recipe-photo" src={ strMealThumb } alt="Recipe" />
+        <div>
+          <button
+            type="button"
+            data-testid="share-btn"
+            onClick={ copyToClipBoard }
+          >
+            <BiShareAlt alt="Share" />
+          </button>
+
+          <button type="button" onClick={ () => setHeart(recipeMeal) }>
+            {checkFavorite() ? <AiFillHeart /> : <AiOutlineHeart />}
+          </button>
+        </div>
 
         {showClipBoardMsg && renderClipBoardMsg()}
 
-        <p data-testid="recipe-category">{strCategory}</p>
-      </section>
+        <h2 data-testid="recih2e-category">{strCategory}</h2>
+      </ContainerFood>
 
-      <section>
+      <ContainerRecipes>
         <section>
           <h2>Ingredients</h2>
           <ul>
@@ -59,7 +66,7 @@ export default function FoodDetails() {
                 data-testid={ `${index}-ingredient-name-and-measure` }
                 key={ index }
               >
-                {`${ingredient} - ${measures[index]}`}
+                {`• ${ingredient} - ${measures[index]}`}
               </li>
             ))}
           </ul>
@@ -67,7 +74,7 @@ export default function FoodDetails() {
 
         <section>
           <h2>Instructions</h2>
-          <p data-testid="instructions">{strInstructions}</p>
+          <span data-testid="instructions">{strInstructions}</span>
         </section>
 
         <section>
@@ -80,31 +87,21 @@ export default function FoodDetails() {
             title="YouTube video player"
           />
         </section>
-      </section>
 
-      <section>
-        <h2>Recommended</h2>
-        <div className="carousel">
-          {filterRecommended(recommended.drinks).map((rec, index) => (
-            <CarouselCard
-              key={ index }
-              cardImg={ rec.strDrinkThumb }
-              cardTitle={ rec.strDrink }
-              cardCategory={ rec.strAlcoholic }
-              index={ index }
-            />
-          ))}
-        </div>
-      </section>
+        <ContainerCarousel>
+          <h2>Recommended</h2>
+          {renderCarouselCards()}
+        </ContainerCarousel>
+      </ContainerRecipes>
 
-      <button
+      <ButtonDetails
         type="button"
         data-testid="start-recipe-btn"
-        style={ styleFooter }
         onClick={ redirectToProgressPage }
+        disabled={ diplayNoneButton() }
       >
         Continuar Receita
-      </button>
-    </main>
+      </ButtonDetails>
+    </MainContainerDetails>
   );
 }

@@ -12,6 +12,7 @@ export default function useMainRecipe(type) {
   const [category, setCategory] = useState('');
   const [toggleCategory, setToggleCategory] = useState(false);
   const [hasBeenChosenCategory, setHasBeenChosenCategory] = useState(false);
+  const [filter, setFilter] = useState('All');
 
   const fetchAllCategories = async () => {
     const responseRecipe = await fetchName(site);
@@ -59,6 +60,7 @@ export default function useMainRecipe(type) {
     }
 
     setCategory(innerText);
+    setFilter(innerText);
     setHasBeenChosenCategory(true);
   };
 
@@ -66,7 +68,7 @@ export default function useMainRecipe(type) {
     if (toggleCategory) {
       setToggleCategory(false);
       fetchAllCategories();
-      console.log('toggleCategory');
+      setFilter('All');
     }
   }, [toggleCategory]);
 
@@ -95,5 +97,12 @@ export default function useMainRecipe(type) {
     if (!loading) fetchAllCategories();
   }, []);
 
-  return { recipe, setRecipe, renderCards, handleClickCategory, loading };
+  return {
+    recipe,
+    setRecipe,
+    renderCards,
+    handleClickCategory,
+    loading,
+    filter,
+  };
 }

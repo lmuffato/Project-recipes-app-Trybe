@@ -1,6 +1,7 @@
 import React from 'react';
 import { string, number } from 'prop-types';
 import { useHistory } from 'react-router-dom';
+import { ContainerCard, ButtonCard } from './styles';
 
 export default function RecipeCard({ index, thumb, title, id }) {
   const { location, push } = useHistory();
@@ -9,16 +10,18 @@ export default function RecipeCard({ index, thumb, title, id }) {
     : 'bebidas';
 
   return (
-    <section
+    <ContainerCard
       data-testid={ `${index}-recipe-card` }
       onClick={ () => push(`/${isDrinkOrFood}/${id}`) }
       onKeyDown={ () => push(`/${isDrinkOrFood}/${id}`) }
       role="button"
       tabIndex="0"
     >
-      <p data-testid={ `${index}-card-name` }>{title}</p>
       <img data-testid={ `${index}-card-img` } src={ thumb } alt="Recipe" />
-    </section>
+      <ButtonCard type="button" data-testid={ `${index}-card-name` }>
+        {title}
+      </ButtonCard>
+    </ContainerCard>
   );
 }
 

@@ -1,39 +1,54 @@
 import React from 'react';
+import { Dropdown } from 'react-bootstrap';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
 import useMainRecipe from '../../hooks/useMainRecipe';
+import {
+  MainContainerDetails,
+  DropdownButton,
+  FilterContainer,
+} from '../../styles/shared/MainDetails/MainDetailsStyles';
+import ContainerRecipeCards from '../../styles/shared/ContainerRecipeCards';
 
 export default function Drinks() {
-  const { renderCards, handleClickCategory, recipe } = useMainRecipe('drink');
+  const { renderCards, handleClickCategory, recipe, filter } = useMainRecipe('drink');
   const { drinks } = recipe.list;
 
   return (
-    <main>
+    <MainContainerDetails>
       <Header title="Bebidas" searchIcon />
 
-      <div>
-        <button
-          type="button"
-          onClick={ handleClickCategory }
-          data-testid="All-category-filter"
+      <FilterContainer>
+        <DropdownButton
+          id="dropdown-split-variants-Danger"
+          title="Filtros"
+          variant="danger"
         >
-          All
-        </button>
-        {drinks.map((category) => (
-          <button
-            key={ category }
-            data-testid={ `${category}-category-filter` }
+          <Dropdown.Item
+            data-testid="All-category-filter"
             type="button"
             onClick={ handleClickCategory }
           >
-            {category.replace(category[0], category[0].toUpperCase())}
-          </button>
-        ))}
-      </div>
+            All
+          </Dropdown.Item>
+          {drinks.map((category) => (
+            <Dropdown.Item
+              key={ category }
+              data-testid={ `${category}-category-filter` }
+              type="button"
+              onClick={ handleClickCategory }
+            >
+              {category.replace(category[0], category[0].toUpperCase())}
+            </Dropdown.Item>
+          ))}
+        </DropdownButton>
 
-      <div>{renderCards()}</div>
+        <span>{filter}</span>
+      </FilterContainer>
+
+      <ContainerRecipeCards>{renderCards()}</ContainerRecipeCards>
 
       <Footer />
-    </main>
+    </MainContainerDetails>
   );
 }

@@ -1,39 +1,59 @@
 import React from 'react';
+import { Dropdown } from 'react-bootstrap';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
 import useMainRecipe from '../../hooks/useMainRecipe';
-import { MainContainerDetails } from './styles';
+import {
+  MainContainerDetails,
+  DropdownButton,
+  FilterContainer,
+} from '../../styles/shared/MainDetails/MainDetailsStyles';
+import ContainerRecipeCards from '../../styles/shared/ContainerRecipeCards';
 
 export default function Foods() {
-  const { renderCards, handleClickCategory, recipe, loading } = useMainRecipe('meal');
+  const {
+    renderCards,
+    handleClickCategory,
+    recipe,
+    loading,
+    filter,
+  } = useMainRecipe('meal');
   const { meals } = recipe.list;
 
-  if (loading) return <h1>Loading..............................</h1>;
+  if (loading) return <h1>Loading...</h1>;
   return (
     <MainContainerDetails>
       <Header title="Comidas" searchIcon />
 
-      <div>
-        <button
-          data-testid="All-category-filter"
-          type="button"
-          onClick={ handleClickCategory }
+      <FilterContainer>
+        <DropdownButton
+          id="dropdown-split-variants-Danger"
+          title="Filtros"
+          variant="danger"
         >
-          All
-        </button>
-        {meals.map((category) => (
-          <button
-            key={ category }
-            data-testid={ `${category}-category-filter` }
+          <Dropdown.Item
+            data-testid="All-category-filter"
             type="button"
             onClick={ handleClickCategory }
           >
-            {category.replace(category[0], category[0].toUpperCase())}
-          </button>
-        ))}
-      </div>
+            All
+          </Dropdown.Item>
+          {meals.map((category) => (
+            <Dropdown.Item
+              key={ category }
+              data-testid={ `${category}-category-filter` }
+              type="button"
+              onClick={ handleClickCategory }
+            >
+              {category.replace(category[0], category[0].toUpperCase())}
+            </Dropdown.Item>
+          ))}
+        </DropdownButton>
 
-      <div>{renderCards()}</div>
+        <span>{filter}</span>
+      </FilterContainer>
+
+      <ContainerRecipeCards>{renderCards()}</ContainerRecipeCards>
       <Footer />
     </MainContainerDetails>
   );
