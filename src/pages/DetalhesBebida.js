@@ -5,8 +5,6 @@ import ReceitaBebidaDetalhe from '../components/ReceitaBebidaDetalhe';
 import { getDrinkByID } from '../services/fetchApiDetailsRecipe';
 import { getFoodRecomendation } from '../services/fetchApiRecomendations';
 
-import '../styles/DetalhesPaginas.css';
-
 function DetalhesBebida({ match: { params: { id } } }) {
   const [acctualyDrink, setAcctualyDrink] = useState();
   const [isLoading, setIsLoading] = useState(false);
