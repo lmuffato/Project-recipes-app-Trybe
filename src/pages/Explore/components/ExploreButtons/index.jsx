@@ -1,8 +1,21 @@
 import { Link } from 'react-router-dom';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from '../../styles.module.scss';
 
+import getRecipes from '../../../../services/recipesData';
+
 function ExploreButtons({ title }) {
+  const [randomId, setRandomId] = useState('');
+
+  async function getRandomId() {
+    const { getRandom } = await getRecipes(`/${title}`);
+    setRandomId(getRandom[0].id);
+  }
+
+  useEffect(() => {
+    getRandomId();
+  });
+
   if (title) {
     return (
       <>
@@ -24,7 +37,7 @@ function ExploreButtons({ title }) {
             Por Local de Origem
           </button>
         </Link>}
-        <Link to="/comidas">
+        <Link to={ `/${title}/${randomId}` }>
           <button
             id={ styles.last }
             type="button"

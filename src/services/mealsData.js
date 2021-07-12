@@ -17,6 +17,10 @@ export default async function mealsData(filterCategory) {
 
   const categories = await fetchJson('https://www.themealdb.com/api/json/v1/1/list.php?c=list');
 
+  const randomMeal = await fetchJson('https://www.themealdb.com/api/json/v1/1/random.php');
+
+  const parserRandom = parseMealResults(randomMeal);
+
   if (filterCategory) {
     const filter = await fetchJson(
       `https://www.themealdb.com/api/json/v1/1/filter.php?c=${filterCategory}`,
@@ -31,5 +35,6 @@ export default async function mealsData(filterCategory) {
     titlePage: 'Comidas',
     categories: categories.meals,
     list: resultsParsed,
+    getRandom: parserRandom,
   };
 }

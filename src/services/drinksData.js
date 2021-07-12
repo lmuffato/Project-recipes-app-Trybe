@@ -17,6 +17,10 @@ export default async function drinksData(filterCategory) {
 
   const categories = await fetchJson('https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list');
 
+  const randonDrink = await fetchJson('https://www.thecocktaildb.com/api/json/v1/1/random.php');
+
+  const parseRandom = parseDrinkResults(randonDrink);
+
   if (filterCategory) {
     const filter = await fetchJson(
       `https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${filterCategory}`,
@@ -31,5 +35,6 @@ export default async function drinksData(filterCategory) {
     titlePage: 'Bebidas',
     categories: categories.drinks,
     list: resultsParsed,
+    getRandom: parseRandom,
   };
 }
