@@ -27,35 +27,38 @@ function Foods() {
 
   useEffect(() => {
     setGlobalRecipe(showRecipe);
-    console.log(filteredRecipes, 'filteredRecipes');
   }, [showRecipe]);
 
   return (
     <div>
       <Header title="Comidas" searchImg="true" />
-      {mealsCategories.map((category, index) => (
-        index < CATEGORIES_NUMBER ? (
-          <FilterButtons
-            key={ index }
-            categoryName={ category.strCategory }
-            testId={ `${category.strCategory}-category-filter` }
-          />
-        ) : (null)
-      ))}
-      <ButtonAll setFiltered={ setFilterButton } />
-      {showRecipe ? showRecipe.map((recipes, index) => (
-        index <= CARDS_NUMBER ? (
-          <MealCard
-            key={ recipes.idMeal }
-            mealName={ recipes.strMeal }
-            mealImg={ recipes.strMealThumb }
-            testImgId={ `${index}-card-img` }
-            testNameId={ `${index}-card-name` }
-            testCardId={ `${index}-recipe-card` }
-            mealId={ recipes.idMeal }
-          />
-        ) : null
-      )) : alert('Sinto muito, não encontramos nenhuma receita para esses filtros.')}
+      <div className="headerFilterButtons">
+        {mealsCategories.map((category, index) => (
+          index < CATEGORIES_NUMBER ? (
+            <FilterButtons
+              key={ index }
+              categoryName={ category.strCategory }
+              testId={ `${category.strCategory}-category-filter` }
+            />
+          ) : (null)
+        ))}
+        <ButtonAll setFiltered={ setFilterButton } />
+      </div>
+      <div className="itensGroup">
+        {showRecipe ? showRecipe.map((recipes, index) => (
+          index <= CARDS_NUMBER ? (
+            <MealCard
+              key={ recipes.idMeal }
+              mealName={ recipes.strMeal }
+              mealImg={ recipes.strMealThumb }
+              testImgId={ `${index}-card-img` }
+              testNameId={ `${index}-card-name` }
+              testCardId={ `${index}-recipe-card` }
+              mealId={ recipes.idMeal }
+            />
+          ) : null
+        )) : alert('Sinto muito, não encontramos nenhuma receita para esses filtros.')}
+      </div>
       <Footer />
     </div>
   );

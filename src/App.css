@@ -1,6 +1,14 @@
 footer {
+  background-color: crimson;
   bottom: 0;
   position: fixed;
+  width: 100vh;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-around;
+  width: 360px;
 }
 
 /* img {
@@ -63,12 +71,53 @@ header {
   width: 339px;
 }
 
+.itensGroup {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: left;
+}
+
+.itemCard {
+  background-color: white;
+  border: white;
+  border-radius: 10px;
+  box-shadow: 8px 5px 5px rgb(194, 190, 190);
+  color: black;
+  margin: 8px;
+  width: 161px;
+}
+
+.imgRecipes {
+  height: 109px;
+  margin-bottom: 30px;
+  width: 161px;
+
+}
+
 .imgRecipeFinished {
   width: 100px;
 }
 
 .cardRecipeFinished, .cardRecipeFavorited {
   display: flex;
+}
+
+.headerTop {
+  background-color: crimson;
+  display: flex;
+  justify-content: space-around;
+}
+
+.headerFilterButtons {
+  background-color: crimson;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.filterButtons {
+  margin: 5px;
+  width: 100px;
 }
 
 /*

@@ -30,7 +30,7 @@ function IngredientsCard({ index, ingredientImg, ingredientName, type }) {
   }, [recipesIngredients]);
 
   return (
-    <button type="button" onClick={ handleClick }>
+    <button type="button" onClick={ handleClick } className="itemCard">
       <div data-testid={ `${index}-ingredient-card` }>
         <img src={ ingredientImg } data-testid={ `${index}-card-img` } alt="ingredient" />
         <h4 data-testid={ `${index}-card-name` }>{ ingredientName }</h4>

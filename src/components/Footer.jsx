@@ -10,15 +10,27 @@ function Footer() {
 
   return (
     <footer data-testid="footer">
-      <Link to="/bebidas">
-        <img data-testid="drinks-bottom-btn" src={ drinkIcon } alt="imagem drink" />
-      </Link>
-      <Link to="/explorar">
-        <img data-testid="explore-bottom-btn" src={ exploreIcon } alt="imagem explore" />
-      </Link>
-      <Link to="/comidas">
-        <img data-testid="food-bottom-btn" src={ mealIcon } alt="imagem drink" />
-      </Link>
+      <div className="footer">
+        <div className="footerItens">
+          <Link to="/bebidas">
+            <img data-testid="drinks-bottom-btn" src={ drinkIcon } alt="imagem drink" />
+          </Link>
+        </div>
+        <div className="footerItens">
+          <Link to="/explorar">
+            <img
+              data-testid="explore-bottom-btn"
+              src={ exploreIcon }
+              alt="imagem explore"
+            />
+          </Link>
+        </div>
+        <div className="footerItens">
+          <Link to="/comidas">
+            <img data-testid="food-bottom-btn" src={ mealIcon } alt="imagem drink" />
+          </Link>
+        </div>
+      </div>
     </footer>
   );
 }

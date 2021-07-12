@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import FilterContext from './FilterContext';
 import { fetchMealsCategories, fetchDrinksCategories,
-  fetchMealsByCategory, fetchDrinksByCategory } from '../services/getApis';
+  fetchMealsByCategory, fetchDrinksByCategory,
+  fetchAreas } from '../services/getApis';
 
 function FilterProvider({ children }) {
   const [mealsCategories, setMealsCategories] = useState([]);
@@ -11,11 +12,18 @@ function FilterProvider({ children }) {
   const [drinksByCategory, setDrinksByCategory] = useState([]);
   const [filterButton, setFilterButton] = useState('');
   const [drinkFilterButton, setDrinkFilterButton] = useState('');
+  const [mealAreas, setMealAreas] = useState([]);
+  const [globalArea, setGlobalArea] = useState('All');
   const [isLoading, setIsLoading] = useState(false);
 
   const getMealsCategories = async () => {
     const apiResult = await fetchMealsCategories();
     setMealsCategories(apiResult.meals);
+  };
+
+  const getMealsAreas = async () => {
+    const apiResult = await fetchAreas();
+    setMealAreas(apiResult.meals);
   };
 
   const getDrinksCategories = async () => {
@@ -50,6 +58,7 @@ function FilterProvider({ children }) {
     setIsLoading(true);
     getMealsCategories();
     getDrinksCategories();
+    getMealsAreas();
     setIsLoading(false);
   }, []);
 
@@ -65,6 +74,9 @@ function FilterProvider({ children }) {
         drinkFilterButton,
         drinksByCategory,
         setDrinkFilterButton,
+        mealAreas,
+        setGlobalArea,
+        globalArea,
       } }
     >
       {children}

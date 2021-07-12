@@ -19,17 +19,19 @@ function SearchMealsIngredients() {
     <div>
       Pagina SearchMealsIngredients
       <Header title="Explorar Ingredientes" />
-      {ingredientsList.map((ingredient, index) => (
-        index < MAX_LENGTH ? (
-          <IngredientsCard
-            key={ index }
-            index={ index }
-            ingredientImg={ `${URL}${ingredient.strIngredient}-Small.png` }
-            ingredientName={ ingredient.strIngredient }
-            type="comidas"
-          />
-        ) : (null)
-      ))}
+      <div className="itensGroup">
+        {ingredientsList.map((ingredient, index) => (
+          index < MAX_LENGTH ? (
+            <IngredientsCard
+              key={ index }
+              index={ index }
+              ingredientImg={ `${URL}${ingredient.strIngredient}-Small.png` }
+              ingredientName={ ingredient.strIngredient }
+              type="comidas"
+            />
+          ) : (null)
+        ))}
+      </div>
       <Footer />
     </div>
   );

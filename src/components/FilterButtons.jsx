@@ -24,6 +24,7 @@ function FilterButtons({ categoryName, testId }) {
       <button
         type="button"
         name="category"
+        className="filterButtons"
         data-testid={ testId }
         onClick={ onClick }
       >

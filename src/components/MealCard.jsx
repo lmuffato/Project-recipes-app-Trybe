@@ -5,8 +5,13 @@ import { Link } from 'react-router-dom';
 function MealCard({ mealName, mealImg, testImgId, testNameId, testCardId, mealId }) {
   return (
     <Link to={ `/comidas/${mealId}` }>
-      <div data-testid={ testCardId }>
-        <img src={ mealImg } alt={ mealName } data-testid={ testImgId } />
+      <div data-testid={ testCardId } className="itemCard">
+        <img
+          src={ mealImg }
+          alt={ mealName }
+          data-testid={ testImgId }
+          className="imgRecipes"
+        />
         <h3 data-testid={ testNameId }>{mealName}</h3>
       </div>
     </Link>
