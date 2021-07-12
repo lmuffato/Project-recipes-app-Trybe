@@ -19,3 +19,10 @@
   margin: 10px 0;
   width: 160px;
 }
+
+.btn-custom-light {
+  background-color: #80ab82;
+  color: #334031;
+  margin: 10px 0;
+  width: 160px;
+}

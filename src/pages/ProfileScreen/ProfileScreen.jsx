@@ -75,7 +75,7 @@ const ProfileScreen = () => {
             to="/"
           >
             <Button
-              variant="custom"
+              variant="custom-light"
               id="logout"
               type="button"
               data-testid="profile-logout-btn"
