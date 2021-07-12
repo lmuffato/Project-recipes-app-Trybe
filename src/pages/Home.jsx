@@ -9,10 +9,12 @@ import RecipesContainer from '../styles/home';
 import CategoriesList from '../components/CategoriesList/CategoriesList';
 import CardList from '../components/CardList/CardList';
 import { RecipesContext } from '../context/RecipesContext';
+import useDetailsProvider from '../hooks/useDetailsProvider';
 
 function Home(props) {
   const { type } = props;
   const [, setFetchUrl] = useFetchRecipes(type);
+  const { setIsRecommended } = useDetailsProvider();
   const { recipesContext } = useContext(RecipesContext);
   const [recipes, setRecipes] = useState([]);
   const [isActive, setIsActive] = useState(false);
@@ -28,8 +30,13 @@ function Home(props) {
   }, [setFetchUrl, type]);
 
   useEffect(() => {
-    if (recipesContext[type]) setRecipes(recipesContext[type]);
-  }, [recipesContext, type]);
+    if (recipesContext[type]) setRecipes(recipesContext[type]); // pega do estado global e seta no estado da pg
+    setIsRecommended(false);
+  }, [recipesContext, setIsRecommended, type]);
+
+  // useEffect(() => {
+  //   getFilteredRecipes(type);
+  // }, [type, searchBarFilters, getFilteredRecipes]);
 
   return (
     <>
@@ -40,9 +47,8 @@ function Home(props) {
         <SearchBarButton onClick={ handleToggleSearchBar } />
       </Header>
       <div>
-        { isActive ? (<SearchBar type={ type } />) : ''}
+        { isActive ? (<SearchBar type={ type } />) : (<CategoriesList type={ type } />) }
       </div>
-      <CategoriesList type={ type } />
       <RecipesContainer>
         <CardList recipes={ recipes } type={ type } />
       </RecipesContainer>

@@ -5,10 +5,10 @@ import formattingMeasuresAndIngredients from '../../services/formatingService';
 import Container from './style';
 import { RecipesInProgressContext } from '../../context/RecipesInProgressContext';
 
-function RecipeIngredients({ recipe, idMeal, type }) {
+function RecipeIngredients({ recipe, idMeal, idDrink, type }) {
   const keysAndValues = Object.entries(recipe);
 
-  const [checked, setChecked] = useState([]);
+  const [checkedBox, setChecked] = useState([]);
 
   const {
     cocktails,
@@ -23,40 +23,41 @@ function RecipeIngredients({ recipe, idMeal, type }) {
     switch (type) {
     case 'meals':
       setMealsIngredients({
-        [idMeal]: checked,
+        [idMeal]: checkedBox,
       });
       break;
     case 'drinks':
       setCocktailsIngredients({
-        [idMeal]: checked,
+        [idDrink]: checkedBox,
       });
       break;
     default:
       break;
     }
   }, [
-    checked,
+    checkedBox,
     idMeal,
+    idDrink,
     type,
     setMealsIngredients,
     setCocktailsIngredients]);
 
   useEffect(() => {
     setContextIngredients();
-  }, [checked, setContextIngredients]);
+  }, [checkedBox, setContextIngredients]);
 
   const handleChange = ({ target }) => {
     if (target.checked) {
-      setChecked([...checked, parseInt(target.value, 10)]);
+      setChecked([...checkedBox, parseInt(target.value, 10)]);
       target.parentNode.style.textDecoration = 'line-through';
     } else {
-      setChecked(checked.filter((check) => check !== parseInt(target.value, 10)));
+      setChecked(checkedBox.filter((check) => check !== parseInt(target.value, 10)));
       target.parentNode.style.textDecoration = 'none';
     }
   };
 
   useEffect(() => {
-    if (checked.length > 0) {
+    if (checkedBox.length > 0) {
       const recipesKeys = {
         cocktails,
         meals,
@@ -64,23 +65,31 @@ function RecipeIngredients({ recipe, idMeal, type }) {
       const jsonRecipes = JSON.stringify(recipesKeys);
       localStorage.setItem('inProgressRecipes', jsonRecipes);
     }
-  }, [cocktails, meals, checked]);
+  }, [cocktails, meals, checkedBox]);
 
   useEffect(() => {
     const recipesJson = localStorage.getItem('inProgressRecipes');
     const storageRecipes = JSON.parse(recipesJson);
 
-    switch (type) {
-    case 'meals':
-      setChecked(storageRecipes.meals[idMeal]);
-      break;
-    case 'drinks':
-      setChecked(storageRecipes.cocktails[idMeal]);
-      break;
-    default:
-      break;
+    if (recipesJson) {
+      switch (type) {
+      case 'meals':
+        if (storageRecipes.meals[idMeal]) {
+          setChecked(storageRecipes.meals[idMeal]);
+        }
+        break;
+      case 'drinks':
+        if (storageRecipes.cocktails[idDrink]) {
+          setChecked(storageRecipes.cocktails[idDrink]);
+        }
+        break;
+      default:
+        break;
+      }
     }
-  }, [idMeal, type]);
+  }, [idMeal, idDrink, type]);
+
+  // console.log(idMeal);
 
   return (
     <Container className="ing">
@@ -92,7 +101,7 @@ function RecipeIngredients({ recipe, idMeal, type }) {
             key={ index }
             id={ element }
             value={ index }
-            checked={ checked.includes(index) }
+            checked={ checkedBox.includes(index) }
             onChange={ handleChange }
           />
           { measures[index]}
@@ -108,5 +117,6 @@ export default RecipeIngredients;
 RecipeIngredients.propTypes = {
   recipe: PropTypes.shape().isRequired,
   idMeal: PropTypes.string.isRequired,
+  idDrink: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
 };

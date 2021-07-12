@@ -52,6 +52,7 @@ function RecipesInProgress({ type }) {
   const recipeCategory = singleRecipe.strCategory;
   const isAlchooholic = singleRecipe.strAlcoholic || '';
   const recipeId = singleRecipe.idMeal || '';
+  const drinkId = singleRecipe.idDrink || '';
 
   return (
     <RecipesInProgressContextProvider>
@@ -70,6 +71,7 @@ function RecipesInProgress({ type }) {
           <RecipeIngredientsInProgress
             recipe={ singleRecipe }
             idMeal={ recipeId }
+            idDrink={ drinkId }
             type={ type }
           />
         </div>
