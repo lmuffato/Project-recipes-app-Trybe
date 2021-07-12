@@ -69,41 +69,41 @@ export default function MealDetails() {
     if (lS) {
       const ids = Object.keys(lS.meals);
       if (ids.length > 0) {
-        const find = ids.filter((e) => e === recId);
+        const find = ids.includes(recId);
         return (
-          find.length > 0 ? 'Continuar Receita' : INICIAR_RECEITA
+          find ? 'Continuar Receita' : INICIAR_RECEITA
         );
       }
     }
     return INICIAR_RECEITA;
   };
 
-  const goToRecipeInProgress = (idMeal, ingredients, measure) => {
-    const ls = JSON.parse(localStorage.getItem('inProgressRecipes'));
-    if (ls && ls.length > 0) {
-      const addMeal = { ...ls, meals: { ...ls.meals, [idMeal]: [] } };
-      localStorage.setItem('inProgressRecipes', JSON.stringify(addMeal));
-    } else {
-      const addMeal = { drinks: {}, meals: { [idMeal]: [] } };
-      localStorage.setItem('inProgressRecipes', JSON.stringify(addMeal));
-    }
-    dispatch(actionIdRecipeInProgress(idMeal, ingredients, measure));
+  const goToRecipeInProgress = (idMeal, aux) => {
+    dispatch(actionIdRecipeInProgress(idMeal, aux));
     history.push(`/comidas/${idMeal}/in-progress`);
   };
 
   const renderMealRecipe = () => {
     const ingredients = [];
     const measure = [];
+    const aux = [];
 
     if (data && data.length > 0) {
       const array = Object.entries(data[0]);
 
       array.forEach((item) => {
-        if (item[0].includes('strIngredient') && item[1] !== null) {
+        if (item[0].includes('strIngredient') && item[1] !== null && item[1] !== '') {
           ingredients.push(item[1]);
         }
         if (item[0].includes('strMeasure')) {
           measure.push(item[1]);
+        }
+      });
+      ingredients.forEach((item, index) => {
+        if (measure[index]) {
+          aux.push(`${item} - ${measure[index]}`);
+        } else {
+          aux.push(item);
         }
       });
 
@@ -126,7 +126,7 @@ export default function MealDetails() {
           {copy}
           <h3 data-testid="recipe-category">{strCategory}</h3>
           <h2>Ingredients</h2>
-          {RenderIngredients(ingredients, measure)}
+          {RenderIngredients(aux)}
           <h2>Instructions</h2>
           <RenderInstructions strInst={ strInstructions } ytEmb={ youtubeEmbed } />
           <h2>Recomendadas</h2>
@@ -139,7 +139,7 @@ export default function MealDetails() {
             className={ showButton ? 'footer' : 'hide-button' }
             type="button"
             data-testid="start-recipe-btn"
-            onClick={ () => goToRecipeInProgress(idMeal, ingredients, measure) }
+            onClick={ () => goToRecipeInProgress(idMeal, aux) }
           >
             { result }
           </button>

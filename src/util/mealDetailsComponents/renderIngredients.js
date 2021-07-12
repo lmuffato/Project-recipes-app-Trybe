@@ -1,15 +1,15 @@
 import React from 'react';
 
-export default function RenderIngredients(ingredients, measure) {
+export default function RenderIngredients(aux) {
   return (
     <ul>
-      { ingredients.map((item, index) => (
+      { aux.map((item, index) => (
         item !== '' && (
           <li
             key={ index }
             data-testid={ `${index}-ingredient-name-and-measure` }
           >
-            {`${item} - ${measure[index]} un`}
+            {`${aux[index]}`}
           </li>
         )
       ))}

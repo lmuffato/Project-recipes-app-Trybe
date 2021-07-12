@@ -11,6 +11,7 @@ export default function MealInProgress() {
   const id = window.location.href.split('/')[4];
   const globalState = useSelector((state) => state.detailsReducer.favorites);
   const [data, setData] = useState();
+  const [inProgress, setInProgress] = useState();
   const dispatch = useDispatch();
   const [copy, setCopy] = useState('');
   const history = useHistory();
@@ -34,16 +35,26 @@ export default function MealInProgress() {
     if (data && data.length > 0) {
       const ingredients = [];
       const measure = [];
+      const aux = [];
       const array = Object.entries(data[0]);
       array.forEach((item) => {
-        if (item[0].includes('strIngredient') && item[1] !== null) {
+        if (item[0].includes('strIngredient') && item[1] !== null && item[1] !== '') {
           ingredients.push(item[1]);
         }
         if (item[0].includes('strMeasure')) {
           measure.push(item[1]);
         }
       });
+      ingredients.forEach((item, index) => {
+        if (measure[index]) {
+          aux.push(`${item} - ${measure[index]}`);
+        } else {
+          aux.push(item);
+        }
+      });
       const { idMeal, strMealThumb, strMeal, strCategory, strInstructions } = data[0];
+      const ls = JSON.parse(localStorage.getItem('inProgressRecipes'));
+      const disabled = ls ? ls.meals[idMeal].length === aux.length : false;
       return (
         <div>
           {RenderRecipeImg(strMealThumb)}
@@ -61,10 +72,15 @@ export default function MealInProgress() {
             <h3 data-testid="recipe-category">{strCategory}</h3>
           </div>
           <h2>Ingredients</h2>
-          <RenderCheckboxIngredients ingredients={ ingredients } measure={ measure } />
+          <RenderCheckboxIngredients
+            ingredients={ aux }
+            inProgress={ inProgress }
+            setInProgress={ setInProgress }
+          />
           <h2>Instructions</h2>
           <RenderInstructions strInst={ strInstructions } />
           <button
+            disabled={ !disabled }
             className="footer"
             type="button"
             data-testid="finish-recipe-btn"

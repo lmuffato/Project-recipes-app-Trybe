@@ -6,7 +6,6 @@ const INITIAL_STATE = {
   recInProgress: {
     id: '',
     ingredients: '',
-    measure: '',
   },
 };
 
@@ -26,9 +25,8 @@ const detailsReducer = (state = INITIAL_STATE, action) => {
     return {
       ...state,
       recInProgress: {
-        id: action.idMeal,
+        id: action.id,
         ingredients: action.ingredients,
-        measure: action.measure,
       },
     };
   default:

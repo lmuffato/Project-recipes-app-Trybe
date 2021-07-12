@@ -13,11 +13,10 @@ export const actionFavorites = (obj) => ({
   obj,
 });
 
-export const actionIdRecipeInProgress = (idMeal, ingredients, measure) => ({
+export const actionIdRecipeInProgress = (id, ingredients) => ({
   type: ID_REC_IN_PROGRESS,
-  idMeal,
+  id,
   ingredients,
-  measure,
 });
 
 export const actionDrinksCategory = (drinksCategories) => ({

@@ -67,9 +67,9 @@ export default function DrinkDetails() {
   const textForButton = (recId) => {
     const lS = JSON.parse(localStorage.getItem('inProgressRecipes'));
     if (lS) {
-      const ids = Object.keys(lS);
+      const ids = Object.keys(lS.drinks);
       if (ids.length > 0) {
-        const find = ids.filter((e) => e === recId);
+        const find = ids.includes(recId);
         return (
           find ? 'Continuar Receita' : INICIAR_RECEITA
         );
@@ -78,24 +78,15 @@ export default function DrinkDetails() {
     return INICIAR_RECEITA;
   };
 
-  const goToRecipeInProgress = (idDrink, ingredients, measure) => {
-    const ls = JSON.parse(localStorage.getItem('inProgressRecipes'));
-    if (ls && Object.keys(ls.drinks).length > 0) {
-      const addDrink = {
-        ...ls, drinks: { ...ls.drinks, [idDrink]: [] },
-      };
-      localStorage.setItem('inProgressRecipes', JSON.stringify(addDrink));
-    } else {
-      const addDrink = { drinks: { [idDrink]: [] }, meals: {} };
-      localStorage.setItem('inProgressRecipes', JSON.stringify(addDrink));
-    }
-    dispatch(actionIdRecipeInProgress(idDrink, ingredients, measure));
+  const goToRecipeInProgress = (idDrink, aux) => {
+    dispatch(actionIdRecipeInProgress(idDrink, aux));
     history.push(`/bebidas/${idDrink}/in-progress`);
   };
 
   const renderDrinkRecipe = () => {
     const ingredients = [];
     const measure = [];
+    const aux = [];
 
     if (data) {
       const array = Object.entries(data[0]);
@@ -105,6 +96,13 @@ export default function DrinkDetails() {
         }
         if (item[0].includes('strMeasure') && item[1] !== null) {
           measure.push(item[1]);
+        }
+      });
+      ingredients.forEach((item, index) => {
+        if (measure[index]) {
+          aux.push(`${item} - ${measure[index]}`);
+        } else {
+          aux.push(item);
         }
       });
 
@@ -130,7 +128,7 @@ export default function DrinkDetails() {
           <h3 data-testid="recipe-category">{strAlcoholic}</h3>
           <h2>Ingredients</h2>
           <ul>
-            {RenderIngredients(ingredients, measure)}
+            {RenderIngredients(aux)}
           </ul>
           <h2>Instructions</h2>
           <RenderInstructions strInst={ strInstructions } />
@@ -144,7 +142,7 @@ export default function DrinkDetails() {
             className={ showButton ? 'footer' : 'hide-button' }
             type="button"
             data-testid="start-recipe-btn"
-            onClick={ () => goToRecipeInProgress(idDrink, ingredients, measure) }
+            onClick={ () => goToRecipeInProgress(idDrink, aux) }
           >
             { result }
           </button>
