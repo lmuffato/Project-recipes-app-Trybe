@@ -22,7 +22,7 @@ const Profile = () => {
         >
           { userEmail.email }
         </span>
-        <div className="buttons">
+        <div className="buttons-profile">
           <button type="button" className="button" data-testid="profile-done-btn">
             <Link to="/receitas-feitas">
               Receitas Feitas
