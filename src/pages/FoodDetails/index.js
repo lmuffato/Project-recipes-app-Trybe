@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import ComidasDetails from '../../components/ComidasDetails';
-import { fetchFoodDetails } from '../../services/fetchFoodDetails';
-import { drinksRecomendation } from '../../services/drinksRecomendation';
+import fetchFoodDetails from '../../services/fetchFoodDetails';
+import drinksRecomendation from '../../services/drinksRecomendation';
 
 function FoodsDetails() {
   const numberSlice = 9;

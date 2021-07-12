@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import ComidasInProgress from '../../components/BebidasInProgress';
-import { fetchFoodDetails } from '../../services/fetchFoodDetails';
+import fetchFoodDetails from '../../services/fetchFoodDetails';
 
 function ComidasProgresso() {
   const { pathname } = useLocation();

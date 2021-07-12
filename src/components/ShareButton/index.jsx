@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import shareIcon from '../../images/shareIcon.svg';
 
-function shareButton({ dataTestId, urlCopied }) {
+export default function ShareButton({ dataTestId, urlCopied }) {
   const [copy, setCopy] = useState('hidden');
 
   function handleClick() {
@@ -28,9 +28,7 @@ function shareButton({ dataTestId, urlCopied }) {
   );
 }
 
-shareButton.propTypes = {
+ShareButton.propTypes = {
   dataTestId: PropTypes.string.isRequired,
   urlCopied: PropTypes.string.isRequired,
 };
-
-export default shareButton;

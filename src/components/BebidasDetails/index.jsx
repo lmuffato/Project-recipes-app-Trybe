@@ -5,7 +5,7 @@ import Recomendations from '../Recomendations';
 import ShareButton from '../ShareButton';
 import FavoriteButton from '../FavoriteButton';
 import RecipeButton from '../RecipeButton';
-import { getIngredients } from '../../services/getIngredients';
+import getIngredients from '../../services/getIngredients';
 
 function BebidasDetails({ data, recomendation }) {
   const { pathname } = useLocation();

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import whiteHeartIcon from '../../images/whiteHeartIcon';
-import blackHeartIcon from '../../images/blackHeartIcon';
+import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
+import blackHeartIcon from '../../images/blackHeartIcon.svg';
 
 function FavoriteButton({ data, path }) {
   function createLocalStorage() {
@@ -88,3 +88,5 @@ FavoriteButton.propTypes = {
   data: PropTypes.arrayOf({}).isRequired,
   path: PropTypes.string.isRequired,
 };
+
+export default FavoriteButton;
