@@ -13,6 +13,7 @@ function SearchProvider({ children }) {
   const [isLoading, setIsloading] = useState(false);
   const [fullRecipes, setFullRecipes] = useState([]);
   const [fullDrinks, setFullDrinks] = useState([]);
+  const [ingredientButton, setIngredientButton] = useState(false);
   const history = useHistory();
 
   const getRecipes = async (text, radio) => {
@@ -70,6 +71,10 @@ function SearchProvider({ children }) {
         getDrinksRecipes,
         fullRecipes,
         fullDrinks,
+        ingredientButton,
+        setIngredientButton,
+        setFilteredRecipes,
+        setFilteredDrinks,
       } }
     >
       {children}

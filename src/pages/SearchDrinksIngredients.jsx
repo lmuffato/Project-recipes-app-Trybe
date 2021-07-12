@@ -26,6 +26,7 @@ function SearchDrinksIngredients() {
             index={ index }
             ingredientImg={ `${URL}${ingredient.strIngredient1}-Small.png` }
             ingredientName={ ingredient.strIngredient1 }
+            type="bebidas"
           />
         ) : (null)
       ))}

@@ -27,6 +27,7 @@ function Foods() {
 
   useEffect(() => {
     setGlobalRecipe(showRecipe);
+    console.log(filteredRecipes, 'filteredRecipes');
   }, [showRecipe]);
 
   return (
