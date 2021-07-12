@@ -21,7 +21,13 @@ function Search({ visibility }) {
           Primeira letra
         </label>
       </div>
-      <button className="primary-btn" type="submit">Buscar</button>
+      <button
+        className="primary-btn"
+        type="submit"
+        data-testid="exec-search-btn"
+      >
+        Buscar
+      </button>
     </form>
   );
 }

@@ -21,7 +21,10 @@ function Header({ title }) {
           />
         </Link>
         { title }
-        <BiSearch onClick={ () => setSearchMode(!searchMode) } />
+        <BiSearch
+          onClick={ () => setSearchMode(!searchMode) }
+          data-testid="search-top-btn"
+        />
       </div>
       <Search visibility={ searchMode } />
     </header>
