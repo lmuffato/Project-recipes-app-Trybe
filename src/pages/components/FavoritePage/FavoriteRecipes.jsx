@@ -36,7 +36,7 @@ export default function FavoriteRecipes(props) {
       setFilteredList(favoriteList
         .filter((recipe) => !recipe.doneDate && recipe.type === 'bebida'));
     }
-  }, [filter, favoriteList]);
+  }, [filter, favoriteList]); // eslint-disable-line
 
   return (
     <div className="card-list">
