@@ -4,7 +4,7 @@ const Container = styled.div`
   label {
     display: block;
 
-    & + input[type=checkbox]:checked {
+    input[type="checkbox"]:checked {
       color: red;
       text-decoration: line-through;
     }

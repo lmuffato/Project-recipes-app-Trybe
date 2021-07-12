@@ -58,10 +58,7 @@ function RecipeIngredients({ recipe, idMeal, idDrink, type }) {
 
   useEffect(() => {
     if (checkedBox.length > 0) {
-      const recipesKeys = {
-        cocktails,
-        meals,
-      };
+      const recipesKeys = { cocktails, meals };
       const jsonRecipes = JSON.stringify(recipesKeys);
       localStorage.setItem('inProgressRecipes', jsonRecipes);
     }
@@ -94,19 +91,20 @@ function RecipeIngredients({ recipe, idMeal, idDrink, type }) {
   return (
     <Container className="ing">
       {ingredients.map((element, index) => (
-        <label htmlFor={ element } key={ index }>
+        <label
+          htmlFor={ element }
+          key={ index }
+          data-testid={ `${index}-ingredient-step` }
+        >
           <input
             type="checkbox"
-            data-testid={ `${index}-ingredient-step` }
             key={ index }
             id={ element }
             value={ index }
             checked={ checkedBox.includes(index) }
             onChange={ handleChange }
           />
-          { measures[index]}
-          {' '}
-          { element }
+          { `${measures[index]} ${element}`}
         </label>))}
     </Container>
   );
