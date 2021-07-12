@@ -58,7 +58,6 @@ class MainDrinkCard extends React.Component {
       .then((response) => response.json())
       .then((allDrinks) => {
         const result = allDrinks.drinks.slice(0, limitNumber);
-        console.log(result);
         this.setState({
           drinkData: result,
           isLoading: false,
@@ -94,13 +93,15 @@ class MainDrinkCard extends React.Component {
   }
 
   async renderCurrentSearch() {
-    const { currentSearch } = this.props;
-    const endpoint = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${currentSearch}`;
-    const request = await fetch(endpoint).then((response) => response.json());
-
+    const { currentSearch, type } = this.props;
+    const endpoints = {
+      name: `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${currentSearch}`,
+      ingrendient: `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${currentSearch}`,
+      firstLetter: `https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${currentSearch}`,
+    };
+    const request = await fetch(endpoints[type]).then((response) => response.json());
     const limit = 12;
     const sliced = request.drinks.slice(0, limit);
-    console.log(sliced);
     this.setState({
       drinkData: sliced,
       isLoading: false,

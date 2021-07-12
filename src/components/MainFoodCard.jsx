@@ -22,6 +22,7 @@ class MainFoodCard extends React.Component {
 
   componentDidMount() {
     const { currentSearch } = this.props;
+    console.log(currentSearch);
     if (currentSearch.length !== 0) {
       this.renderCurrentSearch();
     } else {
@@ -94,11 +95,15 @@ class MainFoodCard extends React.Component {
   }
 
   async renderCurrentSearch() {
-    const { currentSearch } = this.props;
-    const endpoint = `https://www.themealdb.com/api/json/v1/1/filter.php?i=${currentSearch}`;
-    const request = await fetch(endpoint).then((response) => response.json())
+    const { currentSearch, typeRecipe } = this.props;
+    const endpoint = {
+      name: `https://www.themealdb.com/api/json/v1/1/search.php?s=${currentSearch}`,
+      ingrendient: `https://www.themealdb.com/api/json/v1/1/filter.php?i=${currentSearch}`,
+      firstLetter: `https://www.themealdb.com/api/json/v1/1/search.php?f=${currentSearch}`,
+    };
+    const request = await fetch(endpoint[typeRecipe]).then((response) => response.json())
       .catch((erro) => console.log(erro));
-
+    console.log(request);
     const limit = 12;
     const sliced = request.meals.slice(0, limit);
     this.setState({
@@ -157,6 +162,7 @@ class MainFoodCard extends React.Component {
 
 const mapStateToProps = (state) => ({
   currentSearch: state.recipe.currentSearch,
+  typeRecipe: state.recipe.typeRecipe,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -165,7 +171,7 @@ const mapDispatchToProps = (dispatch) => ({
 
 MainFoodCard.propTypes = {
   history: PropTypes.shape().isRequired,
-  currentSearch: PropTypes.arrayOf(
+  currentSearch: PropTypes.objectOf(
     PropTypes.string,
   ).isRequired,
   cleanGlobalSearch: PropTypes.func.isRequired,

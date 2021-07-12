@@ -1,8 +1,7 @@
 import { HANDLE_INFO_RECIPE, HANDLE_CURRENT_SEARCH } from '../actions';
 
 const INITIAL_STATE = {
-  id: '',
-  type: '',
+  typeRecipe: '',
   currentSearch: [],
 };
 
@@ -11,8 +10,7 @@ const recipe = (state = INITIAL_STATE, action) => {
   case HANDLE_INFO_RECIPE:
     return {
       ...state,
-      id: action.id,
-      type: action.type,
+      typeRecipe: action.typeRecipe,
     };
   case HANDLE_CURRENT_SEARCH:
     return {

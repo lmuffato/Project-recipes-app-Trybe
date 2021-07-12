@@ -12,12 +12,9 @@ export const handleChangeUser = (name, value) => ({
 export const HANDLE_INFO_RECIPE = 'HANDLE_TYPE_RECIPE';
 export const HANDLE_CURRENT_SEARCH = 'HANDLE_CURRENT_SEARCH';
 
-export const handleTypeRecipe = (type, id) => ({
+export const handleTypeRecipe = (typeRecipe) => ({
   type: HANDLE_INFO_RECIPE,
-  payload: {
-    id,
-    type,
-  },
+  typeRecipe,
 });
 
 export const handleCurrentSearch = (currentSearch) => ({
