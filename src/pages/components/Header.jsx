@@ -18,6 +18,7 @@ const pageTitle = (type) => {
   if (type === 'search-area') return 'Explorar Origem';
   if (type === 'profile') return 'Perfil';
   if (type === 'favorites') return 'Receitas Favoritas';
+  if (type === 'done-recipes') return 'Receitas Feitas';
 };
 
 function Header(props) {

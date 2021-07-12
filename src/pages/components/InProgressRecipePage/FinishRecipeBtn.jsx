@@ -28,7 +28,7 @@ const handleClick = (recipe) => {
         name: strMeal,
         image: strMealThumb,
         doneDate,
-        tags: strTags,
+        tags: strTags.split(','),
       };
       doneRecipes.push(recipeDone);
       localStorage.setItem('doneRecipes', JSON.stringify(doneRecipes));
@@ -84,7 +84,7 @@ export default function FinishRecipeBtn(props) {
           disabled={ button }
           onClick={ () => handleClick(props.recipe) }
         >
-          Finalizar Receita
+          Finalizar receita
         </button>
       </Link>
     </div>
