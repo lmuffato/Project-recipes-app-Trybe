@@ -11,20 +11,18 @@ function parseDrinkResults(results) {
   return parsed;
 }
 
-export default async function drinksData(filterCategory) {
+export default async function drinksData(options) {
   const results = await fetchJson('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
   const resultsParsed = parseDrinkResults(results);
 
   const categories = await fetchJson('https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list');
 
-  if (filterCategory) {
+  if (options && options.category) {
     const filter = await fetchJson(
-      `https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${filterCategory}`,
+      `https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${options.category}`,
     );
 
-    const filterParsed = parseDrinkResults(filter);
-
-    return filterParsed;
+    return parseDrinkResults(filter);
   }
 
   return {

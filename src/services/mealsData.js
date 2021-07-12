@@ -11,20 +11,18 @@ function parseMealResults(results) {
   return parsed;
 }
 
-export default async function mealsData(filterCategory) {
+export default async function mealsData(options) {
   const results = await fetchJson('https://www.themealdb.com/api/json/v1/1/search.php?s=');
   const resultsParsed = parseMealResults(results);
 
   const categories = await fetchJson('https://www.themealdb.com/api/json/v1/1/list.php?c=list');
 
-  if (filterCategory) {
+  if (options && options.category) {
     const filter = await fetchJson(
-      `https://www.themealdb.com/api/json/v1/1/filter.php?c=${filterCategory}`,
+      `https://www.themealdb.com/api/json/v1/1/filter.php?c=${options.category}`,
     );
 
-    const filterParsed = parseMealResults(filter);
-
-    return filterParsed;
+    return parseMealResults(filter);
   }
 
   return {

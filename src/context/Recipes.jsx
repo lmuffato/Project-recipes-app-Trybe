@@ -41,7 +41,7 @@ export function RecipesProvider({ children }) {
     const recipesLimit = 12;
 
     if (currentFilter !== categoryName && categoryName !== 'All') {
-      results = await getRecipes(location.pathname, categoryName);
+      results = await getRecipes(location.pathname, { category: categoryName });
       setCurrentFilter(categoryName);
     } else {
       if (event) {
