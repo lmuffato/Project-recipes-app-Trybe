@@ -14,6 +14,8 @@ import FavoriteRecipes from './pages/otherPages/FavoriteRecipes';
 import ExploreFoodByArea from './pages/explore/ExploreFoodByArea';
 import MealDetails from './pages/recipes/MealDetails';
 import DrinksDetails from './pages/recipes/DrinksDetails';
+import mealsProgress from './pages/recipes/in-progress/mealsProgress';
+import drinksProgress from './pages/recipes/in-progress/drinksProgress';
 
 export default function Routes() {
   return (
@@ -24,8 +26,10 @@ export default function Routes() {
           <Route exact path="/perfil" component={ Profile } />
           <Route exact path="/comidas" component={ Foods } />
           <Route exact path="/bebidas" component={ Drinks } />
-          <Route path="/comidas/:id" component={ MealDetails } />
-          <Route path="/bebidas/:id" component={ DrinksDetails } />
+          <Route exact path="/comidas/:id" component={ MealDetails } />
+          <Route exact path="/bebidas/:id" component={ DrinksDetails } />
+          <Route exact path="/bebidas/:id/in-progress" component={ drinksProgress } />
+          <Route exact path="/comidas/:id/in-progress" component={ mealsProgress } />
           <Route exact path="/explorar" component={ ExplorePage } />
           <Route exact path="/explorar/bebidas" component={ DrinksExplore } />
           <Route exact path="/explorar/comidas" component={ FoodsExplore } />

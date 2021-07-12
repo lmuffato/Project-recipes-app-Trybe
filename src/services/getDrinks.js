@@ -1,11 +1,11 @@
-const getIngredients = (recipe) => {
+export const getIngredients = (recipe) => {
   const toGet = Object.entries(recipe);
   const ingredients = toGet.filter((key) => key[0].includes('Ingredient')
     && key[1] !== null).map((curr) => curr[1]);
   return ingredients;
 };
 
-const getMeasures = (recipe) => {
+export const getMeasures = (recipe) => {
   const toGet = Object.entries(recipe);
   const measures = toGet.filter((key) => key[0].includes('Measure')
     && key[1] !== null).map((curr) => curr[1]);
@@ -76,6 +76,13 @@ export const getDrinkByFirstLetter = async (letter) => {
 
 export const getDrinksById = async (id) => {
   const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`);
+  const data = await response.json();
+  const { drinks } = data;
+  return drinks;
+};
+
+export const getRecomendedDrinks = async () => {
+  const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
   const data = await response.json();
   const { drinks } = data;
   return drinks;
