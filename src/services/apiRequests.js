@@ -115,7 +115,7 @@ export const getFoodIngredientList = async (callback) => {
 
 export const getDrinksIngredientList = async (callback) => {
   const rawApiData = await fetch(
-    'https:/www.thecocktaildb.com/api/json/v1/1/list.php?i=list',
+    'https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list',
   );
   const ApiData = await rawApiData.json();
   const { drinks } = ApiData;

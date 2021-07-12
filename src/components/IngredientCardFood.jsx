@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { Card } from 'react-bootstrap';
 
-export default function IngredientCard({
+export default function IngredientCardFood({
   ingredient: { strIngredient, idIngredient },
   index,
   selector,
@@ -28,7 +28,7 @@ export default function IngredientCard({
   );
 }
 
-IngredientCard.propTypes = {
+IngredientCardFood.propTypes = {
   ingredient: PropTypes.objectOf(PropTypes.string),
   index: PropTypes.number,
 }.isRequired;

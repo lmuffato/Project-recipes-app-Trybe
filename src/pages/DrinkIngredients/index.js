@@ -12,15 +12,10 @@ export default function DrinkIngredients() {
   const maxLength = 11;
   const { setRecipes, setRedirect } = useContext(RecipeContext);
   const [ingredients, setIngredients] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [exploreRedirect, setExploreRedirect] = useState(false);
-  const startComponent = async () => {
-    await getDrinksIngredientList(setIngredients);
-    setLoading(false);
-  };
   useEffect(() => {
-    startComponent();
-  });
+    getDrinksIngredientList(setIngredients);
+  }, []);
   const selectIngredient = async (ingredient) => {
     await drinksByIngredient(ingredient, setRecipes);
     await setRedirect('from-explore');
@@ -30,7 +25,7 @@ export default function DrinkIngredients() {
     <>
       <Header />
       <div className="ingredients-list">
-        { !loading ? ingredients
+        { ingredients.length > 0 ? ingredients
           .filter((_, index) => index <= maxLength)
           .map((ingredient, index) => (<IngredientCardDrinks
             key={ index }

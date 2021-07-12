@@ -8,7 +8,7 @@ import './css/FoodIngredients.css';
 import RecipeContext from '../../context/RecipeContext';
 import { getFoodIngredientList, foodsByIngredient } from '../../services/apiRequests';
 
-export default function DrinkIngredients() {
+export default function FoodIngredients() {
   const maxLength = 11;
   const { setRecipes, setRedirect } = useContext(RecipeContext);
   const [ingredients, setIngredients] = useState([]);
