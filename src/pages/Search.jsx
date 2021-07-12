@@ -6,14 +6,25 @@ import Footer from '../components/Footer';
 function Search() {
   return (
     <div>
-      Pagina Search
       <Header title="Explorar" />
       <div>
         <Link to="/explorar/comidas">
-          <button type="button" data-testid="explore-food">Explorar Comidas</button>
+          <button
+            type="button"
+            data-testid="explore-food"
+            className="itemCard"
+          >
+            Explorar Comidas
+          </button>
         </Link>
         <Link to="/explorar/bebidas">
-          <button type="button" data-testid="explore-drinks">Explorar Bebidas</button>
+          <button
+            type="button"
+            data-testid="explore-drinks"
+            className="itemCard"
+          >
+            Explorar Bebidas
+          </button>
         </Link>
       </div>
       <Footer />

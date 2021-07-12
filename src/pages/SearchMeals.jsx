@@ -19,13 +19,13 @@ function SearchMeals() {
 
   return (
     <div>
-      Pagina SearchMeals
       <Header title="Explorar Comidas" />
       <div>
         <Link to="/explorar/comidas/ingredientes">
           <button
             type="button"
             data-testid="explore-by-ingredient"
+            className="itemCard"
           >
             Por Ingredientes
           </button>
@@ -34,6 +34,7 @@ function SearchMeals() {
           <button
             type="button"
             data-testid="explore-by-area"
+            className="itemCard"
           >
             Por Local de Origem
           </button>
@@ -42,6 +43,7 @@ function SearchMeals() {
           type="button"
           data-testid="explore-surprise"
           onClick={ handleClick }
+          className="itemCard"
         >
           Me Surpreenda!
         </button>

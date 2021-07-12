@@ -22,12 +22,19 @@ function Profile() {
         <h3 data-testid="profile-email">{ user.email }</h3>
       ) : (null)}
       <Link to="/receitas-feitas">
-        <button type="button" data-testid="profile-done-btn">Receitas Feitas</button>
+        <button
+          type="button"
+          data-testid="profile-done-btn"
+          className="itemCard"
+        >
+          Receitas Feitas
+        </button>
       </Link>
       <Link to="/receitas-favoritas">
         <button
           type="button"
           data-testid="profile-favorite-btn"
+          className="itemCard"
         >
           Receitas Favoritas
         </button>
@@ -37,6 +44,7 @@ function Profile() {
           type="button"
           data-testid="profile-logout-btn"
           onClick={ handleClick }
+          className="itemCard"
         >
           Sair
         </button>

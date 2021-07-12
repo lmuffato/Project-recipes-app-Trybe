@@ -52,12 +52,20 @@ function DrinkCardDetail() {
         data-testid="recipe-photo"
         className="detailImage"
       />
-      <h3 data-testid="recipe-title">{ currentDrink.strDrink }</h3>
-      <button data-testid="share-btn" type="button" onClick={ shareClick }>
-        <img src={ shareIcon } alt="compartilhar" />
-      </button>
-      {copyLink ? <span>Link copiado!</span> : null}
-      <FavoriteButton type="bebida" />
+      <div className="detailsTitle">
+        <h3 data-testid="recipe-title">{ currentDrink.strDrink }</h3>
+        <div>
+          <button
+            data-testid="share-btn"
+            type="button"
+            onClick={ shareClick }
+          >
+            <img src={ shareIcon } alt="compartilhar" />
+          </button>
+          {copyLink ? <span>Link copiado!</span> : null}
+          <FavoriteButton type="bebida" />
+        </div>
+      </div>
       <h4 data-testid="recipe-category">{ currentDrink.strAlcoholic }</h4>
       <h4>Ingredients</h4>
       <IngredientsList currentMeal={ currentDrink } />

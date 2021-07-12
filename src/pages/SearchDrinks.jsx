@@ -19,13 +19,13 @@ function SearchDrinks() {
 
   return (
     <div>
-      Pagina SearchDrinks
       <Header title="Explorar Bebidas" />
       <div>
         <Link to="/explorar/bebidas/ingredientes">
           <button
             type="button"
             data-testid="explore-by-ingredient"
+            className="itemCard"
           >
             Por Ingredientes
           </button>
@@ -34,6 +34,7 @@ function SearchDrinks() {
           type="button"
           data-testid="explore-surprise"
           onClick={ handleClick }
+          className="itemCard"
         >
           Me Surpreenda!
         </button>
