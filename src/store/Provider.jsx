@@ -31,7 +31,6 @@ function Provider({ children }) {
   const [randomMealId, setRandomMealId] = useState([]);
   const [foodsIngredients, setFoodsIngredients] = useState([]);
   const [drinksIngredients, setDrinksIngredients] = useState([]);
-  const [byIngredient, setByIngredient] = useState(false);
   const [ingredientByName, setIngredientByName] = useState([]);
   const [inProgressRecipes, setInProgressRecipes] = useState({
     cocktails: {},
@@ -54,7 +53,9 @@ function Provider({ children }) {
         .then(({ meals }) => setDataMealsAndCategory(meals));
     } else {
       fetchMealsAndCategory(categoryF)
-        .then(({ meals }) => setDataMealsAndCategory(meals));
+        .then(({ meals }) => {
+          setDataMealsAndCategory(meals);
+        });
     }
   }, [categoryF]);
 
@@ -117,8 +118,6 @@ function Provider({ children }) {
     setFoodsIngredients,
     drinksIngredients,
     setDrinksIngredients,
-    byIngredient,
-    setByIngredient,
     ingredientByName,
     setIngredientByName,
     inProgressRecipes,

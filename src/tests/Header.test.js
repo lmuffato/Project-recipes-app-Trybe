@@ -15,7 +15,6 @@ import {
   DrinkExplore,
   FoodExplore,
   RecipesDone,
-  ExploreArea,
   ExploreDrinksIngredients,
   ExploreFoodIngredients,
 } from '../Pages';
@@ -51,11 +50,11 @@ describe('check an icon for the profile screen, a title and an icon for the sear
       expect(get(searchTopBtn)).not.toBe();
     };
 
-    const hasHeader = (query) => {
-      expect(query(profileTopBtn)).toBeInTheDocument();
-      expect(query(pageTitle)).toBeInTheDocument();
-      expect(query(searchTopBtn)).toBeInTheDocument();
-    };
+    // const hasHeader = (query) => {
+    //   expect(query(profileTopBtn)).toBeInTheDocument();
+    //   expect(query(pageTitle)).toBeInTheDocument();
+    //   expect(query(searchTopBtn)).toBeInTheDocument();
+    // };
 
     it('Doesnt Header on the Login screen', () => {
       const { queryByTestId } = renderWithRouter(<App />);
@@ -103,11 +102,6 @@ describe('check an icon for the profile screen, a title and an icon for the sear
       hasNoHeader(queryByTestId);
     });
 
-    it('The header has the correct icons on the ExploreArea screen', () => {
-      const { queryByTestId } = renderWithRouter(<ExploreArea />);
-      hasHeader(queryByTestId);
-    });
-
     it('The header has the correct icons on the ExploreDrinksIngredients screen', () => {
       const { queryByTestId } = renderWithRouter(
         <Provider>
@@ -124,11 +118,6 @@ describe('check an icon for the profile screen, a title and an icon for the sear
         </Provider>,
       );
       hasNoHeader(queryByTestId);
-    });
-
-    it('The header has the correct icons on the ExploreFoodSource screen', () => {
-      const { queryByTestId } = renderWithRouter(<ExploreArea />);
-      hasHeader(queryByTestId);
     });
 
     it('The header has the correct icons on the Profile screen', () => {

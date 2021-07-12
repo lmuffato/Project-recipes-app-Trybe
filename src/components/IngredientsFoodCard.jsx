@@ -2,39 +2,31 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import context from '../store/Context';
+import { fetchFilterFoodByIngredient } from '../services/Data';
 
 function IngredientsFoodCard({ foodsIngredients, index }) {
-  const { setByIngredient, setIngredientByName } = useContext(context);
+  const { setFoods } = useContext(context);
   const { strIngredient } = foodsIngredients;
+
+  const getRecipeByIngredients = (ing) => {
+    fetchFilterFoodByIngredient(ing).then((data) => {
+      setFoods(data);
+    });
+  };
 
   return (
     <div>
-      <div
-        src={ `https://www.themealdb.com/images/ingredients/${strIngredient}-Small.png` }
-        data-testid={ `${index}-ingredient-card` }
-      >
+      <div>
         <Link
-          onClick={ () => {
-            setByIngredient(true);
-            setIngredientByName(strIngredient);
-          } }
           to="/comidas"
-          data-testid={ `${index}-main-ingredient-card-link-image` }
+          data-testid={ `${index}-ingredient-card` }
+          onClick={ () => getRecipeByIngredients(strIngredient) }
         >
           <img
             data-testid={ `${index}-card-img` }
             src={ `https://www.themealdb.com/images/ingredients/${strIngredient}-Small.png` }
             alt={ strIngredient }
           />
-        </Link>
-        <Link
-          onClick={ () => {
-            setByIngredient(true);
-            setIngredientByName(strIngredient);
-          } }
-          to="/comidas"
-          data-testid={ `${index}-main-ingredient-card-link` }
-        >
           <p
             data-testid={ `${index}-card-name` }
           >
@@ -52,5 +44,3 @@ IngredientsFoodCard.propTypes = {
 };
 
 export default IngredientsFoodCard;
-
-//

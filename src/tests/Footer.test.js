@@ -2,7 +2,6 @@ import React from 'react';
 import userEvent from '@testing-library/user-event';
 import renderWithRouter from '../helpers/renderWithRouter';
 
-import App from '../App';
 import Footer from '../components/Footer';
 import Provider from '../store/Provider';
 
@@ -16,7 +15,6 @@ import {
   DrinkExplore,
   FoodExplore,
   RecipesDone,
-  ExploreArea,
   ExploreDrinksIngredients,
   ExploreFoodIngredients,
 } from '../Pages';
@@ -116,11 +114,6 @@ describe('Display the Footer only on the screens indicated by the prototype', ()
     hasFooter(queryByTestId);
   });
 
-  it('The Footer has the correct icons on the ExploreArea screen', () => {
-    const { queryByTestId } = renderWithRouter(<ExploreArea />);
-    hasFooter(queryByTestId);
-  });
-
   it('The Footer has the correct icons on the ExploreDrinksIngredients screen', () => {
     const { queryByTestId } = renderWithRouter(
       <Provider>
@@ -136,11 +129,6 @@ describe('Display the Footer only on the screens indicated by the prototype', ()
         <ExploreFoodIngredients />
       </Provider>,
     );
-    hasFooter(queryByTestId);
-  });
-
-  it('The Footer has the correct icons on the ExploreFoodSource screen', () => {
-    const { queryByTestId } = renderWithRouter(<ExploreArea />);
     hasFooter(queryByTestId);
   });
 
