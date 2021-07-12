@@ -13,12 +13,12 @@ afterEach(() => jest.clearAllMocks());
 
 describe('Check Login screen', () => {
   it('Check route is "/"', () => {
-    const { history } = renderWithRouter(<App />, '/');
+    const { history } = renderWithRouter(<App />);
     expect(history.location.pathname).toBe('/');
   });
 
   it('Check if there is a place for the user to enter their email and password', () => {
-    const { getByTestId } = renderWithRouter(<App />, '/');
+    const { getByTestId } = renderWithRouter(<App />);
 
     const email = getByTestId(emailTestId);
     const password = getByTestId(passwordTestId);
@@ -28,14 +28,14 @@ describe('Check Login screen', () => {
   });
 
   it('Check if there is button whith text "Entrar"', () => {
-    const { getByText } = renderWithRouter(<App />, '/');
+    const { getByText } = renderWithRouter(<App />);
 
     const button = getByText(btnText);
     expect(button).toBeInTheDocument();
   });
 
   it('Check if button "Entrar" is disabled when an invalid email is typed', () => {
-    const { getByTestId, getByText } = renderWithRouter(<App />, '/');
+    const { getByTestId, getByText } = renderWithRouter(<App />);
 
     const email = getByTestId(emailTestId);
     const password = getByTestId(passwordTestId);
@@ -59,7 +59,7 @@ describe('Check Login screen', () => {
   });
 
   it('Check if button "Entrar" is disabled when an invalid password is typed', () => {
-    const { getByTestId, getByText } = renderWithRouter(<App />, '/');
+    const { getByTestId, getByText } = renderWithRouter(<App />);
 
     const email = getByTestId(emailTestId);
     const password = getByTestId(passwordTestId);
@@ -71,7 +71,7 @@ describe('Check Login screen', () => {
   });
 
   it('The route must be changed to "comidas" after clicking the button', () => {
-    const { getByTestId, getByText } = renderWithRouter(<App />, '/');
+    const { getByTestId, getByText } = renderWithRouter(<App />);
 
     const email = getByTestId(emailTestId);
     const password = getByTestId(passwordTestId);
