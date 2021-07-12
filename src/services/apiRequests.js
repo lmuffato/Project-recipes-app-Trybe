@@ -105,3 +105,19 @@ export const drinkById = async (id) => {
   const { drinks } = ApiData;
   return drinks[0];
 };
+
+export const getFoodIngredientList = async (callback) => {
+  const rawApiData = await fetch('https://www.themealdb.com/api/json/v1/1/list.php?i=list');
+  const ApiData = await rawApiData.json();
+  const { meals } = ApiData;
+  callback(meals);
+};
+
+export const getDrinksIngredientList = async (callback) => {
+  const rawApiData = await fetch(
+    'https:/www.thecocktaildb.com/api/json/v1/1/list.php?i=list',
+  );
+  const ApiData = await rawApiData.json();
+  const { drinks } = ApiData;
+  callback(drinks);
+};

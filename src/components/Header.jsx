@@ -12,8 +12,8 @@ function Header({ searchBar, type }) {
   useEffect(() => {
     if (!searchBar) {
       const btnSearch = document.getElementById('search-btn');
-      btnSearch.disabled = true;
       btnSearch.style.opacity = 0;
+      btnSearch.disable = true;
     }
   }, [searchBar]);
 
@@ -40,7 +40,7 @@ function Header({ searchBar, type }) {
           type="button"
           data-testid="search-top-btn"
           id="search-btn"
-          onClick={ toggleSearchBar }
+          onClick={ searchBar ? toggleSearchBar : '' }
         >
           <img src={ searchIcon } alt="icone de pesquisa" />
         </button>
