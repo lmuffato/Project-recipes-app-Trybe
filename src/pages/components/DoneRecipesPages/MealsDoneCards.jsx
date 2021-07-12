@@ -49,14 +49,14 @@ export default function MealsDoneCards({ props:
           />
         </button>
         <p data-testid={ `${index}-horizontal-done-date` }>{ doneDate }</p>
-        {tags.slice(0, size).map((tagName) => (
+        {tags ? tags.slice(0, size).map((tagName, tagIndex) => (
           <p
             key={ tagName }
-            data-testid={ `${index}-${tagName}-horizontal-tag` }
+            data-testid={ `${tagIndex}-${tagName}-horizontal-tag` }
           >
             {tagName}
           </p>
-        )) }
+        )) : null }
       </div>
     );
   }

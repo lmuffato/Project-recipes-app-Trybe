@@ -66,3 +66,17 @@
     transform: rotate(-10deg);
   }
 } */
+
+.main-page-card-img {
+  height: 300px;
+}
+
+.card-video {
+  height: 300px;
+  width: auto;
+}
+
+.details-img {
+  height: auto;
+  width: 100vw;
+}

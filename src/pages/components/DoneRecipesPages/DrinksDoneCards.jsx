@@ -48,14 +48,14 @@ export default function DrinksDoneCards({ props: { recipe, index } }) {
           />
         </button>
         <p data-testid={ `${index}-horizontal-done-date` }>{ doneDate }</p>
-        {tags.slice(0, size).map((tagName, tagIndex) => (
+        {tags ? tags.slice(0, size).map((tagName, tagIndex) => (
           <p
             key={ tagName }
             data-testid={ `${tagIndex}-${tagName}-horizontal-tag` }
           >
             {tagName}
           </p>
-        )) }
+        )) : null }
       </div>
     );
   }

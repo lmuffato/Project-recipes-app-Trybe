@@ -1,0 +1,22 @@
+.recommendation-container {
+  display: flex;
+  flex-flow: row nowrap;
+  margin-bottom: 5vh;
+  overflow-x: scroll;
+  width: 80%;
+}
+
+.recommendation-img {
+  height: 200px;
+}
+
+.card-container {
+  margin: 20px;
+}
+
+.start-recipe-btn {
+  bottom: 0;
+  left: 50%;
+  position: fixed;
+  transform: translateX(-50%);
+}
