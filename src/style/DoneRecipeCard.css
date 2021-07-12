@@ -1,0 +1,27 @@
+.done-recipe-card {
+  border: 1px solid black;
+  display: flex;
+  height: 100px;
+  justify-content: space-between;
+}
+
+.done-recipe-card img {
+  height: 100%;
+}
+
+.done-recipe-card p {
+  margin: 0;
+}
+
+.done-recipe-info {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  height: 100%;
+}
+
+.horizontal-top-text {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
