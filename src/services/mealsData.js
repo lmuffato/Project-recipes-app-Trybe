@@ -30,7 +30,7 @@ export default async function mealsData(options) {
       `https://www.themealdb.com/api/json/v1/1/filter.php?i=${options.ingredient}`,
     );
 
-    return parseDrinkResults(filter);
+    return parseMealResults(filter);
   }
 
   if (options && options.name) {
@@ -38,7 +38,7 @@ export default async function mealsData(options) {
       `https://www.themealdb.com/api/json/v1/1/search.php?s=${options.name}`,
     );
 
-    return parseDrinkResults(filter);
+    return parseMealResults(filter);
   }
 
   if (options && options.firstletter) {
@@ -46,7 +46,7 @@ export default async function mealsData(options) {
       `https://www.themealdb.com/api/json/v1/1/search.php?f=${options.firstletter}`,
     );
 
-    return parseDrinkResults(filter);
+    return parseMealResults(filter);
   }
 
   return {
