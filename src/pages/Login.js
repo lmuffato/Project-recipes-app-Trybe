@@ -15,7 +15,6 @@ function Login() {
   const minPasswordLength = 6;
   const history = useHistory();
 
-  // verifica erros no input de email
   const verifyEmailError = () => {
     const emailSpan = document.getElementById('email_span__form');
 
