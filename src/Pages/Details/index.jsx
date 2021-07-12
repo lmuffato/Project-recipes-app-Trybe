@@ -32,9 +32,9 @@ function Details() {
     });
     const checkRecipe = () => {
       const done = doneRecipes.find((recipe) => recipe.id === id);
-      const doing = doingRecipes[toggleLocalDoing][id];
+      const doing = doingRecipes[toggleLocalDoing];
       if (done) return setRecipeStatus('');
-      if (doing) return setRecipeStatus('Continuar Receita');
+      if (doing && doing[id]) return setRecipeStatus('Continuar Receita');
     };
     checkRecipe();
   }, [doingRecipes, doneRecipes, id, pathname, toggleApi, toggleLocalDoing]);

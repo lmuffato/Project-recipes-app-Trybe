@@ -5,6 +5,7 @@ import UserContext from './UserContext';
 function UserProvider({ children }) {
   const localDone = JSON.parse(localStorage.getItem('doneRecipes'));
   const localDoing = JSON.parse(localStorage.getItem('inProgressRecipes'));
+  console.log(localDoing);
 
   const [user, setUser] = useState('');
   const [password, setPassword] = useState('');
