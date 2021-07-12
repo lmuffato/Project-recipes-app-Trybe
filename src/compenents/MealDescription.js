@@ -6,6 +6,7 @@ import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import DrinkCards from './DrinkCards';
 import '../styles/MealDescription.css';
+import copyToClipboard from '../services/copyToClipboard';
 
 function MealDescription({ recipe, recipeId }) {
   const { recomendations } = useContext(RecipesContext);
@@ -46,14 +47,6 @@ function MealDescription({ recipe, recipeId }) {
     body.style.overflowY = 'scroll';
   };
 
-  const copyToClipboard = ({ target }) => {
-    setIsCopy(true);
-    console.log(target);
-    const { alt } = target;
-    const path = `http://localhost:3000/${alt}`;
-    navigator.clipboard.writeText(path);
-  };
-
   return (
     <>
       <section className="detail-container" onWheel={ handleBodyScroll }>
@@ -64,7 +57,11 @@ function MealDescription({ recipe, recipeId }) {
           className="recomedation-img"
         />
         <h1 data-testid="recipe-title">{ strMeal }</h1>
-        <button data-testid="share-btn" type="button" onClick={ copyToClipboard }>
+        <button
+          data-testid="share-btn"
+          type="button"
+          onClick={ (event) => copyToClipboard(event, setIsCopy) }
+        >
           <img src={ shareIcon } alt={ `comidas/${idMeal}` } />
         </button>
         <button data-testid="favorite-btn" type="button">

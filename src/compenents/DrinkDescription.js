@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import RecipesContext from '../contexts/RecipesContext';
@@ -6,12 +6,14 @@ import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import MealCards from './MealCards';
 import '../styles/MealDescription.css';
+import copyToClipboard from '../services/copyToClipboard';
 
 function DrinkDescription({ recipe, recipeId }) {
   const { recomendations } = useContext(RecipesContext);
   const {
-    strDrinkThumb, strDrink, strCategory, strInstructions, strAlcoholic,
+    idDrink, strDrinkThumb, strDrink, strCategory, strInstructions, strAlcoholic,
   } = recipe;
+  const [isCopy, setIsCopy] = useState(null);
   const body = document.querySelector('body');
 
   const ingredients = Object.entries(recipe)
@@ -45,12 +47,17 @@ function DrinkDescription({ recipe, recipeId }) {
       <section className="detail-container" onWheel={ handleBodyScroll }>
         <img data-testid="recipe-photo" src={ strDrinkThumb } alt="comida" />
         <h1 data-testid="recipe-title">{ strDrink }</h1>
-        <button data-testid="share-btn" type="button">
-          <img src={ shareIcon } alt="botão de compartilhar" />
+        <button
+          data-testid="share-btn"
+          type="button"
+          onClick={ (event) => copyToClipboard(event, setIsCopy) }
+        >
+          <img src={ shareIcon } alt={ `bebidas/${idDrink}` } />
         </button>
         <button data-testid="favorite-btn" type="button">
           <img src={ whiteHeartIcon } alt="botão de favoritar" />
         </button>
+        {isCopy ? <span>Link copiado!</span> : null}
         <h3 data-testid="recipe-category">{`${strCategory} ${strAlcoholic}`}</h3>
         <h2>Ingredients</h2>
         { ingredients.map((ingredient, index) => (
