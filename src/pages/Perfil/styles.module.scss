@@ -1,0 +1,40 @@
+.perfilPage {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  min-height: 100vh;
+
+  button {
+    align-self: center;
+    margin: -50px;
+    padding: 10px;
+    width: 250px;
+  }
+
+  footer {
+    display: grid;
+    justify-items: center;
+
+    img {
+      width: 200px;
+    }
+  }
+
+  .imagemEmail {
+    display: grid;
+    justify-items: center;
+
+    img {
+      border-radius: 50%;
+      margin-top: 30px;
+      width: 100px;
+    }
+
+    h3 {
+      color: var(--light-purple);
+      font-family: Yanone Kaffeesatz , sans-serif;
+      padding-top: 20px;
+      text-align: center;
+    }
+  }
+}
