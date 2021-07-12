@@ -1,12 +1,17 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import RecipesContext from '../contexts/RecipesContext';
 
-function IngredientsMeasure({ detailsRecepie }/* , setAllChecked */) {
+function IngredientsMeasure({ detailsRecepie }) {
   // const { idMeal } = detailsRecepie;
+  const [checkedIngridientsState, setCheckedIngridientsState] = useState(0);
+  const { setAllChecked } = useContext(RecipesContext);
 
   const allIngredients = Object.entries(detailsRecepie)
     .filter((keys) => keys[0]
       .includes('strIngredient') && keys[1] !== null && keys[1] !== '');
+
+  console.log(allIngredients);
 
   const allMeasure = Object.entries(detailsRecepie)
     .filter((keys) => keys[0]
@@ -15,10 +20,30 @@ function IngredientsMeasure({ detailsRecepie }/* , setAllChecked */) {
   /* salvar os ingredientes feitos, no local storage,
   dps quando recuperar, marcar os feitos */
 
-  /* function checkInputs() {
-    // se todos inputs forem verdadeiros
-    // setAllChecked(false);
-  } */
+  const numberIngridients = allIngredients.length;
+  // let checkedIngridients = 0;
+
+  function checkInputs() {
+    if (numberIngridients === checkedIngridientsState) {
+      setAllChecked(false);
+    } else {
+      setAllChecked(true);
+    }
+  }
+
+  useEffect(() => {
+    checkInputs();
+    console.log('Chamou a função');
+  }, [checkedIngridientsState]);
+
+  function checkedListIngredients(e) {
+    if (e.target.checked === true) {
+      setCheckedIngridientsState(checkedIngridientsState + 1);
+    }
+    if (e.target.checked === false) {
+      setCheckedIngridientsState(checkedIngridientsState - 1);
+    }
+  }
 
   // formato dos dados a serem salvos:
   // inProgressRecipes
@@ -36,7 +61,7 @@ function IngredientsMeasure({ detailsRecepie }/* , setAllChecked */) {
   } */
 
   // função para pegar as receitas do local storage
- /*  const getInProgressRecepies = () => {
+  /*  const getInProgressRecepies = () => {
     const recepiesInProgressString = localStorage.getItem('inProgressRecipes');
     const recepiesInProgress = JSON.parse(recepiesInProgressString);
     return recepiesInProgress;
@@ -51,11 +76,13 @@ function IngredientsMeasure({ detailsRecepie }/* , setAllChecked */) {
               id="ingredient"
               data-testid={ `${index}-ingredient-step` }
               type="checkbox"
+              onChange={ (e) => checkedListIngredients(e) }
             />
-            { elem }
+            { elem[1] }
             {' '}
             -
-            { allMeasure[index] }
+            {' '}
+            { allMeasure[index][1] }
           </label>
         </div>))}
     </div>
