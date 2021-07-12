@@ -1,8 +1,20 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
+import Header from '../compenents/Header';
+import SearchbarContext from '../contexts/SearchbarContext';
 
 function ReceitasFavoritas() {
+  const { setHideSearchBtn, setPageName } = useContext(SearchbarContext);
+
+  useEffect(() => {
+    setHideSearchBtn(false);
+    setPageName('Receitas Favoritas');
+  }, []);
+
   return (
-    <p>Receitas Favoritas</p>
+    <>
+      <Header />
+      <p>Receitas Favoritas</p>
+    </>
   );
 }
 

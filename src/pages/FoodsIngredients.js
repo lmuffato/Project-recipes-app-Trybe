@@ -1,11 +1,15 @@
 import React, { useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import Footer from '../compenents/Footer';
+import Header from '../compenents/Header';
 import RecipesContext from '../contexts/RecipesContext';
+import SearchbarContext from '../contexts/SearchbarContext';
 
 function FoodsIngredients() {
   const {
     ingredients, setIngredients, setMealsAndDrinkByIngredients,
   } = useContext(RecipesContext);
+  const { setHideSearchBtn, setPageName } = useContext(SearchbarContext);
   const TWELVE = 12;
 
   useEffect(() => {
@@ -15,9 +19,11 @@ function FoodsIngredients() {
       setIngredients(meals);
     };
     getIngredients();
+    setHideSearchBtn(false);
+    setPageName('Explorar Ingredientes');
   }, []);
 
-  const getTwelveIngredients = () => {
+  const getIngredients = () => {
     const getRecipesByIngredients = async (param) => {
       const endpoint = `https://www.themealdb.com/api/json/v1/1/filter.php?i=${param}`;
       const { meals } = await fetch(endpoint).then((data) => data.json());
@@ -29,7 +35,6 @@ function FoodsIngredients() {
       .filter((ingredient, index) => index < TWELVE);
     return (
       twelveIngredients.map((eachIngredient, index) => {
-        // const id = index - 1;
         const name = eachIngredient.strIngredient;
         return (
           <div data-testid={ `${index}-ingredient-card` } key={ index }>
@@ -57,10 +62,12 @@ function FoodsIngredients() {
     );
   };
 
-  console.log(ingredients);
-
   return (
-    getTwelveIngredients()
+    <>
+      <Header />
+      { getIngredients() }
+      <Footer />
+    </>
   );
 }
 

@@ -1,12 +1,16 @@
 import React, { useEffect, useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
+import Footer from '../compenents/Footer';
+import Header from '../compenents/Header';
 import RecipesContext from '../contexts/RecipesContext';
+import SearchbarContext from '../contexts/SearchbarContext';
 
 function DrinksIngredients() {
   const [drinkIngredients, setDrinkIngredients] = useState([]);
   const {
-    mealsAndDrinkByIngredients, setMealsAndDrinkByIngredients,
+    setMealsAndDrinkByIngredients,
   } = useContext(RecipesContext);
+  const { setHideSearchBtn, setPageName } = useContext(SearchbarContext);
   const TWELVE = 12;
 
   useEffect(() => {
@@ -16,6 +20,8 @@ function DrinksIngredients() {
       setDrinkIngredients(drinks);
     };
     getIngredients();
+    setHideSearchBtn(false);
+    setPageName('Explorar Ingredientes');
   }, []);
 
   const getRecipesByIngredient = async (param) => {
@@ -23,8 +29,6 @@ function DrinksIngredients() {
     const { drinks } = await fetch(endpoint).then((data) => data.json());
     setMealsAndDrinkByIngredients(drinks.slice(0, TWELVE));
   };
-
-  console.log(mealsAndDrinkByIngredients);
 
   const getTwelveIngredients = () => {
     const twelveIngredients = drinkIngredients
@@ -52,7 +56,11 @@ function DrinksIngredients() {
   };
 
   return (
-    getTwelveIngredients()
+    <>
+      <Header />
+      { getTwelveIngredients() }
+      <Footer />
+    </>
   );
 }
 

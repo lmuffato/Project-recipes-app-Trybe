@@ -3,7 +3,6 @@ import userEvent from '@testing-library/user-event';
 import { screen } from '@testing-library/react';
 import renderWithRouter from './renderWithRouter';
 import App from '../App';
-// import FoodsIngredients from '../pages/FoodsIngredients';
 
 function login() {
   const getInputEmail = screen.getByTestId('email-input');
@@ -45,13 +44,19 @@ describe('Testing FoodsIngredients page', () => {
   });
 
   test('if the ingredients are rederized', async () => {
+    // const header = getByTestId('header');
+    // const footer = getByTestId('footer');
+
+    // expect(header).toBeInTheDocument();
+    // expect(footer).toBeInTheDocument();
+
+    // const chicken = await findByText(/salmon/i);
+    // expect(chicken).toBeInTheDocument();
+
     // jest.spyOn(global, 'fetch');
     // global.fetch.mockResolvedValue({
     //   json: jest.fn().mockResolvedValue(ingredients),
     // });
-
-    // const { findByText } = renderWithRouter(<FoodsIngredients />);
-
     // expect(global.fetch).toBeCalledTimes(1);
     // const chicken = getByRole('img', {
     //   name: /chicken/i,

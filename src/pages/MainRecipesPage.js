@@ -1,30 +1,39 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import Header from '../compenents/Header';
 import Footer from '../compenents/Footer';
 import MainRecipes from '../compenents/MainRecipes';
 import RecipesContext from '../contexts/RecipesContext';
 import SearchbarContext from '../contexts/SearchbarContext';
 import apiRequester from '../services/fetchApi';
 import '../styles/MealAndDrinkCards.css';
+import Loading from '../compenents/Loading';
+import Header from '../compenents/Header';
 
-function MainMealsRecipes() {
+function MainRecipesPage() {
   const [twelveRecipes, setTwelveRecipes] = useState(null);
   const [returnedCategoty, setReturnedCategory] = useState(null);
 
   const {
-    searchCategory, categories, setCategories,
+    searchCategory, categories, setCategories, setHideSearchBtn, setPageName,
   } = useContext(SearchbarContext);
   const { mealOrDrink, type, setType, setRecipes, recipes,
   } = useContext(RecipesContext);
 
   const history = useHistory();
 
-  if (history.location.pathname === '/bebidas' || mealOrDrink === 'cocktail') {
-    setType('cocktail');
-  } else if (history.location.pathname === '/comidas' || mealOrDrink === 'meal') {
-    setType('meal');
-  }
+  useEffect(() => {
+    if (history.location.pathname === '/bebidas' || mealOrDrink === 'cocktail') {
+      setType('cocktail');
+      setPageName('Bebidas');
+    } else if (history.location.pathname === '/comidas' || mealOrDrink === 'meal') {
+      setType('meal');
+      setPageName('Comidas');
+    }
+  }, [history, mealOrDrink, setType]);
+
+  useEffect(() => {
+    setHideSearchBtn(true);
+  }, []);
 
   useEffect(() => {
     const endpoints = {
@@ -38,40 +47,38 @@ function MainMealsRecipes() {
     apiRequester(endpoints.endpointMealOrDrink)
       .then((response) => {
         setTwelveRecipes(Object.values(response)[0].slice(0, endpoints.lastRecipe));
-      });
+      })
+      .catch((error) => console.error(error));
 
     apiRequester(endpoints.endpointCategories)
       .then((response) => {
         setCategories(Object.values(response)[0].slice(0, endpoints.lastCategory));
-      });
+      })
+      .catch((error) => console.error(error));
 
     if (searchCategory !== 'list') {
       apiRequester(endpoints.endpointCategory)
         .then((response) => {
           setReturnedCategory(Object.values(response)[0]
             .splice(0, endpoints.lastRecipe));
-        });
+        })
+        .catch((error) => console.error(error));
     }
   }, [type, searchCategory, setCategories]);
 
-  if (searchCategory !== 'list') {
-    setRecipes(returnedCategoty);
-  } else { setRecipes(twelveRecipes); }
+  useEffect(() => {
+    if (searchCategory !== 'list') {
+      setRecipes(returnedCategoty);
+    } else { setRecipes(twelveRecipes); }
+  }, [searchCategory, returnedCategoty, twelveRecipes, setRecipes]);
 
-  if (recipes !== null && categories !== null) {
-    return (
-      <>
-        <Header />
-        <MainRecipes />
-        <Footer />
-      </>
-    );
-  }
   return (
-    <div>
-      <p>Loading...</p>
-    </div>
+    <>
+      <Header />
+      { recipes && categories ? <MainRecipes /> : <Loading />}
+      <Footer />
+    </>
   );
 }
 
-export default MainMealsRecipes;
+export default MainRecipesPage;

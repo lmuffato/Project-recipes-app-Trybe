@@ -8,16 +8,18 @@ import mealIcon from '../images/mealIcon.svg';
 import '../styles/Footer.css';
 
 function Footer() {
-  const { setSearchCategory } = useContext(SearchbarContext);
+  const { setSearchCategory, setPageName } = useContext(SearchbarContext);
   const { setMealOrDrink } = useContext(RecipesContext);
 
   const handleClick = (search) => {
     setMealOrDrink(search);
     setSearchCategory('list');
+    if (search === 'cocktail') setPageName('Bebidas');
+    if (search === 'meal') setPageName('Comidas');
   };
 
   return (
-    <footer data-testid="footer">
+    <footer data-testid="footer" title="footer">
       <Link to="/bebidas" onClick={ () => handleClick('cocktail') }>
         <img src={ drinkIcon } alt="drinks" data-testid="drinks-bottom-btn" />
       </Link>
