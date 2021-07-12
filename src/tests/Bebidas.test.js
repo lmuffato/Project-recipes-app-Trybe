@@ -9,34 +9,28 @@ const LOGIN_BTN_TEST_ID = 'login-submit-btn';
 const MOCK_EMAIL = 'alguem@alguem.com';
 
 describe('Teste da página de Comidas', () => {
-  test('A paǵina de comidas é a primeira a aparecer após o login', () => {
+  test('A tela de bebidas possui um header com os botões corretos', () => {
     const { getByTestId, history } = renderWithRouter(<App />);
 
     userEvent.type(getByTestId(EMAIL_TEST_ID), MOCK_EMAIL);
     userEvent.type(getByTestId(PASSWORD_TEST_ID), '1234567');
     userEvent.click(getByTestId(LOGIN_BTN_TEST_ID));
 
-    expect(history.location.pathname).toBe('/comidas');
-  });
-
-  test('A tela de comidas possui um header com os botões corretos', () => {
-    const { getByTestId } = renderWithRouter(<App />);
-
-    userEvent.type(getByTestId(EMAIL_TEST_ID), MOCK_EMAIL);
-    userEvent.type(getByTestId(PASSWORD_TEST_ID), '1234567');
-    userEvent.click(getByTestId(LOGIN_BTN_TEST_ID));
+    history.push('/bebidas');
 
     expect(getByTestId('profile-top-btn')).toBeInTheDocument();
-    expect(getByTestId('page-title')).toHaveTextContent('Comidas');
+    expect(getByTestId('page-title')).toHaveTextContent('Bebidas');
     expect(getByTestId('search-top-btn')).toBeInTheDocument();
   });
 
   test('A barra de busca é renderizada ao clicar no botão', () => {
-    const { getByTestId } = renderWithRouter(<App />);
+    const { getByTestId, history } = renderWithRouter(<App />);
 
     userEvent.type(getByTestId(EMAIL_TEST_ID), MOCK_EMAIL);
     userEvent.type(getByTestId(PASSWORD_TEST_ID), '1234567');
     userEvent.click(getByTestId(LOGIN_BTN_TEST_ID));
+
+    history.push('/bebidas');
 
     userEvent.click(getByTestId('search-top-btn'));
 
@@ -50,11 +44,13 @@ describe('Teste da página de Comidas', () => {
   });
 
   test('A página renderiza inicialmente 12 comidas', async () => {
-    const { getByTestId, findAllByTestId } = renderWithRouter(<App />);
+    const { getByTestId, findAllByTestId, history } = renderWithRouter(<App />);
 
     userEvent.type(getByTestId(EMAIL_TEST_ID), MOCK_EMAIL);
     userEvent.type(getByTestId(PASSWORD_TEST_ID), '1234567');
     userEvent.click(getByTestId(LOGIN_BTN_TEST_ID));
+
+    history.push('/bebidas');
 
     const cardRegEx = /.-recipe-card/;
     const AMOUNT_OF_CARDS = 12;
