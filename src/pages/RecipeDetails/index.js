@@ -34,7 +34,7 @@ export default function RecipeDetails({ match: { params: { id }, path, url } }) 
       >
         { recipe.strMeal || recipe.strDrink }
       </h2>
-      <BtnShare match={ url } />
+      <BtnShare url={ url } />
       <BtnFavorite id={ id } />
       <p
         data-testid="recipe-category"

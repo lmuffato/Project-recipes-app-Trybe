@@ -5,11 +5,10 @@ import shareIcon from '../../images/shareIcon.svg';
 const copy = require('clipboard-copy');
 // import { Container } from './styles';
 
-export default function BtnShare({ match }) {
+export default function BtnShare({ url }) {
   const [isCopied, setIsCopied] = useState(false);
-  const { url } = match;
   async function handleShareBtn() {
-    await copy(`http://localhost:3000${url || match}`);
+    await copy(`http://localhost:3000${url}`);
     setIsCopied(true);
   }
   return (
@@ -27,7 +26,6 @@ export default function BtnShare({ match }) {
   );
 }
 BtnShare.propTypes = {
-  match: PropTypes.shape({
-    url: PropTypes.string.isRequired,
-  }).isRequired,
+  url: PropTypes.string.isRequired,
+
 };

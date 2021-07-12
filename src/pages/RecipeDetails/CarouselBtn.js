@@ -19,5 +19,5 @@ export default function CarouselBtn({ direction, recommended }) {
 
 CarouselBtn.propTypes = {
   direction: PropTypes.string.isRequired,
-  recommended: PropTypes.objectOf(PropTypes.string).isRequired,
+  recommended: PropTypes.shape(PropTypes.string).isRequired,
 };
