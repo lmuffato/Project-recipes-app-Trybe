@@ -1,11 +1,12 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { shape } from 'prop-types';
 import Header from '../../components/Header/index';
 import Footer from '../../components/Footer';
 import Button from '../../components/shared/button';
-// import ItemCard from '../../components/ItemCard';
 import recipesContext from '../../context/recipesContext/recipesContext';
 import CardRecipe from '../../components/CardRecipe';
+
+import { getFoodsByIngredients } from '../../service/recipesApi';
 
 const LIMIT_RECIPES = 12;
 
@@ -17,12 +18,31 @@ function Foods({ location }) {
     loading,
     fetchCategoryRecipes,
     categorys,
+    forIngredients,
     filterByCategory } = useContext(recipesContext);
+  const [recipesForIngredients, setRecipesForIngredients] = useState([]);
+
+  const fetchApiForIngredients = async () => {
+    const { state } = location;
+    if (state) {
+      const data = await getFoodsByIngredients(state);
+      const filter = data.meals.filter((drink, index) => index < LIMIT_RECIPES);
+      console.log(filter);
+      setRecipesForIngredients(filter);
+    }
+  };
 
   useEffect(() => {
     fetchRecipes(location.pathname);
     fetchCategoryRecipes(location.pathname);
   }, []);
+
+  useEffect(() => {
+    fetchApiForIngredients();
+  }, [forIngredients]);
+
+  const allRecipes = recipesForIngredients.length > 1 ? recipesForIngredients : recipes;
+
   return (
 
     <div>
@@ -41,8 +61,8 @@ function Foods({ location }) {
           key={ index }
           dataTestid={ `${category.strCategory}-category-filter` }
         />))}
-      { loading ? <span>carregando</span> : recipes
-        .filter((item, index) => index < LIMIT_RECIPES)
+      { loading ? <span>carregando</span> : allRecipes
+        .filter((_item, index) => index < LIMIT_RECIPES)
         .map((recipe, index) => (
           <CardRecipe
             typeFilter={ typeFilter }

@@ -14,6 +14,7 @@ function RecipesProvider({ children }) {
   const [loading, setLoading] = useState(true);
   const [categorys, setCategorys] = useState([]);
   const [toggle, setToggle] = useState('');
+  const [forIngredients, setForIngredients] = useState(false);
 
   async function getSubmitApiFoods(text, ingredients, name, firtsLetter) {
     const requestApi = filterMethodFoods(text, ingredients, name, firtsLetter);
@@ -93,6 +94,8 @@ function RecipesProvider({ children }) {
     fetchRecipes,
     fetchCategoryRecipes,
     filterByCategory,
+    setForIngredients,
+    forIngredients,
   };
 
   return (
