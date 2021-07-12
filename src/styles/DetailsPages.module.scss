@@ -2,6 +2,10 @@
   .areaRecipie {
     margin-bottom: 80px;
 
+    img, embed {
+      width: 100%;
+    }
+
     .startRecipie {
       width: 100%;
       height: 60px;
@@ -21,6 +25,10 @@
       &:hover {
         background: #f89c2b;
       }
+    }
+
+    .recipeMade {
+      display: none;
     }
   }
 }

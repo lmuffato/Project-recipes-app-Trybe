@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useStateEasyRedux } from 'easy-redux-trybe';
 import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import { setLocalStorage, getLocalStorage } from '../../helper';
 import positions from '../../services/data';
 import createIngredients from '../../services/functions';
 
@@ -32,6 +34,18 @@ function DrinkDetails(props) {
     fetchRecipie();
   }, []);
 
+  const { areaRecipie, startRecipie /* recipeMade */ } = styles;
+  const stylesArr = [startRecipie];
+
+  const startRecipeText = () => {
+    let buttonText = 'Iniciar Receita';
+    if (localStorage.inProgressRecipes && localStorage.inProgressRecipes.includes(id)) {
+      buttonText = 'Continuar Receita';
+      return buttonText;
+    }
+    return buttonText;
+  };
+
   const drinks = useSelector((state) => (
     state.DrinkDetails ? state.DrinkDetails.responseDrink : undefined
   ));
@@ -42,12 +56,34 @@ function DrinkDetails(props) {
     }
   };
 
+  const history = useHistory();
+
+  const startMakingRecipe = () => {
+    const storage = localStorage.inProgressRecipes;
+    let setInProgressRecipe = {
+      cocktails: {
+        [id]: [],
+      },
+    };
+    if (storage && storage.includes('meals')) {
+      const mealsInProgress = getLocalStorage('inProgressRecipes').meals;
+      setInProgressRecipe = {
+        cocktails: {
+          [id]: [],
+        },
+        meals: [mealsInProgress],
+      };
+    }
+    setLocalStorage('inProgressRecipes', setInProgressRecipe);
+    return history.push(`${id}/in-progress`);
+  };
+
   return (
     <div>
       Bebida de ID :
       { id }
       {drinks && drinks.map((el) => (
-        <div className={ styles.areaRecipie } key={ el.idDrink }>
+        <div className={ areaRecipie } key={ el.idDrink }>
           <img src={ el.strDrinkThumb } alt={ el.strDrink } data-testid="recipe-photo" />
           <h1 data-testid="recipe-title">{ el.strDrink }</h1>
           <button type="button" data-testid="share-btn">compartilhar</button>
@@ -65,9 +101,10 @@ function DrinkDetails(props) {
           <button
             type="button"
             data-testid="start-recipe-btn"
-            className={ styles.startRecipie }
+            className={ stylesArr }
+            onClick={ startMakingRecipe }
           >
-            Iniciar Receita
+            { startRecipeText() }
           </button>
         </div>
 
