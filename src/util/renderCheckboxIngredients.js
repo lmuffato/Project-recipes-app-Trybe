@@ -1,44 +1,43 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Proptypes from 'prop-types';
 import '../PagesCss/Checkbox.css';
 
 export default function RenderCheckboxIngredients({ ingredients, measure }) {
-  // const [value, setValue] = useState(false);
-  // const [check, setCheck] = useState([]);
+  const itens = [];
+  const aux = [];
+  const [checks, setChecks] = useState([]);
+  ingredients.forEach(
+    (ingredient, index) => ingredient !== '' && measure[index] !== '' && (
+      itens.push(`${ingredient} - ${measure[index]}`),
+      aux.push(false)
+    ),
+  );
 
-  // useEffect(() => {
-  //   // ingredients.forEach((e) => setCheck.push(e));
-  // }, []);
+  const checked = (id) => {
+    const newChecks = aux.map((e, index) => index === id && (!e));
+    console.log(newChecks);
 
-  // const checked = (index) => {
-  //   setCheck(true[index]);
-  // };
+    setChecks(newChecks);
+  };
 
   return (
     <>
-      { ingredients.map((item, index) => {
-        if (item !== '') {
-          let name = `${item}`;
-          if (measure[index] !== '' && measure[index] !== null) {
-            name = `${name} - ${measure[index]}`;
-          }
-          return (
-            <div key={ name }>
-              <label htmlFor="ingredient">
-                {name}
-                <input
-                  name="ingredient"
-                  // checked={ check }
-                  // onChange={ () => checked(index) }
-                  type="checkbox"
-                  data-testid={ `${index}-ingredient-step` }
-                />
-              </label>
-            </div>
-          );
-        }
-        return '';
-      })}
+      {
+        itens.map((item, index) => (
+          <div key={ item } data-testid={ `${index}-ingredient-step` }>
+            <label htmlFor="ingredient" className={ checks[index] ? 'risca' : '' }>
+              {item}
+              <input
+                id={ index }
+                name="ingredient"
+                checked={ checks[index] }
+                onChange={ () => checked(index) }
+                type="checkbox"
+              />
+            </label>
+          </div>
+        ))
+      }
     </>
   );
 }
