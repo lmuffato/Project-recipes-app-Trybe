@@ -14,11 +14,13 @@ export const handleProgress = (
   const getRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
   let filtered;
   let toBeSaved;
-  if (getRecipes[toggle]) {
+  if (getRecipes) {
     const currentRecipe = getRecipes[toggle];
-    filtered = currentRecipe[id].includes(ingredient)
-      ? currentRecipe[id].filter((item) => item !== ingredient)
-      : [...currentRecipe[id], ingredient];
+    if (currentRecipe[id]) {
+      filtered = currentRecipe[id].includes(ingredient)
+        ? currentRecipe[id].filter((item) => item !== ingredient)
+        : [...currentRecipe[id], ingredient];
+    }
 
     toBeSaved = { ...getRecipes, [toggle]: { ...getRecipes[toggle], [id]: filtered } };
   } else {
@@ -32,7 +34,10 @@ export const handleProgress = (
 export const shouldBeChecked = (ingredient, toggle, id) => {
   const getRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
   if (getRecipes) {
-    return getRecipes[toggle][id].includes(ingredient);
+    const testKey = getRecipes[toggle];
+    if (testKey && testKey[id]) {
+      return getRecipes[toggle][id].includes(ingredient);
+    }
   }
   return false;
 };
@@ -48,7 +53,7 @@ export const createDoneRecipe = (id, recipeType, recipesDetails) => {
     name: recipesDetails[`str${recipeType}`],
     image: recipesDetails[`str${recipeType}Thumb`],
     doneDate: `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`,
-    tags: recipesDetails.strTags.split(','),
+    tags: recipesDetails.strTags ? recipesDetails.strTags.split(',') : '',
   };
   return doneObj;
 };

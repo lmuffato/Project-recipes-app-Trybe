@@ -21,7 +21,10 @@ function InProcess() {
   const toggleApi = (pathname.includes('comidas')) ? 'meals' : 'drinks';
   const toggleCategory = recipeType === 'Meal' ? 'strCategory' : 'strAlcoholic';
 
-  const localDoneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
+  let localDoneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
+  if (!localDoneRecipes) {
+    localDoneRecipes = [];
+  }
 
   useEffect(() => {
     getRecipeByID(pathname, id).then((response) => {
