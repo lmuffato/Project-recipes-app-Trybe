@@ -47,7 +47,7 @@ export default function ExplorarComidasArea() {
               { strArea }
             </option>
           ))}
-          <option> All </option>
+          <option data-testid="All-option"> All </option>
         </select>
       </label>
       <main>
