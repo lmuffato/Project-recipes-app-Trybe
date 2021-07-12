@@ -1,0 +1,29 @@
+.search {
+  background: var(--dark-purple);
+  display: grid;
+  gap: 15px;
+  height: 0;
+  overflow-y: hidden;
+  padding: 0;
+  transition: 0.3s;
+  visibility: hidden;
+
+  &.visible {
+    height: 200px;
+    padding: 20px;
+    visibility: visible;
+  }
+
+  .options {
+    display: flex;
+    font-size: 16px;
+    justify-content: space-between;
+
+    label {
+      align-items: center;
+      display: grid;
+      gap: 5px;
+      grid-template-columns: repeat(2, auto);
+    }
+  }
+}
