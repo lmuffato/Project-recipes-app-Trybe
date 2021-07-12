@@ -4,18 +4,20 @@ import '../PagesCss/Checkbox.css';
 
 export default function RenderCheckboxIngredients({ ingredients, measure }) {
   const itens = [];
+  const aux = [];
   const [checks, setChecks] = useState([]);
   ingredients.forEach(
     (ingredient, index) => ingredient !== '' && measure[index] !== '' && (
-      itens.push(`${ingredient} - ${measure[index]}`)
+      itens.push(`${ingredient} - ${measure[index]}`),
+      aux.push(false)
     ),
   );
 
-  console.log(checks);
   const checked = (id) => {
-    // if (!checks[id]) setChecks([...checks, false]);
-    if (checks[id]) setChecks([...checks[id], !checks[id]]);
-    console.log(checks);
+    const newChecks = aux.map((e, index) => index === id && (!e));
+    console.log(newChecks);
+
+    setChecks(newChecks);
   };
 
   return (
