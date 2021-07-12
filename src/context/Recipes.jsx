@@ -36,22 +36,54 @@ export function RecipesProvider({ children }) {
     }
   }, []);
 
-  async function filterByCategory(categoryName, event) {
+  async function filterRecipe(filter, event) {
     let results = [];
     const recipesLimit = 12;
 
-    if (currentFilter !== categoryName && categoryName !== 'All') {
-      results = await getRecipes(location.pathname, { category: categoryName });
-      setCurrentFilter(categoryName);
-    } else {
-      if (event) {
-        event.target.checked = false;
+    switch (filter.type) {
+    case 'category': {
+      if (currentFilter.category !== filter.content && filter.content !== 'All') {
+        results = await getRecipes(location.pathname, { category: filter.content });
+        setCurrentFilter({ category: filter.content });
+      } else {
+        if (event) {
+          event.target.checked = false;
+        }
+        results = await getRecipes(location.pathname);
+        results = results.list;
+        setCurrentFilter({ category: 'All' });
       }
-      results = await getRecipes(location.pathname);
-      results = results.list;
-      setCurrentFilter('All');
+      break;
     }
 
+    case 'name': {
+      results = await getRecipes(location.pathname, { name: filter.content });
+      setCurrentFilter({ name: filter.content });
+      break;
+    }
+
+    case 'ingredient': {
+      results = await getRecipes(location.pathname, { ingredient: filter.content });
+      setCurrentFilter({ ingredient: filter.content });
+      break;
+    }
+
+    case 'firstletter': {
+      if (filter.content.length > 1) {
+        return alert('Sua busca deve conter somente 1 (um) caracter');
+      }
+      results = await getRecipes(location.pathname, { firstletter: filter.content });
+      setCurrentFilter({ firstletter: filter.content });
+      break;
+    }
+
+    default: {
+      results = await getRecipes(location.pathname);
+      results = results.list;
+      setCurrentFilter({ category: 'All' });
+      break;
+    }
+    }
     setRecipes(results.slice(0, recipesLimit));
   }
 
@@ -59,7 +91,7 @@ export function RecipesProvider({ children }) {
     recipes,
     categories,
     titlePage,
-    filterByCategory,
+    filterRecipe,
     loadRecipes,
   };
 
