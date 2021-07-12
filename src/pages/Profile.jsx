@@ -15,15 +15,19 @@ function Profile() {
     history.push('/');
   };
 
-  const handleGetEmailFromLocalStorage = () => {
-    const getEmail = JSON.parse(localStorage.getItem('user'));
-    if (getEmail) {
-      setEmail(getEmail.email);
-    }
-  };
-
   useEffect(() => {
+    let cancel = false;
+    if (cancel) return;
+    const handleGetEmailFromLocalStorage = () => {
+      const getEmail = JSON.parse(localStorage.getItem('user'));
+      if (getEmail) {
+        setEmail(getEmail.email);
+      }
+    };
     handleGetEmailFromLocalStorage();
+    return () => {
+      cancel = true;
+    };
   }, []);
 
   return (

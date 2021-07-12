@@ -18,23 +18,19 @@ function RecipeDetails({ type }) {
   const history = useHistory();
   const endpointMeal = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
   const endpointDrink = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
-  // const [carouselRecommendations, setRecomendations] = useState([]);
   const [singleRecipe, setRecipe] = useState({});
   // const [, setRecipeInProgress] = useState('Iniciar receita');
-  const { handleFetch, isLoading, recipeData, recommendations,
-    fetchMealRecipes } = useDetailsProvider();
-  const recipeName = singleRecipe.strMeal || singleRecipe.strDrink;
-  const recipeThumb = singleRecipe.strMealThumb || singleRecipe.strDrinkThumb;
-  const recipeCategory = singleRecipe.strCategory;
+  const { handleFetch, isLoading,
+    recipeData, recommendations, fetchMealRecipes } = useDetailsProvider();
 
   useEffect(() => {
     const getRecipesAndRecommendations = () => {
       if (type === 'meals') {
         fetchMealRecipes(endpointCocktails, type);
-        handleFetch(endpointMeal, type);
+        return handleFetch(endpointMeal, type);
       }
       fetchMealRecipes(endpointRecipes, type);
-      handleFetch(endpointDrink, type);
+      return handleFetch(endpointDrink, type);
     };
     getRecipesAndRecommendations();
     // setRecipeInProgress('Iniciar receita');
@@ -51,7 +47,7 @@ function RecipeDetails({ type }) {
     return () => {
       cancel = true;
     };
-  }, [recipeData, recommendations]);
+  }, [recipeData, recommendations, type]);
 
   const handleClick = (ev) => {
     ev.preventDefault();
@@ -65,6 +61,12 @@ function RecipeDetails({ type }) {
   const isAlchooholic = singleRecipe.strAlcoholic || '';
   const magicNumber = 32;
   const youTubeVideo = singleRecipe.strYoutube || '';
+  const recipeMealName = singleRecipe.strMeal;
+  const recipeThumb = singleRecipe.strMealThumb || singleRecipe.strDrinkThumb;
+  const recipeCategory = singleRecipe.strCategory;
+  const recipeName = type === 'meals' ? singleRecipe.strMeal : singleRecipe.strDrink;
+
+  const renderCategory = type === 'drinks' ? (isAlchooholic) : (recipeCategory);
 
   return (
     <Container>
@@ -73,10 +75,8 @@ function RecipeDetails({ type }) {
         recipeThumb={ recipeThumb }
         type={ type }
         recipe={ singleRecipe }
-      >
-        { type === 'drinks' ? (<h3 data-testid="recipe-category">{isAlchooholic}</h3>) : (
-          <h3 data-testid="recipe-category">{recipeCategory}</h3>)}
-      </RecipeInfo>
+        recipeCategory={ renderCategory }
+      />
       <h3>Ingredientes</h3>
       <div className="ingredients-list">
         <RecipeIngredients recipe={ singleRecipe } />
@@ -85,7 +85,7 @@ function RecipeDetails({ type }) {
       { type === 'meals' ? (
         <MealVideo
           youTubeVideo={ youTubeVideo.substring(magicNumber) }
-          title={ recipeName }
+          title={ recipeMealName }
         />) : ''}
       <div className="title-wrapper"><h3>Recomendadas</h3></div>
       <Carousel

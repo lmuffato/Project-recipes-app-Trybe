@@ -26,7 +26,7 @@ function FilteredRecipesContextProvider(props) {
       // }
       setFilteredData(formattingData);
       setFilteredRecipes(formattingData[type]);
-      // setFilteredData(formattingData);
+
       // console.log(formattingData[type] !== null ? 'sim' : 'no');
       console.log(formattingData[type]);
       console.log(formattingData);
@@ -44,10 +44,11 @@ function FilteredRecipesContextProvider(props) {
   // faz o switch case dos endpoints pra buscar receitas na api de comidas
   const handleMealFilterType = (filterType, query, type) => {
     const trimSpacesQuery = query.replace(/\s/g, '').trim();
-    // console.log(trimSpacesQuery);
+
     const endpointMealIngr = `https://www.themealdb.com/api/json/v1/1/filter.php?i=${trimSpacesQuery}`;
     const endpointMealName = `https://www.themealdb.com/api/json/v1/1/search.php?s=${trimSpacesQuery}`;
     const endpointMealFirstLetter = `https://www.themealdb.com/api/json/v1/1/search.php?f=${trimSpacesQuery}`;
+
     switch (filterType) {
     case 'ingredient':
       fetchFilteredMealRecipes(endpointMealIngr, type);

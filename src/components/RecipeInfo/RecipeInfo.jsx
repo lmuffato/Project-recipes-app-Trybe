@@ -8,9 +8,10 @@ import handleSetFavoritesToLocalStorage from '../../helpers/localStorageHelper';
 
 const THREE_SECONDS = 3000;
 function RecipeInfo(props) {
-  const { recipeName, recipeThumb,
+  const { recipeThumb,
+    recipeName,
     type, recipe,
-    children,
+    recipeCategory,
   } = props;
   const { id } = useParams();
   const history = useHistory();
@@ -54,8 +55,12 @@ function RecipeInfo(props) {
 
   const handleAddFavoriteRecipe = () => {
     setIsFavorite((prevState) => !prevState);
-    handleSetFavoritesToLocalStorage(recipesObject, isFavorite, 'favoriteRecipes', id);
   };
+
+  useEffect(() => {
+    handleSetFavoritesToLocalStorage(recipesObject, isFavorite, 'favoriteRecipes', id);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isFavorite]);
 
   return (
     <div className="componente1">
@@ -84,7 +89,11 @@ function RecipeInfo(props) {
 
         </div>
       </div>
-      <div>{ children }</div>
+      <div>
+        <h3 data-testid="recipe-category">
+          { recipeCategory }
+        </h3>
+      </div>
     </div>
   );
 }
@@ -93,12 +102,13 @@ export default RecipeInfo;
 
 RecipeInfo.defaultProps = {
   recipe: {},
+  recipeName: '',
 };
 
 RecipeInfo.propTypes = {
-  recipeName: PropTypes.string.isRequired,
   recipeThumb: PropTypes.string.isRequired,
-  children: PropTypes.node.isRequired,
+  recipeName: PropTypes.string,
+  recipeCategory: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   recipe: PropTypes.shape(),
 };

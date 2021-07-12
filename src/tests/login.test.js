@@ -57,8 +57,8 @@ describe('2 - Na tela de login são realizadas as seguintes verificações: ', (
       expect(button).toBeDisabled();
     });
   });
-  it('O botão de Entrar continua desabilitado quando um '
-  + 'email inválido é inserido', () => {
+  it('O botão de Entrar continua desabilitado quando um email'
+  + 'inválido é inserido', () => {
     act(() => {
       renderWithRouterHooksAndProvider(<App />, '/');
 
