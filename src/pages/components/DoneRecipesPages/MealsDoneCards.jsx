@@ -48,10 +48,11 @@ export default function MealsDoneCards({ props:
           />
         </button>
         <p data-testid={ `${index}-horizontal-done-date` }>{ doneDate }</p>
-        {tags ? tags.slice(0, size).map((tagName, tagIndex) => (
+        { console.log(tags) }
+        {tags ? tags.slice(0, size).map((tagName) => (
           <p
             key={ tagName }
-            data-testid={ `${tagIndex}-${tagName}-horizontal-tag` }
+            data-testid={ `${index}-${tagName}-horizontal-tag` }
           >
             {tagName}
           </p>
