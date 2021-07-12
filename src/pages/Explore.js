@@ -5,10 +5,11 @@ import Header from '../compenents/Header';
 import SearchbarContext from '../contexts/SearchbarContext';
 
 function Explore() {
-  const { setHideSearchBtn } = useContext(SearchbarContext);
+  const { setHideSearchBtn, setPageName } = useContext(SearchbarContext);
 
   useEffect(() => {
     setHideSearchBtn(false);
+    setPageName('Explorar');
   }, []);
 
   return (

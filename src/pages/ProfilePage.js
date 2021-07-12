@@ -7,13 +7,15 @@ import '../styles/ProfilePage.css';
 
 function Profile() {
   const userEmailStorage = JSON.parse(localStorage.getItem('user'));
-  const userEmail = userEmailStorage.email;
-  const { setHideSearchBtn } = useContext(SearchbarContext);
+  const userEmail = userEmailStorage.email || 'fake@email.com';
+  console.log(userEmail);
+  const { setHideSearchBtn, setPageName } = useContext(SearchbarContext);
 
   const clearStorage = () => localStorage.clear();
 
   useEffect(() => {
     setHideSearchBtn(false);
+    setPageName('Perfil');
   }, []);
 
   return (

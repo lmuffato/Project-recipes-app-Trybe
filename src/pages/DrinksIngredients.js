@@ -8,9 +8,9 @@ import SearchbarContext from '../contexts/SearchbarContext';
 function DrinksIngredients() {
   const [drinkIngredients, setDrinkIngredients] = useState([]);
   const {
-    mealsAndDrinkByIngredients, setMealsAndDrinkByIngredients,
+    setMealsAndDrinkByIngredients,
   } = useContext(RecipesContext);
-  const { setHideSearchBtn } = useContext(SearchbarContext);
+  const { setHideSearchBtn, setPageName } = useContext(SearchbarContext);
   const TWELVE = 12;
 
   useEffect(() => {
@@ -21,6 +21,7 @@ function DrinksIngredients() {
     };
     getIngredients();
     setHideSearchBtn(false);
+    setPageName('Explorar Ingredientes');
   }, []);
 
   const getRecipesByIngredient = async (param) => {
@@ -28,8 +29,6 @@ function DrinksIngredients() {
     const { drinks } = await fetch(endpoint).then((data) => data.json());
     setMealsAndDrinkByIngredients(drinks.slice(0, TWELVE));
   };
-
-  console.log(mealsAndDrinkByIngredients);
 
   const getTwelveIngredients = () => {
     const twelveIngredients = drinkIngredients

@@ -7,7 +7,8 @@ import Header from '../compenents/Header';
 function DoneRecepies() {
   const [myDoneRecepies, setMyDoneRecepies] = useState();
   const [showDoneRecepies, setShowRecepies] = useState();
-  const { setHideSearchBtn } = useContext(SearchbarContext);
+  const [validRecipes, setValidRecipes] = useState(false);
+  const { setHideSearchBtn, setPageName } = useContext(SearchbarContext);
 
   // funções para pegar as receitas do local storage
   const getDoneRecepies = () => {
@@ -17,6 +18,7 @@ function DoneRecepies() {
   };
 
   useEffect(() => {
+    setPageName('Receitas Feitas');
     // função que checa se há receitas no local storage
     const recepiesStorage = getDoneRecepies();
     if (recepiesStorage === null) {
@@ -24,6 +26,7 @@ function DoneRecepies() {
     } else {
       setMyDoneRecepies(recepiesStorage);
       setShowRecepies(recepiesStorage);
+      setValidRecipes(true);
     }
     setHideSearchBtn(false);
   }, []);
@@ -85,7 +88,7 @@ function DoneRecepies() {
           </button>
         </div>
 
-        {showDoneRecepies.map((recepie, index) => (
+        {validRecipes && showDoneRecepies.map((recepie, index) => (
           setMealOrDrink(recepie, index)))}
 
       </section>

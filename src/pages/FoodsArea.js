@@ -11,7 +11,7 @@ function FoodsArea() {
   const [mealsRecepies, setMealsRecepies] = useState([]);
   const [selectedArea, setSelectedArea] = useState('All');
   const [showRecepies, setShowRecepies] = useState(mealsRecepies);
-  const { setHideSearchBtn } = useContext(SearchbarContext);
+  const { setHideSearchBtn, setPageName } = useContext(SearchbarContext);
   const lastRecipe = 12;
 
   useEffect(() => {
@@ -36,6 +36,7 @@ function FoodsArea() {
       setShowRecepies(fetchRecepies.slice(0, lastRecipe));
     };
     getMealsRecepies();
+    setPageName('Explorar Origem');
   }, []);
 
   useEffect(() => {

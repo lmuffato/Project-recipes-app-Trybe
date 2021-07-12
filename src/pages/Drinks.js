@@ -6,7 +6,7 @@ import SearchbarContext from '../contexts/SearchbarContext';
 
 function Drinks() {
   const [idDrink, setIdDrink] = useState();
-  const { setHideSearchBtn } = useContext(SearchbarContext);
+  const { setHideSearchBtn, setPageName } = useContext(SearchbarContext);
 
   useEffect(() => {
     const getRandomFoodRecepie = async () => {
@@ -19,6 +19,7 @@ function Drinks() {
     };
     getRandomFoodRecepie();
     setHideSearchBtn(false);
+    setPageName('Explorar Bebidas');
   }, []);
 
   return (
