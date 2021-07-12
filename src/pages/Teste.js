@@ -1,30 +1,47 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import shareIcon from '../images/shareIcon.svg';
 import FavoriteBtn from '../compenents/FavoriteBtn';
-import RecipesContext from '../contexts/RecipesContext';
 
 function FavoriteRecipes() {
-  const { favoriteRecipes, setFavRecipes } = useContext(RecipesContext);
-
-
-  const [showRecipes, setShowRecipes] = useState(favoriteRecipes);
-  // const [showRecipes, setShowRecipes] = useState(() => {
-  //   const getFavorites = JSON.parse(localStorage.getItem('favoriteRecipes'));
-  //   return getFavorites ? getFavorites : [];
-  // });
+  const [showRecipes, setShowRecipes] = useState();
   const [isCopy, setIsCopy] = useState(false);
 
-  useEffect(() => {
-    const recipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
+  const recipe =   {
+    "id": 178319,
+    "type": "cocktail",
+    "area": "area",
+    "category": "categoria",
+    "alcoholicOrNot": "Alcoholic",
+    "name": "Aquamarine",
+    "image": "https://www.thecocktaildb.com/images/media/drink/zvsre31572902738.jpg",
+  };
 
-    if (recipes === null) {
-      global.alert('Nenhuma receita favorita encontrada!'); 
-    } else {
-      setShowRecipes(recipes);
-      setFavRecipes(recipes);
-    }
-  }, []);
+  const getFavorites = [
+  //   {
+  //   "id": 52771,
+  //   "type": "meal",
+  //   "area": "Italian",
+  //   "category": "Vegetarian",
+  //   "name": "Spicy Arrabiata Penne",
+  //   "image": "https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg",
+  // },
+  {
+    "id": 178319,
+    "type": "cocktail",
+    "area": "area",
+    "category": "categoria",
+    "alcoholicOrNot": "Alcoholic",
+    "name": "Aquamarine",
+    "image": "https://www.thecocktaildb.com/images/media/drink/zvsre31572902738.jpg",
+  },
+  ]
+
+  // const getFavorites = JSON.parse(localStorage.getItem('favoriteRecipes'));
+  // console.log(getFavorites);
+
+  // setShowRecipes(getFavorites);
+  // console.log(showRecipes);
 
   const copyToClipboard = ({ target }) => {
     setIsCopy(true);
@@ -64,10 +81,15 @@ function FavoriteRecipes() {
               alt={ `comidas/${id}` }
             />
           </button>
-
-          <FavoriteBtn
-            id={ id }
-          />
+          {/* <FavoriteBtn
+          id={ id }
+          type={ type }
+          area= { area }
+          category= { category }
+          alcoholicOrNot= { alcoholicOrNot }
+          name={ name }
+          image={ image }
+          />  */}
         </div>
       );
     }
@@ -101,29 +123,35 @@ function FavoriteRecipes() {
 
         <FavoriteBtn
           id={ id }
-        />
+          type={ type }
+          area= { area }
+          category= { category }
+          alcoholicOrNot= { alcoholicOrNot }
+          name={ name }
+          image={ image }
+          /> 
       </div>
     );
   };
 
-  const handleContent = (param) => {
-    if (param === 'all') {
-      setShowRecipes(favoriteRecipes);
-    } else if (param === 'meals') {
-      const mealsRecipes = favoriteRecipes.filter((recipe) => recipe.type === 'meal');
-      setShowRecipes(mealsRecipes);
-    } else if (param === 'cocktails') {
-      const drinksRecipes = favoriteRecipes.filter((recipe) => recipe.type === 'cocktail');
-      setShowRecipes(drinksRecipes);
-    }
-  };
+  // const handleContent = (param) => {
+  //   if (param === 'all') {
+  //     return setShowRecipes(getFavorites);
+  //   } if (param === 'meals') {
+  //     const mealsRecipes = showRecipes.filter((recipe) => recipe.type === 'meal');
+  //     setShowRecipes(mealsRecipes);
+  //   } else if (param === 'cocktails') {
+  //     const drinksRecipes = showRecipes.filter((recipe) => recipe.type === 'cocktail');
+  //     setShowRecipes(drinksRecipes);
+  //   }
+  // };
 
   return (
     <div>
       <button
         type="button"
         data-testid="filter-by-all-btn"
-        onClick={ () => handleContent('all') }
+        // onClick={ () => handleContent('all') }
       >
       All
       </button>
@@ -131,7 +159,7 @@ function FavoriteRecipes() {
       <button
         type="button"
         data-testid="filter-by-food-btn"
-        onClick={ () => handleContent('meals') }
+        // onClick={ () => handleContent('meals') }
       >
       Food
       </button>
@@ -139,13 +167,13 @@ function FavoriteRecipes() {
       <button
         type="button"
         data-testid="filter-by-drink-btn"
-        onClick={ () => handleContent('cocktails') }
+        // onClick={ () => handleContent('cocktails') }
       >
       Drinks
       </button>
 
       {
-        showRecipes.map(
+        getFavorites.map(
           ({ id, type, area, category, alcoholicOrNot, name, image }, index) => (
             renderCards({ id, type, area, category, alcoholicOrNot, name, image }, index)
           ),

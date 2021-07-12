@@ -1,14 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import RecipesContext from '../contexts/RecipesContext';
 
-function FavoriteBtn({ recipe }) {
+function FavoriteBtn({ id, type, area, category, alcoholicOrNot, name, image }) {
+  const { favoriteRecipes, setFavRecipes } = useContext(RecipesContext);
+
   const [isFavorite, setIsFavorite] = useState(false);
-  const [favoriteRecipes, setFavRecipe] = useState(() => {
-    const favRecipe = localStorage.getItem('favoriteRecipes');
-    return favRecipe ? JSON.parse(favRecipe) : [];
-  });
 
   useEffect(() => {
     localStorage.setItem('favoriteRecipes', JSON.stringify(favoriteRecipes));
@@ -16,31 +15,40 @@ function FavoriteBtn({ recipe }) {
 
   const setFavorite = () => {
     const recipeDetails = {
-      id: recipe.id,
-      type: recipe.type,
-      area: recipe.area,
-      category: recipe.category,
-      alcoholicOrNot: recipe.alcoholicOrNot,
-      name: recipe.name,
-      image: recipe.image,
+      id: id,
+      type: type,
+      area: area,
+      category: category,
+      alcoholicOrNot: alcoholicOrNot,
+      name: name,
+      image: image,
     };
-    setFavRecipe((prevRecipes) => [...prevRecipes, recipeDetails]);
+    setFavRecipes((prevRecipes) => [...prevRecipes, recipeDetails]);
     setIsFavorite(true);
   };
 
-  const setUnfavorite = () => {};
+  const setUnfavorite = () => {
+    const recipeId = id;
+    
+    // const getFavRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    const removeFav = Object.values(favoriteRecipes).filter(({ id }) => id !== recipeId);
+
+    localStorage.setItem('favoriteRecipes', JSON.stringify(removeFav));
+    setFavRecipes(removeFav);
+  };
 
   const setButton = () => {
-    const recipeId = recipe.id;
+    const recipeId = id;
     const getLocalStr = JSON.parse(localStorage.getItem('favoriteRecipes'));
-    let checkLocalStr = [];
+    let checkLocalStr;
 
     if (getLocalStr !== null) {
-      // filtra o LS pelo recipeId
-      checkLocalStr = Object.values(getLocalStr).filter(({ id }) => id === recipeId);
+      // procura o recipeId no LS
+      checkLocalStr = Object.values(getLocalStr)
+        .find(({ id }) => id === recipeId);
     }
 
-    if (checkLocalStr.length === 1 || isFavorite) {
+    if (checkLocalStr || isFavorite) {
       // recipeId encontrado no LS
       return (
         <button type="button" onClick={ setUnfavorite }>
