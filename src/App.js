@@ -10,8 +10,6 @@ import ExploreDrinks from './pages/ExploreDrinks/index';
 import ExploreByIngredientFoods from './pages/ExploreByIngredientFoods';
 import ExploreByIngredientDrinks from './pages/ExploreByIngredientDrinks';
 import ExploreByAreaFoods from './pages/ExploreByAreaFoods';
-
-
 import 'bootstrap/dist/css/bootstrap.min.css';
 import RecipesFavorites from './pages/RecipesFavorite';
 
