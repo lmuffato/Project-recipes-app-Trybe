@@ -17,6 +17,7 @@ const pageTitle = (type) => {
   if (type === 'search-ingredients') return 'Explorar Ingredientes';
   if (type === 'search-area') return 'Explorar Origem';
   if (type === 'profile') return 'Perfil';
+  if (type === 'favorites') return 'Receitas Favoritas';
 };
 
 function Header(props) {

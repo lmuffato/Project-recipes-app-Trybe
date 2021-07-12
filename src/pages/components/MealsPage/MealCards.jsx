@@ -29,6 +29,7 @@ function MealCards() {
                 src={ strMealThumb }
                 alt={ strMeal }
                 data-testid={ `${index}-card-img` }
+                className="main-page-card-img"
               />
             </Link>
           </div>
