@@ -9,8 +9,6 @@ const LOGIN_BTN_TEST_ID = 'login-submit-btn';
 const MOCK_EMAIL = 'alguem@alguem.com';
 
 describe('Testa a página de perfil', () => {
-  // incluir o contexto: https://testing-library.com/docs/example-react-context/
-
   test('O campo de email está visível e é correto', () => {
     const { getByTestId, history } = renderWithRouter(<App />);
 
