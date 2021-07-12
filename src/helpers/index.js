@@ -9,37 +9,62 @@ export const checkLocalStorage = (key, recipe, recipeType) => {
 };
 
 export const handleProgress = (
-  ingredient, doingRecipes, setDoingRecipes, id,
+  ingredient, id, toggle, setDoingRecipes,
 ) => {
-  const currentRecipe = doingRecipes.find((item) => item.id === id);
+  const getRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
   let filtered;
-  let newDoings;
-  if (currentRecipe) {
-    filtered = currentRecipe.ingrd.includes(ingredient)
-      ? currentRecipe.ingrd.filter((item) => item !== ingredient)
-      : [...currentRecipe.ingrd, ingredient];
+  let toBeSaved;
+  if (getRecipes) {
+    const currentRecipe = getRecipes[toggle];
+    if (currentRecipe[id]) {
+      filtered = currentRecipe[id].includes(ingredient)
+        ? currentRecipe[id].filter((item) => item !== ingredient)
+        : [...currentRecipe[id], ingredient];
+    }
 
-    const newObj = { id, ingrd: filtered };
-    newDoings = doingRecipes.reduce((acc, cur) => (
-      cur.id === id ? [...acc, newObj] : [...acc, cur]), []);
+    toBeSaved = { ...getRecipes, [toggle]: { ...getRecipes[toggle], [id]: filtered } };
   } else {
+    toBeSaved = { ...getRecipes, [toggle]: { [id]: filtered } };
     filtered = [ingredient];
-    const newObj = { id, ingrd: filtered };
-    newDoings = [...doingRecipes, newObj];
   }
-  setDoingRecipes(newDoings);
-  localStorage.setItem('inProgressRecipes', JSON.stringify(newDoings));
+  setDoingRecipes(toBeSaved);
+  localStorage.setItem('inProgressRecipes', JSON.stringify(toBeSaved));
 };
 
-export const shouldBeChecked = (ingredient, doingRecipes, id) => {
-  const localDoing = JSON.parse(localStorage.getItem('inProgressRecipes'));
-  const currentRecipe = doingRecipes.find((item) => item.id === id);
-  if (currentRecipe) {
-    return currentRecipe.ingrd.includes(ingredient);
-  }
-  if (localDoing) {
-    const currentRecipeLocal = localDoing.find((item) => item.id === id);
-    return currentRecipeLocal.ingrd.includes(ingredient);
+export const shouldBeChecked = (ingredient, toggle, id) => {
+  const getRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
+  if (getRecipes) {
+    const testKey = getRecipes[toggle];
+    if (testKey && testKey[id]) {
+      return getRecipes[toggle][id].includes(ingredient);
+    }
   }
   return false;
+};
+
+export const createDoneRecipe = (id, recipeType, recipesDetails) => {
+  const date = new Date();
+  const doneObj = {
+    id,
+    type: recipeType === 'Meal' ? 'comida' : 'bebida',
+    area: recipeType === 'Meal' ? recipesDetails.strArea : '',
+    category: recipesDetails.strCategory,
+    alcoholicOrNot: recipeType === 'Drink' ? recipesDetails.strAlcoholic : '',
+    name: recipesDetails[`str${recipeType}`],
+    image: recipesDetails[`str${recipeType}Thumb`],
+    doneDate: `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`,
+    tags: recipesDetails.strTags ? recipesDetails.strTags.split(',') : '',
+  };
+  return doneObj;
+};
+
+export const createToggles = (pathname) => {
+  const recipeType = (pathname.includes('comidas')) ? 'Meal' : 'Drink';
+  const toggleApi = (pathname.includes('comidas')) ? 'meals' : 'drinks';
+  const toggleCategory = recipeType === 'Meal' ? 'strCategory' : 'strAlcoholic';
+  const toggleURL = (pathname.includes('comidas')) ? 'comidas' : 'bebidas';
+  const toggleLocalDoing = recipeType === 'Meal' ? 'meals' : 'cocktails';
+  return {
+    recipeType, toggleApi, toggleCategory, toggleURL, toggleLocalDoing,
+  };
 };

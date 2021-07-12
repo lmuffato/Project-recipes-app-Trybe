@@ -8,6 +8,7 @@ import shareIcon from '../../images/shareIcon.svg';
 function ShareButton({ dataTest }) {
   const history = useHistory();
   const URL = history.location.pathname;
+  const fixedURL = `${URL.split('/')[1]}/${URL.split('/')[2]}`;
   const [isCopied, setIsCopied] = useState(false);
   const SECONDS_COPY = 2000;
 
@@ -19,7 +20,7 @@ function ShareButton({ dataTest }) {
   };
 
   return (
-    <CopyToClipboard text={ `http://localhost:3000${URL}` } onCopy={ onCopyText }>
+    <CopyToClipboard text={ `http://localhost:3000${fixedURL}` } onCopy={ onCopyText }>
       <div>
         <input
           type="image"

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
+import { useLocation } from 'react-router-dom';
 import userProvider from '../../context/UserContext';
 import { handleProgress, shouldBeChecked } from '../../helpers';
 import './styles.css';
@@ -11,8 +12,11 @@ function Ingredient({ recipe, type, validate = () => ('empty'), id }) {
   const measures = Object.entries(recipe)
     .filter((pair) => pair[0].includes('strMeasure'));
 
+  const { pathname } = useLocation();
+  const toggle = pathname.includes('comida') ? 'meals' : 'cocktails';
+
   const [list, setList] = useState([]);
-  const { doingRecipes, setDoingRecipes } = useContext(userProvider);
+  const { setDoingRecipes } = useContext(userProvider);
 
   const handleClick = ({ target }) => {
     if (target.checked) {
@@ -25,7 +29,7 @@ function Ingredient({ recipe, type, validate = () => ('empty'), id }) {
         : [...list, target.parentNode],
     );
     handleProgress(
-      target.parentNode.innerText, doingRecipes, setDoingRecipes, id,
+      target.parentNode.innerText, id, toggle, setDoingRecipes,
     );
   };
 
@@ -67,7 +71,7 @@ function Ingredient({ recipe, type, validate = () => ('empty'), id }) {
                   className="form-check-input"
                   onClick={ handleClick }
                   checked={ shouldBeChecked(
-                    `${item[1]} - ${measures[index][1]}`, doingRecipes, id,
+                    `${item[1]} - ${measures[index][1]}`, toggle, id,
                   ) }
                 />
                 { `${item[1]} - ${measures[index][1]}` }

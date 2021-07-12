@@ -9,6 +9,7 @@ import FavoriteButton from '../../Components/FavoriteButton';
 import EndButton from '../../Components/EndButton';
 import Video from '../../Components/Video';
 import Loading from '../../Components/Loading';
+import { createToggles } from '../../helpers';
 import './styles.css';
 
 function Details() {
@@ -20,10 +21,9 @@ function Details() {
   const [recipeStatus, setRecipeStatus] = useState('Iniciar Receita');
   const { doneRecipes, doingRecipes } = useContext(UserContext);
 
-  const recipeType = (pathname.includes('comidas')) ? 'Meal' : 'Drink';
-  const toggleApi = (pathname.includes('comidas')) ? 'meals' : 'drinks';
-  const toggleCategory = recipeType === 'Meal' ? 'strCategory' : 'strAlcoholic';
-  const toggleURL = (pathname.includes('comidas')) ? 'comidas' : 'bebidas';
+  const {
+    recipeType, toggleApi, toggleCategory, toggleURL, toggleLocalDoing,
+  } = createToggles(pathname);
 
   useEffect(() => {
     getRecipeByID(pathname, id).then((response) => {
@@ -32,12 +32,12 @@ function Details() {
     });
     const checkRecipe = () => {
       const done = doneRecipes.find((recipe) => recipe.id === id);
-      const doing = doingRecipes.find((recipe) => recipe.id === id);
+      const doing = doingRecipes[toggleLocalDoing][id];
       if (done) return setRecipeStatus('');
       if (doing) return setRecipeStatus('Continuar Receita');
     };
     checkRecipe();
-  }, [doingRecipes, doneRecipes, id, pathname, toggleApi]);
+  }, [doingRecipes, doneRecipes, id, pathname, toggleApi, toggleLocalDoing]);
 
   return (
     <div className="main-parent">
