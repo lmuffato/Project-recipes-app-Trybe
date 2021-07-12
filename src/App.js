@@ -22,8 +22,7 @@ import FavoriteRecipes from './pages/FavoriteRecipes';
 
 function App() {
   return (
-    <div className="meals">
-      <span className="logo">TRYBE</span>
+    <div>
       <BrowserRouter>
         <UserProvider>
           <Switch>

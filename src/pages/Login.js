@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { Image } from 'react-bootstrap';
 import { setToLocalStorage } from '../services/localStorage';
-import rockGlass from '../images/rockGlass.svg';
+import gifLogin from '../images/gifLogin.gif';
+import ReceitasTitle from '../images/ReceitasTitle.png';
 
 function Login() {
   const history = useHistory();
@@ -35,42 +37,48 @@ function Login() {
   const passwordLength = 7;
   return (
     <div className="login">
-      <span className="logo">TRYBE</span>
-      <object
-        className="rocksGlass"
+      <Image
+        className="titleImage"
+        src={ ReceitasTitle }
+      />
+      <Image
+        className="gifLogin"
         type="image/svg+xml"
-        data={ rockGlass }
-      >
-        Glass
-      </object>
-      <h1 className="login-word">Login</h1>
-      <p className="loginEmail">Email:</p>
-      <input
-        className="input"
-        type="email"
-        onChange={ handleInput }
-        data-testid="email-input"
-        name="email"
-        value={ email }
+        src={ gifLogin }
+        alt="gif"
       />
-      <p>Password:</p>
-      <input
-        className="input"
-        type="password"
-        onChange={ handleInput }
-        data-testid="password-input"
-        name="password"
-        value={ password }
-      />
-      <button
-        type="button"
-        className="button"
-        data-testid="login-submit-btn"
-        onClick={ loginUser }
-        disabled={ !email.match(regex) || password.length < passwordLength }
-      >
-        Entrar
-      </button>
+      <div className="loginButtonsGroup">
+        <div className="login-word">
+          <p>Login</p>
+        </div>
+        <input
+          className="input"
+          type="email"
+          onChange={ handleInput }
+          data-testid="email-input"
+          placeholder="E-mail"
+          name="email"
+          value={ email }
+        />
+        <input
+          className="input"
+          type="password"
+          onChange={ handleInput }
+          placeholder="Senha"
+          data-testid="password-input"
+          name="password"
+          value={ password }
+        />
+        <button
+          type="button"
+          className="loginButton"
+          data-testid="login-submit-btn"
+          onClick={ loginUser }
+          disabled={ !email.match(regex) || password.length < passwordLength }
+        >
+          Entrar
+        </button>
+      </div>
     </div>
   );
 }
