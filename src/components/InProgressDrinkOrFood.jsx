@@ -6,6 +6,13 @@ import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import shareIcon from '../images/shareIcon.svg';
 import '../Style/InProgressDrinkOrFood.css';
 
+const disableButton = (fn, foodOrDrink, ingredients) => {
+  if (fn(foodOrDrink[0]).length === ingredients.length) {
+    return false;
+  }
+  return true;
+};
+
 function InProgressDrinkOrFood() {
   const { url } = useRouteMatch();
   const history = useHistory();
@@ -16,6 +23,7 @@ function InProgressDrinkOrFood() {
   const [foodOrDrink, setFoodOrDrink] = useState([]);
   const [category, setCategory] = useState('');
   const [type, setType] = useState('');
+  const [ingredients, setIngredients] = useState([]);
 
   const [shareButton, setShareButton] = useState(false);
   const [favorited, setFavorited] = useState('');
@@ -24,6 +32,13 @@ function InProgressDrinkOrFood() {
 
   const regex = /[\d+]/g;
   const id = url.match(regex).join('');
+
+  const mapIngredients = (fn = {}) => {
+    const filterByIngredients = Object.entries(fn)
+      .filter((element) => element[0].includes('strIngredient') && element[1])
+      .reduce((acc, element) => [...acc, element[1]], []);
+    return filterByIngredients;
+  };
 
   useEffect(() => {
     if (url.includes('comidas')) {
@@ -56,41 +71,22 @@ function InProgressDrinkOrFood() {
   };
 
   const clickShare = () => {
-    navigator.clipboard.writeText(`http://localhost:3000${url}/in-progress`);
+    navigator.clipboard.writeText(`http://localhost:3000${url.split('/in-progress')[0]}`);
     setShareButton(!shareButton);
   };
 
   const handleIngredientChecked = ({ target }) => {
     if (target.checked) {
       target.parentNode.classList.add('crossed');
+      setIngredients(ingredients.concat(target.nextSibling.innerText));
     } else {
       target.parentNode.classList.remove('crossed');
     }
   };
 
-  if (foodOrDrink) {
-    const { strArea, strCategory, strAlcoholic } = foodOrDrink;
-    console.log(strArea, strCategory, strAlcoholic);
-  }
-
-  // const recipeInfo = {
-  //   id: `id${mapName}`,
-  //   type,
-  //   area: strArea || '',
-  //   category: strCategory || '',
-  //   alcoholicOrNot: strAlcoholic || '',
-  //   name: `str${mapName}`,
-  //   image: `str${mapName}Thumb`,
-  // };
-
-  // console.log(recipeInfo);
-
   return (
     <div>
       {foodOrDrink.map((item, index) => {
-        const filterByIngredients = Object.entries(foodOrDrink[0])
-          .filter((element) => element[0].includes('strIngredient') && element[1])
-          .reduce((acc, element) => [...acc, element[1]], []);
         const filterByMeasures = Object.entries(foodOrDrink[0])
           .filter((element) => element[0].includes('strMeasure') && element[1])
           .reduce((acc, element) => [...acc, element[1]], []);
@@ -126,7 +122,7 @@ function InProgressDrinkOrFood() {
             <p data-testid="recipe-category">{item[`str${category}`]}</p>
             <ul>
               <h1>Ingredientes</h1>
-              {filterByIngredients.map((ingredient, index2) => (
+              { mapIngredients(foodOrDrink[0]).map((ingredient, index2) => (
                 <li
                   key={ index2 }
                   data-testid={ `${index2}-ingredient-step` }
@@ -155,6 +151,7 @@ function InProgressDrinkOrFood() {
         type="button"
         data-testid="finish-recipe-btn"
         onClick={ () => { history.push('/receitas-feitas'); } }
+        disabled={ disableButton(mapIngredients, foodOrDrink, ingredients) }
       >
         Finalizar Receita
       </button>
