@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation, useParams, Link } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 import FavoriteButton from '../../Components/FavoriteButton';
@@ -6,7 +6,7 @@ import Ingredient from '../../Components/Ingredients';
 import Loading from '../../Components/Loading';
 import ShareButton from '../../Components/ShareButton';
 import { getRecipeByID } from '../../services/fetchRecipes';
-import UserContext from '../../context/UserContext';
+import { createDoneRecipe } from '../../helpers';
 import './styles.css';
 
 function InProcess() {
@@ -16,11 +16,12 @@ function InProcess() {
   const [isLoading, setLoading] = useState(true);
   const [recipe, setRecipe] = useState({});
   const [finished, setFinished] = useState(false);
-  const { doneRecipes, setDoneRecipes } = useContext(UserContext);
 
   const recipeType = (pathname.includes('comidas')) ? 'Meal' : 'Drink';
   const toggleApi = (pathname.includes('comidas')) ? 'meals' : 'drinks';
   const toggleCategory = recipeType === 'Meal' ? 'strCategory' : 'strAlcoholic';
+
+  const localDoneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
 
   useEffect(() => {
     getRecipeByID(pathname, id).then((response) => {
@@ -73,7 +74,11 @@ function InProcess() {
               <Button
                 data-testid="finish-recipe-btn"
                 disabled={ !finished }
-                onClick={ () => setDoneRecipes([...doneRecipes, { id }]) }
+                onClick={ () => localStorage.setItem(
+                  'doneRecipes', JSON.stringify(
+                    [...localDoneRecipes, createDoneRecipe(id, recipeType, recipe)],
+                  ),
+                ) }
               >
                 Finalizar Receita
               </Button>

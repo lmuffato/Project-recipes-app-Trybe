@@ -24,6 +24,7 @@ function Details() {
   const toggleApi = (pathname.includes('comidas')) ? 'meals' : 'drinks';
   const toggleCategory = recipeType === 'Meal' ? 'strCategory' : 'strAlcoholic';
   const toggleURL = (pathname.includes('comidas')) ? 'comidas' : 'bebidas';
+  const toggleLocalDoing = recipeType === 'Meal' ? 'meals' : 'cocktails';
 
   useEffect(() => {
     getRecipeByID(pathname, id).then((response) => {
@@ -32,12 +33,12 @@ function Details() {
     });
     const checkRecipe = () => {
       const done = doneRecipes.find((recipe) => recipe.id === id);
-      const doing = doingRecipes.find((recipe) => recipe.id === id);
+      const doing = doingRecipes[toggleLocalDoing][id];
       if (done) return setRecipeStatus('');
       if (doing) return setRecipeStatus('Continuar Receita');
     };
     checkRecipe();
-  }, [doingRecipes, doneRecipes, id, pathname, toggleApi]);
+  }, [doingRecipes, doneRecipes, id, pathname, toggleApi, toggleLocalDoing]);
 
   return (
     <div className="main-parent">

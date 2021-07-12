@@ -3,10 +3,15 @@ import PropTypes from 'prop-types';
 import UserContext from './UserContext';
 
 function UserProvider({ children }) {
+  const localDone = JSON.parse(localStorage.getItem('doneRecipes'));
+  const localDoing = JSON.parse(localStorage.getItem('inProgressRecipes'));
+
   const [user, setUser] = useState('');
   const [password, setPassword] = useState('');
-  const [doneRecipes, setDoneRecipes] = useState([]);
-  const [doingRecipes, setDoingRecipes] = useState([]);
+  const [doneRecipes, setDoneRecipes] = useState(localDone || []);
+  const [doingRecipes, setDoingRecipes] = useState(
+    localDoing || { meals: {}, cocktails: {} },
+  );
 
   function successLogin(loginText, passwordText) {
     setUser(loginText);
