@@ -41,6 +41,7 @@ function App() {
           component={ ExplorerDrinksIngredients }
         />
         <Route path="/explorar/comidas/area" component={ ExplorerFoodsLocal } />
+        <Route path="/explorar/bebidas/area" component={ NotFound } />
         <Route path="/explorar/comidas" component={ ExplorerFoods } />
         <Route path="/explorar/bebidas" component={ ExplorerDrinks } />
         <Route path="/explorar" component={ Explorer } />

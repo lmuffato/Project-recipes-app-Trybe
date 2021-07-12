@@ -3,50 +3,49 @@ import { Link } from 'react-router-dom';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
 import ItemCard from '../../components/ItemCard';
+import { fetchArea, fetchRecipes } from '../../service/recipesApi';
 
 function ExplorerFoodsLocal() {
   const [areas, setAreas] = useState([]);
   const [recipes, setRecipes] = useState([]);
-  const [selectArea, setSelectArea] = useState('American');
-
-  async function fetchArea() {
-    const URL = 'https://www.themealdb.com/api/json/v1/1/list.php?a=list';
-    const response = await fetch(URL);
-    const data = await response.json();
-    console.log(data);
-    setAreas(data.meals);
-  }
-
-  async function fetchRecipes() {
-    const URL = `https://www.themealdb.com/api/json/v1/1/filter.php?a=${selectArea}`;
-    console.log(URL);
-    const response = await fetch(URL);
-    const data = await response.json();
-    const maxMeals = 12;
-    const meals = data.meals.slice(0, maxMeals);
-    console.log(meals);
-    setRecipes(meals);
-  }
+  const [selectArea, setSelectArea] = useState('All');
 
   function handleChange(event) {
     setSelectArea(event.target.value);
-    fetchRecipes();
+  }
+
+  async function getDataRecipes() {
+    const data = await fetchRecipes(selectArea);
+    setRecipes(data);
   }
 
   useEffect(() => {
-    fetchArea();
-    fetchRecipes();
+    async function getDataAreas() {
+      const data = await fetchArea();
+      setAreas(data);
+    }
+    getDataAreas();
+    getDataRecipes();
   }, []);
 
-  if (areas.length === 0 && recipes.length === 0) return 'Loading...';
+  useEffect(() => {
+    getDataRecipes();
+  }, [selectArea]);
+
+  if (areas.length === 0) return 'Loading...';
 
   return (
     <>
-      <Header pageTitle="Explorar Origem" />
+      <Header
+        location={ { pathname: '' } }
+        pageTitle="Explorar Origem"
+        showButton={ false }
+      />
       <select
         data-testid="explore-by-area-dropdown"
         onChange={ (event) => handleChange(event) }
       >
+        <option data-testid="All-option">All</option>
         {areas.map((area) => (
           <option data-testid={ `${area.strArea}-option` } key={ area.strArea }>
             {area.strArea}
@@ -59,7 +58,7 @@ function ExplorerFoodsLocal() {
             <ItemCard
               name={ recipe.strMeal }
               image={ recipe.strMealThumb }
-              dataTestId={ index }
+              dataTestId={ index.toString() }
             />
           </Link>
         ))}
