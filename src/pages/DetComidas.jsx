@@ -84,9 +84,8 @@ class DetComidas extends React.Component {
     this.setState({ video });
   }
 
-  /*
-saveFavorite(recipe) {
-    const favorite = {
+  saveFavorite(recipe) {
+    const favorite = [{
       id: recipe.idMeal,
       type: 'comida',
       area: recipe.strArea,
@@ -94,21 +93,27 @@ saveFavorite(recipe) {
       alcoholicOrNot: '',
       name: recipe.strMeal,
       image: recipe.strMealThumb,
-    };
+    }];
+    if (!localStorage.getItem('favoriteRecipes')) {
+      localStorage.setItem('favoriteRecipes', JSON.stringify(favorite));
+    }
     const favBtn = document.querySelector('.fav-btn');
-    console.log(favBtn)
-    const { src } = favBtn[0];
-    if (src === whiteHeartIcon) {
+    const url = 'http://localhost:3000/static/media/whiteHeartIcon.ea3b6ba8.svg';
+    if (favBtn.src === url) {
       const parseSave = JSON.parse(localStorage.getItem('favoriteRecipes'));
+      console.log(parseSave);
       const combineObj = parseSave.concat(favorite);
+      localStorage.clear();
       localStorage.setItem('favoriteRecipes', JSON.stringify(combineObj));
+    } else {
+      console.log('nãopassou');
     }
   }
-*/
+
   checkFavorite(recipe) {
     if (localStorage.favoriteRecipes) {
       const favorites = JSON.parse(localStorage.getItem('favoriteRecipes'));
-      const current = favorites.find((element) => (element.id === recipe.idDrink));
+      const current = favorites.find((element) => (element.id === recipe.idMeal));
       if (favorites.includes(current)) {
         return blackHeartIcon;
       }
@@ -167,7 +172,7 @@ saveFavorite(recipe) {
               data-testid="favorite-btn"
               src={ this.checkFavorite(recipe[0]) }
               alt="favoritar receita"
-              //  onClick={ this.saveFavorite(recipe[0]) }
+              onClick={ () => this.saveFavorite(recipe[0]) }
               className="fav-btn"
             />
           </div>

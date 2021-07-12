@@ -80,34 +80,42 @@ class DetBebidas extends React.Component {
   }
 
   saveFavorite(recipe) {
-    const obj = {
+    const favorite = [{
       id: recipe.idDrink,
       type: 'bebida',
-      area: '',
+      area: recipe.strArea,
       category: recipe.strCategory,
-      alcoholicOrNot: recipe.strAlcoholic,
+      alcoholicOrNot: '',
       name: recipe.strDrink,
       image: recipe.strDrinkThumb,
-    };
-    const currentStorage = [JSON.parse(localStorage.getItem('favoriteRecipes'))];
-    currentStorage.push(obj);
-    const newStorage = (JSON.stringify(currentStorage));
-    localStorage.setItem('favoriteRecipes', newStorage);
+    }];
+    if (!localStorage.getItem('favoriteRecipes')) {
+      localStorage.setItem('favoriteRecipes', JSON.stringify(favorite));
+    }
+    const favBtn = document.querySelector('.fav-btn');
+    const url = 'http://localhost:3000/static/media/whiteHeartIcon.ea3b6ba8.svg';
+    if (favBtn.src === url) {
+      const parseSave = JSON.parse(localStorage.getItem('favoriteRecipes'));
+      console.log(parseSave);
+      const combineObj = parseSave.concat(favorite);
+      localStorage.clear();
+      localStorage.setItem('favoriteRecipes', JSON.stringify(combineObj));
+    } else {
+      console.log('nãopassou');
+    }
   }
 
   checkFavorite(recipe) {
     if (localStorage.favoriteRecipes) {
       const favorites = JSON.parse(localStorage.getItem('favoriteRecipes'));
-      const fValues = (Object.values(favorites));
-      const current = fValues.find((element) => (element === recipe.idDrink));
-      if (fValues.includes(current)) {
+      const current = favorites.find((element) => (element.id === recipe.idDrink));
+      if (favorites.includes(current)) {
         return blackHeartIcon;
       }
       return whiteHeartIcon;
     }
     return whiteHeartIcon;
   }
-
   /*
   InProgressButton(id) {
     const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
