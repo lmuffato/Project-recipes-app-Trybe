@@ -13,16 +13,18 @@ function Header({ title }) {
   const { user, gravatar } = useLocalStorage('user', 'gravatar');
   return (
     <header className={ styles.header }>
-      <div>
+      <div data-testid="page-title">
         <Link to="/perfil" className={ styles.profilePic }>
           <img
-            src={ gravatar || 'https://www.gravatar.com/avatar/default' }
+            src={ gravatar || 'https://www.gravatar.com/avatar/profileIcon' }
             alt={ user ? user.email : 'user@mail.com' }
+            data-testid="profile-top-btn"
           />
         </Link>
         { title }
         <BiSearch
           onClick={ () => setSearchMode(!searchMode) }
+          src="searchIcon"
           data-testid="search-top-btn"
         />
       </div>
