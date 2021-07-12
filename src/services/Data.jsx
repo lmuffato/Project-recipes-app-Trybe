@@ -32,6 +32,12 @@ export const fetchFoodForId = async (id) => {
   return result;
 };
 
+export const fetchFilterFoodByIngredient = async (ingredient) => {
+  const response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${ingredient}`);
+  const result = await response.json();
+  return result.meals;
+};
+
 // DRINKS //
 
 export const fetchAllDrinks = async () => {
@@ -64,6 +70,12 @@ export const fetchDrinkForId = async (id) => {
   return result;
 };
 
+export const fetchFilterDrinkByIngredient = async (ingredient) => {
+  const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${ingredient}`);
+  const result = await response.json();
+  return result.drinks;
+};
+
 // INGREDIENTS //
 
 export const fetchFoodsIngredients = async () => {
@@ -88,7 +100,8 @@ export const fetchArea = async () => {
 
 export const fetchFilterMealArea = async (meal) => {
   const response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?a=${meal}`);
-  return response;
+  const result = await response.json();
+  return result;
 };
 
 // SEARCH BUTTON //
