@@ -30,7 +30,7 @@ export default function SearchBar() {
       const path = pageOrigin === 'themealdb' ? '/comidas' : '/bebidas';
       history.push(`${path}/${oneRecipe.idMeal || oneRecipe.idDrink}`);
     }
-  }, [recipesList]);
+  }, [recipesList, history, pageOrigin]);
 
   async function apiSearch(value, input, page) {
     switch (value) {

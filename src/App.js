@@ -5,6 +5,7 @@ import RecipesMain from './pages/RecipesMain/index';
 import RecipeDetails from './pages/RecipeDetails';
 import Explore from './pages/Explore/index';
 import AppProvider from './context/AppContext';
+import RecipesProgress from './pages/RecipesProgress';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import RecipesFavorites from './pages/RecipesFavorite';
 
@@ -19,16 +20,18 @@ function App() {
             <Route exact path="/bebidas" component={ RecipesMain } />
             <Route exact path="/comidas/:id" component={ RecipeDetails } />
             <Route exact path="/bebidas/:id" component={ RecipeDetails } />
-            {/* <Route
-              path="/comidas/{id-da-receita}/in-progress"
-              component={ FoodInProgress }
+
+            <Route path="/explorar" component={ Explore } />
+            <Route
+              path="/comidas/:id/in-progress"
+              component={ RecipesProgress }
             />
             <Route
-              path="/bebidas/{id-da-receita}/in-progress"
-              component={ DrinInProgress }
-            /> */}
-            <Route path="/explorar" component={ Explore } />
-            {/* <Route path="/explorar/comidas" component={ ExploreFoods } />
+              path="/bebidas/:id/in-progress"
+              component={ RecipesProgress }
+            />
+            {/* <Route path="/explorar" component={ Explore } />
+            <Route path="/explorar/comidas" component={ ExploreFoods } />
             <Route path="/explorar/bebidas" component={ ExploreDrinks } /> */}
             <Route path="/receitas-favoritas" component={ RecipesFavorites } />
           </Switch>
