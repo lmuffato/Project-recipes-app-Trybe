@@ -40,3 +40,39 @@
   text-align: center;
 }
 
+.recipe-btn {
+  background-color: white;
+  border: 1px solid rgba(51, 64, 49, 1);
+  border-radius: 15px;
+  box-shadow: 5px 3px 1px hsl(138, 10%, 90%);
+  color: #334031;
+  height: 250px;
+  margin: 5px 10px 20px;
+  padding: 10px;
+  width: 200px;
+}
+
+.recipe-btn h5 {
+  margin-top: 10px;
+}
+
+.select-div {
+  display: flex;
+  justify-content: center;
+  margin: 10px;
+}
+
+.select-field {
+  background-clip: padding-box;
+  background-color: white;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  color: #495057;
+  font-size: 1rem;
+  font-weight: 400;
+  height: calc(1.5em + 0.75rem + 2px);
+  line-height: 1.5;
+  padding: 0.375rem 0.75rem;
+  transition: border-color 0.15s ease-in-out , box-shadow 0.15s ease-in-out;
+  width: 80%;
+}
