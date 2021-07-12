@@ -22,7 +22,6 @@ function InProgressDrinkOrFood() {
   const [mapName, setMapName] = useState('');
   const [foodOrDrink, setFoodOrDrink] = useState([]);
   const [category, setCategory] = useState('');
-  const [type, setType] = useState('');
   const [ingredients, setIngredients] = useState([]);
 
   const [shareButton, setShareButton] = useState(false);
@@ -45,13 +44,11 @@ function InProgressDrinkOrFood() {
       setMapName('Meal');
       setFoodOrDrink(food);
       setCategory('Category');
-      setType('comidas');
     }
     if (url.includes('bebidas')) {
       setMapName('Drink');
       setFoodOrDrink(drinks);
       setCategory('Alcoholic');
-      setType('bebidas');
     }
   }, [food, drinks]);
 
