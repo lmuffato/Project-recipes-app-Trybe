@@ -1,13 +1,16 @@
 // import { number, string } from 'prop-types';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
+import recipesContext from '../../context/recipesContext/recipesContext';
 
 import { fetchURLIngredients } from '../../utils/functions';
 
 const MAX_INGREDIENT = 12;
 
 function ExplorerFoodsIngredients() {
+  const { setForIngredients } = useContext(recipesContext);
   const [ingredients, setIngredients] = useState([]);
 
   useEffect(() => {
@@ -26,15 +29,20 @@ function ExplorerFoodsIngredients() {
     <>
       <Header showButton={ false } pageTitle="Explorar Ingredientes" />
       {ingredients.length > 1 ? ingredients.map(({ strIngredient }, index) => (
-        <section key={ index } data-testid={ `${index}-ingredient-card` }>
-          <img
-            width="200"
-            data-testid={ `${index}-card-img` }
-            src={ fetchURLIngredients(strIngredient, 'comida') }
-            alt={ strIngredient }
-          />
-          <p data-testid={ `${index}-card-name` }>{strIngredient}</p>
-        </section>
+        <button type="button" key={ index } onClick={ () => setForIngredients(true) }>
+          <Link to={ { pathname: '/comidas', state: strIngredient } }>
+            <section data-testid={ `${index}-ingredient-card` }>
+              <img
+                width="200"
+                data-testid={ `${index}-card-img` }
+                src={ fetchURLIngredients(strIngredient, 'comida') }
+                alt={ strIngredient }
+              />
+              <p data-testid={ `${index}-card-name` }>{strIngredient}</p>
+            </section>
+          </Link>
+
+        </button>
       )) : <p>Loading ...</p>}
       <Footer />
     </>
