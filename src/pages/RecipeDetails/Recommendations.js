@@ -18,7 +18,6 @@ export default function Recommendations({ path }) {
   }, []);
 
   function renderCarousel() {
-    console.log(recommended[0]);
     return (
       <div className="carousel-container">
         <CarouselBtn

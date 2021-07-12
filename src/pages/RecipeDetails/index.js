@@ -1,25 +1,23 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { AppContext } from '../../context/AppContext';
-import ShareIcon from '../../images/shareIcon.svg';
-import WhiteHeartIcon from '../../images/whiteHeartIcon.svg';
 import fetchByIdApi from '../../services/fetchApiDetails';
 import Ingredients from './Ingredients';
 import Recommendations from './Recommendations';
 import Video from './Video';
 import './recipesDetails.css';
 import StartRecipeBtn from './StartRecipeBtn';
+import BtnFavorite from '../RecipesProgress/BtnFavorite';
+import BtnShare from '../RecipesProgress/BtnShare';
 
-export default function RecipeDetails({ match: { params: { id }, path } }) {
+export default function RecipeDetails({ match: { params: { id }, path, url } }) {
   const { context } = useContext(AppContext);
-  const { pageOrigin } = context;
-  const [recipe, setRecipe] = useState({});
+  const { pageOrigin, recipe, setRecipe } = context;
 
   useEffect(() => {
     fetchByIdApi(path.includes('/comidas') ? 'themealdb' : 'thecocktaildb', id)
       .then((recipeCrr) => {
         setRecipe(recipeCrr);
-        console.log(recipeCrr);
       });
   }, [pageOrigin]);
 
@@ -36,26 +34,8 @@ export default function RecipeDetails({ match: { params: { id }, path } }) {
       >
         { recipe.strMeal || recipe.strDrink }
       </h2>
-      <button
-        type="button"
-        onClick=""
-      >
-        <img
-          src={ ShareIcon }
-          alt="share button"
-          data-testid="share-btn"
-        />
-      </button>
-      <button
-        type="button"
-        onClick=""
-      >
-        <img
-          src={ WhiteHeartIcon }
-          alt="favorite button"
-          data-testid="favorite-btn"
-        />
-      </button>
+      <BtnShare match={ url } />
+      <BtnFavorite id={ id } />
       <p
         data-testid="recipe-category"
       >
@@ -78,6 +58,7 @@ export default function RecipeDetails({ match: { params: { id }, path } }) {
 RecipeDetails.propTypes = {
   match: PropTypes.shape(
     { path: PropTypes.string,
+      url: PropTypes.string,
       params: PropTypes.shape({
         id: PropTypes.string,
       }) },
