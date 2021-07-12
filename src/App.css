@@ -1,3 +1,8 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
 .meals {
   align-items: center;
   background: #0fa36b;
@@ -65,4 +70,12 @@
   100% {
     transform: rotate(-10deg);
   }
+}
+
+footer {
+  align-items: center;
+  background-color: #b3b2b2;
+  bottom: 0%;
+  position: fixed;
+  width: 300px;
 }

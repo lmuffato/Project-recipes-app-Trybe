@@ -4,12 +4,19 @@ import PropTypes from 'prop-types';
 import RecipeContext from './RecipeContext';
 
 function RecipeProvider({ children }) {
-  const [categories, initialRecipes] = useState({
-    categories: [],
-    initialRecipes: [],
-  });
+  const [recipes, setRecipes] = useState([]);
+  const [redirect, setRedirect] = useState(null);
+  const [favoriteRecipes, setFavoriteRecipes] = useState([]);
+  const contextValue = {
+    recipes,
+    setRecipes,
+    redirect,
+    setRedirect,
+    favoriteRecipes,
+    setFavoriteRecipes,
+  };
   return (
-    <RecipeContext.Provider value={ { categories, initialRecipes } }>
+    <RecipeContext.Provider value={ contextValue }>
       { children }
     </RecipeContext.Provider>
   );

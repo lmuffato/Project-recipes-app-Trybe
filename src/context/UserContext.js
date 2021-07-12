@@ -1,5 +1,5 @@
 import { createContext } from 'react';
 
-const RecipeProvider = createContext();
+const UserProvider = createContext();
 
-export default RecipeProvider;
+export default UserProvider;

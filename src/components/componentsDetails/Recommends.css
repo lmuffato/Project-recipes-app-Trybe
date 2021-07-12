@@ -1,0 +1,28 @@
+.recommendCard {
+  display: flex;
+  flex-direction: column;
+  height: 200px;
+  margin: 5px;
+  width: 40vw;
+}
+
+.recommendCard img {
+  border-radius: 0.6rem;
+  height: 200px;
+  object-fit: fill;
+  overflow: hidden;
+  width: 40vw;
+}
+
+.recommendCard h3 {
+  overflow: hidden;
+  padding-bottom: 15px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.recommendsList {
+  display: flex;
+  margin: 10px 30px;
+  overflow-x: scroll;
+}
