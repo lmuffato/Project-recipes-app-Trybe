@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Card } from 'react-bootstrap';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
+
 import { apiMealsIngredients } from '../services/fetchApisIngredients';
 import ContextComidas from '../provider/ContextComida';
 
@@ -42,7 +43,7 @@ function ExplorarComidasING() {
               src={ `https://www.themealdb.com/images/ingredients/${item.strIngredient}-Small.png` }
             />
             <Card.Body>
-              <Card.Title data-testid={ `${index}-card-name` }>
+              <Card.Title className="card-link" data-testid={ `${index}-card-name` }>
                 { item.strIngredient }
               </Card.Title>
             </Card.Body>
