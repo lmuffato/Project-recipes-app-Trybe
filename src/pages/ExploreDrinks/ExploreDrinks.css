@@ -1,0 +1,7 @@
+.box-button-explore-drinks {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
+  margin-top: 400px;
+}

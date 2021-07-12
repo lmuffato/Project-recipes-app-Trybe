@@ -1,4 +1,5 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
+import { useHistory } from 'react-router';
 import { AppContext } from '../../context/AppContext';
 import {
   fetchByIngredientApi,
@@ -14,12 +15,22 @@ export default function SearchBar() {
     setInputValue,
     pageOrigin,
     searchValue,
+    recipesList,
     setRecipesList,
 
   } = context;
   let searchResults = '';
   const length = 1;
   const NUM_RECIPES_SHOWN = 12;
+  const history = useHistory();
+
+  useEffect(() => {
+    if (recipesList.length === 1) {
+      const oneRecipe = recipesList[0];
+      const path = pageOrigin === 'themealdb' ? '/comidas' : '/bebidas';
+      history.push(`${path}/${oneRecipe.idMeal || oneRecipe.idDrink}`);
+    }
+  }, [recipesList, history, pageOrigin]);
 
   async function apiSearch(value, input, page) {
     switch (value) {

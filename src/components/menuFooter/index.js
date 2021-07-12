@@ -6,7 +6,7 @@ import './menuFooter.css';
 
 export default function MenuFooter() {
   return (
-    <div data-testid="footer" className="container">
+    <div data-testid="footer" className="footer-container">
       <DrinksBtn />
       <ExploreBtn />
       <FoodBtn />

@@ -1,0 +1,41 @@
+.carousel {
+  display: none;
+  margin: auto;
+  width: 300px;
+}
+
+.active {
+  display: unset;
+}
+
+.carousel-container {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 20px;
+}
+
+.start-recipe-btn {
+  bottom: 0;
+  position: fixed;
+}
+
+.disappear-btn {
+  display: none;
+}
+
+/* .list-main-recipes {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.recipe-card {
+  display: flex;
+  flex-flow: column;
+  margin: 10px;
+  width: 40%;
+}
+
+.recipe-card > p {
+  margin-top: 5px;
+  text-align: center;
+} */
