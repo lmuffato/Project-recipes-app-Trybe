@@ -9,7 +9,7 @@ import RecipeContext from '../../context/RecipeContext';
 import { getDrinksIngredientList, drinksByIngredient } from '../../services/apiRequests';
 
 export default function DrinkIngredients() {
-  document.title = 'Explorar por ingrediente';
+  document.title = 'Explorar ingrediente';
   const maxLength = 11;
   const { setRecipes, setRedirect } = useContext(RecipeContext);
   const [ingredients, setIngredients] = useState([]);
