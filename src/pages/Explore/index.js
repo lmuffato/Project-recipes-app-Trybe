@@ -11,12 +11,12 @@ export default function Explore() {
       <div className="box-button-explore">
         <ButtonExplore
           title="Explorar Comidas"
-          path="comidas"
+          path="/explorar/comidas"
           dataTestId="explore-food"
         />
         <ButtonExplore
           title="Explorar Bebidas"
-          path="bebidas"
+          path="/explorar/bebidas"
           dataTestId="explore-drinks"
         />
       </div>

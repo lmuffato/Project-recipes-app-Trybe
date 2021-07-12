@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 export default function ButtonExplore({ title, path, dataTestId }) {
   return (
     <div>
-      <Link to={ `/explorar/${path}` }>
+      <Link to={ path }>
         <button
           type="button"
           data-testid={ dataTestId }
