@@ -6,7 +6,6 @@ import RecomendacoesCard from './RecomendacoesCard';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
-import '../styles/DetalhesPaginas.css';
 import { btn } from '../styles/login';
 
 const copy = require('clipboard-copy');
