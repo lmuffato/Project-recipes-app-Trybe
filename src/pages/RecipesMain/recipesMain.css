@@ -14,3 +14,21 @@
   margin-top: 5px;
   text-align: center;
 }
+
+.categories-btns {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  margin: 0 20px;
+  margin-top: 70px;
+}
+
+.categories-btns > button {
+  margin: 10px;
+  width: 80px;
+}
+
+.categories-btns > div > button {
+  margin: 10px;
+  width: 80px;
+}
