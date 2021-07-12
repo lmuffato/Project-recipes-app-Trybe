@@ -4,7 +4,6 @@ const filterClick = (obj) => {
     global.alert('Sua busca deve conter somente 1 (um) caracter');
   } else if (location.pathname === '/comidas'
    || location.pathname === '/explorar/comidas/ingredientes') {
-    console.log(inputText, inputRadios);
     getRecipes(inputText, inputRadios);
   } else { getDrinksRecipes(inputText, inputRadios); }
 };

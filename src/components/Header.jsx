@@ -25,7 +25,6 @@ function Header({ title, searchImg = false }) {
         ) : null}
       </div>
       {searchInput ? (<SearchBar />) : null}
-
     </header>
   );
 }

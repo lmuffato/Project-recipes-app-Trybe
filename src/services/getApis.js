@@ -121,3 +121,17 @@ export async function fetchDrinkIngredients() {
   const resultJson = await result.json();
   return resultJson;
 }
+
+export async function fetchAreas() {
+  const endpoint = 'https://www.themealdb.com/api/json/v1/1/list.php?a=list';
+  const result = await fetch(endpoint);
+  const resultJson = await result.json();
+  return resultJson;
+}
+
+export async function fetchMealsByArea(area) {
+  const endpoint = `https://www.themealdb.com/api/json/v1/1/filter.php?a=${area}`;
+  const result = await fetch(endpoint);
+  const resultJson = await result.json();
+  return resultJson;
+}

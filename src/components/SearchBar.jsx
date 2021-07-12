@@ -16,14 +16,6 @@ function SearchBar() {
     inputRadios, inputText, location, getRecipes, getDrinksRecipes,
   };
 
-  // const onClick = () => {
-  //   if (inputRadios === 'first-letter' && inputText.length > 1) {
-  //     global.alert('Sua busca deve conter somente 1 (um) caracter');
-  //   } else if (location.pathname === '/comidas') {
-  //     getRecipes(inputText, inputRadios);
-  //   } else { getDrinksRecipes(inputText, inputRadios); }
-  // };
-
   return (
     <div>
       <input
