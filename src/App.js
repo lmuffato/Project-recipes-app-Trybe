@@ -42,8 +42,10 @@ function App() {
           path="/explorar/bebidas/ingredientes"
           render={ (props) => <ExploreIngredients { ...props } type="drinks" /> }
         />
-        <Route path="/explorar/comidas" component={ ExploreFoods } />
-        <Route path="/explorar/bebidas" component={ ExploreDrinks } />
+        <Route path="/explorar/comidas" exact component={ ExploreFoods } />
+        <Route path="/explorar/bebidas" exact component={ ExploreDrinks } />
+        <Route path="/explorar/comidas/area" component={ ExploreOrigin } />
+        <Route path="/explorar/bebidas/area" render={ () => <h1>Not Found</h1> } />
         <Route
           exact
           path="/comidas/:id"
