@@ -20,6 +20,8 @@ function Drinks() {
             // Cód</Link>igo fonte da biblioteca Bootstrap
             <Link key={ index } to={ `bebidas/${recipe.idDrink}` }>
               <Card
+                bsPrefix="card"
+                className="cards-recipes"
                 onClick={ () => clickRecipeDrinks(recipe.idDrink) }
                 style={ { width: '10rem' } }
                 data-testid={ `${index}-recipe-card` }

@@ -35,6 +35,8 @@ function ButtonFilter() {
   return (
     <div className="buttons-filter-done">
       <Button
+        bsPrefix="btn"
+        className="buttons-filter"
         variant="secondary"
         size="sm"
         data-testid="filter-by-all-btn"
@@ -43,6 +45,8 @@ function ButtonFilter() {
         All
       </Button>
       <Button
+        bsPrefix="btn"
+        className="buttons-filter"
         variant="secondary"
         size="sm"
         data-testid="filter-by-food-btn"
@@ -51,6 +55,8 @@ function ButtonFilter() {
         Food
       </Button>
       <Button
+        bsPrefix="btn"
+        className="buttons-filter"
         variant="secondary"
         size="sm"
         data-testid="filter-by-drink-btn"
