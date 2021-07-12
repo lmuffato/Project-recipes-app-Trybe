@@ -7,9 +7,6 @@ function UserProvider({ children }) {
   const [password, setPassword] = useState('');
   const [doneRecipes, setDoneRecipes] = useState([]);
   const [doingRecipes, setDoingRecipes] = useState([]);
-  // cada receita deve ser um objeto dentro do array, deve ter uma chave 'id' que
-  // armazena o id da receita;
-  // Caso uma receita tenha sido feita, não esquecer de retirar de doing.
 
   function successLogin(loginText, passwordText) {
     setUser(loginText);
