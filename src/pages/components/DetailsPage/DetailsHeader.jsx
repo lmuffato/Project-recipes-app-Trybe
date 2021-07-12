@@ -6,7 +6,6 @@ import Col from 'react-bootstrap/Col';
 import shareIcon from '../../../images/shareIcon.svg';
 import whiteHeartIcon from '../../../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../../../images/blackHeartIcon.svg';
-import './details.css';
 
 const favoriteRecipe = (recipe, type, isFavorited) => {
   const favorites = JSON.parse(localStorage.getItem('favoriteRecipes'));
