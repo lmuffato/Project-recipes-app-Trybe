@@ -11,7 +11,9 @@ export default function FavoriteRecipes(props) {
   useEffect(() => {
     setFavoriteList(JSON.parse(localStorage.getItem('favoriteRecipes')));
     const list = JSON.parse(localStorage.getItem('favoriteRecipes'));
-    setFilteredList((list.filter((recipe) => !recipe.doneDate)));
+    if (list) {
+      setFilteredList((list.filter((recipe) => !recipe.doneDate)));
+    }
   }, []);
 
   const unFavorite = (e) => {
@@ -26,14 +28,14 @@ export default function FavoriteRecipes(props) {
   useEffect(() => {
     if (filter === 'All' && filteredList) {
       setFilteredList((favoriteList.filter((recipe) => !recipe.doneDate)));
-    } if (filter === 'comida' && filteredList) {
+    } else if (filter === 'comida' && filteredList) {
       setFilteredList(favoriteList
         .filter((recipe) => !recipe.doneDate && recipe.type === 'comida'));
-    } if (filter === 'bebida' && filteredList) {
+    } else if (filter === 'bebida' && filteredList) {
       setFilteredList(favoriteList
         .filter((recipe) => !recipe.doneDate && recipe.type === 'bebida'));
     }
-  }, [filter, favoriteList]);
+  }, [filter, favoriteList]); // eslint-disable-line
 
   return (
     <div className="card-list">
@@ -47,6 +49,7 @@ export default function FavoriteRecipes(props) {
     </div>
   );
 }
+
 FavoriteRecipes.propTypes = {
   filter: PropTypes.string.isRequired,
 };

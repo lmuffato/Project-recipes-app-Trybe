@@ -10,7 +10,7 @@ export default function Favotire() {
   };
   return (
     <div>
-      <Header />
+      <Header type="favorites" />
       <FavoriteFilters handleClick={ handleClick } />
       <FavoriteRecipes filter={ filter } />
     </div>
