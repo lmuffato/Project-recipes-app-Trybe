@@ -52,3 +52,5 @@ IngredientsFoodCard.propTypes = {
 };
 
 export default IngredientsFoodCard;
+
+//
