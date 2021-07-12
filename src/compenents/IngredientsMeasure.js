@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import RecipesContext from '../contexts/RecipesContext';
+import '../styles/IngredientsMeasure.css';
 
 function IngredientsMeasure({ detailsRecepie }) {
-  // const { idMeal } = detailsRecepie;
   const [checkedIngridientsState, setCheckedIngridientsState] = useState(0);
   const { setAllChecked } = useContext(RecipesContext);
 
@@ -21,7 +21,6 @@ function IngredientsMeasure({ detailsRecepie }) {
   dps quando recuperar, marcar os feitos */
 
   const numberIngridients = allIngredients.length;
-  // let checkedIngridients = 0;
 
   function checkInputs() {
     if (numberIngridients === checkedIngridientsState) {
@@ -78,11 +77,13 @@ function IngredientsMeasure({ detailsRecepie }) {
               type="checkbox"
               onChange={ (e) => checkedListIngredients(e) }
             />
-            { elem[1] }
-            {' '}
-            -
-            {' '}
-            { allMeasure[index][1] }
+            <span className="checked-list">
+              { elem[1] }
+              {' '}
+              -
+              {' '}
+              { allMeasure[index][1] }
+            </span>
           </label>
         </div>))}
     </div>

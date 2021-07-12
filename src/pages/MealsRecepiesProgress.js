@@ -11,10 +11,6 @@ function MealsRecepiesProgress() {
   const history = useHistory();
   const recepiID = history.location.pathname.split('/')[2];
 
-  // const test = () => {
-  //   setAllChecked(false);
-  // };
-
   // ao montar a pagina, faz api que traz infos via ID.
   useEffect(() => {
     console.log('entrou no didMount de mealsRecepieProgress');
@@ -49,7 +45,6 @@ function MealsRecepiesProgress() {
       <p>Ingredients</p>
       <IngredientsMeasure
         detailsRecepie={ detailsRecepie }
-        // setAllChecked={ test }
       />
       <p>Instruções</p>
       <p data-testid="instructions">{ detailsRecepie.strInstructions }</p>
