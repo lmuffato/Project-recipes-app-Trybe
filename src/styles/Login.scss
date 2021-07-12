@@ -1,0 +1,115 @@
+$light-purple: rgb(137, 137, 201);
+$medium-purple: rgb(99, 99, 150);
+$purple: rgb(72, 72, 125);
+$sand: rgb(201, 179, 77);
+$grey-sand: rgb(125, 115, 72);
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400&display=swap') ;
+
+form {
+  background: url('../images//background.jpg') no-repeat center fixed;
+  background-size: cover;
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  margin: auto;
+
+  & div {
+    align-items: center;
+    background-color: rgba(39, 37, 37, 0.9);
+    border-radius: 2em;
+    display: flex;
+    flex-direction: column;
+    font-family: Roboto Mono , monospace;
+    margin: auto;
+    max-width: 400px;
+    padding: 2em;
+    width: 85%;
+  }
+
+  & img {
+    background-color: $light-purple;
+    border-radius: 2em;
+    padding: 2em;
+    width: 90%;
+  }
+
+  & h1 {
+    color: $light-purple;
+    margin: 0.5em 0 0.7em;
+    opacity: 1;
+    text-shadow: 3px 3px 4px black;
+  }
+
+  & label {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 1em;
+    width: 100%;
+  }
+
+  & p {
+    display: none;
+  }
+
+  & input {
+    border: none;
+    border-radius: 0.3em;
+    box-sizing: border-box;
+    font-size: 1.2em;
+    height: 5vh;
+    padding: 0.3em;
+
+    &:focus {
+      border: 0.2em solid $sand;
+      font-size: 1.2em;
+      outline: none;
+      transition: 0.2s;
+    }
+  }
+
+  & span {
+    color: red;
+    display: none;
+    font-size: 1em;
+    font-weight: 400;
+    margin-top: 0.4em;
+    padding: 0 0.5em;
+    text-shadow: 3px 3px 4px black;
+    width: fit-content;
+  }
+
+  & button {
+    align-items: center;
+    border: none;
+    border-radius: 0.3em;
+    box-sizing: border-box;
+    color: gray;
+    display: flex;
+    font-size: 1.3em;
+    height: 5vh;
+    justify-content: center;
+    width: 100%;
+
+    &:disabled {
+      background-color: $medium-purple;
+      cursor: not-allowed;
+      transition: 2s;
+    }
+
+    &:enabled {
+      background-color: $medium-purple;
+      color: black;
+      transition: 2s;
+    }
+
+    &:enabled:hover {
+      background-color: $light-purple;
+      transition: 1s;
+    }
+    &:disabled:hover {
+      background-color: $light-purple;
+      transition: 1s;
+    }
+  }
+}
