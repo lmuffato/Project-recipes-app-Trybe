@@ -11,6 +11,8 @@ import ExploreFood from '../pages/ExploreFood';
 import ExploreDrink from '../pages/ExploreDrink';
 import IngredientsPage from '../pages/IngredientsPage';
 import ExploreByAreaPage from '../pages/ExploreByAreaPage';
+import FoodInProgress from '../pages/FoodInProgress';
+import DrinkInProgress from '../pages/DrinkInProgress';
 
 const componentWithHeader = ({ title }) => (
   <section>
@@ -102,5 +104,17 @@ export default [
     Component: componentWithHeader,
     exact: true,
     title: 'Receitas Favoritas',
+  },
+  {
+    path: '/comidas/:id/in-progress',
+    Component: FoodInProgress,
+    exact: true,
+    title: 'Comida em progresso',
+  },
+  {
+    path: '/bebidas/:id/in-progress',
+    Component: DrinkInProgress,
+    exact: true,
+    title: 'Bebida em progresso',
   },
 ];
