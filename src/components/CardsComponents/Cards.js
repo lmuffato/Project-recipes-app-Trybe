@@ -18,7 +18,7 @@ function Card({ index, strName, strThumb, strId, page }) {
         data-testid={ `${index}-card-img` }
         alt="foto da receita"
       />
-      <h4 data-testid={ `${index}-card-name` }>{ strName }</h4>
+      <h4 className="card-title" data-testid={ `${index}-card-name` }>{ strName }</h4>
     </button>
   );
 }

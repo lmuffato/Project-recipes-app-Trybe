@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import Header from '../../../components/Header';
 import Footer from '../../../components/Footer';
+import '../../../styles/Card.css';
 
 import IngredienteCard from '../../../components/CardsComponents/IngredienteCard';
 import ReceitasContext from '../../../contexts/ReceitasContext';
@@ -18,20 +19,22 @@ function ExplorarComidasPorIngrediente() {
   return (
     <>
       <Header title="Explorar Ingredientes" displayButton={ false } />
-      {
-        APIIngredientsFood && APIIngredientsFood.meals
-          .filter((item, index) => index <= INGREDIENT_LENGTH)
-          .map((item, index) => (
-            <IngredienteCard
-              key={ index }
-              index={ index }
-              strName={ item.strIngredient }
-              page="comidas"
-              endpoint={ `https://www.themealdb.com/api/json/v1/1/filter.php?i=${item.strIngredient}` }
-              strThumb={ `https://www.themealdb.com/images/ingredients/${item.strIngredient}-Small.png` }
-            />
-          ))
-      }
+      <div className="cards-container">
+        {
+          APIIngredientsFood && APIIngredientsFood.meals
+            .filter((item, index) => index <= INGREDIENT_LENGTH)
+            .map((item, index) => (
+              <IngredienteCard
+                key={ index }
+                index={ index }
+                strName={ item.strIngredient }
+                page="comidas"
+                endpoint={ `https://www.themealdb.com/api/json/v1/1/filter.php?i=${item.strIngredient}` }
+                strThumb={ `https://www.themealdb.com/images/ingredients/${item.strIngredient}-Small.png` }
+              />
+            ))
+        }
+      </div>
       <Footer />
     </>
   );
