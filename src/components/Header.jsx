@@ -12,7 +12,8 @@ function Header({ searchBar, type }) {
   useEffect(() => {
     if (!searchBar) {
       const btnSearch = document.getElementById('search-btn');
-      btnSearch.style.opacity = 0;
+      const iconSearch = document.getElementById('search-icon');
+      btnSearch.removeChild(iconSearch);
       btnSearch.disable = true;
     }
   }, [searchBar]);
@@ -31,18 +32,26 @@ function Header({ searchBar, type }) {
         <Link
           to="/perfil"
         >
-          <button type="button" data-testid="profile-top-btn">
-            <img src={ profileIcon } alt="icone do perfil" />
+          <button type="button">
+            <img
+              src={ profileIcon }
+              alt="icone do perfil"
+              data-testid="profile-top-btn"
+            />
           </button>
         </Link>
         <h1 data-testid="page-title">{document.title}</h1>
         <button
           type="button"
-          data-testid="search-top-btn"
           id="search-btn"
           onClick={ searchBar ? toggleSearchBar : '' }
         >
-          <img src={ searchIcon } alt="icone de pesquisa" />
+          <img
+            src={ searchIcon }
+            id="search-icon"
+            alt="icone de pesquisa"
+            data-testid="search-top-btn"
+          />
         </button>
       </header>
       { showSearchBar && <SearchBar type={ type } /> }
