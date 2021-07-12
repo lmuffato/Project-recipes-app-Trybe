@@ -25,6 +25,7 @@ function Home(props) {
   };
 
   useEffect(() => {
+    console.log('teste');
     if (type === 'meals') return setFetchUrl('https://www.themealdb.com/api/json/v1/1/search.php?s=');
     return setFetchUrl('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
   }, [setFetchUrl, type]);

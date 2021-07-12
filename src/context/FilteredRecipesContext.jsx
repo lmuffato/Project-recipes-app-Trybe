@@ -29,8 +29,8 @@ function FilteredRecipesContextProvider(props) {
       setFilteredRecipes(formattingData[type]);
       // setFilteredData(formattingData);
       // console.log(formattingData[type] !== null ? 'sim' : 'no');
-      console.log(formattingData[type]);
-      console.log(formattingData);
+      // console.log(formattingData[type]);
+      // console.log(formattingData);
     } catch (err) {
       console.log(err);
       global.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
@@ -78,9 +78,9 @@ function FilteredRecipesContextProvider(props) {
 
     switch (filterType) {
     case 'ingredient':
-      fetchFilteredMealRecipes(encodeQuery, type);
+      return fetchFilteredMealRecipes(encodeQuery, type);
       // fetchFilteredMealRecipes(cocktailEndpointIngr, type);
-      break;
+      // break;
     case 'first-letter':
       if (query.length > 1 || query.trim() === '') {
         alertMessage();

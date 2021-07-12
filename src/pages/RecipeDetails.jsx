@@ -31,10 +31,10 @@ function RecipeDetails({ type }) {
     const getRecipesAndRecommendations = () => {
       if (type === 'meals') {
         fetchMealRecipes(endpointCocktails, type);
-        handleFetch(endpointMeal, type);
+        return handleFetch(endpointMeal, type);
       }
       fetchMealRecipes(endpointRecipes, type);
-      handleFetch(endpointDrink, type);
+      return handleFetch(endpointDrink, type);
     };
     getRecipesAndRecommendations();
     // setRecipeInProgress('Iniciar receita');

@@ -1,16 +1,15 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Header from '../components/Header/Header';
 import Footer from '../components/Footer/Footer';
 import useFilteredRecipes from '../hooks/useFilteredRecipes';
 
 function ExploreIngredients({ type }) {
-  const history = useHistory();
+  // const history = useHistory();
   const {
     setSearchBarFilters,
-    searchBarFilters,
-    getFilteredRecipes } = useFilteredRecipes();
+    searchBarFilters } = useFilteredRecipes();
   const [ingredients, setIngredients] = useState([]);
   const MAX_INGREDIENTS = 12;
 
@@ -31,18 +30,20 @@ function ExploreIngredients({ type }) {
     fetchIngredientsFood();
   }, [fetchIngredientsFood]);
 
-  const handleClick = useCallback(async (dataIngredients) => {
-    await setSearchBarFilters(searchBarFilters.concat(dataIngredients));
-    console.log(dataIngredients);
-    console.log(searchBarFilters);
-    await getFilteredRecipes(type);
+  const handleClick = useCallback((dataIngredients) => {
+    // console.log(dataIngredients);
+    // console.log(searchBarFilters);
+    // await getFilteredRecipes(type);
     if (type === 'meals') {
-      history.push('/comidas');
-    } else {
-      history.push('/bebidas');
+      setSearchBarFilters(searchBarFilters.concat(dataIngredients));
+      // history.push('/comidas');
+    } else if (type === 'drinks') {
+      console.log(type);
+      setSearchBarFilters(searchBarFilters.concat(dataIngredients));
+      // history.push('/bebidas');
     }
-    console.log(history);
-  }, [searchBarFilters, setSearchBarFilters, getFilteredRecipes, type, history]);
+    // console.log(history);
+  }, [searchBarFilters, setSearchBarFilters, type]);
 
   return (
     <div>
@@ -61,8 +62,11 @@ function ExploreIngredients({ type }) {
           ? `https://www.themealdb.com/images/ingredients/${ingredient.strIngredient}-Small.png`
           : `https://www.thecocktaildb.com/images/ingredients/${ingredient.strIngredient1}-Small.png`;
         return (
-          <button
-            type="button"
+          <Link
+            // type="button"
+            to={
+              type === 'meals' ? '/comidas' : '/bebidas'
+            }
             key={ index }
             onClick={ () => handleClick(dataIngredients) }
           >
@@ -81,7 +85,7 @@ function ExploreIngredients({ type }) {
                 </p>
               </div>
             </div>
-          </button>
+          </Link>
         );
       })}
       <Footer />

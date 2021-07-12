@@ -14,7 +14,7 @@ function useFetchRecipes(type) {
       try {
         const res = await fetch(fetchUrl);
         const data = await res.json();
-        console.log(data);
+
         const limitedData = {
           ...data,
           [type]: data[type].slice(0, MAX_RECIPES),
