@@ -15,7 +15,7 @@ export default function FavoriteButton({ recipe, isFood }) {
   const recipeName = isFood ? recipe.strMeal : recipe.strDrink;
   const recipeImage = isFood ? recipe.strMealThumb : recipe.strDrinkThumb;
 
-  const { favorites, setFavorites, saveFavoritesToLS } = useContext(FavoritesContext);
+  const { favorites, setFavorites } = useContext(FavoritesContext);
 
   const [isFavorite, setIsFavorite] = useState(
     favorites.map((fav) => fav.id).includes(recipeId),
@@ -39,7 +39,6 @@ export default function FavoriteButton({ recipe, isFood }) {
       );
     }
     setFavorites(updatedFavorites);
-    saveFavoritesToLS(updatedFavorites);
   }
 
   useEffect(() => {
