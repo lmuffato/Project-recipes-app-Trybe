@@ -32,7 +32,7 @@ function App() {
             <Route
               path="/bebidas/{id-da-receita}/in-progress"
               component={ DrinInProgress }
-            /> */} 
+            /> */}
             <Route exact path="/explorar" component={ Explore } />
             <Route exact path="/explorar/comidas" component={ ExploreFoods } />
             <Route exact path="/explorar/bebidas" component={ ExploreDrinks } />
