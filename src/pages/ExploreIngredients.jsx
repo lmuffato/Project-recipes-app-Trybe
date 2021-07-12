@@ -7,7 +7,10 @@ import useFilteredRecipes from '../hooks/useFilteredRecipes';
 
 function ExploreIngredients({ type }) {
   const history = useHistory();
-  const { setSearchBarFilters, searchBarFilters, getFilteredRecipes } = useFilteredRecipes();
+  const {
+    setSearchBarFilters,
+    searchBarFilters,
+    getFilteredRecipes } = useFilteredRecipes();
   const [ingredients, setIngredients] = useState([]);
   const MAX_INGREDIENTS = 12;
 
