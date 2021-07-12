@@ -1,0 +1,28 @@
+.form {
+  border: 1px solid rgba(51, 64, 49, 1);
+  border-radius: 15px;
+  box-shadow: 5px 3px 1px hsl(138, 10%, 90%);
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+  padding: 10px;
+  text-align: center;
+}
+
+.btn-group-vertical {
+  align-items: center;
+}
+
+.btn-custom {
+  background-color: #334031;
+  color: #c2e1c2;
+  margin: 10px 0;
+  width: 160px;
+}
+
+.btn-custom-light {
+  background-color: #80ab82;
+  color: #334031;
+  margin: 10px 0;
+  width: 160px;
+}

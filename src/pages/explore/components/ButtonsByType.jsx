@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Button } from 'react-bootstrap';
 import { string } from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import { fetchApiRandomDrinks, fetchApiRandomMeal } from '../../../services/fetchApi';
@@ -23,31 +24,34 @@ function ButtonsByType({ type }) {
   }
 
   return (
-    <div>
-      <button
+    <div className="button-toolbar">
+      <Button
+        variant="custom"
         data-testid="explore-by-ingredient"
         type="button"
         onClick={ () => handleExploreDirection('ingredientes') }
       >
         Por Ingredientes
-      </button>
+      </Button>
       {type === 'comidas'
         && (
-          <button
+          <Button
+            variant="custom"
             data-testid="explore-by-area"
             type="button"
             onClick={ () => handleExploreDirection('area') }
           >
             Por Local de Origem
-          </button>
+          </Button>
         )}
-      <button
+      <Button
+        variant="custom"
         data-testid="explore-surprise"
         type="button"
         onClick={ () => history.push(randomDrinkMeal()) }
       >
         Me Surpreenda!
-      </button>
+      </Button>
     </div>
   );
 }

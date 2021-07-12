@@ -15,14 +15,16 @@ function ExploreFoodByIngredients() {
   return (
     <div>
       <Header />
-      { twelveIngredients
-        .map((meal, index) => (<IngredientCards
-          key={ index }
-          name={ meal.strIngredient }
-          thumbnail={ `https://www.themealdb.com/images/ingredients/${meal.strIngredient}-Small.png` }
-          index={ index }
-          param="/comidas"
-        />))}
+      <div className="fake-cards">
+        { twelveIngredients
+          .map((meal, index) => (<IngredientCards
+            key={ index }
+            name={ meal.strIngredient }
+            thumbnail={ `https://www.themealdb.com/images/ingredients/${meal.strIngredient}-Small.png` }
+            index={ index }
+            param="/comidas"
+          />))}
+      </div>
       <Footer />
     </div>
   );
