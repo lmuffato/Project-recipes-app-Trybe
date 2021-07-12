@@ -13,14 +13,17 @@ import SearchIngredients from './pages/SearchIngredients';
 import SearchArea from './pages/SearchArea';
 import NotFound from './pages/NotFound';
 import Favotire from './pages/Favotire';
+import Progress from './pages/components/Progress';
 
 function App() {
   return (
     <div className="meals">
       <Switch>
         <Route exact path="/" component={ Login } />
+        <Route exact path="/comidas/:id/in-progress" component={ Progress } />
         <Route exact path="/comidas/:id" component={ RecipeDetails } />
         <Route exact path="/comidas" component={ Meals } />
+        <Route exact path="/bebidas/:id/in-progress" component={ Progress } />
         <Route exact path="/bebidas/:id" component={ RecipeDetails } />
         <Route exact path="/bebidas" component={ Drinks } />
         <Route exact path="/perfil" component={ Profile } />
