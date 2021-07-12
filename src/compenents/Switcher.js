@@ -31,7 +31,6 @@ function Switcher() {
       <Route path="/receitas-favoritas" component={ FavoriteRecipes } />
       <Route path="/receitas-feitas" component={ DoneRecepies } />
       <Route path="/explorar/bebidas/area" component={ NotFound } />
-      <Route path="/test" component={ Teste } />
       <Route
         path="/explorar/comidas/ingredientes"
         component={ FoodsIngredients }
