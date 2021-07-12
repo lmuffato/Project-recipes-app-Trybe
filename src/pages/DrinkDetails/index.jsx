@@ -45,18 +45,18 @@ export default function DrinkDetails() {
     <MainContainerDetails>
       <ContainerFood>
         <h1 data-testid="recipe-title">{strDrink}</h1>
-        <img data-testid="recipe-photo" src={strDrinkThumb} alt="Recipe" />
+        <img data-testid="recipe-photo" src={ strDrinkThumb } alt="Recipe" />
 
         <div>
           <button
             type="button"
             data-testid="share-btn"
-            onClick={copyToClipBoard}
+            onClick={ copyToClipBoard }
           >
             <BiShareAlt alt="Share" />
           </button>
 
-          <button type="button" onClick={() => setHeart(recipeDrink)}>
+          <button type="button" onClick={ () => setHeart(recipeDrink) }>
             {checkFavorite() ? <AiFillHeart /> : <AiOutlineHeart />}
           </button>
         </div>
@@ -74,8 +74,8 @@ export default function DrinkDetails() {
           <ul>
             {ingredients.map((ingredient, index) => (
               <li
-                data-testid={`${index}-ingredient-name-and-measure`}
-                key={index}
+                data-testid={ `${index}-ingredient-name-and-measure` }
+                key={ index }
               >
                 {`${ingredient} - ${measures[index]}`}
               </li>
@@ -97,8 +97,8 @@ export default function DrinkDetails() {
       <ButtonDetails
         type="button"
         data-testid="start-recipe-btn"
-        disabled={diplayNoneButton()}
-        onClick={redirectToProgressPage}
+        disabled={ diplayNoneButton() }
+        onClick={ redirectToProgressPage }
       >
         Continuar Receita
       </ButtonDetails>

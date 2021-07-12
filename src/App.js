@@ -5,7 +5,6 @@ import Routes from './routes/Routes';
 
 import { RecipeContextProvider } from './store/RecipeContext';
 
-
 import 'bootstrap/dist/css/bootstrap.min.css';
 import GlobalStyle from './styles/globals';
 
