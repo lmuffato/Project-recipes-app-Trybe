@@ -1,4 +1,5 @@
 .category-button {
+
   /* transform: rotate(-90deg); */
   border: none;
   border-radius: 0 10px 10px 0;
@@ -6,14 +7,14 @@
 }
 
 .text-button {
+  justify-self: start;
   writing-mode: vertical-rl;
-  justify-self: start; 
 }
 
 .categories-container {
-  width: 40px;
   display: flex;
   flex-direction: column;
+  width: 40px;
 }
 
 .selected {
