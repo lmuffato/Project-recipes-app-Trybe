@@ -1,14 +1,63 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import Proptypes from 'prop-types';
 import '../PagesCss/Checkbox.css';
 
-export default function RenderCheckboxIngredients({ ingredients, measure }) {
-  const [inProgress, setInProgress] = useState();
+export default function RenderCheckboxIngredients(
+  { ingredients, inProgress, setInProgress },
+) {
   const urlType = window.location.href.split('/')[3];
+  const urlId = window.location.href.split('/')[4];
+
+  const checkls = (ls) => {
+    let add = '';
+    if (!ls.meals[urlId] && !ls.drinks[urlId]) {
+      if (urlType === 'comidas') {
+        add = {
+          ...ls,
+          meals: {
+            ...ls.meals, [urlId]: ls.meals[urlId] ? ls.meals[urlId] : [],
+          },
+        };
+      } else {
+        add = {
+          ...ls,
+          drinks: {
+            ...ls.drinks, [urlId]: ls.drinks[urlId] ? ls.drinks[urlId] : [],
+          },
+        };
+      }
+      localStorage.setItem('inProgressRecipes', JSON.stringify(add));
+    }
+  };
 
   useEffect(() => {
-    const recipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
-    setInProgress(recipes);
+    const renderStorage = () => {
+      const ls = JSON.parse(localStorage.getItem('inProgressRecipes'));
+      let add = '';
+
+      if (ls) checkls(ls);
+
+      if (!ls) {
+        if (urlType === 'comidas') {
+          add = {
+            meals: {
+              [urlId]: [],
+            },
+            drinks: {},
+          };
+        } else {
+          add = {
+            drinks: {
+              [urlId]: [],
+            },
+            meals: {},
+          };
+        }
+        localStorage.setItem('inProgressRecipes', JSON.stringify(add));
+      }
+    };
+    renderStorage();
+    setInProgress(JSON.parse(localStorage.getItem('inProgressRecipes')));
   }, []);
 
   const updateStorage = (item, checked) => {
@@ -44,21 +93,24 @@ export default function RenderCheckboxIngredients({ ingredients, measure }) {
   };
 
   const getStorage = (ingredient) => {
-    const id = window.location.href.split('/')[4];
     const { drinks } = inProgress;
     const { meals } = inProgress;
-    if (urlType === 'bebidas') {
-      return drinks[id].includes(ingredient);
+    let bool = false;
+    if (urlType === 'bebidas' && drinks[urlId]) {
+      bool = drinks[urlId].includes(ingredient);
     }
-    return meals[id].includes(ingredient);
+    if (urlType === 'comidas' && meals[urlId]) {
+      bool = meals[urlId].includes(ingredient);
+    }
+    return bool;
   };
 
   return (
-    <>
-      {
-        itens.map((item, index) => (
+    <div>
+      { inProgress && (
+        ingredients.map((item, index) => (
           <div key={ item } data-testid={ `${index}-ingredient-step` }>
-            <label htmlFor="ingredient" className={ checks[index] ? 'risca' : '' }>
+            <label htmlFor="ingredient" className={ getStorage(item) ? 'risca' : '' }>
               {item}
               <input
                 id={ index }
@@ -70,12 +122,11 @@ export default function RenderCheckboxIngredients({ ingredients, measure }) {
             </label>
           </div>
         ))
-      }
-    </>
+      )}
+    </div>
   );
 }
 
 RenderCheckboxIngredients.propTypes = {
   ingredients: Proptypes.arrayOf(Proptypes.string),
-  measure: Proptypes.arrayOf(Proptypes.string),
 }.isRequired;
