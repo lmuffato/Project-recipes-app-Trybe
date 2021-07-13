@@ -1,11 +1,11 @@
 import React, { useContext } from 'react';
-import { Redirect } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import context from '../../store/Context';
 import '../../Styles/loginPage.css';
 
 function Login() {
   const { infoUser, setDatainfoUser } = useContext(context);
-  const { email, password, shouldRedirect } = infoUser;
+  const { email, password } = infoUser;
   const validateFields = () => {
     const passwordLength = 7;
     const validate = /\S+@\S+\.\S+/;
@@ -13,6 +13,7 @@ function Login() {
     const passwordValidate = password && password.length >= passwordLength;
     return !(emailValidate && passwordValidate);
   };
+  const history = useHistory();
 
   const createLocalStorage = () => {
     const state = { email };
@@ -31,13 +32,9 @@ function Login() {
 
   const handleClick = () => {
     createLocalStorage();
-    setDatainfoUser((oldState) => ({
-      ...oldState,
-      shouldRedirect: true,
-    }));
+    history.push('/comidas');
   };
 
-  if (shouldRedirect) return <Redirect to="/comidas" />;
   return (
     <form>
       <label htmlFor="email-input">

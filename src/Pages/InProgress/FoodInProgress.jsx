@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { useLocation, Redirect, Link } from 'react-router-dom';
+import { useLocation, Redirect } from 'react-router-dom';
 import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../../images/blackHeartIcon.svg';
 import { fetchFoodForId } from '../../services/Data';
@@ -144,7 +144,6 @@ function FoodInProgress() {
       {ingredientsList()}
       <h4>Instructions :</h4>
       <p data-testid="instructions">{strInstructions}</p>
-      <Link to="/comidas">Voltar</Link>
       <button
         type="button"
         data-testid="finish-recipe-btn"
