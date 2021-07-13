@@ -3,13 +3,18 @@ import { LOADING_RECIPES,
   LOADING_RECIPES_FAILED,
   LOADING_CATEGORIES,
   FINISHED_LOADING_CATEGORIES,
-  LOADING_CATEGORIES_FAILED } from '../actions/loadingAction';
+  LOADING_CATEGORIES_FAILED,
+  LOADING_AREAS,
+  FINISHED_LOADING_AREAS,
+  LOADING_AREAS_FAILED } from '../actions/loadingAction';
 
 const INITIAL_STATE = {
   loadingRecipes: false,
   loadingCategories: false,
+  loadingAreas: false,
   loadingRecipesError: null,
   loadingCategoriesError: null,
+  loadingAreasError: null,
   requestedURL: null,
 };
 
@@ -36,6 +41,16 @@ export default function loadingReducer(state = INITIAL_STATE, action) {
     return { ...state,
       loadingCategories: false,
       loadingCategoriesError: action.payload.message };
+  case LOADING_AREAS:
+    return { ...state,
+      loadingAreas: true };
+  case FINISHED_LOADING_AREAS:
+    return { ...state,
+      loadingAreas: false };
+  case LOADING_AREAS_FAILED:
+    return { ...state,
+      loadingAreas: false,
+      loadingAreasError: action.payload.message };
   default:
     return state;
   }
