@@ -45,7 +45,7 @@ function RecipeDetails(props) {
       <h3>Instruções</h3>
       <p data-testid="instructions">{ recipe.strInstructions }</p>
       <Recommendations recipe={ type } />
-      <button 
+      <button
         type="button"
         data-testid="start-recipe-btn"
         style={ { position: 'fixed;' } }
