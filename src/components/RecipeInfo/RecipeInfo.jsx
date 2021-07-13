@@ -108,10 +108,11 @@ export default RecipeInfo;
 RecipeInfo.defaultProps = {
   recipe: {},
   recipeName: '',
+  recipeThumb: '',
 };
 
 RecipeInfo.propTypes = {
-  recipeThumb: PropTypes.string.isRequired,
+  recipeThumb: PropTypes.string,
   recipeName: PropTypes.string,
   recipeCategory: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
