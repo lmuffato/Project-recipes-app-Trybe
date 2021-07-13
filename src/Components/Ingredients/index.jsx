@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { useLocation } from 'react-router-dom';
 import userProvider from '../../context/UserContext';
-import { handleProgress, shouldBeChecked } from '../../helpers';
+import { handleProgress } from '../../helpers';
 import './styles.css';
 
 function Ingredient({ recipe, type, validate = () => ('empty'), id }) {
@@ -70,9 +70,6 @@ function Ingredient({ recipe, type, validate = () => ('empty'), id }) {
                   type="checkbox"
                   className="form-check-input"
                   onClick={ handleClick }
-                  checked={ shouldBeChecked(
-                    `${item[1]} - ${measures[index][1]}`, toggle, id,
-                  ) }
                 />
                 { `${item[1]} - ${measures[index][1]}` }
               </label>
