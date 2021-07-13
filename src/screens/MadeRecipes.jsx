@@ -1,11 +1,11 @@
 import React from 'react';
-import Header from '../components/Header';
+import HeaderRecipes from '../components/HeaderRecipes';
 
 function MadeRecipes() {
   return (
     <div>
-      <Header />
-      recitas feitas
+      <HeaderRecipes />
+      receitas feitas
     </div>
   );
 }

@@ -1,0 +1,44 @@
+@import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Handlee&display=swap') ;
+
+.container-explore {
+  background-color: #ce964a;
+  height: 100vh;
+}
+
+.book-food {
+  align-items: center;
+  background-image: url('../images/exploreFood.png');
+  color: black;
+  display: flex;
+  flex-direction: column;
+  font-family: Handlee , cursive;
+  font-size: 30px;
+  height: 229px;
+  justify-content: center;
+  margin-left: 15px;
+  padding-left: 50px;
+  width: 170px;
+}
+
+.book-drink {
+  align-items: center;
+  align-self: flex-end;
+  background-image: url('../images/exploreDrink.png');
+  color: black;
+  display: flex;
+  flex-direction: column;
+  font-family: Handlee , cursive;
+  font-size: 30px;
+  height: 229px;
+  justify-content: center;
+  margin-right: 15px;
+  padding-left: 50px;
+  width: 170px;
+}
+
+.explore-container {
+  display: flex;
+  flex-direction: column;
+  height: 500px;
+  justify-content: space-around;
+}

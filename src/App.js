@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import ProviderRecipes from './context/ProviderRecipes';
 import ByIngredients from './screens/ByIngredients';
 import ByOrigin from './screens/ByOrigin';
-import Detail from './screens/Detail';
+import Detail from './screens/RecipeDetails';
 import Explore from './screens/Explore';
 import ExploreFilters from './screens/ExploreFilters';
 import Favorites from './screens/Favorites';
@@ -34,9 +34,10 @@ function App() {
           <Route path="/bebidas/:id" render={ (props) => <Detail { ...props } /> } />
           <Route path="/comidas" component={ Main } />
           <Route path="/bebidas" component={ Main } />
-          <Route path="/explorar" component={ Explore } />
-          <Route path="/explorar/comidas" component={ ExploreFilters } />
-          <Route path="/explorar/bebidas" component={ ExploreFilters } />
+          <Route exact path="/explorar" component={ Explore } />
+          <Route exact path="/explorar/comidas" component={ ExploreFilters } />
+          <Route exact path="/explorar/bebidas" component={ ExploreFilters } />
+          <Route path="/explorar/comidas/ingredientes" component={ ByIngredients } />
           <Route path="/explorar/bebidas/ingredientes" component={ ByIngredients } />
           <Route path="/explorar/comidas/area" component={ ByOrigin } />
           <Route path="/receitas-feitas" component={ MadeRecipes } />

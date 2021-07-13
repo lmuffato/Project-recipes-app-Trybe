@@ -12,6 +12,7 @@ function ProviderRecipes({ children }) {
   // const [type, setType] = useState('');
   const [dataDrinkCards, setDataDrinkCards] = useState('');
   const [loadingCards, setLoadingCards] = useState(false);
+  const [showSearchBar, setShowSearchBar] = useState(false);
 
   /* useEffect(() => {
     (async function fetchDrinkAPI() {
@@ -76,6 +77,8 @@ function ProviderRecipes({ children }) {
         setDataDrinkCards,
         loadingCards,
         setLoadingCards,
+        showSearchBar,
+        setShowSearchBar,
       } }
     >
       { children }

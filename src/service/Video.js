@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export default function Video({ recipe }) {
   function getYouTubeURL() {
@@ -20,3 +21,7 @@ export default function Video({ recipe }) {
     </div>
   );
 }
+
+Video.propTypes = {
+  recipe: PropTypes.string.isRequired,
+};

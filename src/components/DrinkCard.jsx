@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 function DrinkCard(props) {
   const { index, drinks } = props;
@@ -11,8 +12,15 @@ function DrinkCard(props) {
         src={ drinks.strDrinkThumb }
       />
       <p data-testid={ `${index}-card-name` }>{ drinks.strDrink }</p>
+      { console.log(drinks)}
+      { console.log('olá')}
     </div>
   );
 }
+
+DrinkCard.propTypes = {
+  index: PropTypes.string,
+  drinks: PropTypes.object,
+}.isRequired;
 
 export default DrinkCard;
