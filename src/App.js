@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import ProviderRecipes from './context/ProviderRecipes';
 import ByIngredients from './screens/ByIngredients';
 import ByOrigin from './screens/ByOrigin';
-import Detail from './screens/Detail';
+import Detail from './screens/RecipeDetails';
 import Explore from './screens/Explore';
 import ExploreFilters from './screens/ExploreFilters';
 import Favorites from './screens/Favorites';
