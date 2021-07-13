@@ -1,0 +1,70 @@
+.login {
+  width: 100%;
+  height: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: #FFC363;
+}
+
+.login h1 {
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  padding-top: 20px;
+}
+
+.login img {
+  width: 410px;
+  margin: 0 auto;
+}
+
+.login-box {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding-top: 20px;
+}
+
+.login-box h5 {
+  color: #FF722A;
+  font-weight: bold;
+}
+
+.login-box input {
+  border-radius: 5px;
+  border: solid black 0.5px;
+  width: 220px;
+  height: 35px;
+  background-color: rgba(255, 255, 255, 0.308);
+}
+
+.login-box button {
+  width: 220px;
+  height: 35px;
+  border-style: none;
+  background-color: #FF722A;
+  color: white;
+  border-radius: 5px;
+}
+/*# sourceMappingURL=style.css.map */

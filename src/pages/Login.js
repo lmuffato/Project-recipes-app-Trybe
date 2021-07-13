@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-
 import { Link } from 'react-router-dom';
+
+import img from '../images/login-img.jpg';
 import setEmail from '../redux/actions/userAction';
 
 class Login extends React.Component {
@@ -44,41 +45,47 @@ class Login extends React.Component {
     const { userEmail, senha } = this.state;
     const { handleClick } = this.props;
     return (
-      <>
-        <div>Login</div>
-        <label htmlFor="input-email">
-          <input
-            placeholder="Email"
-            data-testid="email-input"
-            type="text"
-            id="input-email"
-            onChange={ this.onChange }
-            value={ userEmail }
-            name="userEmail"
-          />
-        </label>
-        <label htmlFor="input-password">
-          <input
-            placeholder="Senha"
-            data-testid="password-input"
-            type="password"
-            id="input-password"
-            onChange={ this.onChange }
-            value={ senha }
-            name="senha"
-          />
-        </label>
-        <Link to="/comidas">
-          <button
-            data-testid="login-submit-btn"
-            onClick={ () => { handleClick(userEmail); } }
-            disabled={ this.validation() }
-            type="button"
-          >
-            Entrar
-          </button>
-        </Link>
-      </>
+      <section className="login">
+        <h1>App receitas</h1>
+
+        <div className="login-box">
+          <h5>Login</h5>
+          <label htmlFor="input-email">
+            <input
+              placeholder="Email"
+              data-testid="email-input"
+              type="text"
+              id="input-email"
+              onChange={ this.onChange }
+              value={ userEmail }
+              name="userEmail"
+            />
+          </label>
+          <label htmlFor="input-password">
+            <input
+              placeholder="Senha"
+              data-testid="password-input"
+              type="password"
+              id="input-password"
+              onChange={ this.onChange }
+              value={ senha }
+              name="senha"
+            />
+          </label>
+          <Link to="/comidas">
+            <button
+              data-testid="login-submit-btn"
+              onClick={ () => { handleClick(userEmail); } }
+              disabled={ this.validation() }
+              type="button"
+            >
+              Entrar
+            </button>
+          </Link>
+        </div>
+
+        <img src={ img } alt="ilutração" />
+      </section>
     );
   }
 }

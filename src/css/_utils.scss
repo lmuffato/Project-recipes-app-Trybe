@@ -1,0 +1,18 @@
+$basecolor: #FFC363;
+$secondcolor: #FF722A;
+$textcolor: rgb(27, 27, 27);
+$bordershadow: 3px 3px 10px rgb(173, 173, 173);
+$border-radius: 5px;
+
+
+@mixin flex($direction, $justify, $align) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+}
+
+@mixin border() {
+  border-radius: $border-radius;
+  border: solid black 0.5px;
+}
