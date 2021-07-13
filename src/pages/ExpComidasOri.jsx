@@ -86,23 +86,26 @@ class ExpComidasOri extends React.Component {
               { country.strArea }
             </option>))}
         </select>
-        { CardIsLoading ? loading : foodData.map((recipe, index) => (
-          <div
-            key={ index }
-            data-testid={ `${index}-recipe-card` }
-            id={ recipe.idMeal }
-          >
-            <input
-              type="image"
-              src={ recipe.strMealThumb }
-              alt={ recipe.strMeal }
-              data-testid={ `${index}-card-img` }
-              width="350px"
-              onClick={ () => history.push(`/comidas/${recipe.idMeal}`) }
-            />
-            <h6 data-testid={ `${index}-card-name` }>{recipe.strMeal}</h6>
-          </div>
-        ))}
+        <div className="recipeContainer">
+          { CardIsLoading ? loading : foodData.map((recipe, index) => (
+            <div
+              key={ index }
+              data-testid={ `${index}-recipe-card` }
+              id={ recipe.idMeal }
+              className="recipeCard"
+            >
+              <input
+                type="image"
+                src={ recipe.strMealThumb }
+                alt={ recipe.strMeal }
+                data-testid={ `${index}-card-img` }
+                className="recipeImg"
+                onClick={ () => history.push(`/comidas/${recipe.idMeal}`) }
+              />
+              <h6 data-testid={ `${index}-card-name` }>{recipe.strMeal}</h6>
+            </div>
+          ))}
+        </div>
         <Footer history={ history } />
       </>
     );

@@ -22,12 +22,18 @@ class MainFoodCard extends React.Component {
 
   componentDidMount() {
     const { currentSearch } = this.props;
+    console.log(currentSearch);
     if (currentSearch.length !== 0) {
       this.renderCurrentSearch();
     } else {
       this.FilterCategoryFood();
       this.loadingFoodCategories();
     }
+  }
+
+  componentDidUpdate(prevState) {
+    const { currentSearch } = this.props;
+    if (prevState.currentSearch !== currentSearch) this.renderCurrentSearch();
   }
 
   componentWillUnmount() {
@@ -94,17 +100,39 @@ class MainFoodCard extends React.Component {
   }
 
   async renderCurrentSearch() {
-    const { currentSearch } = this.props;
-    const endpoint = `https://www.themealdb.com/api/json/v1/1/filter.php?i=${currentSearch}`;
-    const request = await fetch(endpoint).then((response) => response.json())
-      .catch((erro) => console.log(erro));
-
-    const limit = 12;
-    const sliced = request.meals.slice(0, limit);
-    this.setState({
-      foodData: sliced,
-      isLoading: false,
-    });
+    const { currentSearch, typeRecipe, history } = this.props;
+    const endpoint = {
+      name: `https://www.themealdb.com/api/json/v1/1/search.php?s=${currentSearch}`,
+      ingrendient: `https://www.themealdb.com/api/json/v1/1/filter.php?i=${currentSearch}`,
+      firstLetter: `https://www.themealdb.com/api/json/v1/1/search.php?f=${currentSearch}`,
+    };
+    if (typeRecipe) {
+      const chosenEnpoint = endpoint[typeRecipe];
+      const erroMsg = 'Sinto muito, não encontramos nenhuma receita para esses filtros.';
+      const request = await fetch(chosenEnpoint)
+        .then((response) => response.json())
+        .catch((err) => {
+          console.log(err);
+          // eslint-disable-next-line no-alert
+          return { [typeRecipe]: null };
+        });
+      if (request.meals === undefined || request.meals === null) {
+        // eslint-disable-next-line no-alert
+        return alert(erroMsg);
+      }
+      const limit = 12;
+      const data = request.meals;
+      const sliced = data.slice(0, limit);
+      this.setState({
+        foodData: sliced,
+        isLoading: false,
+      });
+      if (data.length === 1) {
+        const idRecipe = sliced[0].idMeal;
+        console.log(idRecipe);
+        return history.push(`/comidas/${idRecipe}`);
+      }
+    }
   }
 
   render() {
@@ -131,19 +159,20 @@ class MainFoodCard extends React.Component {
             {item.strCategory}
           </button>
         ))}
-        <div>
+        <div className="recipeContainer">
           { isLoading ? loading : foodData.map((recipe, index) => (
             <div
               key={ index }
               data-testid={ `${index}-recipe-card` }
               id={ recipe.idMeal }
+              className="recipeCard"
             >
               <input
+                className="recipeImg"
                 type="image"
                 src={ recipe.strMealThumb }
                 alt={ recipe.strMeal }
                 data-testid={ `${index}-card-img` }
-                width="350px"
                 onClick={ () => history.push(`/comidas/${recipe.idMeal}`) }
               />
               <h6 data-testid={ `${index}-card-name` }>{recipe.strMeal}</h6>
@@ -157,6 +186,7 @@ class MainFoodCard extends React.Component {
 
 const mapStateToProps = (state) => ({
   currentSearch: state.recipe.currentSearch,
+  typeRecipe: state.recipe.typeRecipe,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -165,10 +195,9 @@ const mapDispatchToProps = (dispatch) => ({
 
 MainFoodCard.propTypes = {
   history: PropTypes.shape().isRequired,
-  currentSearch: PropTypes.arrayOf(
-    PropTypes.string,
-  ).isRequired,
+  currentSearch: PropTypes.node.isRequired,
   cleanGlobalSearch: PropTypes.func.isRequired,
+  typeRecipe: PropTypes.node.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainFoodCard);

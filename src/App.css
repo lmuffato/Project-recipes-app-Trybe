@@ -89,3 +89,41 @@ footer {
   bottom: 0;
   position: fixed;
 }
+
+.recipeImg {
+  border-radius: 60px;
+  margin-bottom: 4px;
+  transition: 500ms;
+  width: 109px;
+}
+
+.recipeImg:hover {
+  border-radius: 0;
+}
+
+.recipeCard {
+  border: groove 1px;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  margin: 2px;
+  text-align: center;
+}
+
+.recipeContainer {
+  display: flex;
+  flex-flow: row wrap;
+  width: 360px;
+}
+
+.instructions {
+  margin: 4px;
+  text-align: justify;
+}
+
+.detImg {
+  align-content: space-around;
+  display: flex;
+  justify-content: space-around;
+  width: 345px;
+}

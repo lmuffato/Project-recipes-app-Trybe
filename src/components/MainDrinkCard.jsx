@@ -30,6 +30,11 @@ class MainDrinkCard extends React.Component {
     }
   }
 
+  componentDidUpdate(prevState) {
+    const { currentSearch } = this.props;
+    if (prevState.currentSearch !== currentSearch) this.renderCurrentSearch();
+  }
+
   componentWillUnmount() {
     const { cleanGlobalSearch } = this.props;
     cleanGlobalSearch([]);
@@ -58,7 +63,6 @@ class MainDrinkCard extends React.Component {
       .then((response) => response.json())
       .then((allDrinks) => {
         const result = allDrinks.drinks.slice(0, limitNumber);
-        console.log(result);
         this.setState({
           drinkData: result,
           isLoading: false,
@@ -85,6 +89,7 @@ class MainDrinkCard extends React.Component {
     fetch(URL)
       .then((response) => response.json())
       .then((allDrinks) => {
+        console.log();
         const result = allDrinks.drinks.slice(0, limitNumber);
         this.setState({
           drinkData: result,
@@ -94,17 +99,39 @@ class MainDrinkCard extends React.Component {
   }
 
   async renderCurrentSearch() {
-    const { currentSearch } = this.props;
-    const endpoint = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${currentSearch}`;
-    const request = await fetch(endpoint).then((response) => response.json());
-
-    const limit = 12;
-    const sliced = request.drinks.slice(0, limit);
-    console.log(sliced);
-    this.setState({
-      drinkData: sliced,
-      isLoading: false,
-    });
+    const { currentSearch, typeRecipe, history } = this.props;
+    const endpoints = {
+      name: `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${currentSearch}`,
+      ingrendient: `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${currentSearch}`,
+      firstLetter: `https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${currentSearch}`,
+    };
+    const erroMsg = 'Sinto muito, não encontramos nenhuma receita para esses filtros.';
+    if (typeRecipe) {
+      const chosenEnpoint = endpoints[typeRecipe];
+      const request = await fetch(chosenEnpoint)
+        .then((response) => response.json())
+        .catch((err) => {
+          console.log(err);
+          // eslint-disable-next-line no-alert
+          return { [typeRecipe]: null };
+        });
+      if (request.drinks === undefined || request.drinks === null) {
+        // eslint-disable-next-line no-alert
+        return alert(erroMsg);
+      }
+      const limit = 12;
+      const data = request.drinks;
+      const sliced = data.slice(0, limit);
+      this.setState({
+        drinkData: sliced,
+        isLoading: false,
+      });
+      if (data.length === 1) {
+        const idRecipe = sliced[0].idDrink;
+        console.log(idRecipe);
+        return history.push(`/bebidas/${idRecipe}`);
+      }
+    }
   }
 
   render() {
@@ -132,19 +159,20 @@ class MainDrinkCard extends React.Component {
             {item.strCategory}
           </button>
         ))}
-        <div>
+        <div className="recipeContainer">
           { isLoading ? loading : drinkData.map((recipe, index) => (
             <div
               key={ index }
               data-testid={ `${index}-recipe-card` }
               id={ recipe.idDrink }
+              className="recipeCard"
             >
               <input
+                className="recipeImg"
                 type="image"
                 src={ recipe.strDrinkThumb }
                 alt={ recipe.strDrink }
                 data-testid={ `${index}-card-img` }
-                width="350px"
                 onClick={ () => history.push(`/bebidas/${recipe.idDrink}`) }
               />
               <h6 data-testid={ `${index}-card-name` }>{recipe.strDrink}</h6>
@@ -158,6 +186,7 @@ class MainDrinkCard extends React.Component {
 
 const mapStateToProps = (state) => ({
   currentSearch: state.recipe.currentSearch,
+  typeRecipe: state.recipe.typeRecipe,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -166,10 +195,9 @@ const mapDispatchToProps = (dispatch) => ({
 
 MainDrinkCard.propTypes = {
   history: PropTypes.shape().isRequired,
-  currentSearch: PropTypes.arrayOf(
-    PropTypes.string,
-  ).isRequired,
+  currentSearch: PropTypes.node.isRequired,
   cleanGlobalSearch: PropTypes.func.isRequired,
+  typeRecipe: PropTypes.node.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainDrinkCard);
