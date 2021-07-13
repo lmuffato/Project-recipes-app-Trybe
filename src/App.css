@@ -139,6 +139,15 @@ footer {
   height: 640px;
 }
 
+.header {
+  background-color: white;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  padding-top: 6px;
+  z-index: 1;
+}
+
 .footer {
   background-color: white;
 }
@@ -167,4 +176,42 @@ footer {
   border-radius: 10px;
   font-family: Segoe UI, Tahoma, Geneva, Verdana, sans-serif;
   text-align: center;
+}
+
+.headerIcons {
+  border-radius: 40px;
+  height: 45px;
+  width: 45px;
+}
+
+.headerTitle {
+  font-size: 25pt;
+  margin-right: auto;
+  padding-left: 55px;
+  text-align: center;
+}
+
+.inputSearch {
+  border-radius: 15px;
+  margin: 10px;
+  padding: 4px;
+  text-align: center;
+  width: 100%;
+}
+
+.filters {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+}
+
+.filters input {
+  margin-right: 6px;
+}
+
+.categoryFilters {
+  display: flex;
+  font-size: 11pt;
+  justify-content: center;
+  margin-top: 5px;
 }

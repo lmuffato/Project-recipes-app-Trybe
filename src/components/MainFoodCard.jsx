@@ -141,24 +141,26 @@ class MainFoodCard extends React.Component {
     const loading = (<h1>Carregando...</h1>);
     return (
       <>
-        <button
-          type="button"
-          key="All"
-          data-testid="All-category-filter"
-          onClick={ (e) => this.handleClick(e) }
-        >
-          All
-        </button>
-        {isCharging ? '' : categories.map((item, index) => (
+        <section className="categoryFilters">
           <button
             type="button"
-            key={ index }
-            data-testid={ `${item.strCategory}-category-filter` }
+            key="All"
+            data-testid="All-category-filter"
             onClick={ (e) => this.handleClick(e) }
           >
-            {item.strCategory}
+            All
           </button>
-        ))}
+          {isCharging ? '' : categories.map((item, index) => (
+            <button
+              type="button"
+              key={ index }
+              data-testid={ `${item.strCategory}-category-filter` }
+              onClick={ (e) => this.handleClick(e) }
+            >
+              {item.strCategory}
+            </button>
+          ))}
+        </section>
         <div className="recipeContainer">
           { isLoading ? loading : foodData.map((recipe, index) => (
             <div
