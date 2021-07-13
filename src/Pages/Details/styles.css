@@ -97,3 +97,9 @@ span {
   margin: 0.5rem auto;
   width: 80vw;
 }
+
+.over-screen {
+  border-radius: 0.5rem;
+  position: float;
+  z-index: 2;
+}
