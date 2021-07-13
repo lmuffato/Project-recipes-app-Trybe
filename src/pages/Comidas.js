@@ -5,6 +5,7 @@ import CategoryButtons from '../components/Main/CategoryButtons';
 import RecipeCard from '../components/Main/RecipeCard';
 import Footer from '../components/Footer';
 import FoodContext from '../contexts/FoodContext';
+import '../style/Comidas.css';
 
 export default function Comidas() {
   const NUMBER_OF_RECIPES = 12;
