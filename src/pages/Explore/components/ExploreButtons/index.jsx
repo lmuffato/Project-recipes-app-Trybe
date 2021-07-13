@@ -1,12 +1,16 @@
 import { Link } from 'react-router-dom';
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 import styles from '../../styles.module.scss';
 
-import getRecipes from '../../../../services/recipesData';
+import { RecipesContext } from '../../../../context/Recipes';
 
 function ExploreButtons({ title }) {
-  const [randomId, setRandomId] = useState('');
+  const { loadRecipes, randomRecipe } = useContext(RecipesContext);
+
+  useEffect(() => {
+    loadRecipes(`/${title}`);
+  }, [loadRecipes, title]);
 
   function renderAreaLink() {
     if (title === 'comidas') {
@@ -24,15 +28,6 @@ function ExploreButtons({ title }) {
     }
   }
 
-  async function getRandomId() {
-    const response = await getRecipes(`/${title}`);
-    if (response) setRandomId(response.getRandom[0].id);
-  }
-
-  useEffect(() => {
-    getRandomId();
-  });
-
   if (title) {
     return (
       <>
@@ -46,7 +41,7 @@ function ExploreButtons({ title }) {
           </button>
         </Link>
         {renderAreaLink()}
-        <Link to={ `/${title}/${randomId}` }>
+        <Link to={ `/${title}/${randomRecipe}` }>
           <button
             id={ styles.last }
             type="button"
