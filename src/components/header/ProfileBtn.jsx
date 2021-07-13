@@ -5,7 +5,7 @@ import ProfileIcon from '../../images/profileIcon.svg';
 export default function ProfileBtn() {
   return (
     <div>
-      <Link to="/profile">
+      <Link to="/perfil">
         <img src={ ProfileIcon } alt="Profile icon" data-testid="profile-top-btn" />
       </Link>
     </div>
