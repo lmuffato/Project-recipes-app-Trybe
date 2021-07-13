@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { Link, useHistory } from 'react-router-dom';
 
 import plus18Icon from '../../../../images/plus18.svg';
 
 import styles from './styles.module.scss';
+import { RecipesContext } from '../../../../context/Recipes';
 
 function RecipeSimpleCard({ page, recipe, index, alcoholic }) {
+  const { filterRecipe } = useContext(RecipesContext);
   const { location: { pathname } } = useHistory();
 
   let redirec = `${pathname}/${recipe.id}`;
@@ -15,8 +17,16 @@ function RecipeSimpleCard({ page, recipe, index, alcoholic }) {
     redirec = pathname.includes('comidas') ? '/comidas' : '/bebidas';
   }
 
+  function ingredientsClick() {
+    if (!pathname.includes('explorar')) return;
+    filterRecipe({ type: 'ingredient', content: recipe.name });
+  }
+
   return (
-    <Link to={ redirec }>
+    <Link
+      to={ redirec }
+      onClick={ ingredientsClick }
+    >
       <div data-testid={ `${index}-${page}-card` } className={ styles.card }>
         { alcoholic && (
           <span className={ styles.alcoholicTag }>
