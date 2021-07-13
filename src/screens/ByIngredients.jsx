@@ -6,7 +6,7 @@ function ByIngredients() {
   return (
     <main>
       <HeaderExplore />
-      renderiza a tela de busca de receitas por ingredientes
+      renderiza a tela de busca de receitas por ingredientes!!
       <FooterBar />
     </main>
   );
