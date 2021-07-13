@@ -1,112 +1,101 @@
+// Lógica da renderização dos itens inspirada no repositório do grupo 8
+// https://github.com/tryber/sd-010-a-project-recipes-app/pull/55
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Header from '../components/Header';
-// import shareIcon from '../images/shareIcon.svg';
+import shareIcon from '../images/shareIcon.svg';
 
 class ReceitasFeitas extends React.Component {
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     loadingFood: true,
-  //     loadingDrink: true,
-  //   selectedFood: [],
-  //   selectedDrink: [],
-  // };
-  // this.loadingFoodRecipesDone = this.loadingFoodRecipesDone.bind(this);
-  // this.loadingDrinkRecipesDone = this.loadingDrinkRecipesDone.bind(this);
-  // this.selectedFoodRecipes = this.selectedFoodRecipes.bind(this);
-  // this.selectedDrinkRecipes = this.selectedDrinkRecipes.bind(this);
-  //   this.filterOrNot = this.filterOrNot.bind(this);
-  // }
+  constructor(props) {
+    super(props);
+    this.state = {
+      loadingCards: true,
+      selectedRecipe: [],
+      allRecipes: [],
+    };
+    this.loadingRecipesDone = this.loadingRecipesDone.bind(this);
+    this.filterOrNot = this.filterOrNot.bind(this);
+    this.copy = this.copy.bind(this);
+    this.timer = this.timer.bind(this);
+  }
 
-  // loadingFoodRecipesDone() {
-  //   const recipes = JSON.parse(localStorage.getItem('doneRecipes'));
-  //   if (recipes === null) {
-  //     return;
-  //   }
-  //   recipes.forEach(async (item) => {
-  //     const { id } = item;
-  //     const recipeSearch = await (await fetch({ `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${ id }` }).json());
-  //     const selected = Object.values(recipeSearch)[3]
-  //       .filter((product) => product.id === id);
-  //     this.selectedFoodRecipes(selected);
-  //   })
-  // }
+  componentDidMount() {
+    this.loadingRecipesDone();
+  }
 
-  // loadingDrinkRecipesDone() {
-  //   const recipes = JSON.parse(localStorage.getItem('doneRecipes'));
-  //   if (recipes === null) {
-  //     return;
-  //   }
-  //   recipes.forEach(async (item) => {
-  //     const { id } = item;
-  //     const recipeSearch = await (await fetch({ `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${ id }` }).json());
-  //     const selected = Object.values(recipeSearch)[3]
-  //       .filter((product) => product.id === id);
-  //     this.selectedDrinkRecipes(selected);
-  //   })
-  // }
+  loadingRecipesDone() {
+    const recipes = JSON.parse(localStorage.getItem('doneRecipes'));
+    if (recipes === null) {
+      return;
+    }
+    this.setState({
+      allRecipes: recipes,
+      selectedRecipe: recipes,
+      loadingCards: false,
+    });
+  }
 
-  // selectedFoodRecipes(param) {
-  //   this.setState({
-  //     loadingFood: false,
-  //   }, (prevState) => {
-  //     return { selectedFood: [...prevState, param],
-  //     };
-  //   });
-  // }
+  timer(index) {
+    const div = document.querySelector(`#recipeCopy${index}`);
+    const tagP = document.querySelector(`tagP${index}`);
+    div.removeChild(tagP);
+  }
 
-  // selectedDrinkRecipes(param) {
-  //   this.setState({
-  //     loadingDrink: false,
-  //   }, (prevState) => {
-  //     return { selectedDrink: [...prevState, param],
-  //     };
-  //   });
-  // }
+  copy(type, id, index) {
+    let URL;
+    const comida = `http://localhost:3000/comidas/${id}`;
+    const bebida = `http://localhost:3000/bebidas/${id}`;
+    if (type === 'comida') {
+      URL = comida;
+    } else if (type === 'bebida') {
+      URL = bebida;
+    }
+    const el = document.createElement('input');
+    el.value = URL;
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand('copy');
+    document.body.removeChild(el);
+    const div = document.querySelector(`#recipeCopy${index}`);
+    const tagP = document.createElement('p');
+    tagP.setAttribute('id', `tagP${index}`);
+    div.appendChild(tagP);
+    tagP.innerText = 'Link copiado!';
+    const time = 15000;
+    setTimeout(() => this.timer(index), time);
+  }
 
-  // filterOrNot(e) {
-  //   const filter = e.target.innerText;
-  //   if (filter === 'All') {
-  //     this.setState({
-  //       loadingFood: false,
-  //       loadingDrink: false,
-  //     });
-  //   } else if (filter === 'Food') {
-  //     this.setState({
-  //       loadingFood: false,
-  //       loadingDrink: true,
-  //     });
-  //   } else {
-  //     this.setState({
-  //       loadingFood: true,
-  //       loadingDrink: false,
-  //     });
-  //   }
-  // }
+  filterOrNot(e) {
+    const { allRecipes } = this.state;
+    const filter = e.target.innerText;
+    if (filter === 'All') {
+      const image = allRecipes;
+      this.setState({
+        selectedRecipe: image,
+      });
+    } else if (filter === 'Food') {
+      const image = allRecipes.filter((item) => item.type === 'comida');
+      this.setState({
+        selectedRecipe: image,
+      });
+    } else if (filter === 'Drinks') {
+      const image = allRecipes.filter((item) => item.type === 'bebida');
+      this.setState({
+        selectedRecipe: image,
+      });
+    }
+  }
 
   render() {
-  //   const food = { <img src={ img } alt={ name } data-testid={ `${index}-horizontal-image` } />
-  //   <p data-testid={ `${index}-horizontal-top-text` }>{ category }</p>
-  //   <p data-testid={ `${index}-horizontal-name` }>{ name }</p>
-  //   <p data-testid={ `${index}-horizontal-done-date` }> feita em { date }</p>
-  //   <input
-  //   type="image"
-  //   data-testid={ `${index}-horizontal-share-btn` }
-  //   src={ shareIcon }
-  //   alt="Compartilhar receita"
-  // />
-  //   <h5 data-testid={ `${index}-${tagName}-horizontal-tag` }>{ tag }</h5> };
-  //   const drink = { <img src={ img } alt={ name } data-testid={ `${index}-horizontal-image` } />
-  //   <p data-testid={ `${index}-horizontal-top-text` }>{ alcoholicOrNot }</p>
-  //   <p data-testid={ `${index}-horizontal-name` }>{ name }</p>
-  //   <p data-testid={ `${index}-horizontal-done-date` }> feita em { date }</p>
-  //   <input
-  //   type="image"
-  //   data-testid={ `${index}-horizontal-share-btn` }
-  //   src={ shareIcon }
-  //   alt="Compartilhar receita"
-  // />
-  //   <h5 data-testid={ `${index}-${tagName}-horizontal-tag` }>{ tag }</h5> };
+    const { selectedRecipe, loadingCards } = this.state;
+    const mapTags = (array, index) => (
+      array && (
+        array.map((tag) => (
+          <h6 key={ tag } data-testid={ `${index}-${tag}-horizontal-tag` }>{tag}</h6>
+        ))
+      )
+    );
+
     return (
       <>
         <Header title="Receitas Feitas" />
@@ -136,8 +125,54 @@ class ReceitasFeitas extends React.Component {
         </div>
         <main>
           <div>
-            {/* { loadingFood ? null : food }
-            { loadingDrink ? null : drink } */}
+            { loadingCards ? '' : selectedRecipe.map((recipe, index) => (
+              (
+                <div
+                  key={ index }
+                  className="card"
+                  id={ `recipeCopy${index}` }
+                >
+                  <Link to={ `/${recipe.type}s/${recipe.id}` } key={ recipe.name }>
+                    <div>
+                      <h4
+                        data-testid={ `${index}-horizontal-name` }
+                        className="title"
+                      >
+                        {recipe.name}
+                      </h4>
+                      <h6 data-testid={ `${index}-horizontal-top-text` }>
+                        {
+                          recipe.area !== '' ? `${recipe.area} - ${recipe.category}`
+                            : `${recipe.alcoholicOrNot} - ${recipe.category}`
+                        }
+                      </h6>
+                      <img
+                        alt="recipe"
+                        data-testid={ `${index}-horizontal-image` }
+                        className="recipe-card-image recipeImg"
+                        src={ recipe.image }
+                      />
+                    </div>
+                  </Link>
+                  <button
+                    type="button"
+                    onClick={ () => this.copy(recipe.type, recipe.id, index) }
+                  >
+                    <img
+                      src={ shareIcon }
+                      alt="share"
+                      data-testid={ `${index}-horizontal-share-btn` }
+                    />
+                  </button>
+                  <h6 data-testid={ `${index}-horizontal-done-date` }>
+                    {recipe.doneDate}
+                  </h6>
+                  <div>
+                    {recipe.tags ? mapTags(recipe.tags, index) : null}
+                  </div>
+                </div>
+              )
+            ))}
           </div>
         </main>
       </>
