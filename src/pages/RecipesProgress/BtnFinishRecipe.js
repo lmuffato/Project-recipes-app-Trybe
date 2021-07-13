@@ -5,13 +5,19 @@ import { AppContext } from '../../context/AppContext';
 
 export default function BtnFinishRecipe() {
   const { context } = useContext(AppContext);
-  const { checkedState } = context;
+  const { checkedState, toDoneStorage } = context;
+  const key = 'doneRecipes';
+
+  function setDoneStorage() {
+    localStorage.setItem(key, JSON.stringify(toDoneStorage));
+  }
   return (
     <Link to="/receitas-feitas">
       <button
         data-testid="finish-recipe-btn"
         type="button"
         disabled={ checkedState }
+        onClick={ setDoneStorage }
 
       >
 

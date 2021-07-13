@@ -51,6 +51,16 @@ export default function Ingredients({ recipe }) {
     setRecipeIngredients(ingredients);
   }, [recipe]);
 
+  const getMeasures = useCallback(() => {
+    const measuresList = Object.entries(recipe)
+      .filter((property) => {
+        const checkKey = property[0].includes('strMeasure');
+        const checkValue = property[1];
+        return checkKey && checkValue;
+      });
+    return measuresList;
+  }, [recipe]);
+
   useEffect(() => {
     const toStorage = {
       [recipeId]: textInput,
@@ -65,9 +75,10 @@ export default function Ingredients({ recipe }) {
   }, [recipeId, recipe.idMeal, recipe.idDrink]);
 
   useEffect(() => {
+    getMeasures();
     getIngredients();
     getFromStorage();
-  }, [getFromStorage, getIngredients]);
+  }, [getFromStorage, getIngredients, getMeasures]);
 
   return (
     <div ref={ inputRef } className="ingredients">
@@ -94,7 +105,7 @@ export default function Ingredients({ recipe }) {
                    && fromStorage.some((value) => value.includes(ingredient[1]))
                 }
               />
-              <span>{ingredient[1]}</span>
+              <span>{`${ingredient[1]} - ${getMeasures()[index][1]}`}</span>
             </label>
             <br />
           </div>
