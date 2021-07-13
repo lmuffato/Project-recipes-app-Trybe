@@ -70,11 +70,13 @@ function MealDescription({ recipe, recipeId }) {
           </p>
         ))}
         <p data-testid="instructions">{ strInstructions }</p>
-        <iframe
-          data-testid="video"
-          title="Recipe"
-          src={ strYoutube.replace('watch?v=', 'embed/') }
-        />
+        { strYoutube && (
+          <iframe
+            data-testid="video"
+            title="Recipe"
+            src={ strYoutube.replace('watch?v=', 'embed/') }
+          />
+        )}
       </section>
       <section className="carousel">
         <section className="recipes" onWheel={ handleScroll }>
@@ -84,6 +86,7 @@ function MealDescription({ recipe, recipeId }) {
               key={ idDrink }
               id={ idDrink }
               thumb={ strDrinkThumb }
+              pathname={ `/bebidas/${idDrink}` }
               recipeName={ strDrink }
             />
           ))}

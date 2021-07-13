@@ -3,10 +3,11 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import '../styles/Recomendations.css';
 
-function Recomendations({ index, id, thumb, recipeName }) {
+function Recomendations({ index, id, thumb, recipeName, pathname }) {
+  console.log(`/comidas/${id}`);
   return (
     <Link
-      to={ `/comidas/${id}` }
+      to={ pathname }
       className="recipe recomendation-card"
       data-testid={ `${index}-recomendation-card` }
     >

@@ -13,6 +13,8 @@ function RecipeDescription() {
   const recipeId = history.location.pathname.split('/')[2];
   let recipeSearch;
   let type;
+  console.log(recipeType);
+  console.log(recipeId);
 
   if (recipeType === 'comidas') {
     recipeSearch = 'meal';

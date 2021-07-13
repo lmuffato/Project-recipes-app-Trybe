@@ -86,6 +86,7 @@ function DrinkDescription({ recipe, recipeId }) {
               key={ idMeal }
               id={ idMeal }
               thumb={ strMealThumb }
+              pathname={ `/comidas/${idMeal}` }
               recipeName={ strMeal }
             />
           ))}
