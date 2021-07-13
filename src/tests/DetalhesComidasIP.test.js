@@ -28,23 +28,6 @@ describe('Teste da página de Comidas In Progress', () => {
     expect(getByTestId('favorite-btn')).toBeInTheDocument();
   });
 
-  test('testa os botoes de share e like', () => {
-    const { getByTestId, getByText, history } = renderWithRouterAndContext(<App />);
-
-    userEvent.type(getByTestId(EMAIL_TEST_ID), MOCK_EMAIL);
-    userEvent.type(getByTestId(PASSWORD_TEST_ID), '1234567');
-    userEvent.click(getByTestId(LOGIN_BTN_TEST_ID));
-
-    history.push(PAGE_MOCK);
-
-    const shareBtn = getByTestId('share-btn');
-    const favoriteBtn = getByTestId('favorite-btn');
-
-    userEvent.click(shareBtn);
-
-    expect(getByText('Link copiado"')).toBeInTheDocument();
-  });
-
   test('A tela de comidas in-progress possui os ingredientes corretos', async () => {
     const {
       getByTestId,
@@ -103,5 +86,33 @@ describe('Teste da página de Comidas In Progress', () => {
     });
 
     expect(finishRecipeBtn).not.toBeDisabled();
+
+    userEvent.click(finishRecipeBtn);
+
+    expect(history.location.pathname).toBe('/receitas-feitas');
+  });
+
+  test('Um ingrediente pode ser desmarcado', async () => {
+    const { getByTestId, findAllByRole, history } = renderWithRouterAndContext(<App />);
+
+    userEvent.type(getByTestId(EMAIL_TEST_ID), MOCK_EMAIL);
+    userEvent.type(getByTestId(PASSWORD_TEST_ID), '1234567');
+    userEvent.click(getByTestId(LOGIN_BTN_TEST_ID));
+
+    history.push(PAGE_MOCK);
+
+    const finishRecipeBtn = getByTestId('finish-recipe-btn');
+
+    expect(finishRecipeBtn).toBeInTheDocument();
+    expect(finishRecipeBtn).toHaveProperty('disabled');
+
+    const ingredientCheckbox = await findAllByRole('checkbox');
+    ingredientCheckbox.forEach((ing) => {
+      userEvent.click(ing);
+    });
+
+    userEvent.click(ingredientCheckbox[0]);
+
+    expect(finishRecipeBtn).toBeDisabled();
   });
 });

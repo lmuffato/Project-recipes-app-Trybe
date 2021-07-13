@@ -32,7 +32,7 @@ describe('Teste da página de Bebidas In Progress', () => {
     const {
       getByTestId,
       findAllByTestId,
-      getByText,
+      getByRole,
       history } = renderWithRouterAndContext(<App />);
 
     userEvent.type(getByTestId(EMAIL_TEST_ID), MOCK_EMAIL);
@@ -41,7 +41,7 @@ describe('Teste da página de Bebidas In Progress', () => {
 
     history.push(PAGE_MOCK);
 
-    expect(getByText('Ingredients')).toBeInTheDocument();
+    expect(getByRole('heading', { name: 'Ingredients', level: 3 })).toBeInTheDocument();
 
     const ingredientRegEx = /.-ingredient-step/;
     const AMOUNT_OF_INGREDIENTS = 3;
@@ -54,7 +54,7 @@ describe('Teste da página de Bebidas In Progress', () => {
     });
   });
 
-  test('A tela de comidas in-progress possui as instruções corretas', () => {
+  test('A tela de bebidas in-progress possui as instruções corretas', () => {
     const { getByTestId, history } = renderWithRouterAndContext(<App />);
 
     userEvent.type(getByTestId(EMAIL_TEST_ID), MOCK_EMAIL);
@@ -86,5 +86,33 @@ describe('Teste da página de Bebidas In Progress', () => {
     });
 
     expect(finishRecipeBtn).not.toBeDisabled();
+
+    userEvent.click(finishRecipeBtn);
+
+    expect(history.location.pathname).toBe('/receitas-feitas');
+  });
+
+  test('Um ingrediente pode ser desmarcado', async () => {
+    const { getByTestId, findAllByRole, history } = renderWithRouterAndContext(<App />);
+
+    userEvent.type(getByTestId(EMAIL_TEST_ID), MOCK_EMAIL);
+    userEvent.type(getByTestId(PASSWORD_TEST_ID), '1234567');
+    userEvent.click(getByTestId(LOGIN_BTN_TEST_ID));
+
+    history.push(PAGE_MOCK);
+
+    const finishRecipeBtn = getByTestId('finish-recipe-btn');
+
+    expect(finishRecipeBtn).toBeInTheDocument();
+    expect(finishRecipeBtn).toHaveProperty('disabled');
+
+    const ingredientCheckbox = await findAllByRole('checkbox');
+    ingredientCheckbox.forEach((ing) => {
+      userEvent.click(ing);
+    });
+
+    userEvent.click(ingredientCheckbox[0]);
+
+    expect(finishRecipeBtn).toBeDisabled();
   });
 });
