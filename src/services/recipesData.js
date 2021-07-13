@@ -6,15 +6,15 @@ const paths = {
   bebidas: '/bebidas',
 };
 
-export default async function getRecipes(path, filterCategory) {
+export default async function getRecipes(path, options) {
   switch (path) {
   case paths.comidas: {
-    const results = await mealsData(filterCategory);
+    const results = await mealsData(options);
     return results;
   }
 
   case paths.bebidas: {
-    const results = await drinksData(filterCategory);
+    const results = await drinksData(options);
     return results;
   }
 

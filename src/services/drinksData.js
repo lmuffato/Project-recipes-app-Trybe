@@ -11,20 +11,42 @@ function parseDrinkResults(results) {
   return parsed;
 }
 
-export default async function drinksData(filterCategory) {
+export default async function drinksData(options) {
   const results = await fetchJson('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
   const resultsParsed = parseDrinkResults(results);
 
   const categories = await fetchJson('https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list');
 
-  if (filterCategory) {
+  if (options && options.category) {
     const filter = await fetchJson(
-      `https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${filterCategory}`,
+      `https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${options.category}`,
     );
 
-    const filterParsed = parseDrinkResults(filter);
+    return parseDrinkResults(filter);
+  }
 
-    return filterParsed;
+  if (options && options.ingredient) {
+    const filter = await fetchJson(
+      `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${options.ingredient}`,
+    );
+
+    return parseDrinkResults(filter);
+  }
+
+  if (options && options.name) {
+    const filter = await fetchJson(
+      `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${options.name}`,
+    );
+
+    return parseDrinkResults(filter);
+  }
+
+  if (options && options.firstletter) {
+    const filter = await fetchJson(
+      `https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${options.firstletter}`,
+    );
+
+    return parseDrinkResults(filter);
   }
 
   return {

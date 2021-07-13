@@ -11,20 +11,42 @@ function parseMealResults(results) {
   return parsed;
 }
 
-export default async function mealsData(filterCategory) {
+export default async function mealsData(options) {
   const results = await fetchJson('https://www.themealdb.com/api/json/v1/1/search.php?s=');
   const resultsParsed = parseMealResults(results);
 
   const categories = await fetchJson('https://www.themealdb.com/api/json/v1/1/list.php?c=list');
 
-  if (filterCategory) {
+  if (options && options.category) {
     const filter = await fetchJson(
-      `https://www.themealdb.com/api/json/v1/1/filter.php?c=${filterCategory}`,
+      `https://www.themealdb.com/api/json/v1/1/filter.php?c=${options.category}`,
     );
 
-    const filterParsed = parseMealResults(filter);
+    return parseMealResults(filter);
+  }
 
-    return filterParsed;
+  if (options && options.ingredient) {
+    const filter = await fetchJson(
+      `https://www.themealdb.com/api/json/v1/1/filter.php?i=${options.ingredient}`,
+    );
+
+    return parseMealResults(filter);
+  }
+
+  if (options && options.name) {
+    const filter = await fetchJson(
+      `https://www.themealdb.com/api/json/v1/1/search.php?s=${options.name}`,
+    );
+
+    return parseMealResults(filter);
+  }
+
+  if (options && options.firstletter) {
+    const filter = await fetchJson(
+      `https://www.themealdb.com/api/json/v1/1/search.php?f=${options.firstletter}`,
+    );
+
+    return parseMealResults(filter);
   }
 
   return {

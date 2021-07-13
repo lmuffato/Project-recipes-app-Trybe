@@ -4,7 +4,7 @@ import { RecipesContext } from '../../../../context/Recipes';
 import styles from './styles.module.scss';
 
 function Categories() {
-  const { categories, filterByCategory } = useContext(RecipesContext);
+  const { categories, filterRecipe } = useContext(RecipesContext);
 
   return (
     <div className={ styles.categories }>
@@ -13,7 +13,7 @@ function Categories() {
           type="radio"
           id="All"
           name="category"
-          onClick={ () => filterByCategory('All') }
+          onClick={ () => filterRecipe({ type: 'category', content: 'All' }) }
           defaultChecked
         />
         <span>
@@ -29,7 +29,10 @@ function Categories() {
             type="radio"
             id={ category.strCategory }
             name="category"
-            onClick={ (event) => filterByCategory(category.strCategory, event) }
+            onClick={ (event) => filterRecipe({
+              type: 'category',
+              content: category.strCategory,
+            }, event) }
           />
           <span data-testid={ `${category.strCategory}-category-filter` }>
             { category.strCategory }
