@@ -12,9 +12,7 @@ function ExploreDrinks() {
   };
   return (
     <div>
-      <Header>
-        <h2 data-testid="page-title">Explorar Bebidas</h2>
-      </Header>
+      <Header heading="Explorar Bebidas" />
       <section>
         <section data-testid="explore-by-ingredient">
           <a
@@ -25,7 +23,7 @@ function ExploreDrinks() {
         </section>
         <section data-testid="explore-surprise">
           <Link
-            href="/explorar/bebidas/me-surpreenda"
+            to="/explorar/bebidas/me-surpreenda"
             onClick={ handleRandom }
           >
             <h2>Me Surpreenda!</h2>

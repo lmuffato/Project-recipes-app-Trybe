@@ -47,9 +47,7 @@ function ExploreIngredients({ type }) {
 
   return (
     <div>
-      <Header>
-        <h2 data-testid="page-title">Explorar Ingredientes</h2>
-      </Header>
+      <Header heading="Explorar Ingredientes" />
       {ingredients.map((ingredient, index) => {
         const ingredientName = type === 'meals'
           ? ingredient.strIngredient

@@ -11,7 +11,7 @@ import ExploreIngredients from './pages/ExploreIngredients';
 import DetailsContextProvider from './context/DetailsContext';
 import FavoriteRecipes from './pages/FavoriteRecipes';
 import DoneRecipes from './pages/DoneRecipes';
-import ExploreOrigin from './pages/ExploreArea';
+import ExploreOrigin from './pages/ExploreOrigin';
 
 function App() {
   return (
@@ -44,7 +44,7 @@ function App() {
         />
         <Route path="/explorar/comidas" exact component={ ExploreFoods } />
         <Route path="/explorar/bebidas" exact component={ ExploreDrinks } />
-        <Route path="/explorar/comidas/area" component={ ExploreOrigin } />
+        <Route path="/explorar/comidas/area" exact component={ ExploreOrigin } />
         <Route path="/explorar/bebidas/area" render={ () => <h1>Not Found</h1> } />
         <Route
           exact

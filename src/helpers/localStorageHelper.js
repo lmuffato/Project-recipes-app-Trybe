@@ -26,3 +26,31 @@ const handleSetFavoritesToLocalStorage = (recipe, bool, key, id) => {
 };
 
 export default handleSetFavoritesToLocalStorage;
+
+export const handleCheckLS = (key, id, type) => {
+  const checkLocalStorage = JSON.parse(localStorage.getItem(key));
+  if (checkLocalStorage) {
+    const recipeId = type === 'meals' ? Object.keys(checkLocalStorage.meals)
+      : Object.keys(checkLocalStorage.cocktails);
+
+    if (recipeId) {
+      const findId = recipeId.some((item) => item === id);
+      if (findId) {
+        return findId;
+      }
+      return false;
+    }
+    return false;
+  }
+};
+
+export const handleCheckDoneRecipes = (key, id) => {
+  const checkLocalStorage = JSON.parse(localStorage.getItem(key));
+  if (checkLocalStorage) {
+    const soughtId = checkLocalStorage.some((item) => item.id === id);
+    if (soughtId) {
+      return soughtId;
+    }
+    return false;
+  }
+};

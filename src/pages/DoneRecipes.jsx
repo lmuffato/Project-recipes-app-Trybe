@@ -25,9 +25,7 @@ function DoneRecipes() {
   if (doneRecipes.length === 0) {
     return (
       <div>
-        <Header>
-          <h1 data-testid="page-title">Receitas Feitas</h1>
-        </Header>
+        <Header heading="Receitas Feitas" />
         <h2>Você não possui receitas feitas!</h2>
       </div>
     );
