@@ -13,8 +13,6 @@ export const shouldBeChecked = (ingredient, toggle, id) => {
   if (getRecipes) {
     const testKey = getRecipes[toggle];
     if (testKey && testKey[id]) {
-      console.log(ingredient);
-      console.log(getRecipes[toggle][id]);
       return getRecipes[toggle][id].includes(ingredient);
     }
   }
