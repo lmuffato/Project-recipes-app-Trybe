@@ -8,6 +8,8 @@ import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import { btn } from '../styles/login';
 
+import '../styles/DetalhesPagina.css';
+
 const copy = require('clipboard-copy');
 
 function ReceitaBebidaDetalhe({ props }) {
