@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import Header from '../compenents/Header';
 import Footer from '../compenents/Footer';
 import MainRecipes from '../compenents/MainRecipes';
 import RecipesContext from '../contexts/RecipesContext';
@@ -8,13 +7,14 @@ import SearchbarContext from '../contexts/SearchbarContext';
 import apiRequester from '../services/fetchApi';
 import '../styles/MealAndDrinkCards.css';
 import Loading from '../compenents/Loading';
+import Header from '../compenents/Header';
 
 function MainRecipesPage() {
   const [twelveRecipes, setTwelveRecipes] = useState(null);
   const [returnedCategoty, setReturnedCategory] = useState(null);
 
   const {
-    searchCategory, categories, setCategories,
+    searchCategory, categories, setCategories, setHideSearchBtn,
   } = useContext(SearchbarContext);
   const { mealOrDrink, type, setType, setRecipes, recipes,
   } = useContext(RecipesContext);
@@ -28,6 +28,10 @@ function MainRecipesPage() {
       setType('meal');
     }
   }, [history, mealOrDrink, setType]);
+
+  useEffect(() => {
+    setHideSearchBtn(true);
+  }, []);
 
   useEffect(() => {
     const endpoints = {

@@ -1,8 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import Footer from '../compenents/Footer';
+import Header from '../compenents/Header';
+import SearchbarContext from '../contexts/SearchbarContext';
 
 function Foods() {
   const [idMeal, setIdMeal] = useState();
+  const { setHideSearchBtn } = useContext(SearchbarContext);
 
   useEffect(() => {
     const getRandomFoodRecepie = async () => {
@@ -14,10 +18,12 @@ function Foods() {
       setIdMeal(saveIdMeal);
     };
     getRandomFoodRecepie();
+    setHideSearchBtn(false);
   }, []);
 
   return (
-    <div>
+    <>
+      <Header />
       <Link to="/explorar/comidas/ingredientes">
         <button
           type="button"
@@ -42,7 +48,8 @@ function Foods() {
           Me Surpreenda!
         </button>
       </Link>
-    </div>
+      <Footer />
+    </>
   );
 }
 

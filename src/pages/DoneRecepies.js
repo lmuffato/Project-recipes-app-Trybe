@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import CardMealDoneFav from '../compenents/CardMealDoneFav';
 import CardDrinkDoneFav from '../compenents/CardDrinkDoneFav';
+import SearchbarContext from '../contexts/SearchbarContext';
+import Header from '../compenents/Header';
 
 function DoneRecepies() {
   const [myDoneRecepies, setMyDoneRecepies] = useState();
   const [showDoneRecepies, setShowRecepies] = useState();
+  const { setHideSearchBtn } = useContext(SearchbarContext);
 
   // funções para pegar as receitas do local storage
   const getDoneRecepies = () => {
@@ -22,6 +25,7 @@ function DoneRecepies() {
       setMyDoneRecepies(recepiesStorage);
       setShowRecepies(recepiesStorage);
     }
+    setHideSearchBtn(false);
   }, []);
 
   function setMealOrDrink(recepie, index) {
@@ -54,35 +58,38 @@ function DoneRecepies() {
   }
 
   return (
-    <section>
-      <div>
-        <button
-          data-testid="filter-by-all-btn"
-          type="button"
-          onClick={ () => handleContent('all') }
-        >
-          All
-        </button>
-        <button
-          data-testid="filter-by-food-btn"
-          type="button"
-          onClick={ () => handleContent('food') }
-        >
-          Food
-        </button>
-        <button
-          data-testid="filter-by-drink-btn"
-          type="button"
-          onClick={ () => handleContent('drink') }
-        >
-          Drinks
-        </button>
-      </div>
+    <>
+      <Header />
+      <section>
+        <div>
+          <button
+            data-testid="filter-by-all-btn"
+            type="button"
+            onClick={ () => handleContent('all') }
+          >
+            All
+          </button>
+          <button
+            data-testid="filter-by-food-btn"
+            type="button"
+            onClick={ () => handleContent('food') }
+          >
+            Food
+          </button>
+          <button
+            data-testid="filter-by-drink-btn"
+            type="button"
+            onClick={ () => handleContent('drink') }
+          >
+            Drinks
+          </button>
+        </div>
 
-      {showDoneRecepies.map((recepie, index) => (
-        setMealOrDrink(recepie, index)))}
+        {showDoneRecepies.map((recepie, index) => (
+          setMealOrDrink(recepie, index)))}
 
-    </section>
+      </section>
+    </>
   );
 }
 
