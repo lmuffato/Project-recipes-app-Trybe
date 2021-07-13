@@ -7,7 +7,7 @@ import Footer from './components/Footer';
 function Meals() {
   const type = 'meals';
   return (
-    <div>
+    <div className="background">
       <Header type={ type } />
       <CategoriesBtn type={ type } />
       <MealCards />

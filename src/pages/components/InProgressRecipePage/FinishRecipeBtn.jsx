@@ -76,11 +76,12 @@ export default function FinishRecipeBtn(props) {
   }
 
   return (
-    <div>
+    <div className="inProgress-div-btn">
       <Link to="/receitas-feitas">
         <button
           type="button"
           data-testid="finish-recipe-btn"
+          className="finish-recipe-btn"
           disabled={ button }
           onClick={ () => handleClick(props.recipe) }
         >

@@ -14,12 +14,17 @@ export default function MealsDoneCards({ props:
     const size = 2;
     const { name, id, image, area, category, doneDate, tags } = recipe;
     return (
-      <div key={ name }>
+      <div key={ name } className="doneRecipes-card">
         <h1 style={ show ? {} : { display: 'none' } }>Link copiado!</h1>
-        <Link to={ `/comidas/${id}` }>
-          <h2 data-testid={ `${index}-horizontal-name` }>{name}</h2>
+        <Link to={ `/comidas/${id}` } className="doneRecipes-link">
+          <h2
+            data-testid={ `${index}-horizontal-name` }
+            className="doneRecipes-title"
+          >
+            {name}
+          </h2>
           <img
-            style={ { width: '50px' } }
+            className="doneRecipes-img"
             src={ image }
             alt={ name }
             data-testid={ `${index}-horizontal-image` }

@@ -42,7 +42,7 @@ function RecipeDetails() {
   return (
     loading ? null
       : data.map((recipe) => (
-        <div key={ recipe.strDrink || recipe.strMeal }>
+        <div key={ recipe.strDrink || recipe.strMeal } className="inProgress-main">
           <DetailsHeader recipe={ recipe } type={ type } pathname={ pathname } />
           <Ingredients
             recipe={ recipe }

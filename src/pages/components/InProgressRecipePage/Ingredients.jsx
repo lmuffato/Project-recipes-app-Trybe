@@ -21,7 +21,6 @@ const handleChange = (
 
 function Ingredients(props) {
   const [ingredientList, setIngredientList] = useState('');
-  console.log(ingredientList);
   const { recipe, inProgressUpdate, setInprogressUpdate } = props;
   const { idMeal, idDrink } = recipe;
   const recipeKeys = Object.keys(recipe);
@@ -57,13 +56,23 @@ function Ingredients(props) {
   }, [ingredientList]);
 
   return (
-    <Container>
-      <h2>Ingredients</h2>
+    <Container className="inProgress-ingredients-container">
+      <h2 className="inProgress-ingredient-title">Ingredients</h2>
       { ingredientList ? ingredientList.map((ingredient, index) => (
-        <Row key={ ingredient } data-testid={ `${index}-ingredient-step` }>
-          <label key={ ingredient[0] } htmlFor={ ingredient[0] }>
+        <Row
+          key={ ingredient }
+          data-testid={ `${index}-ingredient-step` }
+          className="inProgress-ingredient-row"
+        >
+          <label
+            key={ ingredient[0] }
+            htmlFor={ ingredient[0] }
+            className="inProgress-ingredient"
+          >
             <input
               type="checkbox"
+              className="inProgress-checkbox"
+              id={ ingredient[0] }
               checked={ ingredient[1] }
               key={ ingredient[0] }
               onChange={
@@ -72,7 +81,7 @@ function Ingredients(props) {
               // data-testid={ `${index}-ingredient-step` }
             />
             {!ingredient[1] ? (
-              <div>
+              <div className="inProgress-ingredient-item">
                 <p>
                   {recipe[measures[index]]}
                 </p>
@@ -80,7 +89,7 @@ function Ingredients(props) {
               </div>
             )
               : (
-                <div>
+                <div className="inProgress-ingredient-item">
                   <p>
                     <s>
                       {recipe[measures[index]]}

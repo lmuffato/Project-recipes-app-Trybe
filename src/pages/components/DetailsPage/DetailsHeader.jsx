@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { string } from 'prop-types';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 import shareIcon from '../../../images/shareIcon.svg';
 import whiteHeartIcon from '../../../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../../../images/blackHeartIcon.svg';
@@ -64,31 +61,29 @@ function DetailsHeader(props) {
   };
 
   return (
-    <Container>
-      <Row>
-        <img
-          src={ img }
-          alt={ title }
-          className="details-img"
-          data-testid="recipe-photo"
-        />
-      </Row>
-      <Row>
-        <Col>
-          <h1 data-testid="recipe-title">{ title }</h1>
-        </Col>
-        <Col>
-          <span hidden={ copyMessage }>
+    <div className="details-header">
+      <img
+        src={ img }
+        alt={ title }
+        className="details-img"
+        data-testid="recipe-photo"
+      />
+      <div className="details-name-btns">
+        <h1 data-testid="recipe-title" className="details-name">{ title }</h1>
+        <div className="details-btns">
+          <span hidden={ copyMessage } className="details-span">
             Link copiado!
           </span>
           <button
             type="button"
             onClick={ copyToClipboard }
+            className="details-btn"
           >
             <img src={ shareIcon } alt="Share icon" data-testid="share-btn" />
           </button>
           <button
             type="button"
+            className="details-btn"
             onClick={ () => {
               favoriteRecipe(recipe, type, isFavorited);
               isFavoritedToggle(!isFavorited);
@@ -100,14 +95,12 @@ function DetailsHeader(props) {
               data-testid="favorite-btn"
             />
           </button>
-        </Col>
-      </Row>
-      <Row>
-        <Col data-testid="recipe-category">
-          { category }
-        </Col>
-      </Row>
-    </Container>
+        </div>
+      </div>
+      <h2 data-testid="recipe-category" className="details-category">
+        { category }
+      </h2>
+    </div>
   );
 }
 

@@ -9,7 +9,7 @@ export default function DoneFilters() {
     setFilter(props);
   };
   return (
-    <div>
+    <div className="doneRecipes-div">
       <Header type="done-recipes" />
       <RecipeFilters handleClick={ handleClick } />
       <RecipesDone filter={ filter } />

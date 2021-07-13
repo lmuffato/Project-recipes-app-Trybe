@@ -10,15 +10,21 @@ function Ingredients(props) {
   const measures = recipeKeys.filter((key) => key.includes('Measure'));
 
   return (
-    <Container>
-      <h2>Ingredients</h2>
-      { ingredients.map((ingredient, index) => (
-        <Row key={ ingredient } data-testid={ `${index}-ingredient-name-and-measure` }>
-          { recipe[measures[index]] }
-          { ' ' }
-          { recipe[ingredient] }
-        </Row>
-      )) }
+    <Container className="details-ingredients">
+      <h1 className="details-ingredient-title">Ingredients</h1>
+      <div className="details-ingredient-list">
+        { ingredients.map((ingredient, index) => (
+          <Row
+            key={ ingredient }
+            className="details-ingredient"
+            data-testid={ `${index}-ingredient-name-and-measure` }
+          >
+            { recipe[measures[index]] }
+            { ' ' }
+            { recipe[ingredient] }
+          </Row>
+        )) }
+      </div>
     </Container>
   );
 }

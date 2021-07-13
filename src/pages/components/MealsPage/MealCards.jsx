@@ -19,12 +19,21 @@ function MealCards() {
   }, [filter]); // eslint-disable-line
 
   return (
-    <div>
+    <div className="meals-container">
       { loading ? null
         : meals.slice(0, size).map(({ idMeal, strMeal, strMealThumb }, index) => (
-          <div key={ strMeal } data-testid={ `${index}-recipe-card` }>
-            <Link to={ `/comidas/${idMeal}` }>
-              <h2 data-testid={ `${index}-card-name` }>{strMeal}</h2>
+          <div
+            key={ strMeal }
+            data-testid={ `${index}-recipe-card` }
+            className="meals-card"
+          >
+            <Link to={ `/comidas/${idMeal}` } className="meals-link">
+              <h2
+                data-testid={ `${index}-card-name` }
+                className="meals-title"
+              >
+                {strMeal}
+              </h2>
               <img
                 src={ strMealThumb }
                 alt={ strMeal }
