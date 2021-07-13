@@ -14,6 +14,7 @@ import ExploreByAreaFoods from './pages/ExploreByAreaFoods';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import RecipesFavorites from './pages/RecipesFavorite';
 import RecipesDone from './pages/RecipesDone';
+import ProfileScreen from './pages/ProfileScreen';
 
 function App() {
   return (
@@ -46,7 +47,8 @@ function App() {
             />
             <Route exact path="/explorar/comidas/area" component={ ExploreByAreaFoods } />
             <Route path="/receitas-favoritas" component={ RecipesFavorites } />
-            <Route patch="receitas-feitas" component={ RecipesDone } />
+            <Route exact path="/receitas-feitas" component={ RecipesDone } />
+            <Route exact path="/perfil" component={ ProfileScreen } />
           </Switch>
         </BrowserRouter>
       </AppProvider>

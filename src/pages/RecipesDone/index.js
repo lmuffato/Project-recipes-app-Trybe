@@ -59,7 +59,7 @@ export default function RecipesDone() {
 
   return (
     <>
-      <Header title="Explorar" isSearch={ false } />
+      <Header title="Receitas Feitas" isSearch={ false } />
       <nav>
         <button
           type="button"

@@ -65,7 +65,7 @@ export default function RecipesFavorites() {
   return (
     <>
       <nav>
-        <Header title="Explorar" isSearch={ false } />
+        <Header title="Receitas Favoritas" isSearch={ false } />
         <button
           type="button"
           data-testid="filter-by-all-btn"
