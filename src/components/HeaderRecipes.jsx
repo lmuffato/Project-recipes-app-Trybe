@@ -13,11 +13,13 @@ function HeaderRecipes() {
           data-testid="profile-top-btn"
           src={ profileIcon }
           alt="profile icon"
+          className="explore-icon"
         />
       </Link>
       <h3 data-testid="page-title" className="Explore">
         { location.pathname.includes('feitas') ? 'Receitas Feitas' : 'Receitas Favoritas'}
       </h3>
+      <div className="explore-icon" />
     </div>
   );
 }

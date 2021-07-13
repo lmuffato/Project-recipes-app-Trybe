@@ -1,15 +1,28 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Handlee&display=swap') ;
+  font-family: Comic Neue , cursive;
+*/
+
+.exploreBtn {
+  background-color: transparent;
+  border: none;
+}
+
 .Header {
-  background-color: #ce964a;
+  align-items: center;
+  background-color: rgb(0, 0, 0, 0.45);
+  border-radius: 0 0 19px 19px;
   color: white;
   display: flex;
+  font-weight: 700;
   justify-content: space-between;
   max-width: 100%;
+  padding: 0 20px;
 }
 
 .Explore {
   text-align: start;
 }
 
-.exploreBtn {
-  background-color: #ce964a;
+.explore-icon {
+  width: 25px;
 }
