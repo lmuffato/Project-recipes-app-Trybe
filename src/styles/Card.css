@@ -20,7 +20,7 @@
 }
 
 .card:hover {
-  background-color: #c9b24d4f;
+  background-color: #f1f1f156;
   box-shadow: 1px 1px 7px rgb(29, 28, 29) inset;
 }
 
@@ -69,7 +69,7 @@
   }
 
   .card:hover {
-    background-color: #c9b24d73;
+    background-color: #f1f1f156;
     box-shadow: 1px 1px 7px rgb(29, 28, 29) inset;
   }
 
