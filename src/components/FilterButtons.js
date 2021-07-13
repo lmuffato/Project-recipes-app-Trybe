@@ -49,6 +49,7 @@ function FilterButtons({ path }) {
       setStateRedux({ actionType: 'FETCH_CATEGORY', fiveCategories });
     };
     fetchCategory();
+    // eslint-disable-next-line
   }, []);
 
   return (

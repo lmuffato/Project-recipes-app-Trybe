@@ -4,8 +4,11 @@
     height: 80px;
     
     header {
-      display: flex;
-      justify-content: space-around;
+      display: grid;
+      grid-template-columns: 1fr 3fr 1fr;
+      width: 90%;
+      margin: 0 auto;
+      text-align: center;
 
       img {
         filter: invert(100%) sepia(0%) saturate(7500%) hue-rotate(334deg) brightness(106%) contrast(101%);
@@ -20,9 +23,6 @@
         width: 32px;
         margin-top: 14px;
         padding: 10px;
-        /* background: white;
-        border-radius: 50%;
-        box-shadow: 2px 2px 5px rgb(167, 167, 167); */
       }
 
       h1 {
@@ -30,7 +30,6 @@
         color: white;
         text-shadow: 1px 1px 10px rgb(59, 59, 59);
         font-weight: 500;
-        /* margin-left: -10px; */
       }
 
       .search {
