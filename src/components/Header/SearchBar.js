@@ -102,7 +102,7 @@ export default function SearchBar() {
   }
 
   return (
-    <form>
+    <form className="form-searchbar">
       <label htmlFor="search-input">
         <input
           type="text"
@@ -110,6 +110,7 @@ export default function SearchBar() {
           onChange={ (event) => setSearchString(event.target.value) }
         />
       </label>
+      <br />
       <label
         htmlFor="search-radio"
         onChange={ (event) => setSearchType(event.target.value) }
@@ -128,6 +129,7 @@ export default function SearchBar() {
           value="ingredient"
         />
         Ingrediente
+        <br />
         <input
           type="radio"
           name="search-radio"
@@ -136,6 +138,7 @@ export default function SearchBar() {
         />
         Primeira Letra
       </label>
+      <br />
       <button
         type="submit"
         data-testid="exec-search-btn"
