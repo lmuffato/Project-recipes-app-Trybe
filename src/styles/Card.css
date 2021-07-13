@@ -1,5 +1,8 @@
+body {
+  background-color: rgb(29, 28, 29);
+}
+
 .cards-container {
-  background-color: #48487d;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -11,7 +14,8 @@
 
 .card {
   align-items: center;
-  background-color: #c9b24dd2;
+  background-color: transparent;
+  border: 2px #343539 solid;
   display: flex;
   flex-direction: column;
   height: 410px;
@@ -20,7 +24,8 @@
 }
 
 .card:hover {
-  background-color: #f1f1f156;
+  background-blend-mode: overlay;
+  background-color: rgb(46, 46, 46);
   box-shadow: 1px 1px 7px rgb(29, 28, 29) inset;
 }
 
@@ -39,7 +44,7 @@
 }
 
 .card-title {
-  color: #48487d;
+  color: rgb(242, 242, 242);
   font-size: 180%;
   font-weight: 800;
   height: 60px;
@@ -60,17 +65,11 @@
 
   .card {
     align-items: center;
-    background-color: #c9b24dc2;
     display: flex;
     flex-direction: column;
     height: 180px;
     margin: 8px;
     width: 150px;
-  }
-
-  .card:hover {
-    background-color: #f1f1f156;
-    box-shadow: 1px 1px 7px rgb(29, 28, 29) inset;
   }
 
   .card-img {
@@ -80,7 +79,6 @@
   }
 
   .card-title {
-    color: #48487d;
     font-size: 13px;
     font-weight: 800;
     margin-top: 99%;

@@ -1,8 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100 ;0,300 ;1,500&display=swap') ;
 
 form {
-  background-color: rgb(94, 248, 157);
-  border: 0.3em solid rgb(67, 163, 58);
   display: flex;
   font-family: Roboto , sans-serif;
   height: 100vh;
