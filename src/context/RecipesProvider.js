@@ -29,11 +29,16 @@ function RecipesProvider({ children }) {
     });
   }, []);
 
+  const [data, setData] = useState([]);
+  const updateData = async (api) => setData(await api);
+
   const context = {
     recipes,
     setRecipes,
     favoriteRecipes,
     setFavoriteRecipes,
+    data,
+    updateData,
   };
 
   return (

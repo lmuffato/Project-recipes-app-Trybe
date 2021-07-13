@@ -31,7 +31,6 @@ function ExploreDrink() {
             Por Ingredientes
           </Button>
         </Link>
-
         <Link to={ `/bebidas/${idDrink}` }>
           <Button
             className="myButton btn-lg btn-warning"

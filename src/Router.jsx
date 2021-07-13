@@ -6,11 +6,13 @@ import InProcess from './Pages/InProcess';
 import Explore from './Pages/Explore';
 import ExploreFoodOpt from './Pages/ExploreFood';
 import ExploreDrinkOpt from './Pages/ExploreDrink';
-import ExploreIngredients from './Pages/ExploreIngredients';
-import ExploreArea from './Pages/ExploreArea';
+import ExploreIngredientsDrink from './Pages/ExploreIngredientsDrink';
+import ExploreIngredientsMeal from './Pages/ExploreIngredientsMeal';
+import MealsByOrigin from './Pages/ExploreArea';
 import Profile from './Pages/Profile';
 import RecipeMainPage from './Pages/RecipeMainPage';
 import ListofRecipes from './Pages/ListOfRecipes';
+import NotFound from './Pages/NotFound';
 
 export default function Router() {
   return (
@@ -54,15 +56,19 @@ export default function Router() {
         />
         <Route
           path="/explorar/comidas/ingredientes"
-          component={ ExploreIngredients }
+          component={ ExploreIngredientsMeal }
         />
         <Route
           path="/explorar/bebidas/ingredientes"
-          component={ ExploreIngredients }
+          component={ ExploreIngredientsDrink }
         />
         <Route
           path="/explorar/comidas/area"
-          component={ ExploreArea }
+          component={ MealsByOrigin }
+        />
+        <Route
+          path="/explorar/bebidas/area"
+          component={ NotFound }
         />
         <Route
           path="/perfil"
