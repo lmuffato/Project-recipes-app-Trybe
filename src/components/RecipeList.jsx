@@ -4,7 +4,7 @@ import RecipeItem from './RecipeItem';
 
 function RecipeList(Props) {
   const { data } = Props;
-  if (data.length < 1) return <div>carregando...</div>;
+  if (!data) return <div>Nenhuma receita encontrada</div>;
   return (
     <>
       <Button.Group fluid>
