@@ -6,10 +6,10 @@ const MAX_RECIPES = 12;
 function useFetchRecipes(type) {
   const [fetchUrl, setFetchUrl] = useState('');
   const [recipesData, setRecipesData] = useState({});
-  const { setRecipesContext } = useContext(RecipesContext);
+  const { setRecipesContext, prevFetchUrl, setPrevUrl } = useContext(RecipesContext);
 
   useEffect(() => {
-    if (!fetchUrl) return;
+    if (!fetchUrl || fetchUrl === prevFetchUrl) return;
     const fetchRecipes = async () => {
       try {
         const res = await fetch(fetchUrl);
@@ -21,13 +21,16 @@ function useFetchRecipes(type) {
         };
         setRecipesContext(limitedData);
         setRecipesData(limitedData);
+        setPrevUrl(fetchUrl);
+        console.log('useFetchRecipes useEffect ', limitedData);
       } catch (err) {
-        console.log(err);
+        console.log(err, fetchUrl);
+        console.log('Error block TYPE', type);
       }
     };
 
     fetchRecipes();
-  }, [type, fetchUrl, setRecipesContext]);
+  }, [fetchUrl, type, setRecipesContext, prevFetchUrl, setPrevUrl]);
 
   return [recipesData, setFetchUrl];
 }

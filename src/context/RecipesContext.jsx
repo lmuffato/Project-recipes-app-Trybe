@@ -5,8 +5,9 @@ export const RecipesContext = createContext({});
 
 function RecipesContextProvider({ children }) {
   const [recipesContext, setRecipesContext] = useState({});
+  const [prevFetchUrl, setPrevUrl] = useState('');
   // const [currentType, setCurrentType] = useState('meals');
-  const contextValue = { recipesContext, setRecipesContext };
+  const contextValue = { recipesContext, setRecipesContext, prevFetchUrl, setPrevUrl };
 
   return (
     <RecipesContext.Provider value={ contextValue }>
