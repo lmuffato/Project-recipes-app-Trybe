@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import RecipesContext from '../contexts/RecipesContext';
 import Loading from './Loading';
 import MealDescription from './MealDescription';
+import '../styles/Main.css';
 import DrinkDescription from './DrinkDescription';
 
 function RecipeDescription() {

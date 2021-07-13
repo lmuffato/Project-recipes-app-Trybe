@@ -4,14 +4,18 @@
 }
 
 .recipes {
+  background-color: tomato;
   display: flex;
   max-width: 100%;
   overflow-x: scroll;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
 }
 
 .recomendation-card img {
   max-height: auto;
   max-width: 200px;
+  scroll-snap-align: start;
 }
 
 .start-recipe {

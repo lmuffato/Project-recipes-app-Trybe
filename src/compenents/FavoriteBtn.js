@@ -83,11 +83,11 @@ function FavoriteBtn({ id, type, area, category, alcoholicOrNot, name, image, in
   };
 
   return (
-    <div>
+    <>
       {
         setButton()
       }
-    </div>
+    </>
   );
 }
 
