@@ -35,7 +35,10 @@ export const handleCheckLS = (key, id, type) => {
 
     if (recipeId) {
       const findId = recipeId.some((item) => item === id);
-      return findId;
+      if (findId) {
+        return findId;
+      }
+      return false;
     }
     return false;
   }
