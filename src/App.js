@@ -23,6 +23,7 @@ import receitasFavoritas from './pages/ReceitasFavoritas';
 import recipesInProgress from './pages/ReceitasEmAndamento';
 import ExplorarBebidasPorArea from
   './pages/Bebidas/ExplorarBebidas/ExplorarBebidasPorArea';
+import error404 from './pages/Error404';
 
 function App() {
   return (
@@ -52,6 +53,7 @@ function App() {
           <Route path="/perfil" component={ Perfil } />
           <Route path="/receitas-feitas" component={ receitasFeitas } />
           <Route path="/receitas-favoritas" component={ receitasFavoritas } />
+          <Route default component={ error404 } />
         </Switch>
       </ReceitasProvider>
     </div>

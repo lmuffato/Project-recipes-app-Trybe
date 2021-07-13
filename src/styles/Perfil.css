@@ -1,0 +1,55 @@
+.profile-page {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.email-profile-page {
+  bottom: 70%;
+  font-size: 250%;
+  position: absolute;
+  text-shadow: 0.5px 0.5px 0.5px rgb(41, 38, 38);
+  transform: translateY(-30%);
+}
+
+.btn-profile-page {
+  bottom: 30%;
+  display: flex;
+  flex-direction: column;
+  font-size: 16px;
+  height: 30%;
+  justify-content: space-between;
+  position: absolute;
+  width: 50%;
+}
+
+.btn-profile-page button {
+  background-color: rgb(206, 206, 206);
+  font-size: 16px;
+  font-weight: 900;
+  height: 270%;
+  opacity: 0.6;
+  text-shadow: 0.5px 0.5px 0.5px rgb(41, 38, 38);
+  text-transform: uppercase;
+  transition: 1s;
+  width: 100%;
+}
+
+.btn-profile-page button:hover {
+  opacity: 1;
+}
+
+@media ( max-width : 786.98px ) {
+
+  .email-profile-page {
+    font-size: 140%;
+  }
+
+  .btn-profile-page {
+    width: 80%;
+  }
+
+  .btn-profile-page button {
+    font-size: 14px;
+  }
+}
