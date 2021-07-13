@@ -34,8 +34,6 @@ function Recipes() {
   };
 
   const changeTags = (t, index) => {
-    // if (typeof t === 'string') {
-    // const tags = t.split(',').slice(0, 2);
     const tags = t.slice(0, 2);
     if (!Array.isArray(tags)) return null;
     return tags.map((tagName) => (
@@ -45,7 +43,6 @@ function Recipes() {
       >
         { tagName}
       </Card.Text>));
-    // }
   };
   const handleFood = (recipe, index) => (
     <Card

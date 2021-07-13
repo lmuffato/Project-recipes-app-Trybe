@@ -59,7 +59,7 @@ function doneRecipes(recipe) {
     name: strDrink || strMeal,
     image: strDrinkThumb || strMealThumb,
     doneDate: dataAtualFormatada(),
-    tags: strTags || [],
+    tags: strTags.split(','),
   });
   localStorage.setItem('doneRecipes', JSON.stringify(doneRecipesConst));
 }
