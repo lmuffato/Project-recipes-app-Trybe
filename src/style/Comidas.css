@@ -1,6 +1,7 @@
 * {
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     text-align: center;
+    padding: 0;
 }
 
 a {
@@ -16,4 +17,17 @@ img {
 img:hover {
     opacity: 1;
     border-radius: 5px;
+}
+
+ul { 
+    margin: 0;
+}
+
+.main-foods {
+    width: 100%;
+}
+
+.recipe-card {
+    width: 100%;
+
 }

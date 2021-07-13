@@ -1,0 +1,8 @@
+.category-button {
+  border: 1px solid black;
+  border-radius: 8px;
+  display: flex;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  justify-content: space-evenly;
+  margin-top: 15px;
+}

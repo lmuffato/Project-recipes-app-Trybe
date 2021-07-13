@@ -1,0 +1,15 @@
+.footer {
+  align-items: center;
+  background-color: white;
+  border-radius: 8px;
+  border: 1px solid black;
+  display: flex;
+  justify-content: space-around;
+  width: 95%;
+  
+}
+
+.footer img {
+  margin-top: 5px;
+}
+

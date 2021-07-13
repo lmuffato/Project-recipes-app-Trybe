@@ -5,6 +5,7 @@ import FoodContext from '../../contexts/FoodContext';
 import DrinkContext from '../../contexts/DrinkContext';
 import { fetchFoodByCategoryName, fetchFoods } from '../../services/mealAPI';
 import { fetchDrinkByCategoryName, fetchCocktails } from '../../services/cocktailAPI';
+import '../../style/CategoryButtons.css';
 
 const NUMBER_OF_CATEGORIES = 5;
 
