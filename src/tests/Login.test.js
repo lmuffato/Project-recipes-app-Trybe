@@ -1,11 +1,11 @@
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 import Login from '../pages/Login';
-import renderWithRouter from './renderWithRouter';
+import renderWithRouterAndContext from './renderWithRouterAndContext';
 
 describe('Teste da página de Login', () => {
   test('Os inputs e o botão de login são renderizados', () => {
-    const { getByTestId } = renderWithRouter(<Login />);
+    const { getByTestId } = renderWithRouterAndContext(<Login />);
     const emailInput = getByTestId('email-input');
     const passwordInput = getByTestId('password-input');
     const loginButton = getByTestId('login-submit-btn');
@@ -16,7 +16,7 @@ describe('Teste da página de Login', () => {
   });
 
   test('Ao clicar no botão, o usuário vai para /comidas', () => {
-    const { getByTestId, history } = renderWithRouter(<Login />);
+    const { getByTestId, history } = renderWithRouterAndContext(<Login />);
     const emailInput = getByTestId('email-input');
     const passwordInput = getByTestId('password-input');
     const loginButton = getByTestId('login-submit-btn');
