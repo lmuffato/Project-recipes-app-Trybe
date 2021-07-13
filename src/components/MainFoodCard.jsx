@@ -129,7 +129,6 @@ class MainFoodCard extends React.Component {
       });
       if (data.length === 1) {
         const idRecipe = sliced[0].idMeal;
-        console.log(idRecipe);
         return history.push(`/comidas/${idRecipe}`);
       }
     }

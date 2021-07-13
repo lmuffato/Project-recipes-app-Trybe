@@ -58,6 +58,7 @@ class SearchButton extends React.Component {
     return (
       <>
         <button
+          src={ searchIcon }
           data-testid="search-top-btn"
           type="button"
           className="headerIcons"
