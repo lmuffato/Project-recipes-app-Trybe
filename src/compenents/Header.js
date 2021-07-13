@@ -7,7 +7,7 @@ import SearchbarContext from '../contexts/SearchbarContext';
 
 function Header() {
   const {
-    searchBtn, setSearchBtn, hideSearchBtn,
+    searchBtn, setSearchBtn, hideSearchBtn, pageName,
   } = useContext(SearchbarContext);
 
   function getSearchBar() {
@@ -30,7 +30,7 @@ function Header() {
         <Link to="/perfil" className="profile">
           <img src={ profileIcon } alt="profile" data-testid="profile-top-btn" />
         </Link>
-        <h1 data-testid="page-title" className="title">Título</h1>
+        <h1 data-testid="page-title" className="title">{ pageName }</h1>
         { hideSearchBtn && handleSearchBtn() }
       </header>
     </div>

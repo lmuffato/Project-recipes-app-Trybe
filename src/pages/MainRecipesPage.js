@@ -14,7 +14,7 @@ function MainRecipesPage() {
   const [returnedCategoty, setReturnedCategory] = useState(null);
 
   const {
-    searchCategory, categories, setCategories, setHideSearchBtn,
+    searchCategory, categories, setCategories, setHideSearchBtn, setPageName,
   } = useContext(SearchbarContext);
   const { mealOrDrink, type, setType, setRecipes, recipes,
   } = useContext(RecipesContext);
@@ -24,8 +24,10 @@ function MainRecipesPage() {
   useEffect(() => {
     if (history.location.pathname === '/bebidas' || mealOrDrink === 'cocktail') {
       setType('cocktail');
+      setPageName('Bebidas');
     } else if (history.location.pathname === '/comidas' || mealOrDrink === 'meal') {
       setType('meal');
+      setPageName('Comidas');
     }
   }, [history, mealOrDrink, setType]);
 

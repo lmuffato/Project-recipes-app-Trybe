@@ -9,7 +9,7 @@ function FoodsIngredients() {
   const {
     ingredients, setIngredients, setMealsAndDrinkByIngredients,
   } = useContext(RecipesContext);
-  const { setHideSearchBtn } = useContext(SearchbarContext);
+  const { setHideSearchBtn, setPageName } = useContext(SearchbarContext);
   const TWELVE = 12;
 
   const getRecipesByIngredients = async (param) => {
@@ -27,6 +27,7 @@ function FoodsIngredients() {
     };
     getIngredients();
     setHideSearchBtn(false);
+    setPageName('Explorar Ingredientes');
   }, []);
 
   const getTwelveIngredients = () => {
