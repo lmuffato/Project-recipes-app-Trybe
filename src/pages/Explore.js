@@ -1,9 +1,19 @@
-import React from 'react';
+import React, { useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
+import Footer from '../compenents/Footer';
+import Header from '../compenents/Header';
+import SearchbarContext from '../contexts/SearchbarContext';
 
 function Explore() {
+  const { setHideSearchBtn } = useContext(SearchbarContext);
+
+  useEffect(() => {
+    setHideSearchBtn(false);
+  }, []);
+
   return (
-    <div>
+    <>
+      <Header />
       <Link to="/explorar/comidas">
         <button
           type="button"
@@ -21,7 +31,8 @@ function Explore() {
           Explorar Bebidas
         </button>
       </Link>
-    </div>
+      <Footer />
+    </>
   );
 }
 

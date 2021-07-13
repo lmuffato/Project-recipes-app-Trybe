@@ -1,15 +1,18 @@
 import React, { useState, useContext } from 'react';
 import { useHistory } from 'react-router';
-import SearchbarContext from '../contexts/SearchbarContext';
-import FilteredCard from './FilteredCard';
+import RecipesContext from '../contexts/RecipesContext';
+import checkPath from '../services/checkPath';
+// import DrinkCards from './DrinkCards';
+// import FilteredCard from './FilteredCard';
+// import MealCards from './MealCards';
 
 function SearchBar() {
   const [name, setName] = useState('');
   const [request, setRequest] = useState('');
   const [letter, setLetter] = useState('');
   const {
-    mealOrDrink, setRecipes, setIdMeal, setIdDrink, recipes,
-  } = useContext(SearchbarContext);
+    mealOrDrink, setMealOrDrink, setSearchedRecipes, setIdMeal, setIdDrink, /* recipes, */
+  } = useContext(RecipesContext);
 
   const history = useHistory();
 
@@ -25,7 +28,7 @@ function SearchBar() {
     let mealId;
 
     if (data.meals === null || data.drinks === null) {
-      alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+      global.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
     } else if (mealOrDrink === 'cocktail' && data.drinks.length === 1) {
       drinkId = data.drinks[0].idDrink;
       setIdDrink(drinkId);
@@ -35,17 +38,23 @@ function SearchBar() {
       setIdMeal(mealId);
       history.push(`/comidas/${mealId}`);
     } else {
-      setRecipes(Object.values(data)[0].slice(0, maxRecipes));
+      console.log(data);
+      setSearchedRecipes(Object.values(data)[0].slice(0, maxRecipes));
     }
   };
 
+  checkPath(history, setMealOrDrink);
+
   const getData = async () => {
     if (letter === 'f' && name.length > 1) {
-      alert('Sua busca deve conter somente 1 (um) caracter');
+      global.alert('Sua busca deve conter somente 1 (um) caracter');
     }
-    const endpoint = `https://www.the${mealOrDrink}db.com/api/json/v1/1/${request}.php?${letter}=${name}`;
-    await fetch(endpoint).then((data) => data.json())
-      .then((results) => recipesFilter(results));
+    if (mealOrDrink) {
+      console.log('aqui');
+      const endpoint = `https://www.the${mealOrDrink}db.com/api/json/v1/1/${request}.php?${letter}=${name}`;
+      await fetch(endpoint).then((data) => data.json())
+        .then((results) => recipesFilter(results));
+    }
   };
 
   const getInputs = () => (
@@ -99,30 +108,40 @@ function SearchBar() {
     </div>
   );
 
-  const getIngredientsFiltered = () => (
-    mealOrDrink === 'meal' ? recipes.map((meal, index) => (
-      <FilteredCard
-        key={ meal.idMeal }
-        index={ index }
-        name={ meal.strMeal }
-        thumbnail={ meal.strMealThumb }
-      />
-    ))
-      : recipes.map((drink, index) => (
-        <FilteredCard
-          key={ drink.idDrink }
-          index={ index }
-          name={ drink.strDrink }
-          thumbnail={ drink.strDrinkThumb }
-        />
-      ))
-  );
+  // const getIngredientsFiltered = () => (
+  //   mealOrDrink === 'meal' ? recipes.map((recipe, index) => (
+  //     // <FilteredCard
+  //     //   key={ meal.idMeal }
+  //     //   index={ index }
+  //     //   name={ meal.strMeal }
+  //     //   thumbnail={ meal.strMealThumb }
+  //     // />
+  //     <MealCards
+  //       data={ recipe }
+  //       index={ index }
+  //       key={ recipe.idMeal }
+  //     />
+  //   ))
+  //     : recipes.map((recipe, index) => (
+  //       // <FilteredCard
+  //       //   key={ drink.idDrink }
+  //       //   index={ index }
+  //       //   name={ drink.strDrink }
+  //       //   thumbnail={ drink.strDrinkThumb }
+  //       // />
+  //       <DrinkCards
+  //         data={ recipe }
+  //         index={ index }
+  //         key={ recipe.idDrink }
+  //       />
+  //     ))
+  // );
 
   return (
     <>
       { getInputs() }
       { getButton() }
-      { getIngredientsFiltered() }
+      {/* { getIngredientsFiltered() } */}
     </>
   );
 }
