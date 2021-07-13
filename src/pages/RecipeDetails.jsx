@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import RecipeInfo from '../components/RecipeInfo/RecipeInfo';
-import Button from '../components/Generics/Button';
+import InitOrContinueButton
+  from '../components/InitOrContinueRecipeButton/InitOrContinueButton';
 import RecipeIngredients from '../components/RecipeIngredients/RecipeIngredients';
 import RecipeInstructions from '../components/RecipeInstructions/RecipeInstructions';
 import Container from '../styles/recipeDetails';
@@ -15,11 +16,10 @@ const endpointCocktails = 'https://www.thecocktaildb.com/api/json/v1/1/search.ph
 
 function RecipeDetails({ type }) {
   const { id } = useParams();
-  const history = useHistory();
+  // const history = useHistory();
   const endpointMeal = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
   const endpointDrink = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
   const [singleRecipe, setRecipe] = useState({});
-  // const [, setRecipeInProgress] = useState('Iniciar receita');
   const { handleFetch, isLoading,
     recipeData, recommendations, fetchMealRecipes } = useDetailsProvider();
 
@@ -41,18 +41,12 @@ function RecipeDetails({ type }) {
     const settingUp = () => {
       if (cancel) return;
       setRecipe(recipeData);
-      // setRecomendations(recommendations);
     };
     settingUp();
     return () => {
       cancel = true;
     };
   }, [recipeData, recommendations, type]);
-
-  const handleClick = (ev) => {
-    ev.preventDefault();
-    history.push(`${id}/in-progress`);
-  };
 
   if (isLoading) {
     return 'Loading';
@@ -92,18 +86,7 @@ function RecipeDetails({ type }) {
         recipeRecommendations={ recommendations }
         type={ type }
       />
-      {/* {
-        isRecipeInProgress
-          ? ( */}
-      <Button
-        data-testid="start-recipe-btn"
-        onClick={ (ev) => handleClick(ev) }
-        className="recipe-btn"
-      >
-        Iniciar receita
-      </Button>
-      {/* ) : ('')
-      } */}
+      <InitOrContinueButton type={ type } />
     </Container>
   );
 }
