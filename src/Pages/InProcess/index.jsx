@@ -55,7 +55,7 @@ function InProcess() {
               </h3>
             </div>
             <div className="btn-components">
-              <ShareButton />
+              <ShareButton dataTest="share-btn" />
               <FavoriteButton
                 recipe={ recipe }
                 recipeType={ recipeType }
