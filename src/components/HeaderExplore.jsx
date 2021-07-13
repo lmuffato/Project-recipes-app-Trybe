@@ -20,11 +20,13 @@ function HeaderExplore() {
           data-testid="profile-top-btn"
           src={ profileIcon }
           alt="profile icon"
+          className="explore-icon"
         />
       </Link>
       <h3 data-testid="page-title" className="Explore">
         { location.pathname === '/perfil' ? 'Perfil' : `Explorar ${titleCapitalize}`}
       </h3>
+      <div className="explore-icon" />
     </div>
   );
 }

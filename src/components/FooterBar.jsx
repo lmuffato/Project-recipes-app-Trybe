@@ -14,6 +14,7 @@ function FooterBar() {
           src={ drinkIcon }
           alt="icon of drink page"
           data-testid="drinks-bottom-btn"
+          className="footer-icon"
         />
       </Link>
       <Link to="/explorar">
@@ -21,6 +22,7 @@ function FooterBar() {
           src={ exploreIcon }
           alt="icon of explore page"
           data-testid="explore-bottom-btn"
+          className="footer-icon"
         />
       </Link>
       <Link to="/comidas">
@@ -28,6 +30,7 @@ function FooterBar() {
           src={ mealIcon }
           alt="icon of drink page"
           data-testid="food-bottom-btn"
+          className="footer-icon"
         />
       </Link>
     </footer>
