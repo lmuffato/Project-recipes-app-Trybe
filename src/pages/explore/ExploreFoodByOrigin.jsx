@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Button } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 import HeaderWithSearch from '../../components/HeaderWithSearch';
 import Footer from '../../components/Footer';
@@ -39,35 +40,42 @@ function ExploreFoodByOrigin() {
   return (
     <>
       <HeaderWithSearch />
-      <select
-        data-testid="explore-by-area-dropdown"
-        onChange={ filterMealByCountry }
-      >
-        { countriesList.map((area, index) => (
-          <option
-            data-testid={ `${area.strArea}-option` }
-            key={ index }
-          >
-            { area.strArea }
-          </option>
-        ))}
-      </select>
-      { foodListByCountry.length > 0 && foodListByCountry
-        .slice(0, TWELVE).map((recipe, index) => (
-          <div key={ index } data-testid={ `${index}-recipe-card` }>
-            <button
-              type="button"
-              onClick={ () => history.push(`/comidas/${recipe.idMeal}`) }
+      <div className="select-div">
+        <select
+          className="select-field"
+          type="select"
+          data-testid="explore-by-area-dropdown"
+          onChange={ filterMealByCountry }
+        >
+          { countriesList.map((area, index) => (
+            <option
+              data-testid={ `${area.strArea}-option` }
+              key={ index }
             >
-              <img
-                src={ recipe.strMealThumb }
-                alt={ recipe.strMeal }
-                data-testid={ `${index}-card-img` }
-              />
-              <h4 data-testid={ `${index}-card-name` }>{ recipe.strMeal }</h4>
-            </button>
-          </div>
-        ))}
+              { area.strArea }
+            </option>
+          ))}
+        </select>
+      </div>
+      <div className="button-toolbar ">
+        { foodListByCountry.length > 0 && foodListByCountry
+          .slice(0, TWELVE).map((recipe, index) => (
+            <div key={ index } data-testid={ `${index}-recipe-card` }>
+              <Button
+                className="recipe-btn"
+                type="button"
+                onClick={ () => history.push(`/comidas/${recipe.idMeal}`) }
+              >
+                <img
+                  src={ recipe.strMealThumb }
+                  alt={ recipe.strMeal }
+                  data-testid={ `${index}-card-img` }
+                />
+                <h5 data-testid={ `${index}-card-name` }>{ recipe.strMeal }</h5>
+              </Button>
+            </div>
+          ))}
+      </div>
       <Footer />
     </>
   );

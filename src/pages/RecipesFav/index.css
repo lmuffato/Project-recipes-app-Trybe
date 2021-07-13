@@ -1,27 +1,4 @@
-/* .cards-foods {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  padding: 5px;
-}
-
-.cards-foods div {
-  border-radius: 15px;
-  margin: 5px;
-}
-
-.cards-drinks {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  padding: 5px;
-}
-
-.cards-drinks div {
-  border-radius: 15px;
-  margin: 5px;
-}
-
+/* Css - Done Recipes */
 .buttons-filter-done {
   display: flex;
   flex-wrap: wrap;
@@ -29,27 +6,76 @@
   padding: 3px;
 }
 
-.card-img {
-  border: 1px solid black;
+.cards-favorite {
+  align-items: center;
   display: flex;
+  flex-direction: column;
+}
+
+.card-favorite {
+  border: 1px solid #334031;
+  border-radius: 15px;
+  box-shadow: 5px 3px 1px hsl(138, 10%, 90%);
+  display: flex;
+  flex-direction: row;
+  height: 180px;
   margin: 5px;
 }
 
-.card-img-bottom {
-  height: 150px;
-  margin-left: 5px;
-  margin-top: 30px;
-  max-width: 45%;
+.card-img-favorite {
+  display: flex;
+  height: auto;
+  width: 40%;
 }
 
-.button {
+.card-body {
+  text-align: center;
+  width: 60%;
+}
+
+.card-image-favorite-bottom {
+  border-radius: 15px;
+  width: 100%;
+}
+
+.button-favorite {
   background-color: white;
   border: none;
-  margin-left: 120px;
-  width: 35px;
+  color: #334031;
 }
 
-a {
-  color: black;
-  direction: none;
-} */
+.link-copy {
+  color: #334031;
+}
+
+.card-text-category {
+  color: #80ab82;
+}
+
+.card-title-favorite {
+  color: #334031;
+  margin: 10px;
+}
+
+.card-text-date {
+  color: #80ab82;
+}
+
+.card-span {
+  display: flex;
+}
+
+.card-span p {
+  background-color: #334031;
+  border-radius: 10px;
+  color: #80ab82;
+  height: 30px;
+  margin: 5px;
+  padding: 3px;
+  text-align: center;
+  width: 50px;
+}
+
+.text-copy {
+  color: #778472;
+}
