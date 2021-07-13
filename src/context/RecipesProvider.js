@@ -16,6 +16,7 @@ function RecipesProvider({ children }) {
 
   const [recipes, setRecipes] = useState(INITIAL_RECIPES);
   const [favoriteRecipes, setFavoriteRecipes] = useState(FAVORITES_RECIPES);
+
   useEffect(() => {
     getMeals().then((response) => {
       getDrinks().then((result) => {

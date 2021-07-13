@@ -59,7 +59,7 @@ function Details() {
               </h3>
             </div>
             <div>
-              <ShareButton />
+              <ShareButton dataTest="share-btn" />
               <FavoriteButton
                 recipe={ recipesDetails }
                 recipeType={ recipeType }
