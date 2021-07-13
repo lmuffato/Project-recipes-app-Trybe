@@ -25,14 +25,15 @@ export default function ExploreIngredientsFood() {
 
       <div className="exploreIngredientCards__container">
         {
-          listIngredient && listIngredient.map(({ strIngredient }, index) => (
-            <IngredientCard
-              key={ index }
-              index={ index }
-              thumbnail={ `https://www.themealdb.com/images/ingredients/${strIngredient}-Small.png` }
-              name={ strIngredient }
-            />
-          ))
+          listIngredient && listIngredient
+            .map(({ strIngredient: ingredient }, index) => (
+              <IngredientCard
+                key={ index }
+                index={ index }
+                thumbnail={ `https://www.themealdb.com/images/ingredients/${ingredient}-Small.png` }
+                name={ ingredient }
+              />
+            ))
         }
       </div>
 

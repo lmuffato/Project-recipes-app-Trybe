@@ -3,6 +3,7 @@ import { string, number } from 'prop-types';
 import './ingredientCard.css';
 
 function IngredientCard({ index, thumbnail, name }) {
+  console.log(thumbnail);
   return (
     <div
       data-testid={ `${index}-ingredient-card` }

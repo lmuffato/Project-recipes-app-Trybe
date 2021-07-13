@@ -25,14 +25,15 @@ export default function ExploreIngredientsDrinks() {
 
       <div className="exploreIngredientCards__container">
         {
-          listIngredient && listIngredient.map(({ strIngredient1 }, index) => (
-            <IngredientCard
-              key={ index }
-              index={ index }
-              thumbnail={ `https://www.thecocktaildb.com/images/ingredients/${strIngredient1}-Small.png` }
-              name={ strIngredient1 }
-            />
-          ))
+          listIngredient && listIngredient
+            .map(({ strIngredient1: ingredient }, index) => (
+              <IngredientCard
+                key={ index }
+                index={ index }
+                thumbnail={ `https://www.thecocktaildb.com/images/ingredients/${ingredient}-Small.png` }
+                name={ ingredient }
+              />
+            ))
         }
       </div>
 
