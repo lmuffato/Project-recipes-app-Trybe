@@ -2,24 +2,20 @@ import React, { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import RecipesContext from '../contexts/RecipesContext';
-// import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
-// import DrinkCards from './DrinkCards';
 import '../styles/MealDescription.css';
 import InteractiveButtons from './InteractiveButtons';
 import Recomendations from './Recomendations';
-// import copyToClipboard from '../services/copyToClipboard';
 
 function MealDescription({ recipe, recipeId }) {
   const { recomendations } = useContext(RecipesContext);
   const {
     idMeal, strMealThumb, strMeal, strCategory, strInstructions, strYoutube,
   } = recipe;
-  // const [isCopy, setIsCopy] = useState(null);
   // Estados fake, até poder pegar o estado do localStorage
   const [isFav, setIsFav] = useState(false);
-  const [isStarted, setIsStarted] = useState(false);
+  // const [isStarted, setIsStarted] = useState(false);
   const body = document.querySelector('body');
 
   const ingredients = Object.entries(recipe)
@@ -90,13 +86,6 @@ function MealDescription({ recipe, recipeId }) {
               thumb={ strDrinkThumb }
               recipeName={ strDrink }
             />
-            // <DrinkCards
-            //   data={ recomendation }
-            //   index={ index }
-            //   linkTestid={ `${index}-recomendation-card` }
-            //   titleTestid={ `${index}-recomendation-title` }
-            //   key={ recomendation.idDrink }
-            // />
           ))}
         </section>
       </section>
@@ -106,7 +95,8 @@ function MealDescription({ recipe, recipeId }) {
           className="start-recipe"
           data-testid="start-recipe-btn"
         >
-          { isStarted ? 'Continuar Receita' : 'Iniciar Receita' }
+          Iniciar Receita
+          {/* { isStarted ? 'Continuar Receita' : 'Iniciar Receita' } */}
         </button>
       </Link>
     </>

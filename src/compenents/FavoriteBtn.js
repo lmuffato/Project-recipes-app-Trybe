@@ -15,13 +15,13 @@ function FavoriteBtn({ id, type, area, category, alcoholicOrNot, name, image }) 
 
   const setFavorite = () => {
     const recipeDetails = {
-      id: id,
-      type: type,
-      area: area,
-      category: category,
-      alcoholicOrNot: alcoholicOrNot,
-      name: name,
-      image: image,
+      id,
+      type,
+      area,
+      category,
+      alcoholicOrNot,
+      name,
+      image,
     };
     setFavRecipes((prevRecipes) => [...prevRecipes, recipeDetails]);
     setIsFavorite(true);
@@ -29,9 +29,10 @@ function FavoriteBtn({ id, type, area, category, alcoholicOrNot, name, image }) 
 
   const setUnfavorite = () => {
     const recipeId = id;
-    
+
     // const getFavRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
-    const removeFav = Object.values(favoriteRecipes).filter(({ id }) => id !== recipeId);
+    const removeFav = Object.values(favoriteRecipes)
+      .filter(({ id: favId }) => favId !== recipeId);
 
     localStorage.setItem('favoriteRecipes', JSON.stringify(removeFav));
     setFavRecipes(removeFav);
@@ -45,7 +46,7 @@ function FavoriteBtn({ id, type, area, category, alcoholicOrNot, name, image }) 
     if (getLocalStr !== null) {
       // procura o recipeId no LS
       checkLocalStr = Object.values(getLocalStr)
-        .find(({ id }) => id === recipeId);
+        .find(({ id: favoriteId }) => favoriteId === recipeId);
     }
 
     if (checkLocalStr || isFavorite) {

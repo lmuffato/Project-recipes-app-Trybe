@@ -4,28 +4,32 @@ import renderWithRouter from './renderWithRouter';
 import handleLogin from './handleLogin';
 import App from '../App';
 
-const buttonsLength = 7;
-
-const testIdArray = [
-  'All-category-filter', 'Beef-category-filter', 'Breakfast-category-filter',
-  'Chicken-category-filter', 'Dessert-category-filter', 'Goat-category-filter'];
-// const categoriesArray = ['All', 'Beef', 'Breakfast', 'Chicken', 'Dessert', 'Goat'];
-
 describe('Tests the filter buttons at the main recipes page', () => {
-  it('Verify how many filter buttons there ara', async () => {
+  it('Verify if the meals filter buttons are being rendered', async () => {
     const {
-      getByTestId, findByTestId, findByRole, findAllByRole,
+      getByTestId, findByTestId,
     } = renderWithRouter(<App />);
     handleLogin(getByTestId);
 
-    const buttons = await findAllByRole('button');
-    expect(buttons.length).toBe(buttonsLength);
+    const allCategoryBtn = await findByTestId('All-category-filter');
+    const beefCategoryBtn = await findByTestId('Beef-category-filter');
+    const breakfastCategoryBtn = await findByTestId('Breakfast-category-filter');
+    const chickenCategoryBtn = await findByTestId('Chicken-category-filter');
+    const dessertCategoryBtn = await findByTestId('Dessert-category-filter');
+    const goatCategoryBtn = await findByTestId('Goat-category-filter');
 
-    testIdArray.forEach(async (testId /* , index */) => {
-      const button = await findByRole(testId);
-      expect(button).toBeInTheDocument();
-    });
-    const all = await findByTestId('All-category-filter');
-    expect(all).toBeInTheDocument();
+    expect(allCategoryBtn).toBeInTheDocument();
+    expect(beefCategoryBtn).toBeInTheDocument();
+    expect(breakfastCategoryBtn).toBeInTheDocument();
+    expect(chickenCategoryBtn).toBeInTheDocument();
+    expect(dessertCategoryBtn).toBeInTheDocument();
+    expect(goatCategoryBtn).toBeInTheDocument();
+
+    expect(allCategoryBtn).toHaveAttribute('value', 'All');
+    expect(beefCategoryBtn).toHaveAttribute('value', 'Beef');
+    expect(breakfastCategoryBtn).toHaveAttribute('value', 'Breakfast');
+    expect(chickenCategoryBtn).toHaveAttribute('value', 'Chicken');
+    expect(dessertCategoryBtn).toHaveAttribute('value', 'Dessert');
+    expect(goatCategoryBtn).toHaveAttribute('value', 'Goat');
   });
 });

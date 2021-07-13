@@ -1,7 +1,7 @@
 /* /* Estilização de carousel retirada desse vídeo:
 https://www.youtube.com/watch?v=SGwHpzgqzgk */
 
-/* * {
+* {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -27,7 +27,6 @@ https://www.youtube.com/watch?v=SGwHpzgqzgk */
   flex: none;
   height: 150px;
   margin-right: 10%;
-
   scroll-snap-align: start;
   width: 40%;
 }
@@ -36,7 +35,7 @@ https://www.youtube.com/watch?v=SGwHpzgqzgk */
   height: 80%;
   object-fit: cover;
   width: 100%;
-} */
+}
 
 .start-recipe {
   bottom: 0;

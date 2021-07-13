@@ -18,7 +18,7 @@ function DrinkDescription({ recipe, recipeId }) {
   const [isCopy, setIsCopy] = useState(null);
   // Estados fake, até poder pegar o estado do localStorage
   const [isFav, setIsFav] = useState(false);
-  const [isStarted, setIsStarted] = useState(false);
+  // const [isStarted, setIsStarted] = useState(false);
   const body = document.querySelector('body');
 
   const ingredients = Object.entries(recipe)
@@ -82,20 +82,12 @@ function DrinkDescription({ recipe, recipeId }) {
         <section className="recipes carousel" onWheel={ handleScroll }>
           { recomendations.map(({ idMeal, strMealThumb, strMeal }, index) => (
             <Recomendations
-              // data={ recomendation }
               index={ index }
               key={ idMeal }
               id={ idMeal }
               thumb={ strMealThumb }
               recipeName={ strMeal }
             />
-            // <MealCards
-            //   data={ recomendation }
-            //   index={ index }
-            //   linkTestid={ `${index}-recomendation-card` }
-            //   titleTestid={ `${index}-recomendation-title` }
-            //   key={ recomendation.idMeal }
-            // />
           ))}
         </section>
       </section>
@@ -106,7 +98,8 @@ function DrinkDescription({ recipe, recipeId }) {
           className="start-recipe"
           data-testid="start-recipe-btn"
         >
-          { isStarted ? 'Continuar Receita' : 'Iniciar Receita' }
+          Iniciar Receita
+          {/* { isStarted ? 'Continuar Receita' : 'Iniciar Receita' } */}
         </button>
       </Link>
     </>
