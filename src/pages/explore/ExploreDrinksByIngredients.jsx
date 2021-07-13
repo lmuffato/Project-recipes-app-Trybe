@@ -16,14 +16,16 @@ function ExploreDrinksByIngredients() {
   return (
     <div>
       <Header />
-      { twelveIngredients
-        .map((drink, index) => (<IngredientCards
-          key={ index }
-          name={ drink.strIngredient1 }
-          thumbnail={ `https://www.thecocktaildb.com/images/ingredients/${drink.strIngredient1}-Small.png` }
-          index={ index }
-          param="/bebidas"
-        />))}
+      <div className="fake-cards">
+        { twelveIngredients
+          .map((drink, index) => (<IngredientCards
+            key={ index }
+            name={ drink.strIngredient1 }
+            thumbnail={ `https://www.thecocktaildb.com/images/ingredients/${drink.strIngredient1}-Small.png` }
+            index={ index }
+            param="/bebidas"
+          />))}
+      </div>
       <Footer />
     </div>
   );

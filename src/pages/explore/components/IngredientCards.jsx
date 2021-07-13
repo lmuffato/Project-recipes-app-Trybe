@@ -31,7 +31,11 @@ function IngredientCards({
   };
 
   return (
-    <button type="button" onClick={ () => handleExploreDirection() }>
+    <button
+      type="button"
+      className="ingredient-btn"
+      onClick={ () => handleExploreDirection() }
+    >
       <div key={ key } data-testid={ `${index}-ingredient-card` }>
         <img
           data-testid={ `${index}-card-img` }
@@ -39,12 +43,12 @@ function IngredientCards({
           alt={ name }
           index={ index }
         />
-        <h4
+        <h5
           key={ index }
           data-testid={ `${index}-card-name` }
         >
           { name }
-        </h4>
+        </h5>
       </div>
     </button>
   );

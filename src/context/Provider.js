@@ -212,6 +212,8 @@ function Provider({ children }) {
     setFilterDrinks,
     setFilterFoods,
     setInfoFav,
+    initProgressInLS,
+    initDoneRecipesInLS,
   };
 
   return (

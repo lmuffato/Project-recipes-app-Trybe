@@ -88,9 +88,14 @@ const IngredientsRadios = ({ recipe }) => {
   });
   // console.log(arrEntries);
   return (
-    <ul>
+    <ul className="list-group">
       {arrEntries.map((ingredient, index) => (
-        <li key={ index } data-testid={ `${index}-ingredient-step` }>
+        <li
+          key={ index }
+          data-testid={ `${index}-ingredient-step` }
+          className="list-group-item"
+          style={ { padding: '3px 0 3px 25px', marginTop: '10px' } }
+        >
           <input
             // data-testid={ `${index}-ingredient-step` }
             className="form-check-input"
@@ -102,7 +107,7 @@ const IngredientsRadios = ({ recipe }) => {
             onChange={ (e) => handleChange(e) }
           />
           <label
-            className="form-check-label"
+            // className="list-group-item"
             htmlFor={ index }
           >
             {`${ingredient[0]} - ${ingredient[1]}`}

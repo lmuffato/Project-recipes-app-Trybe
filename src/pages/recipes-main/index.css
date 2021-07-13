@@ -69,3 +69,7 @@ body {
 .cards-recipes card {
   width: 250px;
 }
+
+.card-title {
+  text-align: center;
+}

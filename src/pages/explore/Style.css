@@ -1,0 +1,42 @@
+.align-btn {
+  display: flex;
+  justify-content: space-around;
+}
+
+.btn-custom {
+  background-color: #334031;
+  color: #c2e1c2;
+  margin: 10px 0;
+  width: 160px;
+}
+
+.button-toolbar {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.ingredient-btn {
+  background-color: white;
+  border: 1px solid rgba(51, 64, 49, 1);
+  border-radius: 15px;
+  box-shadow: 5px 3px 1px hsl(138, 10%, 90%);
+  color: #334031;
+  height: 200px;
+  margin: 5px 10px 20px;
+  padding: 10px;
+  width: 150px;
+}
+
+.ingredient-btn h5 {
+  margin-top: 10px;
+}
+
+.fake-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  text-align: center;
+}
+

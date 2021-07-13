@@ -35,6 +35,7 @@ function ComponentAuxProgress(recipe) {
           data-testid="finish-recipe-btn"
           type="button"
           onClick={ () => handleClick() }
+          className="btn btn-dark"
         >
           Finalizar Receita
         </button>

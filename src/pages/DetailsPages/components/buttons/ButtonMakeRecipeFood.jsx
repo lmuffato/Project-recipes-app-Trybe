@@ -33,7 +33,19 @@ const checkExistInLS = (id, type) => {
 
 const ButtonMakeRecipeFood = ({ recipe }) => {
   const { idMeal } = recipe;
-  const { clickSetProgress, progressRecipes } = useContext(Context);
+  const { clickSetProgress,
+    progressRecipes, initProgressInLS, initDoneRecipesInLS } = useContext(Context);
+  function checkAndInitLSProgress() {
+    if (!localStorage.getItem('inProgressRecipe')) {
+      console.log('Iniciando inProgressRecipe!');
+      initProgressInLS();
+    }
+  }
+  function checkAndInitLSDone() {
+    if (!localStorage.getItem('doneRecipes')) {
+      initDoneRecipesInLS();
+    }
+  }
 
   // componentDidUpdate observando idMeal e progressRecipes
   useEffect(() => {
@@ -41,11 +53,15 @@ const ButtonMakeRecipeFood = ({ recipe }) => {
     checkExistInLS(idMeal, 'meal'); // check exist in LS
   }, [idMeal, progressRecipes]);
 
+  useEffect(() => {
+    checkAndInitLSProgress(); // checa se a chave progress no localstorage ja foi iniciada, se nao, inicia.
+    checkAndInitLSDone(); // checa se a chave done no ls ja foi iniciada, se nao, inicia.
+  });
   return (
     <Link
       to={ `/comidas/${idMeal}/in-progress` }
       id="startBtn"
-      className="startBtn"
+      className="btn btn-primary startBtn"
       data-testid="start-recipe-btn"
       onClick={ () => clickSetProgress('in', idMeal, 'meal', recipe) }
     >
