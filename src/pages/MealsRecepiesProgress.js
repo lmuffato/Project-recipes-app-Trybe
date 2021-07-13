@@ -30,7 +30,6 @@ function MealsRecepiesProgress() {
   }
   return (
     <div>
-      <p>parabens</p>
       <img
         data-testid="recipe-photo"
         alt="meals recepi"
