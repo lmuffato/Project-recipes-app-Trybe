@@ -2,12 +2,12 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
 import Share from '../images/shareIcon.svg';
-import MealIngredientsMeasure from '../compenents/MealIngredientsMeasure';
+import DrinkIngredientsMeasure from '../compenents/DrinkIngredientsMeasure';
 import RecipesContext from '../contexts/RecipesContext';
 
 const copy = require('clipboard-copy');
 
-function MealsRecepiesProgress() {
+function DrinksRecepiesProgress() {
   const [detailsRecepie, setDetailsRecepie] = useState();
   const { allChecked } = useContext(RecipesContext);
   const history = useHistory();
@@ -15,18 +15,19 @@ function MealsRecepiesProgress() {
 
   // ao montar a pagina, faz api que traz infos via ID.
   useEffect(() => {
-    console.log('entrou no didMount de mealsRecepieProgress');
+    console.log(recepiID);
     const getRecepi = async () => {
-      const endpoint = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${recepiID}`;
-      const { meals } = await fetch(endpoint).then((data) => data.json()); /* .then((response) => response)) */
-      console.log(meals);
-      setDetailsRecepie(meals[0]);
+      const endpoint = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${recepiID}`;
+      const returnFetch = await fetch(endpoint);
+      const dataJson = await returnFetch.json();
+      const { drinks } = dataJson;
+      setDetailsRecepie(drinks[0]);
     };
     getRecepi();
   }, []);
 
   function copyLink() {
-    const linkToCopy = `/comidas/${recepiID}`;
+    const linkToCopy = `/bebidas/${recepiID}`;
     copy(linkToCopy);
     global.alert('Link copiado!');
   }
@@ -38,18 +39,18 @@ function MealsRecepiesProgress() {
     <div>
       <img
         data-testid="recipe-photo"
-        alt="meals recepi"
-        src={ detailsRecepie.strMealThumb }
+        alt="drinks recepi"
+        src={ detailsRecepie.strImageSource }
         width="50px"
       />
-      <h2 data-testid="recipe-title">{ detailsRecepie.strMeal }</h2>
+      <h2 data-testid="recipe-title">{ detailsRecepie.strDrink }</h2>
       <button type="button" data-testid="share-btn" onClick={ copyLink }>
         <img alt="compartilhar" width="50px" src={ Share } />
       </button>
       { /* <Componente fav/desfav> */ }
-      <p data-testid="recipe-category">{ detailsRecepie.strCategory }</p>
+      <p data-testid="recipe-category">{ detailsRecepie.strAlcoholic }</p>
       <p>Ingredients</p>
-      <MealIngredientsMeasure
+      <DrinkIngredientsMeasure
         detailsRecepie={ detailsRecepie }
       />
       <p>Instruções</p>
@@ -68,4 +69,4 @@ function MealsRecepiesProgress() {
   );
 }
 
-export default MealsRecepiesProgress;
+export default DrinksRecepiesProgress;
