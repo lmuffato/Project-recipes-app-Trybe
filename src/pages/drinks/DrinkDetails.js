@@ -4,7 +4,7 @@ import { useStateEasyRedux } from 'easy-redux-trybe';
 import { useHistory } from 'react-router-dom';
 import copy from 'clipboard-copy';
 import positions from '../../services/data';
-import createIngredients from '../../services/functions';
+import { createIngredients } from '../../services/functions';
 import shareIcon from '../../images/shareIcon.svg';
 import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../../images/blackHeartIcon.svg';
@@ -126,7 +126,12 @@ function DrinkDetails(props) {
     <div>
       {responseDrink && responseDrink.map((el) => (
         <div className={ styles.areaRecipe } key={ el.idDrink }>
-          <img src={ el.strDrinkThumb } alt={ el.strDrink } data-testid="recipe-photo" />
+          <img
+            src={ el.strDrinkThumb }
+            alt={ el.strDrink }
+            data-testid="recipe-photo"
+            className={ styles.imgThumb }
+          />
           <div className={ styles.containerContent }>
             {copyRecipe && <span className={ styles.copyUrl }>Link copiado!</span>}
             <div className={ styles.headerContent }>
