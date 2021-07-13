@@ -115,8 +115,8 @@ footer {
 .recipeContainer {
   display: flex;
   flex-flow: row wrap;
-  margin-top: 10px;
   margin-bottom: 80px;
+  margin-top: 10px;
   width: 360px;
 }
 
@@ -169,16 +169,17 @@ footer {
   border-radius: 50px;
   color: orange;
   font-size: 25pt;
-  font-family: Segoe UI, Tahoma, Geneva, Verdana, sans-serif;
   margin-bottom: 60px;
   padding: 4px;
-  text-align: center;
 }
 
 .userInputs {
   border: none;
   border-radius: 10px;
-  font-family: Segoe UI, Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.title .userInputs {
+  font-family: Segoe UI , Tahoma , Geneva , Verdana , sans-serif;
   text-align: center;
 }
 
