@@ -8,7 +8,7 @@ export const getIngredients = (recipe) => {
 export const getMeasures = (recipe) => {
   const toGet = Object.entries(recipe);
   const measures = toGet.filter((key) => key[0].includes('Measure')
-    && key[1] !== '').map((curr) => curr[1]);
+    && key[1] !== ' ').map((curr) => curr[1]);
   return measures;
 };
 
