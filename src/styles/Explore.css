@@ -33,6 +33,15 @@
     width: 250px;
   }
 
+  .area-select {
+    width: 100%;
+    background-color: #48487d;
+    border: #48487d solid 2px;
+    height: 30px;
+    color: whitesmoke;
+    font-size: 18px;
+  }
+
 }
 
 @media only screen and ( min-width : 768px ) {
@@ -81,6 +90,15 @@
     margin: 50px;
     text-align: center;
     width: 500px;
+  }
+
+  .area-select {
+    width: 100%;
+    background-color: #48487d;
+    border: #48487d solid 2px;
+    height: 60px;
+    color: whitesmoke;
+    font-size: 25px;
   }
 
 }

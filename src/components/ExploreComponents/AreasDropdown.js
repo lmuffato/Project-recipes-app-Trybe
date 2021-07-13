@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import ReceitasContext from '../../contexts/ReceitasContext';
+import '../../styles/Explore.css';
 
 function AreasDropdown() {
   const { fetchApi, foodAreas } = useContext(ReceitasContext);
@@ -22,6 +23,7 @@ function AreasDropdown() {
 
   return (
     <select
+      className="area-select"
       name="area-dropdown"
       id="area-dropdown"
       data-testid="explore-by-area-dropdown"
@@ -29,6 +31,7 @@ function AreasDropdown() {
       onChange={ (ev) => setAreas(ev.target.value) }
     >
       <option
+        className="area-select-option"
         value="all"
         data-testid="All-option"
       >
@@ -38,6 +41,7 @@ function AreasDropdown() {
       {foodAreas !== undefined && (
         foodAreas.meals.map((area) => (
           <option
+            className="area-select-option"
             key={ area.strArea }
             value={ area.strArea }
             data-testid={ `${area.strArea}-option` }
