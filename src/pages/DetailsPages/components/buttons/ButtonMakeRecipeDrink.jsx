@@ -38,8 +38,13 @@ function checkDoneInLS(id) {
 
 const ButtonMakeRecipeDrink = ({ recipe }) => {
   const { idDrink } = recipe;
-  const { clickSetProgress, progressRecipes } = useContext(Context);
-
+  const { clickSetProgress, progressRecipes, initProgressInLS } = useContext(Context);
+  function checkAndInitLSProgress() {
+    if (!localStorage.getItem('inProgressRecipe')) {
+      console.log('Iniciando inProgressRecipe!');
+      initProgressInLS();
+    }
+  }
   // componentDidMount
   useEffect(() => {
     checkExist(idDrink, progressRecipes); // verifica no context
@@ -47,11 +52,15 @@ const ButtonMakeRecipeDrink = ({ recipe }) => {
     checkDoneInLS(idDrink);
   }, [idDrink, progressRecipes]);
 
+  useEffect(() => {
+    checkAndInitLSProgress();
+  });
+
   return (
     <Link
       to={ `/bebidas/${idDrink}/in-progress` }
       id="startBtn"
-      className="startBtn"
+      className="btn btn-primary startBtn"
       data-testid="start-recipe-btn"
       onClick={ () => clickSetProgress('in', idDrink, 'drink', recipe) }
     >
