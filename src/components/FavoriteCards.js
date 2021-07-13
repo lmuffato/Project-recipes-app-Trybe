@@ -63,10 +63,19 @@ export default function FavoriteCards() {
                     {name}
                   </h1>
                 </Link>
-                <h5 data-testid={ `${index}-horizontal-top-text` }>{text}</h5>
+                <h5
+                  className="subtitle"
+                  data-testid={ `${index}-horizontal-top-text` }
+                >
+                  {text}
+                </h5>
               </div>
               <div>
-                <button type="button" onClick={ () => removeFavorite(recipe) }>
+                <button
+                  className="no-style-btn"
+                  type="button"
+                  onClick={ () => removeFavorite(recipe) }
+                >
                   <img
                     alt="unfavorite"
                     data-testid={ `${index}-horizontal-favorite-btn` }
@@ -74,6 +83,7 @@ export default function FavoriteCards() {
                   />
                 </button>
                 <button
+                  className="no-style-btn"
                   data-testid={ `${index}-horizontal-share-btn` }
                   type="button"
                   onClick={ () => copyLink(recipe) }
@@ -92,6 +102,7 @@ export default function FavoriteCards() {
   return (
     <div>
       <button
+        className="filter-btn"
         type="button"
         onClick={ () => setFilter('All') }
         data-testid="filter-by-all-btn"
@@ -99,6 +110,7 @@ export default function FavoriteCards() {
         All
       </button>
       <button
+        className="filter-btn"
         type="button"
         onClick={ () => setFilter('Food') }
         data-testid="filter-by-food-btn"
@@ -106,6 +118,7 @@ export default function FavoriteCards() {
         Food
       </button>
       <button
+        className="filter-btn"
         type="button"
         onClick={ () => setFilter('Drink') }
         data-testid="filter-by-drink-btn"

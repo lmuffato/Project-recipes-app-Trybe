@@ -44,13 +44,21 @@ export default function RenderFavoriteHeart(type, recipe, dispatch) {
   }
   if (check.length > 0) {
     return (
-      <button type="button" onClick={ () => RemoveFavorite(type, recipe, dispatch) }>
+      <button
+        type="button"
+        className="no-style-btn"
+        onClick={ () => RemoveFavorite(type, recipe, dispatch) }
+      >
         <img alt="favorite" data-testid="favorite-btn" src={ blackFavoriteIcon } />
       </button>
     );
   }
   return (
-    <button type="button" onClick={ () => AddFavorite(type, recipe, dispatch) }>
+    <button
+      className="no-style-btn"
+      type="button"
+      onClick={ () => AddFavorite(type, recipe, dispatch) }
+    >
       <img alt="favorite" data-testid="favorite-btn" src={ whiteFavoriteIcon } />
     </button>
   );

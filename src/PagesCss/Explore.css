@@ -8,14 +8,14 @@ html {
 
 }
 
-.main-container {
+/* .main-container {
   align-items: center;
   background-color: var(--main-background);
   display: flex;
   flex-direction: column;
   height: 100vh;
   justify-content: center;
-}
+} */
 
 .main-explore {
   align-items: center;
@@ -25,13 +25,13 @@ html {
   justify-content: center;
 }
 
-.buttons {
+/* .buttons {
   border: 1px solid black;
   border-radius: 2.5vh;
   color: var(--lightBlack);
   margin: 5vh;
   padding: 5vh;
-}
+} */
 
 h3 {
   margin: auto;

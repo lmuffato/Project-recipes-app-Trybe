@@ -5,6 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #f5ebdc;
 }
 
 code {
@@ -15,13 +16,13 @@ code {
 .card {
   background-color: white;
   border: 1px solid rgba(0, 0, 0, 0.125);
-  border-radius: 3px;
+  border-radius: 8px;
   display: flex;
   flex-direction: column;
   height: auto;
   margin: 5px;
   overflow: hidden;
-  width: 300px;
+  width: 35vw;
 }
 
 .recipe-card-image {
@@ -31,21 +32,109 @@ code {
 .list {
   display: flex;
   flex-flow: row wrap;
-  padding: 48px 30px;
+  justify-content: center;
 }
 
 .title {
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 500;
   margin: 0 0 12px;
+  text-decoration: none;
+  color: #9c6435d2;
+}
+
+.subtitle {
+  font-size: 16px;
+  font-weight: 500;
+  margin: 0 0 12px;
+  text-decoration: none;
+  color: #ac6a34d2;
 }
 
 .title-div {
   flex: 1 1 auto;
-  padding: 20px;
+  padding-top: 7px;
+  text-align: center;
+}
+
+p, h2, h3, h1 {
+  padding-left: 6px;
 }
 
 .recipe-img {
-  width: 20%;
-  /* height: 20%; */
+  width: 100%;
+  height: 60vw;
+}
+
+.video {
+  justify-content: center;
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.instruction-text {
+  text-align: justify;
+  margin-right: 9px;
+}
+
+.no-style-btn {
+  background-color: Transparent;
+  border: none;
+  /* display: flex; */
+}
+
+.div-category-btn {
+  justify-content: center;
+  display: flex;
+  flex-flow: row wrap;
+  margin-bottom: 10px;
+}
+
+.filter-btn {
+  margin: 5px;
+  border: none;
+  background-color: #9c6435d2;
+  border-radius: 9px;
+  width: 45vw;
+  color: white;
+  font-weight: bold;
+}
+
+.form-search {
+  background-color: #e6d1b2;
+  border: 3px solid #e4b358d2;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
+  padding-top: 3px;
+}
+
+.input-search {
+  width: 50vw;
+  border-radius: 8px;
+  border-style: solid;
+  border-color: #e4b358d2;
+  padding-left: 8px
+}
+
+/* .main-test {
+  justify-content: center;
+  text-align: center;
+}
+
+#root { 
+  justify-content: center;
+  text-align: center;
+} */
+
+.buttons {
+  /* margin: 5px; */
+  border: none;
+  background-color: #9c6435d2;
+  border-radius: 9px;
+  width: 60vw;
+  color: white;
+  font-weight: bold;
+  margin: 5vh;
+  /* padding: 5vh; */
 }

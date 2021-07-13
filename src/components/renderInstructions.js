@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 
 export default function RenderInstructions({ strInst, ytEmb }) {
   return (
-    <>
-      <p data-testid="instructions">{strInst}</p>
+    <div className="video">
+      <p className="instruction-text" data-testid="instructions">{strInst}</p>
       { ytEmb && (
         <>
-          <h2>Video</h2>
+          {/* <h2>Video</h2> */}
           <iframe
             type="text/html"
             title="recipe"
@@ -18,7 +18,7 @@ export default function RenderInstructions({ strInst, ytEmb }) {
           />
         </>
       )}
-    </>
+    </div>
   );
 }
 

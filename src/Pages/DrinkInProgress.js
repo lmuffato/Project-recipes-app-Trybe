@@ -69,6 +69,7 @@ export default function DrinkInProgress() {
             {RenderFavoriteHeart('bebida', data[0], dispatch, globalState)}
             {copy}
             <button
+              className="no-style-btn"
               data-testid="share-btn"
               type="button"
               onClick={ () => copyLink(idDrink) }

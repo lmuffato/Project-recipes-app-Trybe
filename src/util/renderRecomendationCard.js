@@ -21,12 +21,19 @@ export default function RecomendationCard(type, recipe, index) {
     return (
       <Link to={ url }>
         <div
-          className="card-item"
+          className="card"
           data-testid={ `${index}-recomendation-card` }
         >
-          <span data-testid={ `${index}-recomendation-title` }>{title}</span>
-          <span>{category}</span>
           <img alt={ title } src={ img } />
+          <div className="title-div">
+            <p
+              data-testid={ `${index}-recomendation-title` }
+              className="title"
+            >
+              {title}
+            </p>
+            <p className="subtitle">{category}</p>
+          </div>
         </div>
       </Link>
     );

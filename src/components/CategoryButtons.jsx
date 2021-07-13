@@ -50,11 +50,12 @@ function FilterButtons({ props }) {
   };
 
   return (
-    <div>
+    <div className="div-category-btn">
       {
         list && (
           list.map((e, index) => index < FIVE && (
             <button
+              className="filter-btn"
               key={ index }
               type="button"
               data-testid={ `${e.strCategory}-category-filter` }
@@ -66,6 +67,7 @@ function FilterButtons({ props }) {
         )
       }
       <button
+        className="filter-btn"
         type="button"
         onClick={ () => HandleFilterByCategoryButton(props, 'all') }
         data-testid="All-category-filter"

@@ -1,15 +1,16 @@
 html {
 
-  --background: #e4b358d2;
+  --background: #9c6335;
 
-  --black: #0d114f;
+  /* --black: #fff; */
 
 }
 
 header, footer {
   align-items: center;
   background-color: var(--background);
-  color: var(--black);
+  /* color: var(--black); */
+  color: white;
   display: flex;
   justify-content: space-evenly;
   padding: 0.5vh;

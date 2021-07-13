@@ -11,6 +11,7 @@ export default function DoneRecepies() {
   const filterButtons = () => (
     <section>
       <button
+        className="filter-btn"
         type="button"
         data-testid="filter-by-all-btn"
         onClick={ () => setFilter('') }
@@ -18,6 +19,7 @@ export default function DoneRecepies() {
         All
       </button>
       <button
+        className="filter-btn"
         type="button"
         data-testid="filter-by-food-btn"
         onClick={ () => setFilter('food') }
@@ -25,6 +27,7 @@ export default function DoneRecepies() {
         Food
       </button>
       <button
+        className="filter-btn"
         type="button"
         data-testid="filter-by-drink-btn"
         onClick={ () => setFilter('drink') }

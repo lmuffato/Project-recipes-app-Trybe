@@ -1,8 +1,23 @@
 .footer {
   bottom: 0;
-  height: 10vh;
-  position: fixed;
+  height: 7vh;
   width: 100%;
+  border: none;
+  background-color: #9c6335;
+  color: white;
+  font-weight: bold;
+  position: sticky;
+}
+
+.footer:disabled {
+  bottom: 0;
+  height: 7vh;
+  position:sticky;
+  width: 100%;
+  border: none;
+  background-color: #9c63358e;
+  color: white;
+  font-weight: bold;
 }
 
 .hide-button {
