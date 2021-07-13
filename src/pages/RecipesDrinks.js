@@ -11,7 +11,7 @@ import RecipesCategoryFilters from '../components/RecipesCategoryFilters';
 import './recipesPageContainer.css';
 
 export default function RecipesDrinks() {
-  const { filters, fetchCocktails, drinkData } = useContext(RecipeContext);
+  const { filters, fetchCocktails, drinkData, redirect } = useContext(RecipeContext);
   const { appData: { showHide } } = useSearchBarShowHide();
 
   useEffect(() => {
@@ -24,17 +24,10 @@ export default function RecipesDrinks() {
     return <Redirect to={ `/bebidas/${drinkData[0].idDrink}` } />;
   }
 
-  return (
-    <div className="recipesPage__Container">
-      <Header title="Bebidas">
-        <ButtonSearch />
-        { showHide && <SearchBar /> }
-      </Header>
-
-      <RecipesCategoryFilters typeRecipes="drinks" />
-
-      <div className="recipeCards__container">
-        {drinkData && drinkData.map((drink, index) => (
+  function render() {
+    if (redirect.length > 0) {
+      return (
+        redirect && redirect.map((drink, index) => (
           <Link
             to={ `/bebidas/${drink.idDrink}` }
             key={ index }
@@ -45,7 +38,34 @@ export default function RecipesDrinks() {
               thumbnail={ drink.strDrinkThumb }
             />
           </Link>
-        ))}
+        )));
+    }
+    return (
+      drinkData && drinkData.map((drink, index) => (
+        <Link
+          to={ `/bebidas/${drink.idDrink}` }
+          key={ index }
+        >
+          <RecipeCard
+            index={ index }
+            name={ drink.strDrink }
+            thumbnail={ drink.strDrinkThumb }
+          />
+        </Link>
+      )));
+  }
+
+  return (
+    <div className="recipesPage__Container">
+      <Header title="Bebidas">
+        <ButtonSearch />
+        { showHide && <SearchBar /> }
+      </Header>
+
+      <RecipesCategoryFilters typeRecipes="drinks" />
+
+      <div className="recipeCards__container">
+        {render()}
       </div>
 
       <Footer />

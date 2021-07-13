@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import useRecipesContext from '../hooks/useRecipesContext';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -10,8 +10,7 @@ import '../components/ingredientCard.css';
 
 export default function ExploreIngredientsFood() {
   const [listIngredientFood, setListIngredientFood] = useState([]);
-  const history = useHistory();
-  const { setFilters } = useRecipesContext();
+  const { fetchMealsRedirect } = useRecipesContext();
 
   useEffect(() => {
     getMeals('ingredient_list').then(({ meals }) => {
@@ -22,12 +21,8 @@ export default function ExploreIngredientsFood() {
     });
   }, [setListIngredientFood]);
 
-  function handleRedirectPage(ingredient) {
-    setFilters({
-      search: ingredient,
-      parameter: 'ingredient',
-    });
-    history.push('/comidas');
+  async function handleRedirectPage(ingredient) {
+    fetchMealsRedirect('ingredient', ingredient);
   }
 
   return (
@@ -40,9 +35,8 @@ export default function ExploreIngredientsFood() {
         {
           listIngredientFood && listIngredientFood
             .map(({ strIngredient: ingredient }, index) => (
-              <button
-                // to="/comidas"
-                type="button"
+              <Link
+                to="/comidas"
                 key={ index }
                 className="ingredientCard__container"
                 onClick={ () => handleRedirectPage(ingredient) }
@@ -52,7 +46,7 @@ export default function ExploreIngredientsFood() {
                   thumbnail={ `https://www.themealdb.com/images/ingredients/${ingredient}-Small.png` }
                   name={ ingredient }
                 />
-              </button>
+              </Link>
             ))
         }
       </div>

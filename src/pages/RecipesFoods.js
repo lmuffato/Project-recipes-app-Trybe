@@ -11,7 +11,7 @@ import RecipesCategoryFilters from '../components/RecipesCategoryFilters';
 import './recipesPageContainer.css';
 
 export default function RecipesFoods() {
-  const { filters, fetchMeals, foodData } = useContext(RecipeContext);
+  const { filters, fetchMeals, foodData, redirect } = useContext(RecipeContext);
   const { appData: { showHide } } = useSearchBarShowHide();
 
   useEffect(() => {
@@ -19,10 +19,41 @@ export default function RecipesFoods() {
   }, [filters]);
 
   const { parameter, search } = filters;
-  console.log(`Parameter: ${parameter} / search: ${search}`);
+
   if (foodData && foodData.length === 1
     && (parameter !== 'category' && search !== '')) {
     return <Redirect to={ `/comidas/${foodData[0].idMeal}` } />;
+  }
+
+  function render() {
+    if (redirect.length > 0) {
+      return (
+        redirect.map((food, index) => (
+          <Link
+            to={ `/comidas/${food.idMeal}` }
+            key={ index }
+          >
+            <RecipeCard
+              index={ index }
+              name={ food.strMeal }
+              thumbnail={ food.strMealThumb }
+            />
+          </Link>)));
+    }
+    return (
+      foodData.map((food, index) => (
+        <Link
+          to={ `/comidas/${food.idMeal}` }
+          key={ index }
+        >
+          <RecipeCard
+            index={ index }
+            name={ food.strMeal }
+            thumbnail={ food.strMealThumb }
+          />
+        </Link>
+      ))
+    );
   }
 
   return (
@@ -35,20 +66,8 @@ export default function RecipesFoods() {
       <RecipesCategoryFilters typeRecipes="meals" />
 
       <div className="recipeCards__container">
-        {foodData && foodData.map((food, index) => (
-          <Link
-            to={ `/comidas/${food.idMeal}` }
-            key={ index }
-          >
-            <RecipeCard
-              index={ index }
-              name={ food.strMeal }
-              thumbnail={ food.strMealThumb }
-            />
-          </Link>
-        ))}
+        { render() }
       </div>
-
       <Footer />
     </div>
   );

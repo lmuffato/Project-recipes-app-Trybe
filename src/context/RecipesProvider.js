@@ -24,6 +24,7 @@ function RecipeProvider({ children }) {
   const [doneRecipes, setDoneRecipes] = useState(checkLocalStorage('doneRecipes'));
   const [favoriteRecipes,
     setFavoriteRecipes] = useState(checkLocalStorage('favoriteRecipes'));
+  const [redirect, setRedirect] = useState([]);
 
   const buttonsInitialState = {
     buttonFilter0: false,
@@ -67,6 +68,32 @@ function RecipeProvider({ children }) {
     setDrinkData(drinks);
   }
 
+  async function fetchMealsRedirect(parameter, search) {
+    const { meals } = await getMeals(parameter, search);
+    if (meals === null) {
+      setRedirect([]);
+      return;
+    }
+    if (meals.length > maxObjRetrieve) {
+      setRedirect(meals.slice(0, maxObjRetrieve));
+      return;
+    }
+    setRedirect(meals);
+  }
+
+  async function fetchCocktailsRedirect(parameter, search) {
+    const { drinks } = await getCocktails(parameter, search);
+    if (drinks === null) {
+      setRedirect([]);
+      return;
+    }
+    if (drinks.length > maxObjRetrieve) {
+      setRedirect(drinks.slice(0, maxObjRetrieve));
+      return;
+    }
+    setRedirect(drinks);
+  }
+
   const consumer = {
     fetchMeals,
     fetchCocktails,
@@ -86,6 +113,10 @@ function RecipeProvider({ children }) {
     setDoneRecipes,
     favoriteRecipes,
     setFavoriteRecipes,
+    fetchMealsRedirect,
+    fetchCocktailsRedirect,
+    redirect,
+    setRedirect,
   };
 
   return (
