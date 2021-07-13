@@ -32,7 +32,9 @@ function RecipeInfo(props) {
   };
 
   useEffect(() => {
+    let cancel = false;
     const handleCreateLocalStorageFavKey = () => {
+      if (cancel) return;
       const getFavoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
       if (getFavoriteRecipes && getFavoriteRecipes.some((item) => (
         item.id === id))) {
@@ -43,6 +45,9 @@ function RecipeInfo(props) {
       }
     };
     handleCreateLocalStorageFavKey();
+    return () => {
+      cancel = true;
+    };
   }, [id]);
 
   const handleCopyToClipboard = () => {
