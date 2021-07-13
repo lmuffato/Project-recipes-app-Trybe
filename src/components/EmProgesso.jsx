@@ -1,14 +1,16 @@
 import { object } from 'prop-types';
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import Ingredientes from './EmProgressPage/Ingredientes';
 import '../App.css';
+import FavoriteFood from './FavoriteFood';
 
 function EmProgresso({ props }) {
   const [data, setData] = useState({});
-  // const [isChecked, setIsChecked] = useState(false);
+  const [isDisabled, setIsDisabled] = useState(true);
 
   const magicNumber = 0;
+  const history = useHistory();
 
   useEffect(() => {
     const fetchData = () => {
@@ -17,27 +19,13 @@ function EmProgresso({ props }) {
     fetchData();
   }, [props]);
 
-  // const verifyLocalStorage = () => {
-  //   const progressRecipes = JSON.parse(localStorage
-  //     .getItem('inProgressRecipes'));
-
-  //   if (progressRecipes !== null) {
-  //     const { cocktails, meals } = progressRecipes;
-  //     // console.log(meals);
-  //     // console.log(cocktails);
-  //     const test = Object.values(meals);
-  //     // console.log(test);
-  //     // test[0].find((item) => console.log(item));
-  //   }
-  // };
-
   if (!data) return <h1>Loading...</h1>;
 
   const ingredientsList = Object.entries(data)
     .filter((item) => item[0].includes('Ingredient'))
     .filter((element) => element[1] !== '' && element[1] !== null);
 
-  const obj = { ingredientsList, data };
+  const obj = { ingredientsList, data, setIsDisabled, isDisabled };
 
   return (
     <div className="m-1 pb-4">
@@ -52,9 +40,8 @@ function EmProgresso({ props }) {
         <div className="py-4">
           <h2 data-testid="recipe-title">{ data.strMeal || data.strDrink }</h2>
         </div>
-        <div className="p-2">
-          <button type="button" data-testid="share-btn">Compartilhar</button>
-          <button type="button" data-testid="favorite-btn">Favoritar</button>
+        <div className="pb-4">
+          <FavoriteFood params={ obj } />
         </div>
         <div className="py-2">
           <h3 data-testid="recipe-category">{ data.strCategory }</h3>
@@ -71,11 +58,17 @@ function EmProgresso({ props }) {
         >
           { data.strInstructions }
         </p>
-        <Link to="/receitas-feitas" className="align-self-center w-50">
-          <button type="button" data-testid="finish-recipe-btn" className="w-100 py-3">
+        <div className="align-self-center w-50">
+          <button
+            type="button"
+            className="w-100 py-3"
+            data-testid="finish-recipe-btn"
+            onClick={ () => history.push('/receitas-feitas') }
+            disabled={ isDisabled }
+          >
             Finalizar
           </button>
-        </Link>
+        </div>
       </div>
     </div>
   );

@@ -164,7 +164,7 @@ function ReceitaBebidaDetalhe({ props }) {
               if (index <= cardLength) {
                 return (
                   <RecomendacoesCard
-                    key={ drink.idDrink }
+                    key={ index }
                     props={ drink }
                     type="drink"
                     index={ index }
