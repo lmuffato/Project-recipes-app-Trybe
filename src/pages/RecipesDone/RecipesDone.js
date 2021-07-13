@@ -1,9 +1,17 @@
 import React from 'react';
+import Header from '../../components/Header';
+import ButtonFilter from './ButtonFilter';
+import Recipes from './Recipes';
+import './index.css';
 
-const RecipesDone = () => (
-  <div>
-    <h2>Receitas já feitas</h2>
-  </div>
-);
+function RecipesDone() {
+  return (
+    <>
+      <Header />
+      <ButtonFilter />
+      <Recipes />
+    </>
+  );
+}
 
 export default RecipesDone;

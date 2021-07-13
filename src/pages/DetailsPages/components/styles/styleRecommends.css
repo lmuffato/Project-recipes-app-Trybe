@@ -1,0 +1,21 @@
+.card-left {
+  float: left;
+  padding: 1px;
+  width: 50%;
+}
+
+.card-right {
+  float: right;
+  padding: 1px;
+  width: 50%;
+
+}
+
+.carousel-indicators {
+  visibility: hidden;
+}
+
+.startBtn {
+  bottom: 0;
+  position: fixed;
+}
