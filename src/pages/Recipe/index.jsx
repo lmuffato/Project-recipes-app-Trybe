@@ -12,6 +12,7 @@ function Recipe() {
   const { id } = useParams();
   const [recipe, setRecipe] = useState({});
   const [videoId, setVideoId] = useState('');
+  const [recipeCookMode, setRecipeCookMode] = useState(false);
 
   useEffect(() => {
     async function loadRecipe() {
@@ -68,14 +69,35 @@ function Recipe() {
         </div>
       </div>
       <main>
-        <button type="button" className={ styles.startRecipe }>Iniciar receita</button>
+        <button
+          type="button"
+          className={ styles.startRecipe }
+          onClick={ () => setRecipeCookMode(true) }
+        >
+          Iniciar receita
+        </button>
         <h1>{ recipe.name }</h1>
         <h3>{ recipe.strCategory }</h3>
         <section>
           <h2>Ingredients</h2>
-          { recipe.ingredients && recipe.ingredients.map((ingredient) => (
-            <li key={ ingredient }>{ ingredient }</li>
-          )) }
+          <ul className={ styles.listOfIngredients }>
+            { recipe.ingredients && recipe.ingredients.map((ingredient) => {
+              if (recipeCookMode) {
+                return (
+                  <li className={ styles.listOnProgress }>
+                    <label htmlFor={ ingredient } key={ ingredient }>
+                      <input type="checkbox" name="ingredient" id={ ingredient } />
+                      <span>
+                        { ingredient }
+                      </span>
+                    </label>
+                  </li>
+                );
+              }
+
+              return <li key={ ingredient }>{ ingredient }</li>;
+            })}
+          </ul>
         </section>
         <section>
           <h2>Intructions</h2>
