@@ -13,13 +13,13 @@ import FavoriteRecipes from '../pages/FavoriteRecipes';
 import DoneRecepies from '../pages/DoneRecepies';
 import RecipeDescription from './RecipeDescription';
 import NotFound from './NotFound';
-// import Teste from '../pages/Teste';
+import MealsRecepiesProgress from '../pages/MealsRecepiesProgress';
 
 function Switcher() {
   return (
     <Switch>
-      <Route path="/comidas/:detalhes" component={ RecipeDescription } />
-      <Route path="/bebidas/:detalhes" component={ RecipeDescription } />
+      <Route exact path="/comidas/:id" component={ RecipeDescription } />
+      <Route exact path="/bebidas/:id" component={ RecipeDescription } />
       <Route exact path="/" component={ LoginPage } />
       <Route exact path="/comidas" component={ MainRecipesPage } />
       <Route exact path="/bebidas" component={ MainRecipesPage } />
@@ -30,6 +30,7 @@ function Switcher() {
       <Route path="/receitas-favoritas" component={ FavoriteRecipes } />
       <Route path="/receitas-feitas" component={ DoneRecepies } />
       <Route path="/explorar/bebidas/area" component={ NotFound } />
+      <Route exact path="/comidas/:id/in-progress" component={ MealsRecepiesProgress } />
       <Route
         path="/explorar/comidas/ingredientes"
         component={ FoodsIngredients }

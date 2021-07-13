@@ -1,6 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
+import Footer from '../compenents/Footer';
+import Header from '../compenents/Header';
 import MealCards from '../compenents/MealCards';
+import SearchbarContext from '../contexts/SearchbarContext';
 import '../styles/MealAndDrinkCards.css';
 
 function FoodsArea() {
@@ -8,6 +11,7 @@ function FoodsArea() {
   const [mealsRecepies, setMealsRecepies] = useState([]);
   const [selectedArea, setSelectedArea] = useState('All');
   const [showRecepies, setShowRecepies] = useState(mealsRecepies);
+  const { setHideSearchBtn, setPageName } = useContext(SearchbarContext);
   const lastRecipe = 12;
 
   useEffect(() => {
@@ -19,6 +23,7 @@ function FoodsArea() {
         country.strArea
       ));
       setAreas(allAreas);
+      setHideSearchBtn(true);
     };
     getAreas();
 
@@ -31,6 +36,7 @@ function FoodsArea() {
       setShowRecepies(fetchRecepies.slice(0, lastRecipe));
     };
     getMealsRecepies();
+    setPageName('Explorar Origem');
   }, []);
 
   useEffect(() => {
@@ -52,7 +58,8 @@ function FoodsArea() {
   }, [selectedArea, mealsRecepies]);
 
   return (
-    <div>
+    <>
+      <Header />
       <select
         data-testid="explore-by-area-dropdown"
         onChange={ (e) => setSelectedArea(e.target.value) }
@@ -74,7 +81,8 @@ function FoodsArea() {
           </Link>
         ))}
       </section>
-    </div>
+      <Footer />
+    </>
   );
 }
 

@@ -1,44 +1,41 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import shareIcon from '../images/shareIcon.svg';
 import FavoriteBtn from '../compenents/FavoriteBtn';
 import RecipesContext from '../contexts/RecipesContext';
+import Header from '../compenents/Header';
+import SearchbarContext from '../contexts/SearchbarContext';
 
 function FavoriteRecipes() {
-  const { favoriteRecipes, setFavRecipes } = useContext(RecipesContext);
-
-  const [showRecipes, setShowRecipes] = useState(favoriteRecipes);
-  // const [showRecipes, setShowRecipes] = useState(() => {
-  //   const getFavorites = JSON.parse(localStorage.getItem('favoriteRecipes'));
-  //   return getFavorites ? getFavorites : [];
-  // });
+  const { favoriteRecipes, showRecipes, setShowRecipes } = useContext(RecipesContext);
+  const { setPageName } = useContext(SearchbarContext);
   const [isCopy, setIsCopy] = useState(false);
+
+  setPageName('Receitas Favoritas');
 
   useEffect(() => {
     const recipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
-
     if (recipes === null) {
       global.alert('Nenhuma receita favorita encontrada!');
     } else {
       setShowRecipes(recipes);
-      setFavRecipes(recipes);
     }
-  }, [setFavRecipes]);
+  }, [favoriteRecipes]);
 
   const copyToClipboard = ({ target }) => {
-    setIsCopy(true);
     const { alt } = target;
     const path = `http://localhost:3000/${alt}`;
     navigator.clipboard.writeText(path);
+    setIsCopy(true);
   };
 
   const renderCards = (
     { id, type, area, category, alcoholicOrNot, name, image }, index,
   ) => {
-    if (type === 'meal') {
+    if (type === 'comida') {
       return (
         <div key={ id }>
-          { isCopy ? <p>Link copiado!</p> : null }
+          { isCopy ? <span>Link copiado!</span> : null }
           <Link to={ `/comidas/${id}` }>
             <img
               data-testid={ `${index}-horizontal-image` }
@@ -66,13 +63,14 @@ function FavoriteRecipes() {
 
           <FavoriteBtn
             id={ id }
+            index={ index }
           />
         </div>
       );
     }
     return (
       <div key={ id }>
-        { isCopy ? <p>Link copiado!</p> : null }
+        { isCopy ? <span>Link copiado!</span> : null }
         <Link to={ `/bebidas/${id}` }>
           <img
             data-testid={ `${index}-horizontal-image` }
@@ -100,6 +98,7 @@ function FavoriteRecipes() {
 
         <FavoriteBtn
           id={ id }
+          index={ index }
         />
       </div>
     );
@@ -109,17 +108,18 @@ function FavoriteRecipes() {
     if (param === 'all') {
       setShowRecipes(favoriteRecipes);
     } else if (param === 'meals') {
-      const mealsRecipes = favoriteRecipes.filter((recipe) => recipe.type === 'meal');
+      const mealsRecipes = favoriteRecipes.filter((recipe) => recipe.type === 'comida');
       setShowRecipes(mealsRecipes);
     } else if (param === 'cocktails') {
       const drinksRecipes = favoriteRecipes
-        .filter((recipe) => recipe.type === 'cocktail');
+        .filter((recipe) => recipe.type === 'bebida');
       setShowRecipes(drinksRecipes);
     }
   };
 
   return (
     <div>
+      <Header />
       <button
         type="button"
         data-testid="filter-by-all-btn"

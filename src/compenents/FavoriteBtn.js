@@ -4,14 +4,14 @@ import blackHeartIcon from '../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import RecipesContext from '../contexts/RecipesContext';
 
-function FavoriteBtn({ id, type, area, category, alcoholicOrNot, name, image }) {
+function FavoriteBtn({ id, type, area, category, alcoholicOrNot, name, image, index }) {
   const { favoriteRecipes, setFavRecipes } = useContext(RecipesContext);
-
   const [isFavorite, setIsFavorite] = useState(false);
+  const recipeId = id;
 
   useEffect(() => {
     localStorage.setItem('favoriteRecipes', JSON.stringify(favoriteRecipes));
-  }, [favoriteRecipes]);
+  }, [favoriteRecipes.length]);
 
   const setFavorite = () => {
     const recipeDetails = {
@@ -28,31 +28,29 @@ function FavoriteBtn({ id, type, area, category, alcoholicOrNot, name, image }) 
   };
 
   const setUnfavorite = () => {
-    const recipeId = id;
-
-    // const getFavRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
-    const removeFav = Object.values(favoriteRecipes)
-      .filter(({ id: favId }) => favId !== recipeId);
-
-    localStorage.setItem('favoriteRecipes', JSON.stringify(removeFav));
+    const removeFav = favoriteRecipes.filter(({ id: favId }) => favId !== recipeId);
     setFavRecipes(removeFav);
   };
 
   const setButton = () => {
-    const recipeId = id;
     const getLocalStr = JSON.parse(localStorage.getItem('favoriteRecipes'));
     let checkLocalStr;
 
     if (getLocalStr !== null) {
       // procura o recipeId no LS
       checkLocalStr = Object.values(getLocalStr)
-        .find(({ id: favoriteId }) => favoriteId === recipeId);
+        .find(({ id: strId }) => strId === recipeId);
     }
 
     if (checkLocalStr || isFavorite) {
       // recipeId encontrado no LS
       return (
-        <button type="button" onClick={ setUnfavorite }>
+        <button
+          type="button"
+          src={ blackHeartIcon }
+          data-testid={ `${index}-horizontal-favorite-btn` }
+          onClick={ setUnfavorite }
+        >
           <img
             data-testid="favorite-btn"
             src={ whiteHeartIcon }
@@ -63,7 +61,12 @@ function FavoriteBtn({ id, type, area, category, alcoholicOrNot, name, image }) 
     }
     // recipeId não encontrado no LS
     return (
-      <button type="button" onClick={ setFavorite }>
+      <button
+        type="button"
+        src={ whiteHeartIcon }
+        data-testid={ `${index}-horizontal-favorite-btn` }
+        onClick={ setFavorite }
+      >
         <img
           data-testid="favorite-btn"
           src={ blackHeartIcon }
