@@ -16,7 +16,7 @@ export default function FoodIngredients() {
   return (
     <div>
       <Header title="Explorar Ingredientes" show={ false } />
-      <IngredientList data={ ingredList } />
+      <IngredientList data={ ingredList } path="comidas" />
       <BottomMenu />
     </div>
   );

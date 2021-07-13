@@ -3,8 +3,17 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Context from '../context/Context';
 
-function IngredientList({ data }) {
-  const { category, filtredList } = useContext(Context);
+function IngredientList({ data, path }) {
+  const {
+    category, filtredList, setIngredFromExplore, setFromExplore
+  } = useContext(Context);
+
+  const passInfoFilter = (value) => {
+    setIngredFromExplore(value);
+    setFromExplore(true);
+    console.log(value);
+  }
+
   const renderCards = () => {
     const magicNum = 12;
     const first12 = category === 'All' ? data.slice(0, magicNum)
@@ -15,8 +24,9 @@ function IngredientList({ data }) {
         <li
           key={ index }
           data-testid={ `${index}-ingredient-card` }
+          onClick={ () => passInfoFilter(name) }
         >
-          <Link to={ { pathname: `/explorar/comidas/ingredientes` } }>
+          <Link to={ { pathname: `/${path}` } }>
             <div className="card">
               <img
                 src={ `${imgSrc}` }

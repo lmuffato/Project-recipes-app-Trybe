@@ -4,24 +4,27 @@ import BottomMenu from '../../components/bottomMenu';
 import RecipesList from '../../components/RecipesList';
 import ButtomFilters from '../../components/ButtomFilters';
 import Context from '../../context/Context';
-import { getDrinks } from '../../services/getDrinks';
+import { getDrinks, getDrinkByIngredient } from '../../services/getDrinks';
 import getDrinksCat from '../../services/getDrinksCat';
 import '../../App.css';
 
 export default function Drinks() {
   const { drinksList, setDrinksList, isLoading,
     setLoading, setCatList, catList, setCategory,
+    ingredFromExplore, fromExplore, setFromExplore,
   } = useContext(Context);
 
   useEffect(() => {
     const reciveDrinks = async () => {
       setLoading(true);
-      const data = await getDrinks();
+      const data = fromExplore ? await getDrinkByIngredient(ingredFromExplore)
+        : await getDrinks();
       const categoList = await getDrinksCat();
       setCategory('All');
       setDrinksList([...data]);
       setCatList([...categoList]);
       setLoading(false);
+      setFromExplore(false);
     };
     reciveDrinks();
   }, []);
