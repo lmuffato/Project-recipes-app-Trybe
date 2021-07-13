@@ -2,7 +2,7 @@ import React, { createContext, useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
 
 import { useHistory } from 'react-router-dom';
-import getRecipes from '../services/recipesData';
+import { getRecipes } from '../services/recipesData';
 
 export const RecipesContext = createContext();
 
