@@ -58,7 +58,7 @@ function Details() {
                 {recipesDetails[toggleCategory]}
               </h3>
             </div>
-            <div>
+            <div className="share-btn">
               <ShareButton dataTest="share-btn" />
               <FavoriteButton
                 recipe={ recipesDetails }
@@ -67,17 +67,20 @@ function Details() {
               />
             </div>
           </div>
+          <span />
           <Ingredient
             type="list"
             recipe={ recipesDetails }
             id={ id }
           />
+          <span />
           <div className="instructions">
             <h2>Instructions</h2>
             <p data-testid="instructions">
               {recipesDetails.strInstructions}
             </p>
           </div>
+          <span />
           { isLoading ? '' : (
             <Video recipeType={ recipeType } recipesDetails={ recipesDetails } />
           )}

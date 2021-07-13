@@ -22,27 +22,29 @@ function Header(props) {
 
   return (
     <div className="header-parent">
-      <Link to="/perfil">
-        <img
-          src={ profileIcon }
-          data-testid="profile-top-btn"
-          alt="user"
-        />
-      </Link>
-      <h2 data-testid="page-title">{children}</h2>
-      {
-        toHideSearchIcon.includes(children)
-          ? ''
-          : (
-            <img
-              src={ searchIcon }
-              aria-hidden="true"
-              data-testid="search-top-btn"
-              onClick={ () => setSerching((oldState) => !oldState) }
-              alt="do search"
-            />
-          )
-      }
+      <div className="main-header">
+        <Link to="/perfil">
+          <img
+            src={ profileIcon }
+            data-testid="profile-top-btn"
+            alt="user"
+          />
+        </Link>
+        <h2 data-testid="page-title">{children}</h2>
+        {
+          toHideSearchIcon.includes(children)
+            ? ''
+            : (
+              <img
+                src={ searchIcon }
+                aria-hidden="true"
+                data-testid="search-top-btn"
+                onClick={ () => setSerching((oldState) => !oldState) }
+                alt="do search"
+              />
+            )
+        }
+      </div>
       {
         serching
           ? <SearchBar page={ children.includes('Comida') ? 'meals' : 'drinks' } />

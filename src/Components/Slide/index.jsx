@@ -24,7 +24,7 @@ function Slide({ toggle, category, cleanState }) {
 
   return (
     <div className="slide-parent">
-      <h2>Recomendadas</h2>
+      <h2>Recomended</h2>
       <div className="suggestions-carousel">
         {recomendations.map((item, index) => (
           <div key={ `Card-${index}` } className="box">

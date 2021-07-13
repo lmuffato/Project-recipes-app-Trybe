@@ -1,0 +1,12 @@
+.searchbar-parent {
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+  width: 100vw;
+  margin: 0 1rem;
+}
+
+.searchbar-parent > button {
+  align-self: flex-start;
+  margin-top: 0.5rem;
+}

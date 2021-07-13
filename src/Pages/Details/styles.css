@@ -1,5 +1,6 @@
 .main-parent {
   margin-bottom: 4rem;
+  background-color: #f0ebeb;
 }
 
 .main-parent > div {
@@ -83,4 +84,16 @@ h2 {
 .btn-components {
   align-items: center;
   display: flex;
+}
+
+.share-btn {
+  display: flex;
+}
+
+span {
+  background-color: rgb(36, 35, 35);
+  height: 0.8px;
+  width: 80vw;
+  margin: 0.5rem auto;
+  color: white;
 }
