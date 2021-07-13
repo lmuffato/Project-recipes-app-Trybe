@@ -1,0 +1,16 @@
+.exploreIngredientPage__Container {
+  height: 100vh;
+  margin: 0 auto;
+  max-width: 360px;
+}
+
+.exploreIngredientCards__container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  justify-content: center;
+  margin: 10px auto;
+  max-height: calc(100vh - (52px + 60px + 25px + 32px));
+  max-width: 360px;
+  overflow-y: scroll;
+}
