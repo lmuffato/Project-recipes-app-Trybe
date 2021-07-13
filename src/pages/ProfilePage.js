@@ -1,15 +1,17 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Footer from '../compenents/Footer';
 import Header from '../compenents/Header';
-import SearchbarContext from '../contexts/SearchbarContext';
 import '../styles/ProfilePage.css';
 
 function Profile() {
-  const userEmailStorage = JSON.parse(localStorage.getItem('user'));
-  const userEmail = userEmailStorage.email || 'fake@email.com';
-  console.log(userEmail);
-  const { setHideSearchBtn, setPageName } = useContext(SearchbarContext);
+  const [userEmail, setUserEmail] = useState('');
+
+  useEffect(() => {
+    const userEmailStorageString = JSON.parse(localStorage.getItem('user'));
+    if (userEmailStorageString === null) setUserEmail('fake@gmail.com');
+    else setUserEmail(userEmailStorageString.email);
+  }, []);
 
   const clearStorage = () => localStorage.clear();
 
