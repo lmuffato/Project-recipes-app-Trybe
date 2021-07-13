@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-// import PropTypes from 'prop-types';
 import { useHistory } from 'react-router';
 // import clipboardCopy from '../../services/clipboardCopy';
 import shareIcon from '../../images/shareIcon.svg';
@@ -31,7 +30,3 @@ export default function ShareBtn() {
     </div>
   );
 }
-
-// ShareBtn.propTypes = {
-//   recipe: PropTypes.arrayOf(PropTypes.object),
-// }.isRequired;
