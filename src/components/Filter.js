@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Button from './Button';
+import '../styles/FilterInputGroup.css';
 
 function Filter({ page }) {
   const [APIresponse, setAPIResponse] = useState();
@@ -43,7 +44,7 @@ function Filter({ page }) {
 
   return (classes.length > 1
     && (
-      <div>
+      <div className="input-group-filter">
         {classes.map((clas, index) => (
           <Button key={ index } clas={ clas } index={ index } page={ page } />
         ))}

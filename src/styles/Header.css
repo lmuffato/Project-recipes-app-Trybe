@@ -97,6 +97,11 @@
   width: 50%;
 }
 
+.inp-group-search input {
+  margin-top: -1px;
+  vertical-align: middle;
+}
+
 .group-submit-txt {
   align-items: center;
   display: flex;
@@ -134,7 +139,7 @@
     font-size: 22px;
     margin-top: 16px;
     text-align: center;
-    width: 100%;
+    width: 80%;
   }
 
   .img-header {
