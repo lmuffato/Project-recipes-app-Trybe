@@ -38,7 +38,15 @@ export default function DoneRecipes() {
   if (!getItems) {
     return <h1>Loading...</h1>;
   }
-  if (!recipes) return <h1>Você não possui nenhuma receita concluida...</h1>;
+  if (!recipes) {
+    return (
+      <>
+        <Header>
+          <h1 data-testid="page-title">Receitas Feitas</h1>
+        </Header>
+        <h1>Você não possui nenhuma receita concluida...</h1>
+      </>);
+  }
   return (
     <div>
       <Header>
