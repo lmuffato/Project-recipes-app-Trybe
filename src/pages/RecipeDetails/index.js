@@ -19,7 +19,7 @@ export default function RecipeDetails({ match: { params: { id }, path, url } }) 
       .then((recipeCrr) => {
         setRecipe(recipeCrr);
       });
-  }, [pageOrigin]);
+  }, []);
 
   return (
     <div>
