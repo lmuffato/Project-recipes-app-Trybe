@@ -1,7 +1,9 @@
 .parent {
-  background-color: rgb(253, 253, 216);
+  background-color: white;
+  border-radius: 0.8rem;
   display: flex;
   flex-flow: column nowrap;
+  margin: 0 0.3rem;
   padding: 1rem;
 }
 

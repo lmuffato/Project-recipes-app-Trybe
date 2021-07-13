@@ -1,0 +1,18 @@
+a {
+  color: black;
+}
+
+.btn-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.list-btn {
+  background-color: rgb(252, 252, 113);
+  border: none;
+  border-radius: 10%;
+  color: black;
+  padding: 5px 10px;
+  width: 85px;
+}

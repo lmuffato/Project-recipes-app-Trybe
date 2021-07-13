@@ -26,7 +26,7 @@ function ShareButtonRecipes({ dataTest, recipe }) {
           src={ shareIcon }
           alt="share button"
         />
-        { isCopied ? <span> Link copiado! </span> : '' }
+        { isCopied ? <span className="over-screen"> Link copiado! </span> : '' }
       </div>
     </CopyToClipboard>
   );

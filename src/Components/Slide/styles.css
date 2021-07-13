@@ -13,8 +13,6 @@
   height: fit-content;
   overflow-x: scroll;
   padding: 1rem;
-
-  /* background-color: rgb(25, 25, 25); */
   width: 100vw;
 }
 
@@ -22,6 +20,7 @@
   background-clip: content-box;
   background-color: rgb(47, 47, 47);
   background-position: center;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16) , 0 3px 6px rgba(0, 0, 0, 0.23);
   margin-right: 2vw;
   max-height: fit-content;
   text-align: center;

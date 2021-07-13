@@ -4,6 +4,7 @@ import { Form, Button } from 'react-bootstrap';
 import { useLocation, useHistory } from 'react-router-dom';
 import RecipesContext from '../../context/RecipesContext';
 import fetchMealsAndDrinks from '../../services';
+import './styles.css';
 
 export default function SearchBar({ page }) {
   const [searchTerm, setSearchTerm] = useState('');
@@ -62,24 +63,26 @@ export default function SearchBar({ page }) {
   };
 
   return (
-    <div>
+    <div className="searchbar-parent">
       <Form.Control
         type="text"
         placeholder="Buscar Receita"
         data-testid="search-input"
         onChange={ handleChange }
       />
-      {toRadios.map(({ label, testeId }) => (
-        <Form.Check
-          inline
-          label={ label }
-          name="queries"
-          type="radio"
-          data-testid={ testeId }
-          key={ `radio-${label}` }
-          onChange={ () => setRadioOption(label) }
-        />
-      ))}
+      <div>
+        {toRadios.map(({ label, testeId }) => (
+          <Form.Check
+            inline
+            label={ label }
+            name="queries"
+            type="radio"
+            data-testid={ testeId }
+            key={ `radio-${label}` }
+            onChange={ () => setRadioOption(label) }
+          />
+        ))}
+      </div>
       <Button
         variant="primary"
         data-testid="exec-search-btn"
