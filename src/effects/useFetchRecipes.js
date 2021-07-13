@@ -22,12 +22,12 @@ function useFetchRecipes(type) {
         setRecipesContext(limitedData);
         setRecipesData(limitedData);
       } catch (err) {
-        console.log(err);
+        console.log(err, fetchUrl);
       }
     };
 
     fetchRecipes();
-  }, [type, fetchUrl, setRecipesContext]);
+  }, [fetchUrl, type, setRecipesContext]);
 
   return [recipesData, setFetchUrl];
 }

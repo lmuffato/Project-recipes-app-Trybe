@@ -17,6 +17,7 @@ function FilteredRecipesContextProvider(props) {
     try {
       const response = await fetch(endpoint);
       const data = await response.json();
+      console.log(data);
       const formattingData = {
         ...data,
         [type]: data[type].slice(0, MAX_RECIPES),
@@ -28,8 +29,8 @@ function FilteredRecipesContextProvider(props) {
       setFilteredRecipes(formattingData[type]);
       // setFilteredData(formattingData);
       // console.log(formattingData[type] !== null ? 'sim' : 'no');
-      console.log(formattingData[type]);
-      console.log(formattingData);
+      // console.log(formattingData[type]);
+      // console.log(formattingData);
     } catch (err) {
       console.log(err);
       global.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
@@ -70,14 +71,16 @@ function FilteredRecipesContextProvider(props) {
   // faz o switch case dos endpoints pra buscar receitas na api de drinks
   const handleDrinksFilterType = (filterType, query, type) => {
     const trimSpacesQuery = query.replace(/\s/g, '').trim();
-    const cocktailEndpointIngr = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${trimSpacesQuery}`;
+    const encodeQuery = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${query}`;
+    // const cocktailEndpointIngr = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${trimSpacesQuery}`;
     const cocktailEndpointName = `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${trimSpacesQuery}`;
     const cocktailEndpointFirstLetter = `https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${trimSpacesQuery}`;
 
     switch (filterType) {
     case 'ingredient':
-      fetchFilteredMealRecipes(cocktailEndpointIngr, type);
-      break;
+      return fetchFilteredMealRecipes(encodeQuery, type);
+      // fetchFilteredMealRecipes(cocktailEndpointIngr, type);
+      // break;
     case 'first-letter':
       if (query.length > 1 || query.trim() === '') {
         alertMessage();
@@ -96,7 +99,9 @@ function FilteredRecipesContextProvider(props) {
   // vai ser chamada no useEffect do componente CardList --> array de filtros como dependência
   const getFilteredRecipes = (type) => {
     if (searchBarFilters.length > 0) {
+      console.log(searchBarFilters);
       searchBarFilters.forEach((item) => {
+        console.log(item);
         const { inputSearch, radioValue } = item;
         if (type === 'meals') {
           handleMealFilterType(radioValue, inputSearch, type); // faz o switch case de cada concatenação de busca
@@ -138,3 +143,5 @@ export default FilteredRecipesContextProvider;
 // --> https://pt.stackoverflow.com/questions/382479/removendo-todos-os-espa%C3%A7os-de-uma-string-usando-javascript
 // Remoção dos espaços ao final e no início de uma string:
 // --> https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/String/trim
+// Codificar os espaços da URL:
+// --> https://www.thecocktaildb.com/images/media/drink/rvwrvv1468877323

@@ -85,7 +85,7 @@ function CardList({ recipes, type }) {
           </Link>
         ) : (
           <Link
-            to={ `/bebidas/${recipe.idDrink}` }
+            to={ { pathname: `/bebidas/${recipe.idDrink}` } }
             key={ i }
           >
             <Card recipe={ recipe } index={ i } />
