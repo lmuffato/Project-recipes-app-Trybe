@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 
 import { useParams } from 'react-router-dom';
 
 import { fetchFoodByID } from '../services/mealAPI';
+import { fetchCocktails } from '../services/cocktailAPI';
 
 import DetailsHeader from '../components/DetailsHeader';
 import Text from '../components/Text';
@@ -10,13 +11,15 @@ import Paragraphs from '../components/Paragraphs';
 import Button from '../components/Button';
 import List from '../components/List';
 import RenderVideo from '../components/RenderVideo';
+import Carousel from '../components/Carousel';
 
 export default function DetalhesComidas() {
   const [recipe, setRecipe] = useState({});
   const [filterIngredient, setFilterIngredient] = useState([]);
+  const [drinks, setDrinks] = useState([]);
   const { id } = useParams();
 
-  const filterIngredients = (obj) => {
+  const filterIngredients = useCallback((obj = recipe) => {
     const filter = Object.keys(obj)
       .filter((value) => value.includes('strIngredient'))
       .map((item) => (obj[item]));
@@ -27,16 +30,32 @@ export default function DetalhesComidas() {
       index = filter.indexOf(excluir);
     }
     return setFilterIngredient(filter);
-  };
+  }, [recipe]);
+
+  const updateData = useCallback(async () => {
+    const result = await fetchFoodByID(id);
+    return setRecipe(result.meals[0]);
+  }, [id]);
+
+  const updateDrinks = useCallback(async () => {
+    const result = await fetchCocktails();
+    const arr = [];
+    const six = 6;
+    result.drinks.map((item) => arr.push(item.strDrinkThumb));
+    return setDrinks(arr.slice(0, six));
+  }, []);
 
   useEffect(() => {
-    async function updateData() {
-      const result = await fetchFoodByID(id);
-      return setRecipe(result.meals[0]);
-    }
     updateData();
-    filterIngredients(recipe);
-  }, [id, recipe]);
+  }, [updateData]);
+
+  useEffect(() => {
+    filterIngredients();
+  }, [filterIngredients]);
+
+  useEffect(() => {
+    updateDrinks();
+  }, [updateDrinks]);
 
   return (
     <div>
@@ -47,9 +66,11 @@ export default function DetalhesComidas() {
       <Text>
         Ingredients
       </Text>
-      <List
-        list={ filterIngredient }
-      />
+      { filterIngredient.length > 0
+        && <List
+          dataTestid="-ingredient-name-and-measure"
+          list={ filterIngredient }
+        /> }
       <Text>
         Instructions
       </Text>
@@ -68,6 +89,7 @@ export default function DetalhesComidas() {
       <Text>
         Recomendadas
       </Text>
+      { drinks.length > 0 && <Carousel data={ drinks } /> }
       <Button
         dataTestid="start-recipe-btn"
       >

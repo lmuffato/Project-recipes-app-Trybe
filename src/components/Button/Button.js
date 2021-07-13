@@ -6,6 +6,7 @@ export default function Button({ children, dataTestid }) {
     <button
       data-testid={ `${dataTestid}` }
       type="button"
+      style={ { position: 'fixed', bottom: '0px' } }
     >
       { children }
     </button>

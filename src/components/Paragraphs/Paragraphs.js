@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 export default function Paragraphs({ children, dataTestid }) {
   return (
     <p
-      dataTestid={ `${dataTestid}` }
+      data-testid={ `${dataTestid}` }
     >
       { children }
     </p>

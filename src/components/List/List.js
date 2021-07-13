@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export default function List({ list }) {
+export default function List({ list, dataTestid }) {
   return (
     <ul>
       { list.map((item, index) => (
         <li
-          data-testid={ `${index}-ingredient-name-and-measure` }
           key={ index }
+          data-testid={ `${index}${dataTestid}` }
         >
           { item }
         </li>
@@ -18,4 +18,5 @@ export default function List({ list }) {
 
 List.propTypes = {
   list: PropTypes.instanceOf(Array).isRequired,
+  dataTestid: PropTypes.string.isRequired,
 };
