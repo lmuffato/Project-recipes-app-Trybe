@@ -20,6 +20,7 @@ import ReceitasFavoritas from './pages/ReceitasFavoritas';
 import FoodProvider from './contexts/FoodProvider';
 import DrinkProvider from './contexts/DrinkProvider';
 import FavoritesProvider from './contexts/FavoritesProvider';
+import NotFound from './pages/NotFound';
 
 function App() {
   return (
@@ -40,13 +41,13 @@ function App() {
             />
             <Route
               exact
-              path="/explorar/bebidas/ingredientes"
-              component={ ExplorarBebidasIng }
+              path="/explorar/comidas/area"
+              component={ ExplorarComidasArea }
             />
             <Route
               exact
-              path="/explorar/comidas/area"
-              component={ ExplorarComidasArea }
+              path="/explorar/bebidas/ingredientes"
+              component={ ExplorarBebidasIng }
             />
             <Route exact path="/perfil" component={ Perfil } />
             <Route exact path="/receitas-feitas" component={ ReceitasFeitas } />
@@ -62,6 +63,10 @@ function App() {
               exact
               path="/bebidas/:id/in-progress"
               component={ DetalhesBebidasIP }
+            />
+            <Route
+              path="*"
+              component={ NotFound }
             />
           </Switch>
         </FavoritesProvider>
