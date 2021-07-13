@@ -7,7 +7,7 @@ import { AppContext } from '../../context/AppContext';
 
 export default function BtnFavorite({ id }) {
   const { context } = useContext(AppContext);
-  const { setRecipeContext, toStorage, recipeContext, recipe } = context;
+  const { toStorage } = context;
   const [isFavorite, setIsFavorite] = useState(false);
 
   const key = 'favoriteRecipes';
@@ -15,10 +15,6 @@ export default function BtnFavorite({ id }) {
   function handleFavoriteRecipe() {
     setIsFavorite(!isFavorite);
   }
-
-  useEffect(() => {
-    setRecipeContext(recipe);
-  }, [recipe]);
 
   useEffect(() => {
     const storageValue = localStorage.getItem(key);
@@ -30,7 +26,7 @@ export default function BtnFavorite({ id }) {
         setIsFavorite(true);
       }
     }
-  }, [recipe.idMeal, recipe.idDrink, recipeContext, id]);
+  }, [id]);
 
   useEffect(() => {
     if (isFavorite === true) {
