@@ -4,10 +4,10 @@ import Header from '../../components/Header';
 import FooterMenu from '../../components/footerMenu';
 
 export default function ExplorePage() {
+  document.title = 'Explorar';
   return (
     <div>
       <Header />
-      <p>INSERIR HEADER </p>
       <button type="button">
         <Link to="/explorar/comidas" data-testid="explore-food">
           Explorar Comidas
