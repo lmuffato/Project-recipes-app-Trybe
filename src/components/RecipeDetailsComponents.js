@@ -1,5 +1,5 @@
 import React from 'react';
-import Carousel from 'react-bootstrap/Carousel';
+// import Carousel from 'react-bootstrap/Carousel';
 import PropTypes from 'prop-types';
 import { Swiper } from 'swiper/react';
 import RecipeImage from './RecipeComponents/RecipeImage';
