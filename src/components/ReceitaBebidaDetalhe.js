@@ -54,19 +54,6 @@ function ReceitaBebidaDetalhe({ props }) {
       image: acctualyDrink.drinks[0].strDrinkThumb,
     };
 
-    // if (JSON.parse(localStorage.getItem('favoriteRecipes') !== null)) {
-    //   const oldRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
-
-    //   console.log(oldRecipes);
-
-    //   const newRecipes = [...oldRecipes, favoriteRecipe];
-
-    //   console.log('New Recipe', newRecipes);
-    //   localStorage.setItem('favoriteRecipes', JSON.stringify(newRecipes));
-    // } else {
-    //   localStorage.setItem('favoriteRecipes', JSON.stringify([favoriteRecipe]));
-    // }
-
     if (favoriteDrink !== false
       && JSON.parse(localStorage.getItem('favoriteRecipes') !== null)) {
       const oldRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
@@ -207,6 +194,8 @@ function ReceitaBebidaDetalhe({ props }) {
     }
     return null;
   };
+
+  // Teste
 
   return createRecipe();
 }
