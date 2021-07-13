@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { useLocation } from 'react-router';
 import PropTypes from 'prop-types';
 import fetchApiById from '../service/fetchApiDetails';
@@ -10,7 +11,9 @@ function RecipeDetails(props) {
   const { match: { params: { id } } } = props;
   const { pathname } = useLocation();
   const [recipe, setRecipe] = useState({});
+  const history = useHistory();
   const type = pathname === `/comidas/${id}` ? 'themealdb' : 'thecocktaildb';
+  const url = pathname === `/comidas/${id}` ? 'comidas' : 'bebidas';
 
   useEffect(() => {
     async function requestApi() {
@@ -48,9 +51,10 @@ function RecipeDetails(props) {
       <button
         type="button"
         data-testid="start-recipe-btn"
-        style={ { position: 'fixed;' } }
+        className="start-button"
+        onClick={ () => history.push(`/${url}/${id}/in-progress`) }
       >
-        Iniciar Receita
+        iniciar receita
       </button>
     </div>
   );
