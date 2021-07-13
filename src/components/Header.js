@@ -22,7 +22,11 @@ function Header({ title }) {
 }
 
 Header.propTypes = {
-  title: string.isRequired,
+  title: string,
+};
+
+Header.defaultProps = {
+  title: '',
 };
 
 export default Header;
