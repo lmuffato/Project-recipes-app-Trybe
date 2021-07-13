@@ -10,7 +10,7 @@
 
 .input-group-filter label {
   align-items: center;
-  border-bottom: 1px solid rgb(100, 97, 97);
+  box-shadow: 0.6px 0.6px 4px rgb(29, 28, 29);
   display: flex;
   height: 40px;
   justify-content: center;

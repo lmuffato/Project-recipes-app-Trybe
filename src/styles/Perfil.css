@@ -24,19 +24,21 @@
 }
 
 .btn-profile-page button {
-  background-color: rgb(206, 206, 206);
+  background-color: transparent;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.568);
+  box-shadow: 1px 1px 7px rgb(29, 28, 29);
   font-size: 16px;
   font-weight: 900;
   height: 270%;
   opacity: 0.6;
   text-shadow: 0.5px 0.5px 0.5px rgb(41, 38, 38);
   text-transform: uppercase;
-  transition: 1s;
+  transition: 0.4s;
   width: 100%;
 }
 
 .btn-profile-page button:hover {
-  opacity: 1;
+  box-shadow: 1px 1px 7px rgb(29, 28, 29) inset;
 }
 
 @media ( max-width : 786.98px ) {
