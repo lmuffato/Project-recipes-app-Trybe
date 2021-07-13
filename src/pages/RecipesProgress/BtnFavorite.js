@@ -1,6 +1,5 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useEffect, useContext, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
-
 import whiteHeart from '../../images/whiteHeartIcon.svg';
 import blackHeart from '../../images/blackHeartIcon.svg';
 import { AppContext } from '../../context/AppContext';
@@ -9,32 +8,38 @@ export default function BtnFavorite({ id }) {
   const { context } = useContext(AppContext);
   const { toStorage } = context;
   const [isFavorite, setIsFavorite] = useState(false);
-
   const key = 'favoriteRecipes';
+  const result = useRef('');
 
   function handleFavoriteRecipe() {
-    setIsFavorite(!isFavorite);
+    if (result.current) {
+      toStorage.forEach((item) => {
+        result.current.push(item);
+      });
+      localStorage.setItem(key, JSON.stringify(result.current));
+      setIsFavorite(true);
+    } else {
+      localStorage.setItem(key, JSON.stringify(toStorage));
+      setIsFavorite(true);
+    }
+    if (isFavorite === true) {
+      const filtered = result.current.filter((idRemove) => idRemove.id !== id);
+      localStorage.setItem(key, JSON.stringify(filtered));
+      setIsFavorite(false);
+    }
   }
 
   useEffect(() => {
     const storageValue = localStorage.getItem(key);
     if (storageValue) {
-      const result = JSON.parse(storageValue);
-      const comparison = result && result.some((item) => (
+      result.current = JSON.parse(storageValue);
+      const comparison = result.current && result.current.some((item) => (
         item.id === id));
       if (comparison) {
         setIsFavorite(true);
       }
     }
   }, [id]);
-
-  useEffect(() => {
-    if (isFavorite === true) {
-      localStorage.setItem(key, JSON.stringify(toStorage));
-    } else {
-      localStorage.removeItem(key);
-    }
-  }, [isFavorite, toStorage]);
 
   return (
     <button
@@ -43,7 +48,7 @@ export default function BtnFavorite({ id }) {
     >
       <img
         data-testid="favorite-btn"
-        src={ isFavorite ? blackHeart : whiteHeart }
+        src={ isFavorite === false ? whiteHeart : blackHeart }
         alt="imagem favoritar"
       />
     </button>
