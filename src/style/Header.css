@@ -1,6 +1,4 @@
-/* @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Handlee&display=swap') ;
-  font-family: Comic Neue , cursive;
-*/
+@import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Handlee&display=swap') ;
 
 .exploreBtn {
   background-color: transparent;
@@ -13,6 +11,7 @@
   border-radius: 0 0 19px 19px;
   color: white;
   display: flex;
+  font-family: Comic Neue , cursive;
   font-weight: 700;
   justify-content: space-between;
   max-width: 100%;

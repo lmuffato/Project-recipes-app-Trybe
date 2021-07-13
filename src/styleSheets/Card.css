@@ -7,8 +7,7 @@
   box-shadow: 2px 2px 20px 2px gray;
   display: flex;
   flex-direction: column;
-
-  /* font-family:'Comic Neue', cursive; */
+  font-family: Comic Neue, cursive;
   height: 150px;
   justify-content: space-between;
   margin: 4px;
@@ -26,7 +25,6 @@
   align-self: start;
   font-size: large;
   justify-self: center;
-
-  /* font-family: 'Handlee', cursive; */
+  font-family: Handlee , cursive;
   margin: 0 6px 10px;
 }
