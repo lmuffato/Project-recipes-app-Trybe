@@ -20,7 +20,7 @@ function ShareButton({ dataTest }) {
   };
 
   return (
-    <CopyToClipboard text={ `http://localhost:3000${fixedURL}` } onCopy={ onCopyText }>
+    <CopyToClipboard text={ `http://localhost:3000/${fixedURL}` } onCopy={ onCopyText }>
       <div>
         <input
           type="image"
