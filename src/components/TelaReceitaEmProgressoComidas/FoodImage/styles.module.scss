@@ -1,5 +1,7 @@
-#food-picture {
+.foodpicture {
   width: 360px;
   height: 170px;
   border-radius: 5px;
+  display: flex;
+  align-self: center;
 }

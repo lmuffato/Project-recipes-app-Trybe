@@ -1,0 +1,19 @@
+#ingredients {
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
+}
+
+.container input:checked~.checkmark {
+  text-decoration: line-through
+}
+
+#botaofinalizarReceita {
+  border-radius: 15px;
+  width: 136px;
+  height: 46px;
+  background-color: #FB8B24;
+  color: #4B0740;
+  margin-left: 160px;
+  position: static;
+}

@@ -1,13 +1,13 @@
 import React from 'react';
-import BlackHeart from '../../../images/blackHeartIcon.svg';
+import WhiteHeart from '../../../images/whiteHeartIcon.svg';
 import ShareIcon from '../../../images/shareIcon.svg';
-import './style.css';
+import styles from './styles.module.scss';
 
 function LikeShareButton() {
   return (
-    <div className="like-share-container">
+    <div className={ styles.likesharecontainer }>
       <button type="button">
-        <img src={ BlackHeart } alt="black heart icon" data-testid="favorite-btn" />
+        <img src={ WhiteHeart } alt="black heart icon" data-testid="favorite-btn" />
       </button>
       <button type="button" data-testid="share-btn">
         <img src={ ShareIcon } alt="share icon" />

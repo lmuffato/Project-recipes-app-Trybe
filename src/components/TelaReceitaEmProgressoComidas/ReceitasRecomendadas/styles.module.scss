@@ -1,0 +1,35 @@
+#recomendedId-container {
+  margin-top: 10px;
+  margin-left: 20px;
+  color: #FB8B24;
+  margin-bottom: 100px;
+}
+
+#recomended-container {
+  width: 300px;
+  height: 154px;
+  display: flex;
+  justify-content: space-between;
+  background-color: white;
+}
+
+.recomended {
+  width: 132px;
+  height: 125px;
+  border-start-start-radius: 8px;
+  border-top-right-radius: 8px;
+  background-color: #EE9EE1;
+}
+
+.recomended-name {
+  background-color: #721D64;
+  color: #EE9EE1;
+  width: 132px;
+  height: 29px;
+  position: absolute;
+  border-end-end-radius: 8px;
+  border-bottom-left-radius: 8px;
+  display: flex;
+  padding-left: 10px;
+  padding-top: 2px;
+}

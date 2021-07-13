@@ -1,10 +1,10 @@
 import React from 'react';
 import ExploreIcon from '../../../images/exploreIcon.svg';
-import './styles.css';
+import styles from './styles.module.scss';
 
 function Header() {
   return (
-    <header id="header">
+    <header id={ styles.header }>
       <div>
         <img src={ ExploreIcon } alt="Explore icon" data-testid="recipe-photo" />
         Chelsea Buns

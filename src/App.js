@@ -1,22 +1,16 @@
 import React from 'react';
-import './App.css';
-// import rockGlass from './images/rockGlass.svg';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import TelaReceitaEmProgresso from './components/TelaReceitaEmProgresso';
+import { Switch, Route } from 'react-router-dom';
+import Login from './pages/Login';
+import Receitas from './pages/Receitas';
+import TelaReceitaEmProgresso from './components/TelaReceitaEmProgressoComidas/index';
 
 function App() {
   return (
-    // <div className="meals">
-    //   <span className="logo">TRYBE</span>
-    //   <object
-    //     className="rocksGlass"
-    //     type="image/svg+xml"
-    //     data={ rockGlass }
-    //   >
-    //     Glass
-    //   </object>
-    // </div>
-    <TelaReceitaEmProgresso />
+    <Switch>
+      <Route exact path="/" component={ Login } />
+      <Route path="/comidas/:id/in-progress" component={ TelaReceitaEmProgresso } />
+      <Route path="/comidas" component={ Receitas } />
+    </Switch>
   );
 }
 
