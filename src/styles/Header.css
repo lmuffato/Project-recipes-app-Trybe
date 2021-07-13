@@ -51,7 +51,7 @@
 
 .inp-search {
   background-image: linear-gradient(rgb(67, 163, 58), rgb(60, 179, 49));
-  box-shadow: 1px 1px 10px rgb(29, 28, 29) inset;
+  box-shadow: 1px 1px 7px rgb(29, 28, 29) inset;
   display: flex;
   height: 80px;
   justify-content: space-between;
@@ -84,7 +84,7 @@
 }
 
 .btn-search-submit:hover {
-  box-shadow: 8px 8px 16px 0 hsla(0, 21%, 36%, 0.365);
+  box-shadow: 0.5px 0.5px 4px hsla(0, 21%, 36%, 0.365) inset;
 }
 
 .inp-group-search {
