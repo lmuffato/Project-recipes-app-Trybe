@@ -5,11 +5,7 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
-  return (
-    <RecipeContextProvider>
-      <Routes />
-    </RecipeContextProvider>
-  );
+  return <Routes />;
 }
 
 export default App;
