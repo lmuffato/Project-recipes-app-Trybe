@@ -31,7 +31,7 @@ export default function RecipesDone() {
     },
   ];
 
-  localStorage.setItem('doneRecipes', JSON.stringify(doneRecipes));
+  // localStorage.setItem('doneRecipes', JSON.stringify(doneRecipes));
 
   const [filterRecipes, setFilterRecipes] = useState(doneRecipes);
   const [clipBoardFood, setClipBoardFood] = useState(false);
@@ -118,7 +118,7 @@ export default function RecipesDone() {
                       alt="share button"
                     />
                   </button>
-                  <spam>{clipBoardFood === true ? 'Link copiado!' : null}</spam>
+                  <span>{clipBoardFood === true ? 'Link copiado!' : null}</span>
                 </div>)
               : (
                 <div key={ id }>
@@ -140,7 +140,7 @@ export default function RecipesDone() {
                       alt="share button"
                     />
                   </button>
-                  <spam>{clipBoardDrink === true ? 'Link copiado!' : null}</spam>
+                  <span>{clipBoardDrink === true ? 'Link copiado!' : null}</span>
                 </div>)
           ),
         )}
