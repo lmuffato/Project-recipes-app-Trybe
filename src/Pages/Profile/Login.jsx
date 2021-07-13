@@ -37,7 +37,7 @@ function Login() {
     }));
   };
 
-  if (shouldRedirect) return <Redirect to="/" />;
+  if (shouldRedirect) return <Redirect to="/comidas" />;
   return (
     <form>
       <label htmlFor="email-input">
