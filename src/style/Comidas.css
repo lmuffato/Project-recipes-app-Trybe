@@ -23,11 +23,21 @@ ul {
     margin: 0;
 }
 
+.cards {
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+}
+
 .main-foods {
     width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
 }
 
 .recipe-card {
     width: 100%;
 
 }
+

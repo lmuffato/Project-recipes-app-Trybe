@@ -1,0 +1,9 @@
+button {
+  margin-top: 20px;
+}
+
+.explorar {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}

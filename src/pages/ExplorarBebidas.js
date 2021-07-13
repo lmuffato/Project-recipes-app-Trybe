@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { fetchRandomDrink } from '../services/cocktailAPI';
+import '../style/ExplorarBebidas.css';
 
 export default function ExplorarBebidas() {
   const [randomDrinkId, setRandomDrinkId] = useState(0);
@@ -17,23 +18,25 @@ export default function ExplorarBebidas() {
         title="Explorar Bebidas"
         enableSearchIcon={ false }
       />
-      <Link to="/explorar/bebidas/ingredientes">
-        <button
-          type="submit"
-          data-testid="explore-by-ingredient"
-        >
-          Por Ingredientes
-        </button>
-      </Link>
+      <div className="explorar-bebidas">
+        <Link to="/explorar/bebidas/ingredientes">
+          <button
+            type="submit"
+            data-testid="explore-by-ingredient"
+          >
+            Por Ingredientes
+          </button>
+        </Link>
 
-      <Link to={ `/bebidas/${randomDrinkId} ` }>
-        <button
-          type="submit"
-          data-testid="explore-surprise"
-        >
-          Me Surpreenda!
-        </button>
-      </Link>
+        <Link to={ `/bebidas/${randomDrinkId} ` }>
+          <button
+            type="submit"
+            data-testid="explore-surprise"
+          >
+            Me Surpreenda!
+          </button>
+        </Link>
+      </div>
       <Footer />
     </div>
   );

@@ -2,10 +2,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import '../style/Explorar.css';
 
 export default function Explorar() {
   return (
-    <div>
+    <div className="explorar">
       <Header
         title="Explorar"
         enableSearchIcon={ false }
