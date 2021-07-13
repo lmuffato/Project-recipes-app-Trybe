@@ -12,14 +12,18 @@ import BtnShare from '../RecipesProgress/BtnShare';
 
 export default function RecipeDetails({ match: { params: { id }, path, url } }) {
   const { context } = useContext(AppContext);
-  const { pageOrigin, recipe, setRecipe } = context;
+  const { setPageOrigin, recipe, setRecipe } = context;
 
   useEffect(() => {
     fetchByIdApi(path.includes('/comidas') ? 'themealdb' : 'thecocktaildb', id)
       .then((recipeCrr) => {
         setRecipe(recipeCrr);
       });
-  }, [pageOrigin]);
+  }, [path, id]);
+
+  useEffect(() => {
+    setPageOrigin(path.includes('/comidas/') ? 'themealdb' : 'thecocktaildb');
+  }, [path]);
 
   return (
     <div>

@@ -46,7 +46,7 @@ export default function RecipesProgress({ match }) {
 
   useEffect(() => {
     setPageOrigin(urlOrigin.includes('/comidas/') ? 'themealdb' : 'thecocktaildb');
-  }, []);
+  }, [urlOrigin]);
 
   useEffect(() => {
     getRecipeStorage();

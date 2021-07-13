@@ -39,9 +39,9 @@ export default function AppProvider({ children }) {
   useEffect(() => {
     const inProgressStorage = [{
       id: recipe.idMeal || recipe.idDrink,
-      type: pageOrigin === 'themealdb' ? 'comida' : 'bebida',
+      type: pageOrigin.includes('themealdb') ? 'comida' : 'bebida',
       area: recipe.strArea || '',
-      category: recipe.strCategory,
+      category: recipe.strCategory || '',
       alcoholicOrNot: recipe.strAlcoholic || '',
       name: recipe.strMeal || recipe.strDrink,
       image: recipe.strMealThumb || recipe.strDrinkThumb,
