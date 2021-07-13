@@ -9,14 +9,14 @@ function BebidasProgresso() {
   const minSlice = 9;
   const maxSlice = -12;
   const id = pathname.slice(minSlice, maxSlice);
-  async function fetchAPI() {
-    const { drinks } = await fetchDrinksDetails(id);
-    setData(drinks[0]);
-  }
 
   useEffect(() => {
+    async function fetchAPI() {
+      const { drinks } = await fetchDrinksDetails(id);
+      setData(drinks[0]);
+    }
     fetchAPI();
-  });
+  }, [id]);
 
   return data === '' ? <h2>Loading...</h2> : <BebidasInProgress data={ data } />;
 }

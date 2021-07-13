@@ -12,16 +12,15 @@ function FoodsDetails() {
   const [data, setData] = useState([]);
   const [recomendation, setRecomendation] = useState();
 
-  async function getData() {
-    const { meals } = await fetchFoodDetails(idFood);
-    const recomendations = await drinksRecomendation();
-    setRecomendation(recomendations);
-    setData(meals);
-  }
-
   useEffect(() => {
+    async function getData() {
+      const { meals } = await fetchFoodDetails(idFood);
+      const recomendations = await drinksRecomendation();
+      setRecomendation(recomendations);
+      setData(meals);
+    }
     getData();
-  });
+  }, [idFood]);
 
   return (
     data.length > 0

@@ -11,22 +11,20 @@ function FoodsInProgress({ data }) {
   const ingredients = getIngredients(data, 'strIngredient').map((e) => e[1]);
   const { pathname } = useLocation();
   const [keys, setKeys] = useState([]);
-
-  function saveState() {
-    if (pathname.includes('/comidas')) {
-      const { strMealThumb, strMeal, strCategory } = data;
-      const obj = [{
-        image: strMealThumb,
-        title: strMeal,
-        category: strCategory,
-      }];
-      setKeys(obj);
-    }
-  }
-
   useEffect(() => {
+    function saveState() {
+      if (pathname.includes('/comidas')) {
+        const { strMealThumb, strMeal, strCategory } = data;
+        const obj = [{
+          image: strMealThumb,
+          title: strMeal,
+          category: strCategory,
+        }];
+        setKeys(obj);
+      }
+    }
     saveState();
-  });
+  }, [data, pathname]);
 
   if (keys.length > 0) {
     return (

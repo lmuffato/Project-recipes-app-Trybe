@@ -9,14 +9,14 @@ function ComidasProgresso() {
   const minSlice = 9;
   const maxSlice = -12;
   const id = pathname.slice(minSlice, maxSlice);
-  async function fetchAPI() {
-    const { meals } = await fetchFoodDetails(id);
-    setData(meals[0]);
-  }
 
   useEffect(() => {
+    async function fetchAPI() {
+      const { meals } = await fetchFoodDetails(id);
+      setData(meals[0]);
+    }
     fetchAPI();
-  });
+  }, [id]);
 
   return data === '' ? <h2>Loading...</h2> : <ComidasInProgress data={ data } />;
 }

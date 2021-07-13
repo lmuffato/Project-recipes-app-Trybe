@@ -21,8 +21,8 @@ function DrinkDetails() {
       setData(drinks);
       setLoading(false);
     }
-    if (!data || !data.length) getData();
-  }, [idDrink, data.length, data]);
+    getData();
+  }, [idDrink]);
 
   return (
     loading

@@ -12,8 +12,8 @@ function DrinksInProgress({ data }) {
   const { pathname } = useLocation();
   const [keys, setKeys] = useState([]);
 
-  function saveState() {
-    if (pathname.includes('/comidas')) {
+  useEffect(() => {
+    function saveState() {
       const { strDrinkThumb, strDrink, strCategory } = data;
       const obj = [{
         image: strDrinkThumb,
@@ -22,11 +22,8 @@ function DrinksInProgress({ data }) {
       }];
       setKeys(obj);
     }
-  }
-
-  useEffect(() => {
     saveState();
-  });
+  }, [data, pathname]);
 
   if (keys.length > 0) {
     return (

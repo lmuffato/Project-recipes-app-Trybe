@@ -71,7 +71,7 @@ function FavoriteButton({ data, path }) {
 
   useEffect(() => {
     createLocalStorage();
-  });
+  }, []);
 
   return (
     <button

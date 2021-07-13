@@ -44,22 +44,21 @@ export default function RecipeButton({ path, ingredients }) {
     }
   }
 
-  function button() {
-    const id = path.slice(sliceNumber);
-    const include = JSON.parse(localStorage.getItem('inProgressRecipes'));
-    if (path.includes('/comida')) {
-      if (include.meals[id] !== undefined) setButtonName('Continuar Receita');
-    } else {
-      return include.cocktails[id] !== undefined
-        ? setButtonName('Continuar Receita')
-        : setButtonName('Iniciar Receita');
-    }
-  }
-
   useEffect(() => {
+    function button() {
+      const id = path.slice(sliceNumber);
+      const include = JSON.parse(localStorage.getItem('inProgressRecipes'));
+      if (path.includes('/comida')) {
+        if (include.meals[id] !== undefined) setButtonName('Continuar Receita');
+      } else {
+        return include.cocktails[id] !== undefined
+          ? setButtonName('Continuar Receita')
+          : setButtonName('Iniciar Receita');
+      }
+    }
     setLocalStorage();
     button();
-  });
+  }, [path]);
 
   return (
     <Link to={ `${path}/in-progress` }>
