@@ -34,7 +34,7 @@ export const handleCheckLS = (key, id, type) => {
       : Object.keys(checkLocalStorage.cocktails);
 
     if (recipeId) {
-      const findId = recipeId.includes(id);
+      const findId = recipeId.some((item) => item === id);
       return findId;
     }
     return false;
