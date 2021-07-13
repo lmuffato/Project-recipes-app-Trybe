@@ -16,7 +16,6 @@ const endpointCocktails = 'https://www.thecocktaildb.com/api/json/v1/1/search.ph
 
 function RecipeDetails({ type }) {
   const { id } = useParams();
-  // const history = useHistory();
   const endpointMeal = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
   const endpointDrink = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
   const [singleRecipe, setRecipe] = useState({});
@@ -33,7 +32,6 @@ function RecipeDetails({ type }) {
       return handleFetch(endpointDrink, type);
     };
     getRecipesAndRecommendations();
-    // setRecipeInProgress('Iniciar receita');
   }, [endpointDrink, endpointMeal, fetchMealRecipes, handleFetch, type]);
 
   useEffect(() => {
