@@ -7,12 +7,12 @@ function Profile() {
   const { user } = localStorage;
   const FILTER_EMAIL_START = 10;
   const FILTER_EMAIL_END = -2;
-  const filteredEmail = user.slice(FILTER_EMAIL_START, FILTER_EMAIL_END);
+
   return (
     <main>
       <HeaderExplore />
       <h3 data-testid="profile-email">
-        { filteredEmail }
+        {(user) ? user.slice(FILTER_EMAIL_START, FILTER_EMAIL_END) : null}
       </h3>
       <Link to="receitas-feitas">
         <button type="button" data-testid="profile-done-btn">
