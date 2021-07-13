@@ -183,7 +183,7 @@ function DetalhesBebidas() {
           data-testid="start-recipe-btn"
           onClick={ clickStartButton }
         >
-          { inProgress ? 'Continuar Receita' : 'Iniciar Receita'}
+          {inProgress ? 'Continuar Receita' : 'Iniciar Receita'}
         </button>
       )}
     </div>
