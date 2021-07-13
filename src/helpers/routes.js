@@ -100,15 +100,15 @@ export default [
     title: 'Receitas Favoritas',
   },
   {
-    path: '/comidas/:id/in-progress',
-    Component: FoodInProgress,
-    exact: true,
-    title: 'Comida em progresso',
-  },
-  {
     path: '/bebidas/:id/in-progress',
     Component: DrinkInProgress,
     exact: true,
     title: 'Bebida em progresso',
+  },
+  {
+    path: '/comidas/:id/in-progress',
+    Component: FoodInProgress,
+    exact: true,
+    title: 'Comida em progresso',
   },
 ];
