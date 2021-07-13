@@ -1,9 +1,9 @@
 .searchbar-parent {
+  align-items: center;
   display: flex;
   flex-flow: column wrap;
-  align-items: center;
-  width: 100vw;
   margin: 0 1rem;
+  width: 100vw;
 }
 
 .searchbar-parent > button {
