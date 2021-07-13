@@ -49,7 +49,7 @@ function DrinkDescription({ recipe, recipeId }) {
       <section className="detail-container">
         <img data-testid="recipe-photo" src={ strDrinkThumb } alt="comida" />
         <h1 data-testid="recipe-title">{ strDrink }</h1>
-        <ShareButtons idRecipe={ `comidas/${idDrink}` } />
+        <ShareButtons idRecipe={ `bebidas/${idDrink}` } />
         <FavoriteBtn
           id={ idDrink }
           type="cocktail"
