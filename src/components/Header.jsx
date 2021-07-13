@@ -19,6 +19,7 @@ function Header() {
           data-testid="profile-top-btn"
           src={ profileIcon }
           alt="profile icon"
+          className="explore-icon"
         />
       </Link>
       <h3 className="explore" data-testid="page-title">
@@ -36,6 +37,7 @@ function Header() {
           className="search"
           src={ searchIcon }
           alt="search icon"
+          className="explore-icon"
         />
       </button>
     </div>
