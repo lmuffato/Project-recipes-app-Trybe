@@ -16,7 +16,7 @@ function MealsCategoryButtons() {
     dispatch(changeCategory(category));
   }
   return (
-    <div>
+    <div className="category-buttons">
       {categories.map(({ strCategory }) => (
         <button
           data-testid={ `${strCategory}-category-filter` }

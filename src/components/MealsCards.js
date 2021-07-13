@@ -34,6 +34,7 @@ function MealsCards({ meals }) {
     <div className="meals-container">
       {meals.filter(onlyTheFirst12).map((meal, index) => (
         <Link
+          className="meals-card"
           data-testid={ `${index}-recipe-card` }
           key={ meal.idMeal }
           to={ `/comidas/${meal.idMeal}` }

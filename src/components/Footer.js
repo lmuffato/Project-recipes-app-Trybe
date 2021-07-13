@@ -17,7 +17,8 @@ function Footer() {
       <Link to="/comidas">
         <img src={ mealIcon } alt="Meal icon" data-testid="food-bottom-btn" />
       </Link>
-    </div>);
+    </div>
+  );
 }
 
 export default Footer;

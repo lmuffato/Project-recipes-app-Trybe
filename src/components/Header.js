@@ -30,7 +30,7 @@ function Header({ title, show }) {
 
   return (
     <section>
-      <div>
+      <div className="header">
         <button
           type="button"
           onClick={ () => history.push('/perfil') }
@@ -43,6 +43,7 @@ function Header({ title, show }) {
         { handleSearch() }
 
       </div>
+
       <div>
         { click && <SearchBar type={ title } />}
       </div>
