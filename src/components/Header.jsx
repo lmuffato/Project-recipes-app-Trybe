@@ -33,7 +33,6 @@ function Header() {
       >
         <img
           data-testid="search-top-btn"
-          className="search"
           src={ searchIcon }
           alt="search icon"
         />
