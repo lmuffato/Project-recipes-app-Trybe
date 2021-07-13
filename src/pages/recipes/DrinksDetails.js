@@ -1,44 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import { useHistory, useRouteMatch } from 'react-router-dom';
+import { useRouteMatch } from 'react-router-dom';
 import { getDrinksById, getIngredients, getMeasures } from '../../services/getDrinks';
 import { getRecomendedMeals } from '../../services/getMeals';
-import shareIcon from '../../images/shareIcon.svg';
-import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
-import blackHeartIcon from '../../images/blackHeartIcon.svg';
 import './recipeDetails.css';
-
-const copy = require('clipboard-copy');
+import StartRecipeButton from '../../components/StartRecipeButton';
+import CopyAndFavorite from '../../components/DrinkShareAndFavorite';
 
 function DrinksDetails() {
   const [drinksFromId, setDrinksFromId] = useState([]);
   const [ingredientsId, setIngredientsId] = useState([]);
   const [measuresId, setMeasuresId] = useState([]);
   const [mealsCarousel, setMealsCarousel] = useState([]);
-  const [buttonFav, setButtonFav] = useState(true);
   const match = useRouteMatch();
   const { params: { id } } = match;
-  const history = useHistory();
-
-  const setLocal = () => {
-    localStorage.setItem('favoriteRecipes', JSON.stringify([]));
-  };
-
-  const isFav = () => {
-    const favRecipe = JSON.parse(localStorage.getItem('favoriteRecipes'));
-    const hasFav = favRecipe.filter((element) => element.id === id);
-    console.log(hasFav);
-    const condition = hasFav.length > 0;
-    if (condition) {
-      setButtonFav(!buttonFav);
-    } else {
-      console.log('is not fav');
-    }
-  };
-
-  const setHeartToFav = () => {
-    const hasSetLocal = localStorage.getItem('favoriteRecipes');
-    return hasSetLocal ? isFav() : setLocal();
-  };
 
   useEffect(() => {
     getDrinksById(id)
@@ -55,13 +29,7 @@ function DrinksDetails() {
         const meals = Object.values(meal).slice(0, SIX);
         setMealsCarousel(meals);
       });
-    setHeartToFav();
   }, []);
-
-  function copyBoard() {
-    copy(window.location.href);
-    global.alert('Link copiado!');
-  }
 
   function renderCarousel() {
     return (
@@ -89,43 +57,6 @@ function DrinksDetails() {
     );
   }
 
-  function heartButton(infos) {
-    setButtonFav(!buttonFav);
-    const {
-      idDrink,
-      strCategory,
-      strAlcoholic,
-      strDrink,
-      strDrinkThumb,
-    } = infos;
-    const hasSetLocal = localStorage.getItem('favoriteRecipes');
-    if (hasSetLocal) {
-      console.log('hello world');
-    } else {
-      setLocal();
-    }
-    if (buttonFav === true) {
-      const favRecipe = JSON.parse(localStorage.getItem('favoriteRecipes'));
-      const drinkInfos = [...favRecipe, {
-        id: idDrink,
-        type: 'bebida',
-        area: '',
-        category: strCategory,
-        alcoholicOrNot: strAlcoholic,
-        name: strDrink,
-        image: strDrinkThumb,
-      }];
-      localStorage.setItem('favoriteRecipes', JSON.stringify(drinkInfos));
-    } else {
-      const favRecipe = JSON.parse(localStorage.getItem('favoriteRecipes'));
-      console.log(favRecipe);
-      const filteredRemoved = favRecipe.filter((element) => element.id !== idDrink);
-      localStorage.removeItem('favoriteRecipes');
-      localStorage.setItem('favoriteRecipes', JSON.stringify(filteredRemoved));
-      console.log(localStorage.getItem('favoriteRecipes'));
-    }
-  }
-
   const renderDetail = () => (
     drinksFromId.map((info, index) => {
       const {
@@ -144,18 +75,7 @@ function DrinksDetails() {
             width="100%"
           />
           <h2 data-testid="recipe-title">{ strDrink }</h2>
-          <div className="share-and-favorite-container">
-            <button type="button" onClick={ () => copyBoard() }>
-              <img src={ shareIcon } alt="share button" data-testid="share-btn" />
-            </button>
-            <button type="button" onClick={ () => heartButton(info) }>
-              <img
-                src={ !buttonFav ? blackHeartIcon : whiteHeartIcon }
-                alt="favorite button"
-                data-testid="favorite-btn"
-              />
-            </button>
-          </div>
+          <CopyAndFavorite drinks={ drinksFromId } />
           <p data-testid="recipe-category">
             { strCategory }
             {' '}
@@ -179,16 +99,7 @@ function DrinksDetails() {
           <h2>Instruções</h2>
           <p data-testid="instructions">{ strInstructions }</p>
           { renderCarousel() }
-          <div className="button-container">
-            <button
-              className="start-button"
-              onClick={ () => history.push(`/bebidas/${id}/in-progress`) }
-              data-testid="start-recipe-btn"
-              type="button"
-            >
-              Iniciar Receita
-            </button>
-          </div>
+          <StartRecipeButton />
         </div>
       );
     })

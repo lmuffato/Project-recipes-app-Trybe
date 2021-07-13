@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { useHistory, useRouteMatch } from 'react-router-dom';
+import { useRouteMatch } from 'react-router-dom';
 import { getMealsById, getIngredients, getMeasures } from '../../services/getMeals';
 import { getRecomendedDrinks } from '../../services/getDrinks';
 import './recipeDetails.css';
 import shareIcon from '../../images/shareIcon.svg';
 import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../../images/blackHeartIcon.svg';
+import StartRecipeButton from '../../components/StartRecipeButton';
 
 const copy = require('clipboard-copy');
 
@@ -15,9 +16,9 @@ function MealDetails() {
   const [measuresId, setMeasuresId] = useState([]);
   const [buttonFav, setButtonFav] = useState(true);
   const [drinksCarousel, setDrinksCarousel] = useState([]);
+  const [copyButton, setCopyButton] = useState('');
   const match = useRouteMatch();
   const { params: { id } } = match;
-  const history = useHistory();
 
   const setLocal = () => {
     localStorage.setItem('favoriteRecipes', JSON.stringify([]));
@@ -60,7 +61,7 @@ function MealDetails() {
 
   function copyBoard() {
     copy(window.location.href);
-    global.alert('Link copiado!');
+    setCopyButton('Link copiado!');
   }
 
   function renderCarousel() {
@@ -146,11 +147,11 @@ function MealDetails() {
           />
           <h2 data-testid="recipe-title">{ strMeal }</h2>
           <div className="share-and-favorite-container">
-            <button type="button" onClick={ () => copyBoard() }>
+            { copyButton }
+            <button type="button" data-testid="share-btn" onClick={ () => copyBoard() }>
               <img
                 src={ shareIcon }
                 alt="share button"
-                data-testid="share-btn"
               />
             </button>
             <button type="button" onClick={ () => heartButton(info) }>
@@ -184,16 +185,7 @@ function MealDetails() {
             width="355"
           />
           <div className="card-container">{ renderCarousel() }</div>
-          <div className="button-container">
-            <button
-              className="start-button"
-              onClick={ () => history.push(`/comidas/${id}/in-progress`) }
-              data-testid="start-recipe-btn"
-              type="button"
-            >
-              Iniciar Receita
-            </button>
-          </div>
+          <StartRecipeButton />
         </div>
       );
     })
