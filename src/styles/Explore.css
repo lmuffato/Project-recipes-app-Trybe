@@ -1,0 +1,108 @@
+@media only screen and ( max-width : 768px ) {
+
+  .path-buttons-container {
+    align-items: center;
+    background-color: #48487d;
+    display: flex;
+    flex-direction: column;
+    height: 85vh;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .path-btn {
+    background-color: #c9b34d;
+    border: black 1px solid;
+    border-radius: 60px;
+    color: #636396;
+    font-size: 25px;
+    height: 80px;
+    margin: 20px;
+    text-align: center;
+    width: 250px;
+  }
+
+  .path-btn:active {
+    background-color: white;
+    border: black 1px solid;
+    border-radius: 60px;
+    color: #636396;
+    font-size: 25px;
+    height: 80px;
+    margin: 20px;
+    text-align: center;
+    width: 250px;
+  }
+
+  .area-select {
+    background-color: rgb(67, 163, 58);
+    border: whitesmoke solid 2px;
+    color: whitesmoke;
+    font-size: 18px;
+    height: 40px;
+    margin: 0;
+    width: 100%;
+  }
+
+}
+
+@media only screen and ( min-width : 768px ) {
+
+  .path-buttons-container {
+    align-items: center;
+    background-color: #48487d;
+    display: flex;
+    flex-direction: column;
+    height: 90vh;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .path-btn {
+    background-color: #c9b34d;
+    border: black 1px solid;
+    border-radius: 60px;
+    color: #636396;
+    font-size: 28px;
+    height: 120px;
+    margin: 50px;
+    text-align: center;
+    width: 500px;
+  }
+
+  .path-btn:hover {
+    background-color: white;
+    border: black 1px solid;
+    border-radius: 60px;
+    color: #636396;
+    font-size: 28px;
+    height: 120px;
+    margin: 50px;
+    opacity: 80%;
+    text-align: center;
+    width: 500px;
+  }
+
+  .path-btn:active {
+    background-color: white;
+    border: black 1px solid;
+    border-radius: 60px;
+    color: #636396;
+    font-size: 28px;
+    height: 120px;
+    margin: 50px;
+    text-align: center;
+    width: 500px;
+  }
+
+  .area-select {
+    background-color: rgb(67, 163, 58);
+    border: whitesmoke solid 2px;
+    color: whitesmoke;
+    font-size: 25px;
+    height: 50px;
+    margin: 0;
+    width: 100%;
+  }
+
+}

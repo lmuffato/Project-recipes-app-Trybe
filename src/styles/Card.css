@@ -6,6 +6,7 @@
     flex-wrap: wrap;
     justify-content: center;
     margin: auto;
+    min-height: 100vh;
     width: 100%;
   }
 
@@ -16,7 +17,7 @@
     flex-direction: column;
     margin: 8px;
     max-height: 200px;
-    max-width: 150px;
+    width: 150px;
   }
 
   .card-img {
@@ -49,6 +50,7 @@
     flex-wrap: wrap;
     justify-content: center;
     margin: auto;
+    min-height: 100vh;
     width: 100%;
   }
 
@@ -59,7 +61,7 @@
     flex-direction: column;
     margin: 15px;
     max-height: 400px;
-    max-width: 360px;
+    width: 360px;
   }
 
   .card-img {
