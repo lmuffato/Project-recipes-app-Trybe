@@ -8,34 +8,13 @@ export const checkLocalStorage = (key, recipe, recipeType) => {
   return findFavoriteLocal;
 };
 
-export const handleProgress = (
-  ingredient, id, toggle, setDoingRecipes,
-) => {
-  const getRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
-  let filtered;
-  let toBeSaved;
-  if (getRecipes) {
-    const currentRecipe = getRecipes[toggle];
-    if (currentRecipe[id]) {
-      filtered = currentRecipe[id].includes(ingredient)
-        ? currentRecipe[id].filter((item) => item !== ingredient)
-        : [...currentRecipe[id], ingredient];
-    }
-
-    toBeSaved = { ...getRecipes, [toggle]: { ...getRecipes[toggle], [id]: filtered } };
-  } else {
-    toBeSaved = { ...getRecipes, [toggle]: { [id]: filtered } };
-    filtered = [ingredient];
-  }
-  setDoingRecipes(toBeSaved);
-  localStorage.setItem('inProgressRecipes', JSON.stringify(toBeSaved));
-};
-
 export const shouldBeChecked = (ingredient, toggle, id) => {
   const getRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
   if (getRecipes) {
     const testKey = getRecipes[toggle];
     if (testKey && testKey[id]) {
+      console.log(ingredient);
+      console.log(getRecipes[toggle][id]);
       return getRecipes[toggle][id].includes(ingredient);
     }
   }
@@ -67,4 +46,49 @@ export const createToggles = (pathname) => {
   return {
     recipeType, toggleApi, toggleCategory, toggleURL, toggleLocalDoing,
   };
+};
+
+export const handleLocalProgress = (toggle, id, ingredient) => {
+  const local = JSON.parse(localStorage.getItem('inProgressRecipes'));
+  let editedLocal = local;
+  if (!toggle && !ingredient && !id) {
+    return { meals: {}, cocktails: {} };
+  }
+  if (local) {
+    if (local[toggle] && local[toggle][id]) {
+      editedLocal = local[toggle][id].includes(ingredient)
+        ? {
+          ...local,
+          [toggle]: {
+            ...local[toggle],
+            [id]: local[toggle][id].filter(
+              (item) => item !== ingredient,
+            ),
+          },
+        }
+        : {
+          ...local,
+          [toggle]: {
+            ...local[toggle],
+            [id]: [...local[toggle][id], ingredient],
+          },
+        };
+    } else {
+      editedLocal = {
+        ...local,
+        [toggle]: { ...local[toggle], [id]: [ingredient],
+        } };
+    }
+  } else {
+    editedLocal = { [toggle]: { [id]: [ingredient] } };
+  }
+  return editedLocal;
+};
+
+export const checkLength = (id, toggle, ingredients) => {
+  const actual = JSON.parse(localStorage.getItem('inProgressRecipes'));
+  if (!actual || !actual[toggle] || !actual[toggle][id]) {
+    return false;
+  }
+  return actual[toggle][id].length === ingredients.length;
 };
