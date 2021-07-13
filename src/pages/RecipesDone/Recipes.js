@@ -34,17 +34,18 @@ function Recipes() {
   };
 
   const changeTags = (t, index) => {
-    if (typeof t === 'string') {
-      const tags = t.split(',').slice(0, 2);
-      if (!Array.isArray(tags)) return null;
-      return tags.map((tagName) => (
-        <Card.Text
-          data-testid={ `${index}-${tagName}-horizontal-tag` }
-          key={ tagName }
-        >
-          { tagName}
-        </Card.Text>));
-    }
+    // if (typeof t === 'string') {
+    // const tags = t.split(',').slice(0, 2);
+    const tags = t.slice(0, 2);
+    if (!Array.isArray(tags)) return null;
+    return tags.map((tagName) => (
+      <Card.Text
+        data-testid={ `${index}-${tagName}-horizontal-tag` }
+        key={ tagName }
+      >
+        { tagName}
+      </Card.Text>));
+    // }
   };
   const handleFood = (recipe, index) => (
     <Card

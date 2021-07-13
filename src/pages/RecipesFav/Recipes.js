@@ -47,18 +47,27 @@ function Recipes() {
   };
 
   const handleFood = (recipe, index) => (
-    <Card style={ { width: '22rem' } } bsPrefix="card-img" key={ index }>
-      <Link key={ index } to={ `comidas/${recipe.id}` }>
+    <Card
+      bsPrefix="card-favorite"
+      key={ index }
+    >
+      <Link
+        className="card-img-favorite"
+        key={ index }
+        to={ `comidas/${recipe.id}` }
+      >
         <Card.Img
+          bsPrefix="card-image-favorite"
           variant="bottom"
           src={ recipe.image }
           data-testid={ `${index}-horizontal-image` }
         />
       </Link>
       <Card.Body>
-        {showCopyFood ? <p>Link copiado!</p>
+        {showCopyFood ? <p className="text-copy">Link copiado!</p>
           : (
             <Button
+              bsPrefix="button-favorite"
               variant="primary"
               data-testid={ `${index}-horizontal-share-btn` }
               src={ Share }
@@ -70,6 +79,7 @@ function Recipes() {
               />
             </Button>)}
         <Button
+          bsPrefix="button-favorite"
           variant="primary"
           data-testid={ `${index}-horizontal-favorite-btn` }
           src={ Favorite }
@@ -80,11 +90,15 @@ function Recipes() {
             src={ Favorite }
           />
         </Button>
-        <Card.Text data-testid={ `${index}-horizontal-top-text` }>
+        <Card.Text
+          bsPrefix="card-text-category"
+          data-testid={ `${index}-horizontal-top-text` }
+        >
           {` ${recipe.area} - ${recipe.category} `}
         </Card.Text>
         <Link key={ index } to={ `comidas/${recipe.id}` }>
           <Card.Title
+            bsPrefix="card-title-favorite"
             data-testid={ `${index}-horizontal-name` }
           >
             {recipe.name}
@@ -94,18 +108,27 @@ function Recipes() {
     </Card>
   );
   const handleDrink = (recipe, index) => (
-    <Card style={ { width: '22rem' } } bsPrefix="card-img" key={ index }>
-      <Link key={ index } to={ `bebidas/${recipe.id}` }>
+    <Card
+      bsPrefix="card-favorite"
+      key={ index }
+    >
+      <Link
+        className="card-img-favorite"
+        key={ index }
+        to={ `bebidas/${recipe.id}` }
+      >
         <Card.Img
+          bsPrefix="card-image-favorite"
           variant="bottom"
           src={ recipe.image }
           data-testid={ `${index}-horizontal-image` }
         />
       </Link>
       <Card.Body>
-        {showCopyDrinks ? <p>Link copiado!</p>
+        {showCopyDrinks ? <p className="text-copy">Link copiado!</p>
           : (
             <Button
+              bsPrefix="button-favorite"
               variant="primary"
               data-testid={ `${index}-horizontal-share-btn` }
               src={ Share }
@@ -117,6 +140,7 @@ function Recipes() {
               />
             </Button>)}
         <Button
+          bsPrefix="button-favorite"
           variant="primary"
           data-testid={ `${index}-horizontal-favorite-btn` }
           src={ Favorite }
@@ -127,11 +151,15 @@ function Recipes() {
             src={ Favorite }
           />
         </Button>
-        <Card.Text data-testid={ `${index}-horizontal-top-text` }>
+        <Card.Text
+          data-testid={ `${index}-horizontal-top-text` }
+          bsPrefix="card-text-category"
+        >
           {`${recipe.alcoholicOrNot}`}
         </Card.Text>
         <Link key={ index } to={ `bebidas/${recipe.id}` }>
           <Card.Title
+            bsPrefix="card-title-favorite"
             data-testid={ `${index}-horizontal-name` }
           >
             {recipe.name}
@@ -141,7 +169,7 @@ function Recipes() {
     </Card>
   );
   return (
-    <div>
+    <div className="cards-favorite">
       { (favoriteRecipes) && favoriteRecipes.map((recipe, index) => (
         recipe.type === 'comida' ? handleFood(recipe, index) : handleDrink(recipe, index)
       ))}
