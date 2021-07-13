@@ -1,4 +1,5 @@
 .recipe {
+  padding-bottom: 110px;
 
   .header {
     border-bottom: 2px var(--purple) solid;
@@ -36,13 +37,15 @@
       background: var(--yellow);
       border: 3px solid var(--purple);
       border-radius: 15px;
-      bottom: 40px;
+      bottom: 0;
       color: var(--dark-purple);
       font-family: Yanone Kaffeesatz , sans-serif;
       font-size: 22px;
+      margin-bottom: 40px;
       padding: 10px 15px;
       position: fixed;
       right: 30px;
+      z-index: 8888;
     }
 
     .listOfIngredients {
@@ -75,5 +78,16 @@
       color: var(--purple);
       text-decoration: line-through;
     }
+  }
+}
+
+.recommendationsCarousel {
+  display: flex;
+
+  .content {
+    display: grid;
+    gap: 35px;
+    grid-template-columns: repeat(6, 132px);
+    overflow-x: auto;
   }
 }

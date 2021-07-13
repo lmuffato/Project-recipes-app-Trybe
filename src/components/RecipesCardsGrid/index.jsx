@@ -10,7 +10,11 @@ function RecipesCardsGrid() {
   return (
     <section className={ styles.grid }>
       {recipes.map((recipe, index) => (
-        <RecipeSimpleCard key={ recipe.id } recipe={ recipe } index={ index } />
+        <RecipeSimpleCard
+          key={ recipe.id }
+          recipe={ recipe }
+          index={ index }
+        />
       ))}
     </section>
   );

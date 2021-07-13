@@ -6,11 +6,16 @@ import plus18Icon from '../../../../images/plus18.svg';
 
 import styles from './styles.module.scss';
 
-function RecipeSimpleCard({ recipe, index, alcoholic }) {
+function RecipeSimpleCard({ recipe, index, alcoholic, recommendationCard }) {
   const { location: { pathname } } = useHistory();
   return (
     <Link to={ `${pathname}/${recipe.id}` }>
-      <div data-testid={ `${index}-recipe-card` } className={ styles.card }>
+      <div
+        data-testid={
+          recommendationCard ? `${index}-recomendation-card` : `${index}-recipe-card`
+        }
+        className={ styles.card }
+      >
         { alcoholic && (
           <span className={ styles.alcoholicTag }>
             <img src={ plus18Icon } alt="18+" />
@@ -23,7 +28,9 @@ function RecipeSimpleCard({ recipe, index, alcoholic }) {
           data-testid={ `${index}-card-img` }
         />
         <span
-          data-testid={ `${index}-card-name` }
+          data-testid={
+            recommendationCard ? `${index}-recomendation-title` : `${index}-card-name`
+          }
           className={ styles.title }
         >
           {recipe.name}
@@ -41,10 +48,12 @@ RecipeSimpleCard.propTypes = {
     name: PropTypes.string,
     imagePath: PropTypes.string,
   }).isRequired,
+  recommendationCard: PropTypes.bool,
 };
 
 RecipeSimpleCard.defaultProps = {
   alcoholic: false,
+  recommendationCard: false,
 };
 
 export default RecipeSimpleCard;

@@ -2,8 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { BiHeart, BiShareAlt } from 'react-icons/bi';
 
 import { useHistory, useParams } from 'react-router-dom';
+import RecipeSimpleCard
+  from '../../components/RecipesCardsGrid/components/RecipeSimpleCard';
 import HeaderBack from '../../components/HeaderBack';
-import { getRecipe } from '../../services/recipesData';
+import { getRecipe, getRecommendations } from '../../services/recipesData';
 
 import styles from './styles.module.scss';
 
@@ -13,12 +15,14 @@ function Recipe() {
   const [recipe, setRecipe] = useState({});
   const [videoId, setVideoId] = useState('');
   const [recipeCookMode, setRecipeCookMode] = useState(false);
+  const [recommendations, setRecommendations] = useState([]);
+  const alcoholicRecipe = recipe.strAlcoholic && recipe.strAlcoholic === 'Alcoholic';
 
   useEffect(() => {
     async function loadRecipe() {
       const path = `/${pathname.split('/')[1]}`;
       const result = await getRecipe(path, id);
-      setVideoId(result.strYoutube.split('=')[1]);
+      setVideoId(result.strYoutube && result.strYoutube.split('=')[1]);
 
       const keys = Object.keys(result);
       const ingredientsName = keys.filter((key) => key.includes('strIngredient'));
@@ -58,6 +62,16 @@ function Recipe() {
     loadRecipe();
   }, [pathname, id]);
 
+  useEffect(() => {
+    async function loadRecommendations() {
+      const recipes = await getRecommendations(`/${pathname.split('/')[1]}`);
+      const numberOfRecommendations = 6;
+      setRecommendations(recipes.slice(0, numberOfRecommendations));
+    }
+
+    loadRecommendations();
+  }, [pathname]);
+
   return (
     <div className={ styles.recipe }>
       <HeaderBack title={ recipe.name || 'Recipe' } />
@@ -78,15 +92,17 @@ function Recipe() {
           Iniciar receita
         </button>
         <h1 data-testid="recipe-title">{ recipe.name }</h1>
-        <h3 data-testid="recipe-category">{ recipe.strCategory }</h3>
+        <h3 data-testid="recipe-category">
+          { alcoholicRecipe ? 'Alcoholic' : recipe.strCategory }
+        </h3>
         <section>
           <h2>Ingredients</h2>
           <ul className={ styles.listOfIngredients }>
             { recipe.ingredients && recipe.ingredients.map((ingredient, index) => {
               if (recipeCookMode) {
                 return (
-                  <li className={ styles.listOnProgress }>
-                    <label htmlFor={ ingredient } key={ ingredient }>
+                  <li className={ styles.listOnProgress } key={ ingredient }>
+                    <label htmlFor={ ingredient }>
                       <input type="checkbox" name="ingredient" id={ ingredient } />
                       <span>
                         { ingredient }
@@ -108,8 +124,8 @@ function Recipe() {
           </ul>
         </section>
         <section>
-          <h2 data-testid="instructions">Intructions</h2>
-          <p>{ recipe.strInstructions }</p>
+          <h2>Intructions</h2>
+          <p data-testid="instructions">{ recipe.strInstructions }</p>
         </section>
         <section>
           <h2>Video</h2>
@@ -129,6 +145,24 @@ function Recipe() {
         </section>
         <section>
           <h2>Recomendadas</h2>
+          <div className={ styles.recommendationsCarousel }>
+            <div className={ styles.content }>
+              {recommendations.map((recommendation, index) => {
+                const alcoholic = recommendation.strAlcoholic;
+                return (
+                  <RecipeSimpleCard
+                    key={ recommendation.id }
+                    recipe={ recommendation }
+                    index={ index }
+                    alcoholic={
+                      alcoholic && alcoholic === 'Alcoholic'
+                    }
+                    recommendationCard
+                  />
+                );
+              })}
+            </div>
+          </div>
         </section>
       </main>
     </div>

@@ -10,7 +10,7 @@ function App() {
   return (
     <Switch>
       <Route path="/explorar" component={ Explore } />
-      <Route path="/comidas/:id" component={ Recipe } />
+      <Route path={ ['/comidas/:id', '/bebidas/:id'] } component={ Recipe } />
       <Route path={ ['/comidas', '/bebidas'] } component={ MainRecipes } />
       <Route path="/perfil" component={ Perfil } />
       <Route path="/" component={ Login } />
