@@ -55,10 +55,10 @@ function MealDescription({ recipe, recipeId }) {
         <ShareButtons idRecipe={ `comidas/${idMeal}` } />
         <FavoriteBtn
           id={ idMeal }
-          type="meal"
+          type="comida"
           area={ strArea }
           category={ strCategory }
-          alcoholicOrNot={ null }
+          alcoholicOrNot=""
           name={ strMeal }
           image={ strMealThumb }
         />

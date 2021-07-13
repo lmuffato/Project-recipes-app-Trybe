@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import '../styles/Recomendations.css';
 
-function Recomendations({ index, id, thumb, recipeName, pathname }) {
-  console.log(`/comidas/${id}`);
+function Recomendations({ index, thumb, recipeName, pathname }) {
   return (
     <Link
       to={ pathname }

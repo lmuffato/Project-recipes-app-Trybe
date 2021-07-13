@@ -12,7 +12,7 @@ import ShareButtons from './ShareButtons';
 function DrinkDescription({ recipe, recipeId }) {
   const { recomendations, setIsFavorite } = useContext(RecipesContext);
   const {
-    idDrink, strArea, strDrinkThumb, strDrink, strCategory, strInstructions, strAlcoholic,
+    idDrink, strDrinkThumb, strDrink, strCategory, strInstructions, strAlcoholic,
   } = recipe;
   // Estados fake, até poder pegar o estado do localStorage
   // const [isStarted, setIsStarted] = useState(false);
@@ -20,14 +20,14 @@ function DrinkDescription({ recipe, recipeId }) {
   const ingredients = Object.entries(recipe)
     .filter(([key, value]) => (key.includes('strIngredient') ? value : null))
     .map((ingredient) => ingredient[1]);
-  console.log(ingredients);
+  // console.log(ingredients);
 
   const measures = Object.entries(recipe)
     .filter(([key, value]) => (key
       .includes('strMeasure') ? value : null))
     .map((ingredient) => ingredient[1])
     .filter((measure) => measure.length > 1);
-  console.log(measures);
+  // console.log(measures);
 
   const getLocalStr = JSON.parse(localStorage.getItem('favoriteRecipes'));
   let checkLocalStr;
@@ -52,10 +52,10 @@ function DrinkDescription({ recipe, recipeId }) {
         <ShareButtons idRecipe={ `bebidas/${idDrink}` } />
         <FavoriteBtn
           id={ idDrink }
-          type="cocktail"
-          area={ strArea }
-          category={ strCategory }
-          alcoholicOrNot={ null }
+          type="bebida"
+          area=""
+          category="Cocktail"
+          alcoholicOrNot={ strAlcoholic }
           name={ strDrink }
           image={ strDrinkThumb }
         />

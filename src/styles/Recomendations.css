@@ -13,3 +13,8 @@
   max-height: auto;
   max-width: 200px;
 }
+
+.start-recipe {
+  bottom: 0;
+  position: fixed;
+}
