@@ -3,11 +3,10 @@ import { string, number } from 'prop-types';
 import './ingredientCard.css';
 
 function IngredientCard({ index, thumbnail, name }) {
-  console.log(thumbnail);
   return (
     <div
       data-testid={ `${index}-ingredient-card` }
-      className="ingredientCard__container"
+      // className="ingredientCard__container"
     >
       <img
         data-testid={ `${index}-card-img` }

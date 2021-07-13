@@ -19,6 +19,7 @@ export default function RecipesFoods() {
   }, [filters]);
 
   const { parameter, search } = filters;
+  console.log(`Parameter: ${parameter} / search: ${search}`);
   if (foodData && foodData.length === 1
     && (parameter !== 'category' && search !== '')) {
     return <Redirect to={ `/comidas/${foodData[0].idMeal}` } />;

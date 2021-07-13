@@ -1,21 +1,23 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import IngredientCard from '../components/IngredientCard';
 import { getCocktails } from '../services/api';
 import './exploreIngredientsPage.css';
+import '../components/ingredientCard.css';
 
 export default function ExploreIngredientsDrinks() {
-  const [listIngredient, setListIngredient] = useState([]);
+  const [listIngredientDrinks, setListIngredientDrinks] = useState([]);
 
   useEffect(() => {
     getCocktails('ingredient_list').then(({ drinks }) => {
       const numberMaxOfIngredients = 12;
       const filtered = drinks
         .filter((_, index) => index < numberMaxOfIngredients);
-      setListIngredient(filtered);
+      setListIngredientDrinks(filtered);
     });
-  }, [setListIngredient]);
+  }, [setListIngredientDrinks]);
 
   return (
     <div className="exploreIngredientPage__Container">
@@ -25,14 +27,19 @@ export default function ExploreIngredientsDrinks() {
 
       <div className="exploreIngredientCards__container">
         {
-          listIngredient && listIngredient
+          listIngredientDrinks && listIngredientDrinks
             .map(({ strIngredient1: ingredient }, index) => (
-              <IngredientCard
+              <Link
+                to="/bebidas"
                 key={ index }
-                index={ index }
-                thumbnail={ `https://www.thecocktaildb.com/images/ingredients/${ingredient}-Small.png` }
-                name={ ingredient }
-              />
+                class="ingredientCard__container"
+              >
+                <IngredientCard
+                  index={ index }
+                  thumbnail={ `https://www.thecocktaildb.com/images/ingredients/${ingredient}-Small.png` }
+                  name={ ingredient }
+                />
+              </Link>
             ))
         }
       </div>
