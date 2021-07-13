@@ -48,7 +48,8 @@ function SearchBar() {
     if (!letter && !name) {
       global.alert('Nenhum filtro definido');
     }
-    if (letter === 'f' && name.length < 1) {
+    if (letter === 'f' && name.length > 1) {
+      console.log('O brabo tá aqui');
       global.alert('Sua busca deve conter somente 1 (um) caracter');
     }
     if (mealOrDrink) {

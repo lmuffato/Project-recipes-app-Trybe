@@ -43,17 +43,6 @@ function IngredientsMeasure({ detailsRecepie }) {
   }
 
   function upDateLocalStorage() {
-    // if (recepiesInProgress.meals === null) {
-    //   const arrayAllMeals = Object.entries(allMealsStorage);
-    //   console.log(arrayAllMeals);
-    //   arrayAllMeals.map((recepies) => {
-    //     console.log(recepies[0]);
-    //     if (recepies[0] === [idMeal]) {
-    //       setDoneIngredients(recepies[1]);
-    //       console.log(recepies[1]);
-    //     }
-    //   });
-    // }
     const newLocalStorage = {
       cocktails: cocktailsStorage,
       meals: { ...otherStorageRecepies, [idMeal]: doneIngredients },
