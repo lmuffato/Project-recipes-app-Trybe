@@ -9,6 +9,7 @@ import createIngredients from '../../services/functions';
 import shareIcon from '../../images/shareIcon.svg';
 import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../../images/blackHeartIcon.svg';
+import { getLocalStorage, setLocalStorage } from '../../helper';
 
 import styles from '../../styles/DetailsPages.module.scss';
 
@@ -74,7 +75,7 @@ function FoodDetails(props) {
 
   const clickFavorite = ({ idMeal, strArea, strCategory, strMeal, strMealThumb }) => {
     if (!favorite) {
-      const favoriteRecipe = [{
+      const favoriteRecipe = {
         id: idMeal,
         type: 'comida',
         area: strArea,
@@ -82,12 +83,18 @@ function FoodDetails(props) {
         alcoholicOrNot: '',
         name: strMeal,
         image: strMealThumb,
-      }];
-      localStorage.setItem('favoriteRecipes', JSON.stringify(favoriteRecipe));
+      };
+      const favRecipes = getLocalStorage('favoriteRecipes');
+      if (favRecipes) {
+        favRecipes.push(favoriteRecipe);
+        setLocalStorage('favoriteRecipes', favRecipes);
+      } else {
+        setLocalStorage('favoriteRecipes', [favoriteRecipe]);
+      }
     } else {
-      const removeFavorite = JSON.parse(localStorage.getItem('favoriteRecipes'))
+      const removeFavorite = getLocalStorage('favoriteRecipes')
         .filter((el) => el.id !== idMeal);
-      localStorage.setItem('favoriteRecipes', JSON.stringify(removeFavorite));
+      setLocalStorage('favoriteRecipes', removeFavorite);
     }
     setFavoriteRecipe({ favorite: !favorite });
   };
