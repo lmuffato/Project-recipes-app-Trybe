@@ -22,24 +22,24 @@
 }
 
 .header-done {
+  font-size: 13px;
   padding: 3px;
   text-align: center;
-  font-size: 13px;
 }
 
 .c-body {
-  padding: 8px;
-  text-align: center;
   justify-content: center;
   margin-top: 5px;
+  padding: 8px;
+  text-align: center;
 }
 
 .done-bottom span {
+  background-color: rgb(252, 252, 113);
+  border-radius: 20%;
   font-size: 14px;
   margin-right: 4px;
   padding: 2px 5px;
-  border-radius: 20%;
-  background-color: rgb(252, 252, 113);
 }
 
 .title-done {
