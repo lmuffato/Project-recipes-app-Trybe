@@ -22,7 +22,6 @@ class MainFoodCard extends React.Component {
 
   componentDidMount() {
     const { currentSearch } = this.props;
-    console.log(currentSearch);
     if (currentSearch.length !== 0) {
       this.renderCurrentSearch();
     } else {
