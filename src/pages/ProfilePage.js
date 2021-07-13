@@ -21,11 +21,6 @@ function Profile() {
 
   const clearStorage = () => localStorage.clear();
 
-  // useEffect(() => {
-  //   setHideSearchBtn(false);
-  //   setPageName('Perfil');
-  // }, []);
-
   return (
     <>
       <Header />
