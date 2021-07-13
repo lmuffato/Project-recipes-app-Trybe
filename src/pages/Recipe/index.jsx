@@ -17,8 +17,41 @@ function Recipe() {
     async function loadRecipe() {
       const path = `/${pathname.split('/')[1]}`;
       const result = await getRecipe(path, id);
-      setRecipe(result);
       setVideoId(result.strYoutube.split('=')[1]);
+
+      const keys = Object.keys(result);
+      const ingredientsName = keys.filter((key) => key.includes('strIngredient'));
+      const ingredientsMeasure = keys.filter((key) => key.includes('strMeasure'));
+
+      const ingredientsFromApi = ingredientsName.map((ingredient) => {
+        const foundIngredient = result[ingredient];
+        return foundIngredient;
+      });
+
+      const measuresFromApi = ingredientsMeasure.map((measure) => {
+        const foundMeasure = result[measure];
+        return foundMeasure;
+      });
+
+      let ingredients = {};
+
+      ingredientsFromApi.forEach((ingredient, index) => {
+        ingredients = { ...ingredients, [ingredient]: measuresFromApi[index] };
+      });
+
+      ingredients = Object.entries(ingredients).reduce(
+        (allIngredients, [ingredient, measure]) => {
+          if (ingredient && measure) {
+            return [
+              ...allIngredients,
+              `${ingredient} - ${measure}`,
+            ];
+          }
+
+          return allIngredients;
+        }, [],
+      );
+      setRecipe({ ...result, ingredients });
     }
 
     loadRecipe();
@@ -40,6 +73,9 @@ function Recipe() {
         <h3>{ recipe.strCategory }</h3>
         <section>
           <h2>Ingredients</h2>
+          { recipe.ingredients && recipe.ingredients.map((ingredient) => (
+            <li key={ ingredient }>{ ingredient }</li>
+          )) }
         </section>
         <section>
           <h2>Intructions</h2>
