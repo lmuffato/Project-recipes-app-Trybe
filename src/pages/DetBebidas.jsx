@@ -2,7 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import copy from 'clipboard-copy';
 import { Link } from 'react-router-dom';
-import fetchDrinksById, { fetchRecommendedFoods } from '../services/index';
+import fetchDrinksById, {
+  fetchRecommendedFoods,
+  saveFavoriteDrink,
+  checkStorageDrink } from '../services/index';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
@@ -20,7 +23,6 @@ class DetBebidas extends React.Component {
     this.handleIngredients = this.handleIngredients.bind(this);
     this.onClickShare = this.onClickShare.bind(this);
     this.checkRecipe = this.checkRecipe.bind(this);
-    this.saveFavorite = this.saveFavorite.bind(this);
   }
 
   async componentDidMount() {
@@ -79,43 +81,16 @@ class DetBebidas extends React.Component {
     });
   }
 
-  saveFavorite(recipe) {
-    const favorite = [{
-      id: recipe.idDrink,
-      type: 'bebida',
-      area: recipe.strArea,
-      category: recipe.strCategory,
-      alcoholicOrNot: '',
-      name: recipe.strDrink,
-      image: recipe.strDrinkThumb,
-    }];
-    if (!localStorage.getItem('favoriteRecipes')) {
-      localStorage.setItem('favoriteRecipes', JSON.stringify(favorite));
-    }
-    const favBtn = document.querySelector('.fav-btn');
-    const url = 'http://localhost:3000/static/media/whiteHeartIcon.ea3b6ba8.svg';
-    if (favBtn.src === url) {
-      const parseSave = JSON.parse(localStorage.getItem('favoriteRecipes'));
-      console.log(parseSave);
-      const combineObj = parseSave.concat(favorite);
-      localStorage.clear();
-      localStorage.setItem('favoriteRecipes', JSON.stringify(combineObj));
-    } else {
-      console.log('nãopassou');
-    }
-  }
-
   checkFavorite(recipe) {
     if (localStorage.favoriteRecipes) {
-      const favorites = JSON.parse(localStorage.getItem('favoriteRecipes'));
-      const current = favorites.find((element) => (element.id === recipe.idDrink));
-      if (favorites.includes(current)) {
+      if (checkStorageDrink(recipe) === true) {
         return blackHeartIcon;
       }
       return whiteHeartIcon;
     }
     return whiteHeartIcon;
   }
+
   /*
   InProgressButton(id) {
     const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
@@ -168,7 +143,7 @@ class DetBebidas extends React.Component {
               data-testid="favorite-btn"
               src={ this.checkFavorite(recipe[0]) }
               alt="favoritar receita"
-              onClick={ () => this.saveFavorite(recipe[0]) }
+              onClick={ () => saveFavoriteDrink(recipe[0]) }
               className="fav-btn"
             />
           </div>

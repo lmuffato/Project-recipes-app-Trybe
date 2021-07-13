@@ -2,7 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import copy from 'clipboard-copy';
 import shareIcon from '../images/shareIcon.svg';
-import { fetchFoodsById, fetchRecommendedDrinks } from '../services/index';
+import {
+  fetchFoodsById,
+  fetchRecommendedDrinks,
+  saveFavoriteFood,
+  checkStorageFood } from '../services/index';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 
@@ -19,7 +23,6 @@ class DetComidas extends React.Component {
     this.embedvideo = this.embedvideo.bind(this);
     this.handleIngredients = this.handleIngredients.bind(this);
     this.onClickShare = this.onClickShare.bind(this);
-  //  this.saveFavorite = this.saveFavorite.bind(this);
   }
 
   async componentDidMount() {
@@ -30,7 +33,6 @@ class DetComidas extends React.Component {
     const recommended = await fetchRecommendedDrinks();
     this.setNewState(foods, recommended);
     this.handleIngredients();
-    // this.InProgressButton(id);
   }
 
   handleIngredients() {
@@ -84,37 +86,9 @@ class DetComidas extends React.Component {
     this.setState({ video });
   }
 
-  saveFavorite(recipe) {
-    const favorite = [{
-      id: recipe.idMeal,
-      type: 'comida',
-      area: recipe.strArea,
-      category: recipe.strCategory,
-      alcoholicOrNot: '',
-      name: recipe.strMeal,
-      image: recipe.strMealThumb,
-    }];
-    if (!localStorage.getItem('favoriteRecipes')) {
-      localStorage.setItem('favoriteRecipes', JSON.stringify(favorite));
-    }
-    const favBtn = document.querySelector('.fav-btn');
-    const url = 'http://localhost:3000/static/media/whiteHeartIcon.ea3b6ba8.svg';
-    if (favBtn.src === url) {
-      const parseSave = JSON.parse(localStorage.getItem('favoriteRecipes'));
-      console.log(parseSave);
-      const combineObj = parseSave.concat(favorite);
-      localStorage.clear();
-      localStorage.setItem('favoriteRecipes', JSON.stringify(combineObj));
-    } else {
-      console.log('nãopassou');
-    }
-  }
-
   checkFavorite(recipe) {
     if (localStorage.favoriteRecipes) {
-      const favorites = JSON.parse(localStorage.getItem('favoriteRecipes'));
-      const current = favorites.find((element) => (element.id === recipe.idMeal));
-      if (favorites.includes(current)) {
+      if (checkStorageFood(recipe) === true) {
         return blackHeartIcon;
       }
       return whiteHeartIcon;
@@ -172,7 +146,7 @@ class DetComidas extends React.Component {
               data-testid="favorite-btn"
               src={ this.checkFavorite(recipe[0]) }
               alt="favoritar receita"
-              onClick={ () => this.saveFavorite(recipe[0]) }
+              onClick={ () => saveFavoriteFood(recipe[0]) }
               className="fav-btn"
             />
           </div>
