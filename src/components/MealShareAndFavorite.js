@@ -82,7 +82,7 @@ export default function MealShareAndFavorite({ meals }) {
   };
   return (
     <div>
-      {/* { meals.map((info, index) => (
+      { meals.map((info, index) => (
         <div key={ index } className="share-and-favorite-container">
           <button type="button" data-testid="share-btn" onClick={ () => copyBoard() }>
             <img src={ shareIcon } alt="share button" />
@@ -96,8 +96,7 @@ export default function MealShareAndFavorite({ meals }) {
           </button>
         </div>
       )) }
-      { copyButton } */}
-      teste
+      { copyButton }
     </div>
   );
 }

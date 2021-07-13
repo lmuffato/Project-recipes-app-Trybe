@@ -33,7 +33,7 @@ export default function InProgressMeal() {
             <h1 data-testid="recipe-title">{ strMeal }</h1>
             <MealShareAndFavorite />
             <p data-testid="recipe-category">{ strCategory }</p>
-            <p>{ strInstructions }</p>
+            <p>{strInstructions}</p>
           </div>
         );
       }) }
