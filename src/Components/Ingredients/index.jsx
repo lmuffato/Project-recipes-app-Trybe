@@ -17,19 +17,19 @@ function Ingredient({ recipe, type, validate = () => ('empty'), id }) {
 
   const { setDoingRecipes } = useContext(userProvider);
 
-  const handleClick = ({ target }) => {
+  const handleClick = ({ target }, ingredient) => {
     if (target.checked) {
       target.parentNode.style.textDecoration = 'line-through';
     } else { target.parentNode.style.textDecoration = ''; }
 
-    setDoingRecipes(handleLocalProgress(toggle, id, target.parentNode.innerText));
+    setDoingRecipes(handleLocalProgress(toggle, id, ingredient));
     localStorage.setItem('inProgressRecipes', JSON.stringify(
-      handleLocalProgress(toggle, id, target.parentNode.innerText),
+      handleLocalProgress(toggle, id, ingredient),
     ));
   };
 
   useEffect(() => {
-    checkLength(id, toggle, ingredients, validate);
+    validate(checkLength(id, toggle, ingredients, validate));
   }, [id, ingredients, ingredients.length, toggle, validate]);
 
   return (
@@ -55,7 +55,7 @@ function Ingredient({ recipe, type, validate = () => ('empty'), id }) {
                 data-testid={ `${index}-ingredient-step` }
                 htmlFor={ `${index}-checkbox` }
                 style={
-                  shouldBeChecked(`${item[1]} - ${measures[index][1]}`, toggle, id)
+                  shouldBeChecked(item[1], toggle, id)
                     ? { textDecoration: 'line-through' }
                     : { textDecoration: 'none' }
                 }
@@ -64,9 +64,9 @@ function Ingredient({ recipe, type, validate = () => ('empty'), id }) {
                   id={ `${index}-checkbox` }
                   type="checkbox"
                   className="form-check-input"
-                  onClick={ handleClick }
+                  onClick={ (e) => handleClick(e, item[1]) }
                   defaultChecked={ shouldBeChecked(
-                    `${item[1]} - ${measures[index][1]}`, toggle, id,
+                    item[1], toggle, id,
                   ) }
                 />
                 { `${item[1]} - ${measures[index][1]}` }
