@@ -34,6 +34,8 @@ function Recipes() {
   };
 
   const changeTags = (t, index) => {
+    // if (typeof t === 'string') {
+    // const tags = t.split(',').slice(0, 2);
     const tags = t.slice(0, 2);
     if (!Array.isArray(tags)) return null;
     return tags.map((tagName) => (
@@ -43,20 +45,30 @@ function Recipes() {
       >
         { tagName}
       </Card.Text>));
+    // }
   };
   const handleFood = (recipe, index) => (
-    <Card style={ { width: '22rem' } } key={ index }>
-      <Link key={ index } to={ `comidas/${recipe.id}` }>
+    <Card
+      bsPrefix="card-done"
+      key={ index }
+    >
+      <Link
+        className="card-img-done"
+        key={ index }
+        to={ `comidas/${recipe.id}` }
+      >
         <Card.Img
+          bsPrefix="card-image-done"
           variant="bottom"
           src={ recipe.image }
           data-testid={ `${index}-horizontal-image` }
         />
       </Link>
       <Card.Body>
-        {showCopyFood ? <p>Link copiado!</p>
+        {showCopyFood ? <p className="text-copy">Link copiado!</p>
           : (
             <Button
+              bsPrefix="button-done"
               variant="primary"
               data-testid={ `${index}-horizontal-share-btn` }
               src={ Share }
@@ -67,38 +79,54 @@ function Recipes() {
                 src={ Share }
               />
             </Button>)}
-        <Card.Text data-testid={ `${index}-horizontal-top-text` }>
+        <Card.Text
+          data-testid={ `${index}-horizontal-top-text` }
+          bsPrefix="card-text-category"
+        >
           {` ${recipe.area} - ${recipe.category} `}
         </Card.Text>
         <Link key={ index } to={ `comidas/${recipe.id}` }>
           <Card.Title
+            bsPrefix="card-title-done"
             data-testid={ `${index}-horizontal-name` }
           >
             {recipe.name}
           </Card.Title>
         </Link>
-        <Card.Text data-testid={ `${index}-horizontal-done-date` }>
+        <Card.Text
+          data-testid={ `${index}-horizontal-done-date` }
+          bsPrefix="card-text-date"
+        >
           {`Feita em : ${recipe.doneDate}`}
         </Card.Text>
-        <span>
+        <span className="card-span">
           {changeTags(recipe.tags, index)}
         </span>
       </Card.Body>
     </Card>
   );
   const handleDrink = (recipe, index) => (
-    <Card style={ { width: '22rem' } } bsPrefix="card-img" key={ index }>
-      <Link key={ index } to={ `bebidas/${recipe.id}` }>
+    <Card
+      bsPrefix="card-done"
+      key={ index }
+    >
+      <Link
+        className="card-img-done"
+        key={ index }
+        to={ `bebidas/${recipe.id}` }
+      >
         <Card.Img
+          bsPrefix="card-image-done"
           variant="bottom"
           src={ recipe.image }
           data-testid={ `${index}-horizontal-image` }
         />
       </Link>
       <Card.Body>
-        {showCopyDrinks ? <p>Link copiado!</p>
+        {showCopyDrinks ? <p className="text-copy">Link copiado!</p>
           : (
             <Button
+              bsPrefix="button-done"
               variant="primary"
               data-testid={ `${index}-horizontal-share-btn` }
               src={ Share }
@@ -107,19 +135,27 @@ function Recipes() {
               <Card.Img
                 variant="top"
                 src={ Share }
+                lassName="profile-top-btn altSvg"
               />
             </Button>)}
-        <Card.Text data-testid={ `${index}-horizontal-top-text` }>
+        <Card.Text
+          data-testid={ `${index}-horizontal-top-text` }
+          bsPrefix="card-text-category"
+        >
           {`${recipe.alcoholicOrNot}`}
         </Card.Text>
         <Link key={ index } to={ `bebidas/${recipe.id}` }>
           <Card.Title
             data-testid={ `${index}-horizontal-name` }
+            bsPrefix="card-title-done"
           >
             {recipe.name}
           </Card.Title>
         </Link>
-        <Card.Text data-testid={ `${index}-horizontal-done-date` }>
+        <Card.Text
+          data-testid={ `${index}-horizontal-done-date` }
+          bsPrefix="card-text-date"
+        >
           {`Feita em: ${recipe.doneDate}`}
         </Card.Text>
         <span>
@@ -129,7 +165,7 @@ function Recipes() {
     </Card>
   );
   return (
-    <div>
+    <div className="cards-done">
       {(doneRecipes) && doneRecipes.map((recipe, index) => (
         recipe.type === 'comida' ? handleFood(recipe, index) : handleDrink(recipe, index)
       ))}
