@@ -24,7 +24,7 @@ export default function FoodDetails() {
   if (!currMeal.recipe) return;
   const { arrRecipeIngredients, arrRecipeMeasureUnit,
     recipe, recomends, doneRecipe, inProgress } = currMeal;
-
+  const INDEX_REPLACE = 3;
   return (
     <Card style={ { width: '18rem' } }>
       <h2 data-testid="recipe-title">{recipe.strMeal}</h2>
@@ -50,12 +50,20 @@ export default function FoodDetails() {
         );
       })}
       <p data-testid="instructions">{ recipe.strInstructions }</p>
+      {recipe.strYoutube && console.log(recipe.strYoutube.split('/'))}
+      {recipe.strYoutube && console.log(recipe.strYoutube.split('/')
+        .reduce((acc, item, index) => {
+          if (index === INDEX_REPLACE) return `${acc}/iframe_api/${item}`;
+          return `${acc}/${item}`;
+        }), '')}
       <iframe
-        title={ recipe.strMeal }
-        width="240"
-        height="120"
+        title="video"
+        width="280"
+        height="157.5"
         data-testid="video"
-        src={ recipe.strYoutube }
+        src={ recipe.strYoutube && recipe.strYoutube.split('/')
+          .reduce((acc, item, index) => (index === INDEX_REPLACE
+            ? `${acc}/embed/${item}` : `${acc}/${item}`)) }
       />
       <h4>Bebidas Recomendadas:</h4>
       <Carousel>
