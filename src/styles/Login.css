@@ -1,7 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400&display=swap') ;
+@import url('https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap') ;
 
 form {
-  background: url('../images//background.jpg') no-repeat center fixed;
+  background: url('../images//background1.jpg') no-repeat center fixed;
   background-size: cover;
   display: flex;
   height: 100vh;
@@ -11,11 +11,10 @@ form {
 
 form div {
   align-items: center;
-  background-color: rgba(39, 37, 37, 0.9);
-  border-radius: 2em;
+  background-color: rgba(51, 49, 49, 0.6);
+  border-radius: 1em;
   display: flex;
   flex-direction: column;
-  font-family: Roboto Mono , monospace;
   margin: auto;
   max-width: 400px;
   padding: 2em;
@@ -23,17 +22,18 @@ form div {
 }
 
 form img {
-  background-color: #8989c9;
   border-radius: 2em;
-  padding: 2em;
+  padding: 0 2em 2em;
   width: 90%;
 }
 
 form h1 {
-  color: #8989c9;
-  margin: 0.5em 0 0.7em;
+  color: white;
+  font-family: Montserrat , sans-serif;
+  font-size: 2em;
+  font-weight: 500;
+  margin: 0.1em 0 0.7em;
   opacity: 1;
-  text-shadow: 3px 3px 4px black;
 }
 
 form label {
@@ -48,16 +48,22 @@ form p {
 }
 
 form input {
+  background-color: rgba(216, 209, 209, 0.4);
   border: none;
-  border-radius: 0.3em;
   box-sizing: border-box;
+  color: white;
+  font-family: Alegreya , sans-serif;
   font-size: 1.2em;
   height: 5vh;
   padding: 0.3em;
 }
 
+form input::placeholder {
+  color: white;
+  font-family: Montserrat , sans-serif;
+}
+
 form input:focus {
-  border: 0.2em solid #c9b34d;
   font-size: 1.2em;
   outline: none;
   transition: 0.2s;
@@ -77,35 +83,32 @@ form span {
 form button {
   align-items: center;
   border: none;
-  border-radius: 0.3em;
   box-sizing: border-box;
   color: gray;
   display: flex;
-  font-size: 1.3em;
+  font-family: Montserrat , sans-serif;
+  font-size: 1.8em;
+  font-weight: 700;
   height: 5vh;
   justify-content: center;
   width: 100%;
 }
 
 form button:disabled {
-  background-color: #636396;
+  background-color: #6d6d6d;
   cursor: not-allowed;
   transition: 2s;
 }
 
 form button:enabled {
-  background-color: #636396;
-  color: black;
+  background-color: #f2a30f;
+  color: white;
   transition: 2s;
 }
 
 form button:enabled:hover {
-  background-color: #8989c9;
-  transition: 1s;
-}
-
-form button:disabled:hover {
-  background-color: #8989c9;
+  background-color: #f2a30f;
+  box-shadow: 1px 1px 7px #1d1c1d inset;
   transition: 1s;
 }
 

@@ -1,13 +1,12 @@
-$light-purple: rgb(137, 137, 201);
-$medium-purple: rgb(99, 99, 150);
-$purple: rgb(72, 72, 125);
-$sand: rgb(201, 179, 77);
-$grey-sand: rgb(125, 115, 72);
+$orange: rgb(242, 163, 15);
+$shadow: rgba(51, 49, 49, 0.6);
+$disabled: rgb(109, 109, 109);
+$input: rgba(216, 209, 209, 0.4);
 
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400&display=swap') ;
+@import url('https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap') ;
 
 form {
-  background: url('../images//background.jpg') no-repeat center fixed;
+  background: url('../images//background1.jpg') no-repeat center fixed;
   background-size: cover;
   display: flex;
   height: 100vh;
@@ -16,11 +15,10 @@ form {
 
   & div {
     align-items: center;
-    background-color: rgba(39, 37, 37, 0.9);
-    border-radius: 2em;
+    background-color: $shadow;
+    border-radius: 1em;
     display: flex;
     flex-direction: column;
-    font-family: Roboto Mono , monospace;
     margin: auto;
     max-width: 400px;
     padding: 2em;
@@ -28,17 +26,18 @@ form {
   }
 
   & img {
-    background-color: $light-purple;
     border-radius: 2em;
-    padding: 2em;
+    padding: 0 2em 2em;
     width: 90%;
   }
 
   & h1 {
-    color: $light-purple;
-    margin: 0.5em 0 0.7em;
+    color: white;
+    font-family: Montserrat , sans-serif;
+    font-size: 2em;
+    font-weight: 500;
+    margin: 0.1em 0 0.7em;
     opacity: 1;
-    text-shadow: 3px 3px 4px black;
   }
 
   & label {
@@ -53,15 +52,21 @@ form {
   }
 
   & input {
+    background-color: $input;
     border: none;
-    border-radius: 0.3em;
     box-sizing: border-box;
+    color: white;
+    font-family: Alegreya , sans-serif;
     font-size: 1.2em;
     height: 5vh;
     padding: 0.3em;
 
+    &::placeholder {
+      color: white;
+      font-family: Montserrat , sans-serif;
+    }
+
     &:focus {
-      border: 0.2em solid $sand;
       font-size: 1.2em;
       outline: none;
       transition: 0.2s;
@@ -82,34 +87,31 @@ form {
   & button {
     align-items: center;
     border: none;
-    border-radius: 0.3em;
     box-sizing: border-box;
     color: gray;
     display: flex;
-    font-size: 1.3em;
+    font-family: Montserrat , sans-serif;
+    font-size: 1.8em;
+    font-weight: 700;
     height: 5vh;
     justify-content: center;
     width: 100%;
 
     &:disabled {
-      background-color: $medium-purple;
+      background-color: $disabled;
       cursor: not-allowed;
       transition: 2s;
     }
 
     &:enabled {
-      background-color: $medium-purple;
-      color: black;
+      background-color: $orange;
+      color: white;
       transition: 2s;
     }
 
     &:enabled:hover {
-      background-color: $light-purple;
-      transition: 1s;
-    }
-
-    &:disabled:hover {
-      background-color: $light-purple;
+      background-color: $orange;
+      box-shadow: 1px 1px 7px rgb(29, 28, 29) inset;
       transition: 1s;
     }
   }

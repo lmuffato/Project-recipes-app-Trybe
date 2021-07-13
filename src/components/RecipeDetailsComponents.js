@@ -1,6 +1,7 @@
 import React from 'react';
 import Carousel from 'react-bootstrap/Carousel';
 import PropTypes from 'prop-types';
+import { Swiper } from 'swiper/react';
 import RecipeImage from './RecipeComponents/RecipeImage';
 import RecipeTitle from './RecipeComponents/RecipeTitle';
 import ShareBtn from './RecipeComponents/ShareButton';
@@ -52,9 +53,16 @@ function ComponentGen(props) {
       <RecipeInst instructions={ strInstructions } />
       { strMeal !== undefined && <VideoCtn src={ strYoutube } /> }
       <h3>Recomendadas</h3>
-      <Carousel>
+      <Swiper
+        slidesPerView={ 3 }
+        spaceBetween={ 0 }
+        pagination={ {
+          clickable: true,
+        } }
+        className="mySwiper"
+      >
         {recomendList}
-      </Carousel>
+      </Swiper>
       <BottomBtn info={ info } />
     </div>
   );

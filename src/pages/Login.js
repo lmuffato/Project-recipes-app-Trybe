@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 
 import ReceitasContext from '../contexts/ReceitasContext';
 import '../styles/Login.css';
-import easyRecipe from '../images/recipEasy.png';
+import easyRecipe from '../images/logo1.png';
 
 function Login() {
   const {
@@ -69,7 +69,7 @@ function Login() {
       <div>
         <img className="form__img" src={ easyRecipe } alt="logo easy recipe" />
 
-        <h1 className="form__title">Login</h1>
+        <h1 className="form__title">login</h1>
         <label className="form__label" htmlFor="email">
           <p className="form__p">
             E-mail
@@ -79,7 +79,7 @@ function Login() {
             value={ email }
             data-testid="email-input"
             type="email"
-            placeholder="E-mail"
+            placeholder="e-mail"
             onChange={ ({ target }) => setEmail(target.value) }
             onBlur={ verifyEmailError }
             required
@@ -95,7 +95,7 @@ function Login() {
             value={ password }
             data-testid="password-input"
             type="password"
-            placeholder="Password"
+            placeholder="password"
             onChange={ ({ target }) => setPassword(target.value) }
             minLength="7"
             onBlur={ verifyPassError }
