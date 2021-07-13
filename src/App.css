@@ -127,3 +127,44 @@ footer {
   justify-content: space-around;
   width: 345px;
 }
+
+.loginForm {
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.849);
+  background-image: url(https://media.giphy.com/media/Buva2aomcuXBAD07PC/giphy.gif);
+  background-repeat: round;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  height: 640px;
+}
+
+.footer {
+  background-color: white;
+}
+
+.avatar {
+  border: 2px rgba(255, 0, 0, 0.326);
+  border-radius: 60px;
+  border-style: groove;
+  margin-bottom: 25px;
+  width: 100px;
+}
+
+.title {
+  border-radius: 50px;
+  background-color: rgba(255, 0, 0, 0.658);
+  color: orange;
+  font-size: 25pt;
+  font-family: Segoe UI, Tahoma, Geneva, Verdana, sans-serif;
+  margin-bottom: 60px;
+  padding: 4px;
+  text-align: center;
+}
+
+.userInputs {
+  border: none;
+  border-radius: 10px;
+  font-family: Segoe UI, Tahoma, Geneva, Verdana, sans-serif;
+  text-align: center;
+}
