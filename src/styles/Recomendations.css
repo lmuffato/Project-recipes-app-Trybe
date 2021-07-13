@@ -1,4 +1,9 @@
-.carousel {
+/* Estilização fornecida por Vinicius Rodrigues */
+.recomendation-image {
+  width: 100vw;
+}
+
+.recipes {
   display: flex;
   max-width: 100%;
   overflow-x: scroll;

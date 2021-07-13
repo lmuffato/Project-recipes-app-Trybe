@@ -1,25 +1,21 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext /* , useState */ } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import RecipesContext from '../contexts/RecipesContext';
-import shareIcon from '../images/shareIcon.svg';
-import whiteHeartIcon from '../images/whiteHeartIcon.svg';
-import blackHeartIcon from '../images/blackHeartIcon.svg';
 // import MealCards from './MealCards';
-import '../styles/MealDescription.css';
-import copyToClipboard from '../services/copyToClipboard';
+// import '../styles/MealDescription.css';
+import '../styles/Recomendations.css';
 import Recomendations from './Recomendations';
+import FavoriteBtn from './FavoriteBtn';
+import ShareButtons from './ShareButtons';
 
 function DrinkDescription({ recipe, recipeId }) {
-  const { recomendations } = useContext(RecipesContext);
+  const { recomendations, setIsFavorite } = useContext(RecipesContext);
   const {
-    idDrink, strDrinkThumb, strDrink, strCategory, strInstructions, strAlcoholic,
+    idDrink, strArea, strDrinkThumb, strDrink, strCategory, strInstructions, strAlcoholic,
   } = recipe;
-  const [isCopy, setIsCopy] = useState(null);
   // Estados fake, até poder pegar o estado do localStorage
-  const [isFav, setIsFav] = useState(false);
   // const [isStarted, setIsStarted] = useState(false);
-  const body = document.querySelector('body');
 
   const ingredients = Object.entries(recipe)
     .filter(([key, value]) => (key.includes('strIngredient') ? value : null))
@@ -33,41 +29,36 @@ function DrinkDescription({ recipe, recipeId }) {
     .filter((measure) => measure.length > 1);
   console.log(measures);
 
-  const handleScroll = (event) => {
-    body.style.overflowY = 'hidden';
-    const scrollValue = 300;
-    if (event.deltaY > 0) {
-      event.target.scrollBy(scrollValue, 0);
-    } else {
-      event.target.scrollBy(-scrollValue, 0);
-    }
-  };
+  const getLocalStr = JSON.parse(localStorage.getItem('favoriteRecipes'));
+  let checkLocalStr;
 
-  const handleBodyScroll = () => {
-    body.style.overflowY = 'scroll';
-  };
+  if (getLocalStr !== null) {
+    // procura o recipeId no LS
+    checkLocalStr = Object.values(getLocalStr)
+      .find(({ id: strId }) => strId === recipeId);
+  }
+
+  if (checkLocalStr) {
+    setIsFavorite(true);
+  } else {
+    setIsFavorite(false);
+  }
 
   return (
     <>
-      <section className="detail-container" onWheel={ handleBodyScroll }>
+      <section className="detail-container">
         <img data-testid="recipe-photo" src={ strDrinkThumb } alt="comida" />
         <h1 data-testid="recipe-title">{ strDrink }</h1>
-        <button
-          data-testid="share-btn"
-          type="button"
-          onClick={ (event) => copyToClipboard(event, setIsCopy) }
-        >
-          <img src={ shareIcon } alt={ `bebidas/${idDrink}` } />
-        </button>
-        <button
-          data-testid="favorite-btn"
-          type="button"
-          onClick={ () => setIsFav(!isFav) }
-          src={ isFav ? blackHeartIcon : whiteHeartIcon }
-        >
-          <img src={ isFav ? blackHeartIcon : whiteHeartIcon } alt="botão de favoritar" />
-        </button>
-        {isCopy && <span>Link copiado!</span>}
+        <ShareButtons idRecipe={ `comidas/${idDrink}` } />
+        <FavoriteBtn
+          id={ idDrink }
+          type="cocktail"
+          area={ strArea }
+          category={ strCategory }
+          alcoholicOrNot={ null }
+          name={ strDrink }
+          image={ strDrinkThumb }
+        />
         <h3 data-testid="recipe-category">{`${strCategory} ${strAlcoholic}`}</h3>
         <h2>Ingredients</h2>
         { ingredients.map((ingredient, index) => (
@@ -79,7 +70,7 @@ function DrinkDescription({ recipe, recipeId }) {
         <iframe title="YouTube video player" data-testid="video" />
       </section>
       <section>
-        <section className="recipes carousel" onWheel={ handleScroll }>
+        <section className="recipes">
           { recomendations.map(({ idMeal, strMealThumb, strMeal }, index) => (
             <Recomendations
               index={ index }
@@ -92,7 +83,6 @@ function DrinkDescription({ recipe, recipeId }) {
           ))}
         </section>
       </section>
-      <Recomendations />
       <Link to={ `/bebidas/${recipeId}/in-progress` }>
         <button
           type="button"

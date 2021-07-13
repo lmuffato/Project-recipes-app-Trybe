@@ -1,27 +1,27 @@
 /* /* Estilização de carousel retirada desse vídeo:
 https://www.youtube.com/watch?v=SGwHpzgqzgk */
 
-* {
+/* * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-}
+} */
 
-.recomedation-img {
+/* .recomedation-img {
   width: 100vw;
-}
+} */
 
-.carousel {
+/* .carousel {
   width: 100vw;
-}
+} */
 
-.recipes {
+/* .recipes {
   display: flex;
   -webkit-overflow-scrolling: touch;
   overflow-x: auto;
   scroll-behavior: smooth;
   scroll-snap-type: x mandatory;
-}
+} */
 
 .recipe {
   flex: none;
@@ -37,8 +37,8 @@ https://www.youtube.com/watch?v=SGwHpzgqzgk */
   width: 100%;
 }
 
-.start-recipe {
+/* .start-recipe {
   bottom: 0;
   position: fixed;
-}
+} */
 

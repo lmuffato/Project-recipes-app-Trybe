@@ -19,6 +19,7 @@ function RecipesProvider({ children }) {
   const [ingredients, setIngredients] = useState([]);
   const [mealsAndDrinkByIngredients, setMealsAndDrinkByIngredients] = useState(null);
   const [allChecked, setAllChecked] = useState(true);
+  const [isFavorite, setIsFavorite] = useState(false);
 
   const contextValue = {
     type,
@@ -47,6 +48,8 @@ function RecipesProvider({ children }) {
     setMealsAndDrinkByIngredients,
     allChecked,
     setAllChecked,
+    isFavorite,
+    setIsFavorite,
   };
 
   return (

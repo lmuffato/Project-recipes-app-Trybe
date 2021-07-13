@@ -1,5 +1,5 @@
 const copyToClipboard = ({ target }, setIsCopy) => {
-  setIsCopy(true);
+  // setIsCopy(true);
   console.log(target);
   const { alt } = target;
   const path = `http://localhost:3000/${alt}`;

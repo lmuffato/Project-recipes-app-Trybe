@@ -8,14 +8,13 @@ function Recomendations({ index, id, thumb, recipeName, pathname }) {
   return (
     <Link
       to={ pathname }
-      className="recipe recomendation-card"
+      className="recomendation-card"
       data-testid={ `${index}-recomendation-card` }
     >
       <img
         data-testid={ `${index}-card-img` }
         src={ thumb }
         alt="Meal"
-        className="recipe-image"
       />
       <p className="recipe-title" data-testid={ `${index}-recomendation-title` }>
         {recipeName}

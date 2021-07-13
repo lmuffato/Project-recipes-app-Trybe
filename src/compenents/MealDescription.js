@@ -1,22 +1,21 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, /* , useState
+  useEffect */ } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import RecipesContext from '../contexts/RecipesContext';
-import whiteHeartIcon from '../images/whiteHeartIcon.svg';
-import blackHeartIcon from '../images/blackHeartIcon.svg';
-import '../styles/MealDescription.css';
-import InteractiveButtons from './InteractiveButtons';
+// import '../styles/MealDescription.css';
+import '../styles/Recomendations.css';
+import ShareButtons from './ShareButtons';
 import Recomendations from './Recomendations';
+import FavoriteBtn from './FavoriteBtn';
 
 function MealDescription({ recipe, recipeId }) {
-  const { recomendations } = useContext(RecipesContext);
+  const { recomendations, setIsFavorite } = useContext(RecipesContext);
   const {
-    idMeal, strMealThumb, strMeal, strCategory, strInstructions, strYoutube,
+    idMeal, strArea, strMealThumb, strMeal, strCategory, strInstructions, strYoutube,
   } = recipe;
   // Estados fake, até poder pegar o estado do localStorage
-  const [isFav, setIsFav] = useState(false);
   // const [isStarted, setIsStarted] = useState(false);
-  const body = document.querySelector('body');
 
   const ingredients = Object.entries(recipe)
     .filter(([key, value]) => (key.includes('strIngredient') ? value : null))
@@ -28,23 +27,24 @@ function MealDescription({ recipe, recipeId }) {
     .map((measure) => measure[1])
     .filter((measure) => measure.length > 1);
 
-  const handleScroll = (event) => {
-    body.style.overflowY = 'hidden';
-    const scrollValue = 300;
-    if (event.deltaY > 0) {
-      event.target.scrollBy(scrollValue, 0);
-    } else {
-      event.target.scrollBy(-scrollValue, 0);
-    }
-  };
+  const getLocalStr = JSON.parse(localStorage.getItem('favoriteRecipes'));
+  let checkLocalStr;
 
-  const handleBodyScroll = () => {
-    body.style.overflowY = 'scroll';
-  };
+  if (getLocalStr !== null) {
+    // procura o recipeId no LS
+    checkLocalStr = Object.values(getLocalStr)
+      .find(({ id: strId }) => strId === recipeId);
+  }
+
+  if (checkLocalStr) {
+    setIsFavorite(true);
+  } else {
+    setIsFavorite(false);
+  }
 
   return (
     <>
-      <section className="detail-container" onWheel={ handleBodyScroll }>
+      <section className="detail-container">
         <img
           data-testid="recipe-photo"
           src={ strMealThumb }
@@ -52,16 +52,16 @@ function MealDescription({ recipe, recipeId }) {
           className="recomedation-img"
         />
         <h1 data-testid="recipe-title">{ strMeal }</h1>
-        <InteractiveButtons idRecipe={ `comidas/${idMeal}` } />
-        { /* Botão temporário */}
-        <button
-          data-testid="favorite-btn"
-          type="button"
-          onClick={ () => setIsFav(!isFav) }
-          src={ isFav ? blackHeartIcon : whiteHeartIcon }
-        >
-          <img src={ isFav ? blackHeartIcon : whiteHeartIcon } alt="botão de favoritar" />
-        </button>
+        <ShareButtons idRecipe={ `comidas/${idMeal}` } />
+        <FavoriteBtn
+          id={ idMeal }
+          type="meal"
+          area={ strArea }
+          category={ strCategory }
+          alcoholicOrNot={ null }
+          name={ strMeal }
+          image={ strMealThumb }
+        />
         <h3 data-testid="recipe-category">{ strCategory }</h3>
         <h2>Ingredients</h2>
         { ingredients.map((ingredient, index) => (
@@ -78,8 +78,8 @@ function MealDescription({ recipe, recipeId }) {
           />
         )}
       </section>
-      <section className="carousel">
-        <section className="recipes" onWheel={ handleScroll }>
+      <section>
+        <section className="recipes">
           { recomendations.map(({ idDrink, strDrinkThumb, strDrink }, index) => (
             <Recomendations
               index={ index }

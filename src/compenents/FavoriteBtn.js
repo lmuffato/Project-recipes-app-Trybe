@@ -1,17 +1,19 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect /* , useState */ } from 'react';
 import PropTypes from 'prop-types';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import RecipesContext from '../contexts/RecipesContext';
 
 function FavoriteBtn({ id, type, area, category, alcoholicOrNot, name, image, index }) {
-  const { favoriteRecipes, setFavRecipes } = useContext(RecipesContext);
-  const [isFavorite, setIsFavorite] = useState(false);
+  const {
+    favoriteRecipes, setFavRecipes, isFavorite, setIsFavorite,
+  } = useContext(RecipesContext);
+  // const [isFavorite, setIsFavorite] = useState(false);
   const recipeId = id;
 
   useEffect(() => {
     localStorage.setItem('favoriteRecipes', JSON.stringify(favoriteRecipes));
-  }, [favoriteRecipes.length]);
+  }, [favoriteRecipes.length, favoriteRecipes, isFavorite]);
 
   const setFavorite = () => {
     const recipeDetails = {
@@ -30,6 +32,7 @@ function FavoriteBtn({ id, type, area, category, alcoholicOrNot, name, image, in
   const setUnfavorite = () => {
     const removeFav = favoriteRecipes.filter(({ id: favId }) => favId !== recipeId);
     setFavRecipes(removeFav);
+    setIsFavorite(false);
   };
 
   const setButton = () => {
@@ -53,27 +56,29 @@ function FavoriteBtn({ id, type, area, category, alcoholicOrNot, name, image, in
         >
           <img
             data-testid="favorite-btn"
+            src={ blackHeartIcon }
+            alt="set favorite"
+          />
+        </button>
+      );
+    }
+    if (!isFavorite) {
+      // recipeId não encontrado no LS
+      return (
+        <button
+          type="button"
+          src={ whiteHeartIcon }
+          data-testid={ `${index}-horizontal-favorite-btn` }
+          onClick={ setFavorite }
+        >
+          <img
+            data-testid="favorite-btn"
             src={ whiteHeartIcon }
             alt="set favorite"
           />
         </button>
       );
     }
-    // recipeId não encontrado no LS
-    return (
-      <button
-        type="button"
-        src={ whiteHeartIcon }
-        data-testid={ `${index}-horizontal-favorite-btn` }
-        onClick={ setFavorite }
-      >
-        <img
-          data-testid="favorite-btn"
-          src={ blackHeartIcon }
-          alt="set favorite"
-        />
-      </button>
-    );
   };
 
   return (
