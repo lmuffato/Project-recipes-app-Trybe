@@ -31,10 +31,10 @@ function RecipeDetails(props) {
       <h2 data-testid="recipe-title">
         { recipe.strMeal || recipe.strDrink }
       </h2>
-      <button type="button">
+      <button type="button" data-testid="share-btn">
         compartilhar
       </button>
-      <button type="button">
+      <button type="button" data-testid="favorite-btn">
         favoritar
       </button>
       <p data-testid="recipe-category">
@@ -45,7 +45,13 @@ function RecipeDetails(props) {
       <h3>Instruções</h3>
       <p data-testid="instructions">{ recipe.strInstructions }</p>
       <Recommendations recipe={ type } />
-      <button type="button" data-testid="start-recipe-btn">Iniciar Receita</button>
+      <button 
+        type="button"
+        data-testid="start-recipe-btn"
+        style={ { position: 'fixed;' } }
+      >
+        Iniciar Receita
+      </button>
     </div>
   );
 }
