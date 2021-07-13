@@ -11,7 +11,7 @@ export function RecipesProvider({ children }) {
   const [categories, setCategories] = useState([]);
   const [titlePage, setTitlePage] = useState('');
   const [currentFilter, setCurrentFilter] = useState('');
-  const { location } = useHistory();
+  const { location, push: historyPush } = useHistory();
 
   // async function loadRecipes(pathname) {
   //   const recipesLimit = 12;
@@ -36,30 +36,74 @@ export function RecipesProvider({ children }) {
     }
   }, []);
 
-  async function filterByCategory(categoryName, event) {
+  async function switchFilters(filter, event) {
     let results = [];
-    const recipesLimit = 12;
-
-    if (currentFilter !== categoryName && categoryName !== 'All') {
-      results = await getRecipes(location.pathname, categoryName);
-      setCurrentFilter(categoryName);
-    } else {
-      if (event) {
-        event.target.checked = false;
+    switch (filter.type) {
+    case 'category': {
+      if (currentFilter.category !== filter.content && filter.content !== 'All') {
+        results = await getRecipes(location.pathname, { category: filter.content });
+        setCurrentFilter({ category: filter.content });
+      } else {
+        if (event) {
+          event.target.checked = false;
+        }
+        results = await getRecipes(location.pathname);
+        results = results.list;
+        setCurrentFilter({ category: 'All' });
       }
-      results = await getRecipes(location.pathname);
-      results = results.list;
-      setCurrentFilter('All');
+      break;
     }
 
-    setRecipes(results.slice(0, recipesLimit));
+    case 'name': {
+      results = await getRecipes(location.pathname, { name: filter.content });
+      setCurrentFilter({ name: filter.content });
+      break;
+    }
+
+    case 'ingredient': {
+      results = await getRecipes(location.pathname, { ingredient: filter.content });
+      setCurrentFilter({ ingredient: filter.content });
+      break;
+    }
+
+    case 'firstletter': {
+      if (filter.content.length > 1) {
+        return alert('Sua busca deve conter somente 1 (um) caracter');
+      }
+      results = await getRecipes(location.pathname, { firstletter: filter.content });
+      setCurrentFilter({ firstletter: filter.content });
+      break;
+    }
+
+    default: {
+      results = await getRecipes(location.pathname);
+      results = results.list;
+      setCurrentFilter({ category: 'All' });
+      break;
+    }
+    }
+    return results;
+  }
+
+  async function filterRecipe(filter, event) {
+    const recipesLimit = 12;
+    try {
+      const results = await switchFilters(filter, event);
+      if (results.length === 1) {
+        historyPush(`${location.pathname}/${results[0].id}`);
+      }
+
+      setRecipes(results.slice(0, recipesLimit));
+    } catch (error) {
+      alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+    }
   }
 
   const value = {
     recipes,
     categories,
     titlePage,
-    filterByCategory,
+    filterRecipe,
     loadRecipes,
   };
 
