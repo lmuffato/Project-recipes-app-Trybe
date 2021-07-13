@@ -3,7 +3,8 @@ import { ApiRecipeDetail } from './theMealAPI';
 import { ApiDetailsById } from './theCockTailAPI';
 
 const GetDoneDetails = async () => {
-  const storageItems = getItemFromLocalStorage('doneRecipes');
+  let storageItems = getItemFromLocalStorage('doneRecipes');
+  if (!storageItems) storageItems = [];
   let list = [];
   if (storageItems !== null && storageItems !== undefined && storageItems.length > 0) {
     const promises = await storageItems.map((item) => {
@@ -16,7 +17,8 @@ const GetDoneDetails = async () => {
     list = await Promise.all(promises);
   }
 
-  if (storageItems !== null && storageItems.type === 'comida') {
+  if (storageItems !== null && storageItems !== undefined
+    && storageItems.type === 'comida') {
     return ApiRecipeDetail(storageItems.id);
   }
 
@@ -31,7 +33,7 @@ const GetDoneDetails = async () => {
     return listItems;
   }
 
-  return storageItems !== null && ApiDetailsById(storageItems.id);
+  return storageItems !== null && storageItems !== undefined && ApiDetailsById(storageItems.id);
 };
 
 export default GetDoneDetails;
