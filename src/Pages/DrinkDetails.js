@@ -67,7 +67,7 @@ export default function DrinkDetails() {
   const textForButton = (recId) => {
     const lS = JSON.parse(localStorage.getItem('inProgressRecipes'));
     if (lS) {
-      const ids = Object.keys(lS.drinks);
+      const ids = Object.keys(lS.cocktails);
       if (ids.length > 0) {
         const find = ids.includes(recId);
         return (

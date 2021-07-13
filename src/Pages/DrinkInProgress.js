@@ -31,30 +31,36 @@ export default function DrinkInProgress() {
     setCopy('Link copiado!');
   };
 
+  const ingredientWithMeasure = (dataValue) => {
+    const ingredients = [];
+    const measure = [];
+    const aux = [];
+    const array = Object.entries(dataValue);
+    array.forEach((item) => {
+      if (item[0].includes('strIngredient') && item[1] !== null && item[1] !== '') {
+        ingredients.push(item[1]);
+      }
+      if (item[0].includes('strMeasure')) {
+        measure.push(item[1]);
+      }
+    });
+    ingredients.forEach((item, index) => {
+      if (measure[index]) {
+        aux.push(`${item} - ${measure[index]}`);
+      } else {
+        aux.push(item);
+      }
+    });
+    return aux;
+  };
+
   const renderInProgressRecipe = () => {
     if (data && data.length > 0) {
-      const ingredients = [];
-      const measure = [];
-      const aux = [];
-      const array = Object.entries(data[0]);
-      array.forEach((item) => {
-        if (item[0].includes('strIngredient') && item[1] !== null && item[1] !== '') {
-          ingredients.push(item[1]);
-        }
-        if (item[0].includes('strMeasure')) {
-          measure.push(item[1]);
-        }
-      });
-      ingredients.forEach((item, index) => {
-        if (measure[index]) {
-          aux.push(`${item} - ${measure[index]}`);
-        } else {
-          aux.push(item);
-        }
-      });
+      const aux = ingredientWithMeasure(data[0]);
       const { idDrink, strDrinkThumb, strDrink, strCategory, strInstructions } = data[0];
       const ls = JSON.parse(localStorage.getItem('inProgressRecipes'));
-      const disabled = ls ? ls.drinks[idDrink].length === aux.length : false;
+      const disabled = ls && ls.cocktails[idDrink]
+        ? ls.cocktails[idDrink].length === aux.length : false;
       return (
         <div>
           {RenderRecipeImg(strDrinkThumb)}

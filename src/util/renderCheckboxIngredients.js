@@ -10,7 +10,7 @@ export default function RenderCheckboxIngredients(
 
   const checkls = (ls) => {
     let add = '';
-    if (!ls.meals[urlId] && !ls.drinks[urlId]) {
+    if (!ls.meals[urlId] && !ls.cocktails[urlId]) {
       if (urlType === 'comidas') {
         add = {
           ...ls,
@@ -21,8 +21,8 @@ export default function RenderCheckboxIngredients(
       } else {
         add = {
           ...ls,
-          drinks: {
-            ...ls.drinks, [urlId]: ls.drinks[urlId] ? ls.drinks[urlId] : [],
+          cocktails: {
+            ...ls.cocktails, [urlId]: ls.cocktails[urlId] ? ls.cocktails[urlId] : [],
           },
         };
       }
@@ -43,11 +43,11 @@ export default function RenderCheckboxIngredients(
             meals: {
               [urlId]: [],
             },
-            drinks: {},
+            cocktails: {},
           };
         } else {
           add = {
-            drinks: {
+            cocktails: {
               [urlId]: [],
             },
             meals: {},
@@ -63,13 +63,14 @@ export default function RenderCheckboxIngredients(
   const updateStorage = (item, checked) => {
     const id = window.location.href.split('/')[4];
     const prevIngr = urlType === 'bebidas'
-      ? inProgress.drinks[id].filter((lsItem) => !lsItem.includes(item))
+      ? inProgress.cocktails[id].filter((lsItem) => !lsItem.includes(item))
       : inProgress.meals[id].filter((lsItem) => !lsItem.includes(item));
     let addDrink = {};
     if (checked) {
       if (urlType === 'bebidas') {
         addDrink = {
-          ...inProgress, drinks: { ...inProgress.drinks, [id]: [...prevIngr, item] },
+          ...inProgress,
+          cocktails: { ...inProgress.cocktails, [id]: [...prevIngr, item] },
         };
       } else {
         addDrink = {
@@ -80,7 +81,7 @@ export default function RenderCheckboxIngredients(
     if (!checked) {
       if (urlType === 'bebidas') {
         addDrink = {
-          ...inProgress, drinks: { ...inProgress.drinks, [id]: prevIngr },
+          ...inProgress, cocktails: { ...inProgress.cocktails, [id]: prevIngr },
         };
       } else {
         addDrink = {
@@ -93,11 +94,11 @@ export default function RenderCheckboxIngredients(
   };
 
   const getStorage = (ingredient) => {
-    const { drinks } = inProgress;
+    const { cocktails } = inProgress;
     const { meals } = inProgress;
     let bool = false;
-    if (urlType === 'bebidas' && drinks[urlId]) {
-      bool = drinks[urlId].includes(ingredient);
+    if (urlType === 'bebidas' && cocktails[urlId]) {
+      bool = cocktails[urlId].includes(ingredient);
     }
     if (urlType === 'comidas' && meals[urlId]) {
       bool = meals[urlId].includes(ingredient);
