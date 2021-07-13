@@ -34,6 +34,7 @@ function MealsRecepiesProgress() {
         data-testid="recipe-photo"
         alt="meals recepi"
         src={ detailsRecepie.strMealThumb }
+        width="50px"
       />
       <h2 data-testid="recipe-title">{ detailsRecepie.strMeal }</h2>
       <button type="button" data-testid="share-btn">
