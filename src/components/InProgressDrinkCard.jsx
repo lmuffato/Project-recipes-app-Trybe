@@ -53,19 +53,29 @@ function InProgressDrinkCard() {
   };
 
   return (
-    <div>
+    <div className="detailMeal">
       <img
         data-testid="recipe-photo"
         src={ currentDrink.strDrinkThumb }
         alt="Current Meal"
+        className="detailImage"
       />
-      <h3 data-testid="recipe-title">{currentDrink.strDrink}</h3>
-      <button data-testid="share-btn" type="button" onClick={ shareClick }>
-        <img src={ shareIcon } alt="compartilhar" />
-      </button>
-      {copyLink ? <span>Link copiado!</span> : null}
-      <FavoriteButton type="bebida" />
-      <h4 data-testid="recipe-category">{ currentDrink.strAlcoholic }</h4>
+      <div className="detailsTitle">
+        <h3 data-testid="recipe-title">{currentDrink.strDrink}</h3>
+        <div>
+          <button data-testid="share-btn" type="button" onClick={ shareClick }>
+            <img src={ shareIcon } alt="compartilhar" />
+          </button>
+          {copyLink ? <span>Link copiado!</span> : null}
+          <FavoriteButton type="bebida" />
+        </div>
+      </div>
+      <span
+        data-testid="recipe-category"
+        className="recipe-category"
+      >
+        { currentDrink.strAlcoholic }
+      </span>
       <h4>Ingredients</h4>
       <IngredientsCheckboxDrink
         currentMeal={ currentDrink }

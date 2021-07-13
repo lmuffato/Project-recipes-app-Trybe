@@ -53,19 +53,29 @@ function InProgressMealCard() {
   };
 
   return (
-    <div>
+    <div className="detailMeal">
       <img
         data-testid="recipe-photo"
         src={ currentMeal.strMealThumb }
         alt="Current Meal"
+        className="detailImage"
       />
-      <h3 data-testid="recipe-title">{currentMeal.strMeal}</h3>
-      <button data-testid="share-btn" type="button" onClick={ shareClick }>
-        <img src={ shareIcon } alt="compartilhar" />
-      </button>
-      {copyLink ? <span>Link copiado!</span> : null}
-      <FavoriteButton type="comida" />
-      <h4 data-testid="recipe-category">{ currentMeal.strCategory }</h4>
+      <div className="detailsTitle">
+        <h3 data-testid="recipe-title">{currentMeal.strMeal}</h3>
+        <div>
+          <button data-testid="share-btn" type="button" onClick={ shareClick }>
+            <img src={ shareIcon } alt="compartilhar" />
+          </button>
+          {copyLink ? <span>Link copiado!</span> : null}
+          <FavoriteButton type="comida" />
+        </div>
+      </div>
+      <span
+        data-testid="recipe-category"
+        className="recipe-category"
+      >
+        { currentMeal.strCategory }
+      </span>
       <h4>Ingredients</h4>
       <IngredientsCheckBox
         currentMeal={ currentMeal }

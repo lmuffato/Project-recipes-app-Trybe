@@ -32,7 +32,7 @@ function Drinks() {
   }, [showRecipe]);
 
   return (
-    <div>
+    <div className="mainFoodsAndDrinks">
       <Header title="Bebidas" searchImg="true" />
       <div className="headerFilterButtons">
         {drinksCategories.map((category, index) => (
