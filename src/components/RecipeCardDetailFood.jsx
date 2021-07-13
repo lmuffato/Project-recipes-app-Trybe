@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ReactPlayer from 'react-player'; // https://dev.to/marcelomatosdev/react-adding-a-video-player-to-play-youtube-videos-in-your-project-30p
 import { useParams } from 'react-router-dom';
-import shareIcon from '../images/shareIcon.svg';
+import ShareBtn from './componentsDetails/ShareBtn';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import { foodById } from '../services/apiRequests';
 import DrinksRecomends from './componentsDetails/DrinksRecomends';
@@ -37,9 +37,9 @@ export default function RecipeCardDetailFood() {
         data-testid="recipe-photo"
       />
       <h1 data-testid="recipe-title">{ foodDetails.strMeal }</h1>
-      <button type="button" data-testid="share-btn">
-        <img src={ shareIcon } alt="compartilhar" />
-      </button>
+
+      <ShareBtn />
+
       <button type="button" data-testid="favorite-btn">
         <img src={ whiteHeartIcon } alt="favoritar" />
       </button>

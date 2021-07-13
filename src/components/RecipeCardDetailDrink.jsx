@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import shareIcon from '../images/shareIcon.svg';
+import ShareBtn from './componentsDetails/ShareBtn';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import { drinkById } from '../services/apiRequests';
 import FoodsRecomends from './componentsDetails/FoodsRecomends';
@@ -36,10 +36,7 @@ export default function RecipeCardDetailDrink() {
         data-testid="recipe-photo"
       />
       <h1 data-testid="recipe-title">{ drinkDetails.strDrink }</h1>
-
-      <button type="button" data-testid="share-btn">
-        <img src={ shareIcon } alt="compartilhar" />
-      </button>
+      <ShareBtn />
       <button type="button" data-testid="favorite-btn">
         <img src={ whiteHeartIcon } alt="favoritar" />
       </button>
