@@ -10,7 +10,6 @@ export function RecipesProvider({ children }) {
   const [recipes, setRecipes] = useState([]);
   const [categories, setCategories] = useState([]);
   const [titlePage, setTitlePage] = useState('');
-  const [randomRecipe, setRandomRecipe] = useState('');
   const [currentFilter, setCurrentFilter] = useState('');
   const { location } = useHistory();
 
@@ -33,7 +32,6 @@ export function RecipesProvider({ children }) {
       setRecipes(results.list.slice(0, recipesLimit));
       setCategories(results.categories.slice(0, categoriesLimit));
       setTitlePage(results.titlePage);
-      setRandomRecipe(results.getRandom[0].id);
       setCurrentFilter('All');
     }
   }, []);
@@ -59,7 +57,6 @@ export function RecipesProvider({ children }) {
 
   const value = {
     recipes,
-    randomRecipe,
     categories,
     titlePage,
     filterByCategory,

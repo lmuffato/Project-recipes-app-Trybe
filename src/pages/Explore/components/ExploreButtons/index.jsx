@@ -1,17 +1,9 @@
 import { Link } from 'react-router-dom';
-import React, { useEffect, useContext } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styles from '../../styles.module.scss';
 
-import { RecipesContext } from '../../../../context/Recipes';
-
-function ExploreButtons({ title }) {
-  const { loadRecipes, randomRecipe } = useContext(RecipesContext);
-
-  useEffect(() => {
-    loadRecipes(`/${title}`);
-  }, [loadRecipes, title]);
-
+function ExploreButtons({ title, randomRecipe }) {
   function renderAreaLink() {
     if (title === 'comidas') {
       return (
@@ -81,10 +73,12 @@ function ExploreButtons({ title }) {
 
 ExploreButtons.propTypes = {
   title: PropTypes.string,
+  randomRecipe: PropTypes.string,
 };
 
 ExploreButtons.defaultProps = {
   title: '',
+  randomRecipe: '',
 };
 
 export default ExploreButtons;
