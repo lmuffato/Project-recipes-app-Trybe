@@ -4,13 +4,30 @@ import FooterBar from '../components/FooterBar';
 import HeaderExplore from '../components/HeaderExplore';
 
 function ExploreFilters() {
-  const location = useLocation();
+  const { pathname } = useLocation();
   return (
     <main>
       <HeaderExplore />
-      <Link to={ `${location.pathname}/ingredientes` }><h3>Por Ingredientes</h3></Link>
-      <Link to={ `${location.pathname}/area` }><h3>Por local de origem</h3></Link>
-      <h3>Me surpreenda</h3>
+      <Link
+        to={ `${pathname}/ingredientes` }
+        data-testid="explore-by-ingredient"
+      >
+        Por Ingredientes
+      </Link>
+      {pathname === '/explorar/comidas'
+        && <Link
+          to={ `${pathname}/area` }
+          data-testid="explore-by-area"
+        >
+          Por Local de Origem
+        </Link>}
+
+      <Link
+        to={ `${pathname}/area` }
+        data-testid="explore-surprise"
+      >
+        Me Surpreenda!
+      </Link>
       <FooterBar />
     </main>
   );
