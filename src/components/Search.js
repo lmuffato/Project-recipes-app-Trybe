@@ -1,17 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useClassState, useStateEasyRedux } from 'easy-redux-trybe';
+import { Redirect } from 'react-router-dom';
+import styles from '../styles/Search.module.scss';
 
 const initialState = {
   search: '',
   searchRadio: 'Ingrediente',
+  redirect: false,
 };
 
 export default function Search(props) {
   const [state, setState] = useClassState(initialState);
   const [, setStateRedux] = useStateEasyRedux(Search, {});
   const { search, searchRadio } = state;
-  const { searchApi } = props;
+  const { path, searchApi } = props;
+
+  const link = (result) => {
+    const verifyPath = String(path).includes('comidas');
+    return `${verifyPath ? `/comidas/${result.idMeal}` : `/bebidas/${result.idDrink}`}`;
+  };
 
   const handleChange = ({ target: { name, value } }) => {
     setState({
@@ -50,9 +58,11 @@ export default function Search(props) {
       const INDEX_END = 12;
       const resultsTwelveItems = results.slice(0, INDEX_END);
 
-      console.log(resultsTwelveItems); // APAGAR DEPOIS
+      if (resultsTwelveItems && resultsTwelveItems.length === 1) {
+        setState({ redirect: true, link: link(resultsTwelveItems[0]) });
+      }
+
       setStateRedux({ actionType: 'FETCH_COMPLETED', resultsTwelveItems });
-      return resultsTwelveItems;
     } catch (error) {
       console.error(error);
       alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
@@ -60,9 +70,9 @@ export default function Search(props) {
   };
 
   return (
-    <div>
-      <label htmlFor="search-input">
-        Search:
+    <div className={ styles.searchContainer }>
+      { state.redirect && <Redirect to={ state.link } /> }
+      <section>
         <input
           id="search-input"
           type="text"
@@ -70,53 +80,58 @@ export default function Search(props) {
           value={ search }
           onChange={ handleChange }
           data-testid="search-input"
+          className={ styles.searchInput }
+          placeholder="Search"
         />
-      </label>
-      <label htmlFor="ingredient-search-radio">
-        Ingrediente:
-        <input
-          id="ingredient-search-radio"
-          type="radio"
-          name="searchRadio"
-          value="Ingrediente"
-          onChange={ handleChange }
-          data-testid="ingredient-search-radio"
-          defaultChecked
-        />
-      </label>
-      <label htmlFor="name-search-radio">
-        Nome:
-        <input
-          id="name-search-radio"
-          type="radio"
-          name="searchRadio"
-          value="Nome"
-          onChange={ handleChange }
-          data-testid="name-search-radio"
-        />
-      </label>
-      <label htmlFor="first-letter-search-radio">
-        Primeira letra:
-        <input
-          id="first-letter-search-radio"
-          type="radio"
-          name="searchRadio"
-          value="Primeira letra"
-          onChange={ handleChange }
-          data-testid="first-letter-search-radio"
-        />
-      </label>
-      <button
-        type="button"
-        onClick={ fetchSearch }
-        data-testid="exec-search-btn"
-      >
-        Buscar
-      </button>
+        <div className={ styles.radios }>
+          <label htmlFor="ingredient-search-radio">
+            Ingrediente:
+            <input
+              id="ingredient-search-radio"
+              type="radio"
+              name="searchRadio"
+              value="Ingrediente"
+              onChange={ handleChange }
+              data-testid="ingredient-search-radio"
+              defaultChecked
+            />
+          </label>
+          <label htmlFor="name-search-radio">
+            Nome:
+            <input
+              id="name-search-radio"
+              type="radio"
+              name="searchRadio"
+              value="Nome"
+              onChange={ handleChange }
+              data-testid="name-search-radio"
+            />
+          </label>
+          <label htmlFor="first-letter-search-radio">
+            Primeira letra:
+            <input
+              id="first-letter-search-radio"
+              type="radio"
+              name="searchRadio"
+              value="Primeira letra"
+              onChange={ handleChange }
+              data-testid="first-letter-search-radio"
+            />
+          </label>
+        </div>
+        <button
+          type="button"
+          onClick={ fetchSearch }
+          data-testid="exec-search-btn"
+        >
+          Buscar
+        </button>
+      </section>
     </div>
   );
 }
 
 Search.propTypes = {
   searchApi: PropTypes.string.isRequired,
+  path: PropTypes.string.isRequired,
 };

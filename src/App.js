@@ -4,8 +4,8 @@ import Login from './pages/Login';
 // import Settings from './pages/Settings';
 import NotFound from './pages/NotFound';
 import './App.css';
-import Comidas from './pages/Comidas';
-import Bebidas from './pages/Bebidas';
+import Foods from './pages/foods/Foods';
+import Drinks from './pages/drinks/Drinks';
 import Explorar from './pages/Explorar';
 import Perfil from './pages/Perfil';
 import FoodDetails from './pages/foods/FoodDetails';
@@ -25,8 +25,8 @@ function App() {
     <BrowserRouter>
       <Switch>
         <Route exact path="/" component={ Login } />
-        <Route exact path="/bebidas" component={ Bebidas } />
-        <Route exact path="/comidas" component={ Comidas } />
+        <Route exact path="/bebidas" component={ Drinks } />
+        <Route exact path="/comidas" component={ Foods } />
         <Route
           exact
           path="/bebidas/:id"

@@ -49,7 +49,7 @@ export default function Header(props) {
             </button>)
         }
       </header>
-      { showSearch && <Search searchApi={ searchApi } />}
+      { showSearch && <Search searchApi={ searchApi } { ...{ path } } />}
     </div>
   );
 }
