@@ -5,11 +5,14 @@ import { handleLocalProgress } from '../helpers';
 
 function UserProvider({ children }) {
   const localDone = JSON.parse(localStorage.getItem('doneRecipes'));
+  const INITIAL_DOINGS = JSON.parse(localStorage.getItem('inProgressRecipes'));
 
   const [user, setUser] = useState('');
   const [password, setPassword] = useState('');
   const [doneRecipes, setDoneRecipes] = useState(localDone || []);
-  const [doingRecipes, setDoingRecipes] = useState(handleLocalProgress());
+  const [doingRecipes, setDoingRecipes] = useState(
+    INITIAL_DOINGS || handleLocalProgress(),
+  );
 
   function successLogin(loginText, passwordText) {
     setUser(loginText);

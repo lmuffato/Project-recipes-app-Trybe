@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { useLocation } from 'react-router-dom';
 import userProvider from '../../context/UserContext';
-import { handleLocalProgress, shouldBeChecked } from '../../helpers';
+import { checkLength, handleLocalProgress, shouldBeChecked } from '../../helpers';
 import './styles.css';
 
 function Ingredient({ recipe, type, validate = () => ('empty'), id }) {
@@ -15,7 +15,6 @@ function Ingredient({ recipe, type, validate = () => ('empty'), id }) {
   const { pathname } = useLocation();
   const toggle = pathname.includes('comida') ? 'meals' : 'cocktails';
 
-  const [list, setList] = useState([]);
   const { setDoingRecipes } = useContext(userProvider);
 
   const handleClick = ({ target }) => {
@@ -23,25 +22,15 @@ function Ingredient({ recipe, type, validate = () => ('empty'), id }) {
       target.parentNode.style.textDecoration = 'line-through';
     } else { target.parentNode.style.textDecoration = ''; }
 
-    setList(
-      list.includes(target.parentNode)
-        ? list.filter((item) => item !== target.parentNode)
-        : [...list, target.parentNode],
-    );
+    setDoingRecipes(handleLocalProgress(toggle, id, target.parentNode.innerText));
     localStorage.setItem('inProgressRecipes', JSON.stringify(
       handleLocalProgress(toggle, id, target.parentNode.innerText),
     ));
-    setDoingRecipes(handleLocalProgress(toggle, id, target.parentNode.innerText));
   };
 
   useEffect(() => {
-    const finishList = () => {
-      if (list.length === ingredients.length) {
-        validate(true);
-      } else { validate(false); }
-    };
-    finishList();
-  }, [id, ingredients.length, list.length, toggle, validate]);
+    checkLength(id, toggle, ingredients, validate);
+  }, [id, ingredients, ingredients.length, toggle, validate]);
 
   return (
     <div className="parent">
@@ -65,6 +54,11 @@ function Ingredient({ recipe, type, validate = () => ('empty'), id }) {
                 key={ `ingredient-${index}` }
                 data-testid={ `${index}-ingredient-step` }
                 htmlFor={ `${index}-checkbox` }
+                style={
+                  shouldBeChecked(`${item[1]} - ${measures[index][1]}`, toggle, id)
+                    ? { textDecoration: 'line-through' }
+                    : { textDecoration: 'none' }
+                }
               >
                 <input
                   id={ `${index}-checkbox` }
