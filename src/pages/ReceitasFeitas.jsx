@@ -35,9 +35,9 @@ class ReceitasFeitas extends React.Component {
     });
   }
 
-  timer() {
-    const div = document.querySelector('#recipeCopy');
-    const tagP = document.querySelector('#tagP');
+  timer(index) {
+    const div = document.querySelector(`#recipeCopy${index}`);
+    const tagP = document.querySelector(`tagP${index}`);
     div.removeChild(tagP);
   }
 
@@ -58,11 +58,11 @@ class ReceitasFeitas extends React.Component {
     document.body.removeChild(el);
     const div = document.querySelector(`#recipeCopy${index}`);
     const tagP = document.createElement('p');
-    tagP.setAttribute('id', 'tagP');
+    tagP.setAttribute('id', `tagP${index}`);
     div.appendChild(tagP);
     tagP.innerText = 'Link copiado!';
     const time = 15000;
-    setTimeout(this.timer, time);
+    setTimeout(() => this.timer(index), time);
   }
 
   filterOrNot(e) {
