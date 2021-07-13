@@ -10,6 +10,11 @@ function RecipesProvider({ children }) {
   const [searchedRecipes, setSearchedRecipes] = useState(null);
   const [idMeal, setIdMeal] = useState();
   const [idDrink, setIdDrink] = useState();
+  const [favoriteRecipes, setFavRecipes] = useState(() => {
+    const favRecipe = localStorage.getItem('favoriteRecipes');
+    return favRecipe ? JSON.parse(favRecipe) : [];
+  });
+  const [showRecipes, setShowRecipes] = useState(favoriteRecipes);
   const [ingredients, setIngredients] = useState([]);
   const [mealsAndDrinkByIngredients, setMealsAndDrinkByIngredients] = useState(null);
   const [allChecked, setAllChecked] = useState(true);
@@ -29,6 +34,10 @@ function RecipesProvider({ children }) {
     setIdMeal,
     idDrink,
     setIdDrink,
+    favoriteRecipes,
+    setFavRecipes,
+    showRecipes,
+    setShowRecipes,
     ingredients,
     setIngredients,
     mealsAndDrinkByIngredients,
