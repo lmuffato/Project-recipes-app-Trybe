@@ -7,7 +7,7 @@ import DrinkIngredientCard from '../components/DrinkIngredientCard';
 import { getDrinkssIngredientsAPIThunk } from '../redux/actions/drinksAction';
 
 function ExplorarBebidasIngredientes() {
-  const ingredients = useSelector((state) => state.drinks.ingredients);
+  // const ingredients = useSelector((state) => state.drinks.ingredients);
   const loadingIngredients = useSelector((state) => state.loading.loadingIngredients);
   const dispatch = useDispatch();
 
