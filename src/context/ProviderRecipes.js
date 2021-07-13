@@ -10,7 +10,6 @@ function ProviderRecipes({ children }) {
   const [search, setSearch] = useState('');
   const [radioFilter, setRadioFilter] = useState('');
   const [searchBtn, setSearchBtn] = useState(false);
-  // const [type, setType] = useState('');
   const [dataDrinkCards, setDataDrinkCards] = useState('');
   const [loadingCards, setLoadingCards] = useState(false);
   const [showSearchBar, setShowSearchBar] = useState(false);
@@ -45,7 +44,6 @@ function ProviderRecipes({ children }) {
         [`str${type}Thumb`]: item[`str${type}Thumb`],
       }));
     }
-    console.log(activeFilters, recipeList);
     setRecipes(recipeList);
   };
   // Esta função retorna o endpoint da API baseado no filtro escolhido
@@ -73,7 +71,6 @@ function ProviderRecipes({ children }) {
       .then((r) => r.json())
       .then((r) => r[`${type.toLowerCase()}s`]);
     setLoadingCards(false);
-
     setRecipes(response);
   };
 

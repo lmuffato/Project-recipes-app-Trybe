@@ -1,10 +1,26 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import FooterBar from '../components/FooterBar';
 import HeaderExplore from '../components/HeaderExplore';
+import fetchRandomRecipe from '../service/fetchRandomRecipe';
 
 function ExploreFilters() {
   const { pathname } = useLocation();
+  const recipeType = pathname.includes('comidas') ? 'Meal' : 'Drink';
+  const [id, setId] = useState('');
+  const typePosition = 9;
+  useEffect(() => {
+    const getId = async () => setId(await fetchRandomRecipe(recipeType));
+    getId();
+  }, [recipeType]);
+  const exploreByAreaLink = (
+    <Link
+      to={ `${pathname}/area` }
+      data-testid="explore-by-area"
+    >
+      Por Local de Origem
+    </Link>
+  );
   return (
     <main>
       <HeaderExplore />
@@ -14,16 +30,11 @@ function ExploreFilters() {
       >
         Por Ingredientes
       </Link>
-      {pathname === '/explorar/comidas'
-        && <Link
-          to={ `${pathname}/area` }
-          data-testid="explore-by-area"
-        >
-          Por Local de Origem
-        </Link>}
+
+      {pathname === '/explorar/comidas' && exploreByAreaLink}
 
       <Link
-        to={ `${pathname}/area` }
+        to={ `${pathname.slice(typePosition)}/${id}` }
         data-testid="explore-surprise"
       >
         Me Surpreenda!
