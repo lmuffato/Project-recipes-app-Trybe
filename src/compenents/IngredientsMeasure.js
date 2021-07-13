@@ -1,8 +1,19 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import RecipesContext from '../contexts/RecipesContext';
+import '../styles/IngredientsMeasure.css';
 
-function IngredientsMeasure({ detailsRecepie }/* , setAllChecked */) {
-  // const { idMeal } = detailsRecepie;
+function IngredientsMeasure({ detailsRecepie }) {
+  const [checkedIngridientsState, setCheckedIngridientsState] = useState(0);
+  const { idMeal } = detailsRecepie;
+  const ingredientsStorage = JSON.parse(localStorage.getItem('inProgressRecipes'));
+  const [doneIngredients, setDoneIngredients] = useState(
+    ingredientsStorage ? ingredientsStorage.meals[idMeal] : [],
+  );
+  const [cocktailsStorage, setcocktailsStorage] = useState({});
+  const [allMealsStorage, setAllMealsStorage] = useState({});
+  const [otherStorageRecepies, setOtherStorageRecepies] = useState([]);
+  const { setAllChecked } = useContext(RecipesContext);
 
   const allIngredients = Object.entries(detailsRecepie)
     .filter((keys) => keys[0]
@@ -12,59 +23,99 @@ function IngredientsMeasure({ detailsRecepie }/* , setAllChecked */) {
     .filter((keys) => keys[0]
       .includes('strMeasure') && keys[1] !== null && keys[1] !== '');
 
-  /* salvar os ingredientes feitos, no local storage,
-  dps quando recuperar, marcar os feitos */
+  const numberIngridients = allIngredients.length;
 
-  /* function checkInputs() {
-    // se todos inputs forem verdadeiros
-    // setAllChecked(false);
-  } */
-
-  // formato dos dados a serem salvos:
-  // inProgressRecipes
-  /* {
-    cocktails: {
-      id-da-bebida: [lista-de-ingredientes-utilizados],
-      ...
-    },
-    meals: {
-      id-da-comida: [lista-de-ingredientes-utilizados],
-      id-da-comida: [lista-de-ingredientes-utilizados],
-      id-da-comida: [lista-de-ingredientes-utilizados],
-      ...
+  function checkInputs() {
+    if (numberIngridients === doneIngredients.length) {
+      return setAllChecked(false);
     }
-  } */
+    return setAllChecked(true);
+  }
 
-  // função para pegar as receitas do local storage
- /*  const getInProgressRecepies = () => {
+  function setFirstLocalStorage() {
+    const objetoLocalStorage = {
+      cocktails: {},
+      meals: { [idMeal]: doneIngredients },
+    };
+    const ingredientListString = JSON.stringify(objetoLocalStorage);
+    localStorage.setItem('inProgressRecipes', ingredientListString);
+  }
+
+  function upDateLocalStorage() {
+    const newLocalStorage = {
+      cocktails: cocktailsStorage,
+      meals: { ...otherStorageRecepies, [idMeal]: [...doneIngredients] },
+    };
+    const newLocalStorageString = JSON.stringify(newLocalStorage);
+    localStorage.setItem('inProgressRecipes', newLocalStorageString);
+    setAllMealsStorage(newLocalStorage.meals);
+  }
+
+  function getLocalStorage() {
     const recepiesInProgressString = localStorage.getItem('inProgressRecipes');
     const recepiesInProgress = JSON.parse(recepiesInProgressString);
-    return recepiesInProgress;
-  }; */
+    if (recepiesInProgressString === null) {
+      setFirstLocalStorage();
+    } else {
+      const { cocktails, meals } = recepiesInProgress;
+      setcocktailsStorage(cocktails);
+      setAllMealsStorage(meals);
+      const otherRecepies = delete allMealsStorage.idMeal;
+      setOtherStorageRecepies(otherRecepies);
+
+      if (meals[idMeal] === null) upDateLocalStorage();
+    }
+  }
+
+  useEffect(() => {
+    getLocalStorage();
+  }, []);
+
+  useEffect(() => {
+    checkInputs();
+    upDateLocalStorage();
+  }, [checkedIngridientsState]);
+
+  function checkedListIngredients(e) {
+    if (e.target.checked === true) {
+      setCheckedIngridientsState(checkedIngridientsState + 1);
+      return setDoneIngredients([...doneIngredients, e.target.id]);
+    }
+    setCheckedIngridientsState(checkedIngridientsState - 1);
+    const newDoneIngredients = doneIngredients
+      .filter((ingridient) => ingridient !== e.target.id);
+    return setDoneIngredients(newDoneIngredients);
+  }
+
+  function getIngredientsList() {
+    return allIngredients.map((elem, index) => (
+      <div key={ index }>
+        <label htmlFor={ elem[1] }>
+          <input
+            checked={ doneIngredients.some((element) => element === elem[1]) }
+            id={ elem[1] }
+            data-testid={ `${index}-ingredient-step` }
+            type="checkbox"
+            onChange={ (e) => checkedListIngredients(e) }
+          />
+          <span className="checked-list">
+            { `${elem[1]} - ${allMeasure[index][1]}` }
+          </span>
+        </label>
+      </div>
+    ));
+  }
 
   return (
     <div>
-      { allIngredients.map((elem, index) => (
-        <div key={ index }>
-          <label htmlFor="ingredient">
-            <input
-              id="ingredient"
-              data-testid={ `${index}-ingredient-step` }
-              type="checkbox"
-            />
-            { elem }
-            {' '}
-            -
-            { allMeasure[index] }
-          </label>
-        </div>))}
+      { getIngredientsList() }
     </div>
   );
 }
 
 IngredientsMeasure.propTypes = {
   detailsRecepie: PropTypes.shape({
-    idMeal: PropTypes.number,
+    idMeal: PropTypes.string,
   }).isRequired,
 };
 
