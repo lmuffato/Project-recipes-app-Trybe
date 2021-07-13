@@ -44,8 +44,6 @@ function ReceitaBebidaDetalhe({ props }) {
   const favoriteClick = (e) => {
     e.preventDefault();
 
-    // const date = new Date().toString();
-
     const favoriteRecipe = {
       id,
       type: 'bebida',
@@ -54,21 +52,40 @@ function ReceitaBebidaDetalhe({ props }) {
       alcoholicOrNot: acctualyDrink.drinks[0].strAlcoholic,
       name: acctualyDrink.drinks[0].strDrink,
       image: acctualyDrink.drinks[0].strDrinkThumb,
-      // doneDate: date,
-      // tags: acctualyDrink.drinks[0].strTags,
     };
 
-    if (JSON.parse(localStorage.getItem('favoriteRecipes') !== null)) {
+    // if (JSON.parse(localStorage.getItem('favoriteRecipes') !== null)) {
+    //   const oldRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
+
+    //   console.log(oldRecipes);
+
+    //   const newRecipes = [...oldRecipes, favoriteRecipe];
+
+    //   console.log('New Recipe', newRecipes);
+    //   localStorage.setItem('favoriteRecipes', JSON.stringify(newRecipes));
+    // } else {
+    //   localStorage.setItem('favoriteRecipes', JSON.stringify([favoriteRecipe]));
+    // }
+
+    if (favoriteDrink !== false
+      && JSON.parse(localStorage.getItem('favoriteRecipes') !== null)) {
       const oldRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
 
-      console.log(oldRecipes);
+      const filterRecipes = oldRecipes.filter((actualRecipe) => actualRecipe.id !== id);
 
-      const newRecipes = [...oldRecipes, favoriteRecipe];
+      const newRecipes = [...filterRecipes];
 
-      console.log('New Recipe', newRecipes);
       localStorage.setItem('favoriteRecipes', JSON.stringify(newRecipes));
-    } else {
-      localStorage.setItem('favoriteRecipes', JSON.stringify([favoriteRecipe]));
+    } if (favoriteDrink !== true) {
+      if (JSON.parse(localStorage.getItem('favoriteRecipes') !== null)) {
+        const oldRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
+
+        const newRecipes = [...oldRecipes, favoriteRecipe];
+
+        localStorage.setItem('favoriteRecipes', JSON.stringify(newRecipes));
+      } else {
+        localStorage.setItem('favoriteRecipes', JSON.stringify([favoriteRecipe]));
+      }
     }
 
     return !favoriteDrink ? setFavoriteDrink(true) : setFavoriteDrink(false);
