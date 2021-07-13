@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { useLocation } from 'react-router-dom';
 import userProvider from '../../context/UserContext';
-import { handleProgress } from '../../helpers';
+import { handleLocalProgress, shouldBeChecked } from '../../helpers';
 import './styles.css';
 
 function Ingredient({ recipe, type, validate = () => ('empty'), id }) {
@@ -28,9 +28,10 @@ function Ingredient({ recipe, type, validate = () => ('empty'), id }) {
         ? list.filter((item) => item !== target.parentNode)
         : [...list, target.parentNode],
     );
-    handleProgress(
-      target.parentNode.innerText, id, toggle, setDoingRecipes,
-    );
+    localStorage.setItem('inProgressRecipes', JSON.stringify(
+      handleLocalProgress(toggle, id, target.parentNode.innerText),
+    ));
+    setDoingRecipes(handleLocalProgress(toggle, id, target.parentNode.innerText));
   };
 
   useEffect(() => {
@@ -40,7 +41,7 @@ function Ingredient({ recipe, type, validate = () => ('empty'), id }) {
       } else { validate(false); }
     };
     finishList();
-  }, [ingredients.length, list.length, validate]);
+  }, [id, ingredients.length, list.length, toggle, validate]);
 
   return (
     <div className="parent">
@@ -70,6 +71,9 @@ function Ingredient({ recipe, type, validate = () => ('empty'), id }) {
                   type="checkbox"
                   className="form-check-input"
                   onClick={ handleClick }
+                  defaultChecked={ shouldBeChecked(
+                    `${item[1]} - ${measures[index][1]}`, toggle, id,
+                  ) }
                 />
                 { `${item[1]} - ${measures[index][1]}` }
               </label>

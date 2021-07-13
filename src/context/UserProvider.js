@@ -1,18 +1,15 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import UserContext from './UserContext';
+import { handleLocalProgress } from '../helpers';
 
 function UserProvider({ children }) {
   const localDone = JSON.parse(localStorage.getItem('doneRecipes'));
-  const localDoing = JSON.parse(localStorage.getItem('inProgressRecipes'));
-  console.log(localDoing);
 
   const [user, setUser] = useState('');
   const [password, setPassword] = useState('');
   const [doneRecipes, setDoneRecipes] = useState(localDone || []);
-  const [doingRecipes, setDoingRecipes] = useState(
-    localDoing || { meals: {}, cocktails: {} },
-  );
+  const [doingRecipes, setDoingRecipes] = useState(handleLocalProgress());
 
   function successLogin(loginText, passwordText) {
     setUser(loginText);
