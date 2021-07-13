@@ -40,7 +40,7 @@ function RecipeDetails(props) {
       <p data-testid="recipe-category">
         { recipe.strCategory }
       </p>
-      <Video recipe={ recipe } />
+      { recipe.strMeal ? <Video recipe={ recipe } /> : null }
       <Ingredients recipe={ recipe } />
       <h3>Instruções</h3>
       <p data-testid="instructions">{ recipe.strInstructions }</p>
