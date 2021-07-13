@@ -1,10 +1,10 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { Redirect } from 'react-router-dom';
 import context from '../../store/Context';
 import '../../Styles/loginPage.css';
 
 function Login() {
-  const { infoUser, setDatainfoUser, inProgressRecipes } = useContext(context);
+  const { infoUser, setDatainfoUser } = useContext(context);
   const { email, password, shouldRedirect } = infoUser;
   const validateFields = () => {
     const passwordLength = 7;
@@ -22,10 +22,6 @@ function Login() {
     localStorage.setItem('cocktailsToken', JSON.stringify(token));
   };
 
-  useEffect(() => {
-    localStorage.setItem('inProgressRecipes', JSON.stringify(inProgressRecipes));
-  }, [inProgressRecipes]);
-
   const handleChange = ({ target }) => {
     setDatainfoUser((oldState) => ({
       ...oldState,
@@ -41,7 +37,7 @@ function Login() {
     }));
   };
 
-  if (shouldRedirect) return <Redirect to="/comidas" />;
+  if (shouldRedirect) return <Redirect to="/" />;
   return (
     <form>
       <label htmlFor="email-input">

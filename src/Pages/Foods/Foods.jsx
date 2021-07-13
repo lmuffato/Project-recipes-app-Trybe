@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import context from '../../store/Context';
 import { Header, Footer } from '../../components';
@@ -9,6 +9,7 @@ function Foods() {
     catFoods,
     setCategoryF,
     categoryF,
+    inProgressRecipes,
   } = useContext(context);
   const stopCard = 11;
   const stopCat = 4;
@@ -20,6 +21,10 @@ function Foods() {
       setCategoryF(categoryName);
     }
   };
+
+  useEffect(() => {
+    localStorage.setItem('inProgressRecipes', JSON.stringify(inProgressRecipes));
+  }, [inProgressRecipes]);
 
   return (
     <>
