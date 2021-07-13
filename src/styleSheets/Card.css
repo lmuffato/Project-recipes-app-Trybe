@@ -1,13 +1,14 @@
-@import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Handlee&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Handlee&display=swap') ;
 
 .small-card {
   align-items: center;
   background-color: white;
   border-radius: 6px;
-  box-shadow: 2px 2px 20px 2px gray ;
+  box-shadow: 2px 2px 20px 2px gray;
   display: flex;
   flex-direction: column;
-  font-family:'Comic Neue', cursive;
+
+  /* font-family:'Comic Neue', cursive; */
   height: 150px;
   justify-content: space-between;
   margin: 4px;
@@ -23,8 +24,9 @@
 
 .title-card {
   align-self: start;
-  justify-self: center;
-  font-family: 'Handlee', cursive;
   font-size: large;
-  margin: 0 6px 10px 6px;
+  justify-self: center;
+
+  /* font-family: 'Handlee', cursive; */
+  margin: 0 6px 10px;
 }

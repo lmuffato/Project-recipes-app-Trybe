@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 function RecomendationCards(props) {
   const { recipe } = props;
@@ -16,5 +17,9 @@ function RecomendationCards(props) {
     </section>
   );
 }
+
+RecomendationCards.propTypes = {
+  recipe: PropTypes.object,
+}.isRequired;
 
 export default RecomendationCards;
