@@ -4,6 +4,7 @@ import Header from '../../Components/Header';
 import Footer from '../../Components/Footer';
 import { fetchDrinkIngredients, fetchIngredients } from '../../services/fetchRecipes';
 import RecipesContext from '../../context/RecipesContext';
+import './styles.css';
 
 function ExploreIngredientsDrink() {
   const { updateData } = useContext(RecipesContext);
@@ -30,21 +31,23 @@ function ExploreIngredientsDrink() {
 
   return (
     <section>
-      <Header>Explorar Ingredientes</Header>
-      { ingredients.map(({ strIngredient1 }, index) => (
-        <button
-          data-testid={ `${index}-ingredient-card` }
-          onClick={ () => handleClick(strIngredient1) }
-          key={ strIngredient1 }
-          type="button"
-        >
-          <img
-            data-testid={ `${index}-card-img` }
-            src={ `https://www.thecocktaildb.com/images/ingredients/${strIngredient1}-Small.png` }
-            alt={ strIngredient1 }
-          />
-          <p data-testid={ `${index}-card-name` }>{ strIngredient1 }</p>
-        </button>)) }
+      <Header>Ingredientes</Header>
+      <div className="grid">
+        { ingredients.map(({ strIngredient1 }, index) => (
+          <button
+            data-testid={ `${index}-ingredient-card` }
+            onClick={ () => handleClick(strIngredient1) }
+            key={ strIngredient1 }
+            type="button"
+          >
+            <img
+              data-testid={ `${index}-card-img` }
+              src={ `https://www.thecocktaildb.com/images/ingredients/${strIngredient1}-Small.png` }
+              alt={ strIngredient1 }
+            />
+            <p data-testid={ `${index}-card-name` }>{ strIngredient1 }</p>
+          </button>)) }
+      </div>
       <Footer />
     </section>
 

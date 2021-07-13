@@ -1,6 +1,7 @@
 import React from 'react';
 import { shape, string } from 'prop-types';
 import { Redirect, Link } from 'react-router-dom';
+import './styles.css';
 
 function MealsCard({ data: { meals } }) {
   const maxArrayLength = 12;
@@ -15,7 +16,7 @@ function MealsCard({ data: { meals } }) {
   }
 
   return (
-    <main>
+    <div className="meal-card">
       { meals.map(({ strMeal, strMealThumb, idMeal }, index) => (
         index < maxArrayLength ? (
           <Link to={ `/comidas/${idMeal}` } key={ idMeal }>
@@ -30,7 +31,7 @@ function MealsCard({ data: { meals } }) {
           </Link>
         ) : false
       )) }
-    </main>
+    </div>
   );
 }
 

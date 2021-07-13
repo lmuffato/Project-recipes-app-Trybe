@@ -4,6 +4,7 @@ import Header from '../../Components/Header';
 import Footer from '../../Components/Footer';
 import { fetchMealsIngredients, fetchByMealIngredien } from '../../services/fetchRecipes';
 import RecipesContext from '../../context/RecipesContext';
+import './styles.css';
 
 function ExploreIngredientsMeal() {
   const { updateData } = useContext(RecipesContext);
@@ -30,21 +31,23 @@ function ExploreIngredientsMeal() {
 
   return (
     <section>
-      <Header>Explorar Ingredientes</Header>
-      { ingredients.map(({ strIngredient }, index) => (
-        <button
-          data-testid={ `${index}-ingredient-card` }
-          onClick={ () => handleClick(strIngredient) }
-          key={ strIngredient }
-          type="button"
-        >
-          <img
-            data-testid={ `${index}-card-img` }
-            src={ `https://www.themealdb.com/images/ingredients/${strIngredient}-Small.png` }
-            alt={ strIngredient }
-          />
-          <p data-testid={ `${index}-card-name` }>{ strIngredient }</p>
-        </button>)) }
+      <Header>Ingredientes</Header>
+      <div className="grid">
+        { ingredients.map(({ strIngredient }, index) => (
+          <button
+            data-testid={ `${index}-ingredient-card` }
+            onClick={ () => handleClick(strIngredient) }
+            key={ strIngredient }
+            type="button"
+          >
+            <img
+              data-testid={ `${index}-card-img` }
+              src={ `https://www.themealdb.com/images/ingredients/${strIngredient}-Small.png` }
+              alt={ strIngredient }
+            />
+            <p data-testid={ `${index}-card-name` }>{ strIngredient }</p>
+          </button>)) }
+      </div>
       <Footer />
     </section>
 
