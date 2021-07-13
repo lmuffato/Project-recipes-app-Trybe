@@ -8,7 +8,11 @@ import Perfil from './pages/Perfil';
 function App() {
   return (
     <Switch>
-      <Route path={ ['/explorar/:meal', '/explorar'] } component={ Explore } />
+      <Route
+        path={ ['/explorar/:meal/:type',
+          '/explorar/:meal', '/explorar'] }
+        component={ Explore }
+      />
       <Route path={ ['/comidas', '/bebidas'] } component={ MainRecipes } />
       <Route path="/perfil" component={ Perfil } />
       <Route path="/" component={ Login } />

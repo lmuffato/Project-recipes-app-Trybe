@@ -11,6 +11,17 @@ function parseMealResults(results) {
   return parsed;
 }
 
+function parseIngredientResults(ingredients) {
+  const parsed = ingredients.map((ingredient) => ({
+    ...ingredient,
+    id: ingredient.idIngredient,
+    name: ingredient.strIngredient,
+    imagePath: `https://www.themealdb.com/images/ingredients/${ingredient.strIngredient}-Small.png`,
+  }));
+
+  return parsed;
+}
+
 export async function mealsData(filterCategory) {
   const results = await fetchJson('https://www.themealdb.com/api/json/v1/1/search.php?s=');
   const resultsParsed = parseMealResults(results);
@@ -37,7 +48,14 @@ export async function mealsData(filterCategory) {
 export async function exploreMealsData() {
   const randomMeal = await fetchJson('https://www.themealdb.com/api/json/v1/1/random.php');
 
+  const ingredients = await fetchJson('https://www.themealdb.com/api/json/v1/1/list.php?i=list');
+
+  const parseIngredients = parseIngredientResults(ingredients.meals);
+
   const parserRandom = parseMealResults(randomMeal);
 
-  return { titlePage: 'Explorar Comidas', random: parserRandom };
+  return {
+    titlePage: 'Explorar Comidas',
+    random: parserRandom,
+    ingredients: parseIngredients };
 }

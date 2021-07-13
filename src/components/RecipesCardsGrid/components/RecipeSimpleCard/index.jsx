@@ -6,17 +6,24 @@ import plus18Icon from '../../../../images/plus18.svg';
 
 import styles from './styles.module.scss';
 
-function RecipeSimpleCard({ recipe, index, alcoholic }) {
+function RecipeSimpleCard({ page, recipe, index, alcoholic }) {
   const { location: { pathname } } = useHistory();
+
+  let redirec = `${pathname}/${recipe.id}`;
+
+  if (pathname.includes('explorar')) {
+    redirec = pathname.includes('comidas') ? '/comidas' : '/bebidas';
+  }
+
   return (
-    <Link to={ `${pathname}/${recipe.id}` }>
-      <div data-testid={ `${index}-recipe-card` } className={ styles.card }>
+    <Link to={ redirec }>
+      <div data-testid={ `${index}-${page}-card` } className={ styles.card }>
         { alcoholic && (
           <span className={ styles.alcoholicTag }>
             <img src={ plus18Icon } alt="18+" />
             Alcoholic
           </span>
-        ) }
+        )}
         <img
           src={ recipe.imagePath }
           alt={ recipe.name }
@@ -35,6 +42,7 @@ function RecipeSimpleCard({ recipe, index, alcoholic }) {
 
 RecipeSimpleCard.propTypes = {
   index: PropTypes.number.isRequired,
+  page: PropTypes.string.isRequired,
   alcoholic: PropTypes.bool,
   recipe: PropTypes.shape({
     id: PropTypes.string.isRequired,
