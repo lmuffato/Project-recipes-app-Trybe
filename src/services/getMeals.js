@@ -90,6 +90,6 @@ export const getRecomendedMeals = async () => {
   const response = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=');
   const data = await response.json();
   const { meals } = data;
-  console.log('api meal', meals);
+  // console.log('api meal', meals);
   return meals;
 };

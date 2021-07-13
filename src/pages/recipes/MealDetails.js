@@ -5,7 +5,7 @@ import { getRecomendedDrinks } from '../../services/getDrinks';
 import './recipeDetails.css';
 import shareIcon from '../../images/shareIcon.svg';
 import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
-/* import blackHeartIcon from '../../images/blackHeartIcon.svg'; */
+import blackHeartIcon from '../../images/blackHeartIcon.svg';
 
 const copy = require('clipboard-copy');
 
@@ -13,6 +13,7 @@ function MealDetails() {
   const [mealsFromId, setMealsFromId] = useState([]);
   const [ingredientsId, setIngredientsId] = useState([]);
   const [measuresId, setMeasuresId] = useState([]);
+  const [buttonFav, setButtonFav] = useState(true);
   const [drinksCarousel, setDrinksCarousel] = useState([]);
   const match = useRouteMatch();
   const { params: { id } } = match;
@@ -64,8 +65,14 @@ function MealDetails() {
       </ul>
     );
   }
+  
+  const setLocal = () => {
+    localStorage.setItem('favoriteRecipes', JSON.stringify([]));
+  }
 
-  function heartButton(infos) {
+  const heartButton = (infos) => {
+    setButtonFav(!buttonFav);
+    console.log(buttonFav);
     const {
       idMeal,
       strCategory,
@@ -74,19 +81,30 @@ function MealDetails() {
       strTags,
       strArea,
     } = infos;
-    const mealInfos = [{
-      id: idMeal,
-      type: '',
-      area: strArea,
-      category: strCategory,
-      alcoholicOrNot: '',
-      name: strMeal,
-      image: strMealThumb,
-      doneDate: '',
-      tags: strTags,
-    }];
-    localStorage.setItem('favoriteRecipes', JSON.stringify(mealInfos));
+    const hasSetLocal = localStorage.getItem('favoriteRecipes');
+    hasSetLocal ? console.log('hello world') : setLocal();
+    if (buttonFav === true) {
+      const favRecipe = JSON.parse(localStorage.getItem('favoriteRecipes'));
+      const mealInfos = [...favRecipe, {
+        id: idMeal,
+        type: 'comida',
+        area: strArea,
+        category: strCategory,
+        alcoholicOrNot: '',
+        name: strMeal,
+        image: strMealThumb,
+      }];
+      localStorage.setItem('favoriteRecipes', JSON.stringify(mealInfos));
+    } else {
+      const favRecipe = JSON.parse(localStorage.getItem('favoriteRecipes'));
+      console.log(favRecipe);
+      const filteredRemoved = favRecipe.filter((element) => element.id !== idMeal);
+      localStorage.removeItem('favoriteRecipes');
+      localStorage.setItem('favoriteRecipes', JSON.stringify(filteredRemoved));
+      console.log(localStorage.getItem('favoriteRecipes'));
+    }
   }
+  
 
   const renderDetail = () => (
     mealsFromId.map((info, index) => {
@@ -117,7 +135,7 @@ function MealDetails() {
             </button>
             <button type="button" onClick={ () => heartButton(info) }>
               <img
-                src={ whiteHeartIcon }
+                src={ buttonFav ? blackHeartIcon : whiteHeartIcon }
                 alt="favorite button"
                 data-testid="favorite-btn"
               />

@@ -4,6 +4,7 @@ import { getDrinksById, getIngredients, getMeasures } from '../../services/getDr
 import { getRecomendedMeals } from '../../services/getMeals';
 import shareIcon from '../../images/shareIcon.svg';
 import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
+import blackHeartIcon from '../../images/blackHeartIcon.svg';
 import './recipeDetails.css';
 
 const copy = require('clipboard-copy');
@@ -13,7 +14,7 @@ function DrinksDetails() {
   const [ingredientsId, setIngredientsId] = useState([]);
   const [measuresId, setMeasuresId] = useState([]);
   const [mealsCarousel, setMealsCarousel] = useState([]);
-  const [buttonFav, setButtonFav] = useState(false);
+  const [buttonFav, setButtonFav] = useState(true);
   const match = useRouteMatch();
   const { params: { id } } = match;
   const history = useHistory();
@@ -67,29 +68,31 @@ function DrinksDetails() {
     );
   }
 
+  const setLocal = () => {
+    localStorage.setItem('favoriteRecipes', JSON.stringify([]));
+  }
+
   function heartButton(infos) {
+    setButtonFav(!buttonFav);
     const {
       idDrink,
       strCategory,
       strAlcoholic,
       strDrink,
       strDrinkThumb,
-      dateModified,
     } = infos;
-    localStorage.setItem('favoriteRecipes', JSON.stringify([]));
-    setButtonFav(!buttonFav);
+    const hasSetLocal = localStorage.getItem('favoriteRecipes');
+    hasSetLocal ? console.log('hello world') : setLocal();
     if (buttonFav === true) {
       const favRecipe = JSON.parse(localStorage.getItem('favoriteRecipes'));
       const drinkInfos = [...favRecipe, {
         id: idDrink,
-        type: '',
+        type: 'bebida',
         area: '',
         category: strCategory,
         alcoholicOrNot: strAlcoholic,
         name: strDrink,
         image: strDrinkThumb,
-        doneDate: dateModified,
-        tags: '',
       }];
       localStorage.setItem('favoriteRecipes', JSON.stringify(drinkInfos));
     } else {
@@ -126,7 +129,7 @@ function DrinksDetails() {
             </button>
             <button type="button" onClick={ () => heartButton(info) }>
               <img
-                src={ whiteHeartIcon }
+                src={ !buttonFav ? blackHeartIcon : whiteHeartIcon }
                 alt="favorite button"
                 data-testid="favorite-btn"
               />

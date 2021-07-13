@@ -13,7 +13,6 @@ function loginValidation(email, password) {
 
 export default function Login() {
   const { setUserEmail, setPassword, userEmail, password } = useContext(Context);
-  console.log(userEmail);
   return (
     <div className="meals">
       <Form>
