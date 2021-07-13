@@ -62,10 +62,10 @@ function Recipe() {
     <div className={ styles.recipe }>
       <HeaderBack title={ recipe.name || 'Recipe' } />
       <div className={ styles.header }>
-        <img src={ recipe.imagePath } alt={ recipe.name } />
+        <img src={ recipe.imagePath } alt={ recipe.name } data-testid="recipe-photo" />
         <div className={ styles.options }>
-          <BiHeart />
-          <BiShareAlt />
+          <BiHeart data-testid="favorite-btn" />
+          <BiShareAlt data-testid="share-btn" />
         </div>
       </div>
       <main>
@@ -73,15 +73,16 @@ function Recipe() {
           type="button"
           className={ styles.startRecipe }
           onClick={ () => setRecipeCookMode(true) }
+          data-testid="start-recipe-btn"
         >
           Iniciar receita
         </button>
-        <h1>{ recipe.name }</h1>
-        <h3>{ recipe.strCategory }</h3>
+        <h1 data-testid="recipe-title">{ recipe.name }</h1>
+        <h3 data-testid="recipe-category">{ recipe.strCategory }</h3>
         <section>
           <h2>Ingredients</h2>
           <ul className={ styles.listOfIngredients }>
-            { recipe.ingredients && recipe.ingredients.map((ingredient) => {
+            { recipe.ingredients && recipe.ingredients.map((ingredient, index) => {
               if (recipeCookMode) {
                 return (
                   <li className={ styles.listOnProgress }>
@@ -95,12 +96,19 @@ function Recipe() {
                 );
               }
 
-              return <li key={ ingredient }>{ ingredient }</li>;
+              return (
+                <li
+                  key={ ingredient }
+                  data-testid={ `${index}-ingredient-name-and-measure` }
+                >
+                  { ingredient }
+                </li>
+              );
             })}
           </ul>
         </section>
         <section>
-          <h2>Intructions</h2>
+          <h2 data-testid="instructions">Intructions</h2>
           <p>{ recipe.strInstructions }</p>
         </section>
         <section>
@@ -116,6 +124,7 @@ function Recipe() {
             gyroscope;
             picture-in-picture"
             allowFullScreen
+            data-testid="video"
           />
         </section>
         <section>
