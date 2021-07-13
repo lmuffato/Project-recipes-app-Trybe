@@ -22,7 +22,7 @@ function HeaderExplore() {
           alt="profile icon"
         />
       </Link>
-      <h3 data-testid="page-title" className="Explore">
+      <h3 data-testid="page-title" className="Title">
         { location.pathname === '/perfil' ? 'Perfil' : `Explorar ${titleCapitalize}`}
       </h3>
     </div>

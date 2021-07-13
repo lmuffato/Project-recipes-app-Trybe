@@ -3,11 +3,10 @@
   color: white;
   display: flex;
   justify-content: space-between;
-  max-width: 100%;
 }
 
-.Explore {
-  text-align: start;
+.Title {
+  margin-right: 30%;
 }
 
 .exploreBtn {
