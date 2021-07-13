@@ -1,13 +1,17 @@
 import React, { useEffect, useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
+import Header from '../compenents/Header';
 import shareIcon from '../images/shareIcon.svg';
 import FavoriteBtn from '../compenents/FavoriteBtn';
 import RecipesContext from '../contexts/RecipesContext';
+import SearchbarContext from '../contexts/SearchbarContext';
 
 function FavoriteRecipes() {
   const { favoriteRecipes, showRecipes, setShowRecipes } = useContext(RecipesContext);
+  const { setPageName } = useContext(SearchbarContext);
   const [isCopy, setIsCopy] = useState(false);
 
+  setPageName('Receitas Favoritas');
   useEffect(() => {
     const recipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
     if (recipes === null) {
@@ -114,6 +118,7 @@ function FavoriteRecipes() {
 
   return (
     <div>
+      <Header />
       <button
         type="button"
         data-testid="filter-by-all-btn"
