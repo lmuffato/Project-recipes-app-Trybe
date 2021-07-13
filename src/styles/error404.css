@@ -1,0 +1,23 @@
+.error404 {
+  background-image: url('../images/DEFINICIONES.-ERROR-404.png');
+  height: 420px;
+  left: 50%;
+  position: absolute;
+  transform: translateX(-50%);
+  width: 670px;
+}
+
+@media ( max-width : 786.98px ) {
+
+  .error404 {
+    background-image: url('../images/DEFINICIONES.-ERROR-404.png');
+    height: 420px;
+    left: 28%;
+    object-fit: cover;
+    position: absolute;
+    right: auto;
+    transform: translateX(-50%);
+    width: 520px;
+  }
+}
+
