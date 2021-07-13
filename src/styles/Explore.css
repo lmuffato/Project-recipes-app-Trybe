@@ -5,7 +5,8 @@
     background-color: #48487d;
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    height: 85vh;
+    justify-content: center;
     width: 100%;
   }
 
@@ -34,12 +35,13 @@
   }
 
   .area-select {
-    width: 100%;
-    background-color: #48487d;
-    border: #48487d solid 2px;
-    height: 30px;
+    background-color: rgb(67, 163, 58);
+    border: whitesmoke solid 2px;
     color: whitesmoke;
     font-size: 18px;
+    height: 40px;
+    margin: 0;
+    width: 100%;
   }
 
 }
@@ -51,7 +53,8 @@
     background-color: #48487d;
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    height: 90vh;
+    justify-content: center;
     width: 100%;
   }
 
@@ -93,12 +96,13 @@
   }
 
   .area-select {
-    width: 100%;
-    background-color: #48487d;
-    border: #48487d solid 2px;
-    height: 60px;
+    background-color: rgb(67, 163, 58);
+    border: whitesmoke solid 2px;
     color: whitesmoke;
     font-size: 25px;
+    height: 50px;
+    margin: 0;
+    width: 100%;
   }
 
 }
