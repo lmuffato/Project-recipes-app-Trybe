@@ -6,13 +6,14 @@ export default function useRecipeFilter(doneOrFavoritestr) {
   const doneOrFavorite = doneOrFavoritestr === 'doneRecipes'
     ? doneRecipes
     : favoriteRecipes;
-  console.log(doneRecipes);
   const [filter, setFilter] = useState('all');
+  const [filtros, setFiltros] = useState('All');
   const [filteredRecipes, setFilteredRecipes] = useState(doneOrFavorite);
 
   const changeValueToFilterRecipes = ({ target }) => {
     const { name } = target;
     setFilter(name);
+    setFiltros(target.innerText);
   };
 
   useEffect(() => {
@@ -27,5 +28,5 @@ export default function useRecipeFilter(doneOrFavoritestr) {
     changeFilteredRecipes();
   }, [filter, doneOrFavorite]);
 
-  return { changeValueToFilterRecipes, filteredRecipes };
+  return { changeValueToFilterRecipes, filteredRecipes, filtros };
 }

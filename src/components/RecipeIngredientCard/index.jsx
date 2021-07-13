@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import useRecipe from '../../hooks/useRecipe';
 import getMealsOrDrinks from '../../helper/mealsOrDrinksMethods';
 import { fetchIngredient } from '../../services/data';
+import { ContainerRecipeIngredientCard, ButtonCard } from './styles';
 
 export default function RecipeIngredientCard({ ingredient, type, index }) {
   const { foods, site, portugueseFood } = getMealsOrDrinks(type);
@@ -20,7 +21,7 @@ export default function RecipeIngredientCard({ ingredient, type, index }) {
   };
 
   return (
-    <section
+    <ContainerRecipeIngredientCard
       data-testid={ `${index}-ingredient-card` }
       onClick={ redirectToMainRecipes }
       onKeyDown={ redirectToMainRecipes }
@@ -32,8 +33,8 @@ export default function RecipeIngredientCard({ ingredient, type, index }) {
         src={ `https://www.the${site}db.com/images/ingredients/${ingredient}-Small.png` }
         alt={ `${ingredient} Ingredient}` }
       />
-      <h1 data-testid={ `${index}-card-name` }>{ingredient}</h1>
-    </section>
+      <ButtonCard type="button">{ingredient}</ButtonCard>
+    </ContainerRecipeIngredientCard>
   );
 }
 

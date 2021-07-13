@@ -1,12 +1,18 @@
 import React from 'react';
+import { BiShareAlt } from 'react-icons/bi';
+import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 import useRecipeProgress from '../../hooks/useRecipeProgress';
+import {
+  MainContainerDetails,
+  ButtonDetails,
+  ContainerFood,
+  ContainerRecipes,
+} from '../../styles/shared/Progress/ProgressStyles';
 
 export default function DrinkProgress() {
   const {
     recipeProgress,
     showClipBoardMsg,
-    blackHeartIcon,
-    whiteHeartIcon,
     renderClipBoardMsg,
     getIngredientsAndMeasures,
     checkFavorite,
@@ -21,37 +27,36 @@ export default function DrinkProgress() {
   const { strAlcoholic, strInstructions, strDrink, strDrinkThumb } = recipeDrink;
   const { ingredients, measures } = getIngredientsAndMeasures(recipeDrink);
 
-  const styleFooter = {
-    bottom: '0px',
-    position: 'fixed',
-  };
   const styledChecked = {
     textDecoration: 'line-through',
   };
 
   return (
-    <main>
-      <section>
-        <img data-testid="recipe-photo" src={ strDrinkThumb } alt="Recipe" />
+    <MainContainerDetails>
+      <ContainerFood>
         <h1 data-testid="recipe-title">{strDrink}</h1>
-        <button type="button" data-testid="share-btn" onClick={ copyToClipBoard }>
-          Share button
-        </button>
+        <img data-testid="recipe-photo" src={ strDrinkThumb } alt="Recipe" />
 
-        <button type="button" onClick={ () => setHeart(recipeDrink) }>
-          <img
-            data-testid="favorite-btn"
-            src={ checkFavorite() ? blackHeartIcon : whiteHeartIcon }
-            alt="Favorite"
-          />
-        </button>
+        <div>
+          <button
+            type="button"
+            data-testid="share-btn"
+            onClick={ copyToClipBoard }
+          >
+            <BiShareAlt />
+          </button>
+
+          <button type="button" onClick={ () => setHeart(recipeDrink) }>
+            {checkFavorite() ? <AiFillHeart /> : <AiOutlineHeart />}
+          </button>
+        </div>
 
         {showClipBoardMsg && renderClipBoardMsg()}
 
         <p data-testid="recipe-category">{strAlcoholic}</p>
-      </section>
+      </ContainerFood>
 
-      <section>
+      <ContainerRecipes>
         <section>
           <h2>Ingredients</h2>
           <ul>
@@ -77,17 +82,16 @@ export default function DrinkProgress() {
           <h2>Instructions</h2>
           <p data-testid="instructions">{strInstructions}</p>
         </section>
-      </section>
+      </ContainerRecipes>
 
-      <button
+      <ButtonDetails
         type="button"
         data-testid="finish-recipe-btn"
-        style={ styleFooter }
         onClick={ () => redirectToRecipeDonePage(recipeDrink) }
         disabled={ !recipeDoneCheck(ingredients) }
       >
         Finalizar Receita
-      </button>
-    </main>
+      </ButtonDetails>
+    </MainContainerDetails>
   );
 }

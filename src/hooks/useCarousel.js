@@ -23,7 +23,6 @@ export default function useCarousel(recipes, type) {
           </Carousel.Caption>
         </Carousel.Item>
       ))}
-      ;
     </Carousel>
   );
 

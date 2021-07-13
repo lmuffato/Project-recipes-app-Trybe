@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import SharedButton from '../../styles/shared/Button';
 
-export const ContainerCard = styled.section`
+export const ContainerRecipeIngredientCard = styled.section`
   border: 1px solid red;
   display: flex;
   flex-direction: column;
@@ -25,10 +25,10 @@ export const ContainerCard = styled.section`
 
 export const ButtonCard = styled(SharedButton)`
   margin-top: 0.4rem;
-  
+
   padding: 0.2rem;
   width: 100%;
-  
+
   overflow: hidden;
   text-overflow: ellipsis;
 `;

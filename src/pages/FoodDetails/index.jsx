@@ -24,6 +24,7 @@ export default function FoodDetails() {
     renderClipBoardMsg,
     checkFavorite,
     diplayNoneButton,
+    verifyInProgressById,
   } = useRecipeDetails('meal');
   const { renderCarouselCards } = useCarousel(
     filterRecommended(recommended.drinks),
@@ -81,7 +82,7 @@ export default function FoodDetails() {
           <h2>Video</h2>
           <iframe
             data-testid="video"
-            width="278"
+            width="303"
             height="200"
             src={ strYoutube.replace('watch?v=', 'embed/') }
             title="YouTube video player"
@@ -100,7 +101,7 @@ export default function FoodDetails() {
         onClick={ redirectToProgressPage }
         disabled={ diplayNoneButton() }
       >
-        Continuar Receita
+        {verifyInProgressById() ? 'Continuar receita' : 'Iniciar receita'}
       </ButtonDetails>
     </MainContainerDetails>
   );

@@ -17,9 +17,14 @@ const INITIAL_STATE = {
 };
 
 export default function useRecipeDetails(type) {
-  const { recommendedSite, portugueseFood, site } = getMealsOrDrinks(type);
+  const {
+    recommendedSite,
+    portugueseFood,
+    site,
+    sites,
+  } = getMealsOrDrinks(type);
   const { push } = useHistory();
-  const { doneRecipes } = useRecipe();
+  const { doneRecipes, inProgressRecipes } = useRecipe();
   const { id } = useParams();
   const [recipe, setRecipe] = useState(INITIAL_STATE);
   const [recommended, setRecommended] = useState(INITIAL_STATE);
@@ -62,6 +67,12 @@ export default function useRecipeDetails(type) {
 
   const diplayNoneButton = () => doneRecipes.some((doneRcp) => doneRcp.id === id);
 
+  const verifyInProgressById = () => {
+    const idsInProgress = Object.keys(inProgressRecipes[sites]);
+    console.log(idsInProgress.some((idInProgress) => idInProgress === id));
+    return idsInProgress.some((idInProgress) => idInProgress === id);
+  };
+
   useEffect(() => {
     const fetchDidMount = async () => {
       const resultRecipe = await fetchById(site, id);
@@ -89,5 +100,6 @@ export default function useRecipeDetails(type) {
     setHeart,
     checkFavorite,
     diplayNoneButton,
+    verifyInProgressById,
   };
 }

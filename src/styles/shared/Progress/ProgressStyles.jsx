@@ -5,7 +5,7 @@ export const MainContainerDetails = styled.main`
   display: flex;
   flex-direction: column;
   gap: 2rem;
-  
+
   padding: var(--global-space);
 
   h1,
@@ -67,34 +67,15 @@ export const ContainerRecipes = styled.section`
 
   > section {
     > span,
-    > li {
+    li {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
       font-family: var(--font-second);
     }
 
     > ul {
       list-style-type: none;
-    }
-  }
-`;
-
-export const ContainerCarousel = styled.section`
-  .carousel-inner {
-    width: 99%;
-    margin: 0 auto;
-
-    .carousel-indicators {
-      color: red;
-    }
-
-    .carousel-caption {
-      > span {
-        background: #ff2637a1;
-        color: #fff;
-        border-radius: 8px;
-        padding: 0.6rem;
-        width: 40%;
-        font-weight: bold;
-      }
     }
   }
 `;

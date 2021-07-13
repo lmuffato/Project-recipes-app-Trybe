@@ -5,10 +5,6 @@ import RecipeFavoriteCard from '../../components/RecipeFavoriteCard';
 import useRecipeFilter from '../../hooks/useRecipeFilter';
 
 export default function FavoriteRecipes() {
-  // const favoriteRecipesFromStorage = JSON.parse(
-  //   localStorage.getItem('favoriteRecipes'),
-  // ) || [];
-  // const [favoriteRecipes, setFavoriteRecipes] = useState(favoriteRecipesFromStorage);
   const [hasBeenChanged, setHasBeenChanged] = useState(false);
   const { changeValueToFilterRecipes, filteredRecipes } = useRecipeFilter(
     'favoriteRecipes',

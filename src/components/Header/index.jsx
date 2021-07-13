@@ -2,6 +2,7 @@ import React from 'react';
 import { string, bool } from 'prop-types';
 import { CgProfile } from 'react-icons/cg';
 import { BiSearchAlt2 } from 'react-icons/bi';
+import useSearch from '../../hooks/useSearch';
 import {
   ContainerShowSearch,
   ContainerMainInfos,
@@ -10,7 +11,6 @@ import {
   ButtonSearch,
   Input,
 } from './styles';
-import useSearch from '../../hooks/useSearch';
 
 export default function Header({ title, searchIcon = false }) {
   const {
@@ -32,7 +32,11 @@ export default function Header({ title, searchIcon = false }) {
 
   return (
     <header>
-      <ButtonProfile type="button" onClick={ () => history.push('/perfil') }>
+      <ButtonProfile
+        searchIcon={ searchIcon }
+        type="button"
+        onClick={ () => history.push('/perfil') }
+      >
         <CgProfile data-testid="profile-top-btn" />
       </ButtonProfile>
 
@@ -41,7 +45,11 @@ export default function Header({ title, searchIcon = false }) {
       </ContainerMainInfos>
 
       {searchIcon && (
-        <ButtonSearch type="button" onClick={ () => setShowSearch(!showSearch) }>
+        <ButtonSearch
+          searchIcon={ searchIcon }
+          type="button"
+          onClick={ () => setShowSearch(!showSearch) }
+        >
           <BiSearchAlt2 />
         </ButtonSearch>
       )}

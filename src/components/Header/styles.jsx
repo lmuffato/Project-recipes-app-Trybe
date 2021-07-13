@@ -14,9 +14,9 @@ export const ContainerMainInfos = styled.div`
 `;
 
 export const ButtonProfile = styled.button`
-  position: absolute;
-  right: 1.8rem;
-  top: 0;
+  position: ${({ searchIcon }) => (searchIcon ? 'absolute' : 'none')};
+  left: 1.8rem;
+  top: 1px;
 
   background: none;
   border: none;
@@ -35,12 +35,12 @@ export const ButtonProfile = styled.button`
 
 export const ButtonSearch = styled.button`
   position: absolute;
-  left: 1.8rem;
+  right: 1.8rem;
   top: 0;
 
   color: var(--red-first-color);
   background: none;
-  font-size: 2.5rem;
+  font-size: 2rem;
   border: none;
 
   &:active {

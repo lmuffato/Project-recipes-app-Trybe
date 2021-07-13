@@ -1,8 +1,13 @@
 import React from 'react';
+import { BiShareAlt } from 'react-icons/bi';
 import { number, shape, string } from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import useClipBoard from '../../hooks/useClipboard';
-import shareIcon from '../../images/shareIcon.svg';
+import {
+  ContainerRecipeCardInfos,
+  ContainerInfos,
+  ContainerButton,
+} from './styles';
 
 export default function RecipeDoneCard({ recipeDone, index }) {
   const {
@@ -40,12 +45,7 @@ export default function RecipeDoneCard({ recipeDone, index }) {
         role="button"
         tabIndex="0"
       >
-        <img
-          data-testid={ `${index}-horizontal-image` }
-          alt="Recipe"
-          src={ image }
-          style={ styleImg }
-        />
+        <h1 data-testid={ `${index}-horizontal-name` }>{name}</h1>
       </div>
 
       <div
@@ -54,31 +54,40 @@ export default function RecipeDoneCard({ recipeDone, index }) {
         role="button"
         tabIndex="0"
       >
-        <h1 data-testid={ `${index}-horizontal-name` }>{name}</h1>
+        <img
+          data-testid={ `${index}-horizontal-image` }
+          alt="Recipe"
+          src={ image }
+          style={ styleImg }
+        />
       </div>
 
-      <p data-testid={ `${index}-horizontal-top-text` }>
-        {`${area} - ${isCategoryOrAlcoholic}`}
-      </p>
+      <ContainerRecipeCardInfos>
+        <ContainerInfos>
+          <span data-testid={ `${index}-horizontal-top-text` }>
+            {`${area} - ${isCategoryOrAlcoholic}`}
+          </span>
 
-      <p>{area}</p>
-      <span data-testid={ `${index}-horizontal-done-date` }>{doneDate}</span>
+          <span data-testid={ `${index}-horizontal-done-date` }>{doneDate}</span>
 
-      <span data-testid={ `${index}-${firstTag}-horizontal-tag` }>
-        {firstTag}
-      </span>
+          <span data-testid={ `${index}-${firstTag}-horizontal-tag` }>
+            {firstTag}
+          </span>
 
-      <span data-testid={ `${index}-${secondTag}-horizontal-tag` }>
-        {secondTag}
-      </span>
+          <span data-testid={ `${index}-${secondTag}-horizontal-tag` }>
+            {secondTag}
+          </span>
+        </ContainerInfos>
 
-      <button type="button" onClick={ copyToClipBoard }>
-        <img
-          data-testid={ `${index}-horizontal-share-btn` }
-          alt="Share recipe"
-          src={ shareIcon }
-        />
-      </button>
+        <ContainerButton>
+          <button type="button" onClick={ copyToClipBoard }>
+            <BiShareAlt
+              data-testid={ `${index}-horizontal-share-btn` }
+              alt="Share recipe"
+            />
+          </button>
+        </ContainerButton>
+      </ContainerRecipeCardInfos>
 
       {showClipBoardMsg && renderClipBoardMsg()}
     </section>

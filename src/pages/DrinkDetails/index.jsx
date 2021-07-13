@@ -24,6 +24,7 @@ export default function DrinkDetails() {
     renderClipBoardMsg,
     checkFavorite,
     diplayNoneButton,
+    verifyInProgressById,
   } = useRecipeDetails('drink');
   const { renderCarouselCards } = useCarousel(
     filterRecommended(recommended.meals),
@@ -100,7 +101,7 @@ export default function DrinkDetails() {
         disabled={ diplayNoneButton() }
         onClick={ redirectToProgressPage }
       >
-        Continuar Receita
+        {verifyInProgressById() ? 'Continuar receita' : 'Iniciar receita'}
       </ButtonDetails>
     </MainContainerDetails>
   );
