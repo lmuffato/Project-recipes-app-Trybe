@@ -12,7 +12,7 @@ function Search() {
           <button
             type="button"
             data-testid="explore-food"
-            className="itemCard"
+            className="itemCard exploreButtons"
           >
             Explorar Comidas
           </button>
@@ -21,7 +21,7 @@ function Search() {
           <button
             type="button"
             data-testid="explore-drinks"
-            className="itemCard"
+            className="itemCard exploreButtons"
           >
             Explorar Bebidas
           </button>

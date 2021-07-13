@@ -69,9 +69,18 @@ function FavoriteButton({ type, favoriteId = 'favorite-btn' }) {
   return (
     <button type="button" onClick={ handleClick }>
       {heartColor === 'white' ? (
-        <img data-testid={ favoriteId } src={ whiteHeartIcon } alt="favoritar" />
+        <img
+          data-testid={ favoriteId }
+          src={ whiteHeartIcon }
+          alt="favoritar"
+          className="shareAndFavoriteImgs"
+        />
       ) : (
-        <img data-testid={ favoriteId } src={ blackHeartIcon } alt="favoritar" />
+        <img
+          data-testid={ favoriteId }
+          src={ blackHeartIcon }
+          alt="favoritar"
+        />
       )}
     </button>
   );

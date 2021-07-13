@@ -66,7 +66,12 @@ function DrinkCardDetail() {
           <FavoriteButton type="bebida" />
         </div>
       </div>
-      <h4 data-testid="recipe-category">{ currentDrink.strAlcoholic }</h4>
+      <span
+        data-testid="recipe-category"
+        className="recipe-category"
+      >
+        { currentDrink.strAlcoholic }
+      </span>
       <h4>Ingredients</h4>
       <IngredientsList currentMeal={ currentDrink } />
       <h4>Instructions</h4>

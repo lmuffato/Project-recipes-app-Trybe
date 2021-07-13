@@ -123,6 +123,7 @@ header {
 .detailMeal {
   display: flex;
   flex-direction: column;
+  margin-bottom: 52px;
 }
 
 .detailImage {
@@ -133,7 +134,23 @@ header {
 .detailsTitle {
   display: flex;
   justify-content: space-between;
-  padding: 5px 50px;
+  margin-bottom: -15px;
+  padding: 5px 15px;
+}
+
+.shareAndFavoriteImgs {
+  background-color: white;
+  border: none;
+}
+
+.recipe-category {
+  color: gray;
+}
+
+.exploreButtons {
+  font-size: 25px;
+  height: 82px;
+  width: 327px;
 }
 
 /*

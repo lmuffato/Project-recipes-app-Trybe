@@ -25,7 +25,7 @@ function SearchDrinks() {
           <button
             type="button"
             data-testid="explore-by-ingredient"
-            className="itemCard"
+            className="itemCard exploreButtons"
           >
             Por Ingredientes
           </button>
@@ -34,7 +34,7 @@ function SearchDrinks() {
           type="button"
           data-testid="explore-surprise"
           onClick={ handleClick }
-          className="itemCard"
+          className="itemCard exploreButtons"
         >
           Me Surpreenda!
         </button>

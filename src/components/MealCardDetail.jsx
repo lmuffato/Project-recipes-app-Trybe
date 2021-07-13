@@ -57,9 +57,9 @@ function MealCardDetail() {
         data-testid="recipe-photo"
         className="detailImage"
       />
-      <div>
+      <div className="detailsTitle">
         <h3 data-testid="recipe-title">{ currentMeal.strMeal }</h3>
-        <div className="detailsTitle">
+        <div>
           <button data-testid="share-btn" type="button" onClick={ shareClick }>
             <img src={ shareIcon } alt="compartilhar" />
           </button>
@@ -67,7 +67,12 @@ function MealCardDetail() {
           <FavoriteButton type="comida" />
         </div>
       </div>
-      <h4 data-testid="recipe-category">{ currentMeal.strCategory }</h4>
+      <span
+        data-testid="recipe-category"
+        className="recipe-category"
+      >
+        { currentMeal.strCategory }
+      </span>
       <h4>Ingredients</h4>
       <IngredientsList currentMeal={ currentMeal } />
       <h4>Instructions</h4>
