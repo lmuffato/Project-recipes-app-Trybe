@@ -13,6 +13,7 @@ function ProviderRecipes({ children }) {
   const [dataDrinkCards, setDataDrinkCards] = useState('');
   const [loadingCards, setLoadingCards] = useState(false);
   const [showSearchBar, setShowSearchBar] = useState(false);
+  const [countries, setCountries] = useState([]);
 
   const getCategories = async (type) => {
     const siteName = type === 'Meal' ? 'meal' : 'cocktail';
@@ -81,6 +82,17 @@ function ProviderRecipes({ children }) {
     setDetail({});
   };
 
+  const fetchArea = async () => {
+    const areaCategory = await fetch('https://www.themealdb.com/api/json/v1/1/list.php?a=list')
+      .then((req) => req.json())
+      .then((res) => res.meals);
+    const area = ['All'];
+    areaCategory.forEach((country) => {
+      area.push(country.strArea);
+    });
+    setCountries(area);
+  };
+
   return (
     <ContextRecipes.Provider
       value={ {
@@ -105,6 +117,9 @@ function ProviderRecipes({ children }) {
         setLoadingCards,
         showSearchBar,
         setShowSearchBar,
+        fetchArea,
+        countries,
+        setCountries,
       } }
     >
       { children }

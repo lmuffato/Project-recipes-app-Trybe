@@ -22,7 +22,7 @@ function Header() {
           className="explore-icon"
         />
       </Link>
-      <h3 data-testid="page-title">
+      <h3 className="explore" data-testid="page-title">
         { location.pathname === '/comidas'
         || location.pathname === '/bebidas'
           ? `${titleCapitalize}` : 'Explorar Origem' }
