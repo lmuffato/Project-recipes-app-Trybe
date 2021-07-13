@@ -1,9 +1,8 @@
 .error404 {
   background-image: url('../images/DEFINICIONES.-ERROR-404.png');
-  bottom: 26%;
   height: 420px;
+  left: 50%;
   position: absolute;
-  right: 0%;
   transform: translateX(-50%);
   width: 670px;
 }
@@ -21,3 +20,4 @@
     width: 520px;
   }
 }
+
