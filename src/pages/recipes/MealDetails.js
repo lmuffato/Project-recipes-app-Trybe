@@ -18,6 +18,28 @@ function MealDetails() {
   const match = useRouteMatch();
   const { params: { id } } = match;
   const history = useHistory();
+
+  const setLocal = () => {
+    localStorage.setItem('favoriteRecipes', JSON.stringify([]));
+  };
+
+  const isFav = () => {
+    const favRecipe = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    const hasFav = favRecipe.filter((element) => element.id === id);
+    console.log(hasFav);
+    const condition = hasFav.length > 0;
+    if (condition) {
+      setButtonFav(!buttonFav);
+    } else {
+      console.log('is not fav');
+    }
+  };
+
+  const setHeartToFav = () => {
+    const hasSetLocal = localStorage.getItem('favoriteRecipes');
+    return hasSetLocal ? isFav() : setLocal();
+  };
+
   useEffect(() => {
     getMealsById(id)
       .then((meals) => {
@@ -33,6 +55,7 @@ function MealDetails() {
         const drinks = Object.values(drink).slice(0, SIX);
         setDrinksCarousel(drinks);
       });
+    setHeartToFav();
   }, []);
 
   function copyBoard() {
@@ -65,24 +88,22 @@ function MealDetails() {
       </ul>
     );
   }
-  
-  const setLocal = () => {
-    localStorage.setItem('favoriteRecipes', JSON.stringify([]));
-  }
 
   const heartButton = (infos) => {
     setButtonFav(!buttonFav);
-    console.log(buttonFav);
     const {
       idMeal,
       strCategory,
       strMeal,
       strMealThumb,
-      strTags,
       strArea,
     } = infos;
     const hasSetLocal = localStorage.getItem('favoriteRecipes');
-    hasSetLocal ? console.log('hello world') : setLocal();
+    if (hasSetLocal) {
+      console.log('hello world');
+    } else {
+      setLocal();
+    }
     if (buttonFav === true) {
       const favRecipe = JSON.parse(localStorage.getItem('favoriteRecipes'));
       const mealInfos = [...favRecipe, {
@@ -103,8 +124,7 @@ function MealDetails() {
       localStorage.setItem('favoriteRecipes', JSON.stringify(filteredRemoved));
       console.log(localStorage.getItem('favoriteRecipes'));
     }
-  }
-  
+  };
 
   const renderDetail = () => (
     mealsFromId.map((info, index) => {
@@ -135,7 +155,7 @@ function MealDetails() {
             </button>
             <button type="button" onClick={ () => heartButton(info) }>
               <img
-                src={ buttonFav ? blackHeartIcon : whiteHeartIcon }
+                src={ !buttonFav ? blackHeartIcon : whiteHeartIcon }
                 alt="favorite button"
                 data-testid="favorite-btn"
               />

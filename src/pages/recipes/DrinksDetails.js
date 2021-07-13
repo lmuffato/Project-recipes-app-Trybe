@@ -19,10 +19,26 @@ function DrinksDetails() {
   const { params: { id } } = match;
   const history = useHistory();
 
-  function copyBoard() {
-    copy(window.location.href);
-    global.alert('Link copiado!');
-  }
+  const setLocal = () => {
+    localStorage.setItem('favoriteRecipes', JSON.stringify([]));
+  };
+
+  const isFav = () => {
+    const favRecipe = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    const hasFav = favRecipe.filter((element) => element.id === id);
+    console.log(hasFav);
+    const condition = hasFav.length > 0;
+    if (condition) {
+      setButtonFav(!buttonFav);
+    } else {
+      console.log('is not fav');
+    }
+  };
+
+  const setHeartToFav = () => {
+    const hasSetLocal = localStorage.getItem('favoriteRecipes');
+    return hasSetLocal ? isFav() : setLocal();
+  };
 
   useEffect(() => {
     getDrinksById(id)
@@ -35,12 +51,17 @@ function DrinksDetails() {
       });
     getRecomendedMeals()
       .then((meal) => {
-        console.log(meal);
         const SIX = 6;
         const meals = Object.values(meal).slice(0, SIX);
         setMealsCarousel(meals);
       });
+    setHeartToFav();
   }, []);
+
+  function copyBoard() {
+    copy(window.location.href);
+    global.alert('Link copiado!');
+  }
 
   function renderCarousel() {
     return (
@@ -68,10 +89,6 @@ function DrinksDetails() {
     );
   }
 
-  const setLocal = () => {
-    localStorage.setItem('favoriteRecipes', JSON.stringify([]));
-  }
-
   function heartButton(infos) {
     setButtonFav(!buttonFav);
     const {
@@ -82,7 +99,11 @@ function DrinksDetails() {
       strDrinkThumb,
     } = infos;
     const hasSetLocal = localStorage.getItem('favoriteRecipes');
-    hasSetLocal ? console.log('hello world') : setLocal();
+    if (hasSetLocal) {
+      console.log('hello world');
+    } else {
+      setLocal();
+    }
     if (buttonFav === true) {
       const favRecipe = JSON.parse(localStorage.getItem('favoriteRecipes'));
       const drinkInfos = [...favRecipe, {
