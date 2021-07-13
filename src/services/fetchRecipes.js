@@ -1,5 +1,6 @@
 const MEALS_RECIPES = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
 const DRINKS_RECIPES = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
+
 const NUMBER_INDEX = 12;
 
 export async function getMeals() {
@@ -59,4 +60,48 @@ export async function getRandomDrink() {
   const { drinks } = await fetch('https://www.thecocktaildb.com/api/json/v1/1/random.php')
     .then((response) => response.json());
   return drinks[0];
+}
+
+export async function fetchDrinkIngredients() {
+  const drinks = await fetch('https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list')
+    .then((response) => response.json());
+  return drinks;
+}
+
+export async function fetchIngredients(dk) {
+  const drinks = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${dk}`)
+    .then((response) => response.json());
+  console.log(drinks);
+  return drinks;
+}
+
+export async function fetchMealsIngredients() {
+  const meals = await fetch('https://www.themealdb.com/api/json/v1/1/list.php?i=list')
+    .then((response) => response.json());
+  return meals;
+}
+
+export async function fetchByMealIngredien(dk) {
+  const meals = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${dk}`)
+    .then((response) => response.json());
+  return meals;
+}
+
+export async function fetchAllOrigin() {
+  const meals = await fetch('https://www.themealdb.com/api/json/v1/1/list.php?a=list')
+    .then((response) => response.json());
+  return meals;
+}
+
+export async function fetchItAll(meal) {
+  const meals = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${meal}`)
+    .then((response) => response.json());
+  return meals;
+}
+
+export async function fetchByArea(country) {
+  const origin = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?a=${country}`)
+    .then((response) => response.json());
+  console.log(origin);
+  return origin;
 }
