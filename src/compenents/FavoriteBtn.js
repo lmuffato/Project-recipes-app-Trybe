@@ -4,7 +4,7 @@ import blackHeartIcon from '../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import RecipesContext from '../contexts/RecipesContext';
 
-function FavoriteBtn({ id, type, area, category, alcoholicOrNot, name, image }) {
+function FavoriteBtn({ id, type, area, category, alcoholicOrNot, name, image, index }) {
   const { favoriteRecipes, setFavRecipes } = useContext(RecipesContext);
   const [isFavorite, setIsFavorite] = useState(false);
   const recipeId = id;
@@ -45,7 +45,12 @@ function FavoriteBtn({ id, type, area, category, alcoholicOrNot, name, image }) 
     if (checkLocalStr || isFavorite) {
       // recipeId encontrado no LS
       return (
-        <button type="button" onClick={ setUnfavorite }>
+        <button
+          type="button"
+          src={ blackHeartIcon }
+          data-testid={ `${index}-horizontal-favorite-btn` }
+          onClick={ setUnfavorite }
+        >
           <img
             data-testid="favorite-btn"
             src={ whiteHeartIcon }
@@ -56,7 +61,12 @@ function FavoriteBtn({ id, type, area, category, alcoholicOrNot, name, image }) 
     }
     // recipeId não encontrado no LS
     return (
-      <button type="button" onClick={ setFavorite }>
+      <button
+        type="button"
+        src={ whiteHeartIcon }
+        data-testid={ `${index}-horizontal-favorite-btn` }
+        onClick={ setFavorite }
+      >
         <img
           data-testid="favorite-btn"
           src={ blackHeartIcon }
