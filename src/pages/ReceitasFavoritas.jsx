@@ -24,7 +24,7 @@ class ReceitasFavoritas extends React.Component {
   }
 
   loadingRecipesDone() {
-    const recipes = JSON.parse(localStorage.getItem('doneRecipes'));
+    const recipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
     if (recipes === null) {
       return;
     }
