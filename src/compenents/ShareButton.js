@@ -15,6 +15,7 @@ function ShareButton({ idRecipe }) {
 
   return (
     <>
+      {isCopy ? <span>Link copiado!</span> : null}
       <button
         data-testid="share-btn"
         type="button"
@@ -22,7 +23,6 @@ function ShareButton({ idRecipe }) {
       >
         <img src={ shareIcon } alt={ idRecipe } />
       </button>
-      {isCopy ? <span>Link copiado!</span> : null}
     </>
   );
 }

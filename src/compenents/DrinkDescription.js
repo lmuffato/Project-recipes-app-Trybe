@@ -1,9 +1,7 @@
-import React, { useContext /* , useState */ } from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import RecipesContext from '../contexts/RecipesContext';
-// import MealCards from './MealCards';
-// import '../styles/MealDescription.css';
 import '../styles/Recomendations.css';
 import Recomendations from './Recomendations';
 import FavoriteBtn from './FavoriteBtn';
@@ -14,20 +12,16 @@ function DrinkDescription({ recipe, recipeId }) {
   const {
     idDrink, strDrinkThumb, strDrink, strCategory, strInstructions, strAlcoholic,
   } = recipe;
-  // Estados fake, até poder pegar o estado do localStorage
-  // const [isStarted, setIsStarted] = useState(false);
 
   const ingredients = Object.entries(recipe)
     .filter(([key, value]) => (key.includes('strIngredient') ? value : null))
     .map((ingredient) => ingredient[1]);
-  // console.log(ingredients);
 
   const measures = Object.entries(recipe)
     .filter(([key, value]) => (key
       .includes('strMeasure') ? value : null))
     .map((ingredient) => ingredient[1])
     .filter((measure) => measure.length > 1);
-  // console.log(measures);
 
   const getLocalStr = JSON.parse(localStorage.getItem('favoriteRecipes'));
   let checkLocalStr;
@@ -44,11 +38,21 @@ function DrinkDescription({ recipe, recipeId }) {
     setIsFavorite(false);
   }
 
+  const initialObj = {
+    cocktails: {},
+    meals: {},
+  };
+
+  const lookForInProgress = localStorage.getItem('inProgressRecipes');
+
+  if (!lookForInProgress) {
+    localStorage.setItem('inProgressRecipes', JSON.stringify(initialObj));
+  }
+
   const checkStart = () => {
     const inProgress = JSON.parse(localStorage.getItem('inProgressRecipes'));
     console.log(inProgress);
     if (inProgress && Object.keys(inProgress.cocktails).find((key) => key === idDrink)) {
-      // console.log('Vrau');
       return 'Continuar Receita';
     }
     return 'Iniciar Receita';
@@ -73,7 +77,8 @@ function DrinkDescription({ recipe, recipeId }) {
         <h2>Ingredients</h2>
         { ingredients.map((ingredient, index) => (
           <p key={ index } data-testid={ `${index}-ingredient-name-and-measure` }>
-            {`- ${ingredient} - ${measures[index] === undefined ? 'at taste' : measures[index]}`}
+            {`- ${ingredient} - ${measures[index] === undefined
+              ? 'at taste' : measures[index]}`}
           </p>
         ))}
         <p data-testid="instructions">{ strInstructions }</p>
@@ -100,8 +105,6 @@ function DrinkDescription({ recipe, recipeId }) {
           data-testid="start-recipe-btn"
         >
           { checkStart() }
-          {/* Iniciar Receita */}
-          {/* { isStarted ? 'Continuar Receita' : 'Iniciar Receita' } */}
         </button>
       </Link>
     </>

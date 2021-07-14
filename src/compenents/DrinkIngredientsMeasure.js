@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import RecipesContext from '../contexts/RecipesContext';
 import '../styles/IngredientsMeasure.css';
 
-function IngredientsMeasure({ detailsRecepie }) {
+function DrinkIngredientsMeasure({ detailsRecepie }) {
   const [checkedIngridientsState, setCheckedIngridientsState] = useState(0);
   const { idDrink } = detailsRecepie;
   const ingredientsStorage = JSON.parse(localStorage.getItem('inProgressRecipes'));
@@ -99,10 +99,10 @@ function IngredientsMeasure({ detailsRecepie }) {
   );
 }
 
-IngredientsMeasure.propTypes = {
+DrinkIngredientsMeasure.propTypes = {
   detailsRecepie: PropTypes.shape({
     idDrink: PropTypes.string,
   }).isRequired,
 };
 
-export default IngredientsMeasure;
+export default DrinkIngredientsMeasure;

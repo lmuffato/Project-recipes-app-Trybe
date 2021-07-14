@@ -1,9 +1,7 @@
-import React, { useContext, /* , useState
-  useEffect */ } from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import RecipesContext from '../contexts/RecipesContext';
-// import '../styles/MealDescription.css';
 import '../styles/Recomendations.css';
 import ShareButton from './ShareButton';
 import Recomendations from './Recomendations';
@@ -14,8 +12,6 @@ function MealDescription({ recipe, recipeId }) {
   const {
     idMeal, strArea, strMealThumb, strMeal, strCategory, strInstructions, strYoutube,
   } = recipe;
-  // Estados fake, até poder pegar o estado do localStorage
-  // const [isStarted, setIsStarted] = useState(false);
 
   const ingredients = Object.entries(recipe)
     .filter(([key, value]) => (key.includes('strIngredient') ? value : null))
@@ -42,11 +38,21 @@ function MealDescription({ recipe, recipeId }) {
     setIsFavorite(false);
   }
 
+  const initialObj = {
+    cocktails: {},
+    meals: {},
+  };
+
+  const lookForInProgress = localStorage.getItem('inProgressRecipes');
+
+  if (!lookForInProgress) {
+    localStorage.setItem('inProgressRecipes', JSON.stringify(initialObj));
+  }
+
   const checkStart = () => {
     const inProgress = JSON.parse(localStorage.getItem('inProgressRecipes'));
     console.log(inProgress);
     if (inProgress && Object.keys(inProgress.meals).find((key) => key === idMeal)) {
-      // console.log('Vrau');
       return 'Continuar Receita';
     }
     return 'Iniciar Receita';
@@ -76,7 +82,8 @@ function MealDescription({ recipe, recipeId }) {
         <h2>Ingredients</h2>
         { ingredients.map((ingredient, index) => (
           <p key={ index } data-testid={ `${index}-ingredient-name-and-measure` }>
-            {`- ${ingredient} - ${measures[index]}`}
+            {`- ${ingredient} - ${measures[index] === undefined
+              ? 'at taste' : measures[index]}`}
           </p>
         ))}
         <p data-testid="instructions">{ strInstructions }</p>
