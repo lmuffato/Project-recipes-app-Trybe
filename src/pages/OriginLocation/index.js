@@ -10,7 +10,7 @@ export default function OriginLocation() {
   document.title = 'Explorar Origem';
   const maxLength = 11;
   const [origins, setOrigins] = useState([]);
-  const [selectedOrigin, setSelectedOrigin] = useState('All');
+  const [selectedOrigin, setSelectedOrigin] = useState('American');
   const [recipes, setRecipes] = useState([]);
   useEffect(() => {
     getAllOrigins(setOrigins);
@@ -23,19 +23,20 @@ export default function OriginLocation() {
   return (
     <>
       <Header searchBar="true" />
-      <DropdownButton
+      <DropdownButton 
         title={ selectedOrigin }
         onSelect={ (e) => setSelectedOrigin(e) }
         data-testid="explore-by-area-dropdown"
       >
-        <Dropdown.Item eventKey="All">
-          All
+        <Dropdown.Item eventKey="All" data-testid="All-option">
+          All-option
         </Dropdown.Item>
         { origins && origins
           .map(({ strArea }, index) => (
             <Dropdown.Item
               key={ index }
               eventKey={ strArea }
+              value={ strArea }
               data-testid={ `${strArea}-option` }
             >
               { strArea }
