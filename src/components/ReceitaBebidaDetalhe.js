@@ -195,8 +195,6 @@ function ReceitaBebidaDetalhe({ props }) {
     return null;
   };
 
-  // Teste
-
   return createRecipe();
 }
 
