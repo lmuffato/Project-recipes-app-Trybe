@@ -4,7 +4,7 @@ const setAreas = (arr) => {
     return (strArea);
   });
   return toReturn;
-}
+};
 
 const getByArea = async () => {
   const endPoint = 'https://www.themealdb.com/api/json/v1/1/list.php?a=list';
@@ -14,6 +14,6 @@ const getByArea = async () => {
   const toReturn = await setAreas(meals);
 
   return toReturn;
-}
+};
 
 export default getByArea;

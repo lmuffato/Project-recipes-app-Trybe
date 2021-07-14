@@ -55,7 +55,7 @@ export default function Routes() {
             path="/receitas-favoritas"
             component={ FavoriteRecipes }
           />
-          <Route path='*' exact={true} component={NotFound} />
+          <Route exact path="*" component={ NotFound } />
         </Switch>
       </BrowserRouter>
     </div>

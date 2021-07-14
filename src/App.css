@@ -146,3 +146,12 @@ ul {
 .search {
   width: 90vw;
 }
+
+.drop-down {
+  align-self: center;
+  display: flex;
+  height: 60px;
+  position: relative;
+  top: 50px;
+  width: 357px;
+}
