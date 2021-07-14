@@ -98,7 +98,6 @@ class MainFoodCard extends React.Component {
     const endpoint = `https://www.themealdb.com/api/json/v1/1/filter.php?i=${currentSearch}`;
     const request = await fetch(endpoint).then((response) => response.json())
       .catch((erro) => console.log(erro));
-
     const limit = 12;
     const sliced = request.meals.slice(0, limit);
     this.setState({

@@ -89,3 +89,7 @@ footer {
   bottom: 0;
   position: fixed;
 }
+
+.completed {
+  text-decoration: line-through solid black;
+}
