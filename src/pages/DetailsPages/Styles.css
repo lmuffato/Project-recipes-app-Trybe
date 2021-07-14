@@ -1,0 +1,126 @@
+body {
+  color: #334031;
+}
+
+.svg-btn {
+  background-color: #80ab82;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  width: 25%;
+}
+
+.altSvg {
+  filter: invert(100%);
+}
+
+.custom {
+  background-color: #334031;
+  bottom: 0;
+  color: #c2e1c2;
+  margin-bottom: 10px;
+  position: fixed;
+}
+
+.card-left {
+  border: 1px solid rgba(51, 64, 49, 1);
+  border-radius: 15px;
+  box-shadow: 5px 3px 1px hsl(138, 10%, 90%);
+  color: #334031;
+  float: left;
+  height: 230px;
+  width: 50%;
+}
+
+.card-left img, .card-right img {
+  border-radius: 10px;
+}
+
+.card-left p, .card-right p {
+  margin-bottom: 5px;
+  text-align: center;
+}
+
+.card-right {
+  border: 1px solid rgba(51, 64, 49, 1);
+  border-radius: 15px;
+  box-shadow: 5px 3px 1px hsl(138, 10%, 90%);
+  color: #334031;
+  float: right;
+  height: 230px;
+  width: 50%;
+}
+
+.carousel-indicators {
+  visibility: hidden;
+}
+
+.startBtn {
+  bottom: 0;
+  position: fixed;
+}
+
+.btn-footer {
+  align-content: center;
+  background-color: #80ab82;
+  bottom: 0;
+  display: flex;
+  height: 60px;
+  justify-content: center;
+  position: fixed;
+  width: 100%;
+}
+
+.container {
+  padding-bottom: 20px;
+}
+
+.container h4 {
+  font-weight: 900;
+  padding: 10px 0;
+}
+
+.title {
+  background-color: #80ab82;
+  color: white;
+  padding: 10px 0;
+  padding-left: 15px;
+  width: 100%;
+}
+
+.title h4 {
+  font-weight: 900;
+}
+
+.img-fluid {
+  margin-bottom: 0;
+}
+
+.detail-header {
+  display: flex;
+}
+
+.video {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.list-group-item {
+  padding-left: 30px;
+}
+
+.made {
+  background-color: #334031;
+  bottom: 0;
+  color: #c2e1c2;
+  margin-top: 10px;
+}
+
+.spinner {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 320px;
+}

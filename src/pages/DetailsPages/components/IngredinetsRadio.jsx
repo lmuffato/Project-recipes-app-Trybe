@@ -94,7 +94,6 @@ const IngredientsRadios = ({ recipe }) => {
           key={ index }
           data-testid={ `${index}-ingredient-step` }
           className="list-group-item"
-          style={ { padding: '3px 0 3px 25px', marginTop: '10px' } }
         >
           <input
             // data-testid={ `${index}-ingredient-step` }

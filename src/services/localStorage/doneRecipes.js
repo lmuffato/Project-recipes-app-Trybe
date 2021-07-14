@@ -38,29 +38,48 @@ function removeRecipeFromProgress(id, type) { // falta implementar esta função
   localStorage.setItem('inProgressRecipes', JSON.stringify(progressFromLS));
 }
 
+const doneFood = ((recipe, doneRecipesConst) => (
+  doneRecipesConst.push({
+    id: recipe.idMeal,
+    type: 'comida',
+    area: recipe.strArea || '',
+    category: recipe.strCategory || '',
+    alcoholicOrNot: '',
+    name: recipe.strMeal,
+    image: recipe.strMealThumb,
+    doneDate: dataAtualFormatada(),
+    tags: recipe.strTags.split(','),
+  })
+));
+
 function doneRecipes(recipe) {
   // tenta buscar doneRecipes no LS
   const { recipeFood, recipeDrink } = recipe;
   const doneRecipesConst = JSON.parse(localStorage.getItem('doneRecipes'));
   // monta objeto com variaveis q irão p/ o LS
   const { idDrink, idMeal, strArea, strCategory, strAlcoholic,
-    strDrink, strMeal, strDrinkThumb, strMealThumb, strTags } = recipeDrink || recipeFood;
+    strDrink, strDrinkThumb, strTags } = recipeDrink || recipeFood;
+  console.log(strTags);
   removeRecipeFromProgress(idDrink || idMeal, idDrink ? 'drink' : 'meal'); // ao colocar uma receita em doneRecipe, devemos remover de progress.
   if (verifyDoneRecipesInLS(idDrink || idMeal)) {
     global.alert('Não é possível finalizar uma receita já finalizada!');
     return null;
   }
-  doneRecipesConst.push({
-    id: idDrink || idMeal,
-    type: idDrink ? 'bebida' : 'comida',
-    area: strArea || '',
-    category: strCategory || '',
-    alcoholicOrNot: strAlcoholic || '',
-    name: strDrink || strMeal,
-    image: strDrinkThumb || strMealThumb,
-    doneDate: dataAtualFormatada(),
-    tags: strTags || [],
-  });
+  if (typeof strTags === 'string') {
+    doneFood(recipeFood, doneRecipesConst);
+  } else {
+    doneRecipesConst.push({
+      id: idDrink,
+      type: 'bebida',
+      area: strArea || '',
+      category: strCategory || '',
+      alcoholicOrNot: strAlcoholic || '',
+      name: strDrink,
+      image: strDrinkThumb,
+      doneDate: dataAtualFormatada(),
+      tags: strTags || [],
+    });
+  }
   localStorage.setItem('doneRecipes', JSON.stringify(doneRecipesConst));
 }
 

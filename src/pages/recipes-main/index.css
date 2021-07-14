@@ -73,3 +73,7 @@ body {
 .card-title {
   text-align: center;
 }
+
+.card-body {
+  padding: 20px 0;
+}

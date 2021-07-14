@@ -31,11 +31,13 @@ function FavButton({ props }) {
     <button
       onClick={ () => handleClick() }
       type="button"
+      className="svg-btn"
       id={ idMeal || idDrink }
     >
       <img
         id="heart-x"
         alt="heart"
+        className="altSvg"
         src={ whiteHeartIcon }
         data-testid="favorite-btn"
       />
