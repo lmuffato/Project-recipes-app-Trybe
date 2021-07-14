@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { DropdownButton, Dropdown } from 'react-bootstrap';
+import { DropdownButton as select, Dropdown as option } from 'react-bootstrap';
 import AreaCards from '../../components/AreaCards';
 import FooterMenu from '../../components/footerMenu';
 import Header from '../../components/Header';
@@ -23,30 +23,30 @@ export default function OriginLocation() {
   return (
     <>
       <Header searchBar="true" />
-      <DropdownButton 
-        title={ selectedOrigin }
-        onSelect={ (e) => setSelectedOrigin(e) }
+      <select
+        value={ selectedOrigin }
+        onChange={ (e) => setSelectedOrigin(e.target.value) }
         data-testid="explore-by-area-dropdown"
       >
-        <Dropdown.Item eventKey="All" data-testid="All-option">
-          All-option
-        </Dropdown.Item>
+        <option eventKey="All" data-testid="All-option">
+          All
+        </option>
         { origins && origins
           .map(({ strArea }, index) => (
-            <Dropdown.Item
+            <option
               key={ index }
-              eventKey={ strArea }
               value={ strArea }
               data-testid={ `${strArea}-option` }
             >
               { strArea }
-            </Dropdown.Item>)) }
-      </DropdownButton>
+            </option>)) }
+      </select>
       <section className="card-list">
         { recipes && recipes
           .filter((_, index) => index <= maxLength)
-          .map(({ strMeal, strMealThumb }, index) => (<AreaCards
+          .map(({ idMeal, strMeal, strMealThumb }, index) => (<AreaCards
             key={ index }
+            idMeal={ idMeal }
             strMealThumb={ strMealThumb }
             strMeal={ strMeal }
             index={ index }
