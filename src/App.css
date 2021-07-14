@@ -73,6 +73,8 @@ footer {
   display: flex;
   justify-content: space-between;
   left: 0;
+  padding-bottom: 7px;
+  padding-top: 7px;
   position: fixed;
   width: 100%;
 }
@@ -113,6 +115,8 @@ footer {
 .recipeContainer {
   display: flex;
   flex-flow: row wrap;
+  margin-bottom: 80px;
+  margin-top: 10px;
   width: 360px;
 }
 
@@ -126,4 +130,94 @@ footer {
   display: flex;
   justify-content: space-around;
   width: 345px;
+}
+
+.loginForm {
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.849);
+  background-image: url('https://media.giphy.com/media/Buva2aomcuXBAD07PC/giphy.gif');
+  background-repeat: round;
+  display: flex;
+  flex-flow: column;
+  height: 640px;
+  justify-content: center;
+}
+
+.header {
+  background-color: white;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  padding-top: 6px;
+  z-index: 1;
+}
+
+.footer {
+  background-color: white;
+}
+
+.avatar {
+  border: 2px rgba(255, 0, 0, 0.326);
+  border-radius: 60px;
+  border-style: groove;
+  margin-bottom: 25px;
+  width: 100px;
+}
+
+.title {
+  background-color: rgba(255, 0, 0, 0.658);
+  border-radius: 50px;
+  color: orange;
+  font-size: 25pt;
+  margin-bottom: 60px;
+  padding: 4px;
+}
+
+.userInputs {
+  border: none;
+  border-radius: 10px;
+}
+
+.title, .userInputs {
+  font-family: Segoe UI , Tahoma , Geneva , Verdana , sans-serif;
+  text-align: center;
+}
+
+.headerIcons {
+  border-radius: 40px;
+  height: 45px;
+  width: 45px;
+}
+
+.headerTitle {
+  font-size: 25pt;
+  margin-right: auto;
+  padding-left: 55px;
+  text-align: center;
+}
+
+.inputSearch {
+  border-radius: 15px;
+  margin: 10px;
+  padding: 4px;
+  text-align: center;
+  width: 100%;
+}
+
+.filters {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+}
+
+.filters input {
+  margin-right: 6px;
+}
+
+.categoryFilters {
+  display: flex;
+  flex-flow: row wrap;
+  font-size: 11pt;
+  justify-content: center;
+  margin-top: 4px;
 }

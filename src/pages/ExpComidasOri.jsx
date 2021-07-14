@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Header from '../components/Header';
+import SearchButton from '../components/SearchButton';
 import Footer from '../components/Footer';
 
 class ExpComidasOri extends React.Component {
@@ -66,12 +67,13 @@ class ExpComidasOri extends React.Component {
   }
 
   render() {
-    const { history } = this.props;
+    const { history, pathname } = this.props;
     const { isLoading, countries, CardIsLoading, foodData } = this.state;
     const loading = (<h1>Carregando...</h1>);
     return (
       <>
         <Header title="Explorar Origem" />
+        <SearchButton pathname={ pathname } history={ history } />
         <div>Página de explorar Comidas por origem</div>
         <select
           data-testid="explore-by-area-dropdown"
@@ -112,8 +114,9 @@ class ExpComidasOri extends React.Component {
   }
 }
 
-ExpComidasOri.propTypes = {
-  history: PropTypes.shape().isRequired,
-};
+ExpComidasOri.propTypes = ({
+  history: PropTypes.shape(),
+  pathname: PropTypes.string,
+}).isRequired;
 
 export default ExpComidasOri;

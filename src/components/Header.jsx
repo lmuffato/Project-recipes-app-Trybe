@@ -7,15 +7,16 @@ class Header extends React.Component {
   render() {
     const { title, children } = this.props;
     return (
-      <header>
+      <header className="header">
         <Link to="/perfil">
           <button
             type="submit"
+            className="headerIcons"
           >
             <img src={ profileIcon } alt="perfil" data-testid="profile-top-btn" />
           </button>
         </Link>
-        <h1 data-testid="page-title">{title}</h1>
+        <h1 data-testid="page-title" className="headerTitle">{title}</h1>
         {children !== undefined ? children : <div /> }
       </header>
     );
