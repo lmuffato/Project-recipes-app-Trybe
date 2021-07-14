@@ -1,8 +1,5 @@
-// import { getByTestId } from '@testing-library/react';
 import { fireEvent } from '@testing-library/react';
 import React from 'react';
-// import { render } from '@testing-library/react';
-// import RecipesFav from '../pages/RecipesFav';
 import App from '../App';
 import renderWithRouter from './renderWithRouter';
 
@@ -102,5 +99,18 @@ describe('Test Favorite Recipes page', () => {
 
     expect(getByText(foodName)).toBeInTheDocument();
     expect(getByText('Aquamarine')).toBeInTheDocument();
+  });
+
+  it('Check favoriteBtn button', () => {
+    window.localStorage.setItem('favoriteRecipes', JSON.stringify(favoriteRecipes));
+    const { getByText, getByTestId, history } = renderWithRouter(<App />);
+    history.push(myPath);
+
+    const myHeart = getByTestId('0-horizontal-favorite-btn');
+    expect(myHeart).toBeInTheDocument();
+    const myName = getByText(foodName);
+    expect(myName).toBeInTheDocument();
+    fireEvent.click(myHeart);
+    expect(myName).toBeInTheDocument();
   });
 });
