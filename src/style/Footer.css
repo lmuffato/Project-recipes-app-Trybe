@@ -1,15 +1,16 @@
 .footer {
   align-items: center;
-  background-color: whitesmoke;
-  border: 0;
-  border-radius: 8px;
+  background-color: white;
+  bottom: 0px;
   display: flex;
   justify-content: space-around;
-  margin: 10px 15px;
-  position: sticky;
-  width: 90%;
+  margin: 0;
+  padding: 0;
+  position: fixed;
+  width: 100%;
 }
 
 .footer img {
   margin-top: 10px;
 }
+

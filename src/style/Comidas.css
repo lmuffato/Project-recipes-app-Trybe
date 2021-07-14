@@ -21,7 +21,7 @@ img:hover {
 }
 
 .cards ul { 
-    align-items: center;
+    align-items: flex-start;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -29,15 +29,10 @@ img:hover {
     width: 100%;
 }
 
-.cards ul li {
-    margin-left: 10px;
-}
-
 .cards {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: center;
     width: 100%;
 }
 
@@ -54,7 +49,8 @@ img:hover {
     width: 28%;
     align-items: center;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: flex-start;
 }
 
 /* PS: Existe outro recipe-card no componente RecipeCard */

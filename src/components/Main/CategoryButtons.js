@@ -85,6 +85,7 @@ export default function CategoryButtons({ categories }) {
                 }
               } }
             />
+            {' '}
             {categoryName.strCategory}
           </label>
         ) : null
@@ -97,6 +98,7 @@ export default function CategoryButtons({ categories }) {
           data-testid="All-category-filter"
           onClick={ (ev) => handleFilterAll(ev) }
         />
+        {' '}
         All
       </label>
     </div>
