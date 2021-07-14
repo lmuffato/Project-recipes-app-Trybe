@@ -13,7 +13,11 @@ export default function TagMaker(props) {
       && retrieveLocalInfo()
         .map((e) => e.tags
           .filter((ele, i) => i < 2).map((ele, i) => (
-            <li data-testid={ `${index}-${ele}-horizontal-tag` } key={ i }>
+            <li
+              className="tag"
+              data-testid={ `${index}-${ele}-horizontal-tag` }
+              key={ i }
+            >
               {ele}
             </li>)))}
     </div>

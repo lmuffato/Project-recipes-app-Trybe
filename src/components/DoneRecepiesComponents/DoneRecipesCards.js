@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import ReceitasContext from '../../contexts/ReceitasContext';
 import ShareBtn from '../RecipeComponents/ShareButton';
 import TagMaker from './TagMaker';
-import '../../styles/FavoriteCards.css';
+import '../../styles/DoneRecipes.css';
 
 function DoneRecipesCards() {
   const { filterValue } = useContext(ReceitasContext);
@@ -24,33 +24,42 @@ function DoneRecipesCards() {
         retrieveLocalInfo() !== false
       && retrieveLocalInfo().map((e, i) => (
         <div key={ i } className="doneComponents">
-          <Link to={ `${e.type}s/${e.id}` }>
+          <Link to={ `${e.type}s/${e.id}` } className="ctn-link">
             <img
               src={ e.image }
               data-testid={ `${i}-horizontal-image` }
               alt={ e.name }
               key={ i }
-              className="image"
+              className="image-container"
             />
-            <h4 data-testid={ `${i}-horizontal-top-text` } className="doneCategory">
-              {e.alcoholicOrNot !== ''
-                ? `${e.category} - ${e.alcoholicOrNot}`
-                : `${e.area} - ${e.category}` }
-            </h4>
-            <h2
-              data-testid={ `${i}-horizontal-name` }
-              className="doneTitle"
-            >
-              {e.name}
+            <div className="ctn-title-category">
+              <h4 data-testid={ `${i}-horizontal-top-text` } className="doneCategory">
+                {e.alcoholicOrNot !== ''
+                  ? `${e.category} - ${e.alcoholicOrNot}`
+                  : `${e.area} - ${e.category}` }
+              </h4>
+              <h2
+                data-testid={ `${i}-horizontal-name` }
+                className="doneTitle"
+              >
+                {e.name}
 
-            </h2>
+              </h2>
+            </div>
           </Link>
-          <p data-testid={ `${i}-horizontal-done-date` }>{e.doneDate}</p>
-          <ShareBtn
-            dataTest={ `${i}-horizontal-share-btn` }
-            path={ `${locate}${e.type}s/${e.id}` }
-          />
-          <TagMaker index={ i } />
+          <p
+            data-testid={ `${i}-horizontal-done-date` }
+            className="doneDate"
+          >
+            {e.doneDate}
+          </p>
+          <div className="ctn-date-sharebtn">
+            <ShareBtn
+              dataTest={ `${i}-horizontal-share-btn` }
+              path={ `${locate}${e.type}s/${e.id}` }
+            />
+            <TagMaker index={ i } />
+          </div>
         </div>
       ))
       }
