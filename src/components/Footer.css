@@ -1,13 +1,13 @@
 .footer {
-  bottom: 0px;
-  color: white;
   background-color: #9c6335;
-  height: 7vh;
   border: none;
-  width: 100%;
+  bottom: 0;
+  color: white;
   font-weight: 700;
+  height: 7vh;
+  margin-bottom: 0;
   position: fixed;
-  margin-bottom: 0px;
+  width: 100%;
 }
 
 .footer:disabled {
