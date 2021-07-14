@@ -1,32 +1,27 @@
-import React, { useState } from 'react';
-import { useHistory } from 'react-router';
+import React from 'react';
+import PropTypes from 'prop-types';
 import clipboardCopy from '../../services/clipboardCopy';
 import shareIcon from '../../images/shareIcon.svg';
 
-const copy = require('clipboard-copy');
-
 export default function ShareBtn({ id, type }) {
-  const [Url, setUrl] = useState(false);
-  const history = useHistory();
-
-  const handleClick = () => {
-    clipboardCopy(type, id);
-    setUrl(true);
-  };
   return (
     <div>
       <button
-        id={  }
         type="button"
-        onClick={ handleClick }
+        onClick={ () => clipboardCopy(type, id) }
         data-testid="share-btn"
       >
         <img
           src={ shareIcon }
           alt="Share Icon"
         />
-        <p id={`copyMessage${id}`}>Link copiado!</p>
+        <p id={ `copyMessage${id}` }> Compartilhar </p>
       </button>
     </div>
   );
 }
+
+ShareBtn.propTypes = {
+  id: PropTypes.number,
+  type: PropTypes.string,
+}.isRequired;

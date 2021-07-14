@@ -7,13 +7,13 @@ export default function DoneRecipes() {
   const [doneRecipes, setDoneRecipes] = useState([]);
   const [filter, setFilter] = useState('');
   useEffect(() => {
-    const allRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    const allRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
     setDoneRecipes(allRecipes);
-    setFilter(allRecipes);
   }, []);
   function filterDoneRecipes(filterName, arr) {
     const filterRecipeType = arr
       .filter((recipe) => recipe.type === filterName);
+    console.log(filterRecipeType);
     switch (filterName) {
     case '':
       return arr;

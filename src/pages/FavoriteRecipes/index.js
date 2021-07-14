@@ -47,13 +47,14 @@ export default function FavoriteRecipes() {
       >
         Drinks
       </button>
-      { filterFavoriteRecipesType(filter, favoriteRecipes).map((recipe, index) => (
-        <FavoriteRecipeCard
-          key={ recipe.id }
-          recipe={ recipe }
-          index={ index }
-        />
-      )) }
+      { favoriteRecipes && filterFavoriteRecipesType(filter, favoriteRecipes)
+        .map((recipe, index) => (
+          <FavoriteRecipeCard
+            key={ recipe.id }
+            recipe={ recipe }
+            index={ index }
+          />
+        )) }
     </div>
   );
 }

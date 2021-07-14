@@ -19,6 +19,9 @@ function FavoriteRecipeCard({ recipe, index }) {
     locStorageFavRecipes.splice(deleteFavoriteIndex, 1);
     setFavoriteRecipes(locStorageFavRecipes);
     localStorage.setItem('favoriteRecipes', JSON.stringify(locStorageFavRecipes));
+    if (Object.values(locStorageFavRecipes).length === 0) {
+      localStorage.removeItem('favoriteRecipes');
+    }
   }
   return (
     <div

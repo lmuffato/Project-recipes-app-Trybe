@@ -59,14 +59,14 @@ function doneRecipeCard({ recipe, index }) {
         />
         <span id={ `copyMessage${id}` }>Compartilhar</span>
       </button>
-      { type === 'comida' && tags.map((tag) => (
+      { tags && tags.map((tag) => (
         <p
           key={ index }
           data-testid={ `${index}-${tag}-horizontal-tag` }
         >
           { tag }
         </p>
-      )) }
+      ))}
     </div>
   );
 }
