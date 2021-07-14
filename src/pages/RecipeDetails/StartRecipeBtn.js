@@ -8,28 +8,15 @@ export default function StartRecipeBtn({ recipe }) {
   const { pageOrigin, toDoneStorage } = context;
 
   useEffect(() => {
-   /*  const doneRecipes = [
-      {
-        id: '53013',
-        type: 'comida',
-        area: 'Italian',
-        category: 'Vegetarian',
-        alcoholicOrNot: '',
-        name: 'Spicy Arrabiata Penne',
-        image: 'https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg',
-        doneDate: '23/06/2020',
-        tags: ['Pasta', 'Curry'],
-      },
-    ]; */
-    // localStorage.setItem('doneRecipes', JSON.stringify(doneRecipes)); // info mockada
-    // const savedDoneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
-    console.log(toDoneStorage);
-
     if (toDoneStorage && toDoneStorage.some(
       (doneRecipe) => doneRecipe.id === recipe.idMeal || recipe.idDrink,
     )) {
       document.getElementsByClassName('start-recipe-btn')[0].style.display = 'none';
     }
+
+    return () => {
+      document.getElementsByClassName('start-recipe-btn')[0].style.display = 'unset';
+    };
   }, [toDoneStorage]);
 
   return (
