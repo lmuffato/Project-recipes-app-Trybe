@@ -31,7 +31,7 @@ function Perfil() {
   };
   return (
     <div>
-      <HeaderBack />
+      <HeaderBack title="Perfil" />
       <div className={ styles.perfilPage }>
         <div className={ styles.imagemEmail }>
           <img src={ gravatar } alt="Imagem de perfil" />
@@ -66,8 +66,8 @@ function Perfil() {
         </button>
         <footer>
           <img src="/logo_darkbg.svg" alt="Squarefood" />
+          <Footer />
         </footer>
-        <Footer />
       </div>
     </div>
   );
