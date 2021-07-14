@@ -25,7 +25,7 @@ function DrinksRecepiesProgress() {
     getRecepi();
   }, []);
 
-/*   function saveLS() {
+  /*   function saveLS() {
   // Esta função não esta sendo chamada, e precisa ser duplicada para o MealsRecepiesProgress
     console.log('chamou a função de salvar');
     const getLS = localStorage.getItem('doneRecipes');
