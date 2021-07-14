@@ -45,7 +45,9 @@ function Recipe() {
     async function loadRecommendations() {
       const recipes = await getRecommendations(`/${pathname.split('/')[1]}`);
       const numberOfRecommendations = 6;
-      setRecommendations(recipes.slice(0, numberOfRecommendations));
+      setRecommendations(
+        { path: recipes.path, list: recipes.list.slice(0, numberOfRecommendations) },
+      );
     }
 
     loadRecommendations();
@@ -117,12 +119,14 @@ function Recipe() {
             </>
           ) }
         </section>
-        <section>
-          <h2>Recomendadas</h2>
-          <div className={ styles.recommendationsCarousel }>
-            <Recommendations data={ recommendations } />
-          </div>
-        </section>
+        { recommendations.list && (
+          <section>
+            <h2>Recomendadas</h2>
+            <div className={ styles.recommendationsCarousel }>
+              <Recommendations data={ recommendations } />
+            </div>
+          </section>
+        ) }
       </main>
     </div>
   );
