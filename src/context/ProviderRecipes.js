@@ -4,8 +4,7 @@ import ContextRecipes from './ContextRecipes';
 
 function ProviderRecipes({ children }) {
   const [filteredRecipe, setRecipes] = useState([]);
-  const [activeFilters, setFilter] = useState([]);
-  const [recipeDetail, setDetail] = useState({});
+  const [activeFilter, setFilter] = useState('All');
   const [categories, setCategories] = useState([]);
   const [search, setSearch] = useState('');
   const [radioFilter, setRadioFilter] = useState('');
@@ -75,13 +74,6 @@ function ProviderRecipes({ children }) {
     setRecipes(response);
   };
 
-  const fetchDetail = (recipeId) => {
-    // Esta função deveria fazer a requisição de detalhes de
-    // uma receita quando esta for clicada
-    console.log(recipeId);
-    setDetail({});
-  };
-
   const fetchArea = async () => {
     const areaCategory = await fetch('https://www.themealdb.com/api/json/v1/1/list.php?a=list')
       .then((req) => req.json())
@@ -96,14 +88,12 @@ function ProviderRecipes({ children }) {
   return (
     <ContextRecipes.Provider
       value={ {
-        activeFilters,
+        activeFilter,
+        setFilter,
         filteredRecipe,
         getRecipes,
         categories,
         getCategories,
-        recipeDetail,
-        fetchDetail,
-        setFilter,
         search,
         setSearch,
         radioFilter,

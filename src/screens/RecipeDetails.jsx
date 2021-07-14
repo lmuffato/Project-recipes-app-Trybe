@@ -5,6 +5,8 @@ import fetchApiById from '../service/fetchApiDetails';
 import Ingredients from './Ingredients';
 import Recommendations from './Recomendations';
 import Video from '../service/Video';
+import setFavoriteLocalStorage from '../service/setFavoriteLocalStorage';
+import setDoneRecipesLocalStorage from '../service/setDoneRecipeLocalStorage';
 
 function RecipeDetails(props) {
   const { match: { params: { id } } } = props;
@@ -34,8 +36,17 @@ function RecipeDetails(props) {
       <button type="button">
         compartilhar
       </button>
-      <button type="button">
+      <button
+        onClick={ () => setFavoriteLocalStorage(type, id) }
+        type="button"
+      >
         favoritar
+      </button>
+      <button
+        onClick={ () => setDoneRecipesLocalStorage(type, id) }
+        type="button"
+      >
+        marcar como feito
       </button>
       <p data-testid="recipe-category">
         { recipe.strCategory }
