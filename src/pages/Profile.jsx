@@ -25,7 +25,7 @@ function Profile() {
         <button
           type="button"
           data-testid="profile-done-btn"
-          className="itemCard"
+          className="itemCard exploreButtons"
         >
           Receitas Feitas
         </button>
@@ -34,7 +34,7 @@ function Profile() {
         <button
           type="button"
           data-testid="profile-favorite-btn"
-          className="itemCard"
+          className="itemCard exploreButtons"
         >
           Receitas Favoritas
         </button>
@@ -44,7 +44,7 @@ function Profile() {
           type="button"
           data-testid="profile-logout-btn"
           onClick={ handleClick }
-          className="itemCard"
+          className="itemCard exploreButtons"
         >
           Sair
         </button>
