@@ -14,7 +14,7 @@ function ExplorarComidasIngredientes() {
 
   useEffect(() => {
     dispatch(getMealsIngredientsAPIThunk());
-  }, []);
+  }, [dispatch]);
 
   return (
     <section>

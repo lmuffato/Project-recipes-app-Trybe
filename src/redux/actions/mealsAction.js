@@ -1,7 +1,6 @@
 import { MEALS_ALL_CATEGORIES_ENDPOINT,
   MEALS_INGREDIENT_ENDPOINT,
-  MEALS_ALL_AREAS_ENDPOINT,      
-  MEALS_ALL_CATEGORIES_ENDPOINT } from '../../services/meals';
+  MEALS_ALL_AREAS_ENDPOINT } from '../../services/meals';
 
 import fetchAPI from '../../services';
 import {

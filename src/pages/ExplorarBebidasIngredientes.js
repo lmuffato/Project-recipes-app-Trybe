@@ -13,7 +13,7 @@ function ExplorarBebidasIngredientes() {
 
   useEffect(() => {
     dispatch(getDrinkssIngredientsAPIThunk());
-  }, []);
+  }, [dispatch]);
 
   return (
     <section>
