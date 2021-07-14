@@ -92,8 +92,8 @@
   align-items: center;
   background-color: rgba(255, 255, 255, 0.089);
   background-image: url('../images/1057932.jpg');
-  background-position-x: 530px;
-  background-position-y: 390px;
+  background-position-x: 135vw;
+  background-position-y: 48vh;
   background-size: 650%;
   border-left: #f2f2f21e 0.5px solid;
   color: #f2f2f2;
@@ -102,7 +102,6 @@
   height: 100%;
   padding-top: 10%;
   width: 100%;
-
 }
 
 .share-btn {
@@ -127,7 +126,55 @@
   background-blend-mode: overlay;
   background-color: rgb(136, 134, 134);
   box-shadow: 0.3px 0.3px 3px rgb(29, 28, 29) inset;
+  cursor: default;
 }
 
-/* @media ( max-width : 786.98px ) {
-} */
+@media ( min-width : 786.98px ) {
+
+  .doneFilter input {
+    background-color: transparent;
+    height: 40px;
+    margin-top: 8px;
+    width: 150px;
+  }
+
+  .cardHolder {
+    display: flex;
+    flex-flow: wrap;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+
+  .doneComponents {
+    height: 42vh;
+    width: 40vw;
+  }
+
+  .image-container {
+    border-top-left-radius: 30px;
+    height: 29.2vh;
+    object-fit: cover;
+    width: 30vw;
+  }
+
+  .ctn-date-sharebtn {
+    background-position-x: 109vw;
+    background-position-y: 53vh;
+  }
+
+  .doneDate {
+    font-size: 13px;
+    margin-left: 20px;
+    margin-top: 39.4vh;
+  }
+
+  .tag {
+    font-size: 13px;
+    margin-top: 4vh;
+    width: 80px;
+  }
+
+  .doneTitle {
+    width: 100%;
+  }
+}

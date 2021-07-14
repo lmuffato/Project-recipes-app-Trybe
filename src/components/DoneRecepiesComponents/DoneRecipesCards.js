@@ -18,7 +18,7 @@ function DoneRecipesCards() {
     return (local !== null && local);
   };
   return (
-    <div>
+    <div className="cardHolder">
       {
         retrieveLocalInfo() !== false
       && retrieveLocalInfo().map((e, i) => (
