@@ -17,8 +17,24 @@ export default function DetalhesComidas() {
   const [recipe, setRecipe] = useState({});
   const [filterIngredient, setFilterIngredient] = useState([]);
   const [drinks, setDrinks] = useState([]);
+  const [isDone, setIsDone] = useState();
+  const [isInProgress, setIsInProgress] = useState();
   const { id } = useParams();
   const history = useHistory();
+
+  useEffect(() => {
+    if (localStorage.getItem('doneRecipes')) {
+      const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
+      setIsDone(doneRecipes.map((done) => done.id).includes(id));
+    }
+  }, [id]);
+
+  useEffect(() => {
+    if (localStorage.getItem('inProgressRecipes')) {
+      const { meals } = JSON.parse(localStorage.getItem('inProgressRecipes'));
+      setIsInProgress(Object.keys(meals).includes(id));
+    }
+  }, [id]);
 
   const filterIngredients = useCallback((obj = recipe) => {
     const filterKeys = Object.keys(obj)
@@ -92,12 +108,14 @@ export default function DetalhesComidas() {
         Recomendadas
       </Text>
       { drinks.length > 0 && <Carousel data={ drinks } /> }
-      <Button
-        dataTestid="start-recipe-btn"
-        onClick={ handleClick }
-      >
-        Iniciar Receita
-      </Button>
+      {!isDone && (
+        <Button
+          dataTestid="start-recipe-btn"
+          onClick={ handleClick }
+        >
+          {isInProgress ? 'Continuar Receita' : 'Iniciar Receita'}
+        </Button>
+      )}
     </div>
   );
 }

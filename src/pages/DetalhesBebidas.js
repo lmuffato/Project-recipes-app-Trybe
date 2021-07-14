@@ -10,14 +10,31 @@ import Text from '../components/Text';
 import Paragraphs from '../components/Paragraphs';
 import Button from '../components/Button';
 import List from '../components/List';
+
 import Carousel from '../components/Carousel';
 
 export default function DetalhesBebidas() {
   const [recipe, setRecipe] = useState({});
   const [filterIngredient, setFilterIngredient] = useState([]);
   const [food, setFoods] = useState([]);
+  const [isDone, setIsDone] = useState();
+  const [isInProgress, setIsInProgress] = useState();
   const { id } = useParams();
   const history = useHistory();
+
+  useEffect(() => {
+    if (localStorage.getItem('doneRecipes')) {
+      const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
+      setIsDone(doneRecipes.map((done) => done.id).includes(id));
+    }
+  }, [id]);
+
+  useEffect(() => {
+    if (localStorage.getItem('inProgressRecipes')) {
+      const { cocktails } = JSON.parse(localStorage.getItem('inProgressRecipes'));
+      setIsInProgress(Object.keys(cocktails).includes(id));
+    }
+  }, [id]);
 
   const filterIngredients = useCallback((obj = recipe) => {
     const filterKeys = Object.keys(obj)
@@ -83,12 +100,14 @@ export default function DetalhesBebidas() {
         Recomendadas
       </Text>
       { food.length > 0 && <Carousel data={ food } /> }
-      <Button
-        dataTestid="start-recipe-btn"
-        onClick={ handleClick }
-      >
-        Iniciar Receita
-      </Button>
+      {!isDone && (
+        <Button
+          dataTestid="start-recipe-btn"
+          onClick={ handleClick }
+        >
+          {isInProgress ? 'Continuar Receita' : 'Iniciar Receita'}
+        </Button>
+      )}
     </div>
   );
 }
