@@ -49,7 +49,6 @@ export default function Search(props) {
       break;
     }
 
-    console.log(`${url}${search}`);
     try {
       const response = await fetch(`${url}${search}`);
       const data = await response.json();

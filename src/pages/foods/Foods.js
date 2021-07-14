@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -13,19 +14,20 @@ function Foods(props) {
   const { match: { params, path } } = props;
   const { id } = params;
 
-  const [, setStateRedux] = useStateEasyRedux({ name: 'Search' }, {});
+  const [stateRedux, setStateRedux] = useStateEasyRedux({ name: 'Search' }, {});
 
   useEffect(() => {
-    const fetchApi = async () => {
-      const response = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=');
-      const data = await response.json();
-      const results = data.meals;
-      const INDEX_END = 12;
-      const resultsTwelveItems = results.slice(0, INDEX_END);
-      setStateRedux({ actionType: 'FETCH_COMPLETED_DID_MOUNT', resultsTwelveItems });
-    };
-    fetchApi();
-    // eslint-disable-next-line
+    if (!(stateRedux && stateRedux.actionType === 'FETCH_INGREDIENT_COMPLETED')) {
+      const fetchApi = async () => {
+        const response = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=');
+        const data = await response.json();
+        const results = data.meals;
+        const INDEX_END = 12;
+        const resultsTwelveItems = results.slice(0, INDEX_END);
+        setStateRedux({ actionType: 'FETCH_COMPLETED_DID_MOUNT', resultsTwelveItems });
+      };
+      fetchApi();
+    }
   }, []);
 
   const resultsTwelveItems = useSelector((state) => (
