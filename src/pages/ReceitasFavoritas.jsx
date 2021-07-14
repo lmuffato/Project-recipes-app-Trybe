@@ -13,17 +13,17 @@ class ReceitasFavoritas extends React.Component {
       selectedRecipe: [],
       allRecipes: [],
     };
-    this.loadingRecipesDone = this.loadingRecipesDone.bind(this);
+    this.loadingRecipesDone = this.loadingFavoriteRecipes.bind(this);
     this.filterOrNot = this.filterOrNot.bind(this);
     this.copy = this.copy.bind(this);
     this.timer = this.timer.bind(this);
   }
 
   componentDidMount() {
-    this.loadingRecipesDone();
+    this.loadingFavoriteRecipes();
   }
 
-  loadingRecipesDone() {
+  loadingFavoriteRecipes() {
     const recipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
     if (recipes === null) {
       return;
@@ -88,14 +88,6 @@ class ReceitasFavoritas extends React.Component {
 
   render() {
     const { selectedRecipe, loadingCards } = this.state;
-    const mapTags = (array, index) => (
-      array && (
-        array.map((tag) => (
-          <h6 key={ tag } data-testid={ `${index}-${tag}-horizontal-tag` }>{tag}</h6>
-        ))
-      )
-    );
-
     return (
       <>
         <Header title="Receitas Favoritas" />
@@ -130,6 +122,7 @@ class ReceitasFavoritas extends React.Component {
                 <div
                   key={ index }
                   className="card"
+                  data-testid={ `${index}-recipe-card` }
                   id={ `recipeCopy${index}` }
                 >
                   <Link to={ `/${recipe.type}s/${recipe.id}` } key={ recipe.name }>
@@ -164,12 +157,11 @@ class ReceitasFavoritas extends React.Component {
                       data-testid={ `${index}-horizontal-share-btn` }
                     />
                   </button>
-                  <h6 data-testid={ `${index}-horizontal-done-date` }>
-                    {recipe.doneDate}
-                  </h6>
-                  <div>
-                    {recipe.tags ? mapTags(recipe.tags, index) : null}
-                  </div>
+                  <img
+                    alt="unfavorite"
+                    data-testid={ `${index}-horizontal-favorite-btn` }
+                    src={ blackHeartIcon }
+                  />
                 </div>
               )
             ))}
