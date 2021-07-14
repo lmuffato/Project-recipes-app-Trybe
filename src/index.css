@@ -6,6 +6,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #f5ebdc;
+  margin-bottom:50px;
 }
 
 code {
@@ -57,6 +58,10 @@ code {
   text-align: center;
 }
 
+.done-recipes-div {
+  padding: 4px;
+}
+
 p, h2, h3, h1 {
   padding-left: 6px;
 }
@@ -97,7 +102,7 @@ p, h2, h3, h1 {
   border-radius: 9px;
   width: 45vw;
   color: white;
-  font-weight: bold;
+  font-weight: 700;
 }
 
 .form-search {
@@ -134,7 +139,14 @@ p, h2, h3, h1 {
   border-radius: 9px;
   width: 60vw;
   color: white;
-  font-weight: bold;
+  font-weight: 700;
   margin: 5vh;
   /* padding: 5vh; */
+}
+
+.tag {
+  background-color: #bb885ed2;
+  color: white;
+  border-radius: 8px;
+  padding-left: 3px;
 }

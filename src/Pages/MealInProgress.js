@@ -54,6 +54,30 @@ export default function MealInProgress() {
     return aux;
   };
 
+  const doneRecipe = () => {
+    const storage = JSON.parse(localStorage.getItem('doneRecipes'));
+    const { idMeal, strArea, strCategory, strMeal, strMealThumb, strTags } = data[0];
+    const obj = {
+      id: idMeal,
+      type: 'comida',
+      area: strArea !== null ? strArea : '',
+      category: strCategory,
+      alcoholicOrNot: '',
+      name: strMeal,
+      image: strMealThumb,
+      doneDate: new Date().toLocaleDateString(),
+      tags: strTags !== null ? strTags : '',
+    };
+    let newObj = '';
+    if (storage) {
+      newObj = [...storage, obj];
+    } else {
+      newObj = [obj];
+    }
+    localStorage.setItem('doneRecipes', JSON.stringify(newObj));
+    history.push('/receitas-feitas');
+  };
+
   const renderInProgressRecipe = () => {
     if (data && data.length > 0) {
       const aux = ingredientWithMeasure(data[0]);
@@ -90,7 +114,7 @@ export default function MealInProgress() {
             className="footer"
             type="button"
             data-testid="finish-recipe-btn"
-            onClick={ () => history.push('/receitas-feitas') }
+            onClick={ () => doneRecipe() }
           >
             Finalizar Receita
           </button>
