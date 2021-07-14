@@ -19,12 +19,12 @@ function ProviderRecipes({ children }) {
     const endpoint = `https://www.the${siteName}db.com/api/json/v1/1/list.php?c=list`;
     const dbCategories = await fetch(endpoint)
       .then((response) => response.json())
-      .then((response) => response[`${type.toLowerCase()}s`]);
+      .then((response) => response[`${type.toLowerCase()}s`])
+      .catch((error) => console.log(error));
     const newCategories = ['All'];
     dbCategories.forEach((category) => newCategories.push(category.strCategory));
     setCategories(newCategories);
   };
-
   const getRecipes = async (category = 'All', type = 'Meal') => {
     const siteName = type === 'Meal' ? 'meal' : 'cocktail';
     let recipeList = [];
@@ -60,7 +60,6 @@ function ProviderRecipes({ children }) {
     }
     return endpoint;
   };
-
   // esta função vai fazer a solicitação das receitas e
   // aplicar os filtros devidos
   const fetchRecipes = async (link) => {
@@ -69,7 +68,8 @@ function ProviderRecipes({ children }) {
     setLoadingCards(true);
     const response = await fetch(endpoint)
       .then((r) => r.json())
-      .then((r) => r[`${type.toLowerCase()}s`]);
+      .then((r) => r[`${type.toLowerCase()}s`])
+      .catch((error) => console.log(error));
     setLoadingCards(false);
     setRecipes(response);
   };
@@ -116,11 +116,9 @@ function ProviderRecipes({ children }) {
     </ContextRecipes.Provider>
   );
 }
-
 ProviderRecipes.propTypes = {
   children: PropTypes.objectOf(PropTypes.shape(
     PropTypes.object,
   )),
 }.isRequired;
-
 export default ProviderRecipes;
