@@ -12,15 +12,17 @@ export default function Ingredients({ recipe }) {
   const { setCheckedState } = context;
   const key = 'inProgressRecipes';
   const inputRef = useRef(null);
+  const resultRef = useRef('');
+  const ingredientsRef = useRef('');
 
   const getFromStorage = useCallback(() => {
-    const storageValue = localStorage.getItem(key);
-    if (storageValue) {
-      const result = JSON.parse(storageValue);
-      const values = Object.values(result);
-      setFromStorage(values[0]);
-    }
-  }, []);
+    const storageValue = JSON.parse(localStorage.getItem(key)) || {};
+    const values = Object.entries(storageValue);
+    ingredientsRef.current = [...values];
+    const filter = ingredientsRef.current
+      .filter((ingredient) => ingredient[0].includes(recipe.idMeal || recipe.idDrink));
+    filter.forEach((item) => setFromStorage(item[1]));
+  }, [recipe.idMeal, recipe.idDrink]);
 
   const handleCheckbox = useCallback((() => {
     let checkBoxCounter = 0;
@@ -63,12 +65,14 @@ export default function Ingredients({ recipe }) {
 
   useEffect(() => {
     const toStorage = {
-      [recipeId]: textInput,
+      [recipeId]: [...textInput],
     };
+    const storageValue = JSON.parse(localStorage.getItem(key)) || {};
+    resultRef.current = { ...storageValue, ...toStorage };
     if (textInput.length > 0) {
-      localStorage.setItem(key, JSON.stringify(toStorage));
+      localStorage.setItem(key, JSON.stringify(resultRef.current));
     }
-  }, [textInput, recipeId]);
+  }, [textInput, recipeId, recipe]);
 
   useEffect(() => {
     setRecipeId(recipe.idMeal || recipe.idDrink);
@@ -99,7 +103,7 @@ export default function Ingredients({ recipe }) {
                 id={ ingredient[1] }
                 type="checkbox"
                 name={ `${ingredient[1]} ` }
-                onClick={ handleInput }
+                onChange={ handleInput }
                 defaultChecked={
                   fromStorage
                    && fromStorage.some((value) => value.includes(ingredient[1]))
