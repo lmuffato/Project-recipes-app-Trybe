@@ -14,8 +14,8 @@
 }
 
 .card-container {
-  width: 48%;
-  margin-right: 10px;
   border-radius: 5px;
   flex: none;
+  margin-right: 10px;
+  width: 48%;
 }
