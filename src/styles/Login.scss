@@ -1,0 +1,118 @@
+$orange: rgb(242, 163, 15);
+$shadow: rgba(51, 49, 49, 0.6);
+$disabled: rgb(109, 109, 109);
+$input: rgba(216, 209, 209, 0.4);
+
+@import url('https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap') ;
+
+form {
+  background: url('../images//background1.jpg') no-repeat center fixed;
+  background-size: cover;
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  margin: auto;
+
+  & div {
+    align-items: center;
+    background-color: $shadow;
+    border-radius: 1em;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    max-width: 400px;
+    padding: 2em;
+    width: 85%;
+  }
+
+  & img {
+    border-radius: 2em;
+    padding: 0 2em 2em;
+    width: 90%;
+  }
+
+  & h1 {
+    color: white;
+    font-family: Montserrat , sans-serif;
+    font-size: 2em;
+    font-weight: 500;
+    margin: 0.1em 0 0.7em;
+    opacity: 1;
+  }
+
+  & label {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 1em;
+    width: 100%;
+  }
+
+  & p {
+    display: none;
+  }
+
+  & input {
+    background-color: $input;
+    border: none;
+    box-sizing: border-box;
+    color: white;
+    font-family: Alegreya , sans-serif;
+    font-size: 1.2em;
+    height: 5vh;
+    padding: 0.3em;
+
+    &::placeholder {
+      color: white;
+      font-family: Montserrat , sans-serif;
+    }
+
+    &:focus {
+      font-size: 1.2em;
+      outline: none;
+      transition: 0.2s;
+    }
+  }
+
+  & span {
+    color: red;
+    display: none;
+    font-size: 1em;
+    font-weight: 400;
+    margin-top: 0.4em;
+    padding: 0 0.5em;
+    text-shadow: 3px 3px 4px black;
+    width: fit-content;
+  }
+
+  & button {
+    align-items: center;
+    border: none;
+    box-sizing: border-box;
+    color: gray;
+    display: flex;
+    font-family: Montserrat , sans-serif;
+    font-size: 1.8em;
+    font-weight: 700;
+    height: 5vh;
+    justify-content: center;
+    width: 100%;
+
+    &:disabled {
+      background-color: $disabled;
+      cursor: not-allowed;
+      transition: 2s;
+    }
+
+    &:enabled {
+      background-color: $orange;
+      color: white;
+      transition: 2s;
+    }
+
+    &:enabled:hover {
+      background-color: $orange;
+      box-shadow: 1px 1px 7px rgb(29, 28, 29) inset;
+      transition: 1s;
+    }
+  }
+}

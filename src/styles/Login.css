@@ -1,84 +1,101 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100 ;0,300 ;1,500&display=swap') ;
-
+@import url("https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 form {
+  background: url("../images//background1.jpg") no-repeat center fixed;
+  background-size: cover;
   display: flex;
-  font-family: Roboto , sans-serif;
   height: 100vh;
   justify-content: center;
   margin: auto;
 }
-
-.form-group {
+form div {
   align-items: center;
+  background-color: rgba(51, 49, 49, 0.6);
+  border-radius: 1em;
   display: flex;
   flex-direction: column;
   margin: auto;
-  max-width: 500px;
+  max-width: 400px;
   padding: 2em;
+  width: 85%;
+}
+form img {
+  border-radius: 2em;
+  padding: 0 2em 2em;
   width: 90%;
 }
-
-.icons {
-  display: flex;
-  font-size: 3em;
-  justify-content: space-between;
-  margin-bottom: 2em;
-  width: 100%;
+form h1 {
+  color: white;
+  font-family: Montserrat, sans-serif;
+  font-size: 2em;
+  font-weight: 500;
+  margin: 0.1em 0 0.7em;
+  opacity: 1;
 }
-
-/* label {
+form label {
   display: flex;
   flex-direction: column;
   padding-bottom: 1em;
   width: 100%;
-} */
-
-.lbl-txt-login {
+}
+form p {
   display: none;
 }
-
-.input-login {
+form input {
+  background-color: rgba(216, 209, 209, 0.4);
   border: none;
-  border-radius: 0.3em;
   box-sizing: border-box;
+  color: white;
+  font-family: Alegreya, sans-serif;
   font-size: 1.2em;
   height: 5vh;
   padding: 0.3em;
 }
-
-.input-login:focus {
-  border: 0.2em solid rgb(67, 163, 58);
+form input::placeholder {
+  color: white;
+  font-family: Montserrat, sans-serif;
+}
+form input:focus {
   font-size: 1.2em;
   outline: none;
   transition: 0.2s;
 }
-
-.btn-login {
+form span {
+  color: red;
+  display: none;
+  font-size: 1em;
+  font-weight: 400;
+  margin-top: 0.4em;
+  padding: 0 0.5em;
+  text-shadow: 3px 3px 4px black;
+  width: fit-content;
+}
+form button {
   align-items: center;
-  background-color: rgb(67, 163, 58);
   border: none;
-  border-radius: 0.3em;
   box-sizing: border-box;
-  color: white;
+  color: gray;
   display: flex;
-  font-size: 1.3em;
+  font-family: Montserrat, sans-serif;
+  font-size: 1.8em;
+  font-weight: 700;
   height: 5vh;
   justify-content: center;
   width: 100%;
 }
-
-.btn-login:hover {
-  cursor: pointer;
-}
-
-.btn-login:disabled {
-  background-color: grey;
-  color: white;
+form button:disabled {
+  background-color: #6d6d6d;
   cursor: not-allowed;
-}
-
-.btn-login:enabled {
-  background-color: #5ce250;
-  color: black;
   transition: 2s;
 }
+form button:enabled {
+  background-color: #f2a30f;
+  color: white;
+  transition: 2s;
+}
+form button:enabled:hover {
+  background-color: #f2a30f;
+  box-shadow: 1px 1px 7px #1d1c1d inset;
+  transition: 1s;
+}
+
+/*# sourceMappingURL=Login.css.map */

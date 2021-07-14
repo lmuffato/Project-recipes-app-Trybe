@@ -1,14 +1,21 @@
 import React, { useEffect, useState } from 'react';
-import Carousel from 'react-bootstrap/Carousel';
+// import Carousel from 'react-bootstrap/Carousel';
 import { Link, useRouteMatch } from 'react-router-dom';
 import '../../../styles/RecipeDetails.css';
 import ComponentGen from '../../../components/RecipeDetailsComponents';
+import { SwiperSlide } from 'swiper/react';
+import 'swiper/swiper.min.css';
+import 'swiper/components/pagination/pagination.min.css';
+import SwiperCore, {
+  Pagination,
+} from 'swiper/core';
 
 function Receita() {
   const { params } = useRouteMatch();
   const [loading, setLoading] = useState(true);
   const [info, setInfo] = useState('');
   const [recomend, setRecomend] = useState();
+  SwiperCore.use([Pagination]);
 
   useEffect(() => {
     async function FoodAPI() {
@@ -47,7 +54,7 @@ function Receita() {
     const qtd = 6;
     return (
       recomend.filter((e, i) => i < qtd).map((e, i) => (
-        <Carousel.Item key={ i } data-testid={ `${i}-recomendation-title` }>
+        <SwiperSlide key={ i } data-testid={ `${i}-recomendation-title` }>
           <Link to={ `/bebidas/${e.idDrink}` }>
             <div data-testid={ `${i}-recomendation-card` }>
               <img
@@ -59,7 +66,7 @@ function Receita() {
               <h4>{ e.strDrink }</h4>
             </div>
           </Link>
-        </Carousel.Item>
+        </SwiperSlide>
       )));
   };
 
