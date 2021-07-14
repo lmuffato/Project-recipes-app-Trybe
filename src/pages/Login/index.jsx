@@ -1,6 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import { FormContainer, ContainerInputs, Input, StyledButton, ContainerLogo } from './styles';
+import {
+  FormContainer,
+  ContainerInputs,
+  Input,
+  StyledButton,
+  ContainerLogo,
+} from './styles';
 import Logo from '../../images/noTextLogo.png';
 
 function Login() {

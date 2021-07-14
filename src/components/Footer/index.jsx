@@ -1,4 +1,5 @@
 import React from 'react';
+import { bool } from 'prop-types';
 import { BiDrink } from 'react-icons/bi';
 import { MdExplore } from 'react-icons/md';
 import { IoFastFoodSharp } from 'react-icons/io5';
@@ -35,3 +36,9 @@ export default function Footer({ food = false, drink = false, explore = false })
     </FooterContainerButtons>
   );
 }
+
+Footer.propTypes = {
+  food: bool,
+  drink: bool,
+  explore: bool,
+}.isRequired;

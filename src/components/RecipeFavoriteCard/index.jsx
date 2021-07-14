@@ -1,7 +1,8 @@
 import React from 'react';
+import { BiShareAlt } from 'react-icons/bi';
+import { AiFillHeart } from 'react-icons/ai';
 import { useHistory } from 'react-router-dom';
 import { func, number, shape, string } from 'prop-types';
-import shareIcon from '../../images/shareIcon.svg';
 import blackHeartIcon from '../../images/blackHeartIcon.svg';
 import useClipBoard from '../../hooks/useClipboard';
 import useFavoriteRecipe from '../../hooks/useFavoriteRecipe';
@@ -9,8 +10,6 @@ import {
   ContainerRecipeCardInfos,
   ContainerShareAndFavorite,
 } from './styles';
-import { BiShareAlt } from 'react-icons/bi';
-import { AiFillHeart } from 'react-icons/ai';
 
 export default function RecipeFavoriteCard({
   recipeFavorite,
