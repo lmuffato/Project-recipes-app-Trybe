@@ -4,11 +4,13 @@ import {
   SET_MEALS,
   SET_MEAL_AREAS,
   SET_MEAL_CATEGORIES,
-  SET_MEAL_DETAILS } from '../actions/mealsAction';
+  SET_MEAL_DETAILS,
+  SET_MEALS_INGREDIENTS } from '../actions/mealsAction';
 
 const INITIAL_STATE = {
   recipes: [],
   mealDetails: [],
+  ingredients: [],
   categories: [],
   selectedCategory: 'All',
   areas: [],
@@ -25,6 +27,8 @@ export default function mealsReducer(state = INITIAL_STATE, action) {
     return { ...state, categories: action.payload };
   case CHANGE_MEAL_CATEGORY:
     return { ...state, selectedCategory: action.payload };
+  case SET_MEALS_INGREDIENTS:
+    return { ...state, ingredients: action.payload };
   case SET_MEAL_AREAS:
     return { ...state, areas: action.payload };
   case CHANGE_MEAL_AREA:
