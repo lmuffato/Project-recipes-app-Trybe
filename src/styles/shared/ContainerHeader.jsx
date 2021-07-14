@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 
 const ContainerHeader = styled.div`
+  padding: 0 1.8rem 1rem 1.8rem;
+
   > header {
     display: flex;
     align-items: center;

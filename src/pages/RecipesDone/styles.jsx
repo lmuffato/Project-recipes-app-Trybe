@@ -2,9 +2,7 @@ import styled from 'styled-components';
 import SharedFilterContainer from '../../styles/shared/FilterContainer';
 import SharedContainerHeader from '../../styles/shared/ContainerHeader';
 
-export const ContainerRescipesDone = styled(SharedContainerHeader)`
-  padding: var(--global-space);
-`;
+export const ContainerRescipesDone = styled(SharedContainerHeader)``;
 
 export const MainRecipesDoneCard = styled.main`
   margin-top: 1.5rem;
@@ -25,7 +23,7 @@ export const MainRecipesDoneCard = styled.main`
     border-radius: 8px;
     width: 100%;
     min-height: 420px;
-    margin-bottom: 0.6rem;
+    margin-bottom: 1rem;
     padding: 0.5rem;
 
     span {

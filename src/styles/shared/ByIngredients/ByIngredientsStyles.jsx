@@ -2,9 +2,7 @@ import styled from 'styled-components';
 import SharedContainerHeader from '../ContainerHeader';
 import ContainerRecipeCards from '../ContainerRecipeCards';
 
-export const ContainerExploreByIngredients = styled(SharedContainerHeader)`
-  padding: var(--global-space);
-`;
+export const ContainerExploreByIngredients = styled(SharedContainerHeader)``;
 
 export const MainContainerIngredientsCards = styled(ContainerRecipeCards)`
   padding: 0;

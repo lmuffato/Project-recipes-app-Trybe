@@ -3,8 +3,6 @@ import SharedContainerHeader from '../../styles/shared/ContainerHeader';
 import SharedButton from '../../styles/shared/Button';
 
 export const ContainerExploreFood = styled(SharedContainerHeader)`
-  padding: var(--global-space);
-
   > header {
     > div {
       > h1 {

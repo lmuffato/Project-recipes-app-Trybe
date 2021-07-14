@@ -3,7 +3,6 @@ import SharedButton from '../../styles/shared/Button';
 import SharedContainerHeader from '../../styles/shared/ContainerHeader';
 
 export const ContainerProfile = styled(SharedContainerHeader)`
-  padding: var(--global-space);
   text-align: center;
 
   > h1 {

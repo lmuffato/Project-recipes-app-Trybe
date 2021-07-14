@@ -3,8 +3,6 @@ import SharedContainerHeader from '../../styles/shared/ContainerHeader';
 import SharedButton from '../../styles/shared/Button';
 
 export const ContainerExploreDrink = styled(SharedContainerHeader)`
-  padding: var(--global-space);
-  
   > div {
     min-height: 60vh;
     display: flex;
