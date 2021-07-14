@@ -15,6 +15,7 @@ function Receita() {
   const [loading, setLoading] = useState(true);
   const [info, setInfo] = useState('');
   const [recomend, setRecomend] = useState();
+
   SwiperCore.use([Pagination]);
 
   useEffect(() => {
@@ -54,16 +55,21 @@ function Receita() {
     const qtd = 6;
     return (
       recomend.filter((e, i) => i < qtd).map((e, i) => (
-        <SwiperSlide key={ i } data-testid={ `${i}-recomendation-title` }>
-          <Link to={ `/bebidas/${e.idDrink}` }>
-            <div data-testid={ `${i}-recomendation-card` }>
+        <SwiperSlide
+          className="swiper__slide"
+          key={ i }
+          data-testid={ `${i}-recomendation-title` }
+        >
+          <Link className="swiper__link" to={ `/bebidas/${e.idDrink}` }>
+            <div className="swiper__div" data-testid={ `${i}-recomendation-card` }>
+              <h4 className="swiper__title">{ e.strDrink }</h4>
               <img
+                className="swiper__img"
                 src={ e.strDrinkThumb }
                 data-testid={ `${i}-card-img` }
                 alt="foto da receita"
-                style={ { height: '200px' } }
+                // style={ { height: '200px' } }
               />
-              <h4>{ e.strDrink }</h4>
             </div>
           </Link>
         </SwiperSlide>

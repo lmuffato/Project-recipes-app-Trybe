@@ -8,12 +8,15 @@ export default function VideoCtn(props) {
   return (
     <>
       <h3>Vídeo</h3>
+
       <iframe
-        width="420"
+        width="350"
         height="315"
         src={ embedWay }
-        data-testid="video"
-        title="recipe"
+        title="YouTube video player"
+        frameBorder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowFullScreen
       />
     </>
   );

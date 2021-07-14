@@ -56,10 +56,11 @@ function ComponentGen(props) {
       <Swiper
         slidesPerView={ 3 }
         spaceBetween={ 0 }
+        loop
         pagination={ {
           clickable: true,
         } }
-        className="mySwiper"
+        className="swiper"
       >
         {recomendList}
       </Swiper>
