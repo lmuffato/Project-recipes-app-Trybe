@@ -1,4 +1,4 @@
-.footer {
+/* .footer {
   bottom: 0;
   display: flex;
   justify-content: space-between;
@@ -21,7 +21,7 @@
 .rocksGlass {
   animation: shake 1s infinite ease;
   max-height: 80vh;
-}
+} */
 
 /*
 #iceLeft {
@@ -37,13 +37,13 @@
 }
 */
 
-.meals > .logo {
+/* .meals > .logo {
   animation: shake 1.5s infinite ease;
   color: aliceblue;
   font-family: Montserrat , sans-serif;
   font-size: 3em;
   font-weight: 900;
-}
+} */
 
 @keyframes shake {
 

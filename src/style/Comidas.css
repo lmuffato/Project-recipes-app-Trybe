@@ -12,6 +12,7 @@ a {
 img {
     opacity: 0.8;
     border-radius: 5px;
+    width: 90%;
 }
 
 img:hover {
@@ -19,25 +20,34 @@ img:hover {
     border-radius: 5px;
 }
 
-ul { 
-    margin: 0;
+.cards ul { 
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 0 15px;
+    width: 100%;
 }
 
 .cards {
-    width: 40%;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
 }
 
 .main-foods {
-    width: 100%;
-    display: flex;
     align-items: center;
+    display: flex;
     flex-direction: column;
+    width: 100%;
 }
 
 .recipe-card {
-    width: 100%;
-
+    background-color: cadetblue;
+    width: 30%;
+    align-items: center;
+    display: flex;
+    justify-content: center;
 }
-
