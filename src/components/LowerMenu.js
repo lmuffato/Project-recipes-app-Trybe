@@ -3,8 +3,8 @@ import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import app from '../configs/configs';
 import AppContext from '../contexts/app/AppContext';
-
-import drinkIcon from '../images/drinkIcon.svg';
+import drinkIcon from '../icons/appIcons/bebidas.png';
+// import drinkIcon from '../images/drinkIcon.svg';
 import exploreIcon from '../images/exploreIcon.svg';
 import mealIcon from '../images/mealIcon.svg';
 
@@ -24,7 +24,7 @@ export default function LowerMenu() {
             } }
             src={ drinkIcon }
           >
-            <img src={ drinkIcon } alt="Drink icon" />
+            <img className="drinkIcon" src={ drinkIcon } alt="Drink icon" />
           </button>
         </li>
         <li>
@@ -57,23 +57,22 @@ export default function LowerMenu() {
   );
 }
 
-const Container = styled.div`
-  background-color:  rgb(214, 168, 40);
-  position: fixed;
-  display: flex;
-  align-items: center;
-  bottom: 0;
-  height: 58px;
-  left: 0;
+const Container = styled.div` align-items: center;
+  background-color: rgb(214, 168, 40);
   border-top-left-radius: 6px;
   border-top-right-radius: 6px;
+  bottom: 0;
+  box-shadow: 0 -3px 4px 0 rgba(0, 0, 0, 0.55);
+  display: flex;
+  height: 58px;
+  left: 0;
+  position: fixed;
   width: 100%;
-  box-shadow: 0px -2px 4px 1px rgba(0,0,0,0.65);
 
   ul {
+    align-items: center;
     display: flex;
     justify-content: space-around;
-    align-items: center;
     margin: 0;
     padding: 0;
     width: 100%;
@@ -85,11 +84,16 @@ const Container = styled.div`
 
   button {
     background: none;
-    color: inherit;
     border: none;
-    padding: 0;
-    font: inherit;
+    color: inherit;
     cursor: pointer;
+    font: inherit;
     outline: inherit;
+    padding: 0;
+  }
+
+  .drinkIcon {
+    height: 40px;
+    width: 29px;
   }
 `;

@@ -3,9 +3,8 @@ button {
 }
 
 h1 {
-  font-family: Montserrat;
-  font-style: normal;
-  font-weight: normal;
+  color: rgb(43, 43, 43);
+  font-family: Montserrat , sans-serif;
   font-size: 30px;
   line-height: 37px;
 }
@@ -19,38 +18,38 @@ h1 {
 }
 
 .header-wrapper {
-  background-color:  rgb( 214, 168, 40 );
+  background-color: rgb(214, 168, 40);
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-around;
 }
 
 .profile-icon-img {
-  width: 37px;
   height: 37px;
+  width: 37px;
 }
 
 .search-icon-img {
-  width: 34px;
   height: 34px;
+  width: 34px;
 }
 
 .profile-icon {
   background: none;
-  color: inherit;
   border: none;
-  padding: 0;
-  font: inherit;
+  color: inherit;
   cursor: pointer;
+  font: inherit;
   outline: inherit;
+  padding: 0;
 }
 
 .search-button {
   background: none;
-  color: inherit;
   border: none;
-  padding: 0;
-  font: inherit;
+  color: inherit;
   cursor: pointer;
+  font: inherit;
   outline: inherit;
+  padding: 0;
 }

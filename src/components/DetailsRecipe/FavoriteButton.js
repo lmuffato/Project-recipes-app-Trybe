@@ -1,10 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
-
 import styled from 'styled-components';
 import FavoriteIconEnabled from '../../images/blackHeartIcon.svg';
 import FavoriteIconDisabled from '../../images/whiteHeartIcon.svg';
-
 import AppContext from '../../contexts/app/AppContext';
 
 const getFavoriteRecipes = () => {
@@ -107,24 +105,23 @@ FavoriteButton.defaultProps = {
   item: {},
 };
 
-const Container = styled.div`
-  width: 100%;
+const Container = styled.div` display: flex;
   max-height: 150px;
-  display: flex;
+  width: 100%;
 
   img {
-    width: 100%;
-    height: 100%;
     color: green;
+    height: 100%;
+    width: 100%;
   }
 
   button {
     background: none;
-    color: inherit;
     border: none;
-    padding: 0;
-    font: inherit;
+    color: inherit;
     cursor: pointer;
+    font: inherit;
     outline: inherit;
+    padding: 0;
   }
 `;

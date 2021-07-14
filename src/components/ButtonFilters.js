@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 export default function ButtonFilters({ categories, functionChangeFilter,
@@ -24,19 +25,19 @@ export default function ButtonFilters({ categories, functionChangeFilter,
   }, [categories]);
 
   return (
-    <div>
-      <button type="button" onClick={ changeFilters }>All</button>
+    <Container>
+      <Buttons type="button" onClick={ changeFilters }>All</Buttons>
       {filtersButtons.map((category, index) => (
-        <button
+        <Buttons
           type="button"
           key={ index }
           data-testid={ `${category.strCategory}-category-filter` }
           onClick={ changeFilters }
         >
           {category.strCategory}
-        </button>
+        </Buttons>
       ))}
-    </div>
+    </Container>
   );
 }
 
@@ -47,3 +48,24 @@ ButtonFilters.propTypes = {
   setToggle: PropTypes.func.isRequired,
   toggle: PropTypes.bool.isRequired,
 };
+
+const Container = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+`;
+
+const Buttons = styled.button`
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+  margin: 8px;
+  padding: 10px;
+  border-radius: 6px;
+  background-color: rgb( 214, 168, 40 );
+`;

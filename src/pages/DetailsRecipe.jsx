@@ -88,22 +88,18 @@ DetailsRecipe.propTypes = {
   }).isRequired,
 };
 
-const Container = styled.div`
-  width: 100%;
-  height: 100%;
+const Container = styled.div` align-items: center;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-`;
-
-const Content = styled.div`
-  width: 96%;
   height: 100%;
+  justify-content: flex-start;
+  width: 100%;
 `;
 
-const MessageClipboard = styled.span`
-  display: none;
-  color: green;
+const Content = styled.div`  height: 100%;
+  width: 96%;
 `;
-//
+
+const MessageClipboard = styled.span`  color: green;
+  display: none;
+`;
