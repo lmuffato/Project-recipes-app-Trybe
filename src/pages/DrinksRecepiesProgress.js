@@ -45,7 +45,7 @@ function DrinksRecepiesProgress() {
     return <Loading />;
   }
   const {
-    strArea, strCategory, strDrink, strDrinkThumb,
+    strDrink, strDrinkThumb,
     strAlcoholic, strInstructions, strImageSource,
   } = detailsRecepie;
 
