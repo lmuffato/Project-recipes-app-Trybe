@@ -1,5 +1,5 @@
 .category-button {
-  background-color: gray;
+  background-color: whitesmoke;
   border-radius: 8px;
   display: flex;
   flex-wrap: wrap;
@@ -9,6 +9,7 @@
     'Lucida Sans Unicode',
     'Verdana', 
     'sans-serif';
+  height: 80px;
   justify-content: space-evenly;
   margin-top: 15px;
   width: 90%;

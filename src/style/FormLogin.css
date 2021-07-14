@@ -1,0 +1,9 @@
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.form-login {
+  margin-top: 200px;
+}

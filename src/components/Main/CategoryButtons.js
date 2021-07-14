@@ -66,10 +66,10 @@ export default function CategoryButtons({ categories }) {
   }
 
   return (
-    <div className="category-button">
+    <div className="category-button ">
       {categories.map((categoryName, index) => (
         index < NUMBER_OF_CATEGORIES ? (
-          <label htmlFor="category-button" key={ index }>
+          <label htmlFor="category-button" key={ index } className="checkbox">
             <input
               className="category-buttons"
               name="category-buttons"

@@ -11,7 +11,7 @@ export default function Header({ title, enableSearchIcon = true }) {
 
   return (
     <div className="header-searchbar-container">
-      <div className="header-container">
+      <div className="header-container control">
         <Link to="/perfil" data-testid="profile-top-btn" src="profileIcon">
           <img src={ profileIcon } alt="Icone de perfil" />
         </Link>

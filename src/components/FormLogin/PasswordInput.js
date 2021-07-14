@@ -7,11 +7,20 @@ export default function PasswordInput() {
   const { dispatch } = useContext(LoginContext);
 
   return (
-    <input
-      data-testid="password-input"
-      type="password"
-      placeholder="more than 6 characters"
-      onChange={ (evt) => dispatch(passwordAction(evt.target.value)) }
-    />
+    <div className="field">
+      <label
+        className="label"
+        htmlFor="email-input"
+      >
+        Password:
+        {' '}
+        <input
+          data-testid="password-input"
+          type="password"
+          placeholder="more than 6 characters"
+          onChange={ (evt) => dispatch(passwordAction(evt.target.value)) }
+        />
+      </label>
+    </div>
   );
 }

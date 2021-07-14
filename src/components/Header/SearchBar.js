@@ -103,49 +103,57 @@ export default function SearchBar() {
 
   return (
     <form className="form-searchbar">
-      <label htmlFor="search-input">
-        <input
-          type="text"
-          data-testid="search-input"
-          onChange={ (event) => setSearchString(event.target.value) }
-        />
-      </label>
+      <div className="control">
+        <label htmlFor="search-input">
+          <input
+            type="text"
+            data-testid="search-input"
+            onChange={ (event) => setSearchString(event.target.value) }
+          />
+        </label>
+      </div>
       <br />
-      <label
-        htmlFor="search-radio"
-        onChange={ (event) => setSearchType(event.target.value) }
-      >
-        <input
-          type="radio"
-          name="search-radio"
-          data-testid="name-search-radio"
-          value="name"
-        />
-        Nome
-        <input
-          type="radio"
-          name="search-radio"
-          data-testid="ingredient-search-radio"
-          value="ingredient"
-        />
-        Ingrediente
-        <br />
-        <input
-          type="radio"
-          name="search-radio"
-          data-testid="first-letter-search-radio"
-          value="first-letter"
-        />
-        Primeira Letra
-      </label>
+      <div className="control">
+        <label
+          className="radio"
+          htmlFor="search-radio"
+          onChange={ (event) => setSearchType(event.target.value) }
+        >
+          <input
+            type="radio"
+            name="search-radio"
+            data-testid="name-search-radio"
+            value="name"
+          />
+          Nome
+          <input
+            type="radio"
+            name="search-radio"
+            data-testid="ingredient-search-radio"
+            value="ingredient"
+          />
+          Ingrediente
+          <br />
+          <input
+            type="radio"
+            name="search-radio"
+            data-testid="first-letter-search-radio"
+            value="first-letter"
+          />
+          Primeira Letra
+        </label>
+      </div>
       <br />
-      <button
-        type="submit"
-        data-testid="exec-search-btn"
-        onClick={ (event) => submitSearch(event, searchType, pathname) }
-      >
-        Buscar
-      </button>
+      <div className="control">
+        <button
+          className="button is-primary"
+          type="submit"
+          data-testid="exec-search-btn"
+          onClick={ (event) => submitSearch(event, searchType, pathname) }
+        >
+          Buscar
+        </button>
+      </div>
     </form>
   );
 }

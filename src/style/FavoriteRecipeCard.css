@@ -1,5 +1,4 @@
 .favorite-recipe-card {
-  border: 1px solid black;
   display: flex;
   height: 100px;
   justify-content: space-between;

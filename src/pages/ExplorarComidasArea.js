@@ -4,6 +4,7 @@ import Footer from '../components/Footer';
 import FoodContext from '../contexts/FoodContext';
 import RecipeCard from '../components/Main/RecipeCard';
 import { fetchFoodArea, fetchFoodAreaGeneral, fetchFoods } from '../services/mealAPI';
+import '../style/ExplorarComidasArea.css';
 
 export default function ExplorarComidasArea() {
   const { foods, setFoods } = useContext(FoodContext);
@@ -27,30 +28,35 @@ export default function ExplorarComidasArea() {
   }
 
   return (
-    <div>
+    <div className="main-area">
       <Header
         title="Explorar Origem"
       />
-      <label htmlFor="explore-by-area-dropdown">
-        Selecione
-        <select
-          name="explore-by-area-dropdown"
-          data-testid="explore-by-area-dropdown"
-          onClick={ (event) => filterFoodByArea(event.target.value) }
-        >
-          { areaNameToOptions && areaNameToOptions.map(({ idMeal, strArea }) => (
-            <option
-              value={ strArea }
-              key={ idMeal }
-              data-testid={ `${strArea}-option` }
-            >
-              { strArea }
-            </option>
-          ))}
-          <option data-testid="All-option"> All </option>
-        </select>
-      </label>
-      <main>
+      <div className="control">
+        <label htmlFor="explore-by-area-dropdown">
+          Selecione:
+          {' '}
+          <select
+            className="select select-align"
+            name="explore-by-area-dropdown"
+            data-testid="explore-by-area-dropdown"
+            onClick={ (event) => filterFoodByArea(event.target.value) }
+          >
+            { areaNameToOptions && areaNameToOptions.map(({ idMeal, strArea }) => (
+              <option
+                value={ strArea }
+                key={ idMeal }
+                data-testid={ `${strArea}-option` }
+              >
+                { strArea }
+              </option>
+            ))}
+            <option data-testid="All-option"> All </option>
+          </select>
+        </label>
+      </div>
+
+      <main className="main-food-list">
         <ul>
           { foods && foods.slice(0, NUMBER_OF_RECIPES)
             .map((recipe, index) => (

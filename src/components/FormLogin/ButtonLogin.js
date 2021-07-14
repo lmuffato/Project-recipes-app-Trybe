@@ -9,6 +9,7 @@ export default function ButtonLogin() {
 
   return (
     <button
+      className="button is-primary"
       data-testid="login-submit-btn"
       type="submit"
       disabled={
@@ -16,7 +17,7 @@ export default function ButtonLogin() {
         || password.length < numberMagic
       }
     >
-      Entrar
+      Login
     </button>
-  );
+);
 }

@@ -25,7 +25,7 @@ img:hover {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    margin: 0 15px;
+    margin: 0 10;
     width: 100%;
 }
 
@@ -50,9 +50,11 @@ img:hover {
 
 .recipe-card {
     margin: 15px 6px;
-    background-color: gray;
-    width: 29%;
+    background-color: whitesmoke;
+    width: 28%;
     align-items: center;
     display: flex;
     justify-content: center;
 }
+
+/* PS: Existe outro recipe-card no componente RecipeCard */
