@@ -1,16 +1,13 @@
 import React from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
-import { RecipeContextProvider } from './store/RecipeContext';
 import ReactDOM from 'react-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
   <Router>
-    <RecipeContextProvider>
-      <App />
-    </RecipeContextProvider>
+    <App />
   </Router>,
   document.getElementById('root'),
 );

@@ -1,9 +1,11 @@
 import { screen } from '@testing-library/dom';
+import userEvent from '@testing-library/user-event';
 import renderWithRouterAndContext from './helper/renders/renderWithRouterAndContext';
 import getTest from './helper/mocks/getTestInfo';
+import renderWithRCA from './helper/renders/renderWithRouterAndContextAPI';
 
 const { queryByTestId } = screen;
-const { headerRenderTests, footerRenderTests } = getTest();
+const { headerRenderTests, footerRenderTests, doTheLoginProcess } = getTest();
 const { itDoesntRenderHeader } = headerRenderTests();
 const { itDoesntRenderFooter } = footerRenderTests();
 
@@ -13,6 +15,18 @@ describe('FoodProgress screen', () => {
       await renderWithRouterAndContext();
       itDoesntRenderHeader(queryByTestId);
       itDoesntRenderFooter(queryByTestId);
+    });
+  });
+
+  describe('Testando', () => {
+    it('tessssstando', async () => {
+      const { getByTestId, findByText, history } = renderWithRCA();
+
+      expect(history.location.pathname).toBe('/');
+
+      doTheLoginProcess(getByTestId, userEvent);
+      expect(history.location.pathname).toBe('/comidas');
+      expect(await findByText(/corba/i));
     });
   });
 });

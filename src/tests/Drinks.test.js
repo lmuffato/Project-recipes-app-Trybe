@@ -4,8 +4,15 @@ import renderWithRouterAndContext from './helper/renders/renderWithRouterAndCont
 import getTest from './helper/mocks/getTestInfo';
 import drinks from './helper/mocks/api/drinks';
 import meals from './helper/mocks/api/meals';
+import renderWithRCA from './helper/renders/renderWithRouterAndContextAPI';
+import { drinkDataApi } from './helper/mocks/data';
 
-const { headerRenderTests, footerRenderTests, doTheLoginProcess } = getTest();
+const {
+  headerRenderTests,
+  footerRenderTests,
+  doTheLoginProcess,
+  recipeCardsTest,
+} = getTest();
 
 const { getByTestId, getByRole } = screen;
 
@@ -30,12 +37,6 @@ describe('Check Header and Footer components', () => {
 });
 
 describe('API tests', () => {
-  beforeEach(() => {
-    fetch.mockClear();
-  });
-
-  global.fetch = mockFetch;
-
   it('checks API when it doesnt return anything', async () => {
     await renderWithRouterAndContext();
 
@@ -53,9 +54,6 @@ describe('API tests', () => {
     userEvent.type(inputSearch, '>');
     userEvent.click(labelPrimeiraLetra);
     userEvent.click(buttonSearch);
-
-    const calledTimes = 2;
-    expect(global.fetch).toBeCalledTimes(calledTimes);
   });
 
   it('checks API', async () => {
@@ -77,19 +75,22 @@ describe('API tests', () => {
 });
 
 describe('Drinks tests', () => {
-  beforeEach(() => {
-    fetch.mockClear();
+  it('cheks initial foods', async () => {
+    const { findByTestId, history } = renderWithRCA();
+    goToTheDrinkMainPage();
+
+    expect(history.location.pathname).toBe('/bebidas');
+
+    drinkDataApi.firstTwelve.forEach((recipe) => {
+      recipeCardsTest(recipe, findByTestId);
+    });
   });
 
-  global.fetch = mockFetch;
+   it('checks Recipe Card', async () => {
+    const { findByTestId } = renderWithRCA();
+    goToTheDrinkMainPage();
 
-  // it('cheks initial foods', async () => {
-  //   await renderWithRouterAndContext();
-
-  //   doTheLoginProcess(getByTestId, userEvent);
-
-  //   foodDataApi.firstTwelve.forEach((recipe) => {
-  //     recipeCardsTest(recipe, findByTestId);
-  //   });
-  // });
+    const sectionGG = await findByTestId('0-recipe-card');
+    userEvent.click(sectionGG);
+  });
 });
