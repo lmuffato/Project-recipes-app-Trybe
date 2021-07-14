@@ -15,7 +15,6 @@ function DrinksRecepiesProgress() {
 
   // ao montar a pagina, faz api que traz infos via ID.
   useEffect(() => {
-    console.log(recepiID);
     const getRecepi = async () => {
       const endpoint = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${recepiID}`;
       const returnFetch = await fetch(endpoint);
@@ -25,6 +24,27 @@ function DrinksRecepiesProgress() {
     };
     getRecepi();
   }, []);
+
+/*   function saveLS() {
+  // Esta função não esta sendo chamada, e precisa ser duplicada para o MealsRecepiesProgress
+    console.log('chamou a função de salvar');
+    const getLS = localStorage.getItem('doneRecipes');
+    const { strDrink, strDrinkThumb, strAlcoholic, strTags } = detailsRecepie;
+    const date = new Date();
+    const newDoneRecepi = {
+      id: recepiID,
+      type: 'bebida',
+      area: '',
+      category: 'Cocktail',
+      alcoholicOrNot: strAlcoholic,
+      name: strDrink,
+      image: strDrinkThumb,
+      doneDate: `${date.getDate()} - ${date.getTime()}`,
+      tags: strTags,
+    };
+    console.log(newDoneRecepi.doneDate);
+    return localStorage.setItem('doneRecipes', [...getLS, newDoneRecepi]);
+  } */
 
   const getLocalStr = JSON.parse(localStorage.getItem('favoriteRecipes'));
   let checkLocalStr;
@@ -46,7 +66,7 @@ function DrinksRecepiesProgress() {
   }
   const {
     strDrink, strDrinkThumb,
-    strAlcoholic, strInstructions, strImageSource,
+    strAlcoholic, strInstructions,
   } = detailsRecepie;
 
   return (
@@ -54,7 +74,7 @@ function DrinksRecepiesProgress() {
       <img
         data-testid="recipe-photo"
         alt="drinks recepi"
-        src={ strImageSource }
+        src={ strDrinkThumb }
         width="50px"
       />
       <h2 data-testid="recipe-title">{ strDrink }</h2>
@@ -83,6 +103,7 @@ function DrinksRecepiesProgress() {
           data-testid="finish-recipe-btn"
           type="button"
           disabled={ allChecked }
+          // onClick={ saveLS }
         >
           Finalizar receita
         </button>

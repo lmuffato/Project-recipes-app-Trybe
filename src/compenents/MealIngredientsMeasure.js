@@ -88,8 +88,6 @@ function IngredientsMeasure({ detailsRecepie }) {
   }
 
   function getIngredientsList() {
-    console.log(detailsRecepie);
-    console.log(allIngredients);
     return allIngredients.map((elem, index) => (
       <div key={ index }>
         <label data-testid={ `${index}-ingredient-step` } htmlFor={ elem[1] }>

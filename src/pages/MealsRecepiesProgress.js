@@ -15,7 +15,6 @@ function MealsRecepiesProgress() {
 
   // ao montar a pagina, faz api que traz infos via ID.
   useEffect(() => {
-    console.log('entrou no didMount de mealsRecepieProgress');
     const getRecepi = async () => {
       const endpoint = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${recepiID}`;
       const { meals } = await fetch(endpoint).then((data) => data.json()); /* .then((response) => response)) */
