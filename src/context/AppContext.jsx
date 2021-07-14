@@ -17,7 +17,6 @@ export default function AppProvider({ children }) {
   const [recipe, setRecipe] = useState('');
   const NUM_RECIPES_SHOWN = 12;
   const NUM_CATEG_SHOWN = 5;
-
   const context = {
     displaySearchBar,
     setDisplaySearchBar,
@@ -37,6 +36,7 @@ export default function AppProvider({ children }) {
     recipe,
     setRecipe,
     toDoneStorage,
+
   };
 
   useEffect(() => {
