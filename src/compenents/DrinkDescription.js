@@ -6,6 +6,7 @@ import '../styles/Recomendations.css';
 import Recomendations from './Recomendations';
 import FavoriteBtn from './FavoriteBtn';
 import ShareButton from './ShareButton';
+import checkInProgress from '../services/checkInProgress';
 
 function DrinkDescription({ recipe, recipeId }) {
   const { recomendations, setIsFavorite } = useContext(RecipesContext);
@@ -38,16 +39,7 @@ function DrinkDescription({ recipe, recipeId }) {
     setIsFavorite(false);
   }
 
-  const initialObj = {
-    cocktails: {},
-    meals: {},
-  };
-
-  const lookForInProgress = localStorage.getItem('inProgressRecipes');
-
-  if (!lookForInProgress) {
-    localStorage.setItem('inProgressRecipes', JSON.stringify(initialObj));
-  }
+  checkInProgress();
 
   const checkStart = () => {
     const inProgress = JSON.parse(localStorage.getItem('inProgressRecipes'));
