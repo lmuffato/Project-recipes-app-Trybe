@@ -5,6 +5,7 @@ import renderWithRouterAndRedux from './renderWithRouterAndRedux';
 
 const MEAL_CARDS_COUNT = 12; // no magic numbers
 const breakfastButtonId = 'Breakfast-category-filter';
+const chickenButonId = 'Chicken-category-filter';
 const allButtonId = 'All-category-filter';
 
 describe('tests meal page ', () => {
@@ -45,8 +46,8 @@ describe('tests meal page ', () => {
     const breakfastButton = await findByTestId(breakfastButtonId);
     expect(breakfastButton).toBeInTheDocument(breakfastButtonId);
 
-    const chickenButton = await findByTestId('Chicken-category-filter');
-    expect(chickenButton).toBeInTheDocument('Chicken-category-filter');
+    const chickenButton = await findByTestId(chickenButonId);
+    expect(chickenButton).toBeInTheDocument(chickenButonId);
 
     const dessertButton = await findByTestId('Dessert-category-filter');
     expect(dessertButton).toBeInTheDocument('Dessert-category-filter');
@@ -65,6 +66,16 @@ describe('tests meal page ', () => {
     const breakfastButton = await findByTestId(breakfastButtonId);
     userEvent.click(breakfastButton);
     const text = await findByText('English Breakfast');
+    expect(text).toBeInTheDocument();
+  });
+
+  test('tests clicking on another category button', async () => {
+    const { history, findByTestId, findByText } = renderWithRouterAndRedux(<Meals />);
+    history.push('/comidas');
+
+    const chickenButton = await findByTestId(chickenButonId);
+    userEvent.click(chickenButton);
+    const text = await findByText('Brown Stew Chicken');
     expect(text).toBeInTheDocument();
   });
 });
