@@ -1,0 +1,66 @@
+/* Css - Done Recipes */
+.buttons-filter-done {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding: 3px;
+}
+
+.cards-favorite {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-favorite {
+  border: 1px solid #334031;
+  border-radius: 15px;
+  box-shadow: 5px 3px 1px hsl(138, 10%, 90%);
+  display: flex;
+  flex-direction: row;
+  height: 180px;
+  margin: 5px;
+}
+
+.card-img-favorite {
+  display: flex;
+  height: auto;
+  width: 40%;
+}
+
+.card-body {
+  text-align: center;
+  width: 60%;
+}
+
+.card-image-favorite-bottom {
+  border-radius: 15px;
+  width: 100%;
+}
+
+.button-favorite {
+  background-color: white;
+  border: none;
+  color: #334031;
+}
+
+.link-copy {
+  color: #334031;
+}
+
+.card-text-category {
+  color: #80ab82;
+}
+
+.card-title-favorite {
+  color: #334031;
+  margin: 10px;
+}
+
+.card-text-date {
+  color: #80ab82;
+}
+
+.text-copy {
+  color: #778472;
+}

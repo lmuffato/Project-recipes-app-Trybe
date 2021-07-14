@@ -1,8 +1,13 @@
 import React from 'react';
+import Header from '../../components/Header';
+import ButtonFilter from './ButtonFilter';
+import Recipes from './Recipes';
 
 const RecipesFav = () => (
   <div>
-    <h2>Receitas Favoritas</h2>
+    <Header />
+    <ButtonFilter />
+    <Recipes />
   </div>
 );
 

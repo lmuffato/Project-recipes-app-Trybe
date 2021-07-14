@@ -1,76 +1,93 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { Form, Button, ButtonGroup } from 'react-bootstrap';
 import Context from '../../context/Context';
-import styleCard, { styleBtn } from './index.style';
 import clearLS from '../../services/localStorage/clearLS';
+import Header from '../../components/Header';
+import Footer from '../../components/Footer';
+import './Style.css';
 
 const ProfileScreen = () => {
-  const { setLogout } = useContext(Context);
+  const {
+    setLogout,
+    setFavRecipes,
+    setInfoFav,
+    setDoneRecipes,
+    setInfoDone,
+  } = useContext(Context);
+  const user = JSON.parse(localStorage.getItem('user'));
 
   const handleClick = ({ target }) => {
-    console.log(target);
     if (target.id === 'recipes-made') {
-      console.log('Receitas feitas clicked!');
+      const infoDone = JSON.parse(localStorage.getItem('doneRecipes'));
+      if (infoDone !== true) {
+        setDoneRecipes(infoDone);
+        setInfoDone(infoDone);
+      }
     }
     if (target.id === 'recipes-fav') {
-      console.log('Receitas fav clicked!');
+      const infoFavorite = JSON.parse(localStorage.getItem('favoriteRecipes'));
+      setInfoFav(infoFavorite);
+      setFavRecipes(infoFavorite);
+      console.log(infoFavorite);
     }
     if (target.id === 'logout') {
-      console.log('Logout clcikec!');
+      console.log('Logout clciked!');
       setLogout(true); // setando variavel "logout" para verdadeiro, usuário deslogado!
       clearLS();
     }
   };
 
   return (
-    <div className="card" style={ styleCard }>
-      <h5 className="card-title">Perfil</h5>
-      <span data-testid="profile-email">email@mail.com</span>
-      <div className="btn-group-vertical">
-        <Link
-          to="/receitas-feitas"
-          style={ styleBtn }
-        >
-          <button
-            id="recipes-made"
-            type="button"
-            data-testid="profile-done-btn"
-            onClick={ handleClick }
-            className="btn btn-primary"
+    <>
+      <Header />
+      <Form className="form">
+        { (user) && <span data-testid="profile-email">{ user.email }</span> }
+        <ButtonGroup vertical>
+
+          <Link
+            to="/receitas-feitas"
           >
-            Receitas Feitas
-          </button>
-        </Link>
-        <Link
-          to="receitas-favoritas"
-          style={ styleBtn }
-        >
-          <button
-            id="recipes-fav"
-            type="button"
-            data-testid="profile-favorite-btn"
-            className="btn btn-primary"
-            onClick={ handleClick }
+            <Button
+              variant="custom"
+              id="recipes-made"
+              type="button"
+              data-testid="profile-done-btn"
+              onClick={ handleClick }
+            >
+              Receitas Feitas
+            </Button>
+          </Link>
+          <Link
+            to="receitas-favoritas"
           >
-            Receitas Favoritas
-          </button>
-        </Link>
-        <Link
-          to="/"
-          style={ styleBtn }
-        >
-          <button
-            id="logout"
-            type="button"
-            data-testid="profile-logout-btn"
-            className="btn btn-danger"
-            onClick={ handleClick }
+            <Button
+              variant="custom"
+              id="recipes-fav"
+              type="button"
+              data-testid="profile-favorite-btn"
+              onClick={ handleClick }
+            >
+              Receitas Favoritas
+            </Button>
+          </Link>
+          <Link
+            to="/"
           >
-            Sair
-          </button>
-        </Link>
-      </div>
-    </div>
+            <Button
+              variant="custom-light"
+              id="logout"
+              type="button"
+              data-testid="profile-logout-btn"
+              onClick={ handleClick }
+            >
+              Sair
+            </Button>
+          </Link>
+        </ButtonGroup>
+      </Form>
+      <Footer />
+    </>
   );
 };
 
