@@ -8,8 +8,7 @@ import AppProvider from './context/AppContext';
 import RecipesProgress from './pages/RecipesProgress';
 import ExploreFoods from './pages/ExploreFoods/index';
 import ExploreDrinks from './pages/ExploreDrinks/index';
-import ExploreByIngredientFoods from './pages/ExploreByIngredientFoods';
-import ExploreByIngredientDrinks from './pages/ExploreByIngredientDrinks';
+import ExploreByIngredient from './pages/ExploreByIngredient';
 import ExploreByAreaFoods from './pages/ExploreByAreaFoods';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import RecipesFavorites from './pages/RecipesFavorite';
@@ -38,12 +37,12 @@ function App() {
             <Route
               exact
               path="/explorar/comidas/ingredientes"
-              component={ ExploreByIngredientFoods }
+              component={ ExploreByIngredient }
             />
             <Route
               exact
               path="/explorar/bebidas/ingredientes"
-              component={ ExploreByIngredientDrinks }
+              component={ ExploreByIngredient }
             />
             <Route exact path="/explorar/comidas/area" component={ ExploreByAreaFoods } />
             <Route path="/receitas-favoritas" component={ RecipesFavorites } />

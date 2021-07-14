@@ -15,6 +15,7 @@ export default function SearchBtn() {
       <button
         type="button"
         onClick={ () => setDisplaySearchBar(!displaySearchBar) }
+        className="btn-Search-bar"
       >
         <img src={ SearchIcon } alt="Search icon" data-testid="search-top-btn" />
       </button>
