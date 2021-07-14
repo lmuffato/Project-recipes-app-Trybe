@@ -1,15 +1,16 @@
 import { object } from 'prop-types';
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+// import { useLocation } from 'react-router-dom';
 
-function Ingredientes({ params: { ingredientsList, data, setIsDisabled } }) {
+function Ingredientes({ params: { ingredientsList, data } }) {
+// function Ingredientes({ params: { ingredientsList, data, setIsDisabled } }) {
   const [ingArray, setIngArray] = useState([]);
   const [LSG, setLSG] = useState([]);
   // const [isChecked, setIsChecked] = useState(false);
 
-  let setArrayCheck = [];
+  // let setArrayCheck = [];
 
-  const LOCATION = useLocation();
+  // const LOCATION = useLocation();
 
   const updateLocalStorage = () => {
     const initalLocalStorage = {
@@ -19,54 +20,54 @@ function Ingredientes({ params: { ingredientsList, data, setIsDisabled } }) {
     localStorage.setItem('inProgressRecipes', JSON.stringify(initalLocalStorage));
   };
 
-  const getLocalStorage = () => {
-    const progressRecipes = JSON.parse(localStorage
-      .getItem('inProgressRecipes'));
-    console.log(progressRecipes);
-    // if (LSG !== null) {
-    //   const { cocktails, meals } = LSG;
-    //   const elementsTag = document.querySelector('.py-2').nextSibling.childNodes;
-    //   let valuesMeals;
-    //   let valuesCocktails;
+  // const getLocalStorage = () => {
+  //   const progressRecipes = JSON.parse(localStorage
+  //     .getItem('inProgressRecipes'));
+  //   console.log(progressRecipes);
+  //   // if (LSG !== null) {
+  //   //   const { cocktails, meals } = LSG;
+  //   //   const elementsTag = document.querySelector('.py-2').nextSibling.childNodes;
+  //   //   let valuesMeals;
+  //   //   let valuesCocktails;
 
-    //   elementsTag.forEach((elementTag, index) => {
-    //     switch (LOCATION.pathname) {
-    //     case `/comidas/${data.idMeal}/in-progress`:
-    //       valuesMeals = Object.values(meals);
-    //       valuesMeals[0].forEach((valueMeal) => {
-    //         if (index === valueMeal) {
-    //           elementsTag[index].firstChild.className = 'isCheckedCss';
-    //           elementsTag[index].firstChild.firstChild.checked = true;
-    //         }
-    //       });
-    //       break;
-    //     case `/bebidas/${data.idDrink}/in-progress`:
-    //       valuesCocktails = Object.values(cocktails);
-    //       valuesCocktails[0].forEach((valueCocktail) => {
-    //         if (index === valueCocktail) {
-    //           elementsTag[index].firstChild.className = 'isCheckedCss';
-    //           elementsTag[index].firstChild.firstChild.checked = true;
-    //         }
-    //       });
-    //       break;
-    //     default:
-    //       break;
-    //     }
-    //   });
-    // }
-  };
+  //   //   elementsTag.forEach((elementTag, index) => {
+  //   //     switch (LOCATION.pathname) {
+  //   //     case `/comidas/${data.idMeal}/in-progress`:
+  //   //       valuesMeals = Object.values(meals);
+  //   //       valuesMeals[0].forEach((valueMeal) => {
+  //   //         if (index === valueMeal) {
+  //   //           elementsTag[index].firstChild.className = 'isCheckedCss';
+  //   //           elementsTag[index].firstChild.firstChild.checked = true;
+  //   //         }
+  //   //       });
+  //   //       break;
+  //   //     case `/bebidas/${data.idDrink}/in-progress`:
+  //   //       valuesCocktails = Object.values(cocktails);
+  //   //       valuesCocktails[0].forEach((valueCocktail) => {
+  //   //         if (index === valueCocktail) {
+  //   //           elementsTag[index].firstChild.className = 'isCheckedCss';
+  //   //           elementsTag[index].firstChild.firstChild.checked = true;
+  //   //         }
+  //   //       });
+  //   //       break;
+  //   //     default:
+  //   //       break;
+  //   //     }
+  //   //   });
+  //   // }
+  // };
 
-  const createArrayCheck = () => {
-    const array = [];
-    ingredientsList.forEach((item, index) => {
-      array.push(false);
-    });
-    setArrayCheck = array;
-  };
+  // const createArrayCheck = () => {
+  //   const array = [];
+  //   ingredientsList.forEach((item, index) => {
+  //     array.push(false);
+  //   });
+  //   setArrayCheck = array;
+  // };
 
-  const btnCheck = () => {
+  // const btnCheck = () => {
 
-  };
+  // };
 
   // refatorar tudo nesse component
 
@@ -89,6 +90,7 @@ function Ingredientes({ params: { ingredientsList, data, setIsDisabled } }) {
 
     if (progressRecipes === null) return updateLocalStorage();
     setLSG(progressRecipes);
+    console.log(LSG);
 
     // getLocalStorage();
     // createArrayCheck();
@@ -104,7 +106,7 @@ function Ingredientes({ params: { ingredientsList, data, setIsDisabled } }) {
         .getItem('inProgressRecipes'));
 
       if (progressRecipes.meals === []) {
-        console.log('entrei');
+        console.log('entrei', foodsOrCocktails);
       }
     };
     setLocalStorage();
