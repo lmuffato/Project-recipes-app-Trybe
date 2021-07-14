@@ -1,0 +1,13 @@
+.grid {
+  display: grid;
+  margin-bottom: 3em;
+}
+
+button {
+  background-color: transparent;
+  background-repeat: no-repeat;
+  border: 2px double yellow;
+  cursor: pointer;
+  outline: none;
+  overflow: hidden;
+}
