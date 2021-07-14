@@ -55,7 +55,7 @@ function Ingredient({ recipe, type, validate = () => ('empty'), id }) {
                 data-testid={ `${index}-ingredient-step` }
                 htmlFor={ `${index}-checkbox` }
                 style={
-                  shouldBeChecked(item[1], toggle, id)
+                  shouldBeChecked(`${item[1]}${index}`, toggle, id)
                     ? { textDecoration: 'line-through' }
                     : { textDecoration: 'none' }
                 }
@@ -64,9 +64,9 @@ function Ingredient({ recipe, type, validate = () => ('empty'), id }) {
                   id={ `${index}-checkbox` }
                   type="checkbox"
                   className="form-check-input"
-                  onClick={ (e) => handleClick(e, item[1]) }
+                  onClick={ (e) => handleClick(e, `${item[1]}${index}`) }
                   defaultChecked={ shouldBeChecked(
-                    item[1], toggle, id,
+                    `${item[1]}${index}`, toggle, id,
                   ) }
                 />
                 { `${item[1]} - ${measures[index][1]}` }

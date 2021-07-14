@@ -17,6 +17,7 @@ function Header(props) {
     'Explorar Comidas',
     'Explorar Bebidas',
     'Explorar Ingredientes',
+    'Explorar Origem',
     'Receitas Feitas', 'Receitas Favoritas', 'Perfil',
   ];
 

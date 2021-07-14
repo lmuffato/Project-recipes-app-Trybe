@@ -1,0 +1,18 @@
+.meal-card {
+  background: yellow;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 3.5em;
+  width: 100%;
+}
+
+.meal-card img {
+  border-radius: 10px 10px 0 0;
+  width: 100%;
+}
+
+.meal-card p {
+  margin: 0;
+  padding: 10px;
+}

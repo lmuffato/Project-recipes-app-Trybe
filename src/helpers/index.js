@@ -88,5 +88,7 @@ export const checkLength = (id, toggle, ingredients) => {
   if (!actual || !actual[toggle] || !actual[toggle][id]) {
     return false;
   }
-  return actual[toggle][id].length === ingredients.length;
+  return actual[toggle][id][0] === ''
+    ? actual[toggle][id].length === ingredients.length + 1
+    : actual[toggle][id].length === ingredients.length;
 };
