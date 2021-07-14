@@ -18,6 +18,7 @@ function MealCards({ data, index }) {
         className="recipe-image"
       />
       <p className="recipe-title" data-testid={ `${index}-card-name` }>{strMeal}</p>
+
     </Link>
   );
 }

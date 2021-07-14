@@ -5,7 +5,7 @@ import SearchbarContext from './SearchbarContext';
 function SearchbarProvider({ children }) {
   const [searchBtn, setSearchBtn] = useState(false);
   const [hideSearchBtn, setHideSearchBtn] = useState(false);
-  const [pageName, setPageName] = useState('Comida');
+  const [pageName, setPageName] = useState('Comidas');
   const [searchCategory, setSearchCategory] = useState('list');
   const [categories, setCategories] = useState();
 
