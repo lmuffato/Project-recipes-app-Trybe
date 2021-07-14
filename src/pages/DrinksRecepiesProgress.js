@@ -1,13 +1,13 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
-import MealIngredientsMeasure from '../compenents/MealIngredientsMeasure';
+import DrinkIngredientsMeasure from '../compenents/DrinkIngredientsMeasure';
 import RecipesContext from '../contexts/RecipesContext';
 import ShareButton from '../compenents/ShareButton';
 import FavoriteBtn from '../compenents/FavoriteBtn';
 import Loading from '../compenents/Loading';
 
-function MealsRecepiesProgress() {
+function DrinksRecepiesProgress() {
   const [detailsRecepie, setDetailsRecepie] = useState();
   const { allChecked, setIsFavorite } = useContext(RecipesContext);
   const history = useHistory();
@@ -16,13 +16,35 @@ function MealsRecepiesProgress() {
   // ao montar a pagina, faz api que traz infos via ID.
   useEffect(() => {
     const getRecepi = async () => {
-      const endpoint = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${recepiID}`;
-      const { meals } = await fetch(endpoint).then((data) => data.json()); /* .then((response) => response)) */
-      console.log(meals);
-      setDetailsRecepie(meals[0]);
+      const endpoint = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${recepiID}`;
+      const returnFetch = await fetch(endpoint);
+      const dataJson = await returnFetch.json();
+      const { drinks } = dataJson;
+      setDetailsRecepie(drinks[0]);
     };
     getRecepi();
   }, []);
+
+  /*   function saveLS() {
+  // Esta função não esta sendo chamada, e precisa ser duplicada para o MealsRecepiesProgress
+    console.log('chamou a função de salvar');
+    const getLS = localStorage.getItem('doneRecipes');
+    const { strDrink, strDrinkThumb, strAlcoholic, strTags } = detailsRecepie;
+    const date = new Date();
+    const newDoneRecepi = {
+      id: recepiID,
+      type: 'bebida',
+      area: '',
+      category: 'Cocktail',
+      alcoholicOrNot: strAlcoholic,
+      name: strDrink,
+      image: strDrinkThumb,
+      doneDate: `${date.getDate()} - ${date.getTime()}`,
+      tags: strTags,
+    };
+    console.log(newDoneRecepi.doneDate);
+    return localStorage.setItem('doneRecipes', [...getLS, newDoneRecepi]);
+  } */
 
   const getLocalStr = JSON.parse(localStorage.getItem('favoriteRecipes'));
   let checkLocalStr;
@@ -43,33 +65,34 @@ function MealsRecepiesProgress() {
     return <Loading />;
   }
   const {
-    strArea, strCategory, strMeal, strMealThumb, strInstructions,
+    strDrink, strDrinkThumb,
+    strAlcoholic, strInstructions,
   } = detailsRecepie;
 
   return (
     <div>
       <img
         data-testid="recipe-photo"
-        alt="meals recepi"
-        src={ strMealThumb }
+        alt="drinks recepi"
+        src={ strDrinkThumb }
         width="50px"
       />
-      <h2 data-testid="recipe-title">{ strMeal }</h2>
+      <h2 data-testid="recipe-title">{ strDrink }</h2>
       <ShareButton
-        idRecipe={ `comidas/${recepiID}` }
+        idRecipe={ `bebidas/${recepiID}` }
       />
       <FavoriteBtn
         id={ recepiID }
-        type="comida"
-        area={ strArea }
-        category={ strCategory }
-        alcoholicOrNot=""
-        name={ strMeal }
-        image={ strMealThumb }
+        type="bebida"
+        area=""
+        category="Cocktail"
+        alcoholicOrNot={ strAlcoholic }
+        name={ strDrink }
+        image={ strDrinkThumb }
       />
-      <p data-testid="recipe-category">{ strCategory }</p>
+      <p data-testid="recipe-category">{ strAlcoholic }</p>
       <p>Ingredients</p>
-      <MealIngredientsMeasure
+      <DrinkIngredientsMeasure
         detailsRecepie={ detailsRecepie }
       />
       <p>Instruções</p>
@@ -80,6 +103,7 @@ function MealsRecepiesProgress() {
           data-testid="finish-recipe-btn"
           type="button"
           disabled={ allChecked }
+          // onClick={ saveLS }
         >
           Finalizar receita
         </button>
@@ -88,4 +112,4 @@ function MealsRecepiesProgress() {
   );
 }
 
-export default MealsRecepiesProgress;
+export default DrinksRecepiesProgress;

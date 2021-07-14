@@ -42,6 +42,16 @@ function MealDescription({ recipe, recipeId }) {
     setIsFavorite(false);
   }
 
+  const checkStart = () => {
+    const inProgress = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    console.log(inProgress);
+    if (inProgress && Object.keys(inProgress.meals).find((key) => key === idMeal)) {
+      // console.log('Vrau');
+      return 'Continuar Receita';
+    }
+    return 'Iniciar Receita';
+  };
+
   return (
     <>
       <section className="detail-container">
@@ -98,7 +108,8 @@ function MealDescription({ recipe, recipeId }) {
           className="start-recipe"
           data-testid="start-recipe-btn"
         >
-          Iniciar Receita
+          { checkStart() }
+          {/* Iniciar Receita */}
           {/* { isStarted ? 'Continuar Receita' : 'Iniciar Receita' } */}
         </button>
       </Link>

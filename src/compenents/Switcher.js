@@ -14,6 +14,7 @@ import DoneRecepies from '../pages/DoneRecepies';
 import RecipeDescription from './RecipeDescription';
 import NotFound from './NotFound';
 import MealsRecepiesProgress from '../pages/MealsRecepiesProgress';
+import DrinksRecepiesProgress from '../pages/DrinksRecepiesProgress';
 
 function Switcher() {
   return (
@@ -31,6 +32,7 @@ function Switcher() {
       <Route path="/receitas-feitas" component={ DoneRecepies } />
       <Route path="/explorar/bebidas/area" component={ NotFound } />
       <Route exact path="/comidas/:id/in-progress" component={ MealsRecepiesProgress } />
+      <Route exact path="/bebidas/:id/in-progress" component={ DrinksRecepiesProgress } />
       <Route
         path="/explorar/comidas/ingredientes"
         component={ FoodsIngredients }

@@ -39,13 +39,13 @@ function FavoriteBtn({ id, type, area, category, alcoholicOrNot, name, image, in
     let checkLocalStr;
 
     if (getLocalStr !== null) {
-      // procura o recipeId no LS
+    // procura o recipeId no LS
       checkLocalStr = Object.values(getLocalStr)
         .find(({ id: strId }) => strId === recipeId);
     }
 
     if (checkLocalStr || isFavorite) {
-      // recipeId encontrado no LS
+    // recipeId encontrado no LS
       return (
         <button
           type="button"
