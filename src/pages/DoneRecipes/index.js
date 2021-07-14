@@ -46,7 +46,7 @@ export default function DoneRecipes() {
         Drinks
       </button>
       { doneRecipes && filterDoneRecipes(filter, doneRecipes).map((recipe, index) => (
-        <DoneRecipeCard key={ recipe.id } recipe={ recipe } index={ index } />
+          <DoneRecipeCard key={ recipe.id } recipe={ recipe } index={ index } />
       )) }
     </div>
   );

@@ -4,6 +4,7 @@ import FooterMenu from '../../components/footerMenu';
 import Header from '../../components/Header';
 
 export default function ProfilePage() {
+  document.title = 'Perfil';
   function getItem() {
     return localStorage.getItem('user');
   }

@@ -14,14 +14,16 @@ function DrinkPage() {
   const { recipes, setRecipes, redirect } = useContext(RecipeContext);
   const [isLoading, setIsLoading] = useState(true);
   const [categories, setCategories] = useState([]);
-  const [choosedCategory, toggleCategory] = useState('');
+  const [choosedCategory, toggleCategory] = useState(null);
 
   useEffect(() => {
     setIsLoading(true);
     getCategoriesDrinks(setCategories);
-    initialDrinks(setRecipes);
+    if (redirect !== 'from-explore') {
+      initialDrinks(setRecipes);
+    }
     setIsLoading(false);
-  }, [setRecipes]);
+  }, [redirect, setRecipes]);
   useEffect(() => {
     if (choosedCategory) {
       setIsLoading(true);

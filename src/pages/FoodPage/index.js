@@ -13,14 +13,16 @@ function FoodPage() {
   const { recipes, setRecipes, redirect } = useContext(RecipeContext);
   const [isLoading, setIsLoading] = useState(true);
   const [categories, setCategories] = useState([]);
-  const [choosedCategory, toggleCategory] = useState('');
+  const [choosedCategory, toggleCategory] = useState(null);
 
   useEffect(() => {
     setIsLoading(true);
     getCategoriesFoods(setCategories);
-    initialFoods(setRecipes);
+    if (redirect !== 'from-explore') {
+      initialFoods(setRecipes);
+    }
     setIsLoading(false);
-  }, [setRecipes]);
+  }, [redirect, setRecipes]);
   useEffect(() => {
     if (choosedCategory) {
       setIsLoading(true);
