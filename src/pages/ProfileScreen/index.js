@@ -7,7 +7,7 @@ import './profile.css';
 
 export default function ProfileScreen() {
   const history = useHistory();
-  const email = JSON.parse(localStorage.getItem('user'));
+  const email = JSON.parse(localStorage.getItem('user')) || [];
 
   function cleanStorage() {
     localStorage.clear();
