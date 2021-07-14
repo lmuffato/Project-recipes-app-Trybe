@@ -18,7 +18,7 @@ function shouldRedirect(endpoint) {
   return endpointShouldRedirect.some((element) => endpoint.includes(element));
 }
 function DrinksCards({ drinks }) {
-  const URL = useSelector((state) => state.loading.recipesURL);
+  const URL = useSelector((state) => state.loading.requestedURL);
 
   const LAST_DRINK_INDEX = 12;
   const onlyTheFirst12 = (_recipe, index) => index < LAST_DRINK_INDEX;

@@ -1,0 +1,7 @@
+.text-decoration {
+  text-decoration: line-through solid black;
+}
+
+.no-decoration {
+  text-decoration: none;
+}

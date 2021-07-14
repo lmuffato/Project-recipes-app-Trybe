@@ -1,7 +1,7 @@
 import React from 'react';
 
 function PaginaNaoEncontrada() {
-  return <div>Página de Nao Encontrada</div>;
+  return <div>Not Found</div>;
 }
 
 export default PaginaNaoEncontrada;

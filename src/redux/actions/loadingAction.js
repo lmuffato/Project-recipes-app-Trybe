@@ -8,6 +8,9 @@ export const CHANGE_CATEGORY = 'CHANGE_CATEGORY';
 export const LOADING_INGREDIENT = 'LOADING_INGREDIENT';
 export const LOADING_INGREDIENT_FAIL = 'LOADING_INGREDIENT_FAIL';
 export const FINISH_LOADING_INGREDIENTS = 'FINISH_LOADING_INGREDIENTS';
+export const LOADING_AREAS = 'LOADING_AREAS';
+export const FINISHED_LOADING_AREAS = 'FINISHED_LOADING_AREAS';
+export const LOADING_AREAS_FAILED = 'LOADING_AREAS_FAILED';
 
 export function loadingRecipes(payload) {
   return {
@@ -57,9 +60,25 @@ export function loadingIngredientsFailed(payload) {
     payload,
   };
 }
-
 export function finishedLoadingIngredients() {
   return {
     type: FINISH_LOADING_INGREDIENTS,
+  };
+}
+export function loadingAreas() {
+  return {
+    type: LOADING_AREAS,
+  };
+}
+export function finishedLoadingAreas(payload) {
+  return {
+    type: FINISHED_LOADING_AREAS,
+    payload,
+  };
+}
+export function loadingAreasFailed(payload) {
+  return {
+    type: LOADING_AREAS_FAILED,
+    payload,
   };
 }

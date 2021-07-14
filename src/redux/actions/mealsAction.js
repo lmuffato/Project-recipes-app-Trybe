@@ -1,10 +1,16 @@
 import { MEALS_ALL_CATEGORIES_ENDPOINT,
-  MEALS_INGREDIENT_ENDPOINT } from '../../services/meals';
+  MEALS_INGREDIENT_ENDPOINT,
+  MEALS_ALL_AREAS_ENDPOINT,      
+  MEALS_ALL_CATEGORIES_ENDPOINT } from '../../services/meals';
+
 import fetchAPI from '../../services';
 import {
+  finishedLoadingAreas,
   finishedLoadingCategories,
   finishedLoadingIngredients,
   finishedLoadingRecipes,
+  loadingAreas,
+  loadingAreasFailed,
   loadingCategories,
   loadingCategoriesFailed,
   loadingIngredient,
@@ -18,6 +24,8 @@ export const SET_MEAL_DETAILS = 'SET_MEAL_DETAILS';
 export const SET_MEAL_CATEGORIES = 'SET_MEAL_CATEGORIES';
 export const CHANGE_MEAL_CATEGORY = 'CHANGE_MEAL_CATEGORY';
 export const SET_MEALS_INGREDIENTS = 'SET_MEALS_INGREDIENTS';
+export const SET_MEAL_AREAS = 'SET_MEAL_AREAS';
+export const CHANGE_MEAL_AREA = 'CHANGE_MEAL_AREA';
 
 function APIThunk(setter) {
   return (URL) => async (dispatch) => {
@@ -75,21 +83,38 @@ export function getFoodCategoriesAPIThunk() {
     dispatch(finishedLoadingCategories());
   };
 }
-
+function setAreas(payload) {
+  return {
+    type: SET_MEAL_AREAS,
+    payload,
+  };
+}
+export function getFoodAreasAPIThunk() {
+  return async (dispatch) => {
+    dispatch(loadingAreas());
+    try {
+      console.log(MEALS_ALL_AREAS_ENDPOINT);
+      const response = await fetchAPI(MEALS_ALL_AREAS_ENDPOINT);
+      dispatch(setAreas(response.meals));
+    } catch (e) {
+      console.error(e);
+      dispatch(loadingAreasFailed(e));
+    }
+    dispatch(finishedLoadingAreas());
+  };
+}
 export function changeCategory(payload) {
   return {
     type: CHANGE_MEAL_CATEGORY,
     payload,
   };
 }
-
 export function setIngredients(payload) {
   return {
     type: SET_MEALS_INGREDIENTS,
     payload,
   };
 }
-
 export function getMealsIngredientsAPIThunk() {
   const LAST_INGREDIENT_INDEX = 12;
   const onlyTheFirst12 = (_recipe, index) => index < LAST_INGREDIENT_INDEX;
@@ -103,5 +128,11 @@ export function getMealsIngredientsAPIThunk() {
       dispatch(loadingIngredientsFailed(e));
     }
     dispatch(finishedLoadingIngredients());
+  };
+}
+export function changeArea(payload) {
+  return {
+    type: CHANGE_MEAL_AREA,
+    payload,
   };
 }
