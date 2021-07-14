@@ -4,11 +4,12 @@ import RecipesContext from '../contexts/RecipesContext';
 import '../styles/IngredientsMeasure.css';
 
 function IngredientsMeasure({ detailsRecepie }) {
+  console.log(detailsRecepie);
   const [checkedIngridientsState, setCheckedIngridientsState] = useState(0);
-  const { idMeal } = detailsRecepie;
+  const { idDrink } = detailsRecepie;
   const ingredientsStorage = JSON.parse(localStorage.getItem('inProgressRecipes'));
   const [doneIngredients, setDoneIngredients] = useState(
-    ingredientsStorage ? ingredientsStorage.meals[idMeal] : [],
+    ingredientsStorage ? ingredientsStorage.cocktails[idDrink] : [],
   );
   const [cocktailsStorage, setcocktailsStorage] = useState({});
   const [allMealsStorage, setAllMealsStorage] = useState({});
@@ -34,8 +35,8 @@ function IngredientsMeasure({ detailsRecepie }) {
 
   function setFirstLocalStorage() {
     const objetoLocalStorage = {
-      cocktails: {},
-      meals: { [idMeal]: doneIngredients },
+      cocktails: { [idDrink]: doneIngredients },
+      meals: {},
     };
     const ingredientListString = JSON.stringify(objetoLocalStorage);
     localStorage.setItem('inProgressRecipes', ingredientListString);
@@ -43,12 +44,12 @@ function IngredientsMeasure({ detailsRecepie }) {
 
   function upDateLocalStorage() {
     const newLocalStorage = {
-      cocktails: cocktailsStorage,
-      meals: { ...otherStorageRecepies, [idMeal]: [...doneIngredients] },
+      cocktails: { ...otherStorageRecepies, [idDrink]: [...doneIngredients] },
+      meals: { allMealsStorage },
     };
     const newLocalStorageString = JSON.stringify(newLocalStorage);
     localStorage.setItem('inProgressRecipes', newLocalStorageString);
-    setAllMealsStorage(newLocalStorage.meals);
+    // setAllMealsStorage(newLocalStorage.meals);
   }
 
   function getLocalStorage() {
@@ -60,10 +61,10 @@ function IngredientsMeasure({ detailsRecepie }) {
       const { cocktails, meals } = recepiesInProgress;
       setcocktailsStorage(cocktails);
       setAllMealsStorage(meals);
-      const otherRecepies = delete allMealsStorage.idMeal;
+      const otherRecepies = delete cocktailsStorage.idDrink;
       setOtherStorageRecepies(otherRecepies);
 
-      if (meals[idMeal] === null) upDateLocalStorage();
+      if (cocktails[idDrink] === null) upDateLocalStorage();
     }
   }
 
@@ -88,13 +89,15 @@ function IngredientsMeasure({ detailsRecepie }) {
   }
 
   function getIngredientsList() {
+    if (allIngredients === undefined) {
+      return <div>loading</div>;
+    }
     return allIngredients.map((elem, index) => (
       <div key={ index }>
-        <label htmlFor={ elem[1] }>
+        <label data-testid={ `${index}-ingredient-step` } htmlFor={ elem[1] }>
           <input
             checked={ doneIngredients.some((element) => element === elem[1]) }
             id={ elem[1] }
-            data-testid={ `${index}-ingredient-step` }
             type="checkbox"
             onChange={ (e) => checkedListIngredients(e) }
           />
@@ -115,7 +118,7 @@ function IngredientsMeasure({ detailsRecepie }) {
 
 IngredientsMeasure.propTypes = {
   detailsRecepie: PropTypes.shape({
-    idMeal: PropTypes.string,
+    idDrink: PropTypes.string,
   }).isRequired,
 };
 

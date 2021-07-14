@@ -38,7 +38,6 @@ function SearchBar() {
       setIdMeal(mealId);
       history.push(`/comidas/${mealId}`);
     } else {
-      console.log(data);
       setSearchedRecipes(Object.values(data)[0].slice(0, maxRecipes));
     }
   };
@@ -107,35 +106,6 @@ function SearchBar() {
       </button>
     </div>
   );
-
-  // const getIngredientsFiltered = () => (
-  //   mealOrDrink === 'meal' ? recipes.map((recipe, index) => (
-  //     // <FilteredCard
-  //     //   key={ meal.idMeal }
-  //     //   index={ index }
-  //     //   name={ meal.strMeal }
-  //     //   thumbnail={ meal.strMealThumb }
-  //     // />
-  //     <MealCards
-  //       data={ recipe }
-  //       index={ index }
-  //       key={ recipe.idMeal }
-  //     />
-  //   ))
-  //     : recipes.map((recipe, index) => (
-  //       // <FilteredCard
-  //       //   key={ drink.idDrink }
-  //       //   index={ index }
-  //       //   name={ drink.strDrink }
-  //       //   thumbnail={ drink.strDrinkThumb }
-  //       // />
-  //       <DrinkCards
-  //         data={ recipe }
-  //         index={ index }
-  //         key={ recipe.idDrink }
-  //       />
-  //     ))
-  // );
 
   return (
     <>

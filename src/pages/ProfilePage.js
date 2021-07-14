@@ -1,15 +1,22 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import Footer from '../compenents/Footer';
 import Header from '../compenents/Header';
+import SearchbarContext from '../contexts/SearchbarContext';
+import UserContext from '../contexts/UserContext';
 import '../styles/ProfilePage.css';
 
 function Profile() {
-  const [userEmail, setUserEmail] = useState('');
+  const [userEmailProfile, setUserEmailProfile] = useState('');
+  const { setHideSearchBtn, setPageName } = useContext(SearchbarContext);
+  const { userEmail } = useContext(UserContext);
 
   useEffect(() => {
     const userEmailStorageString = JSON.parse(localStorage.getItem('user'));
-    if (userEmailStorageString === null) setUserEmail('fake@gmail.com');
-    else setUserEmail(userEmailStorageString.email);
+    if (userEmailStorageString === null) setUserEmailProfile(userEmail);
+    else setUserEmailProfile(userEmailStorageString.email);
+    setHideSearchBtn(false);
+    setPageName('Perfil');
   }, []);
 
   const clearStorage = () => localStorage.clear();
@@ -18,7 +25,7 @@ function Profile() {
     <>
       <Header />
       <div className="profile-elements">
-        <p data-testid="profile-email">{userEmail}</p>
+        <p data-testid="profile-email">{userEmailProfile}</p>
         <Link to="/receitas-feitas">
           <button
             type="button"
@@ -48,6 +55,7 @@ function Profile() {
           </button>
         </Link>
       </div>
+      <Footer />
     </>
   );
 }
