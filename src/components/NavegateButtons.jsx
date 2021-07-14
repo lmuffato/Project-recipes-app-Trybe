@@ -18,7 +18,7 @@ function NavegateButtons() {
         type="button"
         data-testid="filter-by-food-btn"
         className="button-navegation"
-        onClick={ () => setFilter('Meal') }
+        onClick={ () => setFilter('comida') }
       >
         Food
       </button>
@@ -26,7 +26,7 @@ function NavegateButtons() {
         type="button"
         data-testid="filter-by-drink-btn"
         className="button-navegation"
-        onClick={ () => setFilter('Drink') }
+        onClick={ () => setFilter('bebida') }
       >
         Drinks
       </button>

@@ -1,10 +1,3 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { useHistory } from 'react-router-dom';
-import shareIcon from '../images/shareIcon.svg';
-import setFavoriteLocalStorage from '../service/setFavoriteLocalStorage';
-import '../styleSheets/CardDoneAndFavorite.css';
-
 /*
 - Esta função renderiza um card de receita pronta ou favorita
 - Ela recebe como parâmetro as informações referentes à receita na variável "recipe"
@@ -35,39 +28,55 @@ O texto do nome da receita deve ter o atributo data-testid="${index}-horizontal-
 O texto da data que a receita foi feita deve ter o atributo data-testid="${index}-horizontal-done-date";
 O elemento de compartilhar a receita deve ter o atributo data-testid="${index}-horizontal-share-btn";
 As tags da receita devem possuir o atributo data-testid=${index}-${tagName}-horizontal-tag;
-
 */
+
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import shareIcon from '../images/shareIcon.svg';
+import setFavoriteLocalStorage from '../service/setFavoriteLocalStorage';
+import '../styleSheets/CardDoneAndFavorite.css';
 
 function CardDoneAndFavorite(props) {
   const { recipe, local, index } = props;
   const { id, type, area, category, alcoholicOrNot, name, image } = recipe;
-  const history = useHistory();
-  const dbType = type === 'Meal' ? 'themealdb' : 'thecocktaildb';
-  const pathDetail = type === 'Meal' ? '/comidas' : '/bebidas';
-  const sendToDetail = () => {
-    history.push(`${pathDetail}/${id}`);
-  };
+  const dbType = type === 'comida' ? 'themealdb' : 'thecocktaildb';
+  const pathDetail = type === 'comida' ? '/comidas' : '/bebidas';
   const doneDateElement = local === 'feitas'
     ? (<span data-testid={ `${index}-horizontal-done-date` }>{recipe.doneDate}</span>)
     : '';
   const tagsInfo = local === 'feitas' ? recipe.tags : [];
   console.log(local, tagsInfo);
-  const tagsElements = tagsInfo.map((tagName, index2) => (
-    <span
-      data-testid={ `${index}-${tagName}-horizontal-tag` }
-      className="tag-recipe"
-      key={ index2 }
-    >
-      {tagName}
-    </span>
-  ));
+  const tagsElements = tagsInfo.reduce((acc, tagName, index2) => {
+    console.log(acc);
+    if (index2 < 2) {
+      acc.push(
+        <span
+          data-testid={ `${index}-${tagName}-horizontal-tag` }
+          className="tag-recipe"
+          key={ index2 }
+        >
+          {tagName}
+        </span>,
+      );
+    }
+    return acc;
+  }, []);
 
-  const custonElement = type === 'Drink'
+  const custonElement = type === 'bebida'
     ? (
-      <span>{alcoholicOrNot}</span>
+      <span
+        data-testid={ `${index}-horizontal-top-text` }
+      >
+        {alcoholicOrNot}
+      </span>
     )
     : (
-      <span>{area}</span>
+      <span
+        data-testid={ `${index}-horizontal-top-text` }
+      >
+        {`${area} - ${category}`}
+      </span>
     );
   const favoriteButton = (
     <button
@@ -80,39 +89,49 @@ function CardDoneAndFavorite(props) {
   return (
     <section
       className="done-favorite-card"
-      role="button"
       tabIndex={ index }
-      onClick={ sendToDetail }
-      onKeyPress={ sendToDetail }
       data-testid={ `${index}` }
     >
-      <img
-        src={ image }
-        alt={ `Recipe of ${name}` }
-        className="image-done-card"
-        data-testid={ `${index}-horizontal-image` }
-      />
-      <span
-        data-testid={ `${index}-horizontal-top-text` }
+      <Link
+        to={ `${pathDetail}/${id}` }
       >
-        { category }
-      </span>
-      { custonElement }
-      <button
-        type="button"
-        data-testid={ `${index}-horizontal-share-btn` }
+        <img
+          src={ image }
+          alt={ `Recipe of ${name}` }
+          className="image-done-card"
+          data-testid={ `${index}-horizontal-image` }
+        />
+      </Link>
+      <div
+        className="info-card"
       >
-        <img src={ shareIcon } alt="share recipe button" />
-      </button>
-      <h3
-        className="title-done-card"
-        data-testid={ `${index}-horizontal-name` }
-      >
-        { name }
-      </h3>
-      {local === 'feitas' && doneDateElement}
-      {local === 'feitas' && tagsElements}
-      {local === 'favoritas' && favoriteButton}
+        <div>
+          { custonElement }
+          <button
+            type="button"
+            src={ shareIcon }
+          >
+            <img
+              src={ shareIcon }
+              alt="icone para compartilhar"
+              data-testid={ `${index}-horizontal-share-btn` }
+            />
+          </button>
+        </div>
+        <Link
+          to={ `${pathDetail}/${id}` }
+        >
+          <h3
+            className="title-done-card"
+            data-testid={ `${index}-horizontal-name` }
+          >
+            { name }
+          </h3>
+        </Link>
+        {local === 'feitas' && doneDateElement}
+        <div>{local === 'feitas' && tagsElements}</div>
+        {local === 'favoritas' && favoriteButton}
+      </div>
     </section>
   );
 }

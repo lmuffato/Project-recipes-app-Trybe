@@ -23,7 +23,7 @@ const generateDoneElement = (recipe, type) => {
   const date = new Date();
   return ({
     id: recipe[`id${type}`],
-    type,
+    type: type === 'Meal' ? 'comida' : 'bebida',
     area: type === 'Meal' ? recipe.strArea : '',
     category: recipe.strCategory,
     alcoholicOrNot: type === 'Drink' ? recipe.strAlcoholic : '',
