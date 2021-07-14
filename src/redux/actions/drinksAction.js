@@ -90,7 +90,7 @@ export function setIngredients(payload) {
   };
 }
 
-export function getDrinkssIngredientsAPIThunk() {
+export function getDrinksIngredientsAPIThunk() {
   const LAST_INGREDIENT_INDEX = 12;
   const onlyTheFirst12 = (_recipe, index) => index < LAST_INGREDIENT_INDEX;
   return async (dispatch) => {

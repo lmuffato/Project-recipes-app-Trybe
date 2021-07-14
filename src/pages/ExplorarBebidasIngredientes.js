@@ -4,7 +4,7 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Loading from '../components/Loading';
 import DrinkIngredientCard from '../components/DrinkIngredientCard';
-import { getDrinkssIngredientsAPIThunk } from '../redux/actions/drinksAction';
+import { getDrinksIngredientsAPIThunk } from '../redux/actions/drinksAction';
 
 function ExplorarBebidasIngredientes() {
   // const ingredients = useSelector((state) => state.drinks.ingredients);
@@ -12,7 +12,7 @@ function ExplorarBebidasIngredientes() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getDrinkssIngredientsAPIThunk());
+    dispatch(getDrinksIngredientsAPIThunk());
   }, [dispatch]);
 
   return (
