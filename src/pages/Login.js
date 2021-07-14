@@ -1,10 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { BiDrink } from 'react-icons/bi';
-import { GiKnifeFork } from 'react-icons/gi';
 
 import ReceitasContext from '../contexts/ReceitasContext';
 import '../styles/Login.css';
+import easyRecipe from '../images/logo1.png';
 
 function Login() {
   const {
@@ -16,7 +15,35 @@ function Login() {
   const minPasswordLength = 6;
   const history = useHistory();
 
+  const verifyEmailError = () => {
+    const emailSpan = document.getElementById('email_span__form');
+
+    if (!emailPatternTest) {
+      emailSpan.style.display = 'block';
+    } else {
+      emailSpan.style.display = 'none';
+    }
+  };
+
+  const verifyPassError = () => {
+    const passwordSpan = document.getElementById('password_span__form');
+
+    if (password.length <= minPasswordLength) {
+      passwordSpan.style.display = 'block';
+    } else {
+      passwordSpan.style.display = 'none';
+    }
+  };
   useEffect(() => {
+    const passwordSpan = document.getElementById('password_span__form');
+    const emailSpan = document.getElementById('email_span__form');
+
+    if (emailPatternTest) {
+      emailSpan.style.display = 'none';
+    }
+    if (password.length > minPasswordLength) {
+      passwordSpan.style.display = 'none';
+    }
     if (emailPatternTest && password.length > minPasswordLength) {
       setDisableButton(false);
     } else {
@@ -33,49 +60,58 @@ function Login() {
   };
   return (
     <form
+      className="form"
       onSubmit={ (event) => {
         event.preventDefault();
         saveToLocalStorage();
       } }
     >
-      <div className="form-group">
-        <div className="icons">
-          <BiDrink className="drinkIcon" />
-          <h1>Login</h1>
-          <GiKnifeFork className="knifeForkIcon" />
-        </div>
-        <label htmlFor="email">
-          <p className="lbl-txt-login">
-            Email
+      <div>
+        <img className="form__img" src={ easyRecipe } alt="logo easy recipe" />
+
+        <h1 className="form__title">login</h1>
+        <label className="form__label" htmlFor="email">
+          <p className="form__p">
+            E-mail
           </p>
           <input
-            className="input-login"
+            className="form__input"
             value={ email }
             data-testid="email-input"
             type="email"
-            placeholder="Email"
+            placeholder="e-mail"
             onChange={ ({ target }) => setEmail(target.value) }
+            onBlur={ verifyEmailError }
+            required
           />
+          <span className="form__span" id="email_span__form">
+            Invalid email format
+          </span>
         </label>
-        <label htmlFor="password">
-          <p className="lbl-txt-login">Senha</p>
+        <label className="form__label" htmlFor="password">
+          <p className="form__p">Password</p>
           <input
-            className="input-login"
+            className="form__input"
             value={ password }
             data-testid="password-input"
             type="password"
-            placeholder="Senha"
+            placeholder="password"
             onChange={ ({ target }) => setPassword(target.value) }
             minLength="7"
+            onBlur={ verifyPassError }
+            required
           />
+          <span className="form__span" id="password_span__form">
+            Password must be at least 7 characters
+          </span>
         </label>
         <button
-          className="btn-login"
+          className="form__button"
           type="submit"
           data-testid="login-submit-btn"
           disabled={ disableButton }
         >
-          Entrar
+          Enter
         </button>
       </div>
 
