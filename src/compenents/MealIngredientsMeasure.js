@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import RecipesContext from '../contexts/RecipesContext';
 import '../styles/IngredientsMeasure.css';
+import Loading from './Loading';
 
 function MealIngredientsMeasure({ detailsRecepie }) {
   const [checkedIngridientsState, setCheckedIngridientsState] = useState(0);
@@ -44,15 +45,6 @@ function MealIngredientsMeasure({ detailsRecepie }) {
     return setAllChecked(true);
   }
 
-  // function setFirstLocalStorage() {
-  //   const objetoLocalStorage = {
-  //     cocktails: {},
-  //     meals: { [idMeal]: doneIngredients },
-  //   };
-  //   const ingredientListString = JSON.stringify(objetoLocalStorage);
-  //   localStorage.setItem('inProgressRecipes', ingredientListString);
-  // }
-
   function upDateLocalStorage() {
     const newLocalStorage = {
       cocktails: allMealsStorage,
@@ -60,28 +52,7 @@ function MealIngredientsMeasure({ detailsRecepie }) {
     };
     const newLocalStorageString = JSON.stringify(newLocalStorage);
     localStorage.setItem('inProgressRecipes', newLocalStorageString);
-    // setAllMealsStorage(newLocalStorage.meals);
   }
-
-  // function getLocalStorage() {
-  //   const recepiesInProgressString = localStorage.getItem('inProgressRecipes');
-  //   const recepiesInProgress = JSON.parse(recepiesInProgressString);
-  //   if (recepiesInProgressString === null) {
-  //     setFirstLocalStorage();
-  //   } else {
-  //     const { cocktails, meals } = recepiesInProgress;
-  //     setcocktailsStorage(cocktails);
-  //     setAllMealsStorage(meals);
-  //     const otherRecepies = delete allMealsStorage.idMeal;
-  //     setOtherStorageRecepies(otherRecepies);
-
-  //     if (meals[idMeal] === null) upDateLocalStorage();
-  //   }
-  // }
-
-  // useEffect(() => {
-  //   getLocalStorage();
-  // }, []);
 
   useEffect(() => {
     checkInputs();
@@ -101,8 +72,9 @@ function MealIngredientsMeasure({ detailsRecepie }) {
 
   function getIngredientsList() {
     if (allIngredients === undefined) {
-      return <div>loading</div>;
+      return <Loading />;
     }
+
     return allIngredients.map((elem, index) => (
       <div key={ index }>
         <label data-testid={ `${index}-ingredient-step` } htmlFor={ elem[1] }>
