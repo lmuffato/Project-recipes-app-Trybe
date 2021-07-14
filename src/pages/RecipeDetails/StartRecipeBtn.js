@@ -24,12 +24,19 @@ export default function StartRecipeBtn({ recipe }) {
       if (toStorage.meals && Object.keys(toStorage.meals).some(
         (inProgMealId) => inProgMealId === recipe.idMeal,
       )) {
-        document.getElementsByClassName('start-recipe-btn')[0].innerHTML = 'Continuar Receita';
+        document.getElementsByClassName('start-recipe-btn')[0]
+          .innerHTML = 'Continuar Receita';
       }
+    } else if (toStorage.cocktails && Object.keys(toStorage.cocktails).some(
+      (inProgDrinkId) => inProgDrinkId === recipe.idDrink,
+    )) {
+      document.getElementsByClassName('start-recipe-btn')[0]
+        .innerHTML = 'Continuar Receita';
     }
 
     return () => {
-      document.getElementsByClassName('start-recipe-btn')[0].style.display = 'Iniciar Receita';
+      document.getElementsByClassName('start-recipe-btn')[0]
+        .style.display = 'Iniciar Receita';
     };
   }, [toStorage, pageOrigin]);
 
