@@ -2,8 +2,13 @@
   background-color: gray;
   border-radius: 8px;
   display: flex;
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   flex-wrap: wrap;
+  font-family: 'Lucida Sans', 
+    'Lucida Sans Regular', 
+    'Lucida Grande', 
+    'Lucida Sans Unicode',
+    'Verdana', 
+    'sans-serif';
   justify-content: space-evenly;
   margin-top: 15px;
   width: 90%;
