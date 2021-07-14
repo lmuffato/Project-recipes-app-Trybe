@@ -14,12 +14,14 @@ export default function FavoritesProvider({ children }) {
     }
   }, []);
 
-  function saveFavoritesToLS(favArray) {
-    localStorage.setItem('favoriteRecipes', JSON.stringify(favArray));
-  }
+  useEffect(() => {
+    if (favorites) {
+      localStorage.setItem('favoriteRecipes', JSON.stringify(favorites));
+    }
+  }, [favorites]);
 
   return (
-    <FavoritesContext.Provider value={ { favorites, setFavorites, saveFavoritesToLS } }>
+    <FavoritesContext.Provider value={ { favorites, setFavorites } }>
       {children}
     </FavoritesContext.Provider>
   );

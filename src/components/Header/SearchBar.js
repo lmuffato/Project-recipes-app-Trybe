@@ -25,7 +25,7 @@ export default function SearchBar() {
 
   function handleEdgeCases(recipes) {
     const isFood = pathname === '/comidas';
-    console.log(isFood);
+
     if (!recipes) {
       global.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
       return;
@@ -51,13 +51,13 @@ export default function SearchBar() {
   }
 
   function handleSearchByIngredient(page, string) {
-    if (pathname === '/comidas') {
+    if (page === '/comidas') {
       fetchFoodsByIngredient(string).then((data) => {
         handleEdgeCases(data.meals);
         setFoods(data.meals);
       });
     }
-    if (pathname === '/bebidas') {
+    if (page === '/bebidas') {
       fetchDrinksByIngredient(string).then((data) => {
         handleEdgeCases(data.drinks);
         setDrinks(data.drinks);
@@ -71,15 +71,15 @@ export default function SearchBar() {
       return;
     }
 
-    if (pathname === '/comidas') {
+    if (page === '/comidas') {
       fetchFoodsByFirstLetter(string).then((data) => {
         handleEdgeCases(data.meals);
         setFoods(data.meals);
       });
     }
-    if (pathname === '/bebidas') {
+    if (page === '/bebidas') {
       fetchDrinksByFirstLetter(string).then((data) => {
-        handleEdgeCases(data.meals);
+        handleEdgeCases(data.drinks);
         setDrinks(data.drinks);
       });
     }
