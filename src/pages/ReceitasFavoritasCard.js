@@ -34,8 +34,6 @@ function ReceitasFavoritasCard({ props: { recipe, index, setFavoriteRecipes } })
 
       const newRecipes = [...filterRecipes];
 
-      console.log('New Recipe', newRecipes);
-      console.log('Old Recipes', oldRecipes);
       localStorage.setItem('favoriteRecipes', JSON.stringify(newRecipes));
       setFavoriteRecipes(newRecipes);
     }

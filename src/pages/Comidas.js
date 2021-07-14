@@ -7,6 +7,7 @@ import { filterCategoriaComidas } from '../services/apisCategories';
 import { mealsAPI } from '../services/apisMealsAndCocktails';
 import { apiSearchMeals } from '../services/fetchApiSearch';
 import Cards from '../components/Card';
+import Loading from '../components/Loading';
 
 function Comidas() {
   const {
@@ -54,7 +55,7 @@ function Comidas() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [texto]);
 
-  if (data.length < 1) return <h1>Loading...</h1>;
+  if (data.length < 1) return <Loading />;
 
   return (
     <div>

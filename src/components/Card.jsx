@@ -4,11 +4,13 @@ import { Card } from 'react-bootstrap';
 import ContextBebidas from '../provider/ContextBebida';
 import ContextComidas from '../provider/ContextComida';
 
+import '../styles/Cards.css';
+
 function Cards({ param }) {
   const { data: dataDrink } = useContext(ContextBebidas);
   const { data: datafood } = useContext(ContextComidas);
 
-  const comidas = () => datafood.map((item, index) => {
+  const comidas = () => datafood && datafood.map((item, index) => {
     const magicNumber = 12;
     if (index < magicNumber) {
       return (
@@ -26,7 +28,7 @@ function Cards({ param }) {
               alt={ item.strMeal }
             />
             <Card.Body>
-              <Card.Title data-testid={ `${index}-card-name` }>
+              <Card.Title className="card-link" data-testid={ `${index}-card-name` }>
                 { item.strMeal }
               </Card.Title>
             </Card.Body>
@@ -37,7 +39,7 @@ function Cards({ param }) {
     return '';
   });
 
-  const bebidas = () => dataDrink.map((item, index) => {
+  const bebidas = () => dataDrink && dataDrink.map((item, index) => {
     const magicNumber = 12;
     if (index < magicNumber) {
       return (
@@ -55,7 +57,7 @@ function Cards({ param }) {
               alt={ item.srtDrink }
             />
             <Card.Body>
-              <Card.Title data-testid={ `${index}-card-name` }>
+              <Card.Title className="card-link" data-testid={ `${index}-card-name` }>
                 { item.strDrink }
               </Card.Title>
             </Card.Body>

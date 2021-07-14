@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import '../App.css';
 import { divMain, divContentForm, textLogin, textUpInput, btn } from '../styles/login';
+import '../styles/Login.css';
+import loginIcon from '../images/loginIcon.png';
 
 function Login(props) {
   const INITIAL_LOGIN = {
@@ -30,7 +32,7 @@ function Login(props) {
 
   const inputsLogin = () => (
     <div className={ divContentForm }>
-      <h1 className={ textLogin }>Login</h1>
+      <h1 className={ textLogin }>Dark Caipirinha</h1>
       <Form>
         <Form.Group controlId="formBasicEmail">
           <Form.Label>Email:</Form.Label>
@@ -93,7 +95,8 @@ function Login(props) {
   }, [login]);
 
   return (
-    <div className={ divMain }>
+    <div className={ `${divMain} body-test` }>
+      <img alt="Icone Aplicação" src={ loginIcon } />
       {inputsLogin()}
     </div>
   );

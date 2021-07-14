@@ -13,6 +13,9 @@ function Explorar() {
   function moveToExploreDrinkPage() {
     history.push('/explorar/bebidas');
   }
+  function moveToExploreAreaPage() {
+    history.push('/explorar/comidas/area');
+  }
   return (
     <div>
       <Header title="Explorar" />
@@ -31,6 +34,14 @@ function Explorar() {
           onClick={ moveToExploreDrinkPage }
         >
           Explorar Bebidas
+
+        </button>
+        <button
+          type="button"
+          data-testid="explore-area"
+          onClick={ moveToExploreAreaPage }
+        >
+          Explorar Areas
 
         </button>
       </div>
