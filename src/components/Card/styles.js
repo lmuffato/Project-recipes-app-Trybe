@@ -4,7 +4,7 @@ const CardContainer = styled.div`margin: 8px 8px 32px;
   min-height: 316px;
   outline: 0;
   position: relative;
-  width: 13.75rem;
+  width: 13.7rem;
 
   .img-wrapper {
     border-radius: 4px;
@@ -41,12 +41,6 @@ const CardContainer = styled.div`margin: 8px 8px 32px;
   @media only screen and ( max-width : 767px ) {
     align-items: center;
     margin: 0 auto;
-  }
-
-  @media only screen and ( max-width : 400px ) {
-    align-items: center;
-    margin: 0 auto;
-    width: 10.75rem;
   }
 `;
 

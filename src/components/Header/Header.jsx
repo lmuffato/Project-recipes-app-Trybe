@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import profileIconImg from '../../images/profileIcon.svg';
 import Button from '../Generics/Button';
 import HeaderContainer from './styles';
+import Logo from './Logo';
 
 function Header({ children, heading }) {
   const history = useHistory();
@@ -15,6 +16,10 @@ function Header({ children, heading }) {
 
   return (
     <HeaderContainer>
+      <div className="title-container">
+        <Logo />
+        <h1 data-testid="page-title">{ heading }</h1>
+      </div>
       <div className="container">
         <Button onClick={ handleRedirectToProfile }>
           <img
@@ -23,9 +28,8 @@ function Header({ children, heading }) {
             alt="Logo da página de perfil"
           />
         </Button>
+        { children }
       </div>
-      <h1 data-testid="page-title">{ heading }</h1>
-      { children }
     </HeaderContainer>
   );
 }
