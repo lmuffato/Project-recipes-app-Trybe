@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 
 import { useParams } from 'react-router-dom';
-import HeaderBack from '../../components/HeaderBack';
+import Header from '../../components/Header';
 import { getRecipes } from '../../services/recipesData';
 import ExploreButtons from './components/ExploreButtons';
 import styles from './styles.module.scss';
@@ -27,7 +27,7 @@ function Explore() {
 
   return (
     <div className={ styles.explorePage }>
-      {meal && <HeaderBack title={ titlePage } />}
+      <Header title={ meal ? titlePage : 'Explorar' } hideSearch />
       <div className={ styles.exploreContent }>
         <ExploreButtons title={ meal } randomRecipe={ randomId } />
       </div>
