@@ -26,7 +26,7 @@ function Header({ title }) {
             alt="profile"
           />
         </Link>
-        <h1 data-testid="page-title">{title}</h1>
+        <h1 className="explore-header" data-testid="page-title">{title}</h1>
       </div>
     );
   }
