@@ -1,13 +1,12 @@
 * {
-    font-size: large;
+  font-size: large;
 }
 
 input {
-    font-size: large;
+  font-size: large;
 }
 
 .FormLogin {
-    display: flex;
-    justify-content: space-evenly;
+  display: flex;
+  justify-content: space-evenly;
 }
-

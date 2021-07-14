@@ -3,8 +3,7 @@
   background-color: whitesmoke;
   border-radius: 8px;
   display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
+  flex-flow: column wrap;
   height: 25vh;
   justify-content: flex-start;
   margin-top: 15px;
@@ -15,7 +14,7 @@
   background-color: #eee;
   height: 20px;
   left: 0;
-  top: 0;
   text-align: center;
+  top: 0;
   width: 20px;
 }
