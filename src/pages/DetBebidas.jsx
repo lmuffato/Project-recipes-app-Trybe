@@ -129,9 +129,9 @@ class DetBebidas extends React.Component {
             data-testid="recipe-photo"
             alt="imagem da receita"
             src={ recipe[0].strDrinkThumb }
-            width="300px"
+            width="100px"
           />
-          <h1 data-testid="recipe-title">{ recipe[0].strDrink }</h1>
+          <h6 data-testid="recipe-title">{ recipe[0].strDrink }</h6>
           <p data-testid="recipe-category">{ recipe[0].strCategory }</p>
           <p data-testid="recipe-category">{`Alcoholic? ${recipe[0].strAlcoholic}`}</p>
           <div id="share">
@@ -179,18 +179,17 @@ class DetBebidas extends React.Component {
           <p data-testid="instructions" className="instructions">
             {recipe[0].strInstructions}
           </p>
-          <h2>Comidas Recomendadas</h2>
+          <h6>Comidas Recomendadas</h6>
           <div className="carousel-sbt">
             {recommended.map((meal, index) => (
               <Link
+                data-testid={ `${index}-recomendation-card` }
                 to={ `/comidas/${meal.idMeal}` }
                 key={ meal.idMeal }
               >
                 <div
                   key={ meal.idMeal }
-                  data-testid={ `${index}-recomendation-card` }
                   className="card-container"
-                  aria-hidden="true"
                 >
                   <img
                     className="recommendation-img"

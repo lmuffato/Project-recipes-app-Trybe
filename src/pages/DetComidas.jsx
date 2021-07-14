@@ -130,7 +130,7 @@ class DetComidas extends React.Component {
             data-testid="recipe-photo"
             alt="imagem da receita"
             src={ recipe[0].strMealThumb }
-            width="300px"
+            width="100px"
           />
           <h1 data-testid="recipe-title">{ recipe[0].strMeal }</h1>
           <p data-testid="recipe-category">{ recipe[0].strCategory }</p>
@@ -191,12 +191,12 @@ class DetComidas extends React.Component {
             {recommended.map((drink, index) => (
               <div
                 key={ drink.idDrink }
+                data-testid={ `${index}-recomendation-card` }
                 className="card-container"
                 onClick={ () => history.push(`/bebidas/${drink.idDrink}`) }
                 aria-hidden="true"
               >
                 <img
-                  data-testid={ `${index}-recomendation-card` }
                   className="recommendation-img"
                   src={ drink.strDrinkThumb }
                   alt="recipe-img"
