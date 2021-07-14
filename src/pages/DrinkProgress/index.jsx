@@ -22,6 +22,7 @@ export default function DrinkProgress() {
     setHeart,
     copyToClipBoard,
     recipeDoneCheck,
+    renderLoading,
   } = useRecipeProgress('drink');
   const recipeDrink = recipeProgress.drinks[0];
   const { strAlcoholic, strInstructions, strDrink, strDrinkThumb } = recipeDrink;
@@ -31,7 +32,7 @@ export default function DrinkProgress() {
     textDecoration: 'line-through',
   };
 
-  return (
+  const DrinkProgressComponent = () => (
     <MainContainerDetails>
       <ContainerFood>
         <h1 data-testid="recipe-title">{strDrink}</h1>
@@ -94,4 +95,6 @@ export default function DrinkProgress() {
       </ButtonDetails>
     </MainContainerDetails>
   );
+
+  return renderLoading(DrinkProgressComponent());
 }

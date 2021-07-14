@@ -24,7 +24,12 @@ export default function useRecipeDetails(type) {
     sites,
   } = getMealsOrDrinks(type);
   const { push } = useHistory();
-  const { doneRecipes, inProgressRecipes } = useRecipe();
+  const {
+    doneRecipes,
+    inProgressRecipes,
+    setLoading,
+    renderLoading,
+  } = useRecipe();
   const { id } = useParams();
   const [recipe, setRecipe] = useState(INITIAL_STATE);
   const [recommended, setRecommended] = useState(INITIAL_STATE);
@@ -75,10 +80,12 @@ export default function useRecipeDetails(type) {
 
   useEffect(() => {
     const fetchDidMount = async () => {
+      setLoading(true);
       const resultRecipe = await fetchById(site, id);
       const resultRecommended = await fetchName(recommendedSite);
       setRecipe(resultRecipe);
       setRecommended(resultRecommended);
+      setLoading(false);
     };
 
     fetchDidMount();
@@ -101,5 +108,6 @@ export default function useRecipeDetails(type) {
     checkFavorite,
     diplayNoneButton,
     verifyInProgressById,
+    renderLoading,
   };
 }

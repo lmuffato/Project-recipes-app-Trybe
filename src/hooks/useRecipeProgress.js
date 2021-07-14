@@ -23,6 +23,8 @@ export default function useRecipeProgress(type) {
     setInProgressRecipes,
     doneRecipes,
     setDoneRecipes,
+    setLoading,
+    renderLoading,
   } = useRecipe();
   const [recipeProgress, setRecipeProgress] = useState(INITIAL_STATE_HOOKS);
   const { push } = useHistory();
@@ -37,8 +39,10 @@ export default function useRecipeProgress(type) {
 
   useEffect(() => {
     const fetchDidMount = async () => {
+      setLoading(true);
       const recipe = await fetchById(site, id);
       setRecipeProgress(recipe);
+      setLoading(false);
     };
 
     fetchDidMount();
@@ -136,5 +140,6 @@ export default function useRecipeProgress(type) {
     sendToLocalStorage,
     recipeDoneCheck,
     redirectToRecipeDonePage,
+    renderLoading,
   };
 }

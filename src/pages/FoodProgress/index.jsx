@@ -22,6 +22,7 @@ export default function FoodProgress() {
     isChecked,
     setHeart,
     copyToClipBoard,
+    renderLoading,
   } = useRecipeProgress('meal');
   const recipeMeal = recipeProgress.meals[0];
   const { strCategory, strInstructions, strMeal, strMealThumb } = recipeMeal;
@@ -31,7 +32,7 @@ export default function FoodProgress() {
     textDecoration: 'line-through',
   };
 
-  return (
+  const FoodProgressComponent = () => (
     <MainContainerDetails>
       <ContainerFood>
         <h1 data-testid="recipe-title">{strMeal}</h1>
@@ -93,4 +94,6 @@ export default function FoodProgress() {
       </ButtonDetails>
     </MainContainerDetails>
   );
+
+  return renderLoading(FoodProgressComponent());
 }

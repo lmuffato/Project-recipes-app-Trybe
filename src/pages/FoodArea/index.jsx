@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 import { Dropdown } from 'react-bootstrap';
+import useRecipe from '../../hooks/useRecipe';
 
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
@@ -13,6 +14,7 @@ import { StyledDropDown, MainContainerFoodArea } from './styles';
 import ContainerRecipeCards from '../../styles/shared/ContainerRecipeCards';
 
 export default function FoodArea() {
+  const { setLoading, renderLoading } = useRecipe();
   const [recipes, setRecipes] = useState([]);
   const [areas, setAreas] = useState([]);
   const [region, setRegion] = useState('All');
@@ -27,8 +29,10 @@ export default function FoodArea() {
 
   useEffect(() => {
     const fetchDidMount = async () => {
+      setLoading(true);
       const responseAreas = await fetchAreas();
       setAreas(responseAreas.meals);
+      setLoading(false);
     };
 
     fetchDidMount();
@@ -36,14 +40,17 @@ export default function FoodArea() {
 
   useEffect(() => {
     const fetchCategory = async () => {
+      setLoading(true);
       if (region === 'All') {
         const responseRecipesByArea = await fetchName('meal');
         setRecipes(filter12Recipes(responseRecipesByArea.meals));
+        setLoading(false);
         return;
       }
 
       const responseByRegion = await fetchByArea(region);
       setRecipes(filter12Recipes((responseByRegion.meals)));
+      setLoading(false);
     };
 
     fetchCategory();
@@ -82,17 +89,19 @@ export default function FoodArea() {
         <span>{region}</span>
       </FilterContainer>
 
-      <ContainerRecipeCards>
-        {recipes.map((recipe, index) => (
-          <RecipeCard
-            key={ recipe.idMeal }
-            index={ index }
-            thumb={ recipe.strMealThumb }
-            title={ recipe.strMeal }
-            id={ recipe.idMeal }
-          />
-        ))}
-      </ContainerRecipeCards>
+      {renderLoading(
+        <ContainerRecipeCards>
+          {recipes.map((recipe, index) => (
+            <RecipeCard
+              key={ recipe.idMeal }
+              index={ index }
+              thumb={ recipe.strMealThumb }
+              title={ recipe.strMeal }
+              id={ recipe.idMeal }
+            />
+          ))}
+        </ContainerRecipeCards>,
+      )}
 
       <Footer explore />
     </MainContainerFoodArea>

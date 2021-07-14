@@ -25,6 +25,7 @@ export default function FoodDetails() {
     checkFavorite,
     diplayNoneButton,
     verifyInProgressById,
+    renderLoading,
   } = useRecipeDetails('meal');
   const { renderCarouselCards } = useCarousel(
     filterRecommended(recommended.drinks),
@@ -34,7 +35,7 @@ export default function FoodDetails() {
   const { ingredients, measures } = getIngredientsAndMeasures(recipeMeal);
   const { strMealThumb, strMeal, strCategory, strInstructions, strYoutube } = recipeMeal;
 
-  return (
+  const FoodDetailsComponent = () => (
     <MainContainerDetails>
       <ContainerFood>
         <h1 data-testid="recipe-title">{strMeal}</h1>
@@ -105,4 +106,6 @@ export default function FoodDetails() {
       </ButtonDetails>
     </MainContainerDetails>
   );
+
+  return renderLoading(FoodDetailsComponent());
 }

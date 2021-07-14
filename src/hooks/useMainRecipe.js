@@ -38,7 +38,7 @@ export default function useMainRecipe(type) {
       [foods]: responseRecipe[foods],
       list: { ...recipe.list, [foods]: filteredList },
     });
-    // setLoading(false);
+    setLoading(false);
   };
 
   const renderCards = () => {

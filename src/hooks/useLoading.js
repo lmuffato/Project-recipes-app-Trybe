@@ -19,7 +19,7 @@ export default function useLoading() {
   const renderLoading = (Component) => {
     if (loading) {
       return (
-        <div style={ { margin: '5.8rem 6.7rem' } }>
+        <div style={ { position: 'absolute', left: '15px', right: '0', top: '12rem' } }>
           <Lottie
             options={ defaultOptions }
             height={ 150 }

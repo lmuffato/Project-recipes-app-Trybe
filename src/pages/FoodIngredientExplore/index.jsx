@@ -8,16 +8,18 @@ import {
 } from '../../styles/shared/ByIngredients/ByIngredientsStyles';
 
 export default function FoodIngredientExplore() {
-  const { renderCards } = useIngredients('meal');
+  const { renderCards, renderLoading } = useIngredients('meal');
 
   return (
     <div>
       <ContainerExploreByIngredients>
         <Header title="Explorar Ingredientes de Comidas" />
 
-        <MainContainerIngredientsCards>
-          {renderCards()}
-        </MainContainerIngredientsCards>
+        {renderLoading(
+          <MainContainerIngredientsCards>
+            {renderCards()}
+          </MainContainerIngredientsCards>,
+        )}
       </ContainerExploreByIngredients>
       <Footer explore />
     </div>
