@@ -118,13 +118,18 @@ export default function MealDetails() {
           {RenderRecipeImg(strMealThumb)}
           <div>
             <h2 data-testid="recipe-title">{strMeal}</h2>
-            <button data-testid="share-btn" type="button" onClick={ () => copyLink() }>
+            <button
+              className="no-style-btn"
+              data-testid="share-btn"
+              type="button"
+              onClick={ () => copyLink() }
+            >
               <img alt="share" src={ shareIcon } />
             </button>
             {RenderFavoriteHeart('comida', data[0], dispatch, globalState)}
           </div>
           {copy}
-          <h3 data-testid="recipe-category">{strCategory}</h3>
+          <h3 className="subtitle" data-testid="recipe-category">{strCategory}</h3>
           <h2>Ingredients</h2>
           {RenderIngredients(aux)}
           <h2>Instructions</h2>

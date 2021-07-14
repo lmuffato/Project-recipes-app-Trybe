@@ -54,6 +54,31 @@ export default function DrinkInProgress() {
     return aux;
   };
 
+  const doneRecipe = () => {
+    const storage = JSON.parse(localStorage.getItem('doneRecipes'));
+    const { idDrink, strArea, strCategory, strDrink, strDrinkThumb,
+      strTags, strAlcoholic } = data[0];
+    const obj = {
+      id: idDrink,
+      type: 'bebida',
+      area: strArea !== undefined ? strArea : '',
+      category: strCategory,
+      alcoholicOrNot: strAlcoholic,
+      name: strDrink,
+      image: strDrinkThumb,
+      doneDate: new Date().toLocaleDateString(),
+      tags: strTags !== null ? strTags : '',
+    };
+    let newObj = '';
+    if (storage) {
+      newObj = [...storage, obj];
+    } else {
+      newObj = [obj];
+    }
+    localStorage.setItem('doneRecipes', JSON.stringify(newObj));
+    history.push('/receitas-feitas');
+  };
+
   const renderInProgressRecipe = () => {
     if (data && data.length > 0) {
       const aux = ingredientWithMeasure(data[0]);
@@ -69,6 +94,7 @@ export default function DrinkInProgress() {
             {RenderFavoriteHeart('bebida', data[0], dispatch, globalState)}
             {copy}
             <button
+              className="no-style-btn"
               data-testid="share-btn"
               type="button"
               onClick={ () => copyLink(idDrink) }
@@ -90,7 +116,7 @@ export default function DrinkInProgress() {
             className="footer"
             type="button"
             data-testid="finish-recipe-btn"
-            onClick={ () => history.push('/receitas-feitas') }
+            onClick={ () => doneRecipe() }
           >
             Finalizar Receita
           </button>

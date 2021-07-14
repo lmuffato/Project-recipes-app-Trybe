@@ -31,12 +31,12 @@ function MainDrink() {
     if (firstTime.length === 0) getDrinks();
   }, [dispatch, firstTime]);
   return (
-    <>
+    <div className="main-test">
       <Header props={ { search: true, title: 'Bebidas' } } />
       { isLoading ? '' : <FilterButtons props="Drinks" /> }
       { isLoading ? loading : <RecipeCards /> }
       <Footer />
-    </>
+    </div>
   );
 }
 

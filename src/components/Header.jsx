@@ -22,7 +22,7 @@ function Header({ props: { search, title } }) {
   const showSearchButton = () => {
     if (search) {
       return (
-        <button type="button" onClick={ showSearchBar }>
+        <button className="no-style-btn" type="button" onClick={ showSearchBar }>
           <img
             src={ searchIcon }
             data-testid="search-top-btn"
@@ -45,13 +45,22 @@ function Header({ props: { search, title } }) {
   const renderSearchBar = () => {
     if (searchBar) {
       return (
-        <form>
+        <form className="form-search">
           <input
+            className="input-search"
             type="text"
             placeholder="Buscar Receita"
             data-testid="search-input"
             onChange={ ({ target }) => setSearchText(target.value) }
           />
+          <button
+            className="filter-btn"
+            type="button"
+            data-testid="exec-search-btn"
+            onClick={ clickSearch }
+          >
+            Buscar
+          </button>
           <label htmlFor="ingredient">
             <input
               type="radio"
@@ -82,13 +91,6 @@ function Header({ props: { search, title } }) {
             />
             Primeira Letra
           </label>
-          <button
-            type="button"
-            data-testid="exec-search-btn"
-            onClick={ clickSearch }
-          >
-            Buscar
-          </button>
         </form>
       );
     }

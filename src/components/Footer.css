@@ -1,8 +1,17 @@
 .footer {
+  background-color: #9c6335;
+  border: none;
   bottom: 0;
-  height: 10vh;
+  color: white;
+  font-weight: 700;
+  height: 7vh;
+  margin-bottom: 0;
   position: fixed;
   width: 100%;
+}
+
+.footer:disabled {
+  background-color: #9c63358e;
 }
 
 .hide-button {
