@@ -5,7 +5,7 @@ import Header from '../../components/header';
 import MenuFooter from '../../components/menuFooter';
 import RecipeCard from '../RecipesMain/RecipeCard';
 import { AppContext } from '../../context/AppContext';
-import fetchApiIngredients from '../../services/fetchApiIngredients';
+import { fetchApiIngredients } from '../../services/fetchApiIngredients';
 
 export default function ExploreByIngredient({ match }) {
   const { path } = match;
@@ -24,7 +24,7 @@ export default function ExploreByIngredient({ match }) {
   return (
     <div>
       <Header title="Explorar Ingredients" isSearch={ false } />
-      <div className="list-main-ingredients">
+      <div className="list-main-recipes">
         { byIngredients && byIngredients.map(
           (ingredient, index) => (
             <Link
@@ -37,7 +37,7 @@ export default function ExploreByIngredient({ match }) {
                 recipe={ ingredient }
                 index={ index }
                 isMain={ false }
-                path={ path }
+                path={ path.includes('/comidas') ? 'themealdb' : 'thecocktaildb' }
               />
             </Link>
           ),

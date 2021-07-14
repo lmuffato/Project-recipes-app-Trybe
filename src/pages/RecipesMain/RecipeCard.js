@@ -1,12 +1,17 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { fetchImageIngredients } from '../../services/fetchApiIngredients';
 
-export default function RecipeCard({ recipe, index, isMain }) {
-  // const [setGetImage] = useState('');
+export default function RecipeCard({ recipe, index, isMain, path }) {
+  const [getImage, setGetImage] = useState('');
 
-  // useEffect(() => {
-  //   setGetImage(path.includes('/comidas') ? 'themealdb' : 'thecocktaildb');
-  // }, [path]);
+  useEffect(() => {
+    const item = recipe.strIngredient || recipe.strIngredient1;
+    if (isMain === false) {
+      fetchImageIngredients(path, item)
+        .then((result) => setGetImage(result.url));
+    }
+  }, [path, recipe, isMain]);
 
   return (
 
@@ -16,15 +21,14 @@ export default function RecipeCard({ recipe, index, isMain }) {
     >
 
       <img
-        src={ isMain
-          ? recipe.strMealThumb || recipe.strDrinkThumb
-          : '' }
-        data-testid={ isMain ? `${index}-card-img` : `${index}-card-img` }
+        data-testid={ `${index}-card-img` }
+        src={ isMain ? recipe.strMealThumb || recipe.strDrinkThumb
+          : getImage }
         alt="recipe"
         width="150px"
       />
       <p
-        data-testid={ isMain ? `${index}-card-name` : `${index}-card-name` }
+        data-testid={ `${index}-card-name` }
       >
         { isMain
           ? recipe.strMeal || recipe.strDrink
