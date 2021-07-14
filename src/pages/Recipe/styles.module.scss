@@ -33,21 +33,6 @@
     color: var(--light-purple);
     padding: 30px;
 
-    .startRecipe {
-      background: var(--yellow);
-      border: 3px solid var(--purple);
-      border-radius: 15px;
-      bottom: 0;
-      color: var(--dark-purple);
-      font-family: Yanone Kaffeesatz , sans-serif;
-      font-size: 22px;
-      margin-bottom: 40px;
-      padding: 10px 15px;
-      position: fixed;
-      right: 30px;
-      z-index: 8888;
-    }
-
     .listOfIngredients {
       display: grid;
       list-style-position: inside;

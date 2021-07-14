@@ -72,8 +72,8 @@ export function RecipesProvider({ children }) {
     }
 
     case 'bebida': {
-      const { [id]: recipeId, ...drinks } = inProgressRecipes.drinks;
-      const updatedInProgressRecipes = { ...inProgressRecipes, drinks };
+      const { [id]: recipeId, ...cocktails } = inProgressRecipes.cocktails;
+      const updatedInProgressRecipes = { ...inProgressRecipes, cocktails };
       setInProgressRecipes(updatedInProgressRecipes);
       localStorage.setItem('inProgressRecipes', JSON.stringify(updatedInProgressRecipes));
       break;
