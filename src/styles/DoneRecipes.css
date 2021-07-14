@@ -4,11 +4,36 @@
   padding: 0;
 }
 
+.doneRecipesPage .header {
+  background-position: center;
+}
+
+.doneFilter {
+  display: flex;
+  justify-content: space-around;
+}
+
+.doneFilter input {
+  background-color: transparent;
+  border-bottom: 1px solid #343539;
+  color: hsl(0, 0%, 95%);
+  height: 30px;
+  margin-top: 8px;
+  width: 100px;
+}
+
+.doneFilter input:hover {
+  background-blend-mode: overlay;
+  background-color: rgb(136, 134, 134);
+  box-shadow: 0.3px 0.3px 3px rgb(29, 28, 29) inset;
+}
+
 .doneComponents {
   background-blend-mode: overlay;
   background-color: rgb(90, 90, 90);
   background-image: url('../images/1057932.jpg');
   background-position: center;
+  border-top-left-radius: 30px;
   box-shadow: 0.3px 0.3px 3px rgb(29, 28, 29) inset;
   display: flex;
   flex-direction: row;
@@ -17,22 +42,20 @@
 }
 
 .image-container {
-  border-radius: 10px;
+  border-top-left-radius: 30px;
   height: 20vh;
-  margin-left: 3px;
-  margin-top: 3px;
   object-fit: cover;
   width: 69vw;
 }
 
 .doneCategory {
-  font-size: 18px;
+  font-size: 16px;
   height: 16px;
 }
 
 .doneTitle {
   display: flex;
-  font-size: 23px;
+  font-size: 25px;
   font-weight: 900;
   height: 70px;
   justify-content: center;
@@ -43,10 +66,12 @@
 
 .doneDate {
   color: #f2f2f2;
-  font-size: 12px;
-  margin-top: 65%;
+  font-size: 10px;
+  margin-left: 10px;
+  margin-top: 62.4%;
+  opacity: 0.9;
   position: absolute;
-  width: 100%;
+  width: 10%;
 }
 
 .ctn-title-category {
@@ -55,6 +80,7 @@
   display: flex;
   flex-direction: column;
   height: 12vh;
+  opacity: 0.9;
   width: 100%;
 }
 
@@ -64,20 +90,44 @@
 
 .ctn-date-sharebtn {
   align-items: center;
-  background-color: rgba(255, 255, 255, 0.13);
-  border-left: #f2f2f2 0.5px solid;
+  background-color: rgba(255, 255, 255, 0.089);
+  background-image: url('../images/1057932.jpg');
+  background-position-x: 530px;
+  background-position-y: 390px;
+  background-size: 650%;
+  border-left: #f2f2f21e 0.5px solid;
   color: #f2f2f2;
   display: flex;
   flex-direction: column;
   height: 100%;
   padding-top: 10%;
   width: 100%;
+
+}
+
+.share-btn {
+  filter: invert(80%);
+}
+
+.share-btn:hover {
+  filter: invert(100%);
 }
 
 .tag {
   border-bottom: 1px gray solid;
   justify-content: center;
   margin-top: 20px;
+  opacity: 0.9;
   position: relative;
-  width: 20%;
+  text-align: center;
+  width: 120%;
 }
+
+.tag:hover {
+  background-blend-mode: overlay;
+  background-color: rgb(136, 134, 134);
+  box-shadow: 0.3px 0.3px 3px rgb(29, 28, 29) inset;
+}
+
+/* @media ( max-width : 786.98px ) {
+} */

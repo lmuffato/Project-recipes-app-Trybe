@@ -49,7 +49,7 @@ export default function ShareBtn(props) {
       <input
         type="image"
         data-testid={ dataTest }
-        className={ dataTest }
+        className={ `${dataTest} share-btn` }
         variant="light"
         style={ { height: '28px' } }
         onClick={ handleClick }

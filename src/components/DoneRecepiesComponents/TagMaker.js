@@ -3,13 +3,10 @@ import PropTypes from 'prop-types';
 
 export default function TagMaker(props) {
   const { index, local } = props;
-  // const retrieveLocalInfo = () => {
-  //   const local = JSON.parse(localStorage.getItem('doneRecipes'));
-  //   return (local !== null && local);
-  // };
+  const maxTagNmb = 3;
   return (
     <div>
-      {local.tags[0] && local.tags[0].split(',').filter((ele, i) => i < 3)
+      {local.tags[0] && local.tags[0].split(',').filter((ele, i) => i < maxTagNmb)
         .map((ele, i) => (
           <li
             className="tag"

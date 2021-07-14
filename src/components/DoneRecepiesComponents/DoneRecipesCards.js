@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import ReceitasContext from '../../contexts/ReceitasContext';
 import ShareBtn from '../RecipeComponents/ShareButton';
 import TagMaker from './TagMaker';
-import '../../styles/DoneRecipes.css';
 
 function DoneRecipesCards() {
   const { filterValue } = useContext(ReceitasContext);

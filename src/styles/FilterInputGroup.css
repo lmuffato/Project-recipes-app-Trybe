@@ -25,7 +25,6 @@
 .input-group-filter label:hover {
   background-blend-mode: overlay;
   background-color: rgb(136, 134, 134);
-  border: none;
   box-shadow: 0.3px 0.3px 3px rgb(29, 28, 29) inset;
 }
 
