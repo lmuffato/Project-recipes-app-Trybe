@@ -58,7 +58,7 @@ export default function LowerMenu() {
 }
 
 const Container = styled.div`
-  background-color: #FFD04E;
+  background-color:  rgb(214, 168, 40);
   position: fixed;
   display: flex;
   align-items: center;

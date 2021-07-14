@@ -2,6 +2,14 @@ button {
   height: 50px;
 }
 
+h1 {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 30px;
+  line-height: 37px;
+}
+
 .hidden {
   display: none;
 }
@@ -11,6 +19,28 @@ button {
 }
 
 .header-wrapper {
+  background-color:  rgb( 214, 168, 40 );
   display: flex;
   flex-flow: row nowrap;
+  justify-content: space-around;
+}
+
+.profile-icon {
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+}
+
+.search-button {
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
 }

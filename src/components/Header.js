@@ -18,7 +18,12 @@ function Header() {
     <div>
       <div className="header-wrapper">
         <Link to="/perfil">
-          <button type="button" data-testid="profile-top-btn" src={ profileIcon }>
+          <button
+            className="profile-icon"
+            type="button"
+            data-testid="profile-top-btn"
+            src={ profileIcon }
+          >
             <img src={ profileIcon } alt="profile-icon" />
           </button>
         </Link>
@@ -33,6 +38,7 @@ function Header() {
           data-testid="search-top-btn"
           onClick={ handleToggle }
           src={ searchIcon }
+          className="search-button"
         >
           <img src={ searchIcon } alt="search-icon" />
         </button>
