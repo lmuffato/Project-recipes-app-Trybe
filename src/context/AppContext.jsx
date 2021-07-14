@@ -15,6 +15,7 @@ export default function AppProvider({ children }) {
   const [toDoneStorage, setToDoneStorage] = useState([]);
   const [checkedState, setCheckedState] = useState(true);
   const [recipe, setRecipe] = useState('');
+  const [byIngredients, setByIngredients] = useState('');
   const NUM_RECIPES_SHOWN = 12;
   const NUM_CATEG_SHOWN = 5;
   const context = {
@@ -36,7 +37,8 @@ export default function AppProvider({ children }) {
     recipe,
     setRecipe,
     toDoneStorage,
-
+    byIngredients,
+    setByIngredients,
   };
 
   useEffect(() => {

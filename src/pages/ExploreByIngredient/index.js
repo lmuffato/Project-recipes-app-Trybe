@@ -5,30 +5,39 @@ import Header from '../../components/header';
 import MenuFooter from '../../components/menuFooter';
 import RecipeCard from '../RecipesMain/RecipeCard';
 import { AppContext } from '../../context/AppContext';
+import { fetchApiIngredients } from '../../services/fetchApiIngredients';
 
 export default function ExploreByIngredient({ match }) {
   const { path } = match;
   const { context } = useContext(AppContext);
-  const { recipesList, setPageOrigin, pageOrigin } = context;
+  const { setByIngredients, byIngredients } = context;
+  const NUM_RECIPES_SHOWN = 12;
 
   useEffect(() => {
-    setPageOrigin(path.includes('/comidas') ? 'themealdb' : 'thecocktaildb');
-  });
+    fetchApiIngredients(path.includes('/comidas') ? 'themealdb' : 'thecocktaildb')
+      .then((ingredients) => {
+        ingredients.splice(NUM_RECIPES_SHOWN, ingredients.length - 1);
+        setByIngredients(ingredients);
+      });
+  }, [path]);
+
   return (
     <div>
       <Header title="Explorar Ingredients" isSearch={ false } />
       <div className="list-main-recipes">
-        { recipesList.map(
-          (recipe, index) => (
+        { byIngredients && byIngredients.map(
+          (ingredient, index) => (
             <Link
-              to={ pageOrigin === 'themealdb'
+              to={ path.includes('/comidas')
                 ? '/comidas'
                 : '/bebidas}' }
-              key={ recipe.idMeal || recipe.idDrink }
+              key={ ingredient.idIngredient || ingredient.strIngredient1 }
             >
               <RecipeCard
-                recipe={ recipe }
+                recipe={ ingredient }
                 index={ index }
+                isMain={ false }
+                path={ path.includes('/comidas') ? 'themealdb' : 'thecocktaildb' }
               />
             </Link>
           ),

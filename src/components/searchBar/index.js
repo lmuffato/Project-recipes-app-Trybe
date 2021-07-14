@@ -6,6 +6,7 @@ import {
   fetchByNameApi,
   fetchByFirstLetterApi,
 } from '../../services/fetchApiRadio';
+import './searchBar.css';
 
 export default function SearchBar() {
   const { context } = useContext(AppContext);
@@ -75,7 +76,7 @@ export default function SearchBar() {
   }
 
   return (
-    <>
+    <div className="radio-search-bar">
       <input
         data-testid="search-input"
         type="text"
@@ -97,6 +98,6 @@ export default function SearchBar() {
         Buscar
 
       </button>
-    </>
+    </div>
   );
 }

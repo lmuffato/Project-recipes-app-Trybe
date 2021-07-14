@@ -1,0 +1,7 @@
+.radio-search-bar {
+  align-items: flex-start;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-bottom: -150px;
+}
