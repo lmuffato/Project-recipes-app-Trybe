@@ -16,11 +16,18 @@ export default function Foods() {
 
   const location = useLocation();
 
+  const withLocation = async () => {
+    const { state: { setIngred, name } } = location;
+    const data = setIngred ? await getMealsByIngredient(name)
+      : await getMealsDefault();
+    return data;
+  };
+
   useEffect(() => {
     const reciveMeals = async () => {
-      const { state: { name, setIngred } } = location;
+      const { state } = location;
       setLoading(true);
-      const data = setIngred ? await getMealsByIngredient(name)
+      const data = state ? await withLocation()
         : await getMealsDefault();
       const categoList = await getMealsCat();
       setCategory('All');
