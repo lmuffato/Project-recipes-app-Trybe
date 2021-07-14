@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Carousel from 'react-bootstrap/Carousel';
 import { Link, useRouteMatch } from 'react-router-dom';
+import Loading from '../../../components/Loading';
 import ComponentGen from '../../../components/RecipeDetailsComponents';
 import '../../../styles/RecipeDetails.css';
 
@@ -62,7 +63,7 @@ function Receita() {
             </Link>
           </Carousel.Item>
         )));
-    }
+    } return (<Loading />);
   };
 
   return (
@@ -72,7 +73,6 @@ function Receita() {
         listCreator={ listCreator() }
         recomendList={ recomendList() }
       />
-
   );
 }
 

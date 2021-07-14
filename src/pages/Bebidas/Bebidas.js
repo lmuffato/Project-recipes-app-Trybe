@@ -4,6 +4,7 @@ import Header from '../../components/Header';
 import ReceitasContext from '../../contexts/ReceitasContext';
 import Footer from '../../components/Footer';
 import Filter from '../../components/Filter';
+import Loading from '../../components/Loading';
 
 function Bebidas() {
   const { APIDrink,
@@ -47,6 +48,7 @@ function Bebidas() {
     <div>
       <Header title="Bebidas" />
       <Filter page="bebidas" />
+      <Loading />
       <Footer />
     </div>
   );

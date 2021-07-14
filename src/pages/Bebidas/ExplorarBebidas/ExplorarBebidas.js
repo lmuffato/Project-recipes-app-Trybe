@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Header from '../../../components/Header';
 import Footer from '../../../components/Footer';
 import FilterDrinks from '../../../components/ExploreComponents/filterDrinks';
+import Loading from '../../../components/Loading';
 
 function ExplorarBebidas() {
   const [random, setRandom] = useState();
@@ -28,8 +29,8 @@ function ExplorarBebidas() {
   return (
     <>
       <Header title="Explorar Bebidas" displayButton={ false } />
-      {loading === false
-      && <FilterDrinks address={ address } />}
+      {loading ? <Loading />
+        : <FilterDrinks address={ address } />}
       <Footer />
     </>
   );

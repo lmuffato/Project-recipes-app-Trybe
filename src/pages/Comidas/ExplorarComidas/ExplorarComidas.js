@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Header from '../../../components/Header';
 import Footer from '../../../components/Footer';
 import FilterFood from '../../../components/ExploreComponents/filterFood';
+import Loading from '../../../components/Loading';
 
 function ExplorarComidas() {
   const [random, setRandom] = useState();
@@ -28,7 +29,7 @@ function ExplorarComidas() {
   return (
     <>
       <Header title="Explorar Comidas" displayButton={ false } />
-      {loading === false && <FilterFood address={ address } />}
+      {loading ? <Loading /> : <FilterFood address={ address } />}
       <Footer />
     </>
   );

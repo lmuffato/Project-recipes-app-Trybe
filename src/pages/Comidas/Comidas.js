@@ -5,6 +5,7 @@ import Header from '../../components/Header';
 import ReceitasContext from '../../contexts/ReceitasContext';
 import Footer from '../../components/Footer';
 import Filter from '../../components/Filter';
+import Loading from '../../components/Loading';
 
 function Comidas() {
   const { APIFood,
@@ -47,6 +48,7 @@ function Comidas() {
     <div>
       <Header title="Comidas" />
       <Filter page="comidas" />
+      <Loading />
       <Footer />
     </div>
   );
