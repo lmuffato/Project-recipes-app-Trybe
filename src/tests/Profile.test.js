@@ -1,6 +1,6 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
-import Profile from '../pages/Profile';
+import Profile from '../pages/Profile'; // changed to the parent component
 import renderWithRouterAndRedux from './renderWithRouterAndRedux';
 
 describe('tests if the elements of the Profile page are being rendered', () => {
