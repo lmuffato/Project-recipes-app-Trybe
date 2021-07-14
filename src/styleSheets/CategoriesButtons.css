@@ -20,3 +20,8 @@
 .selected {
   background-color: antiquewhite;
 }
+
+.start-button {
+  bottom: 0;
+  position: fixed;
+}
