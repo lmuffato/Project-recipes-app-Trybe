@@ -5,8 +5,10 @@ body {
 .svg-btn {
   background-color: #80ab82;
   border: none;
+  color: white;
   padding: 10px 20px;
-  width: 20%;
+  text-align: center;
+  width: 25%;
 }
 
 .altSvg {
@@ -103,4 +105,22 @@ body {
   display: block;
   margin-left: auto;
   margin-right: auto;
+}
+
+.list-group-item {
+  padding-left: 30px;
+}
+
+.made {
+  background-color: #334031;
+  bottom: 0;
+  color: #c2e1c2;
+  margin-top: 10px;
+}
+
+.spinner {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 320px;
 }

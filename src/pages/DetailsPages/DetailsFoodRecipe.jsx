@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Spinner } from 'react-bootstrap';
 // import {
 //   Image,
 //   Heading,
@@ -32,7 +33,7 @@ const DetailsFoodRecipe = () => {
   }, [id]);
 
   return (
-    loading ? <h1>Carregando...</h1>
+    loading ? <Spinner animation="border" className="spinner" />
       : <ComponentAux recipeFood={ recipeFood } />
   );
 };
