@@ -6,12 +6,11 @@ import styles from '../styles/Cards.module.scss';
 function Cards({ el, index, path }) {
   const history = useHistory();
   const verifyPath = String(path).includes('comidas');
-
   const choiceRecipie = (element) => {
     if (verifyPath) {
-      history.push(`comidas/${element}`);
+      history.push(`/comidas/${element}`);
     } else {
-      history.push(`bebidas/${element}`);
+      history.push(`/bebidas/${element}`);
     }
   };
 

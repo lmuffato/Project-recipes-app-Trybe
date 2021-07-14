@@ -4,7 +4,6 @@ const fetchSearch = async (search, searchRadio, searchApi) => {
 
   switch (searchRadio) {
   case 'Ingrediente':
-    console.log('CAIUUUUUUUUUUUUUUUUUUUUUU');
     url = `https://www.${searchApi}.com/api/json/v1/1/filter.php?i=`;
     break;
   case 'Nome':
@@ -36,6 +35,20 @@ const fetchSearch = async (search, searchRadio, searchApi) => {
   } catch (error) {
     console.error(error);
     alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+  }
+};
+
+export const fetchCategories = async (categorie, searchApi) => {
+  try {
+    const data = await fetch(
+      `www.${searchApi}.com/api/json/v1/1/filter.php?c=${categorie}`,
+    );
+    const json = await data.json();
+
+    return json;
+  } catch (error) {
+    console.log(error);
+    return Promise.resolve('Erro, não foi possível completar a requisicão');
   }
 };
 

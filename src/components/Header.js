@@ -9,10 +9,7 @@ import styles from '../styles/Header.module.scss';
 
 export default function Header(props) {
   const { title, showButton, showHeader, path } = props;
-  // const { path } = params;
   const searchApi = String(path).includes('comidas') ? 'themealdb' : 'thecocktaildb';
-  // const bebida = 'thecocktaildb';
-  //   const comida = 'themealdb';
   const [showSearch, setShowSearch] = useState(false);
 
   const toggleSearch = () => {
@@ -49,14 +46,20 @@ export default function Header(props) {
             </button>)
         }
       </header>
-      { showSearch && <Search searchApi={ searchApi } />}
+      { showSearch && <Search searchApi={ searchApi } { ...{ path } } />}
     </div>
   );
 }
 
 Header.propTypes = {
   title: PropTypes.string.isRequired,
-  showButton: PropTypes.bool.isRequired,
-  showHeader: PropTypes.bool.isRequired,
-  path: PropTypes.string.isRequired,
+  showButton: PropTypes.bool,
+  showHeader: PropTypes.bool,
+  path: PropTypes.string,
+};
+
+Header.defaultProps = {
+  showButton: undefined,
+  showHeader: undefined,
+  path: undefined,
 };

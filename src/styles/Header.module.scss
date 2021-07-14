@@ -1,8 +1,10 @@
 @media screen and (max-width: 414px) {
+
   .container {
     background: #EB8328;
     height: 80px;
-    
+    width: 100%;
+
     header {
       display: grid;
       grid-template-columns: 1fr 3fr 1fr;
@@ -20,9 +22,9 @@
 
       .profile {
         height: 32px;
-        width: 32px;
         margin-top: 14px;
         padding: 10px;
+        width: 32px;
       }
 
       h1 {

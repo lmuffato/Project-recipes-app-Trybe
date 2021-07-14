@@ -1,19 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useClassState, useStateEasyRedux } from 'easy-redux-trybe';
-
+import { Redirect } from 'react-router-dom';
 import styles from '../styles/Search.module.scss';
 
 const initialState = {
   search: '',
   searchRadio: 'Ingrediente',
+  redirect: false,
 };
 
 export default function Search(props) {
   const [state, setState] = useClassState(initialState);
   const [, setStateRedux] = useStateEasyRedux(Search, {});
   const { search, searchRadio } = state;
-  const { searchApi } = props;
+  const { path, searchApi } = props;
+
+  const link = (result) => {
+    const verifyPath = String(path).includes('comidas');
+    return `${verifyPath ? `/comidas/${result.idMeal}` : `/bebidas/${result.idDrink}`}`;
+  };
 
   const handleChange = ({ target: { name, value } }) => {
     setState({
@@ -43,7 +49,6 @@ export default function Search(props) {
       break;
     }
 
-    console.log(`${url}${search}`);
     try {
       const response = await fetch(`${url}${search}`);
       const data = await response.json();
@@ -52,9 +57,11 @@ export default function Search(props) {
       const INDEX_END = 12;
       const resultsTwelveItems = results.slice(0, INDEX_END);
 
-      console.log(resultsTwelveItems); // APAGAR DEPOIS
+      if (resultsTwelveItems && resultsTwelveItems.length === 1) {
+        setState({ redirect: true, link: link(resultsTwelveItems[0]) });
+      }
+
       setStateRedux({ actionType: 'FETCH_COMPLETED', resultsTwelveItems });
-      return resultsTwelveItems;
     } catch (error) {
       console.error(error);
       alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
@@ -63,6 +70,7 @@ export default function Search(props) {
 
   return (
     <div className={ styles.searchContainer }>
+      { state.redirect && <Redirect to={ state.link } /> }
       <section>
         <input
           id="search-input"
@@ -71,10 +79,9 @@ export default function Search(props) {
           value={ search }
           onChange={ handleChange }
           data-testid="search-input"
-          placeholder="Search"
           className={ styles.searchInput }
+          placeholder="Search"
         />
-
         <div className={ styles.radios }>
           <label htmlFor="ingredient-search-radio">
             Ingrediente:
@@ -111,7 +118,6 @@ export default function Search(props) {
             />
           </label>
         </div>
-
         <button
           type="button"
           onClick={ fetchSearch }
@@ -126,4 +132,5 @@ export default function Search(props) {
 
 Search.propTypes = {
   searchApi: PropTypes.string.isRequired,
+  path: PropTypes.string.isRequired,
 };

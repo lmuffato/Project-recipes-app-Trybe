@@ -101,7 +101,7 @@ function FoodDetails(props) {
                 <button
                   type="button"
                   data-testid="share-btn"
-                  onClick={ () => copyUrlLink() }
+                  onClick={ copyUrlLink }
                 >
                   <img src={ shareIcon } alt="Compartilhar" />
                 </button>
@@ -127,7 +127,7 @@ function FoodDetails(props) {
               <p data-testid="instructions">{ el.strInstructions }</p>
               <embed
                 type="video/mp4"
-                src={ el.strYoutube }
+                src={ `https://www.youtube.com/embed/${el.strYoutube.split('=')[1]}` }
                 width="400"
                 height="300"
                 data-testid="video"

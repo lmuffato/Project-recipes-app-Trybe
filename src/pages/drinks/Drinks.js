@@ -3,29 +3,31 @@ import { useSelector } from 'react-redux';
 import { useStateEasyRedux } from 'easy-redux-trybe';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
-import Header from '../components/Header';
-import Cards from '../components/Cards';
-import FilterButtons from '../components/FilterButtons';
-import Footer from '../components/Footer';
+import Header from '../../components/Header';
+import Cards from '../../components/Cards';
+import FilterButtons from '../../components/FilterButtons';
+import Footer from '../../components/Footer';
 
-import styles from '../styles/MainPages.module.scss';
+import styles from '../../styles/MainPages.module.scss';
 
-export default function Bebidas(props) {
+export default function Drinks(props) {
   const { match: { params, path } } = props;
   const { id } = params;
 
-  const [, setStateRedux] = useStateEasyRedux({ name: 'Search' }, {});
+  const [stateRedux, setStateRedux] = useStateEasyRedux({ name: 'Search' }, {});
 
   useEffect(() => {
-    const fetchApi = async () => {
-      const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
-      const data = await response.json();
-      const results = data.drinks;
-      const INDEX_END = 12;
-      const resultsTwelveItems = results.slice(0, INDEX_END);
-      setStateRedux({ resultsTwelveItems });
-    };
-    fetchApi();
+    if (!(stateRedux && stateRedux.actionType === 'FETCH_INGREDIENT_COMPLETED')) {
+      const fetchApi = async () => {
+        const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
+        const data = await response.json();
+        const results = data.drinks;
+        const INDEX_END = 12;
+        const resultsTwelveItems = results.slice(0, INDEX_END);
+        setStateRedux({ resultsTwelveItems });
+      };
+      fetchApi();
+    }
     // eslint-disable-next-line
   }, []);
 
@@ -53,7 +55,7 @@ export default function Bebidas(props) {
   );
 }
 
-Bebidas.propTypes = {
+Drinks.propTypes = {
   match: PropTypes.shape({
     params: PropTypes.shape({
       id: PropTypes.string,

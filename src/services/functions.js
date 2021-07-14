@@ -5,7 +5,7 @@ const createIngredients = ({ el, position, index }) => {
   const measure = el[`strMeasure${position}`];
   if ((ingredient && measure) !== '' && (ingredient && measure) !== null) {
     return (
-      <li data-testid={ `${index}-ingredient-name-and-measure` }>
+      <li key={ index } data-testid={ `${index}-ingredient-name-and-measure` }>
         {' '}
         { ingredient }
         {' '}

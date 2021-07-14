@@ -56,8 +56,8 @@
       }
 
       embed {
-        width: 100%;
         height: auto;
+        width: 100%;
       }
 
       // referência para a construção do carousel de Maurício Viegas
@@ -67,7 +67,7 @@
         display: flex;
         flex-flow: row nowrap;
         overflow-x: scroll;
-        
+
         .cardRecommendation {
           width: 48%;
           flex: none;
