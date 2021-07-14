@@ -1,15 +1,15 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
-import Share from '../images/shareIcon.svg';
 import MealIngredientsMeasure from '../compenents/MealIngredientsMeasure';
 import RecipesContext from '../contexts/RecipesContext';
-
-const copy = require('clipboard-copy');
+import ShareButton from '../compenents/ShareButton';
+import FavoriteBtn from '../compenents/FavoriteBtn';
+import Loading from '../compenents/Loading';
 
 function MealsRecepiesProgress() {
   const [detailsRecepie, setDetailsRecepie] = useState();
-  const { allChecked } = useContext(RecipesContext);
+  const { allChecked, setIsFavorite } = useContext(RecipesContext);
   const history = useHistory();
   const recepiID = history.location.pathname.split('/')[2];
 
@@ -25,35 +25,56 @@ function MealsRecepiesProgress() {
     getRecepi();
   }, []);
 
-  function copyLink() {
-    const linkToCopy = `/comidas/${recepiID}`;
-    copy(linkToCopy);
-    global.alert('Link copiado!');
+  const getLocalStr = JSON.parse(localStorage.getItem('favoriteRecipes'));
+  let checkLocalStr;
+
+  if (getLocalStr !== null) {
+    // procura o recipeId no LS
+    checkLocalStr = Object.values(getLocalStr)
+      .find(({ id: strId }) => strId === recepiID);
+  }
+
+  if (checkLocalStr) {
+    setIsFavorite(true);
+  } else {
+    setIsFavorite(false);
   }
 
   if (detailsRecepie === undefined) {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
+  const {
+    strArea, strCategory, strMeal, strMealThumb, strInstructions,
+  } = detailsRecepie;
+
   return (
     <div>
       <img
         data-testid="recipe-photo"
         alt="meals recepi"
-        src={ detailsRecepie.strMealThumb }
+        src={ strMealThumb }
         width="50px"
       />
-      <h2 data-testid="recipe-title">{ detailsRecepie.strMeal }</h2>
-      <button type="button" data-testid="share-btn" onClick={ copyLink }>
-        <img alt="compartilhar" width="50px" src={ Share } />
-      </button>
-      { /* <Componente fav/desfav> */ }
-      <p data-testid="recipe-category">{ detailsRecepie.strCategory }</p>
+      <h2 data-testid="recipe-title">{ strMeal }</h2>
+      <ShareButton
+        idRecipe={ `comidas/${recepiID}` }
+      />
+      <FavoriteBtn
+        id={ recepiID }
+        type="comida"
+        area={ strArea }
+        category={ strCategory }
+        alcoholicOrNot=""
+        name={ strMeal }
+        image={ strMealThumb }
+      />
+      <p data-testid="recipe-category">{ strCategory }</p>
       <p>Ingredients</p>
       <MealIngredientsMeasure
         detailsRecepie={ detailsRecepie }
       />
       <p>Instruções</p>
-      <p data-testid="instructions">{ detailsRecepie.strInstructions }</p>
+      <p data-testid="instructions">{ strInstructions }</p>
 
       <Link to="/receitas-feitas">
         <button
