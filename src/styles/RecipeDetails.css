@@ -9,4 +9,28 @@
   height: 50px;
   position: fixed;
   width: 100%;
+  z-index: 1;
 }
+
+.swiper .swiper__slide {
+  background-color: black;
+}
+.swiper .swiper__slide .swiper__div {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+.swiper .swiper__slide .swiper__title {
+  color: white;
+  padding: 0.6em 0 0.3em;
+}
+.swiper .swiper__slide .swiper__img {
+  border: 1px solid black;
+  height: auto;
+  width: 100%;
+}
+.swiper .swiper__slide .swiper__link:hover {
+  text-decoration: none;
+}
+
+/*# sourceMappingURL=RecipeDetails.css.map */
