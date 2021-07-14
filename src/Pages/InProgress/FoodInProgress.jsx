@@ -49,7 +49,8 @@ function FoodInProgress() {
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id, meals]);
-
+  useEffect(() => {
+  }, []);
   const {
     idMeal,
     strArea,
@@ -146,6 +147,7 @@ function FoodInProgress() {
       <p data-testid="instructions">{strInstructions}</p>
       <Link to="/comidas">Voltar</Link>
       <button
+        disabled="true"
         type="button"
         data-testid="finish-recipe-btn"
         onClick={ handleClick }
