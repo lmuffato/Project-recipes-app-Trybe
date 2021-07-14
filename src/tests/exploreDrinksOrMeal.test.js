@@ -45,3 +45,5 @@ describe('testing requirement 70 to 74', () => {
     expect(pathname).toContain('/bebidas/');
   });
 });
+
+// teste teste
