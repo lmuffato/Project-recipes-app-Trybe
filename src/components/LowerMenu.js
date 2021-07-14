@@ -58,14 +58,21 @@ export default function LowerMenu() {
 }
 
 const Container = styled.div`
+  background-color: #FFD04E;
   position: fixed;
+  display: flex;
+  align-items: center;
   bottom: 0;
+  height: 58px;
   left: 0;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
   width: 100%;
+  box-shadow: 0px -2px 4px 1px rgba(0,0,0,0.65);
 
   ul {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     margin: 0;
     padding: 0;
@@ -73,7 +80,7 @@ const Container = styled.div`
   }
 
   ul li {
-    display: inline;
+    display: flex;
   }
 
   button {
