@@ -3,6 +3,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import HeaderBack from '../../components/HeaderBack';
 import getRecipes from '../../services/recipesData';
+import Dropdown from './components/Dropdown';
 import ExploreButtons from './components/ExploreButtons';
 import ExploreCards from './components/ExploreCards';
 import styles from './styles.module.scss';
@@ -27,6 +28,8 @@ function Explore() {
     loadExploreData();
   }, [loadExploreData]);
 
+  const url = `${meal}/${type}`;
+
   if (!type) {
     return (
       <div className={ styles.page }>
@@ -43,6 +46,7 @@ function Explore() {
     <>
       {meal && <HeaderBack title={ type } />}
       {type === 'ingredientes' && <ExploreCards ingredients={ ingredients } />}
+      {url === 'comidas/area' && <Dropdown />}
     </>
   );
 }
