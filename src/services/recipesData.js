@@ -102,7 +102,10 @@ export async function getRecommendations(path) {
       name: drink.strDrink,
       imagePath: drink.strDrinkThumb,
     }));
-    return parsed;
+    return {
+      path: paths.bebidas,
+      list: parsed,
+    };
   }
 
   case paths.bebidas: {
@@ -113,7 +116,10 @@ export async function getRecommendations(path) {
       name: meal.strMeal,
       imagePath: meal.strMealThumb,
     }));
-    return parsed;
+    return {
+      path: paths.comidas,
+      list: parsed,
+    };
   }
 
   default:
