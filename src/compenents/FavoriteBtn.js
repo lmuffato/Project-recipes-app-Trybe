@@ -10,8 +10,6 @@ function FavoriteBtn({ id, type, area, category, alcoholicOrNot, name, image, in
   } = useContext(RecipesContext);
   const recipeId = id;
 
-  console.log(favoriteRecipes);
-
   useEffect(() => {
     localStorage.setItem('favoriteRecipes', JSON.stringify(favoriteRecipes));
   }, [favoriteRecipes.length, favoriteRecipes, isFavorite]);

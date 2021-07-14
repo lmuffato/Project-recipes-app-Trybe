@@ -8,11 +8,23 @@ function IngredientsMeasure({ detailsRecepie }) {
   const { idMeal } = detailsRecepie;
   const ingredientsStorage = JSON.parse(localStorage.getItem('inProgressRecipes'));
   const [doneIngredients, setDoneIngredients] = useState(
-    ingredientsStorage ? ingredientsStorage.meals[idMeal] : [],
+    ingredientsStorage.meals[idMeal] !== undefined
+      ? ingredientsStorage.meals[idMeal] : [],
   );
-  const [cocktailsStorage, setcocktailsStorage] = useState({});
-  const [allMealsStorage, setAllMealsStorage] = useState({});
-  const [otherStorageRecepies, setOtherStorageRecepies] = useState([]);
+  // const [cocktailsStorage, setcocktailsStorage] = useState({});
+  const [allMealsStorage] = useState(
+    ingredientsStorage.cocktails ? ingredientsStorage.cocktails : {},
+  );
+
+  const theXablauIsComming = () => {
+    delete ingredientsStorage.meals[idMeal];
+    return ingredientsStorage.meals;
+  };
+
+  const [otherStorageRecepies] = useState(
+    Object.keys(ingredientsStorage.meals).length !== 0 ? theXablauIsComming() : {},
+  );
+
   const { setAllChecked } = useContext(RecipesContext);
 
   const allIngredients = Object.entries(detailsRecepie)
@@ -32,44 +44,14 @@ function IngredientsMeasure({ detailsRecepie }) {
     return setAllChecked(true);
   }
 
-  function setFirstLocalStorage() {
-    const objetoLocalStorage = {
-      cocktails: {},
-      meals: { [idMeal]: doneIngredients },
-    };
-    const ingredientListString = JSON.stringify(objetoLocalStorage);
-    localStorage.setItem('inProgressRecipes', ingredientListString);
-  }
-
   function upDateLocalStorage() {
     const newLocalStorage = {
-      cocktails: cocktailsStorage,
+      cocktails: allMealsStorage,
       meals: { ...otherStorageRecepies, [idMeal]: [...doneIngredients] },
     };
     const newLocalStorageString = JSON.stringify(newLocalStorage);
     localStorage.setItem('inProgressRecipes', newLocalStorageString);
-    setAllMealsStorage(newLocalStorage.meals);
   }
-
-  function getLocalStorage() {
-    const recepiesInProgressString = localStorage.getItem('inProgressRecipes');
-    const recepiesInProgress = JSON.parse(recepiesInProgressString);
-    if (recepiesInProgressString === null) {
-      setFirstLocalStorage();
-    } else {
-      const { cocktails, meals } = recepiesInProgress;
-      setcocktailsStorage(cocktails);
-      setAllMealsStorage(meals);
-      const otherRecepies = delete allMealsStorage.idMeal;
-      setOtherStorageRecepies(otherRecepies);
-
-      if (meals[idMeal] === null) upDateLocalStorage();
-    }
-  }
-
-  useEffect(() => {
-    getLocalStorage();
-  }, []);
 
   useEffect(() => {
     checkInputs();
@@ -88,6 +70,9 @@ function IngredientsMeasure({ detailsRecepie }) {
   }
 
   function getIngredientsList() {
+    if (allIngredients === undefined) {
+      return <div>loading</div>;
+    }
     return allIngredients.map((elem, index) => (
       <div key={ index }>
         <label data-testid={ `${index}-ingredient-step` } htmlFor={ elem[1] }>

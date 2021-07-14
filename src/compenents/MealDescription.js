@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import RecipesContext from '../contexts/RecipesContext';
 // import '../styles/MealDescription.css';
 import '../styles/Recomendations.css';
-import ShareButtons from './ShareButtons';
+import ShareButton from './ShareButton';
 import Recomendations from './Recomendations';
 import FavoriteBtn from './FavoriteBtn';
 
@@ -42,6 +42,16 @@ function MealDescription({ recipe, recipeId }) {
     setIsFavorite(false);
   }
 
+  const checkStart = () => {
+    const inProgress = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    console.log(inProgress);
+    if (inProgress && Object.keys(inProgress.meals).find((key) => key === idMeal)) {
+      // console.log('Vrau');
+      return 'Continuar Receita';
+    }
+    return 'Iniciar Receita';
+  };
+
   return (
     <>
       <section className="detail-container">
@@ -52,7 +62,7 @@ function MealDescription({ recipe, recipeId }) {
           className="recomedation-img"
         />
         <h1 data-testid="recipe-title">{ strMeal }</h1>
-        <ShareButtons idRecipe={ `comidas/${idMeal}` } />
+        <ShareButton idRecipe={ `comidas/${idMeal}` } />
         <FavoriteBtn
           id={ idMeal }
           type="comida"
@@ -98,7 +108,8 @@ function MealDescription({ recipe, recipeId }) {
           className="start-recipe"
           data-testid="start-recipe-btn"
         >
-          Iniciar Receita
+          { checkStart() }
+          {/* Iniciar Receita */}
           {/* { isStarted ? 'Continuar Receita' : 'Iniciar Receita' } */}
         </button>
       </Link>

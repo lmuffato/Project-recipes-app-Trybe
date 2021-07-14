@@ -30,6 +30,11 @@ function LoginPage() {
     const setUser = { email: userEmail };
     const emailStringFly = JSON.stringify(setUser);
     localStorage.setItem('user', emailStringFly);
+    const initialObj = {
+      cocktails: {},
+      meals: {},
+    };
+    localStorage.setItem('inProgressRecipes', JSON.stringify(initialObj));
   }
 
   return (

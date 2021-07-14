@@ -7,7 +7,7 @@ import RecipesContext from '../contexts/RecipesContext';
 import '../styles/Recomendations.css';
 import Recomendations from './Recomendations';
 import FavoriteBtn from './FavoriteBtn';
-import ShareButtons from './ShareButtons';
+import ShareButton from './ShareButton';
 
 function DrinkDescription({ recipe, recipeId }) {
   const { recomendations, setIsFavorite } = useContext(RecipesContext);
@@ -44,12 +44,22 @@ function DrinkDescription({ recipe, recipeId }) {
     setIsFavorite(false);
   }
 
+  const checkStart = () => {
+    const inProgress = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    console.log(inProgress);
+    if (inProgress && Object.keys(inProgress.cocktails).find((key) => key === idDrink)) {
+      // console.log('Vrau');
+      return 'Continuar Receita';
+    }
+    return 'Iniciar Receita';
+  };
+
   return (
     <>
       <section className="detail-container">
         <img data-testid="recipe-photo" src={ strDrinkThumb } alt="comida" />
         <h1 data-testid="recipe-title">{ strDrink }</h1>
-        <ShareButtons idRecipe={ `bebidas/${idDrink}` } />
+        <ShareButton idRecipe={ `bebidas/${idDrink}` } />
         <FavoriteBtn
           id={ idDrink }
           type="bebida"
@@ -63,7 +73,7 @@ function DrinkDescription({ recipe, recipeId }) {
         <h2>Ingredients</h2>
         { ingredients.map((ingredient, index) => (
           <p key={ index } data-testid={ `${index}-ingredient-name-and-measure` }>
-            {`- ${ingredient} - ${measures[index]}`}
+            {`- ${ingredient} - ${measures[index] === undefined ? 'at taste' : measures[index]}`}
           </p>
         ))}
         <p data-testid="instructions">{ strInstructions }</p>
@@ -89,7 +99,8 @@ function DrinkDescription({ recipe, recipeId }) {
           className="start-recipe"
           data-testid="start-recipe-btn"
         >
-          Iniciar Receita
+          { checkStart() }
+          {/* Iniciar Receita */}
           {/* { isStarted ? 'Continuar Receita' : 'Iniciar Receita' } */}
         </button>
       </Link>
