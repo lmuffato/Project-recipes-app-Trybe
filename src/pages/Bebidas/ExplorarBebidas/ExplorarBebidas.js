@@ -27,7 +27,7 @@ function ExplorarBebidas() {
 
   return (
     <>
-      <Header title="Explorar Bebidas" displayButton={ false } />
+      <Header title="Explore Drinks" displayButton={ false } />
       {loading === false
       && <FilterDrinks address={ address } />}
       <Footer />

@@ -24,7 +24,7 @@ function Comidas() {
     if (APIFood.meals !== null && APIFood.meals.length >= 1) {
       return (
         <div>
-          <Header title="Comidas" />
+          <Header title="Meals" />
           <Filter page="comidas" />
           <CardList
             list={ APIFood.meals }
@@ -38,14 +38,14 @@ function Comidas() {
     alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
     return (
       <div>
-        <Header title="Comidas" />
+        <Header title="Meals" />
         <Footer />
       </div>
     );
   }
   return (
     <div>
-      <Header title="Comidas" />
+      <Header title="Meals" />
       <Filter page="comidas" />
       <Footer />
     </div>
