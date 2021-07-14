@@ -62,9 +62,22 @@ body::-webkit-scrollbar {
   width: 100%;
 }
 
-/* @media only screen and ( min-width : 768px ) {
+@media only screen and ( min-width : 768px ) and ( max-width : 1199.98px ) {
 
-} */
+
+  .card {
+    height: 345px;
+    margin: 15px;
+    width: 300px;
+  }
+
+
+  .card-img {
+    min-width: 200px;
+  }
+
+
+}
 
 @media only screen and ( max-width : 768px ) {
 

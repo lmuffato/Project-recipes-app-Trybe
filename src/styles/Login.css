@@ -1,12 +1,14 @@
-@import url("https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap') ;
+
 .form {
-  background: url("../images//background1.jpg") no-repeat center fixed;
+  background: url('../images//background1.jpg') no-repeat center fixed;
   background-size: cover;
   display: flex;
   height: 100vh;
   justify-content: center;
   margin: auto;
 }
+
 .form div {
   align-items: center;
   background-color: rgba(51, 49, 49, 0.6);
@@ -18,47 +20,55 @@
   padding: 2em;
   width: 85%;
 }
+
 .form img {
   border-radius: 2em;
   padding: 0 2em 2em;
   width: 90%;
 }
+
 .form h1 {
   color: white;
-  font-family: Montserrat, sans-serif;
+  font-family: Montserrat , sans-serif;
   font-size: 2em;
   font-weight: 500;
   margin: 0.1em 0 0.7em;
   opacity: 1;
 }
+
 .form label {
   display: flex;
   flex-direction: column;
   padding-bottom: 1em;
   width: 100%;
 }
+
 .form p {
   display: none;
 }
+
 .form input {
   background-color: rgba(216, 209, 209, 0.4);
   border: none;
   box-sizing: border-box;
   color: white;
-  font-family: Alegreya, sans-serif;
+  font-family: Alegreya , sans-serif;
   font-size: 1.2em;
   height: 5vh;
   padding: 0.3em;
 }
+
 .form input::placeholder {
   color: white;
-  font-family: Montserrat, sans-serif;
+  font-family: Montserrat , sans-serif;
 }
+
 .form input:focus {
   font-size: 1.2em;
   outline: none;
   transition: 0.2s;
 }
+
 .form span {
   color: red;
   display: none;
@@ -69,29 +79,33 @@
   text-shadow: 3px 3px 4px black;
   width: fit-content;
 }
+
 .form button {
   align-items: center;
   border: none;
   box-sizing: border-box;
   color: gray;
   display: flex;
-  font-family: Montserrat, sans-serif;
+  font-family: Montserrat , sans-serif;
   font-size: 1.8em;
   font-weight: 700;
   height: 5vh;
   justify-content: center;
   width: 100%;
 }
+
 .form button:disabled {
   background-color: #6d6d6d;
   cursor: not-allowed;
   transition: 2s;
 }
+
 .form button:enabled {
   background-color: #f2a30f;
   color: white;
   transition: 2s;
 }
+
 .form button:enabled:hover {
   background-color: #f2a30f;
   box-shadow: 1px 1px 7px #1d1c1d inset;

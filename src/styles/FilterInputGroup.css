@@ -1,5 +1,6 @@
 .input-group-filter {
   display: flex;
+  font-family: Montserrat , Arial , Verdana , Tahoma , sans-serif;
   justify-content: space-around;
 }
 
