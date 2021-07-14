@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react';
 
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 
 import { fetchDrinkByID } from '../services/cocktailAPI';
 import { fetchFoods } from '../services/mealAPI';
@@ -17,18 +17,16 @@ export default function DetalhesBebidas() {
   const [filterIngredient, setFilterIngredient] = useState([]);
   const [food, setFoods] = useState([]);
   const { id } = useParams();
+  const history = useHistory();
 
   const filterIngredients = useCallback((obj = recipe) => {
-    const filter = Object.keys(obj)
-      .filter((value) => value.includes('strIngredient'))
+    const filterKeys = Object.keys(obj)
+      .filter((value) => value.includes('strIngredient')
+        && obj[value] !== '' && obj[value] !== null)
       .map((item) => (obj[item]));
-    const excluir = null;
-    let index = filter.indexOf(excluir);
-    while (index >= 0) {
-      filter.splice(index, 1);
-      index = filter.indexOf(excluir);
-    }
-    return setFilterIngredient(filter);
+    const ingredientsMeasures = filterKeys
+      .map((key, index) => [`${key} - `, obj[`strMeasure${index + 1}`]]);
+    return setFilterIngredient(ingredientsMeasures);
   }, [recipe]);
 
   const updateData = useCallback(async () => {
@@ -40,9 +38,13 @@ export default function DetalhesBebidas() {
     const result = await fetchFoods();
     const arr = [];
     const six = 6;
-    result.meals.map((item) => arr.push(item.strMealThumb));
+    result.meals.map((item) => arr.push([item.strMealThumb, item.strMeal]));
     return setFoods(arr.slice(0, six));
   }, []);
+
+  const handleClick = () => {
+    history.push(`/bebidas/${id}/in-progress`);
+  };
 
   useEffect(() => {
     updateData();
@@ -83,6 +85,7 @@ export default function DetalhesBebidas() {
       { food.length > 0 && <Carousel data={ food } /> }
       <Button
         dataTestid="start-recipe-btn"
+        onClick={ handleClick }
       >
         Iniciar Receita
       </Button>

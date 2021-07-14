@@ -5,31 +5,33 @@ import PropTypes from 'prop-types';
 import CarouselCard from './CarouselCard';
 
 export default function Carousel({ data }) {
-  console.log(data);
   const settings = {
     dots: true,
-    infinite: true,
+    infinite: false,
     speed: 500,
     slidesToShow: 2,
     slidesToScroll: 1,
   };
 
   return (
-    <div>
-      <Slider { ...settings }>
-        { data.length > 0 && data.map((card, index) => (
-          <div
-            key={ index }
-            data-testid={ `${index}-recomendation-card` }
+    <Slider { ...settings }>
+      { data !== undefined && data.map((card, index) => (
+        <div
+          key={ index }
+          data-testid={ `${index}-recomendation-card` }
+        >
+          <CarouselCard
+            card={ card[0] }
+            alt="image recipe"
+          />
+          <p
+            data-testid={ `${index}-recomendation-title` }
           >
-            <CarouselCard
-              card={ card }
-              alt="image recipe"
-            />
-          </div>
-        ))}
-      </Slider>
-    </div>
+            { card[1] }
+          </p>
+        </div>
+      ))}
+    </Slider>
   );
 }
 

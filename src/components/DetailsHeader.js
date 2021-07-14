@@ -11,6 +11,7 @@ export default function DetailsHeader({ recipe, isFood }) {
   const recipeCategory = recipe.strCategory;
   const recipeName = isFood ? recipe.strMeal : recipe.strDrink;
   const recipeImage = isFood ? recipe.strMealThumb : recipe.strDrinkThumb;
+  const recipeStrAlcoholic = recipe.strAlcoholic;
 
   return (
     <div>
@@ -29,7 +30,11 @@ export default function DetailsHeader({ recipe, isFood }) {
           <FavoriteButton recipe={ recipe } isFood={ isFood } />
         </div>
       </div>
-      <p data-testid="recipe-category">{ recipeCategory }</p>
+      <p data-testid="recipe-category">
+        { recipeCategory }
+        <br />
+        { recipeStrAlcoholic }
+      </p>
     </div>
   );
 }

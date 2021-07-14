@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react';
 
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 
 import { fetchFoodByID } from '../services/mealAPI';
 import { fetchCocktails } from '../services/cocktailAPI';
@@ -18,21 +18,19 @@ export default function DetalhesComidas() {
   const [filterIngredient, setFilterIngredient] = useState([]);
   const [drinks, setDrinks] = useState([]);
   const { id } = useParams();
+  const history = useHistory();
 
   const filterIngredients = useCallback((obj = recipe) => {
-    const filter = Object.keys(obj)
-      .filter((value) => value.includes('strIngredient'))
+    const filterKeys = Object.keys(obj)
+      .filter((value) => value.includes('strIngredient')
+        && obj[value] !== '' && obj[value] !== null)
       .map((item) => (obj[item]));
-    const excluir = '';
-    let index = filter.indexOf(excluir);
-    while (index >= 0) {
-      filter.splice(index, 1);
-      index = filter.indexOf(excluir);
-    }
-    return setFilterIngredient(filter);
+    const ingredientsMeasures = filterKeys
+      .map((key, index) => [`${key} - `, obj[`strMeasure${index + 1}`]]);
+    return setFilterIngredient(ingredientsMeasures);
   }, [recipe]);
 
-  const updateData = useCallback(async () => {
+  const updateFood = useCallback(async () => {
     const result = await fetchFoodByID(id);
     return setRecipe(result.meals[0]);
   }, [id]);
@@ -41,17 +39,21 @@ export default function DetalhesComidas() {
     const result = await fetchCocktails();
     const arr = [];
     const six = 6;
-    result.drinks.map((item) => arr.push(item.strDrinkThumb));
+    result.drinks.map((item) => arr.push([item.strDrinkThumb, item.strDrink]));
     return setDrinks(arr.slice(0, six));
   }, []);
 
-  useEffect(() => {
-    updateData();
-  }, [updateData]);
+  const handleClick = () => {
+    history.push(`/comidas/${id}/in-progress`);
+  };
 
   useEffect(() => {
     filterIngredients();
   }, [filterIngredients]);
+
+  useEffect(() => {
+    updateFood();
+  }, [updateFood]);
 
   useEffect(() => {
     updateDrinks();
@@ -92,6 +94,7 @@ export default function DetalhesComidas() {
       { drinks.length > 0 && <Carousel data={ drinks } /> }
       <Button
         dataTestid="start-recipe-btn"
+        onClick={ handleClick }
       >
         Iniciar Receita
       </Button>
