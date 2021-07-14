@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import shareIcon from '../../images/shareIcon.svg';
 import blackHeartIcon from '../../images/blackHeartIcon.svg';
 import './index.css';
+import Header from '../../components/header';
 
 export default function RecipesFavorites() {
   const favoriteRecipes = [
@@ -64,6 +65,7 @@ export default function RecipesFavorites() {
   return (
     <>
       <nav>
+        <Header title="Receitas Favoritas" isSearch={ false } />
         <button
           type="button"
           data-testid="filter-by-all-btn"

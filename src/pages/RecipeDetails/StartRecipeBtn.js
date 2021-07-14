@@ -5,9 +5,10 @@ import { AppContext } from '../../context/AppContext';
 
 export default function StartRecipeBtn({ recipe }) {
   const { context } = useContext(AppContext);
-  const { pageOrigin } = context;
+  const { pageOrigin, toDoneStorage } = context;
+
   useEffect(() => {
-    const doneRecipes = [ // Info mockada
+   /*  const doneRecipes = [
       {
         id: '53013',
         type: 'comida',
@@ -19,28 +20,17 @@ export default function StartRecipeBtn({ recipe }) {
         doneDate: '23/06/2020',
         tags: ['Pasta', 'Curry'],
       },
-      {
-        id: '178319',
-        type: 'bebida',
-        area: '',
-        category: 'Cocktail',
-        alcoholicOrNot: 'Alcoholic',
-        name: 'Aquamarine',
-        image: 'https://www.thecocktaildb.com/images/media/drink/zvsre31572902738.jpg',
-        doneDate: '23/06/2020',
-        tags: [],
-      },
-    ];
-    localStorage.setItem('doneRecipes', JSON.stringify(doneRecipes)); // info mockada
+    ]; */
+    // localStorage.setItem('doneRecipes', JSON.stringify(doneRecipes)); // info mockada
+    // const savedDoneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
+    console.log(toDoneStorage);
 
-    const savedDoneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
-
-    if (savedDoneRecipes.some(
+    if (toDoneStorage && toDoneStorage.some(
       (doneRecipe) => doneRecipe.id === recipe.idMeal || recipe.idDrink,
     )) {
       document.getElementsByClassName('start-recipe-btn')[0].style.display = 'none';
     }
-  }, [recipe]);
+  }, [toDoneStorage]);
 
   return (
     <div>

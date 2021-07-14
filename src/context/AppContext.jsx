@@ -11,10 +11,10 @@ export default function AppProvider({ children }) {
   const [pageOrigin, setPageOrigin] = useState('');
   const [recipesList, setRecipesList] = useState([]);
   const [categoriesList, setCategoriesList] = useState([]);
-  const [recipeContext, setRecipeContext] = useState('');
   const [toStorage, setToStorage] = useState('');
+  const [toDoneStorage, setToDoneStorage] = useState([]);
   const [checkedState, setCheckedState] = useState(true);
-  const [recipe, setRecipe] = useState({});
+  const [recipe, setRecipe] = useState('');
   const NUM_RECIPES_SHOWN = 12;
   const NUM_CATEG_SHOWN = 5;
   const context = {
@@ -30,29 +30,51 @@ export default function AppProvider({ children }) {
     setRecipesList,
     categoriesList,
     setCategoriesList,
-    setRecipeContext,
     toStorage,
     checkedState,
     setCheckedState,
-    recipeContext,
     recipe,
     setRecipe,
+    toDoneStorage,
+
   };
 
   useEffect(() => {
-    const storage = [{
-      id: recipeContext.idMeal || recipeContext.idDrink,
-      type: pageOrigin === 'themealdb' ? 'comida' : 'bebida',
-      area: recipeContext.strArea || '',
-      category: recipeContext.strCategory,
-      alcoholicOrNot: recipeContext.strAlcoholic || '',
-      name: recipeContext.strMeal || recipeContext.strDrink,
-      image: recipeContext.strMealThumb || recipeContext.strDrinkThumb,
-      // doneDate: new Date(),
-      // tags: recipeContext.strTags || '',
+    const inProgressStorage = [{
+      id: recipe.idMeal || recipe.idDrink,
+      type: pageOrigin.includes('themealdb') ? 'comida' : 'bebida',
+      area: recipe.strArea || '',
+      category: recipe.strCategory || '',
+      alcoholicOrNot: recipe.strAlcoholic || '',
+      name: recipe.strMeal || recipe.strDrink,
+      image: recipe.strMealThumb || recipe.strDrinkThumb,
     }];
-    setToStorage(storage);
-  }, [recipeContext, pageOrigin]);
+    setToStorage(inProgressStorage);
+  }, [recipe, pageOrigin]);
+
+  // ideia para criar o formato da data
+  // https://qastack.com.br/programming/6040515/how-do-i-get-month-and-date-of-javascript-in-2-digit-format
+
+  useEffect(() => {
+/*     const data = new Date();
+    const day = data.getDate().toString().padStart(2, '0');
+    const month = (data.getMonth() + 1).toString().padStart(2, '0');
+    const year = data.getFullYear();
+    const doneDate = `${day}/${month}/${year}`;
+    const doneRecipeStorage = [{
+      id: recipe.idMeal || recipe.idDrink,
+      type: pageOrigin.includes('themealdb') ? 'comida' : 'bebida',
+      area: recipe.strArea || '',
+      category: recipe.strCategory || '',
+      alcoholicOrNot: recipe.strAlcoholic || '',
+      name: recipe.strMeal || recipe.strDrink,
+      image: recipe.strMealThumb || recipe.strDrinkThumb,
+      doneDate,
+      tags: [recipe.strTags] || [],
+    }]; */
+    const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
+    setToDoneStorage(doneRecipes);
+  }, [recipe, pageOrigin]);
 
   useEffect(() => {
     fetchCategoriesApi(pageOrigin)

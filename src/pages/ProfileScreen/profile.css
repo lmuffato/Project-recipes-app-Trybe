@@ -1,0 +1,11 @@
+.buttons {
+  background-color: #c4c4c4;
+  margin-bottom: 10px;
+  width: 300px;
+}
+
+.buttonsContainer {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
