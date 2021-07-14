@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import BebidasDetails from '../../components/BebidasDetails';
 import fetchDrinkDetails from '../../services/fetchDrinkDetails';
 import foodsRecomendation from '../../services/foodsRecomendation';
 
 function DrinkDetails() {
-  const numberSlice = 9;
-  const { pathname } = useLocation();
-  const idDrink = pathname.slice(numberSlice);
+  const { id } = useParams();
 
   const [data, setData] = useState([]);
   const [recomendation, setRecomendation] = useState();
@@ -15,14 +13,14 @@ function DrinkDetails() {
 
   useEffect(() => {
     async function getData() {
-      const { drinks } = await fetchDrinkDetails(idDrink);
+      const { drinks } = await fetchDrinkDetails(id);
       const recomendations = await foodsRecomendation();
       setRecomendation(recomendations);
       setData(drinks);
       setLoading(false);
     }
     getData();
-  }, [idDrink]);
+  }, [id]);
 
   return (
     loading

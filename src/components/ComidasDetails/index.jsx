@@ -1,5 +1,5 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Recomendations from '../Recomendations';
 import ShareButton from '../ShareButton';
@@ -9,6 +9,7 @@ import getIngredients from '../../services/getIngredients';
 
 function ComidasDetails({ data, recomendation }) {
   const { pathname } = useLocation();
+  const { id } = useParams();
   const { href } = window.location;
   const ingredients = getIngredients(data[0], 'strIngredient');
   const ingredientsMeasures = getIngredients(data[0], 'strMeasure');
@@ -19,7 +20,7 @@ function ComidasDetails({ data, recomendation }) {
         <img src={ strMealThumb } alt="comida" data-testid="recipe-photo" />
         <h4 data-testid="recipe-title">{ strMeal }</h4>
         <ShareButton data-testid="share-btn" urlCopied={ href } />
-        <FavoriteButton data={ data[0] } path={ pathname } />
+        <FavoriteButton data={ data[0] } path={ id } />
         <p data-testid="recipe-category">{ strCategory }</p>
         <ul>
           { ingredients.map((ingredient, index) => (

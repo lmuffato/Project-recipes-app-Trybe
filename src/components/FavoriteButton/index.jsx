@@ -11,25 +11,18 @@ function FavoriteButton({ data, path }) {
       localStorage.setItem('favoriteRecipes', JSON.stringify(obj));
     }
   }
-
-  function paintHeart() {
-    createLocalStorage();
-    const sliceNumber = 9;
-    const idFood = path.slice(sliceNumber);
-    const include = JSON.parse(localStorage.getItem('favoriteRecipes'));
-    const color = include.filter(({ id }) => id === idFood);
-    if (color.length > 0) return blackHeartIcon;
-    return whiteHeartIcon;
-  }
-
-  const [heartIcon, setHeartIcon] = useState(paintHeart());
+  const [heartIcon, setHeartIcon] = useState('');
 
   function favoritar() {
-    const sliceNumber = 9;
-    const idFood = path.slice(sliceNumber);
+    const idFood = `${path}`;
+    console.log(`${idFood} pra ter certeza`);
     const include = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    console.log(include);
+    const boolConditional = include.some(({ id }) => id === idFood);
     const favorites = include.filter(({ id }) => id === idFood);
-    if (favorites.legnth === 0) {
+    // console.log('fora if');
+    if (!boolConditional) {
+      console.log('teste');
       if (path.includes('/bebidas')) {
         const { idDrink, strCategory, strAlcoholic, strDrink, strDrinkThumb } = data;
         const array = [...include, {
@@ -42,6 +35,7 @@ function FavoriteButton({ data, path }) {
           image: strDrinkThumb,
         }];
         localStorage.setItem('favoriteRecipes', JSON.stringify(array));
+        setHeartIcon(blackHeartIcon);
       } else {
         const { idMeal, strCategory, strArea, strMeal, strMealThumb } = data;
         const array = [...include, {
@@ -54,24 +48,34 @@ function FavoriteButton({ data, path }) {
           image: strMealThumb,
         }];
         localStorage.setItem('favoriteRecipes', JSON.stringify(array));
+        setHeartIcon(blackHeartIcon);
       }
     } else {
       const deleteFav = include.filter(({ id }) => id !== favorites[0].id);
       localStorage.setItem('favoriteRecipes', JSON.stringify(deleteFav));
+      setHeartIcon(whiteHeartIcon);
     }
   }
 
   function handleClick() {
     favoritar();
-    if (heartIcon === whiteHeartIcon) {
-      return setHeartIcon(blackHeartIcon);
-    }
-    setHeartIcon(whiteHeartIcon);
   }
 
   useEffect(() => {
     createLocalStorage();
-  }, []);
+    function paintHeart() {
+      const include = JSON.parse(localStorage.getItem('favoriteRecipes'));
+      console.log(include);
+      const color = include.some(({ id }) => id === `${path}`);
+      console.log(color);
+      if (color) {
+        setHeartIcon(blackHeartIcon);
+      } else {
+        setHeartIcon(whiteHeartIcon);
+      }
+    }
+    paintHeart();
+  }, [path]);
 
   return (
     <button

@@ -1,29 +1,26 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import copy from 'clipboard-copy';
 import shareIcon from '../../images/shareIcon.svg';
 
 export default function ShareButton({ dataTestId, urlCopied }) {
-  const [copy, setCopy] = useState('hidden');
+  const [show, setCopy] = useState(false);
 
   function handleClick() {
-    navigator.clipboard.writeText(urlCopied);
-    setCopy('');
+    copy(urlCopied);
+    setCopy(true);
   }
 
   return (
     <div>
-      <button
-        type="button"
-        src={ shareIcon }
+      <input
+        type="image"
+        alt="share icon"
         onClick={ handleClick }
-      >
-        <img
-          src={ shareIcon }
-          alt="share"
-          data-testid={ dataTestId }
-        />
-      </button>
-      <p className={ copy }>Link copiado!</p>
+        src={ shareIcon }
+        data-test-id={ dataTestId }
+      />
+      {show ? <p>Link copiado!</p> : null}
     </div>
   );
 }
