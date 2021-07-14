@@ -9,7 +9,7 @@ export default function RecipesCategoryFilters({ typeRecipes }) {
   const [recipesCategories, setRecipesCategories] = useState([]);
   const {
     setFilters, stateButtonsFilter,
-    setStateButtonsFilter,
+    setStateButtonsFilter, setFoodDataNoFilter, setDrinkDataNoFilter,
   } = useRecipesContext();
 
   useEffect(() => {
@@ -31,6 +31,7 @@ export default function RecipesCategoryFilters({ typeRecipes }) {
 
   function handleClickButtonAll() {
     setFilters({ search: '', parameter: 'name' });
+    setFoodDataNoFilter([]);
   }
 
   function setFiltersStates(target, filter) {
@@ -54,6 +55,8 @@ export default function RecipesCategoryFilters({ typeRecipes }) {
     default:
       return '';
     }
+    setFoodDataNoFilter([]);
+    setDrinkDataNoFilter([]);
   }
   return (
     <div className="recipesCategoryFilters__containers">

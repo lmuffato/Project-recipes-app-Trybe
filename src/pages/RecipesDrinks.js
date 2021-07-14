@@ -11,7 +11,8 @@ import RecipesCategoryFilters from '../components/RecipesCategoryFilters';
 import './recipesPageContainer.css';
 
 export default function RecipesDrinks() {
-  const { filters, fetchCocktails, drinkData, redirect } = useContext(RecipeContext);
+  const { filters, fetchCocktails, drinkData,
+    drinkDataNoFilter, drinkDataIngredientFilter } = useContext(RecipeContext);
   const { appData: { showHide } } = useSearchBarShowHide();
 
   useEffect(() => {
@@ -25,9 +26,10 @@ export default function RecipesDrinks() {
   }
 
   function render() {
-    if (redirect.length > 0) {
+    if (drinkDataNoFilter.length > 0) {
+      console.log(drinkDataIngredientFilter);
       return (
-        redirect && redirect.map((drink, index) => (
+        drinkDataIngredientFilter && drinkDataIngredientFilter.map((drink, index) => (
           <Link
             to={ `/bebidas/${drink.idDrink}` }
             key={ index }

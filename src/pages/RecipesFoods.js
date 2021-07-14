@@ -11,7 +11,8 @@ import RecipesCategoryFilters from '../components/RecipesCategoryFilters';
 import './recipesPageContainer.css';
 
 export default function RecipesFoods() {
-  const { filters, fetchMeals, foodData, redirect } = useContext(RecipeContext);
+  const { filters, fetchMeals, foodData, setFoodData,
+    foodDataNoFilter, foodDataIngredientFilter } = useContext(RecipeContext);
   const { appData: { showHide } } = useSearchBarShowHide();
 
   useEffect(() => {
@@ -26,9 +27,12 @@ export default function RecipesFoods() {
   }
 
   function render() {
-    if (redirect.length > 0) {
+    if (foodDataNoFilter.length > 0) {
+      console.log(foodDataIngredientFilter);
+      console.log(foodData);
       return (
-        redirect.map((food, index) => (
+        // foodDataIngredientFilter && foodDataIngredientFilter.map((food, index) => (
+        foodData && foodData.map((food, index) => (
           <Link
             to={ `/comidas/${food.idMeal}` }
             key={ index }

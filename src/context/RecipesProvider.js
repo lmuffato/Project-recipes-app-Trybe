@@ -24,7 +24,11 @@ function RecipeProvider({ children }) {
   const [doneRecipes, setDoneRecipes] = useState(checkLocalStorage('doneRecipes'));
   const [favoriteRecipes,
     setFavoriteRecipes] = useState(checkLocalStorage('favoriteRecipes'));
-  const [redirect, setRedirect] = useState([]);
+  const [foodDataNoFilter, setFoodDataNoFilter] = useState([]);
+  const [drinkDataNoFilter, setDrinkDataNoFilter] = useState([]);
+
+  const [foodDataIngredientFilter, setFoodDataIngredientFilter] = useState([]);
+  const [drinkDataIngredientFilter, setDrinkDataIngredientFilter] = useState([]);
 
   const buttonsInitialState = {
     buttonFilter0: false,
@@ -68,30 +72,38 @@ function RecipeProvider({ children }) {
     setDrinkData(drinks);
   }
 
-  async function fetchMealsRedirect(parameter, search) {
+  async function fetchMealsNoFilter(parameter, search) {
     const { meals } = await getMeals(parameter, search);
     if (meals === null) {
-      setRedirect([]);
+      setFoodDataNoFilter([]);
+      // setFoodDataIngredientFilter([]);
+      setFoodData([]);
       return;
     }
     if (meals.length > maxObjRetrieve) {
-      setRedirect(meals.slice(0, maxObjRetrieve));
+      setFoodDataNoFilter(meals.slice(0, maxObjRetrieve));
+      // setFoodDataIngredientFilter(meals.slice(0, maxObjRetrieve));
+      setFoodData(meals.slice(0, maxObjRetrieve));
       return;
     }
-    setRedirect(meals);
+    setFoodDataNoFilter(meals);
+    setFoodData(meals);
   }
 
-  async function fetchCocktailsRedirect(parameter, search) {
+  async function fetchCocktailsNoFilter(parameter, search) {
     const { drinks } = await getCocktails(parameter, search);
     if (drinks === null) {
-      setRedirect([]);
+      setDrinkDataNoFilter([]);
+      setDrinkDataIngredientFilter([]);
       return;
     }
     if (drinks.length > maxObjRetrieve) {
-      setRedirect(drinks.slice(0, maxObjRetrieve));
+      setDrinkDataNoFilter(drinks.slice(0, maxObjRetrieve));
+      setDrinkDataIngredientFilter(drinks.slice(0, maxObjRetrieve));
       return;
     }
-    setRedirect(drinks);
+    setDrinkDataNoFilter(drinks);
+    setDrinkDataIngredientFilter(drinks);
   }
 
   const consumer = {
@@ -113,10 +125,16 @@ function RecipeProvider({ children }) {
     setDoneRecipes,
     favoriteRecipes,
     setFavoriteRecipes,
-    fetchMealsRedirect,
-    fetchCocktailsRedirect,
-    redirect,
-    setRedirect,
+    fetchMealsNoFilter,
+    fetchCocktailsNoFilter,
+    foodDataNoFilter,
+    setFoodDataNoFilter,
+    drinkDataNoFilter,
+    setDrinkDataNoFilter,
+    foodDataIngredientFilter,
+    setFoodDataIngredientFilter,
+    drinkDataIngredientFilter,
+    setDrinkDataIngredientFilter,
   };
 
   return (

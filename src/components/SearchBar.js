@@ -6,7 +6,8 @@ function SearchBar() {
   const [searchText, setSearchText] = useState('');
   const [searchParameter, setSearchParameter] = useState('');
 
-  const { setFilters } = useContext(RecipeContext);
+  const { setFilters, setFoodDataNoFilter,
+    setDrinkDataNoFilter } = useContext(RecipeContext);
 
   function handleSearch() {
     if (searchParameter === 'first-letter' && searchText.length > 1) {
@@ -18,6 +19,8 @@ function SearchBar() {
       search: searchText,
       parameter: searchParameter,
     });
+    setFoodDataNoFilter([]);
+    setDrinkDataNoFilter([]);
   }
 
   return (

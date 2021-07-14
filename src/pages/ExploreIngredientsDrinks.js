@@ -1,23 +1,22 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import useRecipesContext from '../hooks/useRecipesContext';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import IngredientCard from '../components/IngredientCard';
-import { getCocktails } from '../services/api';
 import './exploreIngredientsPage.css';
 import '../components/ingredientCard.css';
 
 export default function ExploreIngredientsDrinks() {
-  const [listIngredientDrinks, setListIngredientDrinks] = useState([]);
+  const { fetchCocktailsNoFilter, drinkDataNoFilter } = useRecipesContext();
 
   useEffect(() => {
-    getCocktails('ingredient_list').then(({ drinks }) => {
-      const numberMaxOfIngredients = 12;
-      const filtered = drinks
-        .filter((_, index) => index < numberMaxOfIngredients);
-      setListIngredientDrinks(filtered);
-    });
-  }, [setListIngredientDrinks]);
+    fetchCocktailsNoFilter('ingredient_list');
+  }, []);
+
+  async function handleRedirectPage(ingredient) {
+    fetchCocktailsNoFilter('ingredient', ingredient);
+  }
 
   return (
     <div className="exploreIngredientPage__Container">
@@ -27,12 +26,13 @@ export default function ExploreIngredientsDrinks() {
 
       <div className="exploreIngredientCards__container">
         {
-          listIngredientDrinks && listIngredientDrinks
+          drinkDataNoFilter && drinkDataNoFilter
             .map(({ strIngredient1: ingredient }, index) => (
               <Link
                 to="/bebidas"
                 key={ index }
-                class="ingredientCard__container"
+                className="ingredientCard__container"
+                onClick={ () => handleRedirectPage(ingredient) }
               >
                 <IngredientCard
                   index={ index }
