@@ -3,7 +3,7 @@ export default async function fetchApiIngredients(page) {
   const results = await data.json();
 
   if (results.meals === null || results.drinks === null) {
-    alert(myAlert);
+    console.log('fail');
   }
   return results.meals || results.drinks;
 }

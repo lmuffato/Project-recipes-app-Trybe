@@ -34,6 +34,8 @@ export default function RecipesMain({ match }) {
               <RecipeCard
                 recipe={ recipe }
                 index={ index }
+                isMain
+                path={ path }
               />
             </Link>
           ),
