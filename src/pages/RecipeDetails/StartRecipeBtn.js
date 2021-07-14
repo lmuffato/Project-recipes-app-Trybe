@@ -5,7 +5,7 @@ import { AppContext } from '../../context/AppContext';
 
 export default function StartRecipeBtn({ recipe }) {
   const { context } = useContext(AppContext);
-  const { pageOrigin, toDoneStorage } = context;
+  const { pageOrigin, toDoneStorage, toStorage } = context;
 
   useEffect(() => {
     if (toDoneStorage && toDoneStorage.some(
@@ -18,6 +18,20 @@ export default function StartRecipeBtn({ recipe }) {
       document.getElementsByClassName('start-recipe-btn')[0].style.display = 'unset';
     };
   }, [toDoneStorage]);
+
+  useEffect(() => {
+    if (pageOrigin === 'themealdb') {
+      if (toStorage.meals && Object.keys(toStorage.meals).some(
+        (inProgMealId) => inProgMealId === recipe.idMeal,
+      )) {
+        document.getElementsByClassName('start-recipe-btn')[0].innerHTML = 'Continuar Receita';
+      }
+    }
+
+    return () => {
+      document.getElementsByClassName('start-recipe-btn')[0].style.display = 'Iniciar Receita';
+    };
+  }, [toStorage, pageOrigin]);
 
   return (
     <div>
