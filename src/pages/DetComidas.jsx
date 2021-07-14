@@ -9,6 +9,7 @@ import {
   checkStorageFood } from '../services/index';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
+import '../css/carousel.css';
 
 class DetComidas extends React.Component {
   constructor() {
@@ -186,18 +187,28 @@ class DetComidas extends React.Component {
             allow="accelerometer; clipboard-write; picture-in-picture"
           />
           <h2>Drinks Recomendados</h2>
-          {recommended.map((drink, index) => (
-            <div key={ drink.idDrink } data-testid={ `${index}-recomendation-card` }>
-              <input
-                width="350"
-                type="image"
-                src={ drink.strDrinkThumb }
-                data-testid="recipe-photo"
-                alt="recipe-img"
+          <div className="carousel-sbt">
+            {recommended.map((drink, index) => (
+              <div
+                key={ drink.idDrink }
+                className="card-container"
                 onClick={ () => history.push(`/bebidas/${drink.idDrink}`) }
-              />
-            </div>
-          ))}
+                aria-hidden="true"
+              >
+                <img
+                  data-testid={ `${index}-recomendation-card` }
+                  className="recommendation-img"
+                  src={ drink.strDrinkThumb }
+                  alt="recipe-img"
+                />
+                <h3
+                  data-testid={ `${index}-recomendation-title` }
+                >
+                  {drink.strDrink}
+                </h3>
+              </div>
+            ))}
+          </div>
           {(!this.checkRecipe(recipe[0]))
           && (
             <button

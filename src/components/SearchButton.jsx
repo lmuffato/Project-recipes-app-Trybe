@@ -56,6 +56,8 @@ class SearchButton extends React.Component {
     return (
       <>
         <button
+          src={ searchIcon }
+          alt="search"
           data-testid="search-top-btn"
           type="button"
           onClick={ () => {
@@ -69,9 +71,7 @@ class SearchButton extends React.Component {
               });
             }
           } }
-        >
-          <img src={ searchIcon } alt="search" />
-        </button>
+        />
         {btn ? this.renderInputSearch() : null}
         <label htmlFor="optionsIngrediente">
           <input

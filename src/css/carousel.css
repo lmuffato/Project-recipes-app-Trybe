@@ -1,0 +1,21 @@
+.aria-conteiner {
+  width: 100%;
+  margin-bottom: 60px;
+}
+
+.carousel-sbt {
+  display: flex;
+  flex-flow: row nowrap;
+  overflow-x: scroll;
+}
+
+.recommendation-img {
+  width: 100%;
+}
+.card-container {
+  margin-right: 10px;
+  width: 48%;
+  flex: none;
+  border-radius: 5px;
+}
+

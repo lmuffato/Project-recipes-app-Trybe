@@ -10,6 +10,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
+import '../css/carousel.css';
 
 class DetBebidas extends React.Component {
   constructor() {
@@ -119,7 +120,10 @@ class DetBebidas extends React.Component {
     const drink = Object.values(drinks);
     return (
       drink.map((recipe) => (
-        <div key="recipe">
+        <div
+          key="recipe"
+          className="aria-conteiner"
+        >
           <img
             className="detImg"
             data-testid="recipe-photo"
@@ -176,19 +180,33 @@ class DetBebidas extends React.Component {
             {recipe[0].strInstructions}
           </p>
           <h2>Comidas Recomendadas</h2>
-          {recommended.map((food, index) => (
-            <div key={ food.idMeal } data-testid={ `${index}-recomendation-card` }>
-              <Link to={ `/comidas/${food.idMeal}` }>
-                <input
-                  width="350"
-                  type="image"
-                  src={ food.strMealThumb }
-                  data-testid="recipe-photo"
-                  alt="recipe-img"
-                />
+          <div className="carousel-sbt">
+            {recommended.map((meal, index) => (
+              <Link
+                to={ `/comidas/${meal.idMeal}` }
+                key={ meal.idMeal }
+              >
+                <div
+                  key={ meal.idMeal }
+                  data-testid={ `${index}-recomendation-card` }
+                  className="card-container"
+                  aria-hidden="true"
+                >
+                  <img
+                    className="recommendation-img"
+                    src={ meal.strMealThumb }
+                    alt="recipe-img"
+                  />
+                  <h3
+                    data-testid={ `${index}-recomendation-title` }
+                  >
+                    {meal.strMeal}
+                  </h3>
+                </div>
               </Link>
-            </div>
-          ))}
+            ))}
+          </div>
+
           {(!this.checkRecipe(recipe[0]))
           && (
             <Link to={ `/bebidas/${recipe[0].idDrink}/in-progress` }>
