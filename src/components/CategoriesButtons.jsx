@@ -11,7 +11,7 @@ function CategoriesButtons(props) {
   const avaliableButtons = 6;
   return (
     <aside className="categories-container">
-      {categories.map((category, index) => (
+      { categories.map((category, index) => (
         <button
           key={ index }
           type="button"
