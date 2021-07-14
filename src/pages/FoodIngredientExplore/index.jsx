@@ -19,7 +19,7 @@ export default function FoodIngredientExplore() {
           {renderCards()}
         </MainContainerIngredientsCards>
       </ContainerExploreByIngredients>
-      <Footer />
+      <Footer explore />
     </div>
   );
 }

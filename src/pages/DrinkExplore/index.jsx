@@ -30,7 +30,7 @@ export default function DrinkExplore() {
           </ButtonDrinkExplore>
         </div>
       </ContainerExploreDrink>
-      <Footer />
+      <Footer explore />
     </div>
   );
 }

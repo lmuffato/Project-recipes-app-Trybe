@@ -71,7 +71,7 @@ export default function FoodArea() {
         />
       ))}
 
-      <Footer />
+      <Footer explore />
     </div>
   );
 }

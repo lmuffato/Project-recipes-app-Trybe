@@ -16,14 +16,14 @@ export default function Explore() {
 
         <div>
           <ButtonExplore
-            onClick={() => redirectToExplore('comidas')}
+            onClick={ () => redirectToExplore('comidas') }
             type="button"
             data-testid="explore-food"
           >
             Explorar Comidas
           </ButtonExplore>
           <ButtonExplore
-            onClick={() => redirectToExplore('bebidas')}
+            onClick={ () => redirectToExplore('bebidas') }
             type="button"
             data-testid="explore-drinks"
           >
@@ -32,7 +32,7 @@ export default function Explore() {
         </div>
       </ContainerExplore>
 
-      <Footer />
+      <Footer explore />
     </div>
   );
 }

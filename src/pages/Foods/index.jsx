@@ -54,7 +54,7 @@ export default function Foods() {
       </FilterContainer>
 
       <ContainerRecipeCards>{renderCards()}</ContainerRecipeCards>
-      <Footer />
+      <Footer food />
     </MainContainerDetails>
   );
 }

@@ -5,23 +5,32 @@ import { IoFastFoodSharp } from 'react-icons/io5';
 import { useHistory } from 'react-router-dom';
 import FooterContainerButtons from './styles';
 
-export default function Footer() {
+export default function Footer({ food = false, drink = false, explore = false }) {
   const history = useHistory();
   return (
-    <FooterContainerButtons
-      className="footer"
-      data-testid="footer"
-    >
+    <FooterContainerButtons className="footer" data-testid="footer">
       <button type="button" onClick={ () => history.push('/bebidas') }>
-        <BiDrink alt="Drink Icon" data-testid="drinks-bottom-btn" />
+        <BiDrink
+          color={ drink ? '#FFF' : '#ffd8d8' }
+          alt="Drink Icon"
+          data-testid="drinks-bottom-btn"
+        />
       </button>
 
       <button type="button" onClick={ () => history.push('/explorar') }>
-        <MdExplore alt="Explore Icon" data-testid="explore-bottom-btn" />
+        <MdExplore
+          color={ explore ? '#FFF' : '#ffd8d8' }
+          alt="Explore Icon"
+          data-testid="explore-bottom-btn"
+        />
       </button>
 
       <button type="button" onClick={ () => history.push('/comidas') }>
-        <IoFastFoodSharp alt="Food Icon" data-testid="food-bottom-btn" />
+        <IoFastFoodSharp
+          color={ food ? '#FFF' : '#ffd8d8' }
+          alt="Food Icon"
+          data-testid="food-bottom-btn"
+        />
       </button>
     </FooterContainerButtons>
   );

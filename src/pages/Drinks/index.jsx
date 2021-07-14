@@ -48,7 +48,7 @@ export default function Drinks() {
 
       <ContainerRecipeCards>{renderCards()}</ContainerRecipeCards>
 
-      <Footer />
+      <Footer drink />
     </MainContainerDetails>
   );
 }

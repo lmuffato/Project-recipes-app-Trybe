@@ -37,7 +37,7 @@ export default function FoodExplore() {
           </ButtonFoodExplore>
         </div>
       </ContainerExploreFood>
-      <Footer />
+      <Footer explore />
     </div>
   );
 }
