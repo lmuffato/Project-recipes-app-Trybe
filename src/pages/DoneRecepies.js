@@ -12,7 +12,7 @@ function DoneRecepies() {
 
   // funções para pegar as receitas do local storage
   const getDoneRecepies = () => {
-    const doneRecepiesString = localStorage.getItem('doneRecepies');
+    const doneRecepiesString = localStorage.getItem('doneRecipes');
     const allDoneRecepies = JSON.parse(doneRecepiesString);
     return allDoneRecepies;
   };

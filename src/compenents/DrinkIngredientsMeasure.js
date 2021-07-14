@@ -45,7 +45,7 @@ function IngredientsMeasure({ detailsRecepie }) {
   function upDateLocalStorage() {
     const newLocalStorage = {
       cocktails: { ...otherStorageRecepies, [idDrink]: [...doneIngredients] },
-      meals: { allMealsStorage },
+      meals: allMealsStorage,
     };
     const newLocalStorageString = JSON.stringify(newLocalStorage);
     localStorage.setItem('inProgressRecipes', newLocalStorageString);

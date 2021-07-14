@@ -17,8 +17,7 @@ function MealsRecepiesProgress() {
   useEffect(() => {
     const getRecepi = async () => {
       const endpoint = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${recepiID}`;
-      const { meals } = await fetch(endpoint).then((data) => data.json()); /* .then((response) => response)) */
-      console.log(meals);
+      const { meals } = await fetch(endpoint).then((data) => data.json());
       setDetailsRecepie(meals[0]);
     };
     getRecepi();
@@ -31,6 +30,36 @@ function MealsRecepiesProgress() {
     // procura o recipeId no LS
     checkLocalStr = Object.values(getLocalStr)
       .find(({ id: strId }) => strId === recepiID);
+  }
+
+  function saveLS() {
+    // Esta função não esta sendo chamada, e precisa ser duplicada para o MealsRecepiesProgress
+    console.log('chamou a função de salvar');
+    const getLS = localStorage.getItem('doneRecipes');
+    const desStringGetLS = JSON.parse(getLS);
+    // desStringGetLS é um array de objetos
+    const { strMeal, strCategory, strArea, strMealThumb, strTags } = detailsRecepie;
+    const date = new Date();
+    const newDoneRecepi = {
+      id: recepiID,
+      type: 'comida',
+      area: strArea,
+      category: strCategory,
+      alcoholicOrNot: '',
+      name: strMeal,
+      image: strMealThumb,
+      doneDate: `${date.getDate()} - ${date.getTime()}`,
+      tags: strTags,
+    };
+    if (desStringGetLS === null) {
+      console.log('desStringGetLs é null');
+      const newDoneRecepiString = JSON.stringify(newDoneRecepi);
+      return localStorage.setItem('doneRecipes', [newDoneRecepiString]);
+    }
+    console.log('localStorage nao é null');
+    const newArrayOfObjects = desStringGetLS.push(newDoneRecepi);
+    const stringNewArrayOfObjects = JSON.stringify(newArrayOfObjects);
+    return localStorage.setItem('doneRecipes', stringNewArrayOfObjects);
   }
 
   if (checkLocalStr) {
@@ -80,6 +109,7 @@ function MealsRecepiesProgress() {
           data-testid="finish-recipe-btn"
           type="button"
           disabled={ allChecked }
+          onClick={ () => saveLS() }
         >
           Finalizar receita
         </button>
