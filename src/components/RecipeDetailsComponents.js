@@ -40,19 +40,32 @@ function ComponentGen(props) {
   }
   return (
     <div className="recipe_details">
-      <RecipeImage origin={ strMealThumb || strDrinkThumb } />
-      <RecipeTitle title={ strMeal || strDrink } />
-      <ShareBtn dataTest="share-btn" />
-      <FavBtn info={ currentInfo } />
-      { strAlcoholic !== undefined
-        ? <RecipeCatg category={ `${strCategory} ${strAlcoholic}` } />
-        : <RecipeCatg category={ strCategory } />}
-      <h3>Ingredientes</h3>
-      {listCreator}
+      <div>
+        <aside className="image">
+          <div className="titles">
+            <RecipeTitle title={ strMeal || strDrink } />
+            { strAlcoholic !== undefined
+              ? <RecipeCatg category={ `${strCategory} ${strAlcoholic}` } />
+              : <RecipeCatg category={ strCategory } />}
+          </div>
+          <RecipeImage origin={ strMealThumb || strDrinkThumb } />
+          <div>
+            <ShareBtn dataTest="share-btn" />
+            <FavBtn info={ currentInfo } />
+          </div>
+        </aside>
+        <aside className="ingredients">
+          <h3>Ingredientes</h3>
+          <ul>
+            {listCreator}
+          </ul>
+        </aside>
+      </div>
       <h3>Instruções</h3>
       <RecipeInst instructions={ strInstructions } />
       { strMeal !== undefined && <VideoCtn src={ strYoutube } /> }
       <h3>Recomendadas</h3>
+
       <Swiper
         slidesPerView={ 3 }
         spaceBetween={ 0 }

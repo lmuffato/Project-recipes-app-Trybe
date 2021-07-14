@@ -8,7 +8,6 @@ export default function RecipeImage(props) {
       data-testid="recipe-photo"
       src={ origin }
       alt="recipe"
-      style={ { height: '200px' } }
     />
   );
 }

@@ -68,7 +68,6 @@ function Receita() {
                 src={ e.strDrinkThumb }
                 data-testid={ `${i}-card-img` }
                 alt="foto da receita"
-                // style={ { height: '200px' } }
               />
             </div>
           </Link>

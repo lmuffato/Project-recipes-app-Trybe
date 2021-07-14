@@ -45,18 +45,15 @@ export default function ShareBtn(props) {
   };
 
   return (
-    <div>
-      <input
-        type="image"
-        data-testid={ dataTest }
-        className={ `${dataTest} share-btn` }
-        variant="light"
-        style={ { height: '28px' } }
-        onClick={ handleClick }
-        src={ shareIcon }
-        alt="shareButton"
-      />
-    </div>
+    <input
+      type="image"
+      data-testid={ dataTest }
+      className={ `${dataTest} share-btn` }
+      variant="light"
+      onClick={ handleClick }
+      src={ shareIcon }
+      alt="shareButton"
+    />
   );
 }
 

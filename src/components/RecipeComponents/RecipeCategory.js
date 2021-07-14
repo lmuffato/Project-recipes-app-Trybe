@@ -3,7 +3,12 @@ import PropTypes from 'prop-types';
 
 export default function RecipeCatg(props) {
   const { category } = props;
-  return (<h4 data-testid="recipe-category">{category}</h4>
+  return (
+    <h4 data-testid="recipe-category">
+      (
+      {category}
+      )
+    </h4>
   );
 }
 

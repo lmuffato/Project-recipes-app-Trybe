@@ -1,6 +1,72 @@
 .recipe_details {
-  list-style: none;
-  margin: 0 0 120px;
+  display: flex;
+  flex-direction: column;
+}
+.recipe_details div {
+  display: flex;
+}
+.recipe_details .image {
+  border-bottom: 1px solid white;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  padding: 2em;
+  width: 50%;
+}
+.recipe_details .image img {
+  align-self: center;
+  height: auto;
+  width: 80%;
+}
+.recipe_details .image .titles {
+  align-self: flex-start;
+  margin: 0 0 2em 4em;
+}
+.recipe_details .image h1 {
+  align-self: center;
+  font-size: 5em;
+}
+.recipe_details .image h4 {
+  align-self: center;
+  font-size: 3em;
+  padding-left: 0.5em;
+}
+.recipe_details .image div {
+  align-self: flex-start;
+  margin: 0.6em 0 0 3.8em;
+}
+.recipe_details .image input {
+  align-self: center;
+  filter: invert(100%);
+  padding: 1em;
+}
+.recipe_details .image input:hover {
+  filter: invert(30%);
+}
+.recipe_details .ingredients {
+  border-bottom: 1px solid white;
+  padding: 2em 0 0;
+  width: 50%;
+}
+.recipe_details .ingredients h3 {
+  color: white;
+  font-size: 3em;
+  margin-top: 2.5em;
+}
+.recipe_details .ingredients ul {
+  display: flex;
+  flex-flow: column wrap;
+  flex-direction: column;
+  height: 400px;
+  margin-left: 1.8em;
+  margin-top: 1.5em;
+  padding-left: 0;
+}
+.recipe_details .ingredients li {
+  color: white;
+  font-size: 1.3em;
+  list-style-type: disc;
+  padding: 0.5em;
 }
 .recipe_details .startBtn {
   border: 1px solid black;
