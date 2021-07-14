@@ -70,26 +70,6 @@ function DrinkDetails(props) {
     }
   };
 
-  const startMakingRecipe = () => {
-    const storage = localStorage.inProgressRecipes;
-    let setInProgressRecipe = {
-      cocktails: {
-        [id]: [],
-      },
-    };
-    if (storage && storage.includes('meals')) {
-      const mealsInProgress = getLocalStorage('inProgressRecipes').meals;
-      setInProgressRecipe = {
-        cocktails: {
-          [id]: [],
-        },
-        meals: [mealsInProgress],
-      };
-    }
-    setLocalStorage('inProgressRecipes', setInProgressRecipe);
-    return history.push(`${id}/in-progress`);
-  };
-
   const choiceRec = (element) => history.push(`/comidas/${element}`);
 
   const copyUrlLink = () => {
@@ -189,7 +169,7 @@ function DrinkDetails(props) {
             type="button"
             data-testid="start-recipe-btn"
             className={ stylesArr }
-            onClick={ startMakingRecipe }
+            onClick={ () => history.push(`${id}/in-progress`) }
           >
             { startRecipeText() }
           </button>

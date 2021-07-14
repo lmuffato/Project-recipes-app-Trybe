@@ -16,7 +16,10 @@ export const createIngredients = ({ el, position, index }) => {
   }
 };
 
-export const checkIngredients = ({ el, position, index }) => {
+export const checkIngredients = ({ el, position, index },
+  handler,
+  style,
+  isChecked = false) => {
   const ingredient = el[`strIngredient${position}`];
   const measure = el[`strMeasure${position}`];
   if ((ingredient && measure) !== '' && (ingredient && measure) !== null) {
@@ -27,8 +30,10 @@ export const checkIngredients = ({ el, position, index }) => {
           id={ `Ingredient${index}` }
           name="ingredients"
           value={ ingredient }
+          onChange={ handler }
+          { ...isChecked ? { checked: true } : '' }
         />
-        <label htmlFor={ `Ingredient${index}` }>
+        <label htmlFor={ `Ingredient${index}` } className={ style }>
           { ` ${ingredient} - ${measure}` }
         </label>
         <br />

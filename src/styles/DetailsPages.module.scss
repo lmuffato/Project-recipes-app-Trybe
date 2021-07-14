@@ -118,4 +118,12 @@
       display: none;
     }
   }
+  .ingredientsCheckbox {
+    color: rgba(0, 0, 0, 0.7);
+    font-style: italic;
+  }
+
+  .ingredientsChecked {
+    text-decoration: line-through;
+  }
 }

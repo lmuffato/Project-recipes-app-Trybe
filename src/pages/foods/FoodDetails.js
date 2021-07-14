@@ -61,26 +61,6 @@ function FoodDetails(props) {
     return buttonText;
   };
 
-  const startMakingRecipe = () => {
-    const storage = localStorage.inProgressRecipes;
-    let setInProgressRecipe = {
-      meals: {
-        [id]: [],
-      },
-    };
-    if (storage && storage.includes('cocktails')) {
-      const drinkInProgress = getLocalStorage('inProgressRecipes').cocktails;
-      setInProgressRecipe = {
-        meals: {
-          [id]: [],
-        },
-        cocktails: [drinkInProgress],
-      };
-    }
-    setLocalStorage('inProgressRecipes', setInProgressRecipe);
-    return history.push(`${id}/in-progress`);
-  };
-
   const { responseFood, resultRecommendations } = stateRedux;
   const { copyRecipe } = copyUrl;
   const { favorite } = favoriteRecipe;
@@ -187,7 +167,7 @@ function FoodDetails(props) {
               type="button"
               data-testid="start-recipe-btn"
               className={ stylesArr }
-              onClick={ startMakingRecipe }
+              onClick={ () => history.push(`${id}/in-progress`) }
             >
               { startRecipeText() }
             </button>

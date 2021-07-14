@@ -11,18 +11,43 @@ import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../../images/blackHeartIcon.svg';
 import styles from '../../styles/DetailsPages.module.scss';
 
+function setRecipeStorage(id) {
+  const drinkProgress = getLocalStorage('inProgressRecipes');
+
+  if (!drinkProgress) {
+    const storage = localStorage.inProgressRecipes;
+    let setInProgressRecipe = {
+      cocktails: {
+        [id]: [],
+      },
+    };
+    if (storage && storage.includes('meals')) {
+      const mealsInProgress = getLocalStorage('inProgressRecipes').meals;
+      setInProgressRecipe = {
+        cocktails: {
+          [id]: [],
+        },
+        meals: mealsInProgress,
+      };
+    }
+    setLocalStorage('inProgressRecipes', setInProgressRecipe);
+  }
+}
+
 function DrinkProgress(props) {
   const { match: { params: { id } } } = props;
 
   const history = useHistory();
-  const [recipeRedux, setRecipeRedux] = useStateEasyRedux({ name: 'RecipeProgress' }, {});
+  const [recipeRedux, setRecipeRedux] = useStateEasyRedux({ name: 'DrinkProgress' }, {});
   const [copyUrl, setCopyUrl] = useStateEasyRedux({ name: 'copyDrink' }, {});
   const [favoriteRecipe, setFavoriteRecipe] = useStateEasyRedux(
     { name: 'favoriteRecipe' }, {},
   );
 
+  setRecipeStorage(id);
+
   useEffect(() => {
-    const fetchRecipie = async () => {
+    const fetchRecipe = async () => {
       const requestDrink = fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`);
 
       const dataDrink = await requestDrink;
@@ -31,7 +56,7 @@ function DrinkProgress(props) {
       const responseDrink = resultDrink.drinks;
 
       setRecipeRedux({ actionType: 'FETCH_FOOD_IN_PROGRESS',
-        startRecipe: true,
+        ingredientsList: getLocalStorage('inProgressRecipes').cocktails[id],
         recipeIsDone: false,
         responseDrink,
       });
@@ -40,10 +65,10 @@ function DrinkProgress(props) {
       const resultGet = getRecipe && getRecipe.some((element) => element.id === id);
       setFavoriteRecipe({ actionType: 'FAVORITE_RECIPE', favorite: resultGet });
     };
-    fetchRecipie();
+    fetchRecipe();
   }, []);
 
-  const { responseDrink } = recipeRedux;
+  const { responseDrink, ingredientsList, recipeIsDone } = recipeRedux;
   const { copyRecipe } = copyUrl;
   const { favorite } = favoriteRecipe;
 
@@ -90,7 +115,57 @@ function DrinkProgress(props) {
     setFavoriteRecipe({ favorite: !favorite });
   };
 
-  console.log(responseDrink);
+  const recipeProgress = (newProg, action) => {
+    const storage = localStorage.inProgressRecipes;
+    let setInProgressRecipe = {
+      cocktails: {
+        [id]: newProg,
+      },
+    };
+    if (storage && storage.includes('meals')) {
+      const mealsInProgress = getLocalStorage('inProgressRecipes').meals;
+      setInProgressRecipe = {
+        cocktails: {
+          [id]: newProg,
+        },
+        meals: mealsInProgress,
+      };
+    }
+    setLocalStorage('inProgressRecipes', setInProgressRecipe);
+    setRecipeRedux({ actionType: action,
+      ingredientsList: newProg,
+    });
+  };
+
+  const handleCheck = ({ target }) => {
+    const { checked } = target;
+    const ingredient = (target.id.split('Ingredient'))[1];
+    const ingredientDiv = target.parentNode;
+    const currentProgress = [...ingredientsList, ingredient];
+    const howManyIngredients = ingredientDiv.parentNode.childElementCount;
+    if (checked && currentProgress.length === howManyIngredients) {
+      ingredientDiv.style.textDecoration = 'line-through';
+      recipeProgress(currentProgress, 'CHECK_INGREDIENT');
+      setRecipeRedux({ actionType: 'ENABLE_FINISH_BUTTON',
+        recipeIsDone: true,
+      });
+    } else if (checked) {
+      ingredientDiv.style.textDecoration = 'line-through';
+      recipeProgress(currentProgress, 'CHECK_INGREDIENT');
+    } else {
+      ingredientDiv.style.textDecoration = '';
+      const removeIngredient = currentProgress.filter((ings) => ings !== ingredient);
+      recipeProgress(removeIngredient, 'UNCHECK_INGREDIENT');
+      setRecipeRedux({
+        recipeIsDone: false,
+      });
+    }
+  };
+
+  const isChecked = (index) => {
+    const storedDrinkProgress = getLocalStorage('inProgressRecipes').cocktails[id];
+    return storedDrinkProgress.includes(String(index));
+  };
 
   return (
     <div>
@@ -134,7 +209,10 @@ function DrinkProgress(props) {
               <h3>Ingredients</h3>
               <div>
                 {positions
-                  .map((position, index) => checkIngredients({ el, position, index }))}
+                  .map((position, index) => checkIngredients({ el, position, index },
+                    handleCheck,
+                    styles.ingredientsCheckbox,
+                    isChecked(index)))}
               </div>
               <h3>Instructions</h3>
               <p data-testid="instructions">{ el.strInstructions }</p>
@@ -143,6 +221,7 @@ function DrinkProgress(props) {
               type="button"
               data-testid="finish-recipe-btn"
               className={ styles.startRecipe }
+              disabled={ !recipeIsDone }
               onClick={ () => history.push('/receitas-feitas') }
             >
               Finalizar Receita
