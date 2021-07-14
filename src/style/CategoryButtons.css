@@ -2,8 +2,8 @@
   background-color: whitesmoke;
   border-radius: 8px;
   display: flex;
-  flex-wrap: wrap;
   flex-direction: column;
+  flex-wrap: wrap;
   font-family: 'Lucida Sans', 
     'Lucida Sans Regular', 
     'Lucida Grande', 

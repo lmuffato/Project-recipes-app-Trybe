@@ -4,7 +4,6 @@ import Header from '../components/Header';
 import CategoryButtons from '../components/Main/CategoryButtons';
 import RecipeCard from '../components/Main/RecipeCard';
 import Footer from '../components/Footer';
-import '../style/Bebidas.css';
 
 import DrinkContext from '../contexts/DrinkContext';
 
