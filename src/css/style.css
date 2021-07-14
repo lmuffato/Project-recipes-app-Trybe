@@ -161,10 +161,6 @@
   background-color: white;
 }
 
-.meals-card img {
-  -o-object-fit: cover;
-     object-fit: cover;
-}
 
 .meals-card div {
   color: #1b1b1b;
