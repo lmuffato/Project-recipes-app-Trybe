@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 
 import { useParams } from 'react-router-dom';
 import HeaderBack from '../../components/HeaderBack';
-import getRecipes from '../../services/recipesData';
+import { getRecipes } from '../../services/recipesData';
 import ExploreButtons from './components/ExploreButtons';
 import styles from './styles.module.scss';
 import Footer from '../../components/footer';
