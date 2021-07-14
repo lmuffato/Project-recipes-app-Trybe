@@ -25,6 +25,16 @@ h1 {
   justify-content: space-around;
 }
 
+.profile-icon-img {
+  width: 37px;
+  height: 37px;
+}
+
+.search-icon-img {
+  width: 34px;
+  height: 34px;
+}
+
 .profile-icon {
   background: none;
   color: inherit;

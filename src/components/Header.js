@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import searchIcon from '../images/searchIcon.svg';
-import profileIcon from '../images/profileIcon.svg';
+// import searchIcon from '../images/searchIcon.svg';
+import profileIcon from '../icons/appIcons/UserAvatar.png';
+import searchIcon from '../icons/appIcons/searchGlass.png';
+// import profileIcon from '../images/profileIcon.svg';
 import PageTitle from './PageTitle';
 import SearchBar from './SearchBar';
 import './Header.css';
@@ -24,7 +26,7 @@ function Header() {
             data-testid="profile-top-btn"
             src={ profileIcon }
           >
-            <img src={ profileIcon } alt="profile-icon" />
+            <img className="profile-icon-img" src={ profileIcon } alt="profile-icon" />
           </button>
         </Link>
         <h1 data-testid="page-title">
@@ -40,7 +42,7 @@ function Header() {
           src={ searchIcon }
           className="search-button"
         >
-          <img src={ searchIcon } alt="search-icon" />
+          <img className="search-icon-img" src={ searchIcon } alt="search-icon" />
         </button>
       </div>
       <div id="search-bar" className={ isHidden ? 'hidden' : 'notHidden' }>
