@@ -6,7 +6,7 @@ import DoneRecipesCards from '../components/DoneRecepiesComponents/DoneRecipesCa
 function receitasFeitas() {
   return (
     <>
-      <Header title="Receitas Feitas" displayButton={ false } />
+      <Header title="Done Recipes" displayButton={ false } />
       <DoneFilter />
       <DoneRecipesCards />
     </>

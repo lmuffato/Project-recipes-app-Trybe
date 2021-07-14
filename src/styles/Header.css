@@ -6,8 +6,7 @@
 
 .header {
   background-image: url('../images/1057932.jpg');
-  background-position-y: center;
-  background-size: 100%;
+  background-position-y: 1477px;
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -121,7 +120,7 @@
   font-size: 16px;
   justify-content: space-between;
   margin-right: 10px;
-  width: 50%;
+  width: 80%;
 }
 
 .inp-group-search input {

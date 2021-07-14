@@ -16,7 +16,7 @@ function ExplorarBebidasPorArea() {
     if (APIFood.meals !== null && APIFood.meals.length >= 1) {
       return (
         <div>
-          <Header title="Explorar Origem" />
+          <Header title="Explore Areas" />
           <AreasDropdown />
           <CardList
             list={ APIFood.meals }
@@ -30,14 +30,14 @@ function ExplorarBebidasPorArea() {
     alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
     return (
       <div>
-        <Header title="Comidas" />
+        <Header title="Meals" />
         <Footer />
       </div>
     );
   }
   return (
     <div>
-      <Header title="Explorar Origem" />
+      <Header title="Explore Areas" />
       <AreasDropdown />
       <Footer />
     </div>

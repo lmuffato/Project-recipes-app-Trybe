@@ -8,7 +8,7 @@ import Footer from '../components/Footer';
 function Explorar() {
   return (
     <>
-      <Header title="Explorar" displayButton={ false } />
+      <Header title="Explore" displayButton={ false } />
       <div className="path-buttons-container">
         <Link to="/explorar/comidas">
           <button
@@ -16,7 +16,7 @@ function Explorar() {
             data-testid="explore-food"
             type="button"
           >
-            Explorar Comidas
+            Explore Meals
 
           </button>
         </Link>
@@ -26,7 +26,7 @@ function Explorar() {
             data-testid="explore-drinks"
             type="button"
           >
-            Explorar Bebidas
+            Explore Drinks
 
           </button>
         </Link>

@@ -1,5 +1,11 @@
 body {
   background-color: rgb(29, 28, 29);
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+body::-webkit-scrollbar {
+  display: none;
 }
 
 .cards-container {
@@ -18,7 +24,7 @@ body {
   border: 2px #343539 solid;
   display: flex;
   flex-direction: column;
-  height: 410px;
+  height: 415px;
   margin: 15px;
   width: 360px;
 }
@@ -49,8 +55,7 @@ body {
   font-weight: 800;
   height: 60px;
   margin: 10px;
-  margin-top: 350px;
-  max-height: 60px;
+  margin-top: 99%;
   overflow: hidden;
   position: absolute;
   text-shadow: 1px 1px 1px rgb(41, 38, 38);
@@ -67,22 +72,23 @@ body {
     align-items: center;
     display: flex;
     flex-direction: column;
-    height: 180px;
+    height: 26vh;
     margin: 8px;
-    width: 150px;
+    width: 43vw;
   }
 
   .card-img {
-    margin: 20px 5px 5px;
+    margin: 5px;
     min-width: 80px;
-    width: 80%;
+    position: absolute;
+    width: 95%;
   }
 
   .card-title {
     font-size: 13px;
     font-weight: 800;
     margin-top: 99%;
-    max-height: 34px;
+    max-height: 33px;
     position: absolute;
     text-shadow: 0.3px 0.3px 1px rgb(41, 38, 38);
   }

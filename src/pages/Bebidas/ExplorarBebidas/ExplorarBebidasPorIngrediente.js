@@ -18,7 +18,7 @@ function ExplorarBebidasPorIngrediente() {
 
   return (
     <>
-      <Header title="Explorar Ingredientes" displayButton={ false } />
+      <Header title="Explore Ingredients" displayButton={ false } />
       <div className="cards-container">
         {
           APIIngredientsDrink && APIIngredientsDrink.drinks
