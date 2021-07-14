@@ -7,7 +7,7 @@ import RecipesContext from '../contexts/RecipesContext';
 import '../styles/Recomendations.css';
 import Recomendations from './Recomendations';
 import FavoriteBtn from './FavoriteBtn';
-import ShareButtons from './ShareButtons';
+import ShareButton from './ShareButton';
 
 function DrinkDescription({ recipe, recipeId }) {
   const { recomendations, setIsFavorite } = useContext(RecipesContext);
@@ -49,7 +49,7 @@ function DrinkDescription({ recipe, recipeId }) {
       <section className="detail-container">
         <img data-testid="recipe-photo" src={ strDrinkThumb } alt="comida" />
         <h1 data-testid="recipe-title">{ strDrink }</h1>
-        <ShareButtons idRecipe={ `bebidas/${idDrink}` } />
+        <ShareButton idRecipe={ `bebidas/${idDrink}` } />
         <FavoriteBtn
           id={ idDrink }
           type="bebida"

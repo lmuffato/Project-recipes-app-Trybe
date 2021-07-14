@@ -15,9 +15,9 @@ function Recomendations({ index, thumb, recipeName, pathname }) {
         src={ thumb }
         alt="Meal"
       />
-      <p className="recipe-title" data-testid={ `${index}-recomendation-title` }>
+      <h3 className="recipe-title" data-testid={ `${index}-recomendation-title` }>
         {recipeName}
-      </p>
+      </h3>
     </Link>
   );
 }

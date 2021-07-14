@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import RecipesContext from '../contexts/RecipesContext';
 // import '../styles/MealDescription.css';
 import '../styles/Recomendations.css';
-import ShareButtons from './ShareButtons';
+import ShareButton from './ShareButton';
 import Recomendations from './Recomendations';
 import FavoriteBtn from './FavoriteBtn';
 
@@ -52,7 +52,7 @@ function MealDescription({ recipe, recipeId }) {
           className="recomedation-img"
         />
         <h1 data-testid="recipe-title">{ strMeal }</h1>
-        <ShareButtons idRecipe={ `comidas/${idMeal}` } />
+        <ShareButton idRecipe={ `comidas/${idMeal}` } />
         <FavoriteBtn
           id={ idMeal }
           type="comida"

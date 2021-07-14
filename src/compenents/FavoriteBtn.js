@@ -1,4 +1,4 @@
-import React, { useContext, useEffect /* , useState */ } from 'react';
+import React, { useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
@@ -9,8 +9,6 @@ function FavoriteBtn({ id, type, area, category, alcoholicOrNot, name, image, in
     favoriteRecipes, setFavRecipes, isFavorite, setIsFavorite,
   } = useContext(RecipesContext);
   const recipeId = id;
-
-  console.log(favoriteRecipes);
 
   useEffect(() => {
     localStorage.setItem('favoriteRecipes', JSON.stringify(favoriteRecipes));

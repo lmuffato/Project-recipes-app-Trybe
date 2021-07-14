@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import shareIcon from '../images/shareIcon.svg';
-// import copyToClipboard from '../services/copyToClipboard';
 
-function ShareButtons({ idRecipe }) {
+function ShareButton({ idRecipe }) {
   const [isCopy, setIsCopy] = useState(null);
 
   const copyToClipboard = ({ target }) => {
@@ -28,8 +27,8 @@ function ShareButtons({ idRecipe }) {
   );
 }
 
-ShareButtons.propTypes = {
+ShareButton.propTypes = {
   idRecipe: PropTypes.string,
 }.isRequired;
 
-export default ShareButtons;
+export default ShareButton;
