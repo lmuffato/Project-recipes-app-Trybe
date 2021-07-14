@@ -17,12 +17,9 @@ function FavoriteButton({ data, path }) {
     const idFood = `${path}`;
     console.log(`${idFood} pra ter certeza`);
     const include = JSON.parse(localStorage.getItem('favoriteRecipes'));
-    console.log(include);
     const boolConditional = include.some(({ id }) => id === idFood);
     const favorites = include.filter(({ id }) => id === idFood);
-    // console.log('fora if');
     if (!boolConditional) {
-      console.log('teste');
       if (path.includes('/bebidas')) {
         const { idDrink, strCategory, strAlcoholic, strDrink, strDrinkThumb } = data;
         const array = [...include, {
@@ -65,9 +62,7 @@ function FavoriteButton({ data, path }) {
     createLocalStorage();
     function paintHeart() {
       const include = JSON.parse(localStorage.getItem('favoriteRecipes'));
-      console.log(include);
       const color = include.some(({ id }) => id === `${path}`);
-      console.log(color);
       if (color) {
         setHeartIcon(blackHeartIcon);
       } else {

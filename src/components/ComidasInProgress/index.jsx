@@ -11,6 +11,7 @@ function FoodsInProgress({ data }) {
   const { pathname } = useLocation();
   const { id } = useParams();
   const [keys, setKeys] = useState([]);
+  const [checkedIngredients, setChecked] = useState([]);
   const [redirect, setRedirect] = useState(false);
   useEffect(() => {
     function saveState() {
@@ -31,6 +32,16 @@ function FoodsInProgress({ data }) {
     setRedirect(true);
   };
 
+  const handleCheked = ({ target }) => {
+    if (checkedIngredients.includes(target.name)) {
+      const filtered = checkedIngredients.filter((element) => element !== target.name);
+      setChecked(filtered);
+    } else {
+      const newArr = [...checkedIngredients, target.name];
+      setChecked(newArr);
+    }
+  };
+
   if (keys.length > 0) {
     return (
       <div>
@@ -45,9 +56,15 @@ function FoodsInProgress({ data }) {
               key={ element }
               data-testid={ `data-testid=${index}-ingredient-step` }
             >
-              <label htmlFor="ingredients">
+              <label htmlFor={ `${index}-${element}` }>
                 { element }
-                <input type="checkbox" id="ingredients" name="ingredients" />
+                <input
+                  type="checkbox"
+                  id={ `${index}-${element}` }
+                  name={ element }
+                  onChange={ handleCheked }
+                  checked={ checkedIngredients.includes(element) }
+                />
               </label>
             </li>)) }
         </ul>
@@ -56,6 +73,7 @@ function FoodsInProgress({ data }) {
           type="button"
           data-testid="finish-recipe-btn"
           onClick={ handleButton }
+          disabled={ checkedIngredients.length < ingredients.length }
         >
           Finalizar Receita!
         </button>
@@ -65,7 +83,7 @@ function FoodsInProgress({ data }) {
   }
 
   return (
-    <div>a</div>
+    <div>{null}</div>
   );
 }
 

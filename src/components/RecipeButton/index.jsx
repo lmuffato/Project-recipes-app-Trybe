@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-export default function RecipeButton({ path, ingredients }) {
+export default function RecipeButton({ path }) {
   const [buttonName, setButtonName] = useState('Iniciar Receita');
   const sliceNumber = 9;
 
@@ -20,14 +20,14 @@ export default function RecipeButton({ path, ingredients }) {
   }
 
   function recipesProgress() {
-    const ingredient = ingredients.map((index) => index[1]);
+    // const ingredient = ingredients.map((index) => index[1]);
     if (path.includes('/comidas')) {
       const id = path.slice(sliceNumber);
       let include = JSON.parse(localStorage.getItem('inProgressRecipes'));
       include = {
         ...include,
         meals: {
-          ...include.meals, [id]: ingredient,
+          ...include.meals, [id]: [],
         },
       };
       localStorage.setItem('inProgressRecipes', JSON.stringify(include));
@@ -37,7 +37,7 @@ export default function RecipeButton({ path, ingredients }) {
       include = {
         ...include,
         cocktails: {
-          ...include.cocktails, [id]: ingredient,
+          ...include.cocktails, [id]: [],
         },
       };
       localStorage.setItem('inProgressRecipes', JSON.stringify(include));
@@ -74,6 +74,6 @@ export default function RecipeButton({ path, ingredients }) {
 }
 
 RecipeButton.propTypes = {
-  ingredients: PropTypes.arrayOf('').isRequired,
+  // ingredients: PropTypes.arrayOf('').isRequired,
   path: PropTypes.string.isRequired,
 };
