@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-
+import { Spinner } from 'react-bootstrap';
 import ComponentAuxProgress from './ComponentAuxProgress';
 
 function DetailsInProgressFood() {
@@ -17,7 +17,7 @@ function DetailsInProgressFood() {
     getRecipe();
   }, [id]);
   return (
-    loading ? <h1>Carregando...</h1>
+    loading ? <Spinner animation="border" className="spinner" />
       : <ComponentAuxProgress recipeFood={ recipeFoodProgress } />
   );
 }

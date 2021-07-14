@@ -17,6 +17,7 @@ const VideoComponent = ({ recipe }) => {
         width="95%"
         height="360"
         title="recipe"
+        className="video"
         data-testid="video"
       />
     </>

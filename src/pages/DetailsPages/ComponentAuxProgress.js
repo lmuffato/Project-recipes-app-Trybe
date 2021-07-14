@@ -24,23 +24,27 @@ function ComponentAuxProgress(recipe) {
     // console.log(doneRecipesConst);
   };
   return (
-    <div className="container">
+    <>
       <Image recipe={ recipeFood || recipeDrink } />
       <Heading recipe={ recipeFood || recipeDrink } />
-      <IngredientsRadios recipe={ recipeFood || recipeDrink } />
-      <Instructions recipe={ recipeFood || recipeDrink } />
-      {recipeDrink ? <Recommends /> : <Recommends drink />}
-      <Link to="/receitas-feitas">
-        <button
-          data-testid="finish-recipe-btn"
-          type="button"
-          onClick={ () => handleClick() }
-          className="btn btn-dark"
-        >
-          Finalizar Receita
-        </button>
-      </Link>
-    </div>
+      <div className="container">
+        <IngredientsRadios recipe={ recipeFood || recipeDrink } />
+        <Instructions recipe={ recipeFood || recipeDrink } />
+        {recipeDrink ? <Recommends /> : <Recommends drink />}
+      </div>
+      <div className="btn-footer">
+        <Link to="/receitas-feitas">
+          <button
+            data-testid="finish-recipe-btn"
+            type="button"
+            onClick={ () => handleClick() }
+            className="btn made"
+          >
+            Finalizar Receita
+          </button>
+        </Link>
+      </div>
+    </>
   );
 }
 

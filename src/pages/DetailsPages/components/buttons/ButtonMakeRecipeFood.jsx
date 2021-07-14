@@ -58,15 +58,17 @@ const ButtonMakeRecipeFood = ({ recipe }) => {
     checkAndInitLSDone(); // checa se a chave done no ls ja foi iniciada, se nao, inicia.
   });
   return (
-    <Link
-      to={ `/comidas/${idMeal}/in-progress` }
-      id="startBtn"
-      className="btn btn-primary startBtn"
-      data-testid="start-recipe-btn"
-      onClick={ () => clickSetProgress('in', idMeal, 'meal', recipe) }
-    >
-      Default
-    </Link>
+    <div className="btn-footer">
+      <Link
+        to={ `/comidas/${idMeal}/in-progress` }
+        id="startBtn"
+        className="btn custom"
+        data-testid="start-recipe-btn"
+        onClick={ () => clickSetProgress('in', idMeal, 'meal', recipe) }
+      >
+        Default
+      </Link>
+    </div>
   );
 };
 

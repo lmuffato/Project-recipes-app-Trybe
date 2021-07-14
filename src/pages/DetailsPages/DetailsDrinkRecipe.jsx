@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Spinner } from 'react-bootstrap';
 // import {
 //   Image,
 //   Heading,
@@ -10,6 +11,7 @@ import React, { useEffect, useState } from 'react';
 // import Context from '../../context/Context';
 
 import ComponentAux from './ComponentAux';
+import './Styles.css';
 
 const DetailsDrinkRecipe = () => {
   // const { recipeDrink } = useContext(Context); // variavel q guarda a receita
@@ -27,7 +29,7 @@ const DetailsDrinkRecipe = () => {
   }, [id]);
 
   return (
-    loading ? <h1>Carregando....</h1>
+    loading ? <Spinner animation="border" className="spinner" />
       : <ComponentAux recipeDrink={ recipeDrink } />
   );
 };
