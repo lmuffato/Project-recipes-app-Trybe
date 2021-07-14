@@ -61,7 +61,7 @@ function BuscaHeader() {
             onChange={ (event) => setType(event.target.value) }
             required
           />
-          Ingrediente
+          Ingredient
         </label>
         <label htmlFor="name">
           <input
@@ -73,7 +73,7 @@ function BuscaHeader() {
             onChange={ (event) => setType(event.target.value) }
             required
           />
-          Nome
+          Name
         </label>
         <label htmlFor="firstLetter">
           <input
@@ -85,7 +85,7 @@ function BuscaHeader() {
             onChange={ (event) => setType(event.target.value) }
             required
           />
-          Primeira letra
+          First Letter
         </label>
       </div>
       <div className="group-submit-txt">

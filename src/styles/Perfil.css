@@ -6,6 +6,7 @@
 
 .email-profile-page {
   bottom: 70%;
+  color: hsl(0, 0%, 95%);
   font-size: 250%;
   position: absolute;
   text-shadow: 0.5px 0.5px 0.5px rgb(41, 38, 38);
@@ -25,12 +26,12 @@
 
 .btn-profile-page button {
   background-color: transparent;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.568);
+  border-bottom: 3px solid #343539;
   box-shadow: 1px 1px 7px rgb(29, 28, 29);
+  color: hsl(0, 0%, 95%);
   font-size: 16px;
   font-weight: 900;
   height: 270%;
-  opacity: 0.6;
   text-shadow: 0.5px 0.5px 0.5px rgb(41, 38, 38);
   text-transform: uppercase;
   transition: 0.4s;
@@ -38,7 +39,9 @@
 }
 
 .btn-profile-page button:hover {
-  box-shadow: 1px 1px 7px rgb(29, 28, 29) inset;
+  background-blend-mode: overlay;
+  background-color: rgb(163, 162, 162);
+  box-shadow: 0.3px 0.3px 3px rgb(29, 28, 29) inset;
 }
 
 @media ( max-width : 786.98px ) {

@@ -121,7 +121,7 @@ function ReceitasFavoritas() {
 
   return (
     <div className="favorite_recipes">
-      <Header title="Receitas Favoritas" displayButton={ false } />
+      <Header title="Favorite Recipes" displayButton={ false } />
       <div className="buttons">
         <button
           type="button"

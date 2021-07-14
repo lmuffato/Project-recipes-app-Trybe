@@ -2,7 +2,7 @@
 
   .path-buttons-container {
     align-items: center;
-    background-color: #48487d;
+    background-color: rgb(29, 28, 29);
     display: flex;
     flex-direction: column;
     height: 85vh;
@@ -11,11 +11,10 @@
   }
 
   .path-btn {
-    background-color: #c9b34d;
-    border: black 1px solid;
-    border-radius: 60px;
-    color: #636396;
-    font-size: 25px;
+    background-color: transparent;
+    border-bottom: 3px solid #343539;
+    color: hsl(0, 0%, 95%);
+    font-size: 22px;
     font-weight: 900;
     height: 80px;
     margin: 20px;
@@ -25,20 +24,17 @@
   }
 
   .path-btn:active {
-    background-color: white;
-    border: black 1px solid;
-    border-radius: 60px;
-    color: #636396;
-    font-size: 25px;
-    height: 80px;
-    margin: 20px;
-    text-align: center;
-    width: 250px;
+    background-blend-mode: overlay;
+    background-color: rgb(163, 162, 162);
+    box-shadow: 0.3px 0.3px 3px rgb(29, 28, 29) inset;
+    transition: 0.4s;
   }
 
   .area-select {
-    background-color: rgb(67, 163, 58);
-    border: rgb(67, 163, 58) solid 3px;
+    background-color: black;
+    background-image: url('../images/1057932.jpg');
+    background-position: center;
+    border: rgba(83, 83, 83, 0.644) solid 1px;
     box-shadow: 1px 1px 7px rgb(29, 28, 29) inset;
     color: whitesmoke;
     font-size: 18px;
@@ -47,13 +43,14 @@
     text-align-last: center;
     width: 100%;
   }
+
 }
 
 @media only screen and ( min-width : 768px ) {
 
   .path-buttons-container {
     align-items: center;
-    background-color: #48487d;
+    background-color: rgb(29, 28, 29);
     display: flex;
     flex-direction: column;
     height: 90vh;
@@ -62,10 +59,10 @@
   }
 
   .path-btn {
-    background-color: #c9b34d;
-    border-radius: 60px;
-    box-shadow: 2px 2px 2px rgb(29, 28, 29);
-    color: #636396;
+    background-color: transparent;
+    border-bottom: 3px solid #343539;
+    box-shadow: 1px 1px 7px rgb(29, 28, 29);
+    color: hsl(0, 0%, 95%);
     font-size: 28px;
     font-weight: 900;
     height: 120px;
@@ -76,35 +73,23 @@
   }
 
   .path-btn:hover {
-    background-color: #c9b24d96;
-    border-radius: 60px;
-    box-shadow: 2px 2px 8px rgb(29, 28, 29) inset;
-    color: #636396;
-    font-size: 28px;
-    height: 120px;
-    margin: 50px;
-    opacity: 80%;
-    text-align: center;
+    background-blend-mode: overlay;
+    background-color: rgb(163, 162, 162);
+    box-shadow: 0.3px 0.3px 3px rgb(29, 28, 29) inset;
     transition: 0.4s;
-    width: 500px;
   }
 
   .path-btn:active {
-    background-color: white;
-    border: black 1px solid;
-    border-radius: 60px;
-    color: #636396;
-    font-size: 28px;
-    height: 120px;
-    margin: 50px;
-    text-align: center;
-    width: 500px;
+    background-blend-mode: overlay;
+    background-color: rgb(163, 162, 162);
+    box-shadow: 0.3px 0.3px 3px rgb(29, 28, 29) inset;
+    transition: 0.4s;
   }
 
   .area-select {
-    background-color: rgb(67, 163, 58);
-    border: rgb(67, 163, 58) solid 3px;
-    box-shadow: 1px 1px 7px rgb(29, 28, 29) inset;
+    background-color: rgb(29, 28, 29);
+    background-position: center;
+    border: rgba(83, 83, 83, 0.644) solid 1px;
     color: whitesmoke;
     font-size: 25px;
     height: 50px;

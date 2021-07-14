@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-form {
+.form {
   background: url("../images//background1.jpg") no-repeat center fixed;
   background-size: cover;
   display: flex;
@@ -7,7 +7,7 @@ form {
   justify-content: center;
   margin: auto;
 }
-form div {
+.form div {
   align-items: center;
   background-color: rgba(51, 49, 49, 0.6);
   border-radius: 1em;
@@ -18,12 +18,12 @@ form div {
   padding: 2em;
   width: 85%;
 }
-form img {
+.form img {
   border-radius: 2em;
   padding: 0 2em 2em;
   width: 90%;
 }
-form h1 {
+.form h1 {
   color: white;
   font-family: Montserrat, sans-serif;
   font-size: 2em;
@@ -31,16 +31,16 @@ form h1 {
   margin: 0.1em 0 0.7em;
   opacity: 1;
 }
-form label {
+.form label {
   display: flex;
   flex-direction: column;
   padding-bottom: 1em;
   width: 100%;
 }
-form p {
+.form p {
   display: none;
 }
-form input {
+.form input {
   background-color: rgba(216, 209, 209, 0.4);
   border: none;
   box-sizing: border-box;
@@ -50,16 +50,16 @@ form input {
   height: 5vh;
   padding: 0.3em;
 }
-form input::placeholder {
+.form input::placeholder {
   color: white;
   font-family: Montserrat, sans-serif;
 }
-form input:focus {
+.form input:focus {
   font-size: 1.2em;
   outline: none;
   transition: 0.2s;
 }
-form span {
+.form span {
   color: red;
   display: none;
   font-size: 1em;
@@ -69,7 +69,7 @@ form span {
   text-shadow: 3px 3px 4px black;
   width: fit-content;
 }
-form button {
+.form button {
   align-items: center;
   border: none;
   box-sizing: border-box;
@@ -82,17 +82,17 @@ form button {
   justify-content: center;
   width: 100%;
 }
-form button:disabled {
+.form button:disabled {
   background-color: #6d6d6d;
   cursor: not-allowed;
   transition: 2s;
 }
-form button:enabled {
+.form button:enabled {
   background-color: #f2a30f;
   color: white;
   transition: 2s;
 }
-form button:enabled:hover {
+.form button:enabled:hover {
   background-color: #f2a30f;
   box-shadow: 1px 1px 7px #1d1c1d inset;
   transition: 1s;

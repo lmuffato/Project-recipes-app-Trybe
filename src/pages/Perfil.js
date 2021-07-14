@@ -16,20 +16,20 @@ function Perfil() {
 
   return (
     <div className="profile-page">
-      <Header title="Perfil" displayButton={ false } />
+      <Header title="Profile" displayButton={ false } />
       <div className="email-profile-page">
         { emailFinder() }
       </div>
       <div className="btn-profile-page">
         <Link to="/receitas-feitas">
-          <button type="button" data-testid="profile-done-btn">Receitas Feitas</button>
+          <button type="button" data-testid="profile-done-btn">Done Recipes</button>
         </Link>
         <Link to="/receitas-favoritas">
           <button
             type="button"
             data-testid="profile-favorite-btn"
           >
-            Receitas Favoritas
+            Favorite Recipes
           </button>
         </Link>
         <Link to="/">
@@ -38,7 +38,7 @@ function Perfil() {
             data-testid="profile-logout-btn"
             onClick={ () => localStorage.clear() }
           >
-            Sair
+            Logout
           </button>
         </Link>
       </div>

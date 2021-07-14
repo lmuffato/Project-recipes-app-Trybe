@@ -1,5 +1,9 @@
 .footer {
-  background-color: rgb(67, 163, 58);
+  background-color: #f28c0f;
+  background-image: url('../images/1057932.jpg');
+  background-position-y: center;
+
+  /* background-blend-mode: overlay; */
   bottom: 0;
   display: flex;
   position: fixed;
@@ -18,4 +22,18 @@
 .footer ul li button {
   background-color: transparent;
   border: none;
+  filter: invert(80%);
+}
+
+.footer ul li button:hover {
+  filter: invert(100%);
+}
+
+@media ( max-width : 786.98px ) {
+
+  .footer ul {
+    justify-content: space-between;
+    padding-left: 0;
+    padding-right: 0;
+  }
 }

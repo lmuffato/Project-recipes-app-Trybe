@@ -24,7 +24,7 @@ function Bebidas() {
     if (APIDrink.drinks !== null && APIDrink.drinks.length >= 1) {
       return (
         <div>
-          <Header title="Bebidas" />
+          <Header title="Drinks" />
           <Filter page="bebidas" />
           {
             isLoading ? <Loading />
@@ -39,7 +39,7 @@ function Bebidas() {
     alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
     return (
       <div>
-        <Header title="Bebidas" />
+        <Header title="Drinks" />
         <Footer />
       </div>
     );
@@ -47,7 +47,7 @@ function Bebidas() {
 
   return (
     <div>
-      <Header title="Bebidas" />
+      <Header title="Drinks" />
       <Filter page="bebidas" />
       <Loading />
       <Footer />

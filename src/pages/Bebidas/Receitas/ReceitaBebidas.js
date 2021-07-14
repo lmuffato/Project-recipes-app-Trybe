@@ -1,15 +1,21 @@
 import React, { useEffect, useState } from 'react';
-import Carousel from 'react-bootstrap/Carousel';
+import { SwiperSlide } from 'swiper/react';
+import SwiperCore, {
+  Pagination,
+} from 'swiper/core';
 import { Link, useRouteMatch } from 'react-router-dom';
 import Loading from '../../../components/Loading';
 import ComponentGen from '../../../components/RecipeDetailsComponents';
 import '../../../styles/RecipeDetails.css';
+import 'swiper/swiper.min.css';
+import 'swiper/components/pagination/pagination.min.css';
 
 function Receita() {
   const { params } = useRouteMatch();
   const [loading, setLoading] = useState(true);
   const [info, setInfo] = useState('');
   const [recomend, setRecomend] = useState();
+  SwiperCore.use([Pagination]);
 
   useEffect(() => {
     async function FoodAPI() {
@@ -49,19 +55,23 @@ function Receita() {
     if (loading === false) {
       return (
         recomend.filter((e, i) => i < qtd).map((e, i) => (
-          <Carousel.Item key={ i } data-testid={ `${i}-recomendation-title` }>
-            <Link to={ `/comidas/${e.idMeal}` }>
-              <div data-testid={ `${i}-recomendation-card` }>
+          <SwiperSlide
+            className="swiper__slide"
+            key={ i }
+            data-testid={ `${i}-recomendation-title` }
+          >
+            <Link className="swiper__link" to={ `/comidas/${e.idMeal}` }>
+              <div className="swiper__div" data-testid={ `${i}-recomendation-card` }>
+                <h4 className="swiper__title">{ e.strMeal }</h4>
                 <img
+                  className="swiper__img"
                   src={ e.strMealThumb }
                   data-testid={ `${i}-card-img` }
                   alt="foto da receita"
-                  style={ { height: '200px' } }
                 />
-                <h4>{ e.strMeal }</h4>
               </div>
             </Link>
-          </Carousel.Item>
+          </SwiperSlide>
         )));
     } return (<Loading />);
   };
