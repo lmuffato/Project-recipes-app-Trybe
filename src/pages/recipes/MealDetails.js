@@ -1,54 +1,34 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useRouteMatch } from 'react-router-dom';
 import { getMealsById, getIngredients, getMeasures } from '../../services/getMeals';
 import { getRecomendedDrinks } from '../../services/getDrinks';
 import './recipeDetails.css';
-import shareIcon from '../../images/shareIcon.svg';
-import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
-import blackHeartIcon from '../../images/blackHeartIcon.svg';
 import StartRecipeButton from '../../components/StartRecipeButton';
-
-const copy = require('clipboard-copy');
+import Context from '../../context/Context';
+import MealShareAndFavorite from '../../components/MealShareAndFavorite';
 
 function MealDetails() {
-  const [mealsFromId, setMealsFromId] = useState([]);
-  const [ingredientsId, setIngredientsId] = useState([]);
-  const [measuresId, setMeasuresId] = useState([]);
-  const [buttonFav, setButtonFav] = useState(true);
+  const {
+    mealsId,
+    mealsMeasuresId,
+    mealsIngredientsId,
+    setMealsId,
+    setMealsIngredientsId,
+    setMealsMeasuresId,
+  } = useContext(Context);
+
   const [drinksCarousel, setDrinksCarousel] = useState([]);
-  const [copyButton, setCopyButton] = useState('');
   const match = useRouteMatch();
   const { params: { id } } = match;
-
-  const setLocal = () => {
-    localStorage.setItem('favoriteRecipes', JSON.stringify([]));
-  };
-
-  const isFav = () => {
-    const favRecipe = JSON.parse(localStorage.getItem('favoriteRecipes'));
-    const hasFav = favRecipe.filter((element) => element.id === id);
-    console.log(hasFav);
-    const condition = hasFav.length > 0;
-    if (condition) {
-      setButtonFav(!buttonFav);
-    } else {
-      console.log('is not fav');
-    }
-  };
-
-  const setHeartToFav = () => {
-    const hasSetLocal = localStorage.getItem('favoriteRecipes');
-    return hasSetLocal ? isFav() : setLocal();
-  };
 
   useEffect(() => {
     getMealsById(id)
       .then((meals) => {
-        setMealsFromId(meals);
+        setMealsId(meals);
         const ingredients = getIngredients(meals[0]);
         const measures = getMeasures(meals[0]);
-        setIngredientsId(ingredients);
-        setMeasuresId(measures);
+        setMealsIngredientsId(ingredients);
+        setMealsMeasuresId(measures);
       });
     getRecomendedDrinks()
       .then((drink) => {
@@ -56,13 +36,8 @@ function MealDetails() {
         const drinks = Object.values(drink).slice(0, SIX);
         setDrinksCarousel(drinks);
       });
-    setHeartToFav();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  function copyBoard() {
-    copy(window.location.href);
-    setCopyButton('Link copiado!');
-  }
 
   function renderCarousel() {
     return (
@@ -90,46 +65,8 @@ function MealDetails() {
     );
   }
 
-  const heartButton = (infos) => {
-    setButtonFav(!buttonFav);
-    const {
-      idMeal,
-      strCategory,
-      strMeal,
-      strMealThumb,
-      strArea,
-    } = infos;
-    const hasSetLocal = localStorage.getItem('favoriteRecipes');
-    if (hasSetLocal) {
-      console.log('hello world');
-    } else {
-      setLocal();
-    }
-    if (buttonFav === true) {
-      const favRecipe = JSON.parse(localStorage.getItem('favoriteRecipes'));
-      const mealInfos = [...favRecipe, {
-        id: idMeal,
-        type: 'comida',
-        area: strArea,
-        category: strCategory,
-        alcoholicOrNot: '',
-        name: strMeal,
-        image: strMealThumb,
-      }];
-      localStorage.setItem('favoriteRecipes', JSON.stringify(mealInfos));
-    } else {
-      const favRecipe = JSON.parse(localStorage.getItem('favoriteRecipes'));
-      console.log(favRecipe);
-      const filteredRemoved = favRecipe.filter((element) => element.id !== idMeal);
-      localStorage.removeItem('favoriteRecipes');
-      localStorage.setItem('favoriteRecipes', JSON.stringify(filteredRemoved));
-      console.log(localStorage.getItem('favoriteRecipes'));
-    }
-  };
-
   const renderDetail = () => (
-    mealsFromId.map((info, index) => {
-      console.log(mealsFromId);
+    mealsId.map((info, index) => {
       const {
         strMealThumb,
         strMeal,
@@ -146,33 +83,20 @@ function MealDetails() {
             width="100%"
           />
           <h2 data-testid="recipe-title">{ strMeal }</h2>
-          <div className="share-and-favorite-container">
-            { copyButton }
-            <button type="button" data-testid="share-btn" onClick={ () => copyBoard() }>
-              <img
-                src={ shareIcon }
-                alt="share button"
-              />
-            </button>
-            <button type="button" onClick={ () => heartButton(info) }>
-              <img
-                src={ !buttonFav ? blackHeartIcon : whiteHeartIcon }
-                alt="favorite button"
-                data-testid="favorite-btn"
-              />
-            </button>
-          </div>
+          <MealShareAndFavorite />
           <p data-testid="recipe-category">{ strCategory }</p>
           <ul>
             Ingredientes
-            { ingredientsId.map((ingredient, measurePos) => (
+            { mealsIngredientsId.map((ingredient, measurePos) => (
               <li
                 data-testid={ `${measurePos}-ingredient-name-and-measure` }
                 key={ ingredient }
               >
                 { ingredient }
                 {' '}
-                { measuresId[measurePos] }
+                <strong>
+                  { mealsMeasuresId[measurePos] }
+                </strong>
               </li>
             )) }
           </ul>

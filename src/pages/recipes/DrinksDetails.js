@@ -1,15 +1,22 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useRouteMatch } from 'react-router-dom';
 import { getDrinksById, getIngredients, getMeasures } from '../../services/getDrinks';
 import { getRecomendedMeals } from '../../services/getMeals';
 import './recipeDetails.css';
 import StartRecipeButton from '../../components/StartRecipeButton';
 import CopyAndFavorite from '../../components/DrinkShareAndFavorite';
+import Context from '../../context/Context';
 
 function DrinksDetails() {
-  const [drinksFromId, setDrinksFromId] = useState([]);
-  const [ingredientsId, setIngredientsId] = useState([]);
-  const [measuresId, setMeasuresId] = useState([]);
+  const {
+    setDrinksId,
+    drinksId,
+    setDrinksIngredientsId,
+    setDrinksMeasuresId,
+    drinksMeasuresId,
+    drinksIngredientsId,
+  } = useContext(Context);
+
   const [mealsCarousel, setMealsCarousel] = useState([]);
   const match = useRouteMatch();
   const { params: { id } } = match;
@@ -17,11 +24,11 @@ function DrinksDetails() {
   useEffect(() => {
     getDrinksById(id)
       .then((drinks) => {
-        setDrinksFromId(drinks);
+        setDrinksId(drinks);
         const ingredients = getIngredients(drinks[0]);
         const measures = getMeasures(drinks[0]);
-        setIngredientsId(ingredients);
-        setMeasuresId(measures);
+        setDrinksIngredientsId(ingredients);
+        setDrinksMeasuresId(measures);
       });
     getRecomendedMeals()
       .then((meal) => {
@@ -29,6 +36,7 @@ function DrinksDetails() {
         const meals = Object.values(meal).slice(0, SIX);
         setMealsCarousel(meals);
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function renderCarousel() {
@@ -58,7 +66,7 @@ function DrinksDetails() {
   }
 
   const renderDetail = () => (
-    drinksFromId.map((info, index) => {
+    drinksId.map((info, index) => {
       const {
         strDrinkThumb,
         strDrink,
@@ -75,7 +83,7 @@ function DrinksDetails() {
             width="100%"
           />
           <h2 data-testid="recipe-title">{ strDrink }</h2>
-          <CopyAndFavorite drinks={ drinksFromId } />
+          <CopyAndFavorite />
           <p data-testid="recipe-category">
             { strCategory }
             {' '}
@@ -83,15 +91,15 @@ function DrinksDetails() {
           </p>
           <ul>
             <h2>Ingredientes</h2>
-            { ingredientsId.map((ingredient, measurePos) => (
+            { drinksIngredientsId.map((ingredient, measurePos) => (
               <li
                 data-testid={ `${measurePos}-ingredient-name-and-measure` }
                 key={ ingredient }
               >
+                { ingredient }
+                {' '}
                 <strong>
-                  { ingredient }
-                  {' '}
-                  { measuresId[measurePos] }
+                  { drinksMeasuresId[measurePos] }
                 </strong>
               </li>
             )) }

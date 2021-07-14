@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import PropTypes, { objectOf } from 'prop-types';
+import React, { useContext, useEffect, useState } from 'react';
 import { useRouteMatch } from 'react-router';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
+import Context from '../context/Context';
 
 const copy = require('clipboard-copy');
 
-export default function MealShareAndFavorite({ meals }) {
+export default function MealShareAndFavorite() {
+  const { inProgressMealsId } = useContext(Context);
   const [buttonFav, setButtonFav] = useState(true);
   const [copyButton, setCopyButton] = useState('');
 
@@ -42,6 +43,7 @@ export default function MealShareAndFavorite({ meals }) {
 
   useEffect(() => {
     setHeartToFav();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const heartButton = (infos) => {
@@ -82,11 +84,12 @@ export default function MealShareAndFavorite({ meals }) {
   };
   return (
     <div>
-      { meals.map((info, index) => (
+      { inProgressMealsId.map((info, index) => (
         <div key={ index } className="share-and-favorite-container">
           <button type="button" data-testid="share-btn" onClick={ () => copyBoard() }>
             <img src={ shareIcon } alt="share button" />
           </button>
+          { copyButton }
           <button type="button" onClick={ () => heartButton(info) }>
             <img
               src={ !buttonFav ? blackHeartIcon : whiteHeartIcon }
@@ -96,11 +99,6 @@ export default function MealShareAndFavorite({ meals }) {
           </button>
         </div>
       )) }
-      { copyButton }
     </div>
   );
 }
-
-MealShareAndFavorite.propTypes = {
-  meals: PropTypes.arrayOf(objectOf(PropTypes.string)).isRequired,
-};

@@ -14,8 +14,13 @@ function Provider({ children }) {
   const [category, setCategory] = useState('All');
   const [filtredList, setFiltredList] = useState([]);
   const [drinksId, setDrinksId] = useState([]);
+  const [drinksIngredientsId, setDrinksIngredientsId] = useState([]);
+  const [drinksMeasuresId, setDrinksMeasuresId] = useState([]);
   const [mealsId, setMealsId] = useState([]);
-
+  const [mealsIngredientsId, setMealsIngredientsId] = useState([]);
+  const [mealsMeasuresId, setMealsMeasuresId] = useState([]);
+  const [inProgressDrinksId, setInProgressDrinksId] = useState([]);
+  const [inProgressMealsId, setInProgressMealsId] = useState([]);
   const store = {
     userEmail,
     password,
@@ -37,10 +42,22 @@ function Provider({ children }) {
     setCategory,
     filtredList,
     setFiltredList,
-    setDrinksId,
     drinksId,
+    setDrinksId,
+    drinksIngredientsId,
+    setDrinksIngredientsId,
+    drinksMeasuresId,
+    setDrinksMeasuresId,
     mealsId,
+    mealsIngredientsId,
+    mealsMeasuresId,
     setMealsId,
+    setMealsIngredientsId,
+    setMealsMeasuresId,
+    inProgressDrinksId,
+    setInProgressDrinksId,
+    inProgressMealsId,
+    setInProgressMealsId,
   };
 
   return (

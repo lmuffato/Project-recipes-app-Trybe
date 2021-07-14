@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import PropTypes, { objectOf } from 'prop-types';
+import React, { useContext, useEffect, useState } from 'react';
 import { useRouteMatch } from 'react-router';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
+import Context from '../context/Context';
 
 const copy = require('clipboard-copy');
 
-export default function DrinkShareAndFavorite({ drinks }) {
+export default function DrinkShareAndFavorite() {
+  const { inProgressDrinksId } = useContext(Context);
   const [buttonFav, setButtonFav] = useState(true);
   const [copyButton, setCopyButton] = useState('');
 
@@ -80,7 +81,7 @@ export default function DrinkShareAndFavorite({ drinks }) {
   }
   return (
     <div>
-      { drinks.map((info, index) => (
+      { inProgressDrinksId.map((info, index) => (
         <div key={ index } className="share-and-favorite-container">
           <button type="button" data-testid="share-btn" onClick={ () => copyBoard() }>
             <img src={ shareIcon } alt="share button" />
@@ -98,7 +99,3 @@ export default function DrinkShareAndFavorite({ drinks }) {
     </div>
   );
 }
-
-DrinkShareAndFavorite.propTypes = {
-  drinks: PropTypes.arrayOf(objectOf(PropTypes.string)).isRequired,
-};
