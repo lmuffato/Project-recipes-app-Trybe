@@ -49,23 +49,19 @@ ButtonFilters.propTypes = {
   toggle: PropTypes.bool.isRequired,
 };
 
-const Container = styled.div`
-  display: flex;
+const Container = styled.div`display: flex;
+  flex-flow: row wrap;
   justify-content: center;
-  flex-direction: row;
-  flex-wrap: wrap;
 `;
 
-const Buttons = styled.button`
-  background: none;
-  color: inherit;
+const Buttons = styled.button` background: none;
+  background-color: rgb(214, 168, 40);
   border: none;
-  padding: 0;
-  font: inherit;
-  cursor: pointer;
-  outline: inherit;
-  margin: 8px;
-  padding: 10px;
   border-radius: 6px;
-  background-color: rgb( 214, 168, 40 );
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  margin: 8px;
+  outline: inherit;
+  padding: 10px;
 `;
