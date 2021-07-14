@@ -31,7 +31,7 @@ function ExploreIngredientsDrink() {
 
   return (
     <section>
-      <Header>Ingredientes</Header>
+      <Header>Explorar Ingredientes</Header>
       <div className="grid">
         { ingredients.map(({ strIngredient1 }, index) => (
           <button
