@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
+import copy from 'clipboard-copy';
 import { BiHeart, BiShareAlt } from 'react-icons/bi';
 import { useHistory, useParams } from 'react-router-dom';
 import { RecipesContext } from '../../context/Recipes';
@@ -21,6 +22,7 @@ function Recipe() {
   const [videoId, setVideoId] = useState('');
   const [recommendations, setRecommendations] = useState([]);
   const [finishedSteps, setFinishedSteps] = useState({});
+  const [copiedLink, setCopiedLink] = useState(false);
   const alcoholicRecipe = recipe.strAlcoholic && recipe.strAlcoholic === 'Alcoholic';
 
   useEffect(() => {
@@ -64,14 +66,28 @@ function Recipe() {
     setFinishedSteps({ ...finishedSteps, [ingredientName]: checked });
   }
 
+  function copyLink() {
+    copy(window.location.href);
+    setCopiedLink(true);
+  }
+
   return (
     <div className={ styles.recipe }>
       <HeaderBack title={ recipe.name || 'Recipe' } />
       <div className={ styles.header }>
         <img src={ recipe.imagePath } alt={ recipe.name } data-testid="recipe-photo" />
         <div className={ styles.options }>
-          <BiHeart data-testid="favorite-btn" />
-          <BiShareAlt data-testid="share-btn" />
+          <button type="button" data-testid="favorite-btn">
+            <BiHeart />
+          </button>
+          <button type="button" data-testid="share-btn" onClick={ copyLink }>
+            <BiShareAlt />
+            { copiedLink && (
+              <span>
+                Link copiado!
+              </span>
+            ) }
+          </button>
         </div>
       </div>
       <main>

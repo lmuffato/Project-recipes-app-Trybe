@@ -11,4 +11,8 @@
   position: fixed;
   right: 30px;
   z-index: 8888;
+
+  &.finished {
+    visibility: hidden;
+  }
 }

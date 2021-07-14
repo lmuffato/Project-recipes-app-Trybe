@@ -50,7 +50,7 @@ function StartOrFinishRecipeBtn({ recipe }) {
   return (
     <button
       type="button"
-      className={ styles.startRecipe }
+      className={ `${styles.startRecipe} ${!recipeIsNotFinished && styles.finished}` }
       onClick={ startOrFinishRecipe }
       data-testid={
         pathname.includes('in-progress') ? 'finish-recipe-btn' : 'start-recipe-btn'
