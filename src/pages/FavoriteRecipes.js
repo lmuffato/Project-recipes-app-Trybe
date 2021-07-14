@@ -3,10 +3,18 @@ import { Link } from 'react-router-dom';
 import shareIcon from '../images/shareIcon.svg';
 import FavoriteBtn from '../compenents/FavoriteBtn';
 import RecipesContext from '../contexts/RecipesContext';
+import SearchbarContext from '../contexts/SearchbarContext';
+import Header from '../compenents/Header';
 
 function FavoriteRecipes() {
   const { favoriteRecipes, showRecipes, setShowRecipes } = useContext(RecipesContext);
+  const { setHideSearchBtn, setPageName } = useContext(SearchbarContext);
   const [isCopy, setIsCopy] = useState(false);
+
+  useEffect(() => {
+    setHideSearchBtn(false);
+    setPageName('Receitas Favoritas');
+  }, []);
 
   useEffect(() => {
     const recipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
@@ -113,39 +121,43 @@ function FavoriteRecipes() {
   };
 
   return (
-    <div>
-      <button
-        type="button"
-        data-testid="filter-by-all-btn"
-        onClick={ () => handleContent('all') }
-      >
-        All
-      </button>
+    <>
+      <Header />
+      <div>
+        <button
+          type="button"
+          data-testid="filter-by-all-btn"
+          onClick={ () => handleContent('all') }
+        >
+          All
+        </button>
 
-      <button
-        type="button"
-        data-testid="filter-by-food-btn"
-        onClick={ () => handleContent('meals') }
-      >
-        Food
-      </button>
+        <button
+          type="button"
+          data-testid="filter-by-food-btn"
+          onClick={ () => handleContent('meals') }
+        >
+          Food
+        </button>
 
-      <button
-        type="button"
-        data-testid="filter-by-drink-btn"
-        onClick={ () => handleContent('cocktails') }
-      >
-        Drinks
-      </button>
+        <button
+          type="button"
+          data-testid="filter-by-drink-btn"
+          onClick={ () => handleContent('cocktails') }
+        >
+          Drinks
+        </button>
 
-      {
-        showRecipes.map(
-          ({ id, type, area, category, alcoholicOrNot, name, image }, index) => (
-            renderCards({ id, type, area, category, alcoholicOrNot, name, image }, index)
-          ),
-        )
-      }
-    </div>
+        {
+          showRecipes.map(
+            ({ id, type, area, category, alcoholicOrNot, name, image }, index) => (
+              renderCards({
+                id, type, area, category, alcoholicOrNot, name, image }, index)
+            ),
+          )
+        }
+      </div>
+    </>
   );
 }
 

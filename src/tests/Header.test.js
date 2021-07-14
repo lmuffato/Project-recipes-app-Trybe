@@ -170,19 +170,19 @@ describe('testing if the header is rendered', () => {
     notHaveTheSearchBtn(queryByTestId);
   });
 
-  // it('check if the header is rendered in the FavoritesRecipes page', () => {
-  //   const { getByTestId, queryByTestId, history } = renderWithRouter(<App />);
+  it('check if the header is rendered in the FavoritesRecipes page', () => {
+    const { getByTestId, queryByTestId, history } = renderWithRouter(<App />);
 
-  //   handleLogin(getByTestId);
+    handleLogin(getByTestId);
 
-  //   clickBtn(getByTestId, profileTopBtnId);
-  //   clickBtn(getByTestId, 'profile-favorite-btn');
-  //   const { pathname } = history.location;
-  //   expect(pathname).toBe('/receitas-favoritas');
+    clickBtn(getByTestId, profileTopBtnId);
+    clickBtn(getByTestId, 'profile-favorite-btn');
+    const { pathname } = history.location;
+    expect(pathname).toBe('/receitas-favoritas');
 
-  //   checkHeaderAndProfileIncon(getByTestId);
-  //   notHaveTheSearchBtn(queryByTestId);
-  // });
+    checkHeaderAndProfileIncon(getByTestId);
+    notHaveTheSearchBtn(queryByTestId);
+  });
 
   it('check if the header is rendered in the DoneRecipes page', () => {
     const { getByTestId, history } = renderWithRouter(<App />);
