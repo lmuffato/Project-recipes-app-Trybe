@@ -1,8 +1,16 @@
 import React, { useState, useEffect } from 'react';
+
+import { Dropdown } from 'react-bootstrap';
+
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import RecipeCard from '../../components/RecipeCard';
+
 import { fetchAreas, fetchByArea, fetchName } from '../../services/data';
+
+import { FilterContainer } from '../../styles/shared/MainDetails/MainDetailsStyles';
+import { StyledDropDown, MainContainerFoodArea } from './styles';
+import ContainerRecipeCards from '../../styles/shared/ContainerRecipeCards';
 
 export default function FoodArea() {
   const [recipes, setRecipes] = useState([]);
@@ -42,36 +50,51 @@ export default function FoodArea() {
   }, [region]);
 
   return (
-    <div>
+    <MainContainerFoodArea>
       <Header title="Explorar Origem" searchIcon />
 
-      <select
-        data-testid="explore-by-area-dropdown"
-        onChange={ ({ target }) => setRegion(target.value) }
-      >
-        <option value="All" data-testid="All-option">All</option>
-        {areas.map(({ strArea }) => (
-          <option
-            data-testid={ `${strArea}-option` }
-            value={ strArea }
-            key={ strArea }
+      <FilterContainer>
+        <StyledDropDown
+          data-testid="explore-by-area-dropdown"
+          id="dropdown-split-variants-Danger"
+          title="Filtros"
+          variant="danger"
+        >
+          <Dropdown.Item
+            value="All"
+            data-testid="All-option"
+            onClick={ ({ target }) => setRegion(target.innerText) }
           >
-            {strArea}
-          </option>
-        ))}
-      </select>
+            All
+          </Dropdown.Item>
+          {areas.map(({ strArea }) => (
+            <Dropdown.Item
+              data-testid={ `${strArea}-option` }
+              value={ strArea }
+              key={ strArea }
+              onClick={ ({ target }) => setRegion(target.innerText) }
+            >
+              {strArea}
+            </Dropdown.Item>
+          ))}
+        </StyledDropDown>
 
-      {recipes.map((recipe, index) => (
-        <RecipeCard
-          key={ recipe.idMeal }
-          index={ index }
-          thumb={ recipe.strMealThumb }
-          title={ recipe.strMeal }
-          id={ recipe.idMeal }
-        />
-      ))}
+        <span>{region}</span>
+      </FilterContainer>
+
+      <ContainerRecipeCards>
+        {recipes.map((recipe, index) => (
+          <RecipeCard
+            key={ recipe.idMeal }
+            index={ index }
+            thumb={ recipe.strMealThumb }
+            title={ recipe.strMeal }
+            id={ recipe.idMeal }
+          />
+        ))}
+      </ContainerRecipeCards>
 
       <Footer explore />
-    </div>
+    </MainContainerFoodArea>
   );
 }

@@ -13,6 +13,7 @@ export default function useClipBoard(id, type) {
       style: {
         color: '#FFF',
         background: '#ff2637',
+        fontWeight: 'bold',
       },
     });
     setShowClipBoardMsg(true);

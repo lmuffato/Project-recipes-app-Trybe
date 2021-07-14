@@ -3,10 +3,15 @@ import ButtonFiltersRecipe from '../../components/ButtonFilterRecipe';
 import Header from '../../components/Header';
 import RecipeFavoriteCard from '../../components/RecipeFavoriteCard';
 import useRecipeFilter from '../../hooks/useRecipeFilter';
+import {
+  ContainerFavoriteRecipes,
+  FilterContainer,
+  MainRecipesDoneCard,
+} from './styles';
 
 export default function FavoriteRecipes() {
   const [hasBeenChanged, setHasBeenChanged] = useState(false);
-  const { changeValueToFilterRecipes, filteredRecipes } = useRecipeFilter(
+  const { changeValueToFilterRecipes, filteredRecipes, filtros } = useRecipeFilter(
     'favoriteRecipes',
     hasBeenChanged,
   );
@@ -18,21 +23,26 @@ export default function FavoriteRecipes() {
   }, [hasBeenChanged]);
 
   return (
-    <section>
+    <ContainerFavoriteRecipes>
       <Header title="Receitas Favoritas" />
-      <ButtonFiltersRecipe
-        changeValueToFilterRecipes={ changeValueToFilterRecipes }
-      />
-      <main>
-        {filteredRecipes && filteredRecipes.map((recipe, index) => (
-          <RecipeFavoriteCard
-            key={ recipe.id }
-            recipeFavorite={ recipe }
-            index={ index }
-            setHasBeenChanged={ setHasBeenChanged }
-          />
-        ))}
-      </main>
-    </section>
+      <FilterContainer>
+        <ButtonFiltersRecipe
+          changeValueToFilterRecipes={ changeValueToFilterRecipes }
+        />
+
+        <span>{filtros}</span>
+      </FilterContainer>
+      <MainRecipesDoneCard>
+        {filteredRecipes
+          && filteredRecipes.map((recipe, index) => (
+            <RecipeFavoriteCard
+              key={ recipe.id }
+              recipeFavorite={ recipe }
+              index={ index }
+              setHasBeenChanged={ setHasBeenChanged }
+            />
+          ))}
+      </MainRecipesDoneCard>
+    </ContainerFavoriteRecipes>
   );
 }

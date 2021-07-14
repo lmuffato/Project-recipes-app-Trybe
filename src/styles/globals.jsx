@@ -11,6 +11,18 @@ export default createGlobalStyle`
     background: var(--background-first-color);
   }
 
+  button {
+    outline: none;
+
+    &:active {
+      outline: none;
+    }
+
+    &:hover {
+      outline: none;
+    }
+  }
+
   :root {
     --global-space: 2rem 1.8rem;
     --red-first-color: #ff2637;

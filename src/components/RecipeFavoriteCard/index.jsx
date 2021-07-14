@@ -5,6 +5,12 @@ import shareIcon from '../../images/shareIcon.svg';
 import blackHeartIcon from '../../images/blackHeartIcon.svg';
 import useClipBoard from '../../hooks/useClipboard';
 import useFavoriteRecipe from '../../hooks/useFavoriteRecipe';
+import {
+  ContainerRecipeCardInfos,
+  ContainerShareAndFavorite,
+} from './styles';
+import { BiShareAlt } from 'react-icons/bi';
+import { AiFillHeart } from 'react-icons/ai';
 
 export default function RecipeFavoriteCard({
   recipeFavorite,
@@ -32,12 +38,7 @@ export default function RecipeFavoriteCard({
         role="button"
         tabIndex="0"
       >
-        <img
-          data-testid={ `${index}-horizontal-image` }
-          alt="Recipe"
-          src={ image }
-          style={ styleImg }
-        />
+        <h1 data-testid={ `${index}-horizontal-name` }>{name}</h1>
       </div>
 
       <div
@@ -46,34 +47,42 @@ export default function RecipeFavoriteCard({
         role="button"
         tabIndex="0"
       >
-        <h1 data-testid={ `${index}-horizontal-name` }>{name}</h1>
+        <img
+          data-testid={ `${index}-horizontal-image` }
+          alt="Recipe"
+          src={ image }
+          style={ styleImg }
+        />
       </div>
 
-      <p data-testid={ `${index}-horizontal-top-text` }>
-        {`${area} - ${isCategoryOrAlcoholic}`}
-      </p>
+      <ContainerRecipeCardInfos>
+        <span data-testid={ `${index}-horizontal-top-text` }>
+          {`${area} - ${isCategoryOrAlcoholic}`}
+        </span>
 
-      <button type="button" onClick={ copyToClipBoard }>
-        <img
-          data-testid={ `${index}-horizontal-share-btn` }
-          alt="Share recipe"
-          src={ shareIcon }
-        />
-      </button>
+        <ContainerShareAndFavorite>
+          <button type="button" onClick={ copyToClipBoard }>
+            <BiShareAlt
+              data-testid={ `${index}-horizontal-share-btn` }
+              alt="Share recipe"
+            />
+          </button>
 
-      <button
-        type="button"
-        onClick={ () => {
-          setHeart(recipeFavorite);
-          setHasBeenChanged(true);
-        } }
-      >
-        <img
-          data-testid={ `${index}-horizontal-favorite-btn` }
-          alt="Favorite recipe"
-          src={ blackHeartIcon }
-        />
-      </button>
+          <button
+            type="button"
+            onClick={ () => {
+              setHeart(recipeFavorite);
+              setHasBeenChanged(true);
+            } }
+          >
+            <AiFillHeart
+              data-testid={ `${index}-horizontal-favorite-btn` }
+              alt="Favorite recipe"
+              src={ blackHeartIcon }
+            />
+          </button>
+        </ContainerShareAndFavorite>
+      </ContainerRecipeCardInfos>
 
       {showClipBoardMsg && renderClipBoardMsg()}
     </section>

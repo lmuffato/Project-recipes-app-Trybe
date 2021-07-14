@@ -6,7 +6,8 @@ export const ContainerExploreFood = styled(SharedContainerHeader)`
   > header {
     > div {
       > h1 {
-        font-size: 1.89rem;
+        font-size: 1.7rem;
+        margin-top: 1.2rem;
       }
     }
   }

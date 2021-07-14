@@ -28,5 +28,14 @@ export const ContainerButton = styled.div`
     background: none;
     color: var(--red-first-color);
     font-size: 1.6rem;
+    outline: none;
+
+    &:active {
+      outline: none;
+    }
+
+    &:hover {
+      outline: none;
+    }
   }
 `;

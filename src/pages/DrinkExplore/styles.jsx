@@ -10,6 +10,15 @@ export const ContainerExploreDrink = styled(SharedContainerHeader)`
     justify-content: center;
     gap: 1rem;
   }
+
+  > header {
+    > div {
+      > h1 {
+        font-size: 1.7rem;
+        margin-top: 1.2rem;
+      }
+    }
+  }
 `;
 
 export const ButtonDrinkExplore = styled(SharedButton)`
