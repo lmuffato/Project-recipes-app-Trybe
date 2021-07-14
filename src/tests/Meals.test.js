@@ -3,7 +3,7 @@ import React from 'react';
 import Meals from '../pages/Meals';
 import renderWithRouterAndRedux from './renderWithRouterAndRedux';
 
-const MEAL_CARDS_COUNT = 12; // magic numbers
+const MEAL_CARDS_COUNT = 12; // no magic numbers
 const breakfastButtonId = 'Breakfast-category-filter';
 const allButtonId = 'All-category-filter';
 
