@@ -45,7 +45,6 @@ function DrinkIngredientsMeasure({ detailsRecepie }) {
   }
 
   function upDateLocalStorage() {
-    // console.log(otherStorageRecepies);
     const newLocalStorage = {
       cocktails: { ...otherStorageRecepies, [idDrink]: [...doneIngredients] },
       meals: allMealsStorage,
