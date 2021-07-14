@@ -4,7 +4,7 @@ import { useStateEasyRedux } from 'easy-redux-trybe';
 import { useHistory } from 'react-router-dom';
 import copy from 'clipboard-copy';
 import positions from '../../services/data';
-import createIngredients from '../../services/functions';
+import { createIngredients } from '../../services/functions';
 import shareIcon from '../../images/shareIcon.svg';
 import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../../images/blackHeartIcon.svg';
@@ -21,6 +21,9 @@ function FoodDetails(props) {
   const [favoriteRecipe, setFavoriteRecipe] = useStateEasyRedux(
     { name: 'favoriteRecipe' }, {},
   );
+
+  const { startRecipe /* recipeMade */ } = styles;
+  const stylesArr = [startRecipe];
 
   useEffect(() => {
     const fetchRecipe = async () => {
@@ -47,6 +50,16 @@ function FoodDetails(props) {
     fetchRecipe();
     // eslint-disable-next-line
   }, []);
+
+  const startRecipeText = () => {
+    const storage = localStorage.inProgressRecipes;
+    let buttonText = 'Iniciar Receita';
+    if (storage && storage.includes(id)) {
+      buttonText = 'Continuar Receita';
+      return buttonText;
+    }
+    return buttonText;
+  };
 
   const { responseFood, resultRecommendations } = stateRedux;
   const { copyRecipe } = copyUrl;
@@ -153,9 +166,10 @@ function FoodDetails(props) {
             <button
               type="button"
               data-testid="start-recipe-btn"
-              className={ styles.startRecipe }
+              className={ stylesArr }
+              onClick={ () => history.push(`${id}/in-progress`) }
             >
-              Iniciar Receita
+              { startRecipeText() }
             </button>
           </div>
         ),
