@@ -13,21 +13,21 @@ function RecomendationCards({ dataForCards, linkToRedirect }) {
         <section className="inScreen" key={ i } data-testid={ `${i}-recomendation-card` }>
           {' '}
           {console.log(linkToRedirect)}
+          <img
+            src={ data.strMealThumb || data.strDrinkThumb }
+            alt="some food"
+            data-testid="recipe-photo"
+          />
           <Link to={ `${linkToRedirect}/${data.idMeal || data.idDrink}` }>
-            <img
-              src={ data.strMealThumb || data.strDrinkThumb }
-              alt="some food"
-              data-testid="recipe-photo"
-            />
+            <h4>
+              { data.strAlcoholic }
+              <br />
+              { data.strCategory }
+            </h4>
+            <h3 data-testid={ `${i}-recomendation-title` }>
+              { data.strMeal || data.strDrink }
+            </h3>
           </Link>
-          <h4>
-            { data.strAlcoholic }
-            <br />
-            { data.strCategory }
-          </h4>
-          <h3 data-testid={ `${i}-recomendation-title` }>
-            { data.strMeal || data.strDrink }
-          </h3>
         </section>
       ))}
     </nav>
