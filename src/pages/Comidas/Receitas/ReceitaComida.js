@@ -2,13 +2,13 @@ import React, { useEffect, useState } from 'react';
 // import Carousel from 'react-bootstrap/Carousel';
 import { Link, useRouteMatch } from 'react-router-dom';
 import '../../../styles/RecipeDetails.css';
-import ComponentGen from '../../../components/RecipeDetailsComponents';
-import { SwiperSlide } from 'swiper/react';
-import 'swiper/swiper.min.css';
-import 'swiper/components/pagination/pagination.min.css';
 import SwiperCore, {
   Pagination,
 } from 'swiper/core';
+import { SwiperSlide } from 'swiper/react';
+import ComponentGen from '../../../components/RecipeDetailsComponents';
+import 'swiper/swiper.min.css';
+import 'swiper/components/pagination/pagination.min.css';
 
 function Receita() {
   const { params } = useRouteMatch();

@@ -21,6 +21,7 @@
     "react-mock": "^6.0.1",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.1",
+    "swiper": "^6.7.5",
     "websocket-extensions": ">=0.1.4"
   },
   "scripts": {

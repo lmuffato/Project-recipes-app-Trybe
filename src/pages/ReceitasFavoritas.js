@@ -35,70 +35,87 @@ function ReceitasFavoritas() {
   const isFood = ({ id, image, type, name, category, area, alcoholicOrNot }, index) => {
     if (type === 'comida') {
       return (
-        <div key={ index }>
-          <span data-testid={ `${index}-horizontal-top-text` }>
-            { `${area} - ${category}` }
-          </span>
-          <Link to={ `/comidas/${id}` }>
+        <div key={ index } className="doneComponents">
+          <Link to={ `/comidas/${id}` } className="ctn-link">
             <img
-              className="image"
+              className="image-container"
               src={ image }
               alt="comida"
               data-testid={ `${index}-horizontal-image` }
             />
+            <div className="ctn-title-category">
+              <p
+                data-testid={ `${index}-horizontal-top-text` }
+                className="doneCategory"
+              >
+                { `${area} - ${category}` }
+              </p>
+              <p data-testid={ `${index}-horizontal-name` } className="doneTitle">
+                { name }
+              </p>
+            </div>
           </Link>
-          <Link to={ `/comidas/${id}` }>
-            <span data-testid={ `${index}-horizontal-name` }>
+          <div className="ctn-date-sharebtn">
+            <ShareBtn
+              dataTest={ `${index}-horizontal-share-btn` }
+              path={ `http://localhost:3000/${type}s/${id}` }
+            />
+            <button
+              type="button"
+              onClick={ localStorageRetriever }
+              key={ id }
+              className="fav-btn"
+            >
+              <img
+                data-testid={ `${index}-horizontal-favorite-btn` }
+                src={ blackHeartIcon }
+                alt={ id }
+              />
+            </button>
+          </div>
+
+        </div>
+      );
+    }
+    return (
+      <div key={ index } className="doneComponents">
+        <Link to={ `/bebidas/${id}` } className="ctn-link">
+          <img
+            className="image-container"
+            src={ image }
+            alt="bebida"
+            data-testid={ `${index}-horizontal-image` }
+          />
+          <div className="ctn-title-category">
+            <span
+              data-testid={ `${index}-horizontal-top-text` }
+              className="doneCategory"
+            >
+              { alcoholicOrNot }
+            </span>
+            <span data-testid={ `${index}-horizontal-name` } className="doneTitle">
               { name }
             </span>
-          </Link>
+          </div>
+        </Link>
+        <div className="ctn-date-sharebtn">
           <ShareBtn
             dataTest={ `${index}-horizontal-share-btn` }
             path={ `http://localhost:3000/${type}s/${id}` }
           />
-
-          <button type="button" onClick={ localStorageRetriever } key={ id }>
+          <button
+            type="button"
+            onClick={ localStorageRetriever }
+            key={ id }
+            className="fav-btn"
+          >
             <img
               data-testid={ `${index}-horizontal-favorite-btn` }
               src={ blackHeartIcon }
               alt={ id }
             />
           </button>
-
         </div>
-      );
-    }
-    return (
-      <div key={ index }>
-        <ShareBtn
-          dataTest={ `${index}-horizontal-share-btn` }
-          path={ `http://localhost:3000/${type}s/${id}` }
-        />
-
-        <button type="button" onClick={ localStorageRetriever } key={ id }>
-          <img
-            data-testid={ `${index}-horizontal-favorite-btn` }
-            src={ blackHeartIcon }
-            alt={ id }
-          />
-        </button>
-
-        <Link to={ `/bebidas/${id}` }>
-          <img
-            className="image"
-            src={ image }
-            alt="bebida"
-            data-testid={ `${index}-horizontal-image` }
-          />
-        </Link>
-        <span data-testid={ `${index}-horizontal-top-text` }>
-          { alcoholicOrNot }
-        </span>
-        <Link to={ `/bebidas/${id}` }>
-          <span data-testid={ `${index}-horizontal-name` }>
-            { name }
-          </span>
-        </Link>
       </div>
     );
   };
@@ -122,7 +139,7 @@ function ReceitasFavoritas() {
   return (
     <div className="favorite_recipes">
       <Header title="Favorite Recipes" displayButton={ false } />
-      <div className="buttons">
+      <div className="fav-buttons">
         <button
           type="button"
           data-testid="filter-by-all-btn"
@@ -148,11 +165,13 @@ function ReceitasFavoritas() {
 
         </button>
       </div>
-      {filteredItems.map(
-        ({ id, image, type, name, category, area, alcoholicOrNot }, index) => (
-          isFood({ id, image, type, name, category, area, alcoholicOrNot }, index)
-        ),
-      )}
+      <div className="cardHolder">
+        {filteredItems.map(
+          ({ id, image, type, name, category, area, alcoholicOrNot }, index) => (
+            isFood({ id, image, type, name, category, area, alcoholicOrNot }, index)
+          ),
+        )}
+      </div>
     </div>
   );
 }
