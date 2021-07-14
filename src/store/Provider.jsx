@@ -21,7 +21,6 @@ function Provider({ children }) {
   const [infoUser, setDatainfoUser] = useState({
     email: '',
     password: '',
-    shouldRedirect: false,
   });
   const [categoryF, setCategoryF] = useState('All');
   const [categoryD, setCategoryD] = useState('All');
