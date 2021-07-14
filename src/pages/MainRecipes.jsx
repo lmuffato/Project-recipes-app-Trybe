@@ -24,6 +24,7 @@ export default function MainRecipes({ categories, arrayCards,
             index={ index }
             name={ recipe.strMeal || recipe.strDrink }
             thumbnail={ recipe.strMealThumb || recipe.strDrinkThumb }
+            category={ recipe.strCategory }
           />
         ))}
       </div>

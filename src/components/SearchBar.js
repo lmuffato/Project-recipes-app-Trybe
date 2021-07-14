@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+import styled from 'styled-components';
 import FoodContext from '../contexts/foods/FoodContext';
 import DrinksContext from '../contexts/drinks/DrinksContext';
 import { requestMealFirstLetter,
@@ -91,13 +92,14 @@ function SearchBar() {
   }
 
   return (
-    <div>
+    <Container>
       <label htmlFor="search-input">
         <input
           data-testid="search-input"
           id="search-input"
           type="text"
           onChange={ handleText }
+          placeholder="Buscar Receita"
         />
       </label>
       <label htmlFor="search-ingredient">
@@ -117,7 +119,7 @@ function SearchBar() {
           data-testid="name-search-radio"
           id="search-name"
           type="radio"
-          value="searc-name"
+          value="search-name"
           onChange={ handleRadios }
         />
         Busca pelo nome
@@ -140,9 +142,47 @@ function SearchBar() {
       >
         Buscar
       </button>
-    </div>
+    </Container>
 
   );
 }
 
 export default SearchBar;
+
+const Container = styled.div`
+
+#search-input {
+  background: #FFFFFF;
+  border: 0.5px solid #FFD04E;
+  box-sizing: border-box;
+  border-radius: 6px;
+}
+
+#search-ingredient, #search-name, #search-first-letter {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  align-items: center;
+  text-align: center;
+  border: 1px solid black;
+  background-color: FFD04E;
+}
+
+button {
+  background-color: #FFD04E;
+  color: black;
+  border: none;
+  border-radius: 6px;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 22px;
+  display: flex;
+  align-items: center;
+color: #000000;
+}
+
+`;
