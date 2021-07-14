@@ -20,9 +20,15 @@ function ButtonShare() {
     <button
       id="shareButton"
       type="button"
+      className="svg-btn"
       onClick={ (e) => shareUrl(e) }
     >
-      <img alt="share-button" src={ shareIcon } data-testid="share-btn" />
+      <img
+        alt="share-button"
+        src={ shareIcon }
+        data-testid="share-btn"
+        className="altSvg"
+      />
     </button>
   );
 }

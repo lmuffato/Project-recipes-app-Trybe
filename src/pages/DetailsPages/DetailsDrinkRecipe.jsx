@@ -10,6 +10,7 @@ import React, { useEffect, useState } from 'react';
 // import Context from '../../context/Context';
 
 import ComponentAux from './ComponentAux';
+import './Styles.css';
 
 const DetailsDrinkRecipe = () => {
   // const { recipeDrink } = useContext(Context); // variavel q guarda a receita

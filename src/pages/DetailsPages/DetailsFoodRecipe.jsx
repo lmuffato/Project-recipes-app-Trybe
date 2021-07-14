@@ -12,6 +12,7 @@ import React, { useEffect, useState } from 'react';
 // import { fetchRecipeFood } from '../../services/fetchApi';
 
 import ComponentAux from './ComponentAux';
+import './Styles.css';
 
 const DetailsFoodRecipe = () => {
   // const { recipeFood } = useContext(Context); // variavel q guarda a receita

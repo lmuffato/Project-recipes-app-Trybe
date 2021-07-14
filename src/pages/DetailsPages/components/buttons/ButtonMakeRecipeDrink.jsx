@@ -65,15 +65,17 @@ const ButtonMakeRecipeDrink = ({ recipe }) => {
   });
 
   return (
-    <Link
-      to={ `/bebidas/${idDrink}/in-progress` }
-      id="startBtn"
-      className="btn btn-primary startBtn"
-      data-testid="start-recipe-btn"
-      onClick={ () => clickSetProgress('in', idDrink, 'drink', recipe) }
-    >
-      Default
-    </Link>
+    <div className="btn-footer">
+      <Link
+        to={ `/bebidas/${idDrink}/in-progress` }
+        id="startBtn"
+        className="btn custom"
+        data-testid="start-recipe-btn"
+        onClick={ () => clickSetProgress('in', idDrink, 'drink', recipe) }
+      >
+        Default
+      </Link>
+    </div>
   );
 };
 
