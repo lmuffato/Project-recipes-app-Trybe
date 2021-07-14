@@ -15,10 +15,10 @@ function Main() {
   const history = useHistory();
   const type = pathname === '/comidas' ? 'Meal' : 'Drink';
   const cardsQuantity = 12;
-
+  const id = pathname === '/comidas' ? 'idMeal' : 'idDrink';
   useEffect(() => {
     if (searchBtn && filteredRecipe && filteredRecipe.length === 1) {
-      history.push(`${pathname}/${filteredRecipe[0].idMeal}`);
+      history.push(`${pathname}/${filteredRecipe[0][id]}`);
     }
     if (searchBtn && !filteredRecipe) {
       const ms = 'Sinto muito, não encontramos nenhuma receita para esses filtros.';

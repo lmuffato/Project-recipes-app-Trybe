@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { useLocation } from 'react-router';
 import ContextRecipes from '../context/ContextRecipes';
+import '../styleSheets/SearchBar.css';
 
 function SearchBar() {
   const { setSearch, setRadioFilter,
@@ -13,7 +14,8 @@ function SearchBar() {
   /* Alerta quando mais de um caracter é escrito na opção de filtro primeira letra */
   function alertOneLetter() {
     if (search.length > 1 && radioFilter === 'primeira-letra') {
-      return window.alert('Sua busca deve conter somente 1 (um) caracter');
+      const alertOne = 'Sua busca deve conter somente 1 (um) caracter';
+      return window.alert(alertOne);
     }
   }
 
@@ -32,7 +34,7 @@ function SearchBar() {
     <div>
       <input type="text" data-testid="search-input" onChange={ handleChangeSearch } />
 
-      <label htmlFor="ingredient">
+      <label htmlFor="ingredient" className="font">
         <input
           name="option"
           type="radio"
@@ -40,11 +42,12 @@ function SearchBar() {
           data-testid="ingredient-search-radio"
           value="ingrediente"
           onChange={ handleChangeRadio }
+          className="radio-ingredient"
         />
         Ingrediente
       </label>
 
-      <label htmlFor="name">
+      <label htmlFor="name" className="font">
         <input
           name="option"
           type="radio"
@@ -52,11 +55,12 @@ function SearchBar() {
           data-testid="name-search-radio"
           value="nome"
           onChange={ handleChangeRadio }
+          className="radio-name"
         />
         Nome
       </label>
 
-      <label htmlFor="firstLetter">
+      <label htmlFor="firstLetter" className="font">
         <input
           name="option"
           type="radio"
@@ -64,6 +68,7 @@ function SearchBar() {
           data-testid="first-letter-search-radio"
           onChange={ handleChangeRadio }
           value="primeira-letra"
+          className="radio-fletter"
         />
         Primeira letra
       </label>
@@ -71,6 +76,7 @@ function SearchBar() {
       <button
         type="button"
         data-testid="exec-search-btn"
+        className="search-btn"
         onClick={ async () => {
           await fetchRecipes(link);
           setSearchBtn(true);
