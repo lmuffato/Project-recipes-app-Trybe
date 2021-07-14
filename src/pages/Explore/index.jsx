@@ -5,6 +5,7 @@ import HeaderBack from '../../components/HeaderBack';
 import getRecipes from '../../services/recipesData';
 import ExploreButtons from './components/ExploreButtons';
 import styles from './styles.module.scss';
+import Footer from '../../components/footer';
 
 function Explore() {
   const [titlePage, setTitlePage] = useState('');
@@ -30,6 +31,7 @@ function Explore() {
       <div className={ styles.exploreContent }>
         <ExploreButtons title={ meal } randomRecipe={ randomId } />
       </div>
+      <Footer />
     </div>
   );
 }
