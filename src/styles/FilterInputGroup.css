@@ -29,6 +29,13 @@
   box-shadow: 0.3px 0.3px 3px rgb(29, 28, 29) inset;
 }
 
+@media only screen and ( min-width : 768px ) and ( max-width : 1199.98px ) {
+
+  .input-group-filter label {
+    width: 15%;
+  }
+}
+
 @media ( max-width : 786.98px ) {
 
   .input-group-filter label {
