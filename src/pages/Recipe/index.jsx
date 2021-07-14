@@ -1,18 +1,25 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { BiHeart, BiShareAlt } from 'react-icons/bi';
-
 import { useHistory, useParams } from 'react-router-dom';
+import { RecipesContext } from '../../context/Recipes';
 
 import HeaderBack from '../../components/HeaderBack';
 import Ingredient from './components/Ingredient';
 import Video from './components/Video';
 import Recommendations from './components/Recommendations';
+
 import { getRecipe, getRecommendations } from '../../services/recipesData';
 
 import styles from './styles.module.scss';
 
 function Recipe() {
   const { location: { pathname }, push: historyPush } = useHistory();
+  const {
+    doneRecipes,
+    inProgressRecipes,
+    addDoneRecipe,
+    addRecipeInProgress,
+  } = useContext(RecipesContext);
   const { id } = useParams();
   const [recipe, setRecipe] = useState({});
   const [videoId, setVideoId] = useState('');
@@ -20,7 +27,31 @@ function Recipe() {
   const [recommendations, setRecommendations] = useState([]);
   const [finishedSteps, setFinishedSteps] = useState({});
   const alcoholicRecipe = recipe.strAlcoholic && recipe.strAlcoholic === 'Alcoholic';
-  const [recipeWasFinished, setRecipeWasFinished] = useState(false);
+  const [typeInProgress, setTypeInProgress] = useState('');
+
+  const recipeIsNotFinished = !(doneRecipes.find((doneRecipe) => doneRecipe.id === id));
+  const recipeIsInProgress = (
+    inProgressRecipes[typeInProgress] && inProgressRecipes[typeInProgress][id]
+  );
+
+  useEffect(() => {
+    const lastCharacter = -1;
+    const type = pathname.split('/')[1].slice(0, lastCharacter);
+    switch (type) {
+    case 'comida': {
+      setTypeInProgress('meals');
+      break;
+    }
+
+    case 'bebida': {
+      setTypeInProgress('cocktails');
+      break;
+    }
+
+    default:
+      break;
+    }
+  }, [pathname]);
 
   useEffect(() => {
     async function loadRecipe() {
@@ -59,13 +90,16 @@ function Recipe() {
       [ingredientName]: checked,
     };
     const notFinished = Object.values(temporaryObject).filter((finished) => !finished);
-    setRecipeWasFinished(notFinished.length === 0);
+    if (notFinished.length === 0) addDoneRecipe(id, recipe, pathname);
     setFinishedSteps({ ...finishedSteps, [ingredientName]: checked });
   }
 
   function startRecipe() {
+    const lastCharacter = -1;
+    const type = pathname.split('/')[1].slice(0, lastCharacter);
     historyPush(`${pathname}/in-progress`);
     setRecipeCookMode(true);
+    addRecipeInProgress(type, id, recipe.ingredients);
   }
 
   return (
@@ -79,14 +113,14 @@ function Recipe() {
         </div>
       </div>
       <main>
-        { !recipeWasFinished && (
+        { recipeIsNotFinished && (
           <button
             type="button"
             className={ styles.startRecipe }
             onClick={ startRecipe }
-            data-testid={ !recipeWasFinished && 'start-recipe-btn' }
+            data-testid={ recipeIsNotFinished && 'start-recipe-btn' }
           >
-            { recipeCookMode ? 'Continuar receita' : 'Iniciar receita' }
+            { recipeIsInProgress ? 'Continuar receita' : 'Iniciar receita' }
           </button>
         ) }
         <h1 data-testid="recipe-title">{ recipe.name }</h1>
