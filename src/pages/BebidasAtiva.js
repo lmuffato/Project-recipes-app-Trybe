@@ -1,11 +1,29 @@
-import React from 'react';
+import { object } from 'prop-types';
+import React, { useEffect, useState } from 'react';
+import EmProgresso from '../components/EmProgesso';
 
-function BebidasAtiva() {
+function BebidasAtiva({ match: { params: { id } } }) {
+  const [cocktail, setCocktail] = useState([]);
+
+  const fetchApi = async () => {
+    const endPoint = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
+    const { drinks } = await (await fetch(endPoint)).json();
+    setCocktail(drinks);
+  };
+
+  useEffect(() => {
+    fetchApi();
+  }, []);
+
   return (
     <div>
-      <h1>BebidasAtiva</h1>
+      <EmProgresso props={ cocktail } />
     </div>
   );
 }
+
+BebidasAtiva.propTypes = {
+  match: object,
+}.isRequired;
 
 export default BebidasAtiva;

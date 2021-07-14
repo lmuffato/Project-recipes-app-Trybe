@@ -6,6 +6,10 @@ html, body {
   height: 100vh;
 }
 
+.isCheckedCss {
+  text-decoration: line-through;
+}
+
 .meals {
   align-items: center;
   background: #0fa36b;
