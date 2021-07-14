@@ -10,6 +10,7 @@ function Bebidas() {
   const { APIDrink,
     fetchApi,
     explore,
+    isLoading,
   } = useContext(ReceitasContext);
 
   useEffect(() => {
@@ -25,10 +26,10 @@ function Bebidas() {
         <div>
           <Header title="Bebidas" />
           <Filter page="bebidas" />
-          <CardList
-            list={ APIDrink.drinks }
-            type="bebidas"
-          />
+          {
+            isLoading ? <Loading />
+              : <CardList list={ APIDrink.drinks } type="bebidas" />
+          }
           <Footer />
         </div>
       );

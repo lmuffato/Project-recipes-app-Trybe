@@ -11,6 +11,7 @@ function Comidas() {
   const { APIFood,
     fetchApi,
     explore,
+    isLoading,
   } = useContext(ReceitasContext);
 
   useEffect(() => {
@@ -27,10 +28,11 @@ function Comidas() {
         <div>
           <Header title="Comidas" />
           <Filter page="comidas" />
-          <CardList
-            list={ APIFood.meals }
-            type="comidas"
-          />
+          {
+            isLoading ? <Loading />
+              : <CardList list={ APIFood.meals } type="comidas" />
+          }
+
           <Footer />
         </div>
       );
