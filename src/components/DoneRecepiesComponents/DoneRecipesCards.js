@@ -58,7 +58,7 @@ function DoneRecipesCards() {
               dataTest={ `${i}-horizontal-share-btn` }
               path={ `${locate}${e.type}s/${e.id}` }
             />
-            <TagMaker index={ i } />
+            <TagMaker index={ i } local={ e } />
           </div>
         </div>
       ))
