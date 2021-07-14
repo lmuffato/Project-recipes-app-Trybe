@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import shareIcon from '../images/shareIcon.svg';
+import setFavoriteLocalStorage from '../service/setFavoriteLocalStorage';
+import '../styleSheets/CardDoneAndFavorite.css';
 
 /*
 - Esta função renderiza um card de receita pronta ou favorita
@@ -36,10 +38,11 @@ As tags da receita devem possuir o atributo data-testid=${index}-${tagName}-hori
 
 */
 
-function DoneAndFavoriteCard(props) {
+function CardDoneAndFavorite(props) {
   const { recipe, local, index } = props;
   const { id, type, area, category, alcoholicOrNot, name, image } = recipe;
   const history = useHistory();
+  const dbType = type === 'Meal' ? 'themealdb' : 'thecocktaildb';
   const pathDetail = type === 'Meal' ? '/comidas' : '/bebidas';
   const sendToDetail = () => {
     history.push(`${pathDetail}/${id}`);
@@ -47,17 +50,18 @@ function DoneAndFavoriteCard(props) {
   const doneDateElement = local === 'feitas'
     ? (<span data-testid={ `${index}-horizontal-done-date` }>{recipe.doneDate}</span>)
     : '';
-  const tagsElements = local === 'feitas'
-    ? (
-      recipe.tags.map((tagName, index2) => (
-        <span
-          data-testid={ `${index}-${tagName}-horizontal-tag` }
-          className="tag-recipe"
-          key={ index2 }
-        >{tagName}</span>
-      ))
-    )
-    : '';
+  const tagsInfo = local === 'feitas' ? recipe.tags : [];
+  console.log(local, tagsInfo);
+  const tagsElements = tagsInfo.map((tagName, index2) => (
+    <span
+      data-testid={ `${index}-${tagName}-horizontal-tag` }
+      className="tag-recipe"
+      key={ index2 }
+    >
+      {tagName}
+    </span>
+  ));
+
   const custonElement = type === 'Drink'
     ? (
       <span>{alcoholicOrNot}</span>
@@ -65,6 +69,14 @@ function DoneAndFavoriteCard(props) {
     : (
       <span>{area}</span>
     );
+  const favoriteButton = (
+    <button
+      onClick={ () => setFavoriteLocalStorage(dbType, id) }
+      type="button"
+    >
+      favoritar
+    </button>
+  );
   return (
     <section
       className="done-favorite-card"
@@ -100,11 +112,12 @@ function DoneAndFavoriteCard(props) {
       </h3>
       {local === 'feitas' && doneDateElement}
       {local === 'feitas' && tagsElements}
+      {local === 'favoritas' && favoriteButton}
     </section>
   );
 }
 
-DoneAndFavoriteCard.propTypes = {
+CardDoneAndFavorite.propTypes = {
   recipe: PropTypes.objectOf(PropTypes.shape({
     id: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
@@ -120,4 +133,4 @@ DoneAndFavoriteCard.propTypes = {
   local: PropTypes.string.isRequired,
 };
 
-export default DoneAndFavoriteCard;
+export default CardDoneAndFavorite;

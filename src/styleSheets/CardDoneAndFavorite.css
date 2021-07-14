@@ -1,0 +1,9 @@
+.done-favorite-card {
+  display: flex;
+  height: 100px;
+  width: 100%;
+}
+
+.image-done-card {
+  height: 100%;
+}

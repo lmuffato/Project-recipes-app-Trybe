@@ -37,7 +37,7 @@ async function setFavoriteLocalStorage(typeRecipe, id) {
       const newFavorite = generateFavoriteElement(recipe, type);
       newFavorites = [...favoriteRecipes, newFavorite];
     }
-    localStorage.setItem('favoriteRecipes', JSON.stringify([newFavorites]));
+    localStorage.setItem('favoriteRecipes', JSON.stringify(newFavorites));
   } else {
     const recipe = await fetchApiById(typeRecipe, id);
     const newFavorite = generateFavoriteElement(recipe, type);

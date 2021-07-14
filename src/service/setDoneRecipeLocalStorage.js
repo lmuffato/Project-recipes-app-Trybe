@@ -30,7 +30,7 @@ const generateDoneElement = (recipe, type) => {
     name: recipe[`str${type}`],
     image: recipe[`str${type}Thumb`],
     doneDate: `${date.getDay()}/${date.getMonth() + 1}/${date.getFullYear()}`,
-    tags: recipe.strTags.split(','),
+    tags: recipe.strTags !== null ? recipe.strTags.split(',') : [],
   });
 };
 
@@ -41,7 +41,7 @@ async function setDoneRecipesLocalStorage(typeRecipe, id) {
   const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
   if (doneRecipes !== null) {
     const newDoneRecipes = [...doneRecipes, newDoneRecipe];
-    localStorage.setItem('favoriteRecipes', JSON.stringify([newDoneRecipes]));
+    localStorage.setItem('doneRecipes', JSON.stringify(newDoneRecipes));
   } else {
     localStorage.setItem('doneRecipes', JSON.stringify([newDoneRecipe]));
   }

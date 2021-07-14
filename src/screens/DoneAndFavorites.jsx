@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import HeaderRecipes from '../components/HeaderRecipes';
 import NavegateButtons from '../components/NavegateButtons';
-import DoneAndFavoriteCard from '../components/DoneAndFavoriteCard';
+import CardDoneAndFavorite from '../components/CardDoneAndFavorite';
 import ContextRecipes from '../context/ContextRecipes';
 
 /*
@@ -36,7 +36,7 @@ function DoneAndFavorites() {
       <HeaderRecipes />
       <NavegateButtons />
       { renderedCards.map((recipe, index) => (
-        <DoneAndFavoriteCard
+        <CardDoneAndFavorite
           key={ index }
           recipe={ recipe }
           local={ local }
