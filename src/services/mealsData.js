@@ -11,7 +11,7 @@ function parseMealResults(results) {
   return parsed;
 }
 
-export default async function mealsData(options) {
+export async function mealsData(options) {
   const results = await fetchJson('https://www.themealdb.com/api/json/v1/1/search.php?s=');
   const resultsParsed = parseMealResults(results);
 
@@ -54,4 +54,12 @@ export default async function mealsData(options) {
     categories: categories.meals,
     list: resultsParsed,
   };
+}
+
+export async function exploreMealsData() {
+  const randomMeal = await fetchJson('https://www.themealdb.com/api/json/v1/1/random.php');
+
+  const parserRandom = parseMealResults(randomMeal);
+
+  return { titlePage: 'Explorar Comidas', random: parserRandom };
 }

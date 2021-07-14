@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import HeaderBack from '../../components/HeaderBack';
 import styles from './styles.module.scss';
 import useLocalStorage from '../../hooks/useLocalStorage';
+import Footer from '../../components/footer';
 
 function Perfil() {
   /* const emailReceived = localStorage.getItem('email');
@@ -66,6 +67,7 @@ function Perfil() {
         <footer>
           <img src="/logo_darkbg.svg" alt="Squarefood" />
         </footer>
+        <Footer />
       </div>
     </div>
   );

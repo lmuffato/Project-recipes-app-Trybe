@@ -11,7 +11,7 @@ function parseDrinkResults(results) {
   return parsed;
 }
 
-export default async function drinksData(options) {
+export async function drinksData(options) {
   const results = await fetchJson('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
   const resultsParsed = parseDrinkResults(results);
 
@@ -54,4 +54,11 @@ export default async function drinksData(options) {
     categories: categories.drinks,
     list: resultsParsed,
   };
+}
+
+export async function exploreDrinksData() {
+  const randonDrink = await fetchJson('https://www.thecocktaildb.com/api/json/v1/1/random.php');
+  const parseRandom = parseDrinkResults(randonDrink);
+
+  return { titlePage: 'Explorar Bebidas', random: parseRandom };
 }

@@ -1,10 +1,12 @@
-import mealsData from './mealsData';
-import drinksData from './drinksData';
+import { mealsData, exploreMealsData } from './mealsData';
+import { drinksData, exploreDrinksData } from './drinksData';
 import fetchJson from '../lib/fetchJson';
 
 const paths = {
   comidas: '/comidas',
   bebidas: '/bebidas',
+  explorarComidas: '/explorar/comidas',
+  explorarBebidas: '/explorar/bebidas',
 };
 
 export async function getRecipes(path, options) {
@@ -16,6 +18,15 @@ export async function getRecipes(path, options) {
 
   case paths.bebidas: {
     const results = await drinksData(options);
+    return results;
+  }
+  case paths.explorarComidas: {
+    const results = await exploreMealsData();
+    return results;
+  }
+
+  case paths.explorarBebidas: {
+    const results = await exploreDrinksData();
     return results;
   }
 

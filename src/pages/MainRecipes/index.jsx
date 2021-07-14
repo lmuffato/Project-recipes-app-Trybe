@@ -5,6 +5,7 @@ import Header from '../../components/Header';
 import RecipesCardsGrid from '../../components/RecipesCardsGrid';
 import Categories from './components/Categories';
 import Carousel from '../../components/Carousel';
+import Footer from '../../components/footer';
 
 import styles from './styles.module.scss';
 
@@ -27,6 +28,7 @@ function MainRecipes() {
       <main>
         <RecipesCardsGrid />
       </main>
+      <Footer />
     </div>
   );
 }
