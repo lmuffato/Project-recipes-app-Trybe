@@ -4,10 +4,9 @@
 }
 
 main {
-  width: 90%;
   margin-left: 5px;
   margin-right: 15px;
-  
+  width: 90%;
 }
 
 ul {
@@ -21,10 +20,10 @@ ul {
 }
 
 .main-area{
-  width: 100%;
   margin-top: 15px;
   margin-left: 15px;
   margin-right: 15px;
+  width: 100%;
 }
 
 .main-food-list {
