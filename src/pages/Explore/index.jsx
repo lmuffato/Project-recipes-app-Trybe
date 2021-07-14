@@ -1,31 +1,35 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useCallback, useEffect, useState } from 'react';
+
+import { useParams } from 'react-router-dom';
+import HeaderBack from '../../components/HeaderBack';
+import getRecipes from '../../services/recipesData';
+import ExploreButtons from './components/ExploreButtons';
 import styles from './styles.module.scss';
 import Footer from '../../components/footer';
 
 function Explore() {
+  const [titlePage, setTitlePage] = useState('');
+  const [randomId, setRandomId] = useState('');
+
+  const { meal } = useParams();
+
+  const loadExploreData = useCallback(async () => {
+    const response = await getRecipes(`/explorar/${meal}`);
+    if (response) {
+      setTitlePage(response.titlePage);
+      setRandomId(response.random[0].id);
+    }
+  }, [meal]);
+
+  useEffect(() => {
+    loadExploreData();
+  }, [loadExploreData]);
+
   return (
     <div className={ styles.explorePage }>
+      {meal && <HeaderBack title={ titlePage } />}
       <div className={ styles.exploreContent }>
-        <Link to="/explorar/comidas" className="first">
-          <button
-            id={ styles.first }
-            data-testid="explore-food"
-            type="button"
-            className="primary-btn"
-          >
-            Explorar Comidas
-          </button>
-        </Link>
-        <Link to="/explorar/bebidas">
-          <button
-            type="button"
-            data-testid="explore-drinks"
-            className="primary-btn"
-          >
-            Explorar Bebidas
-          </button>
-        </Link>
+        <ExploreButtons title={ meal } randomRecipe={ randomId } />
       </div>
       <Footer />
     </div>
