@@ -17,7 +17,6 @@ describe('[82 - 87] Testing Profile Screen', () => {
         <App />
       </Router>,
     );
-    console.log(screen.getByTestId('profile-email'));
     expect(screen.getByTestId('profile-email')).toBeInTheDocument();
     expect(screen.getByTestId(PROFILE_DONE_BTN)).toBeInTheDocument();
     expect(screen.getByTestId('profile-favorite-btn')).toBeInTheDocument();
