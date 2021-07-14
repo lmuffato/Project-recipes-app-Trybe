@@ -29,6 +29,10 @@ img:hover {
     width: 100%;
 }
 
+.cards ul li {
+    margin-left: 10px;
+}
+
 .cards {
     display: flex;
     flex-direction: row;
@@ -45,8 +49,9 @@ img:hover {
 }
 
 .recipe-card {
-    background-color: cadetblue;
-    width: 30%;
+    margin: 15px 6px;
+    background-color: gray;
+    width: 29%;
     align-items: center;
     display: flex;
     justify-content: center;

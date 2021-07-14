@@ -1,10 +1,10 @@
 .category-button {
-  border: 1px solid black;
+  background-color: gray;
   border-radius: 8px;
   display: flex;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: space-evenly;
   margin-top: 15px;
-  width: 80%;
+  width: 90%;
 }

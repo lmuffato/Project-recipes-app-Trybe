@@ -15,9 +15,10 @@ form {
 }
 
 .header-searchbar-container {
-  border: 1px solid black;
+  background-color: gray;
   border-radius: 8px;
   display: flex;
   justify-content: center;
   min-height: 20vh;
+  width: 90%;
 }
