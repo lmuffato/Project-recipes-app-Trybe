@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import '../styles/RecomendacoesCard.css';
 
 function RecomendacoesCard({ props, type, index }) {
   const renderRecipeByType = () => {

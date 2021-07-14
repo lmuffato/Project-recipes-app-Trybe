@@ -3,8 +3,6 @@ import { array } from 'prop-types';
 import ContextComidas from '../provider/ContextComida';
 import ContextBebidas from '../provider/ContextBebida';
 
-import '../styles/custom.scss';
-
 function Categorias({ param }) {
   const { setTexto: setComidas } = useContext(ContextComidas);
   const { setTexto: setBebidas } = useContext(ContextBebidas);
