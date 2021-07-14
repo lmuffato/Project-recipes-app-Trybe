@@ -1,0 +1,20 @@
+/* Estilização fornecida por Vinicius Rodrigues */
+.recomendation-image {
+  width: 100vw;
+}
+
+.recipes {
+  display: flex;
+  max-width: 100%;
+  overflow-x: scroll;
+}
+
+.recomendation-card img {
+  max-height: auto;
+  max-width: 200px;
+}
+
+.start-recipe {
+  bottom: 0;
+  position: fixed;
+}

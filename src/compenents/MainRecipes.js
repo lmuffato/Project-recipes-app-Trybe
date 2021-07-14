@@ -8,6 +8,7 @@ import FilterButtons from './FilterButtons';
 import SearchBar from './SearchBar';
 import '../App.css';
 import '../styles/MainRecipes.css';
+import Loading from './Loading';
 
 function MainRecipes() {
   const [renderRecipes, setRenderRecipes] = useState([]);
@@ -24,26 +25,30 @@ function MainRecipes() {
 
   console.log(mealsAndDrinkByIngredients);
 
+  if (renderRecipes) {
+    return (
+      <main data-testid="main-recipes" className="main">
+        { searchBtn ? <SearchBar /> : <FilterButtons /> }
+        <section className="recipes-container">
+          { type === 'meal' ? renderRecipes.map((recipe, index) => (
+            <MealCards
+              data={ recipe }
+              index={ index }
+              key={ recipe.idMeal }
+            />
+          )) : renderRecipes.map((recipe, index) => (
+            <DrinkCards
+              data={ recipe }
+              index={ index }
+              key={ recipe.idDrink }
+            />
+          ))}
+        </section>
+      </main>
+    );
+  }
   return (
-    <main data-testid="main-recipes" className="main">
-      { searchBtn ? <SearchBar /> : <FilterButtons /> }
-      <section className="recipes-container">
-        { type === 'meal' ? renderRecipes.map((recipe, index) => (
-          <MealCards
-            data={ recipe }
-            index={ index }
-            key={ recipe.idMeal }
-            // data-testid={ `${index}-ingredient-card` }
-          />
-        )) : renderRecipes.map((recipe, index) => (
-          <DrinkCards
-            data={ recipe }
-            index={ index }
-            key={ recipe.idDrink }
-          />
-        ))}
-      </section>
-    </main>
+    <Loading />
   );
 }
 
