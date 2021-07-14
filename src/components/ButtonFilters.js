@@ -26,7 +26,14 @@ export default function ButtonFilters({ categories, functionChangeFilter,
 
   return (
     <Container>
-      <Buttons type="button" onClick={ changeFilters }>All</Buttons>
+      <button
+        type="button"
+        onClick={ changeFilters }
+        data-testid="All-category-filter"
+        id="all-btn"
+      >
+        All
+      </button>
       {filtersButtons.map((category, index) => (
         <Buttons
           type="button"
@@ -52,6 +59,18 @@ ButtonFilters.propTypes = {
 const Container = styled.div`display: flex;
   flex-flow: row wrap;
   justify-content: center;
+
+  #all-btn {
+    background-color: rgb(214, 168, 40);
+    border: none;
+    border-radius: 6px;
+    color: inherit;
+    cursor: pointer;
+    font: inherit;
+    margin: 8px;
+    outline: inherit;
+    padding: 10px;
+  }
 `;
 
 const Buttons = styled.button` background: none;

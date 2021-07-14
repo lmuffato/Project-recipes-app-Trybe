@@ -3,8 +3,7 @@ import ProPTypes from 'prop-types';
 import styled from 'styled-components';
 import { Link, useLocation } from 'react-router-dom';
 import { propTypes } from 'react-bootstrap/esm/Image';
-import favoriteIcon from '../icons/appIcons/favoriteEnable.png';
-import checkIcon from '../icons/appIcons/checkDisabled.png';
+import CardsIcons from './CardsIcons';
 
 function Cards({ index, thumbnail, name, id, type, category }) {
   const { pathname } = useLocation();
@@ -33,10 +32,7 @@ function Cards({ index, thumbnail, name, id, type, category }) {
               { name }
             </h2>
             <h3>{ category }</h3>
-            <div>
-              <img className="fav-icon" src={ favoriteIcon } alt="Favorite Icon" />
-              <img className="check-icon" src={ checkIcon } alt="Check Icon" />
-            </div>
+            <CardsIcons />
           </div>
         </Link>
       </div>
@@ -68,8 +64,14 @@ const Container = styled.div`
     flex-flow: column nowrap;
     align-items: center;
     justify-content: flex-start;
+    transform: scale(1);
+    transition-duration: 0.5s;
   }
-
+  
+  .card-wrapper:hover {
+    transform: scale(1.1);
+  }
+  
   .card-img {
     border: 2px solid rgba(255, 255, 255, 0.94);
     box-shadow: 0px 8px 7px 2px rgba(0, 0, 0, 0.25);
@@ -78,27 +80,14 @@ const Container = styled.div`
     margin: auto;
   }
 
-  .fav-icon {
-    width: 14px;
-    height: 12px;
-    top: 147px;
-    left: 82px;
-    margin-left: 85px;
-  }
 
-  .check-icon {
-    width: 14px;
-    height: 12px;
-    top: 127px;
-    left: 82px;
-  }
 
   h2 {
     font-family: Montserrat;
     font-style: normal;
     font-weight: bold;
     font-size: 14px;
-    line-height: 17px;
+    line-height: 15px;
     text-align: center;
     color: #000000;
     margin-top: 5px;
