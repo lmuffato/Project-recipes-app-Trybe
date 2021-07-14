@@ -19,7 +19,6 @@ const Ingredients = ({ recipe }) => {
                 data-testid={ `${index}-ingredient-name-and-measure` }
                 key={ index }
                 className="list-group-item"
-                style={ { padding: '3px 0 3px 25px', marginTop: '10px' } }
               >
                 {`${ingredient[0]} - ${ingredient[1]}`}
               </li>))}
