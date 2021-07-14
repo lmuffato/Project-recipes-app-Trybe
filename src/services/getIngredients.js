@@ -7,7 +7,7 @@ const getFoodIngredientsImgs = async (ingredients) => {
     });
   });
   return toReturn;
-}
+};
 
 const getDrinkIngredientsImgs = async (ingredients) => {
   const toReturn = ingredients.map((ingredient) => {
@@ -18,7 +18,7 @@ const getDrinkIngredientsImgs = async (ingredients) => {
     });
   });
   return toReturn;
-}
+};
 
 export const getDrinkIngredients = async () => {
   const endPoint = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list';
@@ -27,7 +27,7 @@ export const getDrinkIngredients = async () => {
   const { drinks } = data;
   const toReturn = getDrinkIngredientsImgs(drinks);
   return toReturn;
-}
+};
 
 export const getFoodIngredients = async () => {
   const endPoint = 'https://www.themealdb.com/api/json/v1/1/list.php?i=list';
@@ -36,4 +36,4 @@ export const getFoodIngredients = async () => {
   const { meals } = data;
   const toReturn = getFoodIngredientsImgs(meals);
   return toReturn;
-}
+};

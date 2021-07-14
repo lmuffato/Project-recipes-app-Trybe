@@ -1,4 +1,5 @@
 import React, { useContext, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import Header from '../../components/Header';
 import BottomMenu from '../../components/bottomMenu';
 import RecipesList from '../../components/RecipesList';
@@ -11,20 +12,21 @@ import '../../App.css';
 export default function Foods() {
   const { mealsList, setMealsList,
     isLoading, setLoading, catList, setCatList, setCategory,
-    ingredFromExplore, fromExplore, setFromExplore,
   } = useContext(Context);
+
+  const location = useLocation();
 
   useEffect(() => {
     const reciveMeals = async () => {
+      const { state: { name, setIngred } } = location;
       setLoading(true);
-      const data = fromExplore ? await getMealsByIngredient(ingredFromExplore)
+      const data = setIngred ? await getMealsByIngredient(name)
         : await getMealsDefault();
       const categoList = await getMealsCat();
       setCategory('All');
       setMealsList([...data]);
       setCatList([...categoList]);
       setLoading(false);
-      setFromExplore(false);
     };
 
     reciveMeals();

@@ -4,15 +4,7 @@ import { Link } from 'react-router-dom';
 import Context from '../context/Context';
 
 function IngredientList({ data, path }) {
-  const {
-    category, filtredList, setIngredFromExplore, setFromExplore
-  } = useContext(Context);
-
-  const passInfoFilter = (value) => {
-    setIngredFromExplore(value);
-    setFromExplore(true);
-    console.log(value);
-  }
+  const { category, filtredList } = useContext(Context);
 
   const renderCards = () => {
     const magicNum = 12;
@@ -24,10 +16,18 @@ function IngredientList({ data, path }) {
         <li
           key={ index }
           data-testid={ `${index}-ingredient-card` }
-          onClick={ () => passInfoFilter(name) }
         >
-          <Link to={ { pathname: `/${path}` } }>
-            <div className="card">
+          <Link
+            to={ {
+              pathname: `/${path}`,
+              state: {
+                name,
+                setIngred: true,
+              } } }
+          >
+            <div
+              className="card"
+            >
               <img
                 src={ `${imgSrc}` }
                 alt={ `${name} thumb` }
