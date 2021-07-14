@@ -1,19 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import Share from '../images/shareIcon.svg';
-
-const copy = require('clipboard-copy');
+import ShareButton from './ShareButton';
 
 function CardDrinkDoneFav({ recepie }, index) {
   const { id, name, image, doneDate, alcoholicOrNot } = recepie;
 
-  function copyLink() {
-    const linkToCopy = `/bebidas/${id}`;
-    copy(linkToCopy);
-    global.alert('Link copiado!');
-  }
-  // talvez o link deva ser apenas na imagem e no nome
   return (
     <div>
       <Link to={ `/bebidas/${id}` }>
@@ -27,16 +19,9 @@ function CardDrinkDoneFav({ recepie }, index) {
       </Link>
       <p>{alcoholicOrNot}</p>
       <p data-testid={ `${index}-horizontal-done-date` }>{ doneDate }</p>
-      <button
-        type="button"
-        onClick={ () => copyLink() }
-      >
-        <img
-          data-testid={ `${index}-horizontal-share-btn` }
-          src={ Share }
-          alt="share"
-        />
-      </button>
+      <ShareButton
+        idRecipe={ `bebidas/${id}` }
+      />
     </div>
   );
 }

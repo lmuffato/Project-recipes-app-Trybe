@@ -1,19 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import Share from '../images/shareIcon.svg';
-
-const copy = require('clipboard-copy');
+import ShareButton from './ShareButton';
 
 function CardMealDoneFav({ recepie }, index) {
   console.log(recepie);
   const { id, name, image, category, area, doneDate, tags } = recepie;
-
-  function copyLink() {
-    const linkToCopy = `/comidas/${id}`;
-    copy(linkToCopy);
-    global.alert('Link copiado!');
-  }
 
   return (
     <div>
@@ -26,7 +18,7 @@ function CardMealDoneFav({ recepie }, index) {
         />
         <p data-testid={ `${index}-horizontal-name` }>{ name }</p>
       </Link>
-      <p data-testid={ `${index}-horizontal-top-text>` }>{ category }</p>
+      <p data-testid={ `${index}-horizontal-top-text` }>{ category }</p>
       <p>{ area }</p>
       <p data-testid={ `${index}-horizontal-done-date` }>{ doneDate }</p>
       <p
@@ -34,16 +26,9 @@ function CardMealDoneFav({ recepie }, index) {
       >
         { `${tags[0]}, ${tags[1]}` }
       </p>
-      <button
-        type="button"
-        onClick={ () => copyLink() }
-      >
-        <img
-          data-testid={ `${index}-horizontal-share-btn` }
-          src={ Share }
-          alt="share"
-        />
-      </button>
+      <ShareButton
+        idRecipe={ `comidas/${id}` }
+      />
     </div>
   );
 }
