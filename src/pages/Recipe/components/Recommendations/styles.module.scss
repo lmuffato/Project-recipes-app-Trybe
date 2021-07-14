@@ -1,0 +1,6 @@
+.content {
+  display: grid;
+  gap: 35px;
+  grid-template-columns: repeat(6, 132px);
+  overflow-x: auto;
+}

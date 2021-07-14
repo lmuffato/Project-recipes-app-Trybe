@@ -2,21 +2,25 @@ import React, { useEffect, useState } from 'react';
 import { BiHeart, BiShareAlt } from 'react-icons/bi';
 
 import { useHistory, useParams } from 'react-router-dom';
-import RecipeSimpleCard
-  from '../../components/RecipesCardsGrid/components/RecipeSimpleCard';
+
 import HeaderBack from '../../components/HeaderBack';
+import Ingredient from './components/Ingredient';
+import Video from './components/Video';
+import Recommendations from './components/Recommendations';
 import { getRecipe, getRecommendations } from '../../services/recipesData';
 
 import styles from './styles.module.scss';
 
 function Recipe() {
-  const { location: { pathname } } = useHistory();
+  const { location: { pathname }, push: historyPush } = useHistory();
   const { id } = useParams();
   const [recipe, setRecipe] = useState({});
   const [videoId, setVideoId] = useState('');
   const [recipeCookMode, setRecipeCookMode] = useState(false);
   const [recommendations, setRecommendations] = useState([]);
+  const [finishedSteps, setFinishedSteps] = useState({});
   const alcoholicRecipe = recipe.strAlcoholic && recipe.strAlcoholic === 'Alcoholic';
+  const [recipeWasFinished, setRecipeWasFinished] = useState(false);
 
   useEffect(() => {
     async function loadRecipe() {
@@ -24,39 +28,14 @@ function Recipe() {
       const result = await getRecipe(path, id);
       setVideoId(result.strYoutube && result.strYoutube.split('=')[1]);
 
-      const keys = Object.keys(result);
-      const ingredientsName = keys.filter((key) => key.includes('strIngredient'));
-      const ingredientsMeasure = keys.filter((key) => key.includes('strMeasure'));
+      const stepsToFinish = {};
 
-      const ingredientsFromApi = ingredientsName.map((ingredient) => {
-        const foundIngredient = result[ingredient];
-        return foundIngredient;
+      result.ingredients.forEach((ingredient) => {
+        stepsToFinish[ingredient] = false;
       });
 
-      const measuresFromApi = ingredientsMeasure.map((measure) => {
-        const foundMeasure = result[measure];
-        return foundMeasure;
-      });
-
-      let ingredients = {};
-
-      ingredientsFromApi.forEach((ingredient, index) => {
-        ingredients = { ...ingredients, [ingredient]: measuresFromApi[index] };
-      });
-
-      ingredients = Object.entries(ingredients).reduce(
-        (allIngredients, [ingredient, measure]) => {
-          if (ingredient && measure) {
-            return [
-              ...allIngredients,
-              `${ingredient} - ${measure}`,
-            ];
-          }
-
-          return allIngredients;
-        }, [],
-      );
-      setRecipe({ ...result, ingredients });
+      setRecipe(result);
+      setFinishedSteps(stepsToFinish);
     }
 
     loadRecipe();
@@ -72,6 +51,21 @@ function Recipe() {
     loadRecommendations();
   }, [pathname]);
 
+  function validateRecipeProgress({ target: { id: ingredientName, checked } }) {
+    const temporaryObject = {
+      ...finishedSteps,
+      [ingredientName]: checked,
+    };
+    const notFinished = Object.values(temporaryObject).filter((finished) => !finished);
+    setRecipeWasFinished(notFinished.length === 0);
+    setFinishedSteps({ ...finishedSteps, [ingredientName]: checked });
+  }
+
+  function startRecipe() {
+    historyPush(`${pathname}/in-progress`);
+    setRecipeCookMode(true);
+  }
+
   return (
     <div className={ styles.recipe }>
       <HeaderBack title={ recipe.name || 'Recipe' } />
@@ -83,14 +77,16 @@ function Recipe() {
         </div>
       </div>
       <main>
-        <button
-          type="button"
-          className={ styles.startRecipe }
-          onClick={ () => setRecipeCookMode(true) }
-          data-testid="start-recipe-btn"
-        >
-          Iniciar receita
-        </button>
+        { !recipeWasFinished && (
+          <button
+            type="button"
+            className={ styles.startRecipe }
+            onClick={ startRecipe }
+            data-testid={ !recipeWasFinished && 'start-recipe-btn' }
+          >
+            { recipeCookMode ? 'Continuar receita' : 'Iniciar receita' }
+          </button>
+        ) }
         <h1 data-testid="recipe-title">{ recipe.name }</h1>
         <h3 data-testid="recipe-category">
           { alcoholicRecipe ? 'Alcoholic' : recipe.strCategory }
@@ -98,29 +94,15 @@ function Recipe() {
         <section>
           <h2>Ingredients</h2>
           <ul className={ styles.listOfIngredients }>
-            { recipe.ingredients && recipe.ingredients.map((ingredient, index) => {
-              if (recipeCookMode) {
-                return (
-                  <li className={ styles.listOnProgress } key={ ingredient }>
-                    <label htmlFor={ ingredient }>
-                      <input type="checkbox" name="ingredient" id={ ingredient } />
-                      <span>
-                        { ingredient }
-                      </span>
-                    </label>
-                  </li>
-                );
-              }
-
-              return (
-                <li
-                  key={ ingredient }
-                  data-testid={ `${index}-ingredient-name-and-measure` }
-                >
-                  { ingredient }
-                </li>
-              );
-            })}
+            { recipe.ingredients && recipe.ingredients.map((ingredient, index) => (
+              <Ingredient
+                key={ ingredient }
+                data={ ingredient }
+                index={ index }
+                recipeCookMode={ recipeCookMode }
+                finishStep={ validateRecipeProgress }
+              />
+            ))}
           </ul>
         </section>
         <section>
@@ -128,40 +110,17 @@ function Recipe() {
           <p data-testid="instructions">{ recipe.strInstructions }</p>
         </section>
         <section>
-          <h2>Video</h2>
-          <iframe
-            src={ `https://www.youtube.com/embed/${videoId}` }
-            title={ `Instructions of ${recipe.name}` }
-            frameBorder="0"
-            allow="accelerometer;
-            autoplay;
-            clipboard-write;
-            encrypted-media;
-            gyroscope;
-            picture-in-picture"
-            allowFullScreen
-            data-testid="video"
-          />
+          { videoId && (
+            <>
+              <h2>Video</h2>
+              <Video videoId={ videoId } recipeTitle={ recipe.name } />
+            </>
+          ) }
         </section>
         <section>
           <h2>Recomendadas</h2>
           <div className={ styles.recommendationsCarousel }>
-            <div className={ styles.content }>
-              {recommendations.map((recommendation, index) => {
-                const alcoholic = recommendation.strAlcoholic;
-                return (
-                  <RecipeSimpleCard
-                    key={ recommendation.id }
-                    recipe={ recommendation }
-                    index={ index }
-                    alcoholic={
-                      alcoholic && alcoholic === 'Alcoholic'
-                    }
-                    recommendationCard
-                  />
-                );
-              })}
-            </div>
+            <Recommendations data={ recommendations } />
           </div>
         </section>
       </main>
