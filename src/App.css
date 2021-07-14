@@ -1,8 +1,10 @@
 * {
   font-size: 0.96em;
+  margin: 0;
+  padding: 0;
 }
 
-.progressTitle {
+/* .progressTitle {
   font-size: 1.3em;
 }
 
@@ -65,4 +67,4 @@
   height: 50px;
   position: fixed;
   width: 100%;
-}
+} */
