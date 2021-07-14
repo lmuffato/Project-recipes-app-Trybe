@@ -161,7 +161,7 @@ function ReceitaComidaDetalhe({ props }) {
               if (index <= cardLength) {
                 return (
                   <RecomendacoesCard
-                    key={ food.idMeal }
+                    key={ index }
                     props={ food }
                     type="meal"
                     index={ index }
