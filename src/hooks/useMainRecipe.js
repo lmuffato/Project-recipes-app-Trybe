@@ -7,7 +7,14 @@ import useRecipe from './useRecipe';
 const maxList = 4;
 
 export default function useMainRecipe(type) {
-  const { recipe, setRecipe, setSearchedByCategory, loading } = useRecipe();
+  const {
+    recipe,
+    setRecipe,
+    setSearchedByCategory,
+    setLoading,
+    renderLoading,
+    loading,
+  } = useRecipe();
   const { foods, site, foodUpperCase, idFood } = getMealsOrDrinks(type);
   const [category, setCategory] = useState('');
   const [toggleCategory, setToggleCategory] = useState(false);
@@ -15,6 +22,7 @@ export default function useMainRecipe(type) {
   const [filter, setFilter] = useState('All');
 
   const fetchAllCategories = async () => {
+    setLoading(true);
     const responseRecipe = await fetchName(site);
     const responseList = await fetchList(site);
 
@@ -30,6 +38,7 @@ export default function useMainRecipe(type) {
       [foods]: responseRecipe[foods],
       list: { ...recipe.list, [foods]: filteredList },
     });
+    setLoading(false);
   };
 
   const renderCards = () => {
@@ -82,10 +91,12 @@ export default function useMainRecipe(type) {
 
       if (category) {
         const fetchUpdateRecipe = async () => {
+          setLoading(true);
           setSearchedByCategory(true);
           const updateRecipeByCategory = await fetchByCategory(site, category);
           setRecipe({ ...recipe, [foods]: updateRecipeByCategory[foods] });
           setHasBeenChosenCategory(false);
+          setLoading(false);
         };
 
         fetchUpdateRecipe();
@@ -104,5 +115,6 @@ export default function useMainRecipe(type) {
     handleClickCategory,
     loading,
     filter,
+    renderLoading,
   };
 }

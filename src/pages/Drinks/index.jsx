@@ -11,7 +11,13 @@ import {
 import ContainerRecipeCards from '../../styles/shared/ContainerRecipeCards';
 
 export default function Drinks() {
-  const { renderCards, handleClickCategory, recipe, filter } = useMainRecipe('drink');
+  const {
+    renderCards,
+    handleClickCategory,
+    renderLoading,
+    recipe,
+    filter,
+  } = useMainRecipe('drink');
   const { drinks } = recipe.list;
 
   return (
@@ -46,7 +52,9 @@ export default function Drinks() {
         <span>{filter}</span>
       </FilterContainer>
 
-      <ContainerRecipeCards>{renderCards()}</ContainerRecipeCards>
+      {renderLoading(
+        <ContainerRecipeCards>{renderCards()}</ContainerRecipeCards>,
+      )}
 
       <Footer drink />
     </MainContainerDetails>

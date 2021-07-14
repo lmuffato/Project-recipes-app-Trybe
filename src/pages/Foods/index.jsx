@@ -15,12 +15,11 @@ export default function Foods() {
     renderCards,
     handleClickCategory,
     recipe,
-    loading,
     filter,
+    renderLoading,
   } = useMainRecipe('meal');
   const { meals } = recipe.list;
 
-  if (loading) return <h1>Loading...</h1>;
   return (
     <MainContainerDetails>
       <Header title="Comidas" searchIcon />
@@ -53,7 +52,10 @@ export default function Foods() {
         <span>{filter}</span>
       </FilterContainer>
 
-      <ContainerRecipeCards>{renderCards()}</ContainerRecipeCards>
+      {renderLoading(
+        <ContainerRecipeCards>{renderCards()}</ContainerRecipeCards>,
+      )}
+
       <Footer food />
     </MainContainerDetails>
   );
