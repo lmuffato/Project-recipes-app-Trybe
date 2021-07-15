@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
-import shareIcon from '../images/shareIcon.svg';
+import { useParams } from 'react-router-dom';
+import ShareBtn from './componentsDetails/ShareBtn';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import { drinkById } from '../services/apiRequests';
 import FoodsRecomends from './componentsDetails/FoodsRecomends';
@@ -58,15 +58,7 @@ export default function RecipeCardDetailDrink() {
       <h4>Instructions: </h4>
       <h2 data-testid="instructions">{ drinkDetails.strInstructions }</h2>
       <FoodsRecomends />
-
-//       <BtnInitiateRecipe id={ idDrink } type="bebida" />
-
-      <Link to={ `/bebidas/${idDrink}/in-progress` }>
-        <button type="button" data-testid="start-recipe-btn" className="playRecipe">
-          Iniciar Receita
-        </button>
-      </Link>
-
+      <BtnInitiateRecipe id={ idDrink } type="bebida" />
     </div>
   );
 }
