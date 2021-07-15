@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import AppContext from '../../contexts/app/AppContext';
@@ -11,8 +11,43 @@ export default function Ingredients(props) {
     ingredientsInProgress,
     setIngredientsInProgress,
   } = useContext(AppContext);
+  const {
+    item, // Retorna um array contendo o objeto da receita
+    id, // Retorna o id da receita
+    type, // Retorna "drink" ou "food", dependendo do tipo da receita.
+  } = props;
 
-  const { item } = props;
+  // Objeto que será salvo no localstorage
+  const [recipeInprogress, setRecipeInprogress] = useState({});
+
+  const updateRecipeInprogress = () => {
+    const objeto = {
+      [id]: ingredientsInProgress,
+    };
+    // console.log(objeto[id]); // acessa os ingredientes salvos
+  };
+  // updateRecipeInprogress();
+
+  // const saveRecipeInLocalStorage = () => {
+  //   const actualRecipe = { [id]: ingredientsInProgress };
+  //   // const userInfoJson = JSON.stringify(userKeyLocalStore);
+  //   localStorage.setItem('user', userInfoJson);
+  // };
+
+  const createTokenRecipesInLocalStorage = () => {
+    const recipesInProgress = { cocktails: {}, meals: {} };
+    const token = 'inProgressRecipes';
+    const recipesInProgressJson = JSON.stringify(recipesInProgress);
+    localStorage.setItem(token, recipesInProgressJson);
+  };
+
+  createTokenRecipesInLocalStorage();
+
+  const headLocalStorage = () => {
+    
+  };
+
+
 
   useEffect(() => {
     if (item[0] !== undefined) {

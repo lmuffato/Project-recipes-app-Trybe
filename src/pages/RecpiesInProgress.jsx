@@ -66,7 +66,7 @@ export default function RecpiesInProgress(props) {
         <ShareButton item={ tags } />
         <FavoriteButton item={ tags } />
         <TextSubtitle item={ tags } />
-        <Ingredients item={ tags } />
+        <Ingredients item={ tags } id={ id } type={ screenActive } />
         <TextInstructions item={ tags } />
         {/* {
           screenActive === 'food' && <VideoRecipe
@@ -75,8 +75,8 @@ export default function RecpiesInProgress(props) {
         } */}
         {/* <RecommendedRecipes /> */}
         { !doneRecipe.length ? <FinishRecipeButton item={ tags } /> : null }
-        {console.log('RecpiesInProgress:')}
-        {console.log(tags)}
+        {/* {console.log('RecpiesInProgress:')} */}
+        {/* {console.log(tags)} */}
       </Content>
     </Container>
   );
