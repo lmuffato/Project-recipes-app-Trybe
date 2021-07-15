@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { useHistory, Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import Wrapper from '../styles/profile';
 import Header from '../components/Header/Header';
 import Button from '../components/Generics/Button';
 import Footer from '../components/Footer/Footer';
 import logoIcon from '../images/savory-6.svg';
+import letmeEatIcon from '../images/icon-letmeEatApp.svg';
 
 function Profile() {
   const history = useHistory();
@@ -14,6 +15,16 @@ function Profile() {
     ev.preventDefault();
     localStorage.clear(); // por ora, coloquei localStorage.clear, mas devemos avaliar se é mesmo a melhor opção
     history.push('/');
+  };
+
+  const handleRedirectToFavRecipes = (ev) => {
+    ev.preventDefault();
+    history.push('/receitas-favoritas');
+  };
+
+  const handleRedirectToDoneRecipes = (ev) => {
+    ev.preventDefault();
+    history.push('/receitas-feitas');
   };
 
   useEffect(() => {
@@ -32,26 +43,24 @@ function Profile() {
   }, []);
 
   return (
-    <div>
+    <>
       <Header heading="Perfil" logoSrc={ logoIcon } />
       <Wrapper>
-        <strong data-testid="profile-email">{ email || 'email@teste.com' }</strong>
-        <Link to="/receitas-feitas">
-          <button type="button" data-testid="profile-done-btn">
-            Receitas Feitas
-          </button>
-        </Link>
-        <Link to="/receitas-favoritas">
-          <button type="button" data-testid="profile-favorite-btn">
-            Receitas Favoritas
-          </button>
-        </Link>
+        <strong data-testid="profile-email">{ email }</strong>
+        <Button data-testid="profile-done-btn" onClick={ handleRedirectToDoneRecipes }>
+          Receitas Feitas
+          <span><img src={ letmeEatIcon } alt="logo letmeEat" /></span>
+        </Button>
+        <Button data-testid="profile-favorite-btn" onClick={ handleRedirectToFavRecipes }>
+          Receitas Favoritas
+          <span><img src={ letmeEatIcon } alt="logo letmeEat" /></span>
+        </Button>
         <Button data-testid="profile-logout-btn" onClick={ handleRedirecToLogin }>
           Sair
         </Button>
       </Wrapper>
       <Footer />
-    </div>
+    </>
   );
 }
 
