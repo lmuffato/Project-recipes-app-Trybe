@@ -51,7 +51,7 @@ function FavoriteRecepies() {
         </Button>
       </Filters>
       {arrayRecipes ? arrayRecipes.map((recipe, index) => (
-        <div key={ index }>
+        <Container key={ index }>
           <CardFavorite
             index={ index }
             image={ recipe.image }
@@ -64,22 +64,24 @@ function FavoriteRecepies() {
             tags={ recipe.tags }
             doneDate={ recipe.doneDate }
           />
-        </div>)) : ''}
+        </Container>)) : ''}
     </div>
   );
 }
 
 export default FavoriteRecepies;
 
-const Filters = styled.div`
-  width: 100%;
+const Filters = styled.div` display: flex;
   height: auto;
-  padding: 20px;
-  display: flex;
   justify-content: space-around;
+  padding: 20px;
+  width: 100%;
 `;
 
-const Button = styled.button`
+const Button = styled.button` height: 24px;
   width: 80px;
-  height: 24px;
+`;
+
+const Container = styled.div` display: flex;
+  justify-content: center;
 `;

@@ -30,7 +30,7 @@ export default function ButtonFilters({ categories, functionChangeFilter,
         type="button"
         onClick={ changeFilters }
         data-testid="All-category-filter"
-        id="all-btn"
+        className="all-btn"
       >
         All
       </button>
@@ -60,7 +60,7 @@ const Container = styled.div`display: flex;
   flex-flow: row wrap;
   justify-content: center;
 
-  #all-btn {
+  .all-btn {
     background-color: rgb(214, 168, 40);
     border: none;
     border-radius: 6px;
