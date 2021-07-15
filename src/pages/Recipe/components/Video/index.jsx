@@ -21,7 +21,11 @@ function Video({ videoId, recipeTitle }) {
 
 Video.propTypes = {
   videoId: PropTypes.string.isRequired,
-  recipeTitle: PropTypes.string.isRequired,
+  recipeTitle: PropTypes.string,
+};
+
+Video.defaultProps = {
+  recipeTitle: 'Recipe',
 };
 
 export default Video;
