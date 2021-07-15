@@ -4,7 +4,8 @@ const HeaderContainer = styled.header`align-items: space-around;
 
   /* background: #fff5f0; */
   background: #fdfefb;
-  border-bottom: 1px solid #e2e2e2;
+
+  /* border-bottom: 1px solid #e2e2e2; */
   display: flex;
   flex-direction: row;
   justify-content: space-around;

@@ -8,9 +8,10 @@ const SearchBarContainer = styled.form`align-items: center;
   overflow: hidden;
 
   > input {
-    background: lightgrey;
+    background: #ebf4f2;
     border: 0;
     border-radius: 8px;
+    font-family: Poppins , sans-serif;
     height: 50px;
     margin-bottom: 20px;
     max-width: 350px;
@@ -19,12 +20,18 @@ const SearchBarContainer = styled.form`align-items: center;
     width: 90%;
 
     > :-webkit-input-placeholder {
+      color: #289ea8;
       text-align: center;
+    }
+
+    ::placeholder {
+      color: #289ea8;
     }
   }
 
   .form-control {
     align-items: center;
+    color: #289ea8;
     display: flex;
     justify-content: space-around;
     margin: 0 auto;
@@ -67,18 +74,26 @@ const SearchBarContainer = styled.form`align-items: center;
 
   button {
     align-items: center;
+    background: #289ea8;
     border: 0;
     border-radius: 8px;
+    color: white;
     cursor: pointer;
     display: flex;
-    font-weight: 600;
+    font-family: Poppins , sans-serif;
+    font-weight: 500;
     gap: 20px;
     height: 40px;
     justify-content: center;
     margin-top: auto;
     max-width: 200px;
-    min-width: 180px;
+    min-width: 150px;
     padding: 0 32px;
+
+  }
+
+  .reset-btn {
+    background: #c10644;
   }
 
   @media ( max-width : 600px ) {
@@ -121,3 +136,5 @@ export default SearchBarContainer;
 
 // Source - how to align a placeholder:
 // https://www.w3docs.com/snippets/css/how-to-align-placeholder-text-of-input-field-in-html.html
+// Source - how to edit placeholder text color:
+// https://www.w3schools.com/howto/howto_css_placeholder.asp
