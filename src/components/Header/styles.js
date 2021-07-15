@@ -5,7 +5,10 @@ const HeaderContainer = styled.header`align-items: space-around;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  max-width: 1420px;
+
+  /* max-width: 1420px; */
+  margin: 0 auto;
+  max-width: 990px;
   padding: 20px;
 
   button, .container > button {

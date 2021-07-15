@@ -3,7 +3,7 @@ import styled from 'styled-components';
 const CategoriesListContainer = styled.div`align-items: center;
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: 0.5rem;
   justify-content: space-evenly;
   margin: 0 auto;
   max-width: 600px;
@@ -22,9 +22,10 @@ const CategoriesListContainer = styled.div`align-items: center;
     height: 2.5rem;
     justify-content: center;
     margin-top: auto;
-    max-width: 220px;
-    min-width: 100px;
+    max-width: 300px;
+    min-width: 125px;
     padding: 0 32px;
+    text-transform: lowercase;
 
     & + button {
       margin-top: 0.5rem;
