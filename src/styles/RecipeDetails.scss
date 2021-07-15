@@ -12,6 +12,9 @@
     color: white;
     font-size: 4em;
     padding-top: 0.5em;
+    @include for-phone-only{
+      font-size: 2.5em;
+    }
   }
 
   .category {
@@ -19,21 +22,44 @@
     color: white;
     font-size: 3em;
     padding-bottom: 0.5em;
+    @include for-phone-only{
+      font-size: 1.8em;
+      padding-bottom: 0;
+    }
   }
 
   .h3 {
     color: white;
     font-size: 2.5em;
     padding: 1em 0 0.5em 2.2em;
+    @include for-phone-only{
+      font-size: 1.8em;
+      padding: 1em 0 0 1em;
+    }
   }
 
   .instructions {
-    padding: 3em;
+    padding: 1em;
+    @include for-phone-only{
+      border-bottom: 1px solid black;
+      font-size: 0.8em;
+      line-height: 0.5em;
+      padding: 0;
+      padding-top: 1em;
+      text-align: justify;
+      width: 100%;
+    }
   }
 
   & iframe {
     float: left;
     margin-left: 2em;
+    @include for-phone-only{
+      margin-bottom: 2em;
+      margin-left: 0;
+      padding: 1em;
+      width: 100%;
+    }
   }
 
   & p {
@@ -47,6 +73,9 @@
 
   & div {
     display: flex;
+    @include for-phone-only{
+      flex-direction: column;
+    }
   }
 
   & .image {
@@ -56,7 +85,11 @@
     flex-direction: column;
     padding: 2em;
     width: 50%;
-
+    @include for-phone-only{
+      border-bottom: 1px solid black;
+      padding: 0;
+      width: 100%;
+    }
 
     & img {
       align-self: center;
@@ -72,6 +105,10 @@
     & div {
       align-self: flex-start;
       margin: 0.6em 0 0 3.8em;
+      @include for-phone-only{
+        flex-direction: row;
+        margin: 0.3em 0 0 2em;
+      }
     }
 
     & input {
@@ -89,10 +126,19 @@
     border-bottom: 1px solid white;
     padding-top: 1.8em;
     width: 50%;
+    @include for-phone-only{
+      border-bottom: 1px solid black;
+      padding: 2em;
+      width: 100%;
+    }
 
     & h3 {
       color: white;
       font-size: 3em;
+      @include for-phone-only{
+        font-size: 1.8em;
+        padding-bottom: 0;
+      }
     }
 
     & ul {
@@ -103,6 +149,10 @@
       margin-left: 1.8em;
       margin-top: 1.5em;
       padding-left: 0;
+      @include for-phone-only{
+        flex-flow: column;
+        height: auto;
+      }
     }
 
     & li {
