@@ -1,11 +1,18 @@
 import React, { useContext } from 'react';
 import { UserContext } from '../context/UserContext';
 import { LoginContainer, Container } from '../styles/login';
+import logoIcon from '../images/savory-6.svg';
+// import LogoLogin from '../components/LogoLogin/LogoLogin';
 
 function Login() {
   const { setEmail, setPassword, disabledData, handleClick } = useContext(UserContext);
   return (
     <LoginContainer>
+      <div>
+        <object className="logo-letmeeat" type="image/svg+xml" data={ logoIcon }>
+          Logo letmeEat
+        </object>
+      </div>
       <Container>
         <label htmlFor="email">
           Email

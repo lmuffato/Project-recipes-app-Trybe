@@ -1,37 +1,39 @@
 import styled from 'styled-components';
 
-const HeaderContainer = styled.header`align-items: center;
+const HeaderContainer = styled.header`align-items: space-around;
 
   /* background: #fff5f0; */
   background: #fdfefb;
   border-bottom: 1px solid #e2e2e2;
   display: flex;
   flex-direction: row;
-  justify-content: center;
-  margin: 0 auto;
-  max-width: 1120px;
-  padding: 24px;
+  justify-content: space-around;
+
+  /* margin: 0 auto; */
+
+  /* max-height: 30vh; */
+  max-width: 1420px;
+  padding: 20px;
 
   button, .container > button {
     align-self: center;
     background: inherit;
     border: 0;
     cursor: pointer;
-    max-height: 60px;
+    max-height: 4vh;
     max-width: auto;
-    padding-right: 0.8rem;
+    padding-right: 0.7rem;
   }
 
   .title-container {
     align-items: center;
     display: flex;
-    flex-wrap: wrap;
-
-    /* flex: 2; */
+    flex-direction: column;
     justify-content: center;
-    margin: 0 auto;
-    max-height: auto;
-    max-width: 60vw;
+    line-height: 0.8;
+
+    /* max-height: 18vh; */
+    max-width: 68vw;
 
     img {
       align-self: center;
@@ -40,60 +42,69 @@ const HeaderContainer = styled.header`align-items: center;
 
     h1 {
       align-self: flex-end;
-      font-size: 1.9rem;
+      font-family: Poppins , sans-serif;
+      font-size: 1.7rem;
+      -webkit-font-smoothing: antialiased;
+      font-weight: 200;
+      margin: 0 auto;
     }
   }
 
   .container {
     align-items: center;
-    background: inherit;
     border: 0;
     display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
+    flex-wrap: nowrap;
     justify-content: space-around;
-    margin: 0 auto;
-    max-width: 30vw;
+    max-width: 18vw;
     padding: 10px;
 
     button {
+      align-self: center;
       border: 0;
       cursor: pointer;
-      max-height: 60px;
-      max-width: auto;
+      height: 60px;
+
+      img {
+        display: flex;
+        height: 100%;
+      }
 
 
       & + button {
-        margin-right: 0.4rem;
+        margin-right: 0.1rem;
       }
     }
   }
 
   @media only screen and ( max-width : 650px ) {
-    padding-left: 8px;
+    gap: 2rem;
+
+    .container {
+      display: flex;
+    }
 
     .title-container {
-      margin: 0 auto;
-      max-width: 65vw;
+
+      /* max-height: 18vh;
+      max-width: 68vw; */
       padding-bottom: 1rem;
+
+      img {
+        margin: 0 auto;
+      }
 
       h1 {
         align-self: center;
         display: flex;
-        font-size: 1.375rem;
+        font-size: 1.2rem;
         justify-self: center;
-        margin: 0 auto;
+        margin: 0 0.5rem auto;
+        text-align: center;
       }
     }
 
-    .container {
-      gap: 15px;
 
-      button {
-        height: auto;
-        width: 25px;
-      }
-    }
   }
 `;
 
@@ -102,11 +113,51 @@ export const LogoContainer = styled.div`align-items: center;
   background: inherit;
   display: flex;
   max-height: auto;
-  max-width: 18rem;
-  width: 16.5rem;
+  max-width: 70vw;
 
   img {
     width: 100%;
+  }
+
+  @media only screen and ( max-width : 650px ) {
+
+    /* padding-left: 8px; */
+    .title-container {
+      margin: 0 auto;
+      max-width: 54vw;
+      padding-bottom: 1rem;
+
+      h1 {
+        align-self: center;
+        display: flex;
+        font-size: 1.2rem;
+        justify-self: center;
+        margin: 0 auto;
+        max-width: 54.362vw;
+
+        /* max-width: 70vw; */
+
+        /* min-width: 50vw; */
+        text-align: center;
+      }
+    }
+
+  }
+
+  @media only screen and ( min-width : 1240px ) {
+
+    .title-container {
+      max-height: 30vh;
+      max-width: 60vw;
+    }
+
+    .container {
+
+      button {
+        height: 2.5rem;
+        max-height: 10vh;
+      }
+    }
   }
 
   /* input {

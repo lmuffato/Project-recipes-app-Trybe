@@ -1,30 +1,65 @@
 import styled from 'styled-components';
 
 export const LoginContainer = styled.div`align-items: center;
-  background: #0fa36b; /* provisorio, utilizando background que já vem no projeto */
+  background: #fdfefb;
   display: flex;
   flex-direction: column;
-  font-family: sans-serif;
-  font-weight: 600;
+  font-family: Poppins , sans-serif;
   height: 100vh;
   justify-content: center;
-  padding-top: 10%;
-  width: 100%;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  width: 100vw;
+
+
+  @media only screen and ( min-width : 900px ) {
+    flex-direction: row;
+    max-width: 100vw;
+  }
+
 `;
 
-export const Container = styled.div`display: flex;
+export const Container = styled.div`align-items: center;
+  display: flex;
   flex-direction: column;
   margin: 0 auto;
-  margin-top: -10px;
-  max-width: 400px;
-  padding-right: 2rem;
-  width: 70vw;
+  max-width: 1120px;
+  overflow: none;
+
+  div {
+    align-self: center;
+    background: inherit;
+    display: flex;
+    margin: 0 auto;
+    padding-bottom: 6rem;
+
+    object {
+      animation: shake 1s infinite ease;
+      width: 100%;
+    }
+
+    @keyframes shake {
+
+      0% {
+        transform: rotate(5deg);
+      }
+
+      50% {
+        transform: rotate(-5deg);
+      }
+
+      100% {
+        transform: rotate(5deg);
+      }
+    }
+  }
+
 
   label {
-    color: white;
+    color: #289ea8;
 
     input {
-      background: white;
+      background: #ebf4f2;
       border: 0;
       border-radius: 8px;
       height: 50px;
@@ -39,16 +74,19 @@ export const Container = styled.div`display: flex;
 
   button {
     align-self: center;
+    background: #289ea8;
     border: 0;
     border-radius: 8px;
-    color: black;
+    color: white;
     cursor: pointer;
-    font-size: 16px;
+    font-family: Poppins , sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
     height: 50px;
     justify-content: center;
     margin: 0 auto;
     margin-top: 16px;
-    max-width: 100px;
+    max-width: 120px;
     padding: 0 32px;
     text-align: center;
     transition: filter 0.2s;
@@ -60,6 +98,21 @@ export const Container = styled.div`display: flex;
 
     &:not( :disabled ):hover {
       filter: brightness(0.9);
+    }
+  }
+
+  @media only screen and ( min-width : 900px ) {
+    align-items: center;
+    display: inline-block;
+    justify-content: center;
+
+    div {
+      flex: 2;
+      margin: 0 auto;
+
+      .logo-letmeeat {
+        margin: 0 auto;
+      }
     }
   }
 `;
