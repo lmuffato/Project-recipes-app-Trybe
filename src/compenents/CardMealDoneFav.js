@@ -1,11 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import ShareButton from './ShareButton';
+import shareIcon from '../images/shareIcon.svg';
 
-function CardMealDoneFav({ recepie }, index) {
-  console.log(recepie);
+function CardMealDoneFav({ recepie, index }) {
   const { id, name, image, category, area, doneDate, tags } = recepie;
+
+  const [isCopy, setIsCopy] = useState(null);
+  const copyToClipboard = ({ target }) => {
+    setIsCopy(true);
+    console.log(target);
+    const { alt } = target;
+    const path = `http://localhost:3000/comidas/${alt}`;
+    navigator.clipboard.writeText(path);
+  };
 
   return (
     <div>
@@ -16,24 +24,37 @@ function CardMealDoneFav({ recepie }, index) {
           width="50px"
           alt="the food recepie"
         />
+      </Link>
+      <p data-testid={ `${index}-horizontal-top-text` }>{ `${area} - ${category}` }</p>
+      <Link to={ `/comidas/${id}` }>
         <p data-testid={ `${index}-horizontal-name` }>{ name }</p>
       </Link>
-      <p data-testid={ `${index}-horizontal-top-text` }>{ category }</p>
       <p>{ area }</p>
       <p data-testid={ `${index}-horizontal-done-date` }>{ doneDate }</p>
-      <p
-        data-testid={ `${index}-${tags}-horizontal-tag` }
-      >
-        { `${tags[0]}, ${tags[1]}` }
+      <p data-testid={ `${index}-${tags[0]}-horizontal-tag` }>
+        { tags[0] }
       </p>
-      <ShareButton
-        idRecipe={ `comidas/${id}` }
-      />
+      <p data-testid={ `${index}-${tags[1]}-horizontal-tag` }>
+        {tags[1]}
+      </p>
+      <button
+        src={ shareIcon }
+        type="button"
+        onClick={ (event) => copyToClipboard(event) }
+      >
+        <img
+          data-testid={ `${index}-horizontal-share-btn` }
+          src={ shareIcon }
+          alt={ id }
+        />
+      </button>
+      {isCopy ? <span>Link copiado!</span> : null}
     </div>
   );
 }
 
 CardMealDoneFav.propTypes = {
+  index: PropTypes.number.isRequired,
   recepie: PropTypes.shape({
     id: PropTypes.number,
     name: PropTypes.string,

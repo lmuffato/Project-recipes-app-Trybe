@@ -30,8 +30,10 @@ function DrinksRecepiesProgress() {
     console.log('chamou a função de salvar');
     const getLS = localStorage.getItem('doneRecipes');
     const desStringGetLS = JSON.parse(getLS);
+    console.log(desStringGetLS);
     const { strDrink, strDrinkThumb, strAlcoholic, strTags } = detailsRecepie;
     const date = new Date();
+
     const newDoneRecepi = {
       id: recepiID,
       type: 'bebida',
@@ -43,12 +45,13 @@ function DrinksRecepiesProgress() {
       doneDate: `${date.getDate()} - ${date.getTime()}`,
       tags: strTags,
     };
+
     if (desStringGetLS === null) {
-      const newDoneRecepiString = JSON.stringify(newDoneRecepi);
-      return localStorage.setItem('doneRecipes', [newDoneRecepiString]);
+      const newDoneRecepiString = JSON.stringify([newDoneRecepi]);
+      return localStorage.setItem('doneRecipes', newDoneRecepiString);
     }
-    const newArrayOfObjects = desStringGetLS.push(newDoneRecepi);
-    const stringNewArrayOfObjects = JSON.stringify(newArrayOfObjects);
+    const allInfo = [...desStringGetLS, newDoneRecepi];
+    const stringNewArrayOfObjects = JSON.stringify(allInfo);
     return localStorage.setItem('doneRecipes', stringNewArrayOfObjects);
   }
 

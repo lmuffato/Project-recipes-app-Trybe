@@ -35,10 +35,13 @@ function MealsRecepiesProgress() {
   function saveLS() {
     // Esta função não esta sendo chamada, e precisa ser duplicada para o MealsRecepiesProgress
     console.log('chamou a função de salvar');
+    console.log(detailsRecepie);
     const getLS = localStorage.getItem('doneRecipes');
     const desStringGetLS = JSON.parse(getLS);
     // desStringGetLS é um array de objetos
     const { strMeal, strCategory, strArea, strMealThumb, strTags } = detailsRecepie;
+    const firstTag = strTags !== null ? strTags.split(',')[0] : ' ';
+    const secondTag = strTags !== null ? strTags.split(',')[1] : '';
     const date = new Date();
     const newDoneRecepi = {
       id: recepiID,
@@ -49,16 +52,14 @@ function MealsRecepiesProgress() {
       name: strMeal,
       image: strMealThumb,
       doneDate: `${date.getDate()} - ${date.getTime()}`,
-      tags: strTags,
+      tags: [firstTag, secondTag],
     };
     if (desStringGetLS === null) {
-      console.log('desStringGetLs é null');
-      const newDoneRecepiString = JSON.stringify(newDoneRecepi);
-      return localStorage.setItem('doneRecipes', [newDoneRecepiString]);
+      const newDoneRecepiString = JSON.stringify([newDoneRecepi]);
+      return localStorage.setItem('doneRecipes', newDoneRecepiString);
     }
-    console.log('localStorage nao é null');
-    const newArrayOfObjects = desStringGetLS.push(newDoneRecepi);
-    const stringNewArrayOfObjects = JSON.stringify(newArrayOfObjects);
+    const allInfo = [...desStringGetLS, newDoneRecepi];
+    const stringNewArrayOfObjects = JSON.stringify(allInfo);
     return localStorage.setItem('doneRecipes', stringNewArrayOfObjects);
   }
 
