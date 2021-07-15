@@ -52,8 +52,8 @@ function SearchBar({ type }) {
     }
   }
   return (
-    <section>
-      <div>
+    <section className="search">
+      <div className="search-input">
         <label htmlFor="search-input">
           <input
             data-testid="search-input"
@@ -62,9 +62,8 @@ function SearchBar({ type }) {
           />
         </label>
       </div>
-      <div>
+      <div className="search-radio">
         <label htmlFor="ingredient">
-          Ingrediente
           <input
             type="radio"
             data-testid="ingredient-search-radio"
@@ -72,9 +71,9 @@ function SearchBar({ type }) {
             value="ingredient"
             onClick={ ({ target: { value } }) => setEndpoint(value) }
           />
+          Ingrediente
         </label>
         <label htmlFor="name">
-          Nome
           <input
             type="radio"
             data-testid="name-search-radio"
@@ -82,9 +81,9 @@ function SearchBar({ type }) {
             value="name"
             onClick={ ({ target: { value } }) => setEndpoint(value) }
           />
+          Nome
         </label>
         <label htmlFor="first-letter">
-          Primeira Letra
           <input
             type="radio"
             data-testid="first-letter-search-radio"
@@ -92,9 +91,10 @@ function SearchBar({ type }) {
             value="first-letter"
             onClick={ ({ target: { value } }) => setEndpoint(value) }
           />
+          Primeira Letra
         </label>
       </div>
-      <div>
+      <div className="search-btn">
         <button
           type="button"
           data-testid="exec-search-btn"

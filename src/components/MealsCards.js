@@ -33,6 +33,7 @@ function MealsCards({ meals }) {
   return (
     <div className="meals-container">
       {meals.filter(onlyTheFirst12).map((meal, index) => (
+
         <Link
           className="meals-card"
           data-testid={ `${index}-recipe-card` }
@@ -40,13 +41,15 @@ function MealsCards({ meals }) {
           to={ `/comidas/${meal.idMeal}` }
         >
 
-          <img
-            data-testid={ `${index}-card-img` }
-            src={ meal.strMealThumb }
-            alt={ meal.strMeal }
-            // width="100"
-            // height="100"
-          />
+          <div className="img-crop">
+            <img
+              data-testid={ `${index}-card-img` }
+              src={ meal.strMealThumb }
+              alt={ meal.strMeal }
+              // width="100"
+              // height="100"
+            />
+          </div>
 
           <p data-testid={ `${index}-card-name` }>{meal.strMeal}</p>
         </Link>

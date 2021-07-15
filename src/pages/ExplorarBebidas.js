@@ -26,25 +26,27 @@ function ExplorarBebidas() {
   return (
     <section>
       <Header title="Explorar Bebidas" show={ false } />
-      <Link to="/explorar/bebidas/ingredientes">
-        <button
-          type="button"
-          data-testid="explore-by-ingredient"
-        >
-          Por Ingredientes
-        </button>
-      </Link>
-      <Link to={ `/bebidas/${idDrink}` }>
-        <button
-          type="button"
-          data-testid="explore-surprise"
-        >
-          Me Surpreenda!
-        </button>
-      </Link>
-      <footer>
-        <Footer />
-      </footer>
+
+      <div className="explore">
+        <Link to="/explorar/bebidas/ingredientes">
+          <button
+            type="button"
+            data-testid="explore-by-ingredient"
+          >
+            Por Ingredientes
+          </button>
+        </Link>
+        <Link to={ `/bebidas/${idDrink}` }>
+          <button
+            type="button"
+            data-testid="explore-surprise"
+          >
+            Me Surpreenda!
+          </button>
+        </Link>
+      </div>
+
+      <Footer />
     </section>);
 }
 
