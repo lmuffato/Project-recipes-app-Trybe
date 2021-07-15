@@ -4,6 +4,9 @@ import styled from 'styled-components';
 import copy from 'clipboard-copy';
 import Header from '../components/Header';
 import ShareImage from '../icons/appIcons/share.png';
+import IconAll from '../icons/allIconAndButton/allIcon/all.png';
+import IconBebidas from '../icons/appIcons/bebidas.png';
+import IconComidas from '../icons/appIcons/comidas.png';
 
 const doneRecipes = [
   {
@@ -29,7 +32,6 @@ const doneRecipes = [
     tags: [],
   },
 ];
-
 function FinishedRecipies() {
   const [list, setList] = useState([]);
   const [filter, setFilter] = useState('All');
@@ -56,22 +58,16 @@ function FinishedRecipies() {
       <Header />
       <Container>
         <Filters>
-          <Button
-            data-testid="filter-by-all-btn"
-            onClick={ () => setFilter('All') }
-          >
+          <Button data-testid="filter-by-all-btn" onClick={ () => setFilter('All') }>
+            <IconImageButton src={ IconAll } alt="icon" />
             All
           </Button>
-          <Button
-            data-testid="filter-by-food-btn"
-            onClick={ () => setFilter('Food') }
-          >
+          <Button data-testid="filter-by-food-btn" onClick={ () => setFilter('Food') }>
+            <IconImageButton src={ IconComidas } alt="icon" />
             Food
           </Button>
-          <Button
-            data-testid="filter-by-drink-btn"
-            onClick={ () => setFilter('Drinks') }
-          >
+          <Button data-testid="filter-by-drink-btn" onClick={ () => setFilter('Drinks') }>
+            <IconImageButtonDrinks src={ IconBebidas } alt="icon" />
             Drinks
           </Button>
         </Filters>
@@ -142,11 +138,17 @@ function FinishedRecipies() {
 }
 export default FinishedRecipies;
 
+const IconImageButtonDrinks = styled.img` height: 22px;
+    width: 13px;
+`;
+const IconImageButton = styled.img` height: 22px;
+  width: 22px;
+`;
 const Container = styled.div` align-items: center;
-    display: flex;
-    flex-direction: column;
-    font-family: Montserrat , sans-serif;
-    width: 100%;
+  display: flex;
+  flex-direction: column;
+  font-family: Montserrat , sans-serif;
+  width: 100%;
 `;
 const Filters = styled.div` display: flex;
   height: auto;
@@ -154,7 +156,19 @@ const Filters = styled.div` display: flex;
   padding: 20px;
   width: 100%;
 `;
-const Button = styled.button` height: 24px;
+const Button = styled.button` align-items: center;
+  background: none;
+  background-color: rgb(214, 168, 40);
+  border: none;
+  border-radius: 6px;
+  color: inherit;
+  cursor: pointer;
+  display: flex;
+  font: inherit;
+  height: auto;
+  justify-content: space-around;
+  outline: inherit;
+  padding: 4px;
   width: 80px;
 `;
 const CardRecipe = styled.div` align-items: center;
