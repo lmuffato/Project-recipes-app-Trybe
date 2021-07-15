@@ -1,12 +1,10 @@
-import React, { useContext, useEffect, useState } from 'react';
-import PropTypes, { objectOf } from 'prop-types';
-import { getIngredients, getMeasure } from '../../services/getMeals';
+import React, { useContext, useEffect } from 'react';
+import { getIngredients } from '../../services/getMeals';
 import MealShareAndFavorite from '../MealShareAndFavorite';
 import Context from '../../context/Context';
 
 export default function InProgressMeal() {
   const { mealsId } = useContext(Context);
-  const [ingredients, setIngredients] = useState();
 
   useEffect(() => {
     const mealIngredient = getIngredients(mealsId[0]);
@@ -40,7 +38,3 @@ export default function InProgressMeal() {
     </div>
   );
 }
-
-InProgressMeal.propTypes = {
-  meals: PropTypes.arrayOf(objectOf(PropTypes.string)).isRequired,
-};
