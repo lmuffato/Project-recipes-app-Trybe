@@ -22,6 +22,7 @@ export default function FavoriteButton({ recipe }) {
   return (
     <div>
       <Image
+        className={ shouldColor && 'fillFavoriteButton' }
         style={ { width: '2rem' } }
         data-testid="favorite-btn"
         src={ shouldColor ? favoriteBlackIcon : favoriteWhiteIcon }

@@ -25,30 +25,45 @@ export default function DrinkDetails() {
     recipe, recomends, doneRecipe, inProgress } = currDrink;
 
   return (
-    <Card style={ { width: '18rem' } }>
-      <h2 data-testid="recipe-title">{recipe.strDrink}</h2>
+    <Card className="recipeDetailsCard">
       <img
         src={ recipe.strDrinkThumb }
         alt={ recipe.strDrink }
         data-testid="recipe-photo"
       />
-      <ShareButton />
-      <FavoriteButton recipe={ recipe } />
-      <h3 data-testid="recipe-category">{recipe.strAlcoholic}</h3>
-      <h3>Ingredientes:</h3>
-      {arrRecipeIngredients.map((ingredient, index) => {
-        if (!ingredient[1]) return;
-        return (
-          <p
-            key={ `${index}-${ingredient[1]}` }
-            data-testid={ `${index}-ingredient-name-and-measure` }
-          >
-            {`${ingredient[1]}: `}
-            <span>{arrRecipeMeasureUnit[index][1]}</span>
-          </p>
-        );
-      })}
-      <p data-testid="instructions">{ recipe.strInstructions }</p>
+      <div className="detailsHeader">
+        <div className="titleDiv">
+          <h2 data-testid="recipe-title">{recipe.strDrink}</h2>
+          <p data-testid="recipe-category">{recipe.strAlcoholic}</p>
+        </div>
+        <div className="buttonsRecipeDetails">
+          <ShareButton />
+          <FavoriteButton recipe={ recipe } />
+        </div>
+      </div>
+      <div className="detailsIngredients">
+        <h3>Ingredientes:</h3>
+        <div>
+          {arrRecipeIngredients.map((ingredient, index) => {
+            if (!ingredient[1]) return;
+            return (
+              <p
+                key={ `${index}-${ingredient[1]}` }
+                data-testid={ `${index}-ingredient-name-and-measure` }
+              >
+                {`${ingredient[1]}: `}
+                <span>{arrRecipeMeasureUnit[index][1]}</span>
+              </p>
+            );
+          })}
+        </div>
+      </div>
+      <div className="detailsIngredients">
+        <h3>Instruções:</h3>
+        <div>
+          <p data-testid="instructions">{ recipe.strInstructions }</p>
+        </div>
+      </div>
       {recipe.strYoutube ? <iframe
         title={ recipe.strMeal }
         width="240"
@@ -56,22 +71,29 @@ export default function DrinkDetails() {
         data-testid="video"
         src={ recipe.strYoutube }
       /> : null}
-      <h4>Pratos Recomendados:</h4>
-      <Carousel>
-        {recomends.map((item, index) => (
-          <Carousel.Item key={ `${index}-${item.strMeal}` }>
-            <img
-              className="d-block w-100"
-              src={ item.strMealThumb }
-              alt={ item.strMeal }
-              data-testid={ `${index}-recomendation-card` }
-            />
-            <Carousel.Caption>
-              <h3 data-testid={ `${index}-recomendation-title` }>{item.strMeal}</h3>
-            </Carousel.Caption>
-          </Carousel.Item>
-        ))}
-      </Carousel>
+      <div className="carousel">
+        <h3 className="carouselTitle">Pratos Recomendados:</h3>
+        <Carousel>
+          {recomends.map((item, index) => (
+            <Carousel.Item key={ `${index}-${item.strMeal}` }>
+              <img
+                className="d-block w-100"
+                src={ item.strMealThumb }
+                alt={ item.strMeal }
+                data-testid={ `${index}-recomendation-card` }
+              />
+              <Carousel.Caption>
+                <h3
+                  className="imgText"
+                  data-testid={ `${index}-recomendation-title` }
+                >
+                  {item.strMeal}
+                </h3>
+              </Carousel.Caption>
+            </Carousel.Item>
+          ))}
+        </Carousel>
+      </div>
       {!doneRecipe ? (
         <Button
           className="fixed-bottom"

@@ -1,0 +1,84 @@
+.inProgressCard {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.inProgressCard img {
+  width: 100%;
+}
+
+.inProgressHeader {
+  align-content: center;
+  color: #754f44;
+  display: flex;
+  flex-flow: wrap;
+  flex-direction: row;
+  font-family: Raleway , sans-serif;
+  font-weight: 900;
+  justify-content: space-between;
+  padding: 15px;
+  width: 100%;
+}
+
+.titleDiv {
+  margin: 8px;
+}
+
+.titleDiv h2 {
+  color: #ec7357;
+}
+
+.titleDiv p {
+  color: #754f44;
+}
+
+.buttonsInProgress {
+  display: flex;
+  justify-content: space-between;
+  margin: 8px;
+}
+
+.buttonsInProgress button {
+  background-color: #fbffff;
+}
+
+.ingredientsChecksDiv {
+  display: flex;
+  flex-flow: wrap;
+  flex-direction: column;
+  margin: 10px;
+  width: 80%;
+}
+
+.ingredientsChecks {
+  background-color: #fbffb9;
+  color: #754f44;
+  display: block;
+  font-family: Raleway , sans-serif;
+  font-weight: 900;
+  margin: 8px;
+  padding: 10px;
+  width: 80%;
+}
+
+.instructionsProgress {
+  background-color: #fbffb9;
+  border-radius: 10px;
+  color: #754f44;
+  font-family: Raleway , sans-serif;
+  font-weight: 900;
+  margin: 8px;
+  margin-bottom: 60px;
+  padding: 18px;
+  text-align: justify;
+}
+
+.fixed-bottom {
+  background-color: #ec7357;
+  border: none;
+  color: #fbffb9;
+  font-weight: 900;
+  margin-bottom: 15px;
+  margin-left: 120px;
+}

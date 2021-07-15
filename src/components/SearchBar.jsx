@@ -91,7 +91,7 @@ export default function SearchBar({ page }) {
   };
 
   return (
-    <form>
+    <form className="searchBar">
       <input
         type="text"
         data-testid="search-input"

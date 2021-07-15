@@ -12,15 +12,16 @@ export default function SearchButton({ page }) {
   return (
     <div>
       <button
+        className="iconButtons"
         type="button"
         data-testid="search-top-btn"
         src={ SearchImg }
         alt="Search"
         onClick={ getSearchBar }
       >
-        <img src={ SearchImg } alt="search" />
+        <img className="iconButtonsImages" src={ SearchImg } alt="search" />
       </button>
-      <div>
+      <div className="headerChildren">
         { searchBar && <SearchBar page={ page } /> }
       </div>
     </div>

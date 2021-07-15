@@ -22,6 +22,7 @@ export default function IngredientsChecks({ ingredients }) {
     <>
       { ingredientsInit.map((ingredient, index) => (
         <Card
+          className="ingredientsChecks"
           key={ `${index}-${ingredient}` }
           data-testid={ `${index}-ingredient-step` }
           onChange={ () => setCurrIngredients({ ...currIngredients,

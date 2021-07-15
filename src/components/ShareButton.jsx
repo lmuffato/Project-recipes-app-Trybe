@@ -22,6 +22,7 @@ export default function ShareButton({ data, id, type }) {
     <div>
       {shareRecipe && <span>Link copiado!</span>}
       <button
+        className="doneShareButton"
         type="button"
         data-testid={ checkpathname(data) }
         src={ shareIcon }

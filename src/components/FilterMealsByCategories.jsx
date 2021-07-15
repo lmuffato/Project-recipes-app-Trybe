@@ -9,8 +9,9 @@ export default function FilterMealsByCategories() {
   const recipesArray = mealsCategories ? mealsCategories.slice(0, end) : [];
 
   return (
-    <div>
+    <div className="categoriesButtonsDiv">
       <button
+        className="categoriesButtons"
         value="All"
         type="button"
         data-testid="All-category-filter"
@@ -24,6 +25,7 @@ export default function FilterMealsByCategories() {
       {recipesArray.length > 1
       && recipesArray.map((category) => (
         <button
+          className="categoriesButtons"
           type="button"
           key={ category.strCategory }
           value={ category.strCategory }

@@ -1,0 +1,151 @@
+header {
+  align-items: flex-start;
+  background-color: #754f44;
+  color: #fbffb9;
+  display: flex;
+  flex-flow: wrap;
+  flex-direction: row;
+  font-family: Raleway , sans-serif;
+  font-size: 20px;
+  justify-content: space-around;
+  left: 0;
+  padding: 10px;
+  padding-right: 33px;
+  position: sticky;
+  top: 0;
+  width: 360px;
+}
+
+h1 {
+  display: inline;
+  font-size: 30px;
+  margin-top: 2px;
+}
+
+input {
+  background-color: #fbffff;
+  border: 1px solid #ec7357;
+  border-radius: 0.2rem;
+  border-style: solid;
+  box-sizing: border-box;
+  color: #754f44;
+  font-family: Raleway , sans-serif;
+  font-size: 0.875rem;
+  left: 0;
+  line-height: 1.5;
+  margin: 3px;
+  margin-bottom: 0;
+  overflow: visible;
+  padding: 0.25rem 0.5rem;
+  top: 0;
+}
+
+.iconButtons {
+  background-color: #754f44;
+  border: none;
+  width: 25px;
+}
+
+.iconButtonsImages {
+
+  /* Fonte:
+  https://www.ti-enxame.com/pt/css/alterar-cor-svg/1044922036/ */
+  filter: invert(99%) sepia(39%) saturate(1115%)
+    hue-rotate(336deg) brightness(105%) contrast(101%);
+}
+
+.searchBar {
+  display: flex;
+  flex-flow: wrap;
+  flex-direction: row;
+  font-family: Raleway , sans-serif;
+  font-size: 15px;
+}
+
+.searchBar button {
+  background-color: #ec7357;
+  border: none;
+  border-radius: 3.5px;
+  color: #fbffb9;
+  font-family: Raleway , sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  margin: 3px;
+  margin-top: 0;
+  text-align: center;
+}
+
+.categoriesButtonsDiv {
+  display: flex;
+  flex-flow: wrap;
+  flex-direction: row;
+  font-weight: 900;
+  justify-content: space-around;
+  padding: 15px;
+  width: 100%;
+}
+
+.categoriesButtons {
+  background-color: #ec7357;
+  border: none;
+  color: #754f44;
+  font-family: Raleway , sans-serif;
+  font-size: 14px;
+  font-weight: 900;
+  height: fit-content;
+  left: 130px;
+  margin: 4px;
+  padding: 3px;
+  width: 120px;
+}
+
+.cardsMainRecipes {
+  display: flex;
+  flex-flow: wrap;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-bottom: 80px;
+  padding: 15px;
+  width: 100%;
+}
+
+.cardRecipe {
+  background-color: #fbffb9;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 2px 6px 6px 2px rgba(0 0 0 / 20%);
+  color: #754f44;
+  height: fit-content;
+  margin: 8px;
+  position: static;
+  width: 120px;
+}
+
+.cardRecipe p {
+  font-family: Raleway , sans-serif;
+  font-size: 15px;
+  font-weight: 900;
+  margin-left: 6px;
+  margin-top: 4px;
+}
+
+.cardRecipeImg {
+  border: none;
+  border-radius: 5px;
+  box-shadow: 2px 6px 6px 2px rgba(0 0 0 / 20%);
+}
+
+.footer {
+  align-items: center;
+  background-color: #754f44;
+  bottom: 0;
+  display: flex;
+  height: 60px;
+  justify-content: space-around;
+  position: fixed;
+  width: 100%;
+}
+
+.footer .iconButtonsImages {
+  width: 30px;
+}

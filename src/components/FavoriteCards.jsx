@@ -31,7 +31,7 @@ export default function FavoriteCards() {
   };
 
   return allFavorites && (
-    <div>
+    <div className="cardsDoneRecipes">
       { filterAllFavorites().map((item, index) => checkType(item, index)) }
     </div>
   );

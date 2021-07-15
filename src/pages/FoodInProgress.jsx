@@ -7,6 +7,7 @@ import FavoriteButton from '../components/FavoriteButton';
 import IngredientsChecks from '../components/IngredientsChecks';
 import ShareButton from '../components/ShareButton';
 import FinishButton from '../components/FinishButton';
+import '../CSS/InProgressRecipe.css';
 
 export default function FoodInProgress() {
   const [currMeal, setCurrMeal] = useState({
@@ -23,18 +24,26 @@ export default function FoodInProgress() {
 
   const { recipe, arrRecipeIngredients } = currMeal;
   return (
-    <Card style={ { width: '18rem' } }>
+    <Card className="inProgressCard">
       <img
         src={ recipe.strMealThumb }
         alt={ recipe.strMeal }
         data-testid="recipe-photo"
       />
-      <h2 data-testid="recipe-title">{recipe.strMeal}</h2>
-      <ShareButton />
-      <FavoriteButton recipe={ recipe } />
-      <h3 data-testid="recipe-category">{recipe.strCategory}</h3>
-      <IngredientsChecks ingredients={ arrRecipeIngredients } />
-      <p data-testid="instructions">{ recipe.strInstructions }</p>
+      <div className="inProgressHeader">
+        <div className="titleDiv">
+          <h2 data-testid="recipe-title">{recipe.strMeal}</h2>
+          <h3 data-testid="recipe-category">{recipe.strCategory}</h3>
+        </div>
+        <div className="buttonsInProgress">
+          <ShareButton />
+          <FavoriteButton recipe={ recipe } />
+        </div>
+      </div>
+      <div className="ingredientsChecksDiv">
+        <IngredientsChecks ingredients={ arrRecipeIngredients } />
+      </div>
+      <p className="instructionsProgress" data-testid="instructions">{ recipe.strInstructions }</p>
       <FinishButton ingredients={ arrRecipeIngredients } />
     </Card>
   );

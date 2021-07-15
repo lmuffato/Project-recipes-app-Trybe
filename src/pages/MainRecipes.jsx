@@ -4,14 +4,15 @@ import Header from '../components/Header';
 import MealsCards from '../components/MealsCards';
 import SearchButton from '../components/SearchButton';
 import InferiorMenu from '../components/InferiorMenu';
+import '../CSS/MainRecipes.css';
 
 export default function MainRecipes() {
   return (
     <div>
-      <Header>
+      <Header className="header">
+        <h1 data-testid="page-title">Comidas</h1>
         <SearchButton page="/comidas" />
       </Header>
-      <h1 data-testid="page-title">Comidas</h1>
       <FilterMealsByCategories />
       <MealsCards />
       <InferiorMenu />

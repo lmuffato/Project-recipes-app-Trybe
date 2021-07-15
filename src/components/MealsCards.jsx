@@ -8,22 +8,23 @@ export default function MealsCards() {
   const end = 12;
   const recipesArray = meals ? meals.slice(0, end) : [];
   return (
-    <div>
+    <div className="cardsMainRecipes">
       {recipesArray.length > 0
       && recipesArray.map((recipe, index) => (
         <Card
+          className="cardRecipe"
           onClick={ () => setCurrCategoryId(recipe.idMeal) }
-          style={ { width: '18rem' } }
           key={ index }
           data-testid={ `${index}-recipe-card` }
         >
           <Card.Img
+            className="cardRecipeImg"
             variant="top"
             src={ recipe.strMealThumb }
             data-testid={ `${index}-card-img` }
             alt="recipe"
           />
-          <h3 data-testid={ `${index}-card-name` }>{recipe.strMeal}</h3>
+          <p data-testid={ `${index}-card-name` }>{recipe.strMeal}</p>
         </Card>
       ))}
     </div>

@@ -33,13 +33,15 @@ export default function FavoriteCardDrink({ item, index }) {
   };
 
   return (
-    <Card>
+    <Card className="cardDoneRecipe">
       <Card.Img
+        className="cardDoneRecipeImg"
         onClick={ handleClick }
         data-testid={ `${index}-horizontal-image` }
         src={ item.strDrinkThumb }
       />
       <Card.Title
+        className="title"
         onClick={ handleClick }
         data-testid={ `${index}-horizontal-name` }
       >
@@ -60,6 +62,7 @@ export default function FavoriteCardDrink({ item, index }) {
         type="bebida"
       />
       <Card.Img
+        className="fillFavoriteButton"
         data-testid={ `${index}-horizontal-favorite-btn` }
         style={ { width: '2rem' } }
         src={ favoriteBlackIcon }

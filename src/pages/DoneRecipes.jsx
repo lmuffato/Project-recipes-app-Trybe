@@ -5,6 +5,7 @@ import FilterDoneRecipes from '../components/FilterDoneRecipes';
 import Header from '../components/Header';
 import ShareButton from '../components/ShareButton';
 import RecipeDone from '../effects/RecipeDone';
+import '../CSS/DoneRecipes.css';
 
 export default function DoneRecipes() {
   const [state, setState] = useState({
@@ -38,54 +39,67 @@ export default function DoneRecipes() {
   if (!getItems) {
     return <h1>Loading...</h1>;
   }
-  if (!recipes) return <h1>Você não possui nenhuma receita concluida...</h1>;
+  if (!recipes) {
+    return (
+      <div>
+        <Header className="header">
+          <h1 data-testid="page-title">Receitas Feitas</h1>
+        </Header>
+        <h1 fontSize="20px" padding="10px">Você não possui nenhuma receita concluida...</h1>
+      </div>
+    );
+  }
+
   return (
     <div>
-      <Header>
+      <Header className="header">
         <h1 data-testid="page-title">Receitas Feitas</h1>
       </Header>
       <FilterDoneRecipes setCurrFilter={ setCurrFilter } />
-      {filterAllFavorites().map((item, index) => (
-        <div key={ `${item.index}-${item.name}` }>
-          <Image
-            style={ { width: '18rem' } }
-            src={ item.image }
-            onClick={ () => setState({ ...state,
-              redirectTo: `${item.type}s/${item.id}`,
-              redirect: true }) }
-            data-testid={ `${index}-horizontal-image` }
-          />
-          <h2 data-testid={ `${index}-horizontal-top-text` }>
-            {`${item.area} - ${item.category} ${item.alcoholicOrNot
-              ? item.alcoholicOrNot : ''}`}
-          </h2>
-          <button
-            type="button"
-            data-testid={ `${index}-horizontal-name` }
-            onClick={ () => setState({ ...state,
-              redirectTo: `${item.type}s/${item.id}`,
-              ByCLickName: false,
-              redirect: true }) }
-          >
-            {item.name}
-          </button>
-          <p data-testid={ `${index}-horizontal-done-date` }>{item.doneDate}</p>
-
-          <ShareButton
-            data={ index }
-            id={ item.id }
-            type={ item.type }
-          />
-          { item.tags.map((tag, index2) => index2 < 2 && (
-            <p
-              key={ tag }
-              data-testid={ `${index}-${tag}-horizontal-tag` }
-            >
-              {tag}
+      <div className="cardsDoneRecipes">
+        {filterAllFavorites().map((item, index) => (
+          <div key={ `${item.index}-${item.name}` } className="cardDoneRecipe">
+            <Image
+              className="cardDoneRecipeImg"
+              src={ item.image }
+              onClick={ () => setState({ ...state,
+                redirectTo: `${item.type}s/${item.id}`,
+                redirect: true }) }
+              data-testid={ `${index}-horizontal-image` }
+            />
+            <p className="title" data-testid={ `${index}-horizontal-top-text` }>
+              {`${item.area} - ${item.category} ${item.alcoholicOrNot
+                ? item.alcoholicOrNot : ''}`}
             </p>
-          )) }
-        </div>
-      ))}
+            <button
+              className="doneRecipeButton"
+              type="button"
+              data-testid={ `${index}-horizontal-name` }
+              onClick={ () => setState({ ...state,
+                redirectTo: `${item.type}s/${item.id}`,
+                ByCLickName: false,
+                redirect: true }) }
+            >
+              {item.name}
+            </button>
+            <p data-testid={ `${index}-horizontal-done-date` }>{item.doneDate}</p>
+
+            <ShareButton
+              data={ index }
+              id={ item.id }
+              type={ item.type }
+            />
+            { item.tags.map((tag, index2) => index2 < 2 && (
+              <p
+                key={ tag }
+                data-testid={ `${index}-${tag}-horizontal-tag` }
+              >
+                {tag}
+              </p>
+            )) }
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

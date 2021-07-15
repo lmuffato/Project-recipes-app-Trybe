@@ -6,12 +6,13 @@ export default function ProfileButton() {
   return (
     <Link to="/perfil">
       <button
+        className="iconButtons"
         type="button"
         data-testid="profile-top-btn"
         src={ ProfileImg }
         alt="Profile"
       >
-        <img src={ ProfileImg } alt="search" />
+        <img className="iconButtonsImages" src={ ProfileImg } alt="search" />
       </button>
     </Link>
   );

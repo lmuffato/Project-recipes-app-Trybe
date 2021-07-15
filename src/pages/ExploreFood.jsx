@@ -28,30 +28,35 @@ export default function ExploreFood() {
       <Header>
         <h1 data-testid="page-title">Explorar Comidas</h1>
       </Header>
-      <Button
-        variant="dark"
-        data-testid="explore-by-ingredient"
-        name="ingredient"
-        onClick={ handleClick }
-      >
-        Por Ingredientes
-      </Button>
-      <Button
-        variant="dark"
-        data-testid="explore-by-area"
-        name="area"
-        onClick={ handleClick }
-      >
-        Por Local de Origem
-      </Button>
-      <Button
-        variant="dark"
-        data-testid="explore-surprise"
-        name="surprise"
-        onClick={ handleClick }
-      >
-        Me Surpreenda!
-      </Button>
+      <div className="categoriesButtonsDiv">
+        <Button
+          className="exploreButtons"
+          variant="dark"
+          data-testid="explore-by-ingredient"
+          name="ingredient"
+          onClick={ handleClick }
+        >
+          Por Ingredientes
+        </Button>
+        <Button
+          className="exploreButtons"
+          variant="dark"
+          data-testid="explore-by-area"
+          name="area"
+          onClick={ handleClick }
+        >
+          Por Local de Origem
+        </Button>
+        <Button
+          className="exploreButtons"
+          variant="dark"
+          data-testid="explore-surprise"
+          name="surprise"
+          onClick={ handleClick }
+        >
+          Me Surpreenda!
+        </Button>
+      </div>
       <InferiorMenu />
     </div>
   );

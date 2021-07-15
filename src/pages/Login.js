@@ -4,6 +4,7 @@ import { Image } from 'react-bootstrap';
 import { setToLocalStorage } from '../services/localStorage';
 import gifLogin from '../images/gifLogin.gif';
 import ReceitasTitle from '../images/ReceitasTitle.png';
+import '../CSS/Login.css';
 
 function Login() {
   const history = useHistory();

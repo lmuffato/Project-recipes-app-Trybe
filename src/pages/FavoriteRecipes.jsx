@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import { Button } from 'react-bootstrap';
 import FavoriteCards from '../components/FavoriteCards';
 import Header from '../components/Header';
 import FavoritesContext from '../context/FavoritesContext';
@@ -38,17 +37,35 @@ export default function FavoriteRecipes() {
 
   return (
     <div>
-      <Header>
+      <Header className="header">
         <h1 data-testid="page-title">Receitas Favoritas</h1>
       </Header>
-      <Button data-testid="filter-by-all-btn" onClick={ handleAllClick }>All</Button>
-      <Button data-testid="filter-by-food-btn" onClick={ handleFoodClick }>Food</Button>
-      <Button
-        data-testid="filter-by-drink-btn"
-        onClick={ handleDrinksClick }
-      >
-        Drinks
-      </Button>
+      <div className="doneRecipesButtonsDiv">
+        <button
+          type="button"
+          className="doneRecipesButtons"
+          data-testid="filter-by-all-btn"
+          onClick={ handleAllClick }
+        >
+          All
+        </button>
+        <button
+          type="button"
+          className="doneRecipesButtons"
+          data-testid="filter-by-food-btn"
+          onClick={ handleFoodClick }
+        >
+          Food
+        </button>
+        <button
+          type="button"
+          className="doneRecipesButtons"
+          data-testid="filter-by-drink-btn"
+          onClick={ handleDrinksClick }
+        >
+          Drinks
+        </button>
+      </div>
       <FavoriteCards />
     </div>
   );

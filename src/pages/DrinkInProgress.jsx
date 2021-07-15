@@ -24,18 +24,31 @@ export default function DrinkInProgress() {
     recipe } = currDrink;
 
   return (
-    <Card style={ { width: '18rem' } }>
+    <Card className="inProgressCard">
       <img
         src={ recipe.strDrinkThumb }
         alt={ recipe.strDrink }
         data-testid="recipe-photo"
       />
-      <h2 data-testid="recipe-title">{recipe.strDrink}</h2>
-      <ShareButton />
-      <FavoriteButton recipe={ recipe } />
-      <h3 data-testid="recipe-category">{recipe.strAlcoholic}</h3>
-      <IngredientsChecks ingredients={ arrRecipeIngredients } />
-      <p data-testid="instructions">{ recipe.strInstructions }</p>
+      <div className="inProgressHeader">
+        <div className="titleDiv">
+          <h2 data-testid="recipe-title">{recipe.strDrink}</h2>
+          <h3 data-testid="recipe-category">{recipe.strAlcoholic}</h3>
+        </div>
+        <div className="buttonsInProgress">
+          <ShareButton />
+          <FavoriteButton recipe={ recipe } />
+        </div>
+      </div>
+      <div className="ingredientsChecksDiv">
+        <IngredientsChecks ingredients={ arrRecipeIngredients } />
+      </div>
+      <p
+        className="instructionsProgress"
+        data-testid="instructions"
+      >
+        { recipe.strInstructions }
+      </p>
       <FinishButton ingredients={ arrRecipeIngredients } />
     </Card>
   );
