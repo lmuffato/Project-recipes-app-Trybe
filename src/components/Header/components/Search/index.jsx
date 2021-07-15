@@ -1,16 +1,18 @@
 import React, { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
+import { useHistory } from 'react-router-dom';
 import { RecipesContext } from '../../../../context/Recipes';
 
 import styles from './styles.module.scss';
 
 function Search({ visibility }) {
   const { filterRecipe } = useContext(RecipesContext);
+  const { location: { pathname } } = useHistory();
   const [filterTyped, setFilterTyped] = useState('');
   const [filterType, setFilterType] = useState('');
 
   function filter(event) {
-    filterRecipe({ type: filterType, content: filterTyped }, event);
+    filterRecipe({ type: filterType, content: filterTyped, pathname }, event);
   }
 
   return (
