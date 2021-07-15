@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Button, Item, Popup } from 'semantic-ui-react';
 import shareIcon from '../images/shareIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
@@ -22,16 +23,22 @@ function RecipeItem(Props) {
     : `${data.alcoholicOrNot}`;
   return (
     <Item style={ { padding: 0 } }>
-      <Item.Image>
-        <img data-testid={ `${index}-horizontal-image` } alt="oi" src={ data.image } />
-      </Item.Image>
+      <Link to={ `/${data.type}s/${data.id}` }>
+        <Item.Image>
+          <img data-testid={ `${index}-horizontal-image` } alt="oi" src={ data.image } />
+        </Item.Image>
+      </Link>
       <Item.Content>
         <Item.Meta
           data-testid={ `${index}-horizontal-top-text` }
         >
           {topText}
         </Item.Meta>
-        <Item.Header data-testid={ `${index}-horizontal-name` }>{data.name}</Item.Header>
+        <Link to={ `/${data.type}s/${data.id}` }>
+          <Item.Header data-testid={ `${index}-horizontal-name` }>
+            {data.name}
+          </Item.Header>
+        </Link>
         <Item.Extra>
           <Popup
             context={ contextRef }
