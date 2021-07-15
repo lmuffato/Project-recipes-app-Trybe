@@ -3,6 +3,7 @@ import { Link, useHistory } from 'react-router-dom';
 import Header from '../components/Header/Header';
 import Footer from '../components/Footer/Footer';
 import { fetchRandomDrink } from '../hooks/useFetchRandom';
+import logoIcon from '../images/savory-6.svg';
 
 function ExploreDrinks() {
   const history = useHistory();
@@ -12,7 +13,7 @@ function ExploreDrinks() {
   };
   return (
     <div>
-      <Header heading="Explorar Bebidas" />
+      <Header heading="Explorar Bebidas" logoSrc={ logoIcon } />
       <section>
         <section data-testid="explore-by-ingredient">
           <a

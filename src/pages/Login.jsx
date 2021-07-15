@@ -7,11 +7,11 @@ function Login() {
   const { setEmail, setPassword, disabledData, handleClick } = useContext(UserContext);
   return (
     <LoginContainer>
-      <div>
+      <aside>
         <object className="logo-letmeeat" type="image/svg+xml" data={ logoIcon }>
           Logo letmeEat
         </object>
-      </div>
+      </aside>
       <Container>
         <label htmlFor="email">
           Email

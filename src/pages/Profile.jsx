@@ -4,6 +4,7 @@ import Wrapper from '../styles/profile';
 import Header from '../components/Header/Header';
 import Button from '../components/Generics/Button';
 import Footer from '../components/Footer/Footer';
+import logoIcon from '../images/savory-6.svg';
 
 function Profile() {
   const history = useHistory();
@@ -32,7 +33,7 @@ function Profile() {
 
   return (
     <div>
-      <Header heading="Perfil" />
+      <Header heading="Perfil" logoSrc={ logoIcon } />
       <Wrapper>
         <strong data-testid="profile-email">{ email || 'email@teste.com' }</strong>
         <Link to="/receitas-feitas">

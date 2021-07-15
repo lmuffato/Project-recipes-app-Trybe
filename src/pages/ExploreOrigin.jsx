@@ -7,6 +7,7 @@ import useFetchRecipes from '../effects/useFetchRecipes';
 import CardList from '../components/CardList/CardList';
 import { RecipesContext } from '../context/RecipesContext';
 import AreasList from '../components/AreasList/AreasList';
+import logoIcon from '../images/savory-6.svg';
 
 function ExploreOrigin() {
   const [isActive, setIsActive] = useState(false);
@@ -29,7 +30,7 @@ function ExploreOrigin() {
 
   return (
     <>
-      <Header heading="Explorar Origem">
+      <Header heading="Explorar Origem" logoSrc={ logoIcon }>
         <SearchBarButton onClick={ handleToggleSearchBar } />
       </Header>
       { isActive ? (<SearchBar />) : ''}

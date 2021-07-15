@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import Header from '../components/Header/Header';
 import Footer from '../components/Footer/Footer';
 import useFilteredRecipes from '../hooks/useFilteredRecipes';
+import logoIcon from '../images/logoPaginasExplorar.svg';
 
 function ExploreIngredients({ type }) {
   // const history = useHistory();
@@ -47,7 +48,7 @@ function ExploreIngredients({ type }) {
 
   return (
     <div>
-      <Header heading="Explorar Ingredientes" />
+      <Header heading="Explorar Ingredientes" logoSrc={ logoIcon } />
       {ingredients.map((ingredient, index) => {
         const ingredientName = type === 'meals'
           ? ingredient.strIngredient

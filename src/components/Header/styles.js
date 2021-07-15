@@ -8,10 +8,6 @@ const HeaderContainer = styled.header`align-items: space-around;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-
-  /* margin: 0 auto; */
-
-  /* max-height: 30vh; */
   max-width: 1420px;
   padding: 20px;
 
@@ -20,10 +16,6 @@ const HeaderContainer = styled.header`align-items: space-around;
     background: inherit;
     border: 0;
     cursor: pointer;
-
-    /* max-height: 4vh; */
-
-    /* max-width: auto; */
     padding-right: 0.7rem;
   }
 
@@ -34,8 +26,6 @@ const HeaderContainer = styled.header`align-items: space-around;
     flex-direction: column;
     justify-content: center;
     line-height: 0.8;
-
-    /* max-height: 18vh; */
     max-width: 68vw;
 
     img {
@@ -101,17 +91,13 @@ const HeaderContainer = styled.header`align-items: space-around;
         h1 {
           align-self: center;
           display: flex;
+          flex-wrap: wrap;
           font-size: 1.2rem;
           justify-self: center;
-
-          /* margin: 0 0.5rem auto; */
           text-align: center;
         }
-
       }
     }
-
-
   }
 `;
 

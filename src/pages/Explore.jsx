@@ -1,11 +1,12 @@
 import React from 'react';
 import Header from '../components/Header/Header';
 import Footer from '../components/Footer/Footer';
+import logoIcon from '../images/savory-6.svg';
 
 function Explore() {
   return (
     <div>
-      <Header heading="Explorar" />
+      <Header heading="Explorar" logoSrc={ logoIcon } />
       <section>
         <section data-testid="explore-food">
           <a
