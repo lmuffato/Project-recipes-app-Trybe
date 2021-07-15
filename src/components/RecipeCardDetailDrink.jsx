@@ -37,7 +37,7 @@ export default function RecipeCardDetailDrink() {
         data-testid="recipe-photo"
       />
       <h1 data-testid="recipe-title">{ drinkDetails.strDrink }</h1>
-      <ShareBtn />
+      <ShareBtn id={ idDrink } type="bebida" />
       <button type="button" data-testid="favorite-btn">
         <img src={ whiteHeartIcon } alt="favoritar" />
       </button>
