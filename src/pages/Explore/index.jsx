@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 
 import { useParams } from 'react-router-dom';
-import HeaderBack from '../../components/HeaderBack';
 import Dropdown from './components/Dropdown';
 import Header from '../../components/Header';
 import { getRecipes } from '../../services/recipesData';
@@ -49,7 +48,7 @@ function Explore() {
   }
   return (
     <>
-      {meal && <HeaderBack title={ type } />}
+      {meal && <Header title={ type } hideSearch />}
       <div className={ styles.cardPage }>
         {type === 'ingredientes' && <ExploreCards ingredients={ ingredients } />}
         {type === 'area' && <Dropdown areas={ areas } />}
