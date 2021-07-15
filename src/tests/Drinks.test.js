@@ -2,8 +2,6 @@ import { screen } from '@testing-library/dom';
 import userEvent from '@testing-library/user-event';
 import renderWithRouterAndContext from './helper/renders/renderWithRouterAndContext';
 import getTest from './helper/mocks/getTestInfo';
-import drinks from './helper/mocks/api/drinks';
-import meals from './helper/mocks/api/meals';
 import renderWithRCA from './helper/renders/renderWithRouterAndContextAPI';
 import { drinkDataApi } from './helper/mocks/data';
 
@@ -15,10 +13,6 @@ const {
 } = getTest();
 
 const { getByTestId, getByRole } = screen;
-
-const mockFetch = jest.fn(() => Promise.resolve({
-  json: () => Promise.resolve({ meals, drinks }),
-}));
 
 const goToTheDrinkMainPage = () => {
   doTheLoginProcess(getByTestId, userEvent);
@@ -86,7 +80,7 @@ describe('Drinks tests', () => {
     });
   });
 
-   it('checks Recipe Card', async () => {
+  it('checks Recipe Card', async () => {
     const { findByTestId } = renderWithRCA();
     goToTheDrinkMainPage();
 

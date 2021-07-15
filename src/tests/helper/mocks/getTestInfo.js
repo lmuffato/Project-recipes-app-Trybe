@@ -1,3 +1,5 @@
+const explorebtn = 'explore-bottom-btn';
+
 const testsIds = {
   headerTestIds: {
     profileTopButton: 'profile-top-btn',
@@ -7,10 +9,10 @@ const testsIds = {
   footerTestIds: {
     footer: 'footer',
     drinksBottonBtn: 'drinks-bottom-btn',
-    exploreBottonBtn: 'explore-bottom-btn',
+    exploreBottonBtn: explorebtn,
     foodBottonBtn: 'food-bottom-btn',
     drinkIcon: 'drinks-bottom-btn',
-    exploreIcon: 'explore-bottom-btn',
+    exploreIcon: explorebtn,
     mealIcon: 'food-bottom-btn',
   },
 };
