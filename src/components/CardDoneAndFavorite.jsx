@@ -82,6 +82,7 @@ function CardDoneAndFavorite(props) {
     <button
       onClick={ () => setFavoriteLocalStorage(dbType, id) }
       type="button"
+      data-testid={ `${index}-horizontal-favorite-btn` }
     >
       favoritar
     </button>
