@@ -30,7 +30,10 @@ function Recommendations({ data }) {
 }
 
 Recommendations.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.object).isRequired,
+  data: PropTypes.shape({
+    path: PropTypes.string,
+    list: PropTypes.arrayOf(PropTypes.object),
+  }).isRequired,
 };
 
 export default Recommendations;
