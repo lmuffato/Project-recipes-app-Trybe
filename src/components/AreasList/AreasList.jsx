@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import useFetchRecipes from '../../effects/useFetchRecipes';
+import AreasListContainer from './styles';
 
 function AreasList() {
   const fetchAreasUrl = 'https://www.themealdb.com/api/json/v1/1/list.php?a=list';
@@ -31,7 +32,7 @@ function AreasList() {
   if (areas.length === 0) return 'Loading locations';
 
   return (
-    <div>
+    <AreasListContainer>
       <select
         data-testid="explore-by-area-dropdown"
         value={ selectAreaValue }
@@ -51,7 +52,7 @@ function AreasList() {
         )) }
         <option data-testid="All-option" value="All">All</option>
       </select>
-    </div>
+    </AreasListContainer>
   );
 }
 

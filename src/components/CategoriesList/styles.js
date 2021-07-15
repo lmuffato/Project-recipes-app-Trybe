@@ -38,7 +38,7 @@ const CategoriesListContainer = styled.div`align-items: center;
   @media only screen and ( min-width : 600px ) {
     gap: 0.3rem;
     margin-top: 20px;
-    max-width: 1420px;
+    max-width: 1000px;
     min-width: 300px;
     padding: 0;
   }
