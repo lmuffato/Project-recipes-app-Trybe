@@ -24,6 +24,7 @@ function Cards({ index, thumbnail, name, id, type, category }) {
               alt={ `${index} recipe` }
               className="card-img"
             />
+            <CardsIcons />
             <h2
               id={ id }
               data-testid={ `${index}-card-name` }
@@ -32,7 +33,6 @@ function Cards({ index, thumbnail, name, id, type, category }) {
               { name }
             </h2>
             <h3>{ category }</h3>
-            <CardsIcons />
           </div>
         </Link>
       </div>
@@ -86,7 +86,6 @@ const Container = styled.div`
     font-style: normal;
     font-weight: bold;
     font-size: 10px;
-    line-height: 15px;
     text-align: center;
     color: #000000;
     margin-top: 5px;

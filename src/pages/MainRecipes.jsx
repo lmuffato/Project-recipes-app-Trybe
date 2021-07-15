@@ -95,14 +95,16 @@ const Container = styled.div`
     justify-content: center;
     align-items: center;
     height: 100vh;
+    padding-left: 45px;
   }
 
   .search-cards {
-    margin: auto;
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     height: 100vh;
+    width: 90vw;
+    padding-right: 45px;
   }
 `;
