@@ -31,11 +31,11 @@ function MealsCards({ meals }) {
   }
   // happy path
   return (
-    <div className="meals-container">
+    <div className="recipe-container">
       {meals.filter(onlyTheFirst12).map((meal, index) => (
 
         <Link
-          className="meals-card"
+          className="recipe-card"
           data-testid={ `${index}-recipe-card` }
           key={ meal.idMeal }
           to={ `/comidas/${meal.idMeal}` }

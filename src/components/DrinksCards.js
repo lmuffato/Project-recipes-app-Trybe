@@ -31,21 +31,24 @@ function DrinksCards({ drinks }) {
   }
   // happy path
   return (
-    <div className="drinks-container">
+    <div className="recipe-container">
       {drinks.filter(onlyTheFirst12).map((drink, index) => (
         <Link
+          className="recipe-card"
           data-testid={ `${index}-recipe-card` }
           key={ drink.idDrink }
           to={ `/bebidas/${drink.idDrink}` }
         >
-          <img
-            data-testid={ `${index}-card-img` }
-            src={ drink.strDrinkThumb }
-            alt={ drink.strDrink }
-            width="100"
-            height="100"
-          />
-          <div data-testid={ `${index}-card-name` }>{drink.strDrink}</div>
+          <div className="img-crop">
+            <img
+              data-testid={ `${index}-card-img` }
+              src={ drink.strDrinkThumb }
+              alt={ drink.strDrink }
+              width="100"
+              height="100"
+            />
+          </div>
+          <p data-testid={ `${index}-card-name` }>{drink.strDrink}</p>
         </Link>
       ))}
     </div>

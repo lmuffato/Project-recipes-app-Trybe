@@ -183,7 +183,7 @@
   background-color: #FF722A;
 }
 
-.meals-container {
+.recipe-container {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -201,7 +201,7 @@
       flex-wrap: wrap;
 }
 
-.meals-card {
+.recipe-card {
   width: 45%;
   height: 180px;
   border-radius: 5px;
@@ -211,18 +211,37 @@
   background-color: white;
 }
 
-.meals-card img {
-  width: 300px;
-  height: 100px;
-  -o-object-fit: cover;
-     object-fit: cover;
-}
-
-.meals-card p {
+.recipe-card p {
   color: #1b1b1b;
   font-weight: bold;
-  text-align: center;
-  bottom: 0;
+  font-size: 18px;
+  margin-left: 20px;
+  margin-top: 10px;
+}
+
+.img-crop {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  height: 120px;
+  background-color: pink;
+  border-radius: 5px;
+}
+
+.img-crop img {
+  width: 100%;
+  height: 120px;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 .explore {
