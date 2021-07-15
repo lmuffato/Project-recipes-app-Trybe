@@ -19,6 +19,7 @@ const Container = styled.div`
     display: flex;
     flex-flow: row-reverse nowrap;
     justify-content: center;
+    position: absolute;
   }
 
   .fav-icon {

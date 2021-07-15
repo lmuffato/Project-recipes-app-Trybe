@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import FoodContext from '../contexts/foods/FoodContext';
 import DrinksContext from '../contexts/drinks/DrinksContext';
 import ButtonFilters from '../components/ButtonFilters';
@@ -59,7 +60,7 @@ export default function MainRecipes({ categories, arrayCards,
   }
 
   return (
-    <div>
+    <Container>
       <Header />
       <ButtonFilters
         toggle={ toggle }
@@ -68,9 +69,11 @@ export default function MainRecipes({ categories, arrayCards,
         categories={ categories }
         functionChangeFilter={ functionChangeFilter }
       />
-      {radio.length > 0 ? radioMeals() : meals()}
+      <div className="main-cards">
+        {radio.length > 0 ? radioMeals() : meals()}
+      </div>
       <LowerMenu />
-    </div>
+    </Container>
   );
 }
 
@@ -82,3 +85,15 @@ MainRecipes.propTypes = {
   toggle: PropTypes.bool.isRequired,
   arrayCards: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
+
+const Container = styled.div`
+  .main-cards {
+    margin-left: 70px;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    overflow: scroll;
+    height: fit-content;
+  }
+`;
