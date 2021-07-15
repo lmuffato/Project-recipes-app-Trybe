@@ -34,14 +34,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import shareIcon from '../images/shareIcon.svg';
-import setFavoriteLocalStorage from '../service/setFavoriteLocalStorage';
+import ButtonFavorite from './ButtonFavorite';
+import ButtonShare from './ButtonShare';
 import '../styleSheets/CardDoneAndFavorite.css';
 
 function CardDoneAndFavorite(props) {
   const { recipe, local, index } = props;
   const { id, type, area, category, alcoholicOrNot, name, image } = recipe;
   const dbType = type === 'comida' ? 'themealdb' : 'thecocktaildb';
-  const pathDetail = type === 'comida' ? '/comidas' : '/bebidas';
+  const pathDetail = type === 'comida' ? 'comidas' : 'bebidas';
   const doneDateElement = local === 'feitas'
     ? (<span data-testid={ `${index}-horizontal-done-date` }>{recipe.doneDate}</span>)
     : '';
@@ -78,15 +79,6 @@ function CardDoneAndFavorite(props) {
         {`${area} - ${category}`}
       </span>
     );
-  const favoriteButton = (
-    <button
-      onClick={ () => setFavoriteLocalStorage(dbType, id) }
-      type="button"
-      data-testid={ `${index}-horizontal-favorite-btn` }
-    >
-      favoritar
-    </button>
-  );
   return (
     <section
       className="done-favorite-card"
@@ -94,7 +86,7 @@ function CardDoneAndFavorite(props) {
       data-testid={ `${index}` }
     >
       <Link
-        to={ `${pathDetail}/${id}` }
+        to={ `/${pathDetail}/${id}` }
       >
         <img
           src={ image }
@@ -108,19 +100,14 @@ function CardDoneAndFavorite(props) {
       >
         <div>
           { custonElement }
-          <button
-            type="button"
-            src={ shareIcon }
-          >
-            <img
-              src={ shareIcon }
-              alt="icone para compartilhar"
-              data-testid={ `${index}-horizontal-share-btn` }
-            />
-          </button>
+          <ButtonShare
+            idRecipe={ id }
+            typeRecipe={ pathDetail }
+            testid={ `${index}-horizontal-share-btn` }
+          />
         </div>
         <Link
-          to={ `${pathDetail}/${id}` }
+          to={ `/${pathDetail}/${id}` }
         >
           <h3
             className="title-done-card"
@@ -131,7 +118,12 @@ function CardDoneAndFavorite(props) {
         </Link>
         {local === 'feitas' && doneDateElement}
         <div>{local === 'feitas' && tagsElements}</div>
-        {local === 'favoritas' && favoriteButton}
+        {local === 'favoritas'
+          && <ButtonFavorite
+            idRecipe={ id }
+            dbType={ dbType }
+            testid={ `${index}-horizontal-favorite-btn` }
+          />}
       </div>
     </section>
   );
