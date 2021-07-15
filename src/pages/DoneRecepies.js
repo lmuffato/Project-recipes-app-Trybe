@@ -12,7 +12,7 @@ function DoneRecepies() {
 
   // funções para pegar as receitas do local storage
   const getDoneRecepies = () => {
-    const doneRecepiesString = localStorage.getItem('doneRecepies');
+    const doneRecepiesString = localStorage.getItem('doneRecipes');
     const allDoneRecepies = JSON.parse(doneRecepiesString);
     return allDoneRecepies;
   };
@@ -32,7 +32,8 @@ function DoneRecepies() {
   }, []);
 
   function setMealOrDrink(recepie, index) {
-    if (recepie.type === 'meal') {
+    console.log(index);
+    if (recepie.type === 'comida') {
       console.log(recepie);
       return (
         <CardMealDoneFav
@@ -55,10 +56,11 @@ function DoneRecepies() {
     } else if (param === 'all') {
       setShowRecepies(myDoneRecepies);
     } else if (param === 'food') {
-      const mealsRecepi = myDoneRecepies.filter((recepi) => recepi.type === 'meals');
+      console.log('entrou no filtro de comidas');
+      const mealsRecepi = myDoneRecepies.filter((recepi) => recepi.type === 'comida');
       setShowRecepies(mealsRecepi);
     } else if (param === 'drink') {
-      const drinksRecepi = myDoneRecepies.filter((recepi) => recepi.type === 'drinks');
+      const drinksRecepi = myDoneRecepies.filter((recepi) => recepi.type === 'bebida');
       setShowRecepies(drinksRecepi);
     }
   }
