@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Card from '../../../../components/RecipesCardsGrid/components/RecipeSimpleCard';
 import styles from './styles.module.scss';
@@ -7,12 +8,14 @@ function ExploreCards({ ingredients }) {
   return (
     <section className={ styles.grid }>
       {ingredients.map((ingredient, index) => (
-        <Card
-          key={ ingredient.id }
-          recipe={ ingredient }
-          index={ index }
-          page="ingredient"
-        />))}
+        <Link to="/comidas" key={ ingredient.id }>
+          <Card
+            recipe={ ingredient }
+            index={ index }
+            ingredient
+          />
+        </Link>
+      ))}
     </section>
   );
 }

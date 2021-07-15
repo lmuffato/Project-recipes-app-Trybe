@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import Card from '../../../../components/RecipesCardsGrid/components/RecipeSimpleCard';
 import styles from '../ExploreCards/styles.module.scss';
 import { mealsData, exploreMealsData } from '../../../../services/mealsData';
@@ -47,12 +48,12 @@ function Dropdown({ areas }) {
       </select>
       <section className={ styles.grid }>
         {recipes.map((recipe, index) => (
-          <Card
-            key={ recipe.id }
-            recipe={ recipe }
-            index={ index }
-            page="recipe"
-          />
+          <Link key={ recipe.id } to={ `/comidas/${recipe.id}` }>
+            <Card
+              recipe={ recipe }
+              index={ index }
+            />
+          </Link>
         ))}
       </section>
     </>

@@ -54,6 +54,7 @@ function Explore() {
         {type === 'ingredientes' && <ExploreCards ingredients={ ingredients } />}
         {type === 'area' && <Dropdown areas={ areas } />}
       </div>
+      <Footer />
     </>
   );
 }
