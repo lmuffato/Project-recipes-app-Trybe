@@ -80,7 +80,10 @@ function ComponentGen(props) {
         spaceBetween={ 0 }
         loop
         freeMode
-        autoplay
+        autoplay={ {
+          delay: 2000,
+          disableOnInteraction: false,
+        } }
         grabCursor
         pagination={ {
           clickable: true,

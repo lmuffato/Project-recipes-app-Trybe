@@ -6,7 +6,7 @@ export default function RecipeCatg(props) {
   return (
     <h4 className="category" data-testid="recipe-category">
       (
-      {category}
+      { category }
       )
     </h4>
   );
