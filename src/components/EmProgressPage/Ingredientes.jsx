@@ -1,9 +1,8 @@
 import { object } from 'prop-types';
 import React, { useEffect, useState } from 'react';
-// import { useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
-function Ingredientes({ params: { ingredientsList, data } }) {
-// function Ingredientes({ params: { ingredientsList, data, setIsDisabled } }) {
+function Ingredientes({ params: { ingredientsList, data, setIsDisabled } }) {
   const [ingArray, setIngArray] = useState([]);
   const [LSG, setLSG] = useState([]);
 
