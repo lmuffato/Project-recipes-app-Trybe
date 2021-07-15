@@ -45,7 +45,7 @@ export default function DoneRecipes() {
         <Header className="header">
           <h1 data-testid="page-title">Receitas Feitas</h1>
         </Header>
-        <h1 fontSize="20px" padding="10px">Você não possui nenhuma receita concluida...</h1>
+        <h1>Você não possui nenhuma receita concluida...</h1>
       </div>
     );
   }

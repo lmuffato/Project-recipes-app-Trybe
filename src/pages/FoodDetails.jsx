@@ -21,11 +21,13 @@ export default function FoodDetails() {
 
   RecipeDetail(currMeal, ApiRecipeDetail, ApiCocktailFirstItems, setCurrMeal);
   RecipeInit(currMeal);
-
+  let video = '';
   if (!currMeal.recipe) return;
   const { arrRecipeIngredients, arrRecipeMeasureUnit,
     recipe, recomends, doneRecipe, inProgress } = currMeal;
-
+  if (recipe.strYoutube) {
+    video = recipe.strYoutube.split('=');
+  }
   return (
     <Card className="recipeDetailsCard">
       <img
@@ -67,11 +69,15 @@ export default function FoodDetails() {
         </div>
       </div>
       <iframe
-        title={ recipe.strMeal }
-        width="240"
-        height="120"
+        title="video"
+        width="280"
+        height="157.5"
         data-testid="video"
-        src={ recipe.strYoutube }
+        frameBorder="0"
+        allow="accelerometer; autoplay; clipboard-write;
+        encrypted-media; gyroscope; picture-in-picture"
+        allowFullScreen
+        src={ recipe.strYoutube && `https://www.youtube.com/embed/${video[1]}` }
       />
       <div className="carousel">
         <h3 className="carouselTitle">Bebidas Recomendadas:</h3>

@@ -15,12 +15,10 @@ const GetDoneDetails = async () => {
     // Fonte: https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Promise/all
     list = await Promise.all(promises);
   }
-
   if (storageItems !== null && storageItems !== undefined
     && storageItems.type === 'comida') {
     return ApiRecipeDetail(storageItems.id);
   }
-
   if (list.length) {
     const listItems = list.map((item) => {
       const keys = Object.keys(item);
@@ -31,9 +29,7 @@ const GetDoneDetails = async () => {
     });
     return listItems;
   }
-
   return storageItems !== null && storageItems !== undefined
     && ApiDetailsById(storageItems.id);
 };
-
 export default GetDoneDetails;
