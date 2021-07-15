@@ -39,37 +39,49 @@ function ComponentGen(props) {
     }];
   }
   return (
-    <div className="recipe_details">
-      <div>
-        <aside className="image">
-          <div className="titles">
-            <RecipeTitle title={ strMeal || strDrink } />
-            { strAlcoholic !== undefined
-              ? <RecipeCatg category={ `${strCategory} ${strAlcoholic}` } />
-              : <RecipeCatg category={ strCategory } />}
-          </div>
-          <RecipeImage origin={ strMealThumb || strDrinkThumb } />
-          <div>
-            <ShareBtn dataTest="share-btn" />
-            <FavBtn info={ currentInfo } />
-          </div>
-        </aside>
-        <aside className="ingredients">
-          <h3>Ingredientes</h3>
-          <ul>
-            {listCreator}
-          </ul>
-        </aside>
+    <>
+      <div className="recipe_details">
+        <RecipeTitle className="title" title={ strMeal || strDrink } />
+        { strAlcoholic !== undefined
+          ? <RecipeCatg category={ `${strCategory} ${strAlcoholic}` } />
+          : <RecipeCatg category={ strCategory } />}
+        <div>
+          <aside className="image">
+            <RecipeImage origin={ strMealThumb || strDrinkThumb } />
+            <div>
+              <ShareBtn dataTest="share-btn" />
+              <FavBtn info={ currentInfo } />
+            </div>
+          </aside>
+          <aside className="ingredients">
+            <h3>Ingredients</h3>
+            <ul>
+              {listCreator}
+            </ul>
+          </aside>
+        </div>
+        <h3 className="h3">Instructions</h3>
+        <div className="instructions">
+          <RecipeInst instructions={ strInstructions } />
+          { strMeal !== undefined && <VideoCtn className="video" src={ strYoutube } /> }
+        </div>
+        <h3 className="h3">Recommended</h3>
       </div>
-      <h3>Instruções</h3>
-      <RecipeInst instructions={ strInstructions } />
-      { strMeal !== undefined && <VideoCtn src={ strYoutube } /> }
-      <h3>Recomendadas</h3>
-
       <Swiper
-        slidesPerView={ 3 }
+        effect="coverflow"
+        coverflowEffect={ {
+          rotate: 10,
+          stretch: 0,
+          depth: 200,
+          modifier: 1,
+          slideShadows: true,
+        } }
+        slidesPerView={ 4 }
         spaceBetween={ 0 }
         loop
+        freeMode
+        autoplay
+        grabCursor
         pagination={ {
           clickable: true,
         } }
@@ -78,7 +90,7 @@ function ComponentGen(props) {
         {recomendList}
       </Swiper>
       <BottomBtn info={ info } />
-    </div>
+    </>
   );
 }
 

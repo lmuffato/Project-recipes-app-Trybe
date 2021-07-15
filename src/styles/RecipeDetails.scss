@@ -1,5 +1,4 @@
 @mixin for-phone-only {
-
   @media ( max-width : 767.98px ) { @content;}
 
 }
@@ -7,6 +6,44 @@
 .recipe_details {
   display: flex;
   flex-direction: column;
+
+  .title {
+    align-self: center;
+    color: white;
+    font-size: 4em;
+    padding-top: 0.5em;
+  }
+
+  .category {
+    align-self: center;
+    color: white;
+    font-size: 3em;
+    padding-bottom: 0.5em;
+  }
+
+  .h3 {
+    color: white;
+    font-size: 2.5em;
+    padding: 1em 0 0.5em 2.2em;
+  }
+
+  .instructions {
+    padding: 3em;
+  }
+
+  & iframe {
+    float: left;
+    margin-left: 2em;
+  }
+
+  & p {
+    color: white;
+    float: right;
+    font-size: 1.3em;
+    line-height: 2.4em;
+    padding-left: 2em;
+    width: 87%;
+  }
 
   & div {
     display: flex;
@@ -20,6 +57,7 @@
     padding: 2em;
     width: 50%;
 
+
     & img {
       align-self: center;
       height: auto;
@@ -29,17 +67,6 @@
     & .titles {
       align-self: flex-start;
       margin: 0 0 2em 4em;
-    }
-
-    & h1 {
-      align-self: center;
-      font-size: 5em;
-    }
-
-    & h4 {
-      align-self: center;
-      font-size: 3em;
-      padding-left: 0.5em;
     }
 
     & div {
@@ -60,13 +87,12 @@
 
   & .ingredients {
     border-bottom: 1px solid white;
-    padding: 2em 0 0;
+    padding-top: 1.8em;
     width: 50%;
 
     & h3 {
       color: white;
       font-size: 3em;
-      margin-top: 2.5em;
     }
 
     & ul {
@@ -86,15 +112,6 @@
       padding: 0.5em;
     }
   }
-
-  .startBtn {
-    border: 1px solid black;
-    bottom: 0;
-    height: 50px;
-    position: fixed;
-    width: 100%;
-    z-index: 1;
-  }
 }
 
 .swiper {
@@ -102,12 +119,12 @@
   .swiper__slide {
     background-color: black;
     padding: 0 0.5em 0.5em;
+    padding-bottom: 4.5em;
 
     .swiper__div {
       align-items: center;
       display: flex;
       flex-direction: column;
-
     }
 
     .swiper__title {
@@ -125,4 +142,13 @@
       text-decoration: none;
     }
   }
+}
+
+.startBtn {
+  border: 1px solid black;
+  bottom: 0;
+  height: 50px;
+  position: fixed;
+  width: 100%;
+  z-index: 1;
 }

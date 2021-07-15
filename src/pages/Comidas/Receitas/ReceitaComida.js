@@ -3,12 +3,13 @@ import React, { useEffect, useState } from 'react';
 import { Link, useRouteMatch } from 'react-router-dom';
 import '../../../styles/RecipeDetails.css';
 import SwiperCore, {
-  Pagination,
+  EffectCoverflow, Pagination,
 } from 'swiper/core';
 import { SwiperSlide } from 'swiper/react';
 import ComponentGen from '../../../components/RecipeDetailsComponents';
 import 'swiper/swiper.min.css';
 import 'swiper/components/pagination/pagination.min.css';
+import 'swiper/components/effect-coverflow/effect-coverflow.min.css';
 
 function Receita() {
   const { params } = useRouteMatch();
@@ -16,7 +17,7 @@ function Receita() {
   const [info, setInfo] = useState('');
   const [recomend, setRecomend] = useState();
 
-  SwiperCore.use([Pagination]);
+  SwiperCore.use([EffectCoverflow, Pagination]);
 
   useEffect(() => {
     async function FoodAPI() {

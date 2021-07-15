@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 export default function RecipeCatg(props) {
   const { category } = props;
   return (
-    <h4 data-testid="recipe-category">
+    <h4 className="category" data-testid="recipe-category">
       (
       {category}
       )
