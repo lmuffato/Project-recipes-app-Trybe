@@ -73,7 +73,8 @@ function DrinkDescription({ recipe, recipeId }) {
         <h2>Ingredients</h2>
         { ingredients.map((ingredient, index) => (
           <p key={ index } data-testid={ `${index}-ingredient-name-and-measure` }>
-            {`- ${ingredient} - ${measures[index] === undefined ? 'at taste' : measures[index]}`}
+            {`- ${ingredient} - ${measures[index] === undefined
+              ? 'at taste' : measures[index]}`}
           </p>
         ))}
         <p data-testid="instructions">{ strInstructions }</p>
