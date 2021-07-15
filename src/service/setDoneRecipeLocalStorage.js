@@ -29,7 +29,7 @@ const generateDoneElement = (recipe, type) => {
     alcoholicOrNot: type === 'Drink' ? recipe.strAlcoholic : '',
     name: recipe[`str${type}`],
     image: recipe[`str${type}Thumb`],
-    doneDate: `${date.getDay()}/${date.getMonth() + 1}/${date.getFullYear()}`,
+    doneDate: `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`,
     tags: recipe.strTags !== null ? recipe.strTags.split(',') : [],
   });
 };

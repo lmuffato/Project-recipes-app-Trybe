@@ -5,15 +5,16 @@ data-testid="share-btn"
 
 */
 
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { useLocation } from 'react-router-dom';
+import ContextRecipes from '../context/ContextRecipes';
 import shareIcon from '../images/shareIcon.svg';
 import '../styleSheets/ButtonShare.css';
 
 function ButtonShare(props) {
   const { idRecipe, typeRecipe, testid } = props;
-
+  const { turnOnAlert } = useContext(ContextRecipes);
   const { pathname } = useLocation();
   const url = `${window.location.href.split(pathname)[0]}/${typeRecipe}/${idRecipe}`;
   const sendToClipboard = () => {
@@ -24,18 +25,19 @@ function ButtonShare(props) {
     elem.select();
     document.execCommand('copy');
     document.body.removeChild(elem);
+    turnOnAlert();
   };
   return (
     <button
       type="button"
       className="button-share"
-      value={ url }
       onClick={ () => sendToClipboard() }
+      data-testid={ testid }
+      src={ shareIcon }
     >
       <img
         src={ shareIcon }
         alt="botão de compartilhar"
-        data-testid={ testid }
       />
     </button>
   );

@@ -1,10 +1,3 @@
-import React, { useState, useContext, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
-import HeaderRecipes from '../components/HeaderRecipes';
-import NavegateButtons from '../components/NavegateButtons';
-import CardDoneAndFavorite from '../components/CardDoneAndFavorite';
-import ContextRecipes from '../context/ContextRecipes';
-
 /*
 Esta função renderiza as telas de receitas feitas e favoritas.
 Ela busca informações na local storage e as carrega no estado "renderedRecipes"
@@ -15,9 +8,17 @@ Ela busca informações na local storage e as carrega no estado "renderedRecipes
 - É feito um map da variavel "renderedCards" renderizando os cartões por meio do componente "DoneAndFavoriteCard"
 - O valor da variável "activeFilter" é definido pelos botões renderizados no componente "NavegateButtons"
 */
+import React, { useState, useContext, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+import HeaderRecipes from '../components/HeaderRecipes';
+import NavegateButtons from '../components/NavegateButtons';
+import CardDoneAndFavorite from '../components/CardDoneAndFavorite';
+import ContextRecipes from '../context/ContextRecipes';
+import CustonAlert from '../components/CustonAlert';
 
 function DoneAndFavorites() {
-  const { activeFilter } = useContext(ContextRecipes);
+  const { activeFilter, alertOn,
+    updateFlag, setUpadateFlag } = useContext(ContextRecipes);
   const [renderedCards, setCards] = useState([]);
   const { pathname } = useLocation();
   const local = pathname.split('-')[1];
@@ -29,12 +30,14 @@ function DoneAndFavorites() {
         .filter((recipe) => activeFilter === 'All' || recipe.type === activeFilter);
       setCards(filteredCards);
     }
-  }, [local, activeFilter]);
+    setUpadateFlag(false);
+  }, [local, activeFilter, setUpadateFlag, updateFlag]);
 
   return (
     <main>
       <HeaderRecipes />
       <NavegateButtons />
+      {alertOn && <CustonAlert message="Link copiado!" />}
       { renderedCards.map((recipe, index) => (
         <CardDoneAndFavorite
           key={ index }

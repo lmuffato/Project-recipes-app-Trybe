@@ -33,7 +33,6 @@ As tags da receita devem possuir o atributo data-testid=${index}-${tagName}-hori
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import shareIcon from '../images/shareIcon.svg';
 import ButtonFavorite from './ButtonFavorite';
 import ButtonShare from './ButtonShare';
 import '../styleSheets/CardDoneAndFavorite.css';

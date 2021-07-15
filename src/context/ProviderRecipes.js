@@ -13,6 +13,14 @@ function ProviderRecipes({ children }) {
   const [loadingCards, setLoadingCards] = useState(false);
   const [showSearchBar, setShowSearchBar] = useState(false);
   const [countries, setCountries] = useState([]);
+  const [alertOn, setAlertOn] = useState(false);
+  const [updateFlag, setUpadateFlag] = useState(false);
+
+  const turnOnAlert = () => {
+    setAlertOn(true);
+    const waitTime = 2000;
+    setTimeout(() => { setAlertOn(false); }, waitTime);
+  };
 
   const getCategories = async (type) => {
     const siteName = type === 'Meal' ? 'meal' : 'cocktail';
@@ -110,6 +118,10 @@ function ProviderRecipes({ children }) {
         fetchArea,
         countries,
         setCountries,
+        alertOn,
+        turnOnAlert,
+        updateFlag,
+        setUpadateFlag,
       } }
     >
       { children }

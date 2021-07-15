@@ -11,8 +11,9 @@ Ela é renderizada na tela de receitas favoritas, feitas e detalhes de uma recei
 data-testid={ `${index}-horizontal-favorite-btn` }
 */
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
+import ContextRecipes from '../context/ContextRecipes';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import setFavoriteLocalStorage from '../service/setFavoriteLocalStorage';
@@ -20,10 +21,12 @@ import '../styleSheets/ButtonFavorite.css';
 
 function ButtonFavorite(props) {
   const { idRecipe, dbType, testid } = props;
+  const { setUpadateFlag } = useContext(ContextRecipes);
   const [isFavorite, setIsFavorite] = useState(false);
 
   const toogleIcon = () => {
     setIsFavorite(!isFavorite);
+    setUpadateFlag(true);
   };
 
   useEffect(() => {
