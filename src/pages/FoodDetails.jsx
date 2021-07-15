@@ -20,11 +20,13 @@ export default function FoodDetails() {
 
   RecipeDetail(currMeal, ApiRecipeDetail, ApiCocktailFirstItems, setCurrMeal);
   RecipeInit(currMeal);
-
+  let video = '';
   if (!currMeal.recipe) return;
   const { arrRecipeIngredients, arrRecipeMeasureUnit,
     recipe, recomends, doneRecipe, inProgress } = currMeal;
-  const INDEX_REPLACE = 3;
+  if (recipe.strYoutube) {
+    video = recipe.strYoutube.split('=');
+  }
   return (
     <Card style={ { width: '18rem' } }>
       <h2 data-testid="recipe-title">{recipe.strMeal}</h2>
@@ -50,20 +52,16 @@ export default function FoodDetails() {
         );
       })}
       <p data-testid="instructions">{ recipe.strInstructions }</p>
-      {recipe.strYoutube && console.log(recipe.strYoutube.split('/'))}
-      {recipe.strYoutube && console.log(recipe.strYoutube.split('/')
-        .reduce((acc, item, index) => {
-          if (index === INDEX_REPLACE) return `${acc}/iframe_api/${item}`;
-          return `${acc}/${item}`;
-        }), '')}
       <iframe
         title="video"
         width="280"
         height="157.5"
         data-testid="video"
-        src={ recipe.strYoutube && recipe.strYoutube.split('/')
-          .reduce((acc, item, index) => (index === INDEX_REPLACE
-            ? `${acc}/embed/${item}` : `${acc}/${item}`)) }
+        frameBorder="0"
+        allow="accelerometer; autoplay; clipboard-write;
+        encrypted-media; gyroscope; picture-in-picture"
+        allowFullScreen
+        src={ recipe.strYoutube && `https://www.youtube.com/embed/${video[1]}` }
       />
       <h4>Bebidas Recomendadas:</h4>
       <Carousel>
