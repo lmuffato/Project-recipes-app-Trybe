@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import { drinkById } from '../services/apiRequests';
@@ -60,9 +60,11 @@ export default function RecipeCardDetailDrink() {
       <h4>Instructions: </h4>
       <h2 data-testid="instructions">{ drinkDetails.strInstructions }</h2>
       <FoodsRecomends />
-      <button type="button" data-testid="start-recipe-btn" className="playRecipe">
-        Iniciar Receita
-      </button>
+      <Link to={ `/bebidas/${idDrink}/in-progress` }>
+        <button type="button" data-testid="start-recipe-btn" className="playRecipe">
+          Iniciar Receita
+        </button>
+      </Link>
     </div>
   );
 }

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import ReactPlayer from 'react-player'; // https://dev.to/marcelomatosdev/react-adding-a-video-player-to-play-youtube-videos-in-your-project-30p
-import { useParams } from 'react-router-dom';
+// import ReactPlayer from 'react-player'; // https://dev.to/marcelomatosdev/react-adding-a-video-player-to-play-youtube-videos-in-your-project-30p
+import { Link, useParams } from 'react-router-dom';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import { foodById } from '../services/apiRequests';
@@ -59,14 +59,16 @@ export default function RecipeCardDetailFood() {
       </ul>
       <h4>Instructions: </h4>
       <h2 data-testid="instructions">{ foodDetails.strInstructions }</h2>
-      <ReactPlayer
+      {/* <ReactPlayer
         data-testid="video"
         url={ foodDetails.strYoutube }
-      />
+      /> */}
       <DrinksRecomends />
-      <button type="button" data-testid="start-recipe-btn" className="playRecipe">
-        Iniciar Receita
-      </button>
+      <Link to={ `/comidas/${idMeal}/in-progress` }>
+        <button type="button" data-testid="start-recipe-btn" className="playRecipe">
+          Iniciar Receita
+        </button>
+      </Link>
     </div>
   );
 }
