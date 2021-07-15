@@ -25,22 +25,26 @@ function Drinks() {
   return (
     <>
       <Header />
-      <Link to="/explorar/bebidas/ingredientes">
-        <button
-          type="button"
-          data-testid="explore-by-ingredient"
-        >
-          Por Ingredientes
-        </button>
-      </Link>
-      <Link to={ `/bebidas/${idDrink}` }>
-        <button
-          type="button"
-          data-testid="explore-surprise"
-        >
-          Me Surpreenda!
-        </button>
-      </Link>
+      <main className="main-explore">
+        <Link to="/explorar/bebidas/ingredientes">
+          <button
+            type="button"
+            data-testid="explore-by-ingredient"
+            className="button explore-button"
+          >
+            Por Ingredientes
+          </button>
+        </Link>
+        <Link to={ `/bebidas/${idDrink}` }>
+          <button
+            type="button"
+            data-testid="explore-surprise"
+            className="button explore-button"
+          >
+            Me Surpreenda!
+          </button>
+        </Link>
+      </main>
       <Footer />
     </>
   );

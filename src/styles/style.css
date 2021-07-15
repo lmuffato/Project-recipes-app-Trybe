@@ -65,7 +65,6 @@ body div {
   height: 78%;
   justify-content: space-around;
   margin-bottom: 12%;
-  margin-top: 37%;
 }
 
 .recipe, .ingredient {
@@ -83,11 +82,19 @@ body div {
 /* ------------------------------------------------------------ */
 
 /* -------------- Tela Principal de Receitas  ----------------- */
+
+/* -- Componente Principal de Receitas --- */
 .main-recipes {
   align-items: center;
   justify-content: space-around;
   margin-top: 15%;
 }
+
+.recipes-container {
+  margin-top: 35%;
+}
+
+/* --------------------------------------- */
 
 /* ------ Componente Filter Buttons ------ */
 .button-container {
@@ -97,7 +104,7 @@ body div {
   height: 125px;
   justify-content: space-around;
   position: fixed;
-  top: 8.5%;
+  top: 7%;
   width: 100%;
 }
 
@@ -202,6 +209,10 @@ body div {
 /* ------------------------------------------------------------ */
 
 /* ----------- Tela de Explorar por Ingredientes -------------- */
+.ingredients-container {
+  margin-top: 18%;
+}
+
 .ingredient {
   background-color: #9a8f9794;
   color: black;

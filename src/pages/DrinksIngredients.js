@@ -40,6 +40,7 @@ function DrinksIngredients() {
           <Link
             to="/bebidas"
             key={ index }
+            className="ingredient"
             data-testid={ `${index}-ingredient-card` }
             onClick={ (e) => getRecipesByIngredient(e.target.innerText || e.target.alt) }
           >
