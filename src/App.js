@@ -9,8 +9,11 @@ import Recipe from './pages/Recipe';
 function App() {
   return (
     <Switch>
-      <Route path={ ['/explorar/:meal', '/explorar'] } component={ Explore } />
-      <Route path="/explorar" component={ Explore } />
+      <Route
+        path={ ['/explorar/:meal/:type',
+          '/explorar/:meal', '/explorar'] }
+        component={ Explore }
+      />
       <Route path={ ['/comidas/:id', '/bebidas/:id'] } component={ Recipe } />
       <Route path={ ['/comidas', '/bebidas'] } component={ MainRecipes } />
       <Route path="/perfil" component={ Perfil } />

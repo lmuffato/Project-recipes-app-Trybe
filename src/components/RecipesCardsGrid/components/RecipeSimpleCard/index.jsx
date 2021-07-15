@@ -5,12 +5,20 @@ import plus18Icon from '../../../../images/plus18.svg';
 
 import styles from './styles.module.scss';
 
-function RecipeSimpleCard({ recipe, index, alcoholic, recommendationCard }) {
+function RecipeSimpleCard({ recipe, index, alcoholic, recommendationCard, ingredient }) {
+  let cardTestId;
+
+  if (recommendationCard) {
+    cardTestId = `${index}-recomendation-card`;
+  } else if (ingredient) {
+    cardTestId = `${index}-ingredient-card`;
+  } else {
+    cardTestId = `${index}-recipe-card`;
+  }
+
   return (
     <div
-      data-testid={
-        recommendationCard ? `${index}-recomendation-card` : `${index}-recipe-card`
-      }
+      data-testid={ cardTestId }
       className={ styles.card }
     >
       { alcoholic && (
@@ -45,11 +53,13 @@ RecipeSimpleCard.propTypes = {
     imagePath: PropTypes.string,
   }).isRequired,
   recommendationCard: PropTypes.bool,
+  ingredient: PropTypes.bool,
 };
 
 RecipeSimpleCard.defaultProps = {
   alcoholic: false,
   recommendationCard: false,
+  ingredient: false,
 };
 
 export default RecipeSimpleCard;

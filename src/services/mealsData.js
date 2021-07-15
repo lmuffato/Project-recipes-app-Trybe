@@ -11,6 +11,17 @@ function parseMealResults(results) {
   return parsed;
 }
 
+function parseIngredientResults(ingredients) {
+  const parsed = ingredients.map((ingredient) => ({
+    ...ingredient,
+    id: ingredient.idIngredient,
+    name: ingredient.strIngredient,
+    imagePath: `https://www.themealdb.com/images/ingredients/${ingredient.strIngredient}-Small.png`,
+  }));
+
+  return parsed;
+}
+
 export async function mealsData(options) {
   const results = await fetchJson('https://www.themealdb.com/api/json/v1/1/search.php?s=');
   const resultsParsed = parseMealResults(results);
@@ -56,10 +67,30 @@ export async function mealsData(options) {
   };
 }
 
-export async function exploreMealsData() {
+export async function exploreMealsData(area) {
   const randomMeal = await fetchJson('https://www.themealdb.com/api/json/v1/1/random.php');
+
+  const ingredients = await fetchJson('https://www.themealdb.com/api/json/v1/1/list.php?i=list');
+
+  const areas = await fetchJson('https://www.themealdb.com/api/json/v1/1/list.php?a=list');
+
+  if (area) {
+    if (area === 'All') {
+      const results = await fetchJson('https://www.themealdb.com/api/json/v1/1/search.php?s=');
+      return parseMealResults(results);
+    }
+    const filterMeals = await fetchJson(`https://www.themealdb.com/api/json/v1/1/filter.php?a=${area}`);
+    return parseMealResults(filterMeals);
+  }
+
+  const parseIngredients = parseIngredientResults(ingredients.meals);
 
   const parserRandom = parseMealResults(randomMeal);
 
-  return { titlePage: 'Explorar Comidas', random: parserRandom };
+  return {
+    titlePage: 'Explorar Comidas',
+    random: parserRandom,
+    ingredients: parseIngredients,
+    areas: areas.meals,
+  };
 }

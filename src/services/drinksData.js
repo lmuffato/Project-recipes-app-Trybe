@@ -11,6 +11,17 @@ function parseDrinkResults(results) {
   return parsed;
 }
 
+function parseIngredientResults(ingredients) {
+  const parsed = ingredients.map((ingredient) => ({
+    ...ingredient,
+    id: ingredient.strIngredient1,
+    name: ingredient.strIngredient1,
+    imagePath: `https://www.thecocktaildb.com/images/ingredients/${ingredient.strIngredient1}-Small.png`,
+  }));
+
+  return parsed;
+}
+
 export async function drinksData(options) {
   const results = await fetchJson('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
   const resultsParsed = parseDrinkResults(results);
@@ -58,7 +69,16 @@ export async function drinksData(options) {
 
 export async function exploreDrinksData() {
   const randonDrink = await fetchJson('https://www.thecocktaildb.com/api/json/v1/1/random.php');
+
+  const ingredients = await fetchJson('https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list');
+
   const parseRandom = parseDrinkResults(randonDrink);
 
-  return { titlePage: 'Explorar Bebidas', random: parseRandom };
+  const parseIngredients = parseIngredientResults(ingredients.drinks);
+
+  return {
+    titlePage: 'Explorar Bebidas',
+    random: parseRandom,
+    ingredients: parseIngredients,
+  };
 }
