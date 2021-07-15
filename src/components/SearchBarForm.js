@@ -3,6 +3,7 @@ import { Form, Button, FormControl, Navbar,
   ButtonGroup, ToggleButton,
 } from 'react-bootstrap';
 import { useLocation, useHistory } from 'react-router-dom';
+import propTypes from 'prop-types';
 import { getIngCock, getIngCockTail, getNameCock,
   getNameCockTail, getFirstLetterCock, getFirstLetterCockTail,
 } from '../services/fetchApiSearchBar';
@@ -11,7 +12,7 @@ import './searchBar.css';
 import ContextComidas from '../provider/ContextComida';
 import ContextBebidas from '../provider/ContextBebida';
 
-const SearchBarForm = () => {
+const SearchBarForm = ({ searchBar }) => {
   const [busca, setBusca] = useState('');
   const [markBusca, setMarkBusca] = useState('');
 
@@ -86,11 +87,12 @@ const SearchBarForm = () => {
         type="text"
         id="id-busca"
         name="id-busca"
-        onChange={ ({ target }) => setBusca(target.value) }
-        data-testid="search-input"
-        placeholder="Search"
-        // className="mr-sm-2"
         className="text"
+        placeholder="Search"
+        onChange={ ({ target }) => setBusca(target.value) }
+        // data-testid="search-input"
+        data-testid={ searchBar === true ? 'search-input' : null }
+        // className="mr-sm-2"
       />
       <Button
         className="button"
@@ -144,3 +146,7 @@ const SearchBarForm = () => {
 };
 
 export default SearchBarForm;
+
+SearchBarForm.propTypes = {
+  searchBar: propTypes.bool,
+}.isRequired;
