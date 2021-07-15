@@ -79,11 +79,3 @@ Header.propTypes = {
 };
 
 export default Header;
-
-// explorar sem lupa
-// explorar comidas sem lupa
-// explorar ingredientes sem lupa
-// explorar origem com lupa
-// receitas feitas sem lupa
-// perfil sem lupa
-// receitas favoritas sem lupa
