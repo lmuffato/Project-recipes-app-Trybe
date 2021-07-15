@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router';
 import PropTypes from 'prop-types';
 import fetchApiById from '../service/fetchApiDetails';
-import Ingredients from './Ingredients';
+// import Ingredients from './Ingredients';
 import Recommendations from './Recomendations';
 import Video from '../service/Video';
 import { FavFood, FavDrink } from '../service/Favorite';
@@ -52,7 +52,7 @@ function RecipeDetails(props) {
         { recipe.strCategory }
       </p>
       { recipe.strMeal ? <Video recipe={ recipe } /> : null }
-      <Ingredients recipe={ recipe } />
+      {/* <Ingredients recipe={} /> */}
       <h3>Instruções</h3>
       <p data-testid="instructions">{ recipe.strInstructions }</p>
       <Recommendations recipe={ type } />
