@@ -65,7 +65,7 @@ function MainRecipesPage() {
         })
         .catch((error) => console.error(error));
     }
-  }, [type, searchCategory, setCategories]);
+  }, [type, searchCategory, setCategories, history]);
 
   useEffect(() => {
     if (searchCategory !== 'list') {

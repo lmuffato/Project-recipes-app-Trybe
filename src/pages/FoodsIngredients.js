@@ -66,7 +66,11 @@ function FoodsIngredients() {
   return (
     <>
       <Header />
-      { getTwelveIngredients() }
+      <main className="main-ingredients">
+        <section className="ingredients-container">
+          { getTwelveIngredients() }
+        </section>
+      </main>
       <Footer />
     </>
   );

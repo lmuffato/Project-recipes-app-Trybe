@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import Footer from '../compenents/Footer';
 import Header from '../compenents/Header';
 import MealCards from '../compenents/MealCards';
@@ -71,15 +71,15 @@ function FoodsArea() {
         ))}
       </select>
       <section className="recipes-container">
-        {showRecepies.map((recepie, index) => (
-          <Link key={ index } to={ `/comidas/${recepie.idMeal}` }>
-            <MealCards
-              data={ recepie }
-              index={ index }
-              key={ recepie.idMeal }
-            />
-          </Link>
-        ))}
+        {/* {showRecepies.map((recepie, index) => ( */}
+        {/* // <Link key={ index } to={ `/comidas/${recepie.idMeal}` }> */}
+        <MealCards
+          data={ showRecepies }
+          // index={ index }
+          // key={ recepie.idMeal }
+        />
+        {/* </Link> */}
+        {/* ))} */}
       </section>
       <Footer />
     </>

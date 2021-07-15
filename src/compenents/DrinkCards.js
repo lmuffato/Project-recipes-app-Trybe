@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import '../styles/MainRecipes.css';
 
 function DrinkCards({ data }) {
-  console.log('render');
+  // console.log('render');
   // const { idDrink, strDrinkThumb, strDrink } = data;
   return (
     data.map((recipe, index) => {

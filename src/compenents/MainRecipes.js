@@ -30,9 +30,9 @@ function MainRecipes() {
   };
 
   // console.log(mealsAndDrinkByIngredients);
-  console.log('Opa');
+  // console.log('Opa');
   if (renderRecipes) {
-    console.log('renderizou');
+    // console.log('renderizou');
     return (
       <main data-testid="main-recipes" className="main">
         {/* { searchBtn ? <SearchBar /> : <FilterButtons /> } */}
