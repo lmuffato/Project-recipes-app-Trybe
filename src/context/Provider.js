@@ -13,6 +13,8 @@ function Provider({ children }) {
   const [catList, setCatList] = useState([]);
   const [category, setCategory] = useState('All');
   const [filtredList, setFiltredList] = useState([]);
+  const [drinksId, setDrinksId] = useState([]);
+  const [mealsId, setMealsId] = useState([]);
   const [ingredFromExplore, setIngredFromExplore] = useState('');
   const [fromExplore, setFromExplore] = useState(false);
 
@@ -37,6 +39,10 @@ function Provider({ children }) {
     setCategory,
     filtredList,
     setFiltredList,
+    setDrinksId,
+    drinksId,
+    mealsId,
+    setMealsId,
     ingredFromExplore,
     setIngredFromExplore,
     fromExplore,
