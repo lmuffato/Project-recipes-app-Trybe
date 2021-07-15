@@ -136,7 +136,7 @@ export function RecipesProvider({ children }) {
     setInProgressRecipes(updatedInProgressRecipes);
   }
 
-  async function switchFilters(filter, event) {
+  const switchFilters = useCallback(async (filter, event) => {
     let results = [];
     switch (filter.type) {
     case 'category': {
@@ -161,8 +161,10 @@ export function RecipesProvider({ children }) {
     }
 
     case 'ingredient': {
-      results = await getRecipes(location.pathname, { ingredient: filter.content });
-      setCurrentFilter({ ingredient: filter.content });
+      if (filter.pathname === location.pathname) {
+        results = await getRecipes(location.pathname, { ingredient: filter.content });
+        setCurrentFilter({ ingredient: filter.content });
+      }
       break;
     }
 
@@ -183,21 +185,22 @@ export function RecipesProvider({ children }) {
     }
     }
     return results;
-  }
+  }, [currentFilter.category, location.pathname]);
 
-  async function filterRecipe(filter, event) {
+  const filterRecipe = useCallback(async (filter, event) => {
     const recipesLimit = 12;
     try {
       const results = await switchFilters(filter, event);
-      if (results.length === 1) {
+      if (results && results.length === 1) {
         historyPush(`${location.pathname}/${results[0].id}`);
       }
 
       setRecipes(results.slice(0, recipesLimit));
     } catch (error) {
+      console.log(error);
       alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
     }
-  }
+  }, [historyPush, location.pathname, switchFilters]);
 
   const value = {
     recipes,
