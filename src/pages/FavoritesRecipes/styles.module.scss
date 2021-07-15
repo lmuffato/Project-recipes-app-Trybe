@@ -1,0 +1,19 @@
+.favorites {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  min-height: 100vh;
+  padding-bottom: 30px;
+
+  button {
+    align-self: center;
+    padding: 10px;
+    width: 90px;
+  }
+
+  .buttonsGroup {
+    display: flex;
+    justify-content: space-evenly;
+  }
+
+}
