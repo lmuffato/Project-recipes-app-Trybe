@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
 import { Redirect } from 'react-router-dom';
+
+import LogoImg from '../images/logo.png';
+import BackgroundLoginImg from '../images/backgroundLogin.png';
 
 function Home() {
   const [userEmail, setEmail] = useState('');
@@ -43,47 +47,102 @@ function Home() {
   };
 
   return (
-    <div>
-      <div>
-        <h3>{validEmail === false ? 'false' : 'true'}</h3>
-        <h3>{validPassword === false ? 'false' : 'true'}</h3>
-        <label htmlFor="text">
-          Email
-          <input
-            id="text"
-            data-testid="email-input"
-            type="text"
-            placeholder="Digite um email válido"
-            onChange={ (event) => { changeEmailInState(event.target.value); } }
-          />
-        </label>
-      </div>
-      <div>
-        <label htmlFor="text">
-          Senha
-          <input
-            id="text"
-            type="password"
-            data-testid="password-input"
-            placeholder="Pelo menos sete dígitos"
-            onChange={ (event) => { changePasswordInState(event.target.value); } }
-          />
-        </label>
-      </div>
-      <div>
-        <button
-          id="loginButton"
-          type="button"
-          data-testid="login-submit-btn"
-          disabled={ validEmail === false || validPassword === false }
-          onClick={ buttonSubmit }
-        >
-          Entrar
-        </button>
-        {redirect ? <Redirect to="/comidas" /> : null}
-      </div>
-    </div>
+    <Container image={ BackgroundLoginImg }>
+      <Logo src={ LogoImg } />
+      <FormLogin>
+        <div>
+          <label htmlFor="text">
+            {/* <p>Email</p> */}
+            <input
+              id="text"
+              data-testid="email-input"
+              type="text"
+              placeholder="Digite um email válido"
+              onChange={ (event) => { changeEmailInState(event.target.value); } }
+            />
+          </label>
+        </div>
+        <div>
+          <label htmlFor="text">
+            {/* <p>Senha</p> */}
+            <input
+              id="text"
+              type="password"
+              data-testid="password-input"
+              placeholder="Pelo menos sete dígitos"
+              onChange={ (event) => { changePasswordInState(event.target.value); } }
+            />
+          </label>
+        </div>
+        <div>
+          <Button
+            id="loginButton"
+            type="button"
+            data-testid="login-submit-btn"
+            disabled={ validEmail === false || validPassword === false }
+            onClick={ buttonSubmit }
+          >
+            Entrar
+          </Button>
+          {redirect ? <Redirect to="/comidas" /> : null}
+        </div>
+      </FormLogin>
+    </Container>
   );
 }
+
+const Container = styled.div`
+  width: 100vw;
+  height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  background-color: rgb( 214, 168, 40 );
+  background-image: ${(props) => `url(${props.image})`};
+`;
+
+const Logo = styled.img`
+  width: 60%;
+  height: auto;
+`;
+
+const FormLogin = styled.div`
+  width: 70%;
+  height: auto;
+  margin-top: 20px;
+
+  display: flex;
+  flex-direction: column;
+
+  label {
+    width: 100%;
+
+    input {
+      width: 100%;
+      padding: 5px;
+    }
+  }
+
+  p {
+    margin: 0;
+  }
+`;
+
+const Button = styled.button`
+  width: 100%;
+  height: 50px;
+  border-radius: 50px;
+
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 600;
+
+  background-color: ${({ disabled }) => (
+    disabled ? 'rgba(0, 128, 0, 0.5)' : 'rgb(0, 128, 0)'
+  )};
+`;
 
 export default Home;
