@@ -2,11 +2,13 @@ import React, { useCallback, useEffect, useState } from 'react';
 
 import { useParams } from 'react-router-dom';
 import HeaderBack from '../../components/HeaderBack';
-import getRecipes from '../../services/recipesData';
 import Dropdown from './components/Dropdown';
+import Header from '../../components/Header';
+import { getRecipes } from '../../services/recipesData';
 import ExploreButtons from './components/ExploreButtons';
 import ExploreCards from './components/ExploreCards';
 import styles from './styles.module.scss';
+import Footer from '../../components/footer';
 
 function Explore() {
   const [titlePage, setTitlePage] = useState('');
@@ -36,11 +38,12 @@ function Explore() {
     return (
       <div className={ styles.page }>
         <div className={ styles.explorePage }>
-          {meal && <HeaderBack title={ titlePage } />}
+          {meal && <Header title={ meal ? titlePage : 'Explorar' } hideSearch />}
           <div className={ styles.exploreContent }>
             {!type && <ExploreButtons title={ meal } randomRecipe={ randomId } />}
           </div>
         </div>
+        <Footer />
       </div>
     );
   }

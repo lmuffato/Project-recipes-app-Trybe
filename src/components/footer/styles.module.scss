@@ -1,0 +1,21 @@
+.footer {
+  align-items: center;
+  background: var(--purple);
+  bottom: 0;
+  box-shadow: 0 -30px 15px -20px rgba(0, 0, 0, 0.2);
+  display: flex;
+  height: 54px;
+  justify-content: space-between;
+  padding: 15px 30px;
+  position: fixed;
+  width: 100%;
+
+  .icons {
+    color: var(--light-purple);
+    font-size: 24px;
+
+    &.active {
+      color: var(--yellow);
+    }
+  }
+}

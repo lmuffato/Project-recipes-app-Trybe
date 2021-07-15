@@ -1,0 +1,68 @@
+.recipe {
+  padding-bottom: 110px;
+
+  .header {
+    border-bottom: 2px var(--purple) solid;
+    font-size: 0;
+    position: relative;
+
+    img {
+      height: 250px;
+      object-fit: cover;
+      object-position: center;
+      width: 100%;
+    }
+
+  }
+
+  main {
+    color: var(--light-purple);
+    padding: 30px;
+
+    .listOfIngredients {
+      display: grid;
+      list-style-position: inside;
+    }
+
+  }
+
+  section {
+    margin-top: 40px;
+  }
+}
+
+.options {
+  background: var(--yellow);
+  border-radius: 15px;
+  bottom: 0;
+  display: grid;
+  gap: 35px;
+  grid-template-columns: repeat(2, auto);
+  padding: 10px 15px;
+  position: absolute;
+  right: 30px;
+  transform: translateY(50%);
+
+  button {
+    align-items: center;
+    background: none;
+    border: none;
+    color: var(--dark-purple);
+    display: flex;
+    font-size: 0;
+
+    svg {
+      font-size: 24px;
+    }
+
+    span {
+      font-size: 14px;
+      font-weight: 700;
+      margin-left: 10px;
+    }
+  }
+}
+
+.recommendationsCarousel {
+  display: flex;
+}

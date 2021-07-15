@@ -1,8 +1,9 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import HeaderBack from '../../components/HeaderBack';
+import Header from '../../components/Header';
 import styles from './styles.module.scss';
 import useLocalStorage from '../../hooks/useLocalStorage';
+import Footer from '../../components/footer';
 
 function Perfil() {
   /* const emailReceived = localStorage.getItem('email');
@@ -12,7 +13,6 @@ function Perfil() {
 
   const { gravatar } = useLocalStorage('gravatar');
   const user = JSON.parse(localStorage.getItem('user'));
-  const { email } = user;
 
   const history = useHistory();
   const logout = (event) => {
@@ -30,11 +30,11 @@ function Perfil() {
   };
   return (
     <div>
-      <HeaderBack />
+      <Header title="Perfil" hideSearch />
       <div className={ styles.perfilPage }>
         <div className={ styles.imagemEmail }>
           <img src={ gravatar } alt="Imagem de perfil" />
-          <h3 data-testid="profile-email">{ email }</h3>
+          <h3 data-testid="profile-email">{ user ? user.email : 'mail@user.com' }</h3>
         </div>
         <button
           name="Receitas Feitas"
@@ -65,6 +65,7 @@ function Perfil() {
         </button>
         <footer>
           <img src="/logo_darkbg.svg" alt="Squarefood" />
+          <Footer />
         </footer>
       </div>
     </div>
