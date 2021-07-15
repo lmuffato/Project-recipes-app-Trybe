@@ -15,7 +15,7 @@ body div {
 /* Adicionar a propriedade que faz o menu esconder no scroll */
 .header {
   align-items: center;
-  background-color: #c3baba;
+  background-color: #f4f0bb;
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
@@ -51,12 +51,25 @@ body div {
 /* ------------------------------------------------------------ */
 
 /* ----------------- Estilos bases das telas  ----------------- */
-.main-recipes, .main-explore, .main-ingredients, .main-area {
+.main-recipes, .main-explore, .main-ingredients, .main-area, .main-profile {
   background: #ea1d2bf3;
   display: flex;
   flex-flow: column wrap;
   font-family: sans-serif;
   width: 100%;
+}
+
+.button {
+  border: none;
+  border-radius: 10px;
+  color: #fffefee7;
+  font-size: 13pt;
+  font-weight: 500;
+  height: 40%;
+  margin: 1% 0;
+  padding: 1%;
+  width: 30%;
+  word-wrap: break-word;
 }
 
 .recipes-container, .ingredients-container {
@@ -108,18 +121,8 @@ body div {
   width: 100%;
 }
 
-.button {
+.button-filter {
   background-color: #138a36;
-  border: none;
-  border-radius: 10px;
-  color: #fffefee7;
-  font-size: 13pt;
-  font-weight: 500;
-  height: 40%;
-  margin: 1% 0;
-  padding: 1%;
-  width: 30%;
-  word-wrap: break-word;
 }
 
 /* --------------------------------------- */
@@ -165,7 +168,7 @@ body div {
 
 /* --------------------------------------- */
 
-/* --- Componentes Meal/Drink Recipes & Foods Ingredients -- */
+/* --- Componentes Meal/Drink Recipes & Foods/Drinks Ingredients -- */
 .recipe {
   background-color: #9a8f9757;
 }
@@ -249,9 +252,57 @@ body div {
 
 /* ------------------------------------------------------------ */
 
+/* ---------------------- Tela de Perfil ---------------------- */
+.main-profile {
+  align-items: center;
+  height: 86%;
+  justify-content: space-evenly;
+  margin-top: 12%;
+}
+
+.main-profile p {
+  background-color: #f4f0bb;
+  font-size: 18pt;
+  text-align: center;
+  width: 100%;
+}
+
+.main-profile section {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 97%;
+  justify-content: space-evenly;
+  width: 100%;
+}
+
+.main-profile a {
+  align-content: center;
+  display: flex;
+  height: 30%;
+  justify-content: center;
+  width: 100%;
+}
+
+.profile-btns {
+  background-color: #231651;
+  height: 35%;
+  margin: 0;
+  width: 96%;
+}
+
+/* ------------------------------------------------------------ */
+
+
 /* ---------- Componente Footer ---------- */
 footer {
-  background-color: #c3baba;
+  background-color: #f4f0bb;
+
+  /*
+    231651
+    63adf2
+    f4f0bb
+  */
   bottom: 0;
   display: flex;
   justify-content: space-evenly;
