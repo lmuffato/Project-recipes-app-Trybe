@@ -2,8 +2,8 @@ import React, { useEffect, useState, useContext } from 'react';
 import styled from 'styled-components';
 import CardFavorite from '../components/CardFavorite';
 import Header from '../components/Header';
-import IconAll from '../icons/allIconAndButton/allIcon/all.png';
 import AppProvider from '../contexts/app/AppContext';
+import IconAll from '../icons/allIconAndButton/allIcon/all.png';
 import IconBebidas from '../icons/appIcons/bebidas.png';
 import IconComidas from '../icons/appIcons/comidas.png';
 
@@ -52,10 +52,7 @@ function FavoriteRecepies() {
           onClick={ ({ target }) => setValue(target.value) }
           value="bebida"
         >
-          <IconImageButtonDrinks
-            src={ IconBebidas }
-            alt="icon"
-          />
+          <IconImageButtonDrinks src={ IconBebidas } alt="icon" />
           Drinks
         </Button>
       </Filters>
