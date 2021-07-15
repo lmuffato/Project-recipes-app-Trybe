@@ -11,7 +11,7 @@ function Card(props) {
     history.push(`${pathname}/${id}`);
   };
   return (
-    <div
+    <section
       className="small-card"
       role="button"
       tabIndex={ index }
@@ -26,7 +26,7 @@ function Card(props) {
         data-testid={ `${index}-card-img` }
       />
       <h3 className="title-card" data-testid={ `${index}-card-name` }>{ title }</h3>
-    </div>
+    </section>
   );
 }
 

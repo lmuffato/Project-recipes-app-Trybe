@@ -4,8 +4,7 @@ import ContextRecipes from './ContextRecipes';
 
 function ProviderRecipes({ children }) {
   const [filteredRecipe, setRecipes] = useState([]);
-  const [activeFilters, setFilter] = useState([]);
-  const [recipeDetail, setDetail] = useState({});
+  const [activeFilter, setFilter] = useState('All');
   const [categories, setCategories] = useState([]);
   const [search, setSearch] = useState('');
   const [radioFilter, setRadioFilter] = useState('');
@@ -13,6 +12,15 @@ function ProviderRecipes({ children }) {
   const [dataDrinkCards, setDataDrinkCards] = useState('');
   const [loadingCards, setLoadingCards] = useState(false);
   const [showSearchBar, setShowSearchBar] = useState(false);
+  const [countries, setCountries] = useState([]);
+  const [alertOn, setAlertOn] = useState(false);
+  const [updateFlag, setUpadateFlag] = useState(false);
+
+  const turnOnAlert = () => {
+    setAlertOn(true);
+    const waitTime = 2000;
+    setTimeout(() => { setAlertOn(false); }, waitTime);
+  };
 
   function checkLocStorage() {
     const doneRecipesArray = JSON.parse(localStorage.getItem('doneRecipes'));
@@ -38,12 +46,12 @@ function ProviderRecipes({ children }) {
     const endpoint = `https://www.the${siteName}db.com/api/json/v1/1/list.php?c=list`;
     const dbCategories = await fetch(endpoint)
       .then((response) => response.json())
-      .then((response) => response[`${type.toLowerCase()}s`]);
+      .then((response) => response[`${type.toLowerCase()}s`])
+      .catch((error) => console.log(error));
     const newCategories = ['All'];
     dbCategories.forEach((category) => newCategories.push(category.strCategory));
     setCategories(newCategories);
   };
-
   const getRecipes = async (category = 'All', type = 'Meal') => {
     const siteName = type === 'Meal' ? 'meal' : 'cocktail';
     let recipeList = [];
@@ -63,7 +71,6 @@ function ProviderRecipes({ children }) {
         [`str${type}Thumb`]: item[`str${type}Thumb`],
       }));
     }
-    console.log(activeFilters, recipeList);
     setRecipes(recipeList);
   };
   // Esta função retorna o endpoint da API baseado no filtro escolhido
@@ -80,7 +87,6 @@ function ProviderRecipes({ children }) {
     }
     return endpoint;
   };
-
   // esta função vai fazer a solicitação das receitas e
   // aplicar os filtros devidos
   const fetchRecipes = async (link) => {
@@ -89,17 +95,21 @@ function ProviderRecipes({ children }) {
     setLoadingCards(true);
     const response = await fetch(endpoint)
       .then((r) => r.json())
-      .then((r) => r[`${type.toLowerCase()}s`]);
+      .then((r) => r[`${type.toLowerCase()}s`])
+      .catch((error) => console.log(error));
     setLoadingCards(false);
-
     setRecipes(response);
   };
 
-  const fetchDetail = (recipeId) => {
-    // Esta função deveria fazer a requisição de detalhes de
-    // uma receita quando esta for clicada
-    console.log(recipeId);
-    setDetail({});
+  const fetchArea = async () => {
+    const areaCategory = await fetch('https://www.themealdb.com/api/json/v1/1/list.php?a=list')
+      .then((req) => req.json())
+      .then((res) => res.meals);
+    const area = ['All'];
+    areaCategory.forEach((country) => {
+      area.push(country.strArea);
+    });
+    setCountries(area);
   };
 
   return (
@@ -114,9 +124,6 @@ function ProviderRecipes({ children }) {
         getRecipes,
         categories,
         getCategories,
-        recipeDetail,
-        fetchDetail,
-        setFilter,
         search,
         setSearch,
         radioFilter,
@@ -130,17 +137,22 @@ function ProviderRecipes({ children }) {
         setLoadingCards,
         showSearchBar,
         setShowSearchBar,
+        fetchArea,
+        countries,
+        setCountries,
+        alertOn,
+        turnOnAlert,
+        updateFlag,
+        setUpadateFlag,
       } }
     >
       { children }
     </ContextRecipes.Provider>
   );
 }
-
 ProviderRecipes.propTypes = {
   children: PropTypes.objectOf(PropTypes.shape(
     PropTypes.object,
   )),
 }.isRequired;
-
 export default ProviderRecipes;
