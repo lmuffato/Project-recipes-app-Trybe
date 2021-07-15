@@ -4,7 +4,7 @@ const SearchBarContainer = styled.form`align-items: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin: 20px auto;
+  margin: 3rem auto;
   overflow: hidden;
 
   > input {

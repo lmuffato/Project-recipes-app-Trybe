@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import useFetchRecipes from '../../effects/useFetchRecipes';
+import CategoriesListContainer from './styles';
 
 const MAX_CATEGORIES = 5;
 
@@ -48,7 +49,7 @@ function CategoriesList(props) {
   if (categories.length === 0) return 'Loading categories';
 
   return (
-    <div>
+    <CategoriesListContainer>
       { categories.map((category, index) => (
         <button
           type="button"
@@ -66,7 +67,7 @@ function CategoriesList(props) {
       >
         All
       </button>
-    </div>
+    </CategoriesListContainer>
   );
 }
 
