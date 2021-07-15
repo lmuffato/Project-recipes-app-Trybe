@@ -10,10 +10,28 @@ function ProviderRecipes({ children }) {
   const [search, setSearch] = useState('');
   const [radioFilter, setRadioFilter] = useState('');
   const [searchBtn, setSearchBtn] = useState(false);
-  // const [type, setType] = useState('');
   const [dataDrinkCards, setDataDrinkCards] = useState('');
   const [loadingCards, setLoadingCards] = useState(false);
   const [showSearchBar, setShowSearchBar] = useState(false);
+
+  function checkLocStorage() {
+    const doneRecipesArray = JSON.parse(localStorage.getItem('doneRecipes'));
+    if (doneRecipesArray !== null) {
+      return doneRecipesArray;
+    }
+    return [];
+  }
+
+  function checkLocalStorage() {
+    const inProgressRecipesArray = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    if (inProgressRecipesArray !== null) {
+      return inProgressRecipesArray;
+    }
+    return [];
+  }
+
+  const [inProgressRecipes, setInProgressRecipes] = useState(checkLocalStorage());
+  const [doneRecipes, setDoneRecipes] = useState(checkLocStorage());
 
   const getCategories = async (type) => {
     const siteName = type === 'Meal' ? 'meal' : 'cocktail';
@@ -87,6 +105,10 @@ function ProviderRecipes({ children }) {
   return (
     <ContextRecipes.Provider
       value={ {
+        setDoneRecipes,
+        doneRecipes,
+        inProgressRecipes,
+        setInProgressRecipes,
         activeFilters,
         filteredRecipe,
         getRecipes,
