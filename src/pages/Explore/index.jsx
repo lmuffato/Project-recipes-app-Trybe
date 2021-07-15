@@ -12,23 +12,25 @@ function Explore() {
   const [titlePage, setTitlePage] = useState('');
   const [randomId, setRandomId] = useState('');
   const [ingredients, setIngredients] = useState([]);
+  const [areas, setAreas] = useState([]);
 
   const { meal, type } = useParams();
 
   const loadExploreData = useCallback(async () => {
-    const response = await getRecipes(`/explorar/${meal}`);
+    const response = await getRecipes(`/explorar/${meal}`, 'filtro');
     if (response) {
       setTitlePage(response.titlePage);
       setIngredients(response.ingredients.slice(0, Number('12')));
       setRandomId(response.random[0].id);
+      if (response.areas) {
+        setAreas(response.areas);
+      }
     }
   }, [meal]);
 
   useEffect(() => {
     loadExploreData();
   }, [loadExploreData]);
-
-  const url = `${meal}/${type}`;
 
   if (!type) {
     return (
@@ -45,8 +47,10 @@ function Explore() {
   return (
     <>
       {meal && <HeaderBack title={ type } />}
-      {type === 'ingredientes' && <ExploreCards ingredients={ ingredients } />}
-      {url === 'comidas/area' && <Dropdown />}
+      <div className={ styles.cardPage }>
+        {type === 'ingredientes' && <ExploreCards ingredients={ ingredients } />}
+        {type === 'area' && <Dropdown areas={ areas } />}
+      </div>
     </>
   );
 }

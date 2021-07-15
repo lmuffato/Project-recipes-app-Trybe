@@ -13,12 +13,16 @@ function RecipeSimpleCard({ page, recipe, index, alcoholic }) {
 
   let redirec = `${pathname}/${recipe.id}`;
 
-  if (pathname.includes('explorar')) {
+  if ((pathname.includes('explorar')) && (!pathname.includes('area'))) {
     redirec = pathname.includes('comidas') ? '/comidas' : '/bebidas';
   }
 
+  if (pathname.includes('area')) {
+    redirec = `/comidas/${recipe.id}`;
+  }
+
   function ingredientsClick() {
-    if (!pathname.includes('explorar')) return;
+    if (!pathname.includes('explorar') && (!pathname.includes('area'))) return;
     filterRecipe({ type: 'ingredient', content: recipe.name });
   }
 

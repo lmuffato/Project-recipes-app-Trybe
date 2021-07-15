@@ -67,10 +67,21 @@ export async function mealsData(options) {
   };
 }
 
-export async function exploreMealsData() {
+export async function exploreMealsData(area) {
   const randomMeal = await fetchJson('https://www.themealdb.com/api/json/v1/1/random.php');
 
   const ingredients = await fetchJson('https://www.themealdb.com/api/json/v1/1/list.php?i=list');
+
+  const areas = await fetchJson('https://www.themealdb.com/api/json/v1/1/list.php?a=list');
+
+  if (area) {
+    if (area === 'All') {
+      const results = await fetchJson('https://www.themealdb.com/api/json/v1/1/search.php?s=');
+      return parseMealResults(results);
+    }
+    const filterMeals = await fetchJson(`https://www.themealdb.com/api/json/v1/1/filter.php?a=${area}`);
+    return parseMealResults(filterMeals);
+  }
 
   const parseIngredients = parseIngredientResults(ingredients.meals);
 
@@ -79,5 +90,7 @@ export async function exploreMealsData() {
   return {
     titlePage: 'Explorar Comidas',
     random: parserRandom,
-    ingredients: parseIngredients };
+    ingredients: parseIngredients,
+    areas: areas.meals,
+  };
 }
