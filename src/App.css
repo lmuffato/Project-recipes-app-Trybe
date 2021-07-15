@@ -65,7 +65,7 @@ ul {
   flex-direction: row;
   justify-content: space-around;
   position: relative;
-  top: 40px;
+  top: 48px;
 }
 
 .buttons-list {
@@ -145,4 +145,13 @@ ul {
 
 .search {
   width: 90vw;
+}
+
+.drop-down {
+  align-self: center;
+  display: flex;
+  height: 60px;
+  position: relative;
+  top: 50px;
+  width: 357px;
 }

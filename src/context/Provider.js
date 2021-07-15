@@ -15,6 +15,8 @@ function Provider({ children }) {
   const [filtredList, setFiltredList] = useState([]);
   const [drinksId, setDrinksId] = useState([]);
   const [mealsId, setMealsId] = useState([]);
+  const [ingredFromExplore, setIngredFromExplore] = useState('');
+  const [fromExplore, setFromExplore] = useState(false);
 
   const store = {
     userEmail,
@@ -41,6 +43,10 @@ function Provider({ children }) {
     drinksId,
     mealsId,
     setMealsId,
+    ingredFromExplore,
+    setIngredFromExplore,
+    fromExplore,
+    setFromExplore,
   };
 
   return (
