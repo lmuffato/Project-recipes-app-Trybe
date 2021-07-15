@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 export default function Ingredients({ recipe }) {
   const [ingredients, setIngredients] = useState([]);
+  const [measures, setMeasures] = useState([]);
 
   function getIngredients() {
     return Object.entries(recipe)
@@ -22,20 +23,21 @@ export default function Ingredients({ recipe }) {
 
   useEffect(() => {
     setIngredients(getIngredients());
+    setMeasures(getMeasures());
   }, [recipe]);
 
   return (
     <div>
       <h3>Ingredients</h3>
       <ul>
-        { ingredients.length
+        { ingredients.length && measures.length
           ? ingredients.map(
             (ingredient, index) => (
               <li
                 key={ index }
                 data-testid={ `${index}-ingredient-name-and-measure` }
               >
-                {`${ingredient[1]} - ${getMeasures()[index][1]}`}
+                {`${ingredient[1]} - ${measures[index][1]}`}
               </li>),
           ) : ''}
       </ul>

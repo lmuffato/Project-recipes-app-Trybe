@@ -12,7 +12,7 @@ export default function AppProvider({ children }) {
   const [recipesList, setRecipesList] = useState([]);
   const [categoriesList, setCategoriesList] = useState([]);
   const [toStorage, setToStorage] = useState('');
-  const [toDoneStorage, setToDoneStorage] = useState('');
+  const [toDoneStorage, setToDoneStorage] = useState([]);
   const [checkedState, setCheckedState] = useState(true);
   const [recipe, setRecipe] = useState('');
   const [byIngredients, setByIngredients] = useState('');
@@ -58,23 +58,8 @@ export default function AppProvider({ children }) {
   // https://qastack.com.br/programming/6040515/how-do-i-get-month-and-date-of-javascript-in-2-digit-format
 
   useEffect(() => {
-    const data = new Date();
-    const day = data.getDate().toString().padStart(2, '0');
-    const month = (data.getMonth() + 1).toString().padStart(2, '0');
-    const year = data.getFullYear();
-    const doneDate = `${day}/${month}/${year}`;
-    const DoneRecipeStorage = [{
-      id: recipe.idMeal || recipe.idDrink,
-      type: pageOrigin.includes('themealdb') ? 'comida' : 'bebida',
-      area: recipe.strArea || '',
-      category: recipe.strCategory || '',
-      alcoholicOrNot: recipe.strAlcoholic || '',
-      name: recipe.strMeal || recipe.strDrink,
-      image: recipe.strMealThumb || recipe.strDrinkThumb,
-      doneDate,
-      tags: [recipe.strTags] || [],
-    }];
-    setToDoneStorage(DoneRecipeStorage);
+    const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
+    setToDoneStorage(doneRecipes);
   }, [recipe, pageOrigin]);
 
   useEffect(() => {
