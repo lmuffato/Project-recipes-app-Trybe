@@ -1,17 +1,42 @@
-import React, { createContext, useCallback, useState } from 'react';
+import React, { createContext, useCallback, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import { useHistory } from 'react-router-dom';
-import getRecipes from '../services/recipesData';
+import { getRecipes } from '../services/recipesData';
+import useLocalStorage from '../hooks/useLocalStorage';
 
 export const RecipesContext = createContext();
 
 export function RecipesProvider({ children }) {
   const [recipes, setRecipes] = useState([]);
+  const [doneRecipes, setDoneRecipes] = useState([]);
+  const [inProgressRecipes, setInProgressRecipes] = useState([]);
   const [categories, setCategories] = useState([]);
   const [titlePage, setTitlePage] = useState('');
   const [currentFilter, setCurrentFilter] = useState('');
   const { location, push: historyPush } = useHistory();
+
+  const {
+    doneRecipes: doneRecipesInLocalStorage,
+    inProgressRecipes: inProgressRecipesInLocalStorage,
+  } = useLocalStorage('doneRecipes', 'inProgressRecipes');
+
+  useEffect(() => {
+    if (!doneRecipesInLocalStorage) {
+      localStorage.setItem('doneRecipes', JSON.stringify([]));
+      setDoneRecipes([]);
+    }
+
+    if (!inProgressRecipesInLocalStorage) {
+      localStorage.setItem(
+        'inProgressRecipes', JSON.stringify({ cocktails: {}, meals: {} }),
+      );
+      setInProgressRecipes({ cocktails: {}, meals: {} });
+    } else {
+      setDoneRecipes(doneRecipesInLocalStorage);
+      setInProgressRecipes(inProgressRecipesInLocalStorage);
+    }
+  }, []);
 
   // async function loadRecipes(pathname) {
   //   const recipesLimit = 12;
@@ -35,6 +60,81 @@ export function RecipesProvider({ children }) {
       setCurrentFilter('All');
     }
   }, []);
+
+  function removeRecipeInProgress(id, type) {
+    switch (type) {
+    case 'comida': {
+      const { [id]: recipeId, ...meals } = inProgressRecipes.meals;
+      const updatedInProgressRecipes = { ...inProgressRecipes, meals };
+      setInProgressRecipes(updatedInProgressRecipes);
+      localStorage.setItem('inProgressRecipes', JSON.stringify(updatedInProgressRecipes));
+      break;
+    }
+
+    case 'bebida': {
+      const { [id]: recipeId, ...cocktails } = inProgressRecipes.cocktails;
+      const updatedInProgressRecipes = { ...inProgressRecipes, cocktails };
+      setInProgressRecipes(updatedInProgressRecipes);
+      localStorage.setItem('inProgressRecipes', JSON.stringify(updatedInProgressRecipes));
+      break;
+    }
+
+    default:
+      break;
+    }
+  }
+
+  function addDoneRecipe(id, recipe, pathname) {
+    const lastCharacter = -1;
+    const date = {
+      day: String(new Date().getUTCDate()).padStart(2, '0'),
+      month: String(new Date().getUTCMonth() + 1).padStart(2, '0'),
+      year: new Date().getUTCFullYear(),
+    };
+    const newDoneRecipe = {
+      id,
+      type: pathname.split('/')[1].slice(0, lastCharacter),
+      area: recipe.strArea || '',
+      category: recipe.strCategory || '',
+      alcoholicOrNot: recipe.strAlcoholic || '',
+      name: recipe.name,
+      image: recipe.imagePath,
+      doneDate: `${date.day}/${date.month}/${date.year}`,
+      tags: recipe.strTags,
+    };
+
+    const newDoneRecipes = [...doneRecipes, newDoneRecipe];
+
+    localStorage.setItem('doneRecipes', JSON.stringify(newDoneRecipes));
+
+    setDoneRecipes(newDoneRecipes);
+    removeRecipeInProgress(id, pathname.split('/')[1].slice(0, lastCharacter));
+  }
+
+  function addRecipeInProgress(type, id, ingredients) {
+    let updatedInProgressRecipes = {};
+    switch (type) {
+    case 'comida': {
+      const { meals } = inProgressRecipes;
+      meals[id] = ingredients;
+      updatedInProgressRecipes = { ...inProgressRecipes, meals };
+      break;
+    }
+
+    case 'bebida': {
+      const { cocktails } = inProgressRecipes;
+      cocktails[id] = ingredients;
+      updatedInProgressRecipes = { ...inProgressRecipes, cocktails };
+      break;
+    }
+
+    default:
+      break;
+    }
+
+    localStorage.setItem('inProgressRecipes', JSON.stringify(updatedInProgressRecipes));
+    setInProgressRecipes(updatedInProgressRecipes);
+  }
 
   async function switchFilters(filter, event) {
     let results = [];
@@ -105,6 +205,10 @@ export function RecipesProvider({ children }) {
     titlePage,
     filterRecipe,
     loadRecipes,
+    inProgressRecipes,
+    doneRecipes,
+    addDoneRecipe,
+    addRecipeInProgress,
   };
 
   return (

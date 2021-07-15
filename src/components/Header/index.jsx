@@ -7,7 +7,7 @@ import Search from './components/Search';
 import styles from './styles.module.scss';
 import useLocalStorage from '../../hooks/useLocalStorage';
 
-function Header({ title }) {
+function Header({ title, hideSearch }) {
   const [searchMode, setSearchMode] = useState(false);
 
   const { user, gravatar } = useLocalStorage('user', 'gravatar');
@@ -22,19 +22,24 @@ function Header({ title }) {
           />
         </Link>
         { title }
-        <BiSearch
-          onClick={ () => setSearchMode(!searchMode) }
-          src="searchIcon"
-          data-testid="search-top-btn"
-        />
+        { !hideSearch && (
+          <BiSearch
+            onClick={ () => setSearchMode(!searchMode) }
+            src="searchIcon"
+            data-testid="search-top-btn"
+          />
+        ) }
       </div>
-      <Search visibility={ searchMode } />
+      { searchMode && (
+        <Search visibility={ searchMode } />
+      ) }
     </header>
   );
 }
 
 Header.propTypes = {
   title: PropTypes.string.isRequired,
+  hideSearch: PropTypes.bool.isRequired,
 };
 
 export default Header;
