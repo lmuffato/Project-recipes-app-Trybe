@@ -4,21 +4,30 @@
 
 // function Ingredientes({ params: { ingredientsList, data, setIsDisabled } }) {
 //   const [ingArray, setIngArray] = useState([]);
-//   let setArrayCheck = useState([]);
-//   // const [isChecked, setIsChecked] = useState(false);
+//   const [LSG, setLSG] = useState([]);
 
 //   const LOCATION = useLocation();
+//   let checkboxElement = false;
+
+//   const updateLocalStorage = () => {
+//     const initalLocalStorage = {
+//       cocktails: [],
+//       meals: [],
+//     };
+//     localStorage.setItem('inProgressRecipes', JSON.stringify(initalLocalStorage));
+//   };
 
 //   const getLocalStorage = () => {
 //     const progressRecipes = JSON.parse(localStorage
 //       .getItem('inProgressRecipes'));
+//     const { cocktails, meals } = progressRecipes;
 
-//     if (progressRecipes !== null) {
-//       const { cocktails, meals } = progressRecipes;
+//     if ((cocktails.length || meals.length) !== 0) {
+//       console.log(meals.length !== 0);
 //       const elementsTag = document.querySelector('.py-2').nextSibling.childNodes;
 //       let valuesMeals;
 //       let valuesCocktails;
-
+//       console.log('entrei');
 //       elementsTag.forEach((elementTag, index) => {
 //         switch (LOCATION.pathname) {
 //         case `/comidas/${data.idMeal}/in-progress`:
@@ -26,7 +35,6 @@
 //           valuesMeals[0].forEach((valueMeal) => {
 //             if (index === valueMeal) {
 //               elementsTag[index].firstChild.className = 'isCheckedCss';
-//               elementsTag[index].firstChild.firstChild.checked = true;
 //             }
 //           });
 //           break;
@@ -35,7 +43,6 @@
 //           valuesCocktails[0].forEach((valueCocktail) => {
 //             if (index === valueCocktail) {
 //               elementsTag[index].firstChild.className = 'isCheckedCss';
-//               elementsTag[index].firstChild.firstChild.checked = true;
 //             }
 //           });
 //           break;
@@ -46,42 +53,9 @@
 //     }
 //   };
 
-//   const createArrayCheck = () => {
-//     const array = [];
-//     ingredientsList.forEach((item, index) => {
-//       array.push(false);
-//     });
-//     setArrayCheck = array;
-//   };
-
-//   const btnCheck = () => {
-//     const elementsTag = document.querySelector('.ingredientes').childNodes;
-//     let btnDisabled = 0;
-//     elementsTag.forEach((item) => {
-//       const test = item.firstChild.className;
-//       if (test.includes('isCheckedCss')) {
-//         btnDisabled += 1;
-//       }
-//       if (btnDisabled === elementsTag.length) {
-//         setIsDisabled(false);
-//       }
-//     });
-//   };
-
-//   useEffect(() => {
-//     getLocalStorage();
-//     createArrayCheck();
-//   }, []);
-
-//   useEffect(() => {
-//     btnCheck();
-//   });
-
-//   const localSTSettings = (target) => {
+//   const btnCheck = (target) => {
 //     const foodsOrCocktails = Object.keys(data)
 //       .find((item) => item === 'idDrink' || item === 'idMeal');
-
-//     setIngArray([...ingArray, Number(target.id)]);
 
 //     const progressRecipes = JSON.parse(localStorage
 //       .getItem('inProgressRecipes'));
@@ -91,40 +65,25 @@
 //         const newObj = { meals: {
 //           [data.idMeal]: [...ingArray, Number(target.id)],
 //         } };
-//         const oldObject = [newObj];
-//         localStorage
+
+//         const oldObject = newObj;
+
+//         return localStorage
 //           .setItem(
 //             'inProgressRecipes', JSON
-//               .stringify(oldObject),
-//           );
-//       } else {
-//         localStorage
-//           .setItem(
-//             'inProgressRecipes', JSON
-//               .stringify({
-//                 cocktails: {
-//                   [data.idDrink]: [...ingArray, Number(target.id)],
-//                 } }),
+//               .stringify({ ...progressRecipes, ...oldObject }),
 //           );
 //       }
-//     }
-//     if (foodsOrCocktails === 'idMeal') {
-//       localStorage
+//       const newObj = { cocktails: {
+//         [data.idDrink]: [...ingArray, Number(target.id)],
+//       } };
+
+//       const oldObject = newObj;
+
+//       return localStorage
 //         .setItem(
 //           'inProgressRecipes', JSON
-//             .stringify({
-//               meals: {
-//                 [data.idMeal]: [...ingArray, Number(target.id)],
-//               } }),
-//         );
-//     } else {
-//       localStorage
-//         .setItem(
-//           'inProgressRecipes', JSON
-//             .stringify({
-//               cocktails: {
-//                 [data.idDrink]: [...ingArray, Number(target.id)],
-//               } }),
+//             .stringify({ ...progressRecipes, ...oldObject }),
 //         );
 //     }
 //   };
@@ -134,9 +93,10 @@
 //   const isCheckedBool = ({ target }) => {
 //     const { checked } = target;
 //     if (checked) {
+//       setIngArray([...ingArray, Number(target.id)]);
 //       target.parentNode.className = 'isCheckedCss';
 //       const isClass = target.parentNode.className;
-//       localSTSettings(target);
+//       btnCheck(target);
 //       return isClass;
 //     }
 //     target.parentNode.className = '';
@@ -144,29 +104,55 @@
 //     return notClass;
 //   };
 
+//   useEffect(() => {
+//     const progressRecipes = JSON.parse(localStorage
+//       .getItem('inProgressRecipes'));
+
+//     if (progressRecipes === null) return updateLocalStorage();
+//     setLSG(progressRecipes);
+
+//     getLocalStorage();
+//   }, []);
+
+//   const checkedElement = (index) => {
+//     if (JSON.parse(localStorage.getItem('inProgressRecipes')).meals[data.idMeal]) {
+//       checkboxElement = JSON.parse(localStorage.getItem('inProgressRecipes'))
+//         .meals[data.idMeal].includes(index);
+//       return checkboxElement;
+//     }
+//     if (JSON.parse(localStorage.getItem('inProgressRecipes')).cocktails[data.idDrink]) {
+//       checkboxElement = JSON.parse(localStorage.getItem('inProgressRecipes'))
+//         .cocktails[data.idDrink].includes(index);
+//       return checkboxElement;
+//     }
+//   };
+
 //   return (
 //     <div className="ingredientes">
-//       {ingredientsList.map((ingredient, index) => (
-//         <div
-//           key={ index }
-//           className="d-flex align-items-baseline"
-//           data-testid={ `${index}-ingredient-step` }
-//         >
-//           <label
-//             htmlFor={ index }
+//       {ingredientsList.map((ingredient, index) => {
+//         checkedElement(index);
+//         return (
+//           <div
+//             key={ index }
+//             className="d-flex align-items-baseline"
+//             data-testid={ `${index}-ingredient-step` }
 //           >
-//             <input
-//               className="mr-2"
-//               type="checkbox"
-//               name={ ingredient[1] }
-//               id={ index }
-//               onClick={ isCheckedBool }
-//               // checked={ arrayCheck[index] }
-//             />
-//             {`Ingrediente ${index}: ${ingredient[1]}`}
-//           </label>
-//         </div>
-//       ))}
+//             <label
+//               htmlFor={ index }
+//             >
+//               <input
+//                 className="mr-2"
+//                 type="checkbox"
+//                 name={ ingredient[1] }
+//                 id={ index }
+//                 onClick={ isCheckedBool }
+//                 checked={ checkboxElement }
+//               />
+//               {`Ingrediente ${index}: ${ingredient[1]}`}
+//             </label>
+//           </div>
+//         );
+//       })}
 //     </div>
 //   );
 // }

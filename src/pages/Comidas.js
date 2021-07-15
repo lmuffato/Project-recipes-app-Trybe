@@ -55,8 +55,6 @@ function Comidas() {
     }
   }, [texto]);
 
-  // if (data.length < 1) return <h1>Loading...</h1>;
-
   return (
     <div>
       <Header title="Comidas" />
