@@ -6,7 +6,7 @@ import Button from '../Generics/Button';
 import HeaderContainer from './styles';
 import Logo from './Logo';
 
-function Header({ children, heading }) {
+function Header({ children, heading, logoSrc }) {
   const history = useHistory();
 
   const handleRedirectToProfile = (ev) => {
@@ -17,8 +17,10 @@ function Header({ children, heading }) {
   return (
     <HeaderContainer>
       <div className="title-container">
-        <Logo />
-        <h1 data-testid="page-title">{ heading }</h1>
+        <Logo logoSrc={ logoSrc } />
+        <div className="header-title-container">
+          <h1 data-testid="page-title">{ heading }</h1>
+        </div>
       </div>
       <div className="container">
         <Button onClick={ handleRedirectToProfile }>
@@ -41,6 +43,7 @@ Header.defaultProps = {
 Header.propTypes = {
   children: PropTypes.node,
   heading: PropTypes.string.isRequired,
+  logoSrc: PropTypes.string.isRequired,
 };
 
 export default Header;

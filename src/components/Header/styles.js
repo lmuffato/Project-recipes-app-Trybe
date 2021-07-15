@@ -20,14 +20,17 @@ const HeaderContainer = styled.header`align-items: space-around;
     background: inherit;
     border: 0;
     cursor: pointer;
-    max-height: 4vh;
-    max-width: auto;
+
+    /* max-height: 4vh; */
+
+    /* max-width: auto; */
     padding-right: 0.7rem;
   }
 
   .title-container {
     align-items: center;
     display: flex;
+    flex: 3;
     flex-direction: column;
     justify-content: center;
     line-height: 0.8;
@@ -43,27 +46,25 @@ const HeaderContainer = styled.header`align-items: space-around;
     h1 {
       align-self: flex-end;
       font-family: Poppins , sans-serif;
-      font-size: 1.7rem;
+      font-size: 1.5rem;
       -webkit-font-smoothing: antialiased;
       font-weight: 200;
       margin: 0 auto;
+      padding-left: 5px;
     }
   }
 
   .container {
-    align-items: center;
-    border: 0;
     display: flex;
-    flex-wrap: nowrap;
-    justify-content: space-around;
-    max-width: 18vw;
-    padding: 10px;
+    flex: 1;
+    justify-content: space-evenly;
+    margin: 0 auto;
+    width: 100%;
 
     button {
       align-self: center;
       border: 0;
       cursor: pointer;
-      height: 60px;
 
       img {
         display: flex;
@@ -80,27 +81,33 @@ const HeaderContainer = styled.header`align-items: space-around;
   @media only screen and ( max-width : 650px ) {
     gap: 2rem;
 
-    .container {
+    /* .container {
       display: flex;
-    }
+    } */
 
     .title-container {
-
-      /* max-height: 18vh;
-      max-width: 68vw; */
+      margin: 0 auto;
       padding-bottom: 1rem;
 
       img {
-        margin: 0 auto;
+        align-self: center;
+        justify-self: center;
+        position: relative;
       }
 
-      h1 {
-        align-self: center;
-        display: flex;
-        font-size: 1.2rem;
-        justify-self: center;
-        margin: 0 0.5rem auto;
-        text-align: center;
+      .header-title-container {
+        margin: 0 6px 2px auto;
+
+        h1 {
+          align-self: center;
+          display: flex;
+          font-size: 1.2rem;
+          justify-self: center;
+
+          /* margin: 0 0.5rem auto; */
+          text-align: center;
+        }
+
       }
     }
 
@@ -124,16 +131,17 @@ export const LogoContainer = styled.div`align-items: center;
     /* padding-left: 8px; */
     .title-container {
       margin: 0 auto;
-      max-width: 54vw;
+      max-width: 65vw;
       padding-bottom: 1rem;
 
       h1 {
-        align-self: center;
+        align-self: flex-end;
         display: flex;
         font-size: 1.2rem;
-        justify-self: center;
-        margin: 0 auto;
-        max-width: 54.362vw;
+        justify-self: flex-end;
+
+        /* margin: 0 auto; */
+        max-width: 55vw;
 
         /* max-width: 70vw; */
 

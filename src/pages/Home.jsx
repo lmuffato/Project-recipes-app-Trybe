@@ -10,6 +10,7 @@ import CategoriesList from '../components/CategoriesList/CategoriesList';
 import CardList from '../components/CardList/CardList';
 import { RecipesContext } from '../context/RecipesContext';
 import useDetailsProvider from '../hooks/useDetailsProvider';
+import logoIcon from '../images/savory-6.svg';
 
 const MEALS_URL = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
 const DRINKS_URL = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
@@ -49,7 +50,7 @@ function Home(props) {
 
   return (
     <>
-      <Header heading={ type === 'meals' ? 'Comidas' : 'Bebidas' }>
+      <Header heading={ type === 'meals' ? 'Comidas' : 'Bebidas' } logoSrc={ logoIcon }>
         <SearchBarButton onClick={ handleToggleSearchBar } />
       </Header>
       <div>

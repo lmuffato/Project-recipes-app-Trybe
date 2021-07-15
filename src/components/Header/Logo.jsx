@@ -1,15 +1,17 @@
 import React from 'react';
-// import logoIcon from '../../images/appLogoIcon.svg';
-// import logoIcon from '../../images/savory.png';
-import logoIcon from '../../images/savory-6.svg';
+import PropTypes from 'prop-types';
 import { LogoContainer } from './styles';
 
-function Logo() {
+function Logo({ logoSrc }) {
   return (
     <LogoContainer>
-      <img src={ logoIcon } alt="" />
+      <img src={ logoSrc } alt="" />
     </LogoContainer>
   );
 }
 
 export default Logo;
+
+Logo.propTypes = {
+  logoSrc: PropTypes.string.isRequired,
+};

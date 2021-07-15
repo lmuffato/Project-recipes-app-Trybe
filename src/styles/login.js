@@ -24,7 +24,8 @@ export const Container = styled.div`align-items: center;
   flex-direction: column;
   margin: 0 auto;
   max-width: 1120px;
-  overflow: none;
+  overflow-x: hidden;
+  overflow-y: scroll;
 
   div {
     align-self: center;
@@ -107,12 +108,16 @@ export const Container = styled.div`align-items: center;
     justify-content: center;
 
     div {
-      flex: 2;
+      flex: 7;
       margin: 0 auto;
 
       .logo-letmeeat {
         margin: 0 auto;
       }
+    }
+
+    label {
+      flex: 8;
     }
   }
 `;

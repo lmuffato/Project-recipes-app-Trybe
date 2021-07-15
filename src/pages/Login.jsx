@@ -1,8 +1,7 @@
 import React, { useContext } from 'react';
 import { UserContext } from '../context/UserContext';
 import { LoginContainer, Container } from '../styles/login';
-import logoIcon from '../images/savory-6.svg';
-// import LogoLogin from '../components/LogoLogin/LogoLogin';
+import logoIcon from '../images/logoLoginPequeno.svg';
 
 function Login() {
   const { setEmail, setPassword, disabledData, handleClick } = useContext(UserContext);
