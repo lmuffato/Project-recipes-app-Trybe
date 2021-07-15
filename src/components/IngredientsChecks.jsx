@@ -33,7 +33,7 @@ export default function IngredientsChecks({ ingredients }) {
             id={ ingredient }
             name={ ingredient }
             value={ ingredient }
-            checked={ arrFromLocalStorage.includes(ingredient) }
+            defaultChecked={ arrFromLocalStorage.includes(ingredient) }
           />
           <label htmlFor={ ingredient }>{ingredient}</label>
         </Card>
