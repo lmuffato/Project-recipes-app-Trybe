@@ -6,12 +6,15 @@ import RecipesContext from '../contexts/RecipesContext';
 import ShareButton from '../compenents/ShareButton';
 import FavoriteBtn from '../compenents/FavoriteBtn';
 import Loading from '../compenents/Loading';
+import checkInProgress from '../services/checkInProgress';
 
 function MealsRecepiesProgress() {
   const [detailsRecepie, setDetailsRecepie] = useState();
   const { allChecked, setIsFavorite } = useContext(RecipesContext);
   const history = useHistory();
   const recepiID = history.location.pathname.split('/')[2];
+
+  console.log(recepiID);
 
   // ao montar a pagina, faz api que traz infos via ID.
   useEffect(() => {
@@ -38,6 +41,8 @@ function MealsRecepiesProgress() {
   } else {
     setIsFavorite(false);
   }
+
+  checkInProgress();
 
   if (detailsRecepie === undefined) {
     return <Loading />;

@@ -2,28 +2,10 @@ import React from 'react';
 import { fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import renderWithRouter from './renderWithRouter';
+import handleLogin from './handleLogin';
 import App from '../App';
 
-const emailInput = 'email-input';
-const passwordInput = 'password-input';
-const loginBtn = 'login-submit-btn';
-
-const loginData = { user: 'teste@teste.com', password: '1234567' };
-
 const testIdArray = ['drinks-bottom-btn', 'explore-bottom-btn', 'food-bottom-btn'];
-
-const handleLogin = (getByTestId) => {
-  const userInput = getByTestId(emailInput);
-  const userPasswordInput = getByTestId(passwordInput);
-  const loginSubmitBtn = getByTestId(loginBtn);
-
-  userEvent.type(userInput, loginData.user);
-  userEvent.type(userPasswordInput, loginData.password);
-  userEvent.click(loginSubmitBtn);
-
-  const footer = getByTestId('footer');
-  expect(footer).toBeInTheDocument();
-};
 
 describe('Test the component Footer', () => {
   it('verify the footers position', () => {

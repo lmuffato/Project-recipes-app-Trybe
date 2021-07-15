@@ -2,7 +2,7 @@ import React from 'react';
 import RecipesProvider from './RecipesProvider';
 import Switcher from '../compenents/Switcher';
 import UserProvider from './UserProvider';
-import SearchbarProvider from './SeachbarProvider';
+import SearchbarProvider from './SearchbarProvider';
 
 function ProvidersManager() {
   return (

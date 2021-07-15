@@ -6,6 +6,7 @@ import RecipesContext from '../contexts/RecipesContext';
 import ShareButton from '../compenents/ShareButton';
 import FavoriteBtn from '../compenents/FavoriteBtn';
 import Loading from '../compenents/Loading';
+import checkInProgress from '../services/checkInProgress';
 
 function DrinksRecepiesProgress() {
   const [detailsRecepie, setDetailsRecepie] = useState();
@@ -60,6 +61,8 @@ function DrinksRecepiesProgress() {
   } else {
     setIsFavorite(false);
   }
+
+  checkInProgress();
 
   if (detailsRecepie === undefined) {
     return <Loading />;
