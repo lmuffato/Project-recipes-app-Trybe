@@ -93,55 +93,57 @@ function SearchBar() {
 
   return (
     <Container>
-      <label htmlFor="search-input">
-        <input
-          data-testid="search-input"
-          id="search-input"
-          type="text"
-          onChange={ handleText }
-          placeholder="Buscar Receita"
-        />
-      </label>
-      <label htmlFor="search-ingredient">
-        <input
-          name="search-radio"
-          data-testid="ingredient-search-radio"
-          id="search-ingredient"
-          type="radio"
-          value="search-ingredient"
-          onChange={ handleRadios }
-        />
-        Ingrediente
-      </label>
-      <label htmlFor="search-name">
-        <input
-          name="search-radio"
-          data-testid="name-search-radio"
-          id="search-name"
-          type="radio"
-          value="search-name"
-          onChange={ handleRadios }
-        />
-        Busca pelo nome
-      </label>
-      <label htmlFor="search-first-letter">
-        <input
-          name="search-radio"
-          data-testid="first-letter-search-radio"
-          id="search-first-letter"
-          type="radio"
-          value="search-first-letter"
-          onChange={ handleRadios }
-        />
-        Busca pela primeira letra
-      </label>
-      <button
-        data-testid="exec-search-btn"
-        type="button"
-        onClick={ handleClick }
-      >
-        Buscar
-      </button>
+      <div className="search-bar-wrapper">
+        <label htmlFor="search-input">
+          <input
+            data-testid="search-input"
+            id="search-input"
+            type="text"
+            onChange={ handleText }
+            placeholder="Buscar Receita"
+          />
+        </label>
+        <label htmlFor="search-ingredient">
+          <input
+            name="search-radio"
+            data-testid="ingredient-search-radio"
+            id="search-ingredient"
+            type="radio"
+            value="search-ingredient"
+            onChange={ handleRadios }
+          />
+          Ingrediente
+        </label>
+        <label htmlFor="search-name">
+          <input
+            name="search-radio"
+            data-testid="name-search-radio"
+            id="search-name"
+            type="radio"
+            value="search-name"
+            onChange={ handleRadios }
+          />
+          Nome
+        </label>
+        <label htmlFor="search-first-letter">
+          <input
+            name="search-radio"
+            data-testid="first-letter-search-radio"
+            id="search-first-letter"
+            type="radio"
+            value="search-first-letter"
+            onChange={ handleRadios }
+          />
+          Primeira Letra
+        </label>
+        <button
+          data-testid="exec-search-btn"
+          type="button"
+          onClick={ handleClick }
+        >
+          Buscar
+        </button>
+      </div>
     </Container>
 
   );
@@ -151,11 +153,19 @@ export default SearchBar;
 
 const Container = styled.div`
 
+.search-bar-wrapper {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+}
+
 #search-input {
   background: #FFFFFF;
   border: 0.5px solid #FFD04E;
   box-sizing: border-box;
   border-radius: 6px;
+  margin: 5px;
 }
 
 #search-ingredient, #search-name, #search-first-letter {
@@ -163,26 +173,29 @@ const Container = styled.div`
   font-style: normal;
   font-weight: 500;
   font-size: 14px;
-  line-height: 17px;
+  line-height: 10px;
   align-items: center;
   text-align: center;
   border: 1px solid black;
   background-color: FFD04E;
+  margin-left: 5px;
 }
 
 button {
-  background-color: #FFD04E;
+  background-color: rgb(214, 168, 40);
   color: black;
   border: none;
   border-radius: 6px;
   font-family: Montserrat;
-  font-style: normal;
   font-weight: 500;
   font-size: 18px;
-  line-height: 22px;
   display: flex;
   align-items: center;
-color: #000000;
+  width: 100px;
+  text-align: center;
+  height: 50px;
+  margin-left: 20px;
+  padding-left: 20px;
 }
 
 `;

@@ -19,13 +19,14 @@ const Container = styled.div`
     display: flex;
     flex-flow: row-reverse nowrap;
     justify-content: center;
-    position: absolute;
+    position: static;
+    box-sizing: border-box;
   }
 
   .fav-icon {
     width: 14px;
     height: 12px;
-    margin-left: 70px;
+    margin-left: 72px;
     margin-bottom: 5px;
   }
 
@@ -34,4 +35,5 @@ const Container = styled.div`
     height: 12px;
     margin-bottom: 5px;
   }
+
 `;

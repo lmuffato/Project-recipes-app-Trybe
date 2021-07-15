@@ -19,12 +19,14 @@ function IngredientCard({ index, thumbnail, name }) {
           className="card-img"
           id={ name }
         />
-        <h2
-          data-testid={ `${index}-card-name` }
-          className="card-h2"
-        >
-          { name }
-        </h2>
+        <div>
+          <h2
+            data-testid={ `${index}-card-name` }
+            className="card-h2"
+          >
+            { name }
+          </h2>
+        </div>
       </div>
     </Container>
   );

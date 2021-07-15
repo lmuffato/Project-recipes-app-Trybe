@@ -34,7 +34,7 @@ export default function MainRecipes({ categories, arrayCards,
 
   function radioMeals() {
     return (
-      <div>
+      <div className="search-cards">
         {mealsToMap !== null && mealsToMap.length > 0 ? mealsToMap
           .slice(0, twelve).map((meal, index) => (
             <Cards
@@ -87,13 +87,22 @@ MainRecipes.propTypes = {
 };
 
 const Container = styled.div`
+   
   .main-cards {
-    margin-left: 70px;
+    margin: auto;
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
     align-items: center;
-    overflow: scroll;
-    height: fit-content;
+    height: 100vh;
+  }
+
+  .search-cards {
+    margin: auto;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
   }
 `;

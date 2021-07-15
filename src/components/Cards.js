@@ -51,8 +51,6 @@ export default Cards;
 
 const Container = styled.div`
   
-
- 
   .card-wrapper {
     margin: 5px;
     margin-top: 10px;
@@ -87,7 +85,7 @@ const Container = styled.div`
     font-family: Montserrat;
     font-style: normal;
     font-weight: bold;
-    font-size: 14px;
+    font-size: 10px;
     line-height: 15px;
     text-align: center;
     color: #000000;
@@ -98,7 +96,7 @@ const Container = styled.div`
     font-family: Montserrat;
     font-style: normal;
     font-weight: normal;
-    font-size: 10px;
+    font-size: 8px;
     line-height: 3px;
     text-align: center;
     color: #7A7A7A;
