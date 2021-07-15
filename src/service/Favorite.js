@@ -1,4 +1,4 @@
-export function checkStorageFood(recipe) {
+export function StorageFood(recipe) {
   const parseSave = JSON.parse(localStorage.getItem('favoriteRecipes'));
   const current = parseSave.find((element) => element.id === recipe.idMeal);
   if (current) {
@@ -7,7 +7,7 @@ export function checkStorageFood(recipe) {
   return false;
 }
 
-export function checkStorageDrink(recipe) {
+export function StorageDrink(recipe) {
   const parseSave = JSON.parse(localStorage.getItem('favoriteRecipes'));
   const current = parseSave.find((element) => element.id === recipe.idDrink);
   if (current) {
@@ -16,7 +16,7 @@ export function checkStorageDrink(recipe) {
   return false;
 }
 
-export function saveFavoriteFood(recipe) {
+export function FavFood(recipe) {
   const favorite = [{
     id: recipe.idMeal,
     type: 'comida',
@@ -33,7 +33,7 @@ export function saveFavoriteFood(recipe) {
     const favBtn = document.querySelector('.fav-btn');
     const url = 'http://localhost:3000/static/media/whiteHeartIcon.ea3b6ba8.svg';
     const parseSave = JSON.parse(localStorage.getItem('favoriteRecipes'));
-    if (favBtn.src === url && !checkStorageFood(recipe)) {
+    if (favBtn.src === url && !StorageFood(recipe)) {
       const combineObj = parseSave.concat(favorite);
       localStorage.clear();
       localStorage.setItem('favoriteRecipes', JSON.stringify(combineObj));
@@ -52,7 +52,7 @@ export function saveFavoriteFood(recipe) {
   }
 }
 
-export function saveFavoriteDrink(recipe) {
+export function FavDrink(recipe) {
   const favorite = [{
     id: recipe.idDrink,
     type: 'bebida',
@@ -69,7 +69,7 @@ export function saveFavoriteDrink(recipe) {
     const favBtn = document.querySelector('.fav-btn');
     const url = 'http://localhost:3000/static/media/whiteHeartIcon.ea3b6ba8.svg';
     const parseSave = JSON.parse(localStorage.getItem('favoriteRecipes'));
-    if (favBtn.src === url && !checkStorageDrink(recipe)) {
+    if (favBtn.src === url && !StorageDrink(recipe)) {
       const combineObj = parseSave.concat(favorite);
       localStorage.clear();
       localStorage.setItem('favoriteRecipes', JSON.stringify(combineObj));
