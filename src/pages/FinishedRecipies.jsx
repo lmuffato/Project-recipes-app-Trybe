@@ -3,8 +3,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import copy from 'clipboard-copy';
 import Header from '../components/Header';
-
-import ShareImage from '../images/shareIcon.svg';
+import ShareImage from '../icons/appIcons/share.png';
 
 const doneRecipes = [
   {
@@ -37,7 +36,6 @@ function FinishedRecipies() {
   useEffect(() => {
     setList(doneRecipes);
   }, []);
-
   useEffect(() => {
     switch (filter) {
     case 'All':
@@ -53,7 +51,6 @@ function FinishedRecipies() {
       break;
     }
   }, [filter]);
-
   return (
     <div>
       <Header />
@@ -90,14 +87,27 @@ function FinishedRecipies() {
                 </Link>
               </ImageRecipe>
               <ContentRecipe>
-                <TextCategory data-testid={ `${index}-horizontal-top-text` }>
-                  {
-                    recipe.type === 'comida'
-                      ? `${recipe.area} - ${recipe.category}`
-                      : `${recipe.alcoholicOrNot}`
-                  }
-                </TextCategory>
-                <MessageCopied id={ `${index}-style` } showMessage={ false }>
+                <div style={ { display: 'flex' } }>
+                  <TextCategory data-testid={ `${index}-horizontal-top-text` }>
+                    {
+                      recipe.type === 'comida'
+                        ? `${recipe.area} - ${recipe.category}`
+                        : `${recipe.alcoholicOrNot}`
+                    }
+                  </TextCategory>
+                  <ShareIcon
+                    onClick={ () => {
+                      copy(`${window.location.origin}/comidas/${recipe.id}`);
+                      document.getElementById(`${index}-style`).style.display = 'block';
+                    } }
+                  >
+                    <ImageShare
+                      data-testid={ `${index}-horizontal-share-btn` }
+                      src={ ShareImage }
+                    />
+                  </ShareIcon>
+                </div>
+                <MessageCopied id={ `${index}-style` } showmessage={ false }>
                   Link copiado!
                 </MessageCopied>
                 <Link to={ `/${recipe.type}s/${recipe.id}` }>
@@ -107,17 +117,6 @@ function FinishedRecipies() {
                 </Link>
                 <TextDate data-testid={ `${index}-horizontal-done-date` }>
                   { recipe.doneDate }
-                  <ShareIcon
-                    onClick={ () => {
-                      copy(`${window.location.origin}/comidas/${recipe.id}`);
-                      document.getElementById(`${index}-style`).style.display = 'block';
-                    } }
-                  >
-                    <Image
-                      data-testid={ `${index}-horizontal-share-btn` }
-                      src={ ShareImage }
-                    />
-                  </ShareIcon>
                 </TextDate>
                 <Tags>
                   <ul>
@@ -141,103 +140,95 @@ function FinishedRecipies() {
     </div>
   );
 }
-
 export default FinishedRecipies;
 
-const Container = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+const Container = styled.div` align-items: center;
+    display: flex;
+    flex-direction: column;
+    font-family: Montserrat , sans-serif;
+    width: 100%;
 `;
-
-const Filters = styled.div`
-  width: 100%;
+const Filters = styled.div` display: flex;
   height: auto;
-  padding: 20px;
-  display: flex;
   justify-content: space-around;
-`;
-
-const Button = styled.button`
-  width: 80px;
-  height: 24px;
-`;
-
-const CardRecipe = styled.div`
-  width: 90%;
-  height: 180px;
-  padding: 10px;
-  margin: 5px;
-  border-radius: 5px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  background-color: #f1f1f1;
-`;
-
-const ImageRecipe = styled.div`
-  width: 35%;
-  height: 100%;
-`;
-
-const ContentRecipe = styled.div`
-  width: 65%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 10px;
-`;
-
-const TextCategory = styled.div`
-  width: 80%;
-`;
-
-const MessageCopied = styled.p`
-  width: 80%;
-  margin: 0;
-  color: green;
-  display: ${(props) => (props.showMessage ? 'block' : 'none')}
-`;
-
-const TextName = styled.div`
-  width: 80%;
-`;
-
-const TextDate = styled.div`
-  width: 80%;
-`;
-
-const ShareIcon = styled.button`
-  width: 26px;
-  height: 26px;
-  background: none;
-  color: inherit;
-  border: none;
-  padding: 0;
-  font: inherit;
-  cursor: pointer;
-  outline: inherit;
-  margin-left: 10px;
-`;
-
-const Image = styled.img`
+  padding: 20px;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
 `;
-
-const Tags = styled.div`
+const Button = styled.button` height: 24px;
+  width: 80px;
+`;
+const CardRecipe = styled.div` align-items: center;
+  background-color: #f1f1f1;
+  border-radius: 5px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  display: flex;
+  height: 180px;
+  justify-content: space-between;
+  margin: 5px;
+  padding: 10px;
+  width: 90%;
+`;
+const ImageRecipe = styled.div` display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
+  width: 40%;
+`;
+const ContentRecipe = styled.div` display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
+  margin-left: 14px;
+  padding: 10px;
+  width: 65%;
+`;
+const TextCategory = styled.div` color: rgb(160, 160, 160);
+  width: 100%;
+`;
+const MessageCopied = styled.p` color: green;
+  display: ${(props) => (props.showmessage ? 'block' : 'none')};
+  margin: 0;
+  width: 100%;
+`;
+const TextName = styled.div` color: #363636;
+  font-weight: 600;
+  width: 100%;
+`;
+const TextDate = styled.div` color: #363636;
+  font-weight: 500;
+  width: 100%;
+`;
+const ShareIcon = styled.button` background: none;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  height: 26px;
+  margin-right: 10px;
+  outline: inherit;
+  padding: 0;
+  width: 20px;
+`;
+const Image = styled.img` border-radius: 100%;
+  box-shadow: 2px 4px 6px 1px rgba(0, 0, 0, 0.64);
+  object-fit: cover;
+  width: 100%;
+`;
+const Tags = styled.div` margin-top: 6px;
   width: 80%;
 `;
-
-const TextTag = styled.li`
-  color: red;
+const TextTag = styled.li` background-color: rgba(236, 222, 222, 1);
+  border-radius: 20px;
+  box-shadow: 2px 4px 6px 1px rgba(0, 0, 0, 0.64);
+  color: #363636;
   display: inline;
+  padding: 4px;
 
-  +li{
+  +li {
     margin-left: 5px;
   }
+  width: 100%;
+`;
+const ImageShare = styled.img` height: 26px;
+  width: 32px;
 `;
