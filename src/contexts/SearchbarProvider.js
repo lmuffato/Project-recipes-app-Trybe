@@ -9,6 +9,8 @@ function SearchbarProvider({ children }) {
   const [searchCategory, setSearchCategory] = useState('list');
   const [categories, setCategories] = useState();
 
+  // Criar um estado para controlar a busca, se clicar nos botões de filtro, cancela a barra de pesquisa, se clicar no botão de pesquisar, cancela os botões de filtro.
+
   const contextValue = {
     searchBtn,
     setSearchBtn,

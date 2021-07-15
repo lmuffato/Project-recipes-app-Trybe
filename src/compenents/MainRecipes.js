@@ -18,31 +18,44 @@ function MainRecipes() {
   } = useContext(RecipesContext);
 
   useEffect(() => {
-    if (recipes) setRenderRecipes(recipes);
+    if (recipes && !searchBtn) setRenderRecipes(recipes);
     if (mealsAndDrinkByIngredients) setRenderRecipes(mealsAndDrinkByIngredients);
-    if (searchedRecipes) setRenderRecipes(searchedRecipes);
-  }, [recipes, mealsAndDrinkByIngredients, searchedRecipes]);
+    if (searchedRecipes && searchBtn) setRenderRecipes(searchedRecipes);
+  }, [recipes, mealsAndDrinkByIngredients, searchedRecipes, searchBtn]);
 
-  console.log(mealsAndDrinkByIngredients);
+  const renderFilters = () => {
+    if (searchBtn) {
+      return (<SearchBar />);
+    } return (<FilterButtons />);
+  };
 
+  // console.log(mealsAndDrinkByIngredients);
+  console.log('Opa');
   if (renderRecipes) {
+    console.log('renderizou');
     return (
       <main data-testid="main-recipes" className="main">
-        { searchBtn ? <SearchBar /> : <FilterButtons /> }
+        {/* { searchBtn ? <SearchBar /> : <FilterButtons /> } */}
+        { renderFilters() }
         <section className="recipes-container">
-          { type === 'meal' ? renderRecipes.map((recipe, index) => (
-            <MealCards
-              data={ recipe }
-              index={ index }
-              key={ recipe.idMeal }
-            />
-          )) : renderRecipes.map((recipe, index) => (
-            <DrinkCards
-              data={ recipe }
-              index={ index }
-              key={ recipe.idDrink }
-            />
-          ))}
+          { type === 'meal'
+            ? <MealCards data={ renderRecipes } />
+            : <DrinkCards data={ renderRecipes } />}
+
+          {/* renderRecipes.map((recipe, index) => ( */
+          //   <MealCards
+          //     data={ renderRecipes }
+          //     // index={ index }
+          //     // key={ index }
+          //   />
+          // /* )) */ : /* renderRecipes.map((recipe, index) => ( */
+          //   <DrinkCards
+          //     data={ renderRecipes }
+          //     // index={ index }
+          //     // key={ index }
+          //   />
+          /* )) */}
+
         </section>
       </main>
     );

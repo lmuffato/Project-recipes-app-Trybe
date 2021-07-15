@@ -1,3 +1,8 @@
+body {
+  height: 100vh;
+  width: 100vw;
+}
+
 body div {
   height: 100%;
   margin: 0;
@@ -61,6 +66,7 @@ body div {
   background-color: #c3baba;
   display: flex;
   flex-wrap: wrap;
+  height: 125px;
   justify-content: space-around;
   position: fixed;
   top: 8.5%;
@@ -74,9 +80,51 @@ body div {
   color: #fffefee7;
   font-size: 14pt;
   font-weight: 500;
+  height: 35%;
   margin: 1% 0;
   padding: 1%;
   width: 30%;
+}
+
+/* --------------------------------------- */
+
+/* -------- Componente Search Bar -------- */
+.search-bar {
+  background-color: #c3baba;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  position: fixed;
+  top: 8.5%;
+}
+
+.input-text {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.input-text input {
+  border: none;
+  border-radius: 5px;
+  height: 25pt;
+  width: 85%;
+}
+
+.radio-button {
+  align-items: center;
+  display: flex;
+  font-size: 15pt;
+}
+
+.radio-button input {
+  height: 15pt;
+  width: 15pt;
+}
+
+.search-button {
+  margin-bottom: 2%;
+  width: 98%;
 }
 
 /* --------------------------------------- */
@@ -88,7 +136,7 @@ body div {
   height: 78%;
   justify-content: space-around;
   margin-bottom: 12%;
-  margin-top: 45%;
+  margin-top: 52%;
 }
 
 .recipe {
@@ -98,9 +146,9 @@ body div {
   border-radius: 20px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-around;
   margin-bottom: 3%;
-  width: 40%;
+  width: 35%;
 }
 
 .recipe-image {

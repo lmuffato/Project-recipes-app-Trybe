@@ -10,6 +10,7 @@ function FilterButtons() {
     } else { setSearchCategory(value); }
   };
 
+  console.log('Filter buttons');
   return (
     <section className="button-container">
       <button
