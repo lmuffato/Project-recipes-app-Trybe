@@ -236,7 +236,7 @@ function ProgressCard({ recipe }) {
           {listIngredients(ingredients)}
         </aside>
       </div>
-      <h3 className="h3">Instruções</h3>
+      <h3 className="h3">Instructions</h3>
       <div className="instructions">
         <RecipeInst instructions={ instructions } />
       </div>
