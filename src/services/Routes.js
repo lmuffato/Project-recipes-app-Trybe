@@ -14,6 +14,7 @@ import ProfilePage from '../pages/ProfilePage';
 import DoneRecipes from '../pages/DoneRecipes';
 import FavoriteRecipes from '../pages/FavoriteRecipes';
 import FoodInProgress from '../pages/FoodInProgress';
+
 import DrinkInProgress from '../pages/DrinkInProgress';
 import FoodDetails from '../pages/FoodDetails';
 import DrinkDetails from '../pages/DrinkDetails';

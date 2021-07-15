@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from 'react';
+
 import ReactPlayer from 'react-player'; // https://dev.to/marcelomatosdev/react-adding-a-video-player-to-play-youtube-videos-in-your-project-30p
-import { useParams } from 'react-router-dom';
-import ShareBtn from './componentsDetails/ShareBtn';
+// import { useParams } from 'react-router-dom';
+// import ShareBtn from './componentsDetails/ShareBtn';
+
+// import ReactPlayer from 'react-player'; // https://dev.to/marcelomatosdev/react-adding-a-video-player-to-play-youtube-videos-in-your-project-30p
+import { Link, useParams } from 'react-router-dom';
+import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import { foodById } from '../services/apiRequests';
 import DrinksRecomends from './componentsDetails/DrinksRecomends';
@@ -64,7 +69,15 @@ export default function RecipeCardDetailFood() {
         url={ foodDetails.strYoutube }
       />
       <DrinksRecomends />
-      <BtnInitiateRecipe id={ idMeal } type="comida" />
+
+//       <BtnInitiateRecipe id={ idMeal } type="comida" />
+
+      <Link to={ `/comidas/${idMeal}/in-progress` }>
+        <button type="button" data-testid="start-recipe-btn" className="playRecipe">
+          Iniciar Receita
+        </button>
+      </Link>
+
     </div>
   );
 }
