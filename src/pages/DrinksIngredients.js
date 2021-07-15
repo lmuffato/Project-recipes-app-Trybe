@@ -48,7 +48,12 @@ function DrinksIngredients() {
               src={ `https://www.thecocktaildb.com/images/ingredients/${name}-Small.png` }
               alt={ name }
             />
-            <p data-testid={ `${index}-card-name` }>{ name }</p>
+            <p
+              data-testid={ `${index}-card-name` }
+              className="ingredient-title"
+            >
+              { name }
+            </p>
           </Link>
         );
       })
@@ -58,7 +63,11 @@ function DrinksIngredients() {
   return (
     <>
       <Header />
-      { getTwelveIngredients() }
+      <main className="main-ingredients">
+        <section className="ingredients-container">
+          { getTwelveIngredients() }
+        </section>
+      </main>
       <Footer />
     </>
   );

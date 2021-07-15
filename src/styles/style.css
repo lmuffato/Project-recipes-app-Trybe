@@ -26,7 +26,9 @@ body div {
 }
 
 .header h1 {
+  font-size: 24pt;
   margin: 0;
+  text-align: center;
 }
 
 .searchBtn {
@@ -36,7 +38,7 @@ body div {
 
 /* --------------------------------------- */
 
-/* ------------------------ Página de Login ------------------ */
+/* ------------------------ Tela de Login --------------------- */
 .login-inputs {
   align-items: center;
   display: flex;
@@ -48,16 +50,43 @@ body div {
 
 /* ------------------------------------------------------------ */
 
-/* ---------------- Página Principal de Receitas -------------- */
-.main, .main-explore {
-  align-items: center;
+/* ----------------- Estilos bases das telas  ----------------- */
+.main-recipes, .main-explore, .main-ingredients, .main-area {
   background: #ea1d2bf3;
   display: flex;
   flex-flow: column wrap;
   font-family: sans-serif;
+  width: 100%;
+}
+
+.recipes-container, .ingredients-container {
+  display: flex;
+  flex-flow: row wrap;
+  height: 78%;
+  justify-content: space-around;
+  margin-bottom: 12%;
+  margin-top: 37%;
+}
+
+.recipe, .ingredient {
+  align-items: center;
+  background-color: #9a8f9757;
+  border: 1px solid black;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin-bottom: 3%;
+  width: 35%;
+}
+
+/* ------------------------------------------------------------ */
+
+/* -------------- Tela Principal de Receitas  ----------------- */
+.main-recipes {
+  align-items: center;
   justify-content: space-around;
   margin-top: 15%;
-  width: 100%;
 }
 
 /* ------ Componente Filter Buttons ------ */
@@ -129,29 +158,9 @@ body div {
 
 /* --------------------------------------- */
 
-/* ------- Componente Main Recipes ------- */
-.recipes-container {
-  display: flex;
-  flex-flow: row wrap;
-  height: 78%;
-  justify-content: space-around;
-  margin-bottom: 12%;
-  margin-top: 37%;
-}
-
-/* --------------------------------------- */
-
-/* --- Componentes Meal & Drink Recipes -- */
+/* --- Componentes Meal/Drink Recipes & Foods Ingredients -- */
 .recipe {
-  align-items: center;
   background-color: #9a8f9757;
-  border: 1px solid black;
-  border-radius: 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  margin-bottom: 3%;
-  width: 35%;
 }
 
 .recipe-image {
@@ -166,6 +175,10 @@ body div {
 }
 
 /* --------------------------------------- */
+
+/* ------------------------------------------------------------ */
+
+/* -------------------- Tela de Explorar ---------------------- */
 
 /* ---------- Componente Explore --------- */
 .main-explore {
@@ -186,7 +199,42 @@ body div {
   width: 96%;
 }
 
-/* --------------------------------------- */
+/* ------------------------------------------------------------ */
+
+/* ----------- Tela de Explorar por Ingredientes -------------- */
+.ingredient {
+  background-color: #9a8f9794;
+  color: black;
+  font-size: 15pt;
+}
+
+.ingredient-title {
+  text-align: center;
+}
+
+/* ------------------------------------------------------------ */
+
+/* -------------- Tela de Explorar por Origem ----------------- */
+.recipes-area {
+  align-items: center;
+  background-color: #c3baba;
+  display: flex;
+  height: 50pt;
+  justify-content: center;
+  margin-top: 12%;
+}
+
+.select-area {
+  background-color: whitesmoke;
+  border: none;
+  border-radius: 10px;
+  height: 35px;
+  width: 96%;
+}
+
+.main-area .recipes-container {
+  margin-top: 5%;
+}
 
 /* ------------------------------------------------------------ */
 

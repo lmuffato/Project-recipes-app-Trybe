@@ -43,6 +43,7 @@ function FoodsIngredients() {
             onClick={
               (e) => getRecipesByIngredients(e.target.alt || e.target.innerText)
             }
+            className="ingredient"
             data-testid={ `${index}-ingredient-card` }
             key={ index }
           >
@@ -54,6 +55,7 @@ function FoodsIngredients() {
             <p
               value={ name }
               data-testid={ `${index}-card-name` }
+              className="ingredient-title"
             >
               { name }
             </p>

@@ -34,7 +34,7 @@ function MainRecipes() {
   if (renderRecipes) {
     // console.log('renderizou');
     return (
-      <main data-testid="main-recipes" className="main">
+      <>
         {/* { searchBtn ? <SearchBar /> : <FilterButtons /> } */}
         { renderFilters() }
         <section className="recipes-container">
@@ -57,7 +57,7 @@ function MainRecipes() {
           /* )) */}
 
         </section>
-      </main>
+      </>
     );
   }
   return (

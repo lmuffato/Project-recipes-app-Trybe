@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 // import { Link } from 'react-router-dom';
 import Footer from '../compenents/Footer';
 import Header from '../compenents/Header';
+import Loading from '../compenents/Loading';
 import MealCards from '../compenents/MealCards';
 import SearchbarContext from '../contexts/SearchbarContext';
 import '../styles/MealAndDrinkCards.css';
@@ -57,19 +58,21 @@ function FoodsArea() {
     }
   }, [selectedArea, mealsRecepies]);
 
-  return (
-    <>
-      <Header />
-      <select
-        data-testid="explore-by-area-dropdown"
-        onChange={ (e) => setSelectedArea(e.target.value) }
-        value={ selectedArea }
-      >
-        <option data-testid="All-option">All</option>
-        {areas.map((area, index) => (
-          <option key={ index } data-testid={ `${area}-option` }>{area}</option>
-        ))}
-      </select>
+  const renderRecipesByArea = () => (
+    <main className="main-area">
+      <section className="recipes-area">
+        <select
+          data-testid="explore-by-area-dropdown"
+          onChange={ (e) => setSelectedArea(e.target.value) }
+          value={ selectedArea }
+          className="select-area"
+        >
+          <option data-testid="All-option">All</option>
+          {areas.map((area, index) => (
+            <option key={ index } data-testid={ `${area}-option` }>{area}</option>
+          ))}
+        </select>
+      </section>
       <section className="recipes-container">
         {/* {showRecepies.map((recepie, index) => ( */}
         {/* // <Link key={ index } to={ `/comidas/${recepie.idMeal}` }> */}
@@ -81,6 +84,13 @@ function FoodsArea() {
         {/* </Link> */}
         {/* ))} */}
       </section>
+    </main>
+  );
+
+  return (
+    <>
+      <Header />
+      { showRecepies ? renderRecipesByArea() : <Loading />}
       <Footer />
     </>
   );

@@ -76,7 +76,9 @@ function MainRecipesPage() {
   return (
     <>
       <Header />
-      { recipes && categories ? <MainRecipes /> : <Loading />}
+      <main data-testid="main-recipes" className="main-recipes">
+        { recipes && categories ? <MainRecipes /> : <Loading />}
+      </main>
       <Footer />
     </>
   );
