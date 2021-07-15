@@ -188,12 +188,19 @@
 }
 
 .startBtn {
-  border: 1px solid black;
+  background-color: #f2a30f;
+  border: none;
   bottom: 0;
   height: 50px;
   position: fixed;
   width: 100%;
   z-index: 1;
+}
+
+.startBtn:enabled:hover {
+  background-color: #f2a30f;
+  box-shadow: 1px 1px 7px #1d1c1d inset;
+  transition: 1s;
 }
 
 /*# sourceMappingURL=RecipeDetails.css.map */

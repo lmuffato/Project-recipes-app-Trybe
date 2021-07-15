@@ -1,3 +1,8 @@
+$orange: rgb(242, 163, 15);
+$shadow: rgba(51, 49, 49, 0.6);
+$disabled: rgb(109, 109, 109);
+$input: rgba(216, 209, 209, 0.4);
+
 @mixin for-phone-only {
     @media ( max-width : 767.98px ) { @content;}
 }
@@ -43,6 +48,7 @@
 
   .instructions {
     padding-left: 3em;
+    margin-bottom: 4em;
 
     @include for-phone-only {
       border-bottom: 1px solid black;
@@ -169,12 +175,30 @@
   height: 50px;
   position: fixed;
   width: 100%;
+
+  &:disabled {
+    background-color: $disabled;
+    cursor: not-allowed;
+    transition: 2s;
+  }
+
+  &:enabled {
+    background-color: $orange;
+    color: white;
+    transition: 2s;
+  }
+
+  &:enabled:hover {
+    background-color: $orange;
+    box-shadow: 1px 1px 7px rgb(29, 28, 29) inset;
+    transition: 1s;
+  }
 }
 
-.finish-recipe:enabled {
-  border: 1px solid black;
-  bottom: 0;
-  height: 50px;
-  position: fixed;
-  width: 100%;
-}
+// .finish-recipe:enabled {
+//   border: 1px solid black;
+//   bottom: 0;
+//   height: 50px;
+//   position: fixed;
+//   width: 100%;
+// }

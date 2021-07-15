@@ -1,3 +1,6 @@
+$orange: rgb(242, 163, 15);
+
+
 @mixin for-phone-only {
   @media ( max-width : 767.98px ) { @content;}
 
@@ -169,7 +172,7 @@
   .swiper__slide {
     background-color: black;
     padding: 0 0.5em 0.5em;
-    padding-bottom: 4.5em;
+    padding-bottom: 4.5em;  
 
     .swiper__div {
       align-items: center;
@@ -195,10 +198,17 @@
 }
 
 .startBtn {
-  border: 1px solid black;
+  background-color: $orange;
+  border: none;
   bottom: 0;
   height: 50px;
   position: fixed;
   width: 100%;
   z-index: 1;
+}
+
+.startBtn:enabled:hover {
+  background-color: $orange;
+  box-shadow: 1px 1px 7px rgb(29, 28, 29) inset;
+  transition: 1s;
 }
