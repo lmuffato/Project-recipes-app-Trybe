@@ -1,16 +1,9 @@
-import React, { useContext, useEffect } from 'react';
-import { getIngredients } from '../../services/getMeals';
+import React, { useContext } from 'react';
 import MealShareAndFavorite from '../MealShareAndFavorite';
 import Context from '../../context/Context';
 
 export default function InProgressMeal() {
   const { mealsId } = useContext(Context);
-
-  useEffect(() => {
-    const mealIngredient = getIngredients(mealsId[0]);
-
-    setIngredients(mealIngredient);
-  }, []);
 
   return (
     <div>
