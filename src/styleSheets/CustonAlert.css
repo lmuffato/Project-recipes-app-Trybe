@@ -1,0 +1,15 @@
+.alert-container {
+  align-items: center;
+  align-self: center;
+  background-color: #f5d683;
+  border-radius: 10px;
+  bottom: 50vh;
+  display: flex;
+  font-size: larger;
+  height: 100px;
+  justify-content: center;
+  justify-self: center;
+  left: 25vw;
+  position: fixed;
+  width: 200px;
+}
