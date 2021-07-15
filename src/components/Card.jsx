@@ -4,6 +4,8 @@ import { Card } from 'react-bootstrap';
 import ContextBebidas from '../provider/ContextBebida';
 import ContextComidas from '../provider/ContextComida';
 
+import '../styles/Cards.css';
+
 function Cards({ param }) {
   const { data: dataDrink } = useContext(ContextBebidas);
   const { data: datafood } = useContext(ContextComidas);
@@ -26,7 +28,7 @@ function Cards({ param }) {
               alt={ item.strMeal }
             />
             <Card.Body>
-              <Card.Title data-testid={ `${index}-card-name` }>
+              <Card.Title className="card-link" data-testid={ `${index}-card-name` }>
                 { item.strMeal }
               </Card.Title>
             </Card.Body>
@@ -55,7 +57,7 @@ function Cards({ param }) {
               alt={ item.srtDrink }
             />
             <Card.Body>
-              <Card.Title data-testid={ `${index}-card-name` }>
+              <Card.Title className="card-link" data-testid={ `${index}-card-name` }>
                 { item.strDrink }
               </Card.Title>
             </Card.Body>

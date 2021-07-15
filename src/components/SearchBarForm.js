@@ -1,14 +1,18 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, FormControl, Navbar,
+  ButtonGroup, ToggleButton,
+} from 'react-bootstrap';
 import { useLocation, useHistory } from 'react-router-dom';
+import propTypes from 'prop-types';
 import { getIngCock, getIngCockTail, getNameCock,
   getNameCockTail, getFirstLetterCock, getFirstLetterCockTail,
 } from '../services/fetchApiSearchBar';
+import './searchBar.css';
 
 import ContextComidas from '../provider/ContextComida';
 import ContextBebidas from '../provider/ContextBebida';
 
-const SearchBarForm = () => {
+const SearchBarForm = ({ searchBar }) => {
   const [busca, setBusca] = useState('');
   const [markBusca, setMarkBusca] = useState('');
 
@@ -20,7 +24,9 @@ const SearchBarForm = () => {
 
   const HISTORY = useHistory();
   const LOCATION = useLocation();
-  const FIRST_LETTER = 'primeira-letra';
+  const INGREDIENT = 'ingredient';
+  const NAME = 'name';
+  const FIRST_LETTER = 'first-letter';
   const ALERT_SINTO_MUITO = 'Sinto muito,'
     + ' não encontramos nenhuma receita para esses filtros.';
 
@@ -39,10 +45,10 @@ const SearchBarForm = () => {
   }, [dataCocks, dataDrinks]);
 
   const handleSearchBarApiComidas = () => {
-    if (markBusca === 'ingrediente') {
+    if (markBusca === INGREDIENT) {
       getIngCock(busca).then(({ meals }) => setDataCocks(meals));
     }
-    if (markBusca === 'nome') {
+    if (markBusca === NAME) {
       getNameCock(busca).then(({ meals }) => setDataCocks(meals));
     }
     if (markBusca === FIRST_LETTER) {
@@ -54,11 +60,11 @@ const SearchBarForm = () => {
   };
 
   const handleSearchBarApiBebidas = () => {
-    if (markBusca === 'ingrediente') {
+    if (markBusca === INGREDIENT) {
       getIngCockTail(busca).then(({ drinks }) => setDataDrinks(drinks))
         .catch(() => alert(ALERT_SINTO_MUITO));
     }
-    if (markBusca === 'nome') {
+    if (markBusca === NAME) {
       getNameCockTail(busca).then(({ drinks }) => setDataDrinks(drinks));
     }
     if (markBusca === FIRST_LETTER) {
@@ -75,74 +81,72 @@ const SearchBarForm = () => {
   };
 
   const handleSearchBarValue = () => (
-    <Form.Group>
-      <Form.Label htmlFor="id-busca">Busca:</Form.Label>
-      <input
+    // {/* className="d-flex" ou inline */}
+    <div className="textBtn">
+      <FormControl
         type="text"
         id="id-busca"
         name="id-busca"
-        onChange={ (e) => setBusca(e.target.value) }
-        data-testid="search-input"
+        className="text"
+        placeholder="Search"
+        onChange={ ({ target }) => setBusca(target.value) }
+        // data-testid="search-input"
+        data-testid={ searchBar === true ? 'search-input' : null }
+        // className="mr-sm-2"
       />
-    </Form.Group>
-  );
-
-  const handleSearchBarMark = () => (
-    <div className="d-flex">
-      <Form.Group>
-        <Form.Label>
-          <input
-            type="radio"
-            name="busca"
-            value="ingrediente"
-            onChange={ (e) => setMarkBusca(e.target.value) }
-            data-testid="ingredient-search-radio"
-          />
-          Ingrediente
-        </Form.Label>
-        <Form.Label>
-          <input
-            type="radio"
-            name="busca"
-            value="nome"
-            onChange={ (e) => setMarkBusca(e.target.value) }
-            data-testid="name-search-radio"
-          />
-          Nome
-        </Form.Label>
-        <Form.Label>
-          <input
-            type="radio"
-            name="busca"
-            value="primeira-letra"
-            onChange={ (e) => setMarkBusca(e.target.value) }
-            data-testid="first-letter-search-radio"
-          />
-          Primeira Letra
-        </Form.Label>
-      </Form.Group>
+      <Button
+        className="button"
+        variant="outline-info"
+        data-testid="exec-search-btn"
+        onClick={ handleFilterSearchBar }
+      >
+        Search
+      </Button>
     </div>
   );
 
-  return (
-    <div
-      className="d-flex flex-column align-items-center"
-      style={ { background: 'rgb(122, 122, 122)' } }
-    >
-      <Form>
-        { handleSearchBarValue() }
-        <div className="d-flex justify-content-center align-items-center">
-          { handleSearchBarMark() }
-          <Button
-            data-testid="exec-search-btn"
-            onClick={ handleFilterSearchBar }
+  const handleSearchBarMark = () => {
+    const RADIOS = [
+      { name: 'Ingredient', value: INGREDIENT, dataTestid: 'ingredient-search-radio' },
+      { name: 'Name', value: NAME, dataTestid: 'name-search-radio' },
+      { name: 'First Letter',
+        value: FIRST_LETTER,
+        dataTestid: 'first-letter-search-radio' },
+    ];
+    return (
+      <ButtonGroup toggle className="radios">
+        {RADIOS.map((radio, idx) => (
+          <ToggleButton
+            key={ idx }
+            type="radio"
+            name="radio"
+            value={ radio.value }
+            variant="outline-info"
+            checked={ markBusca === radio.value }
+            data-testid={ `${radio.dataTestid}` }
+            onChange={ ({ target }) => setMarkBusca(target.value) }
           >
-            Busca
-          </Button>
-        </div>
-      </Form>
+            {radio.name}
+          </ToggleButton>
+        ))}
+      </ButtonGroup>
+    );
+  };
+
+  return (
+    <div>
+      <Navbar bg="dark" variant="dark">
+        <Form className="form">
+          { handleSearchBarValue() }
+          { handleSearchBarMark() }
+        </Form>
+      </Navbar>
     </div>
   );
 };
 
 export default SearchBarForm;
+
+SearchBarForm.propTypes = {
+  searchBar: propTypes.bool,
+}.isRequired;

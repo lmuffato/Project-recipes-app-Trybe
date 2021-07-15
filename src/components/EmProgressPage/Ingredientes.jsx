@@ -1,8 +1,9 @@
 import { object } from 'prop-types';
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+// import { useLocation } from 'react-router-dom';
 
-function Ingredientes({ params: { ingredientsList, data, setIsDisabled } }) {
+function Ingredientes({ params: { ingredientsList, data } }) {
+// function Ingredientes({ params: { ingredientsList, data, setIsDisabled } }) {
   const [ingArray, setIngArray] = useState([]);
   const [LSG, setLSG] = useState([]);
 
@@ -124,6 +125,7 @@ function Ingredientes({ params: { ingredientsList, data, setIsDisabled } }) {
 
     if (progressRecipes === null) return updateLocalStorage();
     setLSG(progressRecipes);
+    console.log(LSG);
 
     getLocalStorage();
   }, []);
