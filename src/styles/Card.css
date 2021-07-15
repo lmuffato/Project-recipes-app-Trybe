@@ -85,9 +85,9 @@ body::-webkit-scrollbar {
     align-items: center;
     display: flex;
     flex-direction: column;
-    height: 26vh;
-    margin: 8px;
-    width: 43vw;
+    height: 27vh;
+    margin: 4px;
+    width: 46vw;
   }
 
   .card-img {
