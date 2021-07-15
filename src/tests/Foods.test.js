@@ -2,7 +2,6 @@ import { screen } from '@testing-library/dom';
 import userEvent from '@testing-library/user-event';
 import renderWithRouterAndContext from './helper/renders/renderWithRouterAndContext';
 import getTest from './helper/mocks/getTestInfo';
-import meals from './helper/mocks/api/meals';
 import { foodDataApi } from './helper/mocks/data';
 import renderWithRCA from './helper/renders/renderWithRouterAndContextAPI';
 
@@ -14,10 +13,6 @@ const {
 } = getTest();
 
 const { getByTestId, getByRole } = screen;
-
-const mockFetch = jest.fn(() => Promise.resolve({
-  json: () => Promise.resolve({ meals }),
-}));
 
 describe('Check Header and Footer components', () => {
   it('does Header and Footer tests', async () => {
@@ -32,7 +27,7 @@ describe('Check Header and Footer components', () => {
 
 describe('API tests', () => {
   it('checks API when it doesnt return anything', async () => {
-    await renderWithRouterAndContext();
+    renderWithRCA();
 
     doTheLoginProcess(getByTestId, userEvent);
 
@@ -51,7 +46,7 @@ describe('API tests', () => {
   });
 
   it('checks API', async () => {
-    await renderWithRouterAndContext();
+    renderWithRCA();
 
     doTheLoginProcess(getByTestId, userEvent);
 
@@ -59,7 +54,7 @@ describe('API tests', () => {
     userEvent.click(searchIcon);
 
     const inputSearch = getByRole('textbox');
-    const labelRadioNome = getByRole('radio', { name: /ingrediente/i });
+    const labelRadioNome = getByRole('radio', { name: /nome/i });
     const buttonSearch = getByRole('button', { name: /buscar/i });
 
     userEvent.type(inputSearch, 'Corba');
@@ -79,12 +74,20 @@ describe('Meals tests', () => {
     });
   });
 
-  it('checks Recipe Card', async () => {
+  it('checks buttons category', async () => {
     const { findByTestId } = renderWithRCA();
-
     doTheLoginProcess(getByTestId, userEvent);
 
     const sectionCorba = await findByTestId('0-recipe-card');
-    userEvent.click(sectionCorba);
+    expect(sectionCorba.firstChild).toHaveTextContent('Corba');
+    const beefButton = await findByTestId('Beef-category-filter');
+    const breakfastButton = await findByTestId('Breakfast-category-filter');
+    const chickenButton = await findByTestId('Chicken-category-filter');
+    expect(beefButton).toHaveTextContent('Beef');
+    expect(breakfastButton).toHaveTextContent('Breakfast');
+    expect(chickenButton).toHaveTextContent('Chicken');
+    userEvent.click(beefButton);
+    userEvent.click(breakfastButton);
+    userEvent.click(chickenButton);
   });
 });

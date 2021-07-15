@@ -1,6 +1,7 @@
 import { screen } from '@testing-library/dom';
 import userEvent from '@testing-library/user-event';
 import renderWithRouterAndContext from './helper/renders/renderWithRouterAndContext';
+import renderWithRCA from './helper/renders/renderWithRouterAndContextAPI';
 import getTest from './helper/mocks/getTestInfo';
 
 const {
@@ -31,15 +32,17 @@ describe('FoodArea Screen', () => {
 
   describe('Check all elements on FoodArea Screen', () => {
     it('checks the dropdown area', async () => {
-      await renderWithRouterAndContext();
+      const { findByTestId, history } = renderWithRCA();
 
       redirectToFoodExploreAreaScreen();
 
       const dropdownByArea = getByTestId('explore-by-area-dropdown');
-      userEvent.selectOptions(dropdownByArea, ['All']);
-
-      const allOption = getByTestId('All-option');
+      const allOption = await findByTestId('American-option');
+      userEvent.selectOptions(dropdownByArea, ['American']);
       expect(allOption.selected).toBe(true);
+      const sectionCorba = await findByTestId('0-recipe-card');
+      userEvent.click(sectionCorba);
+      expect(history.location.pathname).toBe('/comidas/52977');
     });
   });
 });
