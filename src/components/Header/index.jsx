@@ -39,7 +39,11 @@ function Header({ title, hideSearch }) {
 
 Header.propTypes = {
   title: PropTypes.string.isRequired,
-  hideSearch: PropTypes.bool.isRequired,
+  hideSearch: PropTypes.bool,
+};
+
+Header.defaultProps = {
+  hideSearch: false,
 };
 
 export default Header;
