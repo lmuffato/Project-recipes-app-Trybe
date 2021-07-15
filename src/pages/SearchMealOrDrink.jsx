@@ -41,6 +41,7 @@ function SearchMealOrDrink() {
             <button
               type="button"
               data-testid="explore-by-ingredient"
+              className="explore-btns"
             >
               Por Ingredientes
             </button>
@@ -53,6 +54,7 @@ function SearchMealOrDrink() {
                 <button
                   type="button"
                   data-testid="explore-by-area"
+                  className="explore-btns"
                 >
                   Por Local de Origem
                 </button>
@@ -69,6 +71,7 @@ function SearchMealOrDrink() {
             <button
               type="button"
               data-testid="explore-surprise"
+              className="explore-btns"
             >
               Me Surpreenda!
             </button>

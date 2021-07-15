@@ -16,12 +16,12 @@ export default function FavoriteMeals({ props:
   if (recipe) {
     const { name, id, image, area, category } = recipe;
     return (
-      <div key={ name } className="card">
+      <div key={ name } className="favoriteRecipes-card">
         <h1 style={ show ? {} : { display: 'none' } }>Link copiado!</h1>
-        <Link to={ `/comidas/${id}` }>
+        <Link to={ `/comidas/${id}` } className="favoriteRecipes-link">
           <h2
             data-testid={ `${index}-horizontal-name` }
-            className="recipe-name"
+            className="favoriteRecipes-title"
           >
             {name}
           </h2>
@@ -29,12 +29,12 @@ export default function FavoriteMeals({ props:
             src={ image }
             alt={ name }
             data-testid={ `${index}-horizontal-image` }
-            className="recipe-picture"
+            className="favoriteRecipes-img"
           />
         </Link>
         <h3
           data-testid={ `${index}-horizontal-top-text` }
-          className="recipe-info"
+          className="favoriteRecipes-text"
         >
           { `${area} - ${category}` }
         </h3>

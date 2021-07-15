@@ -12,6 +12,7 @@
   display: flex;
   flex-direction: column;
   height: 640px;
+  margin-top: 15px;
   position: relative;
   text-align: center;
 }
@@ -76,7 +77,7 @@
 .page-title {
   background-color: rgb(218, 41, 28);
   color: rgb(255, 199, 44);
-  font-size: 40px;
+  font-size: 32px;
   font-weight: 1000;
 }
 
@@ -111,11 +112,14 @@
   border: 3px solid black;
   border-radius: 10px;
   color: rgb(218, 41, 28);
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 1000;
   margin-bottom: 5px;
   transition: 0.5s;
-  width: 110px;
+  width: 115px;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  white-space: wrap;
 }
 
 .categoryBtn:hover, .categoryBtn:active {
@@ -439,6 +443,7 @@
   color: rgb(218, 41, 28);
   display: flex;
   flex-direction: row;
+  font-weight: 600;
   justify-content: center;
 }
 
@@ -462,6 +467,7 @@
   color: rgb(255, 199, 44);
   font-size: 20px;
   height: auto;
+  margin-top: 3px;
   width: 200px;
 }
 
@@ -471,18 +477,27 @@
 
 /* doneRecipes page */
 .doneRecipes-div {
+  align-items: center;
   display: flex;
-  flex-direction: column;
+  flex-flow: wrap;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.recipes-done-cards {
+  display: flex;
+  flex-flow: wrap;
+  flex-direction: row;
+  margin-left: 15px;
 }
 
 .doneRecipes-container {
   background-color: rgb(255, 199, 44);
   display: flex;
   flex-flow: wrap;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-around;
-  padding-bottom: 40px;
-  width: 340px;
+  width: 160px;
 }
 
 .doneRecipes-card {
@@ -491,9 +506,9 @@
   border-style: solid;
   display: flex;
   flex-flow: wrap;
-  flex-direction: row;
-  height: 200px;
-  justify-content: space-around;
+  flex-direction: column;
+  height: 310px;
+  justify-content: flex-start;
   margin-bottom: 5px;
   margin-right: 5px;
   width: 160px;
@@ -501,12 +516,13 @@
 
 
 .doneRecipes-link {
-  align-content: center;
+  align-content: flex-start;
+  align-self: center;
   border-radius: 15px;
   display: flex;
   flex-flow: wrap;
   flex-direction: column;
-  height: 200px;
+  height: 150px;
   justify-content: center;
 }
 
@@ -531,4 +547,319 @@
   max-height: 65%;
   max-width: 90%;
   object-fit: fill;
+}
+
+.doneRecipes-img {
+  align-self: center;
+  width: 100px;
+}
+
+.doneRecipes-text {
+  align-self: center;
+  background-color: rgb(218, 41, 28);
+  color: rgb(255, 199, 44);
+  font-size: 20px;
+  margin-bottom: 0;
+}
+
+/* favorite Recipes */
+.favoriteRecipes-div {
+  align-items: center;
+  display: flex;
+  flex-flow: wrap;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.recipes-favorite-cards {
+  display: flex;
+  flex-flow: wrap;
+  flex-direction: row;
+  margin-left: 15px;
+}
+
+.favoriteRecipes-container {
+  background-color: rgb(255, 199, 44);
+  display: flex;
+  flex-flow: wrap;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 160px;
+}
+
+.favoriteRecipes-card {
+  background-color: rgb(218, 41, 28);
+  border-radius: 10px;
+  border-style: solid;
+  display: flex;
+  flex-flow: wrap;
+  flex-direction: column;
+  height: 270px;
+  justify-content: flex-start;
+  margin-bottom: 5px;
+  margin-right: 5px;
+  width: 160px;
+}
+
+
+.favoriteRecipes-link {
+  align-content: flex-start;
+  align-self: center;
+  border-radius: 10px;
+  display: flex;
+  flex-flow: wrap;
+  flex-direction: column;
+  height: 150px;
+  justify-content: center;
+}
+
+.favoriteRecipes-title {
+  align-self: center;
+  background-color: rgb(218, 41, 28);
+  border-radius: 10px;
+  color: rgb(255, 199, 44);
+  font-size: 3vmax;
+  font-weight: 800;
+  max-height: 42px;
+  overflow: hidden;
+  resize: horizontal;
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: wrap;
+}
+
+.favoriteRecipes-card-img {
+  align-self: center;
+  border: 3px solid black;
+  border-radius: 10px;
+  max-height: 65%;
+  max-width: 90%;
+  object-fit: fill;
+}
+
+.favoriteRecipes-img {
+  align-self: center;
+  width: 100px;
+}
+
+.favoriteRecipes-text {
+  align-self: center;
+  background-color: rgb(218, 41, 28);
+  color: rgb(255, 199, 44);
+  font-size: 20px;
+  margin-bottom: 0;
+}
+
+.share-favorite {
+  border: 3px solid black;
+  border-radius: 5px;
+  margin-right: 15px;
+  margin-top: 10px;
+  width: 160;
+}
+
+/* Profile page */
+.profile-div {
+  align-content: center;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.profile-email {
+  background-color: rgb(218, 41, 28);
+  border: 3px solid black;
+  border-radius: 10px;
+  color: rgb(255, 199, 44);
+  display: flex;
+  flex-direction: column;
+  font-weight: 600;
+  margin-top: 3px;
+  text-align: center;
+  width: 360px;
+}
+
+.profile-links {
+  background-color: rgb(218, 41, 28);
+  border: 3px solid black;
+  border-radius: 10px;
+  color: rgb(255, 199, 44);
+  display: flex;
+  flex-direction: column;
+  font-size: 25px;
+  font-weight: 600;
+  margin-top: 30px;
+  text-align: center;
+  width: 360px;
+}
+
+.profile-btns {
+  background-color: rgb(218, 41, 28);
+  border: none;
+  border-radius: 5px;
+  color: rgb(255, 199, 44);
+  display: flex;
+  flex-direction: column;
+  font-weight: 600;
+  margin-left: 30px;
+  margin-top: 3px;
+  text-align: center;
+  width: 250px;
+}
+
+/* SearchBar */
+.searchBar-div {
+  background-color: rgb(218, 41, 28);
+  border: 3px solid black;
+  border-radius: 10px;
+  color: rgb(255, 199, 44);
+  display: flex;
+  flex-direction: column;
+  margin-top: 3px;
+}
+
+.searchBar-input {
+  background-color: rgb(255, 199, 44);
+  border: 3px solid black;
+  border-radius: 5px;
+  color: rgb(218, 41, 28);
+  font-size: 20px;
+  font-weight: 900;
+  margin-left: 30px;
+  margin-top: 3px;
+  text-align: center;
+  width: 300px;
+}
+
+.searchBar-radio {
+  background-color: rgb(218, 41, 28);
+  color: rgb(255, 199, 44);
+  margin-right: 20px;
+  margin-top: 10px;
+}
+
+.searchBar-radio-div {
+  background-color: rgb(218, 41, 28);
+  color: rgb(255, 199, 44);
+  display: flex;
+  flex-direction: column;
+  font-weight: 600;
+}
+
+.searchBtn {
+  background-color: rgb(218, 41, 28);
+  border: 3px solid black;
+  border-radius: 10px;
+  color: rgb(255, 199, 44);
+  font-size: 20px;
+  height: auto;
+  margin-bottom: 3px;
+  margin-left: 60px;
+  text-align: center;
+  width: 200px;
+}
+
+.searchBar-col-row {
+  background-color: rgb(218, 41, 28);
+  border-radius: 10px;
+}
+
+/* explore */
+.explore-btns {
+  background-color: rgb(218, 41, 28);
+  border: 3px solid black;
+  border-radius: 10px;
+  color: rgb(255, 199, 44);
+  display: flex;
+  flex-direction: column;
+  font-size: 25px;
+  font-weight: 600;
+  margin-top: 30px;
+  text-align: center;
+  width: 360px;
+}
+
+.exploreRecipes-div {
+  align-items: center;
+  display: flex;
+  flex-flow: wrap;
+  flex-direction: row;
+  justify-content: center;
+  margin-bottom: 40px;
+  margin-left: 7px;
+  width: 350px;
+}
+
+.exploreRecipes-card {
+  background-color: rgb(218, 41, 28);
+  border-radius: 10px;
+  border-style: solid;
+  display: flex;
+  flex-flow: wrap;
+  flex-direction: column;
+  height: 200px;
+  justify-content: flex-start;
+  margin-bottom: 5px;
+  margin-right: 5px;
+  width: 160px;
+}
+
+.exploreRecipes-link {
+  align-content: center;
+  align-self: center;
+  background-color: rgb(218, 41, 28);
+  border-radius: 10px;
+  border-style: none;
+  display: flex;
+  flex-flow: wrap;
+  flex-direction: column;
+  justify-content: center;
+  width: 140px;
+}
+
+.exploreRecipes-title {
+  align-self: center;
+  background-color: rgb(218, 41, 28);
+  border-radius: 10px;
+  color: rgb(255, 199, 44);
+  font-size: 3.5vmax;
+  font-weight: 800;
+  max-height: 50px;
+  overflow: hidden;
+  resize: horizontal;
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: wrap;
+}
+
+.exploreRecipes-card-img {
+  align-self: center;
+  background-color: rgb(255, 199, 44);
+  border: 3px solid black;
+  border-radius: 5px;
+  margin-bottom: 8px;
+  margin-left: 12px;
+  margin-top: 20px;
+  max-height: 65%;
+  max-width: 90%;
+  object-fit: fill;
+}
+
+.explore-select {
+  background-color: rgb(218, 41, 28);
+  border: 3px solid black;
+  border-radius: 5px;
+  color: rgb(255, 199, 44);
+  font-size: 20px;
+  font-weight: 900;
+  margin-top: 10px;
+  text-align: center;
+  width: 360px;
+}
+
+.explore-select option {
+  background-color: rgb(218, 41, 28);
+}
+
+.explore-container {
+  margin: 0;
 }

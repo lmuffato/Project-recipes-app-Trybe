@@ -28,7 +28,7 @@ const handleClick = (recipe) => {
         name: strMeal,
         image: strMealThumb,
         doneDate,
-        tags: strTags.split(','),
+        tags: strTags.length ? strTags.split(',') : [strTags],
       };
       doneRecipes.push(recipeDone);
       localStorage.setItem('doneRecipes', JSON.stringify(doneRecipes));
@@ -69,10 +69,8 @@ export default function FinishRecipeBtn(props) {
 
   const a = JSON.parse(localStorage.getItem('doneRecipes'));
   if (!a) {
-    console.log(a);
     const b = [];
     localStorage.setItem('doneRecipes', JSON.stringify(b));
-    console.log(b);
   }
 
   return (

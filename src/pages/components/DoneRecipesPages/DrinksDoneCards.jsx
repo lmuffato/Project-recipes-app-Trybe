@@ -13,18 +13,24 @@ export default function DrinksDoneCards({ props: { recipe, index } }) {
     const size = 2;
     const { name, id, category, image, doneDate, tags, alcoholicOrNot } = recipe;
     return (
-      <div key={ name }>
+      <div key={ name } className="doneRecipes-card">
         <h1 style={ show ? {} : { display: 'none' } }>Link copiado!</h1>
-        <Link to={ `/bebidas/${id}` }>
-          <h2 data-testid={ `${index}-horizontal-name` }>{name}</h2>
+        <Link to={ `/bebidas/${id}` } className="doneRecipes-link">
+          <h2
+            data-testid={ `${index}-horizontal-name` }
+            className="doneRecipes-title"
+          >
+            {name}
+          </h2>
           <img
-            style={ { width: '50px' } }
+            className="doneRecipes-img"
             src={ image }
             alt={ name }
             data-testid={ `${index}-horizontal-image` }
           />
         </Link>
         <h3
+          className="doneRecipes-text"
           data-testid={ `${index}-horizontal-top-text` }
         >
           { ` ${alcoholicOrNot} - ${category}` }
@@ -46,9 +52,15 @@ export default function DrinksDoneCards({ props: { recipe, index } }) {
             data-testid={ `${index}-horizontal-share-btn` }
           />
         </button>
-        <p data-testid={ `${index}-horizontal-done-date` }>{ doneDate }</p>
+        <p
+          data-testid={ `${index}-horizontal-done-date` }
+          className="doneRecipes-text"
+        >
+          { doneDate }
+        </p>
         {tags ? tags.slice(0, size).map((tagName, tagIndex) => (
           <p
+            className="doneRecipes-text"
             key={ tagName }
             data-testid={ `${tagIndex}-${tagName}-horizontal-tag` }
           >

@@ -13,7 +13,7 @@ import NotFound from './pages/NotFound';
 import InProgressRecipe from './pages/InProgressRecipe';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Favotire from './pages/Favotire';
+import Favorite from './pages/Favorite';
 import DoneFilters from './pages/components/DoneRecipesPages/DoneFilters';
 
 function App() {
@@ -43,7 +43,7 @@ function App() {
         <Route exact path="/explorar/bebidas" component={ SearchMealOrDrink } />
         <Route exact path="/explorar" component={ Search } />
         <Route exact path="/receitas-feitas" component={ DoneFilters } />
-        <Route exact path="/receitas-favoritas" component={ Favotire } />
+        <Route exact path="/receitas-favoritas" component={ Favorite } />
         <Route component={ NotFound } />
       </Switch>
     </div>

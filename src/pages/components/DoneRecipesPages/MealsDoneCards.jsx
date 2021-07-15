@@ -32,6 +32,7 @@ export default function MealsDoneCards({ props:
         </Link>
         <h3
           data-testid={ `${index}-horizontal-top-text` }
+          className="doneRecipes-text"
         >
           { `${area} - ${category}` }
         </h3>
@@ -52,12 +53,18 @@ export default function MealsDoneCards({ props:
             data-testid={ `${index}-horizontal-share-btn` }
           />
         </button>
-        <p data-testid={ `${index}-horizontal-done-date` }>{ doneDate }</p>
+        <p
+          data-testid={ `${index}-horizontal-done-date` }
+          className="doneRecipes-text"
+        >
+          { doneDate }
+        </p>
         { console.log(tags) }
         {tags ? tags.slice(0, size).map((tagName) => (
           <p
             key={ tagName }
             data-testid={ `${index}-${tagName}-horizontal-tag` }
+            className="doneRecipes-text"
           >
             {tagName}
           </p>

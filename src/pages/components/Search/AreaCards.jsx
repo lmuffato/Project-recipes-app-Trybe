@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { Container, Row } from 'react-bootstrap';
 import { getMeals } from '../../../actions/meals';
 import './AreaCards.css';
 
@@ -37,13 +36,14 @@ function AreaCards() {
   }, [selectedOrigin, meals]); // eslint-disable-line
 
   return (
-    <Container>
-      <Row>
+    <div className="explore-container">
+      <div className="exploreRecipes-div">
         <select
           name="explore-by-area-dropdown"
           data-testid="explore-by-area-dropdown"
           value={ selectedOrigin }
           onChange={ ({ target: { value } }) => setSelectedOrigin(value) }
+          className="explore-select"
         >
           <option value="All" data-testid="All-option">All</option>
           { originList
@@ -54,28 +54,33 @@ function AreaCards() {
                 { area }
               </option>)) }
         </select>
-      </Row>
-      <Row>
+      </div>
+      <div className="exploreRecipes-div">
         { loading ? null
           : shownCards.slice(0, size).map(({ idMeal, strMeal, strMealThumb }, index) => (
             <div
               key={ strMeal }
               data-testid={ `${index}-recipe-card` }
-              className="card-container"
+              className="exploreRecipes-card"
             >
               <Link to={ `/comidas/${idMeal}` }>
-                <h2 data-testid={ `${index}-card-name` }>{strMeal}</h2>
+                <h2
+                  data-testid={ `${index}-card-name` }
+                  className="exploreRecipes-title"
+                >
+                  {strMeal}
+                </h2>
                 <img
                   src={ strMealThumb }
                   alt={ strMeal }
                   data-testid={ `${index}-card-img` }
-                  className="card-img"
+                  className="exploreRecipes-card-img"
                 />
               </Link>
             </div>
           )) }
-      </Row>
-    </Container>
+      </div>
+    </div>
   );
 }
 

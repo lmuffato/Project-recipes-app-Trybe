@@ -9,7 +9,7 @@ export default function Favotire() {
     setFilter(props);
   };
   return (
-    <div>
+    <div className="favoriteRecipes-div">
       <Header type="favorites" />
       <FavoriteFilters handleClick={ handleClick } />
       <FavoriteRecipes filter={ filter } />

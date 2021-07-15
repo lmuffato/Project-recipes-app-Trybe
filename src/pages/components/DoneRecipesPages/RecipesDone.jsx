@@ -26,7 +26,7 @@ export default function RecipesDone(props) {
   }, [filter]);// eslint-disable-line
 
   return (
-    <div>
+    <div className="recipes-done-cards">
       {filteredList ? filteredList.map((recipe, index) => (
         <div key={ index }>
           {recipe.type === 'comida'

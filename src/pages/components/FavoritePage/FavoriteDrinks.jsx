@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import shareIcon from '../../../images/shareIcon.svg';
 import unFavoriteIcon from '../../../images/blackHeartIcon.svg';
-import './cards.css';
 
 export default function FavoriteDrinks({ props: { recipe, index, unFavorite } }) {
   const [show, setShow] = useState(false);
@@ -14,12 +13,12 @@ export default function FavoriteDrinks({ props: { recipe, index, unFavorite } })
   if (recipe) {
     const { name, id, image, alcoholicOrNot } = recipe;
     return (
-      <div key={ name } className="card">
+      <div key={ name } className="favoriteRecipes-card">
         <h1 style={ show ? {} : { display: 'none' } }>Link copiado!</h1>
-        <Link to={ `/bebidas/${id}` }>
+        <Link to={ `/bebidas/${id}` } className="favoriteRecipes-link">
           <h2
             data-testid={ `${index}-horizontal-name` }
-            className="recipe-name"
+            className="favoriteRecipes-title"
           >
             {name}
           </h2>
@@ -27,12 +26,12 @@ export default function FavoriteDrinks({ props: { recipe, index, unFavorite } })
             src={ image }
             alt={ name }
             data-testid={ `${index}-horizontal-image` }
-            className="recipe-picture"
+            className="favoriteRecipes-img"
           />
         </Link>
         <h3
           data-testid={ `${index}-horizontal-top-text` }
-          className="recipe-info"
+          className="favoriteRecipes-text"
         >
           { alcoholicOrNot }
         </h3>
