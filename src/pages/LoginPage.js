@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import UserContext from '../contexts/UserContext';
+import '../styles/style.css';
 
 function LoginPage() {
   const contextUser = useContext(UserContext);
@@ -38,7 +39,7 @@ function LoginPage() {
   }
 
   return (
-    <div>
+    <section className="login-inputs">
       <label htmlFor="emailInput">
         E-mail
         <input
@@ -75,7 +76,7 @@ function LoginPage() {
           Entrar
         </button>
       </Link>
-    </div>
+    </section>
   );
 }
 

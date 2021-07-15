@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import '../styles/Header.css';
+// import '../styles/Header.css';
 import { Link } from 'react-router-dom';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
@@ -25,15 +25,15 @@ function Header() {
   );
 
   return (
-    <div className="header-cotainer">
-      <header className="header">
-        <Link to="/perfil" className="profile">
-          <img src={ profileIcon } alt="profile" data-testid="profile-top-btn" />
-        </Link>
-        <h1 data-testid="page-title" className="title">{ pageName }</h1>
-        { hideSearchBtn && handleSearchBtn() }
-      </header>
-    </div>
+    // <div className="header-cotainer">
+    <header className="header">
+      <Link to="/perfil" className="profile">
+        <img src={ profileIcon } alt="profile" data-testid="profile-top-btn" />
+      </Link>
+      <h1 data-testid="page-title" className="title">{ pageName }</h1>
+      { hideSearchBtn && handleSearchBtn() }
+    </header>
+    // </div>
   );
 }
 /* { searchBtn && <SearchBar /> } */

@@ -8,7 +8,7 @@ function MealCards({ data, index }) {
   return (
     <Link
       to={ `/comidas/${idMeal}` }
-      className="recipe recomendation-card"
+      className="recipe"
       data-testid={ `${index}-recipe-card` }
     >
       <img

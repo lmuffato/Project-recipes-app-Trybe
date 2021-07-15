@@ -9,7 +9,7 @@ function DrinkCards({ data, index }) {
   return (
     <Link
       to={ `/bebidas/${idDrink}` }
-      className="recipe recomedation-card"
+      className="recipe"
       data-testid={ `${index}-recipe-card` }
     >
       <img

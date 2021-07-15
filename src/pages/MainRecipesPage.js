@@ -5,7 +5,7 @@ import MainRecipes from '../compenents/MainRecipes';
 import RecipesContext from '../contexts/RecipesContext';
 import SearchbarContext from '../contexts/SearchbarContext';
 import apiRequester from '../services/fetchApi';
-import '../styles/MealAndDrinkCards.css';
+// import '../styles/MealAndDrinkCards.css';
 // import '../styles/Main.css';
 import Loading from '../compenents/Loading';
 import Header from '../compenents/Header';
