@@ -1,58 +1,46 @@
-import React from 'react';
-// import userEvent from '@testing-library/user-event';
-// import Login from '../pages/Login';
-import Profile from '../pages/Profile';
+import userEvent from '@testing-library/user-event';
+import { screen } from '@testing-library/react';
 import renderWithRouterAndContext from './helper/renders/renderWithRouterAndContext';
 import getTest from './helper/mocks/getTestInfo';
 
-const { renderEmptyValue, headerRenderTests, footerRenderTests } = getTest('/profile');
-
+const {
+  headerRenderTests,
+  footerRenderTests,
+  redirectToProfileScreen,
+} = getTest('/profile');
+const { queryByTestId, getByTestId } = screen;
 const { itDoesntRenderSearchIcon } = headerRenderTests();
 
 describe('Profile Screen', () => {
+  const backToProfilePage = () => userEvent.click(getByTestId('profile-top-btn'));
+
   describe('Check Header and Footer components', () => {
-    it('does Header and Footer tests', () => {
-      const { getByTestId, queryByTestId } = renderWithRouterAndContext(
-        <Profile />,
-        renderEmptyValue,
-      );
+    it('does Header and Footer tests', async () => {
+      await renderWithRouterAndContext();
 
-      // LOGIN TEST
-      // const emailInput = getByTestId('email-input');
-      // const passwordInput = getByTestId('password-input');
-      // const loginButton = getByTestId('login-submit-btn');
-
-      // userEvent.type(emailInput, 'email@email.com');
-      // userEvent.type(passwordInput, '123456789');
-      // userEvent.click(loginButton);
+      redirectToProfileScreen(getByTestId, userEvent);
 
       itDoesntRenderSearchIcon(queryByTestId, getByTestId);
       footerRenderTests().itRenderAllIcons(getByTestId);
     });
   });
 
-  // describe('Profile Page Tests', () => {
-  //   it('Render User Email', () => {
-  //     const { getByTestId } = renderWithRouterAndContext(
-  //       <Profile />,
-  //       renderEmptyValue,
-  //     );
-  //     const userEmail = getByTestId(profileEmail);
-  //     expect(userEmail).toBeInTheDocument();
-  //   });
+  describe('Profile Page Tests', () => {
+    it('tests the buttons on Profile Page', async () => {
+      await renderWithRouterAndContext();
 
-  //   it('Render "Recipes Done Button"', () => {
-  //     const {} = renderWithRouterAndContext(
-  //       <Profile />,
-  //       renderEmptyValue,
-  //     );
-  //   });
+      redirectToProfileScreen(getByTestId, userEvent);
 
-  //   it('Render "Favorite Recipes Button"', () => {
-  //     const {} = renderWithRouterAndContext(
-  //       <Profile />,
-  //       renderEmptyValue,
-  //     );
-  //   });
-  // });
+      const buttonRecipesDone = queryByTestId('profile-done-btn');
+      userEvent.click(buttonRecipesDone);
+      backToProfilePage();
+
+      const buttonFavoritesRecipes = queryByTestId('profile-favorite-btn');
+      userEvent.click(buttonFavoritesRecipes);
+      backToProfilePage();
+
+      const buttonLogout = queryByTestId('profile-logout-btn');
+      userEvent.click(buttonLogout);
+    });
+  });
 });

@@ -1,26 +1,12 @@
 import React from 'react';
-import { Router } from 'react-router-dom';
-import { createMemoryHistory } from 'history';
-import { render } from '@testing-library/react';
-import { RecipeContextProvider } from '../../../store/RecipeContext';
+import { act } from 'react-dom/test-utils';
+import App from '../../../App';
+import renderWithRouter from './renderWithRouter';
 
-const renderWithRouterAndContext = (
-  Component,
-  {
-    value = {},
-    initialEntries = ['/'],
-    history = createMemoryHistory({ initialEntries }),
-  } = {},
-) => ({
-  ...render(
-    <RecipeContextProvider value={ value }>
-      <Router history={ history }>
-        {Component}
-      </Router>
-    </RecipeContextProvider>,
-  ),
-  value,
-  history,
-});
+const renderWithRouterAndContext = async () => {
+  await act(async () => {
+    renderWithRouter(<App />);
+  });
+};
 
 export default renderWithRouterAndContext;

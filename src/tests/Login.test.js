@@ -1,24 +1,26 @@
-import React from 'react';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import Login from '../pages/Login';
 import renderWithRouterAndContext from './helper/renders/renderWithRouterAndContext';
 import getTest from './helper/mocks/getTestInfo';
+
+const { queryByTestId, getByTestId } = screen;
 
 const { headerRenderTests, footerRenderTests } = getTest('/');
 const { itDoesntRenderHeader } = headerRenderTests();
 const { itDoesntRenderFooter } = footerRenderTests();
 
 describe('Login screen', () => {
-  describe('Check Header and Footer components', () => {
-    it('doesnt render the Header and Footer on the Login screen', () => {
-      const { queryByTestId } = renderWithRouterAndContext(<Login />);
+  describe('Check Header and Footer components', async () => {
+    it('doesnt render the Header and Footer on the Login screen', async () => {
+      await renderWithRouterAndContext();
+
       itDoesntRenderHeader(queryByTestId);
       itDoesntRenderFooter(queryByTestId);
     });
   });
 
-  it('does and checks the user login process', () => {
-    const { getByTestId, history } = renderWithRouterAndContext(<Login />);
+  it('does and checks the user login process', async () => {
+    await renderWithRouterAndContext();
 
     const passwordInput = getByTestId('password-input');
     const emailInput = getByTestId('email-input');
@@ -31,8 +33,5 @@ describe('Login screen', () => {
     userEvent.type(passwordInput, '1234567');
     expect(loginSubmitButton).not.toHaveAttribute('disabled');
     userEvent.click(loginSubmitButton);
-
-    const { pathname } = history.location;
-    expect(pathname).toBe('/comidas');
   });
 });

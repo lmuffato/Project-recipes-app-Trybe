@@ -4,10 +4,9 @@ import Header from '../components/Header';
 import useMainRecipe from '../hooks/useMainRecipe';
 
 export default function Foods() {
-  const { renderCards, handleClickCategory, recipe, loading } = useMainRecipe('meal');
+  const { renderCards, handleClickCategory, recipe } = useMainRecipe('meal');
   const { meals } = recipe.list;
 
-  if (loading) return <h1>Loading..............................</h1>;
   return (
     <main>
       <Header title="Comidas" searchIcon />

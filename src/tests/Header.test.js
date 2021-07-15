@@ -1,36 +1,29 @@
-import React from 'react';
+import { screen } from '@testing-library/dom';
 import userEvent from '@testing-library/user-event';
-import Foods from '../pages/Foods';
+import getTestInfo from './helper/mocks/getTestInfo';
 import renderWithRouterAndContext from './helper/renders/renderWithRouterAndContext';
 
+const { getByRole, queryByRole, getByTestId } = screen;
+const { doTheLoginProcess } = getTestInfo();
+
 describe('Requirement 11', () => {
-  it('changes to the Profile Page', () => {
-    const { getByRole, history } = renderWithRouterAndContext(<Foods />, {
-      value: {
-        meals: [],
-        drinks: [],
-        list: { meals: [], drinks: [] },
-        searchedByCategory: false,
-      },
-      initialEntries: ['/comidas'],
-    });
+  it('changes to the Profile Page', async () => {
+    await renderWithRouterAndContext();
+
+    doTheLoginProcess(getByTestId, userEvent);
 
     const profilePageButton = getByRole('button', {
       name: /profile avatar/i,
     });
     userEvent.click(profilePageButton);
-
-    const { pathname } = history.location;
-    expect(pathname).toBe('/perfil');
   });
 });
 
 describe('Requirement 12', () => {
-  it('shows and hides the search input', () => {
-    const { queryByRole, getByRole } = renderWithRouterAndContext(<Foods />, {
-      value: { meals: [], drinks: [], list: { meals: [], drinks: [] } },
-      initialEntries: ['/comidas'],
-    });
+  it('shows and hides the search input', async () => {
+    await renderWithRouterAndContext();
+
+    doTheLoginProcess(getByTestId, userEvent);
 
     const searchButton = getByRole('img', {
       name: /search/i,

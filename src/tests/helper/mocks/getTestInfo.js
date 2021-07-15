@@ -1,3 +1,5 @@
+const explorebtn = 'explore-bottom-btn';
+
 const testsIds = {
   headerTestIds: {
     profileTopButton: 'profile-top-btn',
@@ -7,10 +9,10 @@ const testsIds = {
   footerTestIds: {
     footer: 'footer',
     drinksBottonBtn: 'drinks-bottom-btn',
-    exploreBottonBtn: 'explore-bottom-btn',
+    exploreBottonBtn: explorebtn,
     foodBottonBtn: 'food-bottom-btn',
     drinkIcon: 'drinks-bottom-btn',
-    exploreIcon: 'explore-bottom-btn',
+    exploreIcon: explorebtn,
     mealIcon: 'food-bottom-btn',
   },
 };
@@ -67,18 +69,46 @@ const recipeCardsTest = async ({ id, name, image }, findByTestId) => {
   expect(imgCard).toHaveAttribute('src', image);
 };
 
-export default function getTestInfo(path = '/') {
-  const recipe = { meals: [], drinks: [], list: { meals: [], drinks: [] } };
-  const renderEmptyValue = {
-    value: { ...recipe },
-    initialEntries: [path],
-  };
+const doTheLoginProcess = (getId, userEvent) => {
+  const passwordInput = getId('password-input');
+  const emailInput = getId('email-input');
+  const loginSubmitButton = getId('login-submit-btn');
 
+  userEvent.type(emailInput, 'renzo@gmail.com');
+  userEvent.type(passwordInput, '1234567');
+  userEvent.click(loginSubmitButton);
+};
+
+const redirectToProfileScreen = (getId, userEvent) => {
+  doTheLoginProcess(getId, userEvent);
+
+  const profilePageButton = getId('profile-top-btn');
+  userEvent.click(profilePageButton);
+};
+
+const redirectToExploreScreen = (getId, userEvent) => {
+  doTheLoginProcess(getId, userEvent);
+
+  const exploreBtnIcon = getId('explore-bottom-btn');
+  userEvent.click(exploreBtnIcon);
+};
+
+const redirectToExploreTypeScreen = (getId, userEvent, type) => {
+  redirectToExploreScreen(getId, userEvent);
+
+  const typeExplorePageButton = getId(`explore-${type}`);
+  userEvent.click(typeExplorePageButton);
+};
+
+export default function getTestInfo() {
   return {
-    renderEmptyValue,
     headerRenderTests,
     footerRenderTests,
     recipeCardsTest,
+    doTheLoginProcess,
+    redirectToProfileScreen,
+    redirectToExploreScreen,
+    redirectToExploreTypeScreen,
     testsIds,
   };
 }

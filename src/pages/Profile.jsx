@@ -6,10 +6,12 @@ import Footer from '../components/Footer';
 export default function Profile() {
   const user = JSON.parse(localStorage.getItem('user'));
   const history = useHistory();
+
   function Logout() {
     localStorage.clear();
     history.push('/');
   }
+
   return (
     <div>
       <Header title="Perfil" />
