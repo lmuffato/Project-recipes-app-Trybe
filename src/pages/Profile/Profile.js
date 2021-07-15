@@ -9,15 +9,14 @@ export default function Profile() {
   useEffect(() => {
     const setUser = () => {
       const toRead = getEmail('user') ? 'hello' : getEmail('user');
-      console.log(toRead);
       if (toRead !== null) {
         const { email } = getEmail('user');
-        return email
+        return email;
       }
       return toRead;
     };
     setEmail(setUser());
-  }, [])
+  }, []);
 
   const history = useHistory();
 
