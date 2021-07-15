@@ -13,7 +13,7 @@ function Ingredients({ recipe }) {
 
   return (
     <div>
-      <h3>Ingredientes:</h3>
+      <h3>Ingredientes</h3>
       <ul>
         {listIngredients.map((ingredient, index) => (
           <li
