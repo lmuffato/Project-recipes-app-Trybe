@@ -1,11 +1,24 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import Header from '../../components/Header';
 import BottomMenu from '../../components/bottomMenu';
 import { getEmail } from '../../services/localStorage';
 
 export default function Profile() {
-  const { email } = getEmail('user');
+  const [userEmail, setEmail] = useState('');
+  useEffect(() => {
+    const setUser = () => {
+      const toRead = getEmail('user') ? 'hello' : getEmail('user');
+      console.log(toRead);
+      if (toRead !== null) {
+        const { email } = getEmail('user');
+        return email
+      }
+      return toRead;
+    };
+    setEmail(setUser());
+  }, [])
+
   const history = useHistory();
 
   function clearRedirect() {
@@ -16,7 +29,7 @@ export default function Profile() {
   return (
     <div>
       <Header title="Perfil" show={ false } />
-      <p data-testid="profile-email">{ email }</p>
+      <p data-testid="profile-email">{ userEmail }</p>
       <button
         type="button"
         onClick={ () => history.push('/receitas-feitas') }
