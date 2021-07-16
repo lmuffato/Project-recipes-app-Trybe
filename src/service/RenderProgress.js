@@ -19,11 +19,21 @@ function RenderProgress(url, id) {
     return doneFlag;
   }
 
-  function inProgress() {
+  function inProgressFood() {
     let progressFlag = false;
     if (inProgressRecipes.length !== 0) {
       progressFlag = (
-        inProgressRecipes.cocktails[id] || inProgressRecipes.meals[id] !== null
+        inProgressRecipes.meals[id] !== null
+      );
+    }
+    return progressFlag;
+  }
+
+  function inProgressDrink() {
+    let progressFlag = false;
+    if (inProgressRecipes.length !== 0) {
+      progressFlag = (
+        inProgressRecipes.cocktails[id] !== null
       );
     }
     return progressFlag;
@@ -32,12 +42,13 @@ function RenderProgress(url, id) {
   if (alreadyDone()) {
     return (<div>Receita já feita</div>);
   }
-  if (inProgress()) {
+  if (inProgressFood() || inProgressDrink()) {
     return (
       <button
         type="button"
         data-testid="start-recipe-btn"
         style={ startRecipe }
+        onClick={ () => history.push(`/${url}/${id}/in-progress`) }
       >
         Continuar Receita
       </button>
