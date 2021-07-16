@@ -15,7 +15,9 @@ $orange: rgb(242, 163, 15);
     color: white;
     font-size: 4em;
     padding-top: 0.5em;
-    @include for-phone-only{
+
+
+    @include for-phone-only {
       font-size: 2.5em;
     }
   }
@@ -25,7 +27,9 @@ $orange: rgb(242, 163, 15);
     color: white;
     font-size: 3em;
     padding-bottom: 0.5em;
-    @include for-phone-only{
+
+
+    @include for-phone-only {
       font-size: 1.8em;
       padding-bottom: 0;
     }
@@ -35,7 +39,9 @@ $orange: rgb(242, 163, 15);
     color: white;
     font-size: 2.5em;
     padding: 1em 0 0.5em 2.2em;
-    @include for-phone-only{
+
+
+    @include for-phone-only {
       font-size: 1.8em;
       padding: 1em 0 0 1em;
     }
@@ -43,7 +49,8 @@ $orange: rgb(242, 163, 15);
 
   .instructions {
     padding: 1em 3em;
-    @include for-phone-only{
+
+    @include for-phone-only {
       border-bottom: 1px solid black;
       font-size: 0.8em;
       line-height: 0.5em;
@@ -57,7 +64,8 @@ $orange: rgb(242, 163, 15);
   & iframe {
     float: left;
     margin-left: 2em;
-    @include for-phone-only{
+
+    @include for-phone-only {
       margin-bottom: 2em;
       margin-left: 0;
       padding: 1em;
@@ -76,7 +84,8 @@ $orange: rgb(242, 163, 15);
 
   & div {
     display: flex;
-    @include for-phone-only{
+
+    @include for-phone-only {
       flex-direction: column;
     }
   }
@@ -90,8 +99,8 @@ $orange: rgb(242, 163, 15);
     width: 50%;
 
     @include for-phone-only {
-      padding-bottom: 3.5em;
       border-bottom: 1px solid black;
+      padding-bottom: 3.5em;
       width: 100%;
     }
 
@@ -137,7 +146,8 @@ $orange: rgb(242, 163, 15);
     border-bottom: 1px solid white;
     padding-top: 1.8em;
     width: 50%;
-    @include for-phone-only{
+
+    @include for-phone-only {
       border-bottom: 1px solid black;
       padding: 2em;
       width: 100%;
@@ -146,7 +156,8 @@ $orange: rgb(242, 163, 15);
     & h3 {
       color: white;
       font-size: 3em;
-      @include for-phone-only{
+
+      @include for-phone-only {
         font-size: 1.8em;
         padding-bottom: 0;
       }
@@ -160,7 +171,8 @@ $orange: rgb(242, 163, 15);
       margin-left: 1.8em;
       margin-top: 1.5em;
       padding-left: 0;
-      @include for-phone-only{
+
+      @include for-phone-only {
         flex-flow: column;
         height: auto;
       }
@@ -209,6 +221,9 @@ $orange: rgb(242, 163, 15);
   background-color: $orange;
   border: none;
   bottom: 0;
+  font-family: Montserrat , sans-serif;
+  font-size: 1.8em;
+  font-weight: 500;
   height: 50px;
   position: fixed;
   width: 100%;

@@ -88,8 +88,8 @@
 }
 @media (max-width: 767.98px) {
   .recipe_details .image {
-    padding-bottom: 3.5em;
     border-bottom: 1px solid black;
+    padding-bottom: 3.5em;
     width: 100%;
   }
 }
@@ -196,6 +196,9 @@
   background-color: #f2a30f;
   border: none;
   bottom: 0;
+  font-family: Montserrat, sans-serif;
+  font-size: 1.8em;
+  font-weight: 500;
   height: 50px;
   position: fixed;
   width: 100%;
