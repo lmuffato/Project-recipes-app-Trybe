@@ -50,8 +50,8 @@ export default function ExplorarComidas() {
             </button>
           </Link>
         </div>
-        <Footer />
       </div>
+    <Footer />
     </div>
   );
 }

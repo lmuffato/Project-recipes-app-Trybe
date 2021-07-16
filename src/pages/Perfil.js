@@ -11,47 +11,45 @@ export default function Perfil() {
   }
 
   return (
-    <>
+    <div className="profile-main">
       <Header
         title="Perfil"
         enableSearchIcon={ false }
       />
-      <div className="profile-main">
-        <h1 data-testid="profile-email" className="profile-head-email">
-          { email }
-        </h1>
-        <Link to="/receitas-feitas">
-          <button
-            className="button is-primary"
-            type="submit"
-            data-testid="profile-done-btn"
-          >
-            Receitas Feitas
-          </button>
-        </Link>
-        <br />
-        <Link to="/receitas-favoritas">
-          <button
-            className="button is-primary"
-            type="submit"
-            data-testid="profile-favorite-btn"
-          >
-            Receitas Favoritas
-          </button>
-        </Link>
-        <br />
-        <Link to="/">
-          <button
-            className="button is-primary"
-            type="submit"
-            data-testid="profile-logout-btn"
-            onClick={ () => localStorage.clear() }
-          >
-            Sair
-          </button>
-        </Link>
-        <Footer />
-      </div>
-    </>
+      <h1 data-testid="profile-email" className="profile-head-email">
+        { email }
+      </h1>
+      <Link to="/receitas-feitas">
+        <button
+          className="button is-primary"
+          type="submit"
+          data-testid="profile-done-btn"
+        >
+          Receitas Feitas
+        </button>
+      </Link>
+      <br />
+      <Link to="/receitas-favoritas">
+        <button
+          className="button is-primary"
+          type="submit"
+          data-testid="profile-favorite-btn"
+        >
+          Receitas Favoritas
+        </button>
+      </Link>
+      <br />
+      <Link to="/">
+        <button
+          className="button is-primary"
+          type="submit"
+          data-testid="profile-logout-btn"
+          onClick={ () => localStorage.clear() }
+        >
+          Sair
+        </button>
+      </Link>
+      <Footer />
+    </div>
   );
 }

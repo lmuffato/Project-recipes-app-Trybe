@@ -29,16 +29,15 @@ export default function ExplorarComidasArea() {
 
   return (
     <div className="main-area">
-      <Header
-        title="Explorar Origem"
-      />
-      <div className="control country-filter">
-        <label htmlFor="explore-by-area-dropdown">
-          Filtrar por País:
-          <br />
-          {' '}
+      <Header title="Explorar Origem" />
+
+      <label htmlFor="explore-by-area-dropdown" className="label-select">
+        Filtrar por País:
+        <br />
+        {' '}
+        <div className="select">
           <select
-            className="select"
+            className="select is-rounded is-primary"
             name="explore-by-area-dropdown"
             data-testid="explore-by-area-dropdown"
             onClick={ (event) => filterFoodByArea(event.target.value) }
@@ -54,10 +53,10 @@ export default function ExplorarComidasArea() {
             ))}
             <option data-testid="All-option"> All </option>
           </select>
-        </label>
-      </div>
+        </div>
+      </label>
 
-      <main className="main-food-list">
+      <div className="main-food-list">
         <ul>
           { foods && foods.slice(0, NUMBER_OF_RECIPES)
             .map((recipe, index) => (
@@ -69,7 +68,7 @@ export default function ExplorarComidasArea() {
               />
             ))}
         </ul>
-      </main>
+      </div>
 
       <Footer />
     </div>
