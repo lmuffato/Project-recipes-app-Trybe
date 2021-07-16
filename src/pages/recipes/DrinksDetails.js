@@ -48,6 +48,7 @@ function DrinksDetails() {
         const ingredients = getIngredients(drinks[0]);
         const measures = getMeasures(drinks[0]);
         setIngredientsId(ingredients);
+        console.log(ingredients);
         setMeasuresId(measures);
       });
     getRecomendedMeals()

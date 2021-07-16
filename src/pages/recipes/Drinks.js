@@ -32,6 +32,7 @@ export default function Drinks() {
       const categoList = await getDrinksCat();
       setCategory('All');
       setDrinksList([...data]);
+      console.log(data);
       setCatList([...categoList]);
       setLoading(false);
     };
@@ -41,7 +42,7 @@ export default function Drinks() {
   return (
     <div className="food-page">
       <Header title="Bebidas" show />
-      <ButtomFilters data={ catList } />
+      <ButtomFilters data={ catList } path="" />
       { isLoading ? <h1>Loading...</h1>
         : <RecipesList data={ drinksList } path="bebidas" /> }
       <BottomMenu />
