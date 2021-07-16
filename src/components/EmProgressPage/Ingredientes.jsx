@@ -27,7 +27,7 @@ function Ingredientes({ params: { ingredientsList, data, setIsDisabled } }) {
       const elementsTag = document.querySelector('.py-2').nextSibling.childNodes;
       let valuesMeals;
       let valuesCocktails;
-      console.log('entrei');
+      console.log(elementsTag);
       elementsTag.forEach((elementTag, index) => {
         switch (LOCATION.pathname) {
         case `/comidas/${data.idMeal}/in-progress`:
