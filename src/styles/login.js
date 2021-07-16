@@ -12,6 +12,30 @@ export const LoginContainer = styled.div`align-items: center;
   width: 100vw;
 
 
+  @media ( min-width : 1024px ) {
+
+    .page-grid {
+      display: grid;
+      grid-template-columns: repeat(10, minmax(0, 1fr));
+      margin: 5rem;
+      max-width: 1200px;
+
+      aside {
+        align-self: center;
+        grid-column-start: 1;
+        justify-self: baseline;
+        margin-left: 2rem;
+        margin-right: 3rem;
+        padding-right: 8rem;
+      }
+
+      .separator {
+        border-right: 1px solid #e6e6e6;
+      }
+    }
+  }
+
+
   @media only screen and ( min-width : 900px ) {
     flex-direction: row;
     max-width: 100vw;
@@ -26,6 +50,7 @@ export const Container = styled.div`align-items: center;
   max-width: 1120px;
   overflow-x: hidden;
   overflow-y: scroll;
+  padding-top: 2rem;
 
   div {
     align-self: center;
@@ -69,7 +94,7 @@ export const Container = styled.div`align-items: center;
     }
 
     & + label {
-      margin-top: 2rem;
+      margin-top: 1.5rem;
     }
   }
 
@@ -102,6 +127,12 @@ export const Container = styled.div`align-items: center;
     }
   }
 
+  @media ( min-width : 768px ) {
+    border-color: rgba(61, 73, 92, var(1));
+    border-left-width: 1.5px;
+    padding-left: 2.5rem;
+  }
+
   @media only screen and ( min-width : 900px ) {
     align-items: center;
     display: inline-block;
@@ -118,6 +149,21 @@ export const Container = styled.div`align-items: center;
 
     label {
       flex: 8;
+
+      input {
+        margin-bottom: 1.5rem;
+      }
     }
+  }
+
+  @media ( min-width : 1024px ) {
+    grid-column: span 6/ span 6;
+    margin-left: 3rem;
+    margin-right: auto;
+    padding-left: 3rem;
+  }
+
+  @media ( min-width : 1280px ) {
+    padding-left: 5rem;
   }
 `;
