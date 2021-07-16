@@ -1,5 +1,6 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
+import DoneRecipes from './pages/DoneRecipes';
 import Explore from './pages/Explore';
 import Login from './pages/Login';
 import MainRecipes from './pages/MainRecipes';
@@ -16,6 +17,7 @@ function App() {
       />
       <Route path={ ['/comidas/:id', '/bebidas/:id'] } component={ Recipe } />
       <Route path={ ['/comidas', '/bebidas'] } component={ MainRecipes } />
+      <Route path="/receitas-feitas" component={ DoneRecipes } />
       <Route path="/perfil" component={ Perfil } />
       <Route path="/" component={ Login } />
     </Switch>
