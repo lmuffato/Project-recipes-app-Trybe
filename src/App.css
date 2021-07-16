@@ -110,10 +110,15 @@ ul {
   border-radius: 6px;
   display: flex;
   flex-flow: column wrap;
-  height: 80px;
+  height: 172px;
   justify-content: space-around;
-  width: 60px;
+  width: 161px;
   z-index: -1;
+}
+
+.img {
+  height: 90px;
+  width: 90px;
 }
 
 .card-list {

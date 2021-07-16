@@ -32,7 +32,6 @@ export default function Drinks() {
       const categoList = await getDrinksCat();
       setCategory('All');
       setDrinksList([...data]);
-      console.log(data);
       setCatList([...categoList]);
       setLoading(false);
     };

@@ -11,7 +11,6 @@ function RecipesList({ data, path }) {
       : filtredList.slice(0, magicNum);
     const toReturn = first12.map((recipe, index) => {
       const { name, imgSrc, id } = recipe;
-      // console.log(recipe);
       return (
         <li
           key={ index }
@@ -23,7 +22,7 @@ function RecipesList({ data, path }) {
                 src={ `${imgSrc}` }
                 alt={ `${name} thumb` }
                 data-testid={ `${index}-card-img` }
-                className="recipe-img"
+                className="img"
               />
               <h4
                 data-testid={ `${index}-card-name` }
