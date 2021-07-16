@@ -53,7 +53,7 @@ function Ingredients(props) {
 
   useEffect(() => {
     setInprogressUpdate(!inProgressUpdate);
-  }, [ingredientList]);
+  }, [ingredientList]); // eslint-disable-line
 
   return (
     <Container className="inProgress-ingredients-container">
