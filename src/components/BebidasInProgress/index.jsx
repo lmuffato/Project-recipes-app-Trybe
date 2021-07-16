@@ -86,7 +86,6 @@ function DrinksInProgress({ data }) {
           { ingredients.map((element, index) => (
             <li
               key={ element }
-              data-testid={ `data-testid=${index}-ingredient-step` }
             >
               <label htmlFor={ `${index}-${element}` }>
                 { element }

@@ -5,7 +5,7 @@ import fetchDrinksDetails from '../../services/fetchDrinkDetails';
 
 function BebidasProgresso() {
   const { pathname } = useLocation();
-  const [data, setData] = useState('');
+  const [data, setData] = useState({});
   const minSlice = 9;
   const maxSlice = -12;
   const id = pathname.slice(minSlice, maxSlice);
