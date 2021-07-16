@@ -23,7 +23,7 @@ export default function ExploreFoodByArea() {
     };
     getArea();
   }, []);
-  
+
   console.log('hello world');
 
   const handleSelect = async (value) => {
