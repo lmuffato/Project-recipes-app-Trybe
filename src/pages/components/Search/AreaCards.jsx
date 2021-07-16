@@ -37,7 +37,7 @@ function AreaCards() {
 
   return (
     <div className="explore-container">
-      <div className="exploreRecipes-div">
+      <div className="exploreRecipes-div-selector">
         <select
           name="explore-by-area-dropdown"
           data-testid="explore-by-area-dropdown"
