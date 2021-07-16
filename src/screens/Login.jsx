@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+import '../styleSheets/Login.css';
 
 function Login() {
   const history = useHistory();
@@ -29,14 +30,17 @@ function Login() {
   };
 
   return (
-    <div>
+    <div className="loginScreen">
+      <h1>MyRecipes</h1>
       <form
+        className="form"
         onSubmit={ (e) => {
           e.preventDefault();
           saveToLocalStorage();
         } }
       >
         <input
+          className="email"
           type="email"
           data-testid="email-input"
           value={ email }
@@ -45,6 +49,7 @@ function Login() {
           required
         />
         <input
+          className="password"
           type="password"
           value={ password }
           onChange={ (e) => setPassword(e.target.value) }
@@ -54,6 +59,7 @@ function Login() {
           required
         />
         <button
+          className="loginBtn"
           type="submit"
           data-testid="login-submit-btn"
           disabled={ disableButton }
