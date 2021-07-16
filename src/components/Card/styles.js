@@ -41,6 +41,20 @@ const CardContainer = styled.div`margin: 8px 8px 32px;
   @media only screen and ( max-width : 767px ) {
     align-items: center;
     margin: 0 auto;
+    width: 21rem;
+  }
+
+  @media only screen and ( max-width : 350px ) {
+    max-width: 20rem;
+    min-width: 12rem;
+  }
+
+  @media only screen and ( max-width : 336px ) {
+    max-width: 16rem;
+  }
+
+  @media only screen and ( max-width : 270px ) {
+    max-width: 12rem;
   }
 `;
 

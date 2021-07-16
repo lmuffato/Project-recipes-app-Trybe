@@ -53,7 +53,7 @@ function Profile() {
         </Button>
         <Button data-testid="profile-favorite-btn" onClick={ handleRedirectToFavRecipes }>
           Receitas Favoritas
-          <span><img src={ letmeEatIcon } alt="logo letmeEat" /></span>
+          {/* <span><img src={ letmeEatIcon } alt="logo letmeEat" /></span> */}
         </Button>
         <Button data-testid="profile-logout-btn" onClick={ handleRedirecToLogin }>
           Sair
