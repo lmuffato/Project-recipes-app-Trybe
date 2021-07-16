@@ -53,12 +53,12 @@ export default function CategoryButtons({ categories }) {
   }
 
   function handleFilterAll(ev) {
-    if (pathname === '/comidas') {
+    if (pathname === '/comidas' || pathname === '/comidas/') {
       fetchFoods().then((data) => setFoods(data.meals));
       resetAllCheckbox();
       ev.target.checked = !checked;
     }
-    if (pathname === '/bebidas') {
+    if (pathname === '/bebidas' || pathname === '/bebidas/') {
       fetchCocktails().then((data) => setDrinks(data.drinks));
       resetAllCheckbox();
       ev.target.checked = !checked;
@@ -78,9 +78,9 @@ export default function CategoryButtons({ categories }) {
               key={ index }
               data-testid={ `${categoryName.strCategory}-category-filter` }
               onClick={ (ev) => {
-                if (pathname === '/comidas') {
+                if (pathname === '/comidas' || pathname === '/comidas/') {
                   handleFilterByCategoryNameFOODS(ev, categoryName.strCategory);
-                } else if (pathname === '/bebidas') {
+                } else if (pathname === '/bebidas' || pathname === '/bebidas/') {
                   handleFilterByCategoryNameDRINKS(ev, categoryName.strCategory);
                 }
               } }
