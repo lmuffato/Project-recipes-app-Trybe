@@ -20,10 +20,12 @@ export default function Recommendations({ path }) {
   function renderCarousel() {
     return (
       <div className="carousel-container">
-        <CarouselBtn
-          direction="prev"
-          recommended={ recommended }
-        />
+        <div className="btn-content">
+          <CarouselBtn
+            direction="prev"
+            recommended={ recommended }
+          />
+        </div>
         {recommended.map(
           (recomRecipe, index) => (
             <div
@@ -39,10 +41,12 @@ export default function Recommendations({ path }) {
             </div>
           ),
         ) }
-        <CarouselBtn
-          direction="next"
-          recommended={ recommended }
-        />
+        <div className="btn-content">
+          <CarouselBtn
+            direction="next"
+            recommended={ recommended }
+          />
+        </div>
       </div>
     );
   }

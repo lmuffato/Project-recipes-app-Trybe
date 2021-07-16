@@ -7,6 +7,7 @@ export default function CarouselBtn({ direction, recommended }) {
     <div>
       <button
         type="button"
+        className="carrousel-btn"
         onClick={
           () => (direction === 'next' ? handleNext(recommended) : handlePrev())
         }

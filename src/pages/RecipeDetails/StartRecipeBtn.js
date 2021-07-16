@@ -1,44 +1,36 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { AppContext } from '../../context/AppContext';
 
 export default function StartRecipeBtn({ recipe }) {
   const { context } = useContext(AppContext);
-  const { pageOrigin, toDoneStorage, toStorage } = context;
+  const { pageOrigin, toDoneStorage } = context;
+  const classNameBtn = 'start-recipe-btn';
 
   useEffect(() => {
     if (toDoneStorage && toDoneStorage.some(
       (doneRecipe) => doneRecipe.id === recipe.idMeal || recipe.idDrink,
     )) {
-      document.getElementsByClassName('start-recipe-btn')[0].style.display = 'none';
+      document.getElementsByClassName(classNameBtn)[0].style.display = 'none';
     }
 
     return () => {
-      document.getElementsByClassName('start-recipe-btn')[0].style.display = 'unset';
+      document.getElementsByClassName(classNameBtn)[0].style.display = 'unset';
     };
   }, [toDoneStorage]);
 
-  useEffect(() => {
-    if (pageOrigin === 'themealdb') {
-      if (toStorage.meals && Object.keys(toStorage.meals).some(
-        (inProgMealId) => inProgMealId === recipe.idMeal,
-      )) {
-        document.getElementsByClassName('start-recipe-btn')[0]
-          .innerHTML = 'Continuar Receita';
-      }
-    } else if (toStorage.cocktails && Object.keys(toStorage.cocktails).some(
-      (inProgDrinkId) => inProgDrinkId === recipe.idDrink,
+  function checkTextBtn() {
+    const storageValue = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    console.log(storageValue);
+    if (storageValue && (
+      Object.keys(storageValue).includes(recipe.idDrink)
+      || Object.keys(storageValue).includes(recipe.idMeal)
     )) {
-      document.getElementsByClassName('start-recipe-btn')[0]
-        .innerHTML = 'Continuar Receita';
+      return 'Continuar Receita';
     }
-
-    return () => {
-      document.getElementsByClassName('start-recipe-btn')[0]
-        .style.display = 'Iniciar Receita';
-    };
-  }, [toStorage, pageOrigin]);
+    return 'Iniciar Receita';
+  }
 
   return (
     <div>
@@ -51,9 +43,9 @@ export default function StartRecipeBtn({ recipe }) {
         <button
           type="button"
           data-testid="start-recipe-btn"
-          className="start-recipe-btn "
+          className={ classNameBtn }
         >
-          Iniciar Receita
+          {checkTextBtn()}
         </button>
       </Link>
     </div>
