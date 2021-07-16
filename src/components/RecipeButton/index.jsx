@@ -6,43 +6,54 @@ export default function RecipeButton({ path }) {
   const [buttonName, setButtonName] = useState('Iniciar Receita');
   const sliceNumber = 9;
 
-  function setLocalStorage() {
-    const inProgressRecipes = 'inProgressRecipes';
-    if (localStorage[inProgressRecipes] === undefined) {
+  // function setLocalStorage() {
+  //   const inProgressRecipes = 'inProgressRecipes';
+  //   if (localStorage[inProgressRecipes] === undefined) {
+  //     const obj = {
+  //       cocktails: {
+  //       },
+  //       meals: {
+  //       },
+  //     };
+  //     localStorage.setItem('inProgressRecipes', JSON.stringify(obj));
+  //   }
+  // }
+
+  // function recipesProgress() {
+  //   // const ingredient = ingredients.map((index) => index[1]);
+  //   if (path.includes('/comidas')) {
+  //     const id = path.slice(sliceNumber);
+  //     let include = JSON.parse(localStorage.getItem('inProgressRecipes'));
+  //     include = {
+  //       ...include,
+  //       meals: {
+  //         ...include.meals, [id]: [],
+  //       },
+  //     };
+  //     localStorage.setItem('inProgressRecipes', JSON.stringify(include));
+  //   } else {
+  //     const id = path.slice(sliceNumber);
+  //     let include = JSON.parse(localStorage.getItem('inProgressRecipes'));
+  //     include = {
+  //       ...include,
+  //       cocktails: {
+  //         ...include.cocktails, [id]: [],
+  //       },
+  //     };
+  //     localStorage.setItem('inProgressRecipes', JSON.stringify(include));
+  //   }
+  // }
+
+  const conditionalLocalStorage = () => {
+    const storage = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    if (storage === null) {
       const obj = {
-        cocktails: {
-        },
-        meals: {
-        },
+        cocktails: {},
+        meals: {},
       };
       localStorage.setItem('inProgressRecipes', JSON.stringify(obj));
     }
-  }
-
-  function recipesProgress() {
-    // const ingredient = ingredients.map((index) => index[1]);
-    if (path.includes('/comidas')) {
-      const id = path.slice(sliceNumber);
-      let include = JSON.parse(localStorage.getItem('inProgressRecipes'));
-      include = {
-        ...include,
-        meals: {
-          ...include.meals, [id]: [],
-        },
-      };
-      localStorage.setItem('inProgressRecipes', JSON.stringify(include));
-    } else {
-      const id = path.slice(sliceNumber);
-      let include = JSON.parse(localStorage.getItem('inProgressRecipes'));
-      include = {
-        ...include,
-        cocktails: {
-          ...include.cocktails, [id]: [],
-        },
-      };
-      localStorage.setItem('inProgressRecipes', JSON.stringify(include));
-    }
-  }
+  };
 
   useEffect(() => {
     function button() {
@@ -56,7 +67,7 @@ export default function RecipeButton({ path }) {
           : setButtonName('Iniciar Receita');
       }
     }
-    setLocalStorage();
+    conditionalLocalStorage();
     button();
   }, [path]);
 
@@ -65,7 +76,7 @@ export default function RecipeButton({ path }) {
       <button
         type="button"
         data-testid="start-recipe-btn"
-        onClick={ recipesProgress }
+        // onClick={ recipesProgress }
       >
         { buttonName }
       </button>

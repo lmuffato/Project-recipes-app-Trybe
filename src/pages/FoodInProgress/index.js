@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import ComidasInProgress from '../../components/BebidasInProgress';
+import ComidasInProgress from '../../components/ComidasInProgress';
 import fetchFoodDetails from '../../services/fetchFoodDetails';
 
 function ComidasProgresso() {
@@ -12,6 +12,7 @@ function ComidasProgresso() {
 
   useEffect(() => {
     async function fetchAPI() {
+      console.log(id);
       const { meals } = await fetchFoodDetails(id);
       setData(meals[0]);
     }

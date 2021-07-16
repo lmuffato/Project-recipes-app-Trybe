@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../../images/blackHeartIcon.svg';
 
 function FavoriteButton({ data, path }) {
+  const { pathname } = useLocation();
   function createLocalStorage() {
     const inProgressRecipes = 'favoriteRecipes';
     if (localStorage[inProgressRecipes] === undefined) {
@@ -15,12 +17,11 @@ function FavoriteButton({ data, path }) {
 
   function favoritar() {
     const idFood = `${path}`;
-    console.log(`${idFood} pra ter certeza`);
     const include = JSON.parse(localStorage.getItem('favoriteRecipes'));
     const boolConditional = include.some(({ id }) => id === idFood);
     const favorites = include.filter(({ id }) => id === idFood);
     if (!boolConditional) {
-      if (path.includes('/bebidas')) {
+      if (pathname.includes('/bebidas')) {
         const { idDrink, strCategory, strAlcoholic, strDrink, strDrinkThumb } = data;
         const array = [...include, {
           id: idDrink,

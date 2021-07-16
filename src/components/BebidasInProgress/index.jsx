@@ -27,10 +27,24 @@ function DrinksInProgress({ data }) {
     }
     saveState();
     const updateChecked = () => {
-      const storage = JSON.parse(localStorage.getItem('inProgressRecipes')).cocktails[id];
-      const newArr = [];
-      storage.forEach((item) => newArr.push(data[`strIngredient${item}`]));
-      setChecked(newArr);
+      const storage = JSON.parse(localStorage.getItem('inProgressRecipes'));
+      if (storage) {
+        const cocktail = storage.cocktails[id];
+        if (cocktail) {
+          const newArr = [];
+          cocktail.forEach((item) => newArr.push(data[`strIngredient${item}`]));
+          setChecked(newArr);
+        } else {
+          storage.cocktails[id] = [];
+          localStorage.setItem('inProgressRecipes', JSON.stringify(storage));
+        }
+      } else {
+        const obj = {
+          cocktails: {},
+          meals: {},
+        };
+        localStorage.setItem('inProgressRecipes', JSON.stringify(obj));
+      }
     };
     updateChecked();
   }, [data, id]);
@@ -78,6 +92,7 @@ function DrinksInProgress({ data }) {
               <label htmlFor={ `${index}-${element}` }>
                 { element }
                 <input
+                  data-testid={ `${index}-ingredient-step` }
                   type="checkbox"
                   id={ `${index}-${element}` }
                   name={ element }
@@ -103,7 +118,7 @@ function DrinksInProgress({ data }) {
 
   return (
     <div>
-      Progresso...
+      { null }
     </div>
   );
 }

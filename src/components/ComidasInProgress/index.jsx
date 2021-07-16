@@ -45,6 +45,7 @@ function FoodsInProgress({ data }) {
   if (keys.length > 0) {
     return (
       <div>
+        <h1>teste</h1>
         <img src={ keys[0].image } alt="thumb" data-testid="recipe-photo" width="200px" />
         <h3 data-testid="recipe-title">{ keys[0].title }</h3>
         <ShareButton dataTestId="share-btn" urlCopied={ href } />
@@ -83,7 +84,7 @@ function FoodsInProgress({ data }) {
   }
 
   return (
-    <div>{null}</div>
+    null
   );
 }
 
