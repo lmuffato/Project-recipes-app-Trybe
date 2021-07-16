@@ -132,6 +132,12 @@ function ReceitasFavoritas() {
     }
   };
 
+  const handleClick = ({ target }) => {
+    const select = document.getElementsByClassName('selected_filter')[0];
+    if (select) { select.className = ''; }
+    target.className = 'selected_filter';
+  };
+
   useEffect(() => {
     fetchStorage();
   }, [doReload]);
@@ -143,7 +149,7 @@ function ReceitasFavoritas() {
         <button
           type="button"
           data-testid="filter-by-all-btn"
-          onClick={ () => renderFavData('todos') }
+          onClick={ (e) => { renderFavData('todos'); handleClick(e); } }
         >
           All
 
@@ -151,7 +157,7 @@ function ReceitasFavoritas() {
         <button
           type="button"
           data-testid="filter-by-food-btn"
-          onClick={ () => renderFavData('comida') }
+          onClick={ (e) => { renderFavData('comida'); handleClick(e); } }
         >
           Food
 
@@ -159,7 +165,7 @@ function ReceitasFavoritas() {
         <button
           type="button"
           data-testid="filter-by-drink-btn"
-          onClick={ () => renderFavData('bebida') }
+          onClick={ (e) => { renderFavData('bebida'); handleClick(e); } }
         >
           Drinks
 

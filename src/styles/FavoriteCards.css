@@ -26,6 +26,14 @@
   background-blend-mode: overlay;
   background-color: rgb(136, 134, 134);
   box-shadow: 0.3px 0.3px 3px rgb(29, 28, 29) inset;
+  text-shadow: 1px 1px 1px rgb(51, 51, 51);
+}
+
+.favorite_recipes .selected_filter {
+  background-blend-mode: overlay;
+  background-color: rgb(136, 134, 134);
+  box-shadow: 0.3px 0.3px 3px rgb(29, 28, 29) inset;
+  text-shadow: 1px 1px 1px rgb(51, 51, 51);
 }
 
 .doneComponents {

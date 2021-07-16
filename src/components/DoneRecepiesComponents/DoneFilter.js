@@ -6,6 +6,9 @@ export default function DoneFilter() {
 
   function handleClick({ target }) {
     setFilterValue(target.value);
+    const select = document.getElementsByClassName('selected_filter')[0];
+    if (select) { select.className = ''; }
+    target.className = 'selected_filter';
   }
 
   return (
