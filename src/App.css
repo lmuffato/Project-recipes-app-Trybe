@@ -110,9 +110,9 @@ ul {
   border-radius: 6px;
   display: flex;
   flex-flow: column wrap;
-  height: 172px;
+  height: 80px;
   justify-content: space-around;
-  width: 161px;
+  width: 60px;
   z-index: -1;
 }
 

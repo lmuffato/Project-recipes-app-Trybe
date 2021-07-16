@@ -11,6 +11,7 @@ function RecipesList({ data, path }) {
       : filtredList.slice(0, magicNum);
     const toReturn = first12.map((recipe, index) => {
       const { name, imgSrc, id } = recipe;
+      // console.log(recipe);
       return (
         <li
           key={ index }
