@@ -6,7 +6,7 @@ import '../style/Explorar.css';
 
 export default function Explorar() {
   return (
-    <>
+    <div className="explore">
       <Header
         title="Explorar"
         enableSearchIcon={ false }
@@ -33,6 +33,6 @@ export default function Explorar() {
         </Link>
         <Footer />
       </div>
-    </>
+    </div>
   );
 }
