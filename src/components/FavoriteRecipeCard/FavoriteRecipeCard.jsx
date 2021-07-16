@@ -36,7 +36,6 @@ function FavoriteRecipeCard(props) {
             { recipe.category }
           </p>
         </div>
-
         <Link to={ detailsUrl }>
           <p data-testid={ `${index}-horizontal-name` }>
             { recipe.name }

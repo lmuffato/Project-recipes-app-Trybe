@@ -7,7 +7,8 @@ const FavRecipeCardContainer = styled.div`margin: 8px 8px 32px;
   width: 15.1rem;
 
   a {
-    color: #289ea8;
+    color: #30343b;
+    font-weight: 600;
     text-decoration: none;
   }
 
@@ -40,40 +41,35 @@ const FavRecipeCardContainer = styled.div`margin: 8px 8px 32px;
   }
 
   .recipe-category {
-    color: #a6a6a6;
+    color: #737373;
+    font-weight: 400;
     text-align: center;
-    text-transform: uppercase;
   }
 
   .icons-grid {
     align-items: center;
     display: flex;
     justify-content: center;
-
-    button {
-
-      img {
-        color: #289ea8;
-      }
-    }
   }
 
   .recipe-info {
     align-items: center;
-    /* background: #289ea8; */
-    /* background: #ebf4f2; */
     border-bottom-left-radius: 8px;
     border-bottom-right-radius: 8px;
-    color: #289ea8;
     display: flex;
     flex-flow: column nowrap;
     font-size: 1rem;
     justify-content: space-between;
     line-height: 1;
     margin: 0 auto 6px;
+    padding-bottom: 20px;
     padding-left: 10px;
     padding-right: 10px;
     z-index: 2;
+
+    a {
+      margin-top: 0;
+    }
   }
 `;
 
