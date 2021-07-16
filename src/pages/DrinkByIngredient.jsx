@@ -1,9 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import Header from '../components/Header';
 import InferiorMenu from '../components/InferiorMenu';
+import CocktailsContext from '../context/CocktailsContext';
 
 export default function DrinkByIngredient() {
+  const { setCocktails } = useContext(CocktailsContext);
   const [ingredients, setIngredients] = useState([]);
+  const history = useHistory();
 
   useEffect(() => {
     const drinkResults = async () => {
@@ -17,6 +21,13 @@ export default function DrinkByIngredient() {
     drinkResults();
   }, []);
 
+  const fetchingIngredients = async (fingredient) => {
+    const choosenDrink = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${fingredient}`);
+    const responseApi = await choosenDrink.json();
+    await setCocktails(responseApi);
+    history.push('/bebidas');
+  };
+
   return (
     <div>
       <Header>
@@ -25,8 +36,10 @@ export default function DrinkByIngredient() {
       <section>
         { ingredients.map((el, index) => (
           <div
+            onClick={ () => fetchingIngredients(el.strIngredient1) }
             data-testid={ `${index}-ingredient-card` }
             key={ el.idIngredient1 }
+            aria-hidden="true"
           >
             <p data-testid={ `${index}-card-name` }>
               { el.strIngredient1 }
