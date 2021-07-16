@@ -8,7 +8,6 @@ export default function Button({ children, dataTestid, onClick }) {
       data-testid={ `${dataTestid}` }
       type="button"
       onClick={ onClick }
-      // style={ { position: 'fixed', bottom: '0px' } }
     >
       { children }
     </button>

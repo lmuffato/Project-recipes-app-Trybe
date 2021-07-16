@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 export default function Paragraphs({ children, dataTestid }) {
   return (
     <p
+      style={ { textAlign: 'justify' } }
       className="details-cards"
       data-testid={ `${dataTestid}` }
     >

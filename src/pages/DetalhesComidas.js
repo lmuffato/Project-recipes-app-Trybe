@@ -117,6 +117,8 @@ export default function DetalhesComidas() {
       </div>
       <div className="recipe-button-bottom">
         { drinks.length > 0 && <Carousel data={ drinks } /> }
+        <br />
+        <br />
         {!isDone && (
           <Button
             dataTestid="start-recipe-btn"
@@ -126,6 +128,8 @@ export default function DetalhesComidas() {
           </Button>
         )}
       </div>
+      <br />
+      <br />
     </>
   );
 }
