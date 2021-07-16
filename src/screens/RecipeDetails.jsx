@@ -1,19 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
 import { useLocation } from 'react-router';
 import PropTypes from 'prop-types';
 import fetchApiById from '../service/fetchApiDetails';
 import Ingredients from './Ingredients';
 import Recommendations from './Recomendations';
 import Video from '../service/Video';
-import setFavoriteLocalStorage from '../service/setFavoriteLocalStorage';
-import setDoneRecipesLocalStorage from '../service/setDoneRecipeLocalStorage';
+import { FavFood, FavDrink } from '../service/Favorite';
+import RenderProgress from '../service/RenderProgress';
+import { checkFavoriteFood, checkFavoriteDrink } from '../service/Check';
 
 function RecipeDetails(props) {
   const { match: { params: { id } } } = props;
   const { pathname } = useLocation();
   const [recipe, setRecipe] = useState({});
-  const history = useHistory();
   const type = pathname === `/comidas/${id}` ? 'themealdb' : 'thecocktaildb';
   const url = pathname === `/comidas/${id}` ? 'comidas' : 'bebidas';
 
@@ -39,18 +38,16 @@ function RecipeDetails(props) {
       <button type="button" data-testid="share-btn">
         compartilhar
       </button>
-      <button
-        onClick={ () => setFavoriteLocalStorage(type, id) }
-        type="button"
-      >
-        favoritar
-      </button>
-      <button
-        onClick={ () => setDoneRecipesLocalStorage(type, id) }
-        type="button"
-      >
-        marcar como feito
-      </button>
+      <input
+        type="image"
+        data-testid="favorite-btn"
+        src={ url === 'comidas' ? checkFavoriteFood(recipe) : checkFavoriteDrink(recipe) }
+        alt="favoritar receita"
+        className="fav-btn"
+        onClick={ () => (
+          url === 'comidas' ? FavFood(recipe) : FavDrink(recipe)
+        ) }
+      />
       <p data-testid="recipe-category">
         { recipe.strCategory }
       </p>
@@ -59,14 +56,7 @@ function RecipeDetails(props) {
       <h3>Instruções</h3>
       <p data-testid="instructions">{ recipe.strInstructions }</p>
       <Recommendations recipe={ type } />
-      <button
-        type="button"
-        data-testid="start-recipe-btn"
-        className="start-button"
-        onClick={ () => history.push(`/${url}/${id}/in-progress`) }
-      >
-        iniciar receita
-      </button>
+      { RenderProgress(url, id) }
     </div>
   );
 }

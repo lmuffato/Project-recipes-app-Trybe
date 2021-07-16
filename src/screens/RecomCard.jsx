@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 function RecomendationCards(props) {
-  const { recipe } = props;
+  const { recipe, index } = props;
   return (
-    <section data-testid="0-recomendation-card">
+    <section data-testid={ `${index}-recomendation-card` }>
       <img
         src={ recipe.strMealThumb || recipe.strDrinkThumb }
         alt="some food"
