@@ -8,8 +8,7 @@ class EmProgComidas extends React.Component {
     super(props);
 
     this.state = {
-      // currentId: '',
-      // type: '',
+      currentId: '',
       title: '',
       category: '',
       thumbnail: '',
@@ -19,11 +18,10 @@ class EmProgComidas extends React.Component {
       usedIngredients: [],
     };
 
-    this.getMealId.this = this.getMealId.bind(this);
-    this.handleDoneSteps.this = this.handleDoneSteps.bind(this);
-    this.checkDoneSteps.this = this.checkDoneSteps.bind(this);
-    this.checkStorageDrinks.this = this.checkStorageDrinks.bind(this);
-    this.checkStorageMeals.this = this.checkStorageMeals.bind(this);
+    // this.getMealId.this = this.getMealId.bind(this);
+    // this.handleDoneSteps.this = this.handleDoneSteps.bind(this);
+    // // this.checkDoneSteps.this = this.checkDoneSteps.bind(this);
+    // this.checkStorageMeals.this = this.checkStorageMeals.bind(this);
   }
 
   componentDidMount() {
@@ -34,27 +32,21 @@ class EmProgComidas extends React.Component {
     this.getMealId(id);
   }
 
-  // componentWillUnmount() {
-  //   const { usedIngredients, currentId, type } = this.state;
-
-  //   if (usedIngredients.length > 0) {
-  //     const currentStore = this.storeItems(currentId, type);
-  //     localStorage
-  //       .setItem('inProgressRecipes', JSON.stringify(this.storeItems(currentStore)));
-  //   }
-  // }
-
   handleDoneSteps(e) {
     const { target } = e;
     const { name } = target;
     const { usedIngredients } = this.state;
     const previusState = [...usedIngredients];
     const checkRepeat = previusState.includes(name);
+
     if (target.checked === true && checkRepeat === false) {
       this.setState((prevState) => ({
         usedIngredients: [...prevState.usedIngredients, name],
       }));
+
+      this.setStore([...usedIngredients, name]);
     }
+
     if (target.checked === false) {
       const item = previusState.indexOf(name);
       previusState.splice(item, 1);
@@ -62,6 +54,7 @@ class EmProgComidas extends React.Component {
       this.setState({
         usedIngredients: [...previusState],
       });
+      this.setStore([...previusState]);
     }
   }
 
@@ -94,13 +87,27 @@ class EmProgComidas extends React.Component {
     });
   }
 
+  setStore(currentState) {
+    const { currentId } = this.state;
+    const storedBefore = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    const setData = {
+      ...storedBefore,
+      meals: {
+        ...storedBefore.meals || null,
+        [currentId]: currentState,
+      },
+    };
+
+    localStorage
+      .setItem('inProgressRecipes', JSON.stringify(setData));
+  }
+
   async getMealId(id) {
     const endpoint = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
     const request = await fetch(endpoint).then((response) => response.json());
-    const recipe = request.meals;
+    const recipe = request.meals || null;
     this.setState({
-      // type: 'meals',
-      // currentId: id,
+      currentId: id,
       title: recipe[0].strMeal,
       category: recipe[0].strCategory,
       thumbnail: recipe[0].strMealThumb,
@@ -115,58 +122,17 @@ class EmProgComidas extends React.Component {
     }
   }
 
-  // storeItems() {
-  //   const { usedIngredients, currentId, type } = this.state;
-  //   const getItem = JSON.parse(localStorage.getItem('inProgressRecipes'));
-  //   if (getItem !== undefined && type === 'meals') {
-  //     return {
-  //       meals: { ...getItem.meals,
-  //         [currentId]: usedIngredients },
-  //     };
-  //   }
-  //   if (getItem !== undefined && type === 'cocktails') {
-  //     return { ...getItem,
-  //       cocktails: { ...getItem.cocktails,
-  //         [currentId]: usedIngredients },
-  //     };
-  //   }
-  //   return {
-  //     meals: [],
-  //     cocktails:
-  //   };
-  // }
-
-  checkStorageDrinks(id) {
-    const storedItems = JSON.parse(localStorage.getItem('inProgressRecipes'));
-    if (storedItems) {
-      return storedItems.cocktails[id];
-    }
-    return false;
-  }
-
   checkStorageMeals(id) {
     const storedItems = JSON.parse(localStorage.getItem('inProgressRecipes'));
     if (storedItems) {
-      return storedItems.meals[id] || false;
+      return storedItems.meals[id] || null;
     }
-    return false;
-  }
-
-  checkDoneSteps(ingredient) {
-    const { usedIngredients } = this.state;
-    return (usedIngredients.includes(ingredient));
   }
 
   render() {
     const { history } = this.props;
     const { location: { pathname } } = history;
-    const {
-      thumbnail,
-      title,
-      category,
-      instructions,
-      ingredients,
-      measures,
+    const { thumbnail, title, category, instructions, ingredients, measures,
       usedIngredients } = this.state;
     return (
       <div>
@@ -186,7 +152,7 @@ class EmProgComidas extends React.Component {
                 key={ ingredient }
                 id={ ingredient }
                 onChange={ (e) => this.handleDoneSteps(e) }
-                checked={ this.checkDoneSteps(ingredient) }
+                checked={ usedIngredients.includes(ingredient) }
               />
               <label
                 htmlFor={ ingredient }
@@ -196,8 +162,14 @@ class EmProgComidas extends React.Component {
             </div>
           ))}
         </form>
-        <button data-testid="finish-recipe-btn" type="submit">Finalizar Receita</button>
-        {usedIngredients && usedIngredients.map((each) => <p key={ each }>{each}</p>)}
+        <button
+          data-testid="finish-recipe-btn"
+          type="submit"
+          onClick={ () => history.push('/receitas-feitas') }
+          disabled={ ingredients.length !== usedIngredients.length }
+        >
+          Finalizar Receita
+        </button>
       </div>
     );
   }

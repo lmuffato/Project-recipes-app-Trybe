@@ -19,9 +19,9 @@ class EmProgBebidas extends React.Component {
       usedIngredients: [],
     };
 
-    this.getDrinkId.this = this.getDrinkId.bind(this);
-    this.handleDoneSteps.this = this.handleDoneSteps.bind(this);
-    this.checkDoneSteps.this = this.checkDoneSteps.bind(this);
+    // this.getDrinkId.this = this.getDrinkId.bind(this);
+    // this.handleDoneSteps.this = this.handleDoneSteps.bind(this);
+    // this.checkDoneSteps.this = this.checkDoneSteps.bind(this);
     // this.checkStorageDrinks.this = this.checkStorageDrinks.bind(this);
     // this.checkStorageMeals.this = this.checkStorageMeals.bind(this);
   }
@@ -44,7 +44,10 @@ class EmProgBebidas extends React.Component {
       this.setState((prevState) => ({
         usedIngredients: [...prevState.usedIngredients, name],
       }));
+
+      this.setStore([...usedIngredients, name]);
     }
+
     if (target.checked === false) {
       const item = previusState.indexOf(name);
       previusState.splice(item, 1);
@@ -52,6 +55,7 @@ class EmProgBebidas extends React.Component {
       this.setState({
         usedIngredients: [...previusState],
       });
+      this.setStore([...previusState]);
     }
   }
 
@@ -84,13 +88,27 @@ class EmProgBebidas extends React.Component {
     });
   }
 
+  setStore(currentState) {
+    const { currentId } = this.state;
+    const storedBefore = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    const setData = {
+      ...storedBefore,
+      cocktails: {
+        ...storedBefore.cocktails || null,
+        [currentId]: currentState,
+      },
+    };
+
+    localStorage
+      .setItem('inProgressRecipes', JSON.stringify(setData));
+  }
+
   async getDrinkId(id) {
     const endpoint = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
     const request = await fetch(endpoint).then((response) => response.json());
-    const recipe = request.drinks;
+    const recipe = request.drinks || null;
     this.setState({
-    //   type: 'cocktails',
-    //   currentId: id,
+      currentId: id,
       title: recipe[0].strDrink,
       category: recipe[0].strAlcoholic,
       thumbnail: recipe[0].strDrinkThumb,
@@ -98,16 +116,18 @@ class EmProgBebidas extends React.Component {
     });
     this.handleIngredients(recipe);
 
-    // if (this.checkStorageDrinks(id)) {
-    //   this.setState({
-    //     usedIngredients: this.checkStorageDrinks(id),
-    //   });
-    // }
+    if (this.checkStorageDrinks(id)) {
+      this.setState({
+        usedIngredients: this.checkStorageDrinks(id),
+      });
+    }
   }
 
-  checkDoneSteps(ingredient) {
-    const { usedIngredients } = this.state;
-    return (usedIngredients.includes(ingredient));
+  checkStorageDrinks(id) {
+    const storedItems = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    if (storedItems) {
+      return storedItems.cocktails[id] || null;
+    }
   }
 
   render() {
@@ -139,7 +159,7 @@ class EmProgBebidas extends React.Component {
                 key={ ingredient }
                 id={ ingredient }
                 onChange={ (e) => this.handleDoneSteps(e) }
-                checked={ this.checkDoneSteps(ingredient) }
+                checked={ usedIngredients.includes(ingredient) }
               />
               <label
                 htmlFor={ ingredient }
@@ -149,8 +169,13 @@ class EmProgBebidas extends React.Component {
             </div>
           ))}
         </form>
-        <button data-testid="finish-recipe-btn" type="submit">Finalizar Receita</button>
-        {usedIngredients && usedIngredients.map((each) => <p key={ each }>{each}</p>)}
+        <button
+          data-testid="finish-recipe-btn"
+          type="submit"
+          disabled={ ingredients.length !== usedIngredients.length }
+        >
+          Finalizar Receita
+        </button>
       </div>
     );
   }
