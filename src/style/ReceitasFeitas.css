@@ -1,0 +1,9 @@
+.done-recipes-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.buttons-done {
+  margin: 40px;
+}

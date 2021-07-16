@@ -3,12 +3,18 @@
 .done-recipe-card {
   /* border: 1px solid black; */
   display: flex;
-  height: 100px;
+  height: auto;
   justify-content: space-between;
+  flex-wrap: wrap;
+  background-color: whitesmoke;
+  transition: 0.3s;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  border-radius: 8px;
 }
 
 .done-recipe-card img {
   height: 100%;
+  width: 100%;
 }
 
 .done-recipe-card p {

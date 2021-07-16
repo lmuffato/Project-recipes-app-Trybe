@@ -21,12 +21,13 @@ export default function ShareButton({ recipeId, isFood, index }) {
 
   return (
     <button
+      style={ { backgroundColor: 'white', width: 30 } }
       type="button"
       data-testid={ `${index !== undefined ? `${index}-horizontal-` : ''}share-btn` }
       onClick={ handleShareClick }
       src={ shareIcon }
     >
-      <img src={ shareIcon } alt="compartilhar" />
+      <img src={ shareIcon } alt="compartilhar" style={ { width: 15, height: 15 } } />
     </button>
   );
 }

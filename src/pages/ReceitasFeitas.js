@@ -4,6 +4,7 @@ import Header from '../components/Header';
 import DoneRecipesContext from '../contexts/DoneRecipesContext';
 
 import DoneRecipeCard from '../components/ReceitasFeitas/DoneRecipeCard';
+import '../style/ReceitasFeitas.css';
 
 export default function ReceitasFeitas() {
   const { doneRecipes } = useContext(DoneRecipesContext);
@@ -13,13 +14,14 @@ export default function ReceitasFeitas() {
     ? doneRecipes.filter((recipe) => recipe.type === filter) : doneRecipes;
 
   return (
-    <div>
+    <div className="done-recipes-main">
       <Header
         title="Receitas Feitas"
         enableSearchIcon={ false }
       />
-      <div>
+      <div className="buttons-done">
         <button
+          className="button is-primary"
           type="button"
           data-testid="filter-by-all-btn"
           value=""
@@ -27,7 +29,10 @@ export default function ReceitasFeitas() {
         >
           All
         </button>
+        <br />
+        <br />
         <button
+          className="button is-primary"
           type="button"
           data-testid="filter-by-food-btn"
           value="comida"
@@ -35,7 +40,10 @@ export default function ReceitasFeitas() {
         >
           Food
         </button>
+        <br />
+        <br />
         <button
+          className="button is-primary"
           type="button"
           data-testid="filter-by-drink-btn"
           value="bebida"
@@ -43,6 +51,8 @@ export default function ReceitasFeitas() {
         >
           Drink
         </button>
+        <br />
+        <br />
         {filteredDoneRecipes.map((done, index) => (
           <DoneRecipeCard key={ index } recipe={ done } index={ index } />
         ))}
