@@ -42,7 +42,6 @@ const Wrapper = styled.section`align-items: center;
 
     & + button {
       margin-bottom: 20px;
-      margin-top: 20px;
     }
 
     &:disabled {
@@ -56,6 +55,7 @@ const Wrapper = styled.section`align-items: center;
 
     & + :last-child {
       background: #c10644;
+      margin-bottom: 50px;
     }
   }
 

@@ -5,7 +5,6 @@ import Header from '../components/Header/Header';
 import Button from '../components/Generics/Button';
 import Footer from '../components/Footer/Footer';
 import logoIcon from '../images/savory-6.svg';
-import letmeEatIcon from '../images/icon-letmeEatApp.svg';
 
 function Profile() {
   const history = useHistory();
@@ -49,11 +48,9 @@ function Profile() {
         <strong data-testid="profile-email">{ email }</strong>
         <Button data-testid="profile-done-btn" onClick={ handleRedirectToDoneRecipes }>
           Receitas Feitas
-          <span><img src={ letmeEatIcon } alt="logo letmeEat" /></span>
         </Button>
         <Button data-testid="profile-favorite-btn" onClick={ handleRedirectToFavRecipes }>
           Receitas Favoritas
-          {/* <span><img src={ letmeEatIcon } alt="logo letmeEat" /></span> */}
         </Button>
         <Button data-testid="profile-logout-btn" onClick={ handleRedirecToLogin }>
           Sair
