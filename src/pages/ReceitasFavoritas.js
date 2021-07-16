@@ -20,21 +20,18 @@ function ReceitasFavoritas() {
     verifyFavorite();
   }, []);
 
-  const createRecipeList = () => {
-    console.log('teste');
-    return (
-      favoriteRecipes
-        .map((recipe, index) => {
-          const props = {
-            recipe,
-            index,
-            setFavoriteRecipes,
-          };
+  const createRecipeList = () => (
+    favoriteRecipes
+      .map((recipe, index) => {
+        const props = {
+          recipe,
+          index,
+          setFavoriteRecipes,
+        };
 
-          return <ReceitasFavoritasCard key={ index } props={ props } />;
-        })
-    );
-  };
+        return <ReceitasFavoritasCard key={ index } props={ props } />;
+      })
+  );
 
   return (
     <div>

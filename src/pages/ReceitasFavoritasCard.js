@@ -39,30 +39,27 @@ function ReceitasFavoritasCard({ props: { recipe, index, setFavoriteRecipes } })
     }
   };
 
-  const createButtons = () => {
-    console.log('recipe');
-    return (
-      <div>
-        <button
-          type="button"
-          onClick={ shareClick }
-        >
-          <img
-            alt="Share link"
-            data-testid={ `${index}-horizontal-share-btn` }
-            src={ shareIcon }
-          />
-        </button>
-        <button type="button" onClick={ unfavoriteClick }>
-          <img
-            alt="Favorite button"
-            data-testid={ `${index}-horizontal-favorite-btn` }
-            src={ blackHeartIcon }
-          />
-        </button>
-      </div>
-    );
-  };
+  const createButtons = () => (
+    <div>
+      <button
+        type="button"
+        onClick={ shareClick }
+      >
+        <img
+          alt="Share link"
+          data-testid={ `${index}-horizontal-share-btn` }
+          src={ shareIcon }
+        />
+      </button>
+      <button type="button" onClick={ unfavoriteClick }>
+        <img
+          alt="Favorite button"
+          data-testid={ `${index}-horizontal-favorite-btn` }
+          src={ blackHeartIcon }
+        />
+      </button>
+    </div>
+  );
 
   const foodSpecs = () => (
     <span
