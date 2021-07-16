@@ -113,7 +113,7 @@ function BuscaHeader() {
           data-testid="exec-search-btn"
           onClick={ handleClick }
         >
-          Filtrar
+          Filter
         </button>
       </div>
     </form>
