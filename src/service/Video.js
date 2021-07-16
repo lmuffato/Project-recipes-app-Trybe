@@ -13,9 +13,12 @@ export default function Video({ recipe }) {
   return (
     <div>
       <h3>Vídeo</h3>
-      <iframe
+      <embed
+        type="video/mp4"
         src={ getYouTubeURL() }
         title="recipe video"
+        width="400"
+        height="300"
         data-testid="video"
       />
     </div>
