@@ -1,3 +1,5 @@
+@import "https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css";
+
 .details-main {
   display: flex;
   flex-direction: column;
@@ -10,4 +12,8 @@
   border-radius: 8px;
   transition: 0.3s;
   margin: 20px;
+}
+
+.recipe-button-bottom {
+  align-items: center;
 }

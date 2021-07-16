@@ -17,6 +17,8 @@ export default function Carousel({ data }) {
     <Slider { ...settings }>
       { data !== undefined && data.map((card, index) => (
         <div
+          style={ { width: 200, height: 200 } }
+          className="recomendation-cardss"
           key={ index }
           data-testid={ `${index}-recomendation-card` }
         >

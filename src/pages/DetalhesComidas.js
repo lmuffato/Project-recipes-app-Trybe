@@ -77,46 +77,55 @@ export default function DetalhesComidas() {
   }, [updateDrinks]);
 
   return (
-    <div className="details-main">
-      <DetailsHeader
-        recipe={ recipe }
-        isFood
-      />
-      <Text>
-        Ingredients
-      </Text>
-      { filterIngredient.length > 0
-        && <List
-          dataTestid="-ingredient-name-and-measure"
-          list={ filterIngredient }
-        /> }
-      <Text>
-        Instructions
-      </Text>
-      {
-        recipe.strInstructions
-        && <Paragraphs dataTestid="instructions">{ recipe.strInstructions }</Paragraphs>
-      }
-      <Text>Video</Text>
-      {
-        recipe.strYoutube
-        && <RenderVideo
-          dataTestid="video"
-          src={ recipe.strYoutube.split('watch?v=').join('embed/') }
+    <>
+      <div className="details-main">
+        <DetailsHeader
+          recipe={ recipe }
+          isFood
         />
-      }
-      <Text>
-        Recomendadas
-      </Text>
-      { drinks.length > 0 && <Carousel data={ drinks } /> }
-      {!isDone && (
-        <Button
-          dataTestid="start-recipe-btn"
-          onClick={ handleClick }
-        >
-          {isInProgress ? 'Continuar Receita' : 'Iniciar Receita'}
-        </Button>
-      )}
-    </div>
+        <br />
+
+        <Text>
+          Ingredients
+        </Text>
+        { filterIngredient.length > 0
+          && <List
+            dataTestid="-ingredient-name-and-measure"
+            list={ filterIngredient }
+          /> }
+        <br />
+        <Text>
+          Instructions
+        </Text>
+        {
+          recipe.strInstructions
+          && <Paragraphs dataTestid="instructions">{ recipe.strInstructions }</Paragraphs>
+        }
+        <Text>Video</Text>
+        <br />
+        {
+          recipe.strYoutube
+          && <RenderVideo
+            dataTestid="video"
+            src={ recipe.strYoutube.split('watch?v=').join('embed/') }
+          />
+        }
+        <br />
+        <Text>
+          Recomendadas
+        </Text>
+      </div>
+      <div className="recipe-button-bottom">
+        { drinks.length > 0 && <Carousel data={ drinks } /> }
+        {!isDone && (
+          <Button
+            dataTestid="start-recipe-btn"
+            onClick={ handleClick }
+          >
+            {isInProgress ? 'Continuar Receita' : 'Iniciar Receita'}
+          </Button>
+        )}
+      </div>
+    </>
   );
 }

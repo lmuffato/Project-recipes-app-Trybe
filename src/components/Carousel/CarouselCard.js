@@ -8,6 +8,7 @@ import 'slick-carousel/slick/slick-theme.css';
 export default function CarouselCard({ card, alt }) {
   return (
     <img
+      style={ { width: 200, height: 200 } }
       src={ `${card}` }
       alt={ `${alt}` }
     />

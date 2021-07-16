@@ -4,10 +4,11 @@ import PropTypes from 'prop-types';
 export default function Button({ children, dataTestid, onClick }) {
   return (
     <button
+      className="button is-primary"
       data-testid={ `${dataTestid}` }
       type="button"
       onClick={ onClick }
-      style={ { position: 'fixed', bottom: '0px' } }
+      // style={ { position: 'fixed', bottom: '0px' } }
     >
       { children }
     </button>
