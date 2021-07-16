@@ -13,6 +13,7 @@ import FavoriteRecipes from './pages/FavoriteRecipes';
 import DoneRecipes from './pages/DoneRecipes';
 // import './App.css';
 import ExploreOrigin from './pages/ExploreOrigin';
+import RecipesInProgess from './pages/RecipesInProgess';
 
 function App() {
   return (
@@ -59,6 +60,16 @@ function App() {
         />
         <Route path="/receitas-favoritas" component={ FavoriteRecipes } />
         <Route path="/receitas-feitas" component={ DoneRecipes } />
+        <Route
+          exact
+          path="/comidas/:id/in-progress"
+          render={ (props) => <RecipesInProgess { ...props } type="meals" /> }
+        />
+        <Route
+          exact
+          path="/bebidas/:id/in-progress"
+          render={ (props) => <RecipesInProgess { ...props } type="drinks" /> }
+        />
       </Switch>
     </DetailsContextProvider>
   );
