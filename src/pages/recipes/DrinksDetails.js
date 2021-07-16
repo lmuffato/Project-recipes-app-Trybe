@@ -23,6 +23,12 @@ function DrinksDetails() {
   const [mealsCarousel, setMealsCarousel] = useState([]);
   const match = useRouteMatch();
   const { params: { id } } = match;
+  const history = useHistory();
+
+  function copyBoard() {
+    copy(window.location.href);
+    global.alert('Link copiado!');
+  }
 
   useEffect(() => {
     getDrinksById(id)
@@ -35,11 +41,11 @@ function DrinksDetails() {
       });
     getRecomendedMeals()
       .then((meal) => {
+        console.log(meal);
         const SIX = 6;
         const meals = Object.values(meal).slice(0, SIX);
         setMealsCarousel(meals);
       });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function renderCarousel() {
@@ -66,6 +72,43 @@ function DrinksDetails() {
         }) }
       </ul>
     );
+  }
+
+  const setLocal = () => {
+    localStorage.setItem('favoriteRecipes', JSON.stringify([]));
+  }
+
+  function heartButton(infos) {
+    setButtonFav(!buttonFav);
+    const {
+      idDrink,
+      strCategory,
+      strAlcoholic,
+      strDrink,
+      strDrinkThumb,
+    } = infos;
+    const hasSetLocal = localStorage.getItem('favoriteRecipes');
+    hasSetLocal ? console.log('hello world') : setLocal();
+    if (buttonFav === true) {
+      const favRecipe = JSON.parse(localStorage.getItem('favoriteRecipes'));
+      const drinkInfos = [...favRecipe, {
+        id: idDrink,
+        type: 'bebida',
+        area: '',
+        category: strCategory,
+        alcoholicOrNot: strAlcoholic,
+        name: strDrink,
+        image: strDrinkThumb,
+      }];
+      localStorage.setItem('favoriteRecipes', JSON.stringify(drinkInfos));
+    } else {
+      const favRecipe = JSON.parse(localStorage.getItem('favoriteRecipes'));
+      console.log(favRecipe);
+      const filteredRemoved = favRecipe.filter((element) => element.id !== idDrink);
+      localStorage.removeItem('favoriteRecipes');
+      localStorage.setItem('favoriteRecipes', JSON.stringify(filteredRemoved));
+      console.log(localStorage.getItem('favoriteRecipes'));
+    }
   }
 
   const renderDetail = () => (

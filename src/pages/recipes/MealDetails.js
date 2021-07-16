@@ -23,7 +23,7 @@ function MealDetails() {
   const [drinksCarousel, setDrinksCarousel] = useState([]);
   const match = useRouteMatch();
   const { params: { id } } = match;
-
+  const history = useHistory();
   useEffect(() => {
     getMealsById(id)
       .then((meals) => {
@@ -39,7 +39,6 @@ function MealDetails() {
         const drinks = Object.values(drink).slice(0, SIX);
         setDrinksCarousel(drinks);
       });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function renderCarousel() {
@@ -67,6 +66,46 @@ function MealDetails() {
       </ul>
     );
   }
+  
+  const setLocal = () => {
+    localStorage.setItem('favoriteRecipes', JSON.stringify([]));
+  }
+
+  const heartButton = (infos) => {
+    setButtonFav(!buttonFav);
+    console.log(buttonFav);
+    const {
+      idMeal,
+      strCategory,
+      strMeal,
+      strMealThumb,
+      strTags,
+      strArea,
+    } = infos;
+    const hasSetLocal = localStorage.getItem('favoriteRecipes');
+    hasSetLocal ? console.log('hello world') : setLocal();
+    if (buttonFav === true) {
+      const favRecipe = JSON.parse(localStorage.getItem('favoriteRecipes'));
+      const mealInfos = [...favRecipe, {
+        id: idMeal,
+        type: 'comida',
+        area: strArea,
+        category: strCategory,
+        alcoholicOrNot: '',
+        name: strMeal,
+        image: strMealThumb,
+      }];
+      localStorage.setItem('favoriteRecipes', JSON.stringify(mealInfos));
+    } else {
+      const favRecipe = JSON.parse(localStorage.getItem('favoriteRecipes'));
+      console.log(favRecipe);
+      const filteredRemoved = favRecipe.filter((element) => element.id !== idMeal);
+      localStorage.removeItem('favoriteRecipes');
+      localStorage.setItem('favoriteRecipes', JSON.stringify(filteredRemoved));
+      console.log(localStorage.getItem('favoriteRecipes'));
+    }
+  }
+  
 
   const renderDetail = () => (
     mealsId.map((info, index) => {
@@ -86,7 +125,22 @@ function MealDetails() {
             width="100%"
           />
           <h2 data-testid="recipe-title">{ strMeal }</h2>
-          <MealShareAndFavorite />
+          <div className="share-and-favorite-container">
+            <button type="button" onClick={ () => copyBoard() }>
+              <img
+                src={ shareIcon }
+                alt="share button"
+                data-testid="share-btn"
+              />
+            </button>
+            <button type="button" onClick={ () => heartButton(info) }>
+              <img
+                src={ buttonFav ? blackHeartIcon : whiteHeartIcon }
+                alt="favorite button"
+                data-testid="favorite-btn"
+              />
+            </button>
+          </div>
           <p data-testid="recipe-category">{ strCategory }</p>
           <ul>
             Ingredientes
