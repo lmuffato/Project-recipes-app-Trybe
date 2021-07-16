@@ -5,11 +5,13 @@ import Header from '../../components/Header';
 import ReceitasContext from '../../contexts/ReceitasContext';
 import Footer from '../../components/Footer';
 import Filter from '../../components/Filter';
+import Loading from '../../components/Loading';
 
 function Comidas() {
   const { APIFood,
     fetchApi,
     explore,
+    isLoading,
   } = useContext(ReceitasContext);
 
   useEffect(() => {
@@ -26,10 +28,11 @@ function Comidas() {
         <div>
           <Header title="Meals" />
           <Filter page="comidas" />
-          <CardList
-            list={ APIFood.meals }
-            type="comidas"
-          />
+          {
+            isLoading ? <Loading />
+              : <CardList list={ APIFood.meals } type="comidas" />
+          }
+
           <Footer />
         </div>
       );
@@ -47,6 +50,7 @@ function Comidas() {
     <div>
       <Header title="Meals" />
       <Filter page="comidas" />
+      <Loading />
       <Footer />
     </div>
   );
