@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import RecipeInfo from '../components/RecipeInfo/RecipeInfo';
 import Button from '../components/Generics/Button';
@@ -10,6 +10,7 @@ import useDetailsProvider from '../hooks/useDetailsProvider';
 
 function RecipesInProgress({ type }) {
   const { id } = useParams();
+  const history = useHistory();
   const endpointMeals = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
   const endpointDrinks = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
   const [fetchRecipeURL, setFetchRecipeURL] = useState('');
@@ -37,6 +38,11 @@ function RecipesInProgress({ type }) {
       console.log(err);
     }
   }, [type]);
+
+  const handleRedirectToDoneRecipes = (ev) => {
+    ev.preventDefault();
+    history.push('/receitas-feitas');
+  };
 
   useEffect(() => {
     handleFetchIngredients();
@@ -83,6 +89,7 @@ function RecipesInProgress({ type }) {
       <Button
         data-testid="finish-recipe-btn"
         disabled={ isDisabled }
+        onClick={ handleRedirectToDoneRecipes }
       >
         Finalizar receita
       </Button>
