@@ -4,6 +4,7 @@ import SwiperCore, {
   Pagination,
 } from 'swiper/core';
 import { Link, useRouteMatch } from 'react-router-dom';
+import Loading from '../../../components/Loading';
 import ComponentGen from '../../../components/RecipeDetailsComponents';
 import '../../../styles/RecipeDetails.css';
 import 'swiper/swiper.min.css';
@@ -72,7 +73,7 @@ function Receita() {
             </Link>
           </SwiperSlide>
         )));
-    }
+    } return (<Loading />);
   };
 
   return (
@@ -82,7 +83,6 @@ function Receita() {
         listCreator={ listCreator() }
         recomendList={ recomendList() }
       />
-
   );
 }
 

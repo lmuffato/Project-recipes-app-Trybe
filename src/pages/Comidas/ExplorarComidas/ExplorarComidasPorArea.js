@@ -4,9 +4,10 @@ import Footer from '../../../components/Footer';
 import ReceitasContext from '../../../contexts/ReceitasContext';
 import CardList from '../../../components/CardList';
 import AreasDropdown from '../../../components/ExploreComponents/AreasDropdown';
+import Loading from '../../../components/Loading';
 
 function ExplorarBebidasPorArea() {
-  const { fetchApi, APIFood } = useContext(ReceitasContext);
+  const { fetchApi, APIFood, isLoading } = useContext(ReceitasContext);
   useEffect(() => {
     fetchApi('https://www.themealdb.com/api/json/v1/1/search.php?s=', 'comidas');
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -18,10 +19,8 @@ function ExplorarBebidasPorArea() {
         <div>
           <Header title="Explore Areas" />
           <AreasDropdown />
-          <CardList
-            list={ APIFood.meals }
-            type="comidas"
-          />
+          {isLoading ? <Loading />
+            : <CardList list={ APIFood.meals } type="comidas" />}
           <Footer />
         </div>
       );

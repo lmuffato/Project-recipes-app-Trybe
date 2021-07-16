@@ -16,22 +16,30 @@ function ReceitasProvider({ children }) {
   const [filterValue, setFilterValue] = useState('All');
   const [explore, setExplore] = useState(false);
   const [foodAreas, setFoodAreas] = useState();
+  const [isLoading, setIsLoading] = useState(false);
 
   async function fetchApi(endpoint, page) {
+    setIsLoading(true);
     await fetch(endpoint)
       .then((response) => response.json())
       .then((response) => {
         if (page === 'comidas') {
+          setIsLoading(false);
           setAPIFood(response);
         } else if (page === 'bebidas') {
+          setIsLoading(false);
           setAPIDrink(response);
         } else if (page === 'ingredientes-comidas') {
+          setIsLoading(false);
           setAPIIngredientsFood(response);
         } else if (page === 'ingredientes-bebidas') {
+          setIsLoading(false);
           setAPIIngredientsDrink(response);
         } else if (page === 'areas-comidas') {
+          setIsLoading(false);
           setFoodAreas(response);
         }
+        setIsLoading(false);
         setAPIResponse(response);
       });
   }
@@ -63,6 +71,7 @@ function ReceitasProvider({ children }) {
         explore,
         setExplore,
         foodAreas,
+        isLoading,
       } }
     >
       {children}
