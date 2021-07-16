@@ -5,7 +5,7 @@ const searchByIngredient = async (name) => {
   return recipes;
 };
 
-const seatchByName = async (name) => {
+const searchByName = async (name) => {
   const recipes = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${name}`)
     .then((response) => response.json())
     .then((drinks) => drinks.drinks);
@@ -22,7 +22,7 @@ const searchByLetter = async (name) => {
 const searchDrinks = async (type, name) => {
   if (type === 'ingredient') return searchByIngredient(name);
 
-  if (type === 'name') return seatchByName(name);
+  if (type === 'name') return searchByName(name);
 
   if (type === 'first-letter') {
     if (name.length === 1) return searchByLetter(name);

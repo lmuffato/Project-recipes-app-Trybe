@@ -19,6 +19,7 @@ export default function ExploreIngredients() {
       setRecipesFoods(api);
     } else {
       const api = await searchDrinks('ingredient', name);
+      console.log(api);
       setRecipesDrinks(api);
     }
   };

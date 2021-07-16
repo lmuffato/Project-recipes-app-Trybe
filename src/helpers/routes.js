@@ -10,6 +10,8 @@ import ExploreDrink from '../pages/ExploreDrink';
 import IngredientsPage from '../pages/IngredientsPage';
 import FavoriteRecipes from '../pages/FavoriteRecipes';
 import ExploreByAreaPage from '../pages/ExploreByAreaPage';
+import FoodInProgress from '../pages/FoodInProgress';
+import DrinkInProgress from '../pages/DrinkInProgress';
 import RecipesDonePage from '../pages/RecipesDonePage';
 
 export default [
@@ -96,5 +98,17 @@ export default [
     Component: FavoriteRecipes,
     exact: true,
     title: 'Receitas Favoritas',
+  },
+  {
+    path: '/bebidas/:id/in-progress',
+    Component: DrinkInProgress,
+    exact: true,
+    title: 'Bebida em progresso',
+  },
+  {
+    path: '/comidas/:id/in-progress',
+    Component: FoodInProgress,
+    exact: true,
+    title: 'Comida em progresso',
   },
 ];
