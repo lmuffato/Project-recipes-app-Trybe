@@ -11,7 +11,7 @@ function DrinksIngredients() {
     setMealsAndDrinkByIngredients,
   } = useContext(RecipesContext);
   const { setHideSearchBtn, setPageName } = useContext(SearchbarContext);
-  const TWELVE = 12;
+  const numberOfIngredients = 12;
 
   useEffect(() => {
     const getIngredients = async () => {
@@ -27,14 +27,14 @@ function DrinksIngredients() {
   const getRecipesByIngredient = async (param) => {
     const endpoint = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${param}`;
     const { drinks } = await fetch(endpoint).then((data) => data.json());
-    setMealsAndDrinkByIngredients(drinks.slice(0, TWELVE));
+    setMealsAndDrinkByIngredients(drinks.slice(0, numberOfIngredients));
   };
 
-  const getTwelveIngredients = () => {
-    const twelveIngredients = drinkIngredients
-      .filter((ingredient, index) => index < TWELVE);
+  const getIngredients = () => {
+    const ingredientsToBeRendered = drinkIngredients
+      .filter((ingredient, index) => index < numberOfIngredients);
     return (
-      twelveIngredients.map((ingredient, index) => {
+      ingredientsToBeRendered.map((ingredient, index) => {
         const name = ingredient.strIngredient1;
         return (
           <Link
@@ -58,7 +58,7 @@ function DrinksIngredients() {
   return (
     <>
       <Header />
-      { getTwelveIngredients() }
+      { getIngredients() }
       <Footer />
     </>
   );

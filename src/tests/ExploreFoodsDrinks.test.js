@@ -5,7 +5,7 @@ import renderWithRouter from './renderWithRouter';
 import App from '../App';
 
 const nine = 9;
-const totalLinksExploreDrinksPage = 5;
+const totalLinksExploreDrinksPage = 6;
 
 function loginAndAcessExplorePage() {
   const getInputEmail = screen.getByTestId('email-input');
@@ -82,8 +82,8 @@ describe('testing explore drinks page', () => {
     expect(pathname).toBe('/explorar/bebidas');
     const allLinks = screen.getAllByRole('link');
     expect(allLinks.length).toBe(totalLinksExploreDrinksPage);
-    expect(allLinks[0]).toHaveTextContent('Por Ingredientes');
-    expect(allLinks[1]).toHaveTextContent('Me Surpreenda!');
+    expect(allLinks[1]).toHaveTextContent('Por Ingredientes');
+    expect(allLinks[2]).toHaveTextContent('Me Surpreenda!');
   });
   test('redirect of byIngredients button', () => {
     const { history } = renderWithRouter(<App />);

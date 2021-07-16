@@ -9,17 +9,18 @@ import FoodsIngredients from '../pages/FoodsIngredients';
 import FoodsArea from '../pages/FoodsArea';
 import LoginPage from '../pages/LoginPage';
 import Profile from '../pages/ProfilePage';
+import FavoriteRecipes from '../pages/FavoriteRecipes';
 import DoneRecepies from '../pages/DoneRecepies';
-import ReceitasFavoritas from '../pages/ReceitasFavoritas';
-import MealDescription from './MealDescription';
-import DrinkDescription from './DrinkDescription';
+import RecipeDescription from './RecipeDescription';
 import NotFound from './NotFound';
+import MealsRecepiesProgress from '../pages/MealsRecepiesProgress';
+import DrinksRecepiesProgress from '../pages/DrinksRecepiesProgress';
 
 function Switcher() {
   return (
     <Switch>
-      <Route path="/comidas/:detalhes" component={ MealDescription } />
-      <Route path="/bebidas/:detalhes" component={ DrinkDescription } />
+      <Route exact path="/comidas/:id" component={ RecipeDescription } />
+      <Route exact path="/bebidas/:id" component={ RecipeDescription } />
       <Route exact path="/" component={ LoginPage } />
       <Route exact path="/comidas" component={ MainRecipesPage } />
       <Route exact path="/bebidas" component={ MainRecipesPage } />
@@ -27,9 +28,11 @@ function Switcher() {
       <Route exact path="/explorar/comidas" component={ Foods } />
       <Route exact path="/explorar/bebidas" component={ Drinks } />
       <Route path="/perfil" component={ Profile } />
+      <Route path="/receitas-favoritas" component={ FavoriteRecipes } />
       <Route path="/receitas-feitas" component={ DoneRecepies } />
-      <Route path="/receitas-favoritas" component={ ReceitasFavoritas } />
       <Route path="/explorar/bebidas/area" component={ NotFound } />
+      <Route exact path="/comidas/:id/in-progress" component={ MealsRecepiesProgress } />
+      <Route exact path="/bebidas/:id/in-progress" component={ DrinksRecepiesProgress } />
       <Route
         path="/explorar/comidas/ingredientes"
         component={ FoodsIngredients }

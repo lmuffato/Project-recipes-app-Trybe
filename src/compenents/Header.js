@@ -36,6 +36,5 @@ function Header() {
     </div>
   );
 }
-/* { searchBtn && <SearchBar /> } */
 
 export default Header;

@@ -10,8 +10,16 @@ function RecipesProvider({ children }) {
   const [searchedRecipes, setSearchedRecipes] = useState(null);
   const [idMeal, setIdMeal] = useState();
   const [idDrink, setIdDrink] = useState();
+  const [recomendations, setRecomendations] = useState(null);
+  const [favoriteRecipes, setFavRecipes] = useState(() => {
+    const favRecipe = localStorage.getItem('favoriteRecipes');
+    return favRecipe ? JSON.parse(favRecipe) : [];
+  });
+  const [showRecipes, setShowRecipes] = useState(favoriteRecipes);
   const [ingredients, setIngredients] = useState([]);
   const [mealsAndDrinkByIngredients, setMealsAndDrinkByIngredients] = useState(null);
+  const [allChecked, setAllChecked] = useState(true);
+  const [isFavorite, setIsFavorite] = useState(false);
 
   const contextValue = {
     type,
@@ -28,10 +36,20 @@ function RecipesProvider({ children }) {
     setIdMeal,
     idDrink,
     setIdDrink,
+    recomendations,
+    setRecomendations,
+    favoriteRecipes,
+    setFavRecipes,
+    showRecipes,
+    setShowRecipes,
     ingredients,
     setIngredients,
     mealsAndDrinkByIngredients,
     setMealsAndDrinkByIngredients,
+    allChecked,
+    setAllChecked,
+    isFavorite,
+    setIsFavorite,
   };
 
   return (
