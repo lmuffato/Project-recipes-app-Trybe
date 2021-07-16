@@ -1,15 +1,27 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Item, Popup } from 'semantic-ui-react';
+import context from '../store/Context';
 import shareIcon from '../images/shareIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 
 const copy = require('clipboard-copy');
 
 function RecipeItem(Props) {
+  const { setFavoriteRecipes } = useContext(context);
   const { data, index } = Props;
   const contextRef = React.useRef();
   const [open, setOpen] = React.useState(false);
+
+  const handleFav = () => {
+    const favoriteRecipes = (JSON.parse(localStorage.getItem('favoriteRecipes')) || []);
+    const newFavoriteRecipes = favoriteRecipes.filter((recipe) => recipe.id !== data.id);
+    localStorage
+      .setItem('favoriteRecipes', JSON
+        .stringify(newFavoriteRecipes));
+    setFavoriteRecipes(newFavoriteRecipes);
+  };
+
   const handleShare = () => {
     const SEC = 3000;
     copy(`http://localhost:3000/${data.type}s/${data.id}`);
@@ -22,7 +34,7 @@ function RecipeItem(Props) {
     ? `${data.area} - ${data.category}`
     : `${data.alcoholicOrNot}`;
   return (
-    <Item style={ { padding: 0 } }>
+    <Item style={ { padding: 0 } } id={ data.id }>
       <Item.Image>
         <Link to={ `/${data.type}s/${data.id}` }>
           <img
@@ -67,6 +79,7 @@ function RecipeItem(Props) {
             style={ { background: 'none' } }
             data-testid={ `${index}-horizontal-favorite-btn` }
             src={ blackHeartIcon }
+            onClick={ handleFav }
           >
             <img src={ blackHeartIcon } alt="favorite icon" />
           </Button>
