@@ -23,11 +23,11 @@ function MainRecipes() {
     if (searchedRecipes && searchBtn) setRenderRecipes(searchedRecipes);
   }, [recipes, mealsAndDrinkByIngredients, searchedRecipes, searchBtn]);
 
-  const renderFilters = () => {
-    if (searchBtn) {
-      return (<SearchBar />);
-    } return (<FilterButtons />);
-  };
+  // const renderFilters = () => {
+  //   if (searchBtn) {
+  //     return (<SearchBar />);
+  //   } return (<FilterButtons />);
+  // };
 
   // console.log(mealsAndDrinkByIngredients);
   // console.log('Opa');
@@ -35,8 +35,8 @@ function MainRecipes() {
     // console.log('renderizou');
     return (
       <>
-        {/* { searchBtn ? <SearchBar /> : <FilterButtons /> } */}
-        { renderFilters() }
+        { searchBtn ? <SearchBar /> : <FilterButtons /> }
+        {/* { renderFilters() } */}
         <section className="recipes-container">
           { type === 'meal'
             ? <MealCards data={ renderRecipes } />
