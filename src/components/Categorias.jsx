@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
 import { array } from 'prop-types';
+import { useHistory } from 'react-router-dom';
 import ContextComidas from '../provider/ContextComida';
 import ContextBebidas from '../provider/ContextBebida';
-import { useHistory } from 'react-router-dom';
 import Loading from './Loading';
 
 function Categorias({ param }) {
