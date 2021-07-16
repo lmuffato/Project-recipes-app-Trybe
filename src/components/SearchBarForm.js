@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable no-alert */
 import React, { useContext, useEffect, useState } from 'react';
 import { Form, Button, FormControl, Navbar,
   ButtonGroup, ToggleButton,

@@ -6,6 +6,7 @@ import Header from '../components/Header';
 
 import { apiMealsIngredients } from '../services/fetchApisIngredients';
 import ContextComidas from '../provider/ContextComida';
+import Loading from '../components/Loading';
 
 function ExplorarComidasING() {
   const [data, setData] = useState([]);
@@ -54,8 +55,13 @@ function ExplorarComidasING() {
     return null;
   });
 
-  if (data.length < 1) return <h1>Loading...</h1>;
-
+  if (data.length < 1) {
+    return (
+      <div className="d-flex w-100 min-vh-100 align-items-center">
+        <Loading param="food" />
+      </div>
+    );
+  }
   return (
     <div>
       <Header title="Explorar Ingredientes" />

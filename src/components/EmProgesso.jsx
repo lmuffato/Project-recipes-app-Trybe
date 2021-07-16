@@ -2,8 +2,9 @@ import { object } from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import Ingredientes from './EmProgressPage/Ingredientes';
-import '../App.css';
+import Loading from './Loading';
 import FavoriteFood from './FavoriteFood';
+import '../App.css';
 
 function EmProgresso({ props }) {
   const [data, setData] = useState({});
@@ -19,7 +20,19 @@ function EmProgresso({ props }) {
     fetchData();
   }, [props]);
 
-  if (!data) return <h1>Loading...</h1>;
+  if (!data) {
+    return history.location.pathname.includes('comidas')
+      ? (
+        <div className="d-flex w-100 min-vh-100 align-items-center">
+          <Loading param="food" />
+        </div>
+      )
+      : (
+        <div className="d-flex w-100 min-vh-100 align-items-center">
+          <Loading param="drink" />
+        </div>
+      );
+  }
 
   const ingredientsList = Object.entries(data)
     .filter((item) => item[0].includes('Ingredient'))

@@ -4,6 +4,7 @@ import ReceitaComidaDetalhe from '../components/ReceitaComidaDetalhe';
 
 import { getFoodByID } from '../services/fetchApiDetailsRecipe';
 import { getDrinkRecomendation } from '../services/fetchApiRecomendations';
+import Loading from '../components/Loading';
 
 function DetalhesComida({ match: { params: { id } } }) {
   const [acctualyFood, setAcctualyFood] = useState();
@@ -30,7 +31,11 @@ function DetalhesComida({ match: { params: { id } } }) {
     id,
   };
 
-  return !isLoading ? <ReceitaComidaDetalhe props={ propsToSend } /> : <p>Loading...</p>;
+  return !isLoading ? <ReceitaComidaDetalhe props={ propsToSend } /> : (
+    <div className="d-flex w-100 min-vh-100 align-items-center">
+      <Loading param="food" />
+    </div>
+  );
 }
 
 DetalhesComida.propTypes = {
