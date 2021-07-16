@@ -1,20 +1,19 @@
 @import "https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css";
 
 .footer {
-  background-color: rgb(40,40,40);
-  bottom: 0;
+  align-items: center;
+  /* border: solid 1px black; */
+  border-radius: 8px;
   display: flex;
-  height: auto;
   justify-content: space-between;
+  height: auto;
   position: fixed;
-  width: 100%;
-  left: 0;
-  bottom: 0;
+  width: 91%;
+  top: 90%
 }
 
 .footer img {
-  padding: 0%;
-  margin-top: 5px;
   width: 30px;
+  margin-bottom: 30px;
 }
 

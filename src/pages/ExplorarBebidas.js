@@ -13,13 +13,13 @@ export default function ExplorarBebidas() {
   }, []);
 
   return (
-    <>
+    <div className="explorar-bebidas">
       <Header
         title="Explorar Bebidas"
         enableSearchIcon={ false }
       />
       <div>
-        <div className="explorar-bebidas">
+        <div className="explorar-bebidas-main">
           <Link to="/explorar/bebidas/ingredientes">
             <button
               className="button is-primary"
@@ -40,8 +40,8 @@ export default function ExplorarBebidas() {
             </button>
           </Link>
         </div>
-        <Footer />
       </div>
-    </>
+      <Footer />
+    </div>
   );
 }

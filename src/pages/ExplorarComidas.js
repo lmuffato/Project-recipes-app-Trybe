@@ -12,44 +12,46 @@ export default function ExplorarComidas() {
   }, []);
 
   return (
-    <div>
+    <div className="explorar-comidas">
       <Header
         title="Explorar Comidas"
         enableSearchIcon={ false }
       />
-      <div className="explorar-comidas">
-        <Link to="/explorar/comidas/ingredientes">
-          <button
-            className="button is-primary"
-            type="submit"
-            data-testid="explore-by-ingredient"
-          >
-            Por Ingredientes
-          </button>
-        </Link>
-        <br />
-        <Link to="/explorar/comidas/area">
-          <button
-            className="button is-primary"
-            id="explore-by-area"
-            type="submit"
-            data-testid="explore-by-area"
-          >
-            Por Local de Origem
-          </button>
-        </Link>
-        <br />
-        <Link to={ `/comidas/${randomFoodId} ` }>
-          <button
-            className="button is-primary"
-            type="submit"
-            data-testid="explore-surprise"
-          >
-            Me Surpreenda!
-          </button>
-        </Link>
+      <div>
+        <div className="explorar-comidas-main">
+          <Link to="/explorar/comidas/ingredientes">
+            <button
+              className="button is-primary"
+              type="submit"
+              data-testid="explore-by-ingredient"
+            >
+              Por Ingredientes
+            </button>
+          </Link>
+          <br />
+          <Link to="/explorar/comidas/area">
+            <button
+              className="button is-primary"
+              id="explore-by-area"
+              type="submit"
+              data-testid="explore-by-area"
+            >
+              Por Local de Origem
+            </button>
+          </Link>
+          <br />
+          <Link to={ `/comidas/${randomFoodId} ` }>
+            <button
+              className="button is-primary"
+              type="submit"
+              data-testid="explore-surprise"
+            >
+              Me Surpreenda!
+            </button>
+          </Link>
+        </div>
+        <Footer />
       </div>
-      <Footer />
     </div>
   );
 }

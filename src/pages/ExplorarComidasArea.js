@@ -32,10 +32,13 @@ export default function ExplorarComidasArea() {
       <Header
         title="Explorar Origem"
       />
-      <div className="control">
+      <div className="control country-filter">
         <label htmlFor="explore-by-area-dropdown">
+          Filtrar por País:
+          <br />
+          {' '}
           <select
-            className="select select-align"
+            className="select"
             name="explore-by-area-dropdown"
             data-testid="explore-by-area-dropdown"
             onClick={ (event) => filterFoodByArea(event.target.value) }

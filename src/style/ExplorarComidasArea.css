@@ -17,10 +17,6 @@ ul {
   margin: 0;
 }
 
-.select-align {
-  margin: 15px;
-}
-
 .main-area {
   margin-left: 15px;
   margin-right: 15px;
@@ -30,4 +26,12 @@ ul {
 
 .main-food-list {
   margin-right: 50px;
+}
+
+.country-filter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
 }

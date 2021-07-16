@@ -13,25 +13,23 @@ export default function Comidas() {
   const { foods, categories } = useContext(FoodContext);
 
   return (
-    <>
-      <div className="main-foods">
-        <Header title="Comidas" />
-        <CategoryButtons categories={ categories } />
-        <div className="cards">
-          <ul>
-            { foods && foods.slice(0, NUMBER_OF_RECIPES)
-              .map((recipe, index) => (
-                <RecipeCard
-                  key={ index }
-                  recipe={ recipe }
-                  index={ index }
-                  type={ pathname }
-                />
-              ))}
-          </ul>
-        </div>
+    <div className="main-foods">
+      <Header title="Comidas" />
+      <CategoryButtons categories={ categories } />
+      <div className="cards">
+        <ul>
+          { foods && foods.slice(0, NUMBER_OF_RECIPES)
+            .map((recipe, index) => (
+              <RecipeCard
+                key={ index }
+                recipe={ recipe }
+                index={ index }
+                type={ pathname }
+              />
+            ))}
+        </ul>
       </div>
       <Footer />
-    </>
+    </div>
   );
 }

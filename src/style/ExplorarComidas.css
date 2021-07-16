@@ -4,5 +4,12 @@
   align-items: center;
   display: flex;
   flex-direction: column;
-  margin-top: 80px;
+}
+
+
+.explorar-comidas-main {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  margin-top: 70px;
 }
