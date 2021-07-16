@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import Login from '../pages/Login';
 import FoodPage from '../pages/FoodPage';
 import DrinkPage from '../pages/DrinkPage';
@@ -18,6 +18,7 @@ import FoodInProgress from '../pages/FoodInProgress';
 import DrinkInProgress from '../pages/DrinkInProgress';
 import FoodDetails from '../pages/FoodDetails';
 import DrinkDetails from '../pages/DrinkDetails';
+import NotFoundPage from '../pages/NotFoundPage';
 
 export default function Routes() {
   return (
@@ -38,6 +39,8 @@ export default function Routes() {
       <Route exact path="/perfil" component={ ProfilePage } />
       <Route exact path="/receitas-feitas" component={ DoneRecipes } />
       <Route exact path="/receitas-favoritas" component={ FavoriteRecipes } />
+      <Route path="/404" component={ NotFoundPage } />
+      <Redirect from="*" to="/404" />
     </Switch>
   );
 }
