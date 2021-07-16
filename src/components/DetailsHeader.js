@@ -30,7 +30,10 @@ export default function DetailsHeader({ recipe, isFood }) {
           <FavoriteButton recipe={ recipe } isFood={ isFood } />
         </div>
       </div>
+      <br />
       <p data-testid="recipe-category">
+        Category:
+        {' '}
         { recipeCategory }
         <br />
         { recipeStrAlcoholic }
