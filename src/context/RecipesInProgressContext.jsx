@@ -8,12 +8,15 @@ export default function RecipesInProgressContextProvider({ children }) {
 
   const [cocktails, setCocktailsIngredients] = useState({});
   const [meals, setMealsIngredients] = useState({});
+  const [isDisabled, setIsDisabled] = useState(true);
 
   const contextValue = {
     cocktails,
     setCocktailsIngredients,
     meals,
     setMealsIngredients,
+    isDisabled,
+    setIsDisabled,
   };
   return (
     <RecipesInProgressContext.Provider value={ contextValue }>

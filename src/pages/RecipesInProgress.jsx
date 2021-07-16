@@ -3,17 +3,17 @@ import { useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import RecipeInfo from '../components/RecipeInfo/RecipeInfo';
 import Button from '../components/Generics/Button';
-import
-RecipeIngredientsInProgress from
+import RecipeIngredientsInProgress from
   '../components/RecipesIngredientsInProgress/RecipesIngredientsInProgress';
 import Container from '../styles/recipeDetails';
-import RecipesInProgressContextProvider from '../context/RecipesInProgressContext';
+import useDetailsProvider from '../hooks/useDetailsProvider';
 
 function RecipesInProgress({ type }) {
   const { id } = useParams();
   const endpointMeals = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
   const endpointDrinks = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
   const [fetchRecipeURL, setFetchRecipeURL] = useState('');
+  const { isDisabled } = useDetailsProvider();
   const [isLoading, setIsLoading] = useState(true);
   const [singleRecipe, setRecipe] = useState({});
 
@@ -55,40 +55,38 @@ function RecipesInProgress({ type }) {
   const drinkId = singleRecipe.idDrink || '';
 
   return (
-    <RecipesInProgressContextProvider>
-      <Container>
-        <RecipeInfo
-          recipeName={ recipeName }
-          recipeThumb={ recipeThumb }
-        >
-          { type === 'drinks'
-            ? (<h3 data-testid="recipe-category">{isAlchooholic}</h3>)
-            : (
-              <h3 data-testid="recipe-category">{recipeCategory}</h3>)}
-        </RecipeInfo>
-        <h3>Ingredientes</h3>
-        <div className="ingredients-list">
-          <RecipeIngredientsInProgress
-            recipe={ singleRecipe }
-            idMeal={ recipeId }
-            idDrink={ drinkId }
-            type={ type }
-          />
-        </div>
-        <h3>Instructions</h3>
-        <div className="instructions">
-          <p data-testid="instructions">
-            { singleRecipe.strInstructions }
-          </p>
-        </div>
-        <Button
-          data-testid="finish-recipe-btn"
-          disabled
-        >
-          Finalizar receita
-        </Button>
-      </Container>
-    </RecipesInProgressContextProvider>
+    <Container>
+      <RecipeInfo
+        recipeName={ recipeName }
+        recipeThumb={ recipeThumb }
+      >
+        { type === 'drinks'
+          ? (<h3 data-testid="recipe-category">{isAlchooholic}</h3>)
+          : (
+            <h3 data-testid="recipe-category">{recipeCategory}</h3>)}
+      </RecipeInfo>
+      <h3>Ingredientes</h3>
+      <div className="ingredients-list">
+        <RecipeIngredientsInProgress
+          recipe={ singleRecipe }
+          idMeal={ recipeId }
+          idDrink={ drinkId }
+          type={ type }
+        />
+      </div>
+      <h3>Instructions</h3>
+      <div className="instructions">
+        <p data-testid="instructions">
+          { singleRecipe.strInstructions }
+        </p>
+      </div>
+      <Button
+        data-testid="finish-recipe-btn"
+        disabled={ isDisabled }
+      >
+        Finalizar receita
+      </Button>
+    </Container>
   );
 }
 

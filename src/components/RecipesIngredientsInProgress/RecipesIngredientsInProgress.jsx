@@ -1,9 +1,9 @@
-import React, { useContext, useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import formattingMeasuresAndIngredients from '../../services/formatingService';
 
 import Container from './style';
-import { RecipesInProgressContext } from '../../context/RecipesInProgressContext';
+import useDetailsProvider from '../../hooks/useDetailsProvider';
 
 function RecipeIngredients({ recipe, idMeal, idDrink, type }) {
   const keysAndValues = Object.entries(recipe);
@@ -14,7 +14,7 @@ function RecipeIngredients({ recipe, idMeal, idDrink, type }) {
     cocktails,
     setCocktailsIngredients,
     meals,
-    setMealsIngredients } = useContext(RecipesInProgressContext);
+    setMealsIngredients, setIsDisabled } = useDetailsProvider();
 
   const formatting = formattingMeasuresAndIngredients(keysAndValues);
   const { ingredients, measures } = formatting;
@@ -83,6 +83,12 @@ function RecipeIngredients({ recipe, idMeal, idDrink, type }) {
       }
     }
   }, [idMeal, idDrink, type]);
+
+  useEffect(() => {
+    if (checkedBox.length === ingredients.length) {
+      setIsDisabled(false);
+    }
+  }, [checkedBox.length, ingredients.length, setIsDisabled]);
 
   // console.log(idMeal);
 

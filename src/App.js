@@ -13,7 +13,7 @@ import FavoriteRecipes from './pages/FavoriteRecipes';
 import DoneRecipes from './pages/DoneRecipes';
 // import './App.css';
 import ExploreOrigin from './pages/ExploreOrigin';
-import RecipesInProgess from './pages/RecipesInProgess';
+import RecipesInProgess from './pages/RecipesInProgress';
 
 function App() {
   return (
