@@ -12,13 +12,6 @@ export const getMeasures = (recipe) => {
   return measures;
 };
 
-const getDrinkImg = async (drink) => {
-  const endPoint = `https://www.thecocktaildb.com/images/ingredients/${drink}-Small.png`;
-  const response = await fetch(endPoint);
-  const data = await response.json();
-  return data;
-}
-
 export const setDrinks = (recipes) => {
   if (recipes === null) {
     global.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
