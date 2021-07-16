@@ -2,10 +2,14 @@ import React, { useContext } from 'react';
 import { array } from 'prop-types';
 import ContextComidas from '../provider/ContextComida';
 import ContextBebidas from '../provider/ContextBebida';
+import { useHistory } from 'react-router-dom';
+import Loading from './Loading';
 
 function Categorias({ param }) {
   const { setTexto: setComidas } = useContext(ContextComidas);
   const { setTexto: setBebidas } = useContext(ContextBebidas);
+
+  const LOCATION = useHistory();
 
   const handleClick = ({ target, currentTarget }) => {
     setComidas(currentTarget.value || target.innerText);
@@ -44,9 +48,11 @@ function Categorias({ param }) {
     </button>
   );
 
-  // if (param.length < 1) return <h1>Loading...</h1>;
-
-  if (param === undefined || param.length < 1) return <h1>Loading...</h1>;
+  if (param === undefined || param.length < 1) {
+    return LOCATION.location.pathname === '/comidas'
+      ? <Loading param="food" />
+      : <Loading param="drink" />;
+  }
 
   return (
     <div className="d-flex justify-content-center flex-wrap mt-1">

@@ -1,14 +1,17 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { Card } from 'react-bootstrap';
 import ContextBebidas from '../provider/ContextBebida';
 import ContextComidas from '../provider/ContextComida';
+import Loading from './Loading';
 
 import '../styles/Cards.css';
 
 function Cards({ param }) {
   const { data: dataDrink } = useContext(ContextBebidas);
   const { data: datafood } = useContext(ContextComidas);
+
+  const LOCATION = useHistory();
 
   const comidas = () => datafood && datafood.map((item, index) => {
     const magicNumber = 12;
@@ -17,7 +20,6 @@ function Cards({ param }) {
         <Link to={ `/${param}/${item.idMeal}` } key={ index }>
           <Card
             key={ item.idMeal }
-            // style={ { width: '8rem' } }
             data-testid={ `${index}-recipe-card` }
             className="shadow m-1 rounded"
           >
@@ -46,7 +48,6 @@ function Cards({ param }) {
         <Link to={ `/${param}/${item.idDrink}` } key={ index }>
           <Card
             key={ item.idDrink }
-            // style={ { width: '8rem' } }
             data-testid={ `${index}-recipe-card` }
             className="shadow m-1 rounded"
           >
@@ -68,7 +69,11 @@ function Cards({ param }) {
     return '';
   });
 
-  if (dataDrink === undefined || datafood === undefined) return <h1>Loading...</h1>;
+  if (dataDrink === undefined || datafood === undefined) {
+    return LOCATION.location.pathname === '/comidas'
+      ? <Loading param="food" />
+      : <Loading param="drink" />;
+  }
 
   return (
     param === 'bebidas' ? bebidas() : comidas()
