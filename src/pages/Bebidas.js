@@ -31,6 +31,8 @@ export default function Bebidas() {
         </ul>
       </div>
       <br />
+      <br />
+      <br />
       <Footer />
     </div>
   );

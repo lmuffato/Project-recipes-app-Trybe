@@ -29,6 +29,9 @@ export default function Comidas() {
             ))}
         </ul>
       </div>
+      <br />
+      <br />
+      <br />
       <Footer />
     </div>
   );
