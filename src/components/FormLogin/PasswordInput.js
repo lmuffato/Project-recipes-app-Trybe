@@ -5,7 +5,6 @@ import passwordAction from '../../actions/passwordLogin.action';
 
 export default function PasswordInput() {
   const { dispatch } = useContext(LoginContext);
-
   return (
     <div className="field">
       <label
