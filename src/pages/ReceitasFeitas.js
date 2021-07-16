@@ -54,7 +54,10 @@ export default function ReceitasFeitas() {
         <br />
         <br />
         {filteredDoneRecipes.map((done, index) => (
-          <DoneRecipeCard key={ index } recipe={ done } index={ index } />
+          <>
+            <DoneRecipeCard key={ index } recipe={ done } index={ index } />
+            <br />
+          </>
         ))}
       </div>
     </div>
