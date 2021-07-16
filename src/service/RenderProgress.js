@@ -22,7 +22,9 @@ function RenderProgress(url, id) {
   function inProgress() {
     let progressFlag = false;
     if (inProgressRecipes.length !== 0) {
-      progressFlag = (inProgressRecipes.cocktails[id] !== null);
+      progressFlag = (
+        inProgressRecipes.cocktails[id] && inProgressRecipes.meals[id] !== null
+      );
     }
     return progressFlag;
   }
