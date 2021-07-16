@@ -99,7 +99,7 @@ const MainDrinks = () => {
       </div>
       {recipesDrinks.map(({ idDrink, strDrink, strDrinkThumb }, index) => (
         <div
-          key={ idDrink }
+          key={ index }
           id={ idDrink }
           onClick={ redirectToDescription }
           aria-hidden="true"

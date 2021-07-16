@@ -64,7 +64,6 @@ const MainFoods = () => {
       target.style.backgroundColor = '#d7d7d7';
       btnAllRecipes.current.style.backgroundColor = '#ffc529';
     } else {
-      console.log('ta aqui');
       setFiltering(true);
       setCategoryName(name);
       getRecipesByCategory(name);
@@ -111,7 +110,7 @@ const MainFoods = () => {
       </div>
       {recipesFoods.map(({ idMeal, strMeal, strMealThumb }, index) => (
         <div
-          key={ idMeal }
+          key={ index }
           id={ idMeal }
           onClick={ redirectToDescription }
           aria-hidden="true"
