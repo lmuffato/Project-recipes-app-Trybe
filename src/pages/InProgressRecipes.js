@@ -3,6 +3,7 @@ import {
   useRouteMatch,
 } from 'react-router-dom';
 import ProgressCard from '../components/RecipeComponents/ProgressCard';
+import '../styles/InProgressRecipes.css';
 
 function ReceitasEmAndamento() {
   const { params, url } = useRouteMatch();
@@ -24,8 +25,8 @@ function ReceitasEmAndamento() {
     fetchRecipes();
   }, [params.id, url, urlToFetch]);
   return (
-    <div>
-      <h1 className="progressTitle">Receita em Andamento</h1>
+    <div className="in-progress-recipe">
+      <h1 className="title">Revenue in progress</h1>
       {(response) ? <ProgressCard recipe={ response } /> : ''}
     </div>
   );

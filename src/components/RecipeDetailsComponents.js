@@ -78,9 +78,20 @@ function ComponentGen(props) {
         } }
         slidesPerView={ 4 }
         spaceBetween={ 0 }
+        breakpoints={ {
+          320: {
+            slidesPerView: 3,
+          },
+          640: {
+            slidesPerView: 4,
+          },
+        } }
         loop
         freeMode
-        autoplay
+        autoplay={ {
+          delay: 4000,
+          disableOnInteraction: false,
+        } }
         grabCursor
         pagination={ {
           clickable: true,

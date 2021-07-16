@@ -176,7 +176,7 @@ function ProgressCard({ recipe }) {
       localStorage.setItem('inProgressRecipes', JSON.stringify(lsItems));
     }
     return (
-      <ol className="ol-ingredients">
+      <ul className="ol-ingredients">
         {recipeIngredients.map((ingredient, key) => (
           <li className="li-ingredients" key={ key }>
             <label
@@ -192,10 +192,10 @@ function ProgressCard({ recipe }) {
                 onClick={ markAsDone }
                 defaultChecked={ isChecked(markedItems(), key + 1)[0] }
               />
-              {ingredient[1]}
+              {` ${ingredient[1]}`}
             </label>
           </li>))}
-      </ol>
+      </ul>
     );
   };
   const favoriteInfo = () => {
@@ -221,17 +221,25 @@ function ProgressCard({ recipe }) {
   };
   return (
     <div className="recipe_details">
-      <RecipeImage origin={ image } />
-      <div className="TitleShare">
-        <RecipeTitle title={ name } />
-        <ShareBtn dataTest="share-btn" path={ `http://localhost:3000${locate}` } />
-        <FavBtn info={ favoriteInfo() } />
+      <RecipeTitle title={ name } />
+      <RecipeCatg className="category" category={ `${category} ${alcoholicOrNot}` } />
+      <div>
+        <aside className="image">
+          <RecipeImage origin={ image } />
+          <div>
+            <ShareBtn dataTest="share-btn" path={ `http://localhost:3000${locate}` } />
+            <FavBtn info={ favoriteInfo() } />
+          </div>
+        </aside>
+        <aside className="ingredients">
+          <h3>Ingredients</h3>
+          {listIngredients(ingredients)}
+        </aside>
       </div>
-      <RecipeCatg category={ `${category} ${alcoholicOrNot}` } />
-      <h3 className="recipe-ingredientes">Ingredientes</h3>
-      {listIngredients(ingredients)}
-      <h3>Instruções</h3>
-      <RecipeInst instructions={ instructions } />
+      <h3 className="h3">Instructions</h3>
+      <div className="instructions">
+        <RecipeInst instructions={ instructions } />
+      </div>
       <button
         className="finish-recipe"
         data-testid="finish-recipe-btn"

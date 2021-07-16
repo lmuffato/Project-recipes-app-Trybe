@@ -4,7 +4,7 @@
   border: none;
   color: #f2f2f2;
   display: flex;
-  height: 32px;
+  height: 38px;
   justify-content: center;
   position: absolute;
   right: 0;
@@ -13,10 +13,46 @@
 }
 
 .btn-close {
-  background-position-y: 8px;
+  background-position-y: 10px;
   background-size: 40%;
   filter: invert(100%);
   position: absolute;
   width: 10px;
   z-index: 2;
+}
+
+.doneRecipesPage .alert {
+  position: absolute;
+  right: auto;
+  transform: translateX(-37.6%);
+  width: 40vw;
+}
+
+.favorite_recipes .alert {
+  position: absolute;
+  right: auto;
+  transform: translateX(-37.6%);
+  width: 40vw;
+}
+
+@media ( max-width : 786.98px ) {
+
+  .alert {
+    right: 0;
+    width: 100%;
+  }
+
+  .doneRecipesPage .alert {
+    position: absolute;
+    right: 0;
+    transform: translateX(0);
+    width: 100vw;
+  }
+
+  .favorite_recipes .alert {
+    position: absolute;
+    right: 0;
+    transform: translateX(0);
+    width: 100vw;
+  }
 }

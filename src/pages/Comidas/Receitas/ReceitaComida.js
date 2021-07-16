@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, useRouteMatch } from 'react-router-dom';
 import '../../../styles/RecipeDetails.css';
 import SwiperCore, {
-  EffectCoverflow, Pagination,
+  Autoplay, EffectCoverflow, Pagination,
 } from 'swiper/core';
 import { SwiperSlide } from 'swiper/react';
 import ComponentGen from '../../../components/RecipeDetailsComponents';
@@ -17,7 +17,7 @@ function Receita() {
   const [info, setInfo] = useState('');
   const [recomend, setRecomend] = useState();
 
-  SwiperCore.use([EffectCoverflow, Pagination]);
+  SwiperCore.use([Autoplay, EffectCoverflow, Pagination]);
 
   useEffect(() => {
     async function FoodAPI() {

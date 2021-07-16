@@ -20,7 +20,7 @@ import ReceitaComida from './pages/Comidas/Receitas/ReceitaComida';
 import ReceitaBebidas from './pages/Bebidas/Receitas/ReceitaBebidas';
 import receitasFeitas from './pages/ReceitasFeitas';
 import receitasFavoritas from './pages/ReceitasFavoritas';
-import recipesInProgress from './pages/ReceitasEmAndamento';
+import recipesInProgress from './pages/InProgressRecipes';
 import ExplorarBebidasPorArea from
   './pages/Bebidas/ExplorarBebidas/ExplorarBebidasPorArea';
 import error404 from './pages/Error404';

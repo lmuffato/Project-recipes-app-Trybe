@@ -1,12 +1,13 @@
 $orange: rgb(242, 163, 15);
-
+$shadow: rgba(51, 49, 49, 0.6);
+$disabled: rgb(109, 109, 109);
+$input: rgba(216, 209, 209, 0.4);
 
 @mixin for-phone-only {
-  @media ( max-width : 767.98px ) { @content;}
-
+    @media ( max-width : 767.98px ) { @content;}
 }
 
-.recipe_details {
+.in-progress-recipe {
   display: flex;
   flex-direction: column;
 
@@ -15,7 +16,8 @@ $orange: rgb(242, 163, 15);
     color: white;
     font-size: 4em;
     padding-top: 0.5em;
-    @include for-phone-only{
+
+    @include for-phone-only {
       font-size: 2.5em;
     }
   }
@@ -25,16 +27,19 @@ $orange: rgb(242, 163, 15);
     color: white;
     font-size: 3em;
     padding-bottom: 0.5em;
-    @include for-phone-only{
+
+    @include for-phone-only {
       font-size: 1.8em;
       padding-bottom: 0;
     }
   }
 
+
   .h3 {
     color: white;
     font-size: 2.5em;
     padding: 1em 0 0.5em 2.2em;
+
     @include for-phone-only{
       font-size: 1.8em;
       padding: 1em 0 0 1em;
@@ -42,25 +47,16 @@ $orange: rgb(242, 163, 15);
   }
 
   .instructions {
-    padding: 1em 3em;
-    @include for-phone-only{
+    padding-left: 3em;
+    margin-bottom: 4em;
+
+    @include for-phone-only {
       border-bottom: 1px solid black;
       font-size: 0.8em;
       line-height: 0.5em;
       padding: 0;
       padding-top: 1em;
       text-align: justify;
-      width: 100%;
-    }
-  }
-
-  & iframe {
-    float: left;
-    margin-left: 2em;
-    @include for-phone-only{
-      margin-bottom: 2em;
-      margin-left: 0;
-      padding: 1em;
       width: 100%;
     }
   }
@@ -76,7 +72,8 @@ $orange: rgb(242, 163, 15);
 
   & div {
     display: flex;
-    @include for-phone-only{
+
+    @include for-phone-only {
       flex-direction: column;
     }
   }
@@ -88,7 +85,8 @@ $orange: rgb(242, 163, 15);
     flex-direction: column;
     padding: 2em;
     width: 50%;
-    @include for-phone-only{
+
+    @include for-phone-only {
       border-bottom: 1px solid black;
       padding: 0;
       width: 100%;
@@ -108,7 +106,8 @@ $orange: rgb(242, 163, 15);
     & div {
       align-self: flex-start;
       margin: 0.6em 0 0 3.8em;
-      @include for-phone-only{
+
+      @include for-phone-only {
         flex-direction: row;
         margin: 0.3em 0 0 2em;
       }
@@ -129,7 +128,8 @@ $orange: rgb(242, 163, 15);
     border-bottom: 1px solid white;
     padding-top: 1.8em;
     width: 50%;
-    @include for-phone-only{
+
+    @include for-phone-only {
       border-bottom: 1px solid black;
       padding: 2em;
       width: 100%;
@@ -138,7 +138,8 @@ $orange: rgb(242, 163, 15);
     & h3 {
       color: white;
       font-size: 3em;
-      @include for-phone-only{
+
+      @include for-phone-only {
         font-size: 1.8em;
         padding-bottom: 0;
       }
@@ -149,10 +150,11 @@ $orange: rgb(242, 163, 15);
       flex-flow: column wrap;
       flex-direction: column;
       height: 400px;
-      margin-left: 1.8em;
+      margin-left: 0;
       margin-top: 1.5em;
       padding-left: 0;
-      @include for-phone-only{
+
+      @include for-phone-only {
         flex-flow: column;
         height: auto;
       }
@@ -161,54 +163,42 @@ $orange: rgb(242, 163, 15);
     & li {
       color: white;
       font-size: 1.3em;
-      list-style-type: disc;
+      list-style-type: none;
       padding: 0.5em;
     }
   }
 }
 
-.swiper {
-
-  .swiper__slide {
-    background-color: black;
-    padding: 0 0.5em 0.5em;
-    padding-bottom: 4.5em;  
-
-    .swiper__div {
-      align-items: center;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .swiper__title {
-      color: white;
-      padding: 0.6em 0 0.3em;
-    }
-
-    .swiper__img {
-      border: 1px solid black;
-      height: auto;
-      width: 100%;
-    }
-
-    .swiper__link:hover {
-      text-decoration: none;
-    }
-  }
-}
-
-.startBtn {
-  background-color: $orange;
-  border: none;
+.finish-recipe {
+  border: 1px solid black;
   bottom: 0;
   height: 50px;
   position: fixed;
   width: 100%;
-  z-index: 1;
+
+  &:disabled {
+    background-color: $disabled;
+    cursor: not-allowed;
+    transition: 2s;
+  }
+
+  &:enabled {
+    background-color: $orange;
+    color: white;
+    transition: 2s;
+  }
+
+  &:enabled:hover {
+    background-color: $orange;
+    box-shadow: 1px 1px 7px rgb(29, 28, 29) inset;
+    transition: 1s;
+  }
 }
 
-.startBtn:enabled:hover {
-  background-color: $orange;
-  box-shadow: 1px 1px 7px rgb(29, 28, 29) inset;
-  transition: 1s;
-}
+// .finish-recipe:enabled {
+//   border: 1px solid black;
+//   bottom: 0;
+//   height: 50px;
+//   position: fixed;
+//   width: 100%;
+// }
