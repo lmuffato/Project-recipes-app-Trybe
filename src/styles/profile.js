@@ -34,15 +34,16 @@ const Wrapper = styled.section`align-items: center;
     height: 2.5rem;
     justify-content: center;
     line-height: 1;
+    margin-bottom: 1.5rem;
     margin-top: auto;
     max-width: 275px;
     min-width: 270px;
     padding: 0 32px;
     transition: filter 0.2s;
 
-    & + button {
-      margin-bottom: 20px;
-    }
+    /* & + button {
+      margin-bottom: 1.5rem;
+    } */
 
     &:disabled {
       cursor: not-allowed;
