@@ -4,7 +4,7 @@ import ContextRecipes from './ContextRecipes';
 
 function ProviderRecipes({ children }) {
   const [filteredRecipe, setRecipes] = useState([]);
-  const [activeFilters, setFilter] = useState('All');
+  const [activeFilter, setFilter] = useState('All');
   const [categories, setCategories] = useState([]);
   const [search, setSearch] = useState('');
   const [radioFilter, setRadioFilter] = useState('');
@@ -119,7 +119,7 @@ function ProviderRecipes({ children }) {
         doneRecipes,
         inProgressRecipes,
         setInProgressRecipes,
-        activeFilters,
+        activeFilter,
         setFilter,
         filteredRecipe,
         getRecipes,
