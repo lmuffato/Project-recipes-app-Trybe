@@ -6,7 +6,6 @@ import ShareButton from '../ShareButton';
 import FavoriteButton from '../FavoriteButton';
 
 function FoodsInProgress({ data }) {
-  const { href } = window.location;
   const ingredients = getIngredients(data, 'strIngredient').map((e) => e[1]);
   const { pathname } = useLocation();
   const { id } = useParams();
@@ -48,7 +47,7 @@ function FoodsInProgress({ data }) {
         <h1>teste</h1>
         <img src={ keys[0].image } alt="thumb" data-testid="recipe-photo" width="200px" />
         <h3 data-testid="recipe-title">{ keys[0].title }</h3>
-        <ShareButton dataTestId="share-btn" urlCopied={ href } />
+        <ShareButton urlCopied={ `http://localhost:3000/comidas/${id}` } />
         <FavoriteButton data={ data } path={ id } />
         <p data-testid="recipe-category">{ keys[0].category }</p>
         <ul>
