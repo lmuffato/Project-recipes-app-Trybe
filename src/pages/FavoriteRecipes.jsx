@@ -3,6 +3,7 @@ import FavoriteRecipeCard from '../components/FavoriteRecipeCard/FavoriteRecipeC
 import filterRecipesByType from '../utils/filterRecipesByType';
 import Header from '../components/Header/Header';
 import logoIcon from '../images/logoPaginasExplorar.svg';
+import CardGridContainer from '../styles/favRecipes';
 
 function FavoriteRecipes() {
   const [favoriteRecipes, setFavoriteRecipes] = useState([]);
@@ -59,15 +60,17 @@ function FavoriteRecipes() {
           Drinks
         </button>
       </div>
-      { filterRecipesByType(favoriteRecipes, filterByType).map((recipe, index) => (
-        <FavoriteRecipeCard
-          recipe={ recipe }
-          index={ index }
-          key={ index }
-          handleRemoveRecipe={ handleRemoveRecipe }
-          setCopiedToClipboard={ setCopiedToClipboard }
-        />
-      )) }
+      <CardGridContainer>
+        { filterRecipesByType(favoriteRecipes, filterByType).map((recipe, index) => (
+          <FavoriteRecipeCard
+            recipe={ recipe }
+            index={ index }
+            key={ index }
+            handleRemoveRecipe={ handleRemoveRecipe }
+            setCopiedToClipboard={ setCopiedToClipboard }
+          />
+        )) }
+      </CardGridContainer>
     </div>
   );
 }

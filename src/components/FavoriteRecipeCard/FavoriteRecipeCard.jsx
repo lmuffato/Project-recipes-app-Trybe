@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import shareIcon from '../../images/shareIcon.svg';
 import blackHeartIcon from '../../images/blackHeartIcon.svg';
 import handleCopyToClipboard from '../../utils/handleCopyToClipboard';
+import FavRecipeCardContainer from './styles';
 
 // import CardContainer from './styles';
 
@@ -13,14 +14,16 @@ function FavoriteRecipeCard(props) {
     : `/bebidas/${recipe.id}`;
 
   return (
-    <div key={ index }>
+    <FavRecipeCardContainer key={ index }>
       <Link to={ detailsUrl }>
-        <img
-          data-testid={ `${index}-horizontal-image` }
-          style={ { maxWidth: '100px' } }
-          src={ recipe.image }
-          alt="Delicious food/drink"
-        />
+        <div className="img-wrapper">
+          <img
+            className="img-banner"
+            data-testid={ `${index}-horizontal-image` }
+            src={ recipe.image }
+            alt="Delicious food/drink"
+          />
+        </div>
       </Link>
       <p data-testid={ `${index}-horizontal-top-text` }>
         { recipe.type === 'comida' && `${recipe.area} - ` }
@@ -49,7 +52,7 @@ function FavoriteRecipeCard(props) {
           alt="share-btn"
         />
       </button>
-    </div>
+    </FavRecipeCardContainer>
   );
 }
 
