@@ -14,6 +14,7 @@ input[type=checkbox] {
 .checkbox-text {
   display: inline;
   font-size: 110%;
+  padding: 0.5em;
 }
 
 .in-progress-recipe {
