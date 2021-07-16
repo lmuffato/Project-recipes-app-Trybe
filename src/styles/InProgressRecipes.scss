@@ -99,12 +99,11 @@ input[type=checkbox] {
     color: white;
     display: flex;
     flex-direction: column;
-    padding: 2em;
+    padding: 1em;
     width: 50%;
 
     @include for-phone-only {
       border-bottom: 1px solid black;
-      padding-bottom: 3em;
       width: 100%;
     }
 
@@ -121,41 +120,27 @@ input[type=checkbox] {
 
     & div {
       align-self: flex-start;
-      margin: 1.3em 0 0 3em;
+      margin: 2em 0 2em 4em;
 
       @include for-phone-only {
-        flex-direction: row;
-        margin: 0.3em 0 0 2em;
+        margin-left: 1.8em;
       }
     }
 
     & input {
       align-self: center;
       filter: invert(100%);
+      margin-left: 0.5em;
       padding: 1em;
       position: absolute;
-      margin-left: 0.5em;
-      margin-top: 1em;
-      @include for-phone-only {
-        position: absolute;
-        margin-top: 1.3em;
-        margin-bottom: 3em;
-      }
     }
 
     & .share-btn {
-      position: absolute;
       margin-left: 4em;
-      margin-top: 1em;
-      @include for-phone-only {
-        position: absolute;
-        margin-top: 1.3em;
-        margin-bottom: 3em;
-      }
+      width: 55px;
     }
 
     & input:hover {
-      position: absolute;
       filter: invert(30%);
     }
   }
