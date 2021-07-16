@@ -2,11 +2,15 @@
 
 .recipe-card {
   border-radius: 8px;
-  height: 38vh;
+  height: 40vh;
   margin-top: 15px;
   width: 100%;
 }
 
 .recipe-card img {
   margin: 5px;
+}
+
+p {
+  color: aqua;
 }

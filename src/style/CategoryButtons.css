@@ -6,7 +6,7 @@
   border-radius: 8px;
   display: flex;
   flex-flow: column wrap;
-  height: 25vh;
+  height: 8vh;
   justify-content: flex-start;
   margin-top: 15px;
   width: 90%;
@@ -14,9 +14,10 @@
 
 .category-buttons {
   background-color: #eee;
-  height: 20px;
-  left: 0;
+  height: 12px;
   text-align: center;
-  top: 0;
-  width: 20px;
+}
+
+.category-button input {
+  margin-top: 5px;
 }

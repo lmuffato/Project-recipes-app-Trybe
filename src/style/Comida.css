@@ -46,7 +46,8 @@ img:hover {
 
 .recipe-card {
 	align-items: center;
-	background-color: whitesmoke;
+	/* background-color: whitesmoke; */
+	background-color: rgb(40,40,40);
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-start;
