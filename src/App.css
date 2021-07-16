@@ -836,11 +836,11 @@
   background-color: rgb(255, 199, 44);
   border: 3px solid black;
   border-radius: 5px;
+  justify-content: center;
   margin-left: 20px;
   max-height: 65%;
   max-width: 90%;
   object-fit: fill;
-  justify-content: center;
 }
 
 .explore-select {
