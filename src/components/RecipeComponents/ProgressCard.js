@@ -192,7 +192,7 @@ function ProgressCard({ recipe }) {
                 onClick={ markAsDone }
                 defaultChecked={ isChecked(markedItems(), key + 1)[0] }
               />
-              {` ${ingredient[1]}`}
+              <span className="checkbox-text">{` ${ingredient[1]}`}</span>
             </label>
           </li>))}
       </ul>
