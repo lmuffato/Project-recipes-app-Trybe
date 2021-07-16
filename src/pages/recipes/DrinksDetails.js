@@ -48,7 +48,6 @@ function DrinksDetails() {
         const ingredients = getIngredients(drinks[0]);
         const measures = getMeasures(drinks[0]);
         setIngredientsId(ingredients);
-        console.log(ingredients);
         setMeasuresId(measures);
       });
     getRecomendedMeals()
@@ -190,7 +189,7 @@ function DrinksDetails() {
             width="355"
           />
           <div className="card-container">{ renderCarousel() }</div>
-          <StartRecipeButton />
+          <StartRecipeButton path="bebidas" />
         </div>
       );
     })

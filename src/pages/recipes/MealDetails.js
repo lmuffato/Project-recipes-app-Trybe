@@ -27,7 +27,6 @@ function MealDetails() {
   const isFav = () => {
     const favRecipe = JSON.parse(localStorage.getItem('favoriteRecipes'));
     const hasFav = favRecipe.filter((element) => element.id === id);
-    console.log(hasFav);
     const condition = hasFav.length > 0;
     if (condition) {
       setButtonFav(!buttonFav);
@@ -129,7 +128,6 @@ function MealDetails() {
 
   const renderDetail = () => (
     mealsFromId.map((info, index) => {
-      console.log(mealsFromId);
       const {
         strMealThumb,
         strMeal,
@@ -185,7 +183,7 @@ function MealDetails() {
             width="355"
           />
           <div className="card-container">{ renderCarousel() }</div>
-          <StartRecipeButton />
+          <StartRecipeButton path="comidas" />
         </div>
       );
     })
