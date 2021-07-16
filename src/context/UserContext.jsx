@@ -13,7 +13,8 @@ function UserContextProvider({ children }) {
   useEffect(() => {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const lengthSix = 6;
-    if (re.test(emailData) && passwordData.length > lengthSix) {
+    if (re.test(emailData)
+      && passwordData.trim().length > lengthSix) {
       setDisabled(false);
     } else {
       setDisabled(true);

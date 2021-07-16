@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import RecipeInfo from '../components/RecipeInfo/RecipeInfo';
-import Button from '../components/Generics/Button';
+import InitOrContinueButton
+  from '../components/InitOrContinueRecipeButton/InitOrContinueButton';
 import RecipeIngredients from '../components/RecipeIngredients/RecipeIngredients';
 import RecipeInstructions from '../components/RecipeInstructions/RecipeInstructions';
 import Container from '../styles/recipeDetails';
@@ -15,29 +16,22 @@ const endpointCocktails = 'https://www.thecocktaildb.com/api/json/v1/1/search.ph
 
 function RecipeDetails({ type }) {
   const { id } = useParams();
-  const history = useHistory();
   const endpointMeal = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
   const endpointDrink = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
-  // const [carouselRecommendations, setRecomendations] = useState([]);
   const [singleRecipe, setRecipe] = useState({});
-  // const [, setRecipeInProgress] = useState('Iniciar receita');
-  const { handleFetch, isLoading, recipeData, recommendations,
-    fetchMealRecipes } = useDetailsProvider();
-  const recipeName = singleRecipe.strMeal || singleRecipe.strDrink;
-  const recipeThumb = singleRecipe.strMealThumb || singleRecipe.strDrinkThumb;
-  const recipeCategory = singleRecipe.strCategory;
+  const { handleFetch, isLoading,
+    recipeData, recommendations, fetchMealRecipes } = useDetailsProvider();
 
   useEffect(() => {
     const getRecipesAndRecommendations = () => {
       if (type === 'meals') {
         fetchMealRecipes(endpointCocktails, type);
-        handleFetch(endpointMeal, type);
+        return handleFetch(endpointMeal, type);
       }
       fetchMealRecipes(endpointRecipes, type);
-      handleFetch(endpointDrink, type);
+      return handleFetch(endpointDrink, type);
     };
     getRecipesAndRecommendations();
-    // setRecipeInProgress('Iniciar receita');
   }, [endpointDrink, endpointMeal, fetchMealRecipes, handleFetch, type]);
 
   useEffect(() => {
@@ -45,18 +39,12 @@ function RecipeDetails({ type }) {
     const settingUp = () => {
       if (cancel) return;
       setRecipe(recipeData);
-      // setRecomendations(recommendations);
     };
     settingUp();
     return () => {
       cancel = true;
     };
-  }, [recipeData, recommendations]);
-
-  const handleClick = (ev) => {
-    ev.preventDefault();
-    history.push(`${id}/in-progress`);
-  };
+  }, [recipeData, recommendations, type]);
 
   if (isLoading) {
     return 'Loading';
@@ -65,6 +53,12 @@ function RecipeDetails({ type }) {
   const isAlchooholic = singleRecipe.strAlcoholic || '';
   const magicNumber = 32;
   const youTubeVideo = singleRecipe.strYoutube || '';
+  const recipeMealName = singleRecipe.strMeal;
+  const recipeThumb = singleRecipe.strMealThumb || singleRecipe.strDrinkThumb;
+  const recipeCategory = singleRecipe.strCategory;
+  const recipeName = type === 'meals' ? singleRecipe.strMeal : singleRecipe.strDrink;
+
+  const renderCategory = type === 'drinks' ? (isAlchooholic) : (recipeCategory);
 
   return (
     <Container>
@@ -73,10 +67,8 @@ function RecipeDetails({ type }) {
         recipeThumb={ recipeThumb }
         type={ type }
         recipe={ singleRecipe }
-      >
-        { type === 'drinks' ? (<h3 data-testid="recipe-category">{isAlchooholic}</h3>) : (
-          <h3 data-testid="recipe-category">{recipeCategory}</h3>)}
-      </RecipeInfo>
+        recipeCategory={ renderCategory }
+      />
       <h3>Ingredientes</h3>
       <div className="ingredients-list">
         <RecipeIngredients recipe={ singleRecipe } />
@@ -85,25 +77,14 @@ function RecipeDetails({ type }) {
       { type === 'meals' ? (
         <MealVideo
           youTubeVideo={ youTubeVideo.substring(magicNumber) }
-          title={ recipeName }
+          title={ recipeMealName }
         />) : ''}
       <div className="title-wrapper"><h3>Recomendadas</h3></div>
       <Carousel
         recipeRecommendations={ recommendations }
         type={ type }
       />
-      {/* {
-        isRecipeInProgress
-          ? ( */}
-      <Button
-        data-testid="start-recipe-btn"
-        onClick={ (ev) => handleClick(ev) }
-        className="recipe-btn"
-      >
-        Iniciar receita
-      </Button>
-      {/* ) : ('')
-      } */}
+      <InitOrContinueButton type={ type } />
     </Container>
   );
 }

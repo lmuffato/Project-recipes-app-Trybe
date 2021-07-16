@@ -11,6 +11,9 @@ import CardList from '../components/CardList/CardList';
 import { RecipesContext } from '../context/RecipesContext';
 import useDetailsProvider from '../hooks/useDetailsProvider';
 
+const MEALS_URL = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
+const DRINKS_URL = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
+
 function Home(props) {
   const { type } = props;
   const [, setFetchUrl] = useFetchRecipes(type);
@@ -25,8 +28,13 @@ function Home(props) {
   };
 
   useEffect(() => {
-    if (type === 'meals') return setFetchUrl('https://www.themealdb.com/api/json/v1/1/search.php?s=');
-    return setFetchUrl('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
+    console.log('teste');
+    if (type === 'meals') {
+      return setFetchUrl(MEALS_URL);
+    }
+    if (type === 'drinks') {
+      return setFetchUrl(DRINKS_URL);
+    }
   }, [setFetchUrl, type]);
 
   useEffect(() => {
@@ -37,13 +45,11 @@ function Home(props) {
   // useEffect(() => {
   //   getFilteredRecipes(type);
   // }, [type, searchBarFilters, getFilteredRecipes]);
+  console.log('Hello from <Home />');
 
   return (
     <>
-      <Header>
-        { type === 'meals'
-          ? (<h2 data-testid="page-title">Comidas</h2>) : (
-            <h2 data-testid="page-title">Bebidas</h2>)}
+      <Header heading={ type === 'meals' ? 'Comidas' : 'Bebidas' }>
         <SearchBarButton onClick={ handleToggleSearchBar } />
       </Header>
       <div>

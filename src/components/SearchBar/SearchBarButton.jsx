@@ -9,7 +9,7 @@ function SearchBarButton({ onClick }) {
       <img
         src={ searchIconImg }
         data-testid="search-top-btn"
-        alt="Logo da página de perfil"
+        alt="Logo do ícone de busca"
       />
     </Button>
   );

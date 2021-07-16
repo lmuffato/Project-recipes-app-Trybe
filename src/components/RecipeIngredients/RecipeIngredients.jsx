@@ -18,12 +18,15 @@ function RecipeIngredients({ recipe }) {
       <ul>
         {ingredients.map((element, index) => (
           <li
-            data-testid={ `${index}-ingredient-name-and-measure` }
             key={ index }
           >
-            { measures[index]}
+            <span data-testid={ `${index}-ingredient-name-and-measure` }>
+              { measures[index]}
+            </span>
             {' '}
-            { element }
+            <span data-testid={ `${index}-ingredient-name-and-measure` }>
+              { element }
+            </span>
           </li>))}
       </ul>
     </div>

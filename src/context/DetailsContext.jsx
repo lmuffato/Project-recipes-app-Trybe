@@ -5,6 +5,7 @@ export const DetailsContext = createContext({});
 const MAX_LENGTH = 6;
 
 function DetailsContextProvider({ children }) {
+  // const [fetchURL, setFetchURL] = useState('');
   const [recipeData, setRecipe] = useState({}); // a receita da pg detalhes
   const [isLoading, setIsLoading] = useState(true);
   const [recommendations, setRecomendations] = useState([]);
@@ -15,7 +16,7 @@ function DetailsContextProvider({ children }) {
       const request = await fetch(url);
       const data = await request.json();
       if (data) setRecipe(data[type][0]);
-      console.log(data[type][0]);
+      // console.log(data[type]);
       setIsLoading(false);
     } catch (err) {
       console.log(err);
@@ -64,4 +65,5 @@ export default DetailsContextProvider;
 
 DetailsContextProvider.propTypes = {
   children: PropTypes.node.isRequired,
+  // type: PropTypes.string.isRequired,
 };
