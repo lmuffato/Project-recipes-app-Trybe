@@ -3,15 +3,29 @@ import { Link } from 'react-router-dom';
 import shareIcon from '../images/shareIcon.svg';
 import FavoriteBtn from '../compenents/FavoriteBtn';
 import RecipesContext from '../contexts/RecipesContext';
+<<<<<<< HEAD
 import Header from '../compenents/Header';
 import SearchbarContext from '../contexts/SearchbarContext';
 
 function FavoriteRecipes() {
   const { favoriteRecipes, showRecipes, setShowRecipes } = useContext(RecipesContext);
   const { setPageName } = useContext(SearchbarContext);
+=======
+import SearchbarContext from '../contexts/SearchbarContext';
+import Header from '../compenents/Header';
+
+function FavoriteRecipes() {
+  const { favoriteRecipes, showRecipes, setShowRecipes } = useContext(RecipesContext);
+  const { setHideSearchBtn, setPageName } = useContext(SearchbarContext);
+>>>>>>> main-group-14-header-test
   const [isCopy, setIsCopy] = useState(false);
 
   setPageName('Receitas Favoritas');
+
+  useEffect(() => {
+    setHideSearchBtn(false);
+    setPageName('Receitas Favoritas');
+  }, []);
 
   useEffect(() => {
     const recipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
@@ -118,6 +132,7 @@ function FavoriteRecipes() {
   };
 
   return (
+<<<<<<< HEAD
     <div>
       <Header />
       <button
@@ -152,6 +167,45 @@ function FavoriteRecipes() {
         )
       }
     </div>
+=======
+    <>
+      <Header />
+      <div>
+        <button
+          type="button"
+          data-testid="filter-by-all-btn"
+          onClick={ () => handleContent('all') }
+        >
+          All
+        </button>
+
+        <button
+          type="button"
+          data-testid="filter-by-food-btn"
+          onClick={ () => handleContent('meals') }
+        >
+          Food
+        </button>
+
+        <button
+          type="button"
+          data-testid="filter-by-drink-btn"
+          onClick={ () => handleContent('cocktails') }
+        >
+          Drinks
+        </button>
+
+        {
+          showRecipes.map(
+            ({ id, type, area, category, alcoholicOrNot, name, image }, index) => (
+              renderCards({
+                id, type, area, category, alcoholicOrNot, name, image }, index)
+            ),
+          )
+        }
+      </div>
+    </>
+>>>>>>> main-group-14-header-test
   );
 }
 
