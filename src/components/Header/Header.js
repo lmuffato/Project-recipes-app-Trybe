@@ -13,7 +13,7 @@ export default function Header({ title, enableSearchIcon = true }) {
     <div className="header-searchbar-container">
       <div className="header-container control">
         <Link to="/perfil" data-testid="profile-top-btn" src="profileIcon">
-          <img src={ profileIcon } alt="Icone de perfil" />
+          <img src={ profileIcon } alt="Icone de perfil" className="profile-image" />
         </Link>
         <span data-testid="page-title">{title}</span>
         { enableSearchIcon && (

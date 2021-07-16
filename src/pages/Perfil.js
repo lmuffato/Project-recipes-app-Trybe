@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import '../style/Perfil.css';
 
 export default function Perfil() {
   let email;
@@ -10,40 +11,47 @@ export default function Perfil() {
   }
 
   return (
-    <div>
+    <>
       <Header
         title="Perfil"
         enableSearchIcon={ false }
       />
-      <p data-testid="profile-email">
-        { email }
-      </p>
-      <Link to="/receitas-feitas">
-        <button
-          type="submit"
-          data-testid="profile-done-btn"
-        >
-          Receitas Feitas
-        </button>
-      </Link>
-      <Link to="/receitas-favoritas">
-        <button
-          type="submit"
-          data-testid="profile-favorite-btn"
-        >
-          Receitas Favoritas
-        </button>
-      </Link>
-      <Link to="/">
-        <button
-          type="submit"
-          data-testid="profile-logout-btn"
-          onClick={ () => localStorage.clear() }
-        >
-          Sair
-        </button>
-      </Link>
-      <Footer />
-    </div>
+      <div className="profile-main">
+        <h1 data-testid="profile-email" className="profile-head-email">
+          { email }
+        </h1>
+        <Link to="/receitas-feitas">
+          <button
+            className="button is-primary"
+            type="submit"
+            data-testid="profile-done-btn"
+          >
+            Receitas Feitas
+          </button>
+        </Link>
+        <br />
+        <Link to="/receitas-favoritas">
+          <button
+            className="button is-primary"
+            type="submit"
+            data-testid="profile-favorite-btn"
+          >
+            Receitas Favoritas
+          </button>
+        </Link>
+        <br />
+        <Link to="/">
+          <button
+            className="button is-primary"
+            type="submit"
+            data-testid="profile-logout-btn"
+            onClick={ () => localStorage.clear() }
+          >
+            Sair
+          </button>
+        </Link>
+        <Footer />
+      </div>
+    </>
   );
 }

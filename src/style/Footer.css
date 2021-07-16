@@ -1,7 +1,7 @@
 @import "https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css";
 
 .footer {
-  background-color: black;
+  background-color: rgb(40,40,40);
   bottom: 0;
   display: flex;
   height: auto;

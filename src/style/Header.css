@@ -4,10 +4,6 @@ input, button {
   border-radius: 5px;
 }
 
-form {
-  margin: 10px 5px;
-}
-
 .header-container {
   align-items: center;
   display: flex;
@@ -18,13 +14,15 @@ form {
 
 .header-searchbar-container {
   /* border: solid 1px black; */
-  background-color: whitesmoke;
+  color: aquamarine;
+  background-color: rgb(30,30,30);
   border-radius: 8px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   min-height: 20vh;
   margin-top: 10px;
+  margin-left: 15px;
   width: 90%;
 }
 
@@ -35,4 +33,8 @@ form {
 
 .form-searchbar {
   display: flex;
+}
+
+.profile-image {
+  filter: invert(0%);
 }
