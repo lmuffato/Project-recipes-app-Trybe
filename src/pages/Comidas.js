@@ -17,21 +17,21 @@ export default function Comidas() {
       <div className="main-foods">
         <Header title="Comidas" />
         <CategoryButtons categories={ categories } />
+        <div className="cards">
+          <ul>
+            { foods && foods.slice(0, NUMBER_OF_RECIPES)
+              .map((recipe, index) => (
+                <RecipeCard
+                  key={ index }
+                  recipe={ recipe }
+                  index={ index }
+                  type={ pathname }
+                />
+              ))}
+          </ul>
+        </div>
       </div>
-      <div className="cards">
-        <ul>
-          { foods && foods.slice(0, NUMBER_OF_RECIPES)
-            .map((recipe, index) => (
-              <RecipeCard
-                key={ index }
-                recipe={ recipe }
-                index={ index }
-                type={ pathname }
-              />
-            ))}
-        </ul>
-        <Footer />
-      </div>
+      <Footer />
     </>
   );
 }

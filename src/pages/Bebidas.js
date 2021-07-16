@@ -14,23 +14,25 @@ export default function Bebidas() {
   const { drinks, categories } = useContext(DrinkContext);
 
   return (
-    <div className="main-foods">
-      <Header title="Bebidas" />
-      <CategoryButtons categories={ categories } />
-      <div className="cards">
-        <ul>
-          {drinks && drinks.slice(0, NUMBER_OF_RECIPES)
-            .map((recipe, index) => (
-              <RecipeCard
-                key={ index }
-                recipe={ recipe }
-                index={ index }
-                type={ pathname }
-              />
-            ))}
-        </ul>
+    <>
+      <div className="main-foods">
+        <Header title="Bebidas" />
+        <CategoryButtons categories={ categories } />
+        <div className="cards">
+          <ul>
+            {drinks && drinks.slice(0, NUMBER_OF_RECIPES)
+              .map((recipe, index) => (
+                <RecipeCard
+                  key={ index }
+                  recipe={ recipe }
+                  index={ index }
+                  type={ pathname }
+                />
+              ))}
+          </ul>
+        </div>
       </div>
       <Footer />
-    </div>
+    </>
   );
 }

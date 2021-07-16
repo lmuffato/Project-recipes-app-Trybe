@@ -13,31 +13,35 @@ export default function ExplorarBebidas() {
   }, []);
 
   return (
-    <div>
+    <>
       <Header
         title="Explorar Bebidas"
         enableSearchIcon={ false }
       />
-      <div className="explorar-bebidas">
-        <Link to="/explorar/bebidas/ingredientes">
-          <button
-            type="submit"
-            data-testid="explore-by-ingredient"
-          >
-            Por Ingredientes
-          </button>
-        </Link>
-
-        <Link to={ `/bebidas/${randomDrinkId} ` }>
-          <button
-            type="submit"
-            data-testid="explore-surprise"
-          >
-            Me Surpreenda!
-          </button>
-        </Link>
+      <div>
+        <div className="explorar-bebidas">
+          <Link to="/explorar/bebidas/ingredientes">
+            <button
+              className="button is-primary"
+              type="submit"
+              data-testid="explore-by-ingredient"
+            >
+              Por Ingredientes
+            </button>
+          </Link>
+          <br />
+          <Link to={ `/bebidas/${randomDrinkId} ` }>
+            <button
+              className="button is-primary"
+              type="submit"
+              data-testid="explore-surprise"
+            >
+              Me Surpreenda!
+            </button>
+          </Link>
+        </div>
+        <Footer />
       </div>
-      <Footer />
-    </div>
+    </>
   );
 }

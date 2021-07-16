@@ -6,29 +6,33 @@ import '../style/Explorar.css';
 
 export default function Explorar() {
   return (
-    <div className="explorar">
+    <>
       <Header
         title="Explorar"
         enableSearchIcon={ false }
       />
-      <Link to="/explorar/comidas">
-        <button
-          type="button"
-          data-testid="explore-food"
-        >
-          Explorar Comidas
-        </button>
-      </Link>
-
-      <Link to="explorar/bebidas">
-        <button
-          type="button"
-          data-testid="explore-drinks"
-        >
-          Explorar Bebidas
-        </button>
-      </Link>
-      <Footer />
-    </div>
+      <div className="explorar-buttons">
+        <Link to="/explorar/comidas">
+          <button
+            className="button is-primary"
+            type="button"
+            data-testid="explore-food"
+          >
+            Explorar Comidas
+          </button>
+        </Link>
+        <br />
+        <Link to="explorar/bebidas">
+          <button
+            className="button is-primary"
+            type="button"
+            data-testid="explore-drinks"
+          >
+            Explorar Bebidas
+          </button>
+        </Link>
+        <Footer />
+      </div>
+    </>
   );
 }

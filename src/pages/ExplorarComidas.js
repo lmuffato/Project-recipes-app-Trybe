@@ -20,15 +20,17 @@ export default function ExplorarComidas() {
       <div className="explorar-comidas">
         <Link to="/explorar/comidas/ingredientes">
           <button
+            className="button is-primary"
             type="submit"
             data-testid="explore-by-ingredient"
           >
             Por Ingredientes
           </button>
         </Link>
-
+        <br />
         <Link to="/explorar/comidas/area">
           <button
+            className="button is-primary"
             id="explore-by-area"
             type="submit"
             data-testid="explore-by-area"
@@ -36,9 +38,10 @@ export default function ExplorarComidas() {
             Por Local de Origem
           </button>
         </Link>
-
+        <br />
         <Link to={ `/comidas/${randomFoodId} ` }>
           <button
+            className="button is-primary"
             type="submit"
             data-testid="explore-surprise"
           >

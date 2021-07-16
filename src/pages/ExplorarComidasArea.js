@@ -34,8 +34,6 @@ export default function ExplorarComidasArea() {
       />
       <div className="control">
         <label htmlFor="explore-by-area-dropdown">
-          Selecione:
-          {' '}
           <select
             className="select select-align"
             name="explore-by-area-dropdown"

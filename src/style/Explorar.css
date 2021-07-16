@@ -1,11 +1,8 @@
 @import "https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css";
 
-button {
-  margin-top: 20px;
-}
-
-.explorar {
+.explorar-buttons {
   align-items: center;
   display: flex;
   flex-direction: column;
+  margin-top: 100px;
 }
