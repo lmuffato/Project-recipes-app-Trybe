@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import shareIcon from '../../images/shareIcon.svg';
+import '../../styles/Alert.css';
 
 export default function ShareBtn(props) {
   const { dataTest, path } = props;
