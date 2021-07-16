@@ -59,12 +59,16 @@ function RecipesInProgress({ type }) {
   const isAlchooholic = singleRecipe.strAlcoholic || '';
   const recipeId = singleRecipe.idMeal || '';
   const drinkId = singleRecipe.idDrink || '';
+  const renderCategory = type === 'drinks' ? (isAlchooholic) : (recipeCategory);
 
   return (
     <Container>
       <RecipeInfo
         recipeName={ recipeName }
         recipeThumb={ recipeThumb }
+        type={ type }
+        recipe={ singleRecipe }
+        recipeCategory={ renderCategory }
       >
         { type === 'drinks'
           ? (<h3 data-testid="recipe-category">{isAlchooholic}</h3>)

@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { useHistory, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import shareIconImg from '../../images/shareIcon.svg';
 import favoriteIconImg from '../../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../../images/blackHeartIcon.svg';
 import handleSetFavoritesToLocalStorage from '../../helpers/localStorageHelper';
+import { getCopyToClipboard } from '../../services/formatingService';
 
 const THREE_SECONDS = 3000;
+
 function RecipeInfo(props) {
   const { recipeThumb,
     recipeName,
@@ -14,8 +16,6 @@ function RecipeInfo(props) {
     recipeCategory,
   } = props;
   const { id } = useParams();
-  const history = useHistory();
-  const recipeURL = history.location.pathname;
   const [copyToClipboard, setCopyToClipboard] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
   const recipeId = type === 'meals' ? recipe.idMeal : recipe.idDrink;
@@ -51,7 +51,7 @@ function RecipeInfo(props) {
   }, [id]);
 
   const handleCopyToClipboard = () => {
-    navigator.clipboard.writeText(`http://localhost:3000${recipeURL}`);
+    getCopyToClipboard(type, id);
     setCopyToClipboard(true);
     setTimeout(() => {
       setCopyToClipboard(false);
