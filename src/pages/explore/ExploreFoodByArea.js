@@ -24,6 +24,8 @@ export default function ExploreFoodByArea() {
     getArea();
   }, []);
 
+  console.log('hello world');
+
   const handleSelect = async (value) => {
     const endPoint = `https://www.themealdb.com/api/json/v1/1/filter.php?a=${value}`;
     const response = await fetch(endPoint);

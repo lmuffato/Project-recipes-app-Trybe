@@ -22,7 +22,7 @@ function RecipesList({ data, path }) {
                 src={ `${imgSrc}` }
                 alt={ `${name} thumb` }
                 data-testid={ `${index}-card-img` }
-                className="recipe-img"
+                className="img"
               />
               <h4
                 data-testid={ `${index}-card-name` }

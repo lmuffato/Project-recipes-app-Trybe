@@ -31,6 +31,7 @@ export default function Foods() {
         : await getMealsDefault();
       const categoList = await getMealsCat();
       setCategory('All');
+      console.log(data);
       setMealsList([...data]);
       setCatList([...categoList]);
       setLoading(false);

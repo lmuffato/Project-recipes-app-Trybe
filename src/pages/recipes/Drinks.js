@@ -41,7 +41,7 @@ export default function Drinks() {
   return (
     <div className="food-page">
       <Header title="Bebidas" show />
-      <ButtomFilters data={ catList } />
+      <ButtomFilters data={ catList } path="" />
       { isLoading ? <h1>Loading...</h1>
         : <RecipesList data={ drinksList } path="bebidas" /> }
       <BottomMenu />

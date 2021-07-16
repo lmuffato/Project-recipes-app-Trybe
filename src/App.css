@@ -116,6 +116,11 @@ ul {
   z-index: -1;
 }
 
+.img {
+  height: 90px;
+  width: 90px;
+}
+
 .card-list {
   align-content: space-around;
   align-self: center;
