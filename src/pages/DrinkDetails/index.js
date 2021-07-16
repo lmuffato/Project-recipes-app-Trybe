@@ -16,14 +16,14 @@ function DrinkDetails() {
       const { drinks } = await fetchDrinkDetails(id);
       const recomendations = await foodsRecomendation();
       setRecomendation(recomendations);
-      setData(drinks);
+      setData([...drinks]);
       setLoading(false);
     }
     getData();
   }, [id]);
 
   return (
-    loading
+    loading || data === undefined
       ? <h2>Loading...</h2>
       : <BebidasDetails data={ data } recomendation={ recomendation } />);
 }
