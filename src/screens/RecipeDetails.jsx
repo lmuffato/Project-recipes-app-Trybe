@@ -24,6 +24,12 @@ function RecipeDetails(props) {
     requestApi();
   }, [type, id]);
 
+  const verifyAlcohol = (el) => {
+    if (el.strAlcoholic === 'Alcoholic') {
+      return (<p>{ el.strAlcoholic }</p>);
+    }
+  };
+
   return (
     <div>
       <img
@@ -50,6 +56,7 @@ function RecipeDetails(props) {
       />
       <p data-testid="recipe-category">
         { recipe.strCategory }
+        { verifyAlcohol(recipe) }
       </p>
       { recipe.strMeal ? <Video recipe={ recipe } /> : null }
       <Ingredients recipe={ recipe } />
