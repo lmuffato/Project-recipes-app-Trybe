@@ -4,6 +4,7 @@ import Header from '../components/Header';
 import FavoritesContext from '../contexts/FavoritesContext';
 
 import FavoriteRecipeCard from '../components/ReceitasFavoritas/FavoriteRecipeCard';
+import '../style/ReceitasFavoritas.css';
 
 export default function ReceitasFavoritas() {
   const { favorites } = useContext(FavoritesContext);
@@ -12,13 +13,14 @@ export default function ReceitasFavoritas() {
   const filteredFavorites = filter
     ? favorites.filter((recipe) => recipe.type === filter) : favorites;
   return (
-    <div>
+    <div className="favorite-recipes">
       <Header
         title="Receitas Favoritas"
         enableSearchIcon={ false }
       />
-      <div>
+      <div className="favorite-buttons">
         <button
+          className="button is-primary"
           type="button"
           data-testid="filter-by-all-btn"
           value=""
@@ -26,7 +28,10 @@ export default function ReceitasFavoritas() {
         >
           All
         </button>
+        <br />
+        <br />
         <button
+          className="button is-primary"
           type="button"
           data-testid="filter-by-food-btn"
           value="comida"
@@ -34,7 +39,10 @@ export default function ReceitasFavoritas() {
         >
           Food
         </button>
+        <br />
+        <br />
         <button
+          className="button is-primary"
           type="button"
           data-testid="filter-by-drink-btn"
           value="bebida"

@@ -1,0 +1,9 @@
+.favorite-recipes {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.favorite-buttons {
+  margin-top: 100px;
+}

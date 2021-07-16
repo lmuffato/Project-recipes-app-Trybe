@@ -16,9 +16,9 @@ export default function Perfil() {
         title="Perfil"
         enableSearchIcon={ false }
       />
-      <h1 data-testid="profile-email" className="profile-head-email">
+      <h2 data-testid="profile-email" className="profile-head-email">
         { email }
-      </h1>
+      </h2>
       <Link to="/receitas-feitas">
         <button
           className="button is-primary"
