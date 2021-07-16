@@ -8,7 +8,8 @@ function ByOrigin() {
     countries,
     fetchArea,
     fetchByCountry,
-    filteredByCountry } = useContext(ContextRecipes);
+    // filteredByCountry,
+  } = useContext(ContextRecipes);
   const [selectedCountry, setSelectedCountry] = useState('');
 
   useEffect(() => {

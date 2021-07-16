@@ -13,7 +13,7 @@ function ProviderRecipes({ children }) {
   const [loadingCards, setLoadingCards] = useState(false);
   const [showSearchBar, setShowSearchBar] = useState(false);
   const [countries, setCountries] = useState([]);
-  const [filteredByCountry, setFilteredByCountry] = useState([]);
+  // const [filteredByCountry, setFilteredByCountry] = useState([]);
   const [alertOn, setAlertOn] = useState(false);
   const [updateFlag, setUpadateFlag] = useState(false);
 
@@ -125,6 +125,7 @@ function ProviderRecipes({ children }) {
       // getByCountry.forEach((meal) => {
       //   setFilteredByCountry(meal);
       // });
+      console.log(getByCountry);
     }
   };
 
