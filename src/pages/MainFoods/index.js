@@ -47,10 +47,10 @@ const MainFoods = () => {
       ).then(({ meals }) => setCategories(meals.slice(0, MAX_LENGTH_CATEGORIES)));
     };
     getCategories();
-    if (!isFiltering) {
+    if (!isFiltering && recipesFoods.length === 0) {
       getRecipes();
     }
-  }, [getRecipes, getRecipesByCategory, isFiltering]);
+  }, [getRecipes, getRecipesByCategory, isFiltering, recipesFoods]);
 
   const handleSelectCategory = ({ target, target: { name } }) => {
     setPreviousTarget(target);

@@ -38,10 +38,10 @@ const MainDrinks = () => {
       ).then(({ drinks }) => setCategories(drinks.slice(0, MAX_LENGTH_CATEGORIES)));
     };
     getCategories();
-    if (!isFiltering) {
+    if (!isFiltering && recipesDrinks.length === 0) {
       getRecipes();
     }
-  }, [getRecipes, isFiltering]);
+  }, [getRecipes, isFiltering, recipesDrinks]);
 
   const handleSelectCategory = ({ target, target: { name } }) => {
     setPreviousTarget(target);

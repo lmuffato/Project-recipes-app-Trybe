@@ -1,18 +1,18 @@
-import React from 'react';
 import Login from '../pages/Login';
 import Profile from '../pages/Profile';
 import Explore from '../pages/Explore';
-import Header from '../components/Header';
 import Foods from '../pages/MainFoods';
 import Drinks from '../pages/MainDrinks';
 import FoodDetails from '../pages/FoodDetails';
 import DrinkDetails from '../pages/DrinkDetails';
-
-const componentWithHeader = ({ title }) => (
-  <section>
-    <Header title={ title } />
-  </section>
-);
+import ExploreFood from '../pages/ExploreFood';
+import ExploreDrink from '../pages/ExploreDrink';
+import IngredientsPage from '../pages/IngredientsPage';
+import FavoriteRecipes from '../pages/FavoriteRecipes';
+import ExploreByAreaPage from '../pages/ExploreByAreaPage';
+import FoodInProgress from '../pages/FoodInProgress';
+import DrinkInProgress from '../pages/DrinkInProgress';
+import RecipesDonePage from '../pages/RecipesDonePage';
 
 export default [
   {
@@ -53,31 +53,31 @@ export default [
   },
   {
     path: '/explorar/comidas',
-    Component: componentWithHeader,
+    Component: ExploreFood,
     exact: true,
     title: 'Explorar Comidas',
   },
   {
     path: '/explorar/bebidas',
-    Component: componentWithHeader,
+    Component: ExploreDrink,
     exact: true,
     title: 'Explorar Bebidas',
   },
   {
     path: '/explorar/comidas/ingredientes',
-    Component: componentWithHeader,
+    Component: IngredientsPage,
     exact: false,
     title: 'Explorar Ingredientes',
   },
   {
     path: '/explorar/bebidas/ingredientes',
-    Component: componentWithHeader,
+    Component: IngredientsPage,
     exact: false,
     title: 'Explorar Ingredientes',
   },
   {
     path: '/explorar/comidas/area',
-    Component: componentWithHeader,
+    Component: ExploreByAreaPage,
     exact: false,
     title: 'Explorar Origem',
   },
@@ -89,14 +89,26 @@ export default [
   },
   {
     path: '/receitas-feitas',
-    Component: componentWithHeader,
+    Component: RecipesDonePage,
     exact: true,
     title: 'Receitas Feitas',
   },
   {
     path: '/receitas-favoritas',
-    Component: componentWithHeader,
+    Component: FavoriteRecipes,
     exact: true,
     title: 'Receitas Favoritas',
+  },
+  {
+    path: '/bebidas/:id/in-progress',
+    Component: DrinkInProgress,
+    exact: true,
+    title: 'Bebida em progresso',
+  },
+  {
+    path: '/comidas/:id/in-progress',
+    Component: FoodInProgress,
+    exact: true,
+    title: 'Comida em progresso',
   },
 ];
