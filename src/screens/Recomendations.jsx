@@ -20,10 +20,10 @@ function Recommendations(type) {
       <h3>Recomendados</h3>
       { recommended.length ? recommended.map((recom, index) => (
         <div
-          data-testid="0-recomendation-card"
+          data-testid={ `${index}-recomendation-card` }
           key={ index }
         >
-          <RecomCard recipe={ recom } />
+          <RecomCard recipe={ recom } index={ index } />
         </div>
       )) : ''}
     </div>
