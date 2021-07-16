@@ -44,7 +44,7 @@ function DrinksDetails() {
   useEffect(() => {
     getDrinksById(id)
       .then((drinks) => {
-        setDrinksFromId(drinks)
+        setDrinksFromId(drinks);
         const ingredients = getIngredients(drinks[0]);
         const measures = getMeasures(drinks[0]);
         setIngredientsId(ingredients);
@@ -200,6 +200,5 @@ function DrinksDetails() {
     </div>
   );
 }
-
 
 export default DrinksDetails;
