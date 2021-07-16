@@ -15,9 +15,19 @@ const copy = require('clipboard-copy');
 function ReceitaComidaDetalhe({ props }) {
   const [favoriteFood, setFavoriteFood] = useState(false);
   const [clipboardStatus, setClipboardStatus] = useState();
+  const [statusFood, setStatusFood] = useState(false);
+
   const history = useHistory();
 
   const { acctualyFood, foodRecomendation, id } = props;
+
+  const checkStatusRecipe = () => {
+    if (JSON.parse(localStorage.getItem('inProgressRecipes') !== null)) {
+      const recipes = JSON.parse(localStorage.getItem('inProgressRecipes')).meals;
+
+      if (Object.keys(recipes).includes(id) === true) setStatusFood(true);
+    }
+  };
 
   useEffect(() => {
     const verifyFavorite = () => {
@@ -29,6 +39,7 @@ function ReceitaComidaDetalhe({ props }) {
       }
     };
 
+    checkStatusRecipe();
     verifyFavorite();
   }, [id]);
 
@@ -188,7 +199,7 @@ function ReceitaComidaDetalhe({ props }) {
             data-testid="start-recipe-btn"
             className={ `${btn} button-recipe` }
           >
-            Start Recipe
+            { statusFood === true ? 'Continuar Receita' : 'Iniciar Receita' }
             {/* foodRecipeStatus === 'start' ? 'Start recipe' : 'Continuar Receita'  */}
           </Button>
         </div>
