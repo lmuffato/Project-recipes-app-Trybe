@@ -26,6 +26,14 @@
   background-blend-mode: overlay;
   background-color: rgb(136, 134, 134);
   box-shadow: 0.3px 0.3px 3px rgb(29, 28, 29) inset;
+  text-shadow: 1px 1px 1px rgb(51, 51, 51);
+}
+
+.doneRecipesPage .selected_filter {
+  background-blend-mode: overlay;
+  background-color: rgb(136, 134, 134);
+  box-shadow: 0.3px 0.3px 3px rgb(29, 28, 29) inset;
+  text-shadow: 1px 1px 1px rgb(51, 51, 51);
 }
 
 .doneComponents {
@@ -51,16 +59,19 @@
 .doneCategory {
   font-size: 16px;
   height: 16px;
+  margin: 4px;
 }
 
 .doneTitle {
   display: flex;
+  font-family: Montserrat , Arial , Verdana , Tahoma , sans-serif;
   font-size: 25px;
-  font-weight: 900;
+  font-weight: 500;
   height: 70px;
   justify-content: center;
   overflow: hidden;
   text-align: center;
+  text-shadow: 1px 1px 1px white;
   width: 100%;
 }
 
@@ -79,6 +90,7 @@
   color: #f2f2f2;
   display: flex;
   flex-direction: column;
+  font-family: Alegreya , Arial , Verdana , Tahoma , sans-serif;
   height: 12vh;
   opacity: 0.9;
   width: 100%;
@@ -106,6 +118,7 @@
 
 .share-btn {
   filter: invert(80%);
+  width: 28%;
 }
 
 .share-btn:hover {
@@ -176,5 +189,11 @@
 
   .doneTitle {
     width: 100%;
+  }
+
+  @media ( max-width : 1199.98px ) {
+    .share-btn {
+      width: 34%;
+    }
   }
 }

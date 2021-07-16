@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import shareIcon from '../../images/shareIcon.svg';
+import '../../styles/Alert.css';
 
 export default function ShareBtn(props) {
   const { dataTest, path } = props;
@@ -45,18 +46,15 @@ export default function ShareBtn(props) {
   };
 
   return (
-    <div>
-      <input
-        type="image"
-        data-testid={ dataTest }
-        className={ `${dataTest} share-btn` }
-        variant="light"
-        style={ { height: '28px' } }
-        onClick={ handleClick }
-        src={ shareIcon }
-        alt="shareButton"
-      />
-    </div>
+    <input
+      type="image"
+      data-testid={ dataTest }
+      className={ `${dataTest} share-btn` }
+      variant="light"
+      onClick={ handleClick }
+      src={ shareIcon }
+      alt="shareButton"
+    />
   );
 }
 

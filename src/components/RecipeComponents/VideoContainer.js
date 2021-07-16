@@ -6,19 +6,16 @@ export default function VideoCtn(props) {
   const videoSrc = src.split('https://www.youtube.com/')[1];
   const embedWay = `https://www.youtube.com/embed/${videoSrc}`;
   return (
-    <>
-      <h3>Vídeo</h3>
-
-      <iframe
-        width="350"
-        height="315"
-        src={ embedWay }
-        title="YouTube video player"
-        frameBorder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowFullScreen
-      />
-    </>
+    <iframe
+      width="500"
+      height="315"
+      src={ embedWay }
+      title="YouTube video player"
+      frameBorder="0"
+      allow="accelerometer;
+        autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowFullScreen
+    />
   );
 }
 

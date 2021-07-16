@@ -1,6 +1,10 @@
 .input-group-filter {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: space-around;
+  font-family: Montserrat , Arial , Verdana , Tahoma , sans-serif;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
 }
 
 .input-group-filter input {
@@ -9,13 +13,19 @@
 }
 
 .input-group-filter label {
-  align-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   background-color: transparent;
   border-bottom: 1px solid #343539;
-  color: hsl(0, 0%, 95%);
+  color: #f2f2f2;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   height: 40px;
-  justify-content: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   line-height: 0;
   margin-top: 4px;
   text-align: center;
@@ -24,20 +34,39 @@
 
 .input-group-filter label:hover {
   background-blend-mode: overlay;
-  background-color: rgb(136, 134, 134);
-  box-shadow: 0.3px 0.3px 3px rgb(29, 28, 29) inset;
+  background-color: #888686;
+  -webkit-box-shadow: 0.3px 0.3px 3px #1d1c1d inset;
+          box-shadow: 0.3px 0.3px 3px #1d1c1d inset;
+  text-shadow: 1px 1px 1px #333333;
 }
 
-@media ( max-width : 786.98px ) {
+.input-group-filter .selected_filter {
+  background-blend-mode: overlay;
+  background-color: #888686;
+  -webkit-box-shadow: 0.3px 0.3px 3px #1d1c1d inset;
+          box-shadow: 0.3px 0.3px 3px #1d1c1d inset;
+  text-shadow: 1px 1px 1px #333333;
+}
 
+@media only screen and (min-width: 768px) and (max-width: 1199.98px) {
+  .input-group-filter label {
+    width: 15%;
+  }
+}
+
+@media (max-width: 786.98px) {
   .input-group-filter label {
     height: 35px;
     text-align: center;
     width: 32%;
   }
-
   .input-group-filter {
-    flex-flow: wrap;
-    flex-direction: row;
+    -ms-flex-flow: wrap;
+        flex-flow: wrap;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
   }
 }
+/*# sourceMappingURL=FilterInputGroup.css.map */

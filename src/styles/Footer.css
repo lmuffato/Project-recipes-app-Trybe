@@ -33,7 +33,7 @@
 
   .footer ul {
     justify-content: space-between;
-    padding-left: 0;
-    padding-right: 0;
+    margin-left: 15px;
+    margin-right: 15px;
   }
 }

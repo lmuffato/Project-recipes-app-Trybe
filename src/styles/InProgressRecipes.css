@@ -1,0 +1,221 @@
+input[type=checkbox] {
+  -ms-transform: scale(1.3);
+  /* IE */
+  -moz-transform: scale(1.3);
+  /* FF */
+  -webkit-transform: scale(1.3);
+  /* Safari and Chrome */
+  -o-transform: scale(1.3);
+  /* Opera */
+  transform: scale(1.3);
+  padding: 10px;
+}
+
+.checkbox-text {
+  display: inline;
+  font-size: 110%;
+  padding: 0.5em;
+}
+
+.in-progress-recipe {
+  display: flex;
+  flex-direction: column;
+}
+.in-progress-recipe .title {
+  align-self: center;
+  color: white;
+  font-size: 4em;
+  padding-top: 0.5em;
+}
+@media (max-width: 767.98px) {
+  .in-progress-recipe .title {
+    font-size: 2.5em;
+  }
+}
+.in-progress-recipe .category {
+  align-self: center;
+  color: white;
+  font-size: 3em;
+  padding-bottom: 0.5em;
+}
+@media (max-width: 767.98px) {
+  .in-progress-recipe .category {
+    font-size: 1.8em;
+    padding-bottom: 0;
+  }
+}
+.in-progress-recipe .h3 {
+  color: white;
+  font-size: 2.5em;
+  padding: 1em 0 0.5em 2.2em;
+}
+@media (max-width: 767.98px) {
+  .in-progress-recipe .h3 {
+    font-size: 1.8em;
+    padding: 1em 0 0 1em;
+  }
+}
+.in-progress-recipe .instructions {
+  padding-left: 3em;
+  margin-bottom: 4em;
+}
+@media (max-width: 767.98px) {
+  .in-progress-recipe .instructions {
+    border-bottom: 1px solid black;
+    font-size: 0.8em;
+    line-height: 0.5em;
+    padding: 0;
+    padding-top: 1em;
+    text-align: justify;
+    width: 100%;
+  }
+}
+.in-progress-recipe p {
+  color: white;
+  float: right;
+  font-size: 1.3em;
+  line-height: 2.4em;
+  padding-left: 2em;
+  width: 87%;
+}
+.in-progress-recipe div {
+  display: flex;
+}
+@media (max-width: 767.98px) {
+  .in-progress-recipe div {
+    flex-direction: column;
+  }
+}
+.in-progress-recipe .image {
+  border-bottom: 1px solid white;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  padding: 2em;
+  width: 50%;
+}
+@media (max-width: 767.98px) {
+  .in-progress-recipe .image {
+    border-bottom: 1px solid black;
+    padding-bottom: 3em;
+    width: 100%;
+  }
+}
+.in-progress-recipe .image img {
+  align-self: center;
+  height: auto;
+  width: 80%;
+}
+.in-progress-recipe .image .titles {
+  align-self: flex-start;
+  margin: 0 0 2em 4em;
+}
+.in-progress-recipe .image div {
+  align-self: flex-start;
+  margin: 1.3em 0 0 3em;
+}
+@media (max-width: 767.98px) {
+  .in-progress-recipe .image div {
+    flex-direction: row;
+    margin: 0.3em 0 0 2em;
+  }
+}
+.in-progress-recipe .image input {
+  align-self: center;
+  filter: invert(100%);
+  padding: 1em;
+  position: absolute;
+  margin-left: 0.5em;
+  margin-top: 1em;
+}
+@media (max-width: 767.98px) {
+  .in-progress-recipe .image input {
+    position: absolute;
+    margin-top: 1.3em;
+    margin-bottom: 3em;
+  }
+}
+.in-progress-recipe .image .share-btn {
+  position: absolute;
+  margin-left: 4em;
+  margin-top: 1em;
+}
+@media (max-width: 767.98px) {
+  .in-progress-recipe .image .share-btn {
+    position: absolute;
+    margin-top: 1.3em;
+    margin-bottom: 3em;
+  }
+}
+.in-progress-recipe .image input:hover {
+  position: absolute;
+  filter: invert(30%);
+}
+.in-progress-recipe .ingredients {
+  border-bottom: 1px solid white;
+  padding-top: 1.8em;
+  width: 50%;
+}
+@media (max-width: 767.98px) {
+  .in-progress-recipe .ingredients {
+    border-bottom: 1px solid black;
+    padding: 2em;
+    width: 100%;
+  }
+}
+.in-progress-recipe .ingredients h3 {
+  color: white;
+  font-size: 3em;
+}
+@media (max-width: 767.98px) {
+  .in-progress-recipe .ingredients h3 {
+    font-size: 1.8em;
+    padding-bottom: 0;
+  }
+}
+.in-progress-recipe .ingredients ul {
+  display: flex;
+  flex-flow: column wrap;
+  flex-direction: column;
+  height: 400px;
+  margin-left: 0;
+  margin-top: 1.5em;
+  padding-left: 0;
+}
+@media (max-width: 767.98px) {
+  .in-progress-recipe .ingredients ul {
+    flex-flow: column;
+    height: auto;
+  }
+}
+.in-progress-recipe .ingredients li {
+  color: white;
+  font-size: 1.3em;
+  list-style-type: none;
+  padding: 0.5em;
+}
+
+.finish-recipe {
+  border: 1px solid black;
+  bottom: 0;
+  height: 50px;
+  position: fixed;
+  width: 100%;
+}
+.finish-recipe:disabled {
+  background-color: #6d6d6d;
+  cursor: not-allowed;
+  transition: 2s;
+}
+.finish-recipe:enabled {
+  background-color: #f2a30f;
+  color: white;
+  transition: 2s;
+}
+.finish-recipe:enabled:hover {
+  background-color: #f2a30f;
+  box-shadow: 1px 1px 7px #1d1c1d inset;
+  transition: 1s;
+}
+
+/*# sourceMappingURL=InProgressRecipes.css.map */

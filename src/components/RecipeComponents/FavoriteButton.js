@@ -61,7 +61,6 @@ export default function FavBtn(props) {
       type="image"
       data-testid="favorite-btn"
       variant="light"
-      style={ { height: '28px' } }
       onClick={ handleClick }
       src={ imageProvider() }
       alt="isFavorite"
