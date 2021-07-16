@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import ReactPlayer from 'react-player'; // https://dev.to/marcelomatosdev/react-adding-a-video-player-to-play-youtube-videos-in-your-project-30p
 import ShareBtn from './componentsDetails/ShareBtn';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import blackHeartIcon from '../images/blackHeartIcon.svg';
 import { foodById } from '../services/apiRequests';
 import DrinksRecomends from './componentsDetails/DrinksRecomends';
 import BtnInitiateRecipe from './componentsDetails/BtnInitiateRecipe';
@@ -29,6 +30,40 @@ export default function RecipeCardDetailFood() {
     return meal[0].includes('Measure') && noAlcool;
   });
 
+  const setFavorite = () => {
+    const { strArea, strCategory, strMealThumb, strMeal } = foodDetails;
+
+    const favoriteRecipeToken = {
+      id: idMeal,
+      type: 'comida',
+      area: strArea,
+      category: strCategory,
+      alcoholicOrNot: '',
+      name: strMeal,
+      image: strMealThumb,
+    };
+
+    let favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    if (favoriteRecipes) {
+      if (favoriteRecipes.some((recipe) => recipe.id !== favoriteRecipeToken.id)) {
+        favoriteRecipes.push(favoriteRecipeToken);
+        document.getElementById('fav-btn').setAttribute('src', blackHeartIcon);
+      } else {
+        favoriteRecipes = favoriteRecipes
+          .filter((recipe) => recipe.id !== favoriteRecipeToken.id);
+        document.getElementById('fav-btn').setAttribute('src', whiteHeartIcon);
+      }
+    } else {
+      favoriteRecipes = [favoriteRecipeToken];
+      console.log(process.env);
+      document.getElementById('fav-btn').src = blackHeartIcon;
+    }
+    localStorage.setItem('favoriteRecipes', JSON.stringify(favoriteRecipes));
+    if (Object.values(favoriteRecipes).length === 0) {
+      localStorage.removeItem('favoriteRecipes');
+    }
+  };
+
   return (
     <div>
       <img
@@ -40,9 +75,15 @@ export default function RecipeCardDetailFood() {
 
       <ShareBtn id={ idMeal } type="comida" />
 
-      <button type="button" data-testid="favorite-btn">
-        <img src={ whiteHeartIcon } alt="favoritar" />
+      <button type="button" onClick={ setFavorite }>
+        <img
+          id="fav-btn"
+          src={ whiteHeartIcon }
+          alt="favoritar"
+          data-testid="favorite-btn"
+        />
       </button>
+
       <h2 data-testid="recipe-category">{ foodDetails.strCategory }</h2>
       <h3>Ingredientes:</h3>
       <ul>
