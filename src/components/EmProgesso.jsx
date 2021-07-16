@@ -68,7 +68,7 @@ function EmProgresso({ props }) {
         alcoholicOrNot: data.strAlcoholic,
         name: data.strDrink,
         image: data.strDrinkThumb,
-        doneDate: Date.parse(),
+        doneDate: new Date().toString().split('G')[0].toString(),
         tags: data.strTags === null ? '' : data.strTags.split(','),
       };
 
@@ -88,7 +88,7 @@ function EmProgresso({ props }) {
       alcoholicOrNot: '',
       name: data.strMeal,
       image: data.strMealThumb,
-      doneDate: Date.parse(),
+      doneDate: new Date().toString().split('G')[0].toString(),
       tags: data.strTags === null ? '' : data.strTags.split(','),
     };
 
@@ -96,7 +96,7 @@ function EmProgresso({ props }) {
 
     const recipesFinished = localRecipes.concat(favoriteRecipe);
 
-    console.log('Estou aqui testando', localRecipes);
+    console.log('Estou aqui testando', new Date());
 
     localStorage.setItem('doneRecipes', JSON.stringify(recipesFinished));
     updateLocalStorage();
