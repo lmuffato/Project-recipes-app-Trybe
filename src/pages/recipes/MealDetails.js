@@ -143,7 +143,7 @@ function MealDetails() {
             data-testid="recipe-photo"
             src={ strMealThumb }
             alt="recipe"
-            width="100%"
+            width="330px"
           />
           <h2 data-testid="recipe-title">{ strMeal }</h2>
           <div className="share-and-favorite-container">
