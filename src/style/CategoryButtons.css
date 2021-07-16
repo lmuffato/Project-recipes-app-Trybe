@@ -2,8 +2,12 @@
 
 .category-button {
   align-items: flex-start;
-  background-color: rgb(30,30,30);
-  color: aquamarine;
+  /* background-color: rgb(30,30,30); */
+  /* background-color: #DB5461; */
+  /* background-color: aquamarine; */
+  background-color: #FFFBFA;
+  color: black;
+  font-weight: 500;
   border-radius: 8px;
   display: flex;
   flex-flow: column wrap;
@@ -11,10 +15,11 @@
   justify-content: flex-start;
   margin-top: 15px;
   width: 90%;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
 }
 
 .category-buttons {
-  background-color: #eee;
   height: 8px;
 }
 
@@ -23,5 +28,6 @@
 }
 
 .input {
-  color: aquamarine;
+  color: whitesmoke;
+  background-color: rgb(30,30,30);
 }

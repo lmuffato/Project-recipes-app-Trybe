@@ -14,8 +14,12 @@ input, button {
 
 .header-searchbar-container {
   /* border: solid 1px black; */
-  color: aquamarine;
-  background-color: rgb(30,30,30);
+  color: black;
+  font-weight: 500;
+  /* background-color: rgb(30,30,30); */
+  background-color: #FFFBFA;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;  
   border-radius: 8px;
   display: flex;
   flex-direction: column;

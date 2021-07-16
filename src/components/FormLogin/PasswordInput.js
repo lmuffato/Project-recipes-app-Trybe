@@ -14,13 +14,15 @@ export default function PasswordInput() {
       >
         Password:
         {' '}
+        <br />
         <input
           data-testid="password-input"
           type="password"
-          size="13"
+          size="15"
           placeholder="more than 6 characters"
           onChange={ (evt) => dispatch(passwordAction(evt.target.value)) }
         />
+
       </label>
     </div>
   );

@@ -11,7 +11,8 @@
 }
 
 .toast {
-  background-color: white;
+  /* background-color: white; */
+  background-color: #DB5461;
   left: 50%;
   position: fixed;
   top: 0;

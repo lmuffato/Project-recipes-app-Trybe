@@ -16,5 +16,9 @@ form {
 }
 
 button {
-  width: 270px;
+  width: 200px;
 }
+
+.form-login h2 {
+    font-size: 20px;
+} 

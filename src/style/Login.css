@@ -1,11 +1,11 @@
 @import "https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css";
 
 * {
-  font-size: large;
+  font-size: medium;
 }
 
 input {
-  font-size: large;
+  font-size: medium;
 }
 
 .FormLogin {

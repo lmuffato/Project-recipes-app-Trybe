@@ -25,7 +25,7 @@ export default function FormLogin() {
     <LoginContext.Provider value={ { stateLogin, dispatch } }>
       <div className="form-login">
         <img src={ logologin } alt="recipe logo" className="logologin" />
-        <h1>R3CIPE23</h1>
+        <h2>R3CIPE23</h2>
         <br />
         <form
           onSubmit={ (evt) => {

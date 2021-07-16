@@ -8,20 +8,23 @@ export default function EmailInput() {
 
   return (
     <div className="field">
-      <label
-        className="label"
-        htmlFor="email-input"
-      >
+      <label className="label" htmlFor="email-input">
         E-Mail:
         {' '}
-        <input
-          name="email-input"
-          size="15"
-          data-testid="email-input"
-          type="email"
-          placeholder="name@example.com"
-          onChange={ (evt) => dispatch(emailAction(evt.target.value)) }
-        />
+        <br />
+        <p className="control has-icons-left has-icons-right">
+          <input
+            name="email-input"
+            size="15"
+            data-testid="email-input"
+            type="email"
+            placeholder="name@example.com"
+            onChange={ (evt) => dispatch(emailAction(evt.target.value)) }
+          />
+          <span className="icon is-small is-left">
+            <i className="fas fa-envelope" />
+          </span>
+        </p>
       </label>
     </div>
   );
