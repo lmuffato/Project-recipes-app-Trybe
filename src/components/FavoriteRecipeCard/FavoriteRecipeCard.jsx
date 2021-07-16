@@ -25,33 +25,43 @@ function FavoriteRecipeCard(props) {
           />
         </div>
       </Link>
-      <p data-testid={ `${index}-horizontal-top-text` }>
-        { recipe.type === 'comida' && `${recipe.area} - ` }
-        { recipe.alcoholicOrNot === 'Alcoholic' && 'Alcoholic - ' }
-        { recipe.category }
-      </p>
-      <Link to={ detailsUrl }>
-        <p data-testid={ `${index}-horizontal-name` }>
-          { recipe.name }
-        </p>
-      </Link>
-      <button
-        type="button"
-        onClick={ () => handleCopyToClipboard(detailsUrl, setCopiedToClipboard) }
-      >
-        <img
-          data-testid={ `${index}-horizontal-share-btn` }
-          src={ shareIcon }
-          alt="share-btn"
-        />
-      </button>
-      <button type="button" onClick={ () => handleRemoveRecipe(index) }>
-        <img
-          data-testid={ `${index}-horizontal-favorite-btn` }
-          src={ blackHeartIcon }
-          alt="share-btn"
-        />
-      </button>
+      <div className="recipe-info">
+        <div className="category">
+          <p
+            data-testid={ `${index}-horizontal-top-text` }
+            className="recipe-category"
+          >
+            { recipe.type === 'comida' && `${recipe.area} - ` }
+            { recipe.alcoholicOrNot === 'Alcoholic' && 'Alcoholic - ' }
+            { recipe.category }
+          </p>
+        </div>
+
+        <Link to={ detailsUrl }>
+          <p data-testid={ `${index}-horizontal-name` }>
+            { recipe.name }
+          </p>
+        </Link>
+        <div className="icons-grid">
+          <button
+            type="button"
+            onClick={ () => handleCopyToClipboard(detailsUrl, setCopiedToClipboard) }
+          >
+            <img
+              data-testid={ `${index}-horizontal-share-btn` }
+              src={ shareIcon }
+              alt="share-btn"
+            />
+          </button>
+          <button type="button" onClick={ () => handleRemoveRecipe(index) }>
+            <img
+              data-testid={ `${index}-horizontal-favorite-btn` }
+              src={ blackHeartIcon }
+              alt="share-btn"
+            />
+          </button>
+        </div>
+      </div>
     </FavRecipeCardContainer>
   );
 }

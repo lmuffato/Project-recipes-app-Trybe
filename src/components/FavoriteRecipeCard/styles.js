@@ -1,12 +1,13 @@
 import styled from 'styled-components';
 
 const FavRecipeCardContainer = styled.div`margin: 8px 8px 32px;
-  min-height: 216px;
+  max-height: 400px;
   outline: 0;
   position: relative;
-  width: 14.7rem;
+  width: 15.1rem;
 
   a {
+    color: #289ea8;
     text-decoration: none;
   }
 
@@ -17,7 +18,8 @@ const FavRecipeCardContainer = styled.div`margin: 8px 8px 32px;
   }
 
   .img-wrapper {
-    border-radius: 4px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
     height: 0;
     overflow: hidden;
     padding-bottom: 100%;
@@ -35,6 +37,43 @@ const FavRecipeCardContainer = styled.div`margin: 8px 8px 32px;
       transform: translateX(50%);
       width: auto;
     }
+  }
+
+  .recipe-category {
+    color: #a6a6a6;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  .icons-grid {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+
+    button {
+
+      img {
+        color: #289ea8;
+      }
+    }
+  }
+
+  .recipe-info {
+    align-items: center;
+    /* background: #289ea8; */
+    /* background: #ebf4f2; */
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    color: #289ea8;
+    display: flex;
+    flex-flow: column nowrap;
+    font-size: 1rem;
+    justify-content: space-between;
+    line-height: 1;
+    margin: 0 auto 6px;
+    padding-left: 10px;
+    padding-right: 10px;
+    z-index: 2;
   }
 `;
 
