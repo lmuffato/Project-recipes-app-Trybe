@@ -9,6 +9,7 @@ import EmailInput from './EmailInput';
 import PasswordInput from './PasswordInput';
 import ButtonLogin from './ButtonLogin';
 import '../../style/FormLogin.css';
+import logologin from '../../images/logologin.jpg';
 
 export default function FormLogin() {
   const [stateLogin, dispatch] = useReducer(loginReducer, {
@@ -23,6 +24,9 @@ export default function FormLogin() {
   return (
     <LoginContext.Provider value={ { stateLogin, dispatch } }>
       <div className="form-login">
+        <img src={ logologin } alt="recipe logo" className="logologin" />
+        <h1>R3CIPE23</h1>
+        <br />
         <form
           onSubmit={ (evt) => {
             evt.preventDefault();
@@ -35,6 +39,7 @@ export default function FormLogin() {
           <EmailInput />
           <br />
           <PasswordInput />
+          <br />
           <ButtonLogin />
         </form>
         { redirect ? <Redirect to="/comidas" /> : ''}

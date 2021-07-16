@@ -13,6 +13,8 @@ import {
   fetchDrinksByIngredient,
   fetchDrinksByFirstLetter } from '../../services/cocktailAPI';
 
+import '../../style/SearchBar.css';
+
 export default function SearchBar() {
   const [searchType, setSearchType] = useState('');
   const [searchString, setSearchString] = useState('');
@@ -112,7 +114,6 @@ export default function SearchBar() {
           />
         </label>
       </div>
-      <br />
       <div className="control">
         <label
           className="radio"
@@ -126,6 +127,7 @@ export default function SearchBar() {
             value="name"
           />
           Nome
+          {'  '}
           <input
             type="radio"
             name="search-radio"
@@ -133,7 +135,7 @@ export default function SearchBar() {
             value="ingredient"
           />
           Ingrediente
-          <br />
+          {'  '}
           <input
             type="radio"
             name="search-radio"
@@ -143,7 +145,6 @@ export default function SearchBar() {
           Primeira Letra
         </label>
       </div>
-      <br />
       <div className="control">
         <button
           className="button is-primary"

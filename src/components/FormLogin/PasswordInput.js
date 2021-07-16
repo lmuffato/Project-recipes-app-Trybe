@@ -17,6 +17,7 @@ export default function PasswordInput() {
         <input
           data-testid="password-input"
           type="password"
+          size="13"
           placeholder="more than 6 characters"
           onChange={ (evt) => dispatch(passwordAction(evt.target.value)) }
         />

@@ -11,16 +11,28 @@ form {
 .header-container {
   align-items: center;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-
+  justify-content: space-around;
+  /* border: solid 1px red; */
+  width: 100%;
 }
 
 .header-searchbar-container {
+  /* border: solid 1px black; */
   background-color: whitesmoke;
   border-radius: 8px;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: space-around;
   min-height: 20vh;
+  margin-top: 10px;
   width: 90%;
+}
+
+
+.header-search-button {
+  width: 30px;
+}
+
+.form-searchbar {
+  display: flex;
 }

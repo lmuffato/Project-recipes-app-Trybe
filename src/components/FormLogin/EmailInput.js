@@ -16,6 +16,7 @@ export default function EmailInput() {
         {' '}
         <input
           name="email-input"
+          size="15"
           data-testid="email-input"
           type="email"
           placeholder="name@example.com"

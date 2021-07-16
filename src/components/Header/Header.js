@@ -18,6 +18,7 @@ export default function Header({ title, enableSearchIcon = true }) {
         <span data-testid="page-title">{title}</span>
         { enableSearchIcon && (
           <button
+            className="header-search-button"
             type="button"
             src={ searchIcon }
             data-testid="search-top-btn"

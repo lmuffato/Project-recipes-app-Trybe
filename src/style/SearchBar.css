@@ -1,0 +1,10 @@
+.form-searchbar {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: space-between;
+  /* border: solid 1px red; */
+}
+
+.control {
+  margin: 10px 0;
+}

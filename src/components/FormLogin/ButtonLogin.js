@@ -8,16 +8,18 @@ export default function ButtonLogin() {
   const numberMagic = 7;
 
   return (
-    <button
-      className="button is-primary"
-      data-testid="login-submit-btn"
-      type="submit"
-      disabled={
-        !/^[\w+.]+@\w+\.\w{2,}(?:\.\w{2})?$/.test(email)
-        || password.length < numberMagic
-      }
-    >
-      Login
-    </button>
+    <div className="control">
+      <button
+        className="button is-primary"
+        data-testid="login-submit-btn"
+        type="submit"
+        disabled={
+          !/^[\w+.]+@\w+\.\w{2,}(?:\.\w{2})?$/.test(email)
+          || password.length < numberMagic
+        }
+      >
+        Login
+      </button>
+    </div>
   );
 }
