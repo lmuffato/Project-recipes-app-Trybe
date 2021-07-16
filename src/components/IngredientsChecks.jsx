@@ -19,7 +19,7 @@ export default function IngredientsChecks({ ingredients }) {
 
   if (!ingredientsInit) return <div />;
   return (
-    <>
+    <div>
       { ingredientsInit.map((ingredient, index) => (
         <Card
           key={ `${index}-${ingredient}` }
@@ -38,7 +38,7 @@ export default function IngredientsChecks({ ingredients }) {
           <label htmlFor={ ingredient }>{ingredient}</label>
         </Card>
       ))}
-    </>
+    </div>
   );
 }
 
