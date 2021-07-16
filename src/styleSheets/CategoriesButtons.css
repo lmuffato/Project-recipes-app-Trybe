@@ -1,6 +1,4 @@
 .category-button {
-
-  /* transform: rotate(-90deg); */
   border: none;
   border-radius: 0 10px 10px 0;
 }
@@ -18,4 +16,9 @@
 
 .selected {
   background-color: antiquewhite;
+}
+
+.start-button {
+  bottom: 0;
+  position: fixed;
 }

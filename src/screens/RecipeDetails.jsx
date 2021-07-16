@@ -5,12 +5,16 @@ import fetchApiById from '../service/fetchApiDetails';
 import Ingredients from './Ingredients';
 import Recommendations from './Recomendations';
 import Video from '../service/Video';
+import { FavFood, FavDrink } from '../service/Favorite';
+import RenderProgress from '../service/RenderProgress';
+import { checkFavoriteFood, checkFavoriteDrink } from '../service/Check';
 
 function RecipeDetails(props) {
   const { match: { params: { id } } } = props;
   const { pathname } = useLocation();
   const [recipe, setRecipe] = useState({});
   const type = pathname === `/comidas/${id}` ? 'themealdb' : 'thecocktaildb';
+  const url = pathname === `/comidas/${id}` ? 'comidas' : 'bebidas';
 
   useEffect(() => {
     async function requestApi() {
@@ -31,21 +35,28 @@ function RecipeDetails(props) {
       <h2 data-testid="recipe-title">
         { recipe.strMeal || recipe.strDrink }
       </h2>
-      <button type="button">
+      <button type="button" data-testid="share-btn">
         compartilhar
       </button>
-      <button type="button">
-        favoritar
-      </button>
+      <input
+        type="image"
+        data-testid="favorite-btn"
+        src={ url === 'comidas' ? checkFavoriteFood(recipe) : checkFavoriteDrink(recipe) }
+        alt="favoritar receita"
+        className="fav-btn"
+        onClick={ () => (
+          url === 'comidas' ? FavFood(recipe) : FavDrink(recipe)
+        ) }
+      />
       <p data-testid="recipe-category">
         { recipe.strCategory }
       </p>
-      <Video recipe={ recipe } />
+      { recipe.strMeal ? <Video recipe={ recipe } /> : null }
       <Ingredients recipe={ recipe } />
       <h3>Instruções</h3>
       <p data-testid="instructions">{ recipe.strInstructions }</p>
       <Recommendations recipe={ type } />
-      <button type="button" data-testid="start-recipe-btn">Iniciar Receita</button>
+      { RenderProgress(url, id) }
     </div>
   );
 }

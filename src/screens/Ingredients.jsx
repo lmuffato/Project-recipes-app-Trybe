@@ -1,43 +1,30 @@
-import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
 
-export default function Ingredients({ recipe }) {
-  const [ingredients, setIngredients] = useState([]);
-
-  function getIngredients() {
-    const ingredientsList = Object.entries(recipe)
-      .filter((property) => property[0].includes('strIngredient') && property[1]);
-    return ingredientsList;
-  }
-
-  function getMeasures() {
-    const measuresList = Object.entries(recipe)
-      .filter((property) => {
-        const checkKey = property[0].includes('strMeasure');
-        const checkValue = property[1];
-        return checkKey && checkValue;
-      });
-    return measuresList;
-  }
-
-  useEffect(() => {
-    setIngredients(getIngredients());
-  }, [recipe]);
+function Ingredients({ recipe }) {
+  const retObj = Object.entries(recipe);
+  const listIngredients = retObj.filter((element) => (
+    element[0].includes('Ingredient') && element[1]
+  ));
+  const filterAlcoohol = retObj.filter((element) => {
+    const noAlcool = element[1] !== ' ' && element[1] !== null;
+    return element[0].includes('Measure') && noAlcool;
+  });
 
   return (
     <div>
-      <h3>Ingredientes</h3>
+      <h3>Ingredientes:</h3>
       <ul>
-        { ingredients.length
-          ? ingredients.map(
-            (ingredient, index) => (
-              <li
-                key={ index }
-                data-testid={ `${index}-ingredient-name-and-measure` }
-              >
-                {`${ingredient[1]} - ${getMeasures()[index][1]}`}
-              </li>),
-          ) : ''}
+        {listIngredients.map((ingredient, index) => (
+          <li
+            key={ index }
+            data-testid={ `${index}-ingredient-name-and-measure` }
+          >
+            {filterAlcoohol[index] ? (
+              `${ingredient[1]} - ${filterAlcoohol[index][1]}`
+            ) : (ingredient[1])}
+          </li>
+        ))}
       </ul>
     </div>
   );
@@ -46,3 +33,5 @@ export default function Ingredients({ recipe }) {
 Ingredients.propTypes = {
   recipe: PropTypes.object,
 }.isRequired;
+
+export default Ingredients;

@@ -4,8 +4,7 @@ import ContextRecipes from './ContextRecipes';
 
 function ProviderRecipes({ children }) {
   const [filteredRecipe, setRecipes] = useState([]);
-  const [activeFilters, setFilter] = useState([]);
-  const [recipeDetail, setDetail] = useState({});
+  const [activeFilter, setFilter] = useState('All');
   const [categories, setCategories] = useState([]);
   const [search, setSearch] = useState('');
   const [radioFilter, setRadioFilter] = useState('');
@@ -15,18 +14,45 @@ function ProviderRecipes({ children }) {
   const [showSearchBar, setShowSearchBar] = useState(false);
   const [countries, setCountries] = useState([]);
   const [filteredByCountry, setFilteredByCountry] = useState([]);
+  const [alertOn, setAlertOn] = useState(false);
+  const [updateFlag, setUpadateFlag] = useState(false);
+
+  const turnOnAlert = () => {
+    setAlertOn(true);
+    const waitTime = 2000;
+    setTimeout(() => { setAlertOn(false); }, waitTime);
+  };
+
+  function checkLocStorage() {
+    const doneRecipesArray = JSON.parse(localStorage.getItem('doneRecipes'));
+    if (doneRecipesArray !== null) {
+      return doneRecipesArray;
+    }
+    return [];
+  }
+
+  function checkLocalStorage() {
+    const inProgressRecipesArray = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    if (inProgressRecipesArray !== null) {
+      return inProgressRecipesArray;
+    }
+    return [];
+  }
+
+  const [inProgressRecipes, setInProgressRecipes] = useState(checkLocalStorage());
+  const [doneRecipes, setDoneRecipes] = useState(checkLocStorage());
 
   const getCategories = async (type) => {
     const siteName = type === 'Meal' ? 'meal' : 'cocktail';
     const endpoint = `https://www.the${siteName}db.com/api/json/v1/1/list.php?c=list`;
     const dbCategories = await fetch(endpoint)
       .then((response) => response.json())
-      .then((response) => response[`${type.toLowerCase()}s`]);
+      .then((response) => response[`${type.toLowerCase()}s`])
+      .catch((error) => console.log(error));
     const newCategories = ['All'];
     dbCategories.forEach((category) => newCategories.push(category.strCategory));
     setCategories(newCategories);
   };
-
   const getRecipes = async (category = 'All', type = 'Meal') => {
     const siteName = type === 'Meal' ? 'meal' : 'cocktail';
     let recipeList = [];
@@ -62,7 +88,6 @@ function ProviderRecipes({ children }) {
     }
     return endpoint;
   };
-
   // esta função vai fazer a solicitação das receitas e
   // aplicar os filtros devidos
   const fetchRecipes = async (link) => {
@@ -71,16 +96,10 @@ function ProviderRecipes({ children }) {
     setLoadingCards(true);
     const response = await fetch(endpoint)
       .then((r) => r.json())
-      .then((r) => r[`${type.toLowerCase()}s`]);
+      .then((r) => r[`${type.toLowerCase()}s`])
+      .catch((error) => console.log(error));
     setLoadingCards(false);
     setRecipes(response);
-  };
-
-  const fetchDetail = (recipeId) => {
-    // Esta função deveria fazer a requisição de detalhes de
-    // uma receita quando esta for clicada
-    console.log(recipeId);
-    setDetail({});
   };
 
   const fetchArea = async () => {
@@ -112,14 +131,16 @@ function ProviderRecipes({ children }) {
   return (
     <ContextRecipes.Provider
       value={ {
-        activeFilters,
+        setDoneRecipes,
+        doneRecipes,
+        inProgressRecipes,
+        setInProgressRecipes,
+        activeFilter,
+        setFilter,
         filteredRecipe,
         getRecipes,
         categories,
         getCategories,
-        recipeDetail,
-        fetchDetail,
-        setFilter,
         search,
         setSearch,
         radioFilter,
@@ -138,17 +159,19 @@ function ProviderRecipes({ children }) {
         setCountries,
         fetchByCountry,
         filteredByCountry,
+        alertOn,
+        turnOnAlert,
+        updateFlag,
+        setUpadateFlag,
       } }
     >
       { children }
     </ContextRecipes.Provider>
   );
 }
-
 ProviderRecipes.propTypes = {
   children: PropTypes.objectOf(PropTypes.shape(
     PropTypes.object,
   )),
 }.isRequired;
-
 export default ProviderRecipes;

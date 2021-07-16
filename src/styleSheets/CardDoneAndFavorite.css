@@ -1,0 +1,14 @@
+.done-favorite-card {
+  display: flex;
+  height: 150px;
+  width: 100%;
+}
+
+.image-done-card {
+  height: 100%;
+}
+
+.info-card {
+  display: flex;
+  flex-direction: column;
+}
