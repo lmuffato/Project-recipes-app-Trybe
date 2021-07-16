@@ -6,7 +6,9 @@
 
 .header {
   background-image: url('../images/1057932.jpg');
-  background-position-y: 1477px;
+  background-position-x: center;
+  background-position-y: 577vw;
+  background-size: 100%;
   display: flex;
   flex-direction: column;
   font-family: Montserrat , Arial , Verdana , Tahoma , sans-serif;
@@ -125,10 +127,32 @@
   width: 80%;
 }
 
+.selected_header_filter {
+  background-blend-mode: overlay;
+  background-color: rgba(0, 0, 0, 0.61);
+  box-shadow: 0.3px 0.3px 3px rgb(29, 28, 29) inset;
+}
+
+.inp-group-search label {
+  align-items: center;
+  box-shadow: 4px 4px 10px rgb(29, 28, 29);
+  display: flex;
+  height: 60%;
+  justify-content: center;
+  margin-top: 2%;
+  text-shadow: 1px 1px 1px rgb(51, 51, 51);
+  width: 30%;
+}
+
+.inp-group-search label:hover {
+  background-blend-mode: overlay;
+  background-color: rgba(0, 0, 0, 0.61);
+  box-shadow: 0.3px 0.3px 3px rgb(29, 28, 29) inset;
+  text-shadow: 1px 1px 1px rgb(51, 51, 51);
+}
+
 .inp-group-search input {
-  margin-right: 6px;
-  margin-top: -1px;
-  vertical-align: middle;
+  opacity: 0;
 }
 
 .group-submit-txt {
@@ -139,6 +163,12 @@
 }
 
 @media ( max-width : 786.98px ) {
+
+  .header {
+    background-position-x: center;
+    background-position-y: 389vw;
+    background-size: auto;
+  }
 
   .inp-group-search {
     align-items: center;

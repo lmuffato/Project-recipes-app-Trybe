@@ -26,6 +26,9 @@ function Button({ clas, index, page }) {
         fetchApi('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=', 'bebidas');
       }
     }
+    const select = document.getElementsByClassName('selected_filter')[0];
+    if (select) { select.className = ''; }
+    event.target.parentElement.className = 'selected_filter';
   }
 
   return (

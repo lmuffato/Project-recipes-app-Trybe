@@ -48,6 +48,12 @@ function BuscaHeader() {
     event.preventDefault();
   }
 
+  function inputChange({ target }) {
+    const select = document.getElementsByClassName('selected_header_filter')[0];
+    if (select) { select.className = ''; }
+    target.parentElement.className = 'selected_header_filter';
+  }
+
   return (
     <form className="inp-search">
       <div className="inp-group-search">
@@ -59,6 +65,7 @@ function BuscaHeader() {
             value="ingredient"
             data-testid="ingredient-search-radio"
             onChange={ (event) => setType(event.target.value) }
+            onClick={ inputChange }
             required
           />
           Ingredient
@@ -71,6 +78,7 @@ function BuscaHeader() {
             value="name"
             data-testid="name-search-radio"
             onChange={ (event) => setType(event.target.value) }
+            onClick={ inputChange }
             required
           />
           Name
@@ -83,6 +91,7 @@ function BuscaHeader() {
             value="firstLetter"
             data-testid="first-letter-search-radio"
             onChange={ (event) => setType(event.target.value) }
+            onClick={ inputChange }
             required
           />
           First Letter
