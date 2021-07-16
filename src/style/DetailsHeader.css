@@ -1,7 +1,8 @@
 @import "https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css";
 
 .details-header-img {
-  width: 100vw;
+  margin-top: 20px;
+  width: 90vw;
 }
 
 .details-header-middle {
@@ -10,10 +11,21 @@
   justify-content: space-between;
 }
 
+.details-header-middle h1{
+  font-size: 40px;
+  margin-left: 20px;
+  margin-top: 30px;
+}
+
 .toast {
   /* background-color: white; */
   background-color: #DB5461;
   left: 50%;
   position: fixed;
   top: 0;
+}
+
+.buttons-container img {
+  width: 20px;
+  height: auto;
 }

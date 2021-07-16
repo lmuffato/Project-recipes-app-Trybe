@@ -12,6 +12,7 @@ import Button from '../components/Button';
 import List from '../components/List';
 import RenderVideo from '../components/RenderVideo';
 import Carousel from '../components/Carousel';
+import '../style/DetalhesComidas.css';
 
 export default function DetalhesComidas() {
   const [recipe, setRecipe] = useState({});
@@ -76,7 +77,7 @@ export default function DetalhesComidas() {
   }, [updateDrinks]);
 
   return (
-    <div>
+    <div className="details-main">
       <DetailsHeader
         recipe={ recipe }
         isFood
