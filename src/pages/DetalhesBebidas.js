@@ -76,38 +76,44 @@ export default function DetalhesBebidas() {
   }, [updateFoods]);
 
   return (
-    <div>
-      <DetailsHeader
-        recipe={ recipe }
-        isDrink
-      />
-      <Text>
-        Ingredients
-      </Text>
-      { filterIngredient.length > 0
-        && <List
-          dataTestid="-ingredient-name-and-measure"
-          list={ filterIngredient }
-        /> }
-      <Text>
-        Instructions
-      </Text>
-      {
-        recipe.strInstructions
-        && <Paragraphs dataTestid="instructions">{ recipe.strInstructions }</Paragraphs>
-      }
-      <Text>
-        Recomendadas
-      </Text>
-      { food.length > 0 && <Carousel data={ food } /> }
-      {!isDone && (
-        <Button
-          dataTestid="start-recipe-btn"
-          onClick={ handleClick }
-        >
-          {isInProgress ? 'Continuar Receita' : 'Iniciar Receita'}
-        </Button>
-      )}
-    </div>
+    <>
+      <div>
+        <DetailsHeader
+          recipe={ recipe }
+          isDrink
+        />
+        <Text>
+          Ingredients
+        </Text>
+        { filterIngredient.length > 0
+          && <List
+            dataTestid="-ingredient-name-and-measure"
+            list={ filterIngredient }
+          /> }
+        <Text>
+          Instructions
+        </Text>
+        {
+          recipe.strInstructions
+          && <Paragraphs dataTestid="instructions">{ recipe.strInstructions }</Paragraphs>
+        }
+        <Text>
+          Recomendadas
+        </Text>
+        { food.length > 0 && <Carousel data={ food } /> }
+        <br />
+        <br />
+        {!isDone && (
+          <Button
+            dataTestid="start-recipe-btn"
+            onClick={ handleClick }
+          >
+            {isInProgress ? 'Continuar Receita' : 'Iniciar Receita'}
+          </Button>
+        )}
+      </div>
+      <br />
+      <br />
+    </>
   );
 }
