@@ -118,6 +118,7 @@
 
 .share-btn {
   filter: invert(80%);
+  width: 28%;
 }
 
 .share-btn:hover {
