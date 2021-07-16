@@ -6,6 +6,7 @@ import RecipesContext from '../contexts/RecipesContext';
 import ShareButton from '../compenents/ShareButton';
 import FavoriteBtn from '../compenents/FavoriteBtn';
 import Loading from '../compenents/Loading';
+import checkInProgress from '../services/checkInProgress';
 
 function DrinksRecepiesProgress() {
   const [detailsRecepie, setDetailsRecepie] = useState();
@@ -25,12 +26,15 @@ function DrinksRecepiesProgress() {
     getRecepi();
   }, []);
 
-  /*   function saveLS() {
-  // Esta função não esta sendo chamada, e precisa ser duplicada para o MealsRecepiesProgress
+  function saveLS() {
+  // Resolver problema caso seja null
     console.log('chamou a função de salvar');
     const getLS = localStorage.getItem('doneRecipes');
+    const desStringGetLS = JSON.parse(getLS);
+    console.log(desStringGetLS);
     const { strDrink, strDrinkThumb, strAlcoholic, strTags } = detailsRecepie;
     const date = new Date();
+
     const newDoneRecepi = {
       id: recepiID,
       type: 'bebida',
@@ -42,9 +46,15 @@ function DrinksRecepiesProgress() {
       doneDate: `${date.getDate()} - ${date.getTime()}`,
       tags: strTags,
     };
-    console.log(newDoneRecepi.doneDate);
-    return localStorage.setItem('doneRecipes', [...getLS, newDoneRecepi]);
-  } */
+
+    if (desStringGetLS === null) {
+      const newDoneRecepiString = JSON.stringify([newDoneRecepi]);
+      return localStorage.setItem('doneRecipes', newDoneRecepiString);
+    }
+    const allInfo = [...desStringGetLS, newDoneRecepi];
+    const stringNewArrayOfObjects = JSON.stringify(allInfo);
+    return localStorage.setItem('doneRecipes', stringNewArrayOfObjects);
+  }
 
   const getLocalStr = JSON.parse(localStorage.getItem('favoriteRecipes'));
   let checkLocalStr;
@@ -60,6 +70,8 @@ function DrinksRecepiesProgress() {
   } else {
     setIsFavorite(false);
   }
+
+  checkInProgress();
 
   if (detailsRecepie === undefined) {
     return <Loading />;
@@ -103,7 +115,7 @@ function DrinksRecepiesProgress() {
           data-testid="finish-recipe-btn"
           type="button"
           disabled={ allChecked }
-          // onClick={ saveLS }
+          onClick={ () => saveLS() }
         >
           Finalizar receita
         </button>

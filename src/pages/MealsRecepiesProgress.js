@@ -6,6 +6,7 @@ import RecipesContext from '../contexts/RecipesContext';
 import ShareButton from '../compenents/ShareButton';
 import FavoriteBtn from '../compenents/FavoriteBtn';
 import Loading from '../compenents/Loading';
+import checkInProgress from '../services/checkInProgress';
 
 function MealsRecepiesProgress() {
   const [detailsRecepie, setDetailsRecepie] = useState();
@@ -13,12 +14,13 @@ function MealsRecepiesProgress() {
   const history = useHistory();
   const recepiID = history.location.pathname.split('/')[2];
 
+  console.log(recepiID);
+
   // ao montar a pagina, faz api que traz infos via ID.
   useEffect(() => {
     const getRecepi = async () => {
       const endpoint = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${recepiID}`;
-      const { meals } = await fetch(endpoint).then((data) => data.json()); /* .then((response) => response)) */
-      console.log(meals);
+      const { meals } = await fetch(endpoint).then((data) => data.json());
       setDetailsRecepie(meals[0]);
     };
     getRecepi();
@@ -33,11 +35,44 @@ function MealsRecepiesProgress() {
       .find(({ id: strId }) => strId === recepiID);
   }
 
+  function saveLS() {
+    // Esta função não esta sendo chamada, e precisa ser duplicada para o MealsRecepiesProgress
+    console.log('chamou a função de salvar');
+    console.log(detailsRecepie);
+    const getLS = localStorage.getItem('doneRecipes');
+    const desStringGetLS = JSON.parse(getLS);
+    // desStringGetLS é um array de objetos
+    const { strMeal, strCategory, strArea, strMealThumb, strTags } = detailsRecepie;
+    const firstTag = strTags !== null ? strTags.split(',')[0] : ' ';
+    const secondTag = strTags !== null ? strTags.split(',')[1] : '';
+    const date = new Date();
+    const newDoneRecepi = {
+      id: recepiID,
+      type: 'comida',
+      area: strArea,
+      category: strCategory,
+      alcoholicOrNot: '',
+      name: strMeal,
+      image: strMealThumb,
+      doneDate: `${date.getDate()} - ${date.getTime()}`,
+      tags: [firstTag, secondTag],
+    };
+    if (desStringGetLS === null) {
+      const newDoneRecepiString = JSON.stringify([newDoneRecepi]);
+      return localStorage.setItem('doneRecipes', newDoneRecepiString);
+    }
+    const allInfo = [...desStringGetLS, newDoneRecepi];
+    const stringNewArrayOfObjects = JSON.stringify(allInfo);
+    return localStorage.setItem('doneRecipes', stringNewArrayOfObjects);
+  }
+
   if (checkLocalStr) {
     setIsFavorite(true);
   } else {
     setIsFavorite(false);
   }
+
+  checkInProgress();
 
   if (detailsRecepie === undefined) {
     return <Loading />;
@@ -80,6 +115,7 @@ function MealsRecepiesProgress() {
           data-testid="finish-recipe-btn"
           type="button"
           disabled={ allChecked }
+          onClick={ () => saveLS() }
         >
           Finalizar receita
         </button>

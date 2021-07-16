@@ -3,18 +3,29 @@ import PropTypes from 'prop-types';
 import RecipesContext from '../contexts/RecipesContext';
 import '../styles/IngredientsMeasure.css';
 
-function IngredientsMeasure({ detailsRecepie }) {
-  console.log(detailsRecepie);
+function DrinkIngredientsMeasure({ detailsRecepie }) {
   const [checkedIngridientsState, setCheckedIngridientsState] = useState(0);
   const { idDrink } = detailsRecepie;
   const ingredientsStorage = JSON.parse(localStorage.getItem('inProgressRecipes'));
   const [doneIngredients, setDoneIngredients] = useState(
-    ingredientsStorage ? ingredientsStorage.cocktails[idDrink] : [],
+    ingredientsStorage.cocktails[idDrink] !== undefined
+      ? ingredientsStorage.cocktails[idDrink] : [],
   );
-  const [cocktailsStorage, setcocktailsStorage] = useState({});
-  const [allMealsStorage, setAllMealsStorage] = useState({});
-  const [otherStorageRecepies, setOtherStorageRecepies] = useState([]);
+
+  const [allMealsStorage] = useState(
+    ingredientsStorage.meals ? ingredientsStorage.meals : {},
+  );
+
+  const theXablauIsComming = () => {
+    delete ingredientsStorage.cocktails[idDrink];
+    return ingredientsStorage.cocktails;
+  };
+
+  const [otherStorageRecepies] = useState(
+    Object.keys(ingredientsStorage.cocktails).length !== 0 ? theXablauIsComming() : {},
+  );
   const { setAllChecked } = useContext(RecipesContext);
+  console.log(otherStorageRecepies);
 
   const allIngredients = Object.entries(detailsRecepie)
     .filter((keys) => keys[0]
@@ -33,44 +44,14 @@ function IngredientsMeasure({ detailsRecepie }) {
     return setAllChecked(true);
   }
 
-  function setFirstLocalStorage() {
-    const objetoLocalStorage = {
-      cocktails: { [idDrink]: doneIngredients },
-      meals: {},
-    };
-    const ingredientListString = JSON.stringify(objetoLocalStorage);
-    localStorage.setItem('inProgressRecipes', ingredientListString);
-  }
-
   function upDateLocalStorage() {
     const newLocalStorage = {
       cocktails: { ...otherStorageRecepies, [idDrink]: [...doneIngredients] },
-      meals: { allMealsStorage },
+      meals: allMealsStorage,
     };
     const newLocalStorageString = JSON.stringify(newLocalStorage);
     localStorage.setItem('inProgressRecipes', newLocalStorageString);
-    // setAllMealsStorage(newLocalStorage.meals);
   }
-
-  function getLocalStorage() {
-    const recepiesInProgressString = localStorage.getItem('inProgressRecipes');
-    const recepiesInProgress = JSON.parse(recepiesInProgressString);
-    if (recepiesInProgressString === null) {
-      setFirstLocalStorage();
-    } else {
-      const { cocktails, meals } = recepiesInProgress;
-      setcocktailsStorage(cocktails);
-      setAllMealsStorage(meals);
-      const otherRecepies = delete cocktailsStorage.idDrink;
-      setOtherStorageRecepies(otherRecepies);
-
-      if (cocktails[idDrink] === null) upDateLocalStorage();
-    }
-  }
-
-  useEffect(() => {
-    getLocalStorage();
-  }, []);
 
   useEffect(() => {
     checkInputs();
@@ -102,7 +83,8 @@ function IngredientsMeasure({ detailsRecepie }) {
             onChange={ (e) => checkedListIngredients(e) }
           />
           <span className="checked-list">
-            { `${elem[1]} - ${allMeasure[index][1]}` }
+            { `${elem[1]} - ${allMeasure[index] === undefined
+              ? 'at taste' : allMeasure[index]}` }
           </span>
         </label>
       </div>
@@ -116,10 +98,10 @@ function IngredientsMeasure({ detailsRecepie }) {
   );
 }
 
-IngredientsMeasure.propTypes = {
+DrinkIngredientsMeasure.propTypes = {
   detailsRecepie: PropTypes.shape({
     idDrink: PropTypes.string,
   }).isRequired,
 };
 
-export default IngredientsMeasure;
+export default DrinkIngredientsMeasure;

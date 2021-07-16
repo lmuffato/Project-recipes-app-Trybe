@@ -10,6 +10,7 @@ function RecipesProvider({ children }) {
   const [searchedRecipes, setSearchedRecipes] = useState(null);
   const [idMeal, setIdMeal] = useState();
   const [idDrink, setIdDrink] = useState();
+  const [recomendations, setRecomendations] = useState(null);
   const [favoriteRecipes, setFavRecipes] = useState(() => {
     const favRecipe = localStorage.getItem('favoriteRecipes');
     return favRecipe ? JSON.parse(favRecipe) : [];
@@ -35,6 +36,8 @@ function RecipesProvider({ children }) {
     setIdMeal,
     idDrink,
     setIdDrink,
+    recomendations,
+    setRecomendations,
     favoriteRecipes,
     setFavRecipes,
     showRecipes,
