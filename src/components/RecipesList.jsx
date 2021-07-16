@@ -6,9 +6,9 @@ import Context from '../context/Context';
 function RecipesList({ data, path }) {
   const { category, filtredList } = useContext(Context);
   const renderCards = () => {
-    const TWELVE_NUM = 12;
-    const first12 = category === 'All' ? data.slice(0, TWELVE_NUM)
-      : filtredList.slice(0, TWELVE_NUM);
+    const magicNum = 12;
+    const first12 = category === 'All' ? data.slice(0, magicNum)
+      : filtredList.slice(0, magicNum);
     const toReturn = first12.map((recipe, index) => {
       const { name, imgSrc, id } = recipe;
       return (

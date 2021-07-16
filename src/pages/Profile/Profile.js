@@ -3,7 +3,6 @@ import { useHistory } from 'react-router-dom';
 import Header from '../../components/Header';
 import BottomMenu from '../../components/bottomMenu';
 import { getEmail } from '../../services/localStorage';
-import './Profile.css';
 
 export default function Profile() {
   const [userEmail, setEmail] = useState('');
@@ -25,6 +24,7 @@ export default function Profile() {
     window.localStorage.clear();
     history.push('/');
   }
+
   return (
     <div>
       <Header title="Perfil" show={ false } />
