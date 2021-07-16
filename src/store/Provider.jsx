@@ -38,6 +38,7 @@ function Provider({ children }) {
 
   const [mealArea, setMealArea] = useState([{ strArea: 'All' }]);
   const [dataOptions, setDataOptions] = useState([]);
+  const [favoriteRecipes, setFavoriteRecipes] = useState([]);
 
   useEffect(() => {
     fetchAllCategoriesFoods()
@@ -125,6 +126,8 @@ function Provider({ children }) {
     setMealArea,
     dataOptions,
     setDataOptions,
+    favoriteRecipes,
+    setFavoriteRecipes,
   };
 
   return (
