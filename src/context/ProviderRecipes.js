@@ -159,7 +159,7 @@ function ProviderRecipes({ children }) {
         countries,
         setCountries,
         fetchByCountry,
-        filteredByCountry,
+        // filteredByCountry,
         alertOn,
         turnOnAlert,
         updateFlag,
