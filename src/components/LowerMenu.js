@@ -4,9 +4,10 @@ import styled from 'styled-components';
 import app from '../configs/configs';
 import AppContext from '../contexts/app/AppContext';
 import drinkIcon from '../icons/appIcons/bebidas.png';
-// import drinkIcon from '../images/drinkIcon.svg';
-import exploreIcon from '../images/exploreIcon.svg';
-import mealIcon from '../images/mealIcon.svg';
+import exploreIcon from '../icons/appIcons/explorar.png';
+// import exploreIcon from '../images/exploreIcon.svg';
+import mealIcon from '../icons/appIcons/comidas.png';
+// import mealIcon from '../images/mealIcon.svg';
 
 export default function LowerMenu() {
   const { setScreenActive } = useContext(AppContext);
@@ -36,7 +37,7 @@ export default function LowerMenu() {
             } }
             src={ exploreIcon }
           >
-            <img src={ exploreIcon } alt="Explore icon" />
+            <img className="exploreIcon" src={ exploreIcon } alt="Explore icon" />
           </button>
         </li>
         <li>
@@ -49,7 +50,7 @@ export default function LowerMenu() {
             } }
             src={ mealIcon }
           >
-            <img src={ mealIcon } alt="Meal icon" />
+            <img className="exploreIcon" src={ mealIcon } alt="Meal icon" />
           </button>
         </li>
       </ul>
@@ -96,4 +97,10 @@ const Container = styled.div` align-items: center;
     height: 40px;
     width: 29px;
   }
+
+  .exploreIcon {
+    height: 47px;
+    width: 47px;
+  }
+
 `;

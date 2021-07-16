@@ -138,7 +138,7 @@ function FinishedRecipies() {
 }
 export default FinishedRecipies;
 
-const IconImageButtonDrinks = styled.img` height: 22px;
+const IconImageButtonDrinks = styled.img` height: 24px;
     width: 13px;
 `;
 const IconImageButton = styled.img` height: 22px;
