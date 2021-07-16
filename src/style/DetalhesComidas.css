@@ -4,3 +4,10 @@
   align-items: center;
 }
 
+.details-cards {
+  background-color: whitesmoke;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  border-radius: 8px;
+  transition: 0.3s;
+  margin: 20px;
+}

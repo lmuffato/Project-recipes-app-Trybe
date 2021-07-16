@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 export default function Paragraphs({ children, dataTestid }) {
   return (
     <p
+      className="details-cards"
       data-testid={ `${dataTestid}` }
     >
       { children }

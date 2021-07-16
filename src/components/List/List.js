@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 export default function List({ list, dataTestid }) {
   return (
-    <ul>
+    <ul className="details-cards">
       { list.map((item, index) => (
         <li
           key={ index }

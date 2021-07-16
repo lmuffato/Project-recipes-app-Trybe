@@ -5,6 +5,7 @@ import FavoritesContext from '../contexts/FavoritesContext';
 
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+// Warning: CSS Inline in Button
 
 export default function FavoriteButton({ recipe, isFood }) {
   const recipeId = isFood ? recipe.idMeal : recipe.idDrink;
@@ -52,6 +53,7 @@ export default function FavoriteButton({ recipe, isFood }) {
 
   return (
     <button
+      style={ { width: 40 } }
       type="button"
       onClick={ () => {
         setIsFavorite(!isFavorite);
@@ -62,6 +64,7 @@ export default function FavoriteButton({ recipe, isFood }) {
         data-testid="favorite-btn"
         src={ isFavorite ? blackHeartIcon : whiteHeartIcon }
         alt="favoritar"
+        style={ { width: 15, height: 15 } }
       />
     </button>
   );

@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import shareIcon from '../images/shareIcon.svg';
+// Warning: CSS Inline in Button
 
 const copy = require('clipboard-copy');
 
@@ -21,7 +22,7 @@ export default function ShareButton({ recipeId, isFood, index }) {
 
   return (
     <button
-      style={ { backgroundColor: 'white', width: 30 } }
+      style={ { backgroundColor: 'white', width: 40 } }
       type="button"
       data-testid={ `${index !== undefined ? `${index}-horizontal-` : ''}share-btn` }
       onClick={ handleShareClick }

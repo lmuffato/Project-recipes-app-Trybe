@@ -3,18 +3,25 @@
 .details-header-img {
   margin-top: 20px;
   width: 90vw;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
 }
 
 .details-header-middle {
   align-items: center;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
+  background-color: whitesmoke;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
 }
 
 .details-header-middle h1{
-  font-size: 40px;
+  font-size: 20px;
   margin-left: 20px;
   margin-top: 30px;
+  margin-bottom: 25px;
 }
 
 .toast {
