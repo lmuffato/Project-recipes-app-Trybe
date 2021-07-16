@@ -190,4 +190,10 @@
   .doneTitle {
     width: 100%;
   }
+
+  @media ( max-width : 1199.98px ) {
+    .share-btn {
+      width: 34%;
+    }
+  }
 }

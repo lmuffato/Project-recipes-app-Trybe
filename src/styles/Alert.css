@@ -4,7 +4,8 @@
   border: none;
   color: #f2f2f2;
   display: flex;
-  height: 38px;
+  font-size: 16px;
+  height: 5.5vh;
   justify-content: center;
   position: absolute;
   right: 0;
@@ -14,7 +15,7 @@
 
 .btn-close {
   background-position-y: 10px;
-  background-size: 40%;
+  background-size: 20px;
   filter: invert(100%);
   position: absolute;
   width: 10px;
@@ -38,6 +39,7 @@
 @media ( max-width : 786.98px ) {
 
   .alert {
+    font-size: 12px;
     right: 0;
     width: 100%;
   }
