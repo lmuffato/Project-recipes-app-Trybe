@@ -23,22 +23,27 @@ function RecipeItem(Props) {
     : `${data.alcoholicOrNot}`;
   return (
     <Item style={ { padding: 0 } }>
-      <Link to={ `/${data.type}s/${data.id}` }>
-        <Item.Image>
-          <img data-testid={ `${index}-horizontal-image` } alt="oi" src={ data.image } />
-        </Item.Image>
-      </Link>
+      <Item.Image>
+        <Link to={ `/${data.type}s/${data.id}` }>
+          <img
+            data-testid={ `${index}-horizontal-image` }
+            alt="food/drink"
+            src={ data.image }
+            style={ { maxHeight: 120 } }
+          />
+        </Link>
+      </Item.Image>
       <Item.Content>
         <Item.Meta
           data-testid={ `${index}-horizontal-top-text` }
         >
           {topText}
         </Item.Meta>
-        <Link to={ `/${data.type}s/${data.id}` }>
-          <Item.Header data-testid={ `${index}-horizontal-name` }>
+        <Item.Header data-testid={ `${index}-horizontal-name` }>
+          <Link to={ `/${data.type}s/${data.id}` }>
             {data.name}
-          </Item.Header>
-        </Link>
+          </Link>
+        </Item.Header>
         <Item.Extra>
           <Popup
             context={ contextRef }
