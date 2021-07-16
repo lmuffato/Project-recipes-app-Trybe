@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-// import ReactPlayer from 'react-player'; // https://dev.to/marcelomatosdev/react-adding-a-video-player-to-play-youtube-videos-in-your-project-30p
-import { Link, useParams } from 'react-router-dom';
-import shareIcon from '../images/shareIcon.svg';
+import { useParams } from 'react-router-dom';
+import ReactPlayer from 'react-player'; // https://dev.to/marcelomatosdev/react-adding-a-video-player-to-play-youtube-videos-in-your-project-30p
+import ShareBtn from './componentsDetails/ShareBtn';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import blackHeartIcon from '../images/blackHeartIcon.svg';
 import { foodById } from '../services/apiRequests';
 import DrinksRecomends from './componentsDetails/DrinksRecomends';
-import './DetailsScreen.css';
+import BtnInitiateRecipe from './componentsDetails/BtnInitiateRecipe';
 
 export default function RecipeCardDetailFood() {
   const [foodDetails, setFoodDetails] = useState({});
@@ -29,6 +30,40 @@ export default function RecipeCardDetailFood() {
     return meal[0].includes('Measure') && noAlcool;
   });
 
+  const setFavorite = () => {
+    const { strArea, strCategory, strMealThumb, strMeal } = foodDetails;
+
+    const favoriteRecipeToken = {
+      id: idMeal,
+      type: 'comida',
+      area: strArea,
+      category: strCategory,
+      alcoholicOrNot: '',
+      name: strMeal,
+      image: strMealThumb,
+    };
+
+    let favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    if (favoriteRecipes) {
+      if (favoriteRecipes.some((recipe) => recipe.id !== favoriteRecipeToken.id)) {
+        favoriteRecipes.push(favoriteRecipeToken);
+        document.getElementById('fav-btn').setAttribute('src', blackHeartIcon);
+      } else {
+        favoriteRecipes = favoriteRecipes
+          .filter((recipe) => recipe.id !== favoriteRecipeToken.id);
+        document.getElementById('fav-btn').setAttribute('src', whiteHeartIcon);
+      }
+    } else {
+      favoriteRecipes = [favoriteRecipeToken];
+      console.log(process.env);
+      document.getElementById('fav-btn').src = blackHeartIcon;
+    }
+    localStorage.setItem('favoriteRecipes', JSON.stringify(favoriteRecipes));
+    if (Object.values(favoriteRecipes).length === 0) {
+      localStorage.removeItem('favoriteRecipes');
+    }
+  };
+
   return (
     <div>
       <img
@@ -37,12 +72,18 @@ export default function RecipeCardDetailFood() {
         data-testid="recipe-photo"
       />
       <h1 data-testid="recipe-title">{ foodDetails.strMeal }</h1>
-      <button type="button" data-testid="share-btn">
-        <img src={ shareIcon } alt="compartilhar" />
+
+      <ShareBtn id={ idMeal } type="comida" />
+
+      <button type="button" onClick={ setFavorite }>
+        <img
+          id="fav-btn"
+          src={ whiteHeartIcon }
+          alt="favoritar"
+          data-testid="favorite-btn"
+        />
       </button>
-      <button type="button" data-testid="favorite-btn">
-        <img src={ whiteHeartIcon } alt="favoritar" />
-      </button>
+
       <h2 data-testid="recipe-category">{ foodDetails.strCategory }</h2>
       <h3>Ingredientes:</h3>
       <ul>
@@ -59,16 +100,12 @@ export default function RecipeCardDetailFood() {
       </ul>
       <h4>Instructions: </h4>
       <h2 data-testid="instructions">{ foodDetails.strInstructions }</h2>
-      {/* <ReactPlayer
+      <ReactPlayer
         data-testid="video"
         url={ foodDetails.strYoutube }
-      /> */}
+      />
       <DrinksRecomends />
-      <Link to={ `/comidas/${idMeal}/in-progress` }>
-        <button type="button" data-testid="start-recipe-btn" className="playRecipe">
-          Iniciar Receita
-        </button>
-      </Link>
+      <BtnInitiateRecipe id={ idMeal } type="comida" />
     </div>
   );
 }

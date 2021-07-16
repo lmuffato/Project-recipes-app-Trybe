@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
-import shareIcon from '../images/shareIcon.svg';
+import { useParams } from 'react-router-dom';
+import ShareBtn from './componentsDetails/ShareBtn';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import blackHeartIcon from '../images/blackHeartIcon.svg';
 import { drinkById } from '../services/apiRequests';
 import FoodsRecomends from './componentsDetails/FoodsRecomends';
 import './DetailsScreen.css';
+import BtnInitiateRecipe from './componentsDetails/BtnInitiateRecipe';
 
 export default function RecipeCardDetailDrink() {
   const [drinkDetails, setDrinkDetails] = useState({});
@@ -27,6 +29,39 @@ export default function RecipeCardDetailDrink() {
     const noAlcool = meal[1] !== ' ' && meal[1] !== null;
     return meal[0].includes('Measure') && noAlcool;
   });
+  const setFavorite = () => {
+    const { strDrinkThumb, strDrink, strAlcoholic, strCategory } = drinkDetails;
+
+    const favoriteRecipeToken = {
+      id: idDrink,
+      type: 'bebida',
+      area: '',
+      category: strCategory,
+      alcoholicOrNot: strAlcoholic,
+      name: strDrink,
+      image: strDrinkThumb,
+    };
+
+    let favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    if (favoriteRecipes) {
+      if (favoriteRecipes.every((recipe) => recipe.id !== favoriteRecipeToken.id)) {
+        favoriteRecipes.push(favoriteRecipeToken);
+        document.getElementById('fav-btn').setAttribute('src', blackHeartIcon);
+      } else {
+        favoriteRecipes = favoriteRecipes
+          .filter((recipe) => recipe.id !== favoriteRecipeToken.id);
+        document.getElementById('fav-btn').setAttribute('src', whiteHeartIcon);
+      }
+    } else {
+      favoriteRecipes = [favoriteRecipeToken];
+      console.log(process.env);
+      document.getElementById('fav-btn').setAttribute('src', blackHeartIcon);
+    }
+    localStorage.setItem('favoriteRecipes', JSON.stringify(favoriteRecipes));
+    if (Object.values(favoriteRecipes).length === 0) {
+      localStorage.removeItem('favoriteRecipes');
+    }
+  };
 
   return (
     <div>
@@ -36,12 +71,14 @@ export default function RecipeCardDetailDrink() {
         data-testid="recipe-photo"
       />
       <h1 data-testid="recipe-title">{ drinkDetails.strDrink }</h1>
-
-      <button type="button" data-testid="share-btn">
-        <img src={ shareIcon } alt="compartilhar" />
-      </button>
-      <button type="button" data-testid="favorite-btn">
-        <img src={ whiteHeartIcon } alt="favoritar" />
+      <ShareBtn id={ idDrink } type="bebida" />
+      <button type="button" onClick={ setFavorite }>
+        <img
+          id="fav-btn"
+          src={ whiteHeartIcon }
+          alt="favoritar"
+          data-testid="favorite-btn"
+        />
       </button>
       <h2 data-testid="recipe-category">{ drinkDetails.strAlcoholic }</h2>
       <h3>Ingredientes:</h3>
@@ -60,11 +97,7 @@ export default function RecipeCardDetailDrink() {
       <h4>Instructions: </h4>
       <h2 data-testid="instructions">{ drinkDetails.strInstructions }</h2>
       <FoodsRecomends />
-      <Link to={ `/bebidas/${idDrink}/in-progress` }>
-        <button type="button" data-testid="start-recipe-btn" className="playRecipe">
-          Iniciar Receita
-        </button>
-      </Link>
+      <BtnInitiateRecipe id={ idDrink } type="bebida" />
     </div>
   );
 }

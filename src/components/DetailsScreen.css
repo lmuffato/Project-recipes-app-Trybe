@@ -1,7 +1,7 @@
 .playRecipe {
-  bottom: 0;
+  bottom: 0%;
   height: 76px;
   left: 13px;
-  top: 558px;
+  position: fixed;
   width: 339px;
 }

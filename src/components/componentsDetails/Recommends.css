@@ -26,3 +26,11 @@
   margin: 10px 30px;
   overflow-x: scroll;
 }
+
+.playRecipe {
+  bottom: 0%;
+  height: 76px;
+  left: 13px;
+  position: fixed;
+  width: 339px;
+}
