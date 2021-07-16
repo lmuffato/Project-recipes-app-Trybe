@@ -86,11 +86,12 @@ $orange: rgb(242, 163, 15);
     color: white;
     display: flex;
     flex-direction: column;
-    padding: 2em;
+    padding: 1em;
     width: 50%;
-    @include for-phone-only{
+
+    @include for-phone-only {
+      padding-bottom: 3.5em;
       border-bottom: 1px solid black;
-      padding: 0;
       width: 100%;
     }
 
@@ -107,17 +108,24 @@ $orange: rgb(242, 163, 15);
 
     & div {
       align-self: flex-start;
-      margin: 0.6em 0 0 3.8em;
-      @include for-phone-only{
-        flex-direction: row;
-        margin: 0.3em 0 0 2em;
+      margin: 2em 0 2em 4em;
+
+      @include for-phone-only {
+        margin: 0 0 1em 3em;
       }
     }
 
     & input {
       align-self: center;
       filter: invert(100%);
+      margin-left: 0.5em;
       padding: 1em;
+      position: absolute;
+    }
+
+    & .share-btn {
+      margin-left: 4em;
+      width: 55px;
     }
 
     & input:hover {
