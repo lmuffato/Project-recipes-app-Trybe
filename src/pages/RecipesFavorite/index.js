@@ -15,12 +15,15 @@ export default function RecipesFavorites() {
 
   function buttonsFilters(param) {
     if (param === 'all') {
-      setFilterRecipes(favoriteRecipes.filter(({ type }) => type));
+      setFilterRecipes(favoriteRecipes
+         && favoriteRecipes.filter(({ type }) => type));
     }
     if (param === 'food') {
-      setFilterRecipes(favoriteRecipes.filter(({ type }) => type === 'comida'));
+      setFilterRecipes(favoriteRecipes
+        && favoriteRecipes.filter(({ type }) => type === 'comida'));
     } if (param === 'drinks') {
-      setFilterRecipes(favoriteRecipes.filter(({ type }) => type === 'bebida'));
+      setFilterRecipes(favoriteRecipes
+        && favoriteRecipes.filter(({ type }) => type === 'bebida'));
     }
   }
 
@@ -67,7 +70,7 @@ export default function RecipesFavorites() {
           Drinks
         </button>
       </nav>
-      {filterRecipes
+      {filterRecipes && filterRecipes
         .map(
           ({ id, image, category, name, type,
             area, alcoholicOrNot }, index) => (

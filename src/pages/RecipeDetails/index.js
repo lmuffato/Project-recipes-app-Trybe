@@ -26,7 +26,9 @@ export default function RecipeDetails({ match: { params: { id }, path, url } }) 
   }, [path]);
 
   return (
+
     <div>
+
       <img
         src={ recipe.strMealThumb || recipe.strDrinkThumb }
         data-testid="recipe-photo"
@@ -55,6 +57,7 @@ export default function RecipeDetails({ match: { params: { id }, path, url } }) 
       </p>
       <Recommendations path={ path } />
       <StartRecipeBtn recipe={ recipe } />
+
     </div>
   );
 }

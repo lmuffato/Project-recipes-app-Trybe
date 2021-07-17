@@ -1,16 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { fetchImageIngredients } from '../../services/fetchApiIngredients';
 
 export default function RecipeCard({ recipe, index, isMain, path }) {
   const [getImage, setGetImage] = useState('');
 
   useEffect(() => {
-    const item = recipe.strIngredient || recipe.strIngredient1;
+    const controller = new AbortController();
     if (isMain === false) {
-      fetchImageIngredients(path, item)
-        .then((result) => setGetImage(result.url));
+      const item = recipe.strIngredient || recipe.strIngredient1;
+      const url = `https://www.${path}.com/images/ingredients/${item}-Small.png`;
+      fetch(url, { signal: controller.signal })
+        .then((result) => setGetImage(result.url))
+        .catch((error) => console.log(error));
     }
+    return (() => {
+      controller.abort();
+    });
   }, [path, recipe, isMain]);
 
   return (
