@@ -4,8 +4,8 @@ import { screen } from '@testing-library/dom';
 import App from '../App';
 import renderWithRouter from './renderWithRouter';
 import handleLogin from './handleLogin';
-import FoodsArea from '../pages/FoodsArea';
-import { filterdToMealsIngredientsMock } from './mocks';
+// import FoodsArea from '../pages/FoodsArea';
+// import { filterdToMealsIngredientsMock } from './mocks';
 
 const dropdownFoodsArea = 'explore-by-area-dropdown';
 
