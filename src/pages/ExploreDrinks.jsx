@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 import Header from '../components/Header';
 import LowerMenu from '../components/LowerMenu';
 
@@ -19,7 +20,7 @@ function ExploreDrinks() {
   return (
     <>
       <Header />
-      <div>
+      <Container>
         <Link to="/explorar/bebidas/ingredientes">
           <button
             data-testid="explore-by-ingredient"
@@ -36,10 +37,33 @@ function ExploreDrinks() {
             Me Surpreenda!
           </button>
         </Link>
-      </div>
+      </Container>
       <LowerMenu />
     </>
   );
 }
+
+const Container = styled.div`
+  width: 100%;
+  padding: 50px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  a button {
+    background: #FFFFFF;
+    box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
+    border-radius: 6px;
+    border: 0.5px solid gray;
+    width: 322px;
+    font-family: Montserrat;
+    font-size: 30px;
+  }
+
+  a + a {
+    margin-top: 20px;
+  }
+`;
 
 export default ExploreDrinks;
