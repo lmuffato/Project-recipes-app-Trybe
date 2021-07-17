@@ -1,16 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useLocation } from 'react-router';
 import PropTypes from 'prop-types';
+import ButtonFavorite from '../components/ButtonFavorite';
+import ContextRecipes from '../context/ContextRecipes';
+import ButtonShare from '../components/ButtonShare';
+import CustonAlert from '../components/CustonAlert';
 import fetchApiById from '../service/fetchApiDetails';
 import Ingredients from './Ingredients';
 import Recommendations from './Recomendations';
 import Video from '../service/Video';
-import { FavFood, FavDrink } from '../service/Favorite';
 import RenderProgress from '../service/RenderProgress';
-import { checkFavoriteFood, checkFavoriteDrink } from '../service/Check';
 
 function RecipeDetails(props) {
   const { match: { params: { id } } } = props;
+  const { alertOn } = useContext(ContextRecipes);
   const { pathname } = useLocation();
   const [recipe, setRecipe] = useState({});
   const type = pathname === `/comidas/${id}` ? 'themealdb' : 'thecocktaildb';
@@ -35,21 +38,19 @@ function RecipeDetails(props) {
       <h2 data-testid="recipe-title">
         { recipe.strMeal || recipe.strDrink }
       </h2>
-      <button type="button" data-testid="share-btn">
-        compartilhar
-      </button>
-      <input
-        type="image"
-        data-testid="favorite-btn"
-        src={ url === 'comidas' ? checkFavoriteFood(recipe) : checkFavoriteDrink(recipe) }
-        alt="favoritar receita"
-        className="fav-btn"
-        onClick={ () => (
-          url === 'comidas' ? FavFood(recipe) : FavDrink(recipe)
-        ) }
+      <ButtonShare
+        idRecipe={ id }
+        typeRecipe={ url }
+        testid="share-btn"
+      />
+      {alertOn && <CustonAlert message="Link copiado!" />}
+      <ButtonFavorite
+        idRecipe={ id }
+        dbType={ type }
+        testid="favorite-btn"
       />
       <p data-testid="recipe-category">
-        { recipe.strCategory }
+        { url === 'comidas' ? recipe.strCategory : recipe.strAlcoholic }
       </p>
       { recipe.strMeal ? <Video recipe={ recipe } /> : null }
       <Ingredients recipe={ recipe } />

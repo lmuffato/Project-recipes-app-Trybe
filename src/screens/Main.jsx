@@ -9,25 +9,25 @@ import CategoriesButtons from '../components/CategoriesButtons';
 import '../styleSheets/Main.css';
 
 function Main() {
-  const { getRecipes, getCategories, filteredRecipe,
-    searchBtn, showSearchBar } = useContext(ContextRecipes);
+  const { getRecipes, getCategories, filteredRecipe, searchBtn,
+    ingredientsSearch, showSearchBar } = useContext(ContextRecipes);
   const { pathname } = useLocation();
   const history = useHistory();
   const type = pathname === '/comidas' ? 'Meal' : 'Drink';
-  const cardsQuantity = 12;
-  const id = pathname === '/comidas' ? 'idMeal' : 'idDrink';
+  const cardsLength = 12;
   useEffect(() => {
     if (searchBtn && filteredRecipe && filteredRecipe.length === 1) {
-      history.push(`${pathname}/${filteredRecipe[0][id]}`);
+      history.push(`${pathname}/${filteredRecipe[0][`id${type}`]}`);
     }
     if (searchBtn && !filteredRecipe) {
-      const ms = 'Sinto muito, não encontramos nenhuma receita para esses filtros.';
-      return window.alert(ms);
+      alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
     }
   }, [searchBtn]);
 
   useEffect(() => {
-    getRecipes('All', type);
+    if (!ingredientsSearch) {
+      getRecipes('All', type);
+    }
     getCategories(type);
   }, [pathname]);
   return (
@@ -37,15 +37,21 @@ function Main() {
       <section className="content-container">
         <section className="recipe-cards-container">
           { filteredRecipe && filteredRecipe.reduce((acc, recipe, index) => {
-            if (index < cardsQuantity) {
+            if (index < cardsLength) {
+              const testid = {
+                image: `${index}-card-img`,
+                title: `${index}-card-name`,
+                card: `${index}-recipe-card`,
+              };
+              const redirectPath = `${pathname}/${recipe[`id${type}`]}`;
               acc.push(
                 <Card
                   src={ recipe[`str${type}Thumb`] }
                   title={ recipe[`str${type}`] }
-                  id={ recipe[`id${type}`] }
                   index={ index }
                   key={ index }
-                  data
+                  testid={ testid }
+                  redirectPath={ redirectPath }
                 />,
               );
             }

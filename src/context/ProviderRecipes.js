@@ -16,6 +16,7 @@ function ProviderRecipes({ children }) {
   // const [filteredByCountry, setFilteredByCountry] = useState([]);
   const [alertOn, setAlertOn] = useState(false);
   const [updateFlag, setUpadateFlag] = useState(false);
+  const [ingredientsSearch, setIngredientsSearch] = useState(false);
 
   const turnOnAlert = () => {
     setAlertOn(true);
@@ -73,6 +74,18 @@ function ProviderRecipes({ children }) {
       }));
     }
     setRecipes(recipeList);
+    setIngredientsSearch(false);
+  };
+
+  const fetchByIngredients = async (ingredient, type) => {
+    setIngredientsSearch(true);
+    const siteName = type === 'Meal' ? 'meal' : 'cocktail';
+    const endpoint = `https://www.the${siteName}db.com/api/json/v1/1/filter.php?i=${ingredient}`;
+    const recipesByIngredient = await fetch(endpoint)
+      .then((response) => response.json())
+      .then((response) => response[`${type.toLowerCase()}s`]);
+    setRecipes(recipesByIngredient);
+    setIngredientsSearch(false);
   };
   // Esta função retorna o endpoint da API baseado no filtro escolhido
   const chooseEndpoint = (link) => {
@@ -100,6 +113,7 @@ function ProviderRecipes({ children }) {
       .catch((error) => console.log(error));
     setLoadingCards(false);
     setRecipes(response);
+    setIngredientsSearch(false);
   };
 
   const fetchArea = async () => {
@@ -164,6 +178,8 @@ function ProviderRecipes({ children }) {
         turnOnAlert,
         updateFlag,
         setUpadateFlag,
+        ingredientsSearch,
+        fetchByIngredients,
       } }
     >
       { children }
