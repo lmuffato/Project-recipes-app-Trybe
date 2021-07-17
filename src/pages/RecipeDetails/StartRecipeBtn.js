@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { AppContext } from '../../context/AppContext';
@@ -45,7 +45,9 @@ export default function StartRecipeBtn({ recipe }) {
           data-testid="start-recipe-btn"
           className={ classNameBtn }
         >
+
           {checkTextBtn()}
+
         </button>
       </Link>
     </div>
