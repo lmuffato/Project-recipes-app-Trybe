@@ -49,7 +49,6 @@ function FoodsArea() {
       setShowRecepies(fils);
     }
 
-    console.log(selectedArea);
     if (selectedArea === 'All') {
       setShowRecepies(mealsRecepies.slice(0, lastRecipe));
     } else {

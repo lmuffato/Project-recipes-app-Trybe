@@ -47,3 +47,9 @@ export const ingredientsMock = {
     },
   ],
 };
+
+export const selectOptionsArea = ['American', 'British', 'Canadian', 'Chinese',
+  'Dutch', 'Egyptian', 'French', 'Greek', 'Indian', 'Irish', 'Italian',
+  'Jamaican', 'Japanese', 'Kenyan', 'Malaysian', 'Mexican', 'Moroccan',
+  'Polish', 'Portuguese', 'Russian', 'Spanish', 'Thai', 'Tunisian',
+  'Turkish', 'Unknown', 'Vietnamese'];
