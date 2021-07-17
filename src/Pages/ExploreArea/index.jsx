@@ -21,13 +21,21 @@ function MealsByOrigin() {
   }, []);
 
   const dropdown = (testid, id, options) => (
-    <select data-testid={ testid } id={ id } onChange={ handleChange }>
-      <option data-testid="All-option" value="All">All</option>
-      { options.map(({ strArea: area }) => (
-        <option data-testid={ `${area}-option` } id={ area } key={ area } value={ area }>
-          { area }
-        </option>)) }
-    </select>
+    <label htmlFor={ id }>
+      Origem:
+      <select data-testid={ testid } id={ id } onChange={ handleChange }>
+        <option data-testid="All-option" value="All">All</option>
+        { options.map(({ strArea: area }) => (
+          <option
+            data-testid={ `${area}-option` }
+            id={ area }
+            key={ area }
+            value={ area }
+          >
+            { area }
+          </option>)) }
+      </select>
+    </label>
   );
 
   if (!areas) return <div>Loading...</div>;

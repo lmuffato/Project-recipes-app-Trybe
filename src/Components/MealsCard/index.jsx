@@ -1,6 +1,7 @@
 import React from 'react';
 import { shape, string } from 'prop-types';
 import { Redirect, Link } from 'react-router-dom';
+import { Card } from 'react-bootstrap';
 import './styles.css';
 
 function MealsCard({ data: { meals } }) {
@@ -19,16 +20,26 @@ function MealsCard({ data: { meals } }) {
     <div className="meal-card">
       { meals.map(({ strMeal, strMealThumb, idMeal }, index) => (
         index < maxArrayLength ? (
-          <Link to={ `/comidas/${idMeal}` } key={ idMeal }>
-            <button type="button" data-testid={ `${index}-recipe-card` }>
-              <img
-                data-testid={ `${index}-card-img` }
-                src={ strMealThumb }
-                alt={ strMeal }
-              />
-              <p data-testid={ `${index}-card-name` }>{ strMeal }</p>
-            </button>
-          </Link>
+          <Card className="card">
+            <Link to={ `/comidas/${idMeal}` } key={ idMeal }>
+              <button type="button" className="bn" data-testid={ `${index}-recipe-card` }>
+                <Card.Img
+                  variant="top"
+                  data-testid={ `${index}-card-img` }
+                  src={ strMealThumb }
+                  alt={ strMeal }
+                />
+                <Card.Body>
+                  <Card.Title
+                    className="card-title"
+                    data-testid={ `${index}-card-name` }
+                  >
+                    { strMeal }
+                  </Card.Title>
+                </Card.Body>
+              </button>
+            </Link>
+          </Card>
         ) : false
       )) }
     </div>

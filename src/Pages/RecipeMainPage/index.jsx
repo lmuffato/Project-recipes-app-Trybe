@@ -4,7 +4,6 @@ import Header from '../../Components/Header';
 import Footer from '../../Components/Footer';
 import RecipeCard from '../../Components/RecipeCard';
 import recipesContext from '../../context/RecipesContext';
-
 import './styles.css';
 
 function RecipeMainPage({ header }) {

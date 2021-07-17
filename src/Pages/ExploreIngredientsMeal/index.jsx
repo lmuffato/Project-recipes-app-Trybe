@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { Redirect } from 'react-router-dom';
+import { Card } from 'react-bootstrap';
 import Header from '../../Components/Header';
 import Footer from '../../Components/Footer';
 import { fetchMealsIngredients, fetchByMealIngredien } from '../../services/fetchRecipes';
@@ -35,22 +36,29 @@ function ExploreIngredientsMeal() {
       <div className="grid">
         { ingredients.map(({ strIngredient }, index) => (
           <button
+            className="card"
             data-testid={ `${index}-ingredient-card` }
             onClick={ () => handleClick(strIngredient) }
             key={ strIngredient }
             type="button"
           >
-            <img
+            <Card.Img
               data-testid={ `${index}-card-img` }
               src={ `https://www.themealdb.com/images/ingredients/${strIngredient}-Small.png` }
               alt={ strIngredient }
             />
-            <p data-testid={ `${index}-card-name` }>{ strIngredient }</p>
-          </button>)) }
+            <Card.Body>
+              <Card.Title
+                className="card-name"
+                data-testid={ `${index}-card-name` }
+              >
+                { strIngredient }
+              </Card.Title>
+            </Card.Body>
+          </button>))}
+        <Footer />
       </div>
-      <Footer />
     </section>
-
   );
 }
 export default ExploreIngredientsMeal;
