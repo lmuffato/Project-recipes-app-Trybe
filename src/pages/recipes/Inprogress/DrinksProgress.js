@@ -216,7 +216,7 @@ function DrinksProgress() {
           </ul>
           <h2>Instruções</h2>
           <p data-testid="instructions">{ strInstructions }</p>
-          <FinishButton isDisable={ isFinish } />
+          <FinishButton isDisable={ isFinish } path="bebidas" />
         </div>
       );
     })

@@ -91,10 +91,3 @@ export const getRecomendedMeals = async () => {
   const { meals } = data;
   return meals;
 };
-
-export const getSmallMealImg = async (item) => {
-  const endPoint = `https://www.themealdb.com/images/ingredients/${item}-Small.png`;
-  const response = await fetch(endPoint);
-  const data = await response.json();
-  return data;
-};
