@@ -1,11 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
+// import { requestData } from '../services/getFinishData';
+// useRouteMatch
 
 function FinishButton({ isDisable }) {
   const history = useHistory();
+  // const match = useRouteMatch();
 
-  const handleClick = () => {
+  const handleClick = async () => {
+    // const { params: { id } } = match;
+    // console.log(await requestData(id, "comidas"));
     history.push('/receitas-feitas');
   };
 
