@@ -40,12 +40,12 @@ export default function DoneRecipes() {
   }
   if (!recipes) {
     return (
-      <>
+      <div>
         <Header>
           <h1 data-testid="page-title">Receitas Feitas</h1>
         </Header>
         <h1>Você não possui nenhuma receita concluida...</h1>
-      </>);
+      </div>);
   }
   return (
     <div>

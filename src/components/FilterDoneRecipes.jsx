@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 export default function FilterDoneRecipes({ setCurrFilter }) {
   return (
-    <>
+    <div>
       <Button
         onClick={ () => setCurrFilter('All') }
         data-testid="filter-by-all-btn"
@@ -23,7 +23,7 @@ export default function FilterDoneRecipes({ setCurrFilter }) {
       >
         Drinks
       </Button>
-    </>
+    </div>
   );
 }
 
