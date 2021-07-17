@@ -5,12 +5,11 @@ import FooterBar from '../components/FooterBar';
 import SearchBar from '../components/SearchBar';
 import Header from '../components/Header';
 import Card from '../components/Card';
-import CustonAlert from '../components/CustonAlert';
 import CategoriesButtons from '../components/CategoriesButtons';
 import '../styleSheets/Main.css';
 
 function Main() {
-  const { getRecipes, getCategories, filteredRecipe, searchBtn, alertOn, setAlertOn,
+  const { getRecipes, getCategories, filteredRecipe, searchBtn,
     ingredientsSearch, showSearchBar } = useContext(ContextRecipes);
   const { pathname } = useLocation();
   const history = useHistory();
@@ -22,7 +21,7 @@ function Main() {
       history.push(`${pathname}/${filteredRecipe[0][id]}`);
     }
     if (searchBtn && !filteredRecipe) {
-      setAlertOn();
+      alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
     }
   }, [searchBtn]);
 
@@ -36,9 +35,6 @@ function Main() {
     <main className="main-container">
       <Header />
       { showSearchBar ? <SearchBar /> : null}
-      {alertOn && <CustonAlert
-        message="Sinto muito, não encontramos nenhuma receita para esses filtros."
-      />}
       <section className="content-container">
         <section className="recipe-cards-container">
           { filteredRecipe && filteredRecipe.reduce((acc, recipe, index) => {
