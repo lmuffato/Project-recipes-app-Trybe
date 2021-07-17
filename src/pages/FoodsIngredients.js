@@ -10,13 +10,13 @@ function FoodsIngredients() {
     ingredients, setIngredients, setMealsAndDrinkByIngredients,
   } = useContext(RecipesContext);
   const { setHideSearchBtn, setPageName } = useContext(SearchbarContext);
-  const TWELVE = 12;
+  const numberOfIngredients = 12;
 
   const getRecipesByIngredients = async (param) => {
     const endpoint = `https://www.themealdb.com/api/json/v1/1/filter.php?i=${param}`;
     const { meals } = await fetch(endpoint).then((data) => data.json());
     console.log(meals);
-    setMealsAndDrinkByIngredients(meals.slice(0, TWELVE));
+    setMealsAndDrinkByIngredients(meals.slice(0, numberOfIngredients));
   };
 
   useEffect(() => {
@@ -32,7 +32,7 @@ function FoodsIngredients() {
 
   const getTwelveIngredients = () => {
     const twelveIngredients = ingredients
-      .filter((ingredient, index) => index < TWELVE);
+      .filter((ingredient, index) => index < numberOfIngredients);
     return (
       twelveIngredients.map((eachIngredient, index) => {
         // const id = index - 1;

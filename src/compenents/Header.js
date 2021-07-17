@@ -26,7 +26,7 @@ function Header() {
 
   return (
     <div className="header-cotainer">
-      <header className="header">
+      <header className="header" data-testid="header">
         <Link to="/perfil" className="profile">
           <img src={ profileIcon } alt="profile" data-testid="profile-top-btn" />
         </Link>
