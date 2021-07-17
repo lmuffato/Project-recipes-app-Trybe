@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-// import PropTypes from 'prop-types';
 import RecomCard from './RecomCard';
 import fetchRecomendations from '../service/fetchRecomendations';
+import '../styleSheets/styleRecom.css';
 
 function Recommendations(type) {
   const { recipe } = type;
@@ -18,17 +18,19 @@ function Recommendations(type) {
   }, []);
 
   return (
-    <div>
+    <section className="container">
       <h3>Recomendados</h3>
-      { recommended.length ? recommended.map((recom, index) => (
-        <div
-          data-testid={ `${index}-recomendation-card` }
-          key={ index }
-        >
-          <RecomCard recipe={ recom } index={ index } />
-        </div>
-      )) : ''}
-    </div>
+      <div className="carousel-container">
+        { recommended.length ? recommended.map((recom, index) => (
+          <div
+            data-testid={ `${index}-recomendation-card` }
+            key={ index }
+          >
+            <RecomCard recipe={ recom } index={ index } />
+          </div>
+        )) : ''}
+      </div>
+    </section>
   );
 }
 

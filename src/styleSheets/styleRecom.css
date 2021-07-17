@@ -1,0 +1,14 @@
+.carousel-container {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+}
+
+.container {
+  width: 100%;
+}
+
+.img {
+  height: 100%;
+  width: 160px;
+}

@@ -8,8 +8,8 @@ function RecomendationCards(props) {
       <img
         src={ recipe.strMealThumb || recipe.strDrinkThumb }
         alt="some food"
-        width="80"
         data-testid="recipe-photo"
+        className="img"
       />
       <h3 data-testid="recipe-title">
         { recipe.strMeal || recipe.strDrink }
