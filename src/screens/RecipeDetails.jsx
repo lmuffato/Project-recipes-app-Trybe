@@ -56,7 +56,7 @@ function RecipeDetails(props) {
         ) }
       />
       <p data-testid="recipe-category">
-        { recipe.strCategory }
+        { url === 'comidas' ? recipe.strCategory : recipe.strAlcoholic }
       </p>
       { recipe.strMeal ? <Video recipe={ recipe } /> : null }
       <Ingredients recipe={ recipe } />
