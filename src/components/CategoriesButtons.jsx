@@ -31,7 +31,6 @@ function CategoriesButtons(props) {
           <p className="text-button">{category}</p>
         </button>
       ))}
-      <p className="category-button">texto teste</p>
     </aside>
   );
 }

@@ -1,14 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import '../styleSheets/Card.css';
 
 function Card(props) {
-  const { src, title, id, index } = props;
+  const { src, title, index, testid, redirectPath } = props;
   const history = useHistory();
-  const { pathname } = useLocation();
   const sendToDetail = () => {
-    history.push(`${pathname}/${id}`);
+    history.push(redirectPath);
   };
   return (
     <section
@@ -17,15 +16,15 @@ function Card(props) {
       tabIndex={ index }
       onClick={ sendToDetail }
       onKeyPress={ sendToDetail }
-      data-testid={ `${index}-recipe-card` }
+      data-testid={ testid.card }
     >
       <img
         src={ src }
         alt={ `Recipe of ${title}` }
         className="image-card"
-        data-testid={ `${index}-card-img` }
+        data-testid={ testid.image }
       />
-      <h3 className="title-card" data-testid={ `${index}-card-name` }>{ title }</h3>
+      <h3 className="title-card" data-testid={ testid.title }>{ title }</h3>
     </section>
   );
 }
@@ -33,8 +32,13 @@ function Card(props) {
 Card.propTypes = {
   src: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
-  id: PropTypes.string.isRequired,
   index: PropTypes.number.isRequired,
+  redirectPath: PropTypes.string.isRequired,
+  testid: PropTypes.objectOf(PropTypes.shape({
+    image: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    card: PropTypes.string.isRequired,
+  })).isRequired,
 };
 
 export default Card;

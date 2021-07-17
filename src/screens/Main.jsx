@@ -11,7 +11,7 @@ import '../styleSheets/Main.css';
 
 function Main() {
   const { getRecipes, getCategories, filteredRecipe,
-    searchBtn, alertOn, setAlertOn } = useContext(ContextRecipes);
+    searchBtn, alertOn, setAlertOn, ingredientsSearch } = useContext(ContextRecipes);
   const { pathname } = useLocation();
   const history = useHistory();
   const type = pathname === '/comidas' ? 'Meal' : 'Drink';
@@ -27,7 +27,9 @@ function Main() {
   }, [searchBtn]);
 
   useEffect(() => {
-    getRecipes('All', type);
+    if (!ingredientsSearch) {
+      getRecipes('All', type);
+    }
     getCategories(type);
   }, [pathname]);
   return (
@@ -41,13 +43,20 @@ function Main() {
         <section className="recipe-cards-container">
           { filteredRecipe && filteredRecipe.reduce((acc, recipe, index) => {
             if (index < cardsQuantity) {
+              const testid = {
+                image: `${index}-card-img`,
+                title: `${index}-card-name`,
+                card: `${index}-recipe-card`,
+              };
+              const redirectPath = `${pathname}/${id}`;
               acc.push(
                 <Card
                   src={ recipe[`str${type}Thumb`] }
                   title={ recipe[`str${type}`] }
-                  id={ recipe[`id${type}`] }
                   index={ index }
                   key={ index }
+                  testid={ testid }
+                  redirectPath={ redirectPath }
                 />,
               );
             }

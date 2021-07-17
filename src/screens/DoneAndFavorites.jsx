@@ -38,7 +38,7 @@ function DoneAndFavorites() {
       <HeaderRecipes />
       <NavegateButtons />
       {alertOn && <CustonAlert message="Link copiado!" />}
-      { renderedCards.map((recipe, index) => (
+      {renderedCards.map((recipe, index) => (
         <CardDoneAndFavorite
           key={ index }
           recipe={ recipe }
