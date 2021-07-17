@@ -96,11 +96,9 @@ function MealsProgress() {
       localStorage.setItem('favoriteRecipes', JSON.stringify(mealInfos));
     } else {
       const favRecipe = JSON.parse(localStorage.getItem('favoriteRecipes'));
-      console.log(favRecipe);
       const filteredRemoved = favRecipe.filter((element) => element.id !== idMeal);
       localStorage.removeItem('favoriteRecipes');
       localStorage.setItem('favoriteRecipes', JSON.stringify(filteredRemoved));
-      console.log(localStorage.getItem('favoriteRecipes'));
     }
   };
 

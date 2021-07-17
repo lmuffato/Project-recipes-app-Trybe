@@ -75,7 +75,6 @@ export const getMealsByFirstLetter = async (letter) => {
   const data = await fetchApi.json();
   const { meals } = data;
   const dataFormat = setMeals(meals);
-  console.log(data);
   return dataFormat;
 };
 
