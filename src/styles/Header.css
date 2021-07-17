@@ -39,6 +39,11 @@
   width: 100%;
 }
 
+.svg-color-icon {
+  filter: invert(24%) sepia(8%) saturate(5357%)
+    hue-rotate(345deg) brightness(94%) contrast(107%);
+}
+
 @import url(
   'https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap'
 ) ;

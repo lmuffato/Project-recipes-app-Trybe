@@ -22,13 +22,12 @@ function Ingredientes({ params: { ingredientsList, data, setIsDisabled } }) {
     const progressRecipes = JSON.parse(localStorage
       .getItem('inProgressRecipes'));
     const { cocktails, meals } = progressRecipes;
-    console.log(meals.length !== 0);
 
     if ((cocktails.length || meals.length) !== 0) {
       const elementsTag = document.querySelector('.py-2').nextSibling.childNodes;
       let valuesMeals;
       let valuesCocktails;
-      console.log(elementsTag);
+
       elementsTag.forEach((elementTag, index) => {
         switch (LOCATION.pathname) {
         case `/comidas/${data.idMeal}/in-progress`:

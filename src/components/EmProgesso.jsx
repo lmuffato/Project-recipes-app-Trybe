@@ -13,10 +13,19 @@ function EmProgresso({ props }) {
   const magicNumber = 0;
   const history = useHistory();
 
+  const setLocalDoneRecipes = () => {
+    if (JSON.parse(localStorage.getItem('doneRecipes') === null)) {
+      const arrayRecipes = [];
+      localStorage.setItem('doneRecipes', JSON.stringify(arrayRecipes));
+    }
+  };
+
   useEffect(() => {
     const fetchData = () => {
       setData(props[magicNumber]);
     };
+
+    setLocalDoneRecipes();
     fetchData();
   }, [props]);
 
@@ -39,6 +48,60 @@ function EmProgresso({ props }) {
     .filter((element) => element[1] !== '' && element[1] !== null);
 
   const obj = { ingredientsList, data, setIsDisabled, isDisabled };
+
+  const updateLocalStorage = () => {
+    const initalLocalStorage = {
+      cocktails: [],
+      meals: [],
+    };
+    localStorage.setItem('inProgressRecipes', JSON.stringify(initalLocalStorage));
+  };
+
+  const finishRecipe = () => {
+    console.log(data);
+    if (history.location.pathname.includes('bebidas')) {
+      const favoriteRecipe = {
+        id: data.idDrink,
+        type: 'bebida',
+        area: '',
+        category: data.strCategory,
+        alcoholicOrNot: data.strAlcoholic,
+        name: data.strDrink,
+        image: data.strDrinkThumb,
+        doneDate: new Date().toString().split('G')[0].toString(),
+        tags: data.strTags === null ? '' : data.strTags.split(','),
+      };
+
+      const localRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
+
+      const recipesFinished = localRecipes.concat(favoriteRecipe);
+
+      localStorage.setItem('doneRecipes', JSON.stringify(recipesFinished));
+      updateLocalStorage();
+      return history.push('/receitas-feitas');
+    }
+    const favoriteRecipe = {
+      id: data.idMeal,
+      type: 'comida',
+      area: data.strArea,
+      category: data.strCategory,
+      alcoholicOrNot: '',
+      name: data.strMeal,
+      image: data.strMealThumb,
+      doneDate: new Date().toString().split('G')[0].toString(),
+      tags: data.strTags === null ? '' : data.strTags.split(','),
+    };
+
+    const localRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
+
+    const recipesFinished = localRecipes.concat(favoriteRecipe);
+
+    console.log('Estou aqui testando', new Date());
+
+    localStorage.setItem('doneRecipes', JSON.stringify(recipesFinished));
+    updateLocalStorage();
+    return history.push('/receitas-feitas');
+  };
 
   return (
     <div className="m-1 pb-4">
@@ -76,7 +139,7 @@ function EmProgresso({ props }) {
             type="button"
             className="w-100 py-3"
             data-testid="finish-recipe-btn"
-            onClick={ () => history.push('/receitas-feitas') }
+            onClick={ finishRecipe }
             disabled={ isDisabled }
           >
             Finalizar
