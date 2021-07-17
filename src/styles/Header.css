@@ -30,4 +30,13 @@
   padding-bottom: 7px;
 }
 
+.loading {
+  align-items: center;
+  background-color: #ff9654;
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  width: 100%;
+}
+
 @import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap') ;

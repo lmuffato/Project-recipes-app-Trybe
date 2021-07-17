@@ -31,49 +31,51 @@ function Login(props) {
   };
 
   const inputsLogin = () => (
-    <div className={ divContentForm }>
-      <h1 className={ textLogin }>Dark Caipirinha</h1>
-      <Form>
-        <Form.Group controlId="formBasicEmail">
-          <Form.Label>Email:</Form.Label>
-          <Form.Control
-            size="lg"
-            type="email"
-            placeholder="Enter email"
-            name="email"
-            value={ login.email }
-            onChange={ handleChange }
-            data-testid="email-input"
-          />
-          <Form.Text className={ textUpInput }>
-            Nunca compartilharemos seu e-mail com mais ninguém.
-          </Form.Text>
-        </Form.Group>
+    <>
+      <h1 className={ textLogin }>Baratie</h1>
+      <div className={ divContentForm }>
+        <Form>
+          <Form.Group controlId="formBasicEmail">
+            <Form.Label>Email:</Form.Label>
+            <Form.Control
+              size="lg"
+              type="email"
+              placeholder="Enter email"
+              name="email"
+              value={ login.email }
+              onChange={ handleChange }
+              data-testid="email-input"
+            />
+            <Form.Text className={ textUpInput }>
+              Nunca compartilharemos seu e-mail com mais ninguém.
+            </Form.Text>
+          </Form.Group>
 
-        <Form.Group controlId="formBasicPassword">
-          <Form.Label>Senha:</Form.Label>
-          <Form.Control
-            size="lg"
-            type="password"
-            name="password"
-            value={ login.password }
-            onChange={ handleChange }
-            placeholder="Senha"
-            data-testid="password-input"
-          />
-        </Form.Group>
-        <Button
-          variant="success"
-          type="button"
-          disabled={ isDisabled }
-          onClick={ handleClick }
-          data-testid="login-submit-btn"
-          className={ btn }
-        >
-          Entrar
-        </Button>
-      </Form>
-    </div>
+          <Form.Group controlId="formBasicPassword">
+            <Form.Label>Senha:</Form.Label>
+            <Form.Control
+              size="lg"
+              type="password"
+              name="password"
+              value={ login.password }
+              onChange={ handleChange }
+              placeholder="Senha"
+              data-testid="password-input"
+            />
+          </Form.Group>
+          <Button
+            variant="success"
+            type="button"
+            disabled={ isDisabled }
+            onClick={ handleClick }
+            data-testid="login-submit-btn"
+            className={ btn }
+          >
+            Entrar
+          </Button>
+        </Form>
+      </div>
+    </>
   );
 
   // regex de email retirado de: https://ui.dev/validate-email-address-javascript/
@@ -96,7 +98,7 @@ function Login(props) {
 
   return (
     <div className={ `${divMain} body-test` }>
-      <img alt="Icone Aplicação" src={ loginIcon } />
+      <img className="w-50" alt="Icone Aplicação" src={ loginIcon } />
       {inputsLogin()}
     </div>
   );

@@ -8,9 +8,11 @@ import { filterCategoriaComidas } from '../services/apisCategories';
 import { mealsAPI } from '../services/apisMealsAndCocktails';
 import { apiSearchMeals } from '../services/fetchApiSearch';
 import Cards from '../components/Card';
+import Loading from '../components/Loading';
 
 function Comidas() {
   const {
+    data,
     originData,
     texto,
     categoria,
@@ -18,9 +20,11 @@ function Comidas() {
     setData,
   } = useContext(ContextComidas);
 
+  const miliseconds = 2000;
+
   const fetchapi = async () => {
     const comidas = await mealsAPI();
-    setData(comidas);
+    setTimeout(() => setData(comidas), miliseconds);
   };
 
   const fetchApiIngredient = async () => {
@@ -55,6 +59,8 @@ function Comidas() {
       getApis();
     }
   }, [texto]);
+
+  if (data.length < 1) return <Loading param="food" />;
 
   return (
     <div>
