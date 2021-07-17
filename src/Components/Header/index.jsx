@@ -29,7 +29,7 @@ function Header(props) {
           alt="user"
         />
       </Link>
-      <h2 data-testid="page-title">{children}</h2>
+      <h3 data-testid="page-title">{children}</h3>
       {
         toHideSearchIcon.includes(children)
           ? ''
