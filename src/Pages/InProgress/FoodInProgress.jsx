@@ -26,34 +26,30 @@ const getFoodsLocalStorage = () => (
   && Object.keys(JSON.parse(localStorage.getItem('inProgressRecipes')).meals)
 );
 
-const checkBoxes = document.getElementsByName('checkbox');
-const checkedBoxes = [];
-checkBoxes.forEach((checkbox) => {
-  if (checkbox.checked) checkedBoxes.push(checkbox.value);
-  return checkedBoxes;
-});
+getFoodsLocalStorage();
 
 function FoodInProgress() {
-  const { inProgressRecipes } = useContext(context);
+  const { inProgressRecipes, setInProgressRecipes } = useContext(context);
   const { meals } = inProgressRecipes;
   const location = useLocation();
   const id = location.pathname.split('/')[2];
   const [foodDetail, setFoodDetail] = useState([]);
   const [shouldRedirect, setShouldRedirect] = useState(false);
   const [alert, setAlert] = useState('');
-  const [desabledBtn, setDesabledBtn] = useState(true);
   const [favHeart, setFavHeart] = useState(whiteHeartIcon);
 
   const handleClick = () => {
     setShouldRedirect(true);
+    setInProgressRecipes({
+      cocktails: {},
+      meals: { ...meals, [id]: [] },
+    });
   };
-
-  getFoodsLocalStorage();
-  getFoodsFavorites(setFavHeart, id);
 
   useEffect(() => {
     const favoriteRecipes = (JSON.parse(localStorage.getItem('favoriteRecipes')) || []);
     localStorage.setItem('favoriteRecipes', JSON.stringify([...favoriteRecipes]));
+    getFoodsFavorites(setFavHeart, id);
     fetchFoodForId(id)
       .then((res) => {
         if (res.meals) setFoodDetail(res.meals[0]);
@@ -61,11 +57,6 @@ function FoodInProgress() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id, meals]);
 
-  /*   setInProgressRecipes({
-    cocktails: {},
-    meals: { ...meals, [id]: [] },
-  });
- */
   const {
     idMeal,
     strArea,
@@ -134,7 +125,6 @@ function FoodInProgress() {
     return listIngredients;
   };
 
-  if (checkedBoxes.length === checkBoxes.length) return setDesabledBtn(false);
   if (shouldRedirect) return <Redirect to="/receitas-feitas" />;
   if (foodDetail.length === 0) return <div>Preparing Ingredients...</div>;
   return (
@@ -165,7 +155,7 @@ function FoodInProgress() {
       <h4>Instructions :</h4>
       <p data-testid="instructions">{strInstructions}</p>
       <button
-        disabled={ desabledBtn }
+        disabled="true"
         type="button"
         data-testid="finish-recipe-btn"
         onClick={ handleClick }
