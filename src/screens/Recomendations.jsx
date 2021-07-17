@@ -10,7 +10,9 @@ function Recommendations(type) {
   useEffect(() => {
     async function requestRecom() {
       const request = await fetchRecomendations(recipe);
-      return setRecommended(request);
+      const six = 6;
+      const maxRecom = Object.values(request).slice(0, six);
+      return setRecommended(maxRecom);
     }
     requestRecom();
   }, []);
