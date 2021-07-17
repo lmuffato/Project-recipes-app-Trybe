@@ -5,7 +5,6 @@ import shareIcon from '../images/shareIcon.svg';
 import FavoriteBtn from '../compenents/FavoriteBtn';
 import RecipesContext from '../contexts/RecipesContext';
 import SearchbarContext from '../contexts/SearchbarContext';
-import Header from '../compenents/Header';
 
 function FavoriteRecipes() {
   const { favoriteRecipes, showRecipes, setShowRecipes } = useContext(RecipesContext);

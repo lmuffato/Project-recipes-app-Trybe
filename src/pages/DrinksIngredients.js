@@ -30,13 +30,8 @@ function DrinksIngredients() {
     setMealsAndDrinkByIngredients(drinks.slice(0, numberOfIngredients));
   };
 
-<<<<<<< HEAD
   const getIngredients = () => {
     const ingredientsToBeRendered = drinkIngredients
-=======
-  const getTwelveIngredients = () => {
-    const twelveIngredients = drinkIngredients
->>>>>>> d65452846ea9bbf409b99a32debc5d5536066f81
       .filter((ingredient, index) => index < numberOfIngredients);
     return (
       ingredientsToBeRendered.map((ingredient, index) => {

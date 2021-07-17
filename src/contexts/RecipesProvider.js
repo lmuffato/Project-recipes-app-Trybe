@@ -16,11 +16,7 @@ function RecipesProvider({ children }) {
     return favRecipe ? JSON.parse(favRecipe) : [];
   });
   const [showRecipes, setShowRecipes] = useState(favoriteRecipes);
-  const [ingredients, setIngredients] = useState([
-    { idIngredient: '1',
-      strIngredient: 'Chicken',
-      strDescription: 'The chicken ...',
-      strType: null }]);
+  const [ingredients, setIngredients] = useState([]);
   const [mealsAndDrinkByIngredients, setMealsAndDrinkByIngredients] = useState(null);
   const [allChecked, setAllChecked] = useState(true);
   const [isFavorite, setIsFavorite] = useState(false);

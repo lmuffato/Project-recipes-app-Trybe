@@ -25,14 +25,18 @@ export const filterdToMealsIngredientsMock = {
 
 export const ingredientsMock = {
   meals: [
-    { idIngredient: '1',
+    {
+      idIngredient: '1',
       strIngredient: 'Chicken',
       strDescription: 'The chicken ...',
-      strType: null },
-    { idIngredient: '2',
+      strType: null,
+    },
+    {
+      idIngredient: '2',
       strIngredient: 'Salmon',
       strDescription: 'Salmon is ...',
-      strType: null },
+      strType: null,
+    },
     {
       idIngredient: '15',
       strIngredient: 'Baking Powder',
