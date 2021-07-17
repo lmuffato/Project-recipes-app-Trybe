@@ -43,6 +43,7 @@ function Header({ title }) {
             data-testid="profile-top-btn"
             src={ profileIcon }
             alt="profile"
+            className="svg-color-icon"
           />
         </Link>
         <h1 data-testid="page-title">{title}</h1>
@@ -56,6 +57,7 @@ function Header({ title }) {
             data-testid="search-top-btn"
             src={ searchIcon }
             alt="search"
+            className="svg-color-icon"
           />
         </button>
       </div>
