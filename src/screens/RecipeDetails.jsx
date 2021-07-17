@@ -64,7 +64,7 @@ function RecipeDetails(props) {
       <h3>Instruções</h3>
       <p data-testid="instructions">{ recipe.strInstructions }</p>
       <Recommendations recipe={ type } />
-      { recipe.srtMeal ? RenderProgressFood(url, id) : RenderProgressDrink(url, id) }
+      { recipe.strDrink ? RenderProgressDrink(url, id) : RenderProgressFood(url, id) }
     </div>
   );
 }
