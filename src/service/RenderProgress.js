@@ -1,9 +1,9 @@
-import React, { useContext } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
-import contexteRecipe from '../context/ContextRecipes';
 
-function RenderProgressFood(url, id) {
-  const { doneRecipes, inProgressRecipes } = useContext(contexteRecipe);
+function RenderProgress(props) {
+  const { type, ke } = props;
   const history = useHistory();
 
   const startRecipe = {
@@ -11,51 +11,63 @@ function RenderProgressFood(url, id) {
     bottom: '0px',
   };
 
-  function alreadyDone() {
-    let doneFlag = false;
-    doneRecipes.forEach((recip) => {
-      if (recip.id === id) doneFlag = true;
-    });
-    return doneFlag;
+  localStorage.setItem('inProgressRecipes', JSON.stringify({
+    meals: {},
+    cocktails: {},
+  }));
+
+  const getLocalInPro = localStorage.getItem('inProgressRecipes');
+  const inProgress = JSON.parse(getLocalInPro);
+  if (type === 'comidas') {
+    const { meals } = inProgress;
+    const toSet = {
+      ...inProgress,
+      meals: { ...meals, [ke]: [] },
+    };
+    localStorage.setItem('inProgressRecipes', JSON.stringify(toSet));
+  }
+  if (type === 'bebidas') {
+    const { cocktails } = inProgress;
+    const toSet = {
+      ...inProgress,
+      cocktails: { ...cocktails, [ke]: [] },
+    };
+    localStorage.setItem('inProgressRecipes', JSON.stringify(toSet));
   }
 
-  function inProgress() {
-    let progressFlag = false;
-    if (inProgressRecipes.length !== 0) {
-      progressFlag = (
-        inProgressRecipes.meals[id] !== null
-      );
+  const searchIt = () => {
+    const inProRecipe = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    if (type === 'comidas') {
+      const ids = Object.keys(inProRecipe.meals);
+      return ids.includes(ke);
     }
-    return progressFlag;
-  }
+    if (type === 'bebidas') {
+      const ids = Object.keys(inProRecipe.cocktails);
+      return ids.includes(ke);
+    }
+  };
 
-  if (alreadyDone()) {
-    return (<div>Receita já feita</div>);
-  }
-
-  if (inProgress()) {
-    return (
-      <button
-        type="button"
-        data-testid="start-recipe-btn"
-        style={ startRecipe }
-        onClick={ () => history.push(`/${url}/${id}/in-progress`) }
-      >
-        Continuar Receita
-      </button>
-    );
-  }
+  const verifyInPro = () => {
+    const inProRecipe = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    const toReturn = inProRecipe ? searchIt() : false;
+    return toReturn;
+  };
 
   return (
     <button
       type="button"
       data-testid="start-recipe-btn"
       style={ startRecipe }
-      onClick={ () => history.push(`/${url}/${id}/in-progress`) }
+      onClick={ () => history.push(`/${type}/${ke}/in-progress`) }
     >
-      iniciar receita
+      { verifyInPro() ? 'Continuar Receita' : 'Iniciar Receita' }
     </button>
   );
 }
 
-export default RenderProgressFood;
+RenderProgress.propTypes = {
+  type: PropTypes.string.isRequired,
+  ke: PropTypes.number.isRequired,
+};
+
+export default RenderProgress;

@@ -22,25 +22,6 @@ function ProviderRecipes({ children }) {
     setTimeout(() => { setAlertOn(false); }, waitTime);
   };
 
-  function checkLocStorage() {
-    const doneRecipesArray = JSON.parse(localStorage.getItem('doneRecipes'));
-    if (doneRecipesArray !== null) {
-      return doneRecipesArray;
-    }
-    return [];
-  }
-
-  function checkLocalStorage() {
-    const inProgressRecipesArray = JSON.parse(localStorage.getItem('inProgressRecipes'));
-    if (inProgressRecipesArray !== null) {
-      return inProgressRecipesArray;
-    }
-    return [];
-  }
-
-  const [inProgressRecipes, setInProgressRecipes] = useState(checkLocalStorage());
-  const [doneRecipes, setDoneRecipes] = useState(checkLocStorage());
-
   const getCategories = async (type) => {
     const siteName = type === 'Meal' ? 'meal' : 'cocktail';
     const endpoint = `https://www.the${siteName}db.com/api/json/v1/1/list.php?c=list`;
@@ -115,10 +96,6 @@ function ProviderRecipes({ children }) {
   return (
     <ContextRecipes.Provider
       value={ {
-        setDoneRecipes,
-        doneRecipes,
-        inProgressRecipes,
-        setInProgressRecipes,
         activeFilter,
         setFilter,
         filteredRecipe,

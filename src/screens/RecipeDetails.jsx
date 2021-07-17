@@ -6,8 +6,7 @@ import Ingredients from './Ingredients';
 import Recommendations from './Recomendations';
 import Video from '../service/Video';
 import { FavFood, FavDrink } from '../service/Favorite';
-import RenderProgressFood from '../service/RenderProgress';
-import RenderProgressDrink from '../service/RenderProgressDrink';
+import Button from '../service/RenderProgress';
 import { checkFavoriteFood, checkFavoriteDrink } from '../service/Check';
 
 function RecipeDetails(props) {
@@ -64,7 +63,7 @@ function RecipeDetails(props) {
       <h3>Instruções</h3>
       <p data-testid="instructions">{ recipe.strInstructions }</p>
       <Recommendations recipe={ type } />
-      { recipe.strDrink ? RenderProgressDrink(url, id) : RenderProgressFood(url, id) }
+      <Button type={ url } ke={ id } />
     </div>
   );
 }
