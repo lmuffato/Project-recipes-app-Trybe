@@ -1,8 +1,9 @@
 .fixed-button {
   bottom: 0;
-  position: fixed;  
+  position: fixed;
 }
-.image-detail {  
+
+.image-detail {
   height: 100px;
   width: 100px;
 }
