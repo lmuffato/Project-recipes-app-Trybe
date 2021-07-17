@@ -4,15 +4,15 @@ import './recipesMain.css';
 import { Link } from 'react-router-dom';
 import Header from '../../components/header';
 import MenuFooter from '../../components/menuFooter/index';
-
 import RecipeCard from './RecipeCard';
 import Categories from './Categories';
 import { AppContext } from '../../context/AppContext';
+import Loading from '../../components/Loading/Loading';
 
 export default function RecipesMain({ match }) {
   const { path } = match;
   const { context } = useContext(AppContext);
-  const { recipesList, setPageOrigin, pageOrigin } = context;
+  const { recipesList, setPageOrigin, pageOrigin, isLoading } = context;
 
   useEffect(() => {
     setPageOrigin(path === '/comidas' ? 'themealdb' : 'thecocktaildb');
@@ -21,27 +21,32 @@ export default function RecipesMain({ match }) {
   return (
     <div>
       <Header title={ pageOrigin === 'themealdb' ? 'Comidas' : 'Bebidas' } />
+
       <Categories />
+
       <div className="list-main-recipes">
-        { recipesList.map(
-          (recipe, index) => (
-            <Link
-              to={ pageOrigin === 'themealdb'
-                ? `comidas/${recipe.idMeal}`
-                : `bebidas/${recipe.idDrink}` }
-              key={ recipe.idMeal || recipe.idDrink }
-            >
-              <RecipeCard
-                recipe={ recipe }
-                index={ index }
-                isMain
-                path={ path }
-              />
-            </Link>
-          ),
-        )}
+        {
+          isLoading
+            ? <Loading /> : recipesList.map(
+              (recipe, index) => (
+                <Link
+                  to={ pageOrigin === 'themealdb'
+                    ? `comidas/${recipe.idMeal}`
+                    : `bebidas/${recipe.idDrink}` }
+                  key={ recipe.idMeal || recipe.idDrink }
+                >
+                  <RecipeCard
+                    recipe={ recipe }
+                    index={ index }
+                    isMain
+                    path={ path }
+                  />
+                </Link>
+              ),
+            )
+        }
+        <MenuFooter />
       </div>
-      <MenuFooter />
     </div>
   );
 }

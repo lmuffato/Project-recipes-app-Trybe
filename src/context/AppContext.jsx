@@ -16,6 +16,7 @@ export default function AppProvider({ children }) {
   const [checkedState, setCheckedState] = useState(true);
   const [recipe, setRecipe] = useState('');
   const [byIngredients, setByIngredients] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const NUM_RECIPES_SHOWN = 12;
   const NUM_CATEG_SHOWN = 5;
   const context = {
@@ -39,6 +40,8 @@ export default function AppProvider({ children }) {
     toDoneStorage,
     byIngredients,
     setByIngredients,
+    isLoading,
+    setIsLoading,
   };
 
   useEffect(() => {
@@ -78,19 +81,28 @@ export default function AppProvider({ children }) {
   }, [recipe, pageOrigin]);
 
   useEffect(() => {
-    fetchCategoriesApi(pageOrigin)
-      .then((categories) => {
-        categories.splice(NUM_CATEG_SHOWN, categories.length - 1);
-        setCategoriesList(categories);
-      });
+    if (pageOrigin !== '') {
+      fetchCategoriesApi(pageOrigin)
+        .then((categories) => {
+          categories.splice(NUM_CATEG_SHOWN, categories.length - 1);
+          setCategoriesList(categories);
+        });
+    }
   }, [pageOrigin]);
 
   useEffect(() => {
-    fetchRecipesApi(pageOrigin)
-      .then((recipes) => {
-        recipes.splice(NUM_RECIPES_SHOWN, recipes.length - 1);
-        setRecipesList(recipes);
-      });
+    if (pageOrigin !== '') {
+      setIsLoading(true);
+      fetchRecipesApi(pageOrigin)
+        .then((recipes) => {
+          recipes.splice(NUM_RECIPES_SHOWN, recipes.length - 1);
+          setRecipesList(recipes);
+        });
+      setIsLoading(false);
+    }
+    return (() => {
+      setIsLoading(false);
+    });
   }, [pageOrigin]);
 
   return (
