@@ -14,6 +14,8 @@ function DrinkDescription({ recipe, recipeId }) {
     idDrink, strDrinkThumb, strDrink, strCategory, strInstructions, strAlcoholic,
   } = recipe;
 
+  console.log(recipe);
+
   const ingredients = Object.entries(recipe)
     .filter(([key, value]) => (key.includes('strIngredient') ? value : null))
     .map((ingredient) => ingredient[1]);

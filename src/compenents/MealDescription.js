@@ -14,6 +14,9 @@ function MealDescription({ recipe, recipeId }) {
     idMeal, strArea, strMealThumb, strMeal, strCategory, strInstructions, strYoutube,
   } = recipe;
 
+  // console.log(recipe);
+  // console.log(recomendations);
+
   const ingredients = Object.entries(recipe)
     .filter(([key, value]) => (key.includes('strIngredient') ? value : null))
     .map((ingredient) => ingredient[1]);
@@ -43,7 +46,7 @@ function MealDescription({ recipe, recipeId }) {
 
   const checkStart = () => {
     const inProgress = JSON.parse(localStorage.getItem('inProgressRecipes'));
-    console.log(inProgress);
+    // console.log(inProgress);
     if (inProgress && Object.keys(inProgress.meals).find((key) => key === idMeal)) {
       return 'Continuar Receita';
     }
@@ -71,6 +74,7 @@ function MealDescription({ recipe, recipeId }) {
               alcoholicOrNot=""
               name={ strMeal }
               image={ strMealThumb }
+              index={ 0 }
             />
           </section>
         </section>
