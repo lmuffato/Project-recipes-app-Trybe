@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { useLocation, Redirect, Link } from 'react-router-dom';
+import { useLocation, Redirect } from 'react-router-dom';
 import { fetchDrinkForId } from '../../services/Data';
 import shareIcon from '../../images/shareIcon.svg';
 import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
@@ -192,7 +192,6 @@ function DrinkId() {
           }
         </div>
       </section>
-      <Link to="/bebidas">Voltar</Link>
       <button
         type="button"
         onClick={ handleClick }

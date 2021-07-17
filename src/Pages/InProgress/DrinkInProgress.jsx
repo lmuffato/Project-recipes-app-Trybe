@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { useLocation, Redirect, Link } from 'react-router-dom';
+import { useLocation, Redirect } from 'react-router-dom';
 import { fetchDrinkForId } from '../../services/Data';
 import shareIcon from '../../images/shareIcon.svg';
 import context from '../../store/Context';
@@ -143,7 +143,6 @@ function DrinkInProgress() {
       {ingredientsList()}
       <h4>Instructions :</h4>
       <p data-testid="instructions">{strInstructions}</p>
-      <Link to="/bebidas">Voltar</Link>
       <button
         type="button"
         data-testid="finish-recipe-btn"
