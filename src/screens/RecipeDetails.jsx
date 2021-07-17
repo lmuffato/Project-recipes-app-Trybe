@@ -1,6 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useLocation } from 'react-router';
 import PropTypes from 'prop-types';
+import ContextRecipes from '../context/ContextRecipes';
+import ButtonShare from '../components/ButtonShare';
+import CustonAlert from '../components/CustonAlert';
 import fetchApiById from '../service/fetchApiDetails';
 import Ingredients from './Ingredients';
 import Recommendations from './Recomendations';
@@ -11,6 +14,7 @@ import { checkFavoriteFood, checkFavoriteDrink } from '../service/Check';
 
 function RecipeDetails(props) {
   const { match: { params: { id } } } = props;
+  const { alertOn } = useContext(ContextRecipes);
   const { pathname } = useLocation();
   const [recipe, setRecipe] = useState({});
   const type = pathname === `/comidas/${id}` ? 'themealdb' : 'thecocktaildb';
@@ -35,9 +39,12 @@ function RecipeDetails(props) {
       <h2 data-testid="recipe-title">
         { recipe.strMeal || recipe.strDrink }
       </h2>
-      <button type="button" data-testid="share-btn">
-        compartilhar
-      </button>
+      <ButtonShare
+        idRecipe={ id }
+        typeRecipe={ url }
+        testid="share-btn"
+      />
+      {alertOn && <CustonAlert message="Link copiado!" />}
       <input
         type="image"
         data-testid="favorite-btn"
