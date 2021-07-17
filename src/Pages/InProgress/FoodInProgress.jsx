@@ -21,36 +21,51 @@ const copyLink = (id, alert, setAlert) => {
   }
 };
 
+const getFoodsLocalStorage = () => (
+  localStorage.getItem('inProgressRecipes')
+  && Object.keys(JSON.parse(localStorage.getItem('inProgressRecipes')).meals)
+);
+
+const checkBoxes = document.getElementsByName('checkbox');
+const checkedBoxes = [];
+checkBoxes.forEach((checkbox) => {
+  if (checkbox.checked) checkedBoxes.push(checkbox.value);
+  return checkedBoxes;
+});
+
 function FoodInProgress() {
+  const { inProgressRecipes } = useContext(context);
+  const { meals } = inProgressRecipes;
   const location = useLocation();
   const id = location.pathname.split('/')[2];
   const [foodDetail, setFoodDetail] = useState([]);
   const [shouldRedirect, setShouldRedirect] = useState(false);
   const [alert, setAlert] = useState('');
+  const [desabledBtn, setDesabledBtn] = useState(true);
   const [favHeart, setFavHeart] = useState(whiteHeartIcon);
-  const { inProgressRecipes, setInProgressRecipes } = useContext(context);
-  const { meals } = inProgressRecipes;
 
   const handleClick = () => {
     setShouldRedirect(true);
-    setInProgressRecipes({
-      cocktails: {},
-      meals: { ...meals, [id]: [] },
-    });
   };
+
+  getFoodsLocalStorage();
+  getFoodsFavorites(setFavHeart, id);
 
   useEffect(() => {
     const favoriteRecipes = (JSON.parse(localStorage.getItem('favoriteRecipes')) || []);
     localStorage.setItem('favoriteRecipes', JSON.stringify([...favoriteRecipes]));
-    getFoodsFavorites(setFavHeart, id);
     fetchFoodForId(id)
       .then((res) => {
         if (res.meals) setFoodDetail(res.meals[0]);
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id, meals]);
-  useEffect(() => {
-  }, []);
+
+  /*   setInProgressRecipes({
+    cocktails: {},
+    meals: { ...meals, [id]: [] },
+  });
+ */
   const {
     idMeal,
     strArea,
@@ -85,6 +100,7 @@ function FoodInProgress() {
       .filter(({ id: localStorageId }) => localStorageId === id)
       .length ? delFavoriteRecipes() : addFavoriteRecipes()
   );
+
   const ingredientsList = () => {
     const ingredientList = foodDetail;
     const twenty = 20;
@@ -103,6 +119,8 @@ function FoodInProgress() {
           data-testid={ `${index}-ingredient-step` }
         >
           <input
+            value={ ingredient }
+            name="checkbox"
             type="checkbox"
             id="ingredients"
           />
@@ -116,6 +134,7 @@ function FoodInProgress() {
     return listIngredients;
   };
 
+  if (checkedBoxes.length === checkBoxes.length) return setDesabledBtn(false);
   if (shouldRedirect) return <Redirect to="/receitas-feitas" />;
   if (foodDetail.length === 0) return <div>Preparing Ingredients...</div>;
   return (
@@ -147,7 +166,7 @@ function FoodInProgress() {
       <p data-testid="instructions">{strInstructions}</p>
       <Link to="/comidas">Voltar</Link>
       <button
-        disabled="true"
+        disabled={ desabledBtn }
         type="button"
         data-testid="finish-recipe-btn"
         onClick={ handleClick }
