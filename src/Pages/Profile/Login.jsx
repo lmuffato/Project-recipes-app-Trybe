@@ -1,7 +1,7 @@
+import '../../Styles/loginPage.css';
 import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import context from '../../store/Context';
-import '../../Styles/loginPage.css';
 
 function Login() {
   const { infoUser, setDatainfoUser } = useContext(context);

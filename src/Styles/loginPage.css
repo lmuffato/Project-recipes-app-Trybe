@@ -1,77 +1,45 @@
 @import url('https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap') ;
 
-body {
-  background: none;
+body, html, div {
   background-image: url('../images/Prancing_Pony.jpg');
   font-family: MedievalSharp , cursive;
   height: 100%;
   margin: 0;
 }
 
-input {
+input, label {
+  align-content: space-around;
   align-items: center;
+  align-self: center;
   border: none;
-  display: flexbox;
+  border-radius: 10px;
+  color: #9c6b65;
+  flex-direction: column;
   font-family: MedievalSharp , cursive;
-  margin-top: 25px;
-  padding-left: 25px;
-  padding-right: 25px;
   z-index: 5;
 }
 
 input::placeholder {
+  align-content: center;
   color: #9c6b65;
+  font-family: MedievalSharp , cursive;
+}
+
+button {
+  align-content: space-around;
+  align-items: center;
+  align-self: center;
+  color: #9c6b65;
+  display: flex;
+  font-family: MedievalSharp , cursive;
 }
 
 button:focus {
   outline: none;
 }
 
-.ghost-round {
-  align-self: flex-end;
-  background: none;
-  border: 1px solid rgba(255, 255, 255, 0.65);
-  border-radius: 25px;
-  color: rgba(255, 255, 255, 0.65);
-  cursor: pointer;
-  font-size: 1.2rem;
-  font-weight: 300;
-  line-height: 2.5em;
-  margin-bottom: 25px;
-  margin-top: auto;
-  transition: all 0.2s ease;
-}
-
-.ghost-round:hover {
-  background: rgba(255, 255, 255, 0.15);
-  transition: all 0.2s ease;
-}
-
-.input-line {
-  background: none;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.65);
-  font-family: MedievalSharp , cursive;
-  font-size: 1.2rem;
-  font-weight: 300;
-  letter-spacing: 0;
-  line-height: 2.4em;
-  margin-bottom: 10px;
-  transition: all 0.2s ease;
-}
-
-.full-width {
-  width: 100%;
-}
-
-.container {
-  align-items: center;
-  background: #eee;
-  display: flexbox;
-  height: 100%;
-  justify-content: center;
-}
-
 form {
+  align-items: center;
   align-self: flex-end;
   background: #9a9a8e;
   border: 1px solid rgba(255, 255, 255, 0.65);
@@ -80,16 +48,13 @@ form {
   box-sizing: border-box;
   color: rgba(255, 255, 255, 0.65);
   cursor: pointer;
-  display: flex;
-  flex-flow: column;
   font-family: MedievalSharp , cursive;
   font-size: 19px;
   font-weight: 300;
   height: 560px;
   line-height: 2.5em;
-  margin-bottom: 25px;
-  margin-top: auto;
-  position: relative;
+  margin-left: 50vh;
+  margin-top: 30vh;
   transition: all 0.2s ease;
   width: 360px;
   z-index: 100;
