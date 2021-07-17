@@ -1,15 +1,25 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
+import contexteRecipe from '../context/ContextRecipes';
 
 function RenderProgress(props) {
   const { type, ke } = props;
+  const { doneRecipes } = useContext(contexteRecipe);
   const history = useHistory();
 
   const startRecipe = {
     position: 'fixed',
     bottom: '0px',
   };
+
+  function alreadyDone() {
+    let doneFlag = false;
+    doneRecipes.forEach((recip) => {
+      if (recip.id === ke) doneFlag = true;
+    });
+    return doneFlag;
+  }
 
   localStorage.setItem('inProgressRecipes', JSON.stringify({
     meals: {},
@@ -53,6 +63,9 @@ function RenderProgress(props) {
     return toReturn;
   };
 
+  if (alreadyDone()) {
+    return <div>Receita já feita</div>;
+  }
   return (
     <button
       type="button"

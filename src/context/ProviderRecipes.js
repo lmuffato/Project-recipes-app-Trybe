@@ -16,6 +16,16 @@ function ProviderRecipes({ children }) {
   const [alertOn, setAlertOn] = useState(false);
   const [updateFlag, setUpadateFlag] = useState(false);
 
+  function checkLocStorage() {
+    const doneRecipesArray = JSON.parse(localStorage.getItem('doneRecipes'));
+    if (doneRecipesArray !== null) {
+      return doneRecipesArray;
+    }
+    return [];
+  }
+
+  const [doneRecipes, setdonesRecipes] = useState(checkLocStorage());
+
   const turnOnAlert = () => {
     setAlertOn(true);
     const waitTime = 2000;
@@ -96,6 +106,8 @@ function ProviderRecipes({ children }) {
   return (
     <ContextRecipes.Provider
       value={ {
+        doneRecipes,
+        setdonesRecipes,
         activeFilter,
         setFilter,
         filteredRecipe,
