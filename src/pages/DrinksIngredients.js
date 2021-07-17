@@ -18,7 +18,6 @@ function DrinksIngredients() {
       const endpoint = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list';
       const { drinks } = await fetch(endpoint).then((data) => data.json());
       setDrinkIngredients(drinks);
-      console.log(drinks);
     };
     getIngredients();
     setHideSearchBtn(false);
@@ -29,7 +28,6 @@ function DrinksIngredients() {
     const endpoint = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${param}`;
     const { drinks } = await fetch(endpoint).then((data) => data.json());
     setMealsAndDrinkByIngredients(drinks.slice(0, numberOfIngredients));
-    console.log(drinks);
   };
 
   const getIngredients = () => {
