@@ -91,7 +91,6 @@ class DetBebidas extends React.Component {
     return whiteHeartIcon;
   }
 
-  /*
   InProgressButton(id) {
     const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
     if (inProgressRecipes.cocktails[id]) {
@@ -99,7 +98,6 @@ class DetBebidas extends React.Component {
       button.innerHTML = 'Continuar Receita';
     }
   }
-  */
 
   checkRecipe({ idMeal }) {
     if (localStorage.doneRecipes) {
@@ -176,19 +174,25 @@ class DetBebidas extends React.Component {
             {recipe[0].strInstructions}
           </p>
           <h2>Comidas Recomendadas</h2>
-          {recommended.map((food, index) => (
-            <div key={ food.idMeal } data-testid={ `${index}-recomendation-card` }>
-              <Link to={ `/comidas/${food.idMeal}` }>
-                <input
-                  width="350"
-                  type="image"
-                  src={ food.strMealThumb }
-                  data-testid="recipe-photo"
-                  alt="recipe-img"
-                />
-              </Link>
-            </div>
-          ))}
+          <div className="recommended">
+            {recommended.map((food, index) => (
+              <div
+                key={ food.idMeal }
+                data-testid={ `${index}-recomendation-card` }
+                className="recommendedCard"
+              >
+                <Link to={ `/comidas/${food.idMeal}` }>
+                  <input
+                    width="350"
+                    type="image"
+                    src={ food.strMealThumb }
+                    data-testid="recipe-photo"
+                    alt="recipe-img"
+                  />
+                </Link>
+              </div>
+            ))}
+          </div>
           {(!this.checkRecipe(recipe[0]))
           && (
             <Link to={ `/bebidas/${recipe[0].idDrink}/in-progress` }>

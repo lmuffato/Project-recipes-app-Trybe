@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import drinkIcon from '../images/drinkIcon.svg';
 import exploreIcon from '../images/exploreIcon.svg';
 import mealIcon from '../images/mealIcon.svg';
+import './footer.css';
 
 class Footer extends React.Component {
   render() {

@@ -1,8 +1,10 @@
+/* eslint-disable no-alert */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import searchIcon from '../images/searchIcon.svg';
 import { handleCurrentSearch } from '../actions';
+import './header.css';
 
 class SearchButton extends React.Component {
   constructor(props) {
@@ -31,8 +33,9 @@ class SearchButton extends React.Component {
     const { handleSearch } = this.props;
     const msgErro = 'Sua busca deve conter somente 1 (um) caracter';
     if (clickRButton === 'firstLetter' && valueInput.length > 1) {
-      // eslint-disable-next-line no-alert
       alert(msgErro);
+    } else if (clickRButton === '') {
+      alert('Selecione ao menos um filtro');
     } else {
       handleSearch(valueInput, clickRButton);
     }
@@ -41,42 +44,16 @@ class SearchButton extends React.Component {
   renderInputSearch() {
     const { valueInput } = this.state;
     return (
-      <input
-        type="text"
-        data-testid="search-input"
-        nome="valueInput"
-        value={ valueInput }
-        onChange={ this.handleChange }
-        placeholder="Selecione um filtro abaixo para pesquisar"
-        className="inputSearch"
-      />
-    );
-  }
-
-  renderRadioButtons() {
-    const { btn } = this.state;
-    return (
       <>
-        <button
-          src={ searchIcon }
-          data-testid="search-top-btn"
-          type="button"
-          className="headerIcons"
-          onClick={ () => {
-            if (!btn) {
-              this.setState({
-                btn: true,
-              });
-            } else {
-              this.setState({
-                btn: false,
-              });
-            }
-          } }
-        >
-          <img src={ searchIcon } alt="search" />
-        </button>
-        {btn ? this.renderInputSearch() : null}
+        <input
+          type="text"
+          data-testid="search-input"
+          nome="valueInput"
+          value={ valueInput }
+          onChange={ this.handleChange }
+          placeholder="Selecione um filtro para pesquisar"
+          className="inputSearch"
+        />
         <section className="filters">
           <label htmlFor="optionsIngrediente">
             <input
@@ -126,6 +103,34 @@ class SearchButton extends React.Component {
         >
           Buscar
         </button>
+      </>
+    );
+  }
+
+  renderRadioButtons() {
+    const { btn } = this.state;
+    return (
+      <>
+        <button
+          src={ searchIcon }
+          data-testid="search-top-btn"
+          type="button"
+          className="headerIcons"
+          onClick={ () => {
+            if (!btn) {
+              this.setState({
+                btn: true,
+              });
+            } else {
+              this.setState({
+                btn: false,
+              });
+            }
+          } }
+        >
+          <img src={ searchIcon } alt="search" className="headerIMGs" />
+        </button>
+        {btn ? this.renderInputSearch() : null}
       </>
     );
   }

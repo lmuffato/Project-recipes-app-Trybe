@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import profileIcon from '../images/profileIcon.svg';
+import './header.css';
 
 class Header extends React.Component {
   render() {
@@ -13,7 +14,12 @@ class Header extends React.Component {
             type="submit"
             className="headerIcons"
           >
-            <img src={ profileIcon } alt="perfil" data-testid="profile-top-btn" />
+            <img
+              src={ profileIcon }
+              alt="perfil"
+              data-testid="profile-top-btn"
+              className="headerIMGs"
+            />
           </button>
         </Link>
         <h1 data-testid="page-title" className="headerTitle">{title}</h1>

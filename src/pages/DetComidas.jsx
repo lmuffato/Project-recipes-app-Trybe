@@ -96,7 +96,6 @@ class DetComidas extends React.Component {
     return whiteHeartIcon;
   }
 
-  /*
   InProgressButton(id) {
     const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
     if (inProgressRecipes.meals[id]) {
@@ -104,7 +103,7 @@ class DetComidas extends React.Component {
       button.innerHTML = 'Continuar Receita';
     }
   }
-  */
+
   checkRecipe({ idMeal }) {
     if (localStorage.doneRecipes) {
       const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
@@ -186,18 +185,24 @@ class DetComidas extends React.Component {
             allow="accelerometer; clipboard-write; picture-in-picture"
           />
           <h2>Drinks Recomendados</h2>
-          {recommended.map((drink, index) => (
-            <div key={ drink.idDrink } data-testid={ `${index}-recomendation-card` }>
-              <input
-                width="350"
-                type="image"
-                src={ drink.strDrinkThumb }
-                data-testid="recipe-photo"
-                alt="recipe-img"
-                onClick={ () => history.push(`/bebidas/${drink.idDrink}`) }
-              />
-            </div>
-          ))}
+          <div className="recommended">
+            {recommended.map((drink, index) => (
+              <div
+                key={ drink.idDrink }
+                data-testid={ `${index}-recomendation-card` }
+                className="recommendedCard"
+              >
+                <input
+                  width="350"
+                  type="image"
+                  src={ drink.strDrinkThumb }
+                  data-testid="recipe-photo"
+                  alt="recipe-img"
+                  onClick={ () => history.push(`/bebidas/${drink.idDrink}`) }
+                />
+              </div>
+            ))}
+          </div>
           {(!this.checkRecipe(recipe[0]))
           && (
             <button
