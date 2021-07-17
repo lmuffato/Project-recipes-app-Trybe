@@ -97,3 +97,7 @@
     hue-rotate(328deg) brightness(99%) contrast(94%);
   padding: 3px;
 }
+
+:checked {
+  text-decoration: none solid rgb(0, 0, 0);
+}

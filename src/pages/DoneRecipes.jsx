@@ -5,6 +5,7 @@ import FilterDoneRecipes from '../components/FilterDoneRecipes';
 import Header from '../components/Header';
 import ShareButton from '../components/ShareButton';
 import RecipeDone from '../effects/RecipeDone';
+import gifLogin from '../images/gifLogin.gif';
 import '../CSS/DoneRecipes.css';
 
 export default function DoneRecipes() {
@@ -37,8 +38,9 @@ export default function DoneRecipes() {
   if (redirect) return <Redirect to={ `${redirectTo}` } />;
 
   if (!getItems) {
-    return <h1>Loading...</h1>;
+    return <img src={ gifLogin } margin="0 auto" width="45px" alt="Loading" />;
   }
+
   if (!recipes) {
     return (
       <div>

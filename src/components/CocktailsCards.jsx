@@ -11,23 +11,23 @@ export default function CocktailsCards() {
   return (
     <div className="cardsMainRecipes">
       {drinksArray.length > 0
-      && drinksArray.map((recipe, index) => (
-        <Card
-          className="cardRecipe"
-          onClick={ async () => setCurrCategoryId(recipe.idDrink) }
-          key={ index }
-          data-testid={ `${index}-recipe-card` }
-        >
-          <Card.Img
-            className="cardRecipeImg"
-            variant="top"
-            src={ recipe.strDrinkThumb }
-            data-testid={ `${index}-card-img` }
-            alt="recipe"
-          />
-          <p data-testid={ `${index}-card-name` }>{recipe.strDrink}</p>
-        </Card>
-      ))}
+        && drinksArray.map((recipe, index) => (
+          <Card
+            className="cardRecipe"
+            onClick={ async () => setCurrCategoryId(recipe.idDrink) }
+            key={ index }
+            data-testid={ `${index}-recipe-card` }
+          >
+            <Card.Img
+              className="cardRecipeImg"
+              variant="top"
+              src={ recipe.strDrinkThumb }
+              data-testid={ `${index}-card-img` }
+              alt="recipe"
+            />
+            <p data-testid={ `${index}-card-name` }>{recipe.strDrink}</p>
+          </Card>
+        ))}
     </div>
   );
 }

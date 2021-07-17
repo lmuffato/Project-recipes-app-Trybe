@@ -43,7 +43,12 @@ export default function FoodInProgress() {
       <div className="ingredientsChecksDiv">
         <IngredientsChecks ingredients={ arrRecipeIngredients } />
       </div>
-      <p className="instructionsProgress" data-testid="instructions">{ recipe.strInstructions }</p>
+      <p
+        className="instructionsProgress"
+        data-testid="instructions"
+      >
+        { recipe.strInstructions }
+      </p>
       <FinishButton ingredients={ arrRecipeIngredients } />
     </Card>
   );
