@@ -19,6 +19,7 @@ import DrinkInProgress from './pages/DrinkInProgress';
 import DrinkByIngredient from './pages/DrinkByIngredient';
 import DoneRecipes from './pages/DoneRecipes';
 import FavoriteRecipes from './pages/FavoriteRecipes';
+import NotFound from './pages/NotFound';
 
 function App() {
   return (
@@ -51,6 +52,7 @@ function App() {
             <Route exact path="/perfil" component={ Profile } />
             <Route exact path="/receitas-feitas" component={ DoneRecipes } />
             <Route exact path="/receitas-favoritas" component={ FavoriteRecipes } />
+            <Route path="*" component={ NotFound } />
           </Switch>
         </UserProvider>
       </BrowserRouter>

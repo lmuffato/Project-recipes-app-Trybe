@@ -14,8 +14,6 @@ export default function FoodByIngredient() {
       const mealIngredients = await fetch('https://www.themealdb.com/api/json/v1/1/list.php?i=list');
       const responseApi = await mealIngredients.json();
       const { meals } = responseApi;
-      // const mealImages = await fetch('https://www.themealdb.com/images/ingredients/{nome-do-ingrediente}.png');
-      // const responseImgApi = await mealImagens.json();
       const indexMeals = 12;
       const twelveIngredients = meals.slice(0, indexMeals);
       setIngredients(twelveIngredients);
