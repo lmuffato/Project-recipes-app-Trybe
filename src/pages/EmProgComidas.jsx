@@ -16,12 +16,14 @@ class EmProgComidas extends React.Component {
       ingredients: [],
       measures: [],
       usedIngredients: [],
+      area: '',
     };
 
     // this.getMealId.this = this.getMealId.bind(this);
     // this.handleDoneSteps.this = this.handleDoneSteps.bind(this);
     // // this.checkDoneSteps.this = this.checkDoneSteps.bind(this);
     // this.checkStorageMeals.this = this.checkStorageMeals.bind(this);
+    this.setDoneRecipe = this.setDoneRecipe.bind(this);
   }
 
   componentDidMount() {
@@ -106,12 +108,15 @@ class EmProgComidas extends React.Component {
     const endpoint = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
     const request = await fetch(endpoint).then((response) => response.json());
     const recipe = request.meals || null;
+    console.log(recipe);
+    console.log(new Date());
     this.setState({
       currentId: id,
       title: recipe[0].strMeal,
       category: recipe[0].strCategory,
       thumbnail: recipe[0].strMealThumb,
       instructions: recipe[0].strInstructions,
+      area: recipe[0].strArea,
     });
     this.handleIngredients(recipe);
 
@@ -122,8 +127,34 @@ class EmProgComidas extends React.Component {
     }
   }
 
+  setDoneRecipe() {
+    const { history } = this.props;
+    const { currentId, category, title, thumbnail, area } = this.state;
+    const prevStore = JSON.parse(localStorage.getItem('doneRecipes'));
+    const existBefore = prevStore.find((recipe) => recipe.id === currentId);
+    const d = new Date();
+    const doneRecipe = [...prevStore, {
+      id: currentId,
+      type: 'meals',
+      area,
+      category,
+      alcoholicOrNot: '',
+      name: title,
+      image: thumbnail,
+      doneDate: `${d.getDate()}/${d.getMonth() + 1}/${d.getFullYear()}`,
+      tags: [],
+    }];
+
+    if (existBefore === false || existBefore === undefined) {
+      localStorage.setItem('doneRecipes', JSON.stringify(doneRecipe));
+    }
+    console.log(existBefore);
+    history.push('/receitas-feitas');
+  }
+
   checkStorageMeals(id) {
     const storedItems = JSON.parse(localStorage.getItem('inProgressRecipes'));
+
     if (storedItems) {
       return storedItems.meals[id] || null;
     }
@@ -165,7 +196,7 @@ class EmProgComidas extends React.Component {
         <button
           data-testid="finish-recipe-btn"
           type="submit"
-          onClick={ () => history.push('/receitas-feitas') }
+          onClick={ this.setDoneRecipe }
           disabled={ ingredients.length !== usedIngredients.length }
         >
           Finalizar Receita

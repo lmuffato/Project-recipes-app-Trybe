@@ -8,8 +8,7 @@ class EmProgBebidas extends React.Component {
     super(props);
 
     this.state = {
-    //   currentId: '',
-    //   type: '',
+      currentId: '',
       title: '',
       category: '',
       thumbnail: '',
@@ -17,13 +16,10 @@ class EmProgBebidas extends React.Component {
       ingredients: [],
       measures: [],
       usedIngredients: [],
+      area: '',
     };
 
-    // this.getDrinkId.this = this.getDrinkId.bind(this);
-    // this.handleDoneSteps.this = this.handleDoneSteps.bind(this);
-    // this.checkDoneSteps.this = this.checkDoneSteps.bind(this);
-    // this.checkStorageDrinks.this = this.checkStorageDrinks.bind(this);
-    // this.checkStorageMeals.this = this.checkStorageMeals.bind(this);
+    this.setDoneRecipe = this.setDoneRecipe.bind(this);
   }
 
   componentDidMount() {
@@ -69,10 +65,10 @@ class EmProgBebidas extends React.Component {
       for (let index = 1; index <= ingredientLimit; index += 1) {
         ingrediente = `strIngredient${index}`;
         measure = `strMeasure${index}`;
-        // console.log(recipe[ingrediente]);
+
         ingredients.push(current[ingrediente]);
-        // console.log(recipe[measure])
         measures.push(current[measure]);
+
         if (ingredients[ingredients.length - 1] === ''
         || ingredients[ingredients.length - 1] === null) {
           ingredients.pop();
@@ -113,6 +109,7 @@ class EmProgBebidas extends React.Component {
       category: recipe[0].strAlcoholic,
       thumbnail: recipe[0].strDrinkThumb,
       instructions: recipe[0].strInstructions,
+      area: recipe[0].strArea,
     });
     this.handleIngredients(recipe);
 
@@ -121,6 +118,31 @@ class EmProgBebidas extends React.Component {
         usedIngredients: this.checkStorageDrinks(id),
       });
     }
+  }
+
+  setDoneRecipe() {
+    const { history } = this.props;
+    const { currentId, category, title, thumbnail, area } = this.state;
+    const prevStore = JSON.parse(localStorage.getItem('doneRecipes'));
+    const existBefore = prevStore.find((recipe) => recipe.id === currentId);
+    const d = new Date();
+    const doneRecipe = [...prevStore, {
+      id: currentId,
+      type: 'cocktails',
+      area,
+      category: '',
+      alcoholicOrNot: category,
+      name: title,
+      image: thumbnail,
+      doneDate: `${d.getDate()}/${d.getMonth() + 1}/${d.getFullYear()}`,
+      tags: [],
+    }];
+
+    if (existBefore === false || existBefore === undefined) {
+      localStorage.setItem('doneRecipes', JSON.stringify(doneRecipe));
+    }
+    console.log(existBefore);
+    history.push('/receitas-feitas');
   }
 
   checkStorageDrinks(id) {
@@ -173,6 +195,7 @@ class EmProgBebidas extends React.Component {
           data-testid="finish-recipe-btn"
           type="submit"
           disabled={ ingredients.length !== usedIngredients.length }
+          onClick={ this.setDoneRecipe }
         >
           Finalizar Receita
         </button>
