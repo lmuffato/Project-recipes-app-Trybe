@@ -6,7 +6,6 @@ import { AppContext } from '../../context/AppContext';
 export default function StartRecipeBtn({ recipe }) {
   const { context } = useContext(AppContext);
   const { pageOrigin, toDoneStorage } = context;
-  const [textButton, setTextButton] = useState('');
   const classNameBtn = 'start-recipe-btn';
 
   useEffect(() => {
@@ -21,21 +20,17 @@ export default function StartRecipeBtn({ recipe }) {
     };
   }, [toDoneStorage]);
 
-  useEffect(() => {
+  function checkTextBtn() {
     const storageValue = JSON.parse(localStorage.getItem('inProgressRecipes'));
     console.log(storageValue);
-    if (storageValue && Object.keys(storageValue).some(
-      (inProgRecipeID) => (
-        inProgRecipeID === recipe.idDrink || inProgRecipeID === recipe.idMeal
-      ),
+    if (storageValue && (
+      Object.keys(storageValue).includes(recipe.idDrink)
+      || Object.keys(storageValue).includes(recipe.idMeal)
     )) {
-      // document.getElementsByClassName(classNameBtn)[0].innerText = 'Continuar Receita';
-      setTextButton('Continuar Receita');
-    } else {
-      // document.getElementsByClassName(classNameBtn)[0].innerText = 'Iniciar Receita';
-      setTextButton('Iniciar Receita');
+      return 'Continuar Receita';
     }
-  }, [recipe]);
+    return 'Iniciar Receita';
+  }
 
   return (
     <div>
@@ -50,9 +45,9 @@ export default function StartRecipeBtn({ recipe }) {
           data-testid="start-recipe-btn"
           className={ classNameBtn }
         >
-          {/* Iniciar Receita */}
-          { console.log(textButton) }
-          { textButton }
+
+          {checkTextBtn()}
+
         </button>
       </Link>
     </div>

@@ -10,9 +10,9 @@ export default function RecomCard({ recipe, index }) {
         width="100"
         alt="recipe details"
       />
-      <h3 data-testid={ `${index}-recomendation-title` }>
+      <p data-testid={ `${index}-recomendation-title` }>
         { recipe.strMeal || recipe.strDrink }
-      </h3>
+      </p>
     </div>
   );
 }

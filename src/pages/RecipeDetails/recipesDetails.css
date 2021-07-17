@@ -1,17 +1,48 @@
+.carousel-container {
+  align-items: center;
+  display: flex;
+  height: 120px;
+  justify-content: flex-start;
+  margin: auto;
+  margin-bottom: 45px;
+  width: 80%;
+}
+
 .carousel {
   display: none;
+  height: 100%;
   margin: auto;
+  margin-bottom: 10px;
   width: 300px;
+}
+
+.carousel > div {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.carousel > div > p {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.carrousel-btn {
+  background-color: transparent;
+  border: none;
+  font-size: 25px;
+  font-weight: 700;
+}
+
+.btn-content {
+  align-items: center;
+  display: flex;
+  height: 100%;
 }
 
 .active {
   display: unset;
-}
-
-.carousel-container {
-  display: flex;
-  justify-content: flex-start;
-  margin-bottom: 20px;
 }
 
 .start-recipe-btn {
@@ -22,20 +53,3 @@
 .disappear-btn {
   display: none;
 }
-
-/* .list-main-recipes {
-  display: flex;
-  flex-flow: row wrap;
-}
-
-.recipe-card {
-  display: flex;
-  flex-flow: column;
-  margin: 10px;
-  width: 40%;
-}
-
-.recipe-card > p {
-  margin-top: 5px;
-  text-align: center;
-} */
