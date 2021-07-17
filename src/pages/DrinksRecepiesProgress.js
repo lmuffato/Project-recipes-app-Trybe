@@ -1,30 +1,60 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
-import MealIngredientsMeasure from '../compenents/MealIngredientsMeasure';
+import DrinkIngredientsMeasure from '../compenents/DrinkIngredientsMeasure';
 import RecipesContext from '../contexts/RecipesContext';
 import ShareButton from '../compenents/ShareButton';
 import FavoriteBtn from '../compenents/FavoriteBtn';
 import Loading from '../compenents/Loading';
 import checkInProgress from '../services/checkInProgress';
 
-function MealsRecepiesProgress() {
+function DrinksRecepiesProgress() {
   const [detailsRecepie, setDetailsRecepie] = useState();
   const { allChecked, setIsFavorite } = useContext(RecipesContext);
   const history = useHistory();
   const recepiID = history.location.pathname.split('/')[2];
 
-  console.log(recepiID);
-
   // ao montar a pagina, faz api que traz infos via ID.
   useEffect(() => {
     const getRecepi = async () => {
-      const endpoint = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${recepiID}`;
-      const { meals } = await fetch(endpoint).then((data) => data.json());
-      setDetailsRecepie(meals[0]);
+      const endpoint = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${recepiID}`;
+      const returnFetch = await fetch(endpoint);
+      const dataJson = await returnFetch.json();
+      const { drinks } = dataJson;
+      setDetailsRecepie(drinks[0]);
     };
     getRecepi();
   }, []);
+
+  function saveLS() {
+  // Resolver problema caso seja null
+    console.log('chamou a função de salvar');
+    const getLS = localStorage.getItem('doneRecipes');
+    const desStringGetLS = JSON.parse(getLS);
+    console.log(desStringGetLS);
+    const { strDrink, strDrinkThumb, strAlcoholic, strTags } = detailsRecepie;
+    const date = new Date();
+
+    const newDoneRecepi = {
+      id: recepiID,
+      type: 'bebida',
+      area: '',
+      category: 'Cocktail',
+      alcoholicOrNot: strAlcoholic,
+      name: strDrink,
+      image: strDrinkThumb,
+      doneDate: `${date.getDate()} - ${date.getTime()}`,
+      tags: strTags,
+    };
+
+    if (desStringGetLS === null) {
+      const newDoneRecepiString = JSON.stringify([newDoneRecepi]);
+      return localStorage.setItem('doneRecipes', newDoneRecepiString);
+    }
+    const allInfo = [...desStringGetLS, newDoneRecepi];
+    const stringNewArrayOfObjects = JSON.stringify(allInfo);
+    return localStorage.setItem('doneRecipes', stringNewArrayOfObjects);
+  }
 
   const getLocalStr = JSON.parse(localStorage.getItem('favoriteRecipes'));
   let checkLocalStr;
@@ -33,37 +63,6 @@ function MealsRecepiesProgress() {
     // procura o recipeId no LS
     checkLocalStr = Object.values(getLocalStr)
       .find(({ id: strId }) => strId === recepiID);
-  }
-
-  function saveLS() {
-    // Esta função não esta sendo chamada, e precisa ser duplicada para o MealsRecepiesProgress
-    console.log('chamou a função de salvar');
-    console.log(detailsRecepie);
-    const getLS = localStorage.getItem('doneRecipes');
-    const desStringGetLS = JSON.parse(getLS);
-    // desStringGetLS é um array de objetos
-    const { strMeal, strCategory, strArea, strMealThumb, strTags } = detailsRecepie;
-    const firstTag = strTags !== null ? strTags.split(',')[0] : ' ';
-    const secondTag = strTags !== null ? strTags.split(',')[1] : '';
-    const date = new Date();
-    const newDoneRecepi = {
-      id: recepiID,
-      type: 'comida',
-      area: strArea,
-      category: strCategory,
-      alcoholicOrNot: '',
-      name: strMeal,
-      image: strMealThumb,
-      doneDate: `${date.getDate()} - ${date.getTime()}`,
-      tags: [firstTag, secondTag],
-    };
-    if (desStringGetLS === null) {
-      const newDoneRecepiString = JSON.stringify([newDoneRecepi]);
-      return localStorage.setItem('doneRecipes', newDoneRecepiString);
-    }
-    const allInfo = [...desStringGetLS, newDoneRecepi];
-    const stringNewArrayOfObjects = JSON.stringify(allInfo);
-    return localStorage.setItem('doneRecipes', stringNewArrayOfObjects);
   }
 
   if (checkLocalStr) {
@@ -78,33 +77,34 @@ function MealsRecepiesProgress() {
     return <Loading />;
   }
   const {
-    strArea, strCategory, strMeal, strMealThumb, strInstructions,
+    strDrink, strDrinkThumb,
+    strAlcoholic, strInstructions,
   } = detailsRecepie;
 
   return (
     <div>
       <img
         data-testid="recipe-photo"
-        alt="meals recepi"
-        src={ strMealThumb }
+        alt="drinks recepi"
+        src={ strDrinkThumb }
         width="50px"
       />
-      <h2 data-testid="recipe-title">{ strMeal }</h2>
+      <h2 data-testid="recipe-title">{ strDrink }</h2>
       <ShareButton
-        idRecipe={ `comidas/${recepiID}` }
+        idRecipe={ `bebidas/${recepiID}` }
       />
       <FavoriteBtn
         id={ recepiID }
-        type="comida"
-        area={ strArea }
-        category={ strCategory }
-        alcoholicOrNot=""
-        name={ strMeal }
-        image={ strMealThumb }
+        type="bebida"
+        area=""
+        category="Cocktail"
+        alcoholicOrNot={ strAlcoholic }
+        name={ strDrink }
+        image={ strDrinkThumb }
       />
-      <p data-testid="recipe-category">{ strCategory }</p>
+      <p data-testid="recipe-category">{ strAlcoholic }</p>
       <p>Ingredients</p>
-      <MealIngredientsMeasure
+      <DrinkIngredientsMeasure
         detailsRecepie={ detailsRecepie }
       />
       <p>Instruções</p>
@@ -124,4 +124,4 @@ function MealsRecepiesProgress() {
   );
 }
 
-export default MealsRecepiesProgress;
+export default DrinksRecepiesProgress;

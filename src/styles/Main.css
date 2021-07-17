@@ -3,6 +3,15 @@ body {
   width: 100vw;
 }
 
+.detail-container {
+  background-color: turquoise;
+  width: 100vw;
+}
+
+.detail-container img {
+  width: 100%;
+}
+
 .recipes-container {
   display: flex;
   flex-flow: row wrap;

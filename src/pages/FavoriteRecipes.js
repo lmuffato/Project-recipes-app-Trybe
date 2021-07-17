@@ -4,6 +4,10 @@ import Header from '../compenents/Header';
 import shareIcon from '../images/shareIcon.svg';
 import FavoriteBtn from '../compenents/FavoriteBtn';
 import RecipesContext from '../contexts/RecipesContext';
+<<<<<<< HEAD
+=======
+import Header from '../compenents/Header';
+>>>>>>> 537e9342ec487426ee4957ce27944cd3fe3866c5
 import SearchbarContext from '../contexts/SearchbarContext';
 
 function FavoriteRecipes() {
@@ -12,6 +16,10 @@ function FavoriteRecipes() {
   const [isCopy, setIsCopy] = useState(false);
 
   setPageName('Receitas Favoritas');
+<<<<<<< HEAD
+=======
+
+>>>>>>> 537e9342ec487426ee4957ce27944cd3fe3866c5
   useEffect(() => {
     const recipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
     if (recipes === null) {

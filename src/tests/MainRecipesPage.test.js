@@ -1,26 +1,12 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
 import renderWithRouter from './renderWithRouter';
+import handleLogin from './handleLogin';
 import App from '../App';
 
-const emailInput = 'email-input';
-const loginBtn = 'login-submit-btn';
-const passwordInput = 'password-input';
 const drinkIcon = 'drinks-bottom-btn';
 const mealIcon = 'food-bottom-btn';
 const exploreIcon = 'explore-bottom-btn';
-
-const loginData = { user: 'teste@teste.com', password: '1234567' };
-
-const handleLogin = (getByTestId) => {
-  const userInput = getByTestId(emailInput);
-  const userPasswordInput = getByTestId(passwordInput);
-  const loginSubmitBtn = getByTestId(loginBtn);
-
-  userEvent.type(userInput, loginData.user);
-  userEvent.type(userPasswordInput, loginData.password);
-  userEvent.click(loginSubmitBtn);
-};
 
 describe('Test the Main Recipes Page', () => {
   it('verify the pathname', async () => {
