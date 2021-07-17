@@ -1,0 +1,102 @@
+.recipeDetailsCard {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.recipeDetailsCard img {
+  width: 100%;
+}
+
+.detailsHeader {
+  align-content: center;
+  color: #754f44;
+  display: flex;
+  flex-flow: wrap;
+  flex-direction: row;
+  font-family: Raleway , sans-serif;
+  font-weight: 900;
+  justify-content: space-between;
+  padding: 15px;
+  width: 100%;
+}
+
+.titleDiv {
+  margin: 8px;
+}
+
+.titleDiv h2 {
+  color: #ec7357;
+}
+
+.titleDiv p {
+  color: #754f44;
+}
+
+.buttonsRecipeDetails {
+  display: flex;
+  justify-content: space-between;
+  margin: 8px;
+}
+
+.buttonsRecipeDetails button {
+  background-color: #fbffff;
+}
+
+.detailsIngredients {
+  font-family: Raleway , sans-serif;
+  font-weight: 900;
+  margin: 8px;
+  padding: 15px;
+}
+
+.detailsIngredients h3 {
+  color: #754f44;
+  padding: 4px;
+}
+
+.detailsIngredients div {
+  background-color: #fbffb9;
+  color: #754f44;
+  padding: 15px;
+  text-align: justify;
+}
+
+.carousel {
+  margin-bottom: 30px;
+  position: relative;
+  width: 100%;
+}
+
+.carouselTitle {
+  color: #754f44;
+  font-size: 23px;
+  padding: 25px;
+}
+
+.imgText {
+  background-color: #ec7357;
+  border-radius: 6px;
+  color: #fbffb9;
+  font-size: 20px;
+  font-weight: 900;
+  padding: 6px;
+}
+
+.carousel-control-next-icon {
+  background-color: #ec7357;
+  padding: 5px;
+}
+
+.carousel-control-prev-icon {
+  background-color: #ec7357;
+}
+
+.fixed-bottom {
+  background-color: #ec7357;
+  border: none;
+  color: #fbffb9;
+  font-weight: 900;
+  margin-bottom: 15px;
+  margin-left: 120px;
+}

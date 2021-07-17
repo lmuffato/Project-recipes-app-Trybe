@@ -1,0 +1,23 @@
+.categoriesButtonsDiv {
+  display: flex;
+  flex-flow: wrap;
+  flex-direction: row;
+  font-weight: 900;
+  justify-content: space-around;
+  padding: 15px;
+  width: 100%;
+}
+
+.exploreButtons {
+  background-color: #ec7357;
+  border: none;
+  color: #754f44;
+  font-family: Raleway , sans-serif;
+  font-size: 14px;
+  font-weight: 900;
+  height: fit-content;
+  left: 130px;
+  margin: 4px;
+  padding: 3px;
+  width: fit-content;
+}
