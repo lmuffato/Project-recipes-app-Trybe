@@ -6,7 +6,8 @@ import Ingredients from './Ingredients';
 import Recommendations from './Recomendations';
 import Video from '../service/Video';
 import { FavFood, FavDrink } from '../service/Favorite';
-import RenderProgress from '../service/RenderProgress';
+import RenderProgressFood from '../service/RenderProgress';
+import RenderProgressDrink from '../service/RenderProgressDrink';
 import { checkFavoriteFood, checkFavoriteDrink } from '../service/Check';
 
 function RecipeDetails(props) {
@@ -63,7 +64,7 @@ function RecipeDetails(props) {
       <h3>Instruções</h3>
       <p data-testid="instructions">{ recipe.strInstructions }</p>
       <Recommendations recipe={ type } />
-      { RenderProgress(url, id) }
+      { recipe.srtMeal ? RenderProgressFood(url, id) : RenderProgressDrink(url, id) }
     </div>
   );
 }

@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import contexteRecipe from '../context/ContextRecipes';
 
-function RenderProgressFood(url, id) {
+function RenderProgressDrink(url, id) {
   const { doneRecipes, inProgressRecipes } = useContext(contexteRecipe);
   const history = useHistory();
 
@@ -23,7 +23,7 @@ function RenderProgressFood(url, id) {
     let progressFlag = false;
     if (inProgressRecipes.length !== 0) {
       progressFlag = (
-        inProgressRecipes.meals[id] !== null
+        inProgressRecipes.cocktails[id] !== null
       );
     }
     return progressFlag;
@@ -58,4 +58,4 @@ function RenderProgressFood(url, id) {
   );
 }
 
-export default RenderProgressFood;
+export default RenderProgressDrink;
