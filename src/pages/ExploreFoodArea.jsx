@@ -126,6 +126,8 @@ const ContainerCards = styled.div`
   justify-content: center;
   flex-wrap: wrap;
   padding: 20px 0;
+  gap: 15px 0;
+  padding-bottom: 80px;
 
   .cards-div {
     display: flex;

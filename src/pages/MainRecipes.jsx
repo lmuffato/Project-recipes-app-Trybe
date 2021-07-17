@@ -87,7 +87,12 @@ MainRecipes.propTypes = {
 };
 
 const Container = styled.div`
-   
+  
+  .mapped-cards {
+    padding-bottom: 80px;
+    justify-content: center;
+  }
+
   .main-cards {
     margin: auto;
     display: flex;
@@ -95,7 +100,7 @@ const Container = styled.div`
     justify-content: center;
     align-items: center;
     height: 100vh;
-    padding-left: 45px;
+    /* padding-left: 45px; */
   }
 
   .search-cards {
