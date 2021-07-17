@@ -55,12 +55,15 @@ const Perfil = () => {
 const Container = styled.div`
   width: 100%;
   height: 100%;
-  padding: 50px;
 
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  h2 {
+    margin-top: 20px;
+  }
 
   a button {
     background: #FFFFFF;
@@ -74,7 +77,7 @@ const Container = styled.div`
   }
 
   > button {
-    width: 100%;
+    width: 322px;
     height: 50px;
     border-radius: 50px;
     color: white;
