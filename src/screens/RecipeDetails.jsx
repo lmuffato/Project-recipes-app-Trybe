@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { useLocation } from 'react-router';
 import PropTypes from 'prop-types';
+import ButtonFavorite from '../components/ButtonFavorite';
 import ContextRecipes from '../context/ContextRecipes';
 import ButtonShare from '../components/ButtonShare';
 import CustonAlert from '../components/CustonAlert';
@@ -8,9 +9,7 @@ import fetchApiById from '../service/fetchApiDetails';
 import Ingredients from './Ingredients';
 import Recommendations from './Recomendations';
 import Video from '../service/Video';
-import { FavFood, FavDrink } from '../service/Favorite';
 import RenderProgress from '../service/RenderProgress';
-import { checkFavoriteFood, checkFavoriteDrink } from '../service/Check';
 
 function RecipeDetails(props) {
   const { match: { params: { id } } } = props;
@@ -45,15 +44,10 @@ function RecipeDetails(props) {
         testid="share-btn"
       />
       {alertOn && <CustonAlert message="Link copiado!" />}
-      <input
-        type="image"
-        data-testid="favorite-btn"
-        src={ url === 'comidas' ? checkFavoriteFood(recipe) : checkFavoriteDrink(recipe) }
-        alt="favoritar receita"
-        className="fav-btn"
-        onClick={ () => (
-          url === 'comidas' ? FavFood(recipe) : FavDrink(recipe)
-        ) }
+      <ButtonFavorite
+        idRecipe={ id }
+        dbType={ type }
+        testid="favorite-btn"
       />
       <p data-testid="recipe-category">
         { url === 'comidas' ? recipe.strCategory : recipe.strAlcoholic }
