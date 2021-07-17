@@ -1,0 +1,17 @@
+footer {
+  align-items: center;
+  bottom: 0;
+  justify-content: space-evenly;
+  left: 0;
+  padding-bottom: 7px;
+  padding-top: 7px;
+  position: fixed;
+  width: 100%;
+}
+
+.footer {
+  background-color: orange;
+  background-image: radial-gradient(yellow, rgb(255, 145, 0));
+  border-radius: 150px 150px 1px 1px;
+  display: flex;
+}

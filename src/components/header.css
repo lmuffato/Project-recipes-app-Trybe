@@ -1,0 +1,79 @@
+.categoryFilters {
+  align-items: center;
+  display: flex;
+  flex-flow: row nowrap;
+  font-size: 11pt;
+  font-weight: 600;
+  height: 35px;
+  justify-content: flex-start;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  padding-left: 4px;
+  padding-right: 10px;
+  white-space: nowrap;
+  width: 100%;
+}
+
+.categoryFilters button, .searchButton {
+  border-radius: 15px;
+  box-shadow: 1px 5px 0.4em rgb(255, 145, 0, 0.7);
+  margin: 1px;
+  padding: 1;
+}
+
+.header {
+  align-items: center;
+  background-image: radial-gradient(yellow, rgb(255, 145, 0));
+  border: solid 1px rgb(255, 145, 0);
+  border-radius: 1px 1px 150px 150px;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  margin-bottom: 15px;
+  padding-bottom: 5px;
+  padding-top: 5px;
+  width: 100%;
+}
+
+.headerIcons {
+  background-image: radial-gradient(yellow, rgb(255, 150, 0));
+  border-radius: 45px;
+  height: 45px;
+  margin-bottom: 5px;
+  width: 45px;
+}
+
+.headerIMGs {
+  height: 32px;
+  width: 20px;
+}
+
+.headerTitle {
+  font-family: Lobster , Courier , monospace;
+  font-size: 29pt;
+}
+
+.filters {
+  display: flex;
+  flex-flow: row;
+  font-size: 9pt;
+  justify-content: space-evenly;
+  width: 84%;
+}
+
+.filters input {
+  margin-right: 5px;
+}
+
+.inputSearch {
+  border-radius: 15px;
+  font-size: 11pt;
+  margin: 10px;
+  padding: 2px;
+  text-align: center;
+  width: 80%;
+}
+
+.filters, .categoryFilters, .inputSearch, .searchButton {
+  font-family: Montserrat , Courier , monospace;
+}
