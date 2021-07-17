@@ -10,13 +10,14 @@ import { useHistory } from 'react-router-dom';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
 import context from '../../context/RecipesContext';
+import FoodLoader from '../../components/Loader/Food';
 import fetchRecipes from '../../services/fetchRecipes';
 import fetchCategories from '../../services/fetchCategories';
 import './style.css';
 
 const MainFoods = () => {
   const history = useHistory();
-  const { recipesFoods, setRecipesFoods } = useContext(context);
+  const { recipesFoods, setRecipesFoods, isLoading, setLoading } = useContext(context);
   const [categories, setCategories] = useState([]);
   const [categoryName, setCategoryName] = useState('');
   const [isFiltering, setFiltering] = useState(false);
@@ -28,7 +29,9 @@ const MainFoods = () => {
   const getRecipes = useCallback(async () => {
     await fetchRecipes(
       'https://www.themealdb.com/api/json/v1/1/search.php?s=',
-    ).then(({ meals }) => setRecipesFoods(meals.slice(0, MAX_LENGTH_RECIPES)));
+    ).then(({ meals }) => {
+      setRecipesFoods(meals.slice(0, MAX_LENGTH_RECIPES));
+    });
   }, [setRecipesFoods]);
 
   const getRecipesByCategory = useCallback(
@@ -47,10 +50,14 @@ const MainFoods = () => {
       ).then(({ meals }) => setCategories(meals.slice(0, MAX_LENGTH_CATEGORIES)));
     };
     getCategories();
-    if (!isFiltering && recipesFoods.length === 0) {
+    const validations = [!isFiltering, recipesFoods.length === 0];
+    if (!validations.includes(false)) {
       getRecipes();
     }
-  }, [getRecipes, getRecipesByCategory, isFiltering, recipesFoods]);
+    const TIMEOUT = 2000;
+    setTimeout(() => setLoading(false), TIMEOUT);
+    return () => setLoading(true);
+  }, [getRecipes, isFiltering, recipesFoods.length, setLoading]);
 
   const handleSelectCategory = ({ target, target: { name } }) => {
     setPreviousTarget(target);
@@ -84,6 +91,12 @@ const MainFoods = () => {
     const { id } = target.parentElement;
     history.push(`/comidas/${id}`);
   };
+
+  if (isLoading) {
+    return (
+      <FoodLoader />
+    );
+  }
 
   return (
     <section className="foods-page">

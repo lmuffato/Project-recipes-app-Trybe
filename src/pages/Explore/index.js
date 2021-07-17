@@ -9,24 +9,19 @@ const Explore = () => (
   <div className="container">
     <Header title="Explorar" />
     <div className="buttons line">
-      <Link to="/explorar/comidas">
-        <button
-          className="button"
-          data-testid="explore-food"
-          type="button"
-        >
-          Explorar Comidas
-        </button>
+      <Link
+        to="/explorar/comidas"
+        className="button"
+        data-testid="explore-food"
+      >
+        Explorar Comidas
       </Link>
-      <Link to="/explorar/bebidas">
-        <button
-          className="button"
-          type="button"
-          data-testid="explore-drinks"
-          block
-        >
-          Explorar Bebidas
-        </button>
+      <Link
+        to="/explorar/bebidas"
+        className="button"
+        data-testid="explore-drinks"
+      >
+        Explorar Bebidas
       </Link>
     </div>
     <Footer />

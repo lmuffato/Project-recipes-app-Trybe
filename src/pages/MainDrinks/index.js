@@ -3,6 +3,7 @@ import { Button } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
+import DrinkLoader from '../../components/Loader/Drink';
 import context from '../../context/RecipesContext';
 import fetchCategories from '../../services/fetchCategories';
 import fetchRecipes from '../../services/fetchRecipes';
@@ -10,7 +11,7 @@ import './style.css';
 
 const MainDrinks = () => {
   const history = useHistory();
-  const { recipesDrinks, setRecipesDrinks } = useContext(context);
+  const { recipesDrinks, setRecipesDrinks, isLoading, setLoading } = useContext(context);
   const [categories, setCategories] = useState([]);
   const [categoryName, setCategoryName] = useState('');
   const [isFiltering, setFiltering] = useState(false);
@@ -38,10 +39,15 @@ const MainDrinks = () => {
       ).then(({ drinks }) => setCategories(drinks.slice(0, MAX_LENGTH_CATEGORIES)));
     };
     getCategories();
-    if (!isFiltering && recipesDrinks.length === 0) {
+    const validations = [!isFiltering, recipesDrinks.length === 0];
+    console.log(!validations.includes(false));
+    if (!validations.includes(false)) {
       getRecipes();
     }
-  }, [getRecipes, isFiltering, recipesDrinks]);
+    const TIMEOUT = 2000;
+    setTimeout(() => setLoading(false), TIMEOUT);
+    return () => setLoading(true);
+  }, [getRecipes, isFiltering, recipesDrinks.length, setLoading]);
 
   const handleSelectCategory = ({ target, target: { name } }) => {
     setPreviousTarget(target);
@@ -73,6 +79,12 @@ const MainDrinks = () => {
     const { id } = target.parentElement;
     history.push(`/bebidas/${id}`);
   };
+
+  if (isLoading) {
+    return (
+      <DrinkLoader />
+    );
+  }
 
   return (
     <section className="drinks-page">
