@@ -13,6 +13,7 @@ function ProviderRecipes({ children }) {
   const [loadingCards, setLoadingCards] = useState(false);
   const [showSearchBar, setShowSearchBar] = useState(false);
   const [countries, setCountries] = useState([]);
+  // const [filteredByCountry, setFilteredByCountry] = useState([]);
   const [alertOn, setAlertOn] = useState(false);
   const [updateFlag, setUpadateFlag] = useState(false);
 
@@ -112,6 +113,22 @@ function ProviderRecipes({ children }) {
     setCountries(area);
   };
 
+  const fetchByCountry = async (dropDownValue) => {
+    // const noFilter = await fetch('https://www.themealdb.com/api/json/v1/1/list.php?a=list')
+    //   .then((req) => req.json())
+    //   .then((res) => console.log(res.meals));
+    if (dropDownValue !== 'All') {
+      const endpoint = `https://www.themealdb.com/api/json/v1/1/filter.php?a=${dropDownValue}`;
+      const getByCountry = await fetch(endpoint)
+        .then((req) => req.json())
+        .then((res) => console.log(res.meals));
+      // getByCountry.forEach((meal) => {
+      //   setFilteredByCountry(meal);
+      // });
+      console.log(getByCountry);
+    }
+  };
+
   return (
     <ContextRecipes.Provider
       value={ {
@@ -141,6 +158,8 @@ function ProviderRecipes({ children }) {
         fetchArea,
         countries,
         setCountries,
+        fetchByCountry,
+        // filteredByCountry,
         alertOn,
         turnOnAlert,
         updateFlag,

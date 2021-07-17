@@ -16,6 +16,7 @@
   justify-content: space-between;
   max-width: 100%;
   padding: 0 20px;
+  width: 100%;
 }
 
 .Title {
@@ -23,5 +24,7 @@
 }
 
 .explore-icon {
-  width: 25px;
+  align-items: center;
+  display: inline-block;
+  text-align: center;
 }
