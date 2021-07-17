@@ -57,6 +57,7 @@ img:hover {
 	justify-content: flex-start;
 	margin: 15px 6px;
 	width: 28%;
+	height: 28vh;
 	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   transition: 0.3s;
 }
