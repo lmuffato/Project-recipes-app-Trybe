@@ -52,5 +52,3 @@
   - [x] Ícone de bebida
   - [x] Ícone de explorar
   - [x] Ícone de comida
-
-'Feat: Profile Page Style'

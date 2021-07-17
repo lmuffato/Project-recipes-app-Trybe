@@ -1,6 +1,11 @@
+/* ----------------- Estilos bases das telas  ----------------- */
 body {
   height: 100vh;
   width: 100vw;
+}
+
+section {
+  display: flex;
 }
 
 body div {
@@ -10,47 +15,6 @@ body div {
   width: 100%;
 }
 
-/* ---------- Componente Header ---------- */
-
-/* Adicionar a propriedade que faz o menu esconder no scroll */
-.header {
-  align-items: center;
-  background-color: #f4f0bb;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  padding: 1%;
-  position: fixed;
-  top: 0;
-  width: 100%;
-}
-
-.header h1 {
-  font-size: 24pt;
-  margin: 0;
-  text-align: center;
-}
-
-.searchBtn {
-  background-color: rgba(245, 245, 245, 0);
-  border: none;
-}
-
-/* --------------------------------------- */
-
-/* ------------------------ Tela de Login --------------------- */
-.login-inputs {
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  justify-content: center;
-  width: 100%;
-}
-
-/* ------------------------------------------------------------ */
-
-/* ----------------- Estilos bases das telas  ----------------- */
 .main-recipes, .main-explore, .main-ingredients, .main-area, .main-profile {
   background: #ea1d2bf3;
   display: flex;
@@ -93,6 +57,46 @@ body div {
 }
 
 /* ------------------------------------------------------------ */
+
+/* ------------------------ Tela de Login --------------------- */
+.login-inputs {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
+  width: 100%;
+}
+
+/* ------------------------------------------------------------ */
+
+/* ---------- Componente Header ---------- */
+
+/* Adicionar a propriedade que faz o menu esconder no scroll */
+.header {
+  align-items: center;
+  background-color: #f4f0bb;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  padding: 1%;
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.header h1 {
+  font-size: 24pt;
+  margin: 0;
+  text-align: center;
+}
+
+.searchBtn {
+  background-color: rgba(245, 245, 245, 0);
+  border: none;
+}
+
+/* --------------------------------------- */
 
 /* -------------- Tela Principal de Receitas  ----------------- */
 
@@ -185,6 +189,28 @@ body div {
 }
 
 /* --------------------------------------- */
+
+/* ------------------------------------------------------------ */
+
+/* --------------- Tela de Detalhes da receita ---------------- */
+.main-detail {
+  display: flex;
+  flex-flow: column;
+}
+
+.recomendation-image {
+  width: 100vw;
+}
+
+.title-and-buttons {
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.interaction-buttons button {
+  background-color: transparent;
+  border: none;
+}
 
 /* ------------------------------------------------------------ */
 
@@ -297,12 +323,6 @@ body div {
 /* ---------- Componente Footer ---------- */
 footer {
   background-color: #f4f0bb;
-
-  /*
-    231651
-    63adf2
-    f4f0bb
-  */
   bottom: 0;
   display: flex;
   justify-content: space-evenly;
@@ -312,3 +332,17 @@ footer {
 }
 
 /* --------------------------------------- */
+
+/*
+#5E9C53 - verde claro
+#256766 - verde escuro
+#D9910B - amarelo
+#A11D2B - vermelho
+#1A1E3B - azul
+*/
+
+/*
+  231651
+  63adf2
+  f4f0bb
+*/
