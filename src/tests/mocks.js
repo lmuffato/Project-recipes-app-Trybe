@@ -11,9 +11,14 @@ export const filterdToMealsIngredientsMock = {
       idMeal: '52846',
     },
     {
-      strMeal: 'Chicken Alfredo Primavera',
-      strMealThumb: 'https://www.themealdb.com/images/media/meals/syqypv1486981727.jpg',
-      idMeal: '52796',
+      strMeal: 'Piri-piri chicken and slaw',
+      strMealThumb: 'https://www.themealdb.com/images/media/meals/hglsbl1614346998.jpg',
+      idMeal: '53039',
+    },
+    {
+      strMeal: 'Thai Green Curry',
+      strMealThumb: 'https://www.themealdb.com/images/media/meals/sstssx1487349585.jpg',
+      idMeal: '52814',
     },
   ],
 };
@@ -28,9 +33,17 @@ export const ingredientsMock = {
       strIngredient: 'Salmon',
       strDescription: 'Salmon is ...',
       strType: null },
-    { idIngredient: '3',
-      strIngredient: 'Beef',
-      strDescription: 'Beef is ...',
-      strType: null },
+    {
+      idIngredient: '15',
+      strIngredient: 'Baking Powder',
+      strDescription: 'Baking powder is ...',
+      strType: null,
+    },
+    {
+      idIngredient: '16',
+      strIngredient: 'Balsamic Vinegar',
+      strDescription: 'Balsamic vinegar ...',
+      strType: null,
+    },
   ],
 };
