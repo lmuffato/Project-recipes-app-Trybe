@@ -14,7 +14,7 @@ function Main() {
   const { pathname } = useLocation();
   const history = useHistory();
   const type = pathname === '/comidas' ? 'Meal' : 'Drink';
-  const cardsQuantity = 12;
+  const cardsLength = 12;
   useEffect(() => {
     if (searchBtn && filteredRecipe && filteredRecipe.length === 1) {
       history.push(`${pathname}/${filteredRecipe[0][`id${type}`]}`);
@@ -37,7 +37,7 @@ function Main() {
       <section className="content-container">
         <section className="recipe-cards-container">
           { filteredRecipe && filteredRecipe.reduce((acc, recipe, index) => {
-            if (index < cardsQuantity) {
+            if (index < cardsLength) {
               const testid = {
                 image: `${index}-card-img`,
                 title: `${index}-card-name`,

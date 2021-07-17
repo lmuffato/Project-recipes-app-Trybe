@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Card from '../components/Card';
 import fetchRecomendations from '../service/fetchRecomendations';
+import '../styleSheets/Recomendations.css';
 
 function Recommendations(props) {
   const { recipe } = props;
@@ -18,31 +19,36 @@ function Recommendations(props) {
   }, []);
 
   return (
-    <div>
+    <section>
       <h3>Recomendados</h3>
-      { recommended.length ? recommended.reduce((acc, recom, index) => {
-        const cardsLength = 6;
-        if (index < cardsLength) {
-          const testid = {
-            image: 'recipe-photo',
-            title: 'recipe-title',
-            card: `${index}-recomendation-card`,
-          };
-          const redirectPath = `${pathname}/${recom[`id${type}`]}`;
-          acc.push(
-            <Card
-              src={ recom[`str${type}Thumb`] }
-              title={ recom[`str${type}`] }
-              index={ index }
-              key={ index }
-              testid={ testid }
-              redirectPath={ redirectPath }
-            />,
-          );
-        }
-        return acc;
-      }, []) : ''}
-    </div>
+      <div
+        className="carousel-container"
+      >
+        { recommended.length ? recommended.reduce((acc, recom, index) => {
+          const cardsLength = 6;
+          if (index < cardsLength) {
+            const testid = {
+              image: 'recipe-photo',
+              title: 'recipe-title',
+              card: `${index}-recomendation-card`,
+            };
+            const redirectPath = `${pathname}/${recom[`id${type}`]}`;
+            acc.push(
+              <Card
+                src={ recom[`str${type}Thumb`] }
+                title={ recom[`str${type}`] }
+                index={ index }
+                key={ index }
+                testid={ testid }
+                redirectPath={ redirectPath }
+              />,
+            );
+          }
+          return acc;
+        }, []) : ''}
+      </div>
+
+    </section>
   );
 }
 
