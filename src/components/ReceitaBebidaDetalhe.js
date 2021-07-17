@@ -15,10 +15,19 @@ const copy = require('clipboard-copy');
 function ReceitaBebidaDetalhe({ props }) {
   const [clipboardStatus, setClipboardStatus] = useState();
   const [favoriteDrink, setFavoriteDrink] = useState(false);
+  const [statusDrink, setStatusDrink] = useState(false);
 
   const history = useHistory();
 
   const { acctualyDrink, drinkRecomendation, id } = props;
+
+  const checkStatusRecipe = () => {
+    if (JSON.parse(localStorage.getItem('inProgressRecipes') !== null)) {
+      const recipes = JSON.parse(localStorage.getItem('inProgressRecipes')).cocktails;
+
+      if (Object.keys(recipes).includes(id) === true) setStatusDrink(true);
+    }
+  };
 
   useEffect(() => {
     const verifyFavorite = () => {
@@ -30,6 +39,7 @@ function ReceitaBebidaDetalhe({ props }) {
       }
     };
 
+    checkStatusRecipe();
     verifyFavorite();
   }, [id]);
 
@@ -187,7 +197,7 @@ function ReceitaBebidaDetalhe({ props }) {
             data-testid="start-recipe-btn"
             className={ `${btn} button-recipe` }
           >
-            Start recipe
+            { statusDrink === true ? 'Continuar Receita' : 'Iniciar Receita' }
           </Button>
         </div>
       );
