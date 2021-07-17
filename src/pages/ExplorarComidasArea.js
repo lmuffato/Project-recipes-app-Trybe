@@ -55,7 +55,6 @@ function ExplorarComidasArea() {
 
   const areasCard = () => {
     if (filterArea !== undefined) {
-      console.log('Render do All');
       return acctualyFood.map((item, index) => {
         const magicNumber = 12;
         if (index < magicNumber) {
