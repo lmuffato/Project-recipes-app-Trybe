@@ -11,6 +11,16 @@ function FoodsIngredients() {
   } = useContext(RecipesContext);
   const { setHideSearchBtn, setPageName } = useContext(SearchbarContext);
   const numberOfIngredients = 12;
+<<<<<<< HEAD
+=======
+
+  const getRecipesByIngredients = async (param) => {
+    const endpoint = `https://www.themealdb.com/api/json/v1/1/filter.php?i=${param}`;
+    const { meals } = await fetch(endpoint).then((data) => data.json());
+    console.log(meals);
+    setMealsAndDrinkByIngredients(meals.slice(0, numberOfIngredients));
+  };
+>>>>>>> d65452846ea9bbf409b99a32debc5d5536066f81
 
   useEffect(() => {
     const getIngredients = async () => {
@@ -24,6 +34,7 @@ function FoodsIngredients() {
     setPageName('Explorar Ingredientes');
   }, []);
 
+<<<<<<< HEAD
   const getIngredients = () => {
     const getRecipesByIngredients = async (param) => {
       const endpoint = `https://www.themealdb.com/api/json/v1/1/filter.php?i=${param}`;
@@ -33,6 +44,10 @@ function FoodsIngredients() {
     };
 
     const ingredientsToBeRendered = ingredients
+=======
+  const getTwelveIngredients = () => {
+    const twelveIngredients = ingredients
+>>>>>>> d65452846ea9bbf409b99a32debc5d5536066f81
       .filter((ingredient, index) => index < numberOfIngredients);
     return (
       ingredientsToBeRendered.map((eachIngredient, index) => {

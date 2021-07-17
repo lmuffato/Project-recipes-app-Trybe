@@ -1,5 +1,6 @@
 import React, { useEffect, useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
+import Header from '../compenents/Header';
 import shareIcon from '../images/shareIcon.svg';
 import FavoriteBtn from '../compenents/FavoriteBtn';
 import RecipesContext from '../contexts/RecipesContext';
