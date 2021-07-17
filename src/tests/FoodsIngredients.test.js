@@ -3,7 +3,8 @@ import userEvent from '@testing-library/user-event';
 import { screen } from '@testing-library/react';
 import renderWithRouter from './renderWithRouter';
 import App from '../App';
-// import FoodsIngredients from '../pages/FoodsIngrediqents';
+import FoodsIngredients from '../pages/FoodsIngredients';
+import { filterdToMealsIngredientsMock, ingredientsMock } from './mocks';
 
 function login() {
   const getInputEmail = screen.getByTestId('email-input');
@@ -30,10 +31,18 @@ function enterTheExploreByIngredients() {
   userEvent.click(exploreByIngredientsBtn);
 }
 
-// const ingredients = [{ idIngredient: '1', strIngredient: 'Chicken', strDescription: 'The chicken is a type of domesticated fowl, a subs…bylonia, according to the annals of Thutmose III.', strType: null }, { idIngredient: '2', strIngredient: 'Salmon', strDescription: 'Salmon is the common name for several species of r…lfactory memory. Salmon date back to the Neogene.', strType: null }, { idIngredient: '3', strIngredient: 'Beef', strDescription: 'Beef is the culinary name for meat from cattle, pa…asings. The bones are used for making beef stock.', strType: null }];
+// const verifyIngrendientsRederized = async (findAllByRole) => {
+//   await ingredientsMock.meals.map((ingredient) => {
+//     console.log(ingredient.strIngredient);
+//     expect(findAllByRole('img', {
+//       nome: ingredient.strIngredient,
+//     })).toBeInTheDocument();
+//     // expect(ingredientsTexts).toHaveAttribute('src', `https://www.themealdb.com/images/ingredients/${ingredient.strIngredient}-Small.png`);
+//   });
+// };
 
 describe('Testing FoodsIngredients page', () => {
-  test('checking the path to FoodsIngredients page', async () => {
+  it('checking the path to FoodsIngredients page', async () => {
     const { history } = renderWithRouter(<App />);
 
     login();
@@ -44,25 +53,45 @@ describe('Testing FoodsIngredients page', () => {
     expect(pathname).toBe('/explorar/comidas/ingredientes');
   });
 
-  test('if the ingredients are rederized', async () => {
-    // jest.spyOn(global, 'fetch');
-    // global.fetch.mockResolvedValue({
-    //   json: jest.fn().mockResolvedValue(ingredients),
+  it('if the ingredients are rederized', async () => {
+    global.fetch = jest.fn().mockResolvedValue({
+      json: async () => ingredientsMock,
+    });
+
+    // global.fetch = jest.fn().mockResolvedValue({
+    //   json: async () => filterdToMealsIngredientsMock,
     // });
 
-    // const { findByText } = renderWithRouter(<FoodsIngredients />);
+    const { findByRole, history } = renderWithRouter(<FoodsIngredients />);
 
-    // expect(global.fetch).toBeCalledTimes(1);
-    // const chicken = getByRole('img', {
-    //   name: /chicken/i,
+    const ingredientText = await
+    findByRole('link', {
+      name: /chicken/i,
+    });
+    const ingredientImg = await
+    findByRole('img', {
+      name: /chicken/i,
+    });
+    console.log(ingredientText);
+    expect(ingredientText).toBeInTheDocument();
+    expect(ingredientImg).toHaveAttribute('src', 'https://www.themealdb.com/images/ingredients/Chicken-Small.png');
+    userEvent.click(ingredientText);
+
+    const { pathname } = history.location;
+    expect(pathname).toBe('/comidas');
+
+    console.log(filterdToMealsIngredientsMock);
+
+    // await verifyIngrendientsRederized(findAllByRole);
+    // const ingredients = findAllByRole('img', {
+    //   nome: ingredient,
     // });
-    // expect(chicken).toBeInTheDocument();
+  });
 
-    // const ingredientsImg = getAllByRole('img');
-    // expect(ingredientsImg.length).toBe(12);
+  it('', () => {
+    // const { findAllByRole } = renderWithRouter(<FoodsIngredients />);
 
-    // const exploreByIngredientsBtn = getByTestId('explore-by-ingredient');
-    // userEvent.click(exploreByIngredientsBtn);
-    // expect(pathname).toBe('/explorar/comidas/ingredientes');
+    // const allLinks = findAllByRole('link');
+    // expect(allLinks.length).toBe(3);
   });
 });
