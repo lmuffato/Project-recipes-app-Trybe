@@ -23,7 +23,7 @@ export const filterdToMealsIngredientsMock = {
   ],
 };
 
-export const ingredientsMock = {
+export const mealsIngredientsMock = {
   meals: [
     {
       idIngredient: '1',
@@ -48,6 +48,48 @@ export const ingredientsMock = {
       strIngredient: 'Balsamic Vinegar',
       strDescription: 'Balsamic vinegar ...',
       strType: null,
+    },
+  ],
+};
+
+export const drinksIngredientsMock = {
+  drinks: [
+    {
+      strIngredient1: 'Light rum',
+    },
+    {
+      strIngredient1: 'Applejack',
+    },
+    {
+      strIngredient1: 'Gin',
+    },
+    {
+      strIngredient1: 'Dark rum',
+    },
+  ],
+};
+
+export const drinkIngredientRecipesMock = {
+  drinks: [
+    {
+      strDrink: '3-Mile Long Island Iced Tea',
+      strDrinkThumb: 'https://www.thecocktaildb.com/images/media/drink/rrtssw1472668972.jpg',
+      idDrink: '15300',
+    },
+    {
+      strDrink: '69 Special',
+      strDrinkThumb: 'https://www.thecocktaildb.com/images/media/drink/vqyxqx1472669095.jpg',
+      idDrink: '13940',
+    },
+    {
+      strDrink: 'A1',
+      strDrinkThumb: 'https://www.thecocktaildb.com/images/media/drink/2x8thr1504816928.jpg',
+      idDrink: '17222',
+    },
+    {
+      strDrink: 'Abbey Cocktail',
+      strDrinkThumb: 'https://www.thecocktaildb.com/images/media/drink/mr30ob1582479875.jpg',
+      idDrink: '17834',
     },
   ],
 };

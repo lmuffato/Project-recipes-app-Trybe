@@ -18,6 +18,7 @@ function DrinksIngredients() {
       const endpoint = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list';
       const { drinks } = await fetch(endpoint).then((data) => data.json());
       setDrinkIngredients(drinks);
+      console.log(drinks);
     };
     getIngredients();
     setHideSearchBtn(false);
@@ -28,6 +29,7 @@ function DrinksIngredients() {
     const endpoint = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${param}`;
     const { drinks } = await fetch(endpoint).then((data) => data.json());
     setMealsAndDrinkByIngredients(drinks.slice(0, numberOfIngredients));
+    console.log(drinks);
   };
 
   const getIngredients = () => {
@@ -37,19 +39,22 @@ function DrinksIngredients() {
       ingredientsToBeRendered.map((ingredient, index) => {
         const name = ingredient.strIngredient1;
         return (
-          <Link
-            to="/bebidas"
-            key={ index }
-            data-testid={ `${index}-ingredient-card` }
-            onClick={ (e) => getRecipesByIngredient(e.target.innerText || e.target.alt) }
-          >
-            <img
-              data-testid={ `${index}-card-img` }
-              src={ `https://www.thecocktaildb.com/images/ingredients/${name}-Small.png` }
-              alt={ name }
-            />
-            <p data-testid={ `${index}-card-name` }>{ name }</p>
-          </Link>
+          <div key={ index } data-testid="ingredientsDrinks">
+            <Link
+              to="/bebidas"
+              data-testid={ `${index}-ingredient-card` }
+              onClick={
+                (e) => getRecipesByIngredient(e.target.innerText || e.target.alt)
+              }
+            >
+              <img
+                data-testid={ `${index}-card-img` }
+                src={ `https://www.thecocktaildb.com/images/ingredients/${name}-Small.png` }
+                alt={ name }
+              />
+              <p data-testid={ `${index}-card-name` }>{ name }</p>
+            </Link>
+          </div>
         );
       })
     );

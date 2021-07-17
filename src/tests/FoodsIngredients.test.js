@@ -4,7 +4,7 @@ import { screen } from '@testing-library/react';
 import renderWithRouter from './renderWithRouter';
 import App from '../App';
 import FoodsIngredients from '../pages/FoodsIngredients';
-import { filterdToMealsIngredientsMock, ingredientsMock } from './mocks';
+import { filterdToMealsIngredientsMock, mealsIngredientsMock } from './mocks';
 
 function login() {
   const getInputEmail = screen.getByTestId('email-input');
@@ -69,7 +69,7 @@ describe('Testing FoodsIngredients page', () => {
 
   it('if the ingredients are rederized', async () => {
     global.fetch = jest.fn().mockResolvedValue({
-      json: async () => ingredientsMock,
+      json: async () => mealsIngredientsMock,
     });
     const { findByRole, history } = renderWithRouter(<FoodsIngredients />);
 
@@ -90,7 +90,7 @@ describe('Testing FoodsIngredients page', () => {
 
   it('if the ingredients are rederized', async () => {
     global.fetch = jest.fn().mockResolvedValue({
-      json: async () => ingredientsMock,
+      json: async () => mealsIngredientsMock,
     });
     const { findByRole, history } = renderWithRouter(<FoodsIngredients />);
     const ingredientBalsamicVinegarText = await

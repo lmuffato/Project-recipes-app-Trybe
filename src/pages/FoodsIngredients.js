@@ -17,7 +17,6 @@ function FoodsIngredients() {
       const endpoint = 'https://www.themealdb.com/api/json/v1/1/list.php?i=list';
       const { meals } = await fetch(endpoint).then((data) => data.json());
       setIngredients(meals);
-      console.log(meals);
     };
     getIngredients();
     setHideSearchBtn(false);
@@ -28,7 +27,6 @@ function FoodsIngredients() {
     const getRecipesByIngredients = async (param) => {
       const endpoint = `https://www.themealdb.com/api/json/v1/1/filter.php?i=${param}`;
       const { meals } = await fetch(endpoint).then((data) => data.json());
-      console.log(meals);
       setMealsAndDrinkByIngredients(meals.slice(0, numberOfIngredients));
     };
 
