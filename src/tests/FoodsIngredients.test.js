@@ -1,9 +1,10 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
-import { cleanup, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import renderWithRouter from './renderWithRouter';
 import App from '../App';
 import FoodsIngredients from '../pages/FoodsIngredients';
+import { filterdToMealsIngredientsMock, ingredientsMock } from './mocks';
 
 function login() {
   const getInputEmail = screen.getByTestId('email-input');
@@ -30,20 +31,15 @@ function enterTheExploreByIngredients() {
   userEvent.click(exploreByIngredientsBtn);
 }
 
-const ingredientsMock = [
-  { idIngredient: '1',
-    strIngredient: 'Chicken',
-    strDescription: 'The chicken ...',
-    strType: null },
-  { idIngredient: '2',
-    strIngredient: 'Salmon',
-    strDescription: 'Salmon is ...',
-    strType: null },
-  { idIngredient: '3',
-    strIngredient: 'Beef',
-    strDescription: 'Beef is ...',
-    strType: null },
-];
+// const verifyIngrendientsRederized = async (findAllByRole) => {
+//   await ingredientsMock.meals.map((ingredient) => {
+//     console.log(ingredient.strIngredient);
+//     expect(findAllByRole('img', {
+//       nome: ingredient.strIngredient,
+//     })).toBeInTheDocument();
+//     // expect(ingredientsTexts).toHaveAttribute('src', `https://www.themealdb.com/images/ingredients/${ingredient.strIngredient}-Small.png`);
+//   });
+// };
 
 describe('Testing FoodsIngredients page', () => {
   it('checking the path to FoodsIngredients page', async () => {
@@ -62,38 +58,40 @@ describe('Testing FoodsIngredients page', () => {
       json: async () => ingredientsMock,
     });
 
-    const { findByText } = renderWithRouter(<FoodsIngredients />);
-    login();
-    enterTheExploreFoodPage();
-    enterTheExploreByIngredients();
+    // global.fetch = jest.fn().mockResolvedValue({
+    //   json: async () => filterdToMealsIngredientsMock,
+    // });
 
-    const findIngredients = await findByText(/chicken/i);
-    expect(findIngredients).toBeInTheDocument();
-    cleanup();
-    // const header = getByTestId('header');
-    // const footer = getByTestId('footer');
+    const { findByRole, history } = renderWithRouter(<FoodsIngredients />);
 
-    // expect(header).toBeInTheDocument();
-    // expect(footer).toBeInTheDocument();
+    const ingredientText = await
+    findByRole('link', {
+      name: /chicken/i,
+    });
+    const ingredientImg = await
+    findByRole('img', {
+      name: /chicken/i,
+    });
+    console.log(ingredientText);
+    expect(ingredientText).toBeInTheDocument();
+    expect(ingredientImg).toHaveAttribute('src', 'https://www.themealdb.com/images/ingredients/Chicken-Small.png');
+    userEvent.click(ingredientText);
 
-    // const chicken = await findByText(/salmon/i);
-    // expect(chicken).toBeInTheDocument();
+    const { pathname } = history.location;
+    expect(pathname).toBe('/comidas');
 
-    // const ingredientsImg = getAllByRole('img');
-    // expect(ingredientsImg.length).toBe(12);
+    console.log(filterdToMealsIngredientsMock);
 
-    // const exploreByIngredientsBtn = getByTestId('explore-by-ingredient');
-    // userEvent.click(exploreByIngredientsBtn);
-    // expect(pathname).toBe('/explorar/comidas/ingredientes');
+    // await verifyIngrendientsRederized(findAllByRole);
+    // const ingredients = findAllByRole('img', {
+    //   nome: ingredient,
+    // });
+  });
 
-    // jest.spyOn(global, 'fetch');
-  // global.fetch.mockResolvedValue({
-  //   json: jest.fn().mockResolvedValue(ingredients),
-  // });
-  // expect(global.fetch).toBeCalledTimes(1);
-  // const chicken = getByRole('img', {
-  //   name: /chicken/i,
-  // });
-  // expect(chicken).toBeInTheDocument();
+  it('', () => {
+    // const { findAllByRole } = renderWithRouter(<FoodsIngredients />);
+
+    // const allLinks = findAllByRole('link');
+    // expect(allLinks.length).toBe(3);
   });
 });
