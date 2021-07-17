@@ -15,7 +15,6 @@ function DrinksInProgress({ data }) {
 
   useEffect(() => {
     function saveState() {
-      console.log(data);
       const { strDrinkThumb, strDrink, strCategory } = data;
       const obj = [{
         image: strDrinkThumb,
@@ -26,12 +25,15 @@ function DrinksInProgress({ data }) {
     }
     saveState();
     const updateChecked = () => {
+      console.log(data);
       const storage = JSON.parse(localStorage.getItem('inProgressRecipes'));
       if (storage) {
         const cocktail = storage.cocktails[id];
         if (cocktail) {
+          console.log(cocktail);
           const newArr = [];
           cocktail.forEach((item) => newArr.push(data[`strIngredient${item}`]));
+          // console.log((data.strIngredient1))
           setChecked(newArr);
         } else {
           storage.cocktails[id] = [];
@@ -64,7 +66,6 @@ function DrinksInProgress({ data }) {
   };
 
   const handleCheked = ({ target }) => {
-    console.log(target.name);
     if (checkedIngredients.includes(target.name)) {
       const filtered = checkedIngredients.filter((element) => element !== target.name);
       setChecked(filtered);
@@ -82,24 +83,22 @@ function DrinksInProgress({ data }) {
         <ShareButton urlCopied={ `http://localhost:3000/bebidas/${id}` } />
         <FavoriteButton data={ data } path={ id } />
         <p data-testid="recipe-category">{ keys[0].category }</p>
-        <ul>
-          { ingredients.map((element, index) => (
-            <li
-              key={ element }
-            >
-              <label htmlFor={ `${index}-${element}` }>
-                { element }
-                <input
-                  data-testid={ `${index}-ingredient-step` }
-                  type="checkbox"
-                  id={ `${index}-${element}` }
-                  name={ element }
-                  onChange={ handleCheked }
-                  checked={ checkedIngredients.includes(element) }
-                />
-              </label>
-            </li>)) }
-        </ul>
+        { ingredients.map((element, index) => (
+          <label
+            data-testid={ `${index}-ingredient-step` }
+            key={ index }
+            htmlFor={ `${index}-${element}` }
+          >
+            { element }
+            <input
+              type="checkbox"
+              id={ `${index}-${element}` }
+              name={ element }
+              onChange={ handleCheked }
+              checked={ checkedIngredients.includes(element) }
+            />
+          </label>
+        )) }
         <p data-testid="instructions">{ data.strInstructions }</p>
         <button
           type="button"

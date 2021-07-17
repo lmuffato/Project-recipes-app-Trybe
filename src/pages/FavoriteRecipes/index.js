@@ -116,6 +116,7 @@ const FavoriteRecipes = () => {
             src={ image }
             alt="bebida"
             data-testid={ `${index}-horizontal-image` }
+            className="favorite-recipe-img"
           />
         </Link>
 

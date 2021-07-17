@@ -74,6 +74,7 @@ export default function RecipeButton({ path }) {
   return (
     <Link to={ `${path}/in-progress` }>
       <button
+        className="fixed-button"
         type="button"
         data-testid="start-recipe-btn"
         // onClick={ recipesProgress }

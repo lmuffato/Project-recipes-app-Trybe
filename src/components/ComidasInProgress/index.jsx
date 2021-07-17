@@ -81,16 +81,24 @@ function FoodsInProgress({ data }) {
   return (
     <div>
       <h1>teste</h1>
-      <img src={ food.strMealThumb } alt="thumb" data-testid="recipe-photo" width="200px" />
+      <img
+        src={ food.strMealThumb }
+        alt="thumb"
+        data-testid="recipe-photo"
+        width="200px"
+      />
       <h3 data-testid="recipe-title">{ food.strMeal }</h3>
       <ShareButton urlCopied={ `http://localhost:3000/comidas/${id}` } />
       <FavoriteButton data={ data } path={ id } />
       <p data-testid="recipe-category">{ food.strCategory }</p>
       { ingredients.map((element, index) => (
-        <label key={ index } htmlFor={ `${index}-${element}` }>
+        <label
+          data-testid={ `${index}-ingredient-step` }
+          key={ index }
+          htmlFor={ `${index}-${element}` }
+        >
           { element }
           <input
-            data-testid={ `${index}-ingredient-step` }
             type="checkbox"
             id={ `${index}-${element}` }
             name={ element }
