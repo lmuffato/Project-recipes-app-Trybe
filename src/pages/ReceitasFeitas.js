@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
 import ReceitasFeitasCard from '../components/ReceitasFeitasCard';
+import '../styles/doneRecipes.css';
 
 function ReceitasFeitas() {
   const [acctualyRecipes, setAcctualyRecipes] = useState();
@@ -36,10 +37,11 @@ function ReceitasFeitas() {
     <div>
       <Header title="Receitas Feitas" />
 
-      <div>
+      <div className="buttons-categories-container">
         <button
           type="button"
           data-testid="filter-by-all-btn"
+          className="categorie-button"
           onClick={ (e) => {
             e.preventDefault();
             setDoneRecipes(acctualyRecipes);
@@ -50,6 +52,7 @@ function ReceitasFeitas() {
         <button
           type="button"
           data-testid="filter-by-food-btn"
+          className="categorie-button"
           onClick={ (e) => {
             e.preventDefault();
             setDoneRecipes(acctualyRecipes
@@ -61,6 +64,7 @@ function ReceitasFeitas() {
         <button
           type="button"
           data-testid="filter-by-drink-btn"
+          className="categorie-button"
           onClick={ (e) => {
             e.preventDefault();
             setDoneRecipes(acctualyRecipes

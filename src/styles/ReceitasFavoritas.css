@@ -1,3 +1,17 @@
 .img-card-favorite {
   width: 100px;
 }
+
+.categorie-button-favorite {
+  background-color: #692c03;
+  border-style: none;
+  color: white;
+  margin: 0;
+  padding: 7px;
+}
+
+.buttons-categories-container-favorite {
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+}
