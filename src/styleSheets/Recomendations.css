@@ -1,5 +1,11 @@
 .carousel-container {
   display: flex;
   flex-wrap: nowrap;
-  width: fit-content;
+  overflow-x: scroll;
+  width: 65%;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
 }

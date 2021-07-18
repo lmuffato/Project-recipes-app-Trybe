@@ -9,7 +9,7 @@ import fetchApiById from '../service/fetchApiDetails';
 import Ingredients from './Ingredients';
 import Recommendations from './Recomendations';
 import Video from '../service/Video';
-import RenderProgress from '../service/RenderProgress';
+import Button from '../service/RenderProgress';
 
 function RecipeDetails(props) {
   const { match: { params: { id } } } = props;
@@ -57,7 +57,7 @@ function RecipeDetails(props) {
       <h3>Instruções</h3>
       <p data-testid="instructions">{ recipe.strInstructions }</p>
       <Recommendations recipe={ type } />
-      { RenderProgress(url, id) }
+      <Button type={ url } ke={ id } />
     </div>
   );
 }
