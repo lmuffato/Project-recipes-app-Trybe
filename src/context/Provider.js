@@ -16,6 +16,7 @@ function Provider({ children }) {
   const [ingredFromExplore, setIngredFromExplore] = useState('');
   const [fromExplore, setFromExplore] = useState(false);
   const [completedFil, setCompletedFill] = useState('All');
+  const [favoritedFil, setFavoritedFill] = useState('All');
 
   const store = {
     userEmail,
@@ -44,6 +45,8 @@ function Provider({ children }) {
     setFromExplore,
     completedFil,
     setCompletedFill,
+    favoritedFil,
+    setFavoritedFill,
   };
 
   return (
