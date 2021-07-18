@@ -23,7 +23,7 @@ import NotFound from './pages/NotFound';
 
 function App() {
   return (
-    <div>
+    <div className="body">
       <Switch>
         <Route exact path="/" component={ Login } />
         <Route exact path="/comidas" component={ Foods } />

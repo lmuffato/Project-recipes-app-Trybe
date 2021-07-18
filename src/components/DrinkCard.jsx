@@ -12,7 +12,7 @@ function DrinkCard({ mealName, mealImg, testImgId, testNameId, testCardId, mealI
           data-testid={ testImgId }
           className="imgRecipes"
         />
-        <h3 data-testid={ testNameId }>{mealName}</h3>
+        <h4 data-testid={ testNameId }>{mealName}</h4>
       </div>
     </Link>
   );

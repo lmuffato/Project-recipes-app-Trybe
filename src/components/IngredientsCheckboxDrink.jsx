@@ -72,7 +72,7 @@ function IngredientsCheckboxDrink({ currentMeal, setShowButtonFinished }) {
                 id={ `${index}-ingredient-step` }
                 onChange={ (event) => handleChange(event) }
                 checked={ isChecked }
-                className="ingredientStep"
+                className="ingredientStep marginCheckbox"
               />
               {measureArray[index] ? (
                 `${ingredient[1]} - ${measureArray[index][1]}`

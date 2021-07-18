@@ -53,26 +53,43 @@ function InProgressDrinkCard() {
   };
 
   return (
-    <div>
+    <div className="detailMeal">
       <img
         data-testid="recipe-photo"
         src={ currentDrink.strDrinkThumb }
         alt="Current Meal"
+        className="detailImage"
       />
-      <h3 data-testid="recipe-title">{currentDrink.strDrink}</h3>
-      <button data-testid="share-btn" type="button" onClick={ shareClick }>
-        <img src={ shareIcon } alt="compartilhar" />
-      </button>
-      {copyLink ? <span>Link copiado!</span> : null}
-      <FavoriteButton type="bebida" />
-      <h4 data-testid="recipe-category">{ currentDrink.strAlcoholic }</h4>
-      <h4>Ingredients</h4>
-      <IngredientsCheckboxDrink
-        currentMeal={ currentDrink }
-        setShowButtonFinished={ setShowButtonFinished }
-      />
-      <h4>Instructions</h4>
-      <p data-testid="instructions">{ currentDrink.strInstructions }</p>
+      <div className="detailsTitle bodyPadding">
+        <h3 data-testid="recipe-title">{currentDrink.strDrink}</h3>
+        <div>
+          <button
+            data-testid="share-btn"
+            type="button"
+            onClick={ shareClick }
+            className="shareButton"
+          >
+            <img src={ shareIcon } alt="compartilhar" />
+          </button>
+          {copyLink ? <span>Link copiado!</span> : null}
+          <FavoriteButton type="bebida" />
+        </div>
+      </div>
+      <span
+        data-testid="recipe-category"
+        className="recipe-category bodyPadding"
+      >
+        { currentDrink.strAlcoholic }
+      </span>
+      <div className="bodyPadding">
+        <h4>Ingredients</h4>
+        <IngredientsCheckboxDrink
+          currentMeal={ currentDrink }
+          setShowButtonFinished={ setShowButtonFinished }
+        />
+        <h4>Instructions</h4>
+        <p data-testid="instructions">{ currentDrink.strInstructions }</p>
+      </div>
       <button
         type="button"
         data-testid="finish-recipe-btn"

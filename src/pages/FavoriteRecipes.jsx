@@ -16,7 +16,6 @@ function FavoriteRecipes() {
 
   return (
     <div>
-      Pagina FavoriteRecipes
       <Header title="Receitas Favoritas" />
       <div className="categoriesBTNRecipesDone">
         <button

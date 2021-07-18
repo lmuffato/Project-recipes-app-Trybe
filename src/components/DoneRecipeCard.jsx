@@ -35,18 +35,23 @@ function DoneRecipeCard({ area, imgSrc, imgId, category,
         <Link to={ `/${type}s/${recipeId}` }>
           <h3 data-testid={ nameId }>{ mealName }</h3>
         </Link>
+        <div>
+          {tag.map((name, index) => (
+            <span
+              key={ index }
+              data-testid={ `${indexTag}-${name}-horizontal-tag` }
+            >
+              { name }
+            </span>))}
+        </div>
+        <div>
+          <button type="button" onClick={ shareClick } className="shareButton">
+            <img data-testid={ shareId } src={ shareIcon } alt="compartilhar" />
+          </button>
+
+          {copyLink ? <span>Link copiado!</span> : null}
+        </div>
         <span data-testid={ dateId }>{ doneDate }</span>
-        <button type="button" onClick={ shareClick }>
-          <img data-testid={ shareId } src={ shareIcon } alt="compartilhar" />
-        </button>
-        {copyLink ? <span>Link copiado!</span> : null}
-        {tag.map((name, index) => (
-          <span
-            key={ index }
-            data-testid={ `${indexTag}-${name}-horizontal-tag` }
-          >
-            { name }
-          </span>))}
       </div>
     </div>
   );

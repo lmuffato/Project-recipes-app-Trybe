@@ -17,7 +17,7 @@ function FavoritedRecipesButton({ favoriteId, elementId }) {
   }, [favoriteRecipe]);
 
   return (
-    <button type="button" onClick={ handleClick }>
+    <button type="button" onClick={ handleClick } className="shareButton">
       <img data-testid={ favoriteId } src={ blackHeartIcon } alt="favoritar" />
     </button>
   );

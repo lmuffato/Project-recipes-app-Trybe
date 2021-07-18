@@ -35,7 +35,7 @@ function FavoriteRecipeCard({ imgSrc, imgId, category, categoryId,
         <Link to={ `/${type}s/${recipeId}` }>
           <h3 data-testid={ nameId }>{ mealName }</h3>
         </Link>
-        <button type="button" onClick={ shareClick }>
+        <button type="button" onClick={ shareClick } className="shareButton">
           <img data-testid={ shareId } src={ shareIcon } alt="compartilhar" />
         </button>
         <FavoritedRecipesButton

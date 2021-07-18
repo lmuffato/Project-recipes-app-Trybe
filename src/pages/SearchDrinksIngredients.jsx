@@ -17,7 +17,6 @@ function SearchDrinksIngredients() {
   const URL = 'https://www.thecocktaildb.com/images/ingredients/';
   return (
     <div>
-      Pagina SearchDrinksIngredients
       <Header title="Explorar Ingredientes" />
       {ingredientsList.map((ingredient, index) => (
         index < MAX_LENGTH ? (
