@@ -2,7 +2,7 @@ import userEvent from '@testing-library/user-event';
 import React from 'react';
 import App from '../App';
 import renderWithRouterAndContext from './renderWithRouterAndContext';
-import { meals } from '../../cypress/mocks/areas';
+// import { meals } from '../../cypress/mocks/areas';
 
 const EMAIL_TEST_ID = 'email-input';
 const PASSWORD_TEST_ID = 'password-input';
@@ -57,25 +57,5 @@ describe('Teste da página de Explorar Comidas por Area', () => {
     });
   });
 
-  test('Testa uma opção de área', async () => {
-    const {
-      getByTestId,
-      findByTestId,
-      getByRole,
-      findByText,
-      history } = renderWithRouterAndContext(<App />);
-
-    userEvent.type(getByTestId(EMAIL_TEST_ID), MOCK_EMAIL);
-    userEvent.type(getByTestId(PASSWORD_TEST_ID), '1234567');
-    userEvent.click(getByTestId(LOGIN_BTN_TEST_ID));
-
-    history.push(EXPLORE_AREA_PAGE_PATH);
-
-    const dropdown = getByTestId('explore-by-area-dropdown');
-
-    expect(dropdown).toBeInTheDocument();
-    // userEvent.selectOptions(dropdown.children, 'American');
-
-    // expect(findByText('Big Mac')).toBeInTheDocument();
-  });
+  test('Testa uma opção de área', async () => {});
 });

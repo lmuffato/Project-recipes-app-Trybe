@@ -77,7 +77,7 @@ describe('Teste da página de receitas favoritas', () => {
     userEvent.type(getByTestId(PASSWORD_TEST_ID), '1234567');
     userEvent.click(getByTestId(LOGIN_BTN_TEST_ID));
 
-    history.push('/comidas/52977');
+    history.push('/comidas/52978');
     userEvent.click(getByTestId(FAVORITE_BTN_TESTID));
 
     history.push(PAGE_MOCK);

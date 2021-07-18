@@ -39,6 +39,5 @@ describe('Teste da página de explorar', () => {
 
     expect(exploreDrinksBtn).toBeInTheDocument();
     expect(exploreDrinksBtn).toHaveTextContent('Explorar Bebidas');
-
   });
 });
