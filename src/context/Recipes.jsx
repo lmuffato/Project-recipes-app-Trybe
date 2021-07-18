@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import React, { createContext, useCallback, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
@@ -15,11 +16,16 @@ export function RecipesProvider({ children }) {
   const [titlePage, setTitlePage] = useState('');
   const [currentFilter, setCurrentFilter] = useState('');
   const { location, push: historyPush } = useHistory();
+  const [favoriteRecipe, setFavoriteRecipe] = useState([]);
 
   const {
     doneRecipes: doneRecipesInLocalStorage,
     inProgressRecipes: inProgressRecipesInLocalStorage,
   } = useLocalStorage('doneRecipes', 'inProgressRecipes');
+
+  const {
+    favoriteRecipe: favoriteRecipeInLocalStorage,
+  } = useLocalStorage('favoriteRecipes');
 
   useEffect(() => {
     if (!doneRecipesInLocalStorage) {
@@ -37,6 +43,15 @@ export function RecipesProvider({ children }) {
       setInProgressRecipes(inProgressRecipesInLocalStorage);
     }
   }, []);
+
+  useEffect(() => {
+    if (!favoriteRecipeInLocalStorage) {
+      localStorage.setItem('favoriteRecipes', JSON.stringify([]));
+      setFavoriteRecipe([]);
+    } else {
+      setFavoriteRecipe(favoriteRecipeInLocalStorage);
+    }
+  }, [favoriteRecipeInLocalStorage]);
 
   // async function loadRecipes(pathname) {
   //   const recipesLimit = 12;
@@ -109,6 +124,25 @@ export function RecipesProvider({ children }) {
 
     setDoneRecipes(newDoneRecipes);
     removeRecipeInProgress(id, pathname.split('/')[1].slice(0, lastCharacter));
+  }
+
+  function addFavoriteRecipe(id, recipe, pathname) {
+    const lastCharacter = -1;
+    const newFavoriteRecipe = {
+      id,
+      type: pathname.split('/')[1].slice(0, lastCharacter),
+      area: recipe.strArea || '',
+      category: recipe.strCategory || '',
+      alcoholicOrNot: recipe.strAlcoholic || '',
+      name: recipe.name,
+      image: recipe.imagePath,
+    };
+
+    const newFavoriteRecipes = [...favoriteRecipe, newFavoriteRecipe];
+
+    localStorage.setItem('favoriteRecipes', JSON.stringify(newFavoriteRecipes));
+
+    setFavoriteRecipe(newFavoriteRecipes);
   }
 
   function addRecipeInProgress(type, id, ingredients) {
@@ -212,6 +246,7 @@ export function RecipesProvider({ children }) {
     doneRecipes,
     addDoneRecipe,
     addRecipeInProgress,
+    addFavoriteRecipe,
   };
 
   return (
