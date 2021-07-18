@@ -17,7 +17,21 @@
   - [x] Cartões de receita
     - [x] Imagem da receita
     - [x] Título da receita
-- [ ] Tela de detalhes de uma receita
+- [x] Tela de detalhes de uma receita
+  - [x] Imagem de receita
+  - [x] Título da receita
+  - [x] Botão de compartilhar
+  - [x] Botão de favoritar
+  - [x] Categorida da receita
+  - [x] Título dos ingredientes
+  - [x] Container dos ingredientes
+  - [x] Container do passo a passo
+  - [x] Área do vídeo nos detalhes das comidas
+  - [x] Seção das recomendações
+    - [x] Cartões das receitas
+      - [x] Imagem da receita
+      - [x] Título da receita
+  - [x] Botão de iniciar/continuar receita
 - [ ] Tela de receita em progresso
 - [ ] Tela de receitas feitas
 - [ ] Tela de receitas favoritas

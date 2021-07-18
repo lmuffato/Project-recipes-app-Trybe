@@ -23,39 +23,14 @@ function MainRecipes() {
     if (searchedRecipes && searchBtn) setRenderRecipes(searchedRecipes);
   }, [recipes, mealsAndDrinkByIngredients, searchedRecipes, searchBtn]);
 
-  // const renderFilters = () => {
-  //   if (searchBtn) {
-  //     return (<SearchBar />);
-  //   } return (<FilterButtons />);
-  // };
-
-  // console.log(mealsAndDrinkByIngredients);
-  // console.log('Opa');
   if (renderRecipes) {
-    // console.log('renderizou');
     return (
       <>
         { searchBtn ? <SearchBar /> : <FilterButtons /> }
-        {/* { renderFilters() } */}
         <section className="recipes-container">
           { type === 'meal'
             ? <MealCards data={ renderRecipes } />
             : <DrinkCards data={ renderRecipes } />}
-
-          {/* renderRecipes.map((recipe, index) => ( */
-          //   <MealCards
-          //     data={ renderRecipes }
-          //     // index={ index }
-          //     // key={ index }
-          //   />
-          // /* )) */ : /* renderRecipes.map((recipe, index) => ( */
-          //   <DrinkCards
-          //     data={ renderRecipes }
-          //     // index={ index }
-          //     // key={ index }
-          //   />
-          /* )) */}
-
         </section>
       </>
     );

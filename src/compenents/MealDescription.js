@@ -74,19 +74,26 @@ function MealDescription({ recipe, recipeId }) {
             />
           </section>
         </section>
-        <h3 data-testid="recipe-category">{ strCategory }</h3>
-        <h2>Ingredients</h2>
-        { ingredients.map((ingredient, index) => (
-          <p key={ index } data-testid={ `${index}-ingredient-name-and-measure` }>
-            {`- ${ingredient} - ${measures[index] === undefined
-              ? 'at taste' : measures[index]}`}
-          </p>
-        ))}
-        <p data-testid="instructions">{ strInstructions }</p>
+        <h3 data-testid="recipe-category" className="category">{ strCategory }</h3>
+        <h2 className="ingredients-title">Ingredients</h2>
+        <section className="ingredients-measures">
+          { ingredients.map((ingredient, index) => (
+            <p
+              key={ index }
+              data-testid={ `${index}-ingredient-name-and-measure` }
+              className="ingredient-measure"
+            >
+              {`- ${ingredient} - ${measures[index] === undefined
+                ? 'at taste' : measures[index]}`}
+            </p>
+          ))}
+        </section>
+        <p data-testid="instructions" className="instructions">{ strInstructions }</p>
         { strYoutube && (
           <iframe
             data-testid="video"
             title="Recipe"
+            className="player"
             src={ strYoutube.replace('watch?v=', 'embed/') }
           />
         )}
@@ -105,15 +112,13 @@ function MealDescription({ recipe, recipeId }) {
           ))}
         </section>
       </section>
-      <Link to={ `/comidas/${recipeId}/in-progress` }>
+      <Link to={ `/comidas/${recipeId}/in-progress` } className="start-recipe">
         <button
           type="button"
-          className="start-recipe"
+          className="start-recipe-btn"
           data-testid="start-recipe-btn"
         >
           { checkStart() }
-          {/* Iniciar Receita */}
-          {/* { isStarted ? 'Continuar Receita' : 'Iniciar Receita' } */}
         </button>
       </Link>
     </>

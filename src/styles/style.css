@@ -15,8 +15,8 @@ body div {
   width: 100%;
 }
 
-.main-recipes, .main-explore, .main-ingredients, .main-area, .main-profile {
-  background: #ea1d2bf3;
+.main-recipes, .main-explore, .main-ingredients, .main-area, .main-profile, .main-detail {
+  background: #a11d2b;
   display: flex;
   flex-flow: column wrap;
   font-family: sans-serif;
@@ -194,7 +194,6 @@ body div {
 
 /* --------------- Tela de Detalhes da receita ---------------- */
 .main-detail {
-  display: flex;
   flex-flow: column;
 }
 
@@ -210,6 +209,74 @@ body div {
 .interaction-buttons button {
   background-color: transparent;
   border: none;
+}
+
+.category, .ingredients-title {
+  color: rgba(0, 0, 0, 0.726);
+  margin-left: 2%;
+}
+
+.ingredients-measures, .instructions {
+  background-color: rgba(240, 202, 202, 0.267);
+  border-radius: 10px;
+  flex-direction: column;
+  font-size: 14pt;
+  margin: 2%;
+}
+
+.player {
+  border: none;
+  border-radius: 10px;
+  margin: 2%;
+}
+
+/* ------- Componente Recomendation ------ */
+.recipes {
+  background-color: tomato;
+  display: flex;
+  max-width: 100%;
+  overflow-x: scroll;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+}
+
+.recomendation-card {
+  align-items: center;
+  border: 1px solid black;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  margin: 3% 3% 50px;
+}
+
+.recomendation-card img {
+  border-radius: 20px 20px 0 0;
+  max-height: auto;
+  max-width: 170px;
+  scroll-snap-align: start;
+  width: fit-content;
+}
+
+.recomendation-card h3 {
+  font-size: 15pt;
+  margin-top: 1%;
+}
+
+/* --------------------------------------- */
+.start-recipe {
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  width: 100%;
+}
+
+.start-recipe-btn {
+  background-color: #d9910b;
+  border: none;
+  border-radius: 10px;
+  height: 40px;
+  width: 96%;
 }
 
 /* ------------------------------------------------------------ */
@@ -334,11 +401,11 @@ footer {
 /* --------------------------------------- */
 
 /*
-#5E9C53 - verde claro
+#5e9c53 - verde claro
 #256766 - verde escuro
-#D9910B - amarelo
-#A11D2B - vermelho
-#1A1E3B - azul
+#d9910b - amarelo
+#a11d2b - vermelho
+#1A1e3b - azul
 */
 
 /*
