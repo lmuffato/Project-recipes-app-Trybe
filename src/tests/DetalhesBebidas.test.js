@@ -84,4 +84,27 @@ describe('Teste página de detalhes de uma bebida', () => {
 
     expect(history.location.pathname).toBe(`${PAGE_MOCK}/in-progress`);
   });
+
+  test('Carousel é renderizado corretamente', async () => {
+    const {
+      getByTestId,
+      findAllByTestId,
+      history } = renderWithRouterAndContext(<App />);
+
+    userEvent.type(getByTestId(EMAIL_TEST_ID), MOCK_EMAIL);
+    userEvent.type(getByTestId(PASSWORD_TEST_ID), '1234567');
+    userEvent.click(getByTestId(LOGIN_BTN_TEST_ID));
+
+    history.push(PAGE_MOCK);
+
+    const carouselRegEx = /.-recomendation-card/;
+    const AMOUNT_OF_CARDS = 6;
+
+    const carouselCards = await findAllByTestId(carouselRegEx);
+    expect(carouselCards).toHaveLength(AMOUNT_OF_CARDS);
+
+    carouselCards.forEach((card) => {
+      expect(card).toBeInTheDocument();
+    });
+  });
 });
