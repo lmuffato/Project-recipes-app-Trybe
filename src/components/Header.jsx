@@ -19,6 +19,7 @@ function Header({ title, searchImg = false }) {
           <button
             type="button"
             onClick={ () => setSearchInput(!searchInput) }
+            className="searchButton"
           >
             <img data-testid="search-top-btn" src={ searchIcon } alt="botão buscar" />
           </button>

@@ -59,6 +59,7 @@ function DrinkCardDetail() {
             data-testid="share-btn"
             type="button"
             onClick={ shareClick }
+            className="shareButton"
           >
             <img src={ shareIcon } alt="compartilhar" />
           </button>

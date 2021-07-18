@@ -91,15 +91,48 @@ header {
   height: 109px;
   margin-bottom: 30px;
   width: 161px;
-
 }
 
 .imgRecipeFinished {
-  width: 100px;
+  height: 141px;
+  margin-right: 5px;
+  width: 165px;
+}
+
+.cardsGroup {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .cardRecipeFinished, .cardRecipeFavorited {
+  background-color: rgba(128, 128, 128, 0.027);
+  border: 1px solid rgba(0, 0, 0, 0.561);
+  border-radius: 4px;
+  box-shadow: 8px 5px 5px rgb(194, 190, 190);
   display: flex;
+  height: 143px;
+  margin: 10px 6px;
+  width: 330px;
+}
+
+.cardRecipeFinished button, .cardRecipeFavorited button {
+  /* margin-left: 100px;
+  position: relative; */
+}
+
+.cardRecipeFinished a h3, .cardRecipeFavorited a h3 {
+  color: black;
+  font-size: 1.2rem;
+}
+
+.cardRecipeFinished h4, .cardRecipeFavorited h4 {
+  color: rgb(82, 82, 82);
+  font-size: 1rem;
+}
+
+.cardRecipeFinished span, .cardRecipeFavorited span {
+  font-size: 0.8rem;
 }
 
 .headerTop {
@@ -116,8 +149,20 @@ header {
 }
 
 .filterButtons {
+  background-color: white;
+  border: none;
+  border-radius: 6px;
+  box-shadow: 8px 5px 5px rgb(194, 190, 190);
+  font-size: 12px;
+  font-weight: 700;
+  height: 35px;
   margin: 5px;
-  width: 100px;
+  padding: 0 16px;
+  width: 110px;
+}
+
+.filterButtons:hover {
+  opacity: 0.5;
 }
 
 .detailMeal {
@@ -155,6 +200,20 @@ header {
 
 .mainFoodsAndDrinks {
   margin-bottom: 52px;
+}
+
+.searchButton {
+  background-color: #e5e5e5;
+  border: none;
+}
+
+.cardRecipeFinished button, .cardRecipeFavorited button {
+  background-color: rgba(128, 128, 128, 0.027);
+}
+
+.shareButton {
+  background-color: white;
+  border: none;
 }
 
 /*

@@ -17,7 +17,6 @@ function SearchMealsIngredients() {
   const URL = 'https://www.themealdb.com/images/ingredients/';
   return (
     <div>
-      Pagina SearchMealsIngredients
       <Header title="Explorar Ingredientes" />
       <div className="itensGroup">
         {ingredientsList.map((ingredient, index) => (

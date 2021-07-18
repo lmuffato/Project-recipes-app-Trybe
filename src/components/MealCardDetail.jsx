@@ -60,7 +60,12 @@ function MealCardDetail() {
       <div className="detailsTitle">
         <h3 data-testid="recipe-title">{ currentMeal.strMeal }</h3>
         <div>
-          <button data-testid="share-btn" type="button" onClick={ shareClick }>
+          <button
+            data-testid="share-btn"
+            type="button"
+            onClick={ shareClick }
+            className="shareButton"
+          >
             <img src={ shareIcon } alt="compartilhar" />
           </button>
           {copyLink ? <span>Link copiado!</span> : null}
