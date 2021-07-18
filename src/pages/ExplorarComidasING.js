@@ -12,10 +12,12 @@ function ExplorarComidasING() {
   const [data, setData] = useState([]);
   const { setIngradient } = useContext(ContextComidas);
 
+  const miliseconds = 2000;
+
   useEffect(() => {
     const fetchApi = async () => {
       const response = await apiMealsIngredients();
-      setData(response);
+      setTimeout(() => setData(response), miliseconds);
     };
     fetchApi();
   }, []);

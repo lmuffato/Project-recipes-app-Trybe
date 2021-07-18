@@ -8,9 +8,11 @@ import { filterCategoriaBebidas } from '../services/apisCategories';
 import { cocktailsAPI } from '../services/apisMealsAndCocktails';
 import { apiSearchCocktails } from '../services/fetchApiSearch';
 import Cards from '../components/Card';
+import Loading from '../components/Loading';
 
 function Bebidas() {
   const {
+    data,
     originData,
     texto,
     categoria,
@@ -18,9 +20,11 @@ function Bebidas() {
     setData,
   } = useContext(ContextBebidas);
 
+  const miliseconds = 2000;
+
   const fetchapi = async () => {
     const bebidas = await cocktailsAPI();
-    setData(bebidas);
+    setTimeout(() => setData(bebidas), miliseconds);
   };
 
   const fetchApiIngredient = async () => {
@@ -55,6 +59,8 @@ function Bebidas() {
       getApis();
     }
   }, [texto]);
+
+  if (data.length < 1) return <Loading param="drink" />;
 
   return (
     <div>
