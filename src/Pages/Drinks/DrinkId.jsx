@@ -1,3 +1,4 @@
+import { Divider } from 'semantic-ui-react';
 import React, { useEffect, useState, useContext } from 'react';
 import { useLocation, Redirect } from 'react-router-dom';
 import { fetchDrinkForId } from '../../services/Data';
@@ -6,6 +7,7 @@ import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../../images/blackHeartIcon.svg';
 import '../../Styles/Recomendation.css';
 import context from '../../store/Context';
+import style from './style';
 
 const copy = require('clipboard-copy');
 
@@ -44,10 +46,6 @@ function DrinkId() {
   const id = location.pathname.split('/')[2];
   const route = location.pathname;
   const stopCart = 5;
-  const style = {
-    bottom: '0px',
-    position: 'fixed',
-  };
 
   const [drinkForId, setDrinkForId] = useState([]);
   const [hiddenValue, setHiddenValue] = useState(false);
@@ -119,35 +117,51 @@ function DrinkId() {
   if (!drinkForId) return <div>Loading...</div>;
 
   return (
-    <div>
-      <img
-        className="img-details"
-        src={ strDrinkThumb }
-        alt="receita pronta"
-        data-testid="recipe-photo"
-      />
-      <span>{textLink}</span>
-      <section>
-        <p data-testid="recipe-title">{strDrink}</p>
-        <p data-testid="recipe-category">{strAlcoholic}</p>
-        <button
-          type="button"
-          onClick={ () => copyURL(route, setTextLink, textLink) }
-          data-testid="share-btn"
-        >
-          <img src={ shareIcon } alt="share-icon" />
-        </button>
-        <button
-          type="button"
-          onClick={ clickFavorite }
-          src={ imgFavorite }
-          data-testid="favorite-btn"
-        >
-          <img src={ imgFavorite } alt="favorite icon" />
-        </button>
-      </section>
-      <section>
-        <p>Ingredients</p>
+    <>
+      <div style={ style.recipeCard }>
+        <img
+          className="img-details"
+          src={ strDrinkThumb }
+          alt="receita pronta"
+          data-testid="recipe-photo"
+          style={ style.image }
+        />
+        <span>{textLink}</span>
+        <section style={ style.recipeDesc }>
+          <p
+            data-testid="recipe-title"
+            style={ style.p }
+          >
+            {strDrink}
+          </p>
+          <p
+            data-testid="recipe-category"
+            style={ style.p }
+          >
+            {strAlcoholic}
+          </p>
+          <button
+            type="button"
+            onClick={ () => copyURL(route, setTextLink, textLink) }
+            data-testid="share-btn"
+            style={ style.button }
+          >
+            <img src={ shareIcon } alt="share-icon" />
+          </button>
+          <button
+            type="button"
+            onClick={ clickFavorite }
+            src={ imgFavorite }
+            data-testid="favorite-btn"
+            style={ style.button }
+          >
+            <img src={ imgFavorite } alt="favorite icon" />
+          </button>
+        </section>
+        <Divider />
+      </div>
+      <section style={ style.recipe }>
+        <p><b>Ingredients</b></p>
         <ul>
           {
             arrIngredients.filter(([key]) => key.includes('strIngredient'))
@@ -165,13 +179,12 @@ function DrinkId() {
               ))
           }
         </ul>
+        <p><b>Instructions</b></p>
+        <p data-testid="instructions" style={ { paddingLeft: 20 } }>{strInstructions}</p>
+        <Divider />
       </section>
-      <section>
-        <p>Instructions</p>
-        <p data-testid="instructions">{strInstructions}</p>
-      </section>
-      <section>
-        <p>Recomendadas</p>
+      <section style={ style.recomendation }>
+        <p style={ { paddingLeft: 5 } }><b>Recomendadas</b></p>
         <div className="recomendation-container">
           {
             foods.filter((_, index) => index <= stopCart)
@@ -196,12 +209,12 @@ function DrinkId() {
         type="button"
         onClick={ handleClick }
         data-testid="start-recipe-btn"
-        style={ style }
+        style={ style.init }
         hidden={ hiddenValue }
       >
         {textBtn}
       </button>
-    </div>
+    </>
   );
 }
 

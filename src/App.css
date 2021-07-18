@@ -1,9 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap');
+
+* {
+  font-family: MedievalSharp , cursive;
+}
+
 footer {
   bottom: 0;
   display: flex;
   justify-content: space-around;
   position: fixed;
-  width: 100%;
 }
 
 header {

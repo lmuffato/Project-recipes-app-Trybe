@@ -1,10 +1,22 @@
 .recomendation-container {
   display: flex;
+  margin-top: -10px;
   max-width: 100%;
   overflow-x: scroll;
 }
 
+.recomendation-card {
+  background-color: #cc8c54;
+  border: 1px solid #7c142c;
+  border-radius: 10px;
+  box-shadow: 0 10px 15px 3px rgb(84, 43, 41);
+  margin: 3px;
+  text-align: center;
+}
+
 .recomendation-card img {
+  border: 1px solid #7c142c;
+  border-radius: 10px;
   max-height: auto;
   max-width: 200px;
 }
