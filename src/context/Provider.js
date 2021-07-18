@@ -15,6 +15,7 @@ function Provider({ children }) {
   const [filtredList, setFiltredList] = useState([]);
   const [ingredFromExplore, setIngredFromExplore] = useState('');
   const [fromExplore, setFromExplore] = useState(false);
+  const [completedFil, setCompletedFill] = useState('All');
 
   const store = {
     userEmail,
@@ -41,6 +42,8 @@ function Provider({ children }) {
     setIngredFromExplore,
     fromExplore,
     setFromExplore,
+    completedFil,
+    setCompletedFill,
   };
 
   return (

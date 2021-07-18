@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import shareIcon from '../images/shareIcon.svg';
 
 const copy = require('clipboard-copy');
@@ -62,7 +63,7 @@ function CompletedRecipeCardList({ list }) {
   };
 
   const renderCardDates = (data, index) => {
-    const { name, doneDate, tags } = data;
+    const { name, doneDate, tags, type, id } = data;
     return (
       <div>
         <p
@@ -73,7 +74,9 @@ function CompletedRecipeCardList({ list }) {
         <p
           data-testid={ `${index}-horizontal-name` }
         >
-          { name }
+          <Link to={ { pathname: `/${type}s/${id}` } }>
+            { name }
+          </Link>
         </p>
         <p
           data-testid={ `${index}-horizontal-done-date` }
@@ -93,15 +96,17 @@ function CompletedRecipeCardList({ list }) {
   );
 
   const renderImg = (data, index) => {
-    const { image } = data;
+    const { image, type, id } = data;
     return (
       <div>
-        <img
-          data-testid={ `${index}-horizontal-image` }
-          src={ `${image}` }
-          alt="recipe-img"
-          className="img"
-        />
+        <Link to={ { pathname: `/${type}s/${id}` } }>
+          <img
+            data-testid={ `${index}-horizontal-image` }
+            src={ `${image}` }
+            alt="recipe-img"
+            className="img"
+          />
+        </Link>
       </div>
     );
   };

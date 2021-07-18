@@ -1,6 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import Context from '../context/Context';
 
 function CompletedButtomFilters() {
+  const { setCompletedFill } = useContext(Context);
+
+  const handleFilter = (value) => {
+    setCompletedFill(value);
+  };
+
   const renderButtoms = () => (
     <ul className="buttons-list">
       <li key="All">
@@ -8,6 +15,7 @@ function CompletedButtomFilters() {
           type="button"
           data-testid="filter-by-all-btn"
           className="buttons"
+          onClick={ () => handleFilter('All') }
         >
           All
         </button>
@@ -17,6 +25,7 @@ function CompletedButtomFilters() {
           type="button"
           data-testid="filter-by-food-btn"
           className="buttons"
+          onClick={ () => handleFilter('comida') }
         >
           Food
         </button>
@@ -26,6 +35,7 @@ function CompletedButtomFilters() {
           type="button"
           data-testid="filter-by-drink-btn"
           className="buttons"
+          onClick={ () => handleFilter('bebida') }
         >
           Drinks
         </button>
