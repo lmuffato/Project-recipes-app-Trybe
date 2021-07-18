@@ -44,6 +44,7 @@ function ReceitasFavoritasCard({ props: { recipe, index, setFavoriteRecipes } })
       <button
         type="button"
         onClick={ shareClick }
+        className="share-favorite-button"
       >
         <img
           alt="Share link"
@@ -51,7 +52,7 @@ function ReceitasFavoritasCard({ props: { recipe, index, setFavoriteRecipes } })
           src={ shareIcon }
         />
       </button>
-      <button type="button" onClick={ unfavoriteClick }>
+      <button type="button" className="share-favorite-button" onClick={ unfavoriteClick }>
         <img
           alt="Favorite button"
           data-testid={ `${index}-horizontal-favorite-btn` }
@@ -75,17 +76,19 @@ function ReceitasFavoritasCard({ props: { recipe, index, setFavoriteRecipes } })
 
   return (
     <div>
-      <main>
-        <Link to={ type === 'comida' ? `/comidas/${id}` : `/bebidas/${id}` }>
-          <img
-            alt="Receita Favoritada"
-            src={ image }
-            className="img-card-favorite"
-            data-testid={ `${index}-horizontal-image` }
-          />
-        </Link>
+      <main className="favorite-item-container">
+        <div className="favorite-recipe-image">
+          <Link to={ type === 'comida' ? `/comidas/${id}` : `/bebidas/${id}` }>
+            <img
+              alt="Receita Favoritada"
+              src={ image }
+              className="img-card-favorite"
+              data-testid={ `${index}-horizontal-image` }
+            />
+          </Link>
+        </div>
 
-        <div>
+        <div className="favorite-recipe-info">
           { type === 'comida'
             ? foodSpecs()
             : drinkSpecs() }
