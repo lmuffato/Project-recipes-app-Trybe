@@ -5,6 +5,7 @@ const COCKTAIL_API_FIRST_URL = 'https://www.thecocktaildb.com/api/json/v1/1/sear
 const DRINK_BY_CATEGORY = 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=';
 const DRINK_BY_ID = 'https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=';
 const RANDOM_DRINK = 'https://www.thecocktaildb.com/api/json/v1/1/random.php';
+const DRINK_INGREDIENTS_LIST = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list';
 
 export async function fetchCocktails() {
   const fetchURL = await fetch(COCKTAIL_API_URL);
@@ -43,5 +44,10 @@ export async function fetchDrinkByID(drinkId) {
 
 export async function fetchRandomDrink() {
   const fetchURL = await fetch(RANDOM_DRINK);
+  return fetchURL.json();
+}
+
+export async function fetchDrinkIngredients() {
+  const fetchURL = await fetch(DRINK_INGREDIENTS_LIST);
   return fetchURL.json();
 }
