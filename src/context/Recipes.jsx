@@ -1,4 +1,3 @@
-/* eslint-disable max-lines */
 import React, { createContext, useCallback, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
@@ -52,17 +51,6 @@ export function RecipesProvider({ children }) {
       setFavoriteRecipe(favoriteRecipeInLocalStorage);
     }
   }, [favoriteRecipeInLocalStorage]);
-
-  // async function loadRecipes(pathname) {
-  //   const recipesLimit = 12;
-  //   const categoriesLimit = 5;
-  //   const results = await getRecipes(pathname);
-  //   if (results) {
-  //     setRecipes(results.list.slice(0, recipesLimit));
-  //     setCategories(results.categories.slice(0, categoriesLimit));
-  //     setTitlePage(results.titlePage);
-  //   }
-  // }
 
   const loadRecipes = useCallback(async (pathname) => {
     const recipesLimit = 12;
