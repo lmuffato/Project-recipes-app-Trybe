@@ -105,4 +105,26 @@ describe('Teste da página de receitas favoritas', () => {
 
     expect(queryByTestId(FAVORITE_IMG_TESTID)).not.toBeInTheDocument();
   });
+
+  test('O botão de desfavoritar funciona', () => {
+    const { getByTestId, queryByTestId, history } = renderWithRouterAndContext(<App />);
+
+    userEvent.type(getByTestId(EMAIL_TEST_ID), MOCK_EMAIL);
+    userEvent.type(getByTestId(PASSWORD_TEST_ID), '1234567');
+    userEvent.click(getByTestId(LOGIN_BTN_TEST_ID));
+
+    history.push('/comidas/52977');
+    userEvent.click(getByTestId(FAVORITE_BTN_TESTID));
+
+    history.push(PAGE_MOCK);
+
+    expect(getByTestId(FAVORITE_IMG_TESTID)).toBeInTheDocument();
+
+    const unFavoriteBtn = getByTestId('0-horizontal-favorite-btn');
+    expect(unFavoriteBtn).toBeInTheDocument();
+
+    userEvent.click(unFavoriteBtn);
+
+    expect(queryByTestId(FAVORITE_IMG_TESTID)).not.toBeInTheDocument();
+  });
 });
