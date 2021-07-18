@@ -21,33 +21,32 @@ function Recommendations(props) {
   return (
     <section>
       <h3>Recomendados</h3>
-      <div
-        className="carousel-container"
-      >
-        { recommended.length ? recommended.reduce((acc, recom, index) => {
-          const cardsLength = 6;
-          if (index < cardsLength) {
-            const testid = {
-              image: 'recipe-photo',
-              title: 'recipe-title',
-              card: `${index}-recomendation-card`,
-            };
-            const redirectPath = `${pathname}/${recom[`id${type}`]}`;
-            acc.push(
-              <Card
-                src={ recom[`str${type}Thumb`] }
-                title={ recom[`str${type}`] }
-                index={ index }
-                key={ index }
-                testid={ testid }
-                redirectPath={ redirectPath }
-              />,
-            );
-          }
-          return acc;
-        }, []) : ''}
+      <div className="carousel-container">
+        {
+          recommended.length ? recommended.reduce((acc, recom, index) => {
+            const cardsLength = 6;
+            if (index < cardsLength) {
+              const testid = {
+                image: 'recipe-photo',
+                title: 'recipe-title',
+                card: `${index}-recomendation-card`,
+              };
+              const redirectPath = `${pathname}/${recom[`id${type}`]}`;
+              acc.push(
+                <Card
+                  src={ recom[`str${type}Thumb`] }
+                  title={ recom[`str${type}`] }
+                  index={ index }
+                  key={ index }
+                  testid={ testid }
+                  redirectPath={ redirectPath }
+                />,
+              );
+            }
+            return acc;
+          }, []) : ''
+        }
       </div>
-
     </section>
   );
 }
