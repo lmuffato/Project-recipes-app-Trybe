@@ -62,4 +62,23 @@ describe('Teste da página de Comidas', () => {
       expect(card).toBeInTheDocument();
     });
   });
+
+  test('os botoes de categoria são renderizados corretamente', () => {
+    const { getByTestId, container, history } = renderWithRouterAndContext(<App />);
+
+    userEvent.type(getByTestId(EMAIL_TEST_ID), MOCK_EMAIL);
+    userEvent.type(getByTestId(PASSWORD_TEST_ID), '1234567');
+    userEvent.click(getByTestId(LOGIN_BTN_TEST_ID));
+
+    history.push('/bebidas');
+
+    const categoryButtons = container.querySelectorAll('.category-buttons');
+
+    const amountOfButtons = 6;
+    const TIMEOUT = 1000;
+
+    setTimeout(() => {
+      expect(categoryButtons).toHaveLength(amountOfButtons);
+    }, TIMEOUT);
+  });
 });
