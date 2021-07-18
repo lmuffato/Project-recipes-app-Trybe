@@ -2,4 +2,10 @@
   display: flex;
   flex-wrap: nowrap;
   overflow-x: scroll;
+  width: 65%;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
 }
