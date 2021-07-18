@@ -45,14 +45,13 @@ function DoneRecipeCard({ area, imgSrc, imgId, category,
             </span>))}
         </div>
         <div>
-          <span data-testid={ dateId }>{ doneDate }</span>
-        </div>
-        <div>
-          {copyLink ? <span>Link copiado!</span> : null}
           <button type="button" onClick={ shareClick } className="shareButton">
             <img data-testid={ shareId } src={ shareIcon } alt="compartilhar" />
           </button>
+
+          {copyLink ? <span>Link copiado!</span> : null}
         </div>
+        <span data-testid={ dateId }>{ doneDate }</span>
       </div>
     </div>
   );
