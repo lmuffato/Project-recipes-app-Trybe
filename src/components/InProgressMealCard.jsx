@@ -60,7 +60,7 @@ function InProgressMealCard() {
         alt="Current Meal"
         className="detailImage"
       />
-      <div className="detailsTitle">
+      <div className="detailsTitle bodyPadding">
         <h3 data-testid="recipe-title">{currentMeal.strMeal}</h3>
         <div>
           <button
@@ -77,17 +77,19 @@ function InProgressMealCard() {
       </div>
       <span
         data-testid="recipe-category"
-        className="recipe-category"
+        className="recipe-category bodyPadding"
       >
         { currentMeal.strCategory }
       </span>
-      <h4>Ingredients</h4>
-      <IngredientsCheckBox
-        currentMeal={ currentMeal }
-        setShowButtonFinished={ setShowButtonFinished }
-      />
-      <h4>Instructions</h4>
-      <p data-testid="instructions">{ currentMeal.strInstructions }</p>
+      <div className="bodyPadding">
+        <h4>Ingredients</h4>
+        <IngredientsCheckBox
+          currentMeal={ currentMeal }
+          setShowButtonFinished={ setShowButtonFinished }
+        />
+        <h4>Instructions</h4>
+        <p data-testid="instructions">{ currentMeal.strInstructions }</p>
+      </div>
       <button
         type="button"
         data-testid="finish-recipe-btn"

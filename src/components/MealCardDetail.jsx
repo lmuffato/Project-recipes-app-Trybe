@@ -57,7 +57,7 @@ function MealCardDetail() {
         data-testid="recipe-photo"
         className="detailImage"
       />
-      <div className="detailsTitle">
+      <div className="detailsTitle bodyPadding">
         <h3 data-testid="recipe-title">{ currentMeal.strMeal }</h3>
         <div>
           <button
@@ -74,21 +74,23 @@ function MealCardDetail() {
       </div>
       <span
         data-testid="recipe-category"
-        className="recipe-category"
+        className="recipe-category bodyPadding"
       >
         { currentMeal.strCategory }
       </span>
-      <h4>Ingredients</h4>
-      <IngredientsList currentMeal={ currentMeal } />
-      <h4>Instructions</h4>
-      <p data-testid="instructions">{ currentMeal.strInstructions }</p>
+      <div className="bodyPadding">
+        <h4>Ingredients</h4>
+        <IngredientsList currentMeal={ currentMeal } />
+        <h4>Instructions</h4>
+        <p data-testid="instructions">{ currentMeal.strInstructions }</p>
+      </div>
       <ReactPlayer
         data-testid="video"
         width="320"
         height="160"
         url={ youtubeId }
       />
-      <h4>Recommended Drinks</h4>
+      <h4 className="bodyPadding">Recommended Drinks</h4>
       <div className="carousel-list">
         {fullDrinks.map((drink, index) => (
           index < RECOMMENDED_NUMBER ? (

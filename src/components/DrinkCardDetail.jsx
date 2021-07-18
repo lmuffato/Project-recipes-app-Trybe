@@ -52,7 +52,7 @@ function DrinkCardDetail() {
         data-testid="recipe-photo"
         className="detailImage"
       />
-      <div className="detailsTitle">
+      <div className="detailsTitle bodyPadding">
         <h3 data-testid="recipe-title">{ currentDrink.strDrink }</h3>
         <div>
           <button
@@ -69,15 +69,17 @@ function DrinkCardDetail() {
       </div>
       <span
         data-testid="recipe-category"
-        className="recipe-category"
+        className="recipe-category bodyPadding"
       >
         { currentDrink.strAlcoholic }
       </span>
-      <h4>Ingredients</h4>
-      <IngredientsList currentMeal={ currentDrink } />
-      <h4>Instructions</h4>
-      <p data-testid="instructions">{ currentDrink.strInstructions }</p>
-      <h4>Recommended Meals</h4>
+      <div className="bodyPadding">
+        <h4>Ingredients</h4>
+        <IngredientsList currentMeal={ currentDrink } />
+        <h4>Instructions</h4>
+        <p data-testid="instructions">{ currentDrink.strInstructions }</p>
+      </div>
+      <h4 className="bodyPadding">Recommended Meals</h4>
       <div className="carousel-list">
         {fullRecipes.map((meal, index) => (
           index < RECOMMENDED_LENGHT ? (

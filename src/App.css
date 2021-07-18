@@ -1,5 +1,15 @@
+.body {
+  background-color: #fca311;
+}
+
+p {
+  color: black;
+  font-family: Noto Sans JP , sans-serif;
+  font-weight: 700;
+}
+
 footer {
-  background-color: #e5e5e5;
+  background-color: white;
   bottom: 0;
   position: fixed;
   width: 100vh;
@@ -11,11 +21,8 @@ footer {
   width: 360px;
 }
 
-/* img {
-  width: 200px;
-} */
-
 header {
+  background-color: white;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
@@ -62,19 +69,23 @@ header {
   overflow-x: scroll;
 }
 
-.start-recipe-btn {
-  bottom: 0;
-  height: 76px;
-  left: 13px;
-  position: fixed;
-  top: 558px;
-  width: 339px;
-}
-
 .itensGroup {
   display: flex;
   flex-wrap: wrap;
   justify-content: left;
+}
+
+.start-recipe-btn {
+  background-color: rgb(238, 236, 236);
+  border: white;
+  border-radius: 10px;
+  bottom: 0;
+  box-shadow: 8px 5px 5px rgb(194, 190, 190);
+  height: 76px;
+  left: 11px;
+  position: fixed;
+  top: 543px;
+  width: 339px;
 }
 
 .itemCard {
@@ -94,10 +105,10 @@ header {
 }
 
 .imgRecipeFinished {
+  border-radius: 4px;
   height: 151px;
   margin-right: 5px;
   width: 165px;
-  border-radius: 4px;
 }
 
 .cardsGroup {
@@ -117,11 +128,6 @@ header {
   width: 330px;
 }
 
-.cardRecipeFinished button, .cardRecipeFavorited button {
-  /* margin-left: 100px;
-  position: relative; */
-}
-
 .cardRecipeFinished a h3, .cardRecipeFavorited a h3 {
   color: black;
   font-size: 1.2rem;
@@ -137,7 +143,7 @@ header {
 }
 
 .headerTop {
-  background-color: #e5e5e5;
+  background-color: white;
   display: flex;
   justify-content: space-around;
 }
@@ -223,19 +229,18 @@ header {
   justify-items: center;
 }
 
-/*
-#iceLeft {
-  animation: clink .8s infinite ease;
-  opacity: 0.6;
-  transform-origin: 36px 66px;
+.bodyPadding {
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
-#iceRight {
-  animation: clink .8s .2s infinite ease;
-  opacity: 0.6;
-  transform-origin: 60px 78px;
+li {
+  line-height: 20px;
 }
-*/
+
+.marginCheckbox { 
+  margin-right: 5px;
+}
 
 .meals > .logo {
   animation: shake 1.5s infinite ease;
