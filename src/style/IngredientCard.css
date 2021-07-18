@@ -1,8 +1,8 @@
 .ingredient-card-container {
-    width: 40vw;
-    margin: 5px;
+  margin: 5px;
+  width: 40vw;
 }
 
 .ingredient-card-container img {
-    width: 100%;
+  width: 100%;
 }
