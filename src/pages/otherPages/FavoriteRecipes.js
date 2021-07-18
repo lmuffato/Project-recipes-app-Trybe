@@ -5,7 +5,7 @@ import FavoritedButtonFilters from '../../components/FavoritedButtonFilters';
 import FavoritedRecipeCardList from '../../components/FavoritedRecipeCardList';
 
 export default function FavoriteRecipes() {
-  const { favoritedFil } = useContext(Context);
+  const { favoritedFil, attFav } = useContext(Context);
   const [list, setList] = useState([]);
   const setLocal = () => {
     localStorage.setItem('favoriteRecipes', JSON.stringify([]));
@@ -47,6 +47,10 @@ export default function FavoriteRecipes() {
   useEffect(() => {
     setList(handleSetFilter());
   }, [favoritedFil]);
+
+  useEffect(() => {
+    setList(handleSetFilter());
+  }, [attFav]);
 
   return (
     <div className="food-page">

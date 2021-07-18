@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import Context from '../context/Context';
 import shareIcon from '../images/shareIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 
 const copy = require('clipboard-copy');
 
 function FavoritedRecipeCardList({ list }) {
+  const { attFav, setAttFev } = useContext(Context);
   const [copyText, setText] = useState({});
 
   function copyBoard(type, id) {
@@ -27,6 +29,7 @@ function FavoritedRecipeCardList({ list }) {
     const filteredRemoved = favRecipe.filter((element) => element.id !== id);
     localStorage.removeItem('favoriteRecipes');
     localStorage.setItem('favoriteRecipes', JSON.stringify(filteredRemoved));
+    setAttFev(attFav + 1);
   };
 
   const renderFavButton = (data, index) => {
