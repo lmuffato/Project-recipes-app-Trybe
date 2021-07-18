@@ -1,5 +1,5 @@
 .body {
-  background-color: #fca311;
+  background-color: #e5e5e5;
 }
 
 p {
@@ -9,8 +9,10 @@ p {
 }
 
 footer {
-  background-color: white;
+  background-color: #fca311;
   bottom: 0;
+  padding-bottom: 4px;
+  padding-top: 4px;
   position: fixed;
   width: 100vh;
 }
@@ -22,10 +24,11 @@ footer {
 }
 
 header {
-  background-color: white;
+  background-color: #fca311;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
+  padding-top: 4px;
 }
 
 .meals {
@@ -143,33 +146,40 @@ header {
 }
 
 .headerTop {
-  background-color: white;
+  background-color: #fca311;
   display: flex;
   justify-content: space-around;
 }
 
 .headerFilterButtons {
-  background-color: #e5e5e5;
+  background-color: #fca311;
+  border: 3px solid #fca311;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
 }
 
 .filterButtons {
-  background-color: white;
+  background-color: #14213d;
   border: none;
   border-radius: 6px;
-  box-shadow: 8px 5px 5px rgb(194, 190, 190);
-  font-size: 12px;
+  color: white;
+  font-size: 14px;
   font-weight: 700;
-  height: 35px;
-  margin: 5px;
+  height: 40px;
+  margin: 1px;
   padding: 0 16px;
-  width: 110px;
+  width: 116px;
 }
 
-.filterButtons:hover {
-  opacity: 0.5;
+.buttonSearch {
+  background-color: #14213d;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  height: 35px;
+  margin-left: 6px;
+  width: 95px;
 }
 
 .detailMeal {
@@ -210,7 +220,7 @@ header {
 }
 
 .searchButton {
-  background-color: #e5e5e5;
+  background-color: #fca311;
   border: none;
 }
 
@@ -219,7 +229,7 @@ header {
 }
 
 .shareButton {
-  background-color: white;
+  background-color: #e5e5e5;
   border: none;
 }
 
@@ -238,7 +248,7 @@ li {
   line-height: 20px;
 }
 
-.marginCheckbox { 
+.marginCheckbox {
   margin-right: 5px;
 }
 

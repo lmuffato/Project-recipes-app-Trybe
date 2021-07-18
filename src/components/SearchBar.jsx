@@ -17,7 +17,7 @@ function SearchBar() {
   };
 
   return (
-    <div>
+    <div className="bodyPadding">
       <input
         onChange={ ({ target }) => setInputText(target.value) }
         type="text"
@@ -25,8 +25,9 @@ function SearchBar() {
         name="searchText"
         data-testid="search-input"
         placeholder="Buscar receitas"
+        className="bodyPadding"
       />
-      <label htmlFor="ingredient">
+      <label htmlFor="ingredient " className="bodyPadding">
         <input
           type="radio"
           id="ingredient"
@@ -37,7 +38,7 @@ function SearchBar() {
         />
         Ingrediente
       </label>
-      <label htmlFor="name">
+      <label htmlFor="name" className="bodyPadding">
         <input
           type="radio"
           id="name"
@@ -48,7 +49,7 @@ function SearchBar() {
         />
         Nome
       </label>
-      <label htmlFor="first-letter">
+      <label htmlFor="first-letter" className="bodyPadding">
         <input
           type="radio"
           id="first-letter"
@@ -61,6 +62,7 @@ function SearchBar() {
       </label>
       <button
         type="button"
+        className="buttonSearch"
         data-testid="exec-search-btn"
         onClick={ () => filterClick(obj) }
       >
