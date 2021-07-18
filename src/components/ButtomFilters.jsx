@@ -20,7 +20,6 @@ function ButtomFilters({ data, path }) {
       setCategory('All');
     }
     setToggle({ ...toggle, [value]: !toggle[value] });
-    console.log(toggle[value]);
   };
 
   const renderButtoms = () => {

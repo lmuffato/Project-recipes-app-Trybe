@@ -1,11 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useRouteMatch } from 'react-router-dom';
+import requestData from '../services/getFinishData';
 
-function FinishButton({ isDisable }) {
+function FinishButton({ isDisable, path }) {
   const history = useHistory();
+  const match = useRouteMatch();
 
-  const handleClick = () => {
+  const handleClick = async () => {
+    const { params: { id } } = match;
+    await requestData(id, path);
     history.push('/receitas-feitas');
   };
 
@@ -26,6 +30,7 @@ function FinishButton({ isDisable }) {
 
 FinishButton.propTypes = {
   isDisable: PropTypes.bool.isRequired,
+  path: PropTypes.string.isRequired,
 };
 
 export default FinishButton;

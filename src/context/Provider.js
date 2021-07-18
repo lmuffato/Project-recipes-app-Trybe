@@ -15,6 +15,9 @@ function Provider({ children }) {
   const [filtredList, setFiltredList] = useState([]);
   const [ingredFromExplore, setIngredFromExplore] = useState('');
   const [fromExplore, setFromExplore] = useState(false);
+  const [completedFil, setCompletedFill] = useState('All');
+  const [favoritedFil, setFavoritedFill] = useState('All');
+  const [attFav, setAttFev] = useState(0);
 
   const store = {
     userEmail,
@@ -41,6 +44,12 @@ function Provider({ children }) {
     setIngredFromExplore,
     fromExplore,
     setFromExplore,
+    completedFil,
+    setCompletedFill,
+    favoritedFil,
+    setFavoritedFill,
+    attFav,
+    setAttFev,
   };
 
   return (
