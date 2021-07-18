@@ -16,12 +16,13 @@ function Header({ title }) {
   && location.pathname !== '/bebidas'
   && location.pathname !== '/explorar/comidas/area') {
     return (
-      <div className="header-container">
+      <div className="header-container-customized">
         <Link to="/perfil">
           <img
             data-testid="profile-top-btn"
             src={ profileIcon }
             alt="profile"
+            className="svg-color-icon"
           />
         </Link>
         <h1 className="explore-header" data-testid="page-title">{title}</h1>

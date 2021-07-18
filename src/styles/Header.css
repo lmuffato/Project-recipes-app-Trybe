@@ -5,11 +5,12 @@
   flex-flow: row;
   flex-wrap: nowrap;
   justify-content: space-around;
+  padding-bottom: 5px;
 }
 
 .header-container > h1 {
   color: #692c03;
-  font-family: Indie Flower , cursive;
+  font-family: Caveat , cursive;
   font-weight: 800;
   margin-bottom: 0;
   margin-top: 10px;
@@ -39,11 +40,30 @@
   width: 100%;
 }
 
+.header-container-customized {
+  align-items: center;
+  background-color: #ff9654;
+  display: flex;
+  flex-flow: row;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+}
+
+.header-container-customized > h1 {
+  color: #692c03;
+  flex-grow: 2;
+  font-family: Caveat , cursive;
+  padding-top: 15px;
+}
+
+.header-container-customized > a {
+  flex-grow: 1;
+  padding-left: 5px;
+}
+
 .svg-color-icon {
   filter: invert(24%) sepia(8%) saturate(5357%)
     hue-rotate(345deg) brightness(94%) contrast(107%);
 }
 
-@import url(
-  'https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap'
-) ;
+@import url('https://fonts.googleapis.com/css2?family=Caveat+Brush&family=Caveat:wght@400;500;600;700&display=swap') ;

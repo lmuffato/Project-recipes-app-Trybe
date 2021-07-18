@@ -68,7 +68,7 @@ function ExplorarComidasING() {
     <div>
       <Header title="Explorar Ingredientes" />
       <div className="pb-5">
-        <div className="d-flex w-75 flex-wrap mx-auto justify-content-center pb-4">
+        <div className="d-flex w-75 flex-wrap mx-auto justify-content-center pb-4 pt-2">
           {ingredients()}
         </div>
       </div>
