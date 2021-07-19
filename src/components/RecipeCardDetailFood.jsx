@@ -10,6 +10,8 @@ import BtnInitiateRecipe from './componentsDetails/BtnInitiateRecipe';
 
 export default function RecipeCardDetailFood() {
   const [foodDetails, setFoodDetails] = useState({});
+  const [done, setDone] = useState(false);
+  const [progress, setProgress] = useState('Iniciar Receita');
   const { idMeal } = useParams();
 
   useEffect(() => {
@@ -23,6 +25,18 @@ export default function RecipeCardDetailFood() {
         .some((recipe) => recipe.id === idMeal) && document.getElementById('fav-btn')
         .setAttribute('src', blackHeartIcon);
       isFavorite();
+    }
+    const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    if (inProgressRecipes && inProgressRecipes.meals) {
+      const wasStarted = Object.keys(inProgressRecipes.meals).some((id) => id === idMeal);
+      const progressChecker = () => wasStarted && setProgress('Continuar Receita');
+      progressChecker();
+    }
+    const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
+    if (doneRecipes) {
+      const wasDone = doneRecipes.some((doneRecipe) => doneRecipe.id === idMeal);
+      const doneChecker = () => wasDone && setDone(true);
+      doneChecker();
     }
     fetchFood();
   }, [idMeal]);
@@ -111,7 +125,7 @@ export default function RecipeCardDetailFood() {
         url={ foodDetails.strYoutube }
       />
       <DrinksRecomends />
-      <BtnInitiateRecipe id={ idMeal } type="comida" />
+      { !done && <BtnInitiateRecipe id={ idMeal } type="comida" progress={ progress } />}
     </div>
   );
 }
