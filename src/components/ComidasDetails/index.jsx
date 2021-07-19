@@ -13,26 +13,29 @@ function ComidasDetails({ data, recomendation }) {
   const { href } = window.location;
   const ingredients = getIngredients(data, 'strIngredient');
   const ingredientsMeasures = getIngredients(data, 'strMeasure');
+  console.log(recomendation);
   if (pathname.includes('/comidas')) {
     const { strMeal, strCategory, strMealThumb, strInstructions, strYoutube } = data;
     return (
-      <div>
+      <div className="recipe-details-container">
         <img src={ strMealThumb } alt="comida" data-testid="recipe-photo" />
         <h4 data-testid="recipe-title">{strMeal}</h4>
         <ShareButton data-testid="share-btn" urlCopied={ href } />
         <FavoriteButton data={ data } path={ id } />
         <p data-testid="recipe-category">{strCategory}</p>
         <ul>
-          {Object.values(ingredients).map((ingredient, index) => (
-            <li
-              key={ index }
-              htmlFor={ ingredient }
-              data-testid={ `${index}-ingredient-name-and-measure` }
-            >
-              <input type="checkbox" id={ ingredient } />
-              {`${Object.values(ingredientsMeasures)[index]} - ${ingredient}`}
-            </li>
-          ))}
+          {Object.values(ingredients).map((ingredient, index) => {
+            const measure = Object.values(ingredientsMeasures)[index];
+            return (
+              <li
+                key={ index }
+                htmlFor={ ingredient }
+                data-testid={ `${index}-ingredient-name-and-measure` }
+              >
+                {`${ingredient} ${measure ? `- ${measure}` : ''}`}
+              </li>
+            );
+          })}
         </ul>
         <p data-testid="instructions">{strInstructions}</p>
         <video controls data-testid="video">

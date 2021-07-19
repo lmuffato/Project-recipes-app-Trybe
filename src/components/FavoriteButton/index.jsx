@@ -23,28 +23,34 @@ function FavoriteButton({ data, path }) {
     if (!boolConditional) {
       if (pathname.includes('/bebidas')) {
         const { idDrink, strCategory, strAlcoholic, strDrink, strDrinkThumb } = data;
-        const array = [...include, {
-          id: idDrink,
-          type: 'bebida',
-          area: '',
-          category: strCategory,
-          alcoholicOrNot: strAlcoholic,
-          name: strDrink,
-          image: strDrinkThumb,
-        }];
+        const array = [
+          ...include,
+          {
+            id: idDrink,
+            type: 'bebida',
+            area: '',
+            category: strCategory,
+            alcoholicOrNot: strAlcoholic,
+            name: strDrink,
+            image: strDrinkThumb,
+          },
+        ];
         localStorage.setItem('favoriteRecipes', JSON.stringify(array));
         setHeartIcon(blackHeartIcon);
       } else {
         const { idMeal, strCategory, strArea, strMeal, strMealThumb } = data;
-        const array = [...include, {
-          id: idMeal,
-          type: 'comida',
-          area: strArea,
-          category: strCategory,
-          alcoholicOrNot: '',
-          name: strMeal,
-          image: strMealThumb,
-        }];
+        const array = [
+          ...include,
+          {
+            id: idMeal,
+            type: 'comida',
+            area: strArea,
+            category: strCategory,
+            alcoholicOrNot: '',
+            name: strMeal,
+            image: strMealThumb,
+          },
+        ];
         localStorage.setItem('favoriteRecipes', JSON.stringify(array));
         setHeartIcon(blackHeartIcon);
       }
@@ -77,9 +83,13 @@ function FavoriteButton({ data, path }) {
     <button
       type="button"
       onClick={ handleClick }
-      src={ heartIcon }
+      className="favorite-btn"
     >
-      <img src={ heartIcon } alt="favorite" data-testid="favorite-btn" />
+      <img
+        src={ heartIcon }
+        alt="favorite"
+        data-testid="favorite-btn"
+      />
     </button>
   );
 }

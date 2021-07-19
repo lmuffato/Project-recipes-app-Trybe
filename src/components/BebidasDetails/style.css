@@ -1,0 +1,26 @@
+.recipe-details-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.recipe-details-container img {
+  width: 80%;
+}
+
+.recipe-details-container .favorite-btn {
+  width: 30px;
+}
+
+.start-recipe-btn {
+  align-self: center;
+  bottom: 0;
+  display: flex;
+  padding: 10px;
+  position: fixed;
+  z-index: 1000;
+}
+
+.carousel-container {
+  margin: 20px 0;
+}

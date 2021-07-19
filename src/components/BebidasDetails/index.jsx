@@ -6,6 +6,7 @@ import ShareButton from '../ShareButton';
 import FavoriteButton from '../FavoriteButton';
 import RecipeButton from '../RecipeButton';
 import getIngredients from '../../services/getIngredients';
+import './style.css';
 
 function BebidasDetails({ data, recomendation }) {
   const { pathname } = useLocation();
@@ -17,7 +18,7 @@ function BebidasDetails({ data, recomendation }) {
     strAlcoholic, strCategory } = data;
 
   return (
-    <div>
+    <div className="recipe-details-container">
       <img src={ strDrinkThumb } alt="comida" data-testid="recipe-photo" />
       <h4 data-testid="recipe-title">{ strDrink }</h4>
       <ShareButton data-testid="share-btn" urlCopied={ href } />
@@ -29,20 +30,18 @@ function BebidasDetails({ data, recomendation }) {
         <br />
       )}
       <ul>
-        { Object.values(ingredients).map((ingredient, index) => (
-          <li key={ index }>
-            <p data-testid={ `${index}-ingredient-name-and-measure` }>
-              { ingredient }
-            </p>
-          </li>
-        ))}
-        { Object.values(ingredientsMeasures).map((measure, index) => (
-          <li key={ index }>
-            <p data-testid={ `${index}-ingredient-name-and-measure` }>
-              { measure }
-            </p>
-          </li>
-        ))}
+        {Object.values(ingredients).map((ingredient, index) => {
+          const measure = Object.values(ingredientsMeasures)[index];
+          return (
+            <li
+              key={ index }
+              htmlFor={ ingredient }
+              data-testid={ `${index}-ingredient-name-and-measure` }
+            >
+              {`${ingredient} ${measure ? `- ${measure}` : ''}`}
+            </li>
+          );
+        })}
       </ul>
       <p data-testid="instructions">{ strInstructions }</p>
       <Recomendations data={ recomendation } />

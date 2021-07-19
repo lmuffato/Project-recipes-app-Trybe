@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 export default function RecipeButton({ path, ingredients }) {
   const [buttonName, setButtonName] = useState('Iniciar Receita');
+  const [recipeStarted, setStarted] = useState(false);
   const sliceNumber = 9;
+
+  console.log(ingredients);
 
   // function setLocalStorage() {
   //   const inProgressRecipes = 'inProgressRecipes';
@@ -19,7 +22,7 @@ export default function RecipeButton({ path, ingredients }) {
   //   }
   // }
 
-  // function recipesProgress() {
+  function recipesProgress() {
   //   // const ingredient = ingredients.map((index) => index[1]);
   //   if (path.includes('/comidas')) {
   //     const id = path.slice(sliceNumber);
@@ -42,7 +45,8 @@ export default function RecipeButton({ path, ingredients }) {
   //     };
   //     localStorage.setItem('inProgressRecipes', JSON.stringify(include));
   //   }
-  // }
+    setStarted(true);
+  }
 
   const conditionalLocalStorage = () => {
     const storage = JSON.parse(localStorage.getItem('inProgressRecipes'));
@@ -71,25 +75,35 @@ export default function RecipeButton({ path, ingredients }) {
     button();
   }, [path]);
 
-  return (
-    <Link
+  if (recipeStarted) {
+    return (<Redirect
       to={ {
         pathname: `${path}/in-progress`,
         state: { ingredients },
       } }
+    />);
+  }
+
+  return (
+    // <Link
+    //   to={ {
+    //     pathname: `${path}/in-progress`,
+    //     // state: { ingredients },
+    //   } }
+    //   >
+    <button
+      className="start-recipe-btn"
+      type="button"
+      data-testid="start-recipe-btn"
+      onClick={ recipesProgress }
     >
-      <button
-        type="button"
-        data-testid="start-recipe-btn"
-        // onClick={ recipesProgress }
-      >
-        { buttonName }
-      </button>
-    </Link>
+      { buttonName }
+    </button>
+    // </Link>
   );
 }
 
 RecipeButton.propTypes = {
-  // ingredients: PropTypes.arrayOf('').isRequired,
+  ingredients: PropTypes.shape({}).isRequired,
   path: PropTypes.string.isRequired,
-};
+}.isRequired;

@@ -22,6 +22,8 @@ function DrinkDetails() {
     getData();
   }, [id]);
 
+  console.log(recomendation);
+
   return (
     loading
       ? <DrinkLoader />
