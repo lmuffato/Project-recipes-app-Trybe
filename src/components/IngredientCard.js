@@ -7,9 +7,10 @@ function IngredientCard() {
   const ingredients = useSelector((state) => state.meals.ingredients);
 
   return (
-    <div>
+    <div className="ingredient-container">
       {ingredients.map(({ strIngredient }, index) => (
         <Link
+          className="ingredient-card"
           data-testid={ `${index}-ingredient-card` }
           key={ strIngredient }
           to={ {
@@ -20,14 +21,16 @@ function IngredientCard() {
             },
           } }
         >
-          <img
-            data-testid={ `${index}-card-img` }
-            src={ `https://www.themealdb.com/images/ingredients/${strIngredient}-Small.png` }
-            alt={ strIngredient }
-            width="100"
-            height="100"
-          />
-          <div data-testid={ `${index}-card-name` }>{strIngredient}</div>
+          <div className="img-crop">
+            <img
+              data-testid={ `${index}-card-img` }
+              src={ `https://www.themealdb.com/images/ingredients/${strIngredient}-Small.png` }
+              alt={ strIngredient }
+              width="100"
+              height="100"
+            />
+          </div>
+          <p data-testid={ `${index}-card-name` }>{strIngredient}</p>
 
         </Link>
       ))}
