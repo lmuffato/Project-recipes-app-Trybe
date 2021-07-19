@@ -45,8 +45,9 @@ export default function RecipesMain({ match }) {
               ),
             )
         }
-        <MenuFooter />
+
       </div>
+      <MenuFooter />
     </div>
   );
 }

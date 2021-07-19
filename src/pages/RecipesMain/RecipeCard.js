@@ -30,7 +30,7 @@ export default function RecipeCard({ recipe, index, isMain, path }) {
         src={ isMain ? recipe.strMealThumb || recipe.strDrinkThumb
           : getImage }
         alt="recipe"
-        width="150px"
+        width="100%"
       />
       <p
         data-testid={ `${index}-card-name` }

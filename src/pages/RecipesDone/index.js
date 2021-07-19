@@ -35,9 +35,9 @@ export default function RecipesDone() {
   }
 
   return (
-    <>
+    <div className="recipes-done-container">
       <Header title="Receitas Feitas" isSearch={ false } />
-      <nav>
+      <nav className="filter-buttons">
         <button
           type="button"
           data-testid="filter-by-all-btn"
@@ -67,35 +67,46 @@ export default function RecipesDone() {
             type === 'comida'
               ? (
                 <div
+                  className="recipe-done-section"
                   key={ id }
                 >
-                  <Link to={ `/${type}s/${id}` }>
-                    <img
-                      className="images"
-                      src={ image }
-                      alt="imagem-receive"
-                      data-testid={ `${index}-horizontal-image` }
-                    />
-                    <p data-testid={ `${index}-horizontal-name` }>{name}</p>
-                  </Link>
-                  <p data-testid={ `${index}-horizontal-top-text` }>
-                    {`${area} - ${category}`}
-                  </p>
-                  <p data-testid={ `${index}-horizontal-done-date` }>{doneDate}</p>
-                  <p data-testid={ `${index}-${tags[0]}-horizontal-tag` }>
-                    {tags[0]}
-                  </p>
-                  <p data-testid={ `${index}-${tags[1]}-horizontal-tag` }>
-                    {tags[1]}
-                  </p>
-                  <button type="button" onClick={ () => clipBoard(type, id) }>
-                    <img
-                      data-testid={ `${index}-horizontal-share-btn` }
-                      src={ shareIcon }
-                      alt="share button"
-                    />
-                  </button>
-                  <span>{clipBoardFood === true ? 'Link copiado!' : null}</span>
+                  <div className="card-info">
+                    <Link to={ `/${type}s/${id}` }>
+                      <img
+                        className="images"
+                        src={ image }
+                        alt="imagem-receive"
+                        data-testid={ `${index}-horizontal-image` }
+                      />
+                      <p
+                        className="recipe-name"
+                        data-testid={ `${index}-horizontal-name` }
+                      >
+                        {name}
+
+                      </p>
+                    </Link>
+                    <p data-testid={ `${index}-horizontal-top-text` }>
+                      {`${area} - ${category}`}
+                    </p>
+                    <p data-testid={ `${index}-horizontal-done-date` }>{doneDate}</p>
+                    <p data-testid={ `${index}-${tags[0]}-horizontal-tag` }>
+                      {tags[0]}
+                    </p>
+                    <p data-testid={ `${index}-${tags[1]}-horizontal-tag` }>
+                      {tags[1]}
+                    </p>
+                  </div>
+                  <div className="btn-share-done">
+                    <button type="button" onClick={ () => clipBoard(type, id) }>
+                      <img
+                        data-testid={ `${index}-horizontal-share-btn` }
+                        src={ shareIcon }
+                        alt="share button"
+                      />
+                    </button>
+                    <span>{clipBoardFood === true ? 'Link copiado!' : null}</span>
+                  </div>
                 </div>)
               : (
                 <div key={ id }>
@@ -109,18 +120,29 @@ export default function RecipesDone() {
                     <p data-testid={ `${index}-horizontal-name` }>{name}</p>
                   </Link>
                   <p data-testid={ `${index}-horizontal-top-text` }>{alcoholicOrNot}</p>
-                  <p data-testid={ `${index}-horizontal-done-date` }>{doneDate}</p>
-                  <button type="button" onClick={ () => clipBoard(type, id) }>
-                    <img
-                      data-testid={ `${index}-horizontal-share-btn` }
-                      src={ shareIcon }
-                      alt="share button"
-                    />
-                  </button>
-                  <span>{clipBoardDrink === true ? 'Link copiado!' : null}</span>
+                  <p
+                    data-testid={ `${index}-horizontal-done-date` }
+                  >
+                    {doneDate}
+
+                  </p>
+
+                  <div className="btn-share-done">
+                    <button
+                      type="button"
+                      onClick={ () => clipBoard(type, id) }
+                    >
+                      <img
+                        data-testid={ `${index}-horizontal-share-btn` }
+                        src={ shareIcon }
+                        alt="share button"
+                      />
+                    </button>
+                    <span>{clipBoardDrink === true ? 'Link copiado!' : null}</span>
+                  </div>
                 </div>)
           ),
         )}
-    </>
+    </div>
   );
 }

@@ -46,8 +46,9 @@ export default function RecipesFavorites() {
 
   return (
     <>
-      <nav>
-        <Header title="Receitas Favoritas" isSearch={ false } />
+
+      <Header title="Receitas Favoritas" isSearch={ false } />
+      <nav className="filter-buttons">
         <button
           type="button"
           data-testid="filter-by-all-btn"
@@ -86,29 +87,37 @@ export default function RecipesFavorites() {
                       alt="imagem-receive"
                       data-testid={ `${index}-horizontal-image` }
                     />
-                    <p data-testid={ `${index}-horizontal-name` }>{name}</p>
+                    <p
+                      className="recipe-name"
+                      data-testid={ `${index}-horizontal-name` }
+                    >
+                      {name}
+
+                    </p>
                   </Link>
                   <p data-testid={ `${index}-horizontal-top-text` }>
                     {`${area} - ${category}`}
                   </p>
-                  <button type="button" onClick={ () => clipBoard(type, id) }>
-                    <img
-                      data-testid={ `${index}-horizontal-share-btn` }
-                      src={ shareIcon }
-                      alt="share button"
-                    />
-                  </button>
-                  <button
-                    type="button"
-                    onClick={ ({ target }) => removeFavorite(target, id) }
-                  >
-                    <img
-                      data-testid={ `${index}-horizontal-favorite-btn` }
-                      src={ blackHeartIcon }
-                      alt="favorite button"
-                    />
-                  </button>
-                  <spam>{clipBoardFood === true ? 'Link copiado!' : null}</spam>
+                  <div className="buttons-share-favorite">
+                    <button type="button" onClick={ () => clipBoard(type, id) }>
+                      <img
+                        data-testid={ `${index}-horizontal-share-btn` }
+                        src={ shareIcon }
+                        alt="share button"
+                      />
+                    </button>
+                    <button
+                      type="button"
+                      onClick={ ({ target }) => removeFavorite(target, id) }
+                    >
+                      <img
+                        data-testid={ `${index}-horizontal-favorite-btn` }
+                        src={ blackHeartIcon }
+                        alt="favorite button"
+                      />
+                    </button>
+                    <spam>{clipBoardFood === true ? 'Link copiado!' : null}</spam>
+                  </div>
                 </div>)
               : (
                 <div key={ id }>

@@ -16,8 +16,8 @@ export default function ProfileScreen() {
   return (
     <>
       <Header title="Perfil" isSearch={ false } />
-      <p data-testid="profile-email">{Object.values(email)}</p>
-      <div className="buttonsContainer">
+      <p className="profile-email" data-testid="profile-email">{Object.values(email)}</p>
+      <div className="buttons-container">
         <Link to="/receitas-feitas">
           <button
             className="buttons"
