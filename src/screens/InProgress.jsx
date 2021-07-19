@@ -18,6 +18,7 @@ import fetchApiById from '../service/fetchApiById';
 import HeaderDetailsInProgress from '../components/HeaderDetailsInProgress';
 import Ingredients from '../components/Ingredients';
 import Instructions from '../components/Instructions';
+import ButtonFinish from '../components/ButtonFinish';
 
 function InProgress(props) {
   const { match: { params: { id } } } = props;
@@ -35,6 +36,7 @@ function InProgress(props) {
     }
     requestApi();
   }, [dbType, id]);
+  const completed = false;
 
   return (
     <div>
@@ -44,6 +46,11 @@ function InProgress(props) {
             <HeaderDetailsInProgress recipe={ recipe } />
             <Ingredients recipe={ recipe } />
             <Instructions instructions={ recipe.strInstructions } />
+            <ButtonFinish
+              completed={ completed }
+              dbType={ dbType }
+              id={ id }
+            />
           </main>)}
     </div>
 

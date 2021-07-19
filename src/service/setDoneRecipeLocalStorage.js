@@ -34,9 +34,9 @@ const generateDoneElement = (recipe, type) => {
   });
 };
 
-async function setDoneRecipesLocalStorage(typeRecipe, id) {
-  const type = typeRecipe === 'themealdb' ? 'Meal' : 'Drink';
-  const recipe = await fetchApiById(typeRecipe, id);
+async function setDoneRecipesLocalStorage(dbType, id) {
+  const type = dbType === 'themealdb' ? 'Meal' : 'Drink';
+  const recipe = await fetchApiById(dbType, id);
   const newDoneRecipe = generateDoneElement(recipe, type);
   const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
   if (doneRecipes !== null) {
