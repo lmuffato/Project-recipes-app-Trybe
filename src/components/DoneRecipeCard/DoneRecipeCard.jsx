@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { IoMdRemoveCircle } from 'react-icons/io';
 import shareIcon from '../../images/shareIcon.svg';
-import blackHeartIcon from '../../images/blackHeartIcon.svg';
 import handleCopyToClipboard from '../../utils/handleCopyToClipboard';
 import DoneRecipeCardContainer from './styles';
 
@@ -47,17 +47,22 @@ function DoneRecipeCard(props) {
               alt="share-btn"
             />
           </button>
-          <button type="button" onClick={ () => handleRemoveRecipe(index) }>
-            <img
+          <button
+            type="button"
+            data-testid={ `${index}-horizontal-favorite-btn` }
+            onClick={ () => handleRemoveRecipe(index) }
+          >
+            <IoMdRemoveCircle size={ 30 } />
+            {/* <img
               data-testid={ `${index}-horizontal-favorite-btn` }
               src={ blackHeartIcon }
-              alt="share-btn"
-            />
+              alt="remove-btn"
+            /> */}
           </button>
         </div>
         { recipe.tags !== null && (
           <ul className="tag">
-            {recipe.tags.map(
+            {recipe.tags.slice(0, 2).map(
               (tag, i) => (
                 <li key={ i } data-testid={ `${index}-${tag}-horizontal-tag` }>
                   { tag }

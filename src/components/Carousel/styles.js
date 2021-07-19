@@ -30,14 +30,6 @@ const CarouselWrapper = styled.div`background-color: white;
     img {
       object-fit: cover;
     }
-
-    /* .invisible {
-      visibility: hidden;
-    } */
-
-    /* .visible {
-      margin: 0 auto;
-    } */
   }
 `;
 

@@ -85,7 +85,8 @@ export const handleDoneRecipesLS = (id, type, singleRecipe) => {
     name: singleRecipe.strMeal || singleRecipe.strDrink,
     image: singleRecipe.strMealThumb || singleRecipe.strDrinkThumb,
     doneDate: currentDate,
-    tags: [singleRecipe.strTags],
+    tags: singleRecipe.strTags !== null
+      ? singleRecipe.strTags.split(',') || singleRecipe.split(/(?=[A-Z])/) : [''],
   };
   const getDoneRecipesFromLS = JSON.parse(localStorage.getItem('doneRecipes'));
   if (getDoneRecipesFromLS) {
@@ -97,3 +98,5 @@ export const handleDoneRecipesLS = (id, type, singleRecipe) => {
     localStorage.setItem('doneRecipes', JSON.stringify(createDoneRecipesKey));
   }
 };
+
+// Source: https://pt.stackoverflow.com/questions/123763/split-por-letras-mai%C3%BAsculas

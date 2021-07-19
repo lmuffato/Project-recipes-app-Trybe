@@ -4,8 +4,7 @@ const DoneRecipeCardContainer = styled.div`margin: 8px 8px 32px;
   max-height: 500px;
   min-height: 450px;
   outline: 0;
-  position: relative;
-  width: 15.1rem;
+  width: 14.1rem;
 
   a {
     color: #30343b;
@@ -71,6 +70,7 @@ const DoneRecipeCardContainer = styled.div`margin: 8px 8px 32px;
 
     a {
       margin-top: 0;
+      text-transform: capitalize;
     }
   }
 

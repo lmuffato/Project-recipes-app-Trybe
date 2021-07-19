@@ -69,11 +69,18 @@ function RecipeInfo(props) {
 
   return (
     <div className="componente1">
+      <div className="recipe-info">
+        <h2 data-testid="recipe-title" className="recipe-title">{ recipeName }</h2>
+      </div>
       <div className="img-container">
         <img src={ recipeThumb } alt="Foto da receita" data-testid="recipe-photo" />
       </div>
-      <div className="recipe-info">
-        <h2 data-testid="recipe-title">{ recipeName }</h2>
+      <div className="container">
+        <div>
+          <h3 data-testid="recipe-category">
+            { recipeCategory }
+          </h3>
+        </div>
         <div className="icons">
           { copyToClipboard ? <span>Link copiado!</span> : '' }
           <input
@@ -91,13 +98,7 @@ function RecipeInfo(props) {
             data-testid="favorite-btn"
             onClick={ handleAddFavoriteRecipe }
           />
-
         </div>
-      </div>
-      <div>
-        <h3 data-testid="recipe-category">
-          { recipeCategory }
-        </h3>
       </div>
     </div>
   );

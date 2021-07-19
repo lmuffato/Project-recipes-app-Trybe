@@ -23,22 +23,18 @@ const RecipeInProgressContainer = styled.div`align-items: center;
       display: flex;
       justify-content: space-evenly;
       margin: 1rem 0.7rem;
+    }
 
-      h1 {
-        align-self: center;
-        display: flex;
-        justify-self: center;
-      }
-
-      .icons {
-        display: flex;
-        gap: 1rem;
-      }
+    .icons {
+      display: flex;
+      gap: 1.2rem;
+      justify-content: space-between;
     }
 
     h3 {
       color: #707070;
       display: block;
+      font-size: 1.2rem;
       justify-self: center;
       line-height: 1;
       margin: 0 auto;
@@ -65,6 +61,20 @@ const RecipeInProgressContainer = styled.div`align-items: center;
         /* width: 100%; */
       }
     }
+  }
+
+  .container {
+    display: flex;
+    justify-content: space-around;
+
+    div {
+      display: flex;
+    }
+  }
+
+  .recipe-title {
+    font-size: 2rem;
+    text-transform: capitalize;
   }
 
   .ingredient-list {

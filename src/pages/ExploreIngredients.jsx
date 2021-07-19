@@ -77,7 +77,6 @@ function ExploreIngredients({ type }) {
                   <div className="img-wrapper">
                     <img
                       data-testid={ `${index}-card-img` }
-                      // style={ { maxWidth: '100px' } }
                       src={ imgUrl }
                       alt="Ingredient food/drink"
                     />

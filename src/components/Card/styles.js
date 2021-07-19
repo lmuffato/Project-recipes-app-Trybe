@@ -129,12 +129,8 @@ export const RecommendationCardsContainer = styled.div`margin: 8px 8px 32px;
     width: 15rem;
   }
 
-  @media only screen and ( min-width : 500px ) {
-    width: 16rem;
-  }
-
   @media only screen and ( min-width : 650px ) {
-    width: 18rem;
+    width: 15rem;
 
 
     img {
@@ -145,8 +141,8 @@ export const RecommendationCardsContainer = styled.div`margin: 8px 8px 32px;
   }
 
   @media only screen and ( min-width : 700px ) {
-    max-width: 40rem;
-    min-width: 25rem;
+    max-width: 22rem;
+    min-width: 18rem;
   }
 
 `;

@@ -19,8 +19,8 @@ function Carousel({ recipeRecommendations, type }) {
   return (
     <CarouselWrapper>
       <CarouselProvider
-        naturalSlideWidth={ 100 }
-        naturalSlideHeight={ 100 }
+        naturalSlideWidth={ 120 }
+        naturalSlideHeight={ 120 }
         visibleSlides={ 2 }
         totalSlides={ 6 }
       >
