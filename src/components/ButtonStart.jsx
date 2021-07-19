@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import ContextRecipes from '../context/ContextRecipes';
 import checkRecipeIsDone from '../service/checkRecipeIsDone';
-import '../styleSheets/ButtonStart.css';
+import '../styleSheets/ButtonStartFinish.css';
 
 function ButtonStart(props) {
   const { type, id } = props;

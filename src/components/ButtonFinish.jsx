@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import setDoneRecipesLocalStorage from '../service/setDoneRecipeLocalStorage';
-import '../styleSheets/ButtonStart.css';
+import '../styleSheets/ButtonStartFinish.css';
 
 function ButtonFinish(props) {
   const { completed, dbType, id } = props;
