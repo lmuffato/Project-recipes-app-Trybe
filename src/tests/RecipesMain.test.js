@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event';
 import renderWithRouter from './renderWithRouter';
 import App from '../App';
 
-describe('[25 - 32] Testing Recipes Main Screen Foods and Drinks', () => {
+describe('Testing Recipes Main Screen Foods and Drinks', () => {
   it('Testing food main page', () => {
     const { history, getByTestId } = renderWithRouter(<App />);
     history.push('/comidas');
@@ -11,13 +11,6 @@ describe('[25 - 32] Testing Recipes Main Screen Foods and Drinks', () => {
     expect(pathName).toBe('/comidas');
     const title = getByTestId('page-title');
     expect(title).toBeInTheDocument();
-  });
-
-  it('Testing if the entire filter button is present in the main food screen', () => {
-    const { history, getByTestId } = renderWithRouter(<App />);
-    history.push('/comidas');
-    const filterAll = getByTestId('All-category-filter');
-    expect(filterAll).toBeInTheDocument();
   });
 
   it('Testing on the main food page there is a search button', () => {
@@ -83,5 +76,4 @@ describe('[25 - 32] Testing Recipes Main Screen Foods and Drinks', () => {
     const pathName = history.location.pathname;
     expect(pathName).toBe('/explorar');
   });
-
 });

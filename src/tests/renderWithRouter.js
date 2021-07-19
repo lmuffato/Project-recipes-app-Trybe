@@ -14,6 +14,7 @@ const renderWithRouter = (component) => {
           {component}
         </Router>
       </Provider>,
+
     ),
     history,
   };
