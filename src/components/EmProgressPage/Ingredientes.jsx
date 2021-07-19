@@ -2,6 +2,7 @@
 import { object } from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import './InProgressPage.css';
 
 function Ingredientes({ params: { ingredientsList, data, setIsDisabled } }) {
   const [ingArray, setIngArray] = useState([]);
@@ -153,7 +154,7 @@ function Ingredientes({ params: { ingredientsList, data, setIsDisabled } }) {
         return (
           <div
             key={ index }
-            className="d-flex align-items-baseline"
+            className="d-flex align-items-baseline ingrediente-list"
             data-testid={ `${index}-ingredient-step` }
           >
             <label

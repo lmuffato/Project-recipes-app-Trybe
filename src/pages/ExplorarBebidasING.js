@@ -11,10 +11,12 @@ function ExplorarBebidasING() {
   const [data, setData] = useState([]);
   const { setIngradient } = useContext(ContextBebidas);
 
+  const miliseconds = 2000;
+
   useEffect(() => {
     const fetchApi = async () => {
       const response = await apiCocktailsIngredients();
-      setData(response);
+      setTimeout(() => setData(response), miliseconds);
     };
     fetchApi();
   }, []);

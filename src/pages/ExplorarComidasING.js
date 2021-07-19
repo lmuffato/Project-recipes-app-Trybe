@@ -12,10 +12,12 @@ function ExplorarComidasING() {
   const [data, setData] = useState([]);
   const { setIngradient } = useContext(ContextComidas);
 
+  const miliseconds = 2000;
+
   useEffect(() => {
     const fetchApi = async () => {
       const response = await apiMealsIngredients();
-      setData(response);
+      setTimeout(() => setData(response), miliseconds);
     };
     fetchApi();
   }, []);
@@ -66,7 +68,7 @@ function ExplorarComidasING() {
     <div>
       <Header title="Explorar Ingredientes" />
       <div className="pb-5">
-        <div className="d-flex w-75 flex-wrap mx-auto justify-content-center pb-4">
+        <div className="d-flex w-75 flex-wrap mx-auto justify-content-center pb-4 pt-2">
           {ingredients()}
         </div>
       </div>

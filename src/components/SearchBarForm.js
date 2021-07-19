@@ -98,7 +98,7 @@ const SearchBarForm = ({ searchBar }) => {
       />
       <Button
         className="button"
-        variant="outline-info"
+        variant="outline-danger"
         data-testid="exec-search-btn"
         onClick={ handleFilterSearchBar }
       >
@@ -123,7 +123,7 @@ const SearchBarForm = ({ searchBar }) => {
             type="radio"
             name="radio"
             value={ radio.value }
-            variant="outline-info"
+            variant="outline-success"
             checked={ markBusca === radio.value }
             data-testid={ `${radio.dataTestid}` }
             onChange={ ({ target }) => setMarkBusca(target.value) }
@@ -137,7 +137,7 @@ const SearchBarForm = ({ searchBar }) => {
 
   return (
     <div>
-      <Navbar bg="dark" variant="dark">
+      <Navbar bg="primary" variant="dark">
         <Form className="form">
           { handleSearchBarValue() }
           { handleSearchBarMark() }

@@ -1,14 +1,17 @@
 import { object } from 'prop-types';
 import React from 'react';
+import '../styles/header';
 
 function Loading({ param }) {
-  const food = 'https://cdn.dribbble.com/users/242557/screenshots/6134238/untitled-2.gif';
-  const drink = 'https://cdn.dribbble.com/users/714651/screenshots/15496945/dribbble-drink.gif';
+  const food = 'https://media.giphy.com/media/tPTVkWRtOmyZ2adIXv/giphy.gif';
+  const drink = 'https://media.giphy.com/media/ii1w1D92hp4FUfAAZg/giphy.gif';
 
   return (
-    <div>
+    <div className="loading">
       <img
-        className="d-flex w-25 mx-auto"
+        className={ param === 'food'
+          ? 'd-flex w-50 mx-auto pl-4'
+          : 'd-flex w-50 mx-auto' }
         src={ param === 'food' ? food : drink }
         alt="loading-gif"
       />

@@ -5,6 +5,7 @@ import Ingredientes from './EmProgressPage/Ingredientes';
 import Loading from './Loading';
 import FavoriteFood from './FavoriteFood';
 import '../App.css';
+import './EmProgressPage/InProgressPage.css';
 
 function EmProgresso({ props }) {
   const [data, setData] = useState({});
@@ -104,7 +105,7 @@ function EmProgresso({ props }) {
   };
 
   return (
-    <div className="m-1 pb-4">
+    <div className="pb-4 background-smoked-with">
       <div className="d-flex flex-column">
         <img
           data-testid="recipe-photo"
@@ -117,10 +118,10 @@ function EmProgresso({ props }) {
           <h2 data-testid="recipe-title">{ data.strMeal || data.strDrink }</h2>
         </div>
         <div className="pb-4">
+          <div className="py-2">
+            <h3 data-testid="recipe-category">{ data.strCategory }</h3>
+          </div>
           <FavoriteFood params={ obj } />
-        </div>
-        <div className="py-2">
-          <h3 data-testid="recipe-category">{ data.strCategory }</h3>
         </div>
 
         <Ingredientes params={ obj } />
@@ -130,14 +131,14 @@ function EmProgresso({ props }) {
         </div>
         <p
           data-testid="instructions"
-          className="text-justify"
+          className="text-justify instructions-background"
         >
           { data.strInstructions }
         </p>
         <div className="align-self-center w-50">
           <button
             type="button"
-            className="w-100 py-3"
+            className="w-100 py-3 finish-button"
             data-testid="finish-recipe-btn"
             onClick={ finishRecipe }
             disabled={ isDisabled }

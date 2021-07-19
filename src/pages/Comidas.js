@@ -20,9 +20,11 @@ function Comidas() {
     setData,
   } = useContext(ContextComidas);
 
+  const miliseconds = 2000;
+
   const fetchapi = async () => {
     const comidas = await mealsAPI();
-    setData(comidas);
+    setTimeout(() => setData(comidas), miliseconds);
   };
 
   const fetchApiIngredient = async () => {
@@ -58,7 +60,11 @@ function Comidas() {
     }
   }, [texto]);
 
+<<<<<<< HEAD
   if (data.length < 1) return <Loading />;
+=======
+  if (data.length < 1) return <Loading param="food" />;
+>>>>>>> 15fd8afedb19429d0506b58c9306c5b84e7adae0
 
   return (
     <div>

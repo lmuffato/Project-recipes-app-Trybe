@@ -20,9 +20,11 @@ function Bebidas() {
     setData,
   } = useContext(ContextBebidas);
 
+  const miliseconds = 2000;
+
   const fetchapi = async () => {
     const bebidas = await cocktailsAPI();
-    setData(bebidas);
+    setTimeout(() => setData(bebidas), miliseconds);
   };
 
   const fetchApiIngredient = async () => {
@@ -58,7 +60,11 @@ function Bebidas() {
     }
   }, [texto]);
 
+<<<<<<< HEAD
   if (data.length < 1) return <Loading />;
+=======
+  if (data.length < 1) return <Loading param="drink" />;
+>>>>>>> 15fd8afedb19429d0506b58c9306c5b84e7adae0
 
   return (
     <div>

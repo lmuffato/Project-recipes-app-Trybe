@@ -5,7 +5,7 @@ function RecomendacoesCard({ props, type, index }) {
   const renderRecipeByType = () => {
     if (type === 'meal') {
       return (
-        <div data-testid={ `${index}-recomendation-card` }>
+        <div data-testid={ `${index}-recomendation-card` } className="card-recomendation">
           <img
             className="recomendation-card-img"
             alt="Recomendações"
@@ -17,7 +17,7 @@ function RecomendacoesCard({ props, type, index }) {
       );
     } if (type === 'drink') {
       return (
-        <div data-testid={ `${index}-recomendation-card` }>
+        <div data-testid={ `${index}-recomendation-card` } className="card-recomendation">
           <img
             className="recomendation-card-img"
             alt="Recomendações"

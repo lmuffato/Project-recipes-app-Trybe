@@ -26,7 +26,7 @@ function Categorias({ param }) {
           value={ item.strCategory }
           onClick={ handleClick }
           data-testid={ `${item.strCategory}-category-filter` }
-          className="btn btn-secondary border-secondary rounded-0 filters-buttons"
+          className="btn btn-danger rounded-0 filters-buttons"
         >
           {item.strCategory}
         </button>
@@ -42,7 +42,7 @@ function Categorias({ param }) {
       value="All"
       name="All"
       onClick={ handleClick }
-      className="btn btn-secondary border-secondary rounded-0 filters-buttons danger"
+      className="btn btn-danger rounded-0 filters-buttons danger"
     >
       All
     </button>

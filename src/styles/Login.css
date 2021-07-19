@@ -7,8 +7,11 @@
 }
 
 .body-test h1 {
-  font-family: Indie Flower , cursive;
+  font-family: Caveat , cursive;
+  font-size: 60px;
   font-weight: 900;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap') ;
+/* @import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap') ; */
+
+@import url('https://fonts.googleapis.com/css2?family=Caveat+Brush&family=Caveat:wght@400;500;600;700&display=swap') ;

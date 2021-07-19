@@ -143,7 +143,7 @@ function FavoriteFood({ params: { data } }) {
   };
 
   return (
-    <>
+    <div className="buttons-container">
       <button type="button" data-testid="share-btn" onClick={ shareClick }>
         <img alt="Share link" src={ shareIcon } />
       </button>
@@ -155,7 +155,7 @@ function FavoriteFood({ params: { data } }) {
         />
       </button>
       {!clipboardStatus ? null : (<h5>Link copiado!</h5>)}
-    </>
+    </div>
   );
 }
 

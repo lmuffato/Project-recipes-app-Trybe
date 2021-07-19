@@ -133,27 +133,30 @@ function ReceitaComidaDetalhe({ props }) {
             data-testid="recipe-photo"
             src={ strMealThumb }
           />
+          <div className="infos-buttons-container">
+            <div className="infos-container">
+              <h2 data-testid="recipe-title">{ strMeal }</h2>
+              <p data-testid="recipe-category">{ strCategory }</p>
+            </div>
 
-          <h2 data-testid="recipe-title">{ strMeal }</h2>
-
-          <div>
-            <button type="button" data-testid="share-btn" onClick={ shareClick }>
-              <img alt="Share link" src={ shareIcon } />
-            </button>
-            <button type="button" onClick={ favoriteClick }>
-              <img
-                alt="Favorite button"
-                data-testid="favorite-btn"
-                src={ !favoriteFood ? whiteHeartIcon : blackHeartIcon }
-              />
-            </button>
+            <div className="buttons-container">
+              <button type="button" data-testid="share-btn" onClick={ shareClick }>
+                <img alt="Share link" src={ shareIcon } />
+              </button>
+              <button type="button" onClick={ favoriteClick }>
+                <img
+                  alt="Favorite button"
+                  data-testid="favorite-btn"
+                  src={ !favoriteFood ? whiteHeartIcon : blackHeartIcon }
+                />
+              </button>
+            </div>
           </div>
 
-          {!clipboardStatus ? null : (<h5>Link copiado!</h5>)}
+          {!clipboardStatus ? null : (<h5 className="margin-link">Link copiado!</h5>)}
 
-          <p data-testid="recipe-category">{ strCategory }</p>
-
-          <ul>
+          <h3>Ingredients</h3>
+          <ul className="list-container">
             { ingredients.map((ingredient, index) => {
               if (ingredient !== null && ingredient !== ' ' && ingredient !== '  ') {
                 return (
@@ -161,21 +164,25 @@ function ReceitaComidaDetalhe({ props }) {
                     key={ ingredient }
                     data-testid={ `${index}-ingredient-name-and-measure` }
                   >
-                    { ingredient }
+                    { `- ${ingredient}` }
                   </li>);
               }
               return null;
             })}
           </ul>
 
-          <p data-testid="instructions">{ strInstructions }</p>
+          <h3>Instructions</h3>
+          <div className="instruction-container">
+            <p data-testid="instructions">{ strInstructions }</p>
+          </div>
 
-          <iframe data-testid="video" width="320" height="240" src={ `https://www.youtube.com/embed/${youtubeLink}` } title="YouTube video player" frameBorder="0" />
+          <div className="video-container">
+            <iframe data-testid="video" width="320" height="240" src={ `https://www.youtube.com/embed/${youtubeLink}` } title="YouTube video player" frameBorder="0" />
+          </div>
 
           <h3>Receitas Recomendadas:</h3>
 
           <div className="recomendation-container">
-
             { foodRecomendation.map((food, index) => {
               const cardLength = 5;
               if (index <= cardLength) {

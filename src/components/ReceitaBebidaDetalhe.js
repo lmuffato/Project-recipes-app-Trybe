@@ -130,27 +130,30 @@ function ReceitaBebidaDetalhe({ props }) {
             data-testid="recipe-photo"
             src={ strDrinkThumb }
           />
+          <div className="infos-buttons-container">
+            <div className="infos-container">
+              <h2 data-testid="recipe-title">{ strDrink }</h2>
+              <p data-testid="recipe-category">{ `${strCategory} - ${strAlcoholic}` }</p>
+            </div>
 
-          <h2 data-testid="recipe-title">{ strDrink }</h2>
-
-          <div>
-            <button type="button" data-testid="share-btn" onClick={ shareClick }>
-              <img alt="Share link" src={ shareIcon } />
-            </button>
-            <button type="button" onClick={ favoriteClick }>
-              <img
-                alt="Favorite button"
-                data-testid="favorite-btn"
-                src={ !favoriteDrink ? whiteHeartIcon : blackHeartIcon }
-              />
-            </button>
+            <div className="buttons-container">
+              <button type="button" data-testid="share-btn" onClick={ shareClick }>
+                <img alt="Share link" src={ shareIcon } />
+              </button>
+              <button type="button" onClick={ favoriteClick }>
+                <img
+                  alt="Favorite button"
+                  data-testid="favorite-btn"
+                  src={ !favoriteDrink ? whiteHeartIcon : blackHeartIcon }
+                />
+              </button>
+            </div>
           </div>
 
           {!clipboardStatus ? null : (<h5>Link copiado!</h5>)}
 
-          <p data-testid="recipe-category">{ `${strCategory} - ${strAlcoholic}` }</p>
-
-          <ul>
+          <h3>Ingredients</h3>
+          <ul className="list-container">
             { ingredients.map((ingredient, index) => {
               if (ingredient !== null
                 && ingredient !== ' '
@@ -161,14 +164,16 @@ function ReceitaBebidaDetalhe({ props }) {
                     key={ ingredient }
                     data-testid={ `${index}-ingredient-name-and-measure` }
                   >
-                    { ingredient }
+                    { `- ${ingredient}` }
                   </li>);
               }
               return '';
             })}
           </ul>
-
-          <p data-testid="instructions">{ strInstructions }</p>
+          <h3>Instructions</h3>
+          <div className="instruction-container">
+            <p data-testid="instructions">{ strInstructions }</p>
+          </div>
 
           <h3>Receitas Recomendadas:</h3>
 

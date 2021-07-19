@@ -9,6 +9,8 @@ import ContextComidas from '../provider/ContextComida';
 import { getAreas, getFoodsByArea } from '../services/apisArea';
 import { mealsAPI } from '../services/apisMealsAndCocktails';
 
+import '../styles/explorarOrigem.css';
+
 function ExplorarComidasArea() {
   const [areas, setAreas] = useState('');
   const [acctualyFood, setAcctualyFood] = useState([]);
@@ -64,7 +66,7 @@ function ExplorarComidasArea() {
                 key={ item.strArea }
                 style={ { width: '8rem' } }
                 data-testid={ `${index}-recipe-card` }
-                className="shadow m-1 rounded"
+                className="shadow rounded centralize-card"
               >
                 <Card.Img
                   variant="top"
@@ -89,8 +91,8 @@ function ExplorarComidasArea() {
   return (
     <div>
       <Header title="Explorar Origem" />
-      <main>
-        <select data-testid="explore-by-area-dropdown" onChange={ handleChange }>
+      <main className="explorar-origem-container">
+        <select data-testid="explore-by-area-dropdown" className="centralize-select" onChange={ handleChange }>
           <option
             key="All"
             value="All"
