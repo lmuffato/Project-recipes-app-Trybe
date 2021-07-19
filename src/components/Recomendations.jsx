@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import Card from '../components/Card';
+import Card from './Card';
 import fetchRecomendations from '../service/fetchRecomendations';
 import '../styleSheets/Recomendations.css';
 
@@ -8,12 +8,15 @@ function Recommendations(props) {
   const { recipe } = props;
   const type = recipe === 'themealdb' ? 'Drink' : 'Meal';
   const pathname = type === 'Meal' ? '/comidas' : '/bebidas';
-  const [recommended, setRecommended] = useState({});
+  const [recommended, setRecommended] = useState([]);
+  const [isLoalding, setIsLoalding] = useState(false);
 
   useEffect(() => {
+    setIsLoalding(true);
     async function requestRecom() {
       const request = await fetchRecomendations(recipe);
-      return setRecommended(request);
+      setRecommended(request);
+      setIsLoalding(false);
     }
     requestRecom();
   }, []);
@@ -24,7 +27,7 @@ function Recommendations(props) {
       <div className="container">
         <div className="carousel-container">
           {
-            recommended.length ? recommended.reduce((acc, recom, index) => {
+            isLoalding ? '' : recommended.reduce((acc, recom, index) => {
               const cardsLength = 6;
               if (index < cardsLength) {
                 const testid = {
@@ -45,7 +48,7 @@ function Recommendations(props) {
                 );
               }
               return acc;
-            }, []) : ''
+            }, [])
           }
         </div>
       </div>

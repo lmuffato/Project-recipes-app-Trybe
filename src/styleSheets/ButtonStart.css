@@ -1,0 +1,21 @@
+.container-button {
+  align-items: center;
+  background-color: rgb(0, 0, 0, 0.45);
+  border-radius: 30px;
+  bottom: 0;
+  color: white;
+  display: flex;
+  height: 30px;
+  justify-content: center;
+  position: fixed;
+  width: 100vw;
+}
+
+.button-start {
+  background-color: transparent;
+  border: none;
+  bottom: 0;
+  color: white;
+  padding-bottom: 2px;
+  position: fixed;
+}

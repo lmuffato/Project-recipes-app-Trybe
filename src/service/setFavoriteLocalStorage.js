@@ -13,7 +13,7 @@ do localStorage com o seguinte formato:
 - recebe como parâmetro o id da receita e busca as demais informações na API.
 - Caso o id da receita já exista na chave 'favoriteRecipes', a função remove este objeto do array
 */
-import fetchApiById from './fetchApiDetails';
+import fetchApiById from './fetchApiById';
 
 const generateFavoriteElement = (recipe, type) => ({
   id: recipe[`id${type}`],

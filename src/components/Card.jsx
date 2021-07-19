@@ -34,11 +34,11 @@ Card.propTypes = {
   title: PropTypes.string.isRequired,
   index: PropTypes.number.isRequired,
   redirectPath: PropTypes.string.isRequired,
-  testid: PropTypes.objectOf(PropTypes.shape({
+  testid: PropTypes.shape({
     image: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     card: PropTypes.string.isRequired,
-  })).isRequired,
+  }).isRequired,
 };
 
 export default Card;

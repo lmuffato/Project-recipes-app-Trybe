@@ -1,42 +1,51 @@
 @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Handlee&display=swap') ;
 
 .loginScreen {
+  align-items: center;
   background-image: url('../images/backgroundLogin.png');
-  height: 100%;
+  display: flex;
+  flex-direction: column;
+  height: 640px;
+  justify-content: space-between;
   margin: 0;
-  position: fixed;
+  width: 360px;
+
 }
 
-h1 {
+.login-title {
   color: white;
   font-family: Comic Neue , cursive;
-  margin-top: 200px;
+  margin-left: 40px;
+  margin-top: 100px;
   text-align: center;
 }
 
 .form {
-  display: block;
+  align-items: center;
+  background-color: white;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
   font-family: Comic Neue , cursive;
-  margin: 50px 185px;
-  width: 50%;
-}
-
-.email {
-  display: inline-block;
-  padding: 5px;
+  margin-bottom: 200px;
+  margin-left: 40px;
   width: 250px;
 }
 
-.password {
-  display: block;
+.input-login {
+  background-color: transparent;
+  border: none;
+  border-bottom: black 1px solid;
+  display: flex;
+  margin: 5px;
   padding: 5px;
-  width: 250px;
+  width: 90%;
 }
 
 .loginBtn {
   background-color: black;
-  border-radius: 5%;
+  border-radius: 0  0 20px 20px;
   color: white;
   padding: 5px;
-  width: 250px;
+  width: 100%;
 }

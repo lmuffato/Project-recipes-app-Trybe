@@ -31,7 +31,11 @@ function Login() {
 
   return (
     <div className="loginScreen">
-      <h1>MyRecipes</h1>
+      <h1
+        className="login-title"
+      >
+        MyRecipes
+      </h1>
       <form
         className="form"
         onSubmit={ (e) => {
@@ -40,7 +44,7 @@ function Login() {
         } }
       >
         <input
-          className="email"
+          className="input-login"
           type="email"
           data-testid="email-input"
           value={ email }
@@ -49,7 +53,7 @@ function Login() {
           required
         />
         <input
-          className="password"
+          className="input-login"
           type="password"
           value={ password }
           onChange={ (e) => setPassword(e.target.value) }

@@ -17,31 +17,18 @@ function ProviderRecipes({ children }) {
   const [alertOn, setAlertOn] = useState(false);
   const [updateFlag, setUpadateFlag] = useState(false);
   const [ingredientsSearch, setIngredientsSearch] = useState(false);
+  const [inProgressId, setInProgressRecipe] = useState('');
+
+  const toogleInProgressRecipe = (idRecipe) => {
+    const newInProgressState = idRecipe === inProgressId ? '' : idRecipe;
+    setInProgressRecipe(newInProgressState);
+  };
 
   const turnOnAlert = () => {
     setAlertOn(true);
     const waitTime = 2000;
     setTimeout(() => { setAlertOn(false); }, waitTime);
   };
-
-  function checkLocStorage() {
-    const doneRecipesArray = JSON.parse(localStorage.getItem('doneRecipes'));
-    if (doneRecipesArray !== null) {
-      return doneRecipesArray;
-    }
-    return [];
-  }
-
-  function checkLocalStorage() {
-    const inProgressRecipesArray = JSON.parse(localStorage.getItem('inProgressRecipes'));
-    if (inProgressRecipesArray !== null) {
-      return inProgressRecipesArray;
-    }
-    return [];
-  }
-
-  const [inProgressRecipes, setInProgressRecipes] = useState(checkLocalStorage());
-  const [doneRecipes, setDoneRecipes] = useState(checkLocStorage());
 
   const getCategories = async (type) => {
     const siteName = type === 'Meal' ? 'meal' : 'cocktail';
@@ -146,10 +133,6 @@ function ProviderRecipes({ children }) {
   return (
     <ContextRecipes.Provider
       value={ {
-        setDoneRecipes,
-        doneRecipes,
-        inProgressRecipes,
-        setInProgressRecipes,
         activeFilter,
         setFilter,
         filteredRecipe,
@@ -180,6 +163,8 @@ function ProviderRecipes({ children }) {
         setUpadateFlag,
         ingredientsSearch,
         fetchByIngredients,
+        inProgressId,
+        toogleInProgressRecipe,
       } }
     >
       { children }
