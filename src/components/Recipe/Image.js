@@ -4,6 +4,7 @@ import React from 'react';
 function Image({ url }) {
   return (
     <img
+      className="img-bg"
       data-testid="recipe-photo"
       src={ url }
       width="200"

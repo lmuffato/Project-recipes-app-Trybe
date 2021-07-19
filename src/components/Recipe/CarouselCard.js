@@ -7,7 +7,7 @@ function CarouselCard({ title, alcoholic, link, index, isVisible }) {
   const visibility = isVisible ? 'carousel-card-show' : 'carousel-card-hidden';
   return (
     <div
-      className={ `carousel-card-frame ${visibility}` }
+      className={ `carousel-card-frame ${visibility} carousel-card` }
       data-testid={ `${index}-recomendation-card` }
     >
       <img
@@ -16,13 +16,13 @@ function CarouselCard({ title, alcoholic, link, index, isVisible }) {
         src={ link }
         alt={ `Bebida recomendada: ${title}` }
       />
-      <h3 className="carousel-card-alcoholic">{alcoholic}</h3>
-      <h2
+      <h5 className="carousel-card-alcoholic">{alcoholic}</h5>
+      <p
         className="carousel-card-name"
         data-testid={ `${index}-recomendation-title` }
       >
         {title}
-      </h2>
+      </p>
     </div>
   );
 }

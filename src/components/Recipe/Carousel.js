@@ -22,7 +22,7 @@ function Carousel({ items }) {
     <div className="carousel-container">
       <button
         type="button"
-        className="carousel-previous"
+        className="carousel-previous icones-btn"
         onClick={ () => setPosition(position - 1) }
       >
         {'<'}
@@ -41,7 +41,7 @@ function Carousel({ items }) {
       </div>
       <button
         type="button"
-        className="carousel-next"
+        className="carousel-next icones-btn"
         onClick={ () => setPosition(position + 1) }
       >
         {'>'}

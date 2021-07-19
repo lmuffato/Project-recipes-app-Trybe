@@ -3,8 +3,12 @@
 @import './favoritos';
 @import './feitos';
 @import './search';
-@import './pagDetalhes';
-@import './pagProcesso';
+@import './pagReceitas';
+
+.icones-btn {
+  border-style: none;
+  background-color: rgba(255, 255, 255, 0);
+}
 
 .header { 
   width: 100%;

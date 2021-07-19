@@ -109,7 +109,9 @@ function ComidasEmProcesso() {
         <label
           htmlFor="checks"
           key={ index }
-          className={ indexChecked.includes(item[0]) ? 'text-decoration' : 'no-decoration' }
+          className={
+            indexChecked.includes(item[0]) ? 'text-decoration' : 'no-decoration'
+          }
           data-testid={ `${index}-ingredient-step` }
         >
           <input
@@ -142,7 +144,12 @@ function ComidasEmProcesso() {
         </div>
 
         <div>
-          <button type="button" data-testid="share-btn" onClick={ handleShare }>
+          <button
+            type="button"
+            data-testid="share-btn"
+            className="icones-btn"
+            onClick={ handleShare }
+          >
             <img src={ shareimg } alt="icone compartilhar" />
             { share ? 'Link copiado!' : null }
           </button>
@@ -150,6 +157,7 @@ function ComidasEmProcesso() {
           <button
             type="button"
             data-testid="favorite-btn"
+            className="icones-btn"
             src={ favorite ? heartBlack : heartWhite }
             onClick={ handleClick }
           >

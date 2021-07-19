@@ -3,11 +3,12 @@ import { string } from 'prop-types';
 
 function Instructions({ text }) {
   return (
-    <section
+    <p
+      className="p-instructions"
       data-testid="instructions"
     >
       {text}
-    </section>
+    </p>
   );
 }
 

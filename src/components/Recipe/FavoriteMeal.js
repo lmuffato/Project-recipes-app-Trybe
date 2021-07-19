@@ -58,6 +58,7 @@ function Favorite() {
     <button
       type="button"
       data-testid="favorite-btn"
+      className="icones-btn"
       src={ isFavorite ? blackHeart : whiteHeart }
       onClick={ toggleStatus }
     >

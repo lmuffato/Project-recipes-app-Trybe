@@ -31,7 +31,7 @@ function Start({ type }) {
   return (
     <button
       type="button"
-      className={ `recipe-start-button ${visibility}` }
+      className={ `recipe-start-button ${visibility} btn-finalizar` }
       data-testid="start-recipe-btn"
       onClick={ () => push(`/${type}/${id}/in-progress`) }
     >

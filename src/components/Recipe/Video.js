@@ -9,6 +9,7 @@ function Video({ url }) {
   return (
     <iframe
       title="Como fazer"
+      className="video-detalhes"
       src={ YOUTUBE_EMBED_VIDEO(id) }
       data-testid="video"
     />

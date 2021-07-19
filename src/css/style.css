@@ -123,6 +123,34 @@
   height: 600px;
 }
 
+.header-details {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 100px;
+  background-color: white;
+  padding: 20px;
+}
+
+.titulo-detalhes {
+  font-weight: bold;
+  margin-bottom: 0px;
+}
+
+.p-detalhes {
+  font-weight: bold;
+}
+
 .header-progress {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -151,18 +179,13 @@
   font-weight: bold;
 }
 
-.header-progress button {
-  border-style: none;
-  background-color: rgba(255, 255, 255, 0);
-}
-
-.checkbox {
+.checkbox, .ingredients-list {
   background-color: white;
   width: 100%;
   padding: 5px 20px;
 }
 
-.p-progress {
+.p-progress, .p-instructions {
   padding: 20px;
 }
 
@@ -174,6 +197,44 @@
   height: 50px;
   color: white;
   font-weight: bold;
+}
+
+.video-detalhes {
+  width: 100%;
+  height: 500px;
+}
+
+.carousel-container {
+  width: 800px;
+  margin-bottom: 100px;
+}
+
+.carousel-card {
+  width: 45%;
+  background-color: white;
+  margin: 10px;
+  -webkit-box-shadow: 1px 1px 5px #bdbdbd;
+          box-shadow: 1px 1px 5px #bdbdbd;
+  border-radius: 5px;
+}
+
+.carousel-card h5 {
+  font-weight: bold;
+  font-size: 20px;
+  margin: 20px 0px 0px 20px;
+}
+
+.carousel-card p {
+  margin: 0px 20px 20px 20px;
+}
+
+.carousel-card-img {
+  width: 200px;
+}
+
+.icones-btn {
+  border-style: none;
+  background-color: rgba(255, 255, 255, 0);
 }
 
 .header {
