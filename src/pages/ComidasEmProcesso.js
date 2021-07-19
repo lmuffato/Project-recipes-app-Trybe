@@ -105,20 +105,22 @@ function ComidasEmProcesso() {
   function renderList() {
     console.log(listIngredients);
     return listIngredients.map((item, index) => (
-      <label
-        htmlFor="checks"
-        key={ index }
-        className={ indexChecked.includes(item[0]) ? 'text-decoration' : 'no-decoration' }
-        data-testid={ `${index}-ingredient-step` }
-      >
-        <input
-          type="checkbox"
-          id="checks"
-          onClick={ (ev) => checkedStyle(ev, item[0]) }
-          checked={ indexChecked.includes(item[0]) }
-        />
-        { `${item[0]} - ${item[1]}` }
-      </label>
+      <div key={ index } className="checkbox">
+        <label
+          htmlFor="checks"
+          key={ index }
+          className={ indexChecked.includes(item[0]) ? 'text-decoration' : 'no-decoration' }
+          data-testid={ `${index}-ingredient-step` }
+        >
+          <input
+            type="checkbox"
+            id="checks"
+            onClick={ (ev) => checkedStyle(ev, item[0]) }
+            checked={ indexChecked.includes(item[0]) }
+          />
+          { `${item[0]} - ${item[1]}` }
+        </label>
+      </div>
     ));
   }
 
@@ -127,32 +129,41 @@ function ComidasEmProcesso() {
   return (
     <section>
       <img
+        className="img-bg"
         src={ meal.strMealThumb }
         data-testid="recipe-photo"
         alt="imagem da refeição"
       />
-      <h3 data-testid="recipe-title">{ meal.strMeal }</h3>
-      <p data-testid="recipe-category">{ meal.strMeal }</p>
 
-      <button type="button" data-testid="share-btn" onClick={ handleShare }>
-        <img src={ shareimg } alt="icone compartilhar" />
-        { share ? 'Link copiado!' : null }
-      </button>
+      <div className="header-progress">
+        <div>
+          <h3 data-testid="recipe-title">{ meal.strMeal }</h3>
+          <p data-testid="recipe-category">{ meal.strMeal }</p>
+        </div>
 
-      <button
-        type="button"
-        data-testid="favorite-btn"
-        src={ favorite ? heartBlack : heartWhite }
-        onClick={ handleClick }
-      >
-        <img src={ favorite ? heartBlack : heartWhite } alt="Favoritar" />
-      </button>
+        <div>
+          <button type="button" data-testid="share-btn" onClick={ handleShare }>
+            <img src={ shareimg } alt="icone compartilhar" />
+            { share ? 'Link copiado!' : null }
+          </button>
+
+          <button
+            type="button"
+            data-testid="favorite-btn"
+            src={ favorite ? heartBlack : heartWhite }
+            onClick={ handleClick }
+          >
+            <img src={ favorite ? heartBlack : heartWhite } alt="Favoritar" />
+          </button>
+        </div>
+      </div>
 
       { renderList() }
 
-      <p data-testid="instructions">{ meal.strInstructions }</p>
+      <p data-testid="instructions" className="p-progress">{ meal.strInstructions }</p>
 
       <button
+        className="btn-finalizar"
         type="button"
         data-testid="finish-recipe-btn"
         disabled={ finished }

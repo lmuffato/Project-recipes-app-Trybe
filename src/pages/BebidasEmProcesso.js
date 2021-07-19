@@ -129,8 +129,10 @@ function BebidasEmProcesso() {
   if (loading) return <p>carregando</p>;
 
   return (
-    <section className="progress-page">
+    <section>
+
       <img
+        className="img-bg"
         src={ drink.strDrinkThumb }
         data-testid="recipe-photo"
         alt="imagem da refeição"
@@ -142,26 +144,29 @@ function BebidasEmProcesso() {
           <p data-testid="recipe-category">{ drink.strCategory }</p>
         </div>
 
-        <button type="button" data-testid="share-btn" onClick={ handleShare }>
-          <img src={ shareimg } alt="icone compartilhar" />
-          { share ? 'Link copiado!' : null }
-        </button>
+        <div>
+          <button type="button" data-testid="share-btn" onClick={ handleShare }>
+            <img src={ shareimg } alt="icone compartilhar" />
+            { share ? 'Link copiado!' : null }
+          </button>
 
-        <button
-          type="button"
-          data-testid="favorite-btn"
-          src={ favorite ? heartBlack : heartWhite }
-          onClick={ handleClick }
-        >
-          <img src={ favorite ? heartBlack : heartWhite } alt="Favoritar" />
-        </button>
+          <button
+            type="button"
+            data-testid="favorite-btn"
+            src={ favorite ? heartBlack : heartWhite }
+            onClick={ handleClick }
+          >
+            <img src={ favorite ? heartBlack : heartWhite } alt="Favoritar" />
+          </button>
+        </div>
       </div>
 
       { renderList() }
 
-      <p data-testid="instructions">{ drink.strInstructions }</p>
+      <p data-testid="instructions" className="p-progress">{ drink.strInstructions }</p>
 
       <button
+        className="btn-finalizar"
         type="button"
         data-testid="finish-recipe-btn"
         disabled={ finished }

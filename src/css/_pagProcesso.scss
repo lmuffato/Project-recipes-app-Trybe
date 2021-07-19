@@ -1,17 +1,41 @@
-.progress-page {
-  background-color:black;
-  img {
-    // width: 100px;
-    // height: 100px;
-    
+.img-bg{
+  width: 100%;
+  height: 600px; 
+}
+.header-progress {
+  @include flex(row, space-between, center);
+  height: 100px;
+  background-color:white;
+  padding: 20px;
+  h3 {
+    font-weight: bold;
+    margin-bottom: 0px;
+  }
+  p {
+    font-weight: bold;
+  }
+  button {
+    border-style: none;
+    background-color: rgba(255, 255, 255, 0);
   }
 }
 
-.header-progress {
-  //@include flex(row, space-between, center);
-  background-color: pink;
+.checkbox {
+  background-color: white;
+  width: 100%;
+  padding: 5px 20px;
 }
 
-section {
-  background-color: orange;
+.p-progress {
+  padding: 20px;
+}
+
+.btn-finalizar {
+  border-style: none;
+  background-color: $secondcolor;
+  margin: 20px;
+  width: 90%;
+  height: 50px;
+  color: white;
+  font-weight: bold;
 }

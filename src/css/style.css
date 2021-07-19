@@ -118,13 +118,9 @@
   height: 35px;
 }
 
-.progress {
-  background-color: black;
-}
-
-.progress img {
-  width: 100px;
-  height: 100px;
+.img-bg {
+  width: 100%;
+  height: 600px;
 }
 
 .header-progress {
@@ -141,6 +137,43 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  height: 100px;
+  background-color: white;
+  padding: 20px;
+}
+
+.header-progress h3 {
+  font-weight: bold;
+  margin-bottom: 0px;
+}
+
+.header-progress p {
+  font-weight: bold;
+}
+
+.header-progress button {
+  border-style: none;
+  background-color: rgba(255, 255, 255, 0);
+}
+
+.checkbox {
+  background-color: white;
+  width: 100%;
+  padding: 5px 20px;
+}
+
+.p-progress {
+  padding: 20px;
+}
+
+.btn-finalizar {
+  border-style: none;
+  background-color: #FF722A;
+  margin: 20px;
+  width: 90%;
+  height: 50px;
+  color: white;
+  font-weight: bold;
 }
 
 .header {
