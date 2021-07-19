@@ -9,6 +9,8 @@ import '../../Styles/Recomendation.css';
 import context from '../../store/Context';
 import style from './style';
 
+// Testando o cypress locão
+
 const copy = require('clipboard-copy');
 
 const setHidden = (setHiddenValue, id) => (
