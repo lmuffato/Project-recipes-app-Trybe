@@ -9,6 +9,7 @@ function ButtonFinish(props) {
   const history = useHistory();
   const finishRecipe = async () => {
     await setDoneRecipesLocalStorage(dbType, id);
+    localStorage.removeItem('inProgressRecipes');
     history.push('/receitas-feitas');
   };
 
