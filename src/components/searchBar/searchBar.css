@@ -1,7 +1,28 @@
 .radio-search-bar {
-  align-items: flex-start;
+  align-items: center;
   display: flex;
   flex-wrap: wrap;
+  font-size: 14px;
   justify-content: space-between;
-  margin-bottom: -150px;
+  left: 0;
+  margin-left: 5px;
+  margin-top: 5px;
+  position: fixed;
+  top: 10;
+
+
+}
+
+.radio-search-bar input {
+  border: none;
+  border-radius: 5%;
+  margin: 5px 0;
+  padding: 0.3rem;
+}
+
+.radio-search-bar button {
+  background-color: #ffd166;
+  border: none;
+  border-radius: 10%;
+  padding: 0.3rem;
 }
