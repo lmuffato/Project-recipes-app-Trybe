@@ -17,7 +17,7 @@ da receita na API e cria a chave doneDate buscando a data no computador pela
 função Date.
 */
 
-import fetchApiById from './fetchApiDetails';
+import fetchApiById from './fetchApiById';
 
 const generateDoneElement = (recipe, type) => {
   const date = new Date();

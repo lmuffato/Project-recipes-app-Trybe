@@ -8,7 +8,7 @@ import ByOrigin from './screens/ByOrigin';
 import RecipeDetails from './screens/RecipeDetails';
 import Explore from './screens/Explore';
 import ExploreFilters from './screens/ExploreFilters';
-import InProcess from './screens/InProcess';
+import InProgress from './screens/InProgress';
 import Login from './screens/Login';
 import DoneAndFavorites from './screens/DoneAndFavorites';
 import Main from './screens/Main';
@@ -23,11 +23,11 @@ function App() {
           <Route exact path="/" component={ Login } />
           <Route
             path="/comidas/:id/in-progress"
-            render={ (props) => <InProcess { ...props } /> }
+            render={ (props) => <InProgress { ...props } /> }
           />
           <Route
             path="/bebidas/:id/in-progress"
-            render={ (props) => <InProcess { ...props } /> }
+            render={ (props) => <InProgress { ...props } /> }
           />
           <Route
             path="/comidas/:id"
