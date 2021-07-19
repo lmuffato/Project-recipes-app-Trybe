@@ -42,16 +42,18 @@ export default function BtnFavorite({ id }) {
   }, [id]);
 
   return (
-    <button
-      type="button"
-      onClick={ handleFavoriteRecipe }
-    >
-      <img
-        data-testid="favorite-btn"
-        src={ isFavorite === false ? whiteHeart : blackHeart }
-        alt="imagem favoritar"
-      />
-    </button>
+    <div className="btn-favorite">
+      <button
+        type="button"
+        onClick={ handleFavoriteRecipe }
+      >
+        <img
+          data-testid="favorite-btn"
+          src={ isFavorite === false ? whiteHeart : blackHeart }
+          alt="imagem favoritar"
+        />
+      </button>
+    </div>
 
   );
 }

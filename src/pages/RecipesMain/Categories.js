@@ -17,7 +17,7 @@ export default function Categories() {
   }
 
   return (
-    <div>
+    <div className="categories">
       <button
         type="button"
         data-testid="All-category-filter"

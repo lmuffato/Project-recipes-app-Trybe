@@ -1,8 +1,27 @@
+.login-page {
+  align-items: center;
+  background-color: #ede7d9;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: center;
+  width: 100vw;
+}
+
+.login input {
+  border: none;
+  border-radius: 5%;
+  padding: 0.5rem;
+}
+
+
 .login {
   align-items: center;
   display: flex;
   flex-direction: column;
-  padding: 50vw;
+  margin: 50px auto;
+  margin-top: 50px;
+
 }
 
 .loginText {

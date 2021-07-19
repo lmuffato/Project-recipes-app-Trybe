@@ -6,9 +6,9 @@ import './Explore.css';
 
 export default function Explore() {
   return (
-    <div>
+    <>
       <Header title="Explorar" isSearch={ false } />
-      <div className="box-button-explore">
+      <div className="buttons-container">
         <ButtonExplore
           title="Explorar Comidas"
           path="/explorar/comidas"
@@ -21,6 +21,6 @@ export default function Explore() {
         />
       </div>
       <MenuFooter />
-    </div>
+    </>
   );
 }

@@ -1,9 +1,18 @@
 .header-container {
   align-items: center;
-  background-color: #c4c4c4;
+  background-color: #d56f3e;
+  border-radius: 0 0 10%;
   display: flex;
+  font-size: 1.5rem;
   height: 10vh;
   justify-content: space-around;
-  margin-top: -70px;
+  margin-bottom: 40px;
+  padding: 0.5rem;
   width: 100%;
+}
+
+.btn-Search-bar {
+  background-color: #d56f3e;
+  border: none;
+  padding: 0.5rem;
 }

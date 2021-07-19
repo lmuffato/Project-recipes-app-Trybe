@@ -45,6 +45,7 @@ export default function BtnFinishRecipe() {
   return (
     <Link to="/receitas-feitas">
       <button
+        className="finish-recipe"
         data-testid="finish-recipe-btn"
         type="button"
         disabled={ checkedState }

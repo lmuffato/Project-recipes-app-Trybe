@@ -1,0 +1,17 @@
+[ class *= 'classic' ]:before {
+  content: 'Preparando... 🍽️';
+}
+
+.classic-1 {
+  align-items: center;
+  animation: c1 1s linear infinite alternate;
+  display: flex;
+  font-family: sans-serif;
+  font-size: 30px;
+  font-weight: 500;
+  justify-content: center;
+}
+
+@keyframes c1 {
+
+  to { opacity: 0;}}

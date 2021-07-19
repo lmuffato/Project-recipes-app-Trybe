@@ -1,5 +1,11 @@
+.main-container-details {
+  background-color: #ede7d9;
+  height: 100vh;
+}
+
 .carousel-container {
   align-items: center;
+  background-color: #ede7d9;
   display: flex;
   height: 120px;
   justify-content: flex-start;
@@ -46,10 +52,68 @@
 }
 
 .start-recipe-btn {
+  background-color: #ffd166;
+  border: none;
+  border-radius: 5%;
   bottom: 0;
+  left: 115px;
+  padding: 0.8rem;
   position: fixed;
 }
 
 .disappear-btn {
   display: none;
 }
+
+h2, h3 {
+  padding: 0 0.5rem;
+
+}
+
+.ingredients-details {
+  background-color: #573e23;
+  color: #ede7d9;
+}
+
+.ingredients-list {
+  padding: 0.5rem;
+}
+
+.video {
+  background-color: #ede7d9;
+}
+
+.instructions {
+  background-color: #ede7d9;
+  margin: -15px 0 0;
+  padding: 0.8rem;
+}
+
+.recommended {
+  background-color: #ede7d9;
+  padding: 0.5rem;
+}
+
+.buttons-share-favorite {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin-top: -20px;
+  padding: 0.8rem;
+}
+
+.buttons-share-favorite button {
+  background-color: #ffd166;
+  border: none;
+  border-radius: 15%;
+  margin-left: 5px;
+  padding: 1rem;
+}
+
+.btn-share {
+  align-items: center;
+  display: flex;
+  justify-content: space-around;
+}
+

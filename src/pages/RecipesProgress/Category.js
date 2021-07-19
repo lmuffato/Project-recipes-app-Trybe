@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 export default function Category({ category }) {
   return (
-    <h4 data-testid="recipe-category">{category}</h4>
+    <p className="category-title" data-testid="recipe-category">{category}</p>
   );
 }
 

@@ -27,13 +27,14 @@ export default function Ingredients({ recipe }) {
   }, [recipe]);
 
   return (
-    <div>
+    <div className="ingredients-details">
       <h3>Ingredients</h3>
       <ul>
         { ingredients.length && measures.length
           ? ingredients.map(
             (ingredient, index) => (
               <li
+                className="ingredients-list"
                 key={ index }
                 data-testid={ `${index}-ingredient-name-and-measure` }
               >

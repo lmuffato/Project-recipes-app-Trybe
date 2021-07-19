@@ -14,6 +14,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import RecipesFavorites from './pages/RecipesFavorite';
 import RecipesDone from './pages/RecipesDone';
 import ProfileScreen from './pages/ProfileScreen';
+import './App.css';
 
 function App() {
   return (

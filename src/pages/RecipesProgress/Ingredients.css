@@ -2,3 +2,34 @@ input:checked + span {
   text-decoration: line-through;
 }
 
+.finish-recipe {
+  background-color: #ffd166;
+  border: none;
+  border-radius: 5%;
+  bottom: 0;
+  left: 105px;
+  padding: 0.8rem;
+  position: fixed;
+}
+
+.recipes-progress {
+  background-color: #ede7d9;
+}
+
+.ingredients {
+  background-color: #583e23;
+  color: #ede7d9;
+  padding: 0.5rem;
+}
+
+.instructions-progress {
+  padding: 0.8rem;
+}
+
+.category-title {
+  font-size: 24px;
+  font-weight: 200;
+  margin-bottom: 0;
+  opacity: 50%;
+  padding: 0.5rem;
+}

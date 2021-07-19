@@ -17,7 +17,7 @@ export default function ExploreDrinks() {
   return (
     <div>
       <Header title="Explorar Bebidas" isSearch={ false } />
-      <div className="box-button-explore-drinks">
+      <div className="buttons-container">
         <ButtonExplore
           title="Por Ingredientes"
           path="/explorar/bebidas/ingredientes"

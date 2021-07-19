@@ -26,11 +26,13 @@ export default function RecipeDetails({ match: { params: { id }, path, url } }) 
   }, [path]);
 
   return (
-    <div>
+
+    <div className="main-container-details">
+
       <img
         src={ recipe.strMealThumb || recipe.strDrinkThumb }
         data-testid="recipe-photo"
-        width="200px"
+        width="100%"
         alt="recipe details"
       />
       <h2
@@ -38,23 +40,28 @@ export default function RecipeDetails({ match: { params: { id }, path, url } }) 
       >
         { recipe.strMeal || recipe.strDrink }
       </h2>
-      <BtnShare url={ url } />
-      <BtnFavorite id={ id } />
+      <div className="buttons-share-favorite">
+        <BtnShare url={ url } />
+        <BtnFavorite id={ id } />
+      </div>
       <p
+        className="category-title"
         data-testid="recipe-category"
       >
         { recipe.strAlcoholic || recipe.strCategory }
       </p>
       <Video recipe={ recipe } />
       <Ingredients recipe={ recipe } />
-      <h3>Instructions</h3>
+      <h2 className="instructions">Instructions</h2>
       <p
+        className="instructions"
         data-testid="instructions"
       >
         { recipe.strInstructions }
       </p>
       <Recommendations path={ path } />
       <StartRecipeBtn recipe={ recipe } />
+
     </div>
   );
 }

@@ -12,7 +12,7 @@ export default function BtnShare({ url }) {
     setIsCopied(true);
   }
   return (
-    <>
+    <div className="btn-share">
       <button
         data-testid="share-btn"
         type="button"
@@ -21,8 +21,8 @@ export default function BtnShare({ url }) {
         <img src={ shareIcon } alt="imagem compartilhar" />
 
       </button>
-      {isCopied && <div>Link copiado!</div>}
-    </>
+      {isCopied && <span>Link copiado!</span>}
+    </div>
   );
 }
 BtnShare.propTypes = {
