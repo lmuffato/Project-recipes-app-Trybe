@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import copy from 'clipboard-copy';
 
 import shareIcon from '../images/shareIcon.svg';
-
-const copy = require('clipboard-copy');
 
 export default function ShareButton({ recipeId, isFood, index }) {
   const [displayToast, setDisplayToast] = useState(false);
