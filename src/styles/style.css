@@ -283,7 +283,9 @@ body div {
   background-color: #d9910b;
   border: none;
   border-radius: 10px;
+  bottom: 0;
   height: 40px;
+  position: fixed;
   width: 96%;
 }
 
