@@ -1,6 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap') ;
 
-body > #root{
+#root {
   background-image: url('../images/Prancing_Pony.jpg');
   background-repeat: no-repeat;
   background-size: cover;
