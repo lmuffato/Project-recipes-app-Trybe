@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 
 import { ALL_DRINKS_ENDPOINT,
-  DRINKS_BY_CATEGORY_ENDPOINT } from '../services/drinks';
+  DRINKS_BY_CATEGORY_ENDPOINT,
+  DRINKS_BY_INGREDIENT_ENDPOINT } from '../services/drinks';
 import { getDrinkCategoriesAPIThunk,
   getDrinkRecipesAPIThunk } from '../redux/actions/drinksAction';
 import Header from '../components/Header';
@@ -22,13 +24,19 @@ const pickEndpoint = (category) => {
 
 function Bebidas() {
   const dispatch = useDispatch();
+  const location = useLocation();
   const selectedCategory = useSelector((state) => state.drinks.selectedCategory);
   useEffect(() => {
     dispatch(getDrinkCategoriesAPIThunk());
   }, [dispatch]);
   useEffect(() => {
-    dispatch(getDrinkRecipesAPIThunk(pickEndpoint(selectedCategory)));
-  }, [dispatch, selectedCategory]);
+    const { fromIngredientsPage, ingredientName } = location.state || {};
+    if (fromIngredientsPage) {
+      dispatch(
+        getDrinkRecipesAPIThunk(DRINKS_BY_INGREDIENT_ENDPOINT(ingredientName)),
+      );
+    } else dispatch(getDrinkRecipesAPIThunk(pickEndpoint(selectedCategory)));
+  }, [dispatch, selectedCategory, location]);
   const loadingRecipes = useSelector((state) => state.loading.loadingRecipes);
   const loadingCategories = useSelector((state) => state.loading.loadingCategories);
   const drinks = useSelector((state) => state.drinks.recipes);
