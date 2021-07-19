@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 export default function Instructions({ instruction }) {
   return (
-    <div data-testid="instructions">
+    <div className="instructions-progress" data-testid="instructions">
       {instruction}
     </div>
 

@@ -57,14 +57,17 @@ export default function RecipesProgress({ match }) {
   }, [recipe]);
 
   return (
-    <div>
+    <div className="recipes-progress-container">
       <div className="recipes-progress">
         <Image src={ recipe.strMealThumb || recipe.strDrinkThumb } />
 
         <div className="title">
           <Title title={ recipe.strMeal || recipe.strDrink } />
-          <BtnShare url={ url } />
-          <BtnFavorite id={ id } />
+          <div className="buttons-share-favorite">
+            <BtnShare url={ url } />
+
+            <BtnFavorite id={ id } />
+          </div>
           <Category category={ recipe.strCategory || recipe.strAlcoholic } />
 
           <h2>Ingredientes</h2>
@@ -72,9 +75,9 @@ export default function RecipesProgress({ match }) {
           <h2>Instruções</h2>
           <Instructions instruction={ recipe.strInstructions } />
         </div>
+
       </div>
       <BtnFinishRecipe />
-
     </div>
   );
 }

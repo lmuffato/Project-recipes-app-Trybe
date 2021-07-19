@@ -19,7 +19,7 @@ export default function RecipesMain({ match }) {
   });
 
   return (
-    <div>
+    <div className="main-container">
       <Header title={ pageOrigin === 'themealdb' ? 'Comidas' : 'Bebidas' } />
 
       <Categories />

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router';
 import { Button } from 'react-bootstrap';
 import './login.css';
+import logo from '../../images/logofood.svg';
 
 export default function Login() {
   const history = useHistory();
@@ -17,7 +18,10 @@ export default function Login() {
   const minPassword = 6;
 
   return (
-    <div>
+    <div className="login-page">
+      <div classNme="logo">
+        <img style={ { width: '150px' } } src={ logo } alt="logo do app" />
+      </div>
       <form className="login">
         <h2 className="loginText">Login</h2>
         <label

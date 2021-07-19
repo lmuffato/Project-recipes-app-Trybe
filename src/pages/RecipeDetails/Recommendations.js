@@ -4,6 +4,7 @@ import RecomCard from './RecomCard';
 import { fetchRecipesApi } from '../../services/fetchApiMain';
 import './recipesDetails.css';
 import CarouselBtn from './CarouselBtn';
+import Loading from '../../components/Loading/Loading';
 
 export default function Recommendations({ path }) {
   const [recommended, setRecommended] = useState([]);
@@ -52,11 +53,11 @@ export default function Recommendations({ path }) {
   }
 
   return (
-    <div>
+    <div className="recommended">
       <h3>Recommended</h3>
       { recommended.length
         ? renderCarousel()
-        : <span>Loading...</span>}
+        : <Loading />}
     </div>
   );
 }

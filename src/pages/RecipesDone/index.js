@@ -14,12 +14,14 @@ export default function RecipesDone() {
 
   function buttonsFilters(param) {
     if (param === 'all') {
-      setFilterRecipes(doneRecipes.filter(({ type }) => type));
+      setFilterRecipes(doneRecipes && doneRecipes.filter(({ type }) => type));
     }
     if (param === 'food') {
-      setFilterRecipes(doneRecipes.filter(({ type }) => type === 'comida'));
+      setFilterRecipes(doneRecipes
+        && doneRecipes.filter(({ type }) => type === 'comida'));
     } if (param === 'drinks') {
-      setFilterRecipes(doneRecipes.filter(({ type }) => type === 'bebida'));
+      setFilterRecipes(doneRecipes
+        && doneRecipes.filter(({ type }) => type === 'bebida'));
     }
   }
 
@@ -58,7 +60,7 @@ export default function RecipesDone() {
           Drinks
         </button>
       </nav>
-      {filterRecipes
+      {filterRecipes && filterRecipes
         .map(
           ({ id, image, category, name, doneDate, tags, type,
             area, alcoholicOrNot }, index) => (
