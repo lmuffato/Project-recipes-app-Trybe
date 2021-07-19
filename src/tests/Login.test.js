@@ -1,6 +1,6 @@
 import React from 'react';
 import App from '../App';
-import renderWithRouter from '../services/renderWithRouter';
+import renderWithRouter from './renderWithRouter';
 
 describe('Login Page Test', () => {
   test('shows the login page when routr is `/`', () => {
