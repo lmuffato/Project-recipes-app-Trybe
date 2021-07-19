@@ -4,6 +4,7 @@ import filterRecipesByType from '../utils/filterRecipesByType';
 import Header from '../components/Header/Header';
 import logoIcon from '../images/logoPaginasExplorar.svg';
 import CardGridContainer from '../styles/favRecipes';
+import { PageGrid } from '../styles/doneRecipes';
 
 function FavoriteRecipes() {
   const [favoriteRecipes, setFavoriteRecipes] = useState([]);
@@ -37,7 +38,7 @@ function FavoriteRecipes() {
     <div>
       <Header heading="Receitas Favoritas" logoSrc={ logoIcon } />
       { copiedToClipboard && 'Link copiado!' }
-      <div>
+      <PageGrid>
         <button
           type="button"
           data-testid="filter-by-all-btn"
@@ -59,7 +60,7 @@ function FavoriteRecipes() {
         >
           Drinks
         </button>
-      </div>
+      </PageGrid>
       <CardGridContainer>
         { filterRecipesByType(favoriteRecipes, filterByType).map((recipe, index) => (
           <FavoriteRecipeCard
