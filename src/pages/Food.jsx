@@ -62,8 +62,8 @@ function Food({ match: { path } }) {
   const renderResult = () => {
     if (Object.keys(result).length === 0) return '...loading';
     if (result.meals === null) {
-      return window
-        .alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+      return console
+        .log('Sinto muito, não encontramos nenhuma receita para esses filtros.');
     }
     if (result.meals.length === 1) {
       return <Redirect to={ `${path}/${result.meals[0].idMeal}` } />;
