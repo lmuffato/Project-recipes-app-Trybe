@@ -59,8 +59,6 @@ function RecipesInProgress({ type }) {
   const recipeThumb = singleRecipe.strMealThumb || singleRecipe.strDrinkThumb;
   const recipeCategory = singleRecipe.strCategory;
   const isAlchooholic = singleRecipe.strAlcoholic || '';
-  const recipeId = singleRecipe.idMeal || '';
-  const drinkId = singleRecipe.idDrink || '';
   const renderCategory = type === 'drinks' ? (isAlchooholic) : (recipeCategory);
 
   return (
@@ -76,8 +74,6 @@ function RecipesInProgress({ type }) {
       <div className="ingredients-list">
         <RecipeIngredientsInProgress
           recipe={ singleRecipe }
-          idMeal={ recipeId }
-          idDrink={ drinkId }
           type={ type }
           id={ id }
         />

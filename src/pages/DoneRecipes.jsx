@@ -3,6 +3,7 @@ import DoneRecipeCard from '../components/DoneRecipeCard/DoneRecipeCard';
 import filterRecipesByType from '../utils/filterRecipesByType';
 import Header from '../components/Header/Header';
 import logoIcon from '../images/savory-6.svg';
+import CardGridContainer from '../styles/doneRecipes';
 
 function DoneRecipes() {
   const [doneRecipes, setDoneRecipes] = useState([]);
@@ -59,15 +60,17 @@ function DoneRecipes() {
           Drinks
         </button>
       </div>
-      { filterRecipesByType(doneRecipes, filterByType).map((recipe, index) => (
-        <DoneRecipeCard
-          recipe={ recipe }
-          index={ index }
-          key={ index }
-          handleRemoveRecipe={ handleRemoveRecipe }
-          setCopiedToClipboard={ setCopiedToClipboard }
-        />
-      )) }
+      <CardGridContainer>
+        { filterRecipesByType(doneRecipes, filterByType).map((recipe, index) => (
+          <DoneRecipeCard
+            recipe={ recipe }
+            index={ index }
+            key={ index }
+            handleRemoveRecipe={ handleRemoveRecipe }
+            setCopiedToClipboard={ setCopiedToClipboard }
+          />
+        )) }
+      </CardGridContainer>
     </div>
   );
 }
