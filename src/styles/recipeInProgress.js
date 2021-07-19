@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const Container = styled.div`align-items: center;
+const RecipeInProgressContainer = styled.div`align-items: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -88,13 +88,6 @@ const Container = styled.div`align-items: center;
     }
   }
 
-  iframe {
-    border: 0;
-    margin: 0 auto 3.75rem;
-    max-height: auto;
-    max-width: 90vw;
-  }
-
   .title-wrapper {
     border: 0;
     font: inherit;
@@ -111,8 +104,8 @@ const Container = styled.div`align-items: center;
     }
   }
 
-  button .recipe-btn {
-    background: #289ea8;
+  .recipe-btn {
+    background: #c10644;
     border: 0;
     border-radius: 8px;
     bottom: 0;
@@ -170,10 +163,6 @@ const Container = styled.div`align-items: center;
       }
     }
 
-    iframe {
-      max-width: 70vw;
-    }
-
     h3 {
       margin-left: 6rem;
     }
@@ -200,6 +189,7 @@ const Container = styled.div`align-items: center;
       }
     }
   }
+
 `;
 
-export default Container;
+export default RecipeInProgressContainer;

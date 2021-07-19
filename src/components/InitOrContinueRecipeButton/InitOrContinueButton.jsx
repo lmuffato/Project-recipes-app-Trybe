@@ -32,7 +32,6 @@ function InitOrContinueButton({ type }) {
   }
 
   return (
-
     <Button
       data-testid="start-recipe-btn"
       className="recipe-btn"
@@ -40,6 +39,7 @@ function InitOrContinueButton({ type }) {
     >
       { isRecipeInProgress ? 'Continuar Receita' : 'Iniciar Receita'}
     </Button>
+
   );
 }
 

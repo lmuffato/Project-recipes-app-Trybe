@@ -5,7 +5,7 @@ import RecipeInfo from '../components/RecipeInfo/RecipeInfo';
 import Button from '../components/Generics/Button';
 import RecipeIngredientsInProgress from
   '../components/RecipesIngredientsInProgress/RecipesIngredientsInProgress';
-import Container from '../styles/recipeDetails';
+import RecipeInProgressContainer from '../styles/recipeInProgress';
 import useDetailsProvider from '../hooks/useDetailsProvider';
 import { handleDoneRecipesLS } from '../helpers/localStorageHelper';
 
@@ -62,7 +62,7 @@ function RecipesInProgress({ type }) {
   const renderCategory = type === 'drinks' ? (isAlchooholic) : (recipeCategory);
 
   return (
-    <Container>
+    <RecipeInProgressContainer>
       <RecipeInfo
         recipeName={ recipeName }
         recipeThumb={ recipeThumb }
@@ -86,12 +86,13 @@ function RecipesInProgress({ type }) {
       </div>
       <Button
         data-testid="finish-recipe-btn"
+        className="recipe-btn"
         disabled={ isDisabled }
         onClick={ handleRedirectToDoneRecipes }
       >
         Finalizar receita
       </Button>
-    </Container>
+    </RecipeInProgressContainer>
   );
 }
 
