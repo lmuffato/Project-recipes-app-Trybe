@@ -6,7 +6,8 @@ import ShareButton from '../ShareButton';
 import FavoriteButton from '../FavoriteButton';
 
 function FoodsInProgress({ data }) {
-  const ingredients = getIngredients(data, 'strIngredient').map((e) => e[1]);
+  const { state: { ingredients } } = useLocation();
+  // const ingredients = getIngredients(data, 'strIngredient').map((e) => e[1]);
   const { pathname } = useLocation();
   const { id } = useParams();
   const [keys, setKeys] = useState([]);
@@ -51,7 +52,7 @@ function FoodsInProgress({ data }) {
         <FavoriteButton data={ data } path={ id } />
         <p data-testid="recipe-category">{ keys[0].category }</p>
         <ul>
-          { ingredients.map((element, index) => (
+          { Object.values(ingredients).map((element, index) => (
             <li
               key={ element }
               data-testid={ `data-testid=${index}-ingredient-step` }
