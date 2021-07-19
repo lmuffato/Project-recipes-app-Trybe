@@ -14,11 +14,19 @@
 
 .top-recipe-details .recipes-buttons-actions {
   display: flex;
+  justify-content: center;
 }
 
 .recipes-buttons-actions button {
   border: none;
   flex: 1;
+}
+
+.recipes-buttons-actions .share-message {
+  background-color: rgba(255, 255, 255, 0.7);
+  padding: 15px;
+  position: absolute;
+  top: 10px;
 }
 
 .recipes-buttons-actions button:nth-child( 2 ) {

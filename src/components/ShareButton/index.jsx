@@ -13,14 +13,10 @@ export default function ShareButton({ urlCopied }) {
 
   return (
     <>
-      <button
-        type="button"
-        onClick={ handleClick }
-        data-testid="share-btn"
-      >
-        <img src={ shareIcon } alt="share icon" />
+      <button type="button" onClick={ handleClick }>
+        <img src={ shareIcon } alt="share icon" data-testid="share-btn" />
       </button>
-      {show ? <p>Link copiado!</p> : null}
+      {show ? <p className="share-message">Link copiado!</p> : null}
     </>
   );
 }

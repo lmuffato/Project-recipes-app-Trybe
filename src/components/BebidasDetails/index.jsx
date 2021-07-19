@@ -19,10 +19,14 @@ function BebidasDetails({ data, recomendation }) {
 
   return (
     <div className="recipe-details-container">
-      <img src={ strDrinkThumb } alt="comida" data-testid="recipe-photo" />
+      <div className="top-recipe-details">
+        <img src={ strDrinkThumb } alt="comida" data-testid="recipe-photo" />
+        <div className="recipes-buttons-actions">
+          <ShareButton data-testid="share-btn" urlCopied={ href } />
+          <FavoriteButton data={ data } path={ id } />
+        </div>
+      </div>
       <h4 data-testid="recipe-title">{ strDrink }</h4>
-      <ShareButton data-testid="share-btn" urlCopied={ href } />
-      <FavoriteButton data={ data } path={ id } />
       <p>{ strCategory }</p>
       {strAlcoholic === 'Alcoholic' ? (
         <p data-testid="recipe-category">Alcoholic</p>
