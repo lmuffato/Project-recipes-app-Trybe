@@ -10,6 +10,8 @@ import BtnInitiateRecipe from './componentsDetails/BtnInitiateRecipe';
 
 export default function RecipeCardDetailDrink() {
   const [drinkDetails, setDrinkDetails] = useState({});
+  const [done, setDone] = useState(false);
+  const [progress, setProgress] = useState('Iniciar Receita');
   const { idDrink } = useParams();
   console.log(drinkDetails);
   useEffect(() => {
@@ -23,6 +25,19 @@ export default function RecipeCardDetailDrink() {
         .some((recipe) => recipe.id === idDrink) && document.getElementById('fav-btn')
         .setAttribute('src', blackHeartIcon);
       isFavorite();
+    }
+    const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    if (inProgressRecipes && inProgressRecipes.cocktails) {
+      const wasStarted = Object.keys(inProgressRecipes.cocktails)
+        .some((id) => id === idDrink);
+      const progressChecker = () => wasStarted && setProgress('Continuar Receita');
+      progressChecker();
+    }
+    const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
+    if (doneRecipes) {
+      const wasDone = doneRecipes.some((doneRecipe) => doneRecipe.id === idDrink);
+      const doneChecker = () => wasDone && setDone(true);
+      doneChecker();
     }
     fetchDrink();
   }, [idDrink]);
@@ -103,7 +118,7 @@ export default function RecipeCardDetailDrink() {
       <h4>Instructions: </h4>
       <h2 data-testid="instructions">{ drinkDetails.strInstructions }</h2>
       <FoodsRecomends />
-      <BtnInitiateRecipe id={ idDrink } type="bebida" />
+      {!done && <BtnInitiateRecipe id={ idDrink } type="bebida" progress={ progress } />}
     </div>
   );
 }
