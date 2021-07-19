@@ -5,7 +5,7 @@ import MainRecipes from '../compenents/MainRecipes';
 import RecipesContext from '../contexts/RecipesContext';
 import SearchbarContext from '../contexts/SearchbarContext';
 import apiRequester from '../services/fetchApi';
-import '../styles/MealAndDrinkCards.css';
+// import '../styles/MealAndDrinkCards.css';
 // import '../styles/Main.css';
 import Loading from '../compenents/Loading';
 import Header from '../compenents/Header';
@@ -65,7 +65,7 @@ function MainRecipesPage() {
         })
         .catch((error) => console.error(error));
     }
-  }, [type, searchCategory, setCategories]);
+  }, [type, searchCategory, setCategories, history]);
 
   useEffect(() => {
     if (searchCategory !== 'list') {
@@ -76,7 +76,9 @@ function MainRecipesPage() {
   return (
     <>
       <Header />
-      { recipes && categories ? <MainRecipes /> : <Loading />}
+      <main data-testid="main-recipes" className="main-recipes">
+        { recipes && categories ? <MainRecipes /> : <Loading />}
+      </main>
       <Footer />
     </>
   );

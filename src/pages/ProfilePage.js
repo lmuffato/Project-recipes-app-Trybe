@@ -24,13 +24,14 @@ function Profile() {
   return (
     <>
       <Header />
-      <div className="profile-elements">
+      <main className="main-profile">
+        {/* <section> */}
         <p data-testid="profile-email">{userEmailProfile}</p>
         <Link to="/receitas-feitas">
           <button
             type="button"
             data-testid="profile-done-btn"
-            className="profile-btns"
+            className="button profile-btns"
           >
             Receitas Feitas
           </button>
@@ -39,7 +40,7 @@ function Profile() {
           <button
             type="button"
             data-testid="profile-favorite-btn"
-            className="profile-btns"
+            className="button profile-btns"
           >
             Receitas Favoritas
           </button>
@@ -48,13 +49,14 @@ function Profile() {
           <button
             type="button"
             data-testid="profile-logout-btn"
-            className="profile-btns"
+            className="button profile-btns"
             onClick={ clearStorage }
           >
             Sair
           </button>
         </Link>
-      </div>
+        {/* </section> */}
+      </main>
       <Footer />
     </>
   );

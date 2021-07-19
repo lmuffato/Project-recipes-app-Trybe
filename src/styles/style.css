@@ -1,0 +1,477 @@
+/* ----------------- Estilos bases das telas  ----------------- */
+body {
+  height: 100vh;
+  width: 100vw;
+}
+
+section {
+  display: flex;
+}
+
+body div {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.main-area, .main-profile, .main-detail, .main-inProgress {
+  background: #a11d2b;
+  display: flex;
+  flex-flow: column wrap;
+  font-family: sans-serif;
+  width: 100%;
+}
+
+.main-recipes, .main-explore, .main-ingredients {
+  background: #a11d2b;
+  display: flex;
+  flex-flow: column wrap;
+  font-family: sans-serif;
+  width: 100%;
+}
+
+.button {
+  border: none;
+  border-radius: 10px;
+  color: #fffefee7;
+  font-size: 13pt;
+  font-weight: 500;
+  height: 40%;
+  margin: 1% 0;
+  padding: 1%;
+  width: 30%;
+  word-wrap: break-word;
+}
+
+.recipes-container, .ingredients-container {
+  display: flex;
+  flex-flow: row wrap;
+  height: 78%;
+  justify-content: space-around;
+  margin-bottom: 12%;
+}
+
+.recipe, .ingredient {
+  align-items: center;
+  background-color: #9a8f9757;
+  border: 1px solid black;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin-bottom: 3%;
+  width: 35%;
+}
+
+/* ------------------------------------------------------------ */
+
+/* ------------------------ Tela de Login --------------------- */
+.login-inputs {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
+  width: 100%;
+}
+
+/* ------------------------------------------------------------ */
+
+/* ---------- Componente Header ---------- */
+
+/* Adicionar a propriedade que faz o menu esconder no scroll */
+.header {
+  align-items: center;
+  background-color: #f4f0bb;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  padding: 1%;
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.header h1 {
+  font-size: 24pt;
+  margin: 0;
+  text-align: center;
+}
+
+.searchBtn {
+  background-color: rgba(245, 245, 245, 0);
+  border: none;
+}
+
+/* --------------------------------------- */
+
+/* -------------- Tela Principal de Receitas  ----------------- */
+
+/* -- Componente Principal de Receitas --- */
+.main-recipes {
+  align-items: center;
+  justify-content: space-around;
+  margin-top: 15%;
+}
+
+.recipes-container {
+  margin-top: 35%;
+}
+
+/* --------------------------------------- */
+
+/* ------ Componente Filter Buttons ------ */
+.button-container {
+  background-color: #c3baba;
+  display: flex;
+  flex-wrap: wrap;
+  height: 125px;
+  justify-content: space-around;
+  position: fixed;
+  top: 7%;
+  width: 100%;
+}
+
+.button-filter {
+  background-color: #138a36;
+}
+
+/* --------------------------------------- */
+
+/* -------- Componente Search Bar -------- */
+.search-bar {
+  background-color: #c3baba;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  position: fixed;
+  top: 8.5%;
+}
+
+.input-text {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.input-text input {
+  border: none;
+  border-radius: 5px;
+  height: 25pt;
+  width: 85%;
+}
+
+.radio-button {
+  align-items: center;
+  display: flex;
+  font-size: 15pt;
+}
+
+.radio-button input {
+  height: 15pt;
+  width: 15pt;
+}
+
+.search-button {
+  margin-bottom: 2%;
+  width: 98%;
+}
+
+/* --------------------------------------- */
+
+/* --- Componentes Meal/Drink Recipes & Foods/Drinks Ingredients -- */
+.recipe {
+  background-color: #9a8f9757;
+}
+
+.recipe-image {
+  border-radius: 20px 20px 0 0;
+  width: 100%;
+}
+
+.recipe-title {
+  color: rgba(0, 0, 0, 0.945);
+  font-size: 16pt;
+  margin: 4% 0;
+}
+
+/* --------------------------------------- */
+
+/* ------------------------------------------------------------ */
+
+/* --------------- Tela de Detalhes da receita ---------------- */
+.main-detail {
+  flex-flow: column;
+}
+
+.recomendation-image {
+  width: 100vw;
+}
+
+.title-and-buttons {
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.interaction-buttons button {
+  background-color: transparent;
+  border: none;
+}
+
+.category, .ingredients-title {
+  color: rgba(0, 0, 0, 0.726);
+  margin-left: 2%;
+}
+
+.ingredients-measures, .instructions {
+  background-color: rgba(240, 202, 202, 0.267);
+  border-radius: 10px;
+  flex-direction: column;
+  font-size: 14pt;
+  margin: 2%;
+}
+
+.player {
+  border: none;
+  border-radius: 10px;
+  margin: 2%;
+}
+
+/* ------- Componente Recomendation ------ */
+.recipes {
+  background-color: tomato;
+  display: flex;
+  max-width: 100%;
+  overflow-x: scroll;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+}
+
+.recomendation-card {
+  align-items: center;
+  border: 1px solid black;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  margin: 3% 3% 50px;
+}
+
+.recomendation-card img {
+  border-radius: 20px 20px 0 0;
+  max-height: auto;
+  max-width: 170px;
+  scroll-snap-align: start;
+  width: fit-content;
+}
+
+.recomendation-card h3 {
+  font-size: 15pt;
+  margin-top: 1%;
+}
+
+/* --------------------------------------- */
+.start-recipe {
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  width: 100%;
+}
+
+.start-recipe-btn {
+  background-color: #d9910b;
+  border: none;
+  border-radius: 10px;
+  bottom: 0;
+  height: 40px;
+  position: fixed;
+  width: 96%;
+}
+
+/* ------------------------------------------------------------ */
+
+/* -------------------- Tela de Explorar ---------------------- */
+
+/* ---------- Componente Explore --------- */
+.main-explore {
+  align-items: stretch;
+  height: 100%;
+  justify-content: space-evenly;
+  margin: 0;
+}
+
+.main-explore a {
+  display: flex;
+  justify-content: center;
+}
+
+.explore-button {
+  background-color: #231651;
+  height: 100%;
+  width: 96%;
+}
+
+/* ------------------------------------------------------------ */
+
+/* ----------- Tela de Explorar por Ingredientes -------------- */
+.ingredients-container {
+  margin-top: 18%;
+}
+
+.ingredient {
+  background-color: #9a8f9794;
+  color: black;
+  font-size: 15pt;
+}
+
+.ingredient-title {
+  text-align: center;
+}
+
+/* ------------------------------------------------------------ */
+
+/* -------------- Tela de Explorar por Origem ----------------- */
+.recipes-area {
+  align-items: center;
+  background-color: #c3baba;
+  display: flex;
+  height: 50pt;
+  justify-content: center;
+  margin-top: 12%;
+}
+
+.select-area {
+  background-color: whitesmoke;
+  border: none;
+  border-radius: 10px;
+  height: 35px;
+  width: 96%;
+}
+
+.main-area .recipes-container {
+  margin-top: 5%;
+}
+
+/* ------------------------------------------------------------ */
+
+/* ---------------------- Tela de Perfil ---------------------- */
+.main-profile {
+  align-items: center;
+  height: 86%;
+  justify-content: space-evenly;
+  margin-top: 12%;
+}
+
+.main-profile p {
+  background-color: #f4f0bb;
+  font-size: 18pt;
+  text-align: center;
+  width: 100%;
+}
+
+.main-profile section {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 97%;
+  justify-content: space-evenly;
+  width: 100%;
+}
+
+.main-profile a {
+  align-content: center;
+  display: flex;
+  height: 30%;
+  justify-content: center;
+  width: 100%;
+}
+
+.profile-btns {
+  background-color: #231651;
+  height: 35%;
+  margin: 0;
+  width: 96%;
+}
+
+/* ------------------------------------------------------------ */
+
+
+/* ---------- Componente Footer ---------- */
+footer {
+  background-color: #f4f0bb;
+  bottom: 0;
+  display: flex;
+  justify-content: space-evenly;
+  padding: 1%;
+  position: fixed;
+  width: 100%;
+}
+
+/* --------------------------------------- */
+
+/* ---------- Pagina in progress ---------- */
+.main-inProgress {
+  flex-flow: column;
+}
+
+.checked-ingredient {
+  display: flex;
+}
+
+input:checked + .checked-list {
+  text-decoration: line-through;
+}
+
+.checked-input {
+  margin: 9px;
+}
+
+.ingredients-box {
+  background-color: rgba(240, 202, 202, 0.267);
+  border-radius: 10px;
+  flex-direction: column;
+  font-size: 14pt;
+  margin: 2%;
+  width: auto;
+}
+
+.inProgress-title {
+  color: rgba(0, 0, 0, 0.726);
+  margin: 15px;
+}
+
+.inProgress-instruction {
+  padding-left: 12px;
+  padding-right: 12px;
+  text-align: justify;
+}
+
+.inProgress-btn {
+  background-color: #d9910b;
+  border: none;
+  border-radius: 10px;
+  height: 40px;
+  margin-bottom: 15px;
+  margin-left: 7px;
+  margin-top: 12px;
+  width: 96%;
+}
+
+/* input:checked + .checked-input {
+  color: green;
+} */
+
+/*
+#5e9c53 - verde claro
+#256766 - verde escuro
+#d9910b - amarelo
+#a11d2b - vermelho
+#1A1e3b - azul
+*/
+
+/*
+  231651
+  63adf2
+  f4f0bb
+*/

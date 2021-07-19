@@ -1,25 +1,26 @@
-body {
+/* body {
   height: 100vh;
   width: 100vw;
-}
+} */
 
-.recipes-container {
+/* .recipes-container {
   display: flex;
   flex-flow: row wrap;
   height: 78%;
   justify-content: space-around;
-}
+} */
 
-.recipe {
+/* .recipe {
   align-items: center;
   display: flex;
   flex-direction: column;
-}
+} */
 
-.recipe-title {
+/* .recipe-title {
   font-size: 6pt;
-}
+} */
 
+/*
 .recipe-image {
   width: 40px;
-}
+} */

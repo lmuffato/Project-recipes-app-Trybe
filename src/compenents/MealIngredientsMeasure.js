@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import RecipesContext from '../contexts/RecipesContext';
-import '../styles/IngredientsMeasure.css';
+// import '../styles/IngredientsMeasure.css';
 import Loading from './Loading';
 
 function MealIngredientsMeasure({ detailsRecepie }) {
@@ -76,24 +76,29 @@ function MealIngredientsMeasure({ detailsRecepie }) {
     }
 
     return allIngredients.map((elem, index) => (
-      <div key={ index }>
-        <label data-testid={ `${index}-ingredient-step` } htmlFor={ elem[1] }>
-          <input
-            checked={ doneIngredients.some((element) => element === elem[1]) }
-            id={ elem[1] }
-            type="checkbox"
-            onChange={ (e) => checkedListIngredients(e) }
-          />
-          <span className="checked-list">
-            { `${elem[1]} - ${allMeasure[index][1]}` }
-          </span>
-        </label>
-      </div>
+      <label
+        key={ index }
+        className="checked-ingredient"
+        data-testid={ `${index}-ingredient-step` }
+        htmlFor={ elem[1] }
+      >
+        <input
+          className="checked-input"
+          checked={ doneIngredients.some((element) => element === elem[1]) }
+          id={ elem[1] }
+          type="checkbox"
+          onChange={ (e) => checkedListIngredients(e) }
+        />
+        <span className="checked-list">
+          { `${elem[1]} - ${allMeasure[index][1]}` }
+        </span>
+      </label>
     ));
   }
 
   return (
-    <div>
+    <div className="ingredients-box">
+      <h3 className="inProgress-title">Ingredients</h3>
       { getIngredientsList() }
     </div>
   );

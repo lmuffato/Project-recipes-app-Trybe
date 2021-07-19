@@ -69,7 +69,7 @@ function FavoriteRecipes() {
       );
     }
     return (
-      <div key={ id }>
+      <section key={ id }>
         { isCopy ? <span>Link copiado!</span> : null }
         <Link to={ `/bebidas/${id}` }>
           <img
@@ -100,7 +100,7 @@ function FavoriteRecipes() {
           id={ id }
           index={ index }
         />
-      </div>
+      </section>
     );
   };
 
@@ -118,40 +118,43 @@ function FavoriteRecipes() {
   };
 
   return (
-    <div>
+    <>
       <Header />
-      <button
-        type="button"
-        data-testid="filter-by-all-btn"
-        onClick={ () => handleContent('all') }
-      >
-        All
-      </button>
+      <main className="main-favorite">
+        <button
+          type="button"
+          data-testid="filter-by-all-btn"
+          onClick={ () => handleContent('all') }
+        >
+          All
+        </button>
 
-      <button
-        type="button"
-        data-testid="filter-by-food-btn"
-        onClick={ () => handleContent('meals') }
-      >
-        Food
-      </button>
+        <button
+          type="button"
+          data-testid="filter-by-food-btn"
+          onClick={ () => handleContent('meals') }
+        >
+          Food
+        </button>
 
-      <button
-        type="button"
-        data-testid="filter-by-drink-btn"
-        onClick={ () => handleContent('cocktails') }
-      >
-        Drinks
-      </button>
+        <button
+          type="button"
+          data-testid="filter-by-drink-btn"
+          onClick={ () => handleContent('cocktails') }
+        >
+          Drinks
+        </button>
 
-      {
-        showRecipes.map(
-          ({ id, type, area, category, alcoholicOrNot, name, image }, index) => (
-            renderCards({ id, type, area, category, alcoholicOrNot, name, image }, index)
-          ),
-        )
-      }
-    </div>
+        {
+          showRecipes.map(
+            ({ id, type, area, category, alcoholicOrNot, name, image }, index) => (
+              renderCards({ id, type, area, category, alcoholicOrNot, name, image },
+                index)
+            ),
+          )
+        }
+      </main>
+    </>
   );
 }
 

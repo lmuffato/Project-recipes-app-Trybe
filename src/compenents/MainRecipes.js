@@ -18,33 +18,21 @@ function MainRecipes() {
   } = useContext(RecipesContext);
 
   useEffect(() => {
-    if (recipes) setRenderRecipes(recipes);
+    if (recipes && !searchBtn) setRenderRecipes(recipes);
     if (mealsAndDrinkByIngredients) setRenderRecipes(mealsAndDrinkByIngredients);
-    if (searchedRecipes) setRenderRecipes(searchedRecipes);
-  }, [recipes, mealsAndDrinkByIngredients, searchedRecipes]);
-
-  console.log(mealsAndDrinkByIngredients);
+    if (searchedRecipes && searchBtn) setRenderRecipes(searchedRecipes);
+  }, [recipes, mealsAndDrinkByIngredients, searchedRecipes, searchBtn]);
 
   if (renderRecipes) {
     return (
-      <main data-testid="main-recipes" className="main">
+      <>
         { searchBtn ? <SearchBar /> : <FilterButtons /> }
         <section className="recipes-container">
-          { type === 'meal' ? renderRecipes.map((recipe, index) => (
-            <MealCards
-              data={ recipe }
-              index={ index }
-              key={ recipe.idMeal }
-            />
-          )) : renderRecipes.map((recipe, index) => (
-            <DrinkCards
-              data={ recipe }
-              index={ index }
-              key={ recipe.idDrink }
-            />
-          ))}
+          { type === 'meal'
+            ? <MealCards data={ renderRecipes } />
+            : <DrinkCards data={ renderRecipes } />}
         </section>
-      </main>
+      </>
     );
   }
   return (
