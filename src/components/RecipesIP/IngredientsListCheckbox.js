@@ -33,7 +33,7 @@ export default function IngredientsListCheckbox({
 
   return (
     <div className="ingredients-checkbox-container">
-      <strong>Ingredients</strong>
+      <h3>Ingredients</h3>
       {fullRecipe.map((ing, index) => (
         <label
           htmlFor="ingredient-checkbox"
