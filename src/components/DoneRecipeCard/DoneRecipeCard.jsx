@@ -53,11 +53,6 @@ function DoneRecipeCard(props) {
             onClick={ () => handleRemoveRecipe(index) }
           >
             <IoMdRemoveCircle size={ 30 } />
-            {/* <img
-              data-testid={ `${index}-horizontal-favorite-btn` }
-              src={ blackHeartIcon }
-              alt="remove-btn"
-            /> */}
           </button>
         </div>
         { recipe.tags !== null && (

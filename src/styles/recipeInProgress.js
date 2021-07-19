@@ -82,6 +82,10 @@ const RecipeInProgressContainer = styled.div`align-items: center;
     display: flex;
     justify-content: flex-start;
     margin-right: 4rem;
+
+    input {
+      font-weight: 300;
+    }
   }
 
   .instructions {
@@ -93,6 +97,7 @@ const RecipeInProgressContainer = styled.div`align-items: center;
     p {
       display: flex;
       flex-wrap: wrap;
+      font-weight: 300;
       margin: 1rem;
       max-width: 640px;
     }

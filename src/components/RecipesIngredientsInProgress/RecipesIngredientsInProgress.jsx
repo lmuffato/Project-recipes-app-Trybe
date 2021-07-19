@@ -162,6 +162,7 @@ function RecipeIngredients({ recipe, type, id }) {
           htmlFor={ element }
           key={ index }
           data-testid={ `${index}-ingredient-step` }
+          className={ checkedBox.includes(index) ? 'checked' : '' }
         >
           <input
             type="checkbox"

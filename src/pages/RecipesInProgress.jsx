@@ -70,7 +70,7 @@ function RecipesInProgress({ type }) {
         recipe={ singleRecipe }
         recipeCategory={ renderCategory }
       />
-      <h3>Ingredientes</h3>
+      <h3>Ingredients</h3>
       <div className="ingredients-list">
         <RecipeIngredientsInProgress
           recipe={ singleRecipe }
