@@ -11,7 +11,7 @@ const CardListContainer = styled.div`align-content: normal;
   max-width: 1120px;
 
   a {
-    color: black;
+    color: #30343b;
     text-decoration: none;
   }
 `;

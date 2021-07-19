@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
 const CardContainer = styled.div`margin: 8px 8px 32px;
-  min-height: 100px;
+  min-height: 150px;
   outline: 0;
   position: relative;
-  width: 6.7rem;
+  width: 8rem;
 
   .img-wrapper {
     border-radius: 4px;
@@ -28,12 +28,12 @@ const CardContainer = styled.div`margin: 8px 8px 32px;
   }
 
   .card-info {
-    align-content: normal;
-    align-items: normal;
+    align-content: center;
+    align-items: center;
     display: flex;
     flex-wrap: nowrap;
-    font-size: 1rem;
-    justify-content: normal;
+    font-size: 0.9rem;
+    justify-content: center;
     margin: 10px auto 6px;
     z-index: 2;
   }
