@@ -3,6 +3,7 @@ import { Form, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import Context from '../../context/Context';
 import setTokenLocalStorage from '../../services/localStorage';
+import './Login.css';
 
 function loginValidation(email, password) {
   const regex2Email = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i;
@@ -15,10 +16,11 @@ export default function Login() {
   const { setUserEmail, setPassword, userEmail, password } = useContext(Context);
   console.log(userEmail);
   return (
-    <div className="meals">
+    <div className="login-page">
+        <h1 className="title-login">OPEN</h1>
       <Form>
         <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label>Email address</Form.Label>
+          <Form.Label className="email-input">Email address</Form.Label>
           <Form.Control
             onChange={ ({ target }) => setUserEmail(target.value) }
             data-testid="email-input"
@@ -27,7 +29,7 @@ export default function Login() {
           />
         </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicPassword">
-          <Form.Label>Password</Form.Label>
+          <Form.Label className="password-input">Password</Form.Label>
           <Form.Control
             onChange={ ({ target }) => setPassword(target.value) }
             type="password"
