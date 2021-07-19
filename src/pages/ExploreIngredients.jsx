@@ -5,6 +5,7 @@ import Header from '../components/Header/Header';
 import Footer from '../components/Footer/Footer';
 import useFilteredRecipes from '../hooks/useFilteredRecipes';
 import logoIcon from '../images/logoPaginasExplorar.svg';
+import CardContainer from '../styles/genericCard';
 
 function ExploreIngredients({ type }) {
   // const history = useHistory();
@@ -69,21 +70,23 @@ function ExploreIngredients({ type }) {
             key={ index }
             onClick={ () => handleClick(dataIngredients) }
           >
-            <div data-testid={ `${index}-ingredient-card` }>
-              <div className="img-wrapper">
-                <img
-                  data-testid={ `${index}-card-img` }
-                  // style={ { maxWidth: '100px' } }
-                  src={ imgUrl }
-                  alt="Ingredient food/drink"
-                />
+            <CardContainer>
+              <div data-testid={ `${index}-ingredient-card` }>
+                <div className="img-wrapper">
+                  <img
+                    data-testid={ `${index}-card-img` }
+                    // style={ { maxWidth: '100px' } }
+                    src={ imgUrl }
+                    alt="Ingredient food/drink"
+                  />
+                </div>
+                <div className="card-info">
+                  <p data-testid={ `${index}-card-name` }>
+                    {ingredient.strIngredient1 || ingredient.strIngredient}
+                  </p>
+                </div>
               </div>
-              <div className="card-info">
-                <p data-testid={ `${index}-card-name` }>
-                  {ingredient.strIngredient1 || ingredient.strIngredient}
-                </p>
-              </div>
-            </div>
+            </CardContainer>
           </Link>
         );
       })}

@@ -111,7 +111,7 @@ const Container = styled.div`align-items: center;
     }
   }
 
-  button .recipe-btn {
+  .recipe-btn {
     background: #289ea8;
     border: 0;
     border-radius: 8px;
@@ -138,6 +138,10 @@ const Container = styled.div`align-items: center;
       filter: brightness(0.9);
     }
 
+  }
+
+  button {
+    position: fixed;
   }
 
   .icon-btn {
