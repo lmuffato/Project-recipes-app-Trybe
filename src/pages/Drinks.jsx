@@ -62,8 +62,7 @@ function Drinks({ match: { path } }) {
   const renderResult = () => {
     if (Object.keys(result).length === 0) return '...loading';
     if (result.drinks === null) {
-      return console
-        .log('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+      return alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
     }
     if (result.drinks.length === 1) {
       return <Redirect to={ `${path}/${result.drinks[0].idDrink}` } />;
