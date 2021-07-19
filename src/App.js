@@ -1,13 +1,14 @@
 import React from 'react';
-import './css/style.css';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 
 import store from './redux/store';
 import Routes from './pages/Routes';
-import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import StorageProvider from './context/StorageProvider';
+
+import './css/style.css';
+import './App.css';
+import 'react-multi-carousel/lib/styles.css';
 
 function App() {
   const progress = {
