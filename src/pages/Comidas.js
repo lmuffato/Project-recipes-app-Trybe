@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { useLocation } from 'react-router-dom';
 import { ALL_MEALS_ENDPOINT,
-  MEALS_BY_CATEGORY_ENDPOINT } from '../services/meals';
+  MEALS_BY_CATEGORY_ENDPOINT,
+  MEALS_BY_INGREDIENT_ENDPOINT } from '../services/meals';
 import { getFoodCategoriesAPIThunk,
   getFoodRecipesAPIThunk } from '../redux/actions/mealsAction';
 import Header from '../components/Header';
@@ -23,12 +25,18 @@ const pickEndpoint = (category) => {
 function Comidas() {
   const dispatch = useDispatch();
   const selectedCategory = useSelector((state) => state.meals.selectedCategory);
+  const location = useLocation();
   useEffect(() => {
     dispatch(getFoodCategoriesAPIThunk());
   }, [dispatch]);
   useEffect(() => {
-    dispatch(getFoodRecipesAPIThunk(pickEndpoint(selectedCategory)));
-  }, [dispatch, selectedCategory]);
+    const { fromIngredientsPage, ingredientName } = location.state || {};
+    if (fromIngredientsPage) {
+      dispatch(
+        getFoodRecipesAPIThunk(MEALS_BY_INGREDIENT_ENDPOINT(ingredientName)),
+      );
+    } else dispatch(getFoodRecipesAPIThunk(pickEndpoint(selectedCategory)));
+  }, [dispatch, selectedCategory, location]);
   const loadingRecipes = useSelector((state) => state.loading.loadingRecipes);
   const loadingCategories = useSelector((state) => state.loading.loadingCategories);
   const meals = useSelector((state) => state.meals.recipes);
