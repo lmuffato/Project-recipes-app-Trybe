@@ -5,11 +5,8 @@ import { Link, Redirect } from 'react-router-dom';
 import Context from '../../../context/Context';
 
 function CardsFilterRecipes() {
-// <<<<<<< HEAD
   const { filterFoods, clickRecipeFood, search } = useContext(Context);
-  // =======
-  // const { filterFoods, search } = useContext(Context);
-  // >>>>>>> main-group-12
+
   const showFilter = () => {
     const lengthFoods = 12;
     const recipes = filterFoods.slice(0, lengthFoods);

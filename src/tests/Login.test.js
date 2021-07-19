@@ -1,7 +1,7 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
 import App from '../App';
-import renderWithRouter from '../services/renderWithRouter';
+import renderWithRouter from './renderWithRouter';
 
 describe('Login Page Test', () => {
   test('shows the login page when route is `/`', () => {
