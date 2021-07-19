@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import profileIconImg from '../../images/profileIcon.svg';
 import Button from '../Generics/Button';
 import HeaderContainer from './styles';
@@ -17,7 +17,9 @@ function Header({ children, heading, logoSrc }) {
   return (
     <HeaderContainer>
       <div className="title-container">
-        <Logo logoSrc={ logoSrc } />
+        <Link to="/comidas">
+          <Logo logoSrc={ logoSrc } />
+        </Link>
         <div className="header-title-container">
           <h1 data-testid="page-title">{ heading }</h1>
         </div>

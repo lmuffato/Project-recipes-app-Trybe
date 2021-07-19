@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const Container = styled.div`align-items: center;
+const RecipeInProgressContainer = styled.div`align-items: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -47,20 +47,6 @@ const Container = styled.div`align-items: center;
       text-transform: uppercase;
     }
 
-    .recipe-title {
-      font-size: 2rem;
-      text-transform: capitalize;
-    }
-
-    .container {
-      display: flex;
-      justify-content: space-around;
-
-      div {
-        display: flex;
-      }
-    }
-
     .img-container {
 
       img {
@@ -75,6 +61,20 @@ const Container = styled.div`align-items: center;
         /* width: 100%; */
       }
     }
+  }
+
+  .container {
+    display: flex;
+    justify-content: space-around;
+
+    div {
+      display: flex;
+    }
+  }
+
+  .recipe-title {
+    font-size: 2rem;
+    text-transform: capitalize;
   }
 
   .ingredient-list {
@@ -98,13 +98,6 @@ const Container = styled.div`align-items: center;
     }
   }
 
-  iframe {
-    border: 0;
-    margin: 0 auto 3.75rem;
-    max-height: auto;
-    max-width: 90vw;
-  }
-
   .title-wrapper {
     border: 0;
     font: inherit;
@@ -115,14 +108,14 @@ const Container = styled.div`align-items: center;
 
     h3 {
       color: #707070;
-      font-size: 1.2rem;
+      font-size: 18px;
       line-height: 29px;
       margin: 0 0 28px;
     }
   }
 
   .recipe-btn {
-    background: #289ea8;
+    background: #c10644;
     border: 0;
     border-radius: 8px;
     bottom: 0;
@@ -132,8 +125,8 @@ const Container = styled.div`align-items: center;
     font-weight: 600;
     gap: 2rem;
     height: 2.5rem;
-    max-width: 250px;
-    min-width: 200px;
+    max-width: 200px;
+    min-width: 180px;
     padding: 0 32px;
     position: fixed;
     text-transform: lowercase;
@@ -148,10 +141,6 @@ const Container = styled.div`align-items: center;
       filter: brightness(0.9);
     }
 
-  }
-
-  button {
-    position: fixed;
   }
 
   .icon-btn {
@@ -184,10 +173,6 @@ const Container = styled.div`align-items: center;
       }
     }
 
-    iframe {
-      max-width: 70vw;
-    }
-
     h3 {
       margin-left: 6rem;
     }
@@ -214,6 +199,7 @@ const Container = styled.div`align-items: center;
       }
     }
   }
+
 `;
 
-export default Container;
+export default RecipeInProgressContainer;

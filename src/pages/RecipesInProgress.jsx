@@ -5,8 +5,9 @@ import RecipeInfo from '../components/RecipeInfo/RecipeInfo';
 import Button from '../components/Generics/Button';
 import RecipeIngredientsInProgress from
   '../components/RecipesIngredientsInProgress/RecipesIngredientsInProgress';
-import Container from '../styles/recipeDetails';
+import RecipeInProgressContainer from '../styles/recipeInProgress';
 import useDetailsProvider from '../hooks/useDetailsProvider';
+import { handleDoneRecipesLS } from '../helpers/localStorageHelper';
 
 function RecipesInProgress({ type }) {
   const { id } = useParams();
@@ -41,6 +42,7 @@ function RecipesInProgress({ type }) {
 
   const handleRedirectToDoneRecipes = (ev) => {
     ev.preventDefault();
+    handleDoneRecipesLS(id, type, singleRecipe);
     history.push('/receitas-feitas');
   };
 
@@ -57,31 +59,23 @@ function RecipesInProgress({ type }) {
   const recipeThumb = singleRecipe.strMealThumb || singleRecipe.strDrinkThumb;
   const recipeCategory = singleRecipe.strCategory;
   const isAlchooholic = singleRecipe.strAlcoholic || '';
-  const recipeId = singleRecipe.idMeal || '';
-  const drinkId = singleRecipe.idDrink || '';
   const renderCategory = type === 'drinks' ? (isAlchooholic) : (recipeCategory);
 
   return (
-    <Container>
+    <RecipeInProgressContainer>
       <RecipeInfo
         recipeName={ recipeName }
         recipeThumb={ recipeThumb }
         type={ type }
         recipe={ singleRecipe }
         recipeCategory={ renderCategory }
-      >
-        { type === 'drinks'
-          ? (<h3 data-testid="recipe-category">{isAlchooholic}</h3>)
-          : (
-            <h3 data-testid="recipe-category">{recipeCategory}</h3>)}
-      </RecipeInfo>
+      />
       <h3>Ingredientes</h3>
       <div className="ingredients-list">
         <RecipeIngredientsInProgress
           recipe={ singleRecipe }
-          idMeal={ recipeId }
-          idDrink={ drinkId }
           type={ type }
+          id={ id }
         />
       </div>
       <h3>Instructions</h3>
@@ -92,22 +86,18 @@ function RecipesInProgress({ type }) {
       </div>
       <Button
         data-testid="finish-recipe-btn"
+        className="recipe-btn"
         disabled={ isDisabled }
         onClick={ handleRedirectToDoneRecipes }
       >
         Finalizar receita
       </Button>
-    </Container>
+    </RecipeInProgressContainer>
   );
 }
 
 export default RecipesInProgress;
 
-// RecipeDetails.defaultProps = {
-//   url: '',
-// };
-
 RecipesInProgress.propTypes = {
   type: PropTypes.string.isRequired,
-  // url: PropTypes.string,
 };

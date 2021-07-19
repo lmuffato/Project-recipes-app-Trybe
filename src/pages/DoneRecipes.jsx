@@ -3,6 +3,7 @@ import DoneRecipeCard from '../components/DoneRecipeCard/DoneRecipeCard';
 import filterRecipesByType from '../utils/filterRecipesByType';
 import Header from '../components/Header/Header';
 import logoIcon from '../images/savory-6.svg';
+import CardGridContainer, { PageGrid } from '../styles/doneRecipes';
 
 function DoneRecipes() {
   const [doneRecipes, setDoneRecipes] = useState([]);
@@ -36,14 +37,7 @@ function DoneRecipes() {
     <div>
       <Header heading="Receitas Feitas" logoSrc={ logoIcon } />
       { copiedToClipboard && 'Link copiado!' }
-      <div>
-        <button
-          type="button"
-          data-testid="filter-by-all-btn"
-          onClick={ () => setFilterByType('All') }
-        >
-          All
-        </button>
+      <PageGrid>
         <button
           type="button"
           data-testid="filter-by-food-btn"
@@ -58,16 +52,25 @@ function DoneRecipes() {
         >
           Drinks
         </button>
-      </div>
-      { filterRecipesByType(doneRecipes, filterByType).map((recipe, index) => (
-        <DoneRecipeCard
-          recipe={ recipe }
-          index={ index }
-          key={ index }
-          handleRemoveRecipe={ handleRemoveRecipe }
-          setCopiedToClipboard={ setCopiedToClipboard }
-        />
-      )) }
+        <button
+          type="button"
+          data-testid="filter-by-all-btn"
+          onClick={ () => setFilterByType('All') }
+        >
+          All
+        </button>
+      </PageGrid>
+      <CardGridContainer>
+        { filterRecipesByType(doneRecipes, filterByType).map((recipe, index) => (
+          <DoneRecipeCard
+            recipe={ recipe }
+            index={ index }
+            key={ index }
+            handleRemoveRecipe={ handleRemoveRecipe }
+            setCopiedToClipboard={ setCopiedToClipboard }
+          />
+        )) }
+      </CardGridContainer>
     </div>
   );
 }
