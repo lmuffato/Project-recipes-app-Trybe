@@ -8,26 +8,9 @@ const PASSWORD_TEST_ID = 'password-input';
 const LOGIN_BTN_TEST_ID = 'login-submit-btn';
 const MOCK_EMAIL = 'alguem@alguem.com';
 
+const FIRST_RECIPE = '0-card-image';
+
 describe('Teste dos botoes de categoria página de Comidas', () => {
-  test('filtro é aplicado ao clicar no botão', async () => {
-    // const { getByTestId, findByTestId } = renderWithRouterAndContext(<App />);
-
-    // userEvent.type(getByTestId(EMAIL_TEST_ID), MOCK_EMAIL);
-    // userEvent.type(getByTestId(PASSWORD_TEST_ID), '1234567');
-    // userEvent.click(getByTestId(LOGIN_BTN_TEST_ID));
-
-    // const beefFilter = await findByTestId('Beef-category-filter');
-
-    // expect(beefFilter).toBeInTheDocument();
-
-    // userEvent.click(beefFilter);
-
-    // const firstBeefRecipe = await findByTestId('0-card-name');
-    // console.log(firstBeefRecipe);
-
-    // expect(firstBeefRecipe).toHaveTextContent('Beef and Mustard Pie');
-  });
-
   test('filtro é removido ao clicar no botão novamente', async () => {
     const { getByTestId, findByTestId } = renderWithRouterAndContext(<App />);
 
@@ -40,7 +23,7 @@ describe('Teste dos botoes de categoria página de Comidas', () => {
     userEvent.click(beefFilter);
     userEvent.click(beefFilter);
 
-    const firstRecipe = await findByTestId('0-card-name');
+    const firstRecipe = await findByTestId(FIRST_RECIPE);
 
     expect(firstRecipe).toHaveTextContent('Corba');
   });
@@ -58,32 +41,13 @@ describe('Teste dos botoes de categoria página de Comidas', () => {
     userEvent.click(beefFilter);
     userEvent.click(allFilter);
 
-    const firstRecipe = await findByTestId('0-card-name');
+    const firstRecipe = await findByTestId(FIRST_RECIPE);
 
     expect(firstRecipe).toHaveTextContent('Corba');
   });
 });
 
 describe('Teste dos botoes de categoria página de Bebidas', () => {
-  test('filtro é aplicado ao clicar no botão', async () => {
-    // const { getByTestId, findByTestId } = renderWithRouterAndContext(<App />);
-
-    // userEvent.type(getByTestId(EMAIL_TEST_ID), MOCK_EMAIL);
-    // userEvent.type(getByTestId(PASSWORD_TEST_ID), '1234567');
-    // userEvent.click(getByTestId(LOGIN_BTN_TEST_ID));
-
-    // const beefFilter = await findByTestId('Beef-category-filter');
-
-    // expect(beefFilter).toBeInTheDocument();
-
-    // userEvent.click(beefFilter);
-
-    // const firstBeefRecipe = await findByTestId('0-card-name');
-    // console.log(firstBeefRecipe);
-
-    // expect(firstBeefRecipe).toHaveTextContent('Beef and Mustard Pie');
-  });
-
   test('filtro é removido ao clicar no botão novamente', async () => {
     const { getByTestId, findByTestId, history } = renderWithRouterAndContext(<App />);
 
@@ -98,7 +62,7 @@ describe('Teste dos botoes de categoria página de Bebidas', () => {
     userEvent.click(ordFilter);
     userEvent.click(ordFilter);
 
-    const firstRecipe = await findByTestId('0-card-name');
+    const firstRecipe = await findByTestId(FIRST_RECIPE);
 
     expect(firstRecipe).toHaveTextContent('GG');
   });
@@ -118,7 +82,7 @@ describe('Teste dos botoes de categoria página de Bebidas', () => {
     userEvent.click(ordFilter);
     userEvent.click(allFilter);
 
-    const firstRecipe = await findByTestId('0-card-name');
+    const firstRecipe = await findByTestId(FIRST_RECIPE);
 
     expect(firstRecipe).toHaveTextContent('GG');
   });
