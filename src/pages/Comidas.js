@@ -60,11 +60,7 @@ function Comidas() {
     }
   }, [texto]);
 
-<<<<<<< HEAD
-  if (data.length < 1) return <Loading />;
-=======
   if (data.length < 1) return <Loading param="food" />;
->>>>>>> 15fd8afedb19429d0506b58c9306c5b84e7adae0
 
   return (
     <div>
