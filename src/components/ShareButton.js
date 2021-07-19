@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import shareIcon from '../images/shareIcon.svg';
@@ -6,28 +6,30 @@ import shareIcon from '../images/shareIcon.svg';
 const copy = require('clipboard-copy');
 
 export default function ShareButton({ recipeId, isFood, index }) {
-  function handleShareClick() {
-    copy(`${window.location.origin}/${isFood ? 'comidas' : 'bebidas'}/${recipeId}`);
+  const [displayToast, setDisplayToast] = useState(false);
+  const WAIT_TIME = 3000;
 
-    const toast = document.createElement('p');
-    toast.innerText = 'Link copiado!';
-    toast.className = 'toast';
-    document.getElementsByTagName('body')[0].appendChild(toast);
-    const WAIT_TIME = 4000;
+  function handleShareClick() {
+    copy(`http://localhost:3000/${isFood ? 'comidas' : 'bebidas'}/${recipeId}`);
+    setDisplayToast(true);
+
     setTimeout(() => {
-      toast.remove();
+      setDisplayToast(false);
     }, WAIT_TIME);
   }
 
   return (
-    <button
-      type="button"
-      data-testid={ `${index !== undefined ? `${index}-horizontal-` : ''}share-btn` }
-      onClick={ handleShareClick }
-      src={ shareIcon }
-    >
-      <img src={ shareIcon } alt="compartilhar" />
-    </button>
+    <>
+      {displayToast && <p className="toast">Link copiado!</p>}
+      <button
+        type="button"
+        data-testid={ `${index !== undefined ? `${index}-horizontal-` : ''}share-btn` }
+        onClick={ handleShareClick }
+        src={ shareIcon }
+      >
+        <img src={ shareIcon } alt="compartilhar" />
+      </button>
+    </>
   );
 }
 
