@@ -105,48 +105,57 @@ function BebidasEmProcesso() {
   function renderList() {
     console.log(listIngredients);
     return listIngredients.map((item, index) => (
-      <label
-        htmlFor="checks"
-        key={ index }
-        className={ indexChecked.includes(item[0]) ? 'text-decoration' : 'no-decoration' }
-        data-testid={ `${index}-ingredient-step` }
-      >
-        <input
-          type="checkbox"
-          id="checks"
-          onClick={ (ev) => checkedStyle(ev, item[0]) }
-          checked={ indexChecked.includes(item[0]) }
-        />
-        { `${item[0]} - ${item[1]}` }
-      </label>
+      <div key={ index } className="checkbox">
+        <label
+          htmlFor="checks"
+          key={ index }
+          className={
+            indexChecked.includes(item[0]) ? 'text-decoration' : 'no-decoration'
+          }
+          data-testid={ `${index}-ingredient-step` }
+        >
+          <input
+            type="checkbox"
+            id="checks"
+            onClick={ (ev) => checkedStyle(ev, item[0]) }
+            checked={ indexChecked.includes(item[0]) }
+          />
+          { `${item[0]} - ${item[1]}` }
+        </label>
+      </div>
     ));
   }
 
   if (loading) return <p>carregando</p>;
 
   return (
-    <section>
+    <section className="progress-page">
       <img
         src={ drink.strDrinkThumb }
         data-testid="recipe-photo"
         alt="imagem da refeição"
       />
-      <h3 data-testid="recipe-title">{ drink.strDrink }</h3>
-      <p data-testid="recipe-category">{ drink.strCategory }</p>
 
-      <button type="button" data-testid="share-btn" onClick={ handleShare }>
-        <img src={ shareimg } alt="icone compartilhar" />
-        { share ? 'Link copiado!' : null }
-      </button>
+      <div className="header-progress">
+        <div>
+          <h3 data-testid="recipe-title">{ drink.strDrink }</h3>
+          <p data-testid="recipe-category">{ drink.strCategory }</p>
+        </div>
 
-      <button
-        type="button"
-        data-testid="favorite-btn"
-        src={ favorite ? heartBlack : heartWhite }
-        onClick={ handleClick }
-      >
-        <img src={ favorite ? heartBlack : heartWhite } alt="Favoritar" />
-      </button>
+        <button type="button" data-testid="share-btn" onClick={ handleShare }>
+          <img src={ shareimg } alt="icone compartilhar" />
+          { share ? 'Link copiado!' : null }
+        </button>
+
+        <button
+          type="button"
+          data-testid="favorite-btn"
+          src={ favorite ? heartBlack : heartWhite }
+          onClick={ handleClick }
+        >
+          <img src={ favorite ? heartBlack : heartWhite } alt="Favoritar" />
+        </button>
+      </div>
 
       { renderList() }
 

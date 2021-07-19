@@ -1,0 +1,17 @@
+.progress-page {
+  background-color:black;
+  img {
+    // width: 100px;
+    // height: 100px;
+    
+  }
+}
+
+.header-progress {
+  //@include flex(row, space-between, center);
+  background-color: pink;
+}
+
+section {
+  background-color: orange;
+}
