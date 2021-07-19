@@ -5,6 +5,8 @@ import renderWithRouterHooksAndProvider from './renderWithRouterHooksAndProvider
 
 const RECIPE_TITLE_TEST_ID = 'recipe-title';
 const FIRST_IMAGE_TEST_ID = '0-card-img';
+const BEEF_FILTER = 'Beef-category-filter';
+const ORDINARY_DRINK_FILTER = 'Ordinary Drink-category-filter';
 
 describe('Testes de rotas do App', () => {
   it('Aparece mensagem de Not Found quando a rota é mudada para /explorar/bebidas/area',
@@ -102,7 +104,7 @@ describe('Testes de rotas do App', () => {
       });
       await waitForElement(() => getByText('Beef Lo Mein'));
       expect(getByText('Beef Lo Mein')).toBeInTheDocument();
-      expect(getByTestId('0-card-img').src).toMatch(
+      expect(getByTestId(FIRST_IMAGE_TEST_ID).src).toMatch(
         'https://www.themealdb.com/images/media/meals/1529444830.jpg',
       );
       expect(getByText('Chicken Congee')).toBeInTheDocument();
@@ -118,12 +120,25 @@ describe('Testes de rotas do App', () => {
 
       // await waitForElement(() => getByTestId('explore-by-area-dropdown'));
       await waitForElement(() => getByText('Corba'));
-      await waitForElement(() => getByTestId('Beef-category-filter'));
+      await waitForElement(() => getByTestId(BEEF_FILTER));
       expect(getByText('Corba')).toBeInTheDocument();
       expect(getByText('Kumpir')).toBeInTheDocument();
-      expect(getByTestId('Beef-category-filter')).toBeInTheDocument();
+      expect(getByTestId(BEEF_FILTER)).toBeInTheDocument();
       expect(getByTestId('Breakfast-category-filter')).toBeInTheDocument();
       expect(getByTestId('Chicken-category-filter')).toBeInTheDocument();
+
+      fireEvent.click(getByTestId(BEEF_FILTER));
+      await waitForElement(() => getByText('Beef and Mustard Pie'));
+      expect(getByText('Beef and Mustard Pie')).toBeInTheDocument();
+      expect(getByTestId(FIRST_IMAGE_TEST_ID).src).toMatch(
+        'https://www.themealdb.com/images/media/meals/sytuqu1511553755.jpg',
+      );
+      expect(getByText('Beef and Oyster pie')).toBeInTheDocument();
+
+      fireEvent.click(getByTestId('All-category-filter'));
+      await waitForElement(() => getByText('Corba'));
+      expect(getByText('Dal fry')).toBeInTheDocument();
+      expect(getByText('Lasagne')).toBeInTheDocument();
     });
 
   it('Rota /bebidas',
@@ -133,12 +148,24 @@ describe('Testes de rotas do App', () => {
         '/bebidas',
       );
 
-      // await waitForElement(() => getByTestId('explore-by-area-dropdown'));
       await waitForElement(() => getByText('GG'));
-      await waitForElement(() => getByTestId('Ordinary Drink-category-filter'));
+      await waitForElement(() => getByTestId(ORDINARY_DRINK_FILTER));
       expect(getByText('GG')).toBeInTheDocument();
       expect(getByText('A1')).toBeInTheDocument();
-      expect(getByTestId('Ordinary Drink-category-filter')).toBeInTheDocument();
+      expect(getByTestId(ORDINARY_DRINK_FILTER)).toBeInTheDocument();
       expect(getByTestId('Cocktail-category-filter')).toBeInTheDocument();
+
+      fireEvent.click(getByTestId(ORDINARY_DRINK_FILTER));
+      await waitForElement(() => getByText('3-Mile Long Island Iced Tea'));
+      expect(getByText('3-Mile Long Island Iced Tea')).toBeInTheDocument();
+      expect(getByTestId('0-card-img').src).toMatch(
+        'https://www.thecocktaildb.com/images/media/drink/rrtssw1472668972.jpg',
+      );
+      expect(getByText('410 Gone')).toBeInTheDocument();
+
+      fireEvent.click(getByTestId('All-category-filter'));
+      await waitForElement(() => getByText('GG'));
+      expect(getByText('ABC')).toBeInTheDocument();
+      expect(getByText('747')).toBeInTheDocument();
     });
 });
