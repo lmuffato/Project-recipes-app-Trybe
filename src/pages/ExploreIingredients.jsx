@@ -12,8 +12,8 @@ import { requestDrinkIngredient } from '../service/apiRequestsDrinks';
 function ExploreIngredients() {
   const [foodIngred, setFoodIngred] = useState([]);
   const [drinksIngred, setDrinksIngred] = useState([]);
-  const { setMeals } = useContext(FoodContext);
-  const { setDrinks } = useContext(DrinksContext);
+  const { setMeals, setMealsToMap } = useContext(FoodContext);
+  const { setDrinks, setDrinksToMap } = useContext(DrinksContext);
   const twelve = 12;
   const path = window.location.pathname;
 
@@ -31,10 +31,12 @@ function ExploreIngredients() {
 
   async function fetchIngredMeals(ingredient) {
     setMeals(await requestMealIngredient(ingredient));
+    setMealsToMap(await requestMealIngredient(ingredient));
   }
 
   async function fetchIngredDrinks(ingredient) {
     setDrinks(await requestDrinkIngredient(ingredient));
+    setDrinksToMap(await requestDrinkIngredient(ingredient));
   }
 
   function ClickMeMeals(event) {
