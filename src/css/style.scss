@@ -5,9 +5,10 @@
   background-color: $basecolor;
   box-shadow: $shadow;
   height: 50px;
+  padding-right: 10px;
   width: 100%;
 
-  @include flex(row, space-between, center) ;
+  @include flex(row, space-around, center) ;
 
   button {
     background-color: rgba(255, 255, 255, 0);
@@ -16,6 +17,58 @@
 
   h3 {
     font-weight: bold;
+  }
+}
+
+.footer {
+  background-color: #ffc363;
+  bottom: 0;
+  box-shadow: 1px 1px 5px rgb(189, 189, 189);
+  display: flex;
+  height: 50px;
+  padding-left: 10px;
+  padding-right: 10px;
+  position: fixed;
+  width: 100%;
+
+  @include flex(row, space-around, center) ;
+}
+
+.explore {
+
+  @include flex(column, center, center) ;
+  margin-top: 20px;
+
+  button {
+    background-color: white;
+    border-radius: $border-radius;
+    border-style: none;
+    box-shadow: $shadow;
+    height: 80px;
+    margin-bottom: 20px;
+    width: 500px;
+  }
+}
+
+.perfil {
+
+  @include flex(column, center, center) ;
+  margin-top: 50px;
+
+  span {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+
+  button {
+    background-color: $basecolor;
+    border-radius: $border-radius;
+    border-style: none;
+    box-shadow: $shadow;
+    height: 50px;
+    margin-bottom: 20px;
+    width: 300px;
   }
 }
 
@@ -76,44 +129,5 @@
     height: 120px;
     object-fit: cover;
     width: 100%;
-  }
-}
-
-
-.explore {
-
-  @include flex(column, center, center) ;
-  margin-top: 20px;
-
-  button {
-    background-color: white;
-    border-radius: $border-radius;
-    border-style: none;
-    box-shadow: $shadow;
-    height: 80px;
-    margin-bottom: 20px;
-    width: 500px;
-  }
-}
-
-.perfil {
-
-  @include flex(column, center, center) ;
-  margin-top: 50px;
-
-  span {
-    font-size: 20px;
-    font-weight: bold;
-    margin-bottom: 20px;
-  }
-
-  button {
-    background-color: $basecolor;
-    border-radius: $border-radius;
-    border-style: none;
-    box-shadow: $shadow;
-    height: 50px;
-    margin-bottom: 20px;
-    width: 300px;
   }
 }

@@ -217,6 +217,7 @@
   -webkit-box-shadow: 1px 1px 5px #bdbdbd;
           box-shadow: 1px 1px 5px #bdbdbd;
   height: 50px;
+  padding-right: 10px;
   width: 100%;
   -webkit-box-align: center;
       -ms-flex-align: center;
@@ -228,9 +229,8 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
 }
 
 .header button {
@@ -240,6 +240,93 @@
 
 .header h3 {
   font-weight: bold;
+}
+
+.footer {
+  background-color: #ffc363;
+  bottom: 0;
+  -webkit-box-shadow: 1px 1px 5px #bdbdbd;
+          box-shadow: 1px 1px 5px #bdbdbd;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 50px;
+  padding-left: 10px;
+  padding-right: 10px;
+  position: fixed;
+  width: 100%;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+.explore {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin-top: 20px;
+}
+
+.explore button {
+  background-color: white;
+  border-radius: 5px;
+  border-style: none;
+  -webkit-box-shadow: 1px 1px 5px #bdbdbd;
+          box-shadow: 1px 1px 5px #bdbdbd;
+  height: 80px;
+  margin-bottom: 20px;
+  width: 500px;
+}
+
+.perfil {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin-top: 50px;
+}
+
+.perfil span {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.perfil button {
+  background-color: #ffc363;
+  border-radius: 5px;
+  border-style: none;
+  -webkit-box-shadow: 1px 1px 5px #bdbdbd;
+          box-shadow: 1px 1px 5px #bdbdbd;
+  height: 50px;
+  margin-bottom: 20px;
+  width: 300px;
 }
 
 .category-buttons {
@@ -334,67 +421,5 @@
   -o-object-fit: cover;
      object-fit: cover;
   width: 100%;
-}
-
-.explore {
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  margin-top: 20px;
-}
-
-.explore button {
-  background-color: white;
-  border-radius: 5px;
-  border-style: none;
-  -webkit-box-shadow: 1px 1px 5px #bdbdbd;
-          box-shadow: 1px 1px 5px #bdbdbd;
-  height: 80px;
-  margin-bottom: 20px;
-  width: 500px;
-}
-
-.perfil {
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  margin-top: 50px;
-}
-
-.perfil span {
-  font-size: 20px;
-  font-weight: bold;
-  margin-bottom: 20px;
-}
-
-.perfil button {
-  background-color: #ffc363;
-  border-radius: 5px;
-  border-style: none;
-  -webkit-box-shadow: 1px 1px 5px #bdbdbd;
-          box-shadow: 1px 1px 5px #bdbdbd;
-  height: 50px;
-  margin-bottom: 20px;
-  width: 300px;
 }
 /*# sourceMappingURL=style.css.map */

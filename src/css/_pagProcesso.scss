@@ -5,7 +5,7 @@
 
 .header-progress {
 
-  @include flex(row, space-between, center);
+  @include flex(row, space-between, center) ;
   background-color: white;
   height: 100px;
   padding: 20px;

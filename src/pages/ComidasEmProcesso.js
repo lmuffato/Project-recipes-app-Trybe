@@ -109,7 +109,9 @@ function ComidasEmProcesso() {
         <label
           htmlFor="checks"
           key={ index }
-          className={ indexChecked.includes(item[0]) ? 'text-decoration' : 'no-decoration' }
+          className={ indexChecked.includes(
+            item[0],
+          ) ? 'text-decoration' : 'no-decoration' }
           data-testid={ `${index}-ingredient-step` }
         >
           <input
