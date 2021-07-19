@@ -1,6 +1,8 @@
 import React from 'react';
-import './App.css';
+// import './styles/reset.css';
+// import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './styles/style.css';
 // import SearchbarProvider from './contexts/SeachbarProvider';
 import ProvidersManager from './contexts/ProvidersManager';
 

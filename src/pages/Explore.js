@@ -15,23 +15,27 @@ function Explore() {
   return (
     <>
       <Header />
-      <Link to="/explorar/comidas">
-        <button
-          type="button"
-          data-testid="explore-food"
-        >
-          Explorar Comidas
-        </button>
-      </Link>
+      <main className="main-explore">
+        <Link to="/explorar/comidas">
+          <button
+            type="button"
+            data-testid="explore-food"
+            className="button explore-button"
+          >
+            Explorar Comidas
+          </button>
+        </Link>
 
-      <Link to="/explorar/bebidas">
-        <button
-          type="button"
-          data-testid="explore-drinks"
-        >
-          Explorar Bebidas
-        </button>
-      </Link>
+        <Link to="/explorar/bebidas">
+          <button
+            type="button"
+            data-testid="explore-drinks"
+            className="button explore-button"
+          >
+            Explorar Bebidas
+          </button>
+        </Link>
+      </main>
       <Footer />
     </>
   );

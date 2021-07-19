@@ -15,15 +15,15 @@ https://www.youtube.com/watch?v=SGwHpzgqzgk */
   width: 100vw;
 } */
 
-/* .recipes {
+.recipes {
   display: flex;
   -webkit-overflow-scrolling: touch;
   overflow-x: auto;
   scroll-behavior: smooth;
   scroll-snap-type: x mandatory;
-} */
+}
 
-.recipe {
+.recomendation-card {
   flex: none;
   height: 150px;
   margin-right: 10%;
@@ -31,11 +31,11 @@ https://www.youtube.com/watch?v=SGwHpzgqzgk */
   width: 40%;
 }
 
-.recipe-image {
+/* .recipe-image {
   height: 80%;
   object-fit: cover;
   width: 100%;
-}
+} */
 
 /* .start-recipe {
   bottom: 0;

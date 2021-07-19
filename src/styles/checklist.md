@@ -1,0 +1,68 @@
+# Checklist dos Estilos
+
+- [x] Tela de Login
+  - [x] Input email
+  - [x] Input senha
+  - [x] Botão de login
+- [x] Header
+  - [x] Ícone de perfil
+  - [x] Título da página
+  - [x] Ícone de pesquisa
+- [x] Barra de busca
+  - [x]  Input de texto
+  - [x] Radio buttons
+  - [x] Botão de pesquisa
+- [x] Tela principal de receitas
+  - [x] Botões de filtro
+  - [x] Cartões de receita
+    - [x] Imagem da receita
+    - [x] Título da receita
+- [x] Tela de detalhes de uma receita
+  - [x] Imagem de receita
+  - [x] Título da receita
+  - [x] Botão de compartilhar
+  - [x] Botão de favoritar
+  - [x] Categorida da receita
+  - [x] Título dos ingredientes
+  - [x] Container dos ingredientes
+  - [x] Container do passo a passo
+  - [x] Área do vídeo nos detalhes das comidas
+  - [x] Seção das recomendações
+    - [x] Cartões das receitas
+      - [x] Imagem da receita
+      - [x] Título da receita
+  - [x] Botão de iniciar/continuar receita
+- [ ] Tela de receita em progresso
+- [ ] Tela de receitas feitas
+- [ ] Tela de receitas favoritas
+- [x] Tela de explorar
+  - [x] Tela de explorar bebidas ou comidas
+    - [x] Botão de Explorar por Comidas
+      - [x] Tela de Explorar Comidas
+        - [x] Botão de Explorar por Ingredientes
+        - [x] Botão de Explorar por Local de Origem
+        - [x] Botão de Me Surpreenda
+    - [x] Botão de Explorar por Bebidas
+      - [x] Tela de Explorar Bebidas
+        - [x] Botão de Explorar por Ingredientes
+        - [x] Botão de Me Surpreenda
+  - [x] Tela de explorar ingredientes
+    - [x] Comidas
+      - [x] Cartões de receita
+        - [x] Imagem da receita
+        - [x] Título da receita
+    - [x] Bebidas
+      - [x] Cartões de receita
+        - [x] Imagem da receita
+        - [x] Título da receita
+  - [x] Tela de explorar por local de origem/área
+    - [x] Select
+- [x] Tela de perfil
+  - [x] Email da pessoa usária
+  - [x] Botão de receitas feitas
+  - [x] Botão de receitas favoritas
+  - [x] Botão de sair
+- [x] Menu inferior
+  - [x] Ícone de bebida
+  - [x] Ícone de explorar
+  - [x] Ícone de comida
