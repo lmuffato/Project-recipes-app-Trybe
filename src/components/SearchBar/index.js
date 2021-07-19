@@ -18,9 +18,8 @@ export default function HeaderSearchBar() {
   const getDrinks = async () => {
     await searchDrinks(myChoice, searchTerm)
       .then((drinks) => {
-        drinks.slice(0, MAX_LENGTH_RECIPES);
         if (drinks.length === 1) history.push(`/bebidas/${drinks[0].idDrink}`);
-        setRecipesDrinks(drinks);
+        setRecipesDrinks(drinks.slice(0, MAX_LENGTH_RECIPES));
       })
       .catch(() => {
         const { alert } = window;
@@ -31,9 +30,8 @@ export default function HeaderSearchBar() {
   const getFoods = async () => {
     await searchFoods(myChoice, searchTerm)
       .then((foods) => {
-        foods.slice(0, MAX_LENGTH_RECIPES);
         if (foods.length === 1) history.push(`/comidas/${foods[0].idMeal}`);
-        setRecipesFoods(foods);
+        setRecipesFoods(foods.slice(0, MAX_LENGTH_RECIPES));
       })
       .catch(() => {
         const { alert } = window;
