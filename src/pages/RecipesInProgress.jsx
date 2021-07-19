@@ -98,11 +98,6 @@ function RecipesInProgress({ type }) {
 
 export default RecipesInProgress;
 
-// RecipeDetails.defaultProps = {
-//   url: '',
-// };
-
 RecipesInProgress.propTypes = {
   type: PropTypes.string.isRequired,
-  // url: PropTypes.string,
 };
