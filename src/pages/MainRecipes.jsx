@@ -107,9 +107,8 @@ const Container = styled.div`
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
     height: 100vh;
     width: 90vw;
-    padding-right: 45px;
   }
 `;
