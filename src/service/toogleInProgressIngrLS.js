@@ -8,7 +8,7 @@ Esta função recebe como parametro o tipo de banco de dados (dbType), o id da r
   -caso a chave não exista, é criada uma chave nomeada pelo id e com um array contendo o valor de ingredient
  */
 
-function toogleInProgressIngredientOnLocal(dbType, id, ingredient) {
+function toogleInProgressIngrLS(dbType, id, ingredient) {
   const ingredientsOnLS = JSON.parse(localStorage.getItem('inProgressRecipes'));
   let ingredientsList = [ingredient];
   if (ingredientsOnLS && Object.keys(ingredientsOnLS[dbType])[0] === id) {
@@ -26,4 +26,4 @@ function toogleInProgressIngredientOnLocal(dbType, id, ingredient) {
   localStorage.setItem('inProgressRecipes', JSON.stringify(newIngredientsOnLs));
 }
 
-export default toogleInProgressIngredientOnLocal;
+export default toogleInProgressIngrLS;

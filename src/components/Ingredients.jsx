@@ -1,9 +1,12 @@
-import PropTypes from 'prop-types';
 import React from 'react';
-// import { useLocation } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { useLocation } from 'react-router-dom';
+import toogleInProgressIngrLS from '../service/toogleInProgressIngrLS';
 
 function Ingredients({ recipe }) {
-  // const { pathname } = useLocation();
+  const { pathname } = useLocation();
+  const dbType = pathname.includes('comidas') ? 'meals' : 'cocktails';
+  const id = dbType === 'meals' ? recipe.idMeal : recipe.idDrink;
   // const isInProgress = pathname.includes('in-progress');
   const recipeEntries = Object.entries(recipe);
   const ingredientsList = recipeEntries ? recipeEntries.reduce((acc, enter) => {
@@ -21,7 +24,10 @@ function Ingredients({ recipe }) {
       <ul>
         {ingredientsList.map((ingredient, index) => (
           <div key={ index } data-testid="ingredient-step">
-            <input type="checkbox" />
+            <input
+              type="checkbox"
+              onChange={ () => toogleInProgressIngrLS(dbType, id, ingredient) }
+            />
             <li
               key={ index }
               data-testid={ `${index}-ingredient-name-and-measure` }
