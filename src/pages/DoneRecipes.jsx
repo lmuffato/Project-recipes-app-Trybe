@@ -40,13 +40,6 @@ function DoneRecipes() {
       <PageGrid>
         <button
           type="button"
-          data-testid="filter-by-all-btn"
-          onClick={ () => setFilterByType('All') }
-        >
-          All
-        </button>
-        <button
-          type="button"
           data-testid="filter-by-food-btn"
           onClick={ () => setFilterByType('Food') }
         >
@@ -58,6 +51,13 @@ function DoneRecipes() {
           onClick={ () => setFilterByType('Drinks') }
         >
           Drinks
+        </button>
+        <button
+          type="button"
+          data-testid="filter-by-all-btn"
+          onClick={ () => setFilterByType('All') }
+        >
+          All
         </button>
       </PageGrid>
       <CardGridContainer>

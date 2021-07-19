@@ -36,9 +36,10 @@ const Wrapper = styled.section`align-items: center;
     line-height: 1;
     margin-bottom: 1.5rem;
     margin-top: auto;
-    max-width: 275px;
-    min-width: 270px;
+    max-width: 250px;
+    min-width: 230px;
     padding: 0 32px;
+    text-transform: lowercase;
     transition: filter 0.2s;
 
     /* & + button {
