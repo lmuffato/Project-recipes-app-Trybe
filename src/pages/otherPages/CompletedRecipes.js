@@ -49,7 +49,7 @@ export default function CompletedRecipes() {
   }, [completedFil]);
 
   return (
-    <div className="food-page">
+    <div>
       <Header title="Receitas Feitas" show={ false } />
       <CompletedButtomFilters />
       <CompletedRecipeCardList list={ list } />

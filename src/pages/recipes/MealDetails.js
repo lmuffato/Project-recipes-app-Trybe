@@ -3,9 +3,9 @@ import { useRouteMatch } from 'react-router-dom';
 import { getMealsById, getIngredients, getMeasures } from '../../services/getMeals';
 import { getRecomendedDrinks } from '../../services/getDrinks';
 import './recipeDetails.css';
-import shareIcon from '../../images/shareIcon.svg';
-import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
-import blackHeartIcon from '../../images/blackHeartIcon.svg';
+import shareIcon from '../../images/shareIcon.png';
+import whiteHeartIcon from '../../images/whiteHeartIcon.png';
+import blackHeartIcon from '../../images/blackHeartIcon.png';
 import StartRecipeButton from '../../components/StartRecipeButton';
 
 const copy = require('clipboard-copy');
@@ -56,6 +56,7 @@ function MealDetails() {
         setDrinksCarousel(drinks);
       });
     setHeartToFav();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function copyBoard() {
@@ -148,6 +149,7 @@ function MealDetails() {
               <img
                 src={ shareIcon }
                 alt="share button"
+                width="26px"
               />
             </button>
             <button type="button" onClick={ () => heartButton(info) }>
@@ -155,6 +157,7 @@ function MealDetails() {
                 src={ !buttonFav ? blackHeartIcon : whiteHeartIcon }
                 alt="favorite button"
                 data-testid="favorite-btn"
+                width="26px"
               />
             </button>
           </div>

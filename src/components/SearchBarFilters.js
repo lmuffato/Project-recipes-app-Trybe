@@ -113,6 +113,13 @@ export default function SearchBarFilters() {
           data-testid="search-input"
           onChange={ handleChange }
         />
+        <button
+          type="button"
+          data-testid="exec-search-btn"
+          onClick={ (event) => handleClick(event) }
+        >
+          Buscar
+        </button>
         <label htmlFor="ingredients-radio">
           <input
             type="radio"
@@ -146,13 +153,6 @@ export default function SearchBarFilters() {
           />
           Primeira letra
         </label>
-        <button
-          type="button"
-          data-testid="exec-search-btn"
-          onClick={ (event) => handleClick(event) }
-        >
-          Buscar
-        </button>
       </form>
     </div>
   );

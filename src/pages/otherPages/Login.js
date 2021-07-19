@@ -14,7 +14,7 @@ function loginValidation(email, password) {
 export default function Login() {
   const { setUserEmail, setPassword, userEmail, password } = useContext(Context);
   return (
-    <div className="meals">
+    <div className="login">
       <Form>
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>

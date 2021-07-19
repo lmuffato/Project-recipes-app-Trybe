@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useRouteMatch } from 'react-router-dom';
 import { getDrinksById, getIngredients, getMeasures } from '../../../services/getDrinks';
 import '../recipeDetails.css';
-import shareIcon from '../../../images/shareIcon.svg';
-import whiteHeartIcon from '../../../images/whiteHeartIcon.svg';
-import blackHeartIcon from '../../../images/blackHeartIcon.svg';
+import shareIcon from '../../../images/shareIcon.png';
+import whiteHeartIcon from '../../../images/whiteHeartIcon.png';
+import blackHeartIcon from '../../../images/blackHeartIcon.png';
 import FinishButton from '../../../components/FinishButton';
 
 const copy = require('clipboard-copy');
@@ -181,11 +181,13 @@ function DrinksProgress() {
               <img
                 src={ shareIcon }
                 alt="share button"
+                width="26px"
               />
             </button>
             <button type="button" onClick={ () => heartButton(info) }>
               <img
                 src={ !buttonFav ? blackHeartIcon : whiteHeartIcon }
+                width="26px"
                 alt="favorite button"
                 data-testid="favorite-btn"
               />

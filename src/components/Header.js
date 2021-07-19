@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import profileIcon from '../images/profileIcon.svg';
-import searchIcon from '../images/searchIcon.svg';
+import profileIcon from '../images/profileIcon.png';
+import searchIcon from '../images/searchIcon.png';
 import SearchBarFilters from './SearchBarFilters';
 
 export default function Header({ title, show = true }) {
@@ -30,6 +30,7 @@ export default function Header({ title, show = true }) {
             data-testid="search-top-btn"
             src={ searchIcon }
             alt="search icon"
+            width="30px"
           />
         </button>
       );
@@ -48,6 +49,7 @@ export default function Header({ title, show = true }) {
             data-testid="profile-top-btn"
             src={ profileIcon }
             alt="profile icon"
+            width="30px"
           />
         </button>
         <h1

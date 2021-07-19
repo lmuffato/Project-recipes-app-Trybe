@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { useRouteMatch } from 'react-router-dom';
 import { getMealsById, getIngredients, getMeasures } from '../../../services/getMeals';
 import '../recipeDetails.css';
-import shareIcon from '../../../images/shareIcon.svg';
+import shareIcon from '../../../images/shareIcon.png';
 import FinishButton from '../../../components/FinishButton';
-import whiteHeartIcon from '../../../images/whiteHeartIcon.svg';
-import blackHeartIcon from '../../../images/blackHeartIcon.svg';
+import whiteHeartIcon from '../../../images/whiteHeartIcon.png';
+import blackHeartIcon from '../../../images/blackHeartIcon.png';
 
 const copy = require('clipboard-copy');
 
@@ -59,6 +59,7 @@ function MealsProgress() {
         cocktails: {},
       }));
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function copyBoard() {
@@ -150,6 +151,7 @@ function MealsProgress() {
   useEffect(() => {
     setInProgress2('comidas');
     verifyBoxs('comidas');
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [stepsDone]);
 
   const handleCheckbox = (target) => {
@@ -187,6 +189,7 @@ function MealsProgress() {
             <button type="button" data-testid="share-btn" onClick={ () => copyBoard() }>
               <img
                 src={ shareIcon }
+                width="26px"
                 alt="share button"
               />
             </button>
@@ -194,6 +197,7 @@ function MealsProgress() {
               <img
                 src={ !buttonFav ? blackHeartIcon : whiteHeartIcon }
                 alt="favorite button"
+                width="26px"
                 data-testid="favorite-btn"
               />
             </button>

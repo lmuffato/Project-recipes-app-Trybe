@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import shareIcon from '../images/shareIcon.svg';
+import shareIcon from '../images/shareIcon.png';
 
 const copy = require('clipboard-copy');
 
@@ -35,6 +35,7 @@ function CompletedRecipeCardList({ list }) {
           <img
             src={ shareIcon }
             alt="share button"
+            width="26px"
           />
         </button>
       </div>
