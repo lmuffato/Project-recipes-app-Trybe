@@ -10,6 +10,7 @@ import { mapMealIngredients } from '../utils/mapIngredients';
 import shareIcon from '../images/shareIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import Loading from '../components/Loading';
 import './recipesInProgress.css';
 
 export default function RecipesFoodsInProgress() {
@@ -107,7 +108,7 @@ export default function RecipesFoodsInProgress() {
   }
 
   if (!meal) {
-    return <p>Loading...</p>;
+    return <Loading/>;
   }
 
   return (

@@ -6,6 +6,7 @@ import ingredientsMesure from '../utils/ingredientsMesure';
 import RecipeContext from '../context/RecipesContext';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
+import Loading from '../components/Loading';
 import './recipesPageContainer.css';
 import ShareButton from '../components/ShareButton';
 import './recipesDetailsPage.css';
@@ -15,15 +16,18 @@ export default function RecipesDrinksDetails(props) {
   const { doneRecipes, favorites, setFavorites,
   } = useContext(RecipeContext);
   const [drink, setDrink] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const [mealAlternate, setMealAlternate] = useState([]);
 
   useEffect(() => {
     const getDrink = async () => {
+      setIsLoading(true);
       const result = await getDrinkByID(id);
       const mealResults = await getMeals('name', '');
       setDrink(result);
       const RECOMMENDED_MEALS = 6;
       setMealAlternate(mealResults.meals.slice(0, RECOMMENDED_MEALS));
+      setIsLoading(false);
     };
 
     getDrink();
@@ -97,6 +101,8 @@ export default function RecipesDrinksDetails(props) {
 
   const NUMBER_OF_INGREDIENTS = 15;
   const ingredients = ingredientsMesure(drink, NUMBER_OF_INGREDIENTS);
+
+  if(isLoading) return <Loading/>;
 
   return (
     <div className="c-recipesDetails">

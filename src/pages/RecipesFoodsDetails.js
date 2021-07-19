@@ -7,6 +7,7 @@ import RecipeContext from '../context/RecipesContext';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import ShareButton from '../components/ShareButton';
+import Loading from '../components/Loading';
 import './recipesDetailsPage.css';
 
 export default function RecipesFoodsDetails(props) {
@@ -15,10 +16,12 @@ export default function RecipesFoodsDetails(props) {
     doneRecipes, favorites, setFavorites,
   } = useContext(RecipeContext);
   const [meal, setMeal] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const [drinkAlternate, setDrinkAlternate] = useState([]);
 
   useEffect(() => {
     const getMeal = async () => {
+      setIsLoading(true);
       const result = await getMealByID(id);
       const drinkResults = await getCocktails('name', '');
       const resultWithEmbedVideo = {
@@ -28,6 +31,7 @@ export default function RecipesFoodsDetails(props) {
       setMeal(resultWithEmbedVideo);
       const RECOMMENDED_DRINKS = 6;
       setDrinkAlternate(drinkResults.drinks.slice(0, RECOMMENDED_DRINKS));
+      setIsLoading(false);
     };
 
     getMeal();
@@ -98,6 +102,10 @@ export default function RecipesFoodsDetails(props) {
           : 'Iniciar Receita'}
       </Link>
     );
+  }
+
+  if(isLoading) {
+    return <Loading/>;
   }
 
   return (

@@ -10,6 +10,7 @@ import shareIcon from '../images/shareIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import RecipeContext from '../context/RecipesContext';
+import Loading from '../components/Loading';
 import './recipesInProgress.css';
 
 export default function RecipesDrinksInProgress() {
@@ -108,7 +109,7 @@ export default function RecipesDrinksInProgress() {
   }
 
   if (!drink) {
-    return <p>Loading...</p>;
+    return <Loading/>;
   }
 
   return (
