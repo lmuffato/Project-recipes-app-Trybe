@@ -1,20 +1,20 @@
-$basecolor: #FFC363;
-$secondcolor: #FF722A;
+$basecolor: #ffc363;
+$secondcolor: #ff722a;
 $textcolor: rgb(27, 27, 27);
 $shadow: 1px 1px 5px rgb(189, 189, 189);
 $border-radius: 5px;
 
 
 @mixin flex($direction, $justify, $align) {
+  align-items: $align;
   display: flex;
   flex-direction: $direction;
   justify-content: $justify;
-  align-items: $align;
 }
 
 @mixin border() {
-  border-radius: $border-radius;
   border: solid black 0.5px;
+  border-radius: $border-radius;
 }
 
 // @mixin btn() {

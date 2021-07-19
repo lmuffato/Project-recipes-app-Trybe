@@ -1,6 +1,10 @@
 .login {
-  width: 100%;
+  background-color: #ffc363;
   height: 100vh;
+  width: 100%;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -11,25 +15,24 @@
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  background-color: #FFC363;
 }
 
 .login h1 {
   color: white;
   font-weight: bold;
-  text-align: center;
   padding-top: 20px;
+  text-align: center;
 }
 
 .login img {
-  width: 410px;
   margin: 0 auto;
+  width: 410px;
 }
 
 .login-box {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -40,35 +43,35 @@
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
   padding-top: 20px;
 }
 
 .login-box h5 {
-  color: #FF722A;
+  color: #ff722a;
   font-weight: bold;
 }
 
 .login-box input {
-  border-radius: 5px;
   border: solid black 0.5px;
-  width: 220px;
-  height: 35px;
+  border-radius: 5px;
   background-color: rgba(255, 255, 255, 0.308);
+  height: 35px;
+  width: 220px;
 }
 
 .login-box button {
-  width: 220px;
-  height: 35px;
-  border-style: none;
-  background-color: #FF722A;
-  color: white;
+  background-color: #ff722a;
   border-radius: 5px;
+  border-style: none;
+  color: white;
+  height: 35px;
+  width: 220px;
 }
 
 .search {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -79,14 +82,11 @@
   -webkit-box-pack: right;
       -ms-flex-pack: right;
           justify-content: right;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  width: 100%;
   background-color: white;
-  height: 150px;
   -webkit-box-shadow: 1px 1px 5px #bdbdbd;
           box-shadow: 1px 1px 5px #bdbdbd;
+  height: 150px;
+  width: 100%;
 }
 
 .search-input {
@@ -94,8 +94,8 @@
 }
 
 .search-input input {
-  border-radius: 5px;
   border: solid black 0.5px;
+  border-radius: 5px;
   background-color: white;
   width: 400px;
 }
@@ -105,25 +105,28 @@
 }
 
 .search-radio input {
-  border-radius: 5px;
   border: solid black 0.5px;
+  border-radius: 5px;
   background-color: white;
 }
 
 .search-btn button {
-  border-style: none;
-  background-color: #FFC363;
+  background-color: #ffc363;
   border-radius: 5px;
-  width: 150px;
+  border-style: none;
   height: 35px;
+  width: 150px;
 }
 
 .img-bg {
-  width: 100%;
   height: 600px;
+  width: 100%;
 }
 
 .header-progress {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -134,17 +137,14 @@
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  height: 100px;
   background-color: white;
+  height: 100px;
   padding: 20px;
 }
 
 .header-progress h3 {
   font-weight: bold;
-  margin-bottom: 0px;
+  margin-bottom: 0;
 }
 
 .header-progress p {
@@ -152,14 +152,14 @@
 }
 
 .header-progress button {
-  border-style: none;
   background-color: rgba(255, 255, 255, 0);
+  border-style: none;
 }
 
 .checkbox {
   background-color: white;
-  width: 100%;
   padding: 5px 20px;
+  width: 100%;
 }
 
 .p-progress {
@@ -167,16 +167,19 @@
 }
 
 .btn-finalizar {
+  background-color: #ff722a;
   border-style: none;
-  background-color: #FF722A;
-  margin: 20px;
-  width: 90%;
-  height: 50px;
   color: white;
   font-weight: bold;
+  height: 50px;
+  margin: 20px;
+  width: 90%;
 }
 
 .ingredient-container {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -187,37 +190,37 @@
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
 }
 
 .ingredient-card {
-  width: 45%;
-  height: 180px;
+  background-color: white;
   border-radius: 5px;
   -webkit-box-shadow: 1px 1px 5px #bdbdbd;
           box-shadow: 1px 1px 5px #bdbdbd;
+  height: 180px;
   margin: 10px;
-  background-color: white;
+  width: 45%;
 }
 
 .ingredient-card p {
   color: #1b1b1b;
-  font-weight: bold;
   font-size: 18px;
+  font-weight: bold;
   margin-left: 20px;
   margin-top: 10px;
 }
 
 .header {
-  width: 100%;
-  height: 50px;
-  background-color: #FFC363;
+  background-color: #ffc363;
   -webkit-box-shadow: 1px 1px 5px #bdbdbd;
           box-shadow: 1px 1px 5px #bdbdbd;
+  height: 50px;
+  width: 100%;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -228,14 +231,11 @@
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
 }
 
 .header button {
-  border-style: none;
   background-color: rgba(255, 255, 255, 0);
+  border-style: none;
 }
 
 .header h3 {
@@ -243,6 +243,9 @@
 }
 
 .category-buttons {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -253,31 +256,31 @@
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
-  margin-top: 10px;
   margin-bottom: 10px;
+  margin-top: 10px;
 }
 
 .category-buttons button {
-  width: 150px;
-  height: 40px;
-  background-color: #FFC363;
+  background-color: #ffc363;
   border-radius: 5px;
   border-style: none;
-  margin: 5px;
   -webkit-box-shadow: 1px 1px 5px #bdbdbd;
           box-shadow: 1px 1px 5px #bdbdbd;
+  height: 40px;
+  margin: 5px;
+  width: 150px;
 }
 
 .category-buttons button:hover {
-  background-color: #FF722A;
+  background-color: #ff722a;
 }
 
 .recipe-container {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -288,57 +291,55 @@
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
 }
 
 .recipe-card {
-  width: 45%;
-  height: 180px;
+  background-color: white;
   border-radius: 5px;
   -webkit-box-shadow: 1px 1px 5px #bdbdbd;
           box-shadow: 1px 1px 5px #bdbdbd;
+  height: 180px;
   margin: 10px;
-  background-color: white;
+  width: 45%;
 }
 
 .recipe-card p {
   color: #1b1b1b;
-  font-weight: bold;
   font-size: 18px;
+  font-weight: bold;
   margin-left: 20px;
   margin-top: 10px;
 }
 
 .img-crop {
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  background-color: pink;
+  border-radius: 5px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
-  -webkit-box-align: start;
-      -ms-flex-align: start;
-          align-items: flex-start;
+      -ms-flex-flow: column wrap;
+          flex-flow: column wrap;
   height: 120px;
-  background-color: pink;
-  border-radius: 5px;
 }
 
 .img-crop img {
-  width: 100%;
   height: 120px;
   -o-object-fit: cover;
      object-fit: cover;
+  width: 100%;
 }
 
 .explore {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -349,24 +350,24 @@
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
   margin-top: 20px;
 }
 
 .explore button {
-  border-style: none;
-  width: 500px;
-  height: 80px;
   background-color: white;
   border-radius: 5px;
+  border-style: none;
   -webkit-box-shadow: 1px 1px 5px #bdbdbd;
           box-shadow: 1px 1px 5px #bdbdbd;
+  height: 80px;
   margin-bottom: 20px;
+  width: 500px;
 }
 
 .perfil {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -377,26 +378,23 @@
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
   margin-top: 50px;
 }
 
 .perfil span {
-  font-weight: bold;
   font-size: 20px;
+  font-weight: bold;
   margin-bottom: 20px;
 }
 
 .perfil button {
-  border-style: none;
-  width: 300px;
-  height: 50px;
-  background-color: #FFC363;
+  background-color: #ffc363;
   border-radius: 5px;
+  border-style: none;
   -webkit-box-shadow: 1px 1px 5px #bdbdbd;
           box-shadow: 1px 1px 5px #bdbdbd;
+  height: 50px;
   margin-bottom: 20px;
+  width: 300px;
 }
 /*# sourceMappingURL=style.css.map */

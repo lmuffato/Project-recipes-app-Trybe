@@ -1,40 +1,40 @@
-@import './utils';
-@import './login';
-@import './favoritos';
-@import './feitos';
-@import './search';
-@import './pagDetalhes';
-@import './pagProcesso';
-@import './pagExplorarPorIngredientes';
+@import './utils', './login', './favoritos', './feitos', './search',
+  './pagDetalhes', './pagProcesso', './pagExplorarPorIngredientes' ;
 
-.header { 
-  width: 100%;
-  height: 50px;
+.header {
   background-color: $basecolor;
   box-shadow: $shadow;
-  @include flex(row, space-between, center);
+  height: 50px;
+  width: 100%;
+
+  @include flex(row, space-between, center) ;
+
   button {
-    border-style: none;
     background-color: rgba(255, 255, 255, 0);
+    border-style: none;
   }
+
   h3 {
     font-weight: bold;
   }
 }
 
 .category-buttons {
-  @include flex(row, center, center);
+
+  @include flex(row, center, center) ;
   flex-wrap: wrap;
-  margin-top: 10px;
   margin-bottom: 10px;
+  margin-top: 10px;
+
   button {
-    width: 150px;
-    height: 40px;
     background-color: $basecolor;
     border-radius: $border-radius;
     border-style: none;
-    margin: 5px;
     box-shadow: $shadow;
+    height: 40px;
+    margin: 5px;
+    width: 150px;
+
     &:hover {
       background-color: $secondcolor;
     }
@@ -42,72 +42,78 @@
 }
 
 .recipe-container {
-  @include flex(row, center, center);
+
+  @include flex(row, center, center) ;
   flex-wrap: wrap;
 }
 
 .recipe-card {
-  width: 45%;
-  height: 180px;
+  background-color: white;
   border-radius: $border-radius;
   box-shadow: $shadow;
+  height: 180px;
   margin: 10px;
-  background-color: white;
+  width: 45%;
+
   p {
     color: $textcolor;
-    font-weight: bold;
     font-size: 18px;
+    font-weight: bold;
     margin-left: 20px;
     margin-top: 10px;
   }
 }
 
 .img-crop {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
   align-items: flex-start;
-  height: 120px;
   background-color: pink;
   border-radius: $border-radius;
-  
+  display: flex;
+  flex-flow: column wrap;
+  height: 120px;
+
   img {
-    width: 100%;
     height: 120px;
-    object-fit:cover;
+    object-fit: cover;
+    width: 100%;
   }
 }
 
 
 .explore {
-  @include flex(column, center, center);
+
+  @include flex(column, center, center) ;
   margin-top: 20px;
+
   button {
-    border-style: none;
-    width: 500px;
-    height: 80px;
-    background-color:white;
+    background-color: white;
     border-radius: $border-radius;
+    border-style: none;
     box-shadow: $shadow;
-    margin-bottom: 20px; 
+    height: 80px;
+    margin-bottom: 20px;
+    width: 500px;
   }
 }
 
 .perfil {
-  @include flex(column, center, center);
+
+  @include flex(column, center, center) ;
   margin-top: 50px;
+
   span {
-    font-weight: bold;
     font-size: 20px;
+    font-weight: bold;
     margin-bottom: 20px;
   }
+
   button {
-    border-style: none;
-    width: 300px;
-    height: 50px;
     background-color: $basecolor;
     border-radius: $border-radius;
+    border-style: none;
     box-shadow: $shadow;
-    margin-bottom: 20px; 
+    height: 50px;
+    margin-bottom: 20px;
+    width: 300px;
   }
 }
