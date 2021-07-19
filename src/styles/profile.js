@@ -5,7 +5,6 @@ const Wrapper = styled.section`align-items: center;
   flex-direction: column;
   gap: 1rem;
   justify-content: center;
-  margin-top: 40px;
 
   strong {
     margin: 30px auto;
@@ -15,8 +14,9 @@ const Wrapper = styled.section`align-items: center;
     text-decoration: none;
 
     & + a {
-      margin-bottom: 20px;
-      margin-top: 10px;
+      margin-bottom: 10px;
+
+      /* margin-top: 10px; */
     }
   }
 

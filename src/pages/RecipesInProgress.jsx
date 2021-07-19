@@ -7,6 +7,7 @@ import RecipeIngredientsInProgress from
   '../components/RecipesIngredientsInProgress/RecipesIngredientsInProgress';
 import Container from '../styles/recipeDetails';
 import useDetailsProvider from '../hooks/useDetailsProvider';
+import { handleDoneRecipesLS } from '../helpers/localStorageHelper';
 
 function RecipesInProgress({ type }) {
   const { id } = useParams();
@@ -41,6 +42,7 @@ function RecipesInProgress({ type }) {
 
   const handleRedirectToDoneRecipes = (ev) => {
     ev.preventDefault();
+    handleDoneRecipesLS(id, type, singleRecipe);
     history.push('/receitas-feitas');
   };
 
@@ -69,12 +71,7 @@ function RecipesInProgress({ type }) {
         type={ type }
         recipe={ singleRecipe }
         recipeCategory={ renderCategory }
-      >
-        { type === 'drinks'
-          ? (<h3 data-testid="recipe-category">{isAlchooholic}</h3>)
-          : (
-            <h3 data-testid="recipe-category">{recipeCategory}</h3>)}
-      </RecipeInfo>
+      />
       <h3>Ingredientes</h3>
       <div className="ingredients-list">
         <RecipeIngredientsInProgress
@@ -82,6 +79,7 @@ function RecipesInProgress({ type }) {
           idMeal={ recipeId }
           idDrink={ drinkId }
           type={ type }
+          id={ id }
         />
       </div>
       <h3>Instructions</h3>

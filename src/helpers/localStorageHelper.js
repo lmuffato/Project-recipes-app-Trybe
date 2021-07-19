@@ -1,3 +1,5 @@
+import currentDate from './date';
+
 const handleRemoveFavorite = (id, key) => {
   const getLocalStorage = JSON.parse(localStorage.getItem(key));
   const newArrOfRecipes = getLocalStorage.filter((it) => it.id !== id);
@@ -52,5 +54,46 @@ export const handleCheckDoneRecipes = (key, id) => {
       return soughtId;
     }
     return false;
+  }
+};
+
+export const handleSetRecipesInProgressToLocalStorage = (key, recipeObjt, type, id) => {
+  const getLocalStorage = JSON.parse(localStorage.getItem(key));
+  if (getLocalStorage) {
+    const recipeId = type === 'meals' ? Object.keys(getLocalStorage.meals)
+      : Object.keys(getLocalStorage.cocktails);
+    if (recipeId) {
+      const checkLocalStorage = getLocalStorage.some((item) => item === id);
+      if (checkLocalStorage) {
+        return checkLocalStorage;
+      }
+      if (!checkLocalStorage) {
+        const newRecipesObj = { ...getLocalStorage, recipeObjt };
+        localStorage.setItem(key, JSON.stringify(newRecipesObj));
+      }
+    }
+  }
+};
+
+export const handleDoneRecipesLS = (id, type, singleRecipe) => {
+  const doneRecipesObjt = {
+    id,
+    type: type === 'drinks' ? 'bebida' : 'comida',
+    area: singleRecipe.strArea || '',
+    category: singleRecipe.strCategory || '',
+    alcoholicOrNot: singleRecipe.strAlcoholic || '',
+    name: singleRecipe.strMeal || singleRecipe.strDrink,
+    image: singleRecipe.strMealThumb || singleRecipe.strDrinkThumb,
+    doneDate: currentDate,
+    tags: [singleRecipe.strTags],
+  };
+  const getDoneRecipesFromLS = JSON.parse(localStorage.getItem('doneRecipes'));
+  if (getDoneRecipesFromLS) {
+    const updateDoneRecipes = [...getDoneRecipesFromLS, doneRecipesObjt];
+    localStorage.setItem('doneRecipes', JSON.stringify(updateDoneRecipes));
+  }
+  if (!getDoneRecipesFromLS) {
+    const createDoneRecipesKey = [doneRecipesObjt];
+    localStorage.setItem('doneRecipes', JSON.stringify(createDoneRecipesKey));
   }
 };
