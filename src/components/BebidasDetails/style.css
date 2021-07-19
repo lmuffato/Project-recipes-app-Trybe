@@ -4,13 +4,34 @@
   width: 100%;
 }
 
-.recipe-details-container img {
-  width: 80%;
+.top-recipe-details {
+  position: relative;
 }
 
-.recipe-details-container .favorite-btn {
+.top-recipe-details img {
+  width: 100%;
+}
+
+.top-recipe-details .recipes-buttons-actions {
+  display: flex;
+}
+
+.recipes-buttons-actions button {
+  border: none;
+  flex: 1;
+}
+
+.recipes-buttons-actions button:nth-child( 2 ) {
+  background-color: #ffc529;
+}
+
+.recipes-buttons-actions button img {
   width: 30px;
 }
+
+/* .recipe-details-container .favorite-btn {
+  width: 30px;
+} */
 
 .start-recipe-btn {
   align-self: center;

@@ -12,16 +12,16 @@ export default function ShareButton({ urlCopied }) {
   }
 
   return (
-    <div>
-      <input
-        type="image"
-        alt="share icon"
+    <>
+      <button
+        type="button"
         onClick={ handleClick }
-        src={ shareIcon }
         data-testid="share-btn"
-      />
+      >
+        <img src={ shareIcon } alt="share icon" />
+      </button>
       {show ? <p>Link copiado!</p> : null}
-    </div>
+    </>
   );
 }
 
