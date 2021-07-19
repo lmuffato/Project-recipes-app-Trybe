@@ -78,4 +78,19 @@ describe('Testes de rotas do App', () => {
       expect(getByTestId('recipe-category')).toBeInTheDocument();
       expect(getByText('Recomendadas')).toBeInTheDocument();
     });
+
+  it('Rota /explorar/comidas/area renderiza corretamente',
+    async () => {
+      const { getByText, getByTestId } = renderWithRouterHooksAndProvider(
+        <App />,
+        '/explorar/comidas/area',
+      );
+
+      await waitForElement(() => getByTestId(FIRST_IMAGE_TEST_ID));
+
+      expect(getByTestId(FIRST_IMAGE_TEST_ID)).toBeInTheDocument();
+      expect(getByText('Corba')).toBeInTheDocument();
+      expect(getByText('Kumpir')).toBeInTheDocument();
+      expect(getByText('Tamiya')).toBeInTheDocument();
+    });
 });
