@@ -92,7 +92,11 @@ function ExplorarComidasArea() {
     <div>
       <Header title="Explorar Origem" />
       <main className="explorar-origem-container">
-        <select data-testid="explore-by-area-dropdown" className="centralize-select" onChange={ handleChange }>
+        <select
+          data-testid="explore-by-area-dropdown"
+          className="centralize-select"
+          onChange={ handleChange }
+        >
           <option
             key="All"
             value="All"
