@@ -76,7 +76,12 @@ function MealIngredientsMeasure({ detailsRecepie }) {
     }
 
     return allIngredients.map((elem, index) => (
-      <label key={ index } className="checked-ingredient" data-testid={ `${index}-ingredient-step` } htmlFor={ elem[1] }>
+      <label
+        key={ index }
+        className="checked-ingredient"
+        data-testid={ `${index}-ingredient-step` }
+        htmlFor={ elem[1] }
+      >
         <input
           className="checked-input"
           checked={ doneIngredients.some((element) => element === elem[1]) }

@@ -114,7 +114,12 @@ function MealsRecepiesProgress() {
         />
         <div className="ingredients-box">
           <h3 className="inProgress-title">Instruções</h3>
-          <p data-testid="instructions" className="inProgress-instruction">{ strInstructions }</p>
+          <p
+            data-testid="instructions"
+            className="inProgress-instruction"
+          >
+            { strInstructions }
+          </p>
         </div>
         <Link to="/receitas-feitas">
           <button
@@ -127,7 +132,7 @@ function MealsRecepiesProgress() {
             Finalizar receita
           </button>
         </Link>
-      </section >
+      </section>
     </div>
   );
 }
