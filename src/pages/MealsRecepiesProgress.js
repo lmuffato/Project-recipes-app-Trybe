@@ -82,44 +82,52 @@ function MealsRecepiesProgress() {
   } = detailsRecepie;
 
   return (
-    <div>
+    <div className="main-inProgress">
       <img
         data-testid="recipe-photo"
+        className="recomendation-image"
         alt="meals recepi"
         src={ strMealThumb }
         width="50px"
       />
-      <h2 data-testid="recipe-title">{ strMeal }</h2>
-      <ShareButton
-        idRecipe={ `comidas/${recepiID}` }
-      />
-      <FavoriteBtn
-        id={ recepiID }
-        type="comida"
-        area={ strArea }
-        category={ strCategory }
-        alcoholicOrNot=""
-        name={ strMeal }
-        image={ strMealThumb }
-      />
-      <p data-testid="recipe-category">{ strCategory }</p>
-      <p>Ingredients</p>
-      <MealIngredientsMeasure
-        detailsRecepie={ detailsRecepie }
-      />
-      <p>Instruções</p>
-      <p data-testid="instructions">{ strInstructions }</p>
-
-      <Link to="/receitas-feitas">
-        <button
-          data-testid="finish-recipe-btn"
-          type="button"
-          disabled={ allChecked }
-          onClick={ () => saveLS() }
-        >
-          Finalizar receita
-        </button>
-      </Link>
+      <section className="title-and-buttons">
+        <h1 data-testid="recipe-title">{ strMeal }</h1>
+        <section className="interaction-buttons">
+          <ShareButton
+            idRecipe={ `comidas/${recepiID}` }
+          />
+          <FavoriteBtn
+            id={ recepiID }
+            type="comida"
+            area={ strArea }
+            category={ strCategory }
+            alcoholicOrNot=""
+            name={ strMeal }
+            image={ strMealThumb }
+          />
+        </section>
+      </section>
+      <h4 data-testid="recipe-category" className="category">{ strCategory }</h4>
+      <section className="main-inProgress">
+        <MealIngredientsMeasure
+          detailsRecepie={ detailsRecepie }
+        />
+        <div className="ingredients-box">
+          <h3 className="inProgress-title">Instruções</h3>
+          <p data-testid="instructions" className="inProgress-instruction">{ strInstructions }</p>
+        </div>
+        <Link to="/receitas-feitas">
+          <button
+            data-testid="finish-recipe-btn"
+            type="button"
+            disabled={ allChecked }
+            onClick={ () => saveLS() }
+            className="inProgress-btn"
+          >
+            Finalizar receita
+          </button>
+        </Link>
+      </section >
     </div>
   );
 }

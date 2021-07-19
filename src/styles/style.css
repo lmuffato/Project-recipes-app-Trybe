@@ -15,7 +15,15 @@ body div {
   width: 100%;
 }
 
-.main-recipes, .main-explore, .main-ingredients, .main-area, .main-profile, .main-detail {
+.main-area, .main-profile, .main-detail, .main-inProgress {
+  background: #a11d2b;
+  display: flex;
+  flex-flow: column wrap;
+  font-family: sans-serif;
+  width: 100%;
+}
+
+.main-recipes, .main-explore, .main-ingredients {
   background: #a11d2b;
   display: flex;
   flex-flow: column wrap;
@@ -399,6 +407,58 @@ footer {
 }
 
 /* --------------------------------------- */
+
+/* ---------- Pagina in progress ---------- */
+.main-inProgress {
+  flex-flow: column;
+}
+
+.checked-ingredient {
+  display: flex;
+}
+
+input:checked + .checked-list {
+  text-decoration: line-through;
+}
+
+.checked-input {
+  margin: 9px;
+}
+
+.ingredients-box {
+  background-color: rgba(240, 202, 202, 0.267);
+  border-radius: 10px;
+  flex-direction: column;
+  font-size: 14pt;
+  margin: 2%;
+  width: auto;
+}
+
+.inProgress-title {
+  color: rgba(0, 0, 0, 0.726);
+  margin: 15px;
+}
+
+.inProgress-instruction {
+  padding-left: 12px;
+  padding-right: 12px;
+  text-align: justify;
+}
+
+.inProgress-btn {
+  background-color: #d9910b;
+  border: none;
+  border-radius: 10px;
+  height: 40px;
+  margin-bottom: 15px;
+  margin-left: 7px;
+  margin-top: 12px;
+  width: 96%;
+}
+
+/* input:checked + .checked-input {
+  color: green;
+} */
 
 /*
 #5e9c53 - verde claro
