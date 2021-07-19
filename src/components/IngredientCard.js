@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-// import { arrayOf, shape, string } from 'prop-types';
 import { useSelector } from 'react-redux';
 
 function IngredientCard() {
