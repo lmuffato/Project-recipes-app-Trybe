@@ -1,3 +1,4 @@
+import { fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 import App from '../App';
@@ -57,5 +58,26 @@ describe('Teste da página de Explorar Comidas por Area', () => {
     });
   });
 
-  test('Testa uma opção de área', async () => {});
+  test('Testa uma opção de área', async () => {
+    const {
+      getByTestId,
+      findByTestId,
+      findByText,
+      history } = renderWithRouterAndContext(<App />);
+
+    userEvent.type(getByTestId(EMAIL_TEST_ID), MOCK_EMAIL);
+    userEvent.type(getByTestId(PASSWORD_TEST_ID), '1234567');
+    userEvent.click(getByTestId(LOGIN_BTN_TEST_ID));
+
+    history.push(EXPLORE_AREA_PAGE_PATH);
+
+    const dropdown = await findByTestId('explore-by-area-dropdown');
+
+    expect(dropdown).toBeInTheDocument();
+
+    fireEvent.change(dropdown, { target: { value: 'American' } });
+
+    const bigMac = await findByText('Big Mac');
+    expect(bigMac).toBeInTheDocument();
+  });
 });
