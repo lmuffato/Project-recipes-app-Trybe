@@ -1,4 +1,4 @@
-import { waitForElement } from '@testing-library/react';
+import { waitForElement, fireEvent } from '@testing-library/react';
 import React from 'react';
 import App from '../App';
 import renderWithRouterHooksAndProvider from './renderWithRouterHooksAndProvider';
@@ -79,7 +79,7 @@ describe('Testes de rotas do App', () => {
       expect(getByText('Recomendadas')).toBeInTheDocument();
     });
 
-  it('Rota /explorar/comidas/area renderiza corretamente',
+  it('Rota explorar comidas por area renderiza corretamente',
     async () => {
       const { getByText, getByTestId } = renderWithRouterHooksAndProvider(
         <App />,
@@ -92,5 +92,53 @@ describe('Testes de rotas do App', () => {
       expect(getByText('Corba')).toBeInTheDocument();
       expect(getByText('Kumpir')).toBeInTheDocument();
       expect(getByText('Tamiya')).toBeInTheDocument();
+      expect(getByTestId('explore-by-area-dropdown')).toBeInTheDocument();
+      expect(getByTestId('American-option')).toBeInTheDocument();
+      expect(getByTestId('British-option')).toBeInTheDocument();
+      expect(getByTestId('Canadian-option')).toBeInTheDocument();
+
+      fireEvent.change(getByTestId('explore-by-area-dropdown'), {
+        target: { value: 'Chinese' },
+      });
+      await waitForElement(() => getByText('Beef Lo Mein'));
+      expect(getByText('Beef Lo Mein')).toBeInTheDocument();
+      expect(getByTestId('0-card-img').src).toMatch(
+        'https://www.themealdb.com/images/media/meals/1529444830.jpg',
+      );
+      expect(getByText('Chicken Congee')).toBeInTheDocument();
+      expect(getByText('Egg Drop Soup')).toBeInTheDocument();
+    });
+
+  it('Rota /comidas',
+    async () => {
+      const { getByText, getByTestId } = renderWithRouterHooksAndProvider(
+        <App />,
+        '/comidas',
+      );
+
+      // await waitForElement(() => getByTestId('explore-by-area-dropdown'));
+      await waitForElement(() => getByText('Corba'));
+      await waitForElement(() => getByTestId('Beef-category-filter'));
+      expect(getByText('Corba')).toBeInTheDocument();
+      expect(getByText('Kumpir')).toBeInTheDocument();
+      expect(getByTestId('Beef-category-filter')).toBeInTheDocument();
+      expect(getByTestId('Breakfast-category-filter')).toBeInTheDocument();
+      expect(getByTestId('Chicken-category-filter')).toBeInTheDocument();
+    });
+
+  it('Rota /bebidas',
+    async () => {
+      const { getByText, getByTestId } = renderWithRouterHooksAndProvider(
+        <App />,
+        '/bebidas',
+      );
+
+      // await waitForElement(() => getByTestId('explore-by-area-dropdown'));
+      await waitForElement(() => getByText('GG'));
+      await waitForElement(() => getByTestId('Ordinary Drink-category-filter'));
+      expect(getByText('GG')).toBeInTheDocument();
+      expect(getByText('A1')).toBeInTheDocument();
+      expect(getByTestId('Ordinary Drink-category-filter')).toBeInTheDocument();
+      expect(getByTestId('Cocktail-category-filter')).toBeInTheDocument();
     });
 });
