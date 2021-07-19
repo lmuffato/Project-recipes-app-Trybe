@@ -6,6 +6,7 @@ import ShareButton from '../ShareButton';
 import FavoriteButton from '../FavoriteButton';
 import RecipeButton from '../RecipeButton';
 import getIngredients from '../../services/getIngredients';
+import './style.css';
 
 function BebidasDetails({ data, recomendation }) {
   console.log(data);
@@ -17,8 +18,13 @@ function BebidasDetails({ data, recomendation }) {
   const { strDrink, strInstructions, strDrinkThumb,
     strAlcoholic, strCategory } = data[0];
   return (
-    <div>
-      <img src={ strDrinkThumb } alt="comida" data-testid="recipe-photo" />
+    <div className="container">
+      <img
+        className="image-detail"
+        src={ strDrinkThumb }
+        alt="comida"
+        data-testid="recipe-photo"
+      />
       <h4 data-testid="recipe-title">{ strDrink }</h4>
       <ShareButton data-testid="share-btn" urlCopied={ href } />
       <FavoriteButton data={ data[0] } path={ id } />

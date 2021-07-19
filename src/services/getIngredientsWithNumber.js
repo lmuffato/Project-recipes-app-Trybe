@@ -3,7 +3,8 @@ export default function getIngredientsWithNumber(data) {
   const filteredKeys = keys.filter((key) => key.includes('Ingredient'));
   const obj = {};
   filteredKeys.forEach((key) => {
-    obj[data[key]] = key[key.length - 1];
+    const number = key.split('Ingredient')[1];
+    obj[data[key]] = number;
   });
   return obj;
 }

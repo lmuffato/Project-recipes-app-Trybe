@@ -6,6 +6,7 @@ import ShareButton from '../ShareButton';
 import FavoriteButton from '../FavoriteButton';
 import RecipeButton from '../RecipeButton';
 import getIngredients from '../../services/getIngredients';
+import './style.css';
 
 function ComidasDetails({ data, recomendation }) {
   const { pathname } = useLocation();
@@ -17,39 +18,48 @@ function ComidasDetails({ data, recomendation }) {
     const { strMeal, strCategory, strMealThumb, strInstructions, strYoutube } = data[0];
     return (
       <div>
-        <img src={ strMealThumb } alt="comida" data-testid="recipe-photo" />
-        <h4 data-testid="recipe-title">{ strMeal }</h4>
-        <ShareButton data-testid="share-btn" urlCopied={ href } />
-        <FavoriteButton data={ data[0] } path={ id } />
-        <p data-testid="recipe-category">{ strCategory }</p>
-        <ul>
-          { ingredients.map((ingredient, index) => (
-            <li key={ ingredient }>
-              <p data-testid={ `${index}-ingredient-name-and-measure` }>
-                { ingredient[1] }
-              </p>
-            </li>
-          ))}
-          { ingredientsMeasures.map((measure, index) => (
-            <li key={ measure }>
-              <p data-testid={ `${index}-ingredient-name-and-measure` }>
-                { measure[1] }
-              </p>
-            </li>
-          ))}
-        </ul>
-        <p data-testid="instructions">{ strInstructions }</p>
-        <video controls data-testid="video">
-          <source src={ strYoutube } type="video/ogg" />
-          <track
-            default
-            kind="captions"
-            srcLang="en"
+        <div>
+          <img
+            className="image-detail"
+            src={ strMealThumb }
+            alt="comida"
+            data-testid="recipe-photo"
           />
-          Desculpe, seu site não suporta videos.
-        </video>
-        <Recomendations data={ recomendation } />
-        <RecipeButton path={ pathname } ingredients={ ingredients } />
+          <h4 data-testid="recipe-title">{ strMeal }</h4>
+          <ShareButton data-testid="share-btn" urlCopied={ href } />
+          <FavoriteButton data={ data[0] } path={ id } />
+          <p data-testid="recipe-category">{ strCategory }</p>
+          <ul>
+            { ingredients.map((ingredient, index) => (
+              <li key={ ingredient }>
+                <p data-testid={ `${index}-ingredient-name-and-measure` }>
+                  { ingredient[1] }
+                </p>
+              </li>
+            ))}
+            { ingredientsMeasures.map((measure, index) => (
+              <li key={ measure }>
+                <p data-testid={ `${index}-ingredient-name-and-measure` }>
+                  { measure[1] }
+                </p>
+              </li>
+            ))}
+          </ul>
+          <p data-testid="instructions">{ strInstructions }</p>
+          <video controls data-testid="video">
+            <source src={ strYoutube } type="video/ogg" />
+            <track
+              default
+              kind="captions"
+              srcLang="en"
+            />
+            Desculpe, seu site não suporta videos.
+          </video>
+          <Recomendations data={ recomendation } />
+        </div>
+        <div>
+          <RecipeButton path={ pathname } ingredients={ ingredients } />
+        </div>
       </div>
     );
   }
