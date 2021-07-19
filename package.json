@@ -35,7 +35,7 @@
     "test-coverage": "react-scripts test --coverage --watchAll=false",
     "eject": "react-scripts eject",
     "lint": "eslint --no-inline-config --no-error-on-unmatched-pattern -c .eslintrc.json . --ext .js,.jsx",
-    "lint:styles": "stylelint '**/*.css'"
+    "lint:styles": "stylelint '**/*.(css|scss)'"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -65,7 +65,8 @@
     "mochawesome-merge": "^4.1.0",
     "mochawesome-report-generator": "^5.1.0",
     "stylelint": "^13.8.0",
-    "stylelint-order": "^4.1.0"
+    "stylelint-order": "^4.1.0",
+    "stylelint-scss": "^3.20.1"
   },
   "jest": {
     "coveragePathIgnorePatterns": [
