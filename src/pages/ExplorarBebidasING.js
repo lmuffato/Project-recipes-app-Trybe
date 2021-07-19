@@ -5,6 +5,7 @@ import Footer from '../components/Footer';
 import Header from '../components/Header';
 import { apiCocktailsIngredients } from '../services/fetchApisIngredients';
 import ContextBebidas from '../provider/ContextBebida';
+import Loading from '../components/Loading';
 
 function ExplorarBebidasING() {
   const [data, setData] = useState([]);
@@ -53,7 +54,13 @@ function ExplorarBebidasING() {
     return null;
   });
 
-  if (data.length < 1) return <h1>Loading...</h1>;
+  if (data.length < 1) {
+    return (
+      <div className="d-flex w-100 min-vh-100 align-items-center">
+        <Loading param="drink" />
+      </div>
+    );
+  }
 
   return (
     <div>

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext, useEffect } from 'react';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
@@ -12,6 +13,7 @@ import Loading from '../components/Loading';
 function Comidas() {
   const {
     data,
+    originData,
     texto,
     categoria,
     ingredient,
@@ -25,7 +27,6 @@ function Comidas() {
 
   const fetchApiIngredient = async () => {
     const ingredientResp = await apiSearchMeals(ingredient);
-    // console.log(ingredientResp);
     setData(ingredientResp);
   };
 
@@ -36,7 +37,6 @@ function Comidas() {
     } else {
       fetchapi();
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const getApis = async () => {
@@ -46,13 +46,16 @@ function Comidas() {
     }
   };
 
+  const fetchapi2 = () => {
+    setData(originData);
+  };
+
   useEffect(() => {
     if (texto === 'All') {
-      fetchapi();
+      fetchapi2();
     } else if (texto !== '') {
       getApis();
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [texto]);
 
   if (data.length < 1) return <Loading />;

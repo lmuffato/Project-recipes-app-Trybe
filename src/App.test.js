@@ -12,7 +12,6 @@ describe('1 - Testes tela de login', () => {
       const { pathname } = location;
       const heading = screen.getByRole('heading', {
         level: 1,
-        name: 'Login',
       });
       expect(pathname).toBe('/');
       expect(heading).toBeInTheDocument();
@@ -76,11 +75,14 @@ describe('1 - Testes tela de login', () => {
 });
 
 describe('2 - Testes do componente Header', () => {
-  test('Verifica se o componente Header renderiza na página de comidas com todos os ícones', () => {
+  test('Verifica se o componente Header renderiza na página de comidas com todos os ícones', async () => {
     const { history } = renderWhithRouter(<App />);
     history.push('/comidas');
 
-    const linkPerfil = screen.getByTestId('profile-top-btn');
+    const loading = screen.getByAltText('loading-gif');
+    expect(loading).toBeInTheDocument();
+
+    const linkPerfil = screen.getByAltText('profile');
     const headerTitle = screen.getByTestId('page-title');
     const searchButton = screen.getByTestId('search-top-btn');
 

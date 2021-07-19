@@ -8,14 +8,26 @@ import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import { btn } from '../styles/login';
 
+import '../styles/DetalhesPagina.css';
+
 const copy = require('clipboard-copy');
 
 function ReceitaComidaDetalhe({ props }) {
   const [favoriteFood, setFavoriteFood] = useState(false);
   const [clipboardStatus, setClipboardStatus] = useState();
+  const [statusFood, setStatusFood] = useState(false);
+
   const history = useHistory();
 
   const { acctualyFood, foodRecomendation, id } = props;
+
+  const checkStatusRecipe = () => {
+    if (JSON.parse(localStorage.getItem('inProgressRecipes') !== null)) {
+      const recipes = JSON.parse(localStorage.getItem('inProgressRecipes')).meals;
+
+      if (Object.keys(recipes).includes(id) === true) setStatusFood(true);
+    }
+  };
 
   useEffect(() => {
     const verifyFavorite = () => {
@@ -27,6 +39,7 @@ function ReceitaComidaDetalhe({ props }) {
       }
     };
 
+    checkStatusRecipe();
     verifyFavorite();
   }, [id]);
 
@@ -41,8 +54,6 @@ function ReceitaComidaDetalhe({ props }) {
   const favoriteClick = (e) => {
     e.preventDefault();
 
-    // const date = new Date().toString();
-
     const favoriteRecipe = {
       id,
       type: 'comida',
@@ -51,18 +62,27 @@ function ReceitaComidaDetalhe({ props }) {
       alcoholicOrNot: '',
       name: acctualyFood.meals[0].strMeal,
       image: acctualyFood.meals[0].strMealThumb,
-      // doneDate: date,
-      // tags: acctualyFood.meals[0].strTags,
     };
 
-    if (JSON.parse(localStorage.getItem('favoriteRecipes') !== null)) {
+    if (favoriteFood !== false
+      && JSON.parse(localStorage.getItem('favoriteRecipes') !== null)) {
       const oldRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
 
-      const newRecipes = [...oldRecipes, favoriteRecipe];
+      const filterRecipes = oldRecipes.filter((actualRecipe) => actualRecipe.id !== id);
+
+      const newRecipes = [...filterRecipes];
 
       localStorage.setItem('favoriteRecipes', JSON.stringify(newRecipes));
-    } else {
-      localStorage.setItem('favoriteRecipes', JSON.stringify([favoriteRecipe]));
+    } if (favoriteFood !== true) {
+      if (JSON.parse(localStorage.getItem('favoriteRecipes') !== null)) {
+        const oldRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
+
+        const newRecipes = [...oldRecipes, favoriteRecipe];
+
+        localStorage.setItem('favoriteRecipes', JSON.stringify(newRecipes));
+      } else {
+        localStorage.setItem('favoriteRecipes', JSON.stringify([favoriteRecipe]));
+      }
     }
 
     return !favoriteFood ? setFavoriteFood(true) : setFavoriteFood(false);
@@ -161,7 +181,7 @@ function ReceitaComidaDetalhe({ props }) {
               if (index <= cardLength) {
                 return (
                   <RecomendacoesCard
-                    key={ food.idMeal }
+                    key={ index }
                     props={ food }
                     type="meal"
                     index={ index }
@@ -179,7 +199,7 @@ function ReceitaComidaDetalhe({ props }) {
             data-testid="start-recipe-btn"
             className={ `${btn} button-recipe` }
           >
-            Start Recipe
+            { statusFood === true ? 'Continuar Receita' : 'Iniciar Receita' }
             {/* foodRecipeStatus === 'start' ? 'Start recipe' : 'Continuar Receita'  */}
           </Button>
         </div>

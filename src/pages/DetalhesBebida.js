@@ -4,6 +4,7 @@ import ReceitaBebidaDetalhe from '../components/ReceitaBebidaDetalhe';
 
 import { getDrinkByID } from '../services/fetchApiDetailsRecipe';
 import { getFoodRecomendation } from '../services/fetchApiRecomendations';
+import Loading from '../components/Loading';
 
 function DetalhesBebida({ match: { params: { id } } }) {
   const [acctualyDrink, setAcctualyDrink] = useState();
@@ -30,7 +31,13 @@ function DetalhesBebida({ match: { params: { id } } }) {
     id,
   };
 
-  return !isLoading ? <ReceitaBebidaDetalhe props={ propsToSend } /> : <p>Loading...</p>;
+  return !isLoading
+    ? <ReceitaBebidaDetalhe props={ propsToSend } />
+    : (
+      <div className="d-flex w-100 min-vh-100 align-items-center">
+        <Loading param="drink" />
+      </div>
+    );
 }
 
 DetalhesBebida.propTypes = {

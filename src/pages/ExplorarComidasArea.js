@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { Card } from 'react-bootstrap';
@@ -54,7 +55,6 @@ function ExplorarComidasArea() {
 
   const areasCard = () => {
     if (filterArea !== undefined) {
-      console.log('Render do All');
       return acctualyFood.map((item, index) => {
         const magicNumber = 12;
         if (index < magicNumber) {
