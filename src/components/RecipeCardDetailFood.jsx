@@ -17,7 +17,13 @@ export default function RecipeCardDetailFood() {
       const food = await foodById(idMeal);
       setFoodDetails(food);
     };
-
+    const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    if (favoriteRecipes) {
+      const isFavorite = () => favoriteRecipes
+        .some((recipe) => recipe.id === idMeal) && document.getElementById('fav-btn')
+        .setAttribute('src', blackHeartIcon);
+      isFavorite();
+    }
     fetchFood();
   }, [idMeal]);
 
