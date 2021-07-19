@@ -131,6 +131,13 @@ const Container = styled.div`
   ul li {
     font-size: 21px;
   }
+
+  img {
+    max-height: 30px;
+    max-width: 30px;
+    margin-right: 5px;
+    margin-left: 5px;
+  }
 `;
 
 /*

@@ -62,4 +62,10 @@ const Container = styled.div`
   ul li {
     font-size: 21px;
   }
+
+  img {
+    max-width: 30px;
+    max-height: 30px;
+    margin-right: 5px;
+  }
 `;
