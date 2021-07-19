@@ -1,37 +1,38 @@
+import { fireEvent } from '@testing-library/react';
 import React from 'react';
 import App from '../App';
 import renderWithRouter from './renderWithRouter';
 
 describe('Test Recipes Details page', () => {
   const myPath = '/comidas/52978';
-  it('Check Page Components', () => {
+  it('Check Page Components', async () => {
     const { getByTestId, history } = renderWithRouter(<App />);
     history.push(myPath);
 
-    const recipeTitle = getByTestId('recipe-title');
+    const recipeTitle = await getByTestId('recipe-title');
     expect(recipeTitle).toBeInTheDocument();
 
-    const recipeCategory = getByTestId('recipe-category');
+    const recipeCategory = await getByTestId('recipe-category');
     expect(recipeCategory).toBeInTheDocument();
 
-    const recipeFirstIngredient = getByTestId('0-ingredient-name-and-measure');
+    const recipeFirstIngredient = await getByTestId('0-ingredient-name-and-measure');
     expect(recipeFirstIngredient).toBeInTheDocument();
 
-    const recipeInstructions = getByTestId('instructions');
+    const recipeInstructions = await getByTestId('instructions');
     expect(recipeInstructions).toBeInTheDocument();
 
-    const recipeVideo = getByTestId('video');
+    const recipeVideo = await getByTestId('video');
     expect(recipeVideo).toBeInTheDocument();
 
-    const recipeStartBtn = getByTestId('start-recipe-btn');
+    const recipeStartBtn = await getByTestId('start-recipe-btn');
     expect(recipeStartBtn).toBeInTheDocument();
   });
 
-  it('Click on Start Recipe button, go to In Progres', () => {
+  it('Click on Start Recipe button, go to In Progres', async () => {
     const { getByTestId, history } = renderWithRouter(<App />);
     history.push(myPath);
 
-    const recipeStartBtn = getByTestId('start-recipe-btn');
+    const recipeStartBtn = await getByTestId('start-recipe-btn');
     expect(recipeStartBtn).toBeInTheDocument();
 
     fireEvent.click(recipeStartBtn);
