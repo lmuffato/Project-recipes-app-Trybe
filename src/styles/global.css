@@ -33,6 +33,7 @@ img {
 html, body, div, span, iframe, h1, h2, h3, p, a, img, ol, ul, li {
   border: 0;
   font: inherit;
+  font-family: 'Poppins', sans-serif;
   font-size: 100%;
   margin: 0;
   padding: 0;
