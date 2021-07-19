@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import './Recommends.css';
 
-export default function BtnInitiateRecipe({ id, type }) {
+export default function BtnInitiateRecipe({ id, type, progress }) {
   const history = useHistory();
   return (
     <button
@@ -13,7 +13,7 @@ export default function BtnInitiateRecipe({ id, type }) {
       className="playRecipe"
       onClick={ () => history.push(`/${type}s/${id}/in-progress`) }
     >
-      Iniciar Receita
+      { progress }
     </button>
   );
 }
