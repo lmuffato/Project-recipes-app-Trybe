@@ -1,0 +1,50 @@
+:root {
+
+  --orange-main-color: #FF6700;
+
+  --primary-background-color: #1F1F1F;
+
+  --secondary-background-color: #363636;
+
+  --black: #000;
+
+  --clr-neon: #ECC01F;
+
+  --font-color: #EAEAEA;
+}
+
+.login-page {
+  align-items: center;
+  background: #1b1b1b;
+  color: var(--orange-main-color);
+  display: flex;
+  flex-direction: column;
+  font-family: sans-serif;
+  height: 100vh;
+  justify-content: center;
+  width: 100%;
+}
+
+.email-input {
+  display: none;
+}
+
+.password-input {
+  display: none;
+}
+
+.title-login {
+  align-items: center;
+  border: 4px solid var(--orange-main-color);
+  border-radius: 20px;
+  box-shadow: inset 0 0 0.5em 0 var(--orange-main-color) , 0 0 0.5em 0 var(--orange-main-color);
+  color: currentColor;
+  display: flex;
+  font-family: montserrat , sans-serif;
+  font-size: 5rem;
+  height: 100px;
+  justify-content: center;
+  margin-bottom: 200px;
+  text-shadow: 0 0 0.125em hsl(0 0% 100% / 0.3) , 0 0 0.45em currentColor;
+  width: 80%;
+}
