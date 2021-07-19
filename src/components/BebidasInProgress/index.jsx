@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, Redirect } from 'react-router-dom';
+import { useParams, Redirect, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import getIngredients from '../../services/getIngredients';
 import ShareButton from '../ShareButton';
@@ -7,7 +7,8 @@ import FavoriteButton from '../FavoriteButton';
 import getIngredientsWithNumber from '../../services/getIngredientsWithNumber';
 
 function DrinksInProgress({ data }) {
-  const ingredients = getIngredients(data, 'strIngredient').map((e) => e[1]);
+  const { state: { ingredients } } = useLocation();
+  // const ingredients = getIngredients(data, 'strIngredient').map((e) => e[1]);
   const { id } = useParams();
   const [keys, setKeys] = useState([]);
   const [checkedIngredients, setChecked] = useState([]);
@@ -15,7 +16,6 @@ function DrinksInProgress({ data }) {
 
   useEffect(() => {
     function saveState() {
-      console.log(data);
       const { strDrinkThumb, strDrink, strCategory } = data;
       const obj = [{
         image: strDrinkThumb,
@@ -64,7 +64,6 @@ function DrinksInProgress({ data }) {
   };
 
   const handleCheked = ({ target }) => {
-    console.log(target.name);
     if (checkedIngredients.includes(target.name)) {
       const filtered = checkedIngredients.filter((element) => element !== target.name);
       setChecked(filtered);
@@ -83,7 +82,7 @@ function DrinksInProgress({ data }) {
         <FavoriteButton data={ data } path={ id } />
         <p data-testid="recipe-category">{ keys[0].category }</p>
         <ul>
-          { ingredients.map((element, index) => (
+          { Object.values(ingredients).map((element, index) => (
             <li
               key={ element }
               data-testid={ `data-testid=${index}-ingredient-step` }

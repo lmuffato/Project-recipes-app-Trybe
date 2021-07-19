@@ -6,7 +6,7 @@ import React, {
   useState,
 } from 'react';
 import { Button } from 'react-bootstrap';
-import { useHistory } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
 import context from '../../context/RecipesContext';
@@ -16,12 +16,12 @@ import fetchCategories from '../../services/fetchCategories';
 import './style.css';
 
 const MainFoods = () => {
-  const history = useHistory();
   const { recipesFoods, setRecipesFoods, isLoading, setLoading } = useContext(context);
   const [categories, setCategories] = useState([]);
   const [categoryName, setCategoryName] = useState('');
   const [isFiltering, setFiltering] = useState(false);
   const [previousTarget, setPreviousTarget] = useState(null);
+  const [recipeClickedId, setRecipeClicked] = useState('');
   const btnAllRecipes = useRef(null);
   const MAX_LENGTH_RECIPES = 12;
   const MAX_LENGTH_CATEGORIES = 5;
@@ -30,7 +30,11 @@ const MainFoods = () => {
     await fetchRecipes(
       'https://www.themealdb.com/api/json/v1/1/search.php?s=',
     ).then(({ meals }) => {
-      setRecipesFoods(meals.slice(0, MAX_LENGTH_RECIPES));
+      if (meals.length > MAX_LENGTH_RECIPES) {
+        setRecipesFoods(meals.slice(0, MAX_LENGTH_RECIPES));
+      } else {
+        setRecipesFoods(meals);
+      }
     });
   }, [setRecipesFoods]);
 
@@ -87,15 +91,12 @@ const MainFoods = () => {
     btnAllRecipes.current.style.backgroundColor = '#ffc529';
   };
 
-  const redirectToDescription = ({ target }) => {
-    const { id } = target.parentElement;
-    history.push(`/comidas/${id}`);
-  };
-
   if (isLoading) {
-    return (
-      <FoodLoader />
-    );
+    return <FoodLoader />;
+  }
+
+  if (recipeClickedId) {
+    return <Redirect to={ `/comidas/${recipeClickedId}` } />;
   }
 
   return (
@@ -124,10 +125,8 @@ const MainFoods = () => {
       {recipesFoods.map(({ idMeal, strMeal, strMealThumb }, index) => (
         <div
           key={ index }
-          id={ idMeal }
-          onClick={ redirectToDescription }
-          aria-hidden="true"
-          onKeyDown={ redirectToDescription }
+          onClick={ () => setRecipeClicked(idMeal) }
+          aria-hidden
           data-testid={ `${index}-recipe-card` }
           className="recipe-card"
         >

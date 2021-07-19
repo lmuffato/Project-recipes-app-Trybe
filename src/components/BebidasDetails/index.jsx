@@ -8,20 +8,20 @@ import RecipeButton from '../RecipeButton';
 import getIngredients from '../../services/getIngredients';
 
 function BebidasDetails({ data, recomendation }) {
-  console.log(data);
   const { pathname } = useLocation();
   const { id } = useParams();
   const { href } = window.location;
-  const ingredients = getIngredients(data[0], 'strIngredient');
-  const ingredientsMeasures = getIngredients(data[0], 'strMeasure');
+  const ingredients = getIngredients(data, 'strIngredient');
+  const ingredientsMeasures = getIngredients(data, 'strMeasure');
   const { strDrink, strInstructions, strDrinkThumb,
-    strAlcoholic, strCategory } = data[0];
+    strAlcoholic, strCategory } = data;
+
   return (
     <div>
       <img src={ strDrinkThumb } alt="comida" data-testid="recipe-photo" />
       <h4 data-testid="recipe-title">{ strDrink }</h4>
       <ShareButton data-testid="share-btn" urlCopied={ href } />
-      <FavoriteButton data={ data[0] } path={ id } />
+      <FavoriteButton data={ data } path={ id } />
       <p>{ strCategory }</p>
       {strAlcoholic === 'Alcoholic' ? (
         <p data-testid="recipe-category">Alcoholic</p>
@@ -29,31 +29,31 @@ function BebidasDetails({ data, recomendation }) {
         <br />
       )}
       <ul>
-        { ingredients.map((ingredient, index) => (
-          <li key={ ingredient }>
+        { Object.values(ingredients).map((ingredient, index) => (
+          <li key={ index }>
             <p data-testid={ `${index}-ingredient-name-and-measure` }>
-              { ingredient[1] }
+              { ingredient }
             </p>
           </li>
         ))}
-        { ingredientsMeasures.map((measure, index) => (
-          <li key={ measure }>
+        { Object.values(ingredientsMeasures).map((measure, index) => (
+          <li key={ index }>
             <p data-testid={ `${index}-ingredient-name-and-measure` }>
-              { measure[1] }
+              { measure }
             </p>
           </li>
         ))}
       </ul>
       <p data-testid="instructions">{ strInstructions }</p>
       <Recomendations data={ recomendation } />
-      <RecipeButton path={ pathname } ingredients={ ingredients } />
+      <RecipeButton recipe={ data } path={ pathname } ingredients={ ingredients } />
     </div>
   );
 }
 
 BebidasDetails.propTypes = {
-  data: PropTypes.arrayOf({}).isRequired,
-  recomendation: PropTypes.arrayOf([]).isRequired,
-};
+  data: PropTypes.shape({}),
+  recomendation: PropTypes.arrayOf(PropTypes.shape({})),
+}.isRequired;
 
 export default BebidasDetails;

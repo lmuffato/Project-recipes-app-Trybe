@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-export default function RecipeButton({ path }) {
+export default function RecipeButton({ path, ingredients }) {
   const [buttonName, setButtonName] = useState('Iniciar Receita');
   const sliceNumber = 9;
 
@@ -72,7 +72,12 @@ export default function RecipeButton({ path }) {
   }, [path]);
 
   return (
-    <Link to={ `${path}/in-progress` }>
+    <Link
+      to={ {
+        pathname: `${path}/in-progress`,
+        state: { ingredients },
+      } }
+    >
       <button
         type="button"
         data-testid="start-recipe-btn"

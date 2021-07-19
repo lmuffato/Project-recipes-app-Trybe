@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 export default function Recomendations({ data }) {
-  const title = data[0].strMeal !== undefined ? 'strMeal' : 'strDrink';
+  const title = data.strMeal !== undefined ? 'strMeal' : 'strDrink';
   return (
     <div>
       <ul>
@@ -16,7 +16,7 @@ export default function Recomendations({ data }) {
           }
           return (
             <li
-              key={ reco[title] }
+              key={ index }
               data-testid={ `${index}-recomendation-card` }
             >
               <span data-testid={ `${index}-recomendation-title` }>{ reco[title] }</span>
@@ -29,5 +29,5 @@ export default function Recomendations({ data }) {
 }
 
 Recomendations.propTypes = {
-  data: PropTypes.arrayOf({}).isRequired,
-};
+  data: PropTypes.shape({}).isRequired,
+}.isRequired;

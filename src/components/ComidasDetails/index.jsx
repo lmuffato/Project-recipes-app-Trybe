@@ -11,41 +11,33 @@ function ComidasDetails({ data, recomendation }) {
   const { pathname } = useLocation();
   const { id } = useParams();
   const { href } = window.location;
-  const ingredients = getIngredients(data[0], 'strIngredient');
-  const ingredientsMeasures = getIngredients(data[0], 'strMeasure');
+  const ingredients = getIngredients(data, 'strIngredient');
+  const ingredientsMeasures = getIngredients(data, 'strMeasure');
   if (pathname.includes('/comidas')) {
-    const { strMeal, strCategory, strMealThumb, strInstructions, strYoutube } = data[0];
+    const { strMeal, strCategory, strMealThumb, strInstructions, strYoutube } = data;
     return (
       <div>
         <img src={ strMealThumb } alt="comida" data-testid="recipe-photo" />
-        <h4 data-testid="recipe-title">{ strMeal }</h4>
+        <h4 data-testid="recipe-title">{strMeal}</h4>
         <ShareButton data-testid="share-btn" urlCopied={ href } />
-        <FavoriteButton data={ data[0] } path={ id } />
-        <p data-testid="recipe-category">{ strCategory }</p>
+        <FavoriteButton data={ data } path={ id } />
+        <p data-testid="recipe-category">{strCategory}</p>
         <ul>
-          { ingredients.map((ingredient, index) => (
-            <li key={ ingredient }>
-              <p data-testid={ `${index}-ingredient-name-and-measure` }>
-                { ingredient[1] }
-              </p>
-            </li>
-          ))}
-          { ingredientsMeasures.map((measure, index) => (
-            <li key={ measure }>
-              <p data-testid={ `${index}-ingredient-name-and-measure` }>
-                { measure[1] }
-              </p>
+          {Object.values(ingredients).map((ingredient, index) => (
+            <li
+              key={ index }
+              htmlFor={ ingredient }
+              data-testid={ `${index}-ingredient-name-and-measure` }
+            >
+              <input type="checkbox" id={ ingredient } />
+              {`${Object.values(ingredientsMeasures)[index]} - ${ingredient}`}
             </li>
           ))}
         </ul>
-        <p data-testid="instructions">{ strInstructions }</p>
+        <p data-testid="instructions">{strInstructions}</p>
         <video controls data-testid="video">
           <source src={ strYoutube } type="video/ogg" />
-          <track
-            default
-            kind="captions"
-            srcLang="en"
-          />
+          <track default kind="captions" srcLang="en" />
           Desculpe, seu site não suporta videos.
         </video>
         <Recomendations data={ recomendation } />
@@ -56,8 +48,8 @@ function ComidasDetails({ data, recomendation }) {
 }
 
 ComidasDetails.propTypes = {
-  data: PropTypes.arrayOf({}).isRequired,
-  recomendation: PropTypes.arrayOf([]).isRequired,
-};
+  data: PropTypes.shape({}),
+  recomendation: PropTypes.arrayOf(PropTypes.shape({})),
+}.isRequired;
 
 export default ComidasDetails;

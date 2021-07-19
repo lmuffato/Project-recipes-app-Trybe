@@ -1,31 +1,31 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import ComidasDetails from '../../components/ComidasDetails';
 import fetchFoodDetails from '../../services/fetchFoodDetails';
 import drinksRecomendation from '../../services/drinksRecomendation';
+import FoodLoader from '../../components/Loader/Food';
 
 function FoodsDetails() {
-  const numberSlice = 9;
-  const { pathname } = useLocation();
-  const idFood = pathname.slice(numberSlice);
-
+  const { id } = useParams();
   const [data, setData] = useState([]);
   const [recomendation, setRecomendation] = useState();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function getData() {
-      const { meals } = await fetchFoodDetails(idFood);
-      const recomendations = await drinksRecomendation();
-      setRecomendation(recomendations);
-      setData(meals);
+      await fetchFoodDetails(id).then(({ meals }) => setData(meals[0]));
+      await drinksRecomendation().then((recomendations) => {
+        setRecomendation(recomendations);
+        setLoading(false);
+      });
     }
     getData();
-  }, [idFood]);
+  }, [id]);
 
   return (
-    data.length > 0
-      ? <ComidasDetails data={ data } recomendation={ recomendation } />
-      : <h2>Loading...</h2>
+    loading
+      ? <FoodLoader />
+      : <ComidasDetails data={ data } recomendation={ recomendation } />
   );
 }
 

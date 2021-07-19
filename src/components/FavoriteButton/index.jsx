@@ -85,8 +85,8 @@ function FavoriteButton({ data, path }) {
 }
 
 FavoriteButton.propTypes = {
-  data: PropTypes.arrayOf({}).isRequired,
+  data: PropTypes.shape({}).isRequired,
   path: PropTypes.string.isRequired,
-};
+}.isRequired;
 
 export default FavoriteButton;

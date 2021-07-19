@@ -13,27 +13,32 @@ export default function HeaderSearchBar() {
   const history = useHistory();
 
   const { setRecipesDrinks, setRecipesFoods } = useContext(RecipesContext);
+  const MAX_LENGTH_RECIPES = 12;
 
   const getDrinks = async () => {
-    const recipes = await searchDrinks(myChoice, searchTerm);
-    if (recipes === null) {
-      const { alert } = window;
-      alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
-      return;
-    }
-    if (recipes.length === 1) history.push(`/bebidas/${recipes[0].idDrink}`);
-    setRecipesDrinks(recipes);
+    await searchDrinks(myChoice, searchTerm)
+      .then((drinks) => {
+        drinks.slice(0, MAX_LENGTH_RECIPES);
+        if (drinks.length === 1) history.push(`/bebidas/${drinks[0].idDrink}`);
+        setRecipesDrinks(drinks);
+      })
+      .catch(() => {
+        const { alert } = window;
+        alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+      });
   };
 
   const getFoods = async () => {
-    const recipes = await searchFoods(myChoice, searchTerm);
-    if (recipes === null) {
-      const { alert } = window;
-      alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
-      return;
-    }
-    if (recipes.length === 1) history.push(`/comidas/${recipes[0].idMeal}`);
-    setRecipesFoods(recipes);
+    await searchFoods(myChoice, searchTerm)
+      .then((foods) => {
+        foods.slice(0, MAX_LENGTH_RECIPES);
+        if (foods.length === 1) history.push(`/comidas/${foods[0].idMeal}`);
+        setRecipesFoods(foods);
+      })
+      .catch(() => {
+        const { alert } = window;
+        alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+      });
   };
 
   /* Source: https://github.com/tryber/sd-09-project-recipes-app/tree/main-group-23 */
@@ -62,8 +67,7 @@ export default function HeaderSearchBar() {
         id="search-input"
         data-testid="search-input"
         placeholder="Digite sua busca"
-        onChange={ ({ target: { value: searchText } }) => (
-          setSearchTerm(searchText)) }
+        onChange={ ({ target: { value: searchText } }) => setSearchTerm(searchText) }
       />
       <br />
       <div className="radios">
