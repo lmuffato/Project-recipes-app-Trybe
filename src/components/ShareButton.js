@@ -22,7 +22,7 @@ export default function ShareButton({ recipeId, isFood, index }) {
     <>
       {displayToast && <p className="toast">Link copiado!</p>}
       <button
-        style={ { width: 40, height: 40 } }
+        style={ { width: 40, height: 40, backgroundColor: 'whitesmoke' } }
         type="button"
         data-testid={ `${index !== undefined ? `${index}-horizontal-` : ''}share-btn` }
         onClick={ handleShareClick }

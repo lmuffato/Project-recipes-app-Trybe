@@ -22,3 +22,8 @@
 .buttons-container {
   display: flex;
 }
+
+.button-in-details {
+  display: flex;
+  background-color: none;
+}

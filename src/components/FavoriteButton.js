@@ -53,7 +53,7 @@ export default function FavoriteButton({ recipe, isFood }) {
 
   return (
     <button
-      style={ { width: 40, height: 40, display: 'inline' } }
+      style={ { width: 40, height: 40, backgroundColor: 'whitesmoke' } }
       type="button"
       onClick={ () => {
         setIsFavorite(!isFavorite);
@@ -64,7 +64,6 @@ export default function FavoriteButton({ recipe, isFood }) {
         data-testid="favorite-btn"
         src={ isFavorite ? blackHeartIcon : whiteHeartIcon }
         alt="favoritar"
-        style={ { width: 15, height: 15 } }
       />
     </button>
   );
