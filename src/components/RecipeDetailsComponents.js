@@ -1,7 +1,9 @@
 import React from 'react';
-// import Carousel from 'react-bootstrap/Carousel';
 import PropTypes from 'prop-types';
 import { Swiper } from 'swiper/react';
+import SwiperCore, {
+  Autoplay, EffectCoverflow, Pagination,
+} from 'swiper/core';
 import RecipeImage from './RecipeComponents/RecipeImage';
 import RecipeTitle from './RecipeComponents/RecipeTitle';
 import ShareBtn from './RecipeComponents/ShareButton';
@@ -15,6 +17,8 @@ function ComponentGen(props) {
   const { info, listCreator, recomendList } = props;
   const { strMealThumb, strMeal, strCategory, strInstructions, strYoutube } = info;
   const { strDrinkThumb, strDrink, strAlcoholic, idDrink, idMeal, strArea } = info;
+  SwiperCore.use([Autoplay, EffectCoverflow, Pagination]);
+
   let currentInfo = [];
 
   if (idDrink !== undefined) {
