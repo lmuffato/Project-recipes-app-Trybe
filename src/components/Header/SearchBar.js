@@ -114,13 +114,14 @@ export default function SearchBar() {
           />
         </label>
       </div>
-      <div className="control">
+
+      <div className="radio-inputs">
         <label
-          className="radio"
           htmlFor="search-radio"
           onChange={ (event) => setSearchType(event.target.value) }
         >
           <input
+            id="search-radio-name"
             type="radio"
             name="search-radio"
             data-testid="name-search-radio"
@@ -128,7 +129,14 @@ export default function SearchBar() {
           />
           Nome
           {'  '}
+        </label>
+
+        <label
+          htmlFor="search-radio-ing"
+          onChange={ (event) => setSearchType(event.target.value) }
+        >
           <input
+            id="search-radio-ing"
             type="radio"
             name="search-radio"
             data-testid="ingredient-search-radio"
@@ -136,7 +144,14 @@ export default function SearchBar() {
           />
           Ingrediente
           {'  '}
+        </label>
+
+        <label
+          htmlFor="search-radio-letter"
+          onChange={ (event) => setSearchType(event.target.value) }
+        >
           <input
+            id="search-radio-letter"
             type="radio"
             name="search-radio"
             data-testid="first-letter-search-radio"
@@ -145,6 +160,7 @@ export default function SearchBar() {
           Primeira Letra
         </label>
       </div>
+
       <div className="control">
         <button
           className="button is-primary"
