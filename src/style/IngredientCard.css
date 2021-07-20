@@ -1,8 +1,29 @@
 .ingredient-card-container {
-  margin: 5px;
-  width: 40vw;
+  background-color: whitesmoke;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  border-radius: 8px;
+  display: flex;
+  height: 130px;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  transition: 0.3s;
+  margin: 10px;
+  width: 90%;
+  align-items: center;
 }
 
 .ingredient-card-container img {
-  width: 100%;
+  width: 40%;
+  margin: 5px;
+}
+
+.main-ingredient {
+  width: 45%;
+  align-items: center;
+}
+
+button {
+  border: none;  
+  display: flex;
+  flex-direction: column;
 }

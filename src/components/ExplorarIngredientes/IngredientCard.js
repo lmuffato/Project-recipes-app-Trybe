@@ -39,19 +39,21 @@ export default function IngredientCard({ ingredient, type, index }) {
   }
 
   return (
-    <button
-      type="button"
-      data-testid={ `${index}-ingredient-card` }
-      onClick={ handleIngredientClick }
-      className="ingredient-card-container"
-    >
-      <img
-        src={ imageURL }
-        alt={ ingredientName }
-        data-testid={ `${index}-card-img` }
-      />
-      <p data-testid={ `${index}-card-name` }>{ingredientName}</p>
-    </button>
+    <div className="main-ingredient">
+      <button
+        type="button"
+        data-testid={ `${index}-ingredient-card` }
+        onClick={ handleIngredientClick }
+        className="ingredient-card-container "
+      >
+        <img
+          src={ imageURL }
+          alt={ ingredientName }
+          data-testid={ `${index}-card-img` }
+        />
+        <p data-testid={ `${index}-card-name` }>{ingredientName}</p>
+      </button>
+    </div>
   );
 }
 

@@ -24,15 +24,20 @@ export default function ExplorarComidasIng() {
         title="Explore by Ingredients"
         enableSearchIcon={ false }
       />
-      {ingredients && ingredients.map((ing, index) => (
-        <IngredientCard
-          key={ index }
-          ingredient={ ing }
-          type="comidas"
-          index={ index }
-        />
-      ))}
+      <div className="main-container-ing">
+        {ingredients && ingredients.map((ing, index) => (
+          <IngredientCard
+            key={ index }
+            ingredient={ ing }
+            type="comidas"
+            index={ index }
+          />
+        ))}
+      </div>
       <Footer />
+      <br />
+      <br />
+      <br />
     </div>
   );
 }
