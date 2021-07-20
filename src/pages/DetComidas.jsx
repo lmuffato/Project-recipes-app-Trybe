@@ -120,6 +120,7 @@ class DetComidas extends React.Component {
     const { pathname } = history.location;
     const { foods, measures, ingredientes, video, recommended } = this.state;
     const food = Object.values(foods);
+    console.log(food);
     return (
       food.map((recipe) => (
         <div key="recipe">
