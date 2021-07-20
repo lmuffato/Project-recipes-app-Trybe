@@ -37,7 +37,7 @@ export default function RecipesFavorites() {
   }
 
   function removeFavorite(target, idItem) {
-    const item = target.parentNode.parentNode;
+    const item = target.parentNode.parentNode.parentNode;
     item.remove();
     const obj = JSON.parse(localStorage.getItem('favoriteRecipes'));
     const newObj = obj.filter(({ id }) => id !== idItem);
