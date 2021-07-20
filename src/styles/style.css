@@ -23,7 +23,7 @@ body div {
   width: 100%;
 }
 
-.main-recipes, .main-explore, .main-ingredients {
+.main-recipes, .main-explore, .main-ingredients, .main-done-recipes, .main-done-recipe {
   background: #a11d2b;
   display: flex;
   flex-flow: column wrap;
@@ -461,6 +461,36 @@ input:checked + .checked-list {
 /* input:checked + .checked-input {
   color: green;
 } */
+
+/* ------------------------------------------------------------ */
+
+/* -------------- Tela de Receitas Feitas ----------------- */
+.main-done-recipes {
+  flex-flow: column;
+  margin-top: 110px;
+  padding-top: 30px;
+}
+
+.button-container-done-recipes {
+  align-items: center;
+  height: 85px;
+}
+
+.main-done-recipe {
+  display: flex;
+  align-items: center;
+}
+
+.about-done-recipes {
+  margin-top: -1em;
+}
+
+.share-button {
+  background-color: transparent;
+  border: none;
+  margin-top: -1em;
+  margin-bottom: 2em;
+}
 
 /*
 #5e9c53 - verde claro

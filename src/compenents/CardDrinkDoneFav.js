@@ -15,23 +15,38 @@ function CardDrinkDoneFav({ recepie, index }) {
     navigator.clipboard.writeText(path);
   };
   return (
-    <div>
-      <Link to={ `/bebidas/${id}` }>
+    <main className="main-done-recipe">
+      <Link to={ `/bebidas/${id}` } className="recipe">
         <img
           data-testid={ `${index}-horizontal-image` }
           alt="the recepie drink"
           width="50px"
           src={ image }
+          className="recipe-image"
         />
+        <p
+          data-testid={ `${index}-horizontal-name` }
+          className="recipe-title"
+        >
+          { name }
+        </p>
       </Link>
-      <p data-testid={ `${index}-horizontal-top-text` }>{ alcoholicOrNot }</p>
-      <Link to={ `/bebidas/${id}` }>
-        <p data-testid={ `${index}-horizontal-name` }>{ name }</p>
-      </Link>
-      <p data-testid={ `${index}-horizontal-done-date` }>{ doneDate }</p>
+      <p
+        data-testid={ `${index}-horizontal-top-text` }
+        className="about-done-recipes"
+      >
+        { alcoholicOrNot }
+      </p>
+      <p
+        data-testid={ `${index}-horizontal-done-date` }
+        className="about-done-recipes"
+      >
+        { doneDate }
+      </p>
       <button
         type="button"
         onClick={ (event) => copyToClipboard(event) }
+        className="share-button"
       >
         <img
           data-testid={ `${index}-horizontal-share-btn` }
@@ -40,7 +55,7 @@ function CardDrinkDoneFav({ recepie, index }) {
         />
       </button>
       {isCopy ? <span>Link copiado!</span> : null}
-    </div>
+    </main>
   );
 }
 
