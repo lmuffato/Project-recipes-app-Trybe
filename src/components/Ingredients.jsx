@@ -45,7 +45,7 @@ function Ingredients({ recipe }) {
               checked={ isDone }
             />);
           return (
-            <div key={ index } data-testid="ingredient-step">
+            <div key={ index } data-testid={ `${index}-ingredient-step` }>
               {isInProgress && checkbox}
 
               <li

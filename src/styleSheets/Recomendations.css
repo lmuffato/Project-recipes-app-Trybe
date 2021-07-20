@@ -1,8 +1,9 @@
 .carousel-container {
   display: flex;
   flex-wrap: nowrap;
+  height: 150px;
   overflow-x: scroll;
-  width: 65%;
+  width: 100%;
 }
 
 .container {
