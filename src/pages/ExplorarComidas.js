@@ -42,7 +42,7 @@ export default function ExplorarComidas() {
           <br />
           <Link to={ `/comidas/${randomFoodId} ` }>
             <button
-              className="button is-primary"
+              className="button is-warning"
               type="submit"
               data-testid="explore-surprise"
             >
