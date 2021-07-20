@@ -9,6 +9,7 @@ import '../style/ExplorarComidasArea.css';
 export default function ExplorarComidasArea() {
   const { foods, setFoods } = useContext(FoodContext);
   const [areaNameToOptions, setAreaNameToOptions] = useState([]);
+
   const NUMBER_OF_RECIPES = 12;
 
   useEffect(() => {
@@ -29,7 +30,7 @@ export default function ExplorarComidasArea() {
 
   return (
     <div className="main-area">
-      <Header title="Explore Foods by Area" />
+      <Header title="Explore Foods by Area" enableSearchIcon={ false } />
 
       <label htmlFor="explore-by-area-dropdown" className="label-select">
         Filter by Country:
