@@ -20,10 +20,6 @@ class EmProgComidas extends React.Component {
       area: '',
     };
 
-    // this.getMealId.this = this.getMealId.bind(this);
-    // this.handleDoneSteps.this = this.handleDoneSteps.bind(this);
-    // // this.checkDoneSteps.this = this.checkDoneSteps.bind(this);
-    // this.checkStorageMeals.this = this.checkStorageMeals.bind(this);
     this.setDoneRecipe = this.setDoneRecipe.bind(this);
   }
 

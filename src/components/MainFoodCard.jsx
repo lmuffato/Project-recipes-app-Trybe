@@ -56,7 +56,7 @@ class MainFoodCard extends React.Component {
     }
   }
 
-  async FilterCategoryFood() { // render principal-inicial dos cards
+  async FilterCategoryFood() {
     const URL = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
     const limitNumber = 12;
     fetch(URL)
@@ -70,7 +70,7 @@ class MainFoodCard extends React.Component {
       });
   }
 
-  loadingFoodCategories() { // render categories buttons
+  loadingFoodCategories() {
     const URL = 'https://www.themealdb.com/api/json/v1/1/list.php?c=list';
     const limitNumber = 5;
     fetch(URL)
@@ -84,7 +84,7 @@ class MainFoodCard extends React.Component {
       });
   }
 
-  FilterCategoryFoods(props) { // render dos cards de acordo com click category
+  FilterCategoryFoods(props) {
     const URL = `https://www.themealdb.com/api/json/v1/1/filter.php?c=${props}`;
     const limitNumber = 12;
     fetch(URL)
