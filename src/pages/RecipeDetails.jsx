@@ -23,6 +23,8 @@ function RecipeDetails({ type }) {
     recipeData, recommendations, fetchMealRecipes } = useDetailsProvider();
 
   useEffect(() => {
+    let cancel = false;
+    if (cancel) return;
     const getRecipesAndRecommendations = () => {
       if (type === 'meals') {
         fetchMealRecipes(endpointCocktails, type);
@@ -32,6 +34,9 @@ function RecipeDetails({ type }) {
       return handleFetch(endpointDrink, type);
     };
     getRecipesAndRecommendations();
+    return () => {
+      cancel = true;
+    };
   }, [endpointDrink, endpointMeal, fetchMealRecipes, handleFetch, type]);
 
   useEffect(() => {

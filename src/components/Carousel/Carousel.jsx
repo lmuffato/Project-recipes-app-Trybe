@@ -9,11 +9,14 @@ function Carousel({ recipeRecommendations, type }) {
   const currRecomendation = type === 'meals' ? 'drinks' : 'meals';
   const recommend = recipeRecommendations;
   const { setIsRecommended } = useDetailsProvider();
-  // const [firstSelectedImageIndex, setSelectedImageIndex] = useState(0);
-  // const [secondSelectedImageIndex, setSecondSelectedImageIndex] = useState(1);
 
   useEffect(() => {
+    let cancel = false;
+    if (cancel) return;
     setIsRecommended(true);
+    return () => {
+      cancel = true;
+    };
   }, [setIsRecommended]);
 
   return (

@@ -47,8 +47,13 @@ function RecipesInProgress({ type }) {
   };
 
   useEffect(() => {
+    let cancel = false;
+    if (cancel) return;
     handleFetchIngredients();
     handleFetch(fetchRecipeURL);
+    return () => {
+      cancel = true;
+    };
   }, [fetchRecipeURL, handleFetch, handleFetchIngredients]);
 
   if (isLoading) {

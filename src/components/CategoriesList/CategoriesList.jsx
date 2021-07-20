@@ -14,16 +14,23 @@ function CategoriesList(props) {
   const [lastCategoryClicked, setLastCategoryClicked] = useState('');
 
   useEffect(() => {
+    let cancel = false;
+    if (cancel) return;
     const fetchCategories = async () => {
       const res = await fetch(fetchCategoriesUrl);
       const data = await res.json();
+      console.log('3 - fetch das categorias antes do slice');
       const treatedData = data[type]
         .slice(0, MAX_CATEGORIES)
         .map((category) => category.strCategory);
+      console.log('4- set das categorias no estado');
       setCategories(treatedData);
     };
 
     fetchCategories();
+    return () => {
+      cancel = true;
+    };
   }, [fetchCategoriesUrl, type]);
 
   const handleCategoryClick = (category) => {
@@ -31,7 +38,6 @@ function CategoriesList(props) {
       const fetchRecipesByCategoryUrl = type === 'meals'
         ? 'https://www.themealdb.com/api/json/v1/1/filter.php?c='
         : 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=';
-
       setLastCategoryClicked(category);
       return setFetchUrl(`${fetchRecipesByCategoryUrl}${category}`);
     }

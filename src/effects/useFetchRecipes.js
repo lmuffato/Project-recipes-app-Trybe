@@ -7,8 +7,12 @@ function useFetchRecipes(type) {
   const [fetchUrl, setFetchUrl] = useState('');
   const [recipesData, setRecipesData] = useState({});
   const { setRecipesContext } = useContext(RecipesContext);
+  const fetchCategoriesUrl = type === 'meals' ? 'https://www.themealdb.com/api/json/v1/1/list.php?c=list'
+    : 'https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list';
 
   useEffect(() => {
+    let cancel = false;
+    if (cancel) return;
     if (!fetchUrl) return;
     const fetchRecipes = async () => {
       try {
@@ -19,6 +23,7 @@ function useFetchRecipes(type) {
           ...data,
           [type]: data[type].slice(0, MAX_RECIPES),
         };
+
         setRecipesContext(limitedData);
         setRecipesData(limitedData);
       } catch (err) {
@@ -27,7 +32,10 @@ function useFetchRecipes(type) {
     };
 
     fetchRecipes();
-  }, [fetchUrl, type, setRecipesContext]);
+    return () => {
+      cancel = true;
+    };
+  }, [fetchUrl, type, setRecipesContext, fetchCategoriesUrl]);
 
   return [recipesData, setFetchUrl];
 }
