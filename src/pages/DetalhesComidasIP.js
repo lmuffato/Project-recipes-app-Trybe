@@ -7,6 +7,8 @@ import DoneRecipesContext from '../contexts/DoneRecipesContext';
 
 import { fetchFoodByID } from '../services/mealAPI';
 
+// PS: This Page contains CSS InLine
+
 export default function DetalhesComidasIP() {
   const { pathname } = useLocation();
   const foodId = pathname.split('/')[2];
@@ -112,21 +114,32 @@ export default function DetalhesComidasIP() {
       {food && (
         <div>
           <DetailsHeader recipe={ food } isFood />
+          <br />
           <IngredientListCheckbox
             recipe={ food }
             isFood
             handleCheckIngredient={ handleCheckIngredient }
             usedIngredients={ usedIngredients }
           />
-          <p data-testid="instructions">{food.strInstructions}</p>
+          <br />
+          <p
+            data-testid="instructions"
+            style={ { margin: 15 } }
+          >
+            {food.strInstructions}
+          </p>
+          <br />
           <button
+            className="button is-primary"
             type="button"
             data-testid="finish-recipe-btn"
             disabled={ !allIngredientsChecked() }
             onClick={ () => finishRecipe() }
           >
-            Finalizar Receita
+            Finish Recipe
           </button>
+          <br />
+          <br />
         </div>
       )}
     </div>

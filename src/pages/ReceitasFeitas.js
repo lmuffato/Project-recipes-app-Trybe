@@ -51,8 +51,9 @@ export default function ReceitasFeitas() {
         >
           Drink
         </button>
-        <br />
-        <br />
+      </div>
+      <br />
+      <div className="done-cards-container">
         {filteredDoneRecipes.map((done, index) => (
           <>
             <DoneRecipeCard key={ index } recipe={ done } index={ index } />

@@ -7,6 +7,8 @@ import DoneRecipesContext from '../contexts/DoneRecipesContext';
 
 import { fetchDrinkByID } from '../services/cocktailAPI';
 
+// PS: This Page contains CSS InLine
+
 export default function DetalhesBebidasIP() {
   const { pathname } = useLocation();
   const drinkId = pathname.split('/')[2];
@@ -112,21 +114,35 @@ export default function DetalhesBebidasIP() {
       {drink && (
         <div>
           <DetailsHeader recipe={ drink } isDrink />
+          <br />
           <IngredientListCheckbox
             recipe={ drink }
             isDrink
             handleCheckIngredient={ handleCheckIngredient }
             usedIngredients={ usedIngredients }
           />
-          <p data-testid="instructions">{drink.strInstructions}</p>
+          <br />
+
+          <p
+            style={ { margin: 15 } }
+            data-testid="instructions"
+          >
+            {drink.strInstructions}
+          </p>
+
+          <br />
+
           <button
+            className="button is-primary"
             type="button"
             data-testid="finish-recipe-btn"
             disabled={ !allIngredientsChecked() }
             onClick={ () => finishRecipe() }
           >
-            Finalizar Receita
+            Finish Recipe
           </button>
+          <br />
+          <br />
         </div>
       )}
     </div>

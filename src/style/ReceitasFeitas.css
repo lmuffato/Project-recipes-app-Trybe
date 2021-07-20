@@ -7,3 +7,10 @@
 .buttons-done {
   margin: 40px;
 }
+
+.done-cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-left: 30px;
+}

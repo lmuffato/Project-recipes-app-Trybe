@@ -3,6 +3,7 @@
 .ingredients-checkbox-container {
   display: flex;
   flex-direction: column;
+  margin: 15px;
 }
 
 .checkbox-container {
