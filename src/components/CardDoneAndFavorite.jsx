@@ -46,9 +46,7 @@ function CardDoneAndFavorite(props) {
     ? (<span data-testid={ `${index}-horizontal-done-date` }>{recipe.doneDate}</span>)
     : '';
   const tagsInfo = local === 'feitas' ? recipe.tags : [];
-  console.log(local, tagsInfo);
   const tagsElements = tagsInfo.reduce((acc, tagName, index2) => {
-    console.log(acc);
     if (index2 < 2) {
       acc.push(
         <span

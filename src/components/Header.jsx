@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
-import '../style/Header.css';
+import '../styleSheets/Header.css';
 import ContextRecipes from '../context/ContextRecipes';
 
 function Header() {

@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Handlee&display=swap') ;
+
+.container-button {
+  align-items: center;
+  background-color: rgb(0, 0, 0, 0.45);
+  border-radius: 20px 20px 0 0;
+  bottom: 0;
+  color: white;
+  display: flex;
+  height: 40px;
+  justify-content: center;
+  position: fixed;
+  width: 100vw;
+}
+
+.button-start {
+  background-color: transparent;
+  border: none;
+  bottom: 0;
+  color: white;
+  font-family: Comic Neue , cursive;
+  font-size: 20px;
+  font-weight: 700;
+  padding-bottom: 6px;
+  position: fixed;
+}
+
+.done-message {
+  align-items: flex-end;
+  align-self: center;
+  background-color: transparent;
+  border: none;
+  color: white;
+  display: flex;
+  font-family: Comic Neue , cursive;
+  font-size: 20px;
+  font-weight: 700;
+  height: 100%;
+}

@@ -1,0 +1,9 @@
+.title-content {
+  display: flex;
+}
+
+.field-content {
+  background-color: white;
+  border-radius: 20px;
+  display: flex;
+}

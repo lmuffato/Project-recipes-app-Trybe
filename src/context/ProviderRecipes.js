@@ -12,36 +12,16 @@ function ProviderRecipes({ children }) {
   const [dataDrinkCards, setDataDrinkCards] = useState('');
   const [loadingCards, setLoadingCards] = useState(false);
   const [showSearchBar, setShowSearchBar] = useState(false);
-  const [countries, setCountries] = useState([]);
-  // const [filteredByCountry, setFilteredByCountry] = useState([]);
   const [alertOn, setAlertOn] = useState(false);
   const [updateFlag, setUpadateFlag] = useState(false);
   const [ingredientsSearch, setIngredientsSearch] = useState(false);
+  const [isCompleted, setIsCompleted] = useState(false);
 
   const turnOnAlert = () => {
     setAlertOn(true);
     const waitTime = 2000;
     setTimeout(() => { setAlertOn(false); }, waitTime);
   };
-
-  function checkLocStorage() {
-    const doneRecipesArray = JSON.parse(localStorage.getItem('doneRecipes'));
-    if (doneRecipesArray !== null) {
-      return doneRecipesArray;
-    }
-    return [];
-  }
-
-  function checkLocalStorage() {
-    const inProgressRecipesArray = JSON.parse(localStorage.getItem('inProgressRecipes'));
-    if (inProgressRecipesArray !== null) {
-      return inProgressRecipesArray;
-    }
-    return [];
-  }
-
-  const [inProgressRecipes, setInProgressRecipes] = useState(checkLocalStorage());
-  const [doneRecipes, setDoneRecipes] = useState(checkLocStorage());
 
   const getCategories = async (type) => {
     const siteName = type === 'Meal' ? 'meal' : 'cocktail';
@@ -116,40 +96,19 @@ function ProviderRecipes({ children }) {
     setIngredientsSearch(false);
   };
 
-  const fetchArea = async () => {
-    const areaCategory = await fetch('https://www.themealdb.com/api/json/v1/1/list.php?a=list')
-      .then((req) => req.json())
-      .then((res) => res.meals);
-    const area = ['All'];
-    areaCategory.forEach((country) => {
-      area.push(country.strArea);
-    });
-    setCountries(area);
-  };
-
   const fetchByCountry = async (dropDownValue) => {
-    // const noFilter = await fetch('https://www.themealdb.com/api/json/v1/1/list.php?a=list')
-    //   .then((req) => req.json())
-    //   .then((res) => console.log(res.meals));
     if (dropDownValue !== 'All') {
       const endpoint = `https://www.themealdb.com/api/json/v1/1/filter.php?a=${dropDownValue}`;
       const getByCountry = await fetch(endpoint)
         .then((req) => req.json())
-        .then((res) => console.log(res.meals));
-      // getByCountry.forEach((meal) => {
-      //   setFilteredByCountry(meal);
-      // });
-      console.log(getByCountry);
-    }
+        .then((res) => res.meals);
+      setRecipes(getByCountry);
+    } else getRecipes('All', 'Meal');
   };
 
   return (
     <ContextRecipes.Provider
       value={ {
-        setDoneRecipes,
-        doneRecipes,
-        inProgressRecipes,
-        setInProgressRecipes,
         activeFilter,
         setFilter,
         filteredRecipe,
@@ -169,17 +128,15 @@ function ProviderRecipes({ children }) {
         setLoadingCards,
         showSearchBar,
         setShowSearchBar,
-        fetchArea,
-        countries,
-        setCountries,
         fetchByCountry,
-        // filteredByCountry,
         alertOn,
         turnOnAlert,
         updateFlag,
         setUpadateFlag,
         ingredientsSearch,
         fetchByIngredients,
+        isCompleted,
+        setIsCompleted,
       } }
     >
       { children }
