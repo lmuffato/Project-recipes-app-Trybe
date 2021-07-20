@@ -117,10 +117,10 @@ $orange: rgb(242, 163, 15);
 
     & div {
       align-self: flex-start;
-      margin: 2em 0 2em 4em;
+      margin: 2em 0 2em 4.5em;
 
       @include for-phone-only {
-        margin: 0 0 1em 3em;
+        margin: 0 0 1em 4em;
       }
     }
 
