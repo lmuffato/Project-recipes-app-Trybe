@@ -34,7 +34,7 @@ function FavoriteRecipes() {
   ) => {
     if (type === 'comida') {
       return (
-        <div key={ id }>
+        <div key={ id } className="recipe-fav">
           { isCopy ? <span>Link copiado!</span> : null }
           <Link to={ `/comidas/${id}` }>
             <img
@@ -118,39 +118,46 @@ function FavoriteRecipes() {
   };
 
   return (
-    <div>
+    <div className="main-recipes">
       <Header />
-      <button
-        type="button"
-        data-testid="filter-by-all-btn"
-        onClick={ () => handleContent('all') }
-      >
-        All
-      </button>
+      <section className="button-container-fav">
+        <button
+          type="button"
+          data-testid="filter-by-all-btn"
+          className="button-fav button-filter"
+          onClick={ () => handleContent('all') }
+        >
+          All
+        </button>
 
-      <button
-        type="button"
-        data-testid="filter-by-food-btn"
-        onClick={ () => handleContent('meals') }
-      >
-        Food
-      </button>
+        <button
+          type="button"
+          data-testid="filter-by-food-btn"
+          className="button-fav button-filter"
+          onClick={ () => handleContent('meals') }
+        >
+          Food
+        </button>
 
-      <button
-        type="button"
-        data-testid="filter-by-drink-btn"
-        onClick={ () => handleContent('cocktails') }
-      >
-        Drinks
-      </button>
+        <button
+          type="button"
+          data-testid="filter-by-drink-btn"
+          className="button-fav button-filter"
+          onClick={ () => handleContent('cocktails') }
+        >
+          Drinks
+        </button>
+      </section>
 
-      {
-        showRecipes.map(
-          ({ id, type, area, category, alcoholicOrNot, name, image }, index) => (
-            renderCards({ id, type, area, category, alcoholicOrNot, name, image }, index)
-          ),
-        )
-      }
+      <section className="recipes-container-fav">
+        {
+          showRecipes.map(
+            ({ id, type, area, category, alcoholicOrNot, name, image }, index) => (
+              renderCards({ id, type, area, category, alcoholicOrNot, name, image }, index)
+            ),
+          )
+        }
+      </section>
     </div>
   );
 }

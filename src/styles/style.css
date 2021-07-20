@@ -460,6 +460,45 @@ input:checked + .checked-list {
   color: green;
 } */
 
+/* ---------- Pagina receitas favoritas ---------- */
+.button-container-fav {
+  background-color: #c3baba;
+  border-top: 90px;
+  display: flex;
+  /* flex-wrap: wrap; */
+  height: auto;
+  justify-content: space-around;
+  position: fixed;
+  top: 7%;
+  width: 100%;
+}
+
+.button-fav {
+  border: none;
+  border-radius: 10px;
+  color: #fffefee7;
+  font-size: 13pt;
+  font-weight: 500;
+  height: 40%;
+  margin: 1% 0;
+  padding: 1%;
+  width: 30%;
+  word-wrap: break-word;
+}
+
+.recipes-container-fav {
+  flex-direction: column;
+  margin-top: 35%;
+}
+
+.main-recipes-fav {
+  align-items: center;
+  justify-content: space-around;
+  margin-top: 15%;
+}
+
+
+
 /*
 #5e9c53 - verde claro
 #256766 - verde escuro
