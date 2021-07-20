@@ -5,36 +5,29 @@ import renderWithRouterHooksAndProvider from './renderWithRouterHooksAndProvider
 
 const RECIPE_TITLE_TEST_ID = 'recipe-title';
 const FIRST_IMAGE_TEST_ID = '0-card-img';
+const FIRST_INGREDIENT = '0-ingredient-name-and-measure';
 const BEEF_FILTER = 'Beef-category-filter';
 const ORDINARY_DRINK_FILTER = 'Ordinary Drink-category-filter';
 
 describe('Testes de rotas do App', () => {
-  it('Aparece mensagem de Not Found quando a rota é mudada para /explorar/bebidas/area',
-    () => {
-      const { getByRole } = renderWithRouterHooksAndProvider(
-        <App />,
-        '/explorar/bebidas/area',
-      );
-
-      const notFoundHeading = getByRole('heading', {
-        name: 'Not Found',
-        level: 1,
-      });
-      expect(notFoundHeading).toBeInTheDocument();
-    });
-
   it('Rota /explorar/bebidas/ingredientes renderiza corretamente',
     async () => {
       const { getByText, getByTestId } = renderWithRouterHooksAndProvider(
         <App />,
         '/explorar/bebidas/ingredientes',
       );
-
       await waitForElement(() => getByTestId(FIRST_IMAGE_TEST_ID));
       await waitForElement(() => getByText('Light rum'));
 
       expect(getByTestId(FIRST_IMAGE_TEST_ID)).toBeInTheDocument();
       expect(getByText('Light rum')).toBeInTheDocument();
+
+      fireEvent.click(getByText('Light rum'));
+      await waitForElement(() => getByText('151 Florida Bushwacker'));
+      expect(getByText('151 Florida Bushwacker')).toBeInTheDocument();
+      expect(getByTestId(FIRST_IMAGE_TEST_ID).src).toMatch(
+        'https://www.thecocktaildb.com/images/media/drink/rvwrvv1468877323.jpg',
+      );
     });
 
   it('Rota /explorar/comidas/ingredientes renderiza corretamente',
@@ -50,11 +43,18 @@ describe('Testes de rotas do App', () => {
       expect(getByText('Chicken')).toBeInTheDocument();
       expect(getByTestId('1-card-img')).toBeInTheDocument();
       expect(getByText('Salmon')).toBeInTheDocument();
+
+      fireEvent.click(getByText('Chicken'));
+      await waitForElement(() => getByText('Brown Stew Chicken'));
+      expect(getByText('Brown Stew Chicken')).toBeInTheDocument();
+      expect(getByTestId(FIRST_IMAGE_TEST_ID).src).toMatch(
+        'https://www.themealdb.com/images/media/meals/sypxpx1515365095.jpg',
+      );
     });
 
   it('Rota /comidas/:id renderiza corretamente',
     async () => {
-      const { getByText, getByTestId } = renderWithRouterHooksAndProvider(
+      const { getByText, getByTestId, getAllByTestId } = renderWithRouterHooksAndProvider(
         <App />,
         '/comidas/52940',
       );
@@ -64,11 +64,17 @@ describe('Testes de rotas do App', () => {
       expect(getByTestId(RECIPE_TITLE_TEST_ID)).toBeInTheDocument();
       expect(getByTestId('recipe-category')).toBeInTheDocument();
       expect(getByText('Recomendadas')).toBeInTheDocument();
+      expect(getAllByTestId(FIRST_INGREDIENT)[0]).toBeInTheDocument();
+      expect(getAllByTestId(FIRST_INGREDIENT)[1]).toBeInTheDocument();
+      expect(getAllByTestId('1-ingredient-name-and-measure')[0]).toBeInTheDocument();
+      expect(getAllByTestId('2-ingredient-name-and-measure')[0]).toBeInTheDocument();
+      expect(getAllByTestId('12-ingredient-name-and-measure')[0]).toBeInTheDocument();
+      expect(getAllByTestId('12-ingredient-name-and-measure')[1]).toBeInTheDocument();
     });
 
   it('Rota /bebidas/:id renderiza corretamente',
     async () => {
-      const { getByText, getByTestId } = renderWithRouterHooksAndProvider(
+      const { getByText, getByTestId, getAllByTestId } = renderWithRouterHooksAndProvider(
         <App />,
         '/bebidas/15997',
       );
@@ -79,6 +85,11 @@ describe('Testes de rotas do App', () => {
       expect(getByTestId(RECIPE_TITLE_TEST_ID)).toBeInTheDocument();
       expect(getByTestId('recipe-category')).toBeInTheDocument();
       expect(getByText('Recomendadas')).toBeInTheDocument();
+
+      expect(getAllByTestId(FIRST_INGREDIENT)[0]).toBeInTheDocument();
+      expect(getAllByTestId(FIRST_INGREDIENT)[1]).toBeInTheDocument();
+      expect(getAllByTestId('1-ingredient-name-and-measure')[0]).toBeInTheDocument();
+      expect(getAllByTestId('2-ingredient-name-and-measure')[0]).toBeInTheDocument();
     });
 
   it('Rota explorar comidas por area renderiza corretamente',
@@ -88,18 +99,21 @@ describe('Testes de rotas do App', () => {
         '/explorar/comidas/area',
       );
 
+      const EXPLORE_DROPDOWN = 'explore-by-area-dropdown';
+
       await waitForElement(() => getByTestId(FIRST_IMAGE_TEST_ID));
+      await waitForElement(() => getByTestId(EXPLORE_DROPDOWN));
 
       expect(getByTestId(FIRST_IMAGE_TEST_ID)).toBeInTheDocument();
       expect(getByText('Corba')).toBeInTheDocument();
       expect(getByText('Kumpir')).toBeInTheDocument();
       expect(getByText('Tamiya')).toBeInTheDocument();
-      expect(getByTestId('explore-by-area-dropdown')).toBeInTheDocument();
+      expect(getByTestId(EXPLORE_DROPDOWN)).toBeInTheDocument();
       expect(getByTestId('American-option')).toBeInTheDocument();
       expect(getByTestId('British-option')).toBeInTheDocument();
       expect(getByTestId('Canadian-option')).toBeInTheDocument();
 
-      fireEvent.change(getByTestId('explore-by-area-dropdown'), {
+      fireEvent.change(getByTestId(EXPLORE_DROPDOWN), {
         target: { value: 'Chinese' },
       });
       await waitForElement(() => getByText('Beef Lo Mein'));
