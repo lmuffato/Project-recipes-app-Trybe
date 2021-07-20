@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 const RecipeInProgressContainer = styled.div`align-items: center;
+  background: #fdfefb;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -48,13 +49,14 @@ const RecipeInProgressContainer = styled.div`align-items: center;
     }
 
     .img-container {
+      align-self: center;
 
       img {
         border-radius: 8px;
 
         /* height: auto; */
         max-height: auto;
-        max-width: 80vw;
+        max-width: 100vw;
         object-fit: cover;
         overflow: hidden;
 
@@ -74,6 +76,7 @@ const RecipeInProgressContainer = styled.div`align-items: center;
 
   .recipe-title {
     font-size: 2rem;
+    text-align: center;
     text-transform: capitalize;
   }
 
@@ -82,6 +85,10 @@ const RecipeInProgressContainer = styled.div`align-items: center;
     display: flex;
     justify-content: flex-start;
     margin-right: 4rem;
+
+    input {
+      font-weight: 300;
+    }
   }
 
   .instructions {
@@ -93,6 +100,7 @@ const RecipeInProgressContainer = styled.div`align-items: center;
     p {
       display: flex;
       flex-wrap: wrap;
+      font-weight: 300;
       margin: 1rem;
       max-width: 640px;
     }

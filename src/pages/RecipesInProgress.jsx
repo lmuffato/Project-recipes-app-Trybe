@@ -47,8 +47,13 @@ function RecipesInProgress({ type }) {
   };
 
   useEffect(() => {
+    let cancel = false;
+    if (cancel) return;
     handleFetchIngredients();
     handleFetch(fetchRecipeURL);
+    return () => {
+      cancel = true;
+    };
   }, [fetchRecipeURL, handleFetch, handleFetchIngredients]);
 
   if (isLoading) {
@@ -70,7 +75,7 @@ function RecipesInProgress({ type }) {
         recipe={ singleRecipe }
         recipeCategory={ renderCategory }
       />
-      <h3>Ingredientes</h3>
+      <h3>Ingredients</h3>
       <div className="ingredients-list">
         <RecipeIngredientsInProgress
           recipe={ singleRecipe }

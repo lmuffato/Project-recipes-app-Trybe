@@ -7,7 +7,7 @@ import RecipesContextProvider from '../context/RecipesContext';
 import FiltredRecipesContextProvider from '../context/FilteredRecipesContext';
 import DetailsContextProvider from '../context/DetailsContext';
 
-const renderWithRouterHooksAndProvider = (component, route = '/') => {
+const renderWithRouterHooksAndProvider = async (component, route = '/') => {
   const history = createMemoryHistory();
   history.push(route);
 

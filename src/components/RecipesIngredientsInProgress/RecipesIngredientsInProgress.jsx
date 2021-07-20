@@ -51,7 +51,9 @@ function RecipeIngredients({ recipe, type, id }) {
   }, [id, type]);
 
   useEffect(() => {
+    let cancel = false;
     const getDataFromLocalStorage = () => {
+      if (cancel) return;
       const localStorageInProgressRecipes = JSON.parse(
         localStorage.getItem('inProgressRecipes'),
       );
@@ -88,6 +90,9 @@ function RecipeIngredients({ recipe, type, id }) {
     };
     getDataFromLocalStorage();
     setRecipeInProgress(JSON.parse(localStorage.getItem('inProgressRecipes')));
+    return () => {
+      cancel = true;
+    };
   }, [id, setContextIngredients, setRecipeInProgress, type]);
 
   const updateRecipesInProgress = (el, isChecked) => {
@@ -130,7 +135,8 @@ function RecipeIngredients({ recipe, type, id }) {
   useEffect(() => {
     const recipesJson = localStorage.getItem('inProgressRecipes');
     const storageRecipes = JSON.parse(recipesJson);
-
+    let cancel = false;
+    if (cancel) return;
     if (recipesJson) {
       switch (type) {
       case 'meals':
@@ -147,12 +153,20 @@ function RecipeIngredients({ recipe, type, id }) {
         break;
       }
     }
+    return () => {
+      cancel = true;
+    };
   }, [id, type]);
 
   useEffect(() => {
+    let cancel = false;
+    if (cancel) return;
     if (checkedBox.length === ingredients.length) {
       setIsDisabled(false);
     }
+    return () => {
+      cancel = true;
+    };
   }, [checkedBox.length, ingredients.length, setIsDisabled]);
 
   return (
@@ -162,6 +176,7 @@ function RecipeIngredients({ recipe, type, id }) {
           htmlFor={ element }
           key={ index }
           data-testid={ `${index}-ingredient-step` }
+          className={ checkedBox.includes(index) ? 'checked' : '' }
         >
           <input
             type="checkbox"

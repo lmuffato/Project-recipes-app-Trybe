@@ -29,7 +29,7 @@ function Home(props) {
   };
 
   useEffect(() => {
-    console.log('teste');
+    console.log('1- URL Home');
     if (type === 'meals') {
       return setFetchUrl(MEALS_URL);
     }
@@ -39,18 +39,28 @@ function Home(props) {
   }, [setFetchUrl, type]);
 
   useEffect(() => {
+    let cancel = false;
+    if (cancel) return;
+    console.log('2 - set estado da home');
     if (recipesContext[type]) setRecipes(recipesContext[type]); // pega do estado global e seta no estado da pg
     setIsRecommended(false);
+    return () => {
+      cancel = true;
+    };
   }, [recipesContext, setIsRecommended, type]);
 
   // useEffect(() => {
   //   getFilteredRecipes(type);
   // }, [type, searchBarFilters, getFilteredRecipes]);
-  console.log('Hello from <Home />');
+  // console.log('Hello from <Home />');
 
   return (
     <>
-      <Header heading={ type === 'meals' ? 'Comidas' : 'Bebidas' } logoSrc={ logoIcon }>
+      <Header
+        heading={ type === 'meals' ? 'Comidas' : 'Bebidas' }
+        logoSrc={ logoIcon }
+        className={ type === 'meals' ? 'meals-header' : 'drinks-header' }
+      >
         <SearchBarButton onClick={ handleToggleSearchBar } />
       </Header>
       <div>

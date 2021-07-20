@@ -9,6 +9,8 @@ function AreasList() {
   const [areas, setAreas] = useState([]);
 
   useEffect(() => {
+    let cancel = false;
+    if (cancel) return;
     const fetchCategories = async () => {
       const res = await fetch(fetchAreasUrl);
       const data = await res.json();
@@ -17,6 +19,9 @@ function AreasList() {
     };
 
     fetchCategories();
+    return () => {
+      cancel = true;
+    };
   }, [fetchAreasUrl]);
 
   function handleDropdownChange(event) {

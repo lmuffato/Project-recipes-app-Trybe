@@ -40,11 +40,12 @@ function Header({ children, heading, logoSrc }) {
 
 Header.defaultProps = {
   children: '',
+  heading: '',
 };
 
 Header.propTypes = {
   children: PropTypes.node,
-  heading: PropTypes.string.isRequired,
+  heading: PropTypes.string,
   logoSrc: PropTypes.string.isRequired,
 };
 

@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 const Container = styled.div`align-items: center;
+  background: #fdfefb;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -49,6 +50,8 @@ const Container = styled.div`align-items: center;
 
     .recipe-title {
       font-size: 2rem;
+      line-height: 2.5rem;
+      text-align: center;
       text-transform: capitalize;
     }
 
@@ -68,7 +71,7 @@ const Container = styled.div`align-items: center;
 
         /* height: auto; */
         max-height: auto;
-        max-width: 80vw;
+        max-width: 100vw;
         object-fit: cover;
         overflow: hidden;
 
@@ -82,6 +85,14 @@ const Container = styled.div`align-items: center;
     display: flex;
     justify-content: flex-start;
     margin-right: 4rem;
+
+  }
+
+  ul {
+
+    li {
+      font-weight: 300;
+    }
   }
 
   .instructions {
@@ -93,6 +104,7 @@ const Container = styled.div`align-items: center;
     p {
       display: flex;
       flex-wrap: wrap;
+      font-weight: 300;
       margin: 1rem;
       max-width: 640px;
     }

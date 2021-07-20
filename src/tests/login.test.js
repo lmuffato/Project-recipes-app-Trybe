@@ -17,10 +17,9 @@ const BUTTON_TEST_ID = 'login-submit-btn';
 
 describe('1 - Crie uma página inicial de login de acordo com os seguintes '
 + 'parâmetros:', () => {
-  it('A rota para esta página deve ser \'/\'', () => {
-    act(() => {
-      const { history } = renderWithRouterHooksAndProvider(<App />, '/');
-
+  it('A rota para esta página deve ser \'/\'', async () => {
+    await act(async () => {
+      const { history } = await renderWithRouterHooksAndProvider(<App />);
       expect(history.location.pathname).toBe('/');
     });
   });
@@ -83,9 +82,9 @@ describe('2 - Na tela de login são realizadas as seguintes verificações: ', (
   });
 
   it('O botão de Entrar continua desabilitado quando uma '
-  + 'senha inválida é inserida', () => {
-    act(() => {
-      renderWithRouterHooksAndProvider(<App />, '/');
+  + 'senha inválida é inserida', async () => {
+    await act(async () => {
+      await renderWithRouterHooksAndProvider(<App />, '/');
 
       const email = screen.getByTestId(EMAIL_INPUT_TEST_ID);
       const password = screen.getByTestId(PASSWORD_INPUT_TEST_ID);
@@ -134,7 +133,7 @@ describe('3 - Verifica se o email da pessoa usuária é salvo no Local Storage '
  + 'e se a pessoa usuária é redirecionada para a tela principal após o login', () => {
   it('A rota deve ser mudada para \'/comidas\' após o clique no botão', async () => {
     await act(async () => {
-      const { history } = renderWithRouterHooksAndProvider(<App />, '/');
+      const { history } = await renderWithRouterHooksAndProvider(<App />, '/');
 
       const email = screen.getByTestId(EMAIL_INPUT_TEST_ID);
       const password = screen.getByTestId(PASSWORD_INPUT_TEST_ID);
@@ -144,7 +143,7 @@ describe('3 - Verifica se o email da pessoa usuária é salvo no Local Storage '
       await userEvent.type(password, VALID_PASSWORD);
       await fireEvent.click(button);
 
-      expect(history.location.pathname).toMatch('/comidas');
+      await expect(history.location.pathname).toMatch('/comidas');
     });
   });
 

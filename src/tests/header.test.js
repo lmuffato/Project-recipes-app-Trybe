@@ -28,9 +28,9 @@ describe('4 - Crie um componente Header de acordo com os seguintes parâmetros',
 
   it('Checa se o título da página principal de comidas está correto', async () => {
     await act(async () => {
-      const { getByRole } = renderWithRouterHooksAndProvider(<Home type="meals" />,
+      renderWithRouterHooksAndProvider(<Home type="meals" />,
         '/comidas');
-      const homePage = await getByRole('heading', {
+      const homePage = await screen.getByRole('heading', {
         name: /comidas/i,
         level: 1,
       });
@@ -48,9 +48,9 @@ describe('4 - Crie um componente Header de acordo com os seguintes parâmetros',
 
   it('Checa se o título da página principal de bebidas está correto', async () => {
     await act(async () => {
-      const { getByRole } = renderWithRouterHooksAndProvider(<Home type="drinks" />,
+      await renderWithRouterHooksAndProvider(<Home type="drinks" />,
         '/bebidas');
-      const homePage = await getByRole('heading', {
+      const homePage = screen.getByRole('heading', {
         name: /bebidas/i,
         level: 1,
       });
@@ -58,19 +58,19 @@ describe('4 - Crie um componente Header de acordo com os seguintes parâmetros',
     });
   });
 
-  it('O header possui um título para a página de perfil', () => {
-    act(() => {
+  it('O header possui um título para a página de perfil', async () => {
+    await act(async () => {
       renderWithRouterHooksAndProvider(<Profile />, '/perfil');
       const pageTitle = screen.getByTestId(HOMEPAGE_TITLE_TESTID);
       expect(pageTitle).toBeInTheDocument();
     });
   });
 
-  it('Checa se o título da página de perfil está correto', () => {
-    act(() => {
-      const { getByRole } = renderWithRouterHooksAndProvider(<Profile />,
+  it('Checa se o título da página de perfil está correto', async () => {
+    await act(async () => {
+      await renderWithRouterHooksAndProvider(<Profile />,
         '/perfil');
-      const profilePage = getByRole('heading', {
+      const profilePage = screen.getByRole('heading', {
         name: /perfil/i,
         level: 1,
       });
@@ -78,19 +78,19 @@ describe('4 - Crie um componente Header de acordo com os seguintes parâmetros',
     });
   });
 
-  it('O header possui um título para a página de receitas favoritas', () => {
-    act(() => {
+  it('O header possui um título para a página de receitas favoritas', async () => {
+    await act(async () => {
       renderWithRouterHooksAndProvider(<FavoriteRecipes />, 'receitas-favoritas');
       const pageTitle = screen.getByTestId(HOMEPAGE_TITLE_TESTID);
       expect(pageTitle).toBeInTheDocument();
     });
   });
 
-  it('Checa se o título da página de receitas favoritas está correto', () => {
-    act(() => {
-      const { getByRole } = renderWithRouterHooksAndProvider(<FavoriteRecipes />,
+  it('Checa se o título da página de receitas favoritas está correto', async () => {
+    await act(async () => {
+      await renderWithRouterHooksAndProvider(<FavoriteRecipes />,
         '/receitas-favoritas');
-      const favoriteRecipesPage = getByRole('heading', {
+      const favoriteRecipesPage = screen.getByRole('heading', {
         name: /Receitas Favoritas/,
         level: 1,
       });
@@ -117,9 +117,9 @@ describe('4 - Crie um componente Header de acordo com os seguintes parâmetros',
     });
   });
 
-  it('O header possui um título para a página de explorar', () => {
-    act(() => {
-      renderWithRouterHooksAndProvider(<Explore />, '/explorar');
+  it('O header possui um título para a página de explorar', async () => {
+    await act(async () => {
+      await renderWithRouterHooksAndProvider(<Explore />, '/explorar');
       const pageTitle = screen.getByTestId(HOMEPAGE_TITLE_TESTID);
       expect(pageTitle).toBeInTheDocument();
     });
@@ -127,9 +127,9 @@ describe('4 - Crie um componente Header de acordo com os seguintes parâmetros',
 
   it('Checa se o título da página de explorar está correto', async () => {
     await act(async () => {
-      const { getByRole } = renderWithRouterHooksAndProvider(<Explore />,
+      await renderWithRouterHooksAndProvider(<Explore />,
         '/explorar');
-      const explorePage = await getByRole('heading', {
+      const explorePage = screen.getByRole('heading', {
         name: 'Explorar',
         level: 1,
       });
@@ -137,16 +137,16 @@ describe('4 - Crie um componente Header de acordo com os seguintes parâmetros',
     });
   });
 
-  it('O header possui um título para as páginas de explorar comidas', () => {
-    act(() => {
+  it('O header possui um título para as páginas de explorar comidas', async () => {
+    await act(async () => {
       renderWithRouterHooksAndProvider(<ExploreFoods />, '/explorar/comidas');
       const pageTitle = screen.getByTestId(HOMEPAGE_TITLE_TESTID);
       expect(pageTitle).toBeInTheDocument();
     });
   });
 
-  it('O header possui um título para as páginas de explorar bebidas', () => {
-    act(() => {
+  it('O header possui um título para as páginas de explorar bebidas', async () => {
+    await act(async () => {
       renderWithRouterHooksAndProvider(<ExploreDrinks />, '/explorar/bebidas');
       const pageTitle = screen.getByTestId(HOMEPAGE_TITLE_TESTID);
       expect(pageTitle).toBeInTheDocument();
@@ -154,21 +154,23 @@ describe('4 - Crie um componente Header de acordo com os seguintes parâmetros',
   });
 
   it('Checa se os títulos das páginas de explorar comidas e bebidas '
-    + 'estão corretos', () => {
-    act(() => {
-      const { getByRole } = renderWithRouterHooksAndProvider(<ExploreFoods />,
+    + 'estão corretos', async () => {
+    await act(async () => {
+      await renderWithRouterHooksAndProvider(<ExploreFoods />,
         '/explorar/comidas');
-      const exploreFoodsPage = getByRole('heading', {
+      const exploreFoodsPage = screen.getByRole('heading', {
         name: /explorar comidas/i,
         level: 1,
       });
       expect(exploreFoodsPage).toBeInTheDocument();
     });
+  });
 
-    act(() => {
-      const { getByRole } = renderWithRouterHooksAndProvider(<ExploreDrinks />,
+  it('', async () => {
+    await act(async () => {
+      await renderWithRouterHooksAndProvider(<ExploreDrinks />,
         '/explorar/bebidas');
-      const exploreDrinksPage = getByRole('heading', {
+      const exploreDrinksPage = screen.getByRole('heading', {
         name: /explorar bebidas/i,
         level: 1,
       });
@@ -179,9 +181,9 @@ describe('4 - Crie um componente Header de acordo com os seguintes parâmetros',
   it('O header possui um título para as páginas de explorar por '
     + 'locais de origem', async () => {
     await act(async () => {
-      const { getByRole } = renderWithRouterHooksAndProvider(<ExploreOrigin />,
+      await renderWithRouterHooksAndProvider(<ExploreOrigin />,
         '/explorar/comidas/area');
-      const explorePage = await getByRole('heading', {
+      const explorePage = screen.getByRole('heading', {
         name: /explorar origem/i,
         level: 1,
       });
@@ -193,7 +195,7 @@ describe('4 - Crie um componente Header de acordo com os seguintes parâmetros',
 describe('5 - O header possui os ícones corretos', () => {
   it('Página principal de comidas possui os ícones corretos', async () => {
     await act(async () => {
-      const { history } = renderWithRouterHooksAndProvider(<App />);
+      const { history } = await renderWithRouterHooksAndProvider(<App />);
       await history.push('/comidas');
       const searchIcon = await screen.getByTestId(SEARCH_ICON_TESTID);
       const profileIcon = await screen.getByTestId(PROFILE_ICON_TESTID);
@@ -210,21 +212,24 @@ describe('5 - O header possui os ícones corretos', () => {
       renderWithRouterHooksAndProvider(<Home />, '/bebidas');
 
       const searchIcon = await screen.getByTestId(SEARCH_ICON_TESTID);
-      const profileIcon = await screen.getByTestId(PROFILE_ICON_TESTID);
 
-      expect(searchIcon).toBeInTheDocument();
-      expect(profileIcon).toBeInTheDocument();
       expect(searchIcon.src).toContain('searchIcon.svg');
+    });
+  });
+
+  it('íconde perfil na página de bebidas', async () => {
+    await act(async () => {
+      await renderWithRouterHooksAndProvider(<Home />, '/bebidas');
+      const profileIcon = await screen.getByTestId(PROFILE_ICON_TESTID);
       expect(profileIcon.src).toContain(PROFILE_ICON_SVG_PATH);
     });
   });
 
   it('Página perfil possui os ícones corretos', async () => {
     await act(async () => {
-      renderWithRouterHooksAndProvider(<Profile />, '/perfil');
+      await renderWithRouterHooksAndProvider(<Profile />, '/perfil');
       const profileIcon = await screen.getByTestId(PROFILE_ICON_TESTID);
 
-      expect(profileIcon).toBeInTheDocument();
       expect(profileIcon.src).toContain(PROFILE_ICON_SVG_PATH);
     });
   });
