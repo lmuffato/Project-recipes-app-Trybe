@@ -40,8 +40,14 @@
 
   .alert {
     font-size: 12px;
+    min-height: 50px;
+    padding-top: 20px;
     right: 0;
     width: 100%;
+  }
+
+  .btn-close {
+    background-position-y: 16px;
   }
 
   .doneRecipesPage .alert {
