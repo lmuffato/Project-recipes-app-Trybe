@@ -30,11 +30,15 @@ function BebidasDetalhes() {
       : (
         <section>
           <Recipe.Image url={ strDrinkThumb } />
-          <div>
-            <Recipe.Title title={ strDrink } />
-            <Recipe.Category category={ strAlcoholic } />
-            <Recipe.Share id={ id } type="bebidas" />
-            <Recipe.FavoriteDrink />
+          <div className="header-details">
+            <div>
+              <Recipe.Title title={ strDrink } />
+              <Recipe.Category category={ strAlcoholic } />
+            </div>
+            <div>
+              <Recipe.Share id={ id } type="bebidas" />
+              <Recipe.FavoriteDrink />
+            </div>
           </div>
           <Recipe.Ingredients list={ ingredients } />
           <Recipe.Instructions text={ strInstructions } />

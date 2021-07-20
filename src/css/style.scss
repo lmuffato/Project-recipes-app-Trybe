@@ -1,7 +1,14 @@
 @import './utils', './login', './favoritos', './feitos', './search',
-  './pagDetalhes', './pagProcesso', './pagExplorarPorIngredientes' ;
+ './pagReceitas', './pagProcesso', './pagExplorarPorIngredientes' ;
 
-.header {
+.icones-btn {
+  border-style: none;
+  background-color: rgba(255, 255, 255, 0);
+}
+
+.header { 
+  width: 100%;
+  height: 50px;
   background-color: $basecolor;
   box-shadow: $shadow;
   height: 50px;

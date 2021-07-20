@@ -3,9 +3,12 @@ import React from 'react';
 
 function Category({ category }) {
   return (
-    <h3 data-testid="recipe-category">
+    <p
+      className="p-detalhes"
+      data-testid="recipe-category"
+    >
       {category}
-    </h3>
+    </p>
   );
 }
 

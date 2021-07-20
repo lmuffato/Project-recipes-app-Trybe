@@ -1,8 +1,5 @@
-.carousel-card-show {
-  visibility: visible;
-}
-
-.carousel-card-hidden {
-  visibility: hidden;
-  width: 0;
+.carousel-img {
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: fill;
 }

@@ -3,9 +3,9 @@ import React from 'react';
 
 function Title({ title }) {
   return (
-    <h2 data-testid="recipe-title">
+    <h3 className="titulo-detalhes" data-testid="recipe-title">
       {title}
-    </h2>
+    </h3>
   );
 }
 

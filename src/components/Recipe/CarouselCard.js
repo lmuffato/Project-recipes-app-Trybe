@@ -2,27 +2,24 @@ import React from 'react';
 import { number, string } from 'prop-types';
 
 import '../../styles/carouselCard.css';
+import '../../styles/carousel.css';
 
-function CarouselCard({ title, alcoholic, link, index, isVisible }) {
-  const visibility = isVisible ? 'carousel-card-show' : 'carousel-card-hidden';
+function CarouselCard({ title, alcoholic, link, index }) {
   return (
-    <div
-      className={ `carousel-card-frame ${visibility}` }
-      data-testid={ `${index}-recomendation-card` }
-    >
+    <div>
       <img
-        className="carousel-card-img"
-        width="50"
+        className="carousel-img"
+        data-testid={ `${index}-recomendation-card` }
         src={ link }
         alt={ `Bebida recomendada: ${title}` }
       />
-      <h3 className="carousel-card-alcoholic">{alcoholic}</h3>
-      <h2
-        className="carousel-card-name"
+      <p
         data-testid={ `${index}-recomendation-title` }
+        className="legend"
       >
+        <h5>{alcoholic}</h5>
         {title}
-      </h2>
+      </p>
     </div>
   );
 }

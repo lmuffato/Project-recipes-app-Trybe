@@ -30,11 +30,15 @@ function ComidasDetalhes() {
       : (
         <section>
           <Recipe.Image url={ strMealThumb } />
-          <div>
-            <Recipe.Title title={ strMeal } />
-            <Recipe.Category category={ strCategory } />
-            <Recipe.Share id={ id } type="comidas" />
-            <Recipe.FavoriteMeal />
+          <div className="header-details">
+            <div>
+              <Recipe.Title title={ strMeal } />
+              <Recipe.Category category={ strCategory } />
+            </div>
+            <div>
+              <Recipe.Share id={ id } type="comidas" />
+              <Recipe.FavoriteMeal />
+            </div>
           </div>
           <Recipe.Ingredients list={ ingredients } />
           <Recipe.Instructions text={ strInstructions } />

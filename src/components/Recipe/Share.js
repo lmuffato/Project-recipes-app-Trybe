@@ -20,6 +20,7 @@ function Share() {
     <button
       type="button"
       data-testid="share-btn"
+      className="icones-btn"
       onClick={ copyToClipBoard }
     >
       <img src={ shareIcon } alt="Compartilhar" />
