@@ -1,23 +1,12 @@
 import { arrayOf, shape } from 'prop-types';
 import React from 'react';
-import ReactMultiCarousel from 'react-multi-carousel';
+import { Carousel as ReactResponsiveCarousel } from 'react-responsive-carousel';
 
 import CarouselCard from './CarouselCard';
 
 function Carousel({ items }) {
-  const responsive = {
-    mobie: {
-      breakpoint: { max: 4000, min: 0 },
-      items: 2,
-    },
-  };
   return (
-    <ReactMultiCarousel
-      keyBoardControl
-      showDots
-      infinite
-      responsive={ responsive }
-    >
+    <ReactResponsiveCarousel infiniteLoop>
       {items.map(({ title, alcoholic, imgLink }, index) => (
         <CarouselCard
           key={ title }
@@ -27,7 +16,7 @@ function Carousel({ items }) {
           index={ index }
         />
       ))}
-    </ReactMultiCarousel>
+    </ReactResponsiveCarousel>
   );
 }
 

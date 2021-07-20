@@ -8,7 +8,7 @@ import StorageProvider from './context/StorageProvider';
 
 import './css/style.css';
 import './App.css';
-import 'react-multi-carousel/lib/styles.css';
+import 'react-responsive-carousel/lib/styles/carousel.min.css'; // requires a loader
 
 function App() {
   const progress = {

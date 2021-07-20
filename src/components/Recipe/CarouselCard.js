@@ -2,6 +2,7 @@ import React from 'react';
 import { number, string } from 'prop-types';
 
 import '../../styles/carouselCard.css';
+import '../../styles/carousel.css';
 
 function CarouselCard({ title, alcoholic, link, index }) {
   return (
@@ -12,10 +13,11 @@ function CarouselCard({ title, alcoholic, link, index }) {
         src={ link }
         alt={ `Bebida recomendada: ${title}` }
       />
-      <h5>{alcoholic}</h5>
       <p
         data-testid={ `${index}-recomendation-title` }
+        className="legend"
       >
+        <h5>{alcoholic}</h5>
         {title}
       </p>
     </div>
