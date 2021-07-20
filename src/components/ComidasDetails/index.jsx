@@ -6,6 +6,7 @@ import ShareButton from '../ShareButton';
 import FavoriteButton from '../FavoriteButton';
 import RecipeButton from '../RecipeButton';
 import getIngredients from '../../services/getIngredients';
+import './style.css';
 
 function ComidasDetails({ data, recomendation }) {
   const { pathname } = useLocation();

@@ -1,0 +1,13 @@
+.recipe-ingredients-container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.recipe-ingredients-container input {
+  margin: 0 3px;
+}
+
+.recipe-ingredient-step.checked {
+  text-decoration: line-through;
+}

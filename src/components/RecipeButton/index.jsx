@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 export default function RecipeButton({ path, ingredients }) {
+  const { id } = useParams();
   const [buttonName, setButtonName] = useState('Iniciar Receita');
   const [recipeStarted, setStarted] = useState(false);
-  const sliceNumber = 9;
-
-  console.log(ingredients);
+  const [display, setDisplay] = useState('block');
 
   // function setLocalStorage() {
   //   const inProgressRecipes = 'inProgressRecipes';
@@ -61,19 +60,18 @@ export default function RecipeButton({ path, ingredients }) {
 
   useEffect(() => {
     function button() {
-      const id = path.slice(sliceNumber);
+      const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
+      if (doneRecipes && doneRecipes.find((recipe) => recipe.id === id)) {
+        setDisplay('none');
+      }
       const include = JSON.parse(localStorage.getItem('inProgressRecipes'));
       if (path.includes('/comida')) {
         if (include.meals[id] !== undefined) setButtonName('Continuar Receita');
-      } else {
-        return include.cocktails[id] !== undefined
-          ? setButtonName('Continuar Receita')
-          : setButtonName('Iniciar Receita');
-      }
+      } else if (include.cocktails[id] !== undefined) setButtonName('Continuar Receita');
     }
     conditionalLocalStorage();
     button();
-  }, [path]);
+  }, [id, path]);
 
   if (recipeStarted) {
     return (<Redirect
@@ -85,21 +83,15 @@ export default function RecipeButton({ path, ingredients }) {
   }
 
   return (
-    // <Link
-    //   to={ {
-    //     pathname: `${path}/in-progress`,
-    //     // state: { ingredients },
-    //   } }
-    //   >
     <button
       className="start-recipe-btn"
       type="button"
       data-testid="start-recipe-btn"
       onClick={ recipesProgress }
+      style={ { display } }
     >
       { buttonName }
     </button>
-    // </Link>
   );
 }
 

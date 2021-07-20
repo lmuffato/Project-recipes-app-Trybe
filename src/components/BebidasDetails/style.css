@@ -29,12 +29,16 @@
   top: 10px;
 }
 
-.recipes-buttons-actions button:nth-child( 2 ) {
+.recipes-buttons-actions .favorite-btn {
   background-color: #ffc529;
 }
 
 .recipes-buttons-actions button img {
   width: 30px;
+}
+
+.recipe-title {
+  margin: 10px 0;
 }
 
 /* .recipe-details-container .favorite-btn {
