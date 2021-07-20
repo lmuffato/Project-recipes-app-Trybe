@@ -18,6 +18,7 @@ function ProviderRecipes({ children }) {
   const [updateFlag, setUpadateFlag] = useState(false);
   const [ingredientsSearch, setIngredientsSearch] = useState(false);
   const [inProgressId, setInProgressRecipe] = useState('');
+  const [isCompleted, setIsCompleted] = useState(false);
 
   const toogleInProgressRecipe = (idRecipe) => {
     const newInProgressState = idRecipe === inProgressId ? '' : idRecipe;
@@ -165,6 +166,8 @@ function ProviderRecipes({ children }) {
         fetchByIngredients,
         inProgressId,
         toogleInProgressRecipe,
+        isCompleted,
+        setIsCompleted,
       } }
     >
       { children }

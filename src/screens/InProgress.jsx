@@ -11,9 +11,10 @@ O botão para finalizar a receita deve possuir o atributo data-testid="finish-re
 Este componente renderiza a tela de receitas em progresso
 */
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useLocation } from 'react-router';
 import PropTypes from 'prop-types';
+import ContextRecipes from '../context/ContextRecipes';
 import fetchApiById from '../service/fetchApiById';
 import HeaderDetailsInProgress from '../components/HeaderDetailsInProgress';
 import Ingredients from '../components/Ingredients';
@@ -25,6 +26,7 @@ function InProgress(props) {
   const { pathname } = useLocation();
   const [recipe, setRecipe] = useState(false);
   const [isLoalding, setIsLoalding] = useState(true);
+  const { isCompleted } = useContext(ContextRecipes);
   const dbType = pathname.includes('comidas') ? 'themealdb' : 'thecocktaildb';
 
   useEffect(() => {
@@ -36,7 +38,6 @@ function InProgress(props) {
     }
     requestApi();
   }, [dbType, id]);
-  const completed = false;
 
   return (
     <div>
@@ -47,7 +48,7 @@ function InProgress(props) {
             <Ingredients recipe={ recipe } />
             <Instructions instructions={ recipe.strInstructions } />
             <ButtonFinish
-              completed={ completed }
+              completed={ isCompleted }
               dbType={ dbType }
               id={ id }
             />
