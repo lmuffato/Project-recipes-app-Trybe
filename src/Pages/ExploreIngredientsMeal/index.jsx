@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link, useLocation } from 'react-router-dom';
 import { Card } from 'react-bootstrap';
 import Header from '../../Components/Header';
 import Footer from '../../Components/Footer';
@@ -18,6 +18,8 @@ function ExploreIngredientsMeal() {
     setIngredients(result.meals.slice(0, arrayMAX));
   };
 
+  const { pathname } = useLocation();
+
   useEffect(() => {
     getIngredients();
   }, []);
@@ -35,12 +37,15 @@ function ExploreIngredientsMeal() {
       <Header>Explorar Ingredientes</Header>
       <div className="grid">
         { ingredients.map(({ strIngredient }, index) => (
-          <button
+          <Link
+            to={ {
+              pathname: '/comidas',
+              state: { previousPath: pathname, ingredient: strIngredient },
+            } }
             className="card"
             data-testid={ `${index}-ingredient-card` }
-            onClick={ () => handleClick(strIngredient) }
+            // onClick={ () => handleClick(strIngredient) }
             key={ strIngredient }
-            type="button"
           >
             <Card.Img
               data-testid={ `${index}-card-img` }
@@ -55,7 +60,7 @@ function ExploreIngredientsMeal() {
                 { strIngredient }
               </Card.Title>
             </Card.Body>
-          </button>))}
+          </Link>))}
         <Footer />
       </div>
     </section>

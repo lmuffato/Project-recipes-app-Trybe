@@ -1,13 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import RecipesContext from './RecipesContext';
-import { getDrinks, getMeals } from '../services/fetchRecipes';
+// import { getDrinks, getMeals } from '../services/fetchRecipes';
 
 function RecipesProvider({ children }) {
   const INITIAL_RECIPES = {
     meals: { results: [] },
     drinks: { results: [] },
-    isLoading: false,
   };
 
   const FAVORITES_RECIPES = {
@@ -17,17 +16,16 @@ function RecipesProvider({ children }) {
   const [recipes, setRecipes] = useState(INITIAL_RECIPES);
   const [favoriteRecipes, setFavoriteRecipes] = useState(FAVORITES_RECIPES);
 
-  useEffect(() => {
-    getMeals().then((response) => {
-      getDrinks().then((result) => {
-        setRecipes({
-          meals: { results: response },
-          drinks: { results: result },
-          isLoading: false,
-        });
-      });
-    });
-  }, []);
+  // useEffect(() => {
+  //   getMeals().then((response) => {
+  //     getDrinks().then((result) => {
+  //       setRecipes({
+  //         meals: { results: response },
+  //         drinks: { results: result },
+  //       });
+  //     });
+  //   });
+  // }, []);
 
   const [data, setData] = useState([]);
   const updateData = async (api) => setData(await api);
