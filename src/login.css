@@ -1,0 +1,35 @@
+body {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.4));
+}
+
+.loginBody {
+  background-attachment: fixed;
+  background-image: url('./images/tyson.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.loginContainer {
+  border: 1px solid black;
+  border-radius: 3px;
+  display: flex;
+  flex-direction: column;
+  margin-left: 85px;
+  margin-top: 40vh;
+  text-align: center;
+  width: 30vh;
+}
+
+.placeholder {
+  text-align: center;
+}
+
+.loginContainer button {
+  background-color: #14213d;
+  color: white;
+}
