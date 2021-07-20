@@ -18,10 +18,11 @@ export default function Login() {
   return (
     <div className="login-page">
         <h1 className="title-login">OPEN</h1>
-      <Form>
+      <Form className="Forms-Login">
         <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label className="email-input">Email address</Form.Label>
+          <Form.Label className="email-label">Email address</Form.Label>
           <Form.Control
+            className="email-input"
             onChange={ ({ target }) => setUserEmail(target.value) }
             data-testid="email-input"
             type="email"
@@ -29,8 +30,9 @@ export default function Login() {
           />
         </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicPassword">
-          <Form.Label className="password-input">Password</Form.Label>
+          <Form.Label className="password-label">Password</Form.Label>
           <Form.Control
+            className="password-input"
             onChange={ ({ target }) => setPassword(target.value) }
             type="password"
             minLength="6"

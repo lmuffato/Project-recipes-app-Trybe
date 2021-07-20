@@ -26,10 +26,14 @@
 }
 
 .email-input {
+  margin-bottom: 200px;
+}
+
+.email-label {
   display: none;
 }
 
-.password-input {
+.password-label {
   display: none;
 }
 
