@@ -18,7 +18,7 @@ function ReceitasFavoritas() {
   return (
     <section>
       <Header title="Receitas Favoritas" show={ false } />
-      <section>
+      <section className="category-buttons">
         <button
           data-testid="filter-by-all-btn"
           type="button"

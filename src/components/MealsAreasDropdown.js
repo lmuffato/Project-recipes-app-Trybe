@@ -11,6 +11,7 @@ function MealsAreasDropdown() {
 
   return (
     <select
+      className="dropdown-area"
       data-testid="explore-by-area-dropdown"
       onChange={ ({ target: { value } }) => dispatch(changeArea(value)) }
       name="areas"

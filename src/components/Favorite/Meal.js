@@ -20,6 +20,7 @@ function Favorite({ id, index }) {
 
   return (
     <button
+      className="icones-btn"
       type="button"
       data-testid={ `${index}-horizontal-favorite-btn` }
       src={ blackHeart }

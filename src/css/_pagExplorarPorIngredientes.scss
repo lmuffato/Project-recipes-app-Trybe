@@ -1,0 +1,22 @@
+.ingredient-container {
+
+  @include flex(row, center, center) ;
+  flex-wrap: wrap;
+}
+
+.ingredient-card {
+  background-color: white;
+  border-radius: $border-radius;
+  box-shadow: $shadow;
+  height: 180px;
+  margin: 10px;
+  width: 45%;
+
+  p {
+    color: $textcolor;
+    font-size: 18px;
+    font-weight: bold;
+    margin-left: 20px;
+    margin-top: 10px;
+  }
+}

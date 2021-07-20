@@ -3,9 +3,9 @@ import React from 'react';
 
 function Category({ category, index }) {
   return (
-    <h3 data-testid={ `${index}-horizontal-top-text` }>
+    <p data-testid={ `${index}-horizontal-top-text` } className="favorite-category">
       {category}
-    </h3>
+    </p>
   );
 }
 

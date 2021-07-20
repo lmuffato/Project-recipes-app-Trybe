@@ -21,6 +21,7 @@ function Favorite({ id, index }) {
   return (
     <button
       type="button"
+      className="icones-btn"
       data-testid={ `${index}-horizontal-favorite-btn` }
       src={ blackHeart }
       onClick={ () => removeFromFavorites(favoriteRecipes, syncFavoriteRecipes, id) }

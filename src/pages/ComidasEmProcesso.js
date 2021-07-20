@@ -103,15 +103,14 @@ function ComidasEmProcesso() {
   }
 
   function renderList() {
-    console.log(listIngredients);
     return listIngredients.map((item, index) => (
       <div key={ index } className="checkbox">
         <label
           htmlFor="checks"
           key={ index }
-          className={
-            indexChecked.includes(item[0]) ? 'text-decoration' : 'no-decoration'
-          }
+          className={ indexChecked.includes(
+            item[0],
+          ) ? 'text-decoration' : 'no-decoration' }
           data-testid={ `${index}-ingredient-step` }
         >
           <input

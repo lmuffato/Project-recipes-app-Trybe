@@ -17,6 +17,7 @@ function Share({ type, id, index }) {
   }
   return (
     <button
+      className="icones-btn"
       type="button"
       data-testid={ `${index}-horizontal-share-btn` }
       onClick={ copyToClipBoard }

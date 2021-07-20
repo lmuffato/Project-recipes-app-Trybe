@@ -4,30 +4,35 @@ import Favorite from './Favorite';
 
 function FavoriteCard({ id, type, area, category, alcoholicOrNot, name, image, index }) {
   return (
-    <section>
+    <section className="favorite-card">
       <Favorite.Image
         index={ index }
         url={ image }
         type={ type }
         id={ id }
       />
-      <Favorite.Category
-        index={ index }
-        category={ type === 'comida' ? `${area} - ${category}` : alcoholicOrNot }
-      />
-      <Favorite.Title
-        index={ index }
-        title={ name }
-        type={ type }
-        id={ id }
-      />
-      <Favorite.Share
-        id={ id }
-        index={ index }
-        type={ `${type}s` }
-      />
-      {type === 'comida' ? <Favorite.FavoriteMeal id={ id } index={ index } />
-        : <Favorite.FavoriteDrink id={ id } index={ index } />}
+      <div className="favorite-content">
+        <Favorite.Category
+          index={ index }
+          category={ type === 'comida' ? `${area} - ${category}` : alcoholicOrNot }
+        />
+        <Favorite.Title
+          index={ index }
+          title={ name }
+          type={ type }
+          id={ id }
+        />
+
+        <div>
+          <Favorite.Share
+            id={ id }
+            index={ index }
+            type={ `${type}s` }
+          />
+          {type === 'comida' ? <Favorite.FavoriteMeal id={ id } index={ index } />
+            : <Favorite.FavoriteDrink id={ id } index={ index } />}
+        </div>
+      </div>
 
     </section>
   );

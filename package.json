@@ -19,6 +19,7 @@
     "react-dom": "^16.13.1",
     "react-logger": "^1.1.0",
     "react-redux": "^7.2.4",
+    "react-responsive-carousel": "^3.2.20",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.1",
     "redux": "^4.1.0",
@@ -35,7 +36,7 @@
     "test-coverage": "react-scripts test --coverage --watchAll=false",
     "eject": "react-scripts eject",
     "lint": "eslint --no-inline-config --no-error-on-unmatched-pattern -c .eslintrc.json . --ext .js,.jsx",
-    "lint:styles": "stylelint '**/*.css'"
+    "lint:styles": "stylelint '**/*.(css|scss)'"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -65,7 +66,8 @@
     "mochawesome-merge": "^4.1.0",
     "mochawesome-report-generator": "^5.1.0",
     "stylelint": "^13.8.0",
-    "stylelint-order": "^4.1.0"
+    "stylelint-order": "^4.1.0",
+    "stylelint-scss": "^3.20.1"
   },
   "jest": {
     "coveragePathIgnorePatterns": [
