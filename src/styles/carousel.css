@@ -1,13 +1,7 @@
-.carousel-container {
-  display: flex;
-  flex-direction: row;
-  padding: 0% 25%;
-  width: 50%;
+.legend {
+  background-color: #ff722a ! important;
 }
 
-.carousel-frame {
-  display: flex;
-  flex-direction: row;
-  flex-grow: 1;
-  justify-content: center;
+.thumbs-wrapper {
+  margin: 0 ! important;
 }
