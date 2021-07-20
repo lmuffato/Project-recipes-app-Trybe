@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import profileIcon from '../images/profileIcon.svg';
-import '../style/Header.css';
+import '../styleSheets/Header.css';
 
 function HeaderRecipes() {
   const location = useLocation();

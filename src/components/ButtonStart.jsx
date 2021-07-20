@@ -7,8 +7,8 @@ import '../styleSheets/ButtonStartFinish.css';
 
 function ButtonStart(props) {
   const { type, id } = props;
-  const dbType = type.includes('comidas') ? 'meals' : 'cocktail';
-  const inProgressId = id === checkInProgressId(dbType);
+  const dbType = type.includes('comidas') ? 'meals' : 'cocktails';
+  const isInProgress = id === checkInProgressId(dbType);
   const history = useHistory();
   const buttonStart = (
     <button
@@ -17,7 +17,7 @@ function ButtonStart(props) {
       className="button-start"
       onClick={ () => history.push(`/${type}/${id}/in-progress`) }
     >
-      { inProgressId === id ? 'Continuar Receita' : 'Iniciar Receita' }
+      { isInProgress ? 'Continuar Receita' : 'Iniciar Receita' }
     </button>
   );
 
@@ -26,7 +26,7 @@ function ButtonStart(props) {
       className="container-button"
     >
       {checkRecipeIsDone(id)
-        ? <p className="button-start">Receita já foi feita!</p>
+        ? <p className="done-message">Receita já foi feita!</p>
         : buttonStart}
     </div>
 
