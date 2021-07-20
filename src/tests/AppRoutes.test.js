@@ -168,4 +168,68 @@ describe('Testes de rotas do App', () => {
       expect(getByText('ABC')).toBeInTheDocument();
       expect(getByText('747')).toBeInTheDocument();
     });
+
+  it('Receita de comida em progresso',
+    async () => {
+      const { getByText, getByTestId } = renderWithRouterHooksAndProvider(
+        <App />,
+        '/comidas/52977',
+      );
+
+      const FINISH_BTN = 'finish-recipe-btn';
+
+      await waitForElement(() => getByTestId(RECIPE_TITLE_TEST_ID));
+      expect(getByText('Corba')).toBeInTheDocument();
+      const startRecipeBtn = getByTestId('start-recipe-btn');
+      expect(startRecipeBtn).toBeInTheDocument();
+
+      fireEvent.click(startRecipeBtn);
+      await waitForElement(() => getByTestId(FINISH_BTN));
+      expect(getByTestId(FINISH_BTN)).toBeInTheDocument();
+      // toBeDisabled consultado no stackOverflow
+      // https://stackoverflow.com/questions/56593840/check-that-button-is-disabled-in-react-testing-library
+      expect(getByTestId(FINISH_BTN)).toBeDisabled();
+
+      const TOTAL_INGREDIENTS = 12;
+      for (let index = 0; index <= TOTAL_INGREDIENTS; index += 1) {
+        fireEvent.click(getByTestId(`${index}-ingredient-step`));
+      }
+
+      expect(getByTestId(FINISH_BTN)).not.toBeDisabled();
+      fireEvent.click(getByTestId(FINISH_BTN));
+      await waitForElement(() => getByTestId('page-title'));
+      expect(getByText('Receitas Feitas')).toBeInTheDocument();
+    });
+
+  it('Receita de bebida em progresso',
+    async () => {
+      const { getByText, getByTestId } = renderWithRouterHooksAndProvider(
+        <App />,
+        '/bebidas/15997',
+      );
+
+      const FINISH_BTN = 'finish-recipe-btn';
+
+      await waitForElement(() => getByTestId(RECIPE_TITLE_TEST_ID));
+      expect(getByText('GG')).toBeInTheDocument();
+      const startRecipeBtn = getByTestId('start-recipe-btn');
+      expect(startRecipeBtn).toBeInTheDocument();
+
+      fireEvent.click(startRecipeBtn);
+      await waitForElement(() => getByTestId(FINISH_BTN));
+      expect(getByTestId(FINISH_BTN)).toBeInTheDocument();
+      // toBeDisabled consultado no stackOverflow
+      // https://stackoverflow.com/questions/56593840/check-that-button-is-disabled-in-react-testing-library
+      expect(getByTestId(FINISH_BTN)).toBeDisabled();
+
+      const TOTAL_INGREDIENTS = 2;
+      for (let index = 0; index <= TOTAL_INGREDIENTS; index += 1) {
+        fireEvent.click(getByTestId(`${index}-ingredient-step`));
+      }
+
+      expect(getByTestId(FINISH_BTN)).not.toBeDisabled();
+      fireEvent.click(getByTestId(FINISH_BTN));
+      await waitForElement(() => getByTestId('page-title'));
+      expect(getByText('Receitas Feitas')).toBeInTheDocument();
+    });
 });
