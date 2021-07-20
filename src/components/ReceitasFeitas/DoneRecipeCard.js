@@ -13,6 +13,7 @@ export default function DoneRecipeCard({ recipe, index }) {
     <div className="done-recipe-card">
       <Link to={ `/${isFood ? 'comidas' : 'bebidas'}/${recipe.id}` }>
         <img
+          id="header-image"
           src={ recipe.image }
           alt={ recipe.name }
           data-testid={ `${index}-horizontal-image` }
