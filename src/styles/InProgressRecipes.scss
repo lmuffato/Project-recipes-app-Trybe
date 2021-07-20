@@ -121,7 +121,6 @@ input[type=checkbox] {
     & div {
       align-self: flex-start;
       margin: 2em 0 2em 4.5em;
-      background-color: blue;
 
       @include for-phone-only {
         margin: 0 0 1em 4em;

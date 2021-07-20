@@ -112,7 +112,6 @@ input[type=checkbox] {
 .in-progress-recipe .image div {
   align-self: flex-start;
   margin: 2em 0 2em 4.5em;
-  background-color: blue;
 }
 @media (max-width: 767.98px) {
   .in-progress-recipe .image div {
