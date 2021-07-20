@@ -87,6 +87,7 @@ body::-webkit-scrollbar {
     flex-direction: column;
     height: 27vh;
     margin: 4px;
+    min-height: 195px;
     width: 46vw;
   }
 
