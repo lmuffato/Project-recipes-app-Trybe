@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 const Container = styled.div`align-items: center;
+  background: #fdfefb;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -49,6 +50,8 @@ const Container = styled.div`align-items: center;
 
     .recipe-title {
       font-size: 2rem;
+      line-height: 2.5rem;
+      text-align: center;
       text-transform: capitalize;
     }
 
@@ -68,7 +71,7 @@ const Container = styled.div`align-items: center;
 
         /* height: auto; */
         max-height: auto;
-        max-width: 80vw;
+        max-width: 100vw;
         object-fit: cover;
         overflow: hidden;
 
