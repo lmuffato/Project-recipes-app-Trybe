@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { Redirect, Link, useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Card } from 'react-bootstrap';
 import Header from '../../Components/Header';
 import Footer from '../../Components/Footer';
@@ -10,7 +10,6 @@ import './styles.css';
 function ExploreIngredientsMeal() {
   const { updateData } = useContext(RecipesContext);
   const [ingredients, setIngredients] = useState([]);
-  const [shouldRedirect, setShouldRedirect] = useState(false);
 
   const getIngredients = async () => {
     const result = await fetchMealsIngredients();
@@ -25,12 +24,10 @@ function ExploreIngredientsMeal() {
   }, []);
 
   const handleClick = (ingredient) => {
-    updateData(fetchByMealIngredien(ingredient))
-      .then(() => setShouldRedirect(true));
+    updateData(fetchByMealIngredien(ingredient));
   };
 
   if (!ingredients.length) return <div>Loading...</div>;
-  if (shouldRedirect) return <Redirect to="/comidas" />;
 
   return (
     <section>
@@ -44,8 +41,8 @@ function ExploreIngredientsMeal() {
             } }
             className="card"
             data-testid={ `${index}-ingredient-card` }
-            // onClick={ () => handleClick(strIngredient) }
-            key={ strIngredient }
+            onClick={ () => handleClick(strIngredient) }
+            key={ `${strIngredient}-explore` }
           >
             <Card.Img
               data-testid={ `${index}-card-img` }
