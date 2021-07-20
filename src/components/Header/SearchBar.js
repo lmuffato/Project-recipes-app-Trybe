@@ -127,8 +127,8 @@ export default function SearchBar() {
             data-testid="name-search-radio"
             value="name"
           />
+          {' '}
           Nome
-          {'  '}
         </label>
 
         <label
@@ -142,8 +142,8 @@ export default function SearchBar() {
             data-testid="ingredient-search-radio"
             value="ingredient"
           />
+          {' '}
           Ingrediente
-          {'  '}
         </label>
 
         <label
@@ -157,6 +157,7 @@ export default function SearchBar() {
             data-testid="first-letter-search-radio"
             value="first-letter"
           />
+          {' '}
           Primeira Letra
         </label>
       </div>
