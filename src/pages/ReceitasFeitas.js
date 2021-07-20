@@ -16,7 +16,7 @@ export default function ReceitasFeitas() {
   return (
     <div className="done-recipes-main">
       <Header
-        title="Receitas Feitas"
+        title="Completed Recipes"
         enableSearchIcon={ false }
       />
       <div className="buttons-done">

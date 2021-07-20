@@ -29,10 +29,10 @@ export default function ExplorarComidasArea() {
 
   return (
     <div className="main-area">
-      <Header title="Explorar Origem" />
+      <Header title="Explore Foods by Area" />
 
       <label htmlFor="explore-by-area-dropdown" className="label-select">
-        Filtrar por País:
+        Filter by Country:
         <br />
         {' '}
         <div className="select">
@@ -71,6 +71,9 @@ export default function ExplorarComidasArea() {
       </div>
 
       <Footer />
+      <br />
+      <br />
+      <br />
     </div>
   );
 }

@@ -14,7 +14,7 @@ export default function Comidas() {
 
   return (
     <div className="main-foods">
-      <Header title="Comidas" />
+      <Header title="Foods" />
       <CategoryButtons categories={ categories } />
       <div className="cards">
         <ul>

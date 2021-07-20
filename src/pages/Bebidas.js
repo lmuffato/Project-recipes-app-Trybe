@@ -15,7 +15,7 @@ export default function Bebidas() {
 
   return (
     <div className="main-foods">
-      <Header title="Bebidas" />
+      <Header title="Drinks" />
       <CategoryButtons categories={ categories } />
       <div className="cards">
         <ul>

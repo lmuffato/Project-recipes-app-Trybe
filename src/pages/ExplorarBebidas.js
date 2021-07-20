@@ -15,7 +15,7 @@ export default function ExplorarBebidas() {
   return (
     <div className="explorar-bebidas">
       <Header
-        title="Explorar Bebidas"
+        title="Explore Drinks"
         enableSearchIcon={ false }
       />
       <div>
@@ -26,7 +26,7 @@ export default function ExplorarBebidas() {
               type="submit"
               data-testid="explore-by-ingredient"
             >
-              Por Ingredientes
+              By Ingredients
             </button>
           </Link>
           <br />
@@ -36,7 +36,7 @@ export default function ExplorarBebidas() {
               type="submit"
               data-testid="explore-surprise"
             >
-              Me Surpreenda!
+              Surprise-me!
             </button>
           </Link>
         </div>

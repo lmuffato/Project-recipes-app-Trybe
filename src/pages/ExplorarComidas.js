@@ -14,7 +14,7 @@ export default function ExplorarComidas() {
   return (
     <div className="explorar-comidas">
       <Header
-        title="Explorar Comidas"
+        title="Explore Foods"
         enableSearchIcon={ false }
       />
       <div>
@@ -25,7 +25,7 @@ export default function ExplorarComidas() {
               type="submit"
               data-testid="explore-by-ingredient"
             >
-              Por Ingredientes
+              By Ingredients
             </button>
           </Link>
           <br />
@@ -36,7 +36,7 @@ export default function ExplorarComidas() {
               type="submit"
               data-testid="explore-by-area"
             >
-              Por Local de Origem
+              By Area
             </button>
           </Link>
           <br />
@@ -46,12 +46,12 @@ export default function ExplorarComidas() {
               type="submit"
               data-testid="explore-surprise"
             >
-              Me Surpreenda!
+              Surprise-Me
             </button>
           </Link>
         </div>
       </div>
-    <Footer />
+      <Footer />
     </div>
   );
 }

@@ -128,7 +128,7 @@ export default function SearchBar() {
             value="name"
           />
           {' '}
-          Nome
+          Name
         </label>
 
         <label
@@ -143,7 +143,7 @@ export default function SearchBar() {
             value="ingredient"
           />
           {' '}
-          Ingrediente
+          Ingredient
         </label>
 
         <label
@@ -158,7 +158,7 @@ export default function SearchBar() {
             value="first-letter"
           />
           {' '}
-          Primeira Letra
+          First Letter
         </label>
       </div>
 
@@ -169,7 +169,7 @@ export default function SearchBar() {
           data-testid="exec-search-btn"
           onClick={ (event) => submitSearch(event, searchType, pathname) }
         >
-          Buscar
+          Search
         </button>
       </div>
     </form>

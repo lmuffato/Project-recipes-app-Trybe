@@ -8,7 +8,7 @@ export default function Explorar() {
   return (
     <div className="explore">
       <Header
-        title="Explorar"
+        title="Explore"
         enableSearchIcon={ false }
       />
       <div className="explorar-buttons">
@@ -18,7 +18,7 @@ export default function Explorar() {
             type="button"
             data-testid="explore-food"
           >
-            Explorar Comidas
+            Explore Foods
           </button>
         </Link>
         <br />
@@ -28,7 +28,7 @@ export default function Explorar() {
             type="button"
             data-testid="explore-drinks"
           >
-            Explorar Bebidas
+            Explore Drinks
           </button>
         </Link>
         <Footer />

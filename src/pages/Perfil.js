@@ -13,7 +13,7 @@ export default function Perfil() {
   return (
     <div className="profile-main">
       <Header
-        title="Perfil"
+        title="Profile"
         enableSearchIcon={ false }
       />
       <h2 data-testid="profile-email" className="profile-head-email">
@@ -25,7 +25,7 @@ export default function Perfil() {
           type="submit"
           data-testid="profile-done-btn"
         >
-          Receitas Feitas
+          Done Recipes
         </button>
       </Link>
       <br />
@@ -35,18 +35,18 @@ export default function Perfil() {
           type="submit"
           data-testid="profile-favorite-btn"
         >
-          Receitas Favoritas
+          Favorite Recipes
         </button>
       </Link>
       <br />
       <Link to="/">
         <button
-          className="button is-primary"
+          className="button is-danger"
           type="submit"
           data-testid="profile-logout-btn"
           onClick={ () => localStorage.clear() }
         >
-          Sair
+          Logout
         </button>
       </Link>
       <Footer />

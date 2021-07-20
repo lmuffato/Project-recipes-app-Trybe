@@ -21,7 +21,7 @@ export default function ExplorarComidasIng() {
   return (
     <div className="explorar-comidas-ing">
       <Header
-        title="Explorar Ingredientes"
+        title="Explore by Ingredients"
         enableSearchIcon={ false }
       />
       {ingredients && ingredients.map((ing, index) => (
