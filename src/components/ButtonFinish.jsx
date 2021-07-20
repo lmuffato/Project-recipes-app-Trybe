@@ -17,7 +17,7 @@ function ButtonFinish(props) {
     <button
       type="button"
       data-testid="finish-recipe-btn"
-      className="button-container"
+      className="container-button"
       onClick={ () => finishRecipe() }
       disabled={ !completed }
 

@@ -17,13 +17,7 @@ function ProviderRecipes({ children }) {
   const [alertOn, setAlertOn] = useState(false);
   const [updateFlag, setUpadateFlag] = useState(false);
   const [ingredientsSearch, setIngredientsSearch] = useState(false);
-  const [inProgressId, setInProgressRecipe] = useState('');
   const [isCompleted, setIsCompleted] = useState(false);
-
-  const toogleInProgressRecipe = (idRecipe) => {
-    const newInProgressState = idRecipe === inProgressId ? '' : idRecipe;
-    setInProgressRecipe(newInProgressState);
-  };
 
   const turnOnAlert = () => {
     setAlertOn(true);
@@ -164,8 +158,6 @@ function ProviderRecipes({ children }) {
         setUpadateFlag,
         ingredientsSearch,
         fetchByIngredients,
-        inProgressId,
-        toogleInProgressRecipe,
         isCompleted,
         setIsCompleted,
       } }

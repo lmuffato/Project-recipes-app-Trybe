@@ -14,12 +14,13 @@ function Ingredients({ recipe }) {
   const id = dbType === 'meals' ? recipe.idMeal : recipe.idDrink;
   const isInProgress = pathname.includes('in-progress');
   const recipeEntries = Object.entries(recipe);
+
+  const measuresList = [];
   const ingredientsList = recipeEntries ? recipeEntries.reduce((acc, enter) => {
-    if (enter[0].includes('Ingredien') && enter[1] !== '' && enter[1]) acc.push(enter[1]);
-    return acc;
-  }, []) : [];
-  const measuresList = recipeEntries ? recipeEntries.reduce((acc, enter) => {
-    if (enter[0].includes('Measure') && enter[1] !== '' && enter[1]) acc.push(enter[1]);
+    if (enter[0]
+      .includes('Ingredient') && enter[1] !== '' && enter[1]) acc.push(enter[1]);
+    if (enter[0]
+      .includes('Measure') && enter[1] !== '' && enter[1]) measuresList.push(enter[1]);
     return acc;
   }, []) : [];
 
@@ -33,7 +34,7 @@ function Ingredients({ recipe }) {
       <ul>
         {ingredientsList.map((ingredient, index) => {
           const isDone = checkIngredientIsDone(dbType, id, ingredient);
-          const decoration = isDone ? 'line-through' : 'none';
+          const decoration = isDone && isInProgress ? 'line-through' : 'none';
           const checkbox = (
             <input
               type="checkbox"

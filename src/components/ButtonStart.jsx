@@ -1,13 +1,14 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
-import ContextRecipes from '../context/ContextRecipes';
+import checkInProgressId from '../service/checkInProgressId';
 import checkRecipeIsDone from '../service/checkRecipeIsDone';
 import '../styleSheets/ButtonStartFinish.css';
 
 function ButtonStart(props) {
   const { type, id } = props;
-  const { inProgressId } = useContext(ContextRecipes);
+  const dbType = type.includes('comidas') ? 'meals' : 'cocktail';
+  const inProgressId = id === checkInProgressId(dbType);
   const history = useHistory();
   const buttonStart = (
     <button
