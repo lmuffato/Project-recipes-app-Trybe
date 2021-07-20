@@ -212,11 +212,15 @@ describe('5 - O header possui os ícones corretos', () => {
       renderWithRouterHooksAndProvider(<Home />, '/bebidas');
 
       const searchIcon = await screen.getByTestId(SEARCH_ICON_TESTID);
-      const profileIcon = await screen.getByTestId(PROFILE_ICON_TESTID);
 
-      expect(searchIcon).toBeInTheDocument();
-      expect(profileIcon).toBeInTheDocument();
       expect(searchIcon.src).toContain('searchIcon.svg');
+    });
+  });
+
+  it('íconde perfil na página de bebidas', async () => {
+    await act(async () => {
+      await renderWithRouterHooksAndProvider(<Home />, '/bebidas');
+      const profileIcon = await screen.getByTestId(PROFILE_ICON_TESTID);
       expect(profileIcon.src).toContain(PROFILE_ICON_SVG_PATH);
     });
   });
