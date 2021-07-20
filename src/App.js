@@ -7,7 +7,7 @@ import Routes from './pages/Routes';
 import StorageProvider from './context/StorageProvider';
 
 import './css/style.css';
-import './App.css';
+import './css/App.css';
 import 'react-responsive-carousel/lib/styles/carousel.min.css'; // requires a loader
 
 function App() {

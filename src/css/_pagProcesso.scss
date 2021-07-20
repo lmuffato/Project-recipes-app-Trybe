@@ -1,0 +1,46 @@
+.img-bg {
+  height: 600px;
+  width: 100%;
+}
+
+.header-progress {
+
+  @include flex(row, space-between, center) ;
+  background-color: white;
+  height: 100px;
+  padding: 20px;
+
+  h3 {
+    font-weight: bold;
+    margin-bottom: 0;
+  }
+
+  p {
+    font-weight: bold;
+  }
+
+  button {
+    background-color: rgba(255, 255, 255, 0);
+    border-style: none;
+  }
+}
+
+.checkbox {
+  background-color: white;
+  padding: 5px 20px;
+  width: 100%;
+}
+
+.p-progress {
+  padding: 20px;
+}
+
+.btn-finalizar {
+  background-color: $secondcolor;
+  border-style: none;
+  color: white;
+  font-weight: bold;
+  height: 50px;
+  margin: 20px;
+  width: 90%;
+}
