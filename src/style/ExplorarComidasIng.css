@@ -6,7 +6,7 @@
   flex-direction: column;
 }
 
-.main-container-ing {
+.main-container-ing-foods {
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;

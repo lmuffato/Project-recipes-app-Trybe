@@ -24,7 +24,7 @@ export default function ExplorarComidasIng() {
         title="Explore by Ingredients"
         enableSearchIcon={ false }
       />
-      <div className="main-container-ing">
+      <div className="main-container-ing-foods">
         {ingredients && ingredients.map((ing, index) => (
           <IngredientCard
             key={ index }

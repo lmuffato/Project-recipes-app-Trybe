@@ -21,18 +21,23 @@ export default function ExplorarBebidasIng() {
   return (
     <div className="explorar-bebidas-ing">
       <Header
-        title="Explorar Ingredientes"
+        title="Explore Drinks"
         enableSearchIcon={ false }
       />
-      {ingredients && ingredients.map((ing, index) => (
-        <IngredientCard
-          key={ index }
-          ingredient={ ing }
-          type="bebidas"
-          index={ index }
-        />
-      ))}
+      <div className="main-container-ing-drinks">
+        {ingredients && ingredients.map((ing, index) => (
+          <IngredientCard
+            key={ index }
+            ingredient={ ing }
+            type="bebidas"
+            index={ index }
+          />
+        ))}
+      </div>
       <Footer />
+      <br />
+      <br />
+      <br />
     </div>
   );
 }

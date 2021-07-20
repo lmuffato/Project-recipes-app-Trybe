@@ -5,3 +5,12 @@
   align-items: center;
   flex-direction: column;
 }
+
+.main-container-ing-drinks {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 20px;
+  margin-left: 30px;
+}

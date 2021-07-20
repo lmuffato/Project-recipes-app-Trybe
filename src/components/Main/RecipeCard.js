@@ -38,7 +38,7 @@ export default function RecipeCard({ recipe, index, type: URL_PATH }) {
           <p data-testid={ `${index}-card-name` }>
             { URL_PATH === '/comidas' || URL_PATH === '/comidas/'
               ? zipName(recipe.strMeal)
-              : recipe.strDrink }
+              : zipName(recipe.strDrink) }
           </p>
         </div>
       </Link>
