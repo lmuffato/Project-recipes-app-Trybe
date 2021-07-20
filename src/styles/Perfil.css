@@ -31,10 +31,9 @@
   box-shadow: 1px 1px 7px rgb(29, 28, 29);
   color: hsl(0, 0%, 95%);
   font-size: 16px;
-  font-weight: 900;
+  font-weight: 500;
   height: 270%;
   text-shadow: 0.5px 0.5px 0.5px rgb(41, 38, 38);
-  text-transform: uppercase;
   transition: 0.4s;
   width: 100%;
 }

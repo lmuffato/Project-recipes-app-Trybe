@@ -17,8 +17,8 @@
   left: 4%;
   min-height: 30px;
   right: auto;
-  top: 97%;
-  width: 40%;
+  top: 81%;
+  width: 35%;
 }
 
 .btn-close {
@@ -45,11 +45,12 @@
 }
 
 .in-progress-recipe .alert {
-  left: 4%;
   min-height: 30px;
-  right: auto;
   top: 93%;
-  width: 35.4%;
+  width: 36%;
+  left: 40px;
+  right: auto;
+  bottom: auto;
 }
 
 .in-progress-recipe .finish-recipe {
