@@ -18,7 +18,7 @@ function RecipesList({ data, path }) {
           data-testid={ `${index}-recipe-card` }
         >
           <Link to={ { pathname: `/${path}/${id}` } }>
-            <div className="card">
+            <div className="card-recipes">
               <img
                 src={ `${imgSrc}` }
                 alt={ `${name} thumb` }

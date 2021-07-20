@@ -1,13 +1,40 @@
+:root {
+
+  --orange-main-color: #ff6700;
+
+  --primary-background-color: #1f1f1f;
+
+  --secondary-background-color: #363636;
+
+  --black: black;
+
+  --clr-neon: #ecc01f;
+
+  --font-color: #eaeaea;
+}
+
+.detail-page {
+  background-color: var(--primary-background-color);
+}
+
 .recommendation-container {
   display: flex;
   flex-flow: row nowrap;
   margin-bottom: 5vh;
   overflow-x: scroll;
   width: 90%;
+  padding: 2rem;
+}
+
+.recommendation-container li {
+  background-color: var(--secondary-background-color);
+  margin-right: 10px;
+  border-radius: 10px;
 }
 
 .recommendation-img {
-  height: 200px;
+  height: 10rem;
+  border-radius: 10px;
 }
 
 .card-container {
@@ -15,24 +42,87 @@
 }
 
 .button-container {
-  background-color: purple;
   display: flex;
   justify-content: center;
 }
 
-.start-button {
-  background-color: #ff6700;
-  bottom: 0;
-  font-size: 20px;
-  height: 5vh;
-  margin-bottom: 5px;
+.start-button { /* button style src: https://www.youtube.com/watch?v=6xNcXwC6ikQ */
+  font-size: 1.2rem;
+  display: inline-block;
+  cursor: pointer;
+  text-decoration: none;
+  color: var(--secondary-background-color);
+  border: var(--clr-neon) 0.125em solid;
+  padding: 0.25em 1em;
+  border-radius: 0.25em;
+  text-shadow: 0 0 0.125em hsl(0 0% 100% / 0.3), 0 0 0.45em currentColor;
+  box-shadow: inset 0 0 0.5em 0 var(--clr-neon), 0 0 0.5em 0 var(--clr-neon);
+  background-color: var(--clr-neon);
   position: fixed;
-  text-align: center;
-  width: 90vw;
+  width: 70%;
+  bottom: 0.2rem;
+  z-index: 1;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
 }
 
 .share-and-favorite-container {
   display: flex;
   justify-content: flex-end;
   margin-right: 5px;
+}
+
+.detail-btn {
+  background-color: transparent;
+  border-color: transparent;
+}
+
+.ingredient-list {
+  background-color: var(--secondary-background-color);
+  border-color: var(--secondary-background-color);
+  padding: 0.125rem;
+  color: var(--font-color);
+  text-align: left;
+  padding-left: 3rem;
+}
+
+.ingredient-list-checkbox {
+  background-color: var(--secondary-background-color);
+  border-color: var(--secondary-background-color);
+  padding: 0.125rem;
+  color: var(--font-color);
+  text-align: left;
+  padding-left: 3rem;
+}
+
+.ingredient-list-checkbox input {
+  margin-right: 0.35rem;
+}
+
+.instructions {
+  background-color: var(--secondary-background-color);
+  color: var(--font-color);
+  padding: 30px;
+  font-size: 1.25rem;
+}
+
+.instructions-inprogress {
+  background-color: var(--secondary-background-color);
+  color: var(--font-color);
+  padding: 30px;
+  font-size: 1.25rem;
+  margin-bottom: 3.5rem;
+}
+
+h2 {
+  padding-left: 0.5rem;
+  color: var(--orange-main-color);
+}
+
+.category {
+  padding-left: 0.5rem;
+  color: var(--font-color);
 }
