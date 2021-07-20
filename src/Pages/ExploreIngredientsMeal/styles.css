@@ -1,14 +1,16 @@
-.grid {
-  display: grid;
-  margin-bottom: 3em;
-  position: relative;
+.card {
+  align-content: center;
+  align-items: flex-start;
+  display: flex;
+  flex-flow: row wrap;
+  margin: 1rem;
+  margin-bottom: 5rem;
+  max-width: 100vw;
 }
 
-button {
-  background-color: transparent;
-  background-repeat: no-repeat;
-  border: 2px double yellow;
-  cursor: pointer;
-  outline: none;
-  overflow: hidden;
+.card-name {
+  color: rgb(0, 123, 255);
+  font-weight: 400;
+  margin: 0;
+  text-align: center;
 }

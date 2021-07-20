@@ -71,7 +71,6 @@ export async function fetchDrinkIngredients() {
 export async function fetchIngredients(dk) {
   const drinks = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${dk}`)
     .then((response) => response.json());
-  console.log(drinks);
   return drinks;
 }
 
@@ -102,6 +101,14 @@ export async function fetchItAll(meal) {
 export async function fetchByArea(country) {
   const origin = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?a=${country}`)
     .then((response) => response.json());
-  console.log(origin);
   return origin;
+}
+
+export async function fetchByIngredient(ingredient, toggle) {
+  const endPoint = toggle === 'meals'
+    ? `https://www.themealdb.com/api/json/v1/1/filter.php?i=${ingredient}`
+    : `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${ingredient}`;
+  const origin = await fetch(endPoint)
+    .then((response) => response.json());
+  return origin[toggle];
 }

@@ -21,10 +21,15 @@ function MealsByOrigin() {
   }, []);
 
   const dropdown = (testid, id, options) => (
-    <select data-testid={ testid } id={ id } onChange={ handleChange }>
+    <select className="select" data-testid={ testid } id={ id } onChange={ handleChange }>
       <option data-testid="All-option" value="All">All</option>
       { options.map(({ strArea: area }) => (
-        <option data-testid={ `${area}-option` } id={ area } key={ area } value={ area }>
+        <option
+          data-testid={ `${area}-option` }
+          id={ area }
+          key={ area }
+          value={ area }
+        >
           { area }
         </option>)) }
     </select>

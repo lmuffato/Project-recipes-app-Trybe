@@ -17,6 +17,14 @@ function Header(props) {
     'Explorar Comidas',
     'Explorar Bebidas',
     'Explorar Ingredientes',
+    'Receitas Feitas', 'Receitas Favoritas', 'Perfil',
+  ];
+
+  const toHideCategories = [
+    'Explorar',
+    'Explorar Comidas',
+    'Explorar Bebidas',
+    'Explorar Ingredientes',
     'Explorar Origem',
     'Receitas Feitas', 'Receitas Favoritas', 'Perfil',
   ];
@@ -52,7 +60,7 @@ function Header(props) {
           : null
       }
       {
-        !toHideSearchIcon.includes(children) && !serching
+        !toHideCategories.includes(children) && !serching
           ? <SearchCategories page={ children.includes('Comida') ? 'meals' : 'drinks' } />
           : null
       }
