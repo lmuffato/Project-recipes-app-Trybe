@@ -1,6 +1,58 @@
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin: 20px auto 60px;
+  max-width: 640px;
+}
+
+.category {
+  color: darkgray;
+  margin: 0 5px;
+}
+
+.center {
+  text-align: center;
+}
+
+.heading {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  margin: 2px 5px;
+}
+
+.ingredients-list {
+  background-color: lightgray;
+  border: 1px solid lightgray;
+  border-radius: 10px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.input, .button {
+  border: 1px solid silver;
+  border-radius: 10px;
+  margin: 1em auto 0;
+  padding: 0.5em 20px;
+  width: 250px;
+}
+
+.button:enabled {
+  background-color: #0b8053;
+  color: aliceblue;
+}
+
+.button:enabled:hover {
+  background-color: rgb(129, 230, 196);
+  color: black;
+}
+
 .meals {
   align-items: center;
-  background: #0fa36b;
+  background: #0b8053;
   color: #464646;
   display: flex;
   flex-direction: column;
@@ -10,193 +62,48 @@
   width: 100%;
 }
 
-.image-click {
-  height: 120px;
-  width: 120px;
+.meals > .logo {
+  color: aliceblue;
+  font-family: Montserrat , sans-serif;
+  font-size: 3em;
+  font-weight: 900;
 }
 
-body {
-  position: relative;
+.recipe-body {
+  margin: 5px;
 }
 
-footer {
-  background: rgb(184, 184, 184);
+.recipe-card {
+  border: 1px solid silver;
+  border-radius: 20px;
+  margin: 6px;
+  overflow: hidden;
+}
+
+.recipe-title {
+  margin: 1em 10px;
+}
+
+.rocksGlass {
+  animation: shake 1s infinite ease;
+  max-height: 80vh;
+}
+
+.search-bar {
+  margin: 15px 0;
+  padding: 5px;
+}
+
+.silver-shadow {
+  box-shadow: 0 5px 5px silver;
+}
+
+.start-recipe-btn {
+  background-color: #6ce34f;
   bottom: 0;
-  display: flex;
-  justify-content: space-around;
-  left: 0;
+  left: 50%;
   position: fixed;
-  width: 100%;
-}
-
-.slider {
-  padding-bottom: 70px;
-}
-
-header {
-  align-items: center;
-  background: rgb(184, 184, 184);
-  display: flex;
-  justify-content: space-around;
-}
-
-.login-container {
-  align-items: center;
-  background: linear-gradient(to top, black 15%, rgba(0, 0, 0, 0)) , url('./images/joseph-gonzalez-fdlZBWIP0aM-unsplash.jpg');
-  background-size: cover;
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  justify-content: center;
-  object-fit: cover;
-  object-position: top;
-  position: relative;
-  width: 360px;
-}
-
-.buttons {
-  bottom: 120px;
-  display: flex;
-  flex-direction: column;
-  position: absolute;
-}
-
-.title, .login-text {
-  color: rgb(241, 241, 241);
-  font-family: Poppins , sans-serif;
-  font-size: 2rem;
-}
-
-.title {
-  animation: initTitle 0.6s;
-  font-style: italic;
-  position: absolute;
-  top: 30px;
-}
-
-.login-text {
-  animation: initLogin 1.5s;
-  bottom: 230px;
-  font-size: 1.5rem;
-  position: absolute;
-}
-
-.logo {
-  animation: initLogo 0.6s;
-  color: rgb(241, 241, 241);
-  font-size: 3rem;
-  position: absolute;
-  top: 120px;
-}
-
-@keyframes initLogo {
-
-  0% {
-    opacity: 0;
-    transform: translateX(-500px);
-  }
-
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes initTitle {
-
-  0% {
-    opacity: 0;
-    transform: translateX(500px);
-  }
-
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes initLogin {
-
-  0% {
-    opacity: 0;
-  }
-
-  100% {
-    opacity: 1;
-  }
-}
-
-.input-login {
-  animation: initLogin 1.5s;
-  background: none;
-  border: none;
-  border-bottom: 2px solid rgb(224, 224, 224);
-  color: rgb(241, 241, 241);
-  outline: none;
-  width: 200px;
-}
-
-.input-login:focus {
-  border-bottom: 2px solid rgb(57, 156, 0);
-}
-
-.input-login::placeholder {
-  color: rgb(224, 224, 224);
-}
-
-.entrar-btn {
-  animation: initLogin 1.5s;
-  background: rgb(48, 48, 48);
-  border: none;
-  border-radius: 3px;
-  cursor: pointer;
-  margin-top: 20px;
-  outline: none;
-  padding: 8px 14px;
-  width: 100%;
-}
-
-.enable {
-  border-bottom: 2px solid rgb(140, 243, 140);
-  color: rgb(140, 243, 140);
-  text-shadow: 0 0 2px green;
-}
-
-.enable:hover {
-  border-bottom: 2px solid rgb(224, 224, 224);
-  color: rgb(224, 224, 224);
-  text-shadow: 0 0 2px rgb(224, 224, 224);
-}
-
-.disable {
-  border-bottom: 2px solid rgb(235, 116, 116);
-  color: rgb(235, 116, 116);
-  text-shadow: 0 0 2px red;
-}
-
-.card-container {
-  align-items: center;
-  background: rgb(88, 88, 88);
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  justify-content: center;
-  min-height: 230px;
-  text-align: center;
-  width: 150px;
-}
-
-.img-card {
-  width: 120px;
-}
-
-.foodlist {
-  align-items: center;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  justify-content: center;
-  margin-top: 15px;
+  transform: translateX(-50%);
   width: 100%;
 }
 
@@ -228,18 +135,4 @@ header {
   100% {
     transform: rotate(-10deg);
   }
-}
-
-.init-recipe-btn {
-  background-color: green;
-  bottom: 0;
-  left: 130px;
-  margin-top: 20px;
-  padding: 8px 13px;
-  position: fixed;
-  z-index: 99;
-}
-
-.check {
-  text-decoration: line-through;
 }
