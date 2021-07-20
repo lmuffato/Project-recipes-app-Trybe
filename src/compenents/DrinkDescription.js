@@ -112,7 +112,7 @@ function DrinkDescription({ recipe, recipeId }) {
       <Link to={ `/bebidas/${recipeId}/in-progress` }>
         <button
           type="button"
-          className="start-recipe"
+          className="start-recipe-btn"
           data-testid="start-recipe-btn"
         >
           { checkStart() }
