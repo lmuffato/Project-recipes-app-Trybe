@@ -94,7 +94,7 @@
 }
 
 .inp-txt-search input {
-  opacity: 0.2;
+  display: none;
 }
 
 .inp-txt-search:focus {
@@ -140,6 +140,7 @@
   height: 60%;
   justify-content: center;
   margin-top: 2%;
+  padding-right: 3%;
   text-shadow: 1px 1px 1px rgb(51, 51, 51);
   width: 30%;
 }
