@@ -111,7 +111,7 @@ export default function DetalhesComidas() {
         }
         <br />
         <Text>
-          Recomendadas
+          Recommended
         </Text>
       </div>
       <div className="recipe-button-bottom">

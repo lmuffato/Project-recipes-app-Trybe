@@ -98,7 +98,7 @@ export default function DetalhesBebidas() {
           && <Paragraphs dataTestid="instructions">{ recipe.strInstructions }</Paragraphs>
         }
         <Text>
-          Recomendadas
+          Recommended
         </Text>
         { food.length > 0 && <Carousel data={ food } /> }
         <br />
