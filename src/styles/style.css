@@ -283,7 +283,9 @@ body div {
   background-color: #d9910b;
   border: none;
   border-radius: 10px;
+  bottom: 0;
   height: 40px;
+  position: fixed;
   width: 96%;
 }
 
@@ -461,13 +463,23 @@ input:checked + .checked-list {
 } */
 
 /* ---------- Pagina receitas favoritas ---------- */
+.main-favorite {
+  background: #a11d2b;
+  display: flex;
+  flex-flow: column wrap;
+  font-family: sans-serif;
+  margin-bottom: 100%;
+  margin-top: 12%;
+  width: 100%;
+}
+
 .button-container-fav {
   background-color: #c3baba;
-  border-top: 90px;
   display: flex;
-  /* flex-wrap: wrap; */
+  flex-wrap: wrap;
   height: auto;
   justify-content: space-around;
+  margin-bottom: 25%;
   position: fixed;
   top: 7%;
   width: 100%;
@@ -487,17 +499,45 @@ input:checked + .checked-list {
 }
 
 .recipes-container-fav {
-  flex-direction: column;
-  margin-top: 35%;
-}
-
-.main-recipes-fav {
   align-items: center;
-  justify-content: space-around;
-  margin-top: 15%;
+  background-color: #9a8f9757;
+  border: 1px solid black;
+  border-radius: 20px;
+  display: flex;
+  flex-flow: row wrap;
+  height: 78%;
+  justify-content: flex-start;
+  margin-bottom: 3%;
+  margin-left: 3%;
+  margin-top: 9%;
+  width: 90%;
 }
 
+.fav-image {
+  border-radius: 20px;
+}
 
+.category-fav {
+  color: rgba(0, 0, 0, 0.726);
+  margin-bottom: 12%;
+  margin-left: 9%;
+}
+
+.fav-details {
+  justify-content: space-around;
+  margin-bottom: 9px;
+  margin-left: 7px;
+  width: 50%;
+
+}
+
+.favorite-type {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: left;
+  margin-bottom: 3%;
+  margin-top: 3%;
+}
 
 /*
 #5e9c53 - verde claro

@@ -34,72 +34,96 @@ function FavoriteRecipes() {
   ) => {
     if (type === 'comida') {
       return (
-        <div key={ id } className="recipe-fav">
+        <div key={ id } className="recipes-container-fav">
           { isCopy ? <span>Link copiado!</span> : null }
           <Link to={ `/comidas/${id}` }>
             <img
               data-testid={ `${index}-horizontal-image` }
+              className="fav-image"
               src={ image }
               alt={ `${name} recipe` }
               width="150px"
             />
           </Link>
 
-          <span data-testid={ `${index}-horizontal-top-text` }>
-            { `${area} - ${category}` }
-          </span>
+          <div className="fav-details">
+            <span
+              data-testid={ `${index}-horizontal-top-text` }
+              className="favorite-type"
+            >
+              { `${area} - ${category}` }
+            </span>
 
-          <Link to={ `/comidas/${id}` }>
-            <h2 data-testid={ `${index}-horizontal-name` }>{name}</h2>
-          </Link>
+            <Link to={ `/comidas/${id}` }>
+              <h2
+                data-testid={ `${index}-horizontal-name` }
+                className="category-fav"
+              >
+                {name}
+              </h2>
+            </Link>
 
-          <button type="button" onClick={ copyToClipboard }>
-            <img
-              data-testid={ `${index}-horizontal-share-btn` }
-              src={ shareIcon }
-              alt={ `comidas/${id}` }
-            />
-          </button>
+            <div className="interaction-buttons">
+              <button type="button" onClick={ copyToClipboard }>
+                <img
+                  data-testid={ `${index}-horizontal-share-btn` }
+                  src={ shareIcon }
+                  alt={ `comidas/${id}` }
+                />
+              </button>
 
-          <FavoriteBtn
-            id={ id }
-            index={ index }
-          />
+              <FavoriteBtn
+                id={ id }
+                index={ index }
+              />
+            </div>
+
+          </div>
         </div>
       );
     }
     return (
-      <div key={ id }>
+      <div key={ id } className="recipes-container-fav">
         { isCopy ? <span>Link copiado!</span> : null }
         <Link to={ `/bebidas/${id}` }>
           <img
             data-testid={ `${index}-horizontal-image` }
+            className="fav-image"
             src={ image }
             alt={ `${name} recipe` }
             width="150px"
           />
         </Link>
 
-        <span data-testid={ `${index}-horizontal-top-text` }>
-          { alcoholicOrNot }
-        </span>
+        <div className="fav-details">
+          <span data-testid={ `${index}-horizontal-top-text` } className="favorite-type">
+            { alcoholicOrNot }
+          </span>
 
-        <Link to={ `/bebidas/${id}` }>
-          <h2 data-testid={ `${index}-horizontal-name` }>{name}</h2>
-        </Link>
+          <Link to={ `/bebidas/${id}` }>
+            <h2
+              data-testid={ `${index}-horizontal-name` }
+              className="category-fav"
+            >
+              {name}
+            </h2>
+          </Link>
 
-        <button type="button" onClick={ copyToClipboard }>
-          <img
-            data-testid={ `${index}-horizontal-share-btn` }
-            src={ shareIcon }
-            alt={ `bebidas/${id}` }
-          />
-        </button>
+          <div className="interaction-buttons">
+            <button type="button" onClick={ copyToClipboard }>
+              <img
+                data-testid={ `${index}-horizontal-share-btn` }
+                src={ shareIcon }
+                alt={ `bebidas/${id}` }
+              />
+            </button>
 
-        <FavoriteBtn
-          id={ id }
-          index={ index }
-        />
+            <FavoriteBtn
+              id={ id }
+              index={ index }
+            />
+          </div>
+        </div>
       </div>
     );
   };
@@ -118,47 +142,50 @@ function FavoriteRecipes() {
   };
 
   return (
-    <div className="main-recipes">
+    <>
       <Header />
-      <section className="button-container-fav">
-        <button
-          type="button"
-          data-testid="filter-by-all-btn"
-          className="button-fav button-filter"
-          onClick={ () => handleContent('all') }
-        >
-          All
-        </button>
+      <main className="main-favorite">
+        <section className="button-container-fav">
+          <button
+            type="button"
+            data-testid="filter-by-all-btn"
+            className="button-fav button-filter"
+            onClick={ () => handleContent('all') }
+          >
+            All
+          </button>
 
-        <button
-          type="button"
-          data-testid="filter-by-food-btn"
-          className="button-fav button-filter"
-          onClick={ () => handleContent('meals') }
-        >
-          Food
-        </button>
+          <button
+            type="button"
+            data-testid="filter-by-food-btn"
+            className="button-fav button-filter"
+            onClick={ () => handleContent('meals') }
+          >
+            Food
+          </button>
 
-        <button
-          type="button"
-          data-testid="filter-by-drink-btn"
-          className="button-fav button-filter"
-          onClick={ () => handleContent('cocktails') }
-        >
-          Drinks
-        </button>
-      </section>
+          <button
+            type="button"
+            data-testid="filter-by-drink-btn"
+            className="button-fav button-filter"
+            onClick={ () => handleContent('cocktails') }
+          >
+            Drinks
+          </button>
+        </section>
 
-      <section className="recipes-container-fav">
-        {
-          showRecipes.map(
-            ({ id, type, area, category, alcoholicOrNot, name, image }, index) => (
-              renderCards({ id, type, area, category, alcoholicOrNot, name, image }, index)
-            ),
-          )
-        }
-      </section>
-    </div>
+        <section className="main-favorite">
+          {
+            showRecipes.map(
+              ({ id, type, area, category, alcoholicOrNot, name, image }, index) => (
+                renderCards({ id, type, area, category, alcoholicOrNot, name, image },
+                  index)
+              ),
+            )
+          }
+        </section>
+      </main>
+    </>
   );
 }
 
