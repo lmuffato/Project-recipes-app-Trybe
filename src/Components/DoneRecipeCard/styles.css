@@ -1,0 +1,47 @@
+.card-recipes {
+  max-width: 80%;
+}
+
+.top-group {
+  display: flex;
+  justify-content: space-around;
+}
+
+.card-recipes-done {
+  flex-direction: row;
+  max-width: 100%;
+}
+
+.img-card-done {
+  width: 160px;
+}
+
+.p-done {
+  font-size: 13px;
+  margin-bottom: 3px;
+}
+
+.header-done {
+  font-size: 13px;
+  padding: 3px;
+  text-align: center;
+}
+
+.c-body {
+  justify-content: center;
+  margin-top: 5px;
+  padding: 8px;
+  text-align: center;
+}
+
+.done-bottom span {
+  background-color: rgb(252, 252, 113);
+  border-radius: 20%;
+  font-size: 14px;
+  margin-right: 4px;
+  padding: 2px 5px;
+}
+
+.title-done {
+  font-size: 18px;
+}

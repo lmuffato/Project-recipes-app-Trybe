@@ -1,0 +1,12 @@
+.header-fav {
+  font-size: 12px;
+}
+
+.card-fav {
+  max-width: 80%;
+}
+
+.btns-fav {
+  display: flex;
+  justify-content: space-around;
+}

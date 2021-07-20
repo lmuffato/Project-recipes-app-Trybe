@@ -1,6 +1,15 @@
 .parent {
-  background-color: rgb(253, 253, 216);
+  background-color: white;
+  border-radius: 0.8rem;
   display: flex;
   flex-flow: column nowrap;
+  margin: 0 0.3rem;
   padding: 1rem;
+}
+
+.checks {
+  display: flex;
+  flex-flow: column;
+  font-size: 1.2rem;
+  margin-left: 1rem;
 }

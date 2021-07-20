@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-// import Carousel from 'react-elastic-carousel';
 import { getDrinks, getMeals } from '../../services/fetchRecipes';
 import './styles.css';
 
@@ -25,7 +24,7 @@ function Slide({ toggle, category, cleanState }) {
 
   return (
     <div className="slide-parent">
-      <h2>Recomendadas</h2>
+      <h2>Recomended</h2>
       <div className="suggestions-carousel">
         {recomendations.map((item, index) => (
           <div key={ `Card-${index}` } className="box">

@@ -9,6 +9,7 @@ import FavoriteButton from '../../Components/FavoriteButton';
 import EndButton from '../../Components/EndButton';
 import Video from '../../Components/Video';
 import Loading from '../../Components/Loading';
+import { createToggles } from '../../helpers';
 import './styles.css';
 
 function Details() {
@@ -20,10 +21,9 @@ function Details() {
   const [recipeStatus, setRecipeStatus] = useState('Iniciar Receita');
   const { doneRecipes, doingRecipes } = useContext(UserContext);
 
-  const recipeType = (pathname.includes('comidas')) ? 'Meal' : 'Drink';
-  const toggleApi = (pathname.includes('comidas')) ? 'meals' : 'drinks';
-  const toggleCategory = recipeType === 'Meal' ? 'strCategory' : 'strAlcoholic';
-  const toggleURL = (pathname.includes('comidas')) ? 'comidas' : 'bebidas';
+  const {
+    recipeType, toggleApi, toggleCategory, toggleURL, toggleLocalDoing,
+  } = createToggles(pathname);
 
   useEffect(() => {
     getRecipeByID(pathname, id).then((response) => {
@@ -32,12 +32,12 @@ function Details() {
     });
     const checkRecipe = () => {
       const done = doneRecipes.find((recipe) => recipe.id === id);
-      const doing = doingRecipes.find((recipe) => recipe.id === id);
+      const doing = doingRecipes[toggleLocalDoing];
       if (done) return setRecipeStatus('');
-      if (doing) return setRecipeStatus('Continuar Receita');
+      if (doing && doing[id]) return setRecipeStatus('Continuar Receita');
     };
     checkRecipe();
-  }, [doingRecipes, doneRecipes, id, pathname, toggleApi]);
+  }, [doingRecipes, doneRecipes, id, pathname, toggleApi, toggleLocalDoing]);
 
   return (
     <div className="main-parent">
@@ -49,7 +49,7 @@ function Details() {
             src={ recipesDetails[`str${recipeType}Thumb`] }
             alt="hero"
           />
-          <div className="top-components">
+          <div className="title-cntl">
             <div>
               <h1 data-testid="recipe-title">
                 {recipesDetails[`str${recipeType}`]}
@@ -58,8 +58,8 @@ function Details() {
                 {recipesDetails[toggleCategory]}
               </h3>
             </div>
-            <div className="btn-components">
-              <ShareButton />
+            <div className="share-btn">
+              <ShareButton dataTest="share-btn" />
               <FavoriteButton
                 recipe={ recipesDetails }
                 recipeType={ recipeType }
@@ -67,13 +67,20 @@ function Details() {
               />
             </div>
           </div>
-          <Ingredient type="list" recipe={ recipesDetails } />
+          <span />
+          <Ingredient
+            type="list"
+            recipe={ recipesDetails }
+            id={ id }
+          />
+          <span />
           <div className="instructions">
             <h2>Instructions</h2>
             <p data-testid="instructions">
               {recipesDetails.strInstructions}
             </p>
           </div>
+          <span />
           { isLoading ? '' : (
             <Video recipeType={ recipeType } recipesDetails={ recipesDetails } />
           )}
