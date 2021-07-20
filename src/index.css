@@ -1,12 +1,10 @@
 * {
-  background: #fdfefb;
   box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
   font-size: 16px;
 }
 
 body {
-  /* background: #fff5f0; */
   background: #fdfefb;
   margin: 0;
   padding: 0;
