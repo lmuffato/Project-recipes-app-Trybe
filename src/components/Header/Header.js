@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import profileIcon from '../../images/profileIcon.svg';
 import searchIcon from '../../images/searchIcon.svg';
+// import newSearchIcon from '../../images/newSearchIcon.png';
 import SearchBar from './SearchBar';
 import '../../style/Header.css';
 
@@ -24,7 +25,7 @@ export default function Header({ title, enableSearchIcon = true }) {
             data-testid="search-top-btn"
             onClick={ () => setDisplaySearchBar(!displaySearchBar) }
           >
-            <img src={ searchIcon } alt="Search Icon" />
+            <img src={ searchIcon } alt="Search Icon" className="search-icon" />
           </button>
         ) }
       </div>
