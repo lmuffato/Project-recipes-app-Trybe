@@ -7,7 +7,8 @@ import FavoriteButton from '../FavoriteButton';
 import getIngredientsWithNumber from '../../services/getIngredientsWithNumber';
 
 function DrinksInProgress({ data }) {
-  const ingredients = getIngredients(data, 'strIngredient').map((e) => e[1]);
+  // const { state: { ingredients } } = useLocation();
+  const ingredients = getIngredients(data, 'strIngredient');
   const { id } = useParams();
   const [keys, setKeys] = useState([]);
   const [checkedIngredients, setChecked] = useState([]);
@@ -83,7 +84,7 @@ function DrinksInProgress({ data }) {
         <ShareButton urlCopied={ `http://localhost:3000/bebidas/${id}` } />
         <FavoriteButton data={ data } path={ id } />
         <p data-testid="recipe-category">{ keys[0].category }</p>
-        { ingredients.map((element, index) => (
+        { Object.values(ingredients).map((element, index) => (
           <label
             data-testid={ `${index}-ingredient-step` }
             key={ index }
@@ -104,7 +105,7 @@ function DrinksInProgress({ data }) {
           type="button"
           data-testid="finish-recipe-btn"
           onClick={ handdleButton }
-          disabled={ checkedIngredients.length < ingredients.length }
+          disabled={ checkedIngredients.length < Object.values(ingredients).length }
         >
           Finalizar Receita!
         </button>

@@ -3,7 +3,7 @@ const foodsRecomendation = async () => {
   const fetchdData = await fetch(url);
   const { meals } = await fetchdData.json();
   const number = 6;
-  const result = meals.filter((_, index) => index < number);
+  const result = meals.slice(0, number);
   return result;
 };
 

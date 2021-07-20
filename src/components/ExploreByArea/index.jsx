@@ -43,7 +43,13 @@ export default function ExploreByArea() {
         </select>
         <div>
           {meals.map((meal, index) => (
-            <Link key={ index } to={ `/comidas/${meal.idMeal}` }>
+            <Link
+              key={ index }
+              to={ {
+                pathname: `/comidas/${meal.idMeal}`,
+                state: { recipe: meal },
+              } }
+            >
               <div data-testid={ `${index}-recipe-card` }>
                 <h1 data-testid={ `${index}-card-name` }>{meal.strMeal}</h1>
                 <img

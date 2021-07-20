@@ -40,6 +40,9 @@ export default function Header({ title }) {
         </Button>
       );
     }
+    return (
+      <div />
+    );
   };
 
   const renderSearchBar = () => {

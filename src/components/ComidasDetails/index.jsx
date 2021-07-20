@@ -12,10 +12,10 @@ function ComidasDetails({ data, recomendation }) {
   const { pathname } = useLocation();
   const { id } = useParams();
   const { href } = window.location;
-  const ingredients = getIngredients(data[0], 'strIngredient');
-  const ingredientsMeasures = getIngredients(data[0], 'strMeasure');
+  const ingredients = getIngredients(data, 'strIngredient');
+  const ingredientsMeasures = getIngredients(data, 'strMeasure');
   if (pathname.includes('/comidas')) {
-    const { strMeal, strCategory, strMealThumb, strInstructions, strYoutube } = data[0];
+    const { strMeal, strCategory, strMealThumb, strInstructions, strYoutube } = data;
     return (
       <div>
         <div>
@@ -30,17 +30,17 @@ function ComidasDetails({ data, recomendation }) {
           <FavoriteButton data={ data[0] } path={ id } />
           <p data-testid="recipe-category">{ strCategory }</p>
           <ul>
-            { ingredients.map((ingredient, index) => (
+            { Object.values(ingredients).map((ingredient, index) => (
               <li key={ ingredient }>
                 <p data-testid={ `${index}-ingredient-name-and-measure` }>
-                  { ingredient[1] }
+                  { ingredient }
                 </p>
               </li>
             ))}
-            { ingredientsMeasures.map((measure, index) => (
+            { Object.values(ingredientsMeasures).map((measure, index) => (
               <li key={ measure }>
                 <p data-testid={ `${index}-ingredient-name-and-measure` }>
-                  { measure[1] }
+                  { measure }
                 </p>
               </li>
             ))}
@@ -66,8 +66,8 @@ function ComidasDetails({ data, recomendation }) {
 }
 
 ComidasDetails.propTypes = {
-  data: PropTypes.arrayOf({}).isRequired,
-  recomendation: PropTypes.arrayOf([]).isRequired,
-};
+  data: PropTypes.shape({}),
+  recomendation: PropTypes.arrayOf(PropTypes.shape({})),
+}.isRequired;
 
 export default ComidasDetails;

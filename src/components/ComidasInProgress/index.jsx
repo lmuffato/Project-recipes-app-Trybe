@@ -9,7 +9,7 @@ import fetchFoodDetails from '../../services/fetchFoodDetails';
 
 function FoodsInProgress({ data }) {
   const [food, setFood] = useState({});
-  const ingredients = getIngredients(food, 'strIngredient').map((e) => e[1]);
+  const ingredients = getIngredients(food, 'strIngredient');
   const { id } = useParams();
   // const [keys, setKeys] = useState([]);
   const [checkedIngredients, setChecked] = useState([]);
@@ -91,7 +91,7 @@ function FoodsInProgress({ data }) {
       <ShareButton urlCopied={ `http://localhost:3000/comidas/${id}` } />
       <FavoriteButton data={ data } path={ id } />
       <p data-testid="recipe-category">{ food.strCategory }</p>
-      { ingredients.map((element, index) => (
+      { Object.values(ingredients).map((element, index) => (
         <label
           data-testid={ `${index}-ingredient-step` }
           key={ index }
@@ -112,7 +112,7 @@ function FoodsInProgress({ data }) {
         type="button"
         data-testid="finish-recipe-btn"
         onClick={ handleButton }
-        disabled={ checkedIngredients.length < ingredients.length }
+        disabled={ checkedIngredients.length < Object.values(ingredients).length }
       >
         Finalizar Receita!
       </button>

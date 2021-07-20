@@ -12,7 +12,6 @@ function ComidasProgresso() {
 
   useEffect(() => {
     async function fetchAPI() {
-      console.log(id);
       const { meals } = await fetchFoodDetails(id);
       setData(meals[0]);
     }

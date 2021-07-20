@@ -33,18 +33,22 @@ export default function RecipesDoneCard({ recipe, index }) {
   });
 
   const conditional = () => {
+    console.log(recipe.id);
     if (recipe.type.toLowerCase().includes('comida')) {
       return (
         <div className="card-container">
-          {console.log('dentro if')}
-          <Link to={ `/comidas/${recipe.id}` }>
+          <Link
+            to={ `/comidas/${recipe.id}` }
+          >
             <img
               data-testid={ `${index}-horizontal-image` }
               src={ recipe.image }
               alt="meal"
             />
           </Link>
-          <Link to={ `/comidas/${recipe.id}` }>
+          <Link
+            to={ `/comidas/${recipe.id}` }
+          >
             <h1 data-testid={ `${index}-horizontal-name` }>{recipe.name}</h1>
           </Link>
           <h2 data-testid={ `${index}-horizontal-top-text` }>
