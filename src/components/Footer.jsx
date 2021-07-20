@@ -8,7 +8,7 @@ class Footer extends React.Component {
   render() {
     const { history } = this.props;
     return (
-      <footer data-testid="footer">
+      <footer data-testid="footer" className="footer">
         <input
           type="image"
           src={ drinkIcon }

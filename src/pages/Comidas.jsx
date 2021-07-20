@@ -15,7 +15,6 @@ class Comidas extends React.Component {
         <Header title="Comidas">
           <SearchButton pathname={ pathname } history={ history } />
         </Header>
-        <div>Página principal Receitas COMIDA</div>
         <MainFoodCard history={ history } />
         <Footer history={ history } />
       </>

@@ -1,9 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import copy from 'clipboard-copy';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import shareIcon from '../images/shareIcon.svg';
+import {
+  fetchFoodsById,
+  fetchRecommendedDrinks,
+  saveFavoriteFood,
+  checkStorageFood } from '../services/index';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import blackHeartIcon from '../images/blackHeartIcon.svg';
 
 class DetComidas extends React.Component {
   constructor() {
@@ -16,9 +21,7 @@ class DetComidas extends React.Component {
       video: '',
     };
     this.embedvideo = this.embedvideo.bind(this);
-    this.fetchFoodsById = this.fetchFoodsById.bind(this);
     this.handleIngredients = this.handleIngredients.bind(this);
-    this.fetchRecommendedDrinks = this.fetchRecommendedDrinks.bind(this);
     this.onClickShare = this.onClickShare.bind(this);
   }
 
@@ -26,8 +29,8 @@ class DetComidas extends React.Component {
     const { history } = this.props;
     const { location: { pathname } } = history;
     const id = pathname.split('/').pop();
-    const foods = await this.fetchFoodsById(id);
-    const recommended = await this.fetchRecommendedDrinks();
+    const foods = await fetchFoodsById(id);
+    const recommended = await fetchRecommendedDrinks();
     this.setNewState(foods, recommended);
     this.handleIngredients();
   }
@@ -83,19 +86,34 @@ class DetComidas extends React.Component {
     this.setState({ video });
   }
 
-  fetchFoodsById(id) {
-    const foods = fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`)
-      .then((response) => response.json());
-    return foods;
+  checkFavorite(recipe) {
+    if (localStorage.favoriteRecipes) {
+      if (checkStorageFood(recipe) === true) {
+        return blackHeartIcon;
+      }
+      return whiteHeartIcon;
+    }
+    return whiteHeartIcon;
   }
 
-  fetchRecommendedDrinks() {
-    const min = 0;
-    const max = 6;
-    const recommended = fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=')
-      .then((response) => response.json())
-      .then((response) => response.drinks.slice(min, max));
-    return recommended;
+  /*
+  InProgressButton(id) {
+    const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    if (inProgressRecipes.meals[id]) {
+      const button = document.querySelector('.start-btn');
+      button.innerHTML = 'Continuar Receita';
+    }
+  }
+  */
+  checkRecipe({ idMeal }) {
+    if (localStorage.doneRecipes) {
+      const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
+      const done = doneRecipes.find((element) => (element.id === idMeal));
+      if (done) {
+        return true;
+      }
+      return false;
+    }
   }
 
   render() {
@@ -103,10 +121,12 @@ class DetComidas extends React.Component {
     const { pathname } = history.location;
     const { foods, measures, ingredientes, video, recommended } = this.state;
     const food = Object.values(foods);
+    console.log(food);
     return (
       food.map((recipe) => (
         <div key="recipe">
           <img
+            className="detImg"
             data-testid="recipe-photo"
             alt="imagem da receita"
             src={ recipe[0].strMealThumb }
@@ -125,38 +145,36 @@ class DetComidas extends React.Component {
             <input
               type="image"
               data-testid="favorite-btn"
-              src={ whiteHeartIcon }
+              src={ this.checkFavorite(recipe[0]) }
               alt="favoritar receita"
+              onClick={ () => saveFavoriteFood(recipe[0]) }
+              className="fav-btn"
             />
           </div>
           <h2>
             Lista de Ingredientes
           </h2>
-          <table border="1">
+          <table border="1" width="340px">
             <thead>
-              Ingredients
-              Measures
+              <tr>
+                <td>Ingredients</td>
+                <td>Measures</td>
+              </tr>
             </thead>
-            {ingredientes.map((ingredient, index) => (
-              <tr key={ `row${index}` }>
-                <td
-                  key={ index }
-                  data-testid={ `${index}-ingredient-name-and-measure` }
-                >
-                  {ingredient}
-                </td>
-                <td
-                  key={ measures }
-                  data-testid={ `${index}-ingredient-name-and-measure` }
-                >
-                  {measures[index]}
-                </td>
-              </tr>))}
+            <tbody>
+              {ingredientes.map((ingredient, i) => (
+                <tr key={ `row${i}` }>
+                  <td key={ i } data-testid={ `${i}-ingredient-name-and-measure` }>
+                    {ingredient}
+                  </td>
+                  <td key={ measures } data-testid={ `${i}-ingredient-name-and-measure` }>
+                    {measures[i]}
+                  </td>
+                </tr>))}
+            </tbody>
           </table>
-          <h2>
-            Modo de Preparo:
-          </h2>
-          <p data-testid="instructions">
+          <h2> Modo de Preparo:</h2>
+          <p data-testid="instructions" className="instructions">
             {recipe[0].strInstructions}
           </p>
           <iframe
@@ -181,13 +199,16 @@ class DetComidas extends React.Component {
               />
             </div>
           ))}
-          <button
-            type="button"
-            data-testid="start-recipe-btn"
-            className="start-btn"
-          >
-            Iniciar Receita
-          </button>
+          {(!this.checkRecipe(recipe[0]))
+          && (
+            <button
+              type="button"
+              data-testid="start-recipe-btn"
+              className="start-btn"
+              onClick={ () => history.push(`/comidas/${recipe[0].idMeal}/in-progress`) }
+            >
+              Iniciar Receita
+            </button>)}
         </div>
       ))
     );

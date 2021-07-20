@@ -8,6 +8,7 @@ class EmProgBebidas extends React.Component {
     super(props);
 
     this.state = {
+      fullRecipe: [],
       currentId: '',
       title: '',
       category: '',
@@ -104,6 +105,7 @@ class EmProgBebidas extends React.Component {
     const request = await fetch(endpoint).then((response) => response.json());
     const recipe = request.drinks || null;
     this.setState({
+      fullRecipe: recipe[0],
       currentId: id,
       title: recipe[0].strDrink,
       category: recipe[0].strAlcoholic,
@@ -155,7 +157,9 @@ class EmProgBebidas extends React.Component {
   render() {
     const { history } = this.props;
     const { location: { pathname } } = history;
+    const typeRecipe = pathname.split('/')[1];
     const {
+      fullRecipe,
       thumbnail,
       title,
       category,
@@ -166,11 +170,13 @@ class EmProgBebidas extends React.Component {
     return (
       <div>
         <EmProgInfos
+          fullRecipe={ fullRecipe }
           pathname={ pathname }
           title={ title }
           thumbnail={ thumbnail }
           category={ category }
           instructions={ instructions }
+          typeRecipe={ typeRecipe }
         />
         <form>
           {ingredients && ingredients.map((ingredient, index) => (

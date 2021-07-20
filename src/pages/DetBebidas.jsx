@@ -1,10 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import copy from 'clipboard-copy';
+import { Link } from 'react-router-dom';
+import fetchDrinksById, {
+  fetchRecommendedFoods,
+  saveFavoriteDrink,
+  checkStorageDrink } from '../services/index';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
-// import blackHeartIcon from '../images/blackHeartIcon.svg';
+import blackHeartIcon from '../images/blackHeartIcon.svg';
 
 class DetBebidas extends React.Component {
   constructor() {
@@ -15,20 +20,20 @@ class DetBebidas extends React.Component {
       recommended: [],
       measures: [],
     };
-    this.fetchDrinksById = this.fetchDrinksById.bind(this);
     this.handleIngredients = this.handleIngredients.bind(this);
-    this.fetchRecommendedFoods = this.fetchRecommendedFoods.bind(this);
     this.onClickShare = this.onClickShare.bind(this);
+    this.checkRecipe = this.checkRecipe.bind(this);
   }
 
   async componentDidMount() {
     const { history } = this.props;
     const { location: { pathname } } = history;
     const id = pathname.split('/').pop();
-    const drinks = await this.fetchDrinksById(id);
-    const recommended = await this.fetchRecommendedFoods();
+    const drinks = await fetchDrinksById(id);
+    const recommended = await fetchRecommendedFoods();
     this.setNewState(drinks, recommended);
     this.handleIngredients();
+    // this.inProgressButton(id);
   }
 
   handleIngredients() {
@@ -43,9 +48,7 @@ class DetBebidas extends React.Component {
       for (let index = 1; index <= ingredientLimit; index += 1) {
         ingrediente = `strIngredient${index}`;
         measure = `strMeasure${index}`;
-        // console.log(recipe[ingrediente]);
         ingredients.push(recipe[ingrediente]);
-        // console.log(recipe[measure])
         measures.push(recipe[measure]);
         if (ingredients[ingredients.length - 1] === ''
         || ingredients[ingredients.length - 1] === null) {
@@ -78,23 +81,38 @@ class DetBebidas extends React.Component {
     });
   }
 
-  fetchDrinksById(id) {
-    const drinks = fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`)
-      .then((response) => response.json());
-    return drinks;
+  checkFavorite(recipe) {
+    if (localStorage.favoriteRecipes) {
+      if (checkStorageDrink(recipe) === true) {
+        return blackHeartIcon;
+      }
+      return whiteHeartIcon;
+    }
+    return whiteHeartIcon;
   }
 
-  fetchRecommendedFoods() {
-    const min = 0;
-    const max = 6;
-    const recommended = fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=')
-      .then((response) => response.json())
-      .then((response) => response.meals.slice(min, max));
-    return recommended;
+  /*
+  InProgressButton(id) {
+    const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    if (inProgressRecipes.cocktails[id]) {
+      const button = document.querySelector('.start-btn');
+      button.innerHTML = 'Continuar Receita';
+    }
+  }
+  */
+
+  checkRecipe({ idMeal }) {
+    if (localStorage.doneRecipes) {
+      const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
+      const done = doneRecipes.find((element) => (element.id === idMeal));
+      if (done) {
+        return true;
+      }
+      return false;
+    }
   }
 
   render() {
-    console.log(this.props);
     const history = this.props;
     const { pathname } = history.location;
     const { drinks, ingredientes, measures, recommended } = this.state;
@@ -103,6 +121,7 @@ class DetBebidas extends React.Component {
       drink.map((recipe) => (
         <div key="recipe">
           <img
+            className="detImg"
             data-testid="recipe-photo"
             alt="imagem da receita"
             src={ recipe[0].strDrinkThumb }
@@ -122,30 +141,30 @@ class DetBebidas extends React.Component {
             <input
               type="image"
               data-testid="favorite-btn"
-              src={ whiteHeartIcon }
+              src={ this.checkFavorite(recipe[0]) }
               alt="favoritar receita"
+              onClick={ () => saveFavoriteDrink(recipe[0]) }
+              className="fav-btn"
             />
           </div>
           <h2>
             Lista de Ingredientes
           </h2>
-          <table border="1" width="350px">
+          <table border="1" width="340px">
+            <thead>
+              <tr>
+                <td>Ingredients</td>
+                <td>Measures</td>
+              </tr>
+            </thead>
             <tbody>
-              <td>Ingredients</td>
-              <td>Measures</td>
-              {ingredientes.map((ingredient, index) => (
-                <tr key={ `row${index}` }>
-                  <td
-                    key={ index }
-                    data-testid={ `${index}-ingredient-name-and-measure` }
-                  >
+              {ingredientes.map((ingredient, i) => (
+                <tr key={ `row${i}` }>
+                  <td key={ i } data-testid={ `${i}-ingredient-name-and-measure` }>
                     {ingredient}
                   </td>
-                  <td
-                    key={ measures }
-                    data-testid={ `${index}-ingredient-name-and-measure` }
-                  >
-                    {measures[index]}
+                  <td key={ measures } data-testid={ `${i}-ingredient-name-and-measure` }>
+                    {measures[i]}
                   </td>
                 </tr>))}
             </tbody>
@@ -153,29 +172,35 @@ class DetBebidas extends React.Component {
           <h2>
             Modo de Preparo:
           </h2>
-          <p data-testid="instructions">
+          <p data-testid="instructions" className="instructions">
             {recipe[0].strInstructions}
           </p>
           <h2>Comidas Recomendadas</h2>
           {recommended.map((food, index) => (
             <div key={ food.idMeal } data-testid={ `${index}-recomendation-card` }>
-              <input
-                width="350"
-                type="image"
-                src={ food.strMealThumb }
-                data-testid="recipe-photo"
-                alt="recipe-img"
-                onClick={ () => history.push(`/comidas/${food.idMeal}`) }
-              />
+              <Link to={ `/comidas/${food.idMeal}` }>
+                <input
+                  width="350"
+                  type="image"
+                  src={ food.strMealThumb }
+                  data-testid="recipe-photo"
+                  alt="recipe-img"
+                />
+              </Link>
             </div>
           ))}
-          <button
-            type="button"
-            data-testid="start-recipe-btn"
-            className="start-btn"
-          >
-            Iniciar Receita
-          </button>
+          {(!this.checkRecipe(recipe[0]))
+          && (
+            <Link to={ `/bebidas/${recipe[0].idDrink}/in-progress` }>
+              <button
+                type="button"
+                data-testid="start-recipe-btn"
+                className="start-btn"
+              >
+                Iniciar Receita
+              </button>
+              )
+            </Link>)}
         </div>
       ))
     );

@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 class Login extends React.Component {
   constructor(props) {
@@ -68,8 +69,15 @@ class Login extends React.Component {
 
   render() {
     const { email, password, validData } = this.state;
+    const title = '<Recipes APP/>';
     return (
-      <form>
+      <form className="loginForm">
+        <h1 className="title">{title}</h1>
+        <img
+          src="https://static.vecteezy.com/ti/vetor-gratis/p1/364628-chef-avatar-ilustracao-gr%C3%A1tis-vetor.jpg"
+          alt="avatar-padrão"
+          className="avatar"
+        />
         <label htmlFor="email">
           <input
             type="email"
@@ -77,6 +85,8 @@ class Login extends React.Component {
             data-testid="email-input"
             value={ email }
             onChange={ (e) => this.handleChange(e) }
+            className="userInputs"
+            placeholder="E-mail"
           />
         </label>
         <label htmlFor="password">
@@ -86,6 +96,8 @@ class Login extends React.Component {
             data-testid="password-input"
             value={ password }
             onChange={ (e) => this.handleChange(e) }
+            className="userInputs"
+            placeholder="Senha"
           />
         </label>
 
@@ -94,6 +106,7 @@ class Login extends React.Component {
           data-testid="login-submit-btn"
           disabled={ !validData }
           onClick={ this.saveEmail }
+          className="btn btn-danger"
         >
           Entrar
         </button>

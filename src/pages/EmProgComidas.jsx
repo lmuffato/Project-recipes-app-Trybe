@@ -8,6 +8,7 @@ class EmProgComidas extends React.Component {
     super(props);
 
     this.state = {
+      fullRecipe: [],
       currentId: '',
       title: '',
       category: '',
@@ -111,6 +112,7 @@ class EmProgComidas extends React.Component {
     console.log(recipe);
     console.log(new Date());
     this.setState({
+      fullRecipe: recipe[0],
       currentId: id,
       title: recipe[0].strMeal,
       category: recipe[0].strCategory,
@@ -163,16 +165,19 @@ class EmProgComidas extends React.Component {
   render() {
     const { history } = this.props;
     const { location: { pathname } } = history;
+    const typeRecipe = pathname.split('/')[1];
     const { thumbnail, title, category, instructions, ingredients, measures,
-      usedIngredients } = this.state;
+      usedIngredients, fullRecipe } = this.state;
     return (
       <div>
         <EmProgInfos
+          fullRecipe={ fullRecipe }
           pathname={ pathname }
           title={ title }
           thumbnail={ thumbnail }
           category={ category }
           instructions={ instructions }
+          typeRecipe={ typeRecipe }
         />
         <form>
           {ingredients && ingredients.map((ingredient, index) => (

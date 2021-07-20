@@ -15,7 +15,6 @@ class Bebidas extends React.Component {
         <Header title="Bebidas">
           <SearchButton pathname={ pathname } history={ history } />
         </Header>
-        <div>Página principal receitas BEBIDAS</div>
         <MainDrinkCard history={ history } />
         <Footer history={ history } />
       </>
