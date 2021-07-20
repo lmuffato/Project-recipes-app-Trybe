@@ -16,7 +16,7 @@ function CardMealDoneFav({ recepie, index }) {
   };
 
   return (
-    <main className="main-done-recipe">
+    <>
       <Link to={ `/comidas/${id}` } className="recipe">
         <img
           data-testid={ `${index}-horizontal-image` }
@@ -38,22 +38,19 @@ function CardMealDoneFav({ recepie, index }) {
       >
         { `${area} - ${category}` }
       </p>
-      <p className="about-done-recipes">{ area }</p>
+      <p>{ area }</p>
       <p
         data-testid={ `${index}-horizontal-done-date` }
-        className="about-done-recipes"
       >
         { doneDate }
       </p>
       <p
         data-testid={ `${index}-${tags[0]}-horizontal-tag` }
-        className="about-done-recipes"
       >
         { tags[0] }
       </p>
       <p
         data-testid={ `${index}-${tags[1]}-horizontal-tag` }
-        className="about-done-recipes"
       >
         {tags[1]}
       </p>
@@ -70,7 +67,7 @@ function CardMealDoneFav({ recepie, index }) {
         />
       </button>
       {isCopy ? <span>Link copiado!</span> : null}
-    </main>
+    </>
   );
 }
 

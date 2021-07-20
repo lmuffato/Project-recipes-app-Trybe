@@ -95,9 +95,10 @@ function DoneRecepies() {
             Drinks
           </button>
         </section>
-
-        {validRecipes && showDoneRecepies.map((recepie, index) => (
-          setMealOrDrink(recepie, index)))}
+        <main className="main-done-recipe">
+          {validRecipes && showDoneRecepies.map((recepie, index) => (
+            setMealOrDrink(recepie, index)))}
+        </main>
 
       </div>
     </>

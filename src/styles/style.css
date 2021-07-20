@@ -8,6 +8,11 @@ section {
   display: flex;
 }
 
+main {
+  margin: 0;
+  padding: 0;
+}
+
 body div {
   height: 100%;
   margin: 0;
@@ -473,23 +478,20 @@ input:checked + .checked-list {
 
 .button-container-done-recipes {
   align-items: center;
-  height: 85px;
+  height: 70px;
 }
 
 .main-done-recipe {
-  display: flex;
   align-items: center;
-}
-
-.about-done-recipes {
-  margin-top: -1em;
+  display: flex;
+  padding-top: 15px;
 }
 
 .share-button {
   background-color: transparent;
   border: none;
-  margin-top: -1em;
   margin-bottom: 2em;
+  margin-top: -1em;
 }
 
 /*

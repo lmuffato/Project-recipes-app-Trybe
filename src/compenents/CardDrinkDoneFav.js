@@ -15,7 +15,7 @@ function CardDrinkDoneFav({ recepie, index }) {
     navigator.clipboard.writeText(path);
   };
   return (
-    <main className="main-done-recipe">
+    <>
       <Link to={ `/bebidas/${id}` } className="recipe">
         <img
           data-testid={ `${index}-horizontal-image` }
@@ -33,13 +33,11 @@ function CardDrinkDoneFav({ recepie, index }) {
       </Link>
       <p
         data-testid={ `${index}-horizontal-top-text` }
-        className="about-done-recipes"
       >
         { alcoholicOrNot }
       </p>
       <p
         data-testid={ `${index}-horizontal-done-date` }
-        className="about-done-recipes"
       >
         { doneDate }
       </p>
@@ -55,7 +53,7 @@ function CardDrinkDoneFav({ recepie, index }) {
         />
       </button>
       {isCopy ? <span>Link copiado!</span> : null}
-    </main>
+    </>
   );
 }
 
