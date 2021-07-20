@@ -39,73 +39,97 @@ function FavoriteRecipes() {
   ) => {
     if (type === 'comida') {
       return (
-        <div key={ id }>
+        <div key={ id } className="recipes-container-fav">
           { isCopy ? <span>Link copiado!</span> : null }
           <Link to={ `/comidas/${id}` }>
             <img
               data-testid={ `${index}-horizontal-image` }
+              className="fav-image"
               src={ image }
               alt={ `${name} recipe` }
               width="150px"
             />
           </Link>
 
-          <span data-testid={ `${index}-horizontal-top-text` }>
-            { `${area} - ${category}` }
-          </span>
+          <div className="fav-details">
+            <span
+              data-testid={ `${index}-horizontal-top-text` }
+              className="favorite-type"
+            >
+              { `${area} - ${category}` }
+            </span>
 
-          <Link to={ `/comidas/${id}` }>
-            <h2 data-testid={ `${index}-horizontal-name` }>{name}</h2>
-          </Link>
+            <Link to={ `/comidas/${id}` }>
+              <h2
+                data-testid={ `${index}-horizontal-name` }
+                className="category-fav"
+              >
+                {name}
+              </h2>
+            </Link>
 
-          <button type="button" onClick={ copyToClipboard }>
-            <img
-              data-testid={ `${index}-horizontal-share-btn` }
-              src={ shareIcon }
-              alt={ `comidas/${id}` }
-            />
-          </button>
+            <div className="interaction-buttons">
+              <button type="button" onClick={ copyToClipboard }>
+                <img
+                  data-testid={ `${index}-horizontal-share-btn` }
+                  src={ shareIcon }
+                  alt={ `comidas/${id}` }
+                />
+              </button>
 
-          <FavoriteBtn
-            id={ id }
-            index={ index }
-          />
+              <FavoriteBtn
+                id={ id }
+                index={ index }
+              />
+            </div>
+
+          </div>
         </div>
       );
     }
     return (
-      <section key={ id }>
+      <div key={ id } className="recipes-container-fav">
         { isCopy ? <span>Link copiado!</span> : null }
         <Link to={ `/bebidas/${id}` }>
           <img
             data-testid={ `${index}-horizontal-image` }
+            className="fav-image"
             src={ image }
             alt={ `${name} recipe` }
             width="150px"
           />
         </Link>
 
-        <span data-testid={ `${index}-horizontal-top-text` }>
-          { alcoholicOrNot }
-        </span>
+        <div className="fav-details">
+          <span data-testid={ `${index}-horizontal-top-text` } className="favorite-type">
+            { alcoholicOrNot }
+          </span>
 
-        <Link to={ `/bebidas/${id}` }>
-          <h2 data-testid={ `${index}-horizontal-name` }>{name}</h2>
-        </Link>
+          <Link to={ `/bebidas/${id}` }>
+            <h2
+              data-testid={ `${index}-horizontal-name` }
+              className="category-fav"
+            >
+              {name}
+            </h2>
+          </Link>
 
-        <button type="button" onClick={ copyToClipboard }>
-          <img
-            data-testid={ `${index}-horizontal-share-btn` }
-            src={ shareIcon }
-            alt={ `bebidas/${id}` }
-          />
-        </button>
+          <div className="interaction-buttons">
+            <button type="button" onClick={ copyToClipboard }>
+              <img
+                data-testid={ `${index}-horizontal-share-btn` }
+                src={ shareIcon }
+                alt={ `bebidas/${id}` }
+              />
+            </button>
 
-        <FavoriteBtn
-          id={ id }
-          index={ index }
-        />
-      </section>
+            <FavoriteBtn
+              id={ id }
+              index={ index }
+            />
+          </div>
+        </div>
+      </div>
     );
   };
 
@@ -123,40 +147,50 @@ function FavoriteRecipes() {
   };
 
   return (
-    <div>
+    <>
       <Header />
-      <button
-        type="button"
-        data-testid="filter-by-all-btn"
-        onClick={ () => handleContent('all') }
-      >
-        All
-      </button>
+      <main className="main-favorite">
+        <section className="button-container-fav">
+          <button
+            type="button"
+            data-testid="filter-by-all-btn"
+            className="button-fav button-filter"
+            onClick={ () => handleContent('all') }
+          >
+            All
+          </button>
 
-      <button
-        type="button"
-        data-testid="filter-by-food-btn"
-        onClick={ () => handleContent('meals') }
-      >
-        Food
-      </button>
+          <button
+            type="button"
+            data-testid="filter-by-food-btn"
+            className="button-fav button-filter"
+            onClick={ () => handleContent('meals') }
+          >
+            Food
+          </button>
 
-      <button
-        type="button"
-        data-testid="filter-by-drink-btn"
-        onClick={ () => handleContent('cocktails') }
-      >
-        Drinks
-      </button>
+          <button
+            type="button"
+            data-testid="filter-by-drink-btn"
+            className="button-fav button-filter"
+            onClick={ () => handleContent('cocktails') }
+          >
+            Drinks
+          </button>
+        </section>
 
-      {
-        showRecipes.map(
-          ({ id, type, area, category, alcoholicOrNot, name, image }, index) => (
-            renderCards({ id, type, area, category, alcoholicOrNot, name, image }, index)
-          ),
-        )
-      }
-    </div>
+        <section className="main-favorite">
+          {
+            showRecipes.map(
+              ({ id, type, area, category, alcoholicOrNot, name, image }, index) => (
+                renderCards({ id, type, area, category, alcoholicOrNot, name, image },
+                  index)
+              ),
+            )
+          }
+        </section>
+      </main>
+    </>
   );
 }
 
