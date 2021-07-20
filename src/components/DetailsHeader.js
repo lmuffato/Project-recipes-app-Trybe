@@ -14,7 +14,7 @@ export default function DetailsHeader({ recipe, isFood }) {
   const recipeStrAlcoholic = recipe.strAlcoholic;
 
   return (
-    <div>
+    <div className="details-header">
       <img
         src={ recipeImage }
         alt={ recipeName }

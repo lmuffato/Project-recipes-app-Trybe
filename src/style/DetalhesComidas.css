@@ -27,3 +27,11 @@
   display: flex;
   background-color: none;
 }
+
+@media screen and ( min-width: 769px) {
+
+  img {
+    width: 20vw;
+  }
+
+}

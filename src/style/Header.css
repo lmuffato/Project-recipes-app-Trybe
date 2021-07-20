@@ -14,22 +14,17 @@ input, button {
 .header-searchbar-container {
   color: black;
   font-weight: 500;
-  background-color: #FFFBFA;
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-  transition: 0.3s;  
-  border-radius: 8px;
+  background-color: lightgray;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  min-height: 20vh;
-  margin-top: 10px;
-  width: 90%;
+  width: 100%;
 }
 
 
 .header-search-button {
   width: 25px;
-  background-color: #FFFBFA;
+  background-color: transparent;
 }
 
 .form-searchbar {
@@ -38,4 +33,11 @@ input, button {
 
 .search-icon {
   width: 100px;
+}
+
+@media screen and ( min-width: 769px) {
+
+  .profile-image {
+    width: 30px;
+  }
 }

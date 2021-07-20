@@ -69,3 +69,29 @@ img:hover {
 .footer {
 	height: 2vh;
 }
+
+/*  DESKTOP RESOLUTION BELOW */
+
+@media screen and ( min-width: 769px) {
+
+  .recipe-card {
+    height: 30vh;
+  }
+
+	.recipe-card img {
+    height: 50%;
+  }
+
+	.cards {
+		width: 106.3%;
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+	}
+
+	.cards ul {
+		width: 100%;
+		margin: 10px;
+	}
+
+}

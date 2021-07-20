@@ -1,6 +1,7 @@
 import React from 'react';
 import '../style/NotFound.css';
 import logologin from '../images/logologin.jpg';
+// Logo downloaded from Pinterest https://br.pinterest.com/pin/482729653809855020/
 
 export default function NotFound() {
   return (
