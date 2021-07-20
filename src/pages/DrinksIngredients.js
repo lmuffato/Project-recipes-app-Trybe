@@ -11,7 +11,7 @@ function DrinksIngredients() {
     setMealsAndDrinkByIngredients,
   } = useContext(RecipesContext);
   const { setHideSearchBtn, setPageName } = useContext(SearchbarContext);
-  const TWELVE = 12;
+  const numberOfIngredients = 12;
 
   useEffect(() => {
     const getIngredients = async () => {
@@ -27,12 +27,12 @@ function DrinksIngredients() {
   const getRecipesByIngredient = async (param) => {
     const endpoint = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${param}`;
     const { drinks } = await fetch(endpoint).then((data) => data.json());
-    setMealsAndDrinkByIngredients(drinks.slice(0, TWELVE));
+    setMealsAndDrinkByIngredients(drinks.slice(0, numberOfIngredients));
   };
 
   const getTwelveIngredients = () => {
     const twelveIngredients = drinkIngredients
-      .filter((ingredient, index) => index < TWELVE);
+      .filter((ingredient, index) => index < numberOfIngredients);
     return (
       twelveIngredients.map((ingredient, index) => {
         const name = ingredient.strIngredient1;
@@ -40,6 +40,7 @@ function DrinksIngredients() {
           <Link
             to="/bebidas"
             key={ index }
+            className="ingredient"
             data-testid={ `${index}-ingredient-card` }
             onClick={ (e) => getRecipesByIngredient(e.target.innerText || e.target.alt) }
           >
@@ -48,7 +49,12 @@ function DrinksIngredients() {
               src={ `https://www.thecocktaildb.com/images/ingredients/${name}-Small.png` }
               alt={ name }
             />
-            <p data-testid={ `${index}-card-name` }>{ name }</p>
+            <p
+              data-testid={ `${index}-card-name` }
+              className="ingredient-title"
+            >
+              { name }
+            </p>
           </Link>
         );
       })
@@ -58,7 +64,11 @@ function DrinksIngredients() {
   return (
     <>
       <Header />
-      { getTwelveIngredients() }
+      <main className="main-ingredients">
+        <section className="ingredients-container">
+          { getTwelveIngredients() }
+        </section>
+      </main>
       <Footer />
     </>
   );

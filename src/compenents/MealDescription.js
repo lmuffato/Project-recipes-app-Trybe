@@ -52,41 +52,52 @@ function MealDescription({ recipe, recipeId }) {
 
   return (
     <>
-      <section className="detail-container">
+      <main className="main-detail">
         <img
           data-testid="recipe-photo"
           src={ strMealThumb }
           alt="comida"
           className="recomedation-img"
         />
-        <h1 data-testid="recipe-title">{ strMeal }</h1>
-        <ShareButton idRecipe={ `comidas/${idMeal}` } />
-        <FavoriteBtn
-          id={ idMeal }
-          type="comida"
-          area={ strArea }
-          category={ strCategory }
-          alcoholicOrNot=""
-          name={ strMeal }
-          image={ strMealThumb }
-        />
-        <h3 data-testid="recipe-category">{ strCategory }</h3>
-        <h2>Ingredients</h2>
-        { ingredients.map((ingredient, index) => (
-          <p key={ index } data-testid={ `${index}-ingredient-name-and-measure` }>
-            {`- ${ingredient} - ${measures[index] === undefined
-              ? 'at taste' : measures[index]}`}
-          </p>
-        ))}
-        <p data-testid="instructions">{ strInstructions }</p>
+        <section className="title-and-buttons">
+          <h1 data-testid="recipe-title">{ strMeal }</h1>
+          <section className="interaction-buttons">
+            <ShareButton idRecipe={ `comidas/${idMeal}` } />
+            <FavoriteBtn
+              id={ idMeal }
+              type="comida"
+              area={ strArea }
+              category={ strCategory }
+              alcoholicOrNot=""
+              name={ strMeal }
+              image={ strMealThumb }
+            />
+          </section>
+        </section>
+        <h3 data-testid="recipe-category" className="category">{ strCategory }</h3>
+        <h2 className="ingredients-title">Ingredients</h2>
+        <section className="ingredients-measures">
+          { ingredients.map((ingredient, index) => (
+            <p
+              key={ index }
+              data-testid={ `${index}-ingredient-name-and-measure` }
+              className="ingredient-measure"
+            >
+              {`- ${ingredient} - ${measures[index] === undefined
+                ? 'at taste' : measures[index]}`}
+            </p>
+          ))}
+        </section>
+        <p data-testid="instructions" className="instructions">{ strInstructions }</p>
         { strYoutube && (
           <iframe
             data-testid="video"
             title="Recipe"
+            className="player"
             src={ strYoutube.replace('watch?v=', 'embed/') }
           />
         )}
-      </section>
+      </main>
       <section>
         <section className="recipes">
           { recomendations.map(({ idDrink, strDrinkThumb, strDrink }, index) => (
@@ -101,15 +112,13 @@ function MealDescription({ recipe, recipeId }) {
           ))}
         </section>
       </section>
-      <Link to={ `/comidas/${recipeId}/in-progress` }>
+      <Link to={ `/comidas/${recipeId}/in-progress` } className="start-recipe">
         <button
           type="button"
-          className="start-recipe"
+          className="start-recipe-btn"
           data-testid="start-recipe-btn"
         >
           { checkStart() }
-          {/* Iniciar Receita */}
-          {/* { isStarted ? 'Continuar Receita' : 'Iniciar Receita' } */}
         </button>
       </Link>
     </>

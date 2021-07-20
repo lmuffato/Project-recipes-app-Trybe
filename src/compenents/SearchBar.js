@@ -26,7 +26,7 @@ function SearchBar() {
     const maxRecipes = 12;
     let drinkId;
     let mealId;
-
+    console.log(data);
     if (data.meals === null || data.drinks === null) {
       global.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
     } else if (mealOrDrink === 'cocktail' && data.drinks.length === 1) {
@@ -56,20 +56,24 @@ function SearchBar() {
       console.log('aqui');
       const endpoint = `https://www.the${mealOrDrink}db.com/api/json/v1/1/${request}.php?${letter}=${name}`;
       await fetch(endpoint).then((data) => data.json())
-        .then((results) => recipesFilter(results));
+        .then((results) => recipesFilter(results))
+        .catch(() => global
+          .alert('Sinto muito, não encontramos nenhuma receita para esses filtros.'));
     }
   };
 
+  console.log('searchbar');
+
   const getInputs = () => (
-    <div>
-      <label htmlFor="search-input">
+    <>
+      <label htmlFor="search-input" className="input-text">
         <input
           type="text"
           data-testid="search-input"
           onChange={ (e) => setName(e.target.value) }
         />
       </label>
-      <label htmlFor="filterType">
+      <label htmlFor="filterType" className="radio-button">
         Ingrediente
         <input
           type="radio"
@@ -78,7 +82,7 @@ function SearchBar() {
           data-testid="ingredient-search-radio"
         />
       </label>
-      <label htmlFor="filterType">
+      <label htmlFor="filterType" className="radio-button">
         Nome
         <input
           type="radio"
@@ -87,7 +91,7 @@ function SearchBar() {
           data-testid="name-search-radio"
         />
       </label>
-      <label htmlFor="filterType">
+      <label htmlFor="filterType" className="radio-button">
         Primeira letra
         <input
           type="radio"
@@ -96,27 +100,28 @@ function SearchBar() {
           data-testid="first-letter-search-radio"
         />
       </label>
-    </div>
+    </>
   );
 
   const getButton = () => (
-    <div>
-      <button
-        type="button"
-        onClick={ () => getData() }
-        data-testid="exec-search-btn"
-      >
-        Buscar
-      </button>
-    </div>
+    // <div>
+    <button
+      type="button"
+      onClick={ () => getData() }
+      className="button search-button"
+      data-testid="exec-search-btn"
+    >
+      Buscar
+    </button>
+    // </div>
   );
 
   return (
-    <>
+    <section className="search-bar">
       { getInputs() }
       { getButton() }
       {/* { getIngredientsFiltered() } */}
-    </>
+    </section>
   );
 }
 

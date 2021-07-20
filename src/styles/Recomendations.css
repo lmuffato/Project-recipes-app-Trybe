@@ -1,9 +1,10 @@
 /* Estilização fornecida por Vinicius Rodrigues */
-.recomendation-image {
-  width: 100vw;
-}
 
-.recipes {
+/* .recomendation-image {
+  width: 100vw;
+} */
+
+/* .recipes {
   background-color: tomato;
   display: flex;
   max-width: 100%;
@@ -37,4 +38,4 @@
 .start-recipe {
   bottom: 0;
   position: fixed;
-}
+} */
