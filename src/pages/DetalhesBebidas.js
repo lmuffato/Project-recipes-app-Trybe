@@ -108,7 +108,7 @@ export default function DetalhesBebidas() {
             dataTestid="start-recipe-btn"
             onClick={ handleClick }
           >
-            {isInProgress ? 'Continuar Receita' : 'Iniciar Receita'}
+            {isInProgress ? 'Continue Recipe' : 'Start Recipe'}
           </Button>
         )}
       </div>
