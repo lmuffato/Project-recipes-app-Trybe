@@ -53,7 +53,7 @@ export default function FavoriteButton({ recipe, isFood }) {
 
   return (
     <button
-      style={ { width: 40 } }
+      style={ { width: 40, height: 40, display: 'inline' } }
       type="button"
       onClick={ () => {
         setIsFavorite(!isFavorite);

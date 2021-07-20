@@ -83,7 +83,6 @@ export default function DetalhesComidas() {
           recipe={ recipe }
           isFood
         />
-        <br />
 
         <Text>
           Ingredients
