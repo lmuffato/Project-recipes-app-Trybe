@@ -96,7 +96,7 @@
 .recipe_details .image img {
   align-self: center;
   height: auto;
-  width: 80%;
+  width: 100%;
 }
 .recipe_details .image .titles {
   align-self: flex-start;
