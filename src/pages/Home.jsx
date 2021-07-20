@@ -50,7 +50,11 @@ function Home(props) {
 
   return (
     <>
-      <Header heading={ type === 'meals' ? 'Comidas' : 'Bebidas' } logoSrc={ logoIcon }>
+      <Header
+        heading={ type === 'meals' ? 'Comidas' : 'Bebidas' }
+        logoSrc={ logoIcon }
+        className={ type === 'meals' ? 'meals-header' : 'drinks-header' }
+      >
         <SearchBarButton onClick={ handleToggleSearchBar } />
       </Header>
       <div>
