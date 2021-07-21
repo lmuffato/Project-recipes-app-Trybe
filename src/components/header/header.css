@@ -1,12 +1,10 @@
 .header-container {
   align-items: center;
   background-color: #d56f3e;
-  border-radius: 0 0 10%;
   display: flex;
   font-size: 1.5rem;
   height: 10vh;
   justify-content: space-around;
-  margin-bottom: 40px;
   padding: 0.5rem;
   width: 100%;
 }

@@ -11,7 +11,7 @@ p {
   align-items: center;
   display: flex;
   justify-content: space-evenly;
-  margin-bottom: 15px;
+  margin: 15px 0;
 
 }
 
