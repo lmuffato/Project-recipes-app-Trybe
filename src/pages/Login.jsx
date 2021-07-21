@@ -2,7 +2,6 @@ import React, { useEffect, useState, useContext } from 'react';
 import { useHistory } from 'react-router';
 import UserContext from '../context/UserContext';
 import { setToLocalStorage } from '../services/localStorage';
-import tyson from '../images/tyson.jpg';
 import '../login.css';
 
 function Login() {
@@ -33,7 +32,7 @@ function Login() {
 
   return (
     <div className="loginBody">
-      {/* <img src={ tyson } alt="mike img" className="mikeImg" /> */}
+      <h2 className="brand">Receitas Campeãs</h2>
       <div className="loginContainer">
         <input
           type="email"

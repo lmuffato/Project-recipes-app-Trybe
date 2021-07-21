@@ -7,7 +7,7 @@ function Search() {
   return (
     <div>
       <Header title="Explorar" />
-      <div>
+      <div className="cardsGroup">
         <Link to="/explorar/comidas">
           <button
             type="button"

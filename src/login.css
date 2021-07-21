@@ -1,5 +1,5 @@
 body {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.4));
+  background-color: #e5e5e5;
 }
 
 .loginBody {
@@ -18,11 +18,13 @@ body {
   border: 1px solid black;
   border-radius: 3px;
   display: flex;
+  line-height: 35px;
   flex-direction: column;
-  margin-left: 85px;
-  margin-top: 40vh;
+  margin-left: 38px;
+  margin-top: 76vh;
+  opacity: 0.8;
   text-align: center;
-  width: 30vh;
+  width: 45vh;
 }
 
 .placeholder {
@@ -32,4 +34,11 @@ body {
 .loginContainer button {
   background-color: #14213d;
   color: white;
+}
+
+.brand {
+  font-family: Lobster , cursive;
+  font-size: 60px;
+  left: 14px;
+  position: absolute;
 }

@@ -18,38 +18,41 @@ function Profile() {
   return (
     <div>
       <Header title="Perfil" />
-      {user ? (
-        <h3 data-testid="profile-email">{ user.email }</h3>
-      ) : (null)}
-      <Link to="/receitas-feitas">
-        <button
-          type="button"
-          data-testid="profile-done-btn"
-          className="itemCard exploreButtons"
-        >
-          Receitas Feitas
-        </button>
-      </Link>
-      <Link to="/receitas-favoritas">
-        <button
-          type="button"
-          data-testid="profile-favorite-btn"
-          className="itemCard exploreButtons"
-        >
-          Receitas Favoritas
-        </button>
-      </Link>
-      <Link to="/">
-        <button
-          type="button"
-          data-testid="profile-logout-btn"
-          onClick={ handleClick }
-          className="itemCard exploreButtons"
-        >
-          Sair
-        </button>
-      </Link>
-      <Footer />
+      <div className="cardsGroup">
+        {user ? (
+          <h3 data-testid="profile-email">{ `Olá, ${user.email}` }</h3>
+        ) : (null)}
+
+        <Link to="/receitas-feitas">
+          <button
+            type="button"
+            data-testid="profile-done-btn"
+            className="itemCard exploreButtons"
+          >
+            Receitas Feitas
+          </button>
+        </Link>
+        <Link to="/receitas-favoritas">
+          <button
+            type="button"
+            data-testid="profile-favorite-btn"
+            className="itemCard exploreButtons"
+          >
+            Receitas Favoritas
+          </button>
+        </Link>
+        <Link to="/">
+          <button
+            type="button"
+            data-testid="profile-logout-btn"
+            onClick={ handleClick }
+            className="itemCard exploreButtons"
+          >
+            Sair
+          </button>
+        </Link>
+        <Footer />
+      </div>
     </div>
   );
 }

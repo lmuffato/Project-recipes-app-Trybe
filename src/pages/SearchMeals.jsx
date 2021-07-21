@@ -20,7 +20,7 @@ function SearchMeals() {
   return (
     <div>
       <Header title="Explorar Comidas" />
-      <div>
+      <div className="cardsGroup">
         <Link to="/explorar/comidas/ingredientes">
           <button
             type="button"
