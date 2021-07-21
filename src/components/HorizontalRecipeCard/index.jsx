@@ -37,7 +37,7 @@ function HorizontalRecipeCard({ recipe, index }) {
         <p data-testid={ `${index}-horizontal-done-date` }>
           { `Feito em: ${recipe.doneDate}` }
         </p>
-        { recipe.tags.map((tag) => (tag !== '') && (
+        { typeof recipe.tags === 'object' && recipe.tags.map((tag) => (tag !== '') && (
           <span
             data-testid={ `${index}-${tag}-horizontal-tag` }
             key={ `${index}-${tag}-horizontal-tag` }
