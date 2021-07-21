@@ -1,6 +1,5 @@
 import React from 'react';
 import { screen } from '@testing-library/dom';
-import { waitForElement, fireEvent } from '@testing-library/react';
 import { act } from 'react-dom/test-utils';
 import Home from '../pages/Home';
 import Profile from '../pages/Profile';
