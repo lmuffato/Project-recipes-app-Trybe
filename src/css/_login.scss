@@ -19,21 +19,20 @@
 }
 
 .login-box {
-
   @include flex(column, center, center) ;
-  padding-top: 20px;
 
   h5 {
     color: $secondcolor;
     font-weight: bold;
+    font-size: 20px;
   }
 
   input {
-
     @include border ;
     background-color: rgba(255, 255, 255, 0.308);
     height: 35px;
     width: 220px;
+    margin-bottom: 10px;
   }
 
   button {
@@ -42,6 +41,7 @@
     border-style: none;
     color: white;
     height: 35px;
-    width: 220px;
+    width: 223px;
+    margin-top: 10px;
   }
 }

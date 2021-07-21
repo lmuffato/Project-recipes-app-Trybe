@@ -24,7 +24,7 @@ function ReceitasFeitas() {
   return (
     <section>
       <Header title="Receitas Feitas" show={ false } />
-      <section>
+      <section className="category-buttons">
         <button
           data-testid="filter-by-all-btn"
           type="button"

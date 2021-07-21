@@ -3,23 +3,24 @@
   @include flex(column, right, center) ;
   background-color: white;
   box-shadow: $shadow;
-  height: 150px;
+  height: 170px;
   width: 100%;
 }
 
 .search-input {
   margin-top: 20px;
+  margin-bottom: 20px;
 
   input {
-
     @include border ;
     background-color: white;
-    width: 400px;
+    min-width: 400px;
+    height: 30px;
   }
 }
 
 .search-radio {
-
+  margin-bottom: 20px;
   label {
     margin: 10px;
   }
