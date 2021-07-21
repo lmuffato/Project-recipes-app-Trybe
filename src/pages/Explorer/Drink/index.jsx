@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import Header from '../../../components/Header';
 import Footer from '../../../components/Footer';
 import { fetchRandomApiDrink } from '../../../services/recipesApi';
@@ -18,12 +17,12 @@ function ExploreDrinks() {
   return (
     <div>
       <Header title="Explorar Bebidas" icon="false" />
-      <Link to="/explorar/bebidas/ingredientes">
+      <a href="/explorar/bebidas/ingredientes">
         <h2 data-testid="explore-by-ingredient">Por Ingredientes</h2>
-      </Link>
-      <Link to={ `/bebidas/${idDrink}` }>
+      </a>
+      <a href={ `/bebidas/${idDrink}` }>
         <h2 data-testid="explore-surprise">Me Surpreenda!</h2>
-      </Link>
+      </a>
       <Footer />
     </div>
   );
