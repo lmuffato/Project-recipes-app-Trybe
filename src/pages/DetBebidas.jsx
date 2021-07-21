@@ -200,7 +200,7 @@ class DetBebidas extends React.Component {
               </div>
             ))}
           </div>
-          {(this.checkRecipe(recipe[0]))
+          {(!this.checkRecipe(recipe[0]))
             ? (
               <button
                 type="button"
