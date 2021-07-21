@@ -163,6 +163,8 @@ function RecipeIngredients({ recipe, type, id }) {
     if (cancel) return;
     if (checkedBox.length === ingredients.length) {
       setIsDisabled(false);
+    } else {
+      setIsDisabled(true);
     }
     return () => {
       cancel = true;
