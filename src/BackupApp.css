@@ -8,7 +8,7 @@
 
 .login {
   align-items: center;
-  background-image: linear-gradient(to top, #1f1f1f, #111, #000);
+  background-image: linear-gradient(to top, #1f1f1f, #111, black);
   color: var(--font-color);
   display: flex;
   flex-direction: column;
@@ -92,8 +92,8 @@ ul {
 }
 
 .recipe-list-title {
-  font-size: 1.5rem;
   color: #686868;
+  font-size: 1.5rem;
   position: relative;
 }
 
@@ -121,11 +121,11 @@ ul {
 
 .component {
   align-items: center;
+  background-color: #1f1f1f;
   display: flex;
   flex-direction: column;
   position: relative;
   z-index: -1;
-  background-color: #1f1f1f;
 }
 
 .searchbar-form {
