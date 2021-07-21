@@ -55,7 +55,7 @@ export default function CompletedRecipes() {
     <div className="render-recipesDone">
       <Header title="Receitas Feitas" show={ false } />
       <CompletedButtomFilters />
-      <CompletedRecipeCardList list={ list } />
-    </div>
+      <CompletedRecipeCardList list={ list } /
+    <div>
   );
 }

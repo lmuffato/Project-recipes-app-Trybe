@@ -82,9 +82,7 @@ ul {
 .buttons-list {
   display: flex;
   flex-flow: row nowrap;
-  justify-content: center;
   margin-bottom: 2vh;
-  margin-top: 50px;
   overflow-x: scroll;
   padding: 10px;
   width: 85%;
