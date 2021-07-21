@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import ProPTypes from 'prop-types';
 import styled from 'styled-components';
 import { Link, useLocation } from 'react-router-dom';
@@ -7,6 +7,30 @@ import CardsIcons from './CardsIcons';
 
 function Cards({ index, thumbnail, name, id, type, category }) {
   const { pathname } = useLocation();
+  const [isFavorite, setIsFavorite] = useState(false);
+  const [isDone, setIsDone] = useState(false);
+
+  useEffect(() => {
+    const checkIsFavorite = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    if (checkIsFavorite) {
+      if (checkIsFavorite.some((el) => el.id === id)) {
+        setIsFavorite(true);
+      } else {
+        setIsFavorite(false);
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    const checkDoneRecipe = JSON.parse(localStorage.getItem('doneRecipes'));
+    if (checkDoneRecipe) {
+      if (checkDoneRecipe.some((el) => el.id === id)) {
+        setIsDone(true);
+      } else {
+        setIsDone(false);
+      }
+    }
+  }, []);
 
   return (
     <Container className="">
@@ -24,7 +48,7 @@ function Cards({ index, thumbnail, name, id, type, category }) {
               alt={ `${index} recipe` }
               className="card-img"
             />
-            <CardsIcons />
+            <CardsIcons isFavorite={ isFavorite } isDone={ isDone } />
             <h2
               id={ id }
               data-testid={ `${index}-card-name` }
@@ -89,6 +113,8 @@ const Container = styled.div`
     text-align: center;
     color: #000000;
     margin-top: 5px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 
   h3 {

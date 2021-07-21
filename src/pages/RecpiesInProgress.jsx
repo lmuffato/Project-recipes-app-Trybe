@@ -75,8 +75,6 @@ export default function RecpiesInProgress(props) {
         } */}
         {/* <RecommendedRecipes /> */}
         { !doneRecipe.length ? <FinishRecipeButton item={ tags } /> : null }
-        {console.log('RecpiesInProgress:')}
-        {console.log(tags)}
       </Content>
     </Container>
   );

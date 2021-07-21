@@ -2,9 +2,12 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-export default function ButtonFilters({ categories, functionChangeFilter,
-  elementFilter, setToggle, toggle }) {
+import icons from '../service/iconsMapped';
+
+export default function ButtonFilters({
+  categories, functionChangeFilter, setToggle, toggle }) {
   const [filtersButtons, setFiltersButton] = useState([]);
+  const screen = window.location.pathname;
 
   function showFilters() {
     const number = 5;
@@ -13,11 +16,10 @@ export default function ButtonFilters({ categories, functionChangeFilter,
   }
 
   function changeFilters({ target }) {
-    const element = target.innerHTML;
+    const element = target.id;
     setToggle(!toggle);
     functionChangeFilter(element === 'All' ? '' : element);
-    if (toggle === true) return functionChangeFilter('');
-    console.log(elementFilter);
+    if (toggle) return functionChangeFilter('');
   }
 
   useEffect(() => {
@@ -26,14 +28,19 @@ export default function ButtonFilters({ categories, functionChangeFilter,
 
   return (
     <Container>
-      <button
+      <Buttons
         type="button"
         onClick={ changeFilters }
         data-testid="All-category-filter"
         className="all-btn"
       >
-        All
-      </button>
+        <img
+          src={
+            screen === '/bebidas' ? icons.bebidas.All : icons.comidas.All
+          }
+          alt="teste"
+        />
+      </Buttons>
       {filtersButtons.map((category, index) => (
         <Buttons
           type="button"
@@ -41,7 +48,15 @@ export default function ButtonFilters({ categories, functionChangeFilter,
           data-testid={ `${category.strCategory}-category-filter` }
           onClick={ changeFilters }
         >
-          {category.strCategory}
+          <img
+            src={
+              screen === '/bebidas'
+                ? icons.bebidas[category.strCategory]
+                : icons.comidas[category.strCategory]
+            }
+            alt="teste"
+            id={ category.strCategory }
+          />
         </Buttons>
       ))}
     </Container>
@@ -51,7 +66,6 @@ export default function ButtonFilters({ categories, functionChangeFilter,
 ButtonFilters.propTypes = {
   categories: PropTypes.arrayOf(PropTypes.object).isRequired,
   functionChangeFilter: PropTypes.func.isRequired,
-  elementFilter: PropTypes.string.isRequired,
   setToggle: PropTypes.func.isRequired,
   toggle: PropTypes.bool.isRequired,
 };
@@ -59,28 +73,25 @@ ButtonFilters.propTypes = {
 const Container = styled.div`display: flex;
   flex-flow: row wrap;
   justify-content: center;
-
-  .all-btn {
-    background-color: rgb(214, 168, 40);
-    border: none;
-    border-radius: 6px;
-    color: inherit;
-    cursor: pointer;
-    font: inherit;
-    margin: 8px;
-    outline: inherit;
-    padding: 10px;
-  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 8px;
 `;
 
 const Buttons = styled.button` background: none;
-  background-color: rgb(214, 168, 40);
+  width: 60px;
+  height: 60px;
   border: none;
-  border-radius: 6px;
+  border-radius: 100%;
   color: inherit;
   cursor: pointer;
   font: inherit;
   margin: 8px;
   outline: inherit;
-  padding: 10px;
+
+  img {
+    width: 60px;
+    height: 60px;
+  }
 `;

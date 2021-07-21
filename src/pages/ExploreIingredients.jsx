@@ -96,6 +96,7 @@ const Container = styled.div`
   align-items: center;
   flex-flow: row wrap;
   width: 360px;
+  padding-bottom: 70px;
 `;
 
 const Container1 = styled.div`

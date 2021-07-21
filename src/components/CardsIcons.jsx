@@ -1,13 +1,25 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import favoriteIcon from '../icons/appIcons/favoriteDisabled.png';
-import checkIcon from '../icons/appIcons/checkDisabled.png';
+import notFavoriteIcon from '../icons/appIcons/favoriteDisabled.png';
+import favoriteIcon from '../icons/appIcons/favoriteEnable.png';
+import isDoneIcon from '../icons/appIcons/checkEnable.png';
+import notDoneIcon from '../icons/appIcons/checkDisabled.png';
 
-function CardsIcons() {
+function CardsIcons(props) {
+  const { isFavorite, isDone } = props;
   return (
     <Container className="icons-wrapper">
-      <img className="check-icon" src={ checkIcon } alt="Check Icon" />
-      <img className="fav-icon" src={ favoriteIcon } alt="Favorite Icon" />
+      <img
+        className="check-icon"
+        src={ isDone ? isDoneIcon : notDoneIcon }
+        alt="Check Icon"
+      />
+      <img
+        className="fav-icon"
+        src={ isFavorite ? favoriteIcon : notFavoriteIcon }
+        alt="Favorite Icon"
+      />
     </Container>
   );
 }
@@ -37,3 +49,8 @@ const Container = styled.div`
   }
 
 `;
+
+CardsIcons.propTypes = {
+  isFavorite: PropTypes.bool.isRequired,
+  isDone: PropTypes.bool.isRequired,
+};

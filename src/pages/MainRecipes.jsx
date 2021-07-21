@@ -99,8 +99,6 @@ const Container = styled.div`
     flex-flow: row wrap;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    /* padding-left: 45px; */
   }
 
   .search-cards {
@@ -108,7 +106,14 @@ const Container = styled.div`
     flex-flow: row wrap;
     justify-content: center;
     align-items: center;
-    height: 100vh;
     width: 90vw;
+    padding-bottom: 70px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  h2 {
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 `;
