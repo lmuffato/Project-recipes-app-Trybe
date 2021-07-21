@@ -99,13 +99,15 @@ class DetBebidas extends React.Component {
     }
   }
 
-  checkRecipe({ idMeal }) {
+  checkRecipe(recipe) {
     if (localStorage.doneRecipes) {
       const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
-      const done = doneRecipes.find((element) => (element.id === idMeal));
+      const done = doneRecipes.find((element) => (element.id === recipe.idDrink));
       if (done) {
+        console.log('encontrado');
         return true;
       }
+      console.log('não encontrado');
       return false;
     }
   }
