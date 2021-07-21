@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Footer from '../compenents/Footer';
 import Header from '../compenents/Header';
+import Loading from '../compenents/Loading';
 import RecipesContext from '../contexts/RecipesContext';
 import SearchbarContext from '../contexts/SearchbarContext';
 
@@ -65,14 +66,21 @@ function FoodsIngredients() {
     );
   };
 
+  const renderMain = () => (
+    <main className="main-ingredients">
+      <section className="ingredients-container">
+        { getTwelveIngredients() }
+      </section>
+    </main>
+  );
+
   return (
     <>
       <Header />
-      <main className="main-ingredients">
-        <section className="ingredients-container">
-          { getTwelveIngredients() }
-        </section>
-      </main>
+      {
+        ingredients.length === 0 ? <Loading />
+          : renderMain()
+      }
       <Footer />
     </>
   );

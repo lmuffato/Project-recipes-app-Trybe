@@ -20,7 +20,7 @@ body div {
   width: 100%;
 }
 
-.main-area, .main-profile, .main-detail, .main-inProgress {
+.main-area, .main-profile, .main-detail, .main-inProgress, .main-loading {
   background: #a11d2b;
   display: flex;
   flex-flow: column wrap;
@@ -655,6 +655,22 @@ input:checked + .checked-list {
   margin-bottom: 3%;
   margin-top: 3%;
 }
+
+/* ------------------------------------------------------------ */
+
+/* ---------- Componente Loading --------- */
+.main-loading {
+  align-items: center;
+  background-color: #a11d2b;
+  display: flex;
+  font-size: 30pt;
+  height: 100vh;
+  justify-content: center;
+  margin-top: -20px;
+  width: 100vw;
+}
+
+/* --------------------------------------- */
 
 /*
 #5e9c53 - verde claro
