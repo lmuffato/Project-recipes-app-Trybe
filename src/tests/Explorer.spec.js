@@ -3,7 +3,7 @@ import { screen } from '@testing-library/react';
 import App from '../App';
 import renderWithRouter from './helpers/renderWithRouter';
 
-describe('Testing the Footer component', () => {
+describe('ExploreScreen', () => {
   it('show footer on screen of meals', () => {
     const { history } = renderWithRouter(<App />);
     history.push('/explorar');
