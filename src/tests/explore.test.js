@@ -3,7 +3,7 @@ import React from 'react';
 import { screen } from '@testing-library/dom';
 import { act } from 'react-dom/test-utils';
 // import userEvent from '@testing-library/user-event';
-import { waitForElement } from '@testing-library/react';
+import { fireEvent, waitForElement } from '@testing-library/react';
 import renderWithRouterHooksAndProvider from './renderWithRouterHooksAndProvider';
 import App from '../App';
 
@@ -68,4 +68,32 @@ describe('Testes da página Explorar', () => {
       expect(exploreByIngredients).toBeInTheDocument();
     });
   });
+});
+
+describe('Testa toggle do searchbar na tela', () => {
+  it('Rota /explorar/comidas/area renderiza SearchBar',
+    async () => {
+      const { getByText, getByTestId } = await renderWithRouterHooksAndProvider(
+        <App />,
+        '/explorar/comidas/area',
+      );
+
+      const EXPLORE_DROPDOWN = 'explore-by-area-dropdown';
+      const SEARCH_BTN = 'search-top-btn';
+
+      await waitForElement(() => getByTestId('0-card-img'));
+      await waitForElement(() => getByTestId(EXPLORE_DROPDOWN));
+      expect(getByTestId(SEARCH_BTN)).toBeInTheDocument();
+      fireEvent.click(getByTestId(SEARCH_BTN));
+      const searchInput = getByTestId('search-input');
+      const searchBtn = getByTestId('exec-search-btn');
+      const resetBtn = getByText('Resetar');
+      expect(searchInput).toBeInTheDocument();
+      expect(searchBtn).toBeInTheDocument();
+      expect(resetBtn).toBeInTheDocument();
+      fireEvent.click(getByTestId(SEARCH_BTN));
+      expect(searchInput).not.toBeInTheDocument();
+      expect(searchBtn).not.toBeInTheDocument();
+      expect(resetBtn).not.toBeInTheDocument();
+    });
 });
