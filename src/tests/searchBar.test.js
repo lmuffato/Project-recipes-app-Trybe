@@ -7,6 +7,7 @@ const RECIPE_TITLE = 'recipe-title';
 const FIRST_IMAGE = '0-card-img';
 const SEARCH_BTN = 'search-top-btn';
 const SEARCH_INPUT = 'search-input';
+const EXEC_SEARCH_BTN = 'exec-search-btn';
 
 describe('Testa funcionalidade de searchBar', () => {
   it('Busca receita por ingrediente', async () => {
@@ -23,7 +24,7 @@ describe('Testa funcionalidade de searchBar', () => {
       target: { value: 'lemon' },
     });
     fireEvent.click(getByTestId('ingredient-search-radio'));
-    fireEvent.click(getByTestId('exec-search-btn'));
+    fireEvent.click(getByTestId(EXEC_SEARCH_BTN));
 
     await waitForElement(() => getByText('BeaverTails'));
     expect(getByTestId(FIRST_IMAGE).src).toMatch('https://www.themealdb.com/images/media/meals/1548772327.jpg');
@@ -45,7 +46,7 @@ describe('Testa funcionalidade de searchBar', () => {
       target: { value: 'pasta' },
     });
     fireEvent.click(getByTestId('name-search-radio'));
-    fireEvent.click(getByTestId('exec-search-btn'));
+    fireEvent.click(getByTestId(EXEC_SEARCH_BTN));
 
     await waitForElement(() => getByTestId(RECIPE_TITLE));
     expect(getByTestId(RECIPE_TITLE)).toBeInTheDocument();
@@ -71,5 +72,27 @@ describe('Testa funcionalidade de searchBar', () => {
     fireEvent.click(getByText('Resetar'));
 
     expect(searcInput.value).toBe('');
+  });
+
+  it('Busca receita por primeira letra', async () => {
+    const { getByTestId, getByText } = await renderWithRouterHooksAndProvider(
+      <App />,
+      '/comidas',
+    );
+
+    await waitForElement(() => getByTestId(SEARCH_BTN));
+    expect(getByTestId(SEARCH_BTN)).toBeInTheDocument();
+    fireEvent.click(getByTestId(SEARCH_BTN));
+
+    fireEvent.change(getByTestId(SEARCH_INPUT), {
+      target: { value: 'a' },
+    });
+    fireEvent.click(getByTestId('first-letter-search-radio'));
+    fireEvent.click(getByTestId(EXEC_SEARCH_BTN));
+
+    await waitForElement(() => getByText('Apple Frangipan Tart'));
+    expect(getByTestId(FIRST_IMAGE).src).toMatch('https://www.themealdb.com/images/media/meals/wxywrq1468235067.jpg');
+    expect(getByText('Apple & Blackberry Crumble')).toBeInTheDocument();
+    expect(getByText('Ayam Percik')).toBeInTheDocument();
   });
 });
