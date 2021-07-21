@@ -19,7 +19,7 @@ export default function ReceitasFeitas() {
         title="Completed Recipes"
         enableSearchIcon={ false }
       />
-      <div className="buttons-done">
+      <div className="buttons-done" style={ { backgroundColor: 'transparent' } }>
         <button
           className="button is-warning"
           type="button"

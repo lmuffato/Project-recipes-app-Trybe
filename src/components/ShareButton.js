@@ -29,7 +29,7 @@ export default function ShareButton({ recipeId, isFood, index }) {
           textAlign: 'center',
           width: 40,
           height: 40,
-          backgroundColor: colorDiv } }
+          backgroundColor: 'transparent' } }
         type="button"
         data-testid={ `${index !== undefined ? `${index}-horizontal-` : ''}share-btn` }
         onClick={ handleShareClick }
