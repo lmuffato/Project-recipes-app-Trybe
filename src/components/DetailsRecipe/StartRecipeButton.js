@@ -70,11 +70,17 @@ StartRecipeButton.defaultProps = {
 const Button = styled.button`
   width: 80%;
   height: 50px;
-  background-color: green;
-  border-radius: 6px;
+  background-color: rgb(214, 168, 40);
+  font-family: 'Montserrat';
+  font-weight: bold;
+  border-radius: 100px;
   position: fixed;
   bottom: 0px;
   margin: 0 auto;
   left: 0;
   right: 0;
+  border: none;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  font-size: 25px;
+  color: white;
 `;
