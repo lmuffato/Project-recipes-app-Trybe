@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import EmProgInfos from '../components/EmProgInfos';
+import EmProgInfos from '../components/EmProInfos/EmProgInfos';
 import '../App.css';
+
+import styles from './styles.module.css';
 
 class EmProgBebidas extends React.Component {
   constructor(props) {
@@ -178,33 +180,37 @@ class EmProgBebidas extends React.Component {
           instructions={ instructions }
           typeRecipe={ typeRecipe }
         />
-        <form>
-          {ingredients && ingredients.map((ingredient, index) => (
-            <div key={ ingredient } data-testid={ `${index}-ingredient-step` }>
-              <input
-                type="checkbox"
-                name={ ingredient }
-                key={ ingredient }
-                id={ ingredient }
-                onChange={ (e) => this.handleDoneSteps(e) }
-                checked={ usedIngredients.includes(ingredient) }
-              />
-              <label
-                htmlFor={ ingredient }
-              >
-                {` ${ingredient} -  ${measures[index]}`}
-              </label>
-            </div>
-          ))}
-        </form>
-        <button
-          data-testid="finish-recipe-btn"
-          type="submit"
-          disabled={ ingredients.length !== usedIngredients.length }
-          onClick={ this.setDoneRecipe }
-        >
-          Finalizar Receita
-        </button>
+        <div className={ styles.progContainer }>
+          <form>
+            {ingredients && ingredients.map((ingredient, index) => (
+              <div key={ ingredient } data-testid={ `${index}-ingredient-step` }>
+                <input
+                  className={ styles.recipeCheck }
+                  type="checkbox"
+                  name={ ingredient }
+                  key={ ingredient }
+                  id={ ingredient }
+                  onChange={ (e) => this.handleDoneSteps(e) }
+                  checked={ usedIngredients.includes(ingredient) }
+                />
+                <label
+                  htmlFor={ ingredient }
+                >
+                  {` ${ingredient} -  ${measures[index]}`}
+                </label>
+              </div>
+            ))}
+          </form>
+          <button
+            className={ styles.finalButton }
+            data-testid="finish-recipe-btn"
+            type="submit"
+            disabled={ ingredients.length !== usedIngredients.length }
+            onClick={ this.setDoneRecipe }
+          >
+            Finalizar Receita
+          </button>
+        </div>
       </div>
     );
   }

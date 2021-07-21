@@ -10,6 +10,8 @@ import {
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 
+import styles from './styles.module.css';
+
 class DetComidas extends React.Component {
   constructor() {
     super();
@@ -23,6 +25,7 @@ class DetComidas extends React.Component {
     this.embedvideo = this.embedvideo.bind(this);
     this.handleIngredients = this.handleIngredients.bind(this);
     this.onClickShare = this.onClickShare.bind(this);
+    this.InProgressButton = this.InProgressButton.bind(this);
   }
 
   async componentDidMount() {
@@ -33,6 +36,7 @@ class DetComidas extends React.Component {
     const recommended = await fetchRecommendedDrinks();
     this.setNewState(foods, recommended);
     this.handleIngredients();
+    this.InProgressButton(id);
   }
 
   handleIngredients() {
@@ -98,7 +102,7 @@ class DetComidas extends React.Component {
 
   InProgressButton(id) {
     const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
-    if (inProgressRecipes.meals[id]) {
+    if (inProgressRecipes && inProgressRecipes.meals[id]) {
       const button = document.querySelector('.start-btn');
       button.innerHTML = 'Continuar Receita';
     }
@@ -108,7 +112,9 @@ class DetComidas extends React.Component {
     if (localStorage.doneRecipes) {
       const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
       const done = doneRecipes.find((element) => (element.id === idMeal));
-      if (done) {
+      const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
+
+      if (done || inProgressRecipes) {
         return true;
       }
       return false;
@@ -123,9 +129,9 @@ class DetComidas extends React.Component {
     console.log(food);
     return (
       food.map((recipe) => (
-        <div key="recipe">
+        <div key="recipe" className={ styles.detailsContainer }>
           <img
-            className="detImg"
+            className={ styles.detailsImg }
             data-testid="recipe-photo"
             alt="imagem da receita"
             src={ recipe[0].strMealThumb }
@@ -133,7 +139,7 @@ class DetComidas extends React.Component {
           />
           <h1 data-testid="recipe-title">{ recipe[0].strMeal }</h1>
           <p data-testid="recipe-category">{ recipe[0].strCategory }</p>
-          <div id="share">
+          <div id="share" className={ styles.detailsIcons }>
             <input
               type="image"
               data-testid="share-btn"
@@ -150,9 +156,9 @@ class DetComidas extends React.Component {
               className="fav-btn"
             />
           </div>
-          <h2>
+          <h4>
             Lista de Ingredientes
-          </h2>
+          </h4>
           <table border="1" width="340px">
             <thead>
               <tr>
@@ -166,14 +172,17 @@ class DetComidas extends React.Component {
                   <td key={ i } data-testid={ `${i}-ingredient-name-and-measure` }>
                     {ingredient}
                   </td>
-                  <td key={ measures } data-testid={ `${i}-ingredient-name-and-measure` }>
+                  <td
+                    key={ measures }
+                    data-testid={ `${i}-ingredient-name-and-measure` }
+                  >
                     {measures[i]}
                   </td>
                 </tr>))}
             </tbody>
           </table>
-          <h2> Modo de Preparo:</h2>
-          <p data-testid="instructions" className="instructions">
+          <h4> Modo de Preparo:</h4>
+          <p data-testid="instructions" className={ styles.instructions }>
             {recipe[0].strInstructions}
           </p>
           <iframe
@@ -185,7 +194,7 @@ class DetComidas extends React.Component {
             frameBorder="0"
             allow="accelerometer; clipboard-write; picture-in-picture"
           />
-          <h2>Drinks Recomendados</h2>
+          <h4>Drinks Recomendados</h4>
           <div className="recommended">
             {recommended.map((drink, index) => (
               <div
@@ -194,6 +203,7 @@ class DetComidas extends React.Component {
                 className="recommendedCard"
               >
                 <input
+                  className={ styles.detailsRecomendCard }
                   width="350"
                   type="image"
                   src={ drink.strDrinkThumb }
@@ -205,16 +215,27 @@ class DetComidas extends React.Component {
             ))}
           </div>
           {(!this.checkRecipe(recipe[0]))
-          && (
-            <button
-              type="button"
-              data-testid="start-recipe-btn"
-              className="start-btn"
-              onClick={ () => history.push(`/comidas/${recipe[0].idMeal}/in-progress`) }
-            >
-              Iniciar Receita
-            </button>)}
+            ? (
+              <button
+                type="button"
+                data-testid="start-recipe-btn"
+                className={ styles.startBtn }
+                onClick={ () => (
+                  history.push(`/comidas/${recipe[0].idMeal}/in-progress`)) }
+              >
+                Iniciar Receita
+              </button>)
+            : (
+              <button
+                className={ styles.startBtn }
+                type="button"
+                onClick={ () => history.push('/receitas-feitas') }
+              >
+                Receitas Feitas
+              </button>
+            )}
         </div>
+
       ))
     );
   }

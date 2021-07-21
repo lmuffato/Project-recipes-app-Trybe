@@ -19,6 +19,7 @@ import DetComidas from './pages/DetComidas';
 import DetBebidas from './pages/DetBebidas';
 
 import './App.css';
+import './styles/globals.css';
 
 class App extends React.Component {
   render() {

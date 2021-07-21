@@ -1,0 +1,104 @@
+/* arquivo estilização páginas */
+
+@media screen and ( max-width : 640px ) {
+
+  /* pagina detalhes comidas e bebidas */
+  .detailsContainer {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 1rem;
+    margin: auto;
+    padding: 2rem;
+    width: 100%;
+  }
+
+  .detailsImg {
+    border: solid rgba(252, 193, 65) 4px;
+    border-radius: 8%;
+    width: 100%;
+  }
+
+  .detailsContainer > h1 {
+    margin-top: -85px;
+    padding-left: 00.9rem;
+  }
+
+  .detailsContainer > h4 {
+    padding-top: 0.5rem;
+  }
+
+  .detailsContainer > table {
+    border: none;
+    line-height: 1.6rem;
+    width: 100%;
+  }
+
+  .instructions {
+    margin: 4px;
+    text-align: justify;
+  }
+
+  .detailsRecomendCard {
+    width: 100%;
+  }
+
+  .detailsContainer > iframe {
+    width: 100%;
+  }
+
+  .detailsIcons {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .detailsIcons > input {
+    padding: 0 1rem;
+  }
+
+  .startBtn {
+    align-items: center;
+    background-color: rgb(252, 193, 65);
+    border: none;
+    border-radius: 8px;
+    bottom: 0.5rem;
+    display: flex;
+    font-size: 20px;
+    font-weight: 400;
+    height: 35px;
+    justify-content: center;
+    left: 50%;
+    margin-left: -100px;
+    margin-top: -24px;
+    position: fixed;
+    right: 50%;
+    width: 200px;
+  }
+
+  /* pagina receitas em progresso */
+  .progContainer {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 1rem;
+    margin: auto;
+    padding: 2rem;
+    width: 100%;
+  }
+
+  .progContainer > form {
+    background-color: rgba(255, 116, 36, 0.342);
+    border-radius: 5%;
+    padding: 1rem;
+  }
+
+  .recipeCheck:checked + label {
+    text-decoration: line-through;
+  }
+
+  .finalButton {
+    background-color: rgb(252, 193, 65);
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    height: 35px;
+  }
+}
