@@ -64,7 +64,23 @@ function BebidasEmProcesso() {
 
   function handleClick() {
     // se retorna true está favoritado, se falso nao estava favoritado
-    if (!favorite) {
+    setFavorite(!favorite);
+    const newFavorite = [
+      ...storageFavorite,
+      {
+        id,
+        type: 'bebida',
+        area: '',
+        category: drink.strCategory,
+        alcoholicOrNot: drink.strAlcoholic,
+        name: drink.strDrink,
+        image: drink.strDrinkThumb,
+      },
+    ];
+    const removeFavorite = storageFavorite.filter((item) => item.id !== id);
+    return favorite ? localStorage.setItem('favoriteRecipes', JSON.stringify(newFavorite))
+      : localStorage.setItem('favoriteRecipes', JSON.stringify(removeFavorite));
+    /*     if (!favorite) {
       // se nao estiver favoritado eu tenho que colocar no local storage
       setFavorite(true);
 
@@ -88,7 +104,7 @@ function BebidasEmProcesso() {
       setFavorite(false);
       const removeFavorite = storageFavorite.filter((item) => item.id !== id);
       localStorage.setItem('favoriteRecipes', JSON.stringify(removeFavorite));
-    }
+    } */
   }
 
   function handleShare() {
@@ -122,6 +138,26 @@ function BebidasEmProcesso() {
     ));
   }
 
+  function handleFinishedRecipe() {
+    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date
+    const now = new Date();
+    const [month, day, year] = [now.getMonth(), now.getDate(), now.getFullYear()];
+    const finishedDrink = {
+      id: drink.idDrink,
+      type: 'bebida',
+      area: '',
+      category: drink.strCategory,
+      alcoholicOrNot: drink.strAlcoholic,
+      name: drink.strDrink,
+      image: drink.strDrinkThumb,
+      doneDate: `${day}/${month}/${year}`,
+    };
+    const finishedRecipes = JSON.parse(localStorage.getItem('doneRecipes')) || [];
+    localStorage.setItem('doneRecipes',
+      JSON.stringify([...finishedRecipes, finishedDrink]));
+
+    history.push('/receitas-feitas');
+  }
   if (loading) return <p>carregando</p>;
 
   return (
@@ -156,7 +192,7 @@ function BebidasEmProcesso() {
         type="button"
         data-testid="finish-recipe-btn"
         disabled={ finished }
-        onClick={ () => history.push('/receitas-feitas') }
+        onClick={ handleFinishedRecipe }
       >
         finalizar
       </button>
