@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 
 import '../../style/IngredientsListCheckbox.css';
+import FoodContext from '../../contexts/FoodContext';
 
 export default function IngredientsListCheckbox({
   recipe,
@@ -9,6 +10,11 @@ export default function IngredientsListCheckbox({
   usedIngredients }) {
   const [fullRecipe, setFullRecipe] = useState([]);
   // const [usedIngredients, setUsedIngredients] = useState([]);
+
+  const context = useContext(FoodContext);
+  const { color: { colorP } } = context;
+  const { color: { colorH3 } } = context;
+  const { color: { colorDiv } } = context;
 
   useEffect(() => {
     // define state with recipe
@@ -32,8 +38,15 @@ export default function IngredientsListCheckbox({
   }, [recipe]);
 
   return (
-    <div className="ingredients-checkbox-container">
-      <h3>Ingredients</h3>
+    <div
+      className="ingredients-checkbox-container"
+      style={ { backgroundColor: colorDiv } }
+    >
+      <h3
+        style={ { color: colorH3 } }
+      >
+        Ingredients
+      </h3>
       {fullRecipe.map((ing, index) => (
         <label
           htmlFor="ingredient-checkbox"
@@ -49,6 +62,7 @@ export default function IngredientsListCheckbox({
             checked={ usedIngredients.includes(ing[0]) }
           />
           <p
+            style={ { color: colorP } }
             className={ usedIngredients.includes(ing[0]) ? 'crossed' : '' }
           >
             {`${ing[0]} - ${ing[1] ? ing[1] : 'a vonts'}`}

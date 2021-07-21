@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState, useCallback, useContext } from 'react';
 
 import { useParams, useHistory } from 'react-router-dom';
 
@@ -13,6 +13,7 @@ import List from '../components/List';
 import RenderVideo from '../components/RenderVideo';
 import Carousel from '../components/Carousel';
 import '../style/DetalhesComidas.css';
+import FoodContext from '../contexts/FoodContext';
 
 export default function DetalhesComidas() {
   const [recipe, setRecipe] = useState({});
@@ -22,6 +23,8 @@ export default function DetalhesComidas() {
   const [isInProgress, setIsInProgress] = useState();
   const { id } = useParams();
   const history = useHistory();
+  const context = useContext(FoodContext);
+  const { color: { colorDiv } } = context;
 
   useEffect(() => {
     if (localStorage.getItem('doneRecipes')) {
@@ -113,7 +116,10 @@ export default function DetalhesComidas() {
           Recommended
         </Text>
       </div>
-      <div className="recipe-button-bottom">
+      <div
+        className="recipe-button-bottom"
+        style={ { backgroundColor: colorDiv } }
+      >
         { drinks.length > 0 && <Carousel data={ drinks } /> }
         <br />
         <br />

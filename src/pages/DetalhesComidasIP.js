@@ -4,6 +4,7 @@ import { useLocation, useHistory } from 'react-router-dom';
 import DetailsHeader from '../components/DetailsHeader';
 import IngredientListCheckbox from '../components/RecipesIP/IngredientsListCheckbox';
 import DoneRecipesContext from '../contexts/DoneRecipesContext';
+import FoodContext from '../contexts/FoodContext';
 
 import { fetchFoodByID } from '../services/mealAPI';
 
@@ -17,6 +18,10 @@ export default function DetalhesComidasIP() {
   const [usedIngredients, setUsedIngredients] = useState([]);
 
   const { doneRecipes, setDoneRecipes } = useContext(DoneRecipesContext);
+  const context = useContext(FoodContext);
+  const { color: { colorP } } = context;
+  const { color: { colorH1 } } = context;
+  const { color: { colorDiv } } = context;
 
   function handleCheckIngredient(ev) {
     // adds or removes clicked ingredient from usedIngredients list
@@ -124,7 +129,7 @@ export default function DetalhesComidasIP() {
           <br />
           <p
             data-testid="instructions"
-            style={ { margin: 15 } }
+            style={ { margin: 15, color: colorP } }
           >
             {food.strInstructions}
           </p>

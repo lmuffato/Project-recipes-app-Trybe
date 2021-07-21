@@ -9,6 +9,14 @@ import {
 export default function FoodProvider({ children }) {
   const [foods, setFoods] = useState([]);
   const [categories, setCategories] = useState([]);
+  const [color, setColor] = useState({
+    colorDiv: 'white',
+    colorP: 'black',
+    colorH1: 'black',
+    colorH2: 'black',
+    colorH3: 'black',
+    colorLi: 'black',
+  });
 
   useEffect(() => {
     fetchFoods().then((data) => {
@@ -25,7 +33,9 @@ export default function FoodProvider({ children }) {
         foods,
         setFoods,
         categories,
-        setCategories } }
+        setCategories,
+        color,
+        setColor } }
     >
       {children}
     </FoodContext.Provider>

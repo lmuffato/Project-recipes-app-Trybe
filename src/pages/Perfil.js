@@ -1,13 +1,18 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import '../style/Perfil.css';
+import FoodContext from '../contexts/FoodContext';
+
+let counter = 0;
 
 export default function Perfil() {
+  const { setColor } = useContext(FoodContext);
+  const context = useContext(FoodContext);
+  console.log('contexto', context);
   let email;
-  let counter = 0;
-
+  console.log('contador de fora: ', counter);
   if (localStorage.user) {
     email = JSON.parse(localStorage.getItem('user')).email;
   }
@@ -16,12 +21,31 @@ export default function Perfil() {
     if (counter % 2 === 0) {
       document.body.style.backgroundColor = 'rgb(30, 30, 30)';
       document.body.style.color = 'white';
-
       counter += 1;
-    } else {
+      setColor({
+        ...context.color,
+        colorP: 'white',
+        colorDiv: 'rgb(30,30,30)',
+        colorH1: 'white',
+        colorH2: 'white',
+        colorH3: 'white',
+        colorLi: 'white',
+      });
+      console.log('contador: ', counter);
+    } else if (counter % 2 === 1) {
       document.body.style.backgroundColor = 'whitesmoke';
       document.body.style.color = 'rgb(30, 30, 30)';
       counter += 1;
+      console.log('contador: ', counter);
+      setColor({
+        ...context.color,
+        colorP: 'black',
+        colorDiv: 'whitesmoke',
+        colorH1: 'black',
+        colorH2: 'black',
+        colorH3: 'black',
+        colorLi: 'black',
+      });
     }
   }
 

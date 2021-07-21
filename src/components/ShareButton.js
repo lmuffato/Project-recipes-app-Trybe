@@ -1,11 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import copy from 'clipboard-copy';
 
 import shareIcon from '../images/shareIcon.svg';
+import FoodContext from '../contexts/FoodContext';
 // Warning: CSS Inline in Button
 
 export default function ShareButton({ recipeId, isFood, index }) {
+  const context = useContext(FoodContext);
+  const { color: { colorDiv } } = context;
   const [displayToast, setDisplayToast] = useState(false);
   const WAIT_TIME = 3000;
 
@@ -22,7 +25,11 @@ export default function ShareButton({ recipeId, isFood, index }) {
     <>
       {displayToast && <p className="toast">Link copiado!</p>}
       <button
-        style={ { width: 40, height: 40, backgroundColor: 'whitesmoke' } }
+        style={ {
+          textAlign: 'center',
+          width: 40,
+          height: 40,
+          backgroundColor: colorDiv } }
         type="button"
         data-testid={ `${index !== undefined ? `${index}-horizontal-` : ''}share-btn` }
         onClick={ handleShareClick }

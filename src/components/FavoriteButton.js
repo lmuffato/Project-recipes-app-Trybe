@@ -5,6 +5,8 @@ import FavoritesContext from '../contexts/FavoritesContext';
 
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import FoodContext from '../contexts/FoodContext';
+import { invert } from 'lodash';
 // Warning: CSS Inline in Button
 
 export default function FavoriteButton({ recipe, isFood }) {
@@ -15,6 +17,8 @@ export default function FavoriteButton({ recipe, isFood }) {
   const recipeAlcoholicOrNot = isFood ? '' : recipe.strAlcoholic;
   const recipeName = isFood ? recipe.strMeal : recipe.strDrink;
   const recipeImage = isFood ? recipe.strMealThumb : recipe.strDrinkThumb;
+  const context = useContext(FoodContext);
+  const { color: { colorDiv } } = context;
 
   const { favorites, setFavorites } = useContext(FavoritesContext);
 
@@ -53,7 +57,12 @@ export default function FavoriteButton({ recipe, isFood }) {
 
   return (
     <button
-      style={ { width: 40, height: 40, backgroundColor: 'whitesmoke' } }
+      style={ {
+        textAlign: 'center',
+        width: 40,
+        height: 40,
+        filter: invert(100),
+        backgroundColor: colorDiv } }
       type="button"
       onClick={ () => {
         setIsFavorite(!isFavorite);

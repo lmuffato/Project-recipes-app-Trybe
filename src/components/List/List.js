@@ -1,7 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
+import FoodContext from '../../contexts/FoodContext';
 
 export default function List({ list, dataTestid }) {
+
+  const context = useContext(FoodContext);
+  const { color: { colorDiv } } = context;
+
+  console.log('contexto', context);
+
   return (
     <ul
       className="details-cards"
@@ -10,6 +17,7 @@ export default function List({ list, dataTestid }) {
         flexDirection: 'column',
         width: 335,
         marginLeft: 20,
+        backgroundColor: colorDiv,
       } }
     >
       { list.map((item, index) => (
