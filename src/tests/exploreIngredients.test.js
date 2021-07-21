@@ -2,7 +2,6 @@ import React from 'react';
 
 import { screen } from '@testing-library/dom';
 import { act } from 'react-dom/test-utils';
-// import userEvent from '@testing-library/user-event';
 import { waitForElement } from '@testing-library/react';
 import renderWithRouterHooksAndProvider from './renderWithRouterHooksAndProvider';
 import App from '../App';
