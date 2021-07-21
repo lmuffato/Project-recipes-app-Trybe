@@ -31,7 +31,7 @@
 }
 
 .footer {
-  position: fixed;
+  position: sticky;
 }
 
 .button-in-profile {

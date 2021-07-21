@@ -2,10 +2,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import BottomMenu from '../../components/bottomMenu';
 import Header from '../../components/Header';
+import './explore.css';
 
 export default function ExplorePage() {
   return (
-    <div>
+    <div className="explore-page">
       <Header title="Explorar" show={ false } />
       <div className="buttonsExplore">
         <Link to="/explorar/comidas">

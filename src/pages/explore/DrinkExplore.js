@@ -15,7 +15,7 @@ export default function DrinksExplore() {
   };
 
   return (
-    <div>
+    <div className="explore-page">
       <Header title="Explorar Bebidas" show={ false } />
 
       <div className="buttonsExplore">
