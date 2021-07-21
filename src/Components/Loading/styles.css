@@ -1,10 +1,12 @@
 .loading {
-  align-items: center;
-  background-color: rgb(37, 95, 133);
-  color: rgb(252, 252, 113);
-  display: flex;
-  font-size: 1.3rem;
-  height: 100vh;
-  justify-content: center;
-  width: 100vw;
+  background-color: white;
+  left: 50%;
+  position: fixed;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.loading img {
+  height: auto;
+  max-width: 40vw;
 }

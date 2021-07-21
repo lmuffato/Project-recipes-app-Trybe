@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Header from '../../Components/Header';
 import Footer from '../../Components/Footer';
+import Loading from '../../Components/Loading';
 import MealsCard from '../../Components/MealsCard';
 import { fetchAllOrigin, fetchByArea, fetchItAll } from '../../services/fetchRecipes';
 
@@ -35,7 +36,7 @@ function MealsByOrigin() {
     </select>
   );
 
-  if (!areas) return <div>Loading...</div>;
+  if (!areas) return <Loading />;
 
   return (
     <section>

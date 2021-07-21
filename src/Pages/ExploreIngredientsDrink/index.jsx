@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { Card } from 'react-bootstrap';
 import Header from '../../Components/Header';
 import Footer from '../../Components/Footer';
+import Loading from '../../Components/Loading';
 import { fetchDrinkIngredients, fetchIngredients } from '../../services/fetchRecipes';
 import RecipesContext from '../../context/RecipesContext';
 import './styles.css';
@@ -27,7 +28,7 @@ function ExploreIngredientsDrink() {
     updateData(fetchIngredients(ingredient));
   };
 
-  if (!ingredients.length) return <div>Loading...</div>;
+  if (!ingredients.length) return <Loading />;
 
   return (
     <section>

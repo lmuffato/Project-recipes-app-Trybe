@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Header from '../../Components/Header';
 import Footer from '../../Components/Footer';
 import RecipeCard from '../../Components/RecipeCard';
+import Loading from '../../Components/Loading';
 import recipesContext from '../../context/RecipesContext';
 import { fetchByIngredient, getDrinks, getMeals } from '../../services/fetchRecipes';
 import './styles.css';
@@ -44,13 +45,15 @@ function RecipeMainPage({ header, location: { state } }) {
   return (
     <div className="main-page-parent">
       <Header>{ header }</Header>
-      { isLoading ? 'Carregando' : (
-        <div>
-          { recipes[toggle].results !== null
-            ? <RecipeCard recipesArray={ recipes[toggle].results } />
-            : ''}
-        </div>
-      )}
+      { isLoading
+        ? <Loading />
+        : (
+          <div>
+            { recipes[toggle].results !== null
+              ? <RecipeCard recipesArray={ recipes[toggle].results } />
+              : ''}
+          </div>
+        )}
       <Footer />
     </div>
   );
