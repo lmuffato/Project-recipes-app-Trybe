@@ -86,12 +86,6 @@ footer {
   justify-content: center;
 }
 
-.start-btn {
-  border-radius: 3px;
-  bottom: 0;
-  position: fixed;
-}
-
 .recipeImg {
   border-radius: 60px;
   margin-bottom: 4px;
@@ -118,11 +112,6 @@ footer {
   margin-bottom: 80px;
   margin-top: 10px;
   width: 360px;
-}
-
-.instructions {
-  margin: 4px;
-  text-align: justify;
 }
 
 .detImg {

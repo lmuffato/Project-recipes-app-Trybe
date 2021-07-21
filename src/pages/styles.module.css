@@ -1,0 +1,75 @@
+/* arquivo estilização páginas */
+
+@media screen and ( max-width : 640px ) {
+
+  /* pagina detalhes comidas e bebidas */
+  .detailsContainer {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 1rem;
+    margin: auto;
+    padding: 2rem;
+    width: 100%;
+  }
+
+  .detailsImg {
+    border-radius: 8%;
+    width: 100%;
+  }
+
+  .detailsContainer > h1 {
+    margin-top: -70px;
+    padding-left: 00.5rem;
+  }
+
+  .detailsContainer > h4 {
+    padding-top: 0.5rem;
+  }
+
+  .detailsContainer > table {
+    border: none;
+    line-height: 1.6rem;
+    width: 100%;
+  }
+
+  .instructions {
+    margin: 4px;
+    text-align: justify;
+  }
+
+  .detailsRecomendCard {
+    width: 100%;
+  }
+
+  .detailsContainer > iframe {
+    width: 100%;
+  }
+
+  .detailsIcons {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .detailsIcons > input {
+    padding: 0 1rem;
+  }
+
+  .startBtn {
+    align-items: center;
+    background-color: rgb(252, 193, 65);
+    border: none;
+    border-radius: 8px;
+    bottom: 0.5rem;
+    display: flex;
+    font-size: 20px;
+    font-weight: 600;
+    height: 35px;
+    justify-content: center;
+    left: 50%;
+    margin-left: -100px;
+    margin-top: -24px;
+    position: fixed;
+    right: 50%;
+    width: 200px;
+  }
+}

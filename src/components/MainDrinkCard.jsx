@@ -177,7 +177,7 @@ class MainDrinkCard extends React.Component {
                 data-testid={ `${index}-card-img` }
                 onClick={ () => history.push(`/bebidas/${recipe.idDrink}`) }
               />
-              <h6 data-testid={ `${index}-card-name` }>{recipe.strDrink}</h6>
+              <p data-testid={ `${index}-card-name` }>{recipe.strDrink}</p>
             </div>
           ))}
         </div>

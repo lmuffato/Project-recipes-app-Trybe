@@ -67,10 +67,10 @@ class EmProgComidas extends React.Component {
       for (let index = 1; index <= ingredientLimit; index += 1) {
         ingrediente = `strIngredient${index}`;
         measure = `strMeasure${index}`;
-        // console.log(recipe[ingrediente]);
+
         ingredients.push(current[ingrediente]);
-        // console.log(recipe[measure])
         measures.push(current[measure]);
+
         if (ingredients[ingredients.length - 1] === ''
         || ingredients[ingredients.length - 1] === null) {
           ingredients.pop();

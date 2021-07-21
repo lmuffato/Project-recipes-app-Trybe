@@ -138,7 +138,7 @@ class MainFoodCard extends React.Component {
     const { foodData, isLoading, categories, isCharging } = this.state;
     const loading = (<h1>Carregando...</h1>);
     return (
-      <>
+      <div>
         <section className="categoryFilters">
           <button
             type="button"
@@ -175,11 +175,11 @@ class MainFoodCard extends React.Component {
                 data-testid={ `${index}-card-img` }
                 onClick={ () => history.push(`/comidas/${recipe.idMeal}`) }
               />
-              <h6 data-testid={ `${index}-card-name` }>{recipe.strMeal}</h6>
+              <p data-testid={ `${index}-card-name` }>{recipe.strMeal}</p>
             </div>
           ))}
         </div>
-      </>
+      </div>
     );
   }
 }

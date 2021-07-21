@@ -11,6 +11,8 @@ import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 
+import styles from './styles.module.css';
+
 class DetBebidas extends React.Component {
   constructor() {
     super();
@@ -23,6 +25,7 @@ class DetBebidas extends React.Component {
     this.handleIngredients = this.handleIngredients.bind(this);
     this.onClickShare = this.onClickShare.bind(this);
     this.checkRecipe = this.checkRecipe.bind(this);
+    this.InProgressButton = this.InProgressButton.bind(this);
   }
 
   async componentDidMount() {
@@ -33,7 +36,7 @@ class DetBebidas extends React.Component {
     const recommended = await fetchRecommendedFoods();
     this.setNewState(drinks, recommended);
     this.handleIngredients();
-    // this.inProgressButton(id);
+    this.InProgressButton(id);
   }
 
   handleIngredients() {
@@ -91,7 +94,6 @@ class DetBebidas extends React.Component {
     return whiteHeartIcon;
   }
 
-  /*
   InProgressButton(id) {
     const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
     if (inProgressRecipes.cocktails[id]) {
@@ -99,13 +101,14 @@ class DetBebidas extends React.Component {
       button.innerHTML = 'Continuar Receita';
     }
   }
-  */
 
-  checkRecipe({ idMeal }) {
+  checkRecipe({ idDrink }) {
     if (localStorage.doneRecipes) {
       const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
-      const done = doneRecipes.find((element) => (element.id === idMeal));
-      if (done) {
+      const done = doneRecipes.find((element) => (element.id === idDrink));
+      const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
+
+      if (done || inProgressRecipes) {
         return true;
       }
       return false;
@@ -113,24 +116,26 @@ class DetBebidas extends React.Component {
   }
 
   render() {
-    const history = this.props;
+    const { history } = this.props;
     const { pathname } = history.location;
     const { drinks, ingredientes, measures, recommended } = this.state;
     const drink = Object.values(drinks);
+    const idDrink = drink.map((recipe) => recipe[0].idDrink);
+    console.log(idDrink[0]);
     return (
       drink.map((recipe) => (
-        <div key="recipe">
+        <div key="recipe" className={ styles.detailsContainer }>
           <img
-            className="detImg"
+            className={ styles.detailsImg }
             data-testid="recipe-photo"
             alt="imagem da receita"
             src={ recipe[0].strDrinkThumb }
             width="300px"
           />
           <h1 data-testid="recipe-title">{ recipe[0].strDrink }</h1>
-          <p data-testid="recipe-category">{ recipe[0].strCategory }</p>
-          <p data-testid="recipe-category">{`Alcoholic? ${recipe[0].strAlcoholic}`}</p>
-          <div id="share">
+          {/* <p data-testid="recipe-category">{ recipe[0].strCategory }</p> */}
+          <p data-testid="recipe-category">{`${recipe[0].strAlcoholic}`}</p>
+          <div id="share" className={ styles.detailsIcons }>
             <input
               type="image"
               data-testid="share-btn"
@@ -144,12 +149,12 @@ class DetBebidas extends React.Component {
               src={ this.checkFavorite(recipe[0]) }
               alt="favoritar receita"
               onClick={ () => saveFavoriteDrink(recipe[0]) }
-              className="fav-btn"
+              // className="fav-btn"
             />
           </div>
-          <h2>
+          <h4>
             Lista de Ingredientes
-          </h2>
+          </h4>
           <table border="1" width="340px">
             <thead>
               <tr>
@@ -169,17 +174,18 @@ class DetBebidas extends React.Component {
                 </tr>))}
             </tbody>
           </table>
-          <h2>
+          <h4>
             Modo de Preparo:
-          </h2>
-          <p data-testid="instructions" className="instructions">
+          </h4>
+          <p data-testid="instructions" className={ styles.instructions }>
             {recipe[0].strInstructions}
           </p>
-          <h2>Comidas Recomendadas</h2>
+          <h4>Comidas Recomendadas</h4>
           {recommended.map((food, index) => (
             <div key={ food.idMeal } data-testid={ `${index}-recomendation-card` }>
               <Link to={ `/comidas/${food.idMeal}` }>
                 <input
+                  className={ styles.detailsRecomendCard }
                   width="350"
                   type="image"
                   src={ food.strMealThumb }
@@ -189,18 +195,26 @@ class DetBebidas extends React.Component {
               </Link>
             </div>
           ))}
-          {(!this.checkRecipe(recipe[0]))
-          && (
-            <Link to={ `/bebidas/${recipe[0].idDrink}/in-progress` }>
+          {(this.checkRecipe(recipe[0]))
+            ? (
               <button
                 type="button"
                 data-testid="start-recipe-btn"
-                className="start-btn"
+                className={ styles.startBtn }
+                onClick={ () => (
+                  history.push(`/bebidas/${idDrink[0]}/in-progress`)) }
               >
                 Iniciar Receita
+              </button>)
+            : (
+              <button
+                className={ styles.startBtn }
+                type="button"
+                onClick={ () => history.push('/receitas-feitas') }
+              >
+                Receitas Feitas
               </button>
-              )
-            </Link>)}
+            )}
         </div>
       ))
     );
@@ -212,3 +226,16 @@ DetBebidas.propTypes = ({
 }).isRequired;
 
 export default DetBebidas;
+
+// (!this.checkRecipe(recipe[0]))
+//           && (
+//             <Link to={ `/bebidas/${recipe[0].idDrink}/in-progress` }>
+//               <button
+//                 type="button"
+//                 data-testid="start-recipe-btn"
+//                 className={ styles.startBtn }
+//               >
+//                 Iniciar Receita
+//               </button>
+//               )
+//             </Link>)
