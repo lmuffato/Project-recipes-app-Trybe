@@ -8,6 +8,7 @@ import Context from '../../context/Context';
 import { getDrinks, getDrinkByIngredient } from '../../services/getDrinks';
 import getDrinksCat from '../../services/getDrinksCat';
 import '../../App.css';
+import LoadingScreen from '../../components/LoadingScreen';
 
 export default function Drinks() {
   const { drinksList, setDrinksList, isLoading,
@@ -43,7 +44,7 @@ export default function Drinks() {
     <div>
       <Header title="Bebidas" show />
       <ButtomFilters data={ catList } path="" />
-      { isLoading ? <h1>Loading...</h1>
+      { isLoading ? <LoadingScreen />
         : <RecipesList data={ drinksList } path="bebidas" /> }
       <BottomMenu />
     </div>

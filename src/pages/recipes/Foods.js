@@ -8,6 +8,7 @@ import Context from '../../context/Context';
 import { getMealsDefault, getMealsByIngredient } from '../../services/getMeals';
 import getMealsCat from '../../services/getMealsCat';
 import '../../App.css';
+import LoadingScreen from '../../components/LoadingScreen';
 
 export default function Foods() {
   const { mealsList, setMealsList,
@@ -44,7 +45,7 @@ export default function Foods() {
     <div className="meal-and-drink">
       <Header title="Comidas" show />
       <ButtomFilters data={ catList } path="comidas" />
-      { isLoading ? <h1>Loading...</h1>
+      { isLoading ? <LoadingScreen />
         : <RecipesList data={ mealsList } path="comidas" /> }
       <BottomMenu />
     </div>

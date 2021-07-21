@@ -64,6 +64,7 @@ ul {
 }
 
 .button-to-filter { /* button style src: https://www.youtube.com/watch?v=6xNcXwC6ikQ */
+  background-color: var(--clr-neon);
   border: var(--clr-neon) 0.125em solid;
   border-radius: 0.25em;
   box-shadow: inset 0 0 0.5em 0 var(--clr-neon) , 0 0 0.5em 0 var(--clr-neon);
