@@ -60,7 +60,7 @@ function MealDescription({ recipe, recipeId }) {
           className="recomedation-img"
         />
         <section className="title-and-buttons">
-          <h1 data-testid="recipe-title">{ strMeal }</h1>
+          <h1 data-testid="recipe-title" className="title-description">{ strMeal }</h1>
           <section className="interaction-buttons">
             <ShareButton idRecipe={ `comidas/${idMeal}` } />
             <FavoriteBtn
@@ -75,8 +75,8 @@ function MealDescription({ recipe, recipeId }) {
           </section>
         </section>
         <h3 data-testid="recipe-category" className="category">{ strCategory }</h3>
-        <h2 className="ingredients-title">Ingredients</h2>
-        <section className="ingredients-measures">
+        <div className="ingredients-box">
+          <h2 className="ingredients-title">Ingredients</h2>
           { ingredients.map((ingredient, index) => (
             <p
               key={ index }
@@ -87,7 +87,7 @@ function MealDescription({ recipe, recipeId }) {
                 ? 'at taste' : measures[index]}`}
             </p>
           ))}
-        </section>
+        </div>
         <p data-testid="instructions" className="instructions">{ strInstructions }</p>
         { strYoutube && (
           <iframe

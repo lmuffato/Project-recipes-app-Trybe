@@ -39,43 +39,48 @@ function LoginPage() {
   }
 
   return (
-    <section className="login-inputs">
-      <label htmlFor="emailInput">
-        E-mail
-        <input
-          data-testid="email-input"
-          id="emailInput"
-          type="email"
-          name="email"
-          value={ userEmail }
-          onChange={ (event) => handleChanges(event, setUserEmail, setValidEmail) }
-          pattern="(\w\.?)+@[\w\.-]+\.\w{2}"
-          required
-        />
-      </label>
+    <section className="login-main">
+      <div className="login-box">
+        <label htmlFor="emailInput" className="login-label">
+          E-mail
+          <input
+            className="login-input"
+            data-testid="email-input"
+            id="emailInput"
+            type="email"
+            name="email"
+            value={ userEmail }
+            onChange={ (event) => handleChanges(event, setUserEmail, setValidEmail) }
+            pattern="(\w\.?)+@[\w\.-]+\.\w{2}"
+            required
+          />
+        </label>
 
-      <label htmlFor="passwordInput">
-        Senha
-        <input
-          data-testid="password-input"
-          id="passwordInput"
-          type="password"
-          name="password"
-          value={ userPassw }
-          onChange={ (event) => handleChanges(event, setUserPassw, setValidPassw) }
-          pattern=".{7,}"
-        />
-      </label>
-      <Link to="/comidas">
-        <button
-          data-testid="login-submit-btn"
-          type="submit"
-          disabled={ btnLogin }
-          onClick={ setLocalStorage }
-        >
-          Entrar
-        </button>
-      </Link>
+        <label htmlFor="passwordInput" className="login-label">
+          Senha
+          <input
+            className="login-input"
+            data-testid="password-input"
+            id="passwordInput"
+            type="password"
+            name="password"
+            value={ userPassw }
+            onChange={ (event) => handleChanges(event, setUserPassw, setValidPassw) }
+            pattern=".{7,}"
+          />
+        </label>
+        <Link to="/comidas">
+          <button
+            className="login-button"
+            data-testid="login-submit-btn"
+            type="submit"
+            disabled={ btnLogin }
+            onClick={ setLocalStorage }
+          >
+            Entrar
+          </button>
+        </Link>
+      </div>
     </section>
   );
 }

@@ -60,7 +60,7 @@ function DrinkDescription({ recipe, recipeId }) {
           className="recomedation-img"
         />
         <section className="title-and-buttons">
-          <h1 data-testid="recipe-title">{ strDrink }</h1>
+          <h1 data-testid="recipe-title" className="title-description">{ strDrink }</h1>
           <section className="interaction-buttons">
             <ShareButton idRecipe={ `bebidas/${idDrink}` } />
             <FavoriteBtn
@@ -80,8 +80,8 @@ function DrinkDescription({ recipe, recipeId }) {
         >
           {`${strCategory} ${strAlcoholic}`}
         </h3>
-        <h2 className="ingredients-title">Ingredients</h2>
-        <section className="ingredients-measures">
+        <div className="ingredients-box">
+          <h2 className="ingredients-title">Ingredients</h2>
           { ingredients.map((ingredient, index) => (
             <p
               key={ index }
@@ -92,7 +92,7 @@ function DrinkDescription({ recipe, recipeId }) {
                 ? 'at taste' : measures[index]}`}
             </p>
           ))}
-        </section>
+        </div>
         <p data-testid="instructions" className="instructions">{ strInstructions }</p>
       </main>
       <section>

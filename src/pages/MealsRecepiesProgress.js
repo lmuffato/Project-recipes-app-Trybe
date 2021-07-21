@@ -91,7 +91,7 @@ function MealsRecepiesProgress() {
         width="50px"
       />
       <section className="title-and-buttons">
-        <h1 data-testid="recipe-title">{ strMeal }</h1>
+        <h1 data-testid="recipe-title" className="title-description">{ strMeal }</h1>
         <section className="interaction-buttons">
           <ShareButton
             idRecipe={ `comidas/${recepiID}` }
