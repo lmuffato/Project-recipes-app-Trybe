@@ -18,8 +18,8 @@ body {
   border: 1px solid black;
   border-radius: 3px;
   display: flex;
-  line-height: 35px;
   flex-direction: column;
+  line-height: 35px;
   margin-left: 38px;
   margin-top: 76vh;
   opacity: 0.8;
