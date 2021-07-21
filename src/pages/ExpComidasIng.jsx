@@ -36,7 +36,8 @@ class ExpComidasIng extends React.Component {
     e.preventDefault();
     const { handleSearch, history } = this.props;
     const { target } = e;
-    handleSearch(target.alt || target.innerText);
+    const getCickName = target.alt || target.innerText;
+    handleSearch(getCickName, 'ingrendient');
     return history.push('/comidas');
   }
 
@@ -77,7 +78,8 @@ class ExpComidasIng extends React.Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  handleSearch: (currentSearch) => dispatch(handleCurrentSearch(currentSearch)),
+  handleSearch: (currentSearch, type) => (
+    dispatch(handleCurrentSearch(currentSearch, type))),
 });
 
 ExpComidasIng.propTypes = {

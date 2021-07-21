@@ -1,0 +1,77 @@
+.recipeContainer {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  margin-bottom: 100px;
+  margin-top: 20px;
+  width: 335px;
+}
+
+.recipeImg {
+  align-self: center;
+  border: 1px groove rgba(0, 0, 0, 0.4);
+  border-radius: 40px 40px 0;
+  box-shadow: 5px -9px 0.3em rgb(30, 30, 30, 0.4);
+  margin: 3px 1px 2px;
+  transition: 100ms;
+  width: 160px;
+}
+
+.recipeContainer h5 {
+  background-image: linear-gradient(to left, #ffff64d3, #ffa60049);
+  border-radius: 0 0 0 150px;
+  color: black;
+  font-family: Lobster , Courier , monospace;
+  font-size: 15pt;
+  margin-left: 5px;
+  margin-top: -45px;
+  padding: 3px;
+  position: absolute;
+  text-align: right;
+  width: 155px;
+}
+
+@media screen and ( min-width : 768px ) {
+
+  .recipeImg {
+    align-self: center;
+    border: 1px groove rgba(0, 0, 0, 0.4);
+    border-radius: 40px 40px 0;
+    box-shadow: 5px -9px 0.3em rgb(30, 30, 30, 0.4);
+    margin: 3px 1px 2px;
+    transition: 100ms;
+    width: 250px;
+  }
+
+  .recipeCard {
+    height: 220px;
+    transition: 10s;
+    width: fit-content;
+  }
+
+  .recipeCard input:hover {
+    position: relative;
+    width: 260px;
+    z-index: 0;
+  }
+
+  .recipeContainer {
+    margin-left: auto;
+    margin-right: auto;
+    width: 90%;
+  }
+
+  .recipeContainer h5 {
+    background-image: linear-gradient(to left, #ffff64, #ffa6001f);
+    border-radius: 0 0 0 150px;
+    color: black;
+    font-family: Lobster , Courier , monospace;
+    font-size: 20pt;
+    margin-left: 5px;
+    margin-top: -90px;
+    padding: 4px;
+    position: absolute;
+    text-align: right;
+    width: 245px;
+  }
+}

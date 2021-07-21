@@ -36,7 +36,8 @@ class ExpBebidasIng extends React.Component {
     e.preventDefault();
     const { handleSearch, history } = this.props;
     const { target } = e;
-    handleSearch(target.alt || target.innerText);
+    const getCickName = target.alt || target.innerText;
+    handleSearch(getCickName, 'ingrendient');
     return history.push('/bebidas');
   }
 
@@ -78,7 +79,8 @@ class ExpBebidasIng extends React.Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  handleSearch: (currentIngredient) => dispatch(handleCurrentSearch(currentIngredient)),
+  handleSearch: (currentIngredient, type) => (
+    dispatch(handleCurrentSearch(currentIngredient, type))),
 });
 
 ExpBebidasIng.propTypes = {

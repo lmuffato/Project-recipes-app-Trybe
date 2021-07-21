@@ -35,6 +35,24 @@ class Login extends React.Component {
     });
   }
 
+  checkAndSetStore() {
+    const storedInProgress = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    const storedDone = JSON.parse(localStorage.getItem('doneRecipes'));
+    const inProgressPattern = {
+      meals: {},
+      cocktails: {},
+    };
+    const donePattern = [];
+
+    if (!storedInProgress) {
+      localStorage.setItem('inProgressRecipes', JSON.stringify(inProgressPattern));
+    }
+
+    if (!storedDone) {
+      localStorage.setItem('doneRecipes', JSON.stringify(donePattern));
+    }
+  }
+
   saveEmail(e) {
     e.preventDefault();
     const { email } = this.state;
@@ -45,6 +63,7 @@ class Login extends React.Component {
     localStorage.setItem('mealsToken', 1);
     localStorage.setItem('cocktailsToken', 1);
     const { history } = this.props;
+    this.checkAndSetStore();
     history.push('/comidas');
   }
 

@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { handleCurrentSearch } from '../actions';
+import './recipesMain.css';
 
 class MainDrinkCard extends React.Component {
   constructor(props) {
@@ -177,7 +178,7 @@ class MainDrinkCard extends React.Component {
                 data-testid={ `${index}-card-img` }
                 onClick={ () => history.push(`/bebidas/${recipe.idDrink}`) }
               />
-              <h6 data-testid={ `${index}-card-name` }>{recipe.strDrink}</h6>
+              <h5 data-testid={ `${index}-card-name` }>{recipe.strDrink}</h5>
             </div>
           ))}
         </div>

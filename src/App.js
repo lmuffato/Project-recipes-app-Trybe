@@ -7,6 +7,8 @@ import Comidas from './pages/Comidas';
 import Bebidas from './pages/Bebidas';
 import ReceitasFeitas from './pages/ReceitasFeitas';
 import ReceitasFavoritas from './pages/ReceitasFavoritas';
+import EmProgComidas from './pages/EmProgComidas';
+import EmProgBebidas from './pages/EmProgBebidas';
 import ExpBebidas from './pages/ExpBebidas';
 import ExpComidas from './pages/ExpComidas';
 import ExpBebidasIng from './pages/ExpBebidasIng';
@@ -15,7 +17,6 @@ import ExpComidasOri from './pages/ExpComidasOri';
 import ExpBebidasOri from './pages/ExpBebidasOri';
 import DetComidas from './pages/DetComidas';
 import DetBebidas from './pages/DetBebidas';
-import ReceitasProgres from './pages/ReceitasProgres';
 
 import './App.css';
 
@@ -44,8 +45,8 @@ class App extends React.Component {
               path="/explorar/comidas/ingredientes"
               component={ ExpComidasIng }
             />
-            <Route exact path="/comidas/:id/in-progress" component={ ReceitasProgres } />
-            <Route exact path="/bebidas/:id/in-progress" component={ ReceitasProgres } />
+            <Route exact path="/comidas/:id/in-progress" component={ EmProgComidas } />
+            <Route exact path="/bebidas/:id/in-progress" component={ EmProgBebidas } />
             <Route exact path="/explorar/comidas/area" component={ ExpComidasOri } />
             <Route exact path="/explorar/bebidas/area" component={ ExpBebidasOri } />
             <Route exact path="/receitas-feitas" component={ ReceitasFeitas } />
