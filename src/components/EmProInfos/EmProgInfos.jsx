@@ -5,10 +5,12 @@ import {
   checkStorageFood,
   checkStorageDrink,
   saveFavoriteDrink,
-  saveFavoriteFood } from '../services';
-import shareIcon from '../images/shareIcon.svg';
-import whiteHeartIcon from '../images/whiteHeartIcon.svg';
-import blackHeartIcon from '../images/blackHeartIcon.svg';
+  saveFavoriteFood } from '../../services';
+import shareIcon from '../../images/shareIcon.svg';
+import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
+import blackHeartIcon from '../../images/blackHeartIcon.svg';
+
+import styles from './styles.module.css';
 
 class EmProgInfos extends React.Component {
   async onClickShare(path) {
@@ -49,28 +51,30 @@ class EmProgInfos extends React.Component {
       fullRecipe,
       typeRecipe } = this.props;
     return (
-      <div>
+      <>
         <img data-testid="recipe-photo" src={ thumbnail } alt={ title } />
-        <h5 data-testid="recipe-title">{title}</h5>
-        <div id="share">
-          <input
-            type="image"
-            data-testid="share-btn"
-            src={ shareIcon }
-            alt="Compartilhar receita"
-            onClick={ () => this.onClickShare(pathname) }
-          />
-          <input
-            type="image"
-            data-testid="favorite-btn"
-            src={ this.checkFavorite(fullRecipe) }
-            alt="favoritar receita"
-            onClick={ () => this.saveFavoriteRecipe(fullRecipe, typeRecipe) }
-          />
+        <div className={ styles.infoContainer }>
+          <h1 data-testid="recipe-title">{title}</h1>
+          <span data-testid="recipe-category">{category}</span>
+          <p data-testid="instructions">{instructions}</p>
+          <div id="share" className={ styles.iconsContainer }>
+            <input
+              type="image"
+              data-testid="share-btn"
+              src={ shareIcon }
+              alt="Compartilhar receita"
+              onClick={ () => this.onClickShare(pathname) }
+            />
+            <input
+              type="image"
+              data-testid="favorite-btn"
+              src={ this.checkFavorite(fullRecipe) }
+              alt="favoritar receita"
+              onClick={ () => this.saveFavoriteRecipe(fullRecipe, typeRecipe) }
+            />
+          </div>
         </div>
-        <span data-testid="recipe-category">{category}</span>
-        <p data-testid="instructions">{instructions}</p>
-      </div>
+      </>
     );
   }
 }
