@@ -10,6 +10,7 @@ import PasswordInput from './PasswordInput';
 import ButtonLogin from './ButtonLogin';
 import '../../style/FormLogin.css';
 import logologin from '../../images/logologin.jpg';
+// Logo downloaded from Pinterest https://br.pinterest.com/pin/482729653809855020/
 
 export default function FormLogin() {
   const [stateLogin, dispatch] = useReducer(loginReducer, {
