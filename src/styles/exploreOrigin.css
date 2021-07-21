@@ -1,0 +1,51 @@
+.explore-area main {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: auto;
+  width: 90vw;
+}
+
+.select-container-explore {
+  position: relative;
+  width: 100%;
+}
+
+.select-container-explore:after {
+  bottom: 12px;
+  color: #c11d52;
+  content: '▼';
+  font-size: 20px;
+  position: absolute;
+  right: 10px;
+}
+
+.select-container-explore p {
+  color: #4f4f4f;
+  display: flex;
+  font-size: 26px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  max-width: 250px;
+}
+
+.select-container-explore select {
+  appearance: none;
+  background: whitesmoke;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.23);
+  color: #252525;
+  font-size: 18px;
+  font-weight: 600;
+  height: 52px;
+  padding: 0 16px;
+  width: 100%;
+}
+
+.explore-img {
+  height: auto;
+  margin-top: 40px;
+  width: 100%;
+}

@@ -19,12 +19,14 @@ function RenderSelect({ setArea }) {
   }, []);
 
   return (
-    <div>
+    <div className="select-container-explore">
+      <p className="slogan-explore">Desbrave o mundo gastronômico</p>
       { apiAreaName && (
         <select
           onChange={ handleChange }
           data-testid="explore-by-area-dropdown"
         >
+          <option selected value="placeholder">Selecione um país...</option>
           <option data-testid="All-option">All</option>
           { apiAreaName.map(({ strArea }, index) => (
             <option data-testid={ `${strArea}-option` } key={ index }>

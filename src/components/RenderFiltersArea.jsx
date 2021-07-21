@@ -1,8 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import '../styles/mapDetails.css';
+import '../styles/Recipes.css';
 import { useHistory } from 'react-router-dom';
 import RecipesContext from '../contexts/RecipesContext';
+import exploreImg from '../images/explore.svg';
 
 function RendersFiltersArea({ area }) {
   const [apiHandleArea, setApiHandleArea] = useState([]);
@@ -33,24 +34,32 @@ function RendersFiltersArea({ area }) {
   });
 
   return (
-    <div>
-      { apiHandleArea ? apiHandleArea.map(({ strMeal, strMealThumb, idMeal }, index) => (
-        <div key={ strMeal } data-testid={ `${index}-recipe-card` }>
-          <button
-            type="button"
-            className="effectBtn"
-            onClick={ () => handleClick(idMeal) }
+    <div className="recipe-list">
+      { apiHandleArea.length
+        ? apiHandleArea.map(({ strMeal, strMealThumb, idMeal }, index) => (
+          <div
+            key={ strMeal }
+            data-testid={ `${index}-recipe-card` }
+            className={ `recipe-card ${!index && 'first'}` }
           >
-            <img
-              data-testid={ `${index}-card-img` }
-              style={ { width: '300px' } }
-              src={ strMealThumb }
-              alt={ strMeal }
-            />
-            <h1 data-testid={ `${index}-card-name` }>{strMeal}</h1>
-          </button>
-        </div>
-      )) : null }
+            <button
+              type="button"
+              onClick={ () => handleClick(idMeal) }
+              className="recipe-card-img"
+            >
+              <img
+                data-testid={ `${index}-card-img` }
+                src={ strMealThumb }
+                alt={ strMeal }
+              />
+              <h2 data-testid={ `${index}-card-name` }>{strMeal}</h2>
+            </button>
+          </div>
+        )) : <img
+          src={ exploreImg }
+          alt="Explorar"
+          className="explore-img"
+        /> }
 
     </div>
   );

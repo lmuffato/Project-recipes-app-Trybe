@@ -3,16 +3,18 @@ import Header from '../components/Header';
 import BottomMenu from '../components/BottomMenu';
 import RenderSelect from '../components/RenderSelect';
 import RendersFiltersArea from '../components/RenderFiltersArea';
-// import ExploreByArea from '../components/ExploreByArea';
+import '../styles/exploreOrigin.css';
 
 function ExploreOriginLocal() {
   const [area, setArea] = useState('');
   return (
-    <div>
+    <div className="explore-area">
       <Header title="Explorar Origem" />
-      <RenderSelect setArea={ setArea } />
-      <RendersFiltersArea area={ area } />
-      <BottomMenu />
+      <main>
+        <RenderSelect setArea={ setArea } />
+        <RendersFiltersArea area={ area } />
+        <BottomMenu />
+      </main>
     </div>
   );
 }
