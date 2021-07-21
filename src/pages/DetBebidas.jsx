@@ -97,7 +97,7 @@ class DetBebidas extends React.Component {
   InProgressButton(id) {
     const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
     if (inProgressRecipes && inProgressRecipes.cocktails[id]) {
-      const button = document.querySelector('.start-btn');
+      const button = document.getElementById('startBtn');
       button.innerHTML = 'Continuar Receita';
     }
   }
@@ -198,6 +198,7 @@ class DetBebidas extends React.Component {
           {(this.checkRecipe(recipe[0]))
             ? (
               <button
+                id="startBtn"
                 type="button"
                 data-testid="start-recipe-btn"
                 className={ styles.startBtn }
@@ -208,6 +209,7 @@ class DetBebidas extends React.Component {
               </button>)
             : (
               <button
+                id="startBtn"
                 className={ styles.startBtn }
                 type="button"
                 onClick={ () => history.push('/receitas-feitas') }
