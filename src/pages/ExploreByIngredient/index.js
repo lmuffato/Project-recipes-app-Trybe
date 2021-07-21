@@ -6,6 +6,7 @@ import MenuFooter from '../../components/menuFooter';
 import RecipeCard from '../RecipesMain/RecipeCard';
 import { AppContext } from '../../context/AppContext';
 import Loading from '../../components/Loading/Loading';
+import '../RecipesMain/recipesMain.css';
 
 export default function ExploreByIngredient({ match }) {
   const [isLoading, setIsLoading] = useState(false);
@@ -36,7 +37,7 @@ export default function ExploreByIngredient({ match }) {
   }, [path]);
 
   return (
-    <div>
+    <div className="main-container">
       <Header title="Explorar Ingredients" isSearch={ false } />
       <div className="list-main-recipes">
         {isLoading ? <Loading />

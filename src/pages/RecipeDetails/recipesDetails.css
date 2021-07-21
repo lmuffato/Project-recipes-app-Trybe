@@ -10,7 +10,7 @@
   height: 120px;
   justify-content: flex-start;
   margin: auto;
-  margin-bottom: 45px;
+  margin-bottom: 55px;
   width: 80%;
 }
 
@@ -37,6 +37,7 @@
 .carrousel-btn {
   background-color: transparent;
   border: none;
+  color: #573e23;
   font-size: 25px;
   font-weight: 700;
 }
@@ -73,6 +74,7 @@ h2, h3 {
 .ingredients-details {
   background-color: #573e23;
   color: #ede7d9;
+  padding: 10px;
 }
 
 .ingredients-list {
@@ -86,7 +88,8 @@ h2, h3 {
 .instructions {
   background-color: #ede7d9;
   margin: -15px 0 0;
-  padding: 0.8rem;
+  padding: 1rem;
+  text-align: justify;
 }
 
 .recommended {

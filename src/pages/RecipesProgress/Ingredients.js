@@ -109,7 +109,7 @@ export default function Ingredients({ recipe }) {
                    && fromStorage.some((value) => value.includes(ingredient[1]))
                 }
               />
-              <span>{`${ingredient[1]} - ${getMeasures()[index][1]}`}</span>
+              <span>{` ${ingredient[1]} - ${getMeasures()[index][1]}`}</span>
             </label>
             <br />
           </div>
