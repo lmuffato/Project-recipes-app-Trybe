@@ -10,7 +10,7 @@ import { requestDrinkFirstLetter,
 
 function SearchBar() {
   const { ingredient, setIngredient, setMealsToMap,
-    radio, setRadio, meals, setMealsSearch, mealsRecipes } = useContext(FoodContext);
+    radio, setRadio, meals, setMealsSearch } = useContext(FoodContext);
   const { setDrinksSearch, drinks,
     setDrinksToMap } = useContext(DrinksContext);
 
@@ -56,19 +56,13 @@ function SearchBar() {
 
   useEffect(() => {
     if (window.location.pathname === '/comidas') {
-      fetchMealsApiSearch().then(() => {
-      });
+      fetchMealsApiSearch();
     }
     if (window.location.pathname === '/bebidas') {
       fetchDrinksApiSearch();
     }
   }, [ingredient]);
 
-  // console.log(meals);
-  // console.log(drinks);
-  // console.log(radio);
-  // console.log(mealsToMap);
-  console.log(mealsRecipes);
   const history = useHistory();
   function handleClick() {
     if (path === '/comidas' && meals === null) {
