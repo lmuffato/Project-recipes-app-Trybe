@@ -81,38 +81,50 @@ function DoneRecipes() {
                 />
               </Link>
               <div className="doneCards-descriptions">
-                <h3 data-testid={ `${index}-horizontal-top-text` }>
+
+                <p
+                  data-testid={ `${index}-horizontal-top-text` }
+                  className="done-category"
+                >
                   {area && `${area} - `}
                   { alcoholicOrNot || category }
-                </h3>
+                </p>
+
                 <Link
                   to={ `/${type}s/${id}` }
                 >
-                  <h2 data-testid={ `${index}-horizontal-name` }>{name}</h2>
+                  <h3 data-testid={ `${index}-horizontal-name` }>{name}</h3>
                 </Link>
-                <h4 data-testid={ `${index}-horizontal-done-date` }>
-                  {doneDate}
-                </h4>
-                <button
-                  type="button"
-                  onClick={ () => handleShareClick(type, id) }
-                  className="share-btn"
-                >
-                  <img
-                    data-testid={ `${index}-horizontal-share-btn` }
-                    src={ shareIcon }
-                    alt="Compartilhar"
-                  />
-                </button>
 
-                {tags && tags.map((tagName, i) => (
-                  <div
-                    key={ i }
-                    data-testid={ `${index}-${tagName}-horizontal-tag` }
+                <p
+                  data-testid={ `${index}-horizontal-done-date` }
+                  className="done-date"
+                >
+                  {doneDate}
+                </p>
+
+                <div className="card-footer">
+                  {tags && tags.map((tagName, i) => (
+                    <div
+                      key={ i }
+                      data-testid={ `${index}-${tagName}-horizontal-tag` }
+                    >
+                      {tagName && <p className="tag">{tagName}</p>}
+                    </div>
+                  ))}
+                  <button
+                    type="button"
+                    onClick={ () => handleShareClick(type, id) }
+                    className="share-btn"
                   >
-                    <p>{ `${tagName} ` }</p>
-                  </div>
-                ))}
+                    <img
+                      data-testid={ `${index}-horizontal-share-btn` }
+                      src={ shareIcon }
+                      alt="Compartilhar"
+                    />
+                  </button>
+
+                </div>
               </div>
             </div>
           ))}

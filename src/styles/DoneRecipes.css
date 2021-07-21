@@ -1,8 +1,18 @@
 .done-container {
   align-items: center;
+  background-color: #fafafa;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  margin: auto;
+  padding-bottom: 16px;
+  width: 90vw;
+}
+
+.header-btns {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 32px;
 }
 
 .header-btns button {
@@ -19,42 +29,70 @@
   width: 100px;
 }
 
-.cards {
-  background-color: #c11d52;
-  border-radius: 8px;
-  box-shadow: 1px 1px 10px black;
-  margin: 20px;
-  padding: 26px 56px;
-}
-
-.share-btn {
-  background-color: white;
-  border: none;
-  border-radius: 20px;
-  color: white;
-  font-size: 16px;
-  height: 26px;
-  margin: 2px;
-  outline: 0;
-  outline-color: transparent;
-  padding: 0 1px;
-  width: 100px;
-}
-
-.done-cards a {
-  color: black;
-}
-
-.img {
-  align-items: center;
-  display: flex;
-  justify-content: center;
-  margin-bottom: 16px;
-}
-
-.doneCards-descriptions {
+.done-cards {
   align-items: center;
   display: flex;
   flex-direction: column;
+  gap: 24px;
   justify-content: center;
+  width: 100%;
+}
+
+.cards {
+  background-color: white;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+  display: flex;
+  width: 100%;
+}
+
+.img img {
+  border-radius: 6px 0 0 6px;
+  height: auto;
+  width: 143px;
+}
+
+.cards h3 {
+  color: #252525;
+  font-size: 24px;
+  margin: 0;
+  margin-top: -16px;
+}
+
+.done-category, .done-date {
+  color: silver;
+  font-size: 16px;
+  margin: 0;
+}
+
+.doneCards-descriptions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  justify-content: space-between;
+  margin-left: 8px;
+  width: 100%;
+}
+
+.card-footer {
+  align-items: center;
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+  padding: 8px;
+  width: 100%;
+}
+
+.doneCards-descriptions button {
+  background: transparent;
+  border: none;
+  margin-left: 4px;
+}
+
+.tag {
+  background-color: #c11d52;
+  border-radius: 4px;
+  color: #fafafa;
+  font-weight: 600;
+  padding: 2px 8px;
 }

@@ -1,12 +1,17 @@
-.favorite-container {
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+main {
+  padding-bottom: 16px;
+  width: 100%;
 }
 
 .filters {
+  align-items: center;
+  display: flex;
+  gap: 8px;
+  justify-content: center;
   list-style: none;
+  margin: auto;
+  margin-bottom: 32px;
+  width: 90vw;
 }
 
 .filters button {
@@ -23,40 +28,56 @@
   width: 100px;
 }
 
-.favorite-cards {
+.favorites-container {
   align-items: center;
-  background-color: #c11d52;
-  border-radius: 8px;
-  box-shadow: 1px 1px 10px black;
   display: flex;
+  flex-direction: column;
+  gap: 24px;
   justify-content: center;
-  margin: 20px;
-  padding: 26px 56px;
+  margin: auto;
+  width: 90vw;
 }
 
-.favorite-cards a {
-  color: black;
-  text-align: center;
+.favorites-container li {
+  background: white;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+  display: flex;
+  width: 100%;
 }
 
-.favorite-cards h3 {
-  margin-top: 20px;
+.recipe-thumb {
+  border-radius: 6px 0 0 6px;
+  height: 130px;
+  width: 143px;
 }
 
-.favorite-cards button {
-  background-color: white;
-  border: none;
-  border-radius: 20px;
-  color: white;
+.recipe-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 8px;
+  width: 100%;
+}
+
+.recipe-info h3 {
+  color: #252525;
+  font-size: 24px;
+  margin: 0;
+}
+
+.recipe-info p {
+  color: silver;
   font-size: 16px;
-  height: 26px;
-  margin: 2px;
-  outline: 0;
-  outline-color: transparent;
-  padding: 0 1px;
-  width: 100px;
+  margin: 0;
 }
 
-.btns-and-description {
-  margin-left: 16px;
+.icons-btn {
+  align-self: flex-end;
+}
+
+.icons-btn button {
+  background: transparent;
+  border: none;
+  margin-left: 4px;
 }

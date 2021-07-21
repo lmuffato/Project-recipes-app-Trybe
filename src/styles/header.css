@@ -7,11 +7,11 @@
 }
 
 .fatherHeader {
-  align-items: center;
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 24px 1fr 24px;
   margin: auto;
   padding: 10px 0;
+  text-align: center;
   width: 90vw;
 }
 

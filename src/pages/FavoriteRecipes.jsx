@@ -8,6 +8,8 @@ import shareIcon from '../images/shareIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import Copied from '../components/Copied';
 
+import '../styles/FavoriteRecipes.css';
+
 function FavoriteRecipes() {
   const { favoriteRecipes } = useContext(RecipesContext);
   const [hasCopied, setHasCopied] = useState(false);
@@ -78,7 +80,8 @@ function FavoriteRecipes() {
             </button>
           </li>
         </ul>
-        <ul>
+
+        <ul className="favorites-container">
           {displayedRecipes.map((recipe, index) => (
             <li key={ recipe.id }>
               <Link to={ `/${recipe.type}s/${recipe.id}` }>
@@ -88,40 +91,48 @@ function FavoriteRecipes() {
                   src={ recipe.image }
                   alt={ recipe.name }
                   data-testid={ `${index}-horizontal-image` }
+                  className="recipe-thumb"
                 />
-
-                <h3 data-testid={ `${index}-horizontal-name` }>{ recipe.name }</h3>
               </Link>
-              <p data-testid={ `${index}-horizontal-top-text` }>
-                {recipe.area && `${recipe.area} - `}
-                {recipe.alcoholicOrNot || recipe.category}
-              </p>
 
-              <div>
-                <button
-                  type="button"
-                  onClick={ () => handleCopyClick(`${recipe.type}s`, recipe.id) }
-                >
-                  <img
-                    src={ shareIcon }
-                    alt="Compartilhar"
-                    data-testid={ `${index}-horizontal-share-btn` }
-                  />
+              <div className="recipe-info">
+                <div>
+                  <p data-testid={ `${index}-horizontal-top-text` }>
+                    {recipe.area && `${recipe.area} - `}
+                    {recipe.alcoholicOrNot || recipe.category}
+                  </p>
+                  <Link to={ `/${recipe.type}s/${recipe.id}` }>
+                    <h3 data-testid={ `${index}-horizontal-name` }>{ recipe.name }</h3>
+                  </Link>
+                </div>
 
-                </button>
+                <div className="icons-btn">
+                  <button
+                    type="button"
+                    onClick={ () => handleCopyClick(`${recipe.type}s`, recipe.id) }
+                  >
+                    <img
+                      src={ shareIcon }
+                      alt="Compartilhar"
+                      data-testid={ `${index}-horizontal-share-btn` }
+                    />
 
-                <button
-                  type="button"
-                  onClick={ () => updateFavoriteRecipes(recipe, null, true) }
-                >
-                  <img
-                    src={ blackHeartIcon }
-                    alt="remover dos favoritos"
-                    data-testid={ `${index}-horizontal-favorite-btn` }
-                  />
-                </button>
+                  </button>
 
+                  <button
+                    type="button"
+                    onClick={ () => updateFavoriteRecipes(recipe, null, true) }
+                  >
+                    <img
+                      src={ blackHeartIcon }
+                      alt="remover dos favoritos"
+                      data-testid={ `${index}-horizontal-favorite-btn` }
+                    />
+                  </button>
+
+                </div>
               </div>
+
             </li>
           ))}
         </ul>
