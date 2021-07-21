@@ -25,37 +25,37 @@ function Profile() {
     <>
       <Header />
       <main className="main-profile">
-        {/* <section> */}
-        <p data-testid="profile-email">{userEmailProfile}</p>
-        <Link to="/receitas-feitas">
-          <button
-            type="button"
-            data-testid="profile-done-btn"
-            className="button profile-btns"
-          >
-            Receitas Feitas
-          </button>
-        </Link>
-        <Link to="/receitas-favoritas">
-          <button
-            type="button"
-            data-testid="profile-favorite-btn"
-            className="button profile-btns"
-          >
-            Receitas Favoritas
-          </button>
-        </Link>
-        <Link to="/">
-          <button
-            type="button"
-            data-testid="profile-logout-btn"
-            className="button profile-btns"
-            onClick={ clearStorage }
-          >
-            Sair
-          </button>
-        </Link>
-        {/* </section> */}
+        <section className="profile-section">
+          <p data-testid="profile-email">{userEmailProfile}</p>
+          <Link to="/receitas-feitas">
+            <button
+              type="button"
+              data-testid="profile-done-btn"
+              className="button profile-btns"
+            >
+              Receitas Feitas
+            </button>
+          </Link>
+          <Link to="/receitas-favoritas">
+            <button
+              type="button"
+              data-testid="profile-favorite-btn"
+              className="button profile-btns"
+            >
+              Receitas Favoritas
+            </button>
+          </Link>
+          <Link to="/">
+            <button
+              type="button"
+              data-testid="profile-logout-btn"
+              className="button profile-btns"
+              onClick={ clearStorage }
+            >
+              Sair
+            </button>
+          </Link>
+        </section>
       </main>
       <Footer />
     </>

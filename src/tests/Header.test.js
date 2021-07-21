@@ -73,14 +73,14 @@ describe('testing if the header is rendered correctly on each path', () => {
     expect(header).not.toBeInTheDocument();
   });
 
-  it('header is rendered in the MainRecipesPage Meals page', async () => {
+  it('check if the header is rendered in the MainRecipesPage Meals page', async () => {
     const { getByTestId, findByRole, findByTestId } = renderWithRouter(<App />);
     handleLogin(getByTestId);
     await findNamePage(findByRole, /comidas/i);
     await findSearchBtn(findByTestId);
   });
 
-  it('header is rendered in the MainRecipesPage Drinks page', async () => {
+  it('check if the header is rendered in the MainRecipesPage Drinks page', async () => {
     const { getByTestId, findByTestId, findByRole } = renderWithRouter(<App />);
     handleLogin(getByTestId);
     clickBtn(getByTestId, 'drinks-bottom-btn');
@@ -90,7 +90,7 @@ describe('testing if the header is rendered correctly on each path', () => {
     await findSearchBtn(findByTestId);
   });
 
-  it('header is rendered in the Explore page', async () => {
+  it('check if the header is rendered in the Explore page', async () => {
     const { getByTestId, findByRole, queryByTestId, history } = renderWithRouter(<App />);
     enterTheExplorePage(getByTestId);
     const { pathname } = history.location;
@@ -101,7 +101,7 @@ describe('testing if the header is rendered correctly on each path', () => {
     checkHeaderAndProfileIncon(getByTestId);
   });
 
-  it('header is rendered in the Explore foods page', async () => {
+  it('check if the header is rendered in the Explore foods page', async () => {
     const { getByTestId, queryByTestId, findByRole, history } = renderWithRouter(<App />);
     enterTheExplorePage(getByTestId);
     clickBtn(getByTestId, exploreFood);
@@ -113,7 +113,7 @@ describe('testing if the header is rendered correctly on each path', () => {
     checkHeaderAndProfileIncon(getByTestId);
   });
 
-  it('header is rendered in the Explore drinks page', async () => {
+  it('check if the header is rendered in the Explore drinks page', async () => {
     const { getByTestId, queryByTestId, findByRole, history } = renderWithRouter(<App />);
     enterTheExplorePage(getByTestId);
     clickBtn(getByTestId, 'explore-drinks');
@@ -125,7 +125,7 @@ describe('testing if the header is rendered correctly on each path', () => {
     checkHeaderAndProfileIncon(getByTestId);
   });
 
-  it('header is rendered in the Explore FoodsIngredients page', async () => {
+  it('check if the header is rendered in the Explore FoodsIngredients page', async () => {
     const { getByTestId, queryByTestId, findByRole, history } = renderWithRouter(<App />);
     enterTheExplorePage(getByTestId);
     clickBtn(getByTestId, exploreFood);
@@ -139,7 +139,7 @@ describe('testing if the header is rendered correctly on each path', () => {
   });
 
   it(
-    'header is rendered in the Explore DrinksIngredients page', async () => {
+    'check if the header is rendered in the Explore DrinksIngredients page', async () => {
       const {
         getByTestId, queryByTestId, findByRole, history } = renderWithRouter(<App />);
       enterTheExplorePage(getByTestId);
@@ -154,7 +154,7 @@ describe('testing if the header is rendered correctly on each path', () => {
     },
   );
 
-  it('header is rendered in the Explore FoodsArea page', async () => {
+  it('check if the header is rendered in the Explore FoodsArea page', async () => {
     const { getByTestId, findByRole, findByTestId, history } = renderWithRouter(<App />);
     enterTheExplorePage(getByTestId);
     clickBtn(getByTestId, exploreFood);
@@ -167,7 +167,7 @@ describe('testing if the header is rendered correctly on each path', () => {
     checkHeaderAndProfileIncon(getByTestId);
   });
 
-  it('header is rendered in the Profile page', async () => {
+  it('check if the header is rendered in the Profile page', async () => {
     const { getByTestId, findByRole, queryByTestId, history } = renderWithRouter(<App />);
     enterTheProfilePage(getByTestId);
     const { pathname } = history.location;
@@ -178,7 +178,7 @@ describe('testing if the header is rendered correctly on each path', () => {
     checkHeaderAndProfileIncon(getByTestId);
   });
 
-  it('header is rendered in the DoneRecipes page', async () => {
+  it('check if the header is rendered in the DoneRecipes page', async () => {
     const { getByTestId, findByRole, queryByTestId, history } = renderWithRouter(<App />);
     enterTheProfilePage(getByTestId);
     clickBtn(getByTestId, 'profile-done-btn');
@@ -190,7 +190,7 @@ describe('testing if the header is rendered correctly on each path', () => {
     checkHeaderAndProfileIncon(getByTestId);
   });
 
-  it('header is rendered in the FavoritesRecipes page', async () => {
+  it('check if the header is rendered in the FavoritesRecipes page', async () => {
     const { getByTestId, findByRole, queryByTestId, history } = renderWithRouter(<App />);
     enterTheProfilePage(getByTestId);
     clickBtn(getByTestId, 'profile-favorite-btn');

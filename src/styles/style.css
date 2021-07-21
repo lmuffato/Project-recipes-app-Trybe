@@ -8,6 +8,11 @@ section {
   display: flex;
 }
 
+main {
+  margin: 0;
+  padding: 0;
+}
+
 body div {
   height: 100%;
   margin: 0;
@@ -15,7 +20,7 @@ body div {
   width: 100%;
 }
 
-.main-area, .main-profile, .main-detail, .main-inProgress {
+.main-area, .main-profile, .main-detail, .main-inProgress, .main-loading {
   background: #a11d2b;
   display: flex;
   flex-flow: column wrap;
@@ -23,7 +28,7 @@ body div {
   width: 100%;
 }
 
-.main-recipes, .main-explore, .main-ingredients {
+.main-recipes, .main-explore, .main-ingredients, .main-done-recipes, .main-done-recipe {
   background: #a11d2b;
   display: flex;
   flex-flow: column wrap;
@@ -34,7 +39,7 @@ body div {
 .button {
   border: none;
   border-radius: 10px;
-  color: #fffefee7;
+  color: #1a1e3b;
   font-size: 13pt;
   font-weight: 500;
   height: 40%;
@@ -54,8 +59,8 @@ body div {
 
 .recipe, .ingredient {
   align-items: center;
-  background-color: #9a8f9757;
-  border: 1px solid black;
+  background-color: #a11d2a2d;
+  border: 1px solid #231651;
   border-radius: 20px;
   display: flex;
   flex-direction: column;
@@ -67,14 +72,50 @@ body div {
 /* ------------------------------------------------------------ */
 
 /* ------------------------ Tela de Login --------------------- */
-.login-inputs {
+.login-main {
   align-items: center;
+  background-color: #a11d2b;
   display: flex;
   flex-direction: column;
   height: 100%;
   justify-content: center;
   width: 100%;
 }
+
+.login-box {
+  align-items: center;
+  background-color: #5e9c53;
+  border: 2px solid #256766;
+  border-radius: 5%;
+  display: flex;
+  flex-direction: column;
+  margin: 60%;
+  padding: 10%;
+  width: 80%;
+}
+
+.login-input {
+  border: 2px solid #256766;
+  color: #256766;
+}
+
+.login-label {
+  color: #231651;
+  font-family: sans-serif;
+  font-size: 20px;
+}
+
+.login-button {
+  background-color: #d9910b;
+  border: none;
+  border-radius: 10px;
+  color: #1a1e3b;
+  font-size: 20px;
+  font-weight: 500;
+  margin: 18% 0;
+  padding: 18%;
+}
+
 
 /* ------------------------------------------------------------ */
 
@@ -83,7 +124,7 @@ body div {
 /* Adicionar a propriedade que faz o menu esconder no scroll */
 .header {
   align-items: center;
-  background-color: #f4f0bb;
+  background-color: #d9910b;
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
@@ -94,6 +135,7 @@ body div {
 }
 
 .header h1 {
+  color: #231651;
   font-size: 24pt;
   margin: 0;
   text-align: center;
@@ -123,7 +165,7 @@ body div {
 
 /* ------ Componente Filter Buttons ------ */
 .button-container {
-  background-color: #c3baba;
+  background-color: #1a1e3b;
   display: flex;
   flex-wrap: wrap;
   height: 125px;
@@ -134,19 +176,19 @@ body div {
 }
 
 .button-filter {
-  background-color: #138a36;
+  background-color: #256766;
 }
 
 /* --------------------------------------- */
 
 /* -------- Componente Search Bar -------- */
 .search-bar {
-  background-color: #c3baba;
+  background-color: #231651;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
   position: fixed;
-  top: 8.5%;
+  top: 6%;
 }
 
 .input-text {
@@ -164,6 +206,7 @@ body div {
 
 .radio-button {
   align-items: center;
+  color: #d9910b;
   display: flex;
   font-size: 15pt;
 }
@@ -174,6 +217,8 @@ body div {
 }
 
 .search-button {
+  background-color: #256766;
+  color: #231651;
   margin-bottom: 2%;
   width: 98%;
 }
@@ -183,6 +228,7 @@ body div {
 /* --- Componentes Meal/Drink Recipes & Foods/Drinks Ingredients -- */
 .recipe {
   background-color: #9a8f9757;
+  border: 1px solid #1a1e3b;
 }
 
 .recipe-image {
@@ -191,7 +237,7 @@ body div {
 }
 
 .recipe-title {
-  color: rgba(0, 0, 0, 0.945);
+  color: #1a1e3b;
   font-size: 16pt;
   margin: 4% 0;
 }
@@ -214,22 +260,35 @@ body div {
   justify-content: space-evenly;
 }
 
+.title-description {
+  color: #231651;
+}
+
 .interaction-buttons button {
   background-color: transparent;
   border: none;
 }
 
 .category, .ingredients-title {
-  color: rgba(0, 0, 0, 0.726);
-  margin-left: 2%;
+  color: #231651;
+  margin-bottom: 8%;
+  margin-left: 5%;
+  margin-top: 5%;
 }
 
 .ingredients-measures, .instructions {
   background-color: rgba(240, 202, 202, 0.267);
   border-radius: 10px;
+  color: #231651;
   flex-direction: column;
   font-size: 14pt;
   margin: 2%;
+  padding: 5%;
+  text-align: justify;
+}
+
+.ingredient-measure {
+  color: #231651;
 }
 
 .player {
@@ -240,7 +299,7 @@ body div {
 
 /* ------- Componente Recomendation ------ */
 .recipes {
-  background-color: tomato;
+  background-color: #a11d2b;
   display: flex;
   max-width: 100%;
   overflow-x: scroll;
@@ -250,7 +309,8 @@ body div {
 
 .recomendation-card {
   align-items: center;
-  border: 1px solid black;
+  background-color: #256766;
+  border: 1px solid #231651;
   border-radius: 20px;
   display: flex;
   flex-direction: column;
@@ -266,6 +326,7 @@ body div {
 }
 
 .recomendation-card h3 {
+  color: #231651;
   font-size: 15pt;
   margin-top: 1%;
 }
@@ -284,6 +345,8 @@ body div {
   border: none;
   border-radius: 10px;
   bottom: 0;
+  color: #231651;
+  font-size: 20px;
   height: 40px;
   position: fixed;
   width: 96%;
@@ -308,6 +371,8 @@ body div {
 
 .explore-button {
   background-color: #231651;
+  color: #d9910b;
+  font-size: 20px;
   height: 100%;
   width: 96%;
 }
@@ -326,6 +391,7 @@ body div {
 }
 
 .ingredient-title {
+  color: #231651;
   text-align: center;
 }
 
@@ -334,7 +400,7 @@ body div {
 /* -------------- Tela de Explorar por Origem ----------------- */
 .recipes-area {
   align-items: center;
-  background-color: #c3baba;
+  background-color: #231651;
   display: flex;
   height: 50pt;
   justify-content: center;
@@ -342,11 +408,12 @@ body div {
 }
 
 .select-area {
-  background-color: whitesmoke;
+  background-color: #256766;
   border: none;
   border-radius: 10px;
+  color: #231651;
   height: 35px;
-  width: 96%;
+  width: 60%;
 }
 
 .main-area .recipes-container {
@@ -387,8 +454,20 @@ body div {
   width: 100%;
 }
 
+.profile-section p {
+  background-color: #a11d2b;
+  color: #1a1e3b;
+  font-weight: 700;
+}
+
+.profile-section {
+  margin-top: 18%;
+}
+
 .profile-btns {
   background-color: #231651;
+  color: #d9910b;
+  font-size: 20px;
   height: 35%;
   margin: 0;
   width: 96%;
@@ -399,7 +478,7 @@ body div {
 
 /* ---------- Componente Footer ---------- */
 footer {
-  background-color: #f4f0bb;
+  background-color: #d9910b;
   bottom: 0;
   display: flex;
   justify-content: space-evenly;
@@ -416,10 +495,12 @@ footer {
 }
 
 .checked-ingredient {
+  color: #231651;
   display: flex;
 }
 
 input:checked + .checked-list {
+  color: #5e9c53;
   text-decoration: line-through;
 }
 
@@ -433,15 +514,17 @@ input:checked + .checked-list {
   flex-direction: column;
   font-size: 14pt;
   margin: 2%;
+  padding: 3%;
   width: auto;
 }
 
 .inProgress-title {
-  color: rgba(0, 0, 0, 0.726);
+  color: #231651;
   margin: 15px;
 }
 
 .inProgress-instruction {
+  color: #231651;
   padding-left: 12px;
   padding-right: 12px;
   text-align: justify;
@@ -461,6 +544,133 @@ input:checked + .checked-list {
 /* input:checked + .checked-input {
   color: green;
 } */
+
+/* ------------------------------------------------------------ */
+
+/* -------------- Tela de Receitas Feitas ----------------- */
+.main-done-recipes {
+  flex-flow: column;
+  margin-top: 22%;
+  padding-top: 30px;
+}
+
+.button-container-done-recipes {
+  align-items: center;
+  height: 70px;
+}
+
+.main-done-recipe {
+  align-items: center;
+  display: flex;
+  padding-top: 15px;
+}
+
+.main-done-recipe p {
+  color: #231651;
+}
+
+.share-button {
+  background-color: transparent;
+  border: none;
+  margin-bottom: 2em;
+  margin-top: -1em;
+}
+
+/* ------------------------------------------------------------ */
+
+/* ---------- Pagina receitas favoritas ---------- */
+.main-favorite {
+  background: #a11d2b;
+  display: flex;
+  flex-flow: column wrap;
+  font-family: sans-serif;
+  margin-bottom: 100%;
+  margin-top: 12%;
+  width: 100%;
+}
+
+.button-container-fav {
+  background-color: #231651;
+  display: flex;
+  flex-wrap: wrap;
+  height: auto;
+  justify-content: space-around;
+  margin-bottom: 25%;
+  position: fixed;
+  top: 7%;
+  width: 100%;
+}
+
+.button-fav {
+  border: none;
+  border-radius: 10px;
+  color: #fffefee7;
+  font-size: 13pt;
+  font-weight: 500;
+  height: 40%;
+  margin: 1% 0;
+  padding: 1%;
+  width: 30%;
+  word-wrap: break-word;
+}
+
+.recipes-container-fav {
+  align-items: center;
+  background-color: #9a8f9757;
+  border: 1px solid #231651;
+  border-radius: 20px;
+  display: flex;
+  flex-flow: row wrap;
+  height: 78%;
+  justify-content: flex-start;
+  margin-bottom: 3%;
+  margin-left: 3%;
+  margin-top: 9%;
+  width: 90%;
+}
+
+.fav-image {
+  border-radius: 20px;
+}
+
+.category-fav {
+  color: #231651;
+  margin-bottom: 12%;
+  margin-left: 9%;
+}
+
+.fav-details {
+  justify-content: space-around;
+  margin-bottom: 9px;
+  margin-left: 7px;
+  width: 50%;
+
+}
+
+.favorite-type {
+  color: #231651;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: left;
+  margin-bottom: 3%;
+  margin-top: 3%;
+}
+
+/* ------------------------------------------------------------ */
+
+/* ---------- Componente Loading --------- */
+.main-loading {
+  align-items: center;
+  background-color: #a11d2b;
+  display: flex;
+  font-size: 30pt;
+  height: 100vh;
+  justify-content: center;
+  margin-top: -20px;
+  width: 100vw;
+}
+
+/* --------------------------------------- */
 
 /*
 #5e9c53 - verde claro

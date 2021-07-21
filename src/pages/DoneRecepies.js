@@ -68,12 +68,13 @@ function DoneRecepies() {
   return (
     <>
       <Header />
-      <section>
-        <div>
+      <div className="main-done-recipes">
+        <section className="button-container button-container-done-recipes">
           <button
             data-testid="filter-by-all-btn"
             type="button"
             onClick={ () => handleContent('all') }
+            className="button button-filter"
           >
             All
           </button>
@@ -81,6 +82,7 @@ function DoneRecepies() {
             data-testid="filter-by-food-btn"
             type="button"
             onClick={ () => handleContent('food') }
+            className="button button-filter"
           >
             Food
           </button>
@@ -88,15 +90,17 @@ function DoneRecepies() {
             data-testid="filter-by-drink-btn"
             type="button"
             onClick={ () => handleContent('drink') }
+            className="button button-filter"
           >
             Drinks
           </button>
-        </div>
+        </section>
+        <main className="main-done-recipe">
+          {validRecipes && showDoneRecepies.map((recepie, index) => (
+            setMealOrDrink(recepie, index)))}
+        </main>
 
-        {validRecipes && showDoneRecepies.map((recepie, index) => (
-          setMealOrDrink(recepie, index)))}
-
-      </section>
+      </div>
     </>
   );
 }

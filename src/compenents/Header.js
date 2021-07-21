@@ -25,7 +25,6 @@ function Header() {
   );
 
   return (
-    // <div className="header-cotainer">
     <header className="header" data-testid="header">
       <Link to="/perfil" className="profile">
         <img src={ profileIcon } alt="profile" data-testid="profile-top-btn" />
@@ -33,9 +32,7 @@ function Header() {
       <h1 data-testid="page-title" className="title">{ pageName }</h1>
       { hideSearchBtn && handleSearchBtn() }
     </header>
-    // </div>
   );
 }
-/* { searchBtn && <SearchBar /> } */
 
 export default Header;

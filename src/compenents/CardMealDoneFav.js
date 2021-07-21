@@ -16,31 +16,49 @@ function CardMealDoneFav({ recepie, index }) {
   };
 
   return (
-    <div>
-      <Link to={ `/comidas/${id}` }>
+    <>
+      <Link to={ `/comidas/${id}` } className="recipe">
         <img
           data-testid={ `${index}-horizontal-image` }
           src={ image }
           width="50px"
-          alt="the food recepie"
+          alt="the food recepe"
+          className="recipe-image"
         />
+        <p
+          data-testid={ `${index}-horizontal-name` }
+          className="recipe-title"
+        >
+          { name }
+        </p>
       </Link>
-      <p data-testid={ `${index}-horizontal-top-text` }>{ `${area} - ${category}` }</p>
-      <Link to={ `/comidas/${id}` }>
-        <p data-testid={ `${index}-horizontal-name` }>{ name }</p>
-      </Link>
+      <p
+        data-testid={ `${index}-horizontal-top-text` }
+        className="recipe-title"
+      >
+        { `${area} - ${category}` }
+      </p>
       <p>{ area }</p>
-      <p data-testid={ `${index}-horizontal-done-date` }>{ doneDate }</p>
-      <p data-testid={ `${index}-${tags[0]}-horizontal-tag` }>
+      <p
+        data-testid={ `${index}-horizontal-done-date` }
+      >
+        { doneDate }
+      </p>
+      <p
+        data-testid={ `${index}-${tags[0]}-horizontal-tag` }
+      >
         { tags[0] }
       </p>
-      <p data-testid={ `${index}-${tags[1]}-horizontal-tag` }>
+      <p
+        data-testid={ `${index}-${tags[1]}-horizontal-tag` }
+      >
         {tags[1]}
       </p>
       <button
         src={ shareIcon }
         type="button"
         onClick={ (event) => copyToClipboard(event) }
+        className="share-button"
       >
         <img
           data-testid={ `${index}-horizontal-share-btn` }
@@ -49,7 +67,7 @@ function CardMealDoneFav({ recepie, index }) {
         />
       </button>
       {isCopy ? <span>Link copiado!</span> : null}
-    </div>
+    </>
   );
 }
 

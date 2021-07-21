@@ -14,7 +14,6 @@ function Foods() {
         .then((response) => response.json())
         .then((respo) => respo);
       const saveIdMeal = myFetch.meals[0].idMeal;
-      console.log(myFetch);
       setIdMeal(saveIdMeal);
     };
     getRandomFoodRecepie();

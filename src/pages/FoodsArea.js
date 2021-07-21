@@ -74,15 +74,9 @@ function FoodsArea() {
         </select>
       </section>
       <section className="recipes-container">
-        {/* {showRecepies.map((recepie, index) => ( */}
-        {/* // <Link key={ index } to={ `/comidas/${recepie.idMeal}` }> */}
         <MealCards
           data={ showRecepies }
-          // index={ index }
-          // key={ recepie.idMeal }
         />
-        {/* </Link> */}
-        {/* ))} */}
       </section>
     </main>
   );
@@ -90,7 +84,7 @@ function FoodsArea() {
   return (
     <>
       <Header />
-      { showRecepies ? renderRecipesByArea() : <Loading />}
+      { showRecepies.length !== 0 ? renderRecipesByArea() : <Loading />}
       <Footer />
     </>
   );
