@@ -93,6 +93,7 @@ function InProgressDrinkCard() {
       <button
         type="button"
         data-testid="finish-recipe-btn"
+        className="start-recipe-btn"
         disabled={ showButtonFinished }
         onClick={ handleClick }
       >
