@@ -5,7 +5,7 @@ import { LogoContainer } from './styles';
 function Logo({ logoSrc }) {
   return (
     <LogoContainer>
-      <img src={ logoSrc } alt="" />
+      <img src={ logoSrc } alt="letmeEat" />
     </LogoContainer>
   );
 }
