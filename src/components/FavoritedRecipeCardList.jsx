@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import Context from '../context/Context';
 import shareIcon from '../images/shareIcon.png';
 import blackHeartIcon from '../images/blackHeartIcon.png';
+import './FavoriteRecipe.css';
 
 const copy = require('clipboard-copy');
 
@@ -32,32 +33,13 @@ function FavoritedRecipeCardList({ list }) {
     setAttFev(attFav + 1);
   };
 
-  const renderFavButton = (data, index) => {
-    const { id } = data;
-    return (
-      <div>
-        <button
-          type="button"
-          data-testid={ `${index}-horizontal-favorite-btn` }
-          onClick={ () => handleFav(id) }
-          src={ blackHeartIcon }
-        >
-          <img
-            src={ blackHeartIcon }
-            alt="Fav button"
-            width="26px"
-          />
-        </button>
-      </div>
-    );
-  };
-
-  const renderShareButton = (data, index) => {
+  const renderButtons = (data, index) => {
     const { id, type } = data;
     return (
       <div>
         { copyText[id] ? copyText[id] : '' }
         <button
+          className="buttons-share-fav"
           type="button"
           data-testid={ `${index}-horizontal-share-btn` }
           onClick={ () => copyBoard(type, id) }
@@ -66,6 +48,20 @@ function FavoritedRecipeCardList({ list }) {
           <img
             src={ shareIcon }
             alt="share button"
+            width="26px"
+          />
+        </button>
+        <button
+          className="buttons-share-fav"
+          type="button"
+          data-testid={ `${index}-horizontal-favorite-btn` }
+          onClick={ () => handleFav(id) }
+          src={ blackHeartIcon }
+        >
+          <img
+            className
+            src={ blackHeartIcon }
+            alt="Fav button"
             width="26px"
           />
         </button>
@@ -83,7 +79,7 @@ function FavoritedRecipeCardList({ list }) {
   const renderCardDates = (data, index) => {
     const { name, type, id } = data;
     return (
-      <div>
+      <div className="info-favRecipe">
         <p
           data-testid={ `${index}-horizontal-top-text` }
         >
@@ -102,8 +98,7 @@ function FavoritedRecipeCardList({ list }) {
 
   const renderLeftSideCard = (data, index) => (
     <div>
-      { renderShareButton(data, index) }
-      { renderFavButton(data, index) }
+      { renderButtons(data, index) }
       { renderCardDates(data, index) }
     </div>
   );
@@ -117,7 +112,7 @@ function FavoritedRecipeCardList({ list }) {
             data-testid={ `${index}-horizontal-image` }
             src={ `${image}` }
             alt="recipe-img"
-            className="img"
+            className="favorite-img"
           />
         </Link>
       </div>
@@ -128,7 +123,7 @@ function FavoritedRecipeCardList({ list }) {
     const toReturn = list.map((ele, index) => {
       const { name } = ele;
       return (
-        <div key={ name }>
+        <div className="render-card" key={ name }>
           { renderImg(ele, index) }
           { renderLeftSideCard(ele, index) }
         </div>
