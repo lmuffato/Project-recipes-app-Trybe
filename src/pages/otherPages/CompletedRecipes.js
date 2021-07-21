@@ -24,6 +24,7 @@ export default function CompletedRecipes() {
 
   useEffect(() => {
     setList(retrivieData());
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleSetFilter = () => {
@@ -46,10 +47,11 @@ export default function CompletedRecipes() {
 
   useEffect(() => {
     setList(handleSetFilter());
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [completedFil]);
 
   return (
-    <div className="food-page">
+    <div>
       <Header title="Receitas Feitas" show={ false } />
       <CompletedButtomFilters />
       <CompletedRecipeCardList list={ list } />

@@ -13,23 +13,28 @@ function RecipesList({ data, path }) {
       const { name, imgSrc, id } = recipe;
       return (
         <li
+          className="li-recipelist"
           key={ index }
           data-testid={ `${index}-recipe-card` }
         >
           <Link to={ { pathname: `/${path}/${id}` } }>
-            <div className="card">
+<<<<<<< HEAD
+            <div className="cards-container">
+=======
+            <div className="card-recipes">
+>>>>>>> af70d59c5fa99a2ba5bf5facb460da85af22c160
               <img
                 src={ `${imgSrc}` }
                 alt={ `${name} thumb` }
                 data-testid={ `${index}-card-img` }
-                className="img"
+                className="recipe-list-img"
               />
-              <h4
+              <h1
                 data-testid={ `${index}-card-name` }
-                className="recipe-name"
+                className="recipe-list-title"
               >
                 { `${name}` }
-              </h4>
+              </h1>
             </div>
           </Link>
         </li>
@@ -39,7 +44,7 @@ function RecipesList({ data, path }) {
   };
 
   return (
-    <div className="component">
+    <div className="recipelist-div">
       <ul className="card-list">
         { renderCards() }
       </ul>

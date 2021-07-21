@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useRouteMatch } from 'react-router-dom';
 import { getDrinksById, getIngredients, getMeasures } from '../../../services/getDrinks';
 import '../recipeDetails.css';
-import shareIcon from '../../../images/shareIcon.svg';
-import whiteHeartIcon from '../../../images/whiteHeartIcon.svg';
-import blackHeartIcon from '../../../images/blackHeartIcon.svg';
+import shareIcon from '../../../images/shareIcon.png';
+import whiteHeartIcon from '../../../images/whiteHeartIcon.png';
+import blackHeartIcon from '../../../images/blackHeartIcon.png';
 import FinishButton from '../../../components/FinishButton';
 
 const copy = require('clipboard-copy');
@@ -59,12 +59,13 @@ function DrinksProgress() {
         cocktails: {},
       }));
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function copyBoard() {
     const endPoint = `http://localhost:3000/bebidas/${id}`;
     copy(endPoint);
-    setCopyButton('Link copiado!');
+    setCopyButton(global.alert('Link copiado!'));
   }
 
   const heartButton = (infos) => {
@@ -126,10 +127,7 @@ function DrinksProgress() {
   const verifyBoxs = (path) => {
     const getLocalInPro = localStorage.getItem('inProgressRecipes');
     const inProgress = JSON.parse(getLocalInPro);
-    if (path === 'bebidas') {
-      /* Comparação de Array pega do seguinte link
-      (https://stackoverflow.com/questions/6229197/how-to-know
-      -if-two-arrays-have-the-same-values) */
+    if (path === 'bebidas') { /* Comparação de Array pega do seguinte link(https://stackoverflow.com/questions/6229197/how-to-know-if-two-arrays-have-the-same-values) */
       const { cocktails } = inProgress;
       const doneIngred = cocktails[id];
       const toSee = ingredientsId.filter((ele) => !doneIngred.includes(ele));
@@ -142,6 +140,7 @@ function DrinksProgress() {
   useEffect(() => {
     setInProgress2('bebidas');
     verifyBoxs('bebidas');
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [stepsDone]);
 
   const handleCheckbox = (target) => {
@@ -167,37 +166,50 @@ function DrinksProgress() {
         strAlcoholic,
       } = info;
       return (
-        <div key={ index }>
+        <div className="detail-page" key={ index }>
           <img
             data-testid="recipe-photo"
             src={ strDrinkThumb }
             alt="recipe"
-            width="330px"
+            width="100%"
           />
-          <h2 data-testid="recipe-title">{ strDrink }</h2>
-          <div className="share-and-favorite-container">
-            { copyButton }
-            <button type="button" data-testid="share-btn" onClick={ () => copyBoard() }>
-              <img
-                src={ shareIcon }
-                alt="share button"
-              />
-            </button>
-            <button type="button" onClick={ () => heartButton(info) }>
-              <img
-                src={ !buttonFav ? blackHeartIcon : whiteHeartIcon }
-                alt="favorite button"
-                data-testid="favorite-btn"
-              />
-            </button>
+          <div className="header-content">
+            <h2 data-testid="recipe-title">{ strDrink }</h2>
+            <div className="share-and-favorite-container">
+              { copyButton }
+              <button
+                type="button"
+                data-testid="share-btn"
+                className="detail-btn"
+                onClick={ () => copyBoard() }
+              >
+                <img
+                  src={ shareIcon }
+                  alt="share button"
+                  width="26px"
+                />
+              </button>
+              <button
+                type="button"
+                className="detail-btn"
+                onClick={ () => heartButton(info) }
+              >
+                <img
+                  src={ !buttonFav ? blackHeartIcon : whiteHeartIcon }
+                  alt="favorite button"
+                  data-testid="favorite-btn"
+                  width="26px"
+                />
+              </button>
+            </div>
           </div>
-          <p data-testid="recipe-category">
+          <p data-testid="recipe-category" className="category">
             { strCategory }
             {' '}
             { strAlcoholic }
           </p>
-          <ul>
-            Ingredientes
+          <h2>Ingredientes</h2>
+          <ul className="ingredient-list-checkbox">
             { ingredientsId.map((ingredient, measurePos) => (
               <li
                 data-testid={ `${measurePos}-ingredient-step` }
@@ -215,7 +227,12 @@ function DrinksProgress() {
             )) }
           </ul>
           <h2>Instruções</h2>
-          <p data-testid="instructions">{ strInstructions }</p>
+          <p
+            data-testid="instructions"
+            className="instructions-inprogress"
+          >
+            { strInstructions }
+          </p>
           <FinishButton isDisable={ isFinish } path="bebidas" />
         </div>
       );

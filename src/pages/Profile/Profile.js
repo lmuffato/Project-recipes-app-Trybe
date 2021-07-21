@@ -26,7 +26,7 @@ export default function Profile() {
   }
 
   return (
-    <div>
+    <div className="other-pages">
       <Header title="Perfil" show={ false } />
       <p data-testid="profile-email">{ userEmail }</p>
       <button

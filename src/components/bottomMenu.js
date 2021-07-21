@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import '../App.css';
-import exploreIcon from '../images/exploreIcon.svg';
-import drinkIcon from '../images/drinkIcon.svg';
-import mealIcon from '../images/mealIcon.svg';
+import exploreIcon from '../images/exploreIcon.png';
+import drinkIcon from '../images/drinkIcon.png';
+import mealIcon from '../images/mealIcon.png';
 
 function bottomMenu() {
   return (
@@ -13,6 +13,7 @@ function bottomMenu() {
           data-testid="drinks-bottom-btn"
           alt="drinks btn"
           src={ drinkIcon }
+          width="40px"
         />
       </Link>
 
@@ -21,6 +22,7 @@ function bottomMenu() {
           data-testid="explore-bottom-btn"
           alt="explore btn"
           src={ exploreIcon }
+          width="40px"
         />
       </Link>
 
@@ -29,6 +31,7 @@ function bottomMenu() {
           data-testid="food-bottom-btn"
           alt="meals btn"
           src={ mealIcon }
+          width="40px"
         />
       </Link>
     </div>

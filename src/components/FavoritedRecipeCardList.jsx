@@ -2,8 +2,8 @@ import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Context from '../context/Context';
-import shareIcon from '../images/shareIcon.svg';
-import blackHeartIcon from '../images/blackHeartIcon.svg';
+import shareIcon from '../images/shareIcon.png';
+import blackHeartIcon from '../images/blackHeartIcon.png';
 
 const copy = require('clipboard-copy');
 
@@ -45,6 +45,7 @@ function FavoritedRecipeCardList({ list }) {
           <img
             src={ blackHeartIcon }
             alt="Fav button"
+            width="26px"
           />
         </button>
       </div>
@@ -65,6 +66,7 @@ function FavoritedRecipeCardList({ list }) {
           <img
             src={ shareIcon }
             alt="share button"
+            width="26px"
           />
         </button>
       </div>
