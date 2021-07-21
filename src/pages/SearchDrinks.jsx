@@ -20,7 +20,7 @@ function SearchDrinks() {
   return (
     <div>
       <Header title="Explorar Bebidas" />
-      <div>
+      <div className="cardsGroup">
         <Link to="/explorar/bebidas/ingredientes">
           <button
             type="button"

@@ -22,6 +22,7 @@ function FavoriteRecipes() {
           type="button"
           data-testid="filter-by-all-btn"
           onClick={ () => setFilterButton('all') }
+          className="filterButtons"
         >
           All
         </button>
@@ -29,6 +30,7 @@ function FavoriteRecipes() {
           type="button"
           data-testid="filter-by-food-btn"
           onClick={ () => setFilterButton('comida') }
+          className="filterButtons"
         >
           Food
         </button>
@@ -36,6 +38,7 @@ function FavoriteRecipes() {
           type="button"
           data-testid="filter-by-drink-btn"
           onClick={ () => setFilterButton('bebida') }
+          className="filterButtons"
         >
           Drinks
         </button>

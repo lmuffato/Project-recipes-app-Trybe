@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import { useHistory } from 'react-router';
 import UserContext from '../context/UserContext';
 import { setToLocalStorage } from '../services/localStorage';
+import '../login.css';
 
 function Login() {
   const [disabled, setDisabled] = useState(true);
@@ -30,32 +31,37 @@ function Login() {
   };
 
   return (
-    <div>
-      <input
-        type="email"
-        data-testid="email-input"
-        value={ email }
-        onChange={ ({ target }) => setEmail(target.value) }
-        placeholder="Email"
-      />
-      <input
-        type="password"
-        data-testid="password-input"
-        value={ password }
-        onChange={ ({ target }) => setPassword(target.value) }
-        placeholder="Senha"
-      />
-      <button
-        type="button"
-        data-testid="login-submit-btn"
-        disabled={ disabled }
-        onClick={ submitInfo }
-      >
-        Entrar
-      </button>
+    <div className="loginBody">
+      <h2 className="brand">Receitas Campeãs</h2>
+      <div className="loginContainer">
+        <input
+          type="email"
+          data-testid="email-input"
+          value={ email }
+          onChange={ ({ target }) => setEmail(target.value) }
+          placeholder="Email"
+          className="placeholder"
+        />
+        <input
+          type="password"
+          data-testid="password-input"
+          value={ password }
+          onChange={ ({ target }) => setPassword(target.value) }
+          placeholder="Senha"
+          className="placeholder"
+        />
+        <button
+          type="button"
+          data-testid="login-submit-btn"
+          disabled={ disabled }
+          onClick={ submitInfo }
+        >
+          Entrar
+        </button>
+
+      </div>
     </div>
   );
 }
-// teste de commit
 
 export default Login;

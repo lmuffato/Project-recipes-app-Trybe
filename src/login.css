@@ -1,0 +1,44 @@
+body {
+  background-color: #e5e5e5;
+}
+
+.loginBody {
+  background-attachment: fixed;
+  background-image: url('./images/tyson.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.loginContainer {
+  border: 1px solid black;
+  border-radius: 3px;
+  display: flex;
+  flex-direction: column;
+  line-height: 35px;
+  margin-left: 38px;
+  margin-top: 76vh;
+  opacity: 0.8;
+  text-align: center;
+  width: 45vh;
+}
+
+.placeholder {
+  text-align: center;
+}
+
+.loginContainer button {
+  background-color: #14213d;
+  color: white;
+}
+
+.brand {
+  font-family: Lobster , cursive;
+  font-size: 60px;
+  left: 14px;
+  position: absolute;
+}
