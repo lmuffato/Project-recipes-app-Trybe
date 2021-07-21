@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import './ExploreButton.css';
 
 class ExploreButton extends React.Component {
   render() {
@@ -7,6 +8,7 @@ class ExploreButton extends React.Component {
     return (
       <button
         type="submit"
+        className="btn-grad"
         data-testid={ datatestId }
         onClick={ onClick }
       >

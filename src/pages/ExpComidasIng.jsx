@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { handleCurrentSearch } from '../actions';
+// import '../App.css';
+import './ExpComidasIng.css';
 
 class ExpComidasIng extends React.Component {
   constructor(props) {
@@ -56,19 +58,22 @@ class ExpComidasIng extends React.Component {
             key={ eachIngredient.idIngredient }
             data-testid={ `${index}-ingredient-card` }
             onClick={ (e) => this.setGlobalRedirect(e) }
+            className="recipeContainer"
             role="button"
             aria-hidden
           >
+            <img
+              src={ this.returnSrcImg(eachIngredient.strIngredient) }
+              alt={ eachIngredient.strIngredient }
+              className="recipeImg"
+              data-testid={ `${index}-card-img` }
+            />
             <h6
+              className="titleFood"
               data-testid={ `${index}-card-name` }
             >
               {eachIngredient.strIngredient}
             </h6>
-            <img
-              src={ this.returnSrcImg(eachIngredient.strIngredient) }
-              alt={ eachIngredient.strIngredient }
-              data-testid={ `${index}-card-img` }
-            />
           </div>
         ))}
         <Footer history={ history } />

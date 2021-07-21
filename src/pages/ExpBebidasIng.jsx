@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import { handleCurrentSearch } from '../actions';
+import './ExpComidasIng.css';
 
 class ExpBebidasIng extends React.Component {
   constructor(props) {
@@ -57,10 +58,12 @@ class ExpBebidasIng extends React.Component {
             key={ eachIngredient.strIngredient1 }
             data-testid={ `${index}-ingredient-card` }
             onClick={ (e) => this.setGlobalRedirect(e) }
+            className="recipeContainer"
             role="button"
             aria-hidden
           >
             <h6
+              className="titleFood"
               data-testid={ `${index}-card-name` }
             >
               {eachIngredient.strIngredient1}
@@ -68,6 +71,7 @@ class ExpBebidasIng extends React.Component {
             <img
               src={ this.returnSrcImg(eachIngredient.strIngredient1) }
               alt={ eachIngredient.strIngredient1 }
+              className="recipeImg"
               data-testid={ `${index}-card-img` }
             />
           </div>

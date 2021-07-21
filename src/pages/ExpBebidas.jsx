@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import ExploreButton from '../components/ExploreButton';
+import './ExpBebidas.css';
 
 class ExpBebidas extends React.Component {
   constructor(props) {
@@ -46,11 +47,13 @@ class ExpBebidas extends React.Component {
         <Header title="Explorar Bebidas" />
         <ExploreButton
           textButton="Por Ingredientes"
+          // className="btn-grad"
           onClick={ () => history.push('/explorar/bebidas/ingredientes') }
           datatestId="explore-by-ingredient"
         />
         <ExploreButton
           textButton="Me Surpreenda!"
+          // className="btn-grad"
           onClick={ (e) => this.redirectToRandom(e) }
           datatestId="explore-surprise"
         />

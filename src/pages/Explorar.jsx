@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
+import './Explorar.css';
 
 class Explorar extends React.Component {
   render() {
@@ -12,6 +13,7 @@ class Explorar extends React.Component {
         <div>
           <button
             data-testid="explore-food"
+            className="btn-grad"
             type="submit"
             onClick={ () => history.push('/explorar/comidas') }
           >
@@ -19,6 +21,7 @@ class Explorar extends React.Component {
           </button>
           <button
             data-testid="explore-drinks"
+            className="btn-grad"
             type="submit"
             onClick={ () => history.push('/explorar/bebidas') }
           >

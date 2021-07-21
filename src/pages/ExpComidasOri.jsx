@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import SearchButton from '../components/SearchButton';
 import Footer from '../components/Footer';
+import './ExpComidasIng.css';
 
 class ExpComidasOri extends React.Component {
   constructor(props) {
@@ -94,7 +95,7 @@ class ExpComidasOri extends React.Component {
               key={ index }
               data-testid={ `${index}-recipe-card` }
               id={ recipe.idMeal }
-              className="recipeCard"
+              className="recipeContainer"
             >
               <input
                 type="image"
@@ -104,7 +105,12 @@ class ExpComidasOri extends React.Component {
                 className="recipeImg"
                 onClick={ () => history.push(`/comidas/${recipe.idMeal}`) }
               />
-              <h6 data-testid={ `${index}-card-name` }>{recipe.strMeal}</h6>
+              <h6
+                className="titleFood"
+                data-testid={ `${index}-card-name` }
+              >
+                {recipe.strMeal}
+              </h6>
             </div>
           ))}
         </div>
