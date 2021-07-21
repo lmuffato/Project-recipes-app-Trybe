@@ -95,4 +95,70 @@ describe('Testa funcionalidade de searchBar', () => {
     expect(getByText('Apple & Blackberry Crumble')).toBeInTheDocument();
     expect(getByText('Ayam Percik')).toBeInTheDocument();
   });
+
+  it('Busca bebida por primeira letra', async () => {
+    const { getByTestId, getByText } = await renderWithRouterHooksAndProvider(
+      <App />,
+      '/bebidas',
+    );
+
+    await waitForElement(() => getByTestId(SEARCH_BTN));
+    expect(getByTestId(SEARCH_BTN)).toBeInTheDocument();
+    fireEvent.click(getByTestId(SEARCH_BTN));
+
+    fireEvent.change(getByTestId(SEARCH_INPUT), {
+      target: { value: 'd' },
+    });
+    fireEvent.click(getByTestId('first-letter-search-radio'));
+    fireEvent.click(getByTestId(EXEC_SEARCH_BTN));
+
+    await waitForElement(() => getByText('Derby'));
+    expect(getByTestId(FIRST_IMAGE).src).toMatch('https://www.thecocktaildb.com/images/media/drink/52weey1606772672.jpg');
+    expect(getByText('Derby')).toBeInTheDocument();
+    expect(getByText('Diesel')).toBeInTheDocument();
+  });
+
+  it('Busca bebida por ingrediente', async () => {
+    const { getByTestId, getByText } = await renderWithRouterHooksAndProvider(
+      <App />,
+      '/bebidas',
+    );
+
+    await waitForElement(() => getByTestId(SEARCH_BTN));
+    expect(getByTestId(SEARCH_BTN)).toBeInTheDocument();
+    fireEvent.click(getByTestId(SEARCH_BTN));
+
+    fireEvent.change(getByTestId(SEARCH_INPUT), {
+      target: { value: 'vodka' },
+    });
+    fireEvent.click(getByTestId('ingredient-search-radio'));
+    fireEvent.click(getByTestId(EXEC_SEARCH_BTN));
+
+    await waitForElement(() => getByText('155 Belmont'));
+    expect(getByTestId(FIRST_IMAGE).src).toMatch('https://www.thecocktaildb.com/images/media/drink/yqvvqs1475667388.jpg');
+    expect(getByText('501 Blue')).toBeInTheDocument();
+    expect(getByText('57 Chevy with a White License Plate')).toBeInTheDocument();
+  });
+
+  it('Busca bebida por nome', async () => {
+    const { getByText, getByTestId } = await renderWithRouterHooksAndProvider(
+      <App />,
+      '/bebidas',
+    );
+
+    await waitForElement(() => getByTestId(SEARCH_BTN));
+    expect(getByTestId(SEARCH_BTN)).toBeInTheDocument();
+    fireEvent.click(getByTestId(SEARCH_BTN));
+
+    fireEvent.change(getByTestId(SEARCH_INPUT), {
+      target: { value: '747' },
+    });
+    fireEvent.click(getByTestId('name-search-radio'));
+    fireEvent.click(getByTestId(EXEC_SEARCH_BTN));
+
+    await waitForElement(() => getByTestId(FIRST_IMAGE));
+    expect(getByTestId(FIRST_IMAGE).src).toMatch('https://www.thecocktaildb.com/images/media/drink/xxsxqy1472668106.jpg');
+    expect(getByText('747')).toBeInTheDocument();
+    expect(getByText('747 Drink')).toBeInTheDocument();
+  });
 });
