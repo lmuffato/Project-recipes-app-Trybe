@@ -11,8 +11,9 @@ import ExploreIngredients from './pages/ExploreIngredients';
 import DetailsContextProvider from './context/DetailsContext';
 import FavoriteRecipes from './pages/FavoriteRecipes';
 import DoneRecipes from './pages/DoneRecipes';
-import ExploreOrigin from './pages/ExploreArea';
-import RecipesInProgess from './pages/RecipesInProgess';
+// import './App.css';
+import ExploreOrigin from './pages/ExploreOrigin';
+import RecipesInProgess from './pages/RecipesInProgress';
 
 function App() {
   return (

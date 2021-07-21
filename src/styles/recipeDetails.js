@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 const Container = styled.div`align-items: center;
+  background: #fdfefb;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -23,22 +24,18 @@ const Container = styled.div`align-items: center;
       display: flex;
       justify-content: space-evenly;
       margin: 1rem 0.7rem;
+    }
 
-      h1 {
-        align-self: center;
-        display: flex;
-        justify-self: center;
-      }
-
-      .icons {
-        display: flex;
-        gap: 1rem;
-      }
+    .icons {
+      display: flex;
+      gap: 1.2rem;
+      justify-content: space-between;
     }
 
     h3 {
       color: #707070;
       display: block;
+      font-size: 1.2rem;
       justify-self: center;
       line-height: 1;
       margin: 0 auto;
@@ -51,6 +48,22 @@ const Container = styled.div`align-items: center;
       text-transform: uppercase;
     }
 
+    .recipe-title {
+      font-size: 2rem;
+      line-height: 2.5rem;
+      text-align: center;
+      text-transform: capitalize;
+    }
+
+    .container {
+      display: flex;
+      justify-content: space-around;
+
+      div {
+        display: flex;
+      }
+    }
+
     .img-container {
 
       img {
@@ -58,7 +71,7 @@ const Container = styled.div`align-items: center;
 
         /* height: auto; */
         max-height: auto;
-        max-width: 80vw;
+        max-width: 100vw;
         object-fit: cover;
         overflow: hidden;
 
@@ -72,6 +85,14 @@ const Container = styled.div`align-items: center;
     display: flex;
     justify-content: flex-start;
     margin-right: 4rem;
+
+  }
+
+  ul {
+
+    li {
+      font-weight: 300;
+    }
   }
 
   .instructions {
@@ -83,6 +104,7 @@ const Container = styled.div`align-items: center;
     p {
       display: flex;
       flex-wrap: wrap;
+      font-weight: 300;
       margin: 1rem;
       max-width: 640px;
     }
@@ -105,23 +127,42 @@ const Container = styled.div`align-items: center;
 
     h3 {
       color: #707070;
-      font-size: 18px;
+      font-size: 1.2rem;
       line-height: 29px;
       margin: 0 0 28px;
     }
   }
 
   .recipe-btn {
+    background: #289ea8;
     border: 0;
     border-radius: 8px;
     bottom: 0;
+    color: white;
     cursor: pointer;
+    font-family: Poppins , sans-serif;
     font-weight: 600;
     gap: 2rem;
-    height: 2.2rem;
-    max-width: 200px;
-    min-width: 180px;
+    height: 2.5rem;
+    max-width: 250px;
+    min-width: 200px;
     padding: 0 32px;
+    position: fixed;
+    text-transform: lowercase;
+    transition: filter 0.2s;
+
+    &:disabled {
+      cursor: not-allowed;
+      opacity: 0.6;
+    }
+
+    &:not( :disabled ):hover {
+      filter: brightness(0.9);
+    }
+
+  }
+
+  button {
     position: fixed;
   }
 

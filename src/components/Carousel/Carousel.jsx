@@ -9,18 +9,21 @@ function Carousel({ recipeRecommendations, type }) {
   const currRecomendation = type === 'meals' ? 'drinks' : 'meals';
   const recommend = recipeRecommendations;
   const { setIsRecommended } = useDetailsProvider();
-  // const [firstSelectedImageIndex, setSelectedImageIndex] = useState(0);
-  // const [secondSelectedImageIndex, setSecondSelectedImageIndex] = useState(1);
 
   useEffect(() => {
+    let cancel = false;
+    if (cancel) return;
     setIsRecommended(true);
+    return () => {
+      cancel = true;
+    };
   }, [setIsRecommended]);
 
   return (
     <CarouselWrapper>
       <CarouselProvider
-        naturalSlideWidth={ 100 }
-        naturalSlideHeight={ 100 }
+        naturalSlideWidth={ 120 }
+        naturalSlideHeight={ 120 }
         visibleSlides={ 2 }
         totalSlides={ 6 }
       >

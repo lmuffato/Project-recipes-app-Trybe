@@ -11,14 +11,22 @@ function UserContextProvider({ children }) {
   const [disabledData, setDisabled] = useState(true);
 
   useEffect(() => {
-    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const lengthSix = 6;
-    if (re.test(emailData)
-      && passwordData.trim().length > lengthSix) {
-      setDisabled(false);
-    } else {
-      setDisabled(true);
-    }
+    let cancel = false;
+    if (cancel) return;
+    const subscription = () => {
+      const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      const lengthSix = 6;
+      if (re.test(emailData)
+        && passwordData.trim().length > lengthSix) {
+        setDisabled(false);
+      } else {
+        setDisabled(true);
+      }
+    };
+    subscription();
+    return () => {
+      cancel = true;
+    };
   }, [emailData, passwordData]);
 
   const handleClick = () => {

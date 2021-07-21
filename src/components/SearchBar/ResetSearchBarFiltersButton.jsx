@@ -4,8 +4,8 @@ import Button from '../Generics/Button';
 
 function ResetSearchBarFiltersButton({ onClick }) {
   return (
-    <Button onClick={ onClick }>
-      Resetar filtros
+    <Button onClick={ onClick } className="reset-btn">
+      Resetar
     </Button>
   );
 }

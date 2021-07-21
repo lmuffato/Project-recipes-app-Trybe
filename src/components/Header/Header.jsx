@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import profileIconImg from '../../images/profileIcon.svg';
 import Button from '../Generics/Button';
 import HeaderContainer from './styles';
+import Logo from './Logo';
 
-function Header({ children, heading }) {
+function Header({ children, heading, logoSrc }) {
   const history = useHistory();
 
   const handleRedirectToProfile = (ev) => {
@@ -15,6 +16,14 @@ function Header({ children, heading }) {
 
   return (
     <HeaderContainer>
+      <div className="title-container">
+        <Link to="/comidas">
+          <Logo logoSrc={ logoSrc } />
+        </Link>
+        <div className="header-title-container">
+          <h1 data-testid="page-title">{ heading }</h1>
+        </div>
+      </div>
       <div className="container">
         <Button onClick={ handleRedirectToProfile }>
           <img
@@ -23,20 +32,21 @@ function Header({ children, heading }) {
             alt="Logo da página de perfil"
           />
         </Button>
+        { children }
       </div>
-      <h1 data-testid="page-title">{ heading }</h1>
-      { children }
     </HeaderContainer>
   );
 }
 
 Header.defaultProps = {
   children: '',
+  heading: '',
 };
 
 Header.propTypes = {
   children: PropTypes.node,
-  heading: PropTypes.string.isRequired,
+  heading: PropTypes.string,
+  logoSrc: PropTypes.string.isRequired,
 };
 
 export default Header;

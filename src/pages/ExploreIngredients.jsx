@@ -4,6 +4,9 @@ import { Link } from 'react-router-dom';
 import Header from '../components/Header/Header';
 import Footer from '../components/Footer/Footer';
 import useFilteredRecipes from '../hooks/useFilteredRecipes';
+import logoIcon from '../images/logoPaginasExplorar.svg';
+import CardContainer from '../styles/genericCard';
+import ExploreContainer from '../styles/exploreIngredients';
 
 function ExploreIngredients({ type }) {
   // const history = useHistory();
@@ -47,45 +50,48 @@ function ExploreIngredients({ type }) {
 
   return (
     <div>
-      <Header heading="Explorar Ingredientes" />
-      {ingredients.map((ingredient, index) => {
-        const ingredientName = type === 'meals'
-          ? ingredient.strIngredient
-          : ingredient.strIngredient1;
-        const dataIngredients = {
-          inputSearch: ingredientName,
-          radioValue: 'ingredient',
-        };
-        const imgUrl = type === 'meals'
-          ? `https://www.themealdb.com/images/ingredients/${ingredient.strIngredient}-Small.png`
-          : `https://www.thecocktaildb.com/images/ingredients/${ingredient.strIngredient1}-Small.png`;
-        return (
-          <Link
+      <Header heading="Explorar Ingredientes" logoSrc={ logoIcon } />
+      <ExploreContainer>
+        {ingredients.map((ingredient, index) => {
+          const ingredientName = type === 'meals'
+            ? ingredient.strIngredient
+            : ingredient.strIngredient1;
+          const dataIngredients = {
+            inputSearch: ingredientName,
+            radioValue: 'ingredient',
+          };
+          const imgUrl = type === 'meals'
+            ? `https://www.themealdb.com/images/ingredients/${ingredient.strIngredient}-Small.png`
+            : `https://www.thecocktaildb.com/images/ingredients/${ingredient.strIngredient1}-Small.png`;
+          return (
+            <Link
             // type="button"
-            to={
-              type === 'meals' ? '/comidas' : '/bebidas'
-            }
-            key={ index }
-            onClick={ () => handleClick(dataIngredients) }
-          >
-            <div data-testid={ `${index}-ingredient-card` }>
-              <div className="img-wrapper">
-                <img
-                  data-testid={ `${index}-card-img` }
-                  // style={ { maxWidth: '100px' } }
-                  src={ imgUrl }
-                  alt="Ingredient food/drink"
-                />
-              </div>
-              <div className="card-info">
-                <p data-testid={ `${index}-card-name` }>
-                  {ingredient.strIngredient1 || ingredient.strIngredient}
-                </p>
-              </div>
-            </div>
-          </Link>
-        );
-      })}
+              to={
+                type === 'meals' ? '/comidas' : '/bebidas'
+              }
+              key={ index }
+              onClick={ () => handleClick(dataIngredients) }
+            >
+              <CardContainer>
+                <div data-testid={ `${index}-ingredient-card` }>
+                  <div className="img-wrapper">
+                    <img
+                      data-testid={ `${index}-card-img` }
+                      src={ imgUrl }
+                      alt="Ingredient food/drink"
+                    />
+                  </div>
+                  <div className="card-info">
+                    <p data-testid={ `${index}-card-name` }>
+                      {ingredient.strIngredient1 || ingredient.strIngredient}
+                    </p>
+                  </div>
+                </div>
+              </CardContainer>
+            </Link>
+          );
+        })}
+      </ExploreContainer>
       <Footer />
     </div>
   );

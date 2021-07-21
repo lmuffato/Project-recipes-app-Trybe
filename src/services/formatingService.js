@@ -57,3 +57,14 @@ export const formattingCarouselImages = (keysAndValues) => {
   });
   return mappingImagesURLAndRecipeNames;
 };
+
+export const getCopyToClipboard = (type, id) => {
+  let url = '';
+  if (type === 'meals') {
+    url = 'http://localhost:3000/comidas/';
+  }
+  if (type === 'drinks') {
+    url = 'http://localhost:3000/bebidas/';
+  }
+  navigator.clipboard.writeText(`${url}${id}`);
+};

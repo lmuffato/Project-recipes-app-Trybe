@@ -1,19 +1,21 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import RecipeInfo from '../components/RecipeInfo/RecipeInfo';
 import Button from '../components/Generics/Button';
-import
-RecipeIngredientsInProgress from
+import RecipeIngredientsInProgress from
   '../components/RecipesIngredientsInProgress/RecipesIngredientsInProgress';
-import Container from '../styles/recipeDetails';
-import RecipesInProgressContextProvider from '../context/RecipesInProgressContext';
+import RecipeInProgressContainer from '../styles/recipeInProgress';
+import useDetailsProvider from '../hooks/useDetailsProvider';
+import { handleDoneRecipesLS } from '../helpers/localStorageHelper';
 
 function RecipesInProgress({ type }) {
   const { id } = useParams();
+  const history = useHistory();
   const endpointMeals = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
   const endpointDrinks = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
   const [fetchRecipeURL, setFetchRecipeURL] = useState('');
+  const { isDisabled } = useDetailsProvider();
   const [isLoading, setIsLoading] = useState(true);
   const [singleRecipe, setRecipe] = useState({});
 
@@ -38,9 +40,20 @@ function RecipesInProgress({ type }) {
     }
   }, [type]);
 
+  const handleRedirectToDoneRecipes = (ev) => {
+    ev.preventDefault();
+    handleDoneRecipesLS(id, type, singleRecipe);
+    history.push('/receitas-feitas');
+  };
+
   useEffect(() => {
+    let cancel = false;
+    if (cancel) return;
     handleFetchIngredients();
     handleFetch(fetchRecipeURL);
+    return () => {
+      cancel = true;
+    };
   }, [fetchRecipeURL, handleFetch, handleFetchIngredients]);
 
   if (isLoading) {
@@ -51,54 +64,45 @@ function RecipesInProgress({ type }) {
   const recipeThumb = singleRecipe.strMealThumb || singleRecipe.strDrinkThumb;
   const recipeCategory = singleRecipe.strCategory;
   const isAlchooholic = singleRecipe.strAlcoholic || '';
-  const recipeId = singleRecipe.idMeal || '';
-  const drinkId = singleRecipe.idDrink || '';
+  const renderCategory = type === 'drinks' ? (isAlchooholic) : (recipeCategory);
 
   return (
-    <RecipesInProgressContextProvider>
-      <Container>
-        <RecipeInfo
-          recipeName={ recipeName }
-          recipeThumb={ recipeThumb }
-        >
-          { type === 'drinks'
-            ? (<h3 data-testid="recipe-category">{isAlchooholic}</h3>)
-            : (
-              <h3 data-testid="recipe-category">{recipeCategory}</h3>)}
-        </RecipeInfo>
-        <h3>Ingredientes</h3>
-        <div className="ingredients-list">
-          <RecipeIngredientsInProgress
-            recipe={ singleRecipe }
-            idMeal={ recipeId }
-            idDrink={ drinkId }
-            type={ type }
-          />
-        </div>
-        <h3>Instructions</h3>
-        <div className="instructions">
-          <p data-testid="instructions">
-            { singleRecipe.strInstructions }
-          </p>
-        </div>
-        <Button
-          data-testid="finish-recipe-btn"
-          disabled
-        >
-          Finalizar receita
-        </Button>
-      </Container>
-    </RecipesInProgressContextProvider>
+    <RecipeInProgressContainer>
+      <RecipeInfo
+        recipeName={ recipeName }
+        recipeThumb={ recipeThumb }
+        type={ type }
+        recipe={ singleRecipe }
+        recipeCategory={ renderCategory }
+      />
+      <h3>Ingredients</h3>
+      <div className="ingredients-list">
+        <RecipeIngredientsInProgress
+          recipe={ singleRecipe }
+          type={ type }
+          id={ id }
+        />
+      </div>
+      <h3>Instructions</h3>
+      <div className="instructions">
+        <p data-testid="instructions">
+          { singleRecipe.strInstructions }
+        </p>
+      </div>
+      <Button
+        data-testid="finish-recipe-btn"
+        className="recipe-btn"
+        disabled={ isDisabled }
+        onClick={ handleRedirectToDoneRecipes }
+      >
+        Finalizar receita
+      </Button>
+    </RecipeInProgressContainer>
   );
 }
 
 export default RecipesInProgress;
 
-// RecipeDetails.defaultProps = {
-//   url: '',
-// };
-
 RecipesInProgress.propTypes = {
   type: PropTypes.string.isRequired,
-  // url: PropTypes.string,
 };

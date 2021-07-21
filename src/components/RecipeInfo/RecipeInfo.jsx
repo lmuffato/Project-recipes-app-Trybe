@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { useHistory, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import shareIconImg from '../../images/shareIcon.svg';
 import favoriteIconImg from '../../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../../images/blackHeartIcon.svg';
 import handleSetFavoritesToLocalStorage from '../../helpers/localStorageHelper';
+import { getCopyToClipboard } from '../../services/formatingService';
 
 const THREE_SECONDS = 3000;
+
 function RecipeInfo(props) {
   const { recipeThumb,
     recipeName,
@@ -14,8 +16,6 @@ function RecipeInfo(props) {
     recipeCategory,
   } = props;
   const { id } = useParams();
-  const history = useHistory();
-  const recipeURL = history.location.pathname;
   const [copyToClipboard, setCopyToClipboard] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
   const recipeId = type === 'meals' ? recipe.idMeal : recipe.idDrink;
@@ -51,7 +51,7 @@ function RecipeInfo(props) {
   }, [id]);
 
   const handleCopyToClipboard = () => {
-    navigator.clipboard.writeText(`http://localhost:3000${recipeURL}`);
+    getCopyToClipboard(type, id);
     setCopyToClipboard(true);
     setTimeout(() => {
       setCopyToClipboard(false);
@@ -69,11 +69,18 @@ function RecipeInfo(props) {
 
   return (
     <div className="componente1">
+      <div className="recipe-info">
+        <h2 data-testid="recipe-title" className="recipe-title">{ recipeName }</h2>
+      </div>
       <div className="img-container">
         <img src={ recipeThumb } alt="Foto da receita" data-testid="recipe-photo" />
       </div>
-      <div className="recipe-info">
-        <h2 data-testid="recipe-title">{ recipeName }</h2>
+      <div className="container">
+        <div>
+          <h3 data-testid="recipe-category">
+            { recipeCategory }
+          </h3>
+        </div>
         <div className="icons">
           { copyToClipboard ? <span>Link copiado!</span> : '' }
           <input
@@ -91,13 +98,7 @@ function RecipeInfo(props) {
             data-testid="favorite-btn"
             onClick={ handleAddFavoriteRecipe }
           />
-
         </div>
-      </div>
-      <div>
-        <h3 data-testid="recipe-category">
-          { recipeCategory }
-        </h3>
       </div>
     </div>
   );

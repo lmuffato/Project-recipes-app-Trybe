@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import FavoriteRecipeCard from '../components/FavoriteRecipeCard/FavoriteRecipeCard';
 import filterRecipesByType from '../utils/filterRecipesByType';
 import Header from '../components/Header/Header';
+import logoIcon from '../images/logoPaginasExplorar.svg';
+import CardGridContainer from '../styles/favRecipes';
+import { PageGrid } from '../styles/doneRecipes';
 
 function FavoriteRecipes() {
   const [favoriteRecipes, setFavoriteRecipes] = useState([]);
@@ -25,7 +28,7 @@ function FavoriteRecipes() {
   if (favoriteRecipes.length === 0) {
     return (
       <div>
-        <Header heading="Receitas Favoritas" />
+        <Header heading="Receitas Favoritas" logoSrc={ logoIcon } />
         <h2>Você não possui receitas favoritas!</h2>
       </div>
     );
@@ -33,16 +36,9 @@ function FavoriteRecipes() {
 
   return (
     <div>
-      <Header heading="Receitas Favoritas" />
+      <Header heading="Receitas Favoritas" logoSrc={ logoIcon } />
       { copiedToClipboard && 'Link copiado!' }
-      <div>
-        <button
-          type="button"
-          data-testid="filter-by-all-btn"
-          onClick={ () => setFilterByType('All') }
-        >
-          All
-        </button>
+      <PageGrid>
         <button
           type="button"
           data-testid="filter-by-food-btn"
@@ -57,16 +53,25 @@ function FavoriteRecipes() {
         >
           Drinks
         </button>
-      </div>
-      { filterRecipesByType(favoriteRecipes, filterByType).map((recipe, index) => (
-        <FavoriteRecipeCard
-          recipe={ recipe }
-          index={ index }
-          key={ index }
-          handleRemoveRecipe={ handleRemoveRecipe }
-          setCopiedToClipboard={ setCopiedToClipboard }
-        />
-      )) }
+        <button
+          type="button"
+          data-testid="filter-by-all-btn"
+          onClick={ () => setFilterByType('All') }
+        >
+          All
+        </button>
+      </PageGrid>
+      <CardGridContainer>
+        { filterRecipesByType(favoriteRecipes, filterByType).map((recipe, index) => (
+          <FavoriteRecipeCard
+            recipe={ recipe }
+            index={ index }
+            key={ index }
+            handleRemoveRecipe={ handleRemoveRecipe }
+            setCopiedToClipboard={ setCopiedToClipboard }
+          />
+        )) }
+      </CardGridContainer>
     </div>
   );
 }

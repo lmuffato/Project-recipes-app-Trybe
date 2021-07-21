@@ -10,6 +10,7 @@ import CategoriesList from '../components/CategoriesList/CategoriesList';
 import CardList from '../components/CardList/CardList';
 import { RecipesContext } from '../context/RecipesContext';
 import useDetailsProvider from '../hooks/useDetailsProvider';
+import logoIcon from '../images/savory-6.svg';
 
 const MEALS_URL = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
 const DRINKS_URL = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
@@ -28,7 +29,6 @@ function Home(props) {
   };
 
   useEffect(() => {
-    console.log('teste');
     if (type === 'meals') {
       return setFetchUrl(MEALS_URL);
     }
@@ -38,18 +38,28 @@ function Home(props) {
   }, [setFetchUrl, type]);
 
   useEffect(() => {
+    let cancel = false;
+    if (cancel) return;
+    console.log('2 - set estado da home');
     if (recipesContext[type]) setRecipes(recipesContext[type]); // pega do estado global e seta no estado da pg
     setIsRecommended(false);
+    return () => {
+      cancel = true;
+    };
   }, [recipesContext, setIsRecommended, type]);
 
   // useEffect(() => {
   //   getFilteredRecipes(type);
   // }, [type, searchBarFilters, getFilteredRecipes]);
-  console.log('Hello from <Home />');
+  // console.log('Hello from <Home />');
 
   return (
     <>
-      <Header heading={ type === 'meals' ? 'Comidas' : 'Bebidas' }>
+      <Header
+        heading={ type === 'meals' ? 'Comidas' : 'Bebidas' }
+        logoSrc={ logoIcon }
+        className={ type === 'meals' ? 'meals-header' : 'drinks-header' }
+      >
         <SearchBarButton onClick={ handleToggleSearchBar } />
       </Header>
       <div>

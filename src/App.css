@@ -3,9 +3,14 @@
   -webkit-font-smoothing: antialiased;
 }
 
+:root {
+
+  --homeBackgroundColor: #0fa36b; /* variável de cor */
+}
+
 .meals {
   align-items: center;
-  background: #0fa36b;
+  background: var(--homeBackgroundColor);
   color: #464646;
   display: flex;
   flex-direction: column;

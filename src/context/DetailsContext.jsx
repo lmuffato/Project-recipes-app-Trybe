@@ -11,6 +11,10 @@ function DetailsContextProvider({ children }) {
   const [recommendations, setRecomendations] = useState([]);
   const [isRecommended, setIsRecommended] = useState(false);
 
+  // contexto receitas em progresso
+  const [isDisabled, setIsDisabled] = useState(true);
+  const [recipeInProgress, setRecipeInProgress] = useState();
+
   const handleFetch = useCallback(async (url, type) => {
     try {
       const request = await fetch(url);
@@ -38,7 +42,6 @@ function DetailsContextProvider({ children }) {
       if (formattingData[currentRecommendation] !== null) {
         setRecomendations(formattingData[currentRecommendation]);
       }
-      console.log(formattingData[currentRecommendation]);
     } catch (err) {
       console.log(err);
     }
@@ -52,6 +55,10 @@ function DetailsContextProvider({ children }) {
     fetchMealRecipes,
     isRecommended,
     setIsRecommended,
+    isDisabled,
+    setIsDisabled,
+    recipeInProgress,
+    setRecipeInProgress,
   };
 
   return (

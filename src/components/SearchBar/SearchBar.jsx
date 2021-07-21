@@ -50,7 +50,7 @@ function SearchBar({ type }) {
     <SearchBarContainer>
       <input
         type="text"
-        placeholder="Buscar receita"
+        placeholder="Buscar Receita"
         data-testid="search-input"
         value={ inputSearch }
         onChange={ (ev) => setInputSearch(ev.target.value) }

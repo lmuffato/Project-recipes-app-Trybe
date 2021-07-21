@@ -7,6 +7,7 @@ import useFetchRecipes from '../effects/useFetchRecipes';
 import CardList from '../components/CardList/CardList';
 import { RecipesContext } from '../context/RecipesContext';
 import AreasList from '../components/AreasList/AreasList';
+import logoIcon from '../images/savory-6.svg';
 
 function ExploreOrigin() {
   const [isActive, setIsActive] = useState(false);
@@ -20,7 +21,12 @@ function ExploreOrigin() {
   };
 
   useEffect(() => {
+    let cancel = false;
+    if (cancel) return;
     setFetchUrl('https://www.themealdb.com/api/json/v1/1/search.php?s=');
+    return () => {
+      cancel = true;
+    };
   }, [setFetchUrl]);
 
   useEffect(() => {
@@ -29,7 +35,7 @@ function ExploreOrigin() {
 
   return (
     <>
-      <Header heading="Explorar Origem">
+      <Header heading="Explorar Origem" logoSrc={ logoIcon }>
         <SearchBarButton onClick={ handleToggleSearchBar } />
       </Header>
       { isActive ? (<SearchBar />) : ''}
