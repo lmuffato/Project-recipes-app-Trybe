@@ -29,7 +29,6 @@ function Home(props) {
   };
 
   useEffect(() => {
-    console.log('1- URL Home');
     if (type === 'meals') {
       return setFetchUrl(MEALS_URL);
     }

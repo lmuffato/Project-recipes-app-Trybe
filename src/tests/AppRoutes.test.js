@@ -8,17 +8,15 @@ const FIRST_IMAGE_TEST_ID = '0-card-img';
 const FIRST_INGREDIENT = '0-ingredient-name-and-measure';
 const BEEF_FILTER = 'Beef-category-filter';
 const ORDINARY_DRINK_FILTER = 'Ordinary Drink-category-filter';
-
 describe('Testes de rotas do App', () => {
   it('Rota /explorar/bebidas/ingredientes renderiza corretamente',
     async () => {
-      const { getByText, getByTestId } = renderWithRouterHooksAndProvider(
+      const { getByText, getByTestId } = await renderWithRouterHooksAndProvider(
         <App />,
         '/explorar/bebidas/ingredientes',
       );
       await waitForElement(() => getByTestId(FIRST_IMAGE_TEST_ID));
       await waitForElement(() => getByText('Light rum'));
-
       expect(getByTestId(FIRST_IMAGE_TEST_ID)).toBeInTheDocument();
       expect(getByText('Light rum')).toBeInTheDocument();
 
@@ -32,13 +30,12 @@ describe('Testes de rotas do App', () => {
 
   it('Rota /explorar/comidas/ingredientes renderiza corretamente',
     async () => {
-      const { getByText, getByTestId } = renderWithRouterHooksAndProvider(
+      const { getByText, getByTestId } = await renderWithRouterHooksAndProvider(
         <App />,
         '/explorar/comidas/ingredientes',
       );
 
       await waitForElement(() => getByTestId(FIRST_IMAGE_TEST_ID));
-
       expect(getByTestId(FIRST_IMAGE_TEST_ID)).toBeInTheDocument();
       expect(getByText('Chicken')).toBeInTheDocument();
       expect(getByTestId('1-card-img')).toBeInTheDocument();
@@ -54,13 +51,16 @@ describe('Testes de rotas do App', () => {
 
   it('Rota /comidas/:id renderiza corretamente',
     async () => {
-      const { getByText, getByTestId, getAllByTestId } = renderWithRouterHooksAndProvider(
+      const {
+        getByText,
+        getByTestId,
+        getAllByTestId,
+      } = await renderWithRouterHooksAndProvider(
         <App />,
         '/comidas/52940',
       );
 
       await waitForElement(() => getByTestId(RECIPE_TITLE_TEST_ID));
-
       expect(getByTestId(RECIPE_TITLE_TEST_ID)).toBeInTheDocument();
       expect(getByTestId('recipe-category')).toBeInTheDocument();
       expect(getByText('Recomendadas')).toBeInTheDocument();
@@ -74,7 +74,9 @@ describe('Testes de rotas do App', () => {
 
   it('Rota /bebidas/:id renderiza corretamente',
     async () => {
-      const { getByText, getByTestId, getAllByTestId } = renderWithRouterHooksAndProvider(
+      const {
+        getByText, getByTestId, getAllByTestId,
+      } = await renderWithRouterHooksAndProvider(
         <App />,
         '/bebidas/15997',
       );
@@ -94,7 +96,7 @@ describe('Testes de rotas do App', () => {
 
   it('Rota explorar comidas por area renderiza corretamente',
     async () => {
-      const { getByText, getByTestId } = renderWithRouterHooksAndProvider(
+      const { getByText, getByTestId } = await renderWithRouterHooksAndProvider(
         <App />,
         '/explorar/comidas/area',
       );
@@ -127,7 +129,7 @@ describe('Testes de rotas do App', () => {
 
   it('Rota /comidas',
     async () => {
-      const { getByText, getByTestId } = renderWithRouterHooksAndProvider(
+      const { getByText, getByTestId } = await renderWithRouterHooksAndProvider(
         <App />,
         '/comidas',
       );
@@ -157,7 +159,7 @@ describe('Testes de rotas do App', () => {
 
   it('Rota /bebidas',
     async () => {
-      const { getByText, getByTestId } = renderWithRouterHooksAndProvider(
+      const { getByText, getByTestId } = await renderWithRouterHooksAndProvider(
         <App />,
         '/bebidas',
       );
@@ -185,7 +187,7 @@ describe('Testes de rotas do App', () => {
 
   it('Receita de comida em progresso',
     async () => {
-      const { getByText, getByTestId } = renderWithRouterHooksAndProvider(
+      const { getByText, getByTestId } = await renderWithRouterHooksAndProvider(
         <App />,
         '/comidas/52977',
       );
@@ -217,13 +219,12 @@ describe('Testes de rotas do App', () => {
 
   it('Receita de bebida em progresso',
     async () => {
-      const { getByText, getByTestId } = renderWithRouterHooksAndProvider(
+      const { getByText, getByTestId } = await renderWithRouterHooksAndProvider(
         <App />,
         '/bebidas/15997',
       );
 
       const FINISH_BTN = 'finish-recipe-btn';
-
       await waitForElement(() => getByTestId(RECIPE_TITLE_TEST_ID));
       expect(getByText('GG')).toBeInTheDocument();
       const startRecipeBtn = getByTestId('start-recipe-btn');
@@ -235,7 +236,6 @@ describe('Testes de rotas do App', () => {
       // toBeDisabled consultado no stackOverflow
       // https://stackoverflow.com/questions/56593840/check-that-button-is-disabled-in-react-testing-library
       expect(getByTestId(FINISH_BTN)).toBeDisabled();
-
       const TOTAL_INGREDIENTS = 2;
       for (let index = 0; index <= TOTAL_INGREDIENTS; index += 1) {
         fireEvent.click(getByTestId(`${index}-ingredient-step`));

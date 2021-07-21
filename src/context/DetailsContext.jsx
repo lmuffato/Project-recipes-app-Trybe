@@ -42,7 +42,6 @@ function DetailsContextProvider({ children }) {
       if (formattingData[currentRecommendation] !== null) {
         setRecomendations(formattingData[currentRecommendation]);
       }
-      console.log(formattingData[currentRecommendation]);
     } catch (err) {
       console.log(err);
     }

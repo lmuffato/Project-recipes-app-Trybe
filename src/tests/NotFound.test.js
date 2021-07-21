@@ -3,8 +3,8 @@ import App from '../App';
 import renderWithRouterHooksAndProvider from './renderWithRouterHooksAndProvider';
 
 it('Aparece mensagem de Not Found quando a rota é mudada para /explorar/bebidas/area',
-  () => {
-    const { getByRole } = renderWithRouterHooksAndProvider(
+  async () => {
+    const { getByRole } = await renderWithRouterHooksAndProvider(
       <App />,
       '/explorar/bebidas/area',
     );

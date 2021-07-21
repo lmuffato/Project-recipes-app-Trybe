@@ -3,9 +3,13 @@ import React from 'react';
 import App from '../App';
 import renderWithRouterHooksAndProvider from './renderWithRouterHooksAndProvider';
 
+const RECIPE_TITLE_TEST_ID = 'recipe-title';
+const FIRST_IMAGE = '0-horizontal-image';
+const RECEITAS_FAVORITAS = '/receitas-favoritas';
+
 describe('Testa funcionalidade de receitas favoritas', () => {
   it('Ao entrar pela primeira vez mostra msg que não há receitas favoritas', async () => {
-    const { getByTestId, getByText } = renderWithRouterHooksAndProvider(
+    const { getByTestId, getByText } = await renderWithRouterHooksAndProvider(
       <App />,
       '/comidas',
     );
@@ -31,7 +35,7 @@ describe('Testa funcionalidade de receitas favoritas', () => {
         getByText,
         getByTestId,
         history,
-      } = renderWithRouterHooksAndProvider(
+      } = await renderWithRouterHooksAndProvider(
         <App />,
         '/bebidas/15997',
       );
@@ -40,7 +44,7 @@ describe('Testa funcionalidade de receitas favoritas', () => {
 
       expect(getByTestId(FAVORITE_BTN)).toBeInTheDocument();
       fireEvent.click(getByTestId(FAVORITE_BTN));
-      history.push('/receitas-favoritas');
+      history.push(RECEITAS_FAVORITAS);
 
       await waitForElement(() => getByTestId(FIRST_IMG));
       expect(getByTestId(FIRST_IMG)).toBeInTheDocument();
@@ -57,5 +61,38 @@ describe('Testa funcionalidade de receitas favoritas', () => {
       expect(getByTestId(FAVORITE_BTN).src).toMatch(
         'whiteHeartIcon.svg',
       );
+
+      history.push(RECEITAS_FAVORITAS);
+      const noFavoritesMsg = getByText('Você não possui receitas favoritas!');
+      expect(noFavoritesMsg).toBeInTheDocument();
     });
+
+  it('Filtragem de receitas favoritas', async () => {
+    const {
+      getByText,
+      getByTestId,
+      history,
+    } = await renderWithRouterHooksAndProvider(
+      <App />,
+      '/comidas/52978',
+    );
+
+    await waitForElement(() => getByTestId(RECIPE_TITLE_TEST_ID));
+    expect(getByTestId(FAVORITE_BTN)).toBeInTheDocument();
+    fireEvent.click(getByTestId(FAVORITE_BTN));
+
+    history.push(RECEITAS_FAVORITAS);
+    expect(getByTestId(FIRST_IMAGE)).toBeInTheDocument();
+    expect(getByTestId(FIRST_IMAGE).src).toMatch(
+      'https://www.themealdb.com/images/media/meals/mlchx21564916997.jpg',
+    );
+    const kumpir = getByText('Kumpir');
+    expect(kumpir).toBeInTheDocument();
+    fireEvent.click(getByTestId('filter-by-drink-btn'));
+    expect(kumpir).not.toBeInTheDocument();
+    fireEvent.click(getByTestId('filter-by-all-btn'));
+    expect(getByText('Kumpir')).toBeInTheDocument();
+    fireEvent.click(getByTestId('filter-by-food-btn'));
+    expect(getByText('Kumpir')).toBeInTheDocument();
+  });
 });
