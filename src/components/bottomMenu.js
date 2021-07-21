@@ -4,6 +4,7 @@ import '../App.css';
 import exploreIcon from '../images/exploreIcon.png';
 import drinkIcon from '../images/drinkIcon.png';
 import mealIcon from '../images/mealIcon.png';
+import '../pages/Profile/Profile.css';
 
 function bottomMenu() {
   return (

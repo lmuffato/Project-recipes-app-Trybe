@@ -3,6 +3,7 @@ import Header from '../../components/Header';
 import Context from '../../context/Context';
 import CompletedRecipeCardList from '../../components/CompletedRecipeCardList';
 import CompletedButtomFilters from '../../components/CompletedButtomFilters';
+import '../../components/CompletedRecipe.css';
 
 export default function CompletedRecipes() {
   const { completedFil } = useContext(Context);
@@ -51,10 +52,10 @@ export default function CompletedRecipes() {
   }, [completedFil]);
 
   return (
-    <div>
+    <div className="render-recipesDone">
       <Header title="Receitas Feitas" show={ false } />
       <CompletedButtomFilters />
-      <CompletedRecipeCardList list={ list } />
-    </div>
+      <CompletedRecipeCardList list={ list } /
+    <div>
   );
 }
