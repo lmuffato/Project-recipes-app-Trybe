@@ -96,7 +96,7 @@ class DetBebidas extends React.Component {
 
   InProgressButton(id) {
     const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
-    if (inProgressRecipes.cocktails[id]) {
+    if (inProgressRecipes && inProgressRecipes.cocktails[id]) {
       const button = document.querySelector('.start-btn');
       button.innerHTML = 'Continuar Receita';
     }
@@ -149,7 +149,7 @@ class DetBebidas extends React.Component {
               src={ this.checkFavorite(recipe[0]) }
               alt="favoritar receita"
               onClick={ () => saveFavoriteDrink(recipe[0]) }
-              // className="fav-btn"
+              className="fav-btn"
             />
           </div>
           <h4>

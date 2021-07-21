@@ -153,7 +153,7 @@ class DetComidas extends React.Component {
               src={ this.checkFavorite(recipe[0]) }
               alt="favoritar receita"
               onClick={ () => saveFavoriteFood(recipe[0]) }
-              // className="fav-btn"
+              className="fav-btn"
             />
           </div>
           <h4>

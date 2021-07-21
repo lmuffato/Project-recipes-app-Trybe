@@ -1,0 +1,29 @@
+.infoContainer {
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 1rem;
+  margin: auto;
+  padding: 0 2rem;
+}
+
+h1 {
+  padding-top: 1rem;
+}
+
+p {
+  font-style: italic;
+}
+
+.iconsContainer {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 1rem;
+}
+
+img {
+  border-bottom: solid yellow 8px;
+  border-bottom-left-radius: 7%;
+  border-bottom-right-radius: 7%;
+  padding: 0;
+  width: 100%;
+}
