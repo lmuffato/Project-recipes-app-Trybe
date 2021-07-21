@@ -45,6 +45,7 @@ img:hover {
 	display: flex;
 	flex-direction: column;
 	width: 100%;
+	/* background-color: rgb(30,30,30); */
 }
 
 .recipe-card {
