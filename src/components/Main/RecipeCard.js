@@ -2,20 +2,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import '../../style/RecipeCard.css';
+import zipName from './Helpers';
 
 export default function RecipeCard({ recipe, index, type: URL_PATH }) {
 
-  function zipName(recipeName) {
-    const MAX_OF_CHARACTERS = 25;
-
-    let compactedName = recipeName.slice(0, MAX_OF_CHARACTERS);
-
-    if (recipeName.length > MAX_OF_CHARACTERS) {
-      compactedName = recipeName.slice(0, MAX_OF_CHARACTERS).concat('...');
-    }
-
-    return compactedName;
-  }
+  const numOfCharacters = 25;
 
   return (
     <div className="recipe-card">
@@ -37,8 +28,8 @@ export default function RecipeCard({ recipe, index, type: URL_PATH }) {
           />
           <p data-testid={ `${index}-card-name` }>
             { URL_PATH === '/comidas' || URL_PATH === '/comidas/'
-              ? zipName(recipe.strMeal)
-              : zipName(recipe.strDrink) }
+              ? zipName(recipe.strMeal, numOfCharacters)
+              : zipName(recipe.strDrink, numOfCharacters) }
           </p>
         </div>
       </Link>

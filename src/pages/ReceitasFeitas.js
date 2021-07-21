@@ -21,7 +21,7 @@ export default function ReceitasFeitas() {
       />
       <div className="buttons-done">
         <button
-          className="button is-primary"
+          className="button is-warning"
           type="button"
           data-testid="filter-by-all-btn"
           value=""

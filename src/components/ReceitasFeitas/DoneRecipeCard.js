@@ -5,9 +5,11 @@ import PropTypes from 'prop-types';
 import ShareButton from '../ShareButton';
 
 import '../../style/DoneRecipeCard.css';
+import zipName from '../Main/Helpers';
 
 export default function DoneRecipeCard({ recipe, index }) {
   const isFood = recipe.type === 'comida';
+  const numOfCharacters = 12;
 
   return (
     <div className="done-recipe-card">
@@ -32,7 +34,7 @@ export default function DoneRecipeCard({ recipe, index }) {
         </div>
         <Link to={ `/${isFood ? 'comidas' : 'bebidas'}/${recipe.id}` }>
           <p data-testid={ `${index}-horizontal-name` }>
-            {recipe.name}
+            { zipName(recipe.name, numOfCharacters)}
           </p>
         </Link>
         <p data-testid={ `${index}-horizontal-done-date` }>
@@ -45,7 +47,7 @@ export default function DoneRecipeCard({ recipe, index }) {
               key={ i }
               data-testid={ `${index}-${tag}-horizontal-tag` }
             >
-              {tag}
+              { tag }
             </span>
           )) }
       </div>

@@ -5,13 +5,13 @@
 }
 
 .buttons-done {
-  margin: 40px;
+  margin: 30px;
 }
 
 .done-cards-container {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  margin-left: 30px;
+  justify-content: center;
 }
 
