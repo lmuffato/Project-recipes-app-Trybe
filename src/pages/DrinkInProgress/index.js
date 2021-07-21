@@ -1,26 +1,24 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import BebidasInProgress from '../../components/BebidasInProgress';
 import fetchDrinksDetails from '../../services/fetchDrinkDetails';
+import DrinkLoader from '../../components/Loader/Drink';
 
 function BebidasProgresso() {
-  const { pathname } = useLocation();
-  const [data, setData] = useState({});
-  const [show, setShow] = useState(true);
-  const minSlice = 9;
-  const maxSlice = -12;
-  const id = pathname.slice(minSlice, maxSlice);
+  const { id } = useParams();
+  const [data, setData] = useState('');
+  const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
     async function fetchAPI() {
       const { drinks } = await fetchDrinksDetails(id);
       setData(drinks[0]);
-      setShow(false);
+      setLoading(false);
     }
     fetchAPI();
   }, [id]);
 
-  return show ? <h2>Loading...</h2> : <BebidasInProgress data={ data } />;
+  return isLoading ? <DrinkLoader /> : <BebidasInProgress data={ data } />;
 }
 
 export default BebidasProgresso;

@@ -1,113 +1,121 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import getIngredients from '../../services/getIngredients';
 import ShareButton from '../ShareButton';
 import FavoriteButton from '../FavoriteButton';
-import getIngredientsWithNumber from '../../services/getIngredientsWithNumber';
-import fetchFoodDetails from '../../services/fetchFoodDetails';
+import getIngredients from '../../services/getIngredients';
 
-function FoodsInProgress({ data }) {
-  const [food, setFood] = useState({});
-  const ingredients = getIngredients(food, 'strIngredient');
+const setDoneRecipes = (recipe) => {
+  const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
+  if (doneRecipes) {
+    localStorage.setItem(
+      'doneRecipes',
+      JSON.stringify([...doneRecipes, recipe]),
+    );
+  } else {
+    localStorage.setItem('doneRecipes', JSON.stringify([recipe]));
+  }
+};
+
+function FoodsInProgress({ data: recipe }) {
   const { id } = useParams();
-  // const [keys, setKeys] = useState([]);
   const [checkedIngredients, setChecked] = useState([]);
   const [redirect, setRedirect] = useState(false);
+  const ingredients = getIngredients(recipe, 'strIngredient');
+
   useEffect(() => {
-    // function saveState() {
-    //   const { strMealThumb, strMeal, strCategory } = data;
-    //   const obj = [{
-    //     image: strMealThumb,
-    //     title: strMeal,
-    //     category: strCategory,
-    //   }];
-    //   setKeys(obj);
-    // }
-    // saveState();
     const updateChecked = () => {
-      const storage = JSON.parse(localStorage.getItem('inProgressRecipes'));
-      if (storage) {
-        const meal = storage.meals[id];
+      const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
+      if (inProgressRecipes) {
+        const meal = inProgressRecipes.meals[id];
         if (meal) {
-          const newArr = [];
-          meal.forEach((item) => newArr.push(data[`strIngredient${item}`]));
-          setChecked(newArr);
-        } else {
-          storage.meals[id] = [];
-          localStorage.setItem('inProgressRecipes', JSON.stringify(storage));
+          setChecked(meal);
         }
       } else {
-        const obj = {
+        localStorage.setItem('inProgressRecipes', JSON.stringify({
           cocktails: {},
           meals: {},
-        };
-        localStorage.setItem('inProgressRecipes', JSON.stringify(obj));
+        }));
       }
     };
     updateChecked();
-    const getFood = async () => {
-      const { meals } = await fetchFoodDetails(id);
-      setFood(meals[0]);
-    };
-    getFood();
-  }, [data, id]);
+  }, [recipe, id]);
 
   useEffect(() => {
     const updateLocalStorage = () => {
-      const storage = JSON.parse(localStorage.getItem('inProgressRecipes'));
-      const numberIngredients = getIngredientsWithNumber(data);
-      const newArr = checkedIngredients.map((element) => numberIngredients[element]);
-      storage.meals[id] = newArr;
-      localStorage.setItem('inProgressRecipes', JSON.stringify(storage));
+      const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
+      localStorage.setItem('inProgressRecipes', JSON.stringify({
+        ...inProgressRecipes,
+        meals: { ...inProgressRecipes.meals, [id]: checkedIngredients },
+      }));
     };
     updateLocalStorage();
-  }, [checkedIngredients, id, data]);
+  }, [checkedIngredients, id, recipe]);
 
   const handleButton = () => {
+    const {
+      strMeal: name,
+      strArea: area,
+      strTags,
+      strCategory: category,
+      strMealThumb: image,
+    } = recipe;
+    const tags = strTags.split(',').slice(0, 2);
+    const type = 'comida';
+    const doneDate = new Date();
+    setDoneRecipes({ id, name, area, tags, category, doneDate, type, image });
     setRedirect(true);
   };
 
   const handleCheked = ({ target }) => {
-    console.log(target);
     if (checkedIngredients.includes(target.name)) {
-      const filtered = checkedIngredients.filter((element) => element !== target.name);
+      const filtered = checkedIngredients.filter(
+        (element) => element !== target.name,
+      );
       setChecked(filtered);
     } else {
       const newArr = [...checkedIngredients, target.name];
       setChecked(newArr);
     }
   };
+
   return (
     <div>
-      <h1>teste</h1>
-      <img
-        src={ food.strMealThumb }
-        alt="thumb"
-        data-testid="recipe-photo"
-        width="200px"
-      />
-      <h3 data-testid="recipe-title">{ food.strMeal }</h3>
-      <ShareButton urlCopied={ `http://localhost:3000/comidas/${id}` } />
-      <FavoriteButton data={ data } path={ id } />
-      <p data-testid="recipe-category">{ food.strCategory }</p>
-      { Object.values(ingredients).map((element, index) => (
-        <label
-          data-testid={ `${index}-ingredient-step` }
-          key={ index }
-          htmlFor={ `${index}-${element}` }
-        >
-          { element }
-          <input
-            type="checkbox"
-            id={ `${index}-${element}` }
-            name={ element }
-            onChange={ handleCheked }
-            checked={ checkedIngredients.includes(element) }
-          />
-        </label>
-      )) }
-      <p data-testid="instructions">{ food.strInstructions }</p>
+      <div className="top-recipe-details">
+        <img
+          src={ recipe.strMealThumb }
+          alt="thumb"
+          data-testid="recipe-photo"
+          width="200px"
+        />
+        <div className="recipes-buttons-actions">
+          <ShareButton urlCopied={ `http://localhost:3000/comidas/${id}` } />
+          <FavoriteButton data={ recipe } path={ id } />
+        </div>
+      </div>
+      <div className="recipe-title">
+        <h3 data-testid="recipe-title">{recipe.strMeal}</h3>
+        <p data-testid="recipe-category">{recipe.strCategory}</p>
+      </div>
+      <div className="recipe-ingredients-container">
+        {Object.values(ingredients).map((element, index) => (
+          <label
+            data-testid={ `${index}-ingredient-step` }
+            key={ index }
+            htmlFor={ `${index}-${element}` }
+          >
+            <input
+              type="checkbox"
+              id={ `${index}-${element}` }
+              name={ element }
+              onChange={ handleCheked }
+              checked={ checkedIngredients.includes(element) }
+            />
+            {element}
+          </label>
+        ))}
+      </div>
+      <p data-testid="instructions">{recipe.strInstructions}</p>
       <button
         type="button"
         data-testid="finish-recipe-btn"
@@ -116,7 +124,7 @@ function FoodsInProgress({ data }) {
       >
         Finalizar Receita!
       </button>
-      { redirect ? <Redirect to="/receitas-feitas" /> : null }
+      {redirect ? <Redirect to="/receitas-feitas" /> : null}
     </div>
   );
 }

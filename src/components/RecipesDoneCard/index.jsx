@@ -11,51 +11,37 @@ export default function RecipesDoneCard({ recipe, index }) {
     copy(`http://localhost:3000/${str}/${recipe.id}`);
     setShow(true);
   };
-  const renderTag = () => recipe.tags.slice(0, 2).map((tag, tagIndex) => {
-    if (tagIndex !== recipe.tags.length - 1) {
-      return (
-        <span
-          data-testid={ `${index}-${tag}-horizontal-tag` }
-          key={ tag }
-        >
-          {tag}
-          {' - '}
-        </span>
-      );
-    } return (
-      <span
-        data-testid={ `${index}-${tag}-horizontal-tag` }
-        key={ tag }
-      >
-        {tag}
-      </span>
-    );
-  });
+
+  const renderTag = () => recipe.tags.map((tag) => (
+    <span key={ tag } data-testid={ `${index}-${tag}-horizontal-tag` }>
+      {tag === recipe.tags[recipe.tags.length - 1] && recipe.tags.length > 1
+        ? ` - ${tag}`
+        : tag}
+    </span>
+  ));
 
   const conditional = () => {
-    console.log(recipe.id);
     if (recipe.type.toLowerCase().includes('comida')) {
       return (
         <div className="card-container">
-          <Link
-            to={ `/comidas/${recipe.id}` }
-          >
+          <Link to={ `/comidas/${recipe.id}` }>
             <img
               data-testid={ `${index}-horizontal-image` }
               src={ recipe.image }
               alt="meal"
+              className="recipe-done-img"
             />
           </Link>
-          <Link
-            to={ `/comidas/${recipe.id}` }
-          >
+          <Link to={ `/comidas/${recipe.id}` }>
             <h1 data-testid={ `${index}-horizontal-name` }>{recipe.name}</h1>
           </Link>
           <h2 data-testid={ `${index}-horizontal-top-text` }>
             {`${recipe.area} - ${recipe.category}`}
           </h2>
-          <p>{renderTag()}</p>
-          <h4 data-testid={ `${index}-horizontal-done-date` }>{recipe.doneDate}</h4>
+          {renderTag()}
+          <h4 data-testid={ `${index}-horizontal-done-date` }>
+            {recipe.doneDate}
+          </h4>
           <input
             type="image"
             data-testid={ `${index}-horizontal-share-btn` }
@@ -66,19 +52,23 @@ export default function RecipesDoneCard({ recipe, index }) {
           {show ? <h2>Link copiado!</h2> : null}
         </div>
       );
-    } return (
+    }
+    return (
       <div className="card-container">
         <Link to={ `/bebidas/${recipe.id}` }>
           <img
             data-testid={ `${index}-horizontal-image` }
             src={ recipe.image }
             alt="meal"
+            className="recipe-done-img"
           />
         </Link>
         <Link to={ `/bebidas/${recipe.id}` }>
           <h1 data-testid={ `${index}-horizontal-name` }>{recipe.name}</h1>
         </Link>
-        <p data-testid={ `${index}-horizontal-top-text` }>{recipe.alcoholicOrNot}</p>
+        <p data-testid={ `${index}-horizontal-top-text` }>
+          {recipe.alcoholicOrNot}
+        </p>
         <p data-testid={ `${index}-horizontal-done-date` }>{recipe.doneDate}</p>
         <input
           type="image"
@@ -91,11 +81,7 @@ export default function RecipesDoneCard({ recipe, index }) {
       </div>
     );
   };
-  return (
-    <div>
-      {conditional()}
-    </div>
-  );
+  return <div>{conditional()}</div>;
 }
 
 RecipesDoneCard.propTypes = {

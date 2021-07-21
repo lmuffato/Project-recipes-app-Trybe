@@ -1,9 +1,13 @@
-.card-container {
+/* .card-container {
   max-height: 25%;
   max-width: 25%;
-}
+} */
 
-.card-container img {
+/* .card-container img {
   max-height: 5%;
   max-width: 5%;
+} */
+
+.recipe-done-img {
+  width: 50%;
 }

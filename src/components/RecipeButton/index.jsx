@@ -1,13 +1,30 @@
 import React, { useState, useEffect } from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
+const insertNewRecipeProgress = (id) => {
+  const { pathname } = window.location;
+  const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
+  if (inProgressRecipes) {
+    if (pathname.includes('/comidas')) {
+      inProgressRecipes.meals = {
+        ...inProgressRecipes.meals, [id]: [],
+      };
+      localStorage.setItem('inProgressRecipes', JSON.stringify(inProgressRecipes));
+    } else {
+      inProgressRecipes.cocktails = {
+        ...inProgressRecipes.cocktails, [id]: [],
+      };
+      localStorage.setItem('inProgressRecipes', JSON.stringify(inProgressRecipes));
+    }
+  }
+};
+
 export default function RecipeButton({ path, ingredients }) {
+  const { id } = useParams();
   const [buttonName, setButtonName] = useState('Iniciar Receita');
   const [recipeStarted, setStarted] = useState(false);
-  const sliceNumber = 9;
-
-  console.log(ingredients);
+  const [display, setDisplay] = useState('block');
 
   // function setLocalStorage() {
   //   const inProgressRecipes = 'inProgressRecipes';
@@ -23,34 +40,13 @@ export default function RecipeButton({ path, ingredients }) {
   // }
 
   function recipesProgress() {
-  //   // const ingredient = ingredients.map((index) => index[1]);
-  //   if (path.includes('/comidas')) {
-  //     const id = path.slice(sliceNumber);
-  //     let include = JSON.parse(localStorage.getItem('inProgressRecipes'));
-  //     include = {
-  //       ...include,
-  //       meals: {
-  //         ...include.meals, [id]: [],
-  //       },
-  //     };
-  //     localStorage.setItem('inProgressRecipes', JSON.stringify(include));
-  //   } else {
-  //     const id = path.slice(sliceNumber);
-  //     let include = JSON.parse(localStorage.getItem('inProgressRecipes'));
-  //     include = {
-  //       ...include,
-  //       cocktails: {
-  //         ...include.cocktails, [id]: [],
-  //       },
-  //     };
-  //     localStorage.setItem('inProgressRecipes', JSON.stringify(include));
-  //   }
     setStarted(true);
+    insertNewRecipeProgress(id);
   }
 
   const conditionalLocalStorage = () => {
-    const storage = JSON.parse(localStorage.getItem('inProgressRecipes'));
-    if (storage === null) {
+    const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    if (inProgressRecipes === null) {
       const obj = {
         cocktails: {},
         meals: {},
@@ -61,19 +57,18 @@ export default function RecipeButton({ path, ingredients }) {
 
   useEffect(() => {
     function button() {
-      const id = path.slice(sliceNumber);
+      const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
+      if (doneRecipes && doneRecipes.find((recipe) => recipe.id === id)) {
+        setDisplay('none');
+      }
       const include = JSON.parse(localStorage.getItem('inProgressRecipes'));
       if (path.includes('/comida')) {
         if (include.meals[id] !== undefined) setButtonName('Continuar Receita');
-      } else {
-        return include.cocktails[id] !== undefined
-          ? setButtonName('Continuar Receita')
-          : setButtonName('Iniciar Receita');
-      }
+      } else if (include.cocktails[id] !== undefined) setButtonName('Continuar Receita');
     }
     conditionalLocalStorage();
     button();
-  }, [path]);
+  }, [id, path]);
 
   if (recipeStarted) {
     return (<Redirect
@@ -85,21 +80,15 @@ export default function RecipeButton({ path, ingredients }) {
   }
 
   return (
-    // <Link
-    //   to={ {
-    //     pathname: `${path}/in-progress`,
-    //     // state: { ingredients },
-    //   } }
-    //   >
     <button
       className="start-recipe-btn"
       type="button"
       data-testid="start-recipe-btn"
       onClick={ recipesProgress }
+      style={ { display } }
     >
       { buttonName }
     </button>
-    // </Link>
   );
 }
 

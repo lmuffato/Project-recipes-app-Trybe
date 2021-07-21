@@ -17,49 +17,38 @@ function ComidasDetails({ data, recomendation }) {
   if (pathname.includes('/comidas')) {
     const { strMeal, strCategory, strMealThumb, strInstructions, strYoutube } = data;
     return (
-      <div>
-        <div>
-          <img
-            className="image-detail"
-            src={ strMealThumb }
-            alt="comida"
-            data-testid="recipe-photo"
-          />
-          <h4 data-testid="recipe-title">{ strMeal }</h4>
-          <ShareButton data-testid="share-btn" urlCopied={ href } />
-          <FavoriteButton data={ data[0] } path={ id } />
-          <p data-testid="recipe-category">{ strCategory }</p>
-          <ul>
-            { Object.values(ingredients).map((ingredient, index) => (
-              <li key={ ingredient }>
-                <p data-testid={ `${index}-ingredient-name-and-measure` }>
-                  { ingredient }
-                </p>
-              </li>
-            ))}
-            { Object.values(ingredientsMeasures).map((measure, index) => (
-              <li key={ measure }>
-                <p data-testid={ `${index}-ingredient-name-and-measure` }>
-                  { measure }
-                </p>
-              </li>
-            ))}
-          </ul>
-          <p data-testid="instructions">{ strInstructions }</p>
-          <video controls data-testid="video">
-            <source src={ strYoutube } type="video/ogg" />
-            <track
-              default
-              kind="captions"
-              srcLang="en"
-            />
-            Desculpe, seu site não suporta videos.
-          </video>
-          <Recomendations data={ recomendation } />
+      <div className="recipe-details-container">
+        <div className="top-recipe-details">
+          <img src={ strMealThumb } alt="comida" data-testid="recipe-photo" />
+          <div className="recipes-buttons-actions">
+            <ShareButton data-testid="share-btn" urlCopied={ href } />
+            <FavoriteButton data={ data } path={ id } />
+          </div>
         </div>
-        <div>
-          <RecipeButton path={ pathname } ingredients={ ingredients } />
-        </div>
+        <h4 data-testid="recipe-title">{strMeal}</h4>
+        <p data-testid="recipe-category">{strCategory}</p>
+        <ul>
+          {Object.values(ingredients).map((ingredient, index) => {
+            const measure = Object.values(ingredientsMeasures)[index];
+            return (
+              <li
+                key={ index }
+                htmlFor={ ingredient }
+                data-testid={ `${index}-ingredient-name-and-measure` }
+              >
+                {`${ingredient} ${measure ? `- ${measure}` : ''}`}
+              </li>
+            );
+          })}
+        </ul>
+        <p data-testid="instructions">{strInstructions}</p>
+        <video controls data-testid="video">
+          <source src={ strYoutube } type="video/ogg" />
+          <track default kind="captions" srcLang="en" />
+          Desculpe, seu site não suporta videos.
+        </video>
+        <Recomendations data={ recomendation } />
+        <RecipeButton path={ pathname } ingredients={ ingredients } />
       </div>
     );
   }
