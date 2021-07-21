@@ -17,12 +17,14 @@ function Search({ visibility }) {
 
   return (
     <form className={ `${styles.search} ${visibility && styles.visible}` }>
-      <input
-        type="text"
-        data-testid="search-input"
-        placeholder="Buscar receita"
-        onChange={ ({ target: { value } }) => setFilterTyped(value) }
-      />
+      { visibility && (
+        <input
+          type="text"
+          data-testid="search-input"
+          placeholder="Buscar receita"
+          onChange={ ({ target: { value } }) => setFilterTyped(value) }
+        />
+      ) }
       <div className={ styles.options }>
         <label htmlFor="ingredient" data-testid="ingredient-search-radio">
           <input

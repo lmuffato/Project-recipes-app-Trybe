@@ -30,9 +30,7 @@ function Header({ title, hideSearch }) {
           />
         ) }
       </div>
-      { searchMode && (
-        <Search visibility={ searchMode } />
-      ) }
+      <Search visibility={ searchMode } />
     </header>
   );
 }
