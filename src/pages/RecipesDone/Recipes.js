@@ -40,6 +40,7 @@ function Recipes() {
       <Card.Text
         data-testid={ `${index}-${tagName}-horizontal-tag` }
         key={ tagName }
+        className="card-tag"
       >
         { tagName}
       </Card.Text>));
