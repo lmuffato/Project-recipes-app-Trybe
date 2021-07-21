@@ -185,7 +185,7 @@ header {
 .detailMeal {
   display: flex;
   flex-direction: column;
-  margin-bottom: 52px;
+  margin-bottom: 80px;
 }
 
 .detailImage {
@@ -201,7 +201,7 @@ header {
 }
 
 .shareAndFavoriteImgs {
-  background-color: white;
+  background-color: #e5e5e5;
   border: none;
 }
 
@@ -250,6 +250,34 @@ li {
 
 .marginCheckbox {
   margin-right: 5px;
+}
+
+.emailLogad {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin: 12px;
+  width: 100vh;
+}
+
+.profile-email {
+  display: block;
+  text-align: end;
+}
+
+.profileIMG {
+  background-color: #e5e5e5;
+  margin-left: 3px;
+  width: 30px;
+}
+
+.firstLetter {
+  background-color: #14213d;
+  border-radius: 200px;
+  color: white;
+  margin-left: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
 }
 
 .meals > .logo {

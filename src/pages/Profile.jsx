@@ -19,9 +19,24 @@ function Profile() {
     <div>
       <Header title="Perfil" />
       <div className="cardsGroup">
-        {user ? (
-          <h3 data-testid="profile-email">{ `Olá, ${user.email}` }</h3>
-        ) : (null)}
+        <div className="emailLogad">
+          <div className="profile-email">
+            {user ? (
+              <span
+                data-testid="profile-email"
+              >
+                { `Olá, ${user.email}` }
+              </span>
+            ) : (null)}
+          </div>
+          <div className="firstLetter">
+            {user ? (
+              <span>
+                { `${user.email[0].toUpperCase()}` }
+              </span>
+            ) : (null)}
+          </div>
+        </div>
 
         <Link to="/receitas-feitas">
           <button
