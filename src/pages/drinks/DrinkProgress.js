@@ -19,6 +19,7 @@ function setRecipeStorage(id) {
     let setInProgressRecipe = {
       cocktails: {
         [id]: [],
+        isDone: false,
       },
     };
     if (storage && storage.includes('meals')) {
@@ -26,6 +27,7 @@ function setRecipeStorage(id) {
       setInProgressRecipe = {
         cocktails: {
           [id]: [],
+          isDone: false,
         },
         meals: mealsInProgress,
       };
@@ -115,11 +117,12 @@ function DrinkProgress(props) {
     setFavoriteRecipe({ favorite: !favorite });
   };
 
-  const recipeProgress = (newProg, action) => {
+  const recipeProgress = (newProg, action, bool) => {
     const storage = localStorage.inProgressRecipes;
     let setInProgressRecipe = {
       cocktails: {
         [id]: newProg,
+        isDone: bool,
       },
     };
     if (storage && storage.includes('meals')) {
@@ -127,6 +130,7 @@ function DrinkProgress(props) {
       setInProgressRecipe = {
         cocktails: {
           [id]: newProg,
+          isDone: bool,
         },
         meals: mealsInProgress,
       };
@@ -145,17 +149,17 @@ function DrinkProgress(props) {
     const howManyIngredients = ingredientDiv.parentNode.childElementCount;
     if (checked && currentProgress.length === howManyIngredients) {
       ingredientDiv.style.textDecoration = 'line-through';
-      recipeProgress(currentProgress, 'CHECK_INGREDIENT');
+      recipeProgress(currentProgress, 'CHECK_INGREDIENT', true);
       setRecipeRedux({ actionType: 'ENABLE_FINISH_BUTTON',
         recipeIsDone: true,
       });
     } else if (checked) {
       ingredientDiv.style.textDecoration = 'line-through';
-      recipeProgress(currentProgress, 'CHECK_INGREDIENT');
+      recipeProgress(currentProgress, 'CHECK_INGREDIENT', false);
     } else {
       ingredientDiv.style.textDecoration = '';
       const removeIngredient = currentProgress.filter((ings) => ings !== ingredient);
-      recipeProgress(removeIngredient, 'UNCHECK_INGREDIENT');
+      recipeProgress(removeIngredient, 'UNCHECK_INGREDIENT', false);
       setRecipeRedux({
         recipeIsDone: false,
       });
