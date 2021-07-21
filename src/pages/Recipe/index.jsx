@@ -3,6 +3,7 @@ import copy from 'clipboard-copy';
 import { BiHeart, BiShareAlt } from 'react-icons/bi';
 import { useHistory, useParams } from 'react-router-dom';
 import { RecipesContext } from '../../context/Recipes';
+import { FavoriteRecipesContext } from '../../context/FavoriteRecipes';
 
 import HeaderBack from '../../components/HeaderBack';
 import Ingredient from './components/Ingredient';
@@ -12,17 +13,25 @@ import StartOrFinishRecipeBtn from './components/StartOrFinishRecipeBtn';
 
 import { getRecipe, getRecommendations } from '../../services/recipesData';
 
+import blackHeartIcon from '../../images/blackHeartIcon.svg';
+
 import styles from './styles.module.scss';
 
 function Recipe() {
   const { location: { pathname } } = useHistory();
   const { addDoneRecipe } = useContext(RecipesContext);
+  const {
+    favoriteRecipe,
+    addFavoriteRecipe,
+    removeFavoriteRecipe,
+  } = useContext(FavoriteRecipesContext);
   const { id } = useParams();
   const [recipe, setRecipe] = useState({});
   const [videoId, setVideoId] = useState('');
   const [recommendations, setRecommendations] = useState([]);
   const [finishedSteps, setFinishedSteps] = useState({});
   const [copiedLink, setCopiedLink] = useState(false);
+  const recipeIsLiked = favoriteRecipe.find((recipeLiked) => recipeLiked.id === id);
   const alcoholicRecipe = recipe.strAlcoholic && recipe.strAlcoholic === 'Alcoholic';
 
   useEffect(() => {
@@ -71,14 +80,35 @@ function Recipe() {
     setCopiedLink(true);
   }
 
+  function heartRecipe() {
+    if (!recipeIsLiked) {
+      addFavoriteRecipe(id, recipe, pathname);
+    } else {
+      removeFavoriteRecipe(id);
+    }
+  }
+
   return (
     <div className={ styles.recipe }>
       <HeaderBack title={ recipe.name || 'Recipe' } />
       <div className={ styles.header }>
-        <img src={ recipe.imagePath } alt={ recipe.name } data-testid="recipe-photo" />
+        <img
+          src={ recipe.imagePath }
+          alt={ recipe.name }
+          data-testid="recipe-photo"
+          className={ styles.recipeImg }
+        />
         <div className={ styles.options }>
-          <button type="button" data-testid="favorite-btn">
-            <BiHeart />
+          <button
+            type="button"
+            data-testid="favorite-btn"
+            onClick={ heartRecipe }
+          >
+            { recipeIsLiked ? (
+              <img src={ blackHeartIcon } alt="Liked" />
+            ) : (
+              <BiHeart />
+            ) }
           </button>
           <button type="button" data-testid="share-btn" onClick={ copyLink }>
             <BiShareAlt />
