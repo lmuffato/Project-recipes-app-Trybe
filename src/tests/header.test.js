@@ -1,5 +1,6 @@
 import React from 'react';
 import { screen } from '@testing-library/dom';
+import { waitForElement, fireEvent } from '@testing-library/react';
 import { act } from 'react-dom/test-utils';
 import Home from '../pages/Home';
 import Profile from '../pages/Profile';
@@ -25,7 +26,6 @@ describe('4 - Crie um componente Header de acordo com os seguintes parâmetros',
       expect(pageTitle).toBeInTheDocument();
     });
   });
-
   it('Checa se o título da página principal de comidas está correto', async () => {
     await act(async () => {
       renderWithRouterHooksAndProvider(<Home type="meals" />,
@@ -37,7 +37,6 @@ describe('4 - Crie um componente Header de acordo com os seguintes parâmetros',
       expect(homePage).toBeInTheDocument();
     });
   });
-
   it('O header possui um título para a página principal de bebidas', async () => {
     await act(async () => {
       renderWithRouterHooksAndProvider(<Home />, '/bebidas');
@@ -45,7 +44,6 @@ describe('4 - Crie um componente Header de acordo com os seguintes parâmetros',
       expect(pageTitle).toBeInTheDocument();
     });
   });
-
   it('Checa se o título da página principal de bebidas está correto', async () => {
     await act(async () => {
       await renderWithRouterHooksAndProvider(<Home type="drinks" />,
@@ -57,7 +55,6 @@ describe('4 - Crie um componente Header de acordo com os seguintes parâmetros',
       expect(homePage).toBeInTheDocument();
     });
   });
-
   it('O header possui um título para a página de perfil', async () => {
     await act(async () => {
       renderWithRouterHooksAndProvider(<Profile />, '/perfil');
@@ -65,7 +62,6 @@ describe('4 - Crie um componente Header de acordo com os seguintes parâmetros',
       expect(pageTitle).toBeInTheDocument();
     });
   });
-
   it('Checa se o título da página de perfil está correto', async () => {
     await act(async () => {
       await renderWithRouterHooksAndProvider(<Profile />,
@@ -77,7 +73,6 @@ describe('4 - Crie um componente Header de acordo com os seguintes parâmetros',
       expect(profilePage).toBeInTheDocument();
     });
   });
-
   it('O header possui um título para a página de receitas favoritas', async () => {
     await act(async () => {
       renderWithRouterHooksAndProvider(<FavoriteRecipes />, 'receitas-favoritas');
@@ -97,7 +92,6 @@ describe('4 - Crie um componente Header de acordo com os seguintes parâmetros',
       expect(favoriteRecipesPage).toBeInTheDocument();
     });
   });
-
   it('O header possui um título para a página de receitas feitas', async () => {
     await act(async () => {
       renderWithRouterHooksAndProvider(<DoneRecipes />, '/receitas-feitas');
@@ -116,7 +110,6 @@ describe('4 - Crie um componente Header de acordo com os seguintes parâmetros',
       expect(doneRecipesPage).toBeInTheDocument();
     });
   });
-
   it('O header possui um título para a página de explorar', async () => {
     await act(async () => {
       await renderWithRouterHooksAndProvider(<Explore />, '/explorar');
