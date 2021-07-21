@@ -3,9 +3,9 @@ import { useRouteMatch } from 'react-router-dom';
 import { getMealsById, getIngredients, getMeasures } from '../../services/getMeals';
 import { getRecomendedDrinks } from '../../services/getDrinks';
 import './recipeDetails.css';
-import shareIcon from '../../images/shareIcon.svg';
-import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
-import blackHeartIcon from '../../images/blackHeartIcon.svg';
+import shareIcon from '../../images/shareIcon.png';
+import whiteHeartIcon from '../../images/whiteHeartIcon.png';
+import blackHeartIcon from '../../images/blackHeartIcon.png';
 import StartRecipeButton from '../../components/StartRecipeButton';
 
 const copy = require('clipboard-copy');
@@ -56,11 +56,12 @@ function MealDetails() {
         setDrinksCarousel(drinks);
       });
     setHeartToFav();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function copyBoard() {
     copy(window.location.href);
-    setCopyButton('Link copiado!');
+    setCopyButton(global.alert('Link copiado!'));
   }
 
   function renderCarousel() {
@@ -81,7 +82,7 @@ function MealDetails() {
                 src={ strDrinkThumb }
                 alt={ `imagem-da-receita-${strDrink}` }
               />
-              <h1 data-testid={ `${index}-recomendation-title` }>{ strDrink }</h1>
+              <h2 data-testid={ `${index}-recomendation-title` }>{ strDrink }</h2>
             </li>
           );
         }) }
@@ -134,33 +135,46 @@ function MealDetails() {
         strYoutube,
       } = info;
       return (
-        <div key={ index }>
+        <div className="detail-page" key={ index }>
           <img
             data-testid="recipe-photo"
             src={ strMealThumb }
             alt="recipe"
-            width="330px"
+            width="100%"
           />
-          <h2 data-testid="recipe-title">{ strMeal }</h2>
-          <div className="share-and-favorite-container">
-            { copyButton }
-            <button type="button" data-testid="share-btn" onClick={ () => copyBoard() }>
-              <img
-                src={ shareIcon }
-                alt="share button"
-              />
-            </button>
-            <button type="button" onClick={ () => heartButton(info) }>
-              <img
-                src={ !buttonFav ? blackHeartIcon : whiteHeartIcon }
-                alt="favorite button"
-                data-testid="favorite-btn"
-              />
-            </button>
+          <div className="header-content">
+            <h2 data-testid="recipe-title">{ strMeal }</h2>
+            <div className="share-and-favorite-container">
+              { copyButton }
+              <button
+                type="button"
+                data-testid="share-btn"
+                className="detail-btn"
+                onClick={ () => copyBoard() }
+              >
+                <img
+                  src={ shareIcon }
+                  alt="share button"
+                  width="26px"
+                />
+              </button>
+              <button
+                type="button"
+                className="detail-btn"
+                onClick={ () => heartButton(info) }
+              >
+                <img
+                  src={ !buttonFav ? blackHeartIcon : whiteHeartIcon }
+                  alt="favorite button"
+                  data-testid="favorite-btn"
+                  width="26px"
+                />
+              </button>
+            </div>
           </div>
-          <p data-testid="recipe-category">{ strCategory }</p>
-          <ul>
-            Ingredientes
+          <p data-testid="recipe-category" className="category">{ strCategory }</p>
+          <h2>Ingredientes</h2>
+          <ul className="ingredient-list">
             { ingredientsId.map((ingredient, measurePos) => (
               <li
                 data-testid={ `${measurePos}-ingredient-name-and-measure` }
@@ -173,12 +187,12 @@ function MealDetails() {
             )) }
           </ul>
           <h2>Instruções</h2>
-          <p data-testid="instructions">{ strInstructions }</p>
+          <p data-testid="instructions" className="instructions">{ strInstructions }</p>
           <iframe
             title="recipe-video"
             data-testid="video"
             src={ strYoutube }
-            width="355"
+            width="100%"
           />
           <div className="card-container">{ renderCarousel() }</div>
           <StartRecipeButton path="comidas" />

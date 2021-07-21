@@ -21,6 +21,7 @@ export default function ExploreFoodByArea() {
       setLoading(false);
     };
     getArea();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleSelect = async (value) => {
@@ -81,7 +82,7 @@ export default function ExploreFoodByArea() {
   );
 
   return (
-    <div className="food-page">
+    <div>
       <Header title="Explorar Origem" show />
       { isLoading ? renderLoading() : renderByArea() }
       <BottomMenu />

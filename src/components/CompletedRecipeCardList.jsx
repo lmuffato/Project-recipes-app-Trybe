@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import shareIcon from '../images/shareIcon.svg';
+import shareIcon from '../images/shareIcon.png';
+import './CompletedRecipe.css';
 
 const copy = require('clipboard-copy');
 
@@ -17,16 +18,17 @@ function CompletedRecipeCardList({ list }) {
       correctSTR = 'bebidas';
     }
     const endPoint = `http://localhost:3000/${correctSTR}/${id}`;
-    setText({ ...copyText, [id]: 'Link copiado!' });
+    setText({ ...copyText, [id]: global.alert('Link copiado!') });
     copy(endPoint);
   }
 
   const renderShareButton = (data, index) => {
     const { id, type } = data;
     return (
-      <div>
+      <div className="share-button-div">
         { copyText[id] ? copyText[id] : '' }
         <button
+          className="button-share-recipeDone"
           type="button"
           data-testid={ `${index}-horizontal-share-btn` }
           onClick={ () => copyBoard(type, id) }
@@ -35,6 +37,7 @@ function CompletedRecipeCardList({ list }) {
           <img
             src={ shareIcon }
             alt="share button"
+            width="26px"
           />
         </button>
       </div>
@@ -46,6 +49,7 @@ function CompletedRecipeCardList({ list }) {
     const first2 = tags ? tags.slice(0, magicNum) : [];
     const toReturn = first2.map((ele) => (
       <li
+        className="tag-recipesDone"
         data-testid={ `${index}-${ele}-horizontal-tag` }
         key={ ele }
       >
@@ -65,13 +69,14 @@ function CompletedRecipeCardList({ list }) {
   const renderCardDates = (data, index) => {
     const { name, doneDate, tags, type, id } = data;
     return (
-      <div>
+      <div className="test2">
         <p
           data-testid={ `${index}-horizontal-top-text` }
         >
           { handleTextCat(data) }
         </p>
         <p
+          className="name-recipeDone"
           data-testid={ `${index}-horizontal-name` }
         >
           <Link to={ { pathname: `/${type}s/${id}` } }>
@@ -104,7 +109,7 @@ function CompletedRecipeCardList({ list }) {
             data-testid={ `${index}-horizontal-image` }
             src={ `${image}` }
             alt="recipe-img"
-            className="img"
+            className="img-recipeDone"
           />
         </Link>
       </div>

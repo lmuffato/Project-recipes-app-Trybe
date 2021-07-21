@@ -1,0 +1,45 @@
+:root {
+
+  --orange-main-color: #ff6700;
+
+  --primary-background-color: #1f1f1f;
+
+  --secondary-background-color: #363636;
+
+  --black: black;
+
+  --clr-neon: #ecc01f;
+
+  --font-color: #eaeaea;
+}
+
+.other-pages {
+  background-color: var(--primary-background-color);
+  display: flex;
+  flex-flow: column;
+  height: 100vh;
+  text-align: center;
+}
+
+.elements-profile {
+  align-content: center;
+  color: var(--orange-main-color);
+  display: flex;
+  flex-flow: column;
+  flex-wrap: wrap;
+  margin-bottom: 370px;
+}
+
+.footer {
+  position: fixed;
+}
+
+.button-in-profile {
+  background-color: var(--clr-neon);
+  border: var(--clr-neon) 0.125em solid;
+  border-radius: 0.25em;
+  box-shadow: inset 0 0 0.5em 0 var(--clr-neon) , 0 0 0.5em 0 var(--clr-neon);
+  color: var(--primary-background-color);
+  margin-top: 20px;
+  width: 90%;
+}

@@ -113,39 +113,6 @@ export default function SearchBarFilters() {
           data-testid="search-input"
           onChange={ handleChange }
         />
-        <label htmlFor="ingredients-radio">
-          <input
-            type="radio"
-            data-testid="ingredient-search-radio"
-            id="ingredients-radio"
-            name="check"
-            value="ingredient"
-            onChange={ handleChange }
-          />
-          Ingrediente
-        </label>
-        <label htmlFor="name-radio">
-          <input
-            type="radio"
-            data-testid="name-search-radio"
-            id="name-radio"
-            name="check"
-            value="name"
-            onChange={ handleChange }
-          />
-          Nome
-        </label>
-        <label htmlFor="firstLetter-radio">
-          <input
-            type="radio"
-            data-testid="first-letter-search-radio"
-            id="firstLetter-radio"
-            name="check"
-            value="first-letter"
-            onChange={ handleChange }
-          />
-          Primeira letra
-        </label>
         <button
           type="button"
           data-testid="exec-search-btn"
@@ -153,6 +120,41 @@ export default function SearchBarFilters() {
         >
           Buscar
         </button>
+        <div className="radio-buttons">
+          <label htmlFor="ingredients-radio">
+            Ingrediente
+            <input
+              type="radio"
+              data-testid="ingredient-search-radio"
+              id="ingredients-radio"
+              name="check"
+              value="ingredient"
+              onChange={ handleChange }
+            />
+          </label>
+          <label htmlFor="name-radio">
+            Nome
+            <input
+              type="radio"
+              data-testid="name-search-radio"
+              id="name-radio"
+              name="check"
+              value="name"
+              onChange={ handleChange }
+            />
+          </label>
+          <label htmlFor="firstLetter-radio">
+            Primeira letra
+            <input
+              type="radio"
+              data-testid="first-letter-search-radio"
+              id="firstLetter-radio"
+              name="check"
+              value="first-letter"
+              onChange={ handleChange }
+            />
+          </label>
+        </div>
       </form>
     </div>
   );

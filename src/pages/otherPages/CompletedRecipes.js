@@ -3,6 +3,7 @@ import Header from '../../components/Header';
 import Context from '../../context/Context';
 import CompletedRecipeCardList from '../../components/CompletedRecipeCardList';
 import CompletedButtomFilters from '../../components/CompletedButtomFilters';
+import '../../components/CompletedRecipe.css';
 
 export default function CompletedRecipes() {
   const { completedFil } = useContext(Context);
@@ -24,6 +25,7 @@ export default function CompletedRecipes() {
 
   useEffect(() => {
     setList(retrivieData());
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleSetFilter = () => {
@@ -46,10 +48,11 @@ export default function CompletedRecipes() {
 
   useEffect(() => {
     setList(handleSetFilter());
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [completedFil]);
 
   return (
-    <div className="food-page">
+    <div className="render-recipesDone">
       <Header title="Receitas Feitas" show={ false } />
       <CompletedButtomFilters />
       <CompletedRecipeCardList list={ list } />

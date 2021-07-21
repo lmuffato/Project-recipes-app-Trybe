@@ -32,7 +32,7 @@ function ButtomFilters({ data, path }) {
           type="button"
           value={ categoryName }
           data-testid={ `${categoryName}-category-filter` }
-          className="buttons"
+          className="button-to-filter"
           onClick={ ({ target: { value } }) => handleButtom(value) }
         >
           { categoryName }
@@ -42,7 +42,7 @@ function ButtomFilters({ data, path }) {
   };
 
   return (
-    <fieldset className="Buttom-filters">
+    <fieldset className="button-filters-container">
       <ul className="buttons-list ">
         { renderButtoms() }
       </ul>

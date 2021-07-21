@@ -24,6 +24,7 @@ export default function FavoriteRecipes() {
 
   useEffect(() => {
     setList(retrivieData());
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleSetFilter = () => {
@@ -46,14 +47,16 @@ export default function FavoriteRecipes() {
 
   useEffect(() => {
     setList(handleSetFilter());
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [favoritedFil]);
 
   useEffect(() => {
     setList(handleSetFilter());
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [attFav]);
 
   return (
-    <div className="food-page">
+    <div>
       <Header title="Receitas Feitas" show={ false } />
       <FavoritedButtonFilters />
       <FavoritedRecipeCardList list={ list } />

@@ -36,10 +36,11 @@ export default function Drinks() {
       setLoading(false);
     };
     reciveDrinks();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
-    <div className="food-page">
+    <div>
       <Header title="Bebidas" show />
       <ButtomFilters data={ catList } path="" />
       { isLoading ? <h1>Loading...</h1>
