@@ -38,7 +38,7 @@ export default function FavoriteRecipes(props) {
   }, [filter, favoriteList]); // eslint-disable-line
 
   return (
-    <div className="card-list">
+    <div className="recipes-favorite-cards">
       {filteredList ? filteredList.map((recipe, index) => (
         <div key={ index }>
           {recipe.type === 'comida'

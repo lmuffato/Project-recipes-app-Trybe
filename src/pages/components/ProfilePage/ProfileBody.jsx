@@ -8,22 +8,24 @@ function ProfileBody() {
 
   return (
     <Container>
-      <Row data-testid="profile-email">
+      <Row data-testid="profile-email" className="profile-email">
         { user ? user.email : 'Email do usuário' }
       </Row>
       <Row>
-        <Link to="/receitas-feitas">
+        <Link to="/receitas-feitas" className="profile-links">
           <button
             type="button"
             data-testid="profile-done-btn"
+            className="profile-btns"
           >
             Receitas Feitas
           </button>
         </Link>
       </Row>
       <Row>
-        <Link to="/receitas-favoritas">
+        <Link to="/receitas-favoritas" className="profile-links">
           <button
+            className="profile-btns"
             type="button"
             data-testid="profile-favorite-btn"
           >
@@ -32,9 +34,10 @@ function ProfileBody() {
         </Link>
       </Row>
       <Row>
-        <Link to="/">
+        <Link to="/" className="profile-links">
           <button
             type="button"
+            className="profile-btns"
             data-testid="profile-logout-btn"
             onClick={ () => {
               localStorage.removeItem('user');

@@ -39,6 +39,7 @@ function Recommendations(props) {
           data-testid={ `${index}-recomendation-card` }
         >
           <Link
+            className="card-container"
             to={ recommendation.idMeal ? `/comidas/${recommendation.idMeal}`
               : `/bebidas/${recommendation.idDrink}` }
           >
@@ -49,12 +50,17 @@ function Recommendations(props) {
                 className="recommendation-img"
               />
             </Row>
-            <Row>
-              { recommendation.strAlcoholic || recommendation.strCategory }
-            </Row>
-            <Row data-testid={ `${index}-recomendation-title` }>
-              { recommendation.strDrink || recommendation.strMeal }
-            </Row>
+            <div className="recomendation-div">
+              <Row className="recomendation-title">
+                { recommendation.strAlcoholic || recommendation.strCategory }
+              </Row>
+              <Row
+                data-testid={ `${index}-recomendation-title` }
+                className="recomendation-title"
+              >
+                { recommendation.strDrink || recommendation.strMeal }
+              </Row>
+            </div>
           </Link>
         </div>
       )) }

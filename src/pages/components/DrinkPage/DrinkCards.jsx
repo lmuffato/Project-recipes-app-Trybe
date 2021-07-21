@@ -19,12 +19,21 @@ function DrinkCards() {
   }, [filter]); // eslint-disable-line
 
   return (
-    <div>
+    <div className="meals-container">
       { loading ? null
         : drinks.slice(0, size).map(({ idDrink, strDrink, strDrinkThumb }, index) => (
-          <div key={ strDrink } data-testid={ `${index}-recipe-card` }>
-            <Link to={ `/bebidas/${idDrink}` }>
-              <h2 data-testid={ `${index}-card-name` }>{strDrink}</h2>
+          <div
+            key={ strDrink }
+            data-testid={ `${index}-recipe-card` }
+            className="meals-card"
+          >
+            <Link to={ `/bebidas/${idDrink}` } className="meals-link">
+              <h2
+                data-testid={ `${index}-card-name` }
+                className="meals-title"
+              >
+                {strDrink}
+              </h2>
               <img
                 src={ strDrinkThumb }
                 alt={ strDrink }

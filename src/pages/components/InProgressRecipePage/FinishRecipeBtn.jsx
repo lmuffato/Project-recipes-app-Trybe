@@ -28,7 +28,7 @@ const handleClick = (recipe) => {
         name: strMeal,
         image: strMealThumb,
         doneDate,
-        tags: strTags.split(','),
+        tags: strTags ? strTags.split(',') : [],
       };
       doneRecipes.push(recipeDone);
       localStorage.setItem('doneRecipes', JSON.stringify(doneRecipes));
@@ -69,18 +69,17 @@ export default function FinishRecipeBtn(props) {
 
   const a = JSON.parse(localStorage.getItem('doneRecipes'));
   if (!a) {
-    console.log(a);
     const b = [];
     localStorage.setItem('doneRecipes', JSON.stringify(b));
-    console.log(b);
   }
 
   return (
-    <div>
+    <div className="inProgress-div-btn">
       <Link to="/receitas-feitas">
         <button
           type="button"
           data-testid="finish-recipe-btn"
+          className="finish-recipe-btn"
           disabled={ button }
           onClick={ () => handleClick(props.recipe) }
         >

@@ -46,19 +46,20 @@ function SearchBar(props) {
   };
 
   return (
-    <Container>
-      <Row>
+    <Container className="searchBar-div">
+      <Row className="searchBar-col-row">
         <input
           data-testid="search-input"
           type="text"
+          className="searchBar-input"
           placeholder="Buscar receita"
           value={ searchText }
           onChange={ ({ target: { value } }) => setSearchText(value) }
         />
       </Row>
-      <Row>
-        <Col>
-          <label htmlFor="ingredient">
+      <Row className="searchBar-radio-div">
+        <Col className="searchBar-col-row">
+          <label htmlFor="ingredient" className="searchBar-col-row">
             <input
               data-testid="ingredient-search-radio"
               id="ingredient"
@@ -66,44 +67,48 @@ function SearchBar(props) {
               value="ingredient"
               name="search-options"
               onChange={ () => setRadioOption('ingredient') }
+              className="searchBar-radio"
               defaultChecked
             />
             Ingredientes
           </label>
         </Col>
-        <Col>
-          <label htmlFor="name">
+        <Col className="searchBar-col-row">
+          <label htmlFor="name" className="searchBar-col-row">
             <input
               data-testid="name-search-radio"
               id="name"
               type="radio"
               value="name"
               name="search-options"
+              className="searchBar-radio"
               onChange={ () => setRadioOption('name') }
             />
             Nome
           </label>
         </Col>
-        <Col>
-          <label htmlFor="first-letter">
+        <Col className="searchBar-col-row">
+          <label htmlFor="first-letter" className="searchBar-col-row">
             <input
               data-testid="first-letter-search-radio"
               id="first-letter"
               type="radio"
               value="first-letter"
               name="search-options"
+              className="searchBar-radio"
               onChange={ () => setRadioOption('first-letter') }
             />
             Primeira letra
           </label>
         </Col>
       </Row>
-      <Row>
-        <Col>
+      <Row className="searchBar-col-row">
+        <Col className="searchBar-col-row">
           <button
             data-testid="exec-search-btn"
             type="button"
             onClick={ () => searchRecipe() }
+            className="searchBtn"
           >
             Buscar
           </button>

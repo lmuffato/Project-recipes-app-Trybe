@@ -2,7 +2,7 @@ import React from 'react';
 import userEvent from '@testing-library/user-event';
 import favorite from './mockFavorite';
 import App from '../App';
-import Favorite from '../pages/Favotire';
+import Favorite from '../pages/Favorite';
 import renderWithRouterAndRedux from './renderWithRouterAndRedux';
 
 const favoriteUrl = '/receitas-favoritas';

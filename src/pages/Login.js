@@ -4,7 +4,6 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import PropTypes from 'prop-types';
 import { loginAction } from '../actions';
-import './Login.css';
 
 function Login({ history, loginProps }) {
   const [buttonDisable, setButtonDisable] = useState(true);
@@ -32,7 +31,10 @@ function Login({ history, loginProps }) {
   return (
     // https://react-bootstrap.github.io/components/forms/ modelo de formulario.
     <Form className="login-form">
-      <h1 className="text-center">Trybe Recipes</h1>
+      <h1 className="text-center">
+        Trybe
+        Recipes
+      </h1>
       <Form.Group controlId="formBasicEmail" className="form-group">
         <Form.Control
           className="form-input"
@@ -45,6 +47,7 @@ function Login({ history, loginProps }) {
       </Form.Group>
       <Form.Group controlId="formBasicPassword">
         <Form.Control
+          className="form-input"
           type="password"
           placeholder="Password"
           data-testid="password-input"
@@ -54,7 +57,7 @@ function Login({ history, loginProps }) {
       </Form.Group>
       {' '}
       <Button
-        variant="success"
+        className="form-button"
         type="submit"
         data-testid="login-submit-btn"
         disabled={ buttonDisable }
