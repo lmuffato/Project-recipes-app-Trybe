@@ -5,10 +5,11 @@ const HeaderContainer = styled.header`align-items: space-around;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-
-  /* max-width: 1420px; */
   margin: 0 auto;
   max-width: 990px;
+  min-height: 10rem;
+
+  /* max-width: 1420px; */
   padding: 20px;
 
   button, .container > button {
@@ -58,7 +59,10 @@ const HeaderContainer = styled.header`align-items: space-around;
 
       img {
         display: flex;
-        height: 100%;
+
+        /* height: 100%; */
+        height: 30px;
+        width: 30px;
       }
 
 
@@ -106,7 +110,7 @@ export const LogoContainer = styled.div`align-items: center;
   background: inherit;
   display: flex;
   max-height: auto;
-  max-width: 70vw;
+  max-width: 60vw;
 
   img {
     width: 100%;
