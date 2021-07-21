@@ -3,6 +3,7 @@ import Header from '../../components/Header';
 import Context from '../../context/Context';
 import FavoritedButtonFilters from '../../components/FavoritedButtonFilters';
 import FavoritedRecipeCardList from '../../components/FavoritedRecipeCardList';
+import '../../components/FavoriteRecipe.css';
 
 export default function FavoriteRecipes() {
   const { favoritedFil, attFav } = useContext(Context);
@@ -56,7 +57,7 @@ export default function FavoriteRecipes() {
   }, [attFav]);
 
   return (
-    <div>
+    <div className="test">
       <Header title="Receitas Feitas" show={ false } />
       <FavoritedButtonFilters />
       <FavoritedRecipeCardList list={ list } />

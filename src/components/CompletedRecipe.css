@@ -54,7 +54,7 @@ a {
   align-items: center;
   display: flex;
   flex-flow: row;
-  justify-content: space-evenly;
+  justify-content: center;
   margin-top: 52px;
 }
 
@@ -66,3 +66,9 @@ a {
   color: var(--secondary-background-color);
 }
 
+.completed-recipe-container {
+  border: 2px solid var(--clr-neon);
+  border-radius: 20px;
+  box-shadow: inset 0 0 0.5em 0 var(--clr-neon) , 0 0 0.5em 0 var(--clr-neon);
+  max-height: 370px;
+}

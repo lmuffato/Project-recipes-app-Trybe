@@ -120,7 +120,7 @@ function CompletedRecipeCardList({ list }) {
     const toReturn = list.map((ele, index) => {
       const { name } = ele;
       return (
-        <div key={ name }>
+        <div className="completed-recipe-container" key={ name }>
           { renderImg(ele, index) }
           { renderLeftSideCard(ele, index) }
         </div>

@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import Context from '../context/Context';
+import './FavoriteRecipe.css';
 
 function FavoritedButtonFilters() {
   const { setFavoritedFill } = useContext(Context);
@@ -9,7 +10,7 @@ function FavoritedButtonFilters() {
   };
 
   const renderButtoms = () => (
-    <ul className="buttons-list">
+    <ul className="buttons-list-favRecipe">
       <li key="All">
         <button
           type="button"
