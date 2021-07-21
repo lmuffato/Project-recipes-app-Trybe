@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 
 export default function VideoCtn(props) {
   const { src } = props;
-  const videoSrc = src.split('https://www.youtube.com/')[1];
+  const videoSrc = src.split('https://www.youtube.com/watch?v=')[1];
   const embedWay = `https://www.youtube.com/embed/${videoSrc}`;
+  console.log(embedWay);
   return (
     <iframe
       width="500"
