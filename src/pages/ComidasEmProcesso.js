@@ -72,8 +72,10 @@ function ComidasEmProcesso() {
       },
     ];
     const removeFavorite = storageFavorite.filter((item) => item.id !== id);
-    return favorite ? localStorage.setItem('favoriteRecipes', JSON.stringify(newFavorite))
-      : localStorage.setItem('favoriteRecipes', JSON.stringify(removeFavorite));
+    return favorite ? localStorage.setItem(
+      'favoriteRecipes', JSON.stringify(removeFavorite),
+    )
+      : localStorage.setItem('favoriteRecipes', JSON.stringify(newFavorite));
   }
 
   function handleShare() {
