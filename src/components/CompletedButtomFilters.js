@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import Context from '../context/Context';
+import './CompletedRecipe.css';
 
 function CompletedButtomFilters() {
   const { setCompletedFill } = useContext(Context);
@@ -9,7 +10,7 @@ function CompletedButtomFilters() {
   };
 
   const renderButtoms = () => (
-    <ul className="buttons-list">
+    <ul className="buttons-filter-recipesDone">
       <li key="All">
         <button
           type="button"

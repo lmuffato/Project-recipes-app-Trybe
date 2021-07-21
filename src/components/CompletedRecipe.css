@@ -1,0 +1,68 @@
+:root {
+
+  --orange-main-color: #ff6700;
+
+  --primary-background-color: #1f1f1f;
+
+  --secondary-background-color: #363636;
+
+  --black: black;
+
+  --clr-neon: #ecc01f;
+
+  --font-color: #eaeaea;
+}
+
+a {
+  color: var(--orange-main-color);
+}
+
+.component {
+  color: var(--orange-main-color);
+  display: flex;
+  flex-flow: row wrap;
+  height: 120vh;
+  justify-content: space-around;
+}
+
+.render-recipesDone {
+  background-color: var(--primary-background-color);
+  height: 100%;
+}
+
+.img-recipeDone {
+  border-radius: 100px;
+  width: 150px;
+}
+
+.tag-recipesDone {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.button-share-recipeDone {
+  background: none;
+  border: none;
+}
+
+.share-button-div {
+  margin-bottom: 10px;
+  margin-top: 20px;
+}
+
+.buttons-filter-recipesDone {
+  align-items: center;
+  display: flex;
+  flex-flow: row;
+  justify-content: space-evenly;
+  margin-top: 52px;
+}
+
+.buttons {
+  background-color: var(--clr-neon);
+  border: var(--clr-neon) 0.125em solid;
+  border-radius: 0.25em;
+  box-shadow: inset 0 0 0.5em 0 var(--clr-neon) , 0 0 0.5em 0 var(--clr-neon);
+  color: var(--secondary-background-color);
+}
+
