@@ -102,7 +102,6 @@ CardFavorite.propTypes = {
 export default CardFavorite;
 
 const ContaineButtons = styled.div` display: flex;
-  justify-content: space-between;
   padding: 8px;
 `;
 
@@ -115,7 +114,6 @@ const Container = styled.div` align-content: center;
   display: flex;
   font-family: Montserrat , sans-serif;
   height: auto;
-  justify-content: space-between;
   margin: 16px 0;
   width: 93%;
 `;
@@ -129,6 +127,7 @@ const FavoriteButton = styled.button` background: none;
   outline: inherit;
   padding: 0;
   width: 20px;
+  margin-left: 10px;
 `;
 const ImageRecipe = styled.div` display: flex;
   flex-direction: column;

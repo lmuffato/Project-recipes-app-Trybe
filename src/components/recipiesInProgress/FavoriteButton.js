@@ -2,8 +2,8 @@ import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 
 import styled from 'styled-components';
-import FavoriteIconEnabled from '../../images/blackHeartIcon.svg';
-import FavoriteIconDisabled from '../../images/whiteHeartIcon.svg';
+import FavoriteIconEnabled from '../../icons/appIcons/favoriteEnable.png';
+import FavoriteIconDisabled from '../../icons/appIcons/favoriteDisabled.png';
 
 import AppContext from '../../contexts/app/AppContext';
 
@@ -109,8 +109,8 @@ const Container = styled.div`
   display: flex;
 
   img {
-    width: 100%;
-    height: 100%;
+    height: 30px;
+    width: 30px;
   }
 
   button {

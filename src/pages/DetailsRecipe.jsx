@@ -61,8 +61,10 @@ export default function DetailsRecipe(props) {
         <MessageClipboard className="message-clipboard">
           Link copiado!
         </MessageClipboard>
-        <ShareButton item={ tags } />
-        <FavoriteButton item={ tags } />
+        <TopRecipe>
+          <ShareButton item={ tags } />
+          <FavoriteButton item={ tags } />
+        </TopRecipe>
         <TextSubtitle item={ tags } />
         <Ingredients item={ tags } />
         <TextInstructions item={ tags } />
@@ -72,7 +74,11 @@ export default function DetailsRecipe(props) {
           />
         }
         <RecommendedRecipes />
-        { !doneRecipe.length ? <StartRecipeButton item={ tags } /> : null }
+        {
+          doneRecipe.length || !doneRecipe.length
+            ? <StartRecipeButton item={ tags } />
+            : null
+        }
         {/* {console.log('DetailsRecipe:')}
         {console.log(item)} */}
       </Content>
@@ -94,6 +100,14 @@ const Container = styled.div` align-items: center;
   height: 100%;
   justify-content: flex-start;
   width: 100%;
+`;
+
+const TopRecipe = styled.div`
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
 `;
 
 const Content = styled.div`  height: 100%;

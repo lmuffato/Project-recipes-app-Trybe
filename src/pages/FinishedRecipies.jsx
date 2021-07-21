@@ -8,46 +8,26 @@ import IconAll from '../icons/allIconAndButton/allIcon/all.png';
 import IconBebidas from '../icons/appIcons/bebidas.png';
 import IconComidas from '../icons/appIcons/comidas.png';
 
-const doneRecipes = [
-  {
-    id: '52771',
-    type: 'comida',
-    area: 'Italian',
-    category: 'Vegetarian',
-    alcoholicOrNot: '',
-    name: 'Spicy Arrabiata Penne',
-    image: 'https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg',
-    doneDate: '23/06/2020',
-    tags: ['Pasta', 'Curry'],
-  },
-  {
-    id: '178319',
-    type: 'bebida',
-    area: '',
-    category: 'Cocktail',
-    alcoholicOrNot: 'Alcoholic',
-    name: 'Aquamarine',
-    image: 'https://www.thecocktaildb.com/images/media/drink/zvsre31572902738.jpg',
-    doneDate: '23/06/2020',
-    tags: [],
-  },
-];
 function FinishedRecipies() {
   const [list, setList] = useState([]);
   const [filter, setFilter] = useState('All');
+  const checkDoneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
+
   useEffect(() => {
-    setList(doneRecipes);
+    if (checkDoneRecipes) {
+      setList(checkDoneRecipes);
+    }
   }, []);
   useEffect(() => {
     switch (filter) {
     case 'All':
-      setList(doneRecipes);
+      setList(checkDoneRecipes);
       break;
     case 'Food':
-      setList(doneRecipes.filter((recipe) => recipe.type === 'comida'));
+      setList(checkDoneRecipes.filter((recipe) => recipe.type === 'comida'));
       break;
     case 'Drinks':
-      setList(doneRecipes.filter((recipe) => recipe.type === 'bebida'));
+      setList(checkDoneRecipes.filter((recipe) => recipe.type === 'bebida'));
       break;
     default:
       break;

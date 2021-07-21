@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import styled from 'styled-components';
 import copy from 'clipboard-copy';
-import ShareIcon from '../../images/shareIcon.svg';
+import ShareIcon from '../../icons/appIcons/share.png';
 
 export default function ShareButton(props) {
   const showMessageClipboard = () => {
@@ -43,13 +43,14 @@ ShareButton.defaultProps = {
 };
 
 const Container = styled.div`
-  width: 100%;
+  width: 30px;
+  height: 30px;
   max-height: 150px;
   display: flex;
 
   img {
-    width: 100%;
-    height: 100%;
+    width: 30px;
+    height: 30px;
   }
 
   button {

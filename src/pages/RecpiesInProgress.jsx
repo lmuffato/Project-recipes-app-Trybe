@@ -63,8 +63,10 @@ export default function RecpiesInProgress(props) {
         <MessageClipboard className="message-clipboard">
           Link copiado!
         </MessageClipboard>
-        <ShareButton item={ tags } />
-        <FavoriteButton item={ tags } />
+        <TopRecipe>
+          <ShareButton item={ tags } />
+          <FavoriteButton item={ tags } />
+        </TopRecipe>
         <TextSubtitle item={ tags } />
         <Ingredients item={ tags } />
         <TextInstructions item={ tags } />
@@ -74,7 +76,11 @@ export default function RecpiesInProgress(props) {
           />
         } */}
         {/* <RecommendedRecipes /> */}
-        { !doneRecipe.length ? <FinishRecipeButton item={ tags } /> : null }
+        {
+          doneRecipe.length || !doneRecipe.length
+            ? <FinishRecipeButton item={ tags } />
+            : null
+        }
       </Content>
     </Container>
   );
@@ -95,6 +101,14 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+`;
+
+const TopRecipe = styled.div`
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
 `;
 
 const Content = styled.div`

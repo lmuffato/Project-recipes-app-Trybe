@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import FavoriteIconEnabled from '../../images/blackHeartIcon.svg';
-import FavoriteIconDisabled from '../../images/whiteHeartIcon.svg';
+import FavoriteIconEnabled from '../../icons/appIcons/favoriteEnable.png';
+import FavoriteIconDisabled from '../../icons/appIcons/favoriteDisabled.png';
 import AppContext from '../../contexts/app/AppContext';
 
 const getFavoriteRecipes = () => {
@@ -24,7 +24,7 @@ const addToFavorites = (el, activeScreen) => {
       category: el.strCategory,
       area: el.strArea || '',
       doneDate: new Date(),
-      tags: el.strTags.split(',') || [],
+      tags: el.strTags ? el.strTags.split(',') : '' || [],
     };
   } else {
     newEl = {
@@ -43,7 +43,6 @@ const addToFavorites = (el, activeScreen) => {
   if (data.length) {
     localStorage.setItem('favoriteRecipes', JSON.stringify([...data, newEl]));
   } else {
-    console.log(newEl);
     localStorage.setItem('favoriteRecipes', JSON.stringify([{ ...newEl }]));
   }
 };
@@ -111,8 +110,8 @@ const Container = styled.div` display: flex;
 
   img {
     color: green;
-    height: 100%;
-    width: 100%;
+    height: 30px;
+    width: 30px;
   }
 
   button {
