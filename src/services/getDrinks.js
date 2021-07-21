@@ -28,7 +28,7 @@ export const setDrinks = (recipes) => {
         name: strDrink,
         category: strCategory,
         from: strArea,
-        imgSrc: strDrinkThumb,
+        imgSrc: `${strDrinkThumb}/preview`,
         tags: strTags,
         instructions: strInstructions,
         ingredients,

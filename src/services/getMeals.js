@@ -29,7 +29,7 @@ export const setMeals = (recipes) => {
         name: strMeal,
         category: strCategory,
         from: strArea,
-        imgSrc: strMealThumb,
+        imgSrc: `${strMealThumb}/preview`,
         tags: strTags,
         instructions: strInstructions,
         ingredients,
@@ -75,7 +75,6 @@ export const getMealsByFirstLetter = async (letter) => {
   const data = await fetchApi.json();
   const { meals } = data;
   const dataFormat = setMeals(meals);
-  console.log(data);
   return dataFormat;
 };
 

@@ -66,7 +66,6 @@ export default function SearchBarFilters() {
         const result = await getMealsByFirstLetter(search);
         setMealsList(result);
         handleEdgeCase(result);
-        console.log(result);
       }
     }
     if (check === firstLetter && url === '/bebidas') {

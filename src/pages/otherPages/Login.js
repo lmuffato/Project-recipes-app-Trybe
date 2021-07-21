@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import { Form, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import Context from '../../context/Context';
 import setTokenLocalStorage from '../../services/localStorage';
@@ -14,32 +13,38 @@ function loginValidation(email, password) {
 
 export default function Login() {
   const { setUserEmail, setPassword, userEmail, password } = useContext(Context);
-  console.log(userEmail);
   return (
     <div className="login-page">
-      <h1 className="title-login">OPEN</h1>
-      <Form>
-        <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label className="email-input">Email address</Form.Label>
-          <Form.Control
+      <div className="NeonButton-container">
+        <button type="button" className="neon-button">OPEN</button>
+      </div>
+      <form className="form-login">
+        <label htmlFor="control">
+          Email address
+          <input
+            id="control"
+            className="email-input"
             onChange={ ({ target }) => setUserEmail(target.value) }
             data-testid="email-input"
             type="email"
             placeholder="Enter email"
           />
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="formBasicPassword">
-          <Form.Label className="password-input">Password</Form.Label>
-          <Form.Control
+        </label>
+        <label htmlFor="control2">
+          Password
+          <input
+            id="control2"
+            className="password-input"
             onChange={ ({ target }) => setPassword(target.value) }
             type="password"
             minLength="6"
             placeholder="Password"
             data-testid="password-input"
           />
-        </Form.Group>
+        </label>
         <Link to="/comidas">
-          <Button
+          <button
+            className="Button-Login"
             disabled={ loginValidation(userEmail, password) }
             variant="dark"
             type="button"
@@ -47,9 +52,9 @@ export default function Login() {
             onClick={ () => setTokenLocalStorage(userEmail) }
           >
             Entrar
-          </Button>
+          </button>
         </Link>
-      </Form>
+      </form>
     </div>
   );
 }

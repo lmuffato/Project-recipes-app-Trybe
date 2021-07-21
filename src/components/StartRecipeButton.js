@@ -45,7 +45,7 @@ export default function StartRecipeButton({ path }) {
 
   const searchIt = () => {
     const inProRecipe = JSON.parse(localStorage.getItem('inProgressRecipes'));
-    console.log(inProRecipe);
+
     if (path === 'comidas') {
       const ids = Object.keys(inProRecipe.meals);
       return ids.includes(id);

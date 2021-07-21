@@ -27,7 +27,6 @@ function DrinksDetails() {
   const isFav = () => {
     const favRecipe = JSON.parse(localStorage.getItem('favoriteRecipes'));
     const hasFav = favRecipe.filter((element) => element.id === id);
-    console.log(hasFav);
     const condition = hasFav.length > 0;
     if (condition) {
       setButtonFav(!buttonFav);
@@ -119,11 +118,9 @@ function DrinksDetails() {
       localStorage.setItem('favoriteRecipes', JSON.stringify(mealInfos));
     } else {
       const favRecipe = JSON.parse(localStorage.getItem('favoriteRecipes'));
-      console.log(favRecipe);
       const filteredRemoved = favRecipe.filter((element) => element.id !== idDrink);
       localStorage.removeItem('favoriteRecipes');
       localStorage.setItem('favoriteRecipes', JSON.stringify(filteredRemoved));
-      console.log(localStorage.getItem('favoriteRecipes'));
     }
   };
 

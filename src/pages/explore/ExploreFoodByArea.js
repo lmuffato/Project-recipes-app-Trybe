@@ -18,13 +18,10 @@ export default function ExploreFoodByArea() {
       const data = await getByArea();
       setMealsList(list);
       setAreas([...data, 'All']);
-      console.log(data);
       setLoading(false);
     };
     getArea();
   }, []);
-
-  console.log('hello world');
 
   const handleSelect = async (value) => {
     const endPoint = `https://www.themealdb.com/api/json/v1/1/filter.php?a=${value}`;
