@@ -59,7 +59,6 @@ export default function MealsDoneCards({ props:
         >
           { doneDate }
         </p>
-        { console.log(tags) }
         {tags ? tags.slice(0, size).map((tagName) => (
           <p
             key={ tagName }

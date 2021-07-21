@@ -28,7 +28,7 @@ const handleClick = (recipe) => {
         name: strMeal,
         image: strMealThumb,
         doneDate,
-        tags: strTags.length ? strTags.split(',') : [strTags],
+        tags: strTags ? strTags.split(',') : [],
       };
       doneRecipes.push(recipeDone);
       localStorage.setItem('doneRecipes', JSON.stringify(doneRecipes));

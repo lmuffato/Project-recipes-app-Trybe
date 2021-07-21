@@ -95,7 +95,7 @@ function Ingredients(props) {
                       {recipe[measures[index]]}
                     </s>
                   </p>
-                  <p><s>{ingredient[0]}</s></p>
+                  <p><s>{` ${ingredient[0]}`}</s></p>
                 </div>)}
           </label>
         </Row>

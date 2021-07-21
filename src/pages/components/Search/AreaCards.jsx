@@ -63,7 +63,7 @@ function AreaCards() {
               data-testid={ `${index}-recipe-card` }
               className="exploreRecipes-card"
             >
-              <Link to={ `/comidas/${idMeal}` }>
+              <Link to={ `/comidas/${idMeal}` } className="exploreRecipes-link">
                 <h2
                   data-testid={ `${index}-card-name` }
                   className="exploreRecipes-title"

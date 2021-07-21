@@ -837,7 +837,7 @@
   border: 3px solid black;
   border-radius: 5px;
   justify-content: center;
-  margin-left: 20px;
+  margin-bottom: 20px;
   max-height: 65%;
   max-width: 90%;
   object-fit: fill;
@@ -853,6 +853,10 @@
   margin-top: 10px;
   text-align: center;
   width: 360px;
+}
+
+.explore-select:focus {
+  background-color: rgb(218, 41, 28);
 }
 
 .explore-select option {
