@@ -15,7 +15,7 @@ export default function Explore() {
             data-testid="explore-food"
             type="button"
           >
-            Explorar Comidas
+            Explore Foods
           </button>
         </Link>
         <Link to="/explorar/bebidas" className="drink-btn-link">
@@ -24,7 +24,7 @@ export default function Explore() {
             data-testid="explore-drinks"
             type="button"
           >
-            Explorar Bebidas
+            Explore Drinks
           </button>
         </Link>
       </div>

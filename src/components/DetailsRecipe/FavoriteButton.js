@@ -36,7 +36,7 @@ const addToFavorites = (el, activeScreen) => {
       category: el.strCategory,
       area: el.strArea || '',
       doneDate: new Date(),
-      tags: el.strTags.split(',') || [],
+      tags: el.strTags ? el.strTags.split(',') : '' || [],
     };
   }
 
@@ -106,7 +106,7 @@ FavoriteButton.defaultProps = {
 
 const Container = styled.div` display: flex;
   max-height: 150px;
-  width: 100%;
+  width: 30px;
 
   img {
     color: green;

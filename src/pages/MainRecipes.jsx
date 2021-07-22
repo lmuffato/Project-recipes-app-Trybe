@@ -26,6 +26,7 @@ export default function MainRecipes({ categories, arrayCards,
             name={ recipe.strMeal || recipe.strDrink }
             thumbnail={ recipe.strMealThumb || recipe.strDrinkThumb }
             category={ recipe.strCategory }
+            flag={ recipe.strArea }
           />
         ))}
       </div>
@@ -43,6 +44,7 @@ export default function MainRecipes({ categories, arrayCards,
               index={ index }
               name={ meal.strMeal }
               thumbnail={ meal.strMealThumb }
+              flag={ meal.strArea }
             />
           )) : ''}
         {drinksToMap !== null && drinksToMap.length > 0 ? drinksToMap

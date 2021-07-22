@@ -27,7 +27,7 @@ function ExploreFoodArea() {
       };
       getRecipesByArea();
     }
-  }, [selectedArea]);
+  }, [selectedArea, mealsRecipes]);
 
   useEffect(() => {
     setList(mealsRecipes);
@@ -76,6 +76,7 @@ function ExploreFoodArea() {
                   name={ recipe.strMeal }
                   thumbnail={ recipe.strMealThumb }
                   type="meal"
+                  flag={ recipe.strArea }
                 />
               ))
           }

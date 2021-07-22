@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import HeaderPhoto from '../components/DetailsRecipe/HeaderPhoto';
 import AppContext from '../contexts/app/AppContext';
 import TitleRecipe from '../components/DetailsRecipe/TitleRecipe';
@@ -12,8 +13,17 @@ import TextInstructions from '../components/DetailsRecipe/TextInstructions';
 import VideoRecipe from '../components/DetailsRecipe/VideRecipe';
 import RecommendedRecipes from '../components/DetailsRecipe/RecommendedRecipes';
 import StartRecipeButton from '../components/DetailsRecipe/StartRecipeButton';
+import HomeIcon from '../icons/appIcons/home.png';
 
 import user from '../configs/configs';
+
+const home = () => (
+  <HomeButton>
+    <Link to="/comidas">
+      <img src={ HomeIcon } alt="teste" />
+    </Link>
+  </HomeButton>
+);
 
 export default function DetailsRecipe(props) {
   const { screens: { drink, food } } = user;
@@ -64,6 +74,7 @@ export default function DetailsRecipe(props) {
         <TopRecipe>
           <ShareButton item={ tags } />
           <FavoriteButton item={ tags } />
+          { home() }
         </TopRecipe>
         <TextSubtitle item={ tags } />
         <Ingredients item={ tags } />
@@ -106,7 +117,8 @@ const TopRecipe = styled.div`
   width: 100%;
   height: auto;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
+  align-items: center;
   gap: 10px;
 `;
 
@@ -116,4 +128,24 @@ const Content = styled.div`  height: 100%;
 
 const MessageClipboard = styled.span`  color: green;
   display: none;
+`;
+
+const HomeButton = styled.button`
+  width: 30px;
+  height: 30px;
+  border: none;
+  border-radius: 100%;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  margin: 8px;
+  outline: inherit;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+
+  img {
+    width: 30px;
+    height: 30px;
+  }
 `;

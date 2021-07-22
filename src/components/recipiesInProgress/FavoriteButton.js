@@ -41,7 +41,6 @@ const addToFavorites = (el, activeScreen) => {
   if (data.length) {
     localStorage.setItem('favoriteRecipes', JSON.stringify([...data, newEl]));
   } else {
-    console.log(newEl);
     localStorage.setItem('favoriteRecipes', JSON.stringify([{ ...newEl }]));
   }
 };
@@ -104,9 +103,9 @@ FavoriteButton.defaultProps = {
 };
 
 const Container = styled.div`
-  width: 100%;
   max-height: 150px;
   display: flex;
+  width: 30px;
 
   img {
     height: 30px;

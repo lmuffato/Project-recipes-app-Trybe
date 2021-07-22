@@ -3,6 +3,7 @@ import { Link, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import Header from '../components/Header';
 import LowerMenu from '../components/LowerMenu';
+import ExitIcon from '../icons/appIcons/sair.png';
 
 const Perfil = () => {
   const [user, setUser] = useState('Faça login...');
@@ -29,14 +30,14 @@ const Perfil = () => {
           { Object.values(user) }
         </h2>
         <Link to="/receitas-feitas">
-          <button data-testid="profile-done-btn" type="button">Receitas Feitas</button>
+          <button data-testid="profile-done-btn" type="button">Done Recipes</button>
         </Link>
         <Link to="/receitas-favoritas">
           <button
             data-testid="profile-favorite-btn"
             type="button"
           >
-            Receitas Favoritas
+            Favorite Recipes
           </button>
         </Link>
         <button
@@ -44,7 +45,8 @@ const Perfil = () => {
           type="button"
           onClick={ logout }
         >
-          Sair
+          <img src={ ExitIcon } alt="Sair" />
+          Exit
         </button>
       </Container>
       <LowerMenu />
@@ -77,17 +79,25 @@ const Container = styled.div`
   }
 
   > button {
-    width: 322px;
+    width: 122px;
     height: 50px;
     border-radius: 50px;
-    color: white;
-    font-family: Arial,Helvetica,sans-serif;
-    font-weight: 600;
-    background-color: #d10e00;
+    color: #ffffff;
+    font-family: Montserrat;
+    font-weight: bold;
+    background-color: rgb(173, 135, 31);
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
     margin-top: 50px;
+    border: none;
+
+    img {
+      width: 20px;
+      height: 20px;
+      margin-right: 10px;
+    }
 
     &:hover{
-      background-color: #eb0000;
+      background-color: rgb(146, 114, 26);
     }
   }
 `;

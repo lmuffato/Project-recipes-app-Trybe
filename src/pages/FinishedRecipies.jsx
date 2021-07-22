@@ -52,65 +52,67 @@ function FinishedRecipies() {
           </Button>
         </Filters>
         {
-          list.map((recipe, index) => (
-            <CardRecipe key={ index }>
-              <ImageRecipe>
-                <Link to={ `/${recipe.type}s/${recipe.id}` }>
-                  <Image
-                    data-testid={ `${index}-horizontal-image` }
-                    src={ recipe.image }
-                  />
-                </Link>
-              </ImageRecipe>
-              <ContentRecipe>
-                <div style={ { display: 'flex' } }>
-                  <TextCategory data-testid={ `${index}-horizontal-top-text` }>
-                    {
-                      recipe.type === 'comida'
-                        ? `${recipe.area} - ${recipe.category}`
-                        : `${recipe.alcoholicOrNot}`
-                    }
-                  </TextCategory>
-                  <ShareIcon
-                    onClick={ () => {
-                      copy(`${window.location.origin}/comidas/${recipe.id}`);
-                      document.getElementById(`${index}-style`).style.display = 'block';
-                    } }
-                  >
-                    <ImageShare
-                      data-testid={ `${index}-horizontal-share-btn` }
-                      src={ ShareImage }
+          list
+            ? list.map((recipe, index) => (
+              <CardRecipe key={ index }>
+                <ImageRecipe>
+                  <Link to={ `/${recipe.type}s/${recipe.id}` }>
+                    <Image
+                      data-testid={ `${index}-horizontal-image` }
+                      src={ recipe.image }
                     />
-                  </ShareIcon>
-                </div>
-                <MessageCopied id={ `${index}-style` } showmessage={ false }>
-                  Link copiado!
-                </MessageCopied>
-                <Link to={ `/${recipe.type}s/${recipe.id}` }>
-                  <TextName data-testid={ `${index}-horizontal-name` }>
-                    { recipe.name }
-                  </TextName>
-                </Link>
-                <TextDate data-testid={ `${index}-horizontal-done-date` }>
-                  { recipe.doneDate }
-                </TextDate>
-                <Tags>
-                  <ul>
-                    {
-                      recipe.tags.map((tagName, i) => (
-                        <TextTag
-                          key={ i }
-                          data-testid={ `${index}-${tagName}-horizontal-tag` }
-                        >
-                          { tagName }
-                        </TextTag>
-                      ))
-                    }
-                  </ul>
-                </Tags>
-              </ContentRecipe>
-            </CardRecipe>
-          ))
+                  </Link>
+                </ImageRecipe>
+                <ContentRecipe>
+                  <div style={ { display: 'flex' } }>
+                    <TextCategory data-testid={ `${index}-horizontal-top-text` }>
+                      {
+                        recipe.type === 'comida'
+                          ? `${recipe.area} - ${recipe.category}`
+                          : `${recipe.alcoholicOrNot}`
+                      }
+                    </TextCategory>
+                    <ShareIcon
+                      onClick={ () => {
+                        copy(`${window.location.origin}/comidas/${recipe.id}`);
+                        document.getElementById(`${index}-style`).style.display = 'block';
+                      } }
+                    >
+                      <ImageShare
+                        data-testid={ `${index}-horizontal-share-btn` }
+                        src={ ShareImage }
+                      />
+                    </ShareIcon>
+                  </div>
+                  <MessageCopied id={ `${index}-style` } showmessage={ false }>
+                    Link copiado!
+                  </MessageCopied>
+                  <Link to={ `/${recipe.type}s/${recipe.id}` }>
+                    <TextName data-testid={ `${index}-horizontal-name` }>
+                      { recipe.name }
+                    </TextName>
+                  </Link>
+                  <TextDate data-testid={ `${index}-horizontal-done-date` }>
+                    { recipe.doneDate }
+                  </TextDate>
+                  <Tags>
+                    <ul>
+                      {
+                        recipe.tags.map((tagName, i) => (
+                          <TextTag
+                            key={ i }
+                            data-testid={ `${index}-${tagName}-horizontal-tag` }
+                          >
+                            { tagName }
+                          </TextTag>
+                        ))
+                      }
+                    </ul>
+                  </Tags>
+                </ContentRecipe>
+              </CardRecipe>
+            ))
+            : <p>Nenhuma receita</p>
         }
       </Container>
     </div>
@@ -197,11 +199,11 @@ const ShareIcon = styled.button` background: none;
   color: inherit;
   cursor: pointer;
   font: inherit;
-  height: 26px;
   margin-right: 10px;
   outline: inherit;
   padding: 0;
-  width: 20px;
+  width: 30px;
+  height: 30px;
 `;
 const Image = styled.img` border-radius: 100%;
   box-shadow: 2px 4px 6px 1px rgba(0, 0, 0, 0.64);
@@ -224,5 +226,6 @@ const TextTag = styled.li` background-color: rgba(236, 222, 222, 1);
   width: 100%;
 `;
 const ImageShare = styled.img` height: 26px;
-  width: 32px;
+  width: 30px;
+  height: 30px;
 `;
