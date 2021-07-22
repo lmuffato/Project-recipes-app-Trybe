@@ -13,7 +13,7 @@ export default function VideoRecipe(props) {
   };
   return (
     <Container>
-      <h3>Vídeo</h3>
+      <h3>Video</h3>
       {
         item.length
           && (

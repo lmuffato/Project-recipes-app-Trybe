@@ -1,4 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import HeaderPhoto from '../components/recipiesInProgress/HeaderPhoto';
@@ -11,8 +12,17 @@ import Ingredients from '../components/recipiesInProgress/Ingredients';
 import TextInstructions from '../components/recipiesInProgress/TextInstructions';
 // import RecommendedRecipes from '../components/recipiesInProgress/RecommendedRecipes';
 import FinishRecipeButton from '../components/recipiesInProgress/FinishRecipeButton';
+import HomeIcon from '../icons/appIcons/home.png';
 
 import user from '../configs/configs';
+
+const home = () => (
+  <HomeButton>
+    <Link to="/comidas">
+      <img src={ HomeIcon } alt="teste" />
+    </Link>
+  </HomeButton>
+);
 
 export default function RecpiesInProgress(props) {
   const { match: { params: { id } } } = props;
@@ -66,6 +76,7 @@ export default function RecpiesInProgress(props) {
         <TopRecipe>
           <ShareButton item={ tags } />
           <FavoriteButton item={ tags } />
+          { home() }
         </TopRecipe>
         <TextSubtitle item={ tags } />
         <Ingredients item={ tags } />
@@ -107,7 +118,8 @@ const TopRecipe = styled.div`
   width: 100%;
   height: auto;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
+  align-items: center;
   gap: 10px;
 `;
 
@@ -119,4 +131,24 @@ const Content = styled.div`
 const MessageClipboard = styled.span`
   display: none;
   color: green;
+`;
+
+const HomeButton = styled.button`
+  width: 30px;
+  height: 30px;
+  border: none;
+  border-radius: 100%;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  margin: 8px;
+  outline: inherit;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+
+  img {
+    width: 30px;
+    height: 30px;
+  }
 `;

@@ -27,25 +27,30 @@ function CardsIcons(props) {
 export default CardsIcons;
 
 const Container = styled.div`
-  .icons-wrapper {
-    display: flex;
-    flex-flow: row-reverse nowrap;
-    justify-content: center;
-    position: static;
-    box-sizing: border-box;
-  }
+  width: 100%;
+  padding: 5px;
+  display: flex;
+  display: flex;
+  flex-flow: row-reverse nowrap;
+  justify-content: space-between;
+  align-items: center;
+  position: static;
+  box-sizing: border-box;
+  margin-top: 5px;
+
+  /* .icons-wrapper {
+  } */
 
   .fav-icon {
     width: 14px;
     height: 12px;
-    margin-left: 72px;
-    margin-bottom: 5px;
+    /* margin-left: 72px;
+    margin-bottom: 5px; */
   }
 
   .check-icon {
     width: 14px;
     height: 12px;
-    margin-bottom: 5px;
   }
 
 `;

@@ -23,11 +23,6 @@ function CardFavorite({ image, name, category, id, area,
     navigator
       .clipboard
       .writeText(`${window.location.protocol}//${window.location.host}/${type}s/${id}`);
-    console.log(window.location.hostname);
-    console.log(window.location.protocol);
-    console.log(window.location.host);
-    console.log(`${window.location.hostname}:${window.location.port}/${type}s/${id}`);
-    console.log(`${window.location.host}/${type}s/${id}`);
     setShowMessage(!showMessage);
   }
 
@@ -122,11 +117,11 @@ const FavoriteButton = styled.button` background: none;
   color: inherit;
   cursor: pointer;
   font: inherit;
-  height: 26px;
+  height: 30px;
   margin-right: 10px;
   outline: inherit;
   padding: 0;
-  width: 20px;
+  width: 30px;
   margin-left: 10px;
 `;
 const ImageRecipe = styled.div` display: flex;
@@ -167,7 +162,8 @@ const ShareIcon = styled.button` background: none;
   margin-right: 10px;
   outline: inherit;
   padding: 0;
-  width: 20px;
+  width: 30px;
+  height: 30px;
 `;
 const Image = styled.img` border-radius: 100%;
   box-shadow: 2px 4px 6px 1px rgba(0, 0, 0, 0.64);
@@ -192,5 +188,6 @@ const Uls = styled.ul` align-items: center;
   flex-flow: row wrap;
 `;
 const ImageIcon = styled.img` height: 26px;
-  width: 32px;
+  width: 30px;
+  height: 30px;
 `;

@@ -28,7 +28,7 @@ function FavoriteRecepies() {
   }, [value, renderFavorites]);
 
   return (
-    <div>
+    <Content>
       <Header />
       <Filters>
         <Button
@@ -56,26 +56,39 @@ function FavoriteRecepies() {
           Drinks
         </Button>
       </Filters>
-      {arrayRecipes ? arrayRecipes.map((recipe, index) => (
-        <Container key={ index }>
-          <CardFavorite
-            index={ index }
-            image={ recipe.image }
-            name={ recipe.name }
-            category={ recipe.category }
-            id={ recipe.id }
-            area={ recipe.area }
-            alcoholicOrNot={ recipe.alcoholicOrNot }
-            type={ recipe.type }
-            tags={ recipe.tags }
-            doneDate={ recipe.doneDate }
-          />
-        </Container>)) : ''}
-    </div>
+      {
+        arrayRecipes
+          ? arrayRecipes.map((recipe, index) => (
+            <Container key={ index }>
+              <CardFavorite
+                index={ index }
+                image={ recipe.image }
+                name={ recipe.name }
+                category={ recipe.category }
+                id={ recipe.id }
+                area={ recipe.area }
+                alcoholicOrNot={ recipe.alcoholicOrNot }
+                type={ recipe.type }
+                tags={ recipe.tags }
+                doneDate={ recipe.doneDate }
+              />
+            </Container>))
+          : <p>Nenhuma receita</p>
+      }
+    </Content>
   );
 }
 
 export default FavoriteRecepies;
+
+const Content = styled.div`
+  width: 100%;
+  height: auto;
+
+  p {
+    text-align: center;
+  }
+`;
 
 const IconImageButtonDrinks = styled.img` height: 22px;
   width: 13px;

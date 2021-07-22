@@ -14,8 +14,6 @@ const addToDoneRecipes = (el, activeScreen) => {
   const data = getDoneRecipes();
   let newEl;
 
-  console.log(el);
-
   if (activeScreen === 'food') {
     newEl = {
       id: el.idMeal,
@@ -57,13 +55,11 @@ export default function FinishRecipeButton() {
     screenActive,
     setIngredientsInProgress,
   } = useContext(AppContext);
-  const [textButton] = useState('Finalizar Receita');
+  const [textButton] = useState('Finish Recipe');
   const [redirect, setRedirect] = useState(false);
   const [buttonDisabled, setButtonDisabled] = useState(true);
 
   const checkRecipieFinalized = () => {
-    console.log(recipeIngredients);
-    console.log(ingredientsInProgress);
     if (recipeIngredients.length === 0
       || recipeIngredients.length !== ingredientsInProgress.length) {
       return setButtonDisabled(true);

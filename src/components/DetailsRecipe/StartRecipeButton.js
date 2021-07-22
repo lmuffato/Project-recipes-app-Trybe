@@ -15,26 +15,23 @@ export default function StartRecipeButton(props) {
   const history = useHistory();
   const { item } = props;
   const type = screenActive === 'food' ? 'comidas' : 'bebidas';
-  const [textButton, setTextButton] = useState('Iniciar Receita');
+  const [textButton, setTextButton] = useState('Start Recipe');
 
   useEffect(() => {
     const dataLS = getInProgressRecipes();
     if (item.length && dataLS) {
       let check;
       if (type === 'comidas') {
-        // console.log(dataLS);
         check = !!Object.keys(dataLS.meals).filter(
           (key) => key === item[0].idMeal,
         ).length;
       } else {
-        // console.log(dataLS);
-        // console.log(item);
         check = !!Object.keys(dataLS.cocktails).filter(
           (key) => key === item[0].idDrink,
         ).length;
       }
       if (check) {
-        setTextButton('Continuar Receita');
+        setTextButton('Continue Recipe');
       }
     }
   }, [item]);

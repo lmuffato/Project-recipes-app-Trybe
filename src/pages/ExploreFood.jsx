@@ -27,7 +27,7 @@ function ExploreFood() {
             data-testid="explore-by-ingredient"
             type="button"
           >
-            Por Ingredientes
+            By Ingredients
           </button>
         </Link>
         <Link to="/explorar/comidas/area">
@@ -35,7 +35,7 @@ function ExploreFood() {
             data-testid="explore-by-area"
             type="button"
           >
-            Por Local de Origem
+            By Origin
           </button>
         </Link>
         <Link to={ randomMeal !== undefined ? `/comidas/${randomMeal}` : null }>
@@ -43,7 +43,7 @@ function ExploreFood() {
             data-testid="explore-surprise"
             type="button"
           >
-            Me Surpreenda!
+            Surprise me!
           </button>
         </Link>
       </Container>

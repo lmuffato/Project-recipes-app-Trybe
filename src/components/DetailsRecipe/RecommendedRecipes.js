@@ -35,7 +35,7 @@ export default function RecommendedRecipes() {
   if (isLoading) return <p>Carregando...</p>;
   return (
     <Container>
-      <h3>Receitas Recomendadas</h3>
+      <h3>Recommendeds Recipes</h3>
       {
         tags
         && (

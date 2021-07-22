@@ -47,6 +47,7 @@ const Container = styled.div`
   height: 30px;
   max-height: 150px;
   display: flex;
+  align-items: center;
 
   img {
     width: 30px;

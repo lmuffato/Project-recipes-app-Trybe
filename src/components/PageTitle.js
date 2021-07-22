@@ -7,32 +7,32 @@ function PageTitle() {
   const searchBtn = 'search-btn';
   function title() {
     if (path === '/explorar') {
-      setPageTitle('Explorar');
+      setPageTitle('Explore');
       document.getElementById(searchBtn).remove();
     } if (path === '/explorar/comidas') {
-      setPageTitle('Explorar Comidas');
+      setPageTitle('Explore Foods');
       document.getElementById(searchBtn).remove();
     } if (path === '/explorar/bebidas') {
-      setPageTitle('Explorar Bebidas');
+      setPageTitle('Explore Drinks');
       document.getElementById(searchBtn).remove();
     } if (path === '/explorar/comidas/ingredientes'
       || path === '/explorar/bebidas/ingredientes') {
-      setPageTitle('Explorar Ingredientes');
+      setPageTitle('Explore Ingredients');
       document.getElementById(searchBtn).remove();
     } if (path === '/comidas') {
-      setPageTitle('Comidas');
+      setPageTitle('Foods');
     } if (path === '/bebidas') {
-      setPageTitle('Bebidas');
+      setPageTitle('Drinks');
     } if (path === '/perfil') {
-      setPageTitle('Perfil');
+      setPageTitle('Profile');
       document.getElementById(searchBtn).remove();
     } if (path === '/explorar/comidas/area') {
-      return setPageTitle('Explorar Origem');
+      return setPageTitle('Explore Origin');
     } if (path === '/receitas-feitas') {
-      setPageTitle('Receitas Feitas');
+      setPageTitle('Done Recipes');
       document.getElementById(searchBtn).remove();
     } if (path === '/receitas-favoritas') {
-      setPageTitle('Receitas Favoritas');
+      setPageTitle('Favorite Recipes');
       document.getElementById(searchBtn).remove();
     }
   }

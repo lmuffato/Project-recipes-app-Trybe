@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import ProPTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Link, useLocation } from 'react-router-dom';
-import { propTypes } from 'react-bootstrap/esm/Image';
 import CardsIcons from './CardsIcons';
 
 function Cards({ index, thumbnail, name, id, type, category }) {
@@ -19,7 +18,7 @@ function Cards({ index, thumbnail, name, id, type, category }) {
         setIsFavorite(false);
       }
     }
-  }, []);
+  }, [id]);
 
   useEffect(() => {
     const checkDoneRecipe = JSON.parse(localStorage.getItem('doneRecipes'));
@@ -30,7 +29,7 @@ function Cards({ index, thumbnail, name, id, type, category }) {
         setIsDone(false);
       }
     }
-  }, []);
+  }, [id]);
 
   return (
     <Container className="">
@@ -65,10 +64,11 @@ function Cards({ index, thumbnail, name, id, type, category }) {
 }
 
 Cards.propTypes = {
-  index: ProPTypes.number,
-  thumbnail: propTypes.string,
-  name: propTypes.string,
-  id: ProPTypes.string,
+  index: PropTypes.number,
+  thumbnail: PropTypes.string,
+  name: PropTypes.string,
+  id: PropTypes.string,
+  flag: PropTypes.string,
 }.isRequired;
 
 export default Cards;
@@ -106,15 +106,20 @@ const Container = styled.div`
 
 
   h2 {
+    width: 100px;
     font-family: Montserrat;
     font-style: normal;
     font-weight: bold;
     font-size: 10px;
     text-align: center;
     color: #000000;
-    margin-top: 5px;
     white-space: nowrap;
+    overflow: hidden;
     text-overflow: ellipsis;
+    
+    padding: 10px 20px;
+    margin: 0px;
+    resize: horizontal;
   }
 
   h3 {
@@ -126,5 +131,6 @@ const Container = styled.div`
     text-align: center;
     color: #7A7A7A;
     position: relative;
+    margin-top: 5px;
   }
 `;
