@@ -20,8 +20,6 @@ export default function DetalhesComidasIP() {
   const { doneRecipes, setDoneRecipes } = useContext(DoneRecipesContext);
   const context = useContext(FoodContext);
   const { color: { colorP } } = context;
-  const { color: { colorH1 } } = context;
-  const { color: { colorDiv } } = context;
 
   function handleCheckIngredient(ev) {
     // adds or removes clicked ingredient from usedIngredients list

@@ -15,6 +15,9 @@ export default function CategoryButtons({ categories }) {
   const { pathname } = useLocation();
   const buttons = document.querySelectorAll('.category-buttons');
   const checked = false;
+  const context = useContext(FoodContext);
+  const { color: { colorDiv } } = context;
+  const { color: { colorP } } = context;
 
   function resetAllCheckbox() {
     for (let index = 0; index < buttons.length; index += 1) {
@@ -66,10 +69,24 @@ export default function CategoryButtons({ categories }) {
   }
 
   return (
-    <div className="category-button ">
+    <div
+      className="category-button"
+      style={ {
+        backgroundColor: colorDiv,
+        display: 'flex',
+        flexWrap: 'wrap',
+        textAlign: 'center',
+        alignItems: 'left' } }
+
+    >
       {categories.map((categoryName, index) => (
         index < NUMBER_OF_CATEGORIES ? (
-          <label htmlFor="category-button" key={ index } className="checkbox">
+          <label
+            htmlFor="category-button"
+            key={ index }
+            className="checkbox"
+            style={ { color: colorP } }
+          >
             <input
               className="category-buttons"
               name="category-buttons"
@@ -86,11 +103,13 @@ export default function CategoryButtons({ categories }) {
               } }
             />
             {' '}
+
             {categoryName.strCategory}
+
           </label>
         ) : null
       ))}
-      <label htmlFor="category-buttons">
+      <label htmlFor="category-buttons" style={ { color: colorP } }>
         <input
           type="checkbox"
           name="category-buttons"
