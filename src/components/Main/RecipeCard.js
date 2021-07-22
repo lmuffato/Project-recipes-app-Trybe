@@ -25,7 +25,7 @@ export default function RecipeCard({ recipe, index, type: URL_PATH }) {
       >
         <div
           data-testid={ `${index}-recipe-card` }
-          style={ {backgroundColor: colorDiv } }
+          style={ { backgroundColor: colorDiv } }
         >
           <img
             data-testid={ `${index}-card-img` }

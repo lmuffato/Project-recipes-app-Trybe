@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Slider from 'react-slick';
 import PropTypes from 'prop-types';
-
+import FoodContext from '../../contexts/FoodContext';
 import CarouselCard from './CarouselCard';
 
 export default function Carousel({ data }) {
+  const context = useContext(FoodContext);
+  const { color: { colorP } } = context;
+  const { color: { colorDiv } } = context;
+
   const settings = {
     dots: true,
     infinite: false,
@@ -17,7 +21,7 @@ export default function Carousel({ data }) {
     <Slider { ...settings }>
       { data !== undefined && data.map((card, index) => (
         <div
-          // style={ { width: 100, height: 100 } }
+          style={ { backgroundColor: colorDiv } }
           className="recomendation-cards"
           key={ index }
           data-testid={ `${index}-recomendation-card` }
@@ -28,6 +32,7 @@ export default function Carousel({ data }) {
           />
           <p
             data-testid={ `${index}-recomendation-title` }
+            style={ { color: colorP } }
           >
             { card[1] }
           </p>

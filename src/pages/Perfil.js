@@ -2,10 +2,11 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import '../style/Perfil.css';
 import FoodContext from '../contexts/FoodContext';
+import '../style/Perfil.css';
 
 let counter = 0;
+const TWO_SECONDS = 2000;
 
 export default function Perfil() {
   const { setColor } = useContext(FoodContext);
@@ -17,11 +18,26 @@ export default function Perfil() {
     email = JSON.parse(localStorage.getItem('user')).email;
   }
 
+  function themeMessage(theme) {
+    const msg = document.createElement('p');
+    msg.innerText = `- ${theme} Theme -`;
+
+    const divmsg = document.getElementById('theme-message');
+    divmsg.style.backgroundColor = 'whitesmoke';
+    divmsg.style.color = 'black';
+    divmsg.style.borderRadius = '8px';
+    divmsg.style.marginTop = '20px';
+    divmsg.appendChild(msg);
+
+    setTimeout(() => {
+      msg.remove();
+    }, TWO_SECONDS);
+  }
+
   function switchTheme() {
-    if (counter % 2 === 0) {
+    if (counter === 0) {
       document.body.style.backgroundColor = 'rgb(30, 30, 30)';
       document.body.style.color = 'white';
-      counter += 1;
       setColor({
         ...context.color,
         colorP: 'white',
@@ -32,10 +48,11 @@ export default function Perfil() {
         colorLi: 'white',
       });
       console.log('contador: ', counter);
-    } else if (counter % 2 === 1) {
+      counter += 1;
+      themeMessage('Black');
+    } else if (counter === 1) {
       document.body.style.backgroundColor = 'whitesmoke';
       document.body.style.color = 'rgb(30, 30, 30)';
-      counter += 1;
       console.log('contador: ', counter);
       setColor({
         ...context.color,
@@ -46,6 +63,24 @@ export default function Perfil() {
         colorH3: 'black',
         colorLi: 'black',
       });
+      themeMessage('Whitesmoke');
+      counter += 1;
+    } else if (counter === 2) {
+      document.body.style.backgroundColor = 'black';
+      document.body.style.color = 'cyan';
+      counter += 1;
+      console.log('contador: ', counter);
+      setColor({
+        ...context.color,
+        colorP: 'cyan',
+        colorDiv: 'black',
+        colorH1: 'cyan',
+        colorH2: 'cyan',
+        colorH3: 'cyan',
+        colorLi: 'cyan',
+      });
+      themeMessage('Futuristic');
+      counter -= 3;
     }
   }
 
@@ -96,6 +131,7 @@ export default function Perfil() {
           Logout
         </button>
       </Link>
+      <div id="theme-message" />
       <Footer />
     </div>
   );
