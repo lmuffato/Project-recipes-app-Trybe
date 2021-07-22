@@ -27,6 +27,10 @@ const favoriteRecipes = [
 ];
 
 describe('Test Favorite Recipes page', () => {
+  beforeEach(() => {
+    window.localStorage.setItem('favoriteRecipes', JSON.stringify(favoriteRecipes));
+  });
+
   const myPath = '/receitas-favoritas';
   it('Test profile button', () => {
     const { getByTestId, getByText, history } = renderWithRouter(<App />);
@@ -45,7 +49,6 @@ describe('Test Favorite Recipes page', () => {
   });
 
   it('Check all elements on the screen', () => {
-    window.localStorage.setItem('favoriteRecipes', JSON.stringify(favoriteRecipes));
     const { getByTestId, history } = renderWithRouter(<App />);
     history.push(myPath);
 
@@ -79,7 +82,6 @@ describe('Test Favorite Recipes page', () => {
   });
 
   it('Check filter buttons', () => {
-    window.localStorage.setItem('favoriteRecipes', JSON.stringify(favoriteRecipes));
     const { getByText, getByTestId, history } = renderWithRouter(<App />);
     history.push(myPath);
 
@@ -102,7 +104,6 @@ describe('Test Favorite Recipes page', () => {
   });
 
   it('Check favoriteBtn button', () => {
-    window.localStorage.setItem('favoriteRecipes', JSON.stringify(favoriteRecipes));
     const { getByText, getByTestId, history } = renderWithRouter(<App />);
     history.push(myPath);
 
