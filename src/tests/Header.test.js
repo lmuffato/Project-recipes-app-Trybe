@@ -1,18 +1,13 @@
 import { fireEvent } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+// import userEvent from '@testing-library/user-event';
 import React from 'react';
 import App from '../App';
-import Provider from '../contexts/Provider';
-import MyContext from '../contexts/MyContext';
-import renderWithRouter from './renderWithRouter';
-import meals from '../../cypress/mocks/meals';
+import renderWithRouterAndProvider from './renderWithRouterAndProvider';
 
 describe('Test Header', () => {
   it('Test profile button', async () => {
-    const { getByTestId, getByText, history } = renderWithRouter(
-      <Provider>
-        <App />
-      </Provider>,
+    const { getByTestId, getByText, history } = renderWithRouterAndProvider(
+      <App />,
     );
 
     history.push('/comidas');
@@ -35,10 +30,8 @@ describe('Test Header', () => {
     //     json: () => Promise.resolve(meals),
     //   })));
 
-    const { getByTestId, getByText, history } = await renderWithRouter(
-      <Provider>
-        <App />
-      </Provider>,
+    const { getByTestId, getByText, history } = await renderWithRouterAndProvider(
+      <App />,
     );
 
     history.push('/comidas');

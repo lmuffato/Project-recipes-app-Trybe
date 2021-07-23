@@ -1,7 +1,7 @@
 import { fireEvent } from '@testing-library/react';
 import React from 'react';
 import App from '../App';
-import renderWithRouter from './renderWithRouter';
+import renderWithRouterAndProvider from './renderWithRouterAndProvider';
 
 const foodName = 'Spicy Arrabiata Penne';
 
@@ -33,7 +33,7 @@ describe('Test Favorite Recipes page', () => {
 
   const myPath = '/receitas-favoritas';
   it('Test profile button', () => {
-    const { getByTestId, getByText, history } = renderWithRouter(<App />);
+    const { getByTestId, getByText, history } = renderWithRouterAndProvider(<App />);
     history.push(myPath);
 
     const myTittle = getByText('Receitas Favoritas');
@@ -49,7 +49,7 @@ describe('Test Favorite Recipes page', () => {
   });
 
   it('Check all elements on the screen', () => {
-    const { getByTestId, history } = renderWithRouter(<App />);
+    const { getByTestId, history } = renderWithRouterAndProvider(<App />);
     history.push(myPath);
 
     const myHeart = getByTestId('0-horizontal-favorite-btn');
@@ -82,7 +82,7 @@ describe('Test Favorite Recipes page', () => {
   });
 
   it('Check filter buttons', () => {
-    const { getByText, getByTestId, history } = renderWithRouter(<App />);
+    const { getByText, getByTestId, history } = renderWithRouterAndProvider(<App />);
     history.push(myPath);
 
     const myName = getByText(foodName);
@@ -104,7 +104,7 @@ describe('Test Favorite Recipes page', () => {
   });
 
   it('Check favoriteBtn button', () => {
-    const { getByText, getByTestId, history } = renderWithRouter(<App />);
+    const { getByText, getByTestId, history } = renderWithRouterAndProvider(<App />);
     history.push(myPath);
 
     const myHeart = getByTestId('0-horizontal-favorite-btn');
