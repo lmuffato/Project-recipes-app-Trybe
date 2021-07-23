@@ -55,7 +55,7 @@ function Perfil(props) {
       <Header title="Perfil" />
       <div className={ containerBtn }>
         <div className={ containerTitle }>
-          <h5 className={ title } data-testid="profile-email">{ getEmail() }</h5>
+          <p className={ title } data-testid="profile-email">{ getEmail() }</p>
         </div>
         <div className={ btnGroup }>
           {btnDone()}

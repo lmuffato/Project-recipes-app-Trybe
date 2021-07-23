@@ -33,9 +33,9 @@ function ExplorarBebidasING() {
         <Link to="/bebidas" key={ index }>
           <Card
             key={ item.idIngredient1 }
-            style={ { width: '8rem' } }
+            style={ { width: '10rem' } }
             data-testid={ `${index}-ingredient-card` }
-            className="shadow m-1 rounded"
+            className="text-center shadow m-1 rounded"
             onClick={ handleClick }
           >
             <Card.Img
@@ -68,7 +68,7 @@ function ExplorarBebidasING() {
     <div>
       <Header title="Explorar Ingredientes" />
       <div className="pb-5">
-        <div className="d-flex w-75 flex-wrap mx-auto justify-content-center pb-4">
+        <div className="d-flex flex-wrap mx-auto justify-content-center pb-4">
           {ingredients()}
         </div>
       </div>

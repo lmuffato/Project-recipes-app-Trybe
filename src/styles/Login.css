@@ -12,6 +12,15 @@
   font-weight: 900;
 }
 
-/* @import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap') ; */
+.body-test img {
+  width: 20%;
+}
+
+@media only screen and ( max-width : 360px ) {
+
+  .body-test img {
+    width: 50%;
+  }
+}
 
 @import url('https://fonts.googleapis.com/css2?family=Caveat+Brush&family=Caveat:wght@400;500;600;700&display=swap') ;

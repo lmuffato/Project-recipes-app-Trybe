@@ -83,7 +83,6 @@ const SearchBarForm = ({ searchBar }) => {
   };
 
   const handleSearchBarValue = () => (
-    // {/* className="d-flex" ou inline */}
     <div className="textBtn">
       <FormControl
         type="text"
@@ -92,9 +91,7 @@ const SearchBarForm = ({ searchBar }) => {
         className="text"
         placeholder="Search"
         onChange={ ({ target }) => setBusca(target.value) }
-        // data-testid="search-input"
         data-testid={ searchBar === true ? 'search-input' : null }
-        // className="mr-sm-2"
       />
       <Button
         className="button"

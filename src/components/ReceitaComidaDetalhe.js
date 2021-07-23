@@ -9,6 +9,7 @@ import blackHeartIcon from '../images/blackHeartIcon.svg';
 import { btn } from '../styles/login';
 
 import '../styles/DetalhesPagina.css';
+import Header from './Header';
 
 const copy = require('clipboard-copy');
 
@@ -127,6 +128,7 @@ function ReceitaComidaDetalhe({ props }) {
 
       return (
         <div className="recipe-container">
+          <Header title="Detalhes da Camida" />
           <img
             alt="Produto"
             className="img-details-main"
@@ -155,8 +157,8 @@ function ReceitaComidaDetalhe({ props }) {
 
           {!clipboardStatus ? null : (<h5 className="margin-link">Link copiado!</h5>)}
 
-          <h3>Ingredients</h3>
-          <ul className="list-container">
+          <ul className="list-container py-3">
+            <h3 className="text-center pb-3">Ingredients</h3>
             { ingredients.map((ingredient, index) => {
               if (ingredient !== null && ingredient !== ' ' && ingredient !== '  ') {
                 return (
@@ -171,16 +173,16 @@ function ReceitaComidaDetalhe({ props }) {
             })}
           </ul>
 
-          <h3>Instructions</h3>
-          <div className="instruction-container">
+          <div className="instruction-container py-3 mt-3">
+            <h3 className="text-center pb-3">Instructions</h3>
             <p data-testid="instructions">{ strInstructions }</p>
           </div>
 
-          <div className="video-container">
+          <div className="video-container pt-3">
             <iframe data-testid="video" width="320" height="240" src={ `https://www.youtube.com/embed/${youtubeLink}` } title="YouTube video player" frameBorder="0" />
           </div>
 
-          <h3>Receitas Recomendadas:</h3>
+          <h3 className="py-4">Receitas Recomendadas:</h3>
 
           <div className="recomendation-container">
             { foodRecomendation.map((food, index) => {
@@ -204,7 +206,7 @@ function ReceitaComidaDetalhe({ props }) {
             type="button"
             onClick={ handleClick }
             data-testid="start-recipe-btn"
-            className={ `${btn} button-recipe` }
+            className={ `${btn} button-recipe py-3` }
           >
             { statusFood === true ? 'Continuar Receita' : 'Iniciar Receita' }
             {/* foodRecipeStatus === 'start' ? 'Start recipe' : 'Continuar Receita'  */}
