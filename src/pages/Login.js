@@ -2,7 +2,7 @@ import { object } from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import '../App.css';
-import { divMain, divContentForm, textLogin, textUpInput, btn } from '../styles/login';
+import { divMain, divImg, divContentForm, textLogin, textUpInput, btn } from '../styles/login';
 import '../styles/Login.css';
 import loginIcon from '../images/loginIcon.png';
 
@@ -45,6 +45,7 @@ function Login(props) {
               value={ login.email }
               onChange={ handleChange }
               data-testid="email-input"
+              autoComplete="off"
             />
             <Form.Text className={ textUpInput }>
               Nunca compartilharemos seu e-mail com mais ninguém.
@@ -98,8 +99,12 @@ function Login(props) {
 
   return (
     <div className={ `${divMain} body-test` }>
-      <img className="w-50" alt="Icone Aplicação" src={ loginIcon } />
-      {inputsLogin()}
+      <div className={ divImg }>
+        <img alt="Icone Aplicação" src={ loginIcon } />
+      </div>
+      <div>
+        {inputsLogin()}
+      </div>
     </div>
   );
 }

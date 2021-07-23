@@ -107,34 +107,38 @@ function EmProgresso({ props }) {
   return (
     <div className="pb-4 background-smoked-with">
       <div className="d-flex flex-column">
-        <img
-          data-testid="recipe-photo"
-          src={ data.strMealThumb || data.strDrinkThumb }
-          alt="meals-img"
-          width="350px"
-          height="auto"
-        />
-        <div className="py-4">
-          <h2 data-testid="recipe-title">{ data.strMeal || data.strDrink }</h2>
+        <div className="d-flex justify-content-center">
+          <img
+            data-testid="recipe-photo"
+            src={ data.strMealThumb || data.strDrinkThumb }
+            alt="meals-img"
+            width="100%"
+          />
         </div>
-        <div className="pb-4">
+        <div className="d-flex px-3 justify-content-between text-center">
           <div className="py-2">
-            <h3 data-testid="recipe-category">{ data.strCategory }</h3>
+            <h2 data-testid="recipe-title">{ data.strMeal || data.strDrink }</h2>
           </div>
           <FavoriteFood params={ obj } />
         </div>
 
-        <Ingredientes params={ obj } />
-
-        <div className="py-2">
-          <h4>Instruções</h4>
+        <div className="py-2 text-center">
+          <h4 data-testid="recipe-category">{ data.strCategory }</h4>
         </div>
-        <p
-          data-testid="instructions"
-          className="text-justify instructions-background"
-        >
-          { data.strInstructions }
-        </p>
+        <div className="bg-primary py-3 text-center">
+          <h4 className="py-2">Ingredientes</h4>
+          <Ingredientes params={ obj } />
+        </div>
+
+        <div className="py-3 my-5 bg-primary text-center">
+          <h4 className="py-2">Instruções</h4>
+          <p
+            data-testid="instructions"
+            className="text-justify instructions-background"
+          >
+            { data.strInstructions }
+          </p>
+        </div>
         <div className="align-self-center w-50">
           <button
             type="button"

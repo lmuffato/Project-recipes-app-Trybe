@@ -5,7 +5,6 @@ import { Collapse } from 'react-bootstrap';
 import searchIcon from '../images/searchIcon.svg';
 import profileIcon from '../images/profileIcon.svg';
 import SearchBarForm from './SearchBarForm';
-// import header from '../styles/header';
 import '../styles/Header.css';
 
 function Header({ title }) {
@@ -16,7 +15,7 @@ function Header({ title }) {
   && location.pathname !== '/bebidas'
   && location.pathname !== '/explorar/comidas/area') {
     return (
-      <div className="header-container-customized">
+      <div className="header-container">
         <Link to="/perfil">
           <img
             data-testid="profile-top-btn"

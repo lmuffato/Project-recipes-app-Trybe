@@ -10,6 +10,7 @@ import { getAreas, getFoodsByArea } from '../services/apisArea';
 import { mealsAPI } from '../services/apisMealsAndCocktails';
 
 import '../styles/explorarOrigem.css';
+import Loading from '../components/Loading';
 
 function ExplorarComidasArea() {
   const [areas, setAreas] = useState('');
@@ -66,7 +67,7 @@ function ExplorarComidasArea() {
                 key={ item.strArea }
                 style={ { width: '8rem' } }
                 data-testid={ `${index}-recipe-card` }
-                className="shadow rounded centralize-card"
+                className="shadow rounded m-1"
               >
                 <Card.Img
                   variant="top"
@@ -88,13 +89,15 @@ function ExplorarComidasArea() {
     }
   };
 
+  if (data.length < 1) return <Loading param="food" />;
+
   return (
     <div>
       <Header title="Explorar Origem" />
       <main className="explorar-origem-container">
         <select
           data-testid="explore-by-area-dropdown"
-          className="centralize-select"
+          className="d-flex mx-auto w-75 border-0 rounded p-2 my-2 bg-danger text-light"
           onChange={ handleChange }
         >
           <option
@@ -119,7 +122,10 @@ function ExplorarComidasArea() {
               )
             : null }
         </select>
-        <div className="filter-cards-area">
+        <div
+          style={ { paddingBottom: '60px' } }
+          className="filter-cards-area d-flex flex-wrap justify-content-center"
+        >
           { acctualyFood !== [] && areas !== undefined && areas.meals !== undefined
             ? areasCard() : null }
         </div>

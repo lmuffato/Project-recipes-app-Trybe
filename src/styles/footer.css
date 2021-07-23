@@ -1,5 +1,6 @@
 .footer-links {
   background-color: #e85c06;
+  border-radius: 15px 15px 0 0;
   bottom: 0;
   display: flex;
   justify-content: space-around;

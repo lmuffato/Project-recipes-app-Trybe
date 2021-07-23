@@ -26,7 +26,7 @@ function Categorias({ param }) {
           value={ item.strCategory }
           onClick={ handleClick }
           data-testid={ `${item.strCategory}-category-filter` }
-          className="btn btn-danger rounded-0 filters-buttons"
+          className="btn btn-danger rounded-1 filters-buttons w-50 border"
         >
           {item.strCategory}
         </button>
@@ -42,7 +42,7 @@ function Categorias({ param }) {
       value="All"
       name="All"
       onClick={ handleClick }
-      className="btn btn-danger rounded-0 filters-buttons danger"
+      className="btn btn-danger rounded-1 filters-buttons w-50 border"
     >
       All
     </button>
@@ -55,7 +55,7 @@ function Categorias({ param }) {
   }
 
   return (
-    <div className="d-flex justify-content-center flex-wrap mt-1">
+    <div className="w-100">
       { btns() }
       { btnAll() }
     </div>

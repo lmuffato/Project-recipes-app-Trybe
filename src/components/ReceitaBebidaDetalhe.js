@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import { useHistory } from 'react-router-dom';
 import RecomendacoesCard from './RecomendacoesCard';
+import Header from './Header';
 
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
@@ -124,6 +125,7 @@ function ReceitaBebidaDetalhe({ props }) {
 
       return (
         <div className="recipe-container">
+          <Header title="Detalhes da Bebidas" />
           <img
             alt="Produto"
             className="img-details-main"
@@ -152,8 +154,8 @@ function ReceitaBebidaDetalhe({ props }) {
 
           {!clipboardStatus ? null : (<h5>Link copiado!</h5>)}
 
-          <h3>Ingredients</h3>
-          <ul className="list-container">
+          <ul className="list-container py-3">
+            <h3 className="text-center pb-3">Ingredients</h3>
             { ingredients.map((ingredient, index) => {
               if (ingredient !== null
                 && ingredient !== ' '
@@ -170,15 +172,14 @@ function ReceitaBebidaDetalhe({ props }) {
               return '';
             })}
           </ul>
-          <h3>Instructions</h3>
-          <div className="instruction-container">
+          <div className="instruction-container py-3 mt-3">
+            <h3 className="text-center pb-3">Instructions</h3>
             <p data-testid="instructions">{ strInstructions }</p>
           </div>
 
-          <h3>Receitas Recomendadas:</h3>
+          <h3 className="py-4">Receitas Recomendadas:</h3>
 
           <div className="recomendation-container">
-
             { drinkRecomendation.map((drink, index) => {
               const cardLength = 5;
               if (index <= cardLength) {
@@ -200,7 +201,7 @@ function ReceitaBebidaDetalhe({ props }) {
             type="button"
             onClick={ handleClick }
             data-testid="start-recipe-btn"
-            className={ `${btn} button-recipe` }
+            className={ `${btn} button-recipe py-3` }
           >
             { statusDrink === true ? 'Continuar Receita' : 'Iniciar Receita' }
           </Button>

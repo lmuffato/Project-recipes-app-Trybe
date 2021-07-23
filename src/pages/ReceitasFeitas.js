@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
 import ReceitasFeitasCard from '../components/ReceitasFeitasCard';
-import '../styles/doneRecipes.css';
+import { containerBtns, btns } from '../styles/ReceitasFeitas';
 
 function ReceitasFeitas() {
   const [acctualyRecipes, setAcctualyRecipes] = useState();
@@ -37,11 +37,11 @@ function ReceitasFeitas() {
     <div>
       <Header title="Receitas Feitas" />
 
-      <div className="buttons-categories-container">
+      <div className={ containerBtns }>
         <button
           type="button"
           data-testid="filter-by-all-btn"
-          className="categorie-button"
+          className={ btns }
           onClick={ (e) => {
             e.preventDefault();
             setDoneRecipes(acctualyRecipes);
@@ -52,7 +52,7 @@ function ReceitasFeitas() {
         <button
           type="button"
           data-testid="filter-by-food-btn"
-          className="categorie-button"
+          className={ btns }
           onClick={ (e) => {
             e.preventDefault();
             setDoneRecipes(acctualyRecipes
@@ -64,7 +64,7 @@ function ReceitasFeitas() {
         <button
           type="button"
           data-testid="filter-by-drink-btn"
-          className="categorie-button"
+          className={ btns }
           onClick={ (e) => {
             e.preventDefault();
             setDoneRecipes(acctualyRecipes
@@ -75,7 +75,11 @@ function ReceitasFeitas() {
         </button>
       </div>
 
-      { doneRecipes ? createRecipeList() : <span>Nenhuma receita finalizada</span> }
+      { doneRecipes ? createRecipeList() : (
+        <span className="d-flex justify-content-center mt-5">
+          Nenhuma receita finalizada
+        </span>
+      ) }
     </div>
   );
 }

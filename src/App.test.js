@@ -3,6 +3,7 @@ import { queryByAltText, screen } from '@testing-library/dom'
 import App from './App';
 import renderWhithRouter from './components/RenderWithRouter';
 import userEvent from '@testing-library/user-event';
+import { waitFor } from '@testing-library/react';
 
 describe('1 - Testes tela de login', () => {
   test('Verifica se existe tela de login',

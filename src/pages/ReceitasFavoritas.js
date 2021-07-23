@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
 import ReceitasFavoritasCard from './ReceitasFavoritasCard';
-import '../styles/ReceitasFavoritas.css';
+import { containerBtns, btns } from '../styles/ReceitasFavoritas';
 
 function ReceitasFavoritas() {
   const [acctualyRecipes, setAcctualyRecipes] = useState();
@@ -38,11 +38,11 @@ function ReceitasFavoritas() {
     <div>
       <Header title="Receitas Favoritas" />
 
-      <div className="buttons-categories-container-favorite">
+      <div className={ containerBtns }>
         <button
           type="button"
           data-testid="filter-by-all-btn"
-          className="categorie-button-favorite"
+          className={ btns }
           onClick={ (e) => {
             e.preventDefault();
             setFavoriteRecipes(acctualyRecipes);
@@ -52,7 +52,7 @@ function ReceitasFavoritas() {
         </button>
         <button
           type="button"
-          className="categorie-button-favorite"
+          className={ btns }
           data-testid="filter-by-food-btn"
           onClick={ (e) => {
             e.preventDefault();
@@ -64,7 +64,7 @@ function ReceitasFavoritas() {
         </button>
         <button
           type="button"
-          className="categorie-button-favorite"
+          className={ btns }
           data-testid="filter-by-drink-btn"
           onClick={ (e) => {
             e.preventDefault();
@@ -76,7 +76,11 @@ function ReceitasFavoritas() {
         </button>
       </div>
 
-      { favoriteRecipes ? createRecipeList() : <span>Nenhuma receita favoritada</span> }
+      { favoriteRecipes ? createRecipeList() : (
+        <span className="d-flex justify-content-center mt-5">
+          Nenhuma receita favoritada
+        </span>
+      ) }
     </div>
   );
 }
