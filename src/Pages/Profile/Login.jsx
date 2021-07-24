@@ -3,6 +3,39 @@ import { useHistory } from 'react-router-dom';
 import context from '../../store/Context';
 import '../../Styles/loginPage.css';
 
+import colors from '../../Styles/colors';
+
+const style = {
+  form: {
+    display: 'flex',
+    flex: 1,
+    backgroundColor: 'rgba(154, 154, 142, 0.3)',
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: '90vh',
+    width: '90vw',
+    padding: '10px',
+  },
+  input: {
+    fontFamily: 'MedievalSharp, Cursive',
+    padding: 10,
+    color: colors.cor3,
+  },
+  button: {
+    marginTop: 20,
+    color: colors.cor3,
+    padding: 10,
+    fontFamily: 'MedievalSharp, cursive',
+  },
+  heading: {
+    fontFamily: 'MedievalSharp, cursive',
+    color: colors.cor3,
+    backgroundColor: colors.cor4,
+    padding: 10,
+    borderRadius: 10,
+  },
+};
+
 function Login() {
   const { infoUser, setDatainfoUser } = useContext(context);
   const { email, password } = infoUser;
@@ -36,7 +69,8 @@ function Login() {
   };
 
   return (
-    <form>
+    <form style={ style.form }>
+      <h1 style={ style.heading }>Prancing Pony</h1>
       <label htmlFor="email-input">
         <input
           type="email"
@@ -45,6 +79,7 @@ function Login() {
           id="email-input"
           data-testid="email-input"
           onChange={ handleChange }
+          style={ style.input }
         />
       </label>
       <br />
@@ -56,6 +91,7 @@ function Login() {
           id="password-input"
           data-testid="password-input"
           onChange={ handleChange }
+          style={ style.input }
         />
       </label>
       <button
@@ -63,6 +99,7 @@ function Login() {
         disabled={ validateFields() }
         onClick={ handleClick }
         data-testid="login-submit-btn"
+        style={ style.button }
       >
         Entrar
       </button>

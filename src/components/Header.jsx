@@ -4,13 +4,23 @@ import PropTypes from 'prop-types';
 import SearchIcon from '../images/searchIcon.svg';
 import ProfileImage from '../images/profileIcon.svg';
 import SearchBar from './SearchBar';
+import colors from '../Styles/colors';
+
+const style = {
+  display: 'flex',
+  fontFamily: 'MedievalSharp, Cursive',
+  color: colors.cor3,
+  backgroundColor: colors.cor1,
+  alignItems: 'center',
+  justifyContent: 'center',
+};
 
 function Header({ title, searchBtn = true }) {
   const [displaySearch, setDisplaySearch] = useState(false);
   const history = useHistory();
   return (
     <>
-      <header>
+      <header style={ style }>
         <button
           type="button"
           onClick={ () => history.push('./perfil') }
