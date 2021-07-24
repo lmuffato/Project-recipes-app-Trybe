@@ -32,6 +32,22 @@ function FavoriteRecipies() {
     setLocalStorage('favoriteRecipes', newFavorites); */
   };
 
+  const renderLabel = (el) => {
+    let returnLabel = '';
+    if (el.type === 'comida') {
+      returnLabel = `${el.area}`;
+    } else if (el.type === 'bebida') {
+      switch (el.alcoholicOrNot) {
+      case 'Alcoholic':
+        returnLabel = 'Alcoholic';
+        break;
+      default:
+        returnLabel = 'Not Alcoholic';
+      }
+    }
+    return returnLabel;
+  };
+
   return (
     <div>
       <Header title="Receitas Favoritas" />
@@ -49,13 +65,20 @@ function FavoriteRecipies() {
               alt=""
             />
             <div>
-              <p data-testid={ `${index}-horizontal-top-text` }>{ el.category }</p>
+              <p data-testid={ `${index}-horizontal-top-text` }>
+                { renderLabel(el) }
+                {' '}
+                -
+                {' '}
+                { el.category }
+              </p>
               <p data-testid={ `${index}-horizontal-name` }>{ el.name }</p>
               <div>
                 <button
                   type="button"
                   data-testid={ `${index}-horizontal-share-btn` }
                   onClick={ copyUrlLink }
+                  src={ shareIcon }
                 >
                   <img src={ shareIcon } alt="Compartilhar" />
                 </button>
