@@ -14,8 +14,14 @@ function FavoriteRecipies() {
   const [favorites, setFavorites] = useClassState({ favorite: true });
   const favRecipes = getLocalStorage('favoriteRecipes');
 
-  const copyUrlLink = () => {
-    copy(window.location.href.toString());
+  const copyUrlLink = (el) => {
+    const { hostname, protocol, port } = window.location;
+    const initialUrl = `${protocol}//${hostname}:${port}`;
+    if (el.type === 'comida') {
+      copy(`${initialUrl}/comidas/${el.id}`);
+    } else {
+      copy(`${initialUrl}/bebidas/${el.id}`);
+    }
     setCopyUrl({ copyRecipe: true });
     const time = 3000;
     setTimeout(() => {
@@ -77,7 +83,7 @@ function FavoriteRecipies() {
                 <button
                   type="button"
                   data-testid={ `${index}-horizontal-share-btn` }
-                  onClick={ copyUrlLink }
+                  onClick={ () => copyUrlLink(el) }
                   src={ shareIcon }
                 >
                   <img src={ shareIcon } alt="Compartilhar" />
