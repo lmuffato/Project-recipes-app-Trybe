@@ -1,6 +1,7 @@
 import React from 'react';
 import copy from 'clipboard-copy';
 import { useStateEasyRedux, useClassState } from 'easy-redux-trybe';
+import { useHistory } from 'react-router-dom';
 import Header from '../components/Header';
 import { setLocalStorage, getLocalStorage } from '../helper';
 import shareIcon from '../images/shareIcon.svg';
@@ -14,6 +15,7 @@ function FavoriteRecipies() {
   const [favorites, setFavorites] = useClassState({ favorite: true });
   const favRec = getLocalStorage('favoriteRecipes');
   const [stateFavorite, setStateFavorite] = useClassState({ favRecipes: favRec });
+  const history = useHistory();
 
   const copyUrlLink = (el) => {
     const initialUrl = 'http://localhost:3000';
@@ -71,6 +73,14 @@ function FavoriteRecipies() {
     }
   };
 
+  const choiceRecipie = (el) => {
+    if (el.type === 'comida') {
+      history.push(`/comidas/${el.id}`);
+    } else {
+      history.push(`/bebidas/${el.id}`);
+    }
+  };
+
   return (
     <div>
       <Header title="Receitas Favoritas" />
@@ -100,10 +110,15 @@ function FavoriteRecipies() {
         </div>
         {copyRecipe && <span className={ styles.copyUrl }>Link copiado!</span>}
         {favRecipes && favRecipes.map((el, index) => (
-          <div key={ index } className={ styles.cardFavorite }>
+          <div
+            key={ el.id }
+            className={ styles.cardFavorite }
+          >
             <img
               src={ el.image }
               data-testid={ `${index}-horizontal-image` }
+              onClick={ () => choiceRecipie(el) }
+              aria-hidden="true"
               alt=""
             />
             <div>
@@ -114,7 +129,13 @@ function FavoriteRecipies() {
                 {' '}
                 { el.category }
               </p>
-              <p data-testid={ `${index}-horizontal-name` }>{ el.name }</p>
+              <p
+                data-testid={ `${index}-horizontal-name` }
+                onClick={ () => choiceRecipie(el) }
+                aria-hidden="true"
+              >
+                { el.name }
+              </p>
               <div>
                 <button
                   type="button"
