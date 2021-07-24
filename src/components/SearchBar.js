@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import RecipeContext from '../context/RecipesContext';
 import inputsContent from '../utils/searchBarInputsContent';
+import searchIcon from '../images/searchIcon.svg';
 import './searchBar.css';
 
 function SearchBar() {
@@ -23,13 +24,24 @@ function SearchBar() {
 
   return (
     <section className="searchBar">
-      <input
-        type="text"
-        data-testid="search-input"
-        value={ searchText }
-        onChange={ ({ target }) => setSearchText(target.value) }
-        className="searchBar__input"
-      />
+      <div className="searchBar__input_block">
+        <input
+          type="text"
+          data-testid="search-input"
+          value={ searchText }
+          onChange={ ({ target }) => setSearchText(target.value) }
+          className="searchBar__input"
+        />
+
+        <button
+          type="button"
+          data-testid="exec-search-btn"
+          onClick={ () => handleSearch() }
+          className="searchBar__button"
+        >
+          Search
+        </button>
+      </div>
 
       <fieldset className="searchBar__radios">
         { inputsContent.map((input, index) => (
@@ -46,15 +58,6 @@ function SearchBar() {
           </label>
         )) }
       </fieldset>
-
-      <button
-        type="button"
-        data-testid="exec-search-btn"
-        onClick={ () => handleSearch() }
-        className="searchBar__button"
-      >
-        Buscar
-      </button>
     </section>
   );
 }
