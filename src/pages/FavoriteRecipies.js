@@ -12,7 +12,8 @@ import styles from '../styles/FavoritePage.module.scss';
 function FavoriteRecipies() {
   const [copyUrl, setCopyUrl] = useStateEasyRedux({ name: 'copyFood' }, {});
   const [favorites, setFavorites] = useClassState({ favorite: true });
-  const favRecipes = getLocalStorage('favoriteRecipes');
+  const favRec = getLocalStorage('favoriteRecipes');
+  const [stateFavorite, setStateFavorite] = useClassState({ favRecipes: favRec });
 
   const copyUrlLink = (el) => {
     const initialUrl = 'http://localhost:3000';
@@ -30,11 +31,13 @@ function FavoriteRecipies() {
 
   const { copyRecipe } = copyUrl;
   const { favorite } = favorites;
+  const { favRecipes } = stateFavorite;
 
   const clickFavorite = (el) => {
     setFavorites({ favorite: !favorite });
     const newFavorites = favRecipes.filter((fav) => fav !== el);
     setLocalStorage('favoriteRecipes', newFavorites);
+    setStateFavorite({ favRecipes: newFavorites });
   };
 
   const renderLabel = (el) => {
@@ -53,14 +56,48 @@ function FavoriteRecipies() {
     return returnLabel;
   };
 
+  const renderCards = (ev) => {
+    const { textContent } = ev.target;
+    if (textContent === 'All') {
+      setStateFavorite({ favRecipes: favRec });
+    }
+    if (textContent === 'Food') {
+      const filterFood = favRec.filter((el) => el.type === 'comida');
+      setStateFavorite({ favRecipes: filterFood });
+    }
+    if (textContent === 'Drinks') {
+      const filterDrink = favRec.filter((el) => el.type === 'bebida');
+      setStateFavorite({ favRecipes: filterDrink });
+    }
+  };
+
   return (
     <div>
       <Header title="Receitas Favoritas" />
-      Essas receitas são uma delícia mesmo né??
       <main>
-        <button type="button" data-testid="filter-by-all-btn">All</button>
-        <button type="button" data-testid="filter-by-food-btn">Food</button>
-        <button type="button" data-testid="filter-by-drink-btn">Drinks</button>
+        <div className={ styles.buttonsDiv }>
+          <button
+            type="button"
+            data-testid="filter-by-all-btn"
+            onClick={ (ev) => renderCards(ev) }
+          >
+            All
+          </button>
+          <button
+            type="button"
+            data-testid="filter-by-food-btn"
+            onClick={ (ev) => renderCards(ev) }
+          >
+            Food
+          </button>
+          <button
+            type="button"
+            data-testid="filter-by-drink-btn"
+            onClick={ (ev) => renderCards(ev) }
+          >
+            Drinks
+          </button>
+        </div>
         {copyRecipe && <span className={ styles.copyUrl }>Link copiado!</span>}
         {favRecipes && favRecipes.map((el, index) => (
           <div key={ index } className={ styles.cardFavorite }>

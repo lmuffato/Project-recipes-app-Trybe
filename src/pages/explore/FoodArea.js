@@ -2,6 +2,7 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useStateEasyRedux, useClassState } from 'easy-redux-trybe';
+import { useSelector } from 'react-redux';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
 
@@ -10,7 +11,7 @@ import Cards from '../../components/Cards';
 
 function FoodArea({ match: { path } }) {
   const [state, setState] = useClassState({ area: 'American' });
-  const [stateRedux, setStateRedux] = useStateEasyRedux({ name: 'Search' }, {});
+  const [, setStateRedux] = useStateEasyRedux({ name: 'Search' }, {});
 
   useEffect(() => {
     const fetchApi = async () => {
@@ -32,7 +33,10 @@ function FoodArea({ match: { path } }) {
     fetchApi();
   }, []);
 
-  const { resultsTwelveItems } = stateRedux;
+  // const { resultsTwelveItems } = stateRedux
+
+  const resultsTwelveItems = useSelector((stt) => (
+    stt.Search ? stt.Search.resultsTwelveItems : undefined));
 
   const handleAreaChange = ({ target: { name, value } }) => {
     setState({

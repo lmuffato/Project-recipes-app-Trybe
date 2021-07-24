@@ -1,4 +1,33 @@
 @media screen and (max-width: 414px) {
+  .buttonsDiv {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-around;
+
+    button {
+      align-items: center;
+      padding: 0 20px;
+      background: #EB8328;
+      border: 0;
+      border-radius: 5px;
+      color: #FFF;
+      cursor: pointer;
+      display: flex;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 500;
+      height: 45px;
+      justify-content: center;
+      text-shadow: 0.5px 0.5px 5px grey;
+
+      &:hover {
+        background: #FFF;
+        box-shadow: 1px 1px 5px grey;
+        color: #EB8328;
+        text-shadow: 1px 1px 5px #ffd6a5;
+      }
+    }
+  }
+
   .cardFavorite {
     border-radius: 5px;
     margin: 20px auto;
@@ -8,9 +37,10 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-gap: 10px;
-
+    
     img {
       width: 100%
     }
+
   }
 }
