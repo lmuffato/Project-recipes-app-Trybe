@@ -1,0 +1,16 @@
+@media screen and (max-width: 414px) {
+  .cardFavorite {
+    border-radius: 5px;
+    margin: 20px auto;
+    box-shadow: 2px 2px 5px grey;
+    padding: 10px;
+    width: 85%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 10px;
+
+    img {
+      width: 100%
+    }
+  }
+}

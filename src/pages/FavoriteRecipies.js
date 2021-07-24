@@ -1,17 +1,80 @@
 import React from 'react';
+import copy from 'clipboard-copy';
+import { useStateEasyRedux, useClassState } from 'easy-redux-trybe';
 import Header from '../components/Header';
-import { getLocalStorage } from '../helper';
+import { /* setLocalStorage, */ getLocalStorage } from '../helper';
+import shareIcon from '../images/shareIcon.svg';
+import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import blackHeartIcon from '../images/blackHeartIcon.svg';
+
+import styles from '../styles/FavoritePage.module.scss';
 
 function FavoriteRecipies() {
+  const [copyUrl, setCopyUrl] = useStateEasyRedux({ name: 'copyFood' }, {});
+  const [favorites, setFavorites] = useClassState({ favorite: true });
   const favRecipes = getLocalStorage('favoriteRecipes');
+
+  const copyUrlLink = () => {
+    copy(window.location.href.toString());
+    setCopyUrl({ copyRecipe: true });
+    const time = 3000;
+    setTimeout(() => {
+      setCopyUrl({ copyRecipe: false });
+    }, time);
+  };
+
+  const { copyRecipe } = copyUrl;
+  const { favorite } = favorites;
+
+  const clickFavorite = () => {
+    setFavorites({ favorite: !favorite });
+    /* const newFavorites = favRecipes.filter((fav) => fav !== el);
+    setLocalStorage('favoriteRecipes', newFavorites); */
+  };
 
   return (
     <div>
       <Header title="Receitas Favoritas" />
       Essas receitas são uma delícia mesmo né??
-      {favRecipes && favRecipes.map((el, index) => (
-        <div key={ index }>TODO favorites</div>
-      ))}
+      <main>
+        <button type="button" data-testid="filter-by-all-btn">All</button>
+        <button type="button" data-testid="filter-by-food-btn">Food</button>
+        <button type="button" data-testid="filter-by-drink-btn">Drinks</button>
+        {copyRecipe && <span className={ styles.copyUrl }>Link copiado!</span>}
+        {favRecipes && favRecipes.map((el, index) => (
+          <div key={ index } className={ styles.cardFavorite }>
+            <img
+              src={ el.image }
+              data-testid={ `${index}-horizontal-image` }
+              alt=""
+            />
+            <div>
+              <p data-testid={ `${index}-horizontal-top-text` }>{ el.category }</p>
+              <p data-testid={ `${index}-horizontal-name` }>{ el.name }</p>
+              <div>
+                <button
+                  type="button"
+                  data-testid={ `${index}-horizontal-share-btn` }
+                  onClick={ copyUrlLink }
+                >
+                  <img src={ shareIcon } alt="Compartilhar" />
+                </button>
+                <button
+                  type="button"
+                  onClick={ clickFavorite }
+                  src={ favorite ? blackHeartIcon : whiteHeartIcon }
+                  data-testid={ `${index}-horizontal-favorite-btn` }
+                >
+                  <img
+                    src={ favorite ? blackHeartIcon : whiteHeartIcon }
+                    alt="Favoritado"
+                  />
+                </button>
+              </div>
+            </div>
+          </div>
+        ))}
+      </main>
     </div>
   );
 }
