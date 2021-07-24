@@ -13,14 +13,14 @@
 
   /* background: var(--white); */
   border: none;
-  border-radius: 10px;
+  border-radius: 25px;
   box-shadow: 1px 1px 4px 1px #e1e6e1;
-  color: var(--contrast);
+  color: var(--white);
   cursor: pointer;
   overflow: hidden;
-  padding: 5px;
+  padding: 10px;
   text-align: center;
   text-overflow: ellipsis;
   white-space: nowrap;
-  width: 100px;
+  width: fit-content;
 }
