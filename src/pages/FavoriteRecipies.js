@@ -2,7 +2,7 @@ import React from 'react';
 import copy from 'clipboard-copy';
 import { useStateEasyRedux, useClassState } from 'easy-redux-trybe';
 import Header from '../components/Header';
-import { /* setLocalStorage, */ getLocalStorage } from '../helper';
+import { setLocalStorage, getLocalStorage } from '../helper';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
@@ -32,10 +32,10 @@ function FavoriteRecipies() {
   const { copyRecipe } = copyUrl;
   const { favorite } = favorites;
 
-  const clickFavorite = () => {
+  const clickFavorite = (el) => {
     setFavorites({ favorite: !favorite });
-    /* const newFavorites = favRecipes.filter((fav) => fav !== el);
-    setLocalStorage('favoriteRecipes', newFavorites); */
+    const newFavorites = favRecipes.filter((fav) => fav !== el);
+    setLocalStorage('favoriteRecipes', newFavorites);
   };
 
   const renderLabel = (el) => {
@@ -90,7 +90,7 @@ function FavoriteRecipies() {
                 </button>
                 <button
                   type="button"
-                  onClick={ clickFavorite }
+                  onClick={ () => clickFavorite(el) }
                   src={ favorite ? blackHeartIcon : whiteHeartIcon }
                   data-testid={ `${index}-horizontal-favorite-btn` }
                 >
