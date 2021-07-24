@@ -1,5 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from 'react';
-import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { useStateEasyRedux, useClassState } from 'easy-redux-trybe';
 import Footer from '../../components/Footer';
@@ -10,7 +10,7 @@ import Cards from '../../components/Cards';
 
 function FoodArea({ match: { path } }) {
   const [state, setState] = useClassState({ area: 'American' });
-  const [, setStateRedux] = useStateEasyRedux({ name: 'Search' }, {});
+  const [stateRedux, setStateRedux] = useStateEasyRedux({ name: 'Search' }, {});
 
   useEffect(() => {
     const fetchApi = async () => {
@@ -32,8 +32,7 @@ function FoodArea({ match: { path } }) {
     fetchApi();
   }, []);
 
-  const resultsTwelveItems = useSelector((stt) => (
-    stt.Search ? stt.Search.resultsTwelveItems : undefined));
+  const { resultsTwelveItems } = stateRedux;
 
   const handleAreaChange = ({ target: { name, value } }) => {
     setState({
@@ -69,6 +68,7 @@ function FoodArea({ match: { path } }) {
         value={ state.area }
         data-testid="explore-by-area-dropdown"
         onChange={ handleAreaChange }
+        className={ styles.selectArea }
       >
         <option data-testid="All-option">
           All
