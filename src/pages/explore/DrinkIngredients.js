@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 import { useStateEasyRedux } from 'easy-redux-trybe';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
@@ -10,7 +10,7 @@ import styles from '../../styles/MainPages.module.scss';
 import stylesCards from '../../styles/Cards.module.scss';
 
 function DrinkIngredients() {
-  const [, setStateRedux] = useStateEasyRedux({ name: 'Search' }, {});
+  const [setState, setStateRedux] = useStateEasyRedux({ name: 'Search' }, {});
   const history = useHistory();
 
   useEffect(() => {
@@ -35,13 +35,14 @@ function DrinkIngredients() {
     history.push('/bebidas');
   };
 
-  const resultsTwelveItems = useSelector((state) => (
-    state.Search ? state.Search.resultsTwelveItems : undefined));
+  const { resultsTwelveItems } = setState;
+
+  /* const resultsTwelveItems = useSelector((state) => (
+    state.Search ? state.Search.resultsTwelveItems : undefined)); */
 
   return (
     <div className={ styles.container }>
       <Header title="Explorar Ingredientes" />
-      Os ingredientes das bebidas
       <main className={ styles.cardsArea }>
         {resultsTwelveItems && resultsTwelveItems.map(
           (el, index) => (

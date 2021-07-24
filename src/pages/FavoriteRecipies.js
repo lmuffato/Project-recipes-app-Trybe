@@ -15,8 +15,7 @@ function FavoriteRecipies() {
   const favRecipes = getLocalStorage('favoriteRecipes');
 
   const copyUrlLink = (el) => {
-    const { hostname, protocol, port } = window.location;
-    const initialUrl = `${protocol}//${hostname}:${port}`;
+    const initialUrl = 'http://localhost:3000';
     if (el.type === 'comida') {
       copy(`${initialUrl}/comidas/${el.id}`);
     } else {
