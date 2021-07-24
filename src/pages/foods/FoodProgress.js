@@ -14,7 +14,7 @@ import styles from '../../styles/DetailsPages.module.scss';
 function setRecipeStorage(id) {
   const mealProgress = getLocalStorage('inProgressRecipes');
 
-  if (!mealProgress) {
+  if (!mealProgress || !mealProgress.meals || !mealProgress.meals[id]) {
     const storage = localStorage.inProgressRecipes;
     let setInProgressRecipe = {
       meals: {

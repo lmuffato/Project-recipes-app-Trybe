@@ -14,7 +14,7 @@ import styles from '../../styles/DetailsPages.module.scss';
 function setRecipeStorage(id) {
   const drinkProgress = getLocalStorage('inProgressRecipes');
 
-  if (!drinkProgress) {
+  if (!drinkProgress || !drinkProgress.cocktails || !drinkProgress.cocktails[id]) {
     const storage = localStorage.inProgressRecipes;
     let setInProgressRecipe = {
       cocktails: {
