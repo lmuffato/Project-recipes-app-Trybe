@@ -11,6 +11,7 @@ import blackHeartIcon from '../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import RecipeContext from '../context/RecipesContext';
 import './recipesInProgress.css';
+import ShareButton from '../components/ShareButton';
 
 export default function RecipesDrinksInProgress() {
   const { id } = useParams();
@@ -133,18 +134,7 @@ export default function RecipesDrinksInProgress() {
           </p>
         </div>
         <div className="recipe-interact-buttons-block">
-          <button
-            data-testid="share-btn"
-            onClick={ () => handleShare() }
-            type="button"
-            className="interact__buttons"
-          >
-            <img
-              src={ shareIcon }
-              alt="Share"
-            />
-            { isLinkCopied && <p>Link copiado!</p> }
-          </button>
+          <ShareButton type='comidas' index={ 0 } id={ id }/>
           <button
             onClick={ () => favoriteMeal() }
             type="button"

@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Redirect, useParams } from 'react-router-dom';
 import copy from 'clipboard-copy';
+import ShareButton from '../components/ShareButton';
 import RecipeContext from '../context/RecipesContext';
 import { getMealById } from '../services/api';
 import verifyIngredientsInLocalStorage from '../utils/verifyIngredientsInLocalStorage';
@@ -132,18 +133,7 @@ export default function RecipesFoodsInProgress() {
           </p>
         </div>
         <div className="recipe-interact-buttons-block">
-          <button
-            data-testid="share-btn"
-            onClick={ () => handleShare() }
-            type="button"
-            className="interact__buttons"
-          >
-            <img
-              src={ shareIcon }
-              alt="Share"
-            />
-            { isLinkCopied && <p>Link copiado!</p> }
-          </button>
+          <ShareButton type='comidas' index={ 0 } id={ id }/>
           <button
             onClick={ () => favoriteMeal() }
             type="button"
