@@ -10,8 +10,9 @@
   border: none;
   border-radius: 10px;
   box-shadow: 1px 1px 4px 1px #e1e6e1;
-  color: var(--contrast);
+  color: var(--white);
   cursor: pointer;
+  font-weight: 700;
   padding: 5px;
   width: 100px;
 }
