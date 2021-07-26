@@ -6,6 +6,7 @@
     width: 100%;
 
     header {
+      height: 100%;
       display: grid;
       grid-template-columns: 1fr 3fr 1fr;
       width: 90%;
@@ -27,21 +28,28 @@
         width: 32px;
       }
 
-      h1 {
-        font-family: 'Poppins', sans-serif;
-        color: white;
-        text-shadow: 1px 1px 10px rgb(59, 59, 59);
-        font-weight: 500;
+      .title {
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: center;  
+        align-items: center;
+
+        h1 {
+          font-size: min(35px, 8vw);
+          font-family: 'Poppins', sans-serif;
+          color: white;
+          text-shadow: 1px 1px 10px rgb(59, 59, 59);
+          font-weight: 500;
+          line-height: 1.2;
+          margin-top: auto;
+          margin-bottom: auto;
+        }
       }
 
       .search {
         border: none;
         background: transparent;
         cursor: pointer;
-
-        img {
-          margin-top: -5px;
-        }
       }
     }
   }

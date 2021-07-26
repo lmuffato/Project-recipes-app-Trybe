@@ -29,9 +29,11 @@ export default function Header(props) {
         >
           <img src={ profileIcon } alt="Search" />
         </Link>
-        <h1 data-testid="page-title">
-          {title}
-        </h1>
+        <div className={ styles.title }>
+          <h1 data-testid="page-title">
+            {title}
+          </h1>
+        </div>
         {
           showButton && (
             <button
