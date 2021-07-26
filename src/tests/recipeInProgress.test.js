@@ -1,11 +1,11 @@
 import React from 'react';
 import App from '../App';
-import renderWithRouter from './renderWithRouter';
+import renderWithRouterAndProvider from './renderWithRouterAndProvider';
 
 describe('Test Recipes In Progress page', () => {
   const myPath = '/comidas/52978/in-progress';
   it('Check Page Components', async () => {
-    const { getByTestId, history } = renderWithRouter(<App />);
+    const { getByTestId, history } = renderWithRouterAndProvider(<App />);
     history.push(myPath);
 
     const recipePhoto = await getByTestId('recipe-photo');
