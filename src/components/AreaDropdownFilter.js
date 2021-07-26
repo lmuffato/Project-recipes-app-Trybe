@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { string, func } from 'prop-types';
 
+import '../styles/select.css';
+
 function DropdownFilter({ selectedArea, areaSetter }) {
   const [areaData, setAreaData] = useState([]);
 
@@ -18,22 +20,23 @@ function DropdownFilter({ selectedArea, areaSetter }) {
       data-testid="explore-by-area-dropdown"
       value={ selectedArea }
       onChange={ (e) => areaSetter(e.target.value) }
+      className="explore-by-area__select"
     >
-      { areaData && areaData.map(({ strArea }, index) => (
+        { areaData && areaData.map(({ strArea }, index) => (
+          <option
+            key={ index }
+            value={ strArea }
+            data-testid={ `${strArea}-option` }
+          >
+            { strArea }
+          </option>
+        ))}
         <option
-          key={ index }
-          value={ strArea }
-          data-testid={ `${strArea}-option` }
+          value=""
+          data-testid="All-option"
         >
-          { strArea }
+          All
         </option>
-      ))}
-      <option
-        value=""
-        data-testid="All-option"
-      >
-        All
-      </option>
     </select>
   );
 }

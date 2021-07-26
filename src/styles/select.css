@@ -1,0 +1,17 @@
+select {
+  margin: 20px 0;
+  margin-left: 10px;
+  background: var(--white);
+  border: none;
+  color: var(--spotlight);
+  width: 70vw;
+  font-family: Ubuntu, sans-serif;
+  font-size: 18px;
+  height: 30px;
+}
+
+select option {
+  font-size: 14px;
+  width: 100px;
+  border: none;
+}
