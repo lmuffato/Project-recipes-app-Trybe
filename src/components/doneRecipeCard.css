@@ -20,15 +20,18 @@
 }
 
 .doneRecipesCard__info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   padding: 5px;
   text-align: center;
 }
 
 .doneRecipesCard__info__title {
-  background-color: var(--contrast);
+  background-color: var(--white);
   border-radius: 5px;
-  color: var(--complementary);
-  font-size: 1.2rem;
+  color: var(--spotlight);
+  font-size: 1.3rem;
   margin: 5px auto;
   padding: 5px;
   text-align: center;
@@ -51,10 +54,6 @@
   background: var(--background);
   border-radius: 10px;
   color: var(--contrast);
-  padding: 5px;
+  margin-bottom: 15px;
   text-align: center;
-}
-
-.doneRecipe__shareButton {
-  padding: 5px;
 }
