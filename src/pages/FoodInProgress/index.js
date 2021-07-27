@@ -1,25 +1,24 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import ComidasInProgress from '../../components/ComidasInProgress';
 import fetchFoodDetails from '../../services/fetchFoodDetails';
+import FoodLoader from '../../components/Loader/Food';
 
 function ComidasProgresso() {
-  const { pathname } = useLocation();
+  const { id } = useParams();
   const [data, setData] = useState('');
-  const minSlice = 9;
-  const maxSlice = -12;
-  const id = pathname.slice(minSlice, maxSlice);
+  const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
     async function fetchAPI() {
-      console.log(id);
       const { meals } = await fetchFoodDetails(id);
       setData(meals[0]);
+      setLoading(false);
     }
     fetchAPI();
   }, [id]);
 
-  return data === '' ? <h2>Loading...</h2> : <ComidasInProgress data={ data } />;
+  return isLoading ? <FoodLoader /> : <ComidasInProgress data={ data } />;
 }
 
 export default ComidasProgresso;

@@ -9,25 +9,24 @@ import getIngredients from '../../services/getIngredients';
 import './style.css';
 
 function BebidasDetails({ data, recomendation }) {
-  console.log(data);
   const { pathname } = useLocation();
   const { id } = useParams();
   const { href } = window.location;
-  const ingredients = getIngredients(data[0], 'strIngredient');
-  const ingredientsMeasures = getIngredients(data[0], 'strMeasure');
+  const ingredients = getIngredients(data, 'strIngredient');
+  const ingredientsMeasures = getIngredients(data, 'strMeasure');
   const { strDrink, strInstructions, strDrinkThumb,
-    strAlcoholic, strCategory } = data[0];
+    strAlcoholic, strCategory } = data;
+
   return (
-    <div className="container">
-      <img
-        className="image-detail"
-        src={ strDrinkThumb }
-        alt="comida"
-        data-testid="recipe-photo"
-      />
+    <div className="recipe-details-container">
+      <div className="top-recipe-details">
+        <img src={ strDrinkThumb } alt="comida" data-testid="recipe-photo" />
+        <div className="recipes-buttons-actions">
+          <ShareButton data-testid="share-btn" urlCopied={ href } />
+          <FavoriteButton data={ data } path={ id } />
+        </div>
+      </div>
       <h4 data-testid="recipe-title">{ strDrink }</h4>
-      <ShareButton data-testid="share-btn" urlCopied={ href } />
-      <FavoriteButton data={ data[0] } path={ id } />
       <p>{ strCategory }</p>
       {strAlcoholic === 'Alcoholic' ? (
         <p data-testid="recipe-category">Alcoholic</p>
@@ -35,31 +34,29 @@ function BebidasDetails({ data, recomendation }) {
         <br />
       )}
       <ul>
-        { ingredients.map((ingredient, index) => (
-          <li key={ ingredient }>
-            <p data-testid={ `${index}-ingredient-name-and-measure` }>
-              { ingredient[1] }
-            </p>
-          </li>
-        ))}
-        { ingredientsMeasures.map((measure, index) => (
-          <li key={ measure }>
-            <p data-testid={ `${index}-ingredient-name-and-measure` }>
-              { measure[1] }
-            </p>
-          </li>
-        ))}
+        {Object.values(ingredients).map((ingredient, index) => {
+          const measure = Object.values(ingredientsMeasures)[index];
+          return (
+            <li
+              key={ index }
+              htmlFor={ ingredient }
+              data-testid={ `${index}-ingredient-name-and-measure` }
+            >
+              {`${ingredient} ${measure ? `- ${measure}` : ''}`}
+            </li>
+          );
+        })}
       </ul>
       <p data-testid="instructions">{ strInstructions }</p>
       <Recomendations data={ recomendation } />
-      <RecipeButton path={ pathname } ingredients={ ingredients } />
+      <RecipeButton recipe={ data } path={ pathname } ingredients={ ingredients } />
     </div>
   );
 }
 
 BebidasDetails.propTypes = {
-  data: PropTypes.arrayOf({}).isRequired,
-  recomendation: PropTypes.arrayOf([]).isRequired,
-};
+  data: PropTypes.shape({}),
+  recomendation: PropTypes.arrayOf(PropTypes.shape({})),
+}.isRequired;
 
 export default BebidasDetails;

@@ -1,3 +1,13 @@
+.favorite-recipe-card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.favorite-recipe-card img {
+  width: 50%;
+}
+
 .buttons {
   display: flex;
   flex-direction: row;

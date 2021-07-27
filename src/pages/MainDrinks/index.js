@@ -1,19 +1,26 @@
-import React, { useCallback, useContext, useEffect, useRef, useState } from 'react';
+import React, {
+  useCallback,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import { Button } from 'react-bootstrap';
-import { useHistory } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
+import DrinkLoader from '../../components/Loader/Drink';
 import context from '../../context/RecipesContext';
 import fetchCategories from '../../services/fetchCategories';
 import fetchRecipes from '../../services/fetchRecipes';
 import './style.css';
 
 const MainDrinks = () => {
-  const history = useHistory();
-  const { recipesDrinks, setRecipesDrinks } = useContext(context);
+  const { recipesDrinks, setRecipesDrinks, isLoading, setLoading } = useContext(context);
   const [categories, setCategories] = useState([]);
   const [categoryName, setCategoryName] = useState('');
   const [isFiltering, setFiltering] = useState(false);
+  const [recipeClickedId, setRecipeClicked] = useState('');
   const [previousTarget, setPreviousTarget] = useState(null);
   const btnAllRecipes = useRef(null);
   const MAX_LENGTH_RECIPES = 12;
@@ -22,14 +29,23 @@ const MainDrinks = () => {
   const getRecipes = useCallback(async () => {
     await fetchRecipes(
       'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=',
-    ).then(({ drinks }) => setRecipesDrinks(drinks.slice(0, MAX_LENGTH_RECIPES)));
+    ).then(({ drinks }) => {
+      if (drinks.length > MAX_LENGTH_RECIPES) {
+        setRecipesDrinks(drinks.slice(0, MAX_LENGTH_RECIPES));
+      } else {
+        setRecipesDrinks(drinks);
+      }
+    });
   }, [setRecipesDrinks]);
 
-  const getRecipesByCategory = useCallback(async (name) => {
-    await fetchRecipes(
-      `https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${name}`,
-    ).then(({ drinks }) => setRecipesDrinks(drinks.slice(0, MAX_LENGTH_RECIPES)));
-  }, [setRecipesDrinks]);
+  const getRecipesByCategory = useCallback(
+    async (name) => {
+      await fetchRecipes(
+        `https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${name}`,
+      ).then(({ drinks }) => setRecipesDrinks(drinks.slice(0, MAX_LENGTH_RECIPES)));
+    },
+    [setRecipesDrinks],
+  );
 
   useEffect(() => {
     const getCategories = async () => {
@@ -38,10 +54,14 @@ const MainDrinks = () => {
       ).then(({ drinks }) => setCategories(drinks.slice(0, MAX_LENGTH_CATEGORIES)));
     };
     getCategories();
-    if (!isFiltering && recipesDrinks.length === 0) {
+    const validations = [!isFiltering, recipesDrinks.length === 0];
+    if (!validations.includes(false)) {
       getRecipes();
     }
-  }, [getRecipes, isFiltering, recipesDrinks]);
+    const TIMEOUT = 2000;
+    setTimeout(() => setLoading(false), TIMEOUT);
+    return () => setLoading(true);
+  }, [getRecipes, isFiltering, recipesDrinks.length, setLoading]);
 
   const handleSelectCategory = ({ target, target: { name } }) => {
     setPreviousTarget(target);
@@ -64,15 +84,20 @@ const MainDrinks = () => {
   };
 
   const setAllRecipes = () => {
+    setFiltering(false);
     getRecipes();
+    setCategoryName('');
     previousTarget.style.backgroundColor = '#d7d7d7';
     btnAllRecipes.current.style.backgroundColor = '#ffc529';
   };
 
-  const redirectToDescription = ({ target }) => {
-    const { id } = target.parentElement;
-    history.push(`/bebidas/${id}`);
-  };
+  if (isLoading) {
+    return <DrinkLoader />;
+  }
+
+  if (recipeClickedId) {
+    return <Redirect to={ `/bebidas/${recipeClickedId}` } />;
+  }
 
   return (
     <section className="drinks-page">
@@ -99,11 +124,9 @@ const MainDrinks = () => {
       </div>
       {recipesDrinks.map(({ idDrink, strDrink, strDrinkThumb }, index) => (
         <div
-          key={ idDrink }
-          id={ idDrink }
-          onClick={ redirectToDescription }
-          aria-hidden="true"
-          onKeyDown={ redirectToDescription }
+          key={ index }
+          onClick={ () => setRecipeClicked(idDrink) }
+          aria-hidden
           data-testid={ `${index}-recipe-card` }
           className="recipe-card"
         >

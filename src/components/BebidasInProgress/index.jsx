@@ -4,40 +4,21 @@ import PropTypes from 'prop-types';
 import getIngredients from '../../services/getIngredients';
 import ShareButton from '../ShareButton';
 import FavoriteButton from '../FavoriteButton';
-import getIngredientsWithNumber from '../../services/getIngredientsWithNumber';
 
 function DrinksInProgress({ data }) {
-  const ingredients = getIngredients(data, 'strIngredient').map((e) => e[1]);
+  // const { state: { ingredients } } = useLocation();
+  const ingredients = getIngredients(data, 'strIngredient');
   const { id } = useParams();
-  const [keys, setKeys] = useState([]);
   const [checkedIngredients, setChecked] = useState([]);
   const [redirect, setRedirect] = useState(false);
 
   useEffect(() => {
-    function saveState() {
-      const { strDrinkThumb, strDrink, strCategory } = data;
-      const obj = [{
-        image: strDrinkThumb,
-        title: strDrink,
-        category: strCategory,
-      }];
-      setKeys(obj);
-    }
-    saveState();
     const updateChecked = () => {
-      console.log(data);
-      const storage = JSON.parse(localStorage.getItem('inProgressRecipes'));
-      if (storage) {
-        const cocktail = storage.cocktails[id];
+      const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
+      if (inProgressRecipes) {
+        const cocktail = inProgressRecipes.cocktails[id];
         if (cocktail) {
-          console.log(cocktail);
-          const newArr = [];
-          cocktail.forEach((item) => newArr.push(data[`strIngredient${item}`]));
-          // console.log((data.strIngredient1))
-          setChecked(newArr);
-        } else {
-          storage.cocktails[id] = [];
-          localStorage.setItem('inProgressRecipes', JSON.stringify(storage));
+          setChecked(cocktail);
         }
       } else {
         const obj = {
@@ -48,15 +29,15 @@ function DrinksInProgress({ data }) {
       }
     };
     updateChecked();
-  }, [data, id]);
+  }, [id]);
 
   useEffect(() => {
     const updateLocalStorage = () => {
-      const storage = JSON.parse(localStorage.getItem('inProgressRecipes'));
-      const numberIngredients = getIngredientsWithNumber(data);
-      const newArr = checkedIngredients.map((element) => numberIngredients[element]);
-      storage.cocktails[id] = newArr;
-      localStorage.setItem('inProgressRecipes', JSON.stringify(storage));
+      const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
+      localStorage.setItem('inProgressRecipes', JSON.stringify({
+        ...inProgressRecipes,
+        cocktails: { ...inProgressRecipes.cocktails, [id]: checkedIngredients },
+      }));
     };
     updateLocalStorage();
   }, [checkedIngredients, id, data]);
@@ -67,7 +48,9 @@ function DrinksInProgress({ data }) {
 
   const handleCheked = ({ target }) => {
     if (checkedIngredients.includes(target.name)) {
-      const filtered = checkedIngredients.filter((element) => element !== target.name);
+      const filtered = checkedIngredients.filter(
+        (element) => element !== target.name,
+      );
       setChecked(filtered);
     } else {
       const newArr = [...checkedIngredients, target.name];
@@ -75,21 +58,30 @@ function DrinksInProgress({ data }) {
     }
   };
 
-  if (keys.length > 0) {
-    return (
-      <div>
-        <img src={ keys[0].image } alt="thumb" data-testid="recipe-photo" width="200px" />
-        <h3 data-testid="recipe-title">{ keys[0].title }</h3>
-        <ShareButton urlCopied={ `http://localhost:3000/bebidas/${id}` } />
-        <FavoriteButton data={ data } path={ id } />
-        <p data-testid="recipe-category">{ keys[0].category }</p>
-        { ingredients.map((element, index) => (
-          <label
+  return (
+    <div>
+      <div className="top-recipe-details">
+        <img
+          src={ data.strDrinkThumb }
+          alt="thumb"
+          data-testid="recipe-photo"
+          width="200px"
+        />
+        <div className="recipes-buttons-actions">
+          <ShareButton urlCopied={ `http://localhost:3000/bebidas/${id}` } />
+          <FavoriteButton data={ data } path={ id } />
+        </div>
+      </div>
+      <div className="recipe-title">
+        <h3 data-testid="recipe-title">{data.strDrink}</h3>
+        <p data-testid="recipe-category">{data.strCategory}</p>
+      </div>
+      <div className="recipe-ingredients-container">
+        {Object.values(ingredients).map((element, index) => (
+          <div
             data-testid={ `${index}-ingredient-step` }
             key={ index }
-            htmlFor={ `${index}-${element}` }
           >
-            { element }
             <input
               type="checkbox"
               id={ `${index}-${element}` }
@@ -97,25 +89,20 @@ function DrinksInProgress({ data }) {
               onChange={ handleCheked }
               checked={ checkedIngredients.includes(element) }
             />
-          </label>
-        )) }
-        <p data-testid="instructions">{ data.strInstructions }</p>
-        <button
-          type="button"
-          data-testid="finish-recipe-btn"
-          onClick={ handdleButton }
-          disabled={ checkedIngredients.length < ingredients.length }
-        >
-          Finalizar Receita!
-        </button>
-        {redirect ? <Redirect to="/receitas-feitas" /> : null}
+            {element}
+          </div>
+        ))}
       </div>
-    );
-  }
-
-  return (
-    <div>
-      { null }
+      <p data-testid="instructions">{data.strInstructions}</p>
+      <button
+        type="button"
+        data-testid="finish-recipe-btn"
+        onClick={ handdleButton }
+        disabled={ checkedIngredients.length < Object.values(ingredients).length }
+      >
+        Finalizar Receita!
+      </button>
+      {redirect ? <Redirect to="/receitas-feitas" /> : null}
     </div>
   );
 }

@@ -1,9 +1,59 @@
-.fixed-button {
-  bottom: 0;
-  position: fixed;
+.recipe-details-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
-.image-detail {
-  height: 100px;
-  width: 100px;
+.top-recipe-details {
+  position: relative;
+}
+
+.top-recipe-details img {
+  width: 100%;
+}
+
+.top-recipe-details .recipes-buttons-actions {
+  display: flex;
+  justify-content: center;
+}
+
+.recipes-buttons-actions button {
+  border: none;
+  flex: 1;
+}
+
+.recipes-buttons-actions .share-message {
+  background-color: rgba(255, 255, 255, 0.7);
+  padding: 15px;
+  position: absolute;
+  top: 10px;
+}
+
+.recipes-buttons-actions .favorite-btn {
+  background-color: #ffc529;
+}
+
+.recipes-buttons-actions button img {
+  width: 30px;
+}
+
+.recipe-title {
+  margin: 10px 0;
+}
+
+/* .recipe-details-container .favorite-btn {
+  width: 30px;
+} */
+
+.start-recipe-btn {
+  align-self: center;
+  bottom: 0;
+  display: flex;
+  padding: 10px;
+  position: fixed;
+  z-index: 1000;
+}
+
+.carousel-container {
+  margin: 20px 0;
 }
