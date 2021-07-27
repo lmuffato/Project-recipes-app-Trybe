@@ -1,7 +1,8 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from 'react';
-import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { useStateEasyRedux, useClassState } from 'easy-redux-trybe';
+import { useSelector } from 'react-redux';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
 
@@ -31,6 +32,8 @@ function FoodArea({ match: { path } }) {
     };
     fetchApi();
   }, []);
+
+  // const { resultsTwelveItems } = stateRedux
 
   const resultsTwelveItems = useSelector((stt) => (
     stt.Search ? stt.Search.resultsTwelveItems : undefined));
@@ -69,6 +72,7 @@ function FoodArea({ match: { path } }) {
         value={ state.area }
         data-testid="explore-by-area-dropdown"
         onChange={ handleAreaChange }
+        className={ styles.selectArea }
       >
         <option data-testid="All-option">
           All

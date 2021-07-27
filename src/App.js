@@ -1,7 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Login from './pages/Login';
-// import Settings from './pages/Settings';
 import NotFound from './pages/NotFound';
 import './App.css';
 import Foods from './pages/foods/Foods';
@@ -17,7 +16,7 @@ import ExploreFood from './pages/explore/ExploreFood';
 import DrinkIngredients from './pages/explore/DrinkIngredients';
 import FoodIngredients from './pages/explore/FoodIngredients';
 import FoodArea from './pages/explore/FoodArea';
-import DoneRecipies from './pages/DoneRecipies';
+import DoneRecipes from './pages/DoneRecipes';
 import FavoriteRecipies from './pages/FavoriteRecipies';
 
 function App() {
@@ -60,12 +59,10 @@ function App() {
           path="/explorar/comidas/ingredientes"
           component={ FoodIngredients }
         />
-        {/* <Route exact path="/explorar/bebidas/area" component={ Login } /> */}
         <Route exact path="/explorar/comidas/area" component={ FoodArea } />
         <Route exact path="/perfil" component={ Perfil } />
-        <Route exact path="/receitas-feitas" component={ DoneRecipies } />
+        <Route exact path="/receitas-feitas" component={ DoneRecipes } />
         <Route exact path="/receitas-favoritas" component={ FavoriteRecipies } />
-        {/* <Route exact path="/feedback" component={ Feedback } /> */}
         <Route path="*" component={ NotFound } />
       </Switch>
     </BrowserRouter>
@@ -73,24 +70,3 @@ function App() {
 }
 
 export default App;
-// import React from 'react';
-// import './App.css';
-// import rockGlass from './images/rockGlass.svg';
-// import 'bootstrap/dist/css/bootstrap.min.css';
-
-// function App() {
-//   return (
-//     <div className="meals">
-//       <span className="logo">TRYBE</span>
-//       <object
-//         className="rocksGlass"
-//         type="image/svg+xml"
-//         data={ rockGlass }
-//       >
-//         Glass
-//       </object>
-//     </div>
-//   );
-// }
-
-// export default App;

@@ -4,6 +4,16 @@
     position: absolute;
     width: 100%;
 
+    .selectArea {
+      font-family: 'Poppins', sans-serif;
+      width: 95%;
+      margin: 8px;
+      padding: 8px;
+      border-radius: 5px;
+      background: #FFF;
+      cursor: pointer;
+    }
+
     .cardsArea {
       display: grid;
       grid-gap: 8px;

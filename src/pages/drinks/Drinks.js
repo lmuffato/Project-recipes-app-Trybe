@@ -33,6 +33,10 @@ export default function Drinks(props) {
 
   const resultsTwelveItems = useSelector((state) => (
     state.Search ? state.Search.resultsTwelveItems : undefined));
+
+  const isLoading = useSelector((state) => (
+    state.Search ? state.Search.isLoading : false));
+
   if (resultsTwelveItems && resultsTwelveItems.length === 1) {
     const { idDrink } = resultsTwelveItems[0];
     return <Redirect to={ `bebidas/${idDrink}` } />;
@@ -42,7 +46,7 @@ export default function Drinks(props) {
       <Header title="Bebidas" showButton showHeader={ !!id } { ...{ path } } />
       <FilterButtons { ...{ path, resultsTwelveItems } } />
       <main className={ styles.cardsArea }>
-        {resultsTwelveItems && resultsTwelveItems.map(
+        {!isLoading && resultsTwelveItems && resultsTwelveItems.map(
           (el, index) => (<Cards
             key={ el.idDrink }
             { ...{ path, el, index } }
