@@ -30,25 +30,18 @@ function BebidasEmProcesso() {
     setLoading(true);
     const fetchDrink = async () => {
       const data = await fetchAPI(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`);
-      console.log(data.drinks[0]);
       setDrink(data.drinks[0]);
-      console.log(data.drinks[0]);
-
       const ingredientes = createIngredientsList(data.drinks[0]);
       const filter = ingredientes.filter((item) => item[0] !== null);
       setListIngredients(filter);
 
       setLoading(false);
     };
-    console.log('aaaaa');
-
     fetchDrink();
   }, [id]);
 
   useEffect(() => {
     const previousIngredientes = JSON.parse(localStorage.getItem('inProgressRecipes'));
-    console.log(previousIngredientes);
-
     const newIngredientes = {
       ...previousIngredientes,
       cocktails: {
@@ -64,31 +57,24 @@ function BebidasEmProcesso() {
 
   function handleClick() {
     // se retorna true está favoritado, se falso nao estava favoritado
-    if (!favorite) {
-      // se nao estiver favoritado eu tenho que colocar no local storage
-      setFavorite(true);
-
-      const newFavorite = [
-        ...storageFavorite,
-        {
-          id,
-          type: 'bebida',
-          area: '',
-          category: drink.strCategory,
-          alcoholicOrNot: drink.strAlcoholic,
-          name: drink.strDrink,
-          image: drink.strDrinkThumb,
-        },
-      ];
-      localStorage.setItem('favoriteRecipes', JSON.stringify(newFavorite));
-    }
-
-    if (favorite) {
-      // se ja estiver favoritado eu tenho que tirar do local storage
-      setFavorite(false);
-      const removeFavorite = storageFavorite.filter((item) => item.id !== id);
-      localStorage.setItem('favoriteRecipes', JSON.stringify(removeFavorite));
-    }
+    setFavorite(!favorite);
+    const newFavorite = [
+      ...storageFavorite,
+      {
+        id,
+        type: 'bebida',
+        area: '',
+        category: drink.strCategory,
+        alcoholicOrNot: drink.strAlcoholic,
+        name: drink.strDrink,
+        image: drink.strDrinkThumb,
+      },
+    ];
+    const removeFavorite = storageFavorite.filter((item) => item.id !== id);
+    return favorite ? localStorage.setItem(
+      'favoriteRecipes', JSON.stringify(removeFavorite),
+    )
+      : localStorage.setItem('favoriteRecipes', JSON.stringify(newFavorite));
   }
 
   function handleShare() {
@@ -103,7 +89,6 @@ function BebidasEmProcesso() {
   }
 
   function renderList() {
-    console.log(listIngredients);
     return listIngredients.map((item, index) => (
       <div key={ index } className="checkbox">
         <label
@@ -126,6 +111,26 @@ function BebidasEmProcesso() {
     ));
   }
 
+  function handleFinishedRecipe() {
+    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date
+    const now = new Date();
+    const [month, day, year] = [now.getMonth(), now.getDate(), now.getFullYear()];
+    const finishedDrink = {
+      id: drink.idDrink,
+      type: 'bebida',
+      area: '',
+      category: drink.strCategory,
+      alcoholicOrNot: drink.strAlcoholic,
+      name: drink.strDrink,
+      image: drink.strDrinkThumb,
+      doneDate: `${day}/${month}/${year}`,
+    };
+    const finishedRecipes = JSON.parse(localStorage.getItem('doneRecipes')) || [];
+    localStorage.setItem('doneRecipes',
+      JSON.stringify([...finishedRecipes, finishedDrink]));
+
+    history.push('/receitas-feitas');
+  }
   if (loading) return <p>carregando</p>;
 
   return (
@@ -176,7 +181,7 @@ function BebidasEmProcesso() {
         type="button"
         data-testid="finish-recipe-btn"
         disabled={ finished }
-        onClick={ () => history.push('/receitas-feitas') }
+        onClick={ handleFinishedRecipe }
       >
         finalizar
       </button>

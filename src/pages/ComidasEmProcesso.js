@@ -32,8 +32,6 @@ function ComidasEmProcesso() {
     const fetchMeal = async () => {
       const data = await fetchAPI(MEALS_BY_ID_ENDPOINT(id));
       setMeal(data.meals[0]);
-      console.log(data.meals[0]);
-
       const ingredientes = createIngredientsList(data.meals[0]);
       const filter = ingredientes.filter((item) => item[0] !== undefined);
       setListIngredients(filter);
@@ -46,7 +44,6 @@ function ComidasEmProcesso() {
 
   useEffect(() => {
     const previousIngredientes = JSON.parse(localStorage.getItem('inProgressRecipes'));
-
     const newIngredientes = {
       ...previousIngredientes,
       meals: {
@@ -56,39 +53,29 @@ function ComidasEmProcesso() {
     };
 
     localStorage.setItem('inProgressRecipes', JSON.stringify(newIngredientes));
-
     setFinished(listIngredients.length !== indexChecked.length);
-    console.log(listIngredients);
-    console.log(indexChecked);
   }, [indexChecked, listIngredients, id]);
 
   function handleClick() {
     // se retorna true está favoritado, se falso nao estava favoritado
-    if (!favorite) {
-      // se nao estiver favoritado eu tenho que colocar no local storage
-      setFavorite(true);
-
-      const newFavorite = [
-        ...storageFavorite,
-        {
-          id,
-          type: 'comida',
-          area: meal.strArea,
-          category: meal.strCategory,
-          alcoholicOrNot: '',
-          name: meal.strMeal,
-          image: meal.strMealThumb,
-        },
-      ];
-      localStorage.setItem('favoriteRecipes', JSON.stringify(newFavorite));
-    }
-
-    if (favorite) {
-      // se ja estiver favoritado eu tenho que tirar do local storage
-      setFavorite(false);
-      const removeFavorite = storageFavorite.filter((item) => item.id !== id);
-      localStorage.setItem('favoriteRecipes', JSON.stringify(removeFavorite));
-    }
+    setFavorite(!favorite);
+    const newFavorite = [
+      ...storageFavorite,
+      {
+        id,
+        type: 'comida',
+        area: meal.strArea,
+        category: meal.strCategory,
+        alcoholicOrNot: '',
+        name: meal.strMeal,
+        image: meal.strMealThumb,
+      },
+    ];
+    const removeFavorite = storageFavorite.filter((item) => item.id !== id);
+    return favorite ? localStorage.setItem(
+      'favoriteRecipes', JSON.stringify(removeFavorite),
+    )
+      : localStorage.setItem('favoriteRecipes', JSON.stringify(newFavorite));
   }
 
   function handleShare() {
@@ -123,6 +110,27 @@ function ComidasEmProcesso() {
         </label>
       </div>
     ));
+  }
+
+  function handleFinishedRecipe() {
+    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date
+    const now = new Date();
+    const [month, day, year] = [now.getMonth(), now.getDate(), now.getFullYear()];
+    const finishedMeal = {
+      id: meal.idMeal,
+      type: 'comida',
+      area: meal.strArea,
+      category: meal.strCategory,
+      alcoholicOrNot: '',
+      name: meal.strMeal,
+      image: meal.strMealThumb,
+      doneDate: `${day}/${month}/${year}`,
+    };
+    const finishedRecipes = JSON.parse(localStorage.getItem('doneRecipes')) || [];
+    localStorage.setItem('doneRecipes',
+      JSON.stringify([...finishedRecipes, finishedMeal]));
+
+    history.push('/receitas-feitas');
   }
 
   if (loading) return <p>carregando</p>;
@@ -174,7 +182,7 @@ function ComidasEmProcesso() {
         type="button"
         data-testid="finish-recipe-btn"
         disabled={ finished }
-        onClick={ () => history.push('/receitas-feitas') }
+        onClick={ handleFinishedRecipe }
       >
         finalizar
       </button>
