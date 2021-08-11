@@ -70,6 +70,130 @@
   margin-top: 10px;
 }
 
+.favorite-card {
+  width: 80%;
+  height: 250px;
+  background-color: white;
+  margin: 0 auto;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  -webkit-box-shadow: 1px 1px 5px rgba(189, 189, 189, 0.438);
+          box-shadow: 1px 1px 5px rgba(189, 189, 189, 0.438);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.img-card {
+  width: 200px;
+}
+
+.favorite-content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: left;
+      -ms-flex-align: left;
+          align-items: left;
+  width: 45%;
+  margin: 0px;
+}
+
+.favorite-title {
+  width: 90px;
+  height: 25px;
+  padding: 0px;
+  margin-bottom: 10px;
+  border-style: none;
+  background-color: #ff722a;
+  color: white;
+}
+
+.favorite-category {
+  font-weight: bold;
+}
+
+.done-card {
+  width: 80%;
+  height: 250px;
+  background-color: white;
+  margin: 0 auto;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  -webkit-box-shadow: 1px 1px 5px rgba(189, 189, 189, 0.438);
+          box-shadow: 1px 1px 5px rgba(189, 189, 189, 0.438);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.done-img {
+  width: 200px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-style: none;
+  background-color: rgba(255, 255, 255, 0);
+}
+
+.done-content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: left;
+      -ms-flex-align: left;
+          align-items: left;
+  width: 45%;
+  margin: 0px;
+}
+
+.done-title {
+  width: 90px;
+  height: 60px;
+  padding: 0px;
+  margin-bottom: 50px;
+  border-style: none;
+  background-color: #ff722a;
+  color: white;
+}
+
+.done-btn {
+  width: 20px;
+}
+
 .search {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -472,65 +596,5 @@
   width: 93%;
   height: 50px;
   margin: 20px;
-}
-
-.favorite-card {
-  width: 80%;
-  height: 250px;
-  background-color: white;
-  margin: 0 auto;
-  margin-top: 20px;
-  margin-bottom: 10px;
-  border-radius: 5px;
-  -webkit-box-shadow: 1px 1px 5px rgba(189, 189, 189, 0.438);
-          box-shadow: 1px 1px 5px rgba(189, 189, 189, 0.438);
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-}
-
-.img-card {
-  width: 200px;
-}
-
-.favorite-content {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: left;
-      -ms-flex-align: left;
-          align-items: left;
-  width: 45%;
-  margin: 0px;
-}
-
-.favorite-title {
-  width: 90px;
-  height: 25px;
-  padding: 0px;
-  margin-bottom: 10px;
-  border-style: none;
-  background-color: #ff722a;
-  color: white;
-}
-
-.favorite-category {
-  font-weight: bold;
 }
 /*# sourceMappingURL=style.css.map */

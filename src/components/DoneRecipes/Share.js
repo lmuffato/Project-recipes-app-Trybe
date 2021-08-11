@@ -21,6 +21,7 @@ function Share({ type, id, index }) {
       data-testid={ `${index}-horizontal-share-btn` }
       onClick={ copyToClipBoard }
       src={ shareIcon }
+      className="icones-btn done-btn"
     >
       <img src={ shareIcon } alt="Compartilhar" />
       {isShared && 'Link copiado!'}

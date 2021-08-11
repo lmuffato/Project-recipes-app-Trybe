@@ -6,36 +6,38 @@ function DoneRecipeCard({
   id, type, area, category, alcoholicOrNot, name, image, index, tags, doneDate,
 }) {
   return (
-    <section>
+    <section className="done-card">
       <DoneRecipesImports.Image
         index={ index }
         url={ image }
         type={ type }
         id={ id }
       />
-      <DoneRecipesImports.Category
-        index={ index }
-        category={ type === 'comida' ? `${area} - ${category}` : alcoholicOrNot }
-      />
-      <DoneRecipesImports.Title
-        index={ index }
-        title={ name }
-        type={ type }
-        id={ id }
-      />
-      <DoneRecipesImports.Share
-        id={ id }
-        index={ index }
-        type={ `${type}s` }
-      />
-      <DoneRecipesImports.DoneDate
-        doneDate={ doneDate }
-        index={ index }
-      />
-      <DoneRecipesImports.Tag
-        tags={ tags }
-        index={ index }
-      />
+      <div className="done-content">
+        <DoneRecipesImports.Category
+          index={ index }
+          category={ type === 'comida' ? `${area} - ${category}` : alcoholicOrNot }
+        />
+        <DoneRecipesImports.Title
+          index={ index }
+          title={ name }
+          type={ type }
+          id={ id }
+        />
+        <DoneRecipesImports.Share
+          id={ id }
+          index={ index }
+          type={ `${type}s` }
+        />
+        <DoneRecipesImports.DoneDate
+          doneDate={ doneDate }
+          index={ index }
+        />
+        <DoneRecipesImports.Tag
+          tags={ tags }
+          index={ index }
+        />
+      </div>
     </section>
   );
 }

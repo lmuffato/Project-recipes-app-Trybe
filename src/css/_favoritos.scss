@@ -1,0 +1,35 @@
+.favorite-card {
+  width: 80%;
+  height: 250px;
+  background-color: white;
+  margin: 0 auto;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  border-radius: $border-radius;
+  box-shadow: $shadow;
+  @include flex(row, space-around, center);
+}
+  
+.img-card {
+  width: 200px;
+}
+  
+.favorite-content{
+  @include flex(column, center, left);
+  width: 45%;
+  margin: 0px;
+}
+  
+.favorite-title {
+  width: 90px;
+  height: 25px;
+  padding: 0px;
+  margin-bottom: 10px;
+  border-style: none;
+  background-color: $secondcolor;
+  color: white;
+}
+
+.favorite-category {
+  font-weight: bold;
+}

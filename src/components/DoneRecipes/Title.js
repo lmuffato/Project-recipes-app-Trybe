@@ -6,7 +6,11 @@ function Title({ title, index, type, id }) {
   const { push } = useHistory();
 
   return (
-    <button onClick={ () => { push(`/${type}s/${id}`); } } type="button">
+    <button
+      onClick={ () => { push(`/${type}s/${id}`); } }
+      type="button"
+      className="done-title"
+    >
       <h2 data-testid={ `${index}-horizontal-name` }>
         {title}
       </h2>

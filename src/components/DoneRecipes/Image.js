@@ -6,7 +6,11 @@ function Image({ url, index, type, id }) {
   const { push } = useHistory();
 
   return (
-    <button onClick={ () => { push(`/${type}s/${id}`); } } type="button">
+    <button
+      onClick={ () => { push(`/${type}s/${id}`); } }
+      type="button"
+      className="done-img"
+    >
       <img
         data-testid={ `${index}-horizontal-image` }
         src={ url }
