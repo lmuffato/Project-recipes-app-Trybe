@@ -26,6 +26,7 @@ function Cards({ param }) {
             <Card.Img
               variant="top"
               src={ item.strMealThumb }
+              style={ { width: '8rem' } }
               data-testid={ `${index}-card-img` }
               alt={ item.strMeal }
             />
@@ -54,6 +55,7 @@ function Cards({ param }) {
             <Card.Img
               variant="top"
               src={ item.strDrinkThumb }
+              style={ { width: '8rem' } }
               data-testid={ `${index}-card-img` }
               alt={ item.srtDrink }
             />
